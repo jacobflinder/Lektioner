@@ -1,0 +1,35 @@
+name: Fy2 web lesson quality checks
+on:
+  push:
+    paths:
+      - "fy2/kapitel-3/**"
+      - ".github/workflows/fy2-browser-qa.yml"
+  workflow_dispatch:
+jobs:
+  classroom-and-repetition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Start the lesson site locally
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/fy2-http.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy2/kapitel-3/ >/dev/null && break; sleep 1; done
+      - name: Verify all lesson slides and interactivity
+        run: node fy2/kapitel-3/qa/browser-smoke.cjs
+      - name: Upload screenshots and QA summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy2-browser-quality-evidence
+          path: fy2-qa-screenshots/
+          retention-days: 14
