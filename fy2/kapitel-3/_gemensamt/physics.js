@@ -7,7 +7,7 @@ const T=(x,y,t,c='#254655',size=18)=>'<text x="'+x+'" y="'+y+'" style="font-size
 const field=(cols=10,rows=6,x=76,y=78,dx=54,dy=42)=>{let s='';for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)s+=T(x+i*dx,y+j*dy,'×','#80aab7',20);return s};
 const S=(body,w=680,h=360,alt='Schematisk fysikalisk modell')=>'<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+alt+'"><rect x="0" y="0" width="'+w+'" height="'+h+'" rx="14" fill="#eef7f9"/>'+body+'</svg>';
 function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1,showForce=true){
- const bend=sign*fieldSign,x0=92,y0=215,R=150*speed/B,theta=1.1*progress,pts=[];
+ const bend=sign*fieldSign,x0=92,y0=183,R=150*speed/B,theta=.85*progress,pts=[];
  for(let i=0;i<=70;i++){const a=theta*i/70;pts.push([x0+R*Math.sin(a),y0-bend*R*(1-Math.cos(a))]);}
  const p=pts[70],vx=Math.cos(theta),vy=-bend*Math.sin(theta),fx=-Math.sin(theta),fy=-bend*Math.cos(theta);
  const route=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
