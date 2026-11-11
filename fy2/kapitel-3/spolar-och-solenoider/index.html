@@ -31,6 +31,13 @@ textarea{width:100%;min-height:88px;border:1px solid #a8c8d1;padding:12px;border
 .fig svg,.comparison svg{overflow:visible}
 @media(max-width:1000px){.comparison .panel{padding:13px}.comparison svg{max-height:245px}}
 @media(max-width:800px){.inquiry{padding:12px}.choice-options button{flex:1 1 160px}.comparison svg{max-height:290px}}
+
+.calc-chain{display:grid;gap:10px;text-align:left;font-weight:500;font-variant-numeric:tabular-nums}
+.calc-chain>div,.calc-chain>details{background:white;border:1px solid #c7dfe3;border-radius:10px;padding:9px 12px;min-width:0}
+.calc-chain math{display:block;font-size:clamp(1.03rem,1.55vw,1.35rem);overflow-x:auto;max-width:100%}
+.calc-chain .small{margin:6px 0 0;font-size:.78rem;font-weight:480}
+.calc-ins summary{cursor:pointer;color:#08768b;font-weight:650;font-size:.82rem}
+.calc-ins[open] .math-sm{margin-top:9px;overflow-x:auto}
 </style></head>
 <body>
 <header><div class="brand">FYSIK 2 / SPOLAR OCH SOLENOIDER <span>Från strömvarv till elektromagnet · Strömvarv · magnetisk kärna · flödestäthet</span></div><div class="controls"><button id="class-btn" class="selected" aria-pressed="true">Klassrum</button><button id="repeat-btn" aria-pressed="false">Repetition</button><button id="setting-btn">Arbetsbild</button><button id="fullscreen-btn" title="Helskärm för projektor">Helskärm</button></div></header>
