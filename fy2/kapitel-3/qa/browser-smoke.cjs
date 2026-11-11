@@ -5,6 +5,7 @@ const lessons=[['elektriska-falt',18],['magnetism',10],['raknestuga',7],['strom-
 const base=process.env.FY2_URL||'http://127.0.0.1:8123/fy2/kapitel-3/';
 const dir='fy2-qa-screenshots';fs.mkdirSync(dir,{recursive:true});
 const errors=[],warnings=[];function check(ok,msg){if(!ok)errors.push(msg)}
+const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','induktion','raknestuga-kraft-jordfalt','demonstrationer-elektromagnetism']);
 (async()=>{
  const browser=await chromium.launch({headless:true});
  try{
@@ -14,11 +15,30 @@ const errors=[],warnings=[];function check(ok,msg){if(!ok)errors.push(msg)}
     const label=lesson+'-'+vp.width,consoleErrors=[];
     page.on('pageerror',e=>consoleErrors.push(e.message));
     page.on('console',e=>{if(e.type()==='error')consoleErrors.push(e.text())});
+    page.on('response',r=>{if(r.status()>=400&&r.url().includes('/fy2/kapitel-3/'))consoleErrors.push('HTTP '+r.status()+' '+r.url())});
     try{
      const res=await page.goto(base+lesson+'/',{waitUntil:'networkidle',timeout:30000});
      check(!!res&&res.status()===200,label+' HTTP status');
      const n=await page.locator('.slide').count();
      check(n===expected,label+' slide count '+n+' expected '+expected);
+     if(sharedAssetLessons.has(lesson)){
+      const assetState=await page.evaluate(()=>{
+       const assetUrls=[...document.querySelectorAll('link[rel="stylesheet"][href],script[src]')].map(el=>el.getAttribute('href')||el.getAttribute('src'));
+       const slides=[...document.querySelectorAll('.slide')];
+       return {
+        assetUrls,
+        styled:getComputedStyle(document.body).fontFamily.includes('system-ui'),
+        hidden:slides.length>1&&getComputedStyle(slides[1]).display==='none',
+        computedStyle:getComputedStyle(slides[1]||document.body).display
+       };
+      });
+      check(assetState.assetUrls.filter(url=>url.includes('gemensamt/')).length===3,
+       label+' must reference 3 shared CSS/JS assets, found '+assetState.assetUrls.join(', '));
+      check(!assetState.assetUrls.some(url=>/\/_[^/]+\//.test(url)),
+       label+' contains underscore-prefixed directory that Jekyll does not publish');
+      check(assetState.styled,label+' missing common CSS: body is not using system-ui');
+      check(assetState.hidden,label+' missing common CSS: inactive lesson slides remain visible (display='+assetState.computedStyle+')');
+     }
      const next=page.locator('#next-slide, #next').last();
      check(await next.count()===1,label+' missing Next button');
      for(let i=0;i<Math.min(expected,n);i++){
