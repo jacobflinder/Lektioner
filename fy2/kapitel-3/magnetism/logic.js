@@ -69,22 +69,31 @@ function drawCompass(){
 }
 document.querySelectorAll("[data-point]").forEach(b=>b.addEventListener("click",()=>{compassPoint=b.dataset.point;drawCompass()}));
 $("flip-magnet").addEventListener("click",()=>{magnetFlipped=!magnetFlipped;drawCompass()});
-const angles=["↗","←","↓","↙","↑","→","↖","↘","←","↗","→","↓","↙","↑","←","↖","↓","↘","→","↖","↘","←","↙","↑"];
+const domainDirections=["↗","←","↓","↑","↙","→"];
+let domainStage=0;
 function drawDomains(){
- const grid=$("domain-grid");grid.replaceChildren();
- angles.forEach((a,i)=>{const span=document.createElement("span");span.textContent=domainApplied?"→":a;span.setAttribute("aria-label",domainApplied?"Moment ordnade åt höger":"Moment i olika riktningar");grid.appendChild(span)});
- $("domain-state").textContent=domainApplied?"Med yttre fält: schematisk ökning av nettomagnetisering åt höger. Domänernas växt och vridning visas inte i detalj.":"Utan yttre fält: olika domäners magnetiseringar kan ge liten nettomagnetisering.";
- $("domain-field").textContent=domainApplied?"Visa fältet borttaget (schematiskt)":"Lägg på yttre fält →";
+ const grid=$("domain-grid");
+ grid.replaceChildren();
+ const directions=domainStage===0?domainDirections:domainStage===1?Array(6).fill("→"):["→","→","↗","→","→","↙"];
+ directions.forEach((arrow,i)=>{
+  const domain=document.createElement("span");
+  domain.textContent=arrow+" "+arrow;
+  domain.setAttribute("aria-label","Domän "+(i+1)+": två parallella magnetiseringspilar "+arrow);
+  grid.appendChild(domain);
+ });
+ const explanations=[
+  "Före magnetisering: magnetiseringen är samordnad inom varje domän, men olika domäner har olika riktningar. Nettomagnetiseringen kan vara liten.",
+  "Med yttre fält åt höger: magnetiseringen gynnas i fältets riktning. Illustration av stor nettomagnetisering, inte faktisk domändynamik.",
+  "Efter att fältet tagits bort: i ett hårdmagnetiskt material kan viss magnetisering finnas kvar (remanens). Detta är ett exempel, inte ett universellt restvärde."
+ ];
+ $("domain-state").textContent=explanations[domainStage];
+ $("domain-field").textContent=["Lägg på yttre fält →","Ta bort yttre fält","Lägg på fältet igen →"][domainStage];
 }
 $("domain-field").addEventListener("click",()=>{
- domainApplied=true;drawDomains();
- $("domain-field").disabled=true;
- $("domain-field").textContent="Yttre fält på";
+ domainStage=domainStage===0?1:domainStage===1?2:1;
+ drawDomains();
 });
-$("domain-reset").addEventListener("click",()=>{
- domainApplied=false;drawDomains();
- $("domain-field").disabled=false;
-});
+$("domain-reset").addEventListener("click",()=>{domainStage=0;drawDomains()});
 function circle(group,x,y,r=8){
  const ns="http://www.w3.org/2000/svg";
  const c=document.createElementNS(ns,"circle"),p=document.createElementNS(ns,"circle");
