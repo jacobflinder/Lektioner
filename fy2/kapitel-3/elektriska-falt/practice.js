@@ -62,7 +62,7 @@ for(const [index,c] of checks.entries()){
  }
  reset.addEventListener("click",resetAll);
  state.set(c.slide,[...(state.get(c.slide)||[]),resetAll]);
- slide.appendChild(box);
+ const footer=slide.querySelector('.slide-footer');if(footer)footer.before(box);else slide.appendChild(box);
 }
 const modeIntro=document.createElement("div");
 modeIntro.className="mode-message";
