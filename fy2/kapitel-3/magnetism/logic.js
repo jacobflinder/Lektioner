@@ -149,6 +149,14 @@ $("download").addEventListener("click",async()=>{
  try{
   const clone=document.documentElement.cloneNode(true);
   clone.querySelectorAll(".review").forEach(el=>el.remove());
+  // The standalone document must recreate SVG marks and domain tiles exactly once.
+  clone.querySelectorAll("#domain-grid,#flux-dots,#example-dots").forEach(el=>el.replaceChildren());
+  clone.querySelector("#editor").hidden=true;
+  clone.querySelector("body").classList.remove("repetition");
+  clone.querySelector("#class-mode").classList.add("selected");
+  clone.querySelector("#repeat-mode").classList.remove("selected");
+  clone.querySelector("#class-mode").setAttribute("aria-pressed","true");
+  clone.querySelector("#repeat-mode").setAttribute("aria-pressed","false");
   clone.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
   clone.querySelectorAll(".slide").forEach((el,i)=>el.classList.toggle("active",i===0));
   clone.querySelectorAll("textarea").forEach(el=>{el.value="";el.textContent=""});
