@@ -48,6 +48,17 @@ Efter att formgivningen återställts visade användarens skärmbild av Induktio
 - Webbtestet har utökats så att det kräver att aktuell bild faktiskt byts vid varje klick på Nästa. Det räcker inte längre att endast en bild är synlig.
 - Fullständig rendering i Safari/iOS och publicerad GitHub Pages-version har ännu inte bekräftats i realtid. De tillagda testerna är inte likvärdiga med en genomförd iOS-testning.
 
+## Klickbara magnetiska kraftmodeller (2026-11-11)
+
+**Laddade partiklar i magnetiska fält, bilder 5, 6, 12 och 17** har byggts om till styrda undersökningar:
+- Två klickbara förutsägelser för positiv/negativ laddning; i klassrumsläge avvaktar återkopplingen lärarens knapp, i repetitionsläge är den omedelbar.
+- Partikelbana med **Starta, Pausa, Börja om och stegning** samt oberoende val av laddningstecken och magnetfältets riktning. Hastighets- och kraftvektorer kan visas/döljas var för sig.
+- Rörelsemodellen har normaliserad tid: för lika m och |q| gäller **r∝v/B**, **ω∝B** och **|F|∝vB**. Det är inte en jämförelse av faktiska proton- och elektronmassor; pilskalorna är schematiska.
+- Ledarmodell med klickbar vändning av I och B, fördröjd visning av F och separat kontroll av att två samtidiga vändningar lämnar F oförändrad.
+- PDF:ens 18 bilder, bokhänvisningar 162 samt 164–166, uppgifter 343–350 och de två riktiga klassrumsdemonstrationerna är kvar.
+
+**Kontroller utförda:** båda kodkällorna är synkroniserade med den publicerbara, självständiga HTML-sidan; 18 bilder och inga dubbla ID:n; 180 kombinationer av v, B, tecken, riktning och tidsläge har kontrollerats matematiskt för att F·v=0 samt att kraft- och hastighetspilar ryms i bildområdet. JavaScript-test visar också att Starta/Pausa fungerar, att kraften inledningsvis döljs, att B/v förändrar grafik och återkoppling, att enbart I eller B vänder kraften och att båda tillsammans lämnar kraften oförändrad. Separata tester visar att klassrumsläget inte avslöjar svaret före lärarens återkoppling och att repetition ger direkt återkoppling. Chromium-testscriptet har fått nya tester för dessa funktioner. **Verklig rendering i publicerad Safari/iPad kvarstår.**
+
 ## Rättningar genomförda under revisionen
 
 - **Gemensam regel för undersökningar:** beräknat resultat förblir synligt och uppdateras efter att användaren har visat det första gången. Ett nytt reglagevärde ska inte tvinga fram ett nytt facitklick. Gäller induktionens fem undersökningar, jordfältets två och magnetismens flödesmodell. Återställ går tillbaka till en obesvarad fråga.
