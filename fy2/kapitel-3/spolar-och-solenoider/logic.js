@@ -27,8 +27,10 @@ $("reveal-btn").addEventListener("click",reveal);
 $("reset-btn").addEventListener("click",()=>{
  slides[current].querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
  slides[current].dispatchEvent(new Event("lesson:reset"));
- if(current===4){view="side";drawView()}
- if(current===7){core=false;drawCore()}
+ if(current===4){view="side";viewDir=1;viewShown=false;drawView()}
+ if(current===7){core=false;coreDir=1;drawCore()}
+ if(current===10){$("sol-reset").click()}
+ if(current===12){$("flat-reset").click()}
  render();
 });
 document.querySelectorAll("[data-reveal]").forEach(b=>b.addEventListener("click",()=>{
@@ -59,60 +61,95 @@ document.addEventListener("keydown",e=>{
  if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();reveal()}
  else if(e.key==="ArrowLeft"){e.preventDefault();go(current-1)}
 });
+
+let viewDir=1,viewShown=false,coreDir=1,solDir=1,flatDir=1,solShown=false,flatShown=false;
+const mu0=4*Math.PI*1e-7;
+const swFmt=(x,n=1)=>Number(x).toLocaleString("sv-SE",{minimumFractionDigits:n,maximumFractionDigits:n});
+const coreHost=$("core-svg").parentElement;
+function endViewLoop(sign,revealed){
+ const cx=325,cy=174,R=108;
+ const cur=sign>0?"moturs":"medurs";
+ const B=sign>0?"ut mot dig":"in från dig";
+ const arrow=sign>0?"M315 67L291 70L302 49":"M315 67L340 72L328 50";
+ return '<svg viewBox="0 0 650 350" role="img" aria-label="Ett cirkulärt strömvarv sett från höger. Strömmen går '+cur+'.">'+
+ '<rect width="650" height="350" rx="16" fill="#f0f7f8"/>'+
+ '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" stroke="#8e402a" stroke-width="9" fill="none"/>'+
+ '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" stroke="#eda36b" stroke-width="3" fill="none"/>'+
+ '<path d="'+arrow+'" fill="none" stroke="#713021" stroke-width="5" stroke-linejoin="round"/>'+
+ (revealed?(sign>0?'<circle cx="'+cx+'" cy="'+cy+'" r="24" fill="white" stroke="#07758a" stroke-width="3"/><circle cx="'+cx+'" cy="'+cy+'" r="7" fill="#07758a"/>':'<circle cx="'+cx+'" cy="'+cy+'" r="24" fill="white" stroke="#07758a" stroke-width="3"/><path d="M308 157L342 191M342 157L308 191" stroke="#07758a" stroke-width="5"/>'):
+ '<text x="314" y="187" style="font-size:38px;fill:#163b49">?</text>')+
+ '<text x="466" y="93" style="font-size:20px;fill:#183a45">I: '+cur+'</text>'+
+ (revealed?'<text x="466" y="130" style="font-size:19px;fill:#08758a">B: '+B+'</text>':'')+
+ '<text x="26" y="322" style="font-size:17px;fill:#54707b">Betraktaren står till höger om varvet och tittar åt vänster.</text></svg>';
+}
 function drawView(){
- const svg=$("view-svg");
- const side='<rect x="0" y="0" width="650" height="390" rx="17" fill="#f0f7f8"/>'+
-  '<text x="25" y="37" style="font-size:18px">Från sidan</text>'+
-  '<path d="M315 75 V309" stroke="#bc6a4d" stroke-width="4"/>'+
-  '<circle cx="315" cy="89" r="29" fill="white" stroke="#b66a4a" stroke-width="3"/>'+
-  '<text x="293" y="102" style="font-size:43px;fill:#a65e44">⊙</text>'+
-  '<circle cx="315" cy="295" r="29" fill="white" stroke="#b66a4a" stroke-width="3"/>'+
-  '<text x="293" y="308" style="font-size:43px;fill:#a65e44">⊗</text>'+
-  '<path d="M200 194H474m-16 -12 16 12 -16 12" fill="none" stroke="#0d7e94" stroke-width="6"/>'+
-  '<text x="400" y="178" style="font-size:23px;font-weight:750;fill:#0d738a">B åt höger</text>'+
-  '<text x="24" y="355">Orange: ström i övre/undre delen · blått: fält i mitten</text>';
- const end='<rect x="0" y="0" width="650" height="390" rx="17" fill="#f0f7f8"/>'+
-  '<text x="25" y="37" style="font-size:18px">Sett från höger – betraktaren tittar åt vänster längs spolens axel</text>'+
-  '<circle cx="324" cy="197" r="119" fill="#fff" stroke="#b76b48" stroke-width="5"/>'+
-  '<path d="M335 77 C268 73 219 114 208 186" stroke="#b76b48" stroke-width="5" fill="none"/>'+
-  '<path d="M207 185 l-11 -19 m11 19 15 -16" stroke="#b76b48" stroke-width="5" fill="none"/>'+
-  [245,285,325,365,405].map(x=>'<circle cx="'+x+'" cy="181" r="6" fill="#0c8096"/>').join("")+
-  [265,305,345,385].map(x=>'<circle cx="'+x+'" cy="215" r="6" fill="#0c8096"/>').join("")+
-  '<text x="25" y="353">Moturs ström sett från höger · B ut mot dig</text>';
- svg.innerHTML=view==="side"?side:end;
- $("view-caption").textContent=view==="side"?
-  "Från sidan: översta ledardelen har ström ut ur bilden, nedersta in. B pekar åt höger.":
-  "Sett från höger: samma strömvarv ses moturs. Magnetfältet pekar ut mot betraktaren, det vill säga åt höger i sidobilden.";
+ $("view-holder").innerHTML=view==="side"?
+   CoilArt.coilSingleLoop({dir:viewDir,field:viewShown}):endViewLoop(viewDir,viewShown);
+ $("view-caption").textContent=!viewShown?
+  (view==="side"?"Förutsäg B: övre tråddelen går "+(viewDir>0?"ut ur":"in i")+" bilden, undre går "+(viewDir>0?"in i":"ut ur")+" bilden.":"Förutsäg B: sett från höger går strömmen "+(viewDir>0?"moturs":"medurs")+"."):
+  (view==="side"?"B pekar "+(viewDir>0?"åt höger":"åt vänster")+" längs varvets axel.":"B pekar "+(viewDir>0?"ut ur":"in i")+" bilden. Det är samma fält som i sidovyn.");
  $("view-side").classList.toggle("selected",view==="side");
  $("view-right").classList.toggle("selected",view==="right");
  $("view-side").setAttribute("aria-pressed",String(view==="side"));
  $("view-right").setAttribute("aria-pressed",String(view==="right"));
+ $("view-reveal").textContent=viewShown?"Dölj fältriktningen":"Visa fältriktningen";
 }
 $("view-side").addEventListener("click",()=>{view="side";drawView()});
 $("view-right").addEventListener("click",()=>{view="right";drawView()});
-$("view-reset").addEventListener("click",()=>{view="side";drawView()});
+$("view-flip").addEventListener("click",()=>{viewDir*=-1;viewShown=false;drawView()});
+$("view-reveal").addEventListener("click",()=>{viewShown=!viewShown;drawView()});
+$("view-reset").addEventListener("click",()=>{view="side";viewDir=1;viewShown=false;drawView()});
 function drawCore(){
- const svg=$("core-svg"),path=[];
- for(let i=0;i<9;i++){
-  const x=135+i*44;
-  path.push("M"+x+" 174 C"+(x-22)+" 83 "+(x+20)+" 83 "+(x+19)+" 174 C"+(x+20)+" 270 "+(x-20)+" 270 "+(x+44)+" 174");
- }
- const P=565,base=174,len=core?86:47;
- svg.innerHTML='<rect x="0" y="0" width="700" height="325" rx="15" fill="#eff7f8"/>'+
-  '<path d="'+path.join(" ")+'" stroke="#bd7150" stroke-width="3.5" fill="none"/>'+
-  (core?'<rect x="122" y="161" width="409" height="29" rx="7" fill="#90a4ad" opacity=".86"/>':'')+
-  '<circle cx="'+P+'" cy="'+base+'" r="6" fill="#ca864b"/>'+
-  '<text x="'+(P+15)+'" y="'+(base+4)+'">P</text>'+
-  '<path d="M'+P+' '+base+' H'+(P+len)+'" stroke="#0b7e94" stroke-width="6"/>'+
-  '<path d="M'+(P+len-15)+' '+(base-12)+'L'+(P+len)+' '+base+'L'+(P+len-15)+' '+(base+12)+'" fill="none" stroke="#0b7e94" stroke-width="4"/>'+
-  '<text x="23" y="31">'+(core?"Mjukjärnskärnan i spolen":"Luftspole, mjukjärnskärnan utanför")+'</text>'+
-  '<text x="27" y="302">Samma ström · samma spole · samma punkt P · schematiskt relativt B</text>';
+ coreHost.innerHTML=CoilArt.coilHelix({core,dir:coreDir,field:true,withP:true});
  $("core-explanation").textContent=core?
-  "Kärnan magnetiseras. Den kan bidra till ett starkare fält nära spolens axel. Pilens relativa längd är en kvalitativ illustration, inte en uppmätt eller beräknad förstärkningsfaktor.":
-  "Samma spole och ström, utan mjukjärnskärna. Föreslå vad som bör ändras innan du sätter in kärnan.";
+ "Samma spole och ström, nu med mjukjärnskärna. Kärnans magnetisering kan öka B, men en exakt förstärkningsfaktor kan inte räknas ut utan materialdata och geometri.":
+ "Luftspole. Spolens och strömmens värden är oförändrade. Förutsäg hur en mjukjärnskärna påverkar fältet i P.";
+ $("core-insert").classList.toggle("selected",core);
+ $("core-remove").classList.toggle("selected",!core);
 }
 $("core-insert").addEventListener("click",()=>{core=true;drawCore()});
 $("core-remove").addEventListener("click",()=>{core=false;drawCore()});
+$("core-direction").addEventListener("click",()=>{coreDir*=-1;drawCore()});
+function renderSol(){
+ const I=Number($("sol-i").value),N=Number($("sol-n").value),L=Number($("sol-l").value);
+ const mT=(mu0*N*I/L)*1e3;
+ $("sol-i-value").textContent=swFmt(I,2)+" A";
+ $("sol-n-value").textContent=String(N);
+ $("sol-l-value").textContent=swFmt(L,2)+" m";
+ $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown});
+ $("sol-result").textContent=solShown?
+ "B ≈ "+swFmt(mT,3)+" mT · fältet inuti riktat "+(solDir>0?"åt höger (N till höger)":"åt vänster (N till vänster)")+
+ ". För denna idealiserade luftsolenoid gäller B ∝ NI/L.":
+ "Föreslå riktning och storlek innan du visar beräkningen. Håll två reglage stilla när du ändrar det tredje.";
+ $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";
+}
+for(const id of ["sol-i","sol-n","sol-l"])$(id).addEventListener("input",renderSol);
+$("sol-flip").addEventListener("click",()=>{solDir*=-1;solShown=false;renderSol()});
+$("sol-show").addEventListener("click",()=>{solShown=!solShown;renderSol()});
+$("sol-reset").addEventListener("click",()=>{
+ $("sol-i").value="0.8";$("sol-n").value="300";$("sol-l").value="0.3";
+ solDir=1;solShown=false;renderSol();
+});
+function renderFlat(){
+ const I=Number($("flat-i").value),N=Number($("flat-n").value),r=Number($("flat-r").value);
+ const B=mu0*N*I/(2*(r/100))*1e6;
+ $("flat-i-value").textContent=swFmt(I,2)+" A";
+ $("flat-n-value").textContent=String(N);
+ $("flat-r-value").textContent=swFmt(r,1)+" cm";
+ $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown});
+ $("flat-result").textContent=flatShown?
+ "B ≈ "+swFmt(B,1)+" μT i centrum · riktat "+(flatDir>0?"ut ur bilden (mot dig)":"in i bilden (från dig)")+
+ ". Ideal modell: N täta varv med samma radie.":
+ "Räkna själv innan facit. Ändra N, I eller r och pröva ett samband i taget.";
+ $("flat-show").textContent=flatShown?"Dölj beräkning och riktning":"Visa beräkning och riktning";
+}
+for(const id of ["flat-n","flat-i","flat-r"])$(id).addEventListener("input",renderFlat);
+$("flat-flip").addEventListener("click",()=>{flatDir*=-1;flatShown=false;renderFlat()});
+$("flat-show").addEventListener("click",()=>{flatShown=!flatShown;renderFlat()});
+$("flat-reset").addEventListener("click",()=>{
+ $("flat-i").value="0.8";$("flat-n").value="5";$("flat-r").value="4";
+ flatDir=1;flatShown=false;renderFlat();
+});
 function applyRefs(){
  const data=[[".read-ref",$("read-setting").value.trim()||"Ej angivna"],[".task-ref",$("task-setting").value.trim()||"Ej angivna"],[".next-ref",$("next-setting").value.trim()||"Ej angivna"]];
  for(const [sel,val] of data)document.querySelectorAll(sel).forEach(el=>el.textContent=val);
@@ -143,5 +180,5 @@ $("download-btn").addEventListener("click",async()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1500);
  }catch(e){alert("Kunde inte skapa fristående fil. Prova från onlineversionen.")}
 });
-drawView();drawCore();applyRefs();mode(false);render();
+drawView();drawCore();renderSol();renderFlat();applyRefs();mode(false);render();
 })();
