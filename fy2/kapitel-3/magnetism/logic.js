@@ -58,6 +58,7 @@ function drawCompass(){
  const c1=magnetFlipped?440:160,c2=magnetFlipped?160:440;
  $("loop-up").setAttribute("d","M"+startL+" 150 C"+c1+" 12 "+c2+" 12 "+endR+" 150");
  $("loop-down").setAttribute("d","M"+startL+" 230 C"+c1+" 365 "+c2+" 365 "+endR+" 230");
+ $("loop-inside").setAttribute("d",magnetFlipped?"M201 217H400":"M400 217H201");
  const p=points[compassPoint],dx=(compassPoint==="top"?1:-1)*(magnetFlipped?-1:1);
  $("needle-line").setAttribute("x1",p.x-20*dx);
  $("needle-line").setAttribute("x2",p.x+20*dx);
