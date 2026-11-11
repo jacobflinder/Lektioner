@@ -13,7 +13,7 @@ function renderRod(){
  for(let i=0;i<number;i++)symbols+=T(265,98+i*19,"+","#bc5742",19)+T(265,249+i*19,"−","#0f7992",19);
  if(eff>0)symbols+=A(318,205,318,205-68*eff,"#127a93",3)+T(330,193-68*eff,"Fₑ","#0d7b97",17);
  if(v>0)symbols+=A(231,205,231,274,"#ba6643",3)+T(177,272,"Fₘ","#b36543",17);
- $("ind-rod-dynamic").innerHTML=fieldOnRod(false).replace("</svg>",symbols+"</svg>");
+ $("ind-rod-dynamic").innerHTML=fieldOnRod(false,v>0).replace("</svg>",symbols+"</svg>");
  $("charge-pct").textContent=fmt(p*100,0)+" %";
  $("rod-B-value").textContent=fmt(B,2)+" T";
  $("rod-v-value").textContent=fmt(v,1)+" m/s";
