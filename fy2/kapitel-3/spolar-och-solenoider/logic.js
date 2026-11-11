@@ -163,7 +163,7 @@ function renderSol(){
  $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:6+Math.round((N-100)/100)});
  $("sol-result").innerHTML=solShown?
  calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',
- '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4π</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
+ '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
  '<mi>B</mi><mo>≈</mo>'+mult(mT,'mT',3),
  'Luftsolenoid, idealiserat långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
  '. Jämfört med utgångsfallet är beloppet '+swFmt(relSol,2)+' gånger så stort. Vänd strömmen ⇒ vänd riktningen, inte beloppet.') :
@@ -188,7 +188,7 @@ function renderFlat(){
  $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N});
  $("flat-result").innerHTML=flatShown?
  calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',
- '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4π</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow><mrow><mn>2</mn><mo>·</mo>'+mult(r/100,'m',3)+'</mrow></mfrac>',
+ '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow><mrow><mn>2</mn><mo>·</mo>'+mult(r/100,'m',3)+'</mrow></mfrac>',
  '<mi>B</mi><mo>≈</mo>'+mult(B,'μT',1),
  'Fältets riktning är '+(flatDir>0?'ut ur bilden':'in i bilden')+'. Relativt startfallet: '+swFmt(relFlat,2)+
  ' gånger så stort belopp. Detta gäller i centrum för idealiserat lika stora varv i luft.') :
