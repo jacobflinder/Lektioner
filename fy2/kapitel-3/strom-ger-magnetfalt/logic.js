@@ -109,7 +109,9 @@ function updateModel(){
  const I=Number($("i-slider").value),r=Number($("r-slider").value),dir=$("dir-select").value;
  const microTesla=mu02pi*I/(r/100)*1e6;
  $("i-value").textContent=fmt(I)+" A";$("r-value").textContent=fmt(r)+" cm";
- $("model-result").textContent="B = "+fmt(microTesla,1)+" μT, "+(dir==="out"?"uppåt":"nedåt")+" i P till höger.";
+ $("model-result").innerHTML='<div style="font-family:Cambria,Georgia,serif;font-size:1.22rem"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn><mtext> μT</mtext></math></div>'+
+ '<details style="margin-top:8px;font-size:.84rem;font-weight:500"><summary>Visa insättningen med enheter</summary><div style="font-family:Cambria,Georgia,serif;font-size:1.12rem;overflow-x:auto"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+fmt(I,1)+'</mn><mtext> A</mtext></mrow><mrow><mn>'+fmt(r/100,3)+'</mn><mtext> m</mtext></mrow></mfrac></math></div></details>'+
+ '<p style="font-family:system-ui;font-size:.86rem;margin:5px 0 0">Fältriktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+'</b>. Endast beloppet ändras när I och r ändras.</p>';
  $("model-svg").innerHTML=wireSVG(dir,"right",true,55+(r-2)*10);
 }
 ["i-slider","r-slider","dir-select"].forEach(id=>$(id).addEventListener("input",updateModel));
