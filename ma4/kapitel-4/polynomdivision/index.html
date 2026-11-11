@@ -30,7 +30,8 @@ document.getElementById('mode').onclick=e=>{let on=document.body.classList.toggl
 document.querySelectorAll('[data-reveal]').forEach(b=>{let t=document.getElementById(b.dataset.reveal),label=b.textContent;b.setAttribute('aria-expanded','false');b.onclick=()=>{let hide=t.classList.toggle('hidden');b.textContent=hide?label:'Dölj återkoppling';b.setAttribute('aria-expanded',String(!hide))}});
 document.querySelectorAll('[data-quiz]').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{g.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let ok=b.dataset.ok==='1';b.classList.add(ok?'correct':'wrong');g.querySelector('.feedback').textContent=ok?'Rätt. En rest måste ha lägre grad än divisorn.':'Försök igen. En rest av grad 1 kan fortfarande divideras med en divisor av grad 1.'}));
 const rows=[
-[['2x³','+ 3x²','− 5x','+ 6','x + 2',''],['','','','','','2x²']],
+[['2x³','+ 3x²','− 5x','+ 6','x + 2','']],
+[['','','','','','2x²']],
 [['− 2x³','− 4x²','','','','']],
 [['','− x²','− 5x','','','']],
 [['','','','','','− x']],
