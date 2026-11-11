@@ -24,7 +24,7 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false}
  '<path d="M'+p1.x.toFixed(1)+' '+p1.y.toFixed(1)+'L630 '+(cy-16)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="6" fill="none" stroke-linecap="round"/>'+
  '<path d="'+front.join("")+'" stroke="'+COIL_COLORS.copper+'" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
  '<path d="'+front.join("")+'" stroke="'+COIL_COLORS.light+'" stroke-width="2.8" fill="none" stroke-linecap="round" opacity=".82"/>'+
- (field?currentArrows:"")+
+ currentArrows+
  (withP?'<circle cx="356" cy="'+cy+'" r="5" fill="#073f52"/><text x="363" y="'+(cy-13)+'" style="font-size:20px;font-weight:800;fill:#163c4b">P</text>':"")+
  '<text x="67" y="306" font-size="16" fill="#486b78">Orange: strömförande koppartråd · ljus: baksida · '+(core?"grå: järnkärna":"luft i spolen")+'</text>'+
  '</svg>';
