@@ -25,6 +25,8 @@ const errors=[],warnings=[];function check(ok,msg){if(!ok)errors.push(msg)}
       check(await page.locator('.slide.active').count()===1,label+' active slide '+(i+1));
       const overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
       if(overflow>36)warnings.push(label+' slide '+(i+1)+' horizontal overflow '+overflow+'px');
+      const slideBottom=await page.locator('.slide.active').evaluate(el=>el.getBoundingClientRect().bottom);
+      if(slideBottom>vp.height+5)warnings.push(label+' slide '+(i+1)+' extends below projector viewport by '+Math.round(slideBottom-vp.height)+'px');
       if(vp.width===1440||i===0||i===n-1)
        await page.screenshot({path:path.join(dir,label+'-'+String(i+1).padStart(2,'0')+'.png')});
       if(i<n-1&&await next.count())await next.click({timeout:7000});
@@ -56,6 +58,41 @@ const errors=[],warnings=[];function check(ok,msg){if(!ok)errors.push(msg)}
   check(old!==changed,'Flat coil: radius change does not redraw');
   check((changed.match(/<g opacity=/g)||[]).length>15,'Flat coil: insufficient distributed field markers');
   await page.close();
+  // Verify that changing the investigated quantity updates both the visual
+  // representation and the already revealed numeric explanation.
+  const induction=await browser.newPage();
+  await induction.goto(base+'induktion/',{waitUntil:'networkidle'});
+  await induction.locator('#jump').selectOption('5');
+  await induction.locator('#rod-show').click();
+  const rod0=await induction.evaluate(()=>({
+   geometry:document.querySelector('#ind-rod-dynamic svg rect[fill="#d6a473"]').getAttribute('height'),
+   result:document.querySelector('#rod-result').textContent
+  }));
+  await induction.locator('#rod-L').evaluate(el=>{el.value='40';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  const rod1=await induction.evaluate(()=>({
+   geometry:document.querySelector('#ind-rod-dynamic svg rect[fill="#d6a473"]').getAttribute('height'),
+   result:document.querySelector('#rod-result').textContent
+  }));
+  check(+rod1.geometry>+rod0.geometry,'Induction: rod length slider does not change rod geometry');
+  check(rod1.result!==rod0.result&&rod1.result.includes('Samband'),'Induction: solved calculation does not update after length change');
+  await induction.close();
+  const earth=await browser.newPage();
+  await earth.goto(base+'jordens-magnetfalt/',{waitUntil:'networkidle'});
+  await earth.locator('#jump').selectOption('5');
+  await earth.locator('#earth-components-reveal').click();
+  const earth0=await earth.locator('#earth-components-result').innerText();
+  await earth.locator('#earth-i').evaluate(el=>{el.value='60';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  const earth1=await earth.locator('#earth-components-result').innerText();
+  check(earth0!==earth1&&earth1.includes('Samband'),'Earth components: revealed math not kept live during slider exploration');
+  await earth.close();
+  const charge=await browser.newPage();
+  await charge.goto(base+'laddade-partiklar/',{waitUntil:'networkidle'});
+  await charge.locator('#jump').selectOption('5');
+  const charge0=await charge.locator('#particle-dynamic svg').evaluate(el=>el.outerHTML);
+  await charge.locator('#particle-speed').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  const charge1=await charge.locator('#particle-dynamic svg').evaluate(el=>el.outerHTML);
+  check(charge0!==charge1,'Particle model: changing speed did not change vectors and trajectory');
+  await charge.close();
  }finally{await browser.close()}
  fs.writeFileSync(path.join(dir,'summary.json'),JSON.stringify({errors,warnings,checkedAt:new Date().toISOString()},null,2));
  console.log('Errors:',errors.length,'Warnings:',warnings.length);
