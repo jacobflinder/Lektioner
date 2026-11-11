@@ -54,7 +54,7 @@ function fluxAngle(B=.4,area=.08,deg=0){
 }
 function fluxPiece(t){
  const x=u=>85+530*u,y=u=>252-50*u,phi=u=>u<.3?10*u:u<.6?3:u<.8?3*(.8-u)/.2:0,pts=[[0,0],[.3,3],[.6,3],[.8,0],[1,0]];
- const slope=t<.3?10:t<.6?0:t<.8?-15:0,U=-.2*slope;
+ const slope=t<.3?10:t<.6?0:t<.8?-15:0,U=[.3,.6,.8].some(k=>Math.abs(t-k)<1e-10)?NaN:slope===0?0:-.2*slope;
  let s=A(85,258,640,258,'#6d8a94',2)+A(85,258,85,40,'#6d8a94',2)+T(24,36,'Φ (mWb)','#0c7690')+T(608,288,'t (s)','#50717c')+
  '<path d="'+pts.map((p,i)=>(i?'L':'M')+x(p[0])+' '+y(p[1])).join('')+'" stroke="#078498" stroke-width="5" fill="none"/>';
  for(const z of [.3,.6,.8])s+=T(x(z)-10,290,fmt(z,1),'#52707c',14);
