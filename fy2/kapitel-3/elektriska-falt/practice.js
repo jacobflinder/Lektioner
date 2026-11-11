@@ -10,6 +10,8 @@ const checks = [
  {slide:6,title:"Två ändringar samtidigt",question:"Om både spänningen U och ingångsfarten v₀ fördubblas, medan d och L är oförändrade och ingen platta träffas: hur ändras avböjningen?",options:["Den blir hälften så stor.","Den är oförändrad.","Den fördubblas."],right:0,hint:"Kombinera effekterna: y är proportionell mot U men omvänt proportionell mot v₀².",explain:"y ∝ U/v₀². Två gånger så hög spänning och dubbla farten ger faktorn 2/2² = 1/2."},
  {slide:8,title:"Utcheckning 1: rörelsens riktning",question:"En elektron kommer in vågrätt mellan en positiv övre och negativ undre platta. Varför kröks banan uppåt medan vₓ förblir konstant?",options:["Kraften pekar uppåt men ingen kraft verkar horisontellt.","Elektriska fältet pekar uppåt och hastigheten följer alltid fältet.","Elektronen har ingen acceleration eftersom vₓ är konstant."],right:0,hint:"Skilj på fältriktning, elektronkraft och hastighetskomponenter. Vilken kraft verkar i x-led?",explain:"E pekar nedåt. Elektronens q är negativt, alltså pekar kraft och acceleration uppåt. Därför ökar vᵧ, medan Fₓ = 0 ger konstant vₓ."},
  {slide:8,title:"Utcheckning 2: sambandet mellan energi och fart",question:"Vilket uttryck beskriver farten hos en proton som accelereras från vila genom spänningens belopp U?",options:["v = 2eU/mₚ","v = √(2eU/mₚ)","v = eU/mₚ"],right:1,hint:"Börja med eU = mₚv²/2. Lös ut v, inte v².",explain:"v = √(2eU/mₚ). För U = 250 V blir v ≈ 2,19 · 10⁵ m/s. Notera att spänningen är en energiförändring per laddning, inte en kraft."}
+,
+ {slide:8,title:"Utcheckning 3: avböjning och utgångsvinkel",question:"I exemplet är avböjningen 6,9 mm och utgångsvinkeln 15,4°. Vad händer ungefär om elektronens ingångsfart fördubblas medan U, d och L är oförändrade?",options:["6,9 mm och 7,7°","1,7 mm och 3,9°","3,5 mm och 7,7°"],right:1,hint:"Tiden halveras när ingångsfarten fördubblas. Avböjningen är proportionell mot tiden i kvadrat. För vinkeln: jämför vᵧ/vₓ.",explain:"y blir en fjärdedel: 6,9/4≈1,7 mm. Samtidigt halveras vᵧ medan vₓ fördubblas, så tan α blir en fjärdedel. Då är α≈3,9°. Förutsatt att elektronen passerar utan att träffa en platta."}
 ];
 const slides=[...document.querySelectorAll(".slide")];
 const state=new Map();
@@ -64,7 +66,7 @@ for(const [index,c] of checks.entries()){
 }
 const modeIntro=document.createElement("div");
 modeIntro.className="mode-message";
-modeIntro.innerHTML='<div class="only-class"><b>Klassrumsläge:</b> Tänk själv → jämför → motivera. Läraren bestämmer när nästa steg och återkoppling visas. <a href="./lararstod.html" target="_blank" rel="noopener">Separat lärarstöd</a>.</div><div class="only-repetition"><b>Repetitionsläge:</b> Försök själv, välj ett svar och använd ledtrådar vid behov. Du kan alltid försöka igen. Inga svar sparas eller skickas.</div>';
+modeIntro.innerHTML='<div class="only-class"><b>Klassrumsläge:</b> Tänk själv → jämför → motivera. Läraren bestämmer när nästa steg och återkoppling visas. </div><div class="only-repetition"><b>Repetitionsläge:</b> Försök själv, välj ett svar och använd ledtrådar vid behov. Du kan alltid försöka igen. Inga svar sparas eller skickas.</div>';
 const main=document.querySelector("main.stage");
 if(main)main.parentNode.insertBefore(modeIntro,main);
 const resetButton=document.getElementById("reset-slide");
