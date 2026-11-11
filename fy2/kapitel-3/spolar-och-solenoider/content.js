@@ -6,7 +6,7 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
  // Coil radius is deliberately exaggerated for readability, never presented to scale.
  const L=Math.min(.60,Math.max(.15,Number(lengthMeters)||.30));
  const span=528*L/.60,x0=(w-span)/2,x1=x0+span;
- const loops=Math.max(2,Math.min(16,Math.round(turns))),pitch=span/loops;
+ const loops=Math.max(3,Math.min(26,Math.round(turns))),pitch=span/loops;
  const pt=t=>({x:x0+pitch*t/(2*Math.PI)+depth*Math.cos(t),y:cy+ry*Math.sin(t)});
  const fmtPt=p=>p.x.toFixed(2)+' '+p.y.toFixed(2);
  const front=[],back=[],dt=Math.PI/32,total=loops*2*Math.PI;
