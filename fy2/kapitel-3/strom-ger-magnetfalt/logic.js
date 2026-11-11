@@ -66,8 +66,8 @@ document.addEventListener("keydown",e=>{
  if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();revealNext();}
  else if(e.key==="ArrowLeft"){e.preventDefault();go(current===OPTIONAL?MAIN-1:current-1);}
 });
-function wireSVG(dir,point,shown,radius=108){
- const cx=251,cy=185,sign=dir==="out"?-1:1;
+function wireSVG(dir,point,shown,radius=108,fieldAtPointUT=null){
+ const cx=251,cy=185,sign=dir==="out"?-1:1,measured=fieldAtPointUT!==null;
  let s='<rect x="0" y="0" width="520" height="370" fill="#edf6f7" rx="14"/>';
  [46,95,151].forEach(r=>{s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';});
  // Tangent arrows have identical lengths: they show direction, never field magnitude.
@@ -77,19 +77,23 @@ function wireSVG(dir,point,shown,radius=108){
   if(label)p+='<text x="'+(x+10)+'" y="'+(y-11)+'" style="font-weight:800">'+label+'</text>';
   if(includeArrow){
    const tx=-Math.sin(theta)*sign,ty=Math.cos(theta)*sign;
-   const x0=x-23*tx,y0=y-23*ty,x1=x+23*tx,y1=y+23*ty;
+   const localUT=measured?fieldAtPointUT*(radius/r):30;
+   const arrowHalf=measured?10+29*localUT/(localUT+30):23;
+   const x0=x-arrowHalf*tx,y0=y-arrowHalf*ty,x1=x+arrowHalf*tx,y1=y+arrowHalf*ty;
    p+='<path d="M'+x0+' '+y0+' L'+x1+' '+y1+'" stroke="#c15f43" stroke-width="4" stroke-linecap="round"/>';
    p+='<path d="M'+(x1-11*tx-7*ty)+' '+(y1-11*ty+7*tx)+' L'+x1+' '+y1+' L'+(x1-11*tx+7*ty)+' '+(y1-11*ty-7*tx)+'" fill="none" stroke="#c15f43" stroke-width="3"/>';
   }
   return p;
  }
- // One equal-length arrow per decorative circle: direction only, independent of r.
+ // Static slides: arrows only show direction. In the interactive model their lengths vary with calculated local field magnitude.
  if(shown) [46,95,151].forEach((r,k)=>{
   const th=k*2.2+.6;
   const x=cx+r*Math.cos(th),y=cy+r*Math.sin(th);
   const tx=-Math.sin(th)*sign,ty=Math.cos(th)*sign;
-  const xx=x+15*tx,yy=y+15*ty;
-  s+='<path d="M'+(x-15*tx)+' '+(y-15*ty)+' L'+xx+' '+yy+'" stroke="#0b8195" stroke-width="3"/>';
+  const localUT=measured?fieldAtPointUT*(radius/r):30;
+  const half=measured?7+19*localUT/(localUT+30):15;
+  const xx=x+half*tx,yy=y+half*ty;
+  s+='<path d="M'+(x-half*tx)+' '+(y-half*ty)+' L'+xx+' '+yy+'" stroke="#0b8195" stroke-width="'+(measured?(2+2*localUT/(localUT+30)).toFixed(2):3)+'"/>';
   s+='<path d="M'+(xx-9*tx-5*ty)+' '+(yy-9*ty+5*tx)+' L'+xx+' '+yy+' L'+(xx-9*tx+5*ty)+' '+(yy-9*ty-5*tx)+'" stroke="#0b8195" stroke-width="3" fill="none"/>';
  });
  s+='<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="white" stroke="#0b798f" stroke-width="3"/>';
@@ -111,8 +115,8 @@ function updateModel(){
  $("i-value").textContent=fmt(I)+" A";$("r-value").textContent=fmt(r)+" cm";
  $("model-result").innerHTML='<div style="font-family:Cambria,Georgia,serif;font-size:1.22rem"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn><mtext> μT</mtext></math></div>'+
  '<details style="margin-top:8px;font-size:.84rem;font-weight:500"><summary>Visa insättningen med enheter</summary><div style="font-family:Cambria,Georgia,serif;font-size:1.12rem;overflow-x:auto"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+fmt(I,1)+'</mn><mtext> A</mtext></mrow><mrow><mn>'+fmt(r/100,3)+'</mn><mtext> m</mtext></mrow></mfrac></math></div></details>'+
- '<p style="font-family:system-ui;font-size:.86rem;margin:5px 0 0">Fältriktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+'</b>. Endast beloppet ändras när I och r ändras.</p>';
- $("model-svg").innerHTML=wireSVG(dir,"right",true,55+(r-2)*10);
+ '<p style="font-family:system-ui;font-size:.86rem;margin:5px 0 0">Fältriktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+'</b>. Pilarna är längre vid större B och mindre vid större avstånd; deras längder är inte linjärt skalenliga.</p>';
+ $("model-svg").innerHTML=wireSVG(dir,"right",true,55+(r-2)*10,microTesla);
 }
 ["i-slider","r-slider","dir-select"].forEach(id=>$(id).addEventListener("input",updateModel));
 $("model-reset").addEventListener("click",()=>{
