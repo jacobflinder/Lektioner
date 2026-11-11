@@ -146,13 +146,14 @@ function resetPrediction(kind){
 function renderSol(){
  const I=Number($("sol-i").value),N=Number($("sol-n").value),L=Number($("sol-l").value);
  const mT=(mu0*N*I/L)*1e3;
+ const relSol=(N/300)*(I/0.8)*(0.30/L);
  $("sol-i-value").textContent=swFmt(I,2)+" A";
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
  $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:6+Math.round((N-100)/100)});
  $("sol-result").textContent=solShown?
  "B ≈ "+swFmt(mT,3)+" mT · fältet inuti riktat "+(solDir>0?"åt höger (N till höger)":"åt vänster (N till vänster)")+
- ". För denna idealiserade luftsolenoid gäller B ∝ NI/L.":
+ ". Jämfört med utgångsfallet: "+swFmt(relSol,2)+" gånger så stort belopp. För luftsolenoiden gäller B ∝ NI/L.":
  "Föreslå riktning och storlek innan du visar beräkningen. Håll två reglage stilla när du ändrar det tredje.";
  $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";
  syncPrediction("sol");
@@ -167,13 +168,14 @@ $("sol-reset").addEventListener("click",()=>{
 function renderFlat(){
  const I=Number($("flat-i").value),N=Number($("flat-n").value),r=Number($("flat-r").value);
  const B=mu0*N*I/(2*(r/100))*1e6;
+ const relFlat=(N/5)*(I/0.8)*(4/r);
  $("flat-i-value").textContent=swFmt(I,2)+" A";
  $("flat-n-value").textContent=String(N);
  $("flat-r-value").textContent=swFmt(r,1)+" cm";
  $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N});
  $("flat-result").textContent=flatShown?
  "B ≈ "+swFmt(B,1)+" μT i centrum · riktat "+(flatDir>0?"ut ur bilden (mot dig)":"in i bilden (från dig)")+
- ". Ideal modell: N täta varv med samma radie.":
+ ". Jämfört med utgångsfallet: "+swFmt(relFlat,2)+" gånger så stort belopp. Ideal modell: N täta varv med samma radie.":
  "Räkna själv innan facit. Ändra N, I eller r och pröva ett samband i taget.";
  $("flat-show").textContent=flatShown?"Dölj beräkning och riktning":"Visa beräkning och riktning";
  syncPrediction("flat");
