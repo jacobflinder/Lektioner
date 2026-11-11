@@ -83,7 +83,7 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
 }
 function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroTesla=null}={}){
  const w=650,h=365,cx=264,cy=175,n=Math.max(1,Math.min(10,Math.round(turns)));
- const rCm=Math.max(2,Math.min(10,Number(radiusCm)||4)),R=14*rCm+4;
+ const rCm=Math.max(2,Math.min(10,Number(radiusCm)||4)),R=13*rCm+1;
  const spacing=1.9,outer=R+spacing*(n-1)/2,total=n*2*Math.PI,pts=[];
  for(let i=0;i<=Math.max(250,n*170);i++){
   const t=i/Math.max(250,n*170)*total,r=outer-spacing*t/(2*Math.PI);
@@ -106,11 +106,12 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
   const disk=Math.max(15,rInner-5),step=Math.max(16,Math.min(31,disk/3.6));
   fieldMarks='<circle cx="'+cx+'" cy="'+cy+'" r="'+disk.toFixed(1)+'" fill="'+blue+'" fill-opacity="'+(.05+.20*strength).toFixed(3)+'"/>';
   for(let y=-disk;y<=disk;y+=step)for(let x=-disk;x<=disk;x+=step){
-   if(x*x+y*y>disk*disk*.91)continue;
+   if(x*x+y*y>disk*disk*.91||x*x+y*y<step*step*.39)continue;
    // Direction symbols across the entire interior area, not an assertion
    // that local field magnitude equals the calculated central value.
    fieldMarks+=mark(cx+x,cy+y,dir);
   }
+  fieldMarks+=mark(cx,cy,dir,1.22); // explicit central field vector
   for(const t of [.34*Math.PI,.74*Math.PI,1.26*Math.PI,1.66*Math.PI]){
    const rExt=outer+22,x=cx+rExt*Math.cos(t),y=cy+rExt*Math.sin(t);
    if(x>17&&x<w-155&&y>20&&y<h-43)exterior+=mark(x,y,-dir,.58);
