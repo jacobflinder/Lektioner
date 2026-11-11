@@ -1,4 +1,25 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Jordens magnetfält · Fysik 2</title><link rel="stylesheet" href="../gemensamt/lektion.css"></head>
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Jordens magnetfält · Fysik 2</title><style>
+:root{font:18px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#173b48;background:#eef5f7;color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0}a{color:#08778a}button,input,textarea,select{font:inherit}button{border:1px solid #b8d1d9;border-radius:10px;background:#fff;color:#143c4d;padding:10px 14px;cursor:pointer;font-weight:650;line-height:1.28}button:hover:not(:disabled){background:#e9f5f7}button.primary{background:#086f84;color:#fff;border-color:#086f84}button.primary:hover{background:#065669}button.selected{background:#d4ecf1;border-color:#08788e}button:disabled{opacity:.42;cursor:not-allowed}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #cf923b;outline-offset:3px}
+header{max-width:1510px;margin:auto;padding:12px 24px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.brand{color:#0a738a;font-size:.83rem;font-weight:850;letter-spacing:.065em}.brand span{display:block;font-size:.76rem;letter-spacing:0;font-weight:450;color:#55727d}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.crumb{max-width:1470px;margin:0 auto 8px;padding:0 20px;font-size:.76rem;color:#5c737d}.crumb a{margin:0 7px}.crumb a:first-child{margin-left:0}
+.mode-banner{max-width:1440px;margin:0 auto 11px;padding:10px 18px;background:#fbfefe;border:1px solid #d4e7ea;border-left:5px solid #0a8094;border-radius:11px;color:#365869;font-size:.82rem}.mode-banner .only-repeat{display:none}body.repeat .mode-banner .only-repeat{display:block}body.repeat .mode-banner .only-class{display:none}
+.stage{max-width:1440px;margin:auto;min-height:65vh;background:#fff;border:1px solid #d8e7eb;border-radius:19px;box-shadow:0 8px 32px #16495b0a;padding:clamp(22px,3.25vw,50px)}.slide{display:none}.slide.active{display:block}.kicker{font-size:.73rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#08788a}h1{font-size:clamp(2rem,4.1vw,3.1rem);letter-spacing:-.045em;line-height:1.14;margin:8px 0 12px}h2{font-size:clamp(1.15rem,2vw,1.62rem);letter-spacing:-.025em;line-height:1.25;margin:8px 0 12px}h3{font-size:1.12rem;margin:8px 0 12px}p{line-height:1.53}.sub{font-size:1.06rem;color:#55717b;margin:0 0 23px}.small{font-size:.86rem;color:#546d78}.muted{color:#56727c}.tag{font-size:.72rem;font-weight:850;letter-spacing:.06em;color:#087c90;text-transform:uppercase}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}.thirds{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.panel{background:#f0f7f9;border:1px solid #cfe1e6;border-radius:14px;padding:18px}.panel.plain{background:#fff}.question{margin:12px 0 16px;padding:15px 19px;border-left:5px solid #75b4c1;background:#edf6f8;border-radius:10px}.instruction{margin:16px 0 10px;padding:13px 16px;border-radius:11px;background:#fff6e5;border-left:4px solid #d49b46}.diagram{background:#edf6f7;border-radius:14px;padding:10px;min-width:0}.diagram svg{width:100%;height:auto;display:block}.caption{font-size:.8rem;color:#58707c;margin:8px 2px 0}.answer{display:none;margin:12px 0;background:#e9f6ef;border-left:5px solid #238569;padding:15px 18px;border-radius:9px}.answer.open{display:block}.answer p:first-child{margin-top:0}.answer p:last-child{margin-bottom:0}.math{font-family:"Cambria Math","STIX Two Math",Cambria,Georgia,serif;font-size:clamp(1.4rem,2.35vw,2rem);line-height:1.55;overflow-x:auto}.math math{font-size:1em}.math-sm{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.35rem}.mono{font-variant-numeric:tabular-nums}.foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;max-width:1440px;margin:11px auto 22px;padding:0 8px}.foot .controls{gap:7px}.foot select{font-size:.8rem;max-width:330px;border:1px solid #b5d0d8;border-radius:8px;padding:9px;background:white;color:#244456}.chip{display:inline-block;background:#ecf5f7;padding:5px 9px;border-radius:8px;color:#286379;font-size:.79rem;font-weight:700}ul,ol{padding-left:1.45rem}li{margin:8px 0}
+.slider{margin:12px 0 15px}.slider label{display:flex;justify-content:space-between;align-items:center;font-size:.86rem;color:#245062;margin-bottom:7px;gap:10px}.slider input[type=range]{display:block;width:100%;accent-color:#078299}.readout{border:1px solid #c6dfe4;background:#f2f9fa;border-radius:11px;padding:12px 16px;font-size:1.03rem;font-weight:700;margin:12px 0;font-variant-numeric:tabular-nums}.lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.83fr);gap:17px;align-items:start}.lab .diagram{position:relative}.lab .panel{margin:0}.stage button{max-width:100%}.choice{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.choice button.selected{background:#d4edf2;border:2px solid #087c90;padding:9px 13px}.feedback{min-height:1.5em;color:#235669;font-size:.89rem;margin:10px 0 0;font-weight:650}.repeat-card{display:none;background:#f4fafb;border:1px solid #c4dfe4;border-left:5px solid #17839a;border-radius:13px;padding:17px;margin:25px 0 5px}body.repeat .repeat-card{display:block}.repeat-card .choice{flex-direction:column;align-items:stretch;max-width:650px}.repeat-card button{text-align:left}.repeat-card .feedback{padding:9px;border-radius:8px;background:#eaf5f7}.repeat-card button.good{background:#d9f2e5;border-color:#16876c}.repeat-card button.wrong{background:#fff1df;border-color:#d59b50}
+.teacher-note{display:none;background:#fff4e0;border-left:4px solid #c99649;border-radius:9px;padding:14px;margin:15px 0}body.show-teacher .teacher-note{display:block}
+.editor{background:white;max-width:1440px;margin:0 auto 10px;padding:16px;border-radius:12px;border:1px solid #d2e3e8}.editor label{display:inline-block;margin:7px 12px 7px 0;font-size:.83rem;color:#335b65}.editor input{display:block;padding:7px;border-radius:7px;border:1px solid #b8cdd4;min-width:150px;max-width:225px}.editor[hidden]{display:none}.timerline{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:14px 0}.timerline output{font-size:1.55rem;font-weight:800;font-variant-numeric:tabular-nums}.workbox{background:#eff7f9;padding:19px;border-radius:13px;border:1px solid #cbdfe4}.workbox strong{font-size:1.22rem;color:#096d82}textarea{width:100%;min-height:100px;border-radius:10px;border:1px solid #bbd4d9;padding:12px}.only-repeat{display:none}body.repeat .only-repeat{display:block}body.repeat .only-class{display:none}
+svg text{font-family:system-ui,sans-serif;fill:#284c5a}svg .bfield{stroke:#08768d;fill:none}svg .copper{stroke:#bf6947;fill:none}svg .force{stroke:#c16d37;fill:none}svg .green{stroke:#2b896f;fill:none}svg .axis{stroke:#728f9a;fill:none}svg .gridmark{stroke:#a1c3ca;fill:none}svg .chargepos{fill:#bb5c45}svg .chargeneg{fill:#116f8c}svg .fillsoft{fill:#eef6f8}svg .bg{fill:#edf6f8}svg .fieldbox{fill:#eef6f8;stroke:#b4d2d9}svg .poleN{fill:#ce443a}svg .poleS{fill:#f9fbfa;stroke:#1e4f5c}.diagram figcaption{font-size:.78rem}
+@media(max-width:850px){:root{font-size:16.5px}.stage{border-radius:0}.grid,.thirds,.lab{grid-template-columns:1fr}.mode-banner{border-radius:0}.foot{padding:0 12px}.foot select{max-width:220px}.diagram svg{max-height:420px}}@media(max-width:550px){header{padding:12px}.stage{padding:17px 14px}.controls{gap:5px}button{padding:9px 11px}.foot .controls{width:100%;justify-content:space-between}.foot select{max-width:100%;width:100%}h1{font-size:2rem}.question{padding:12px 14px}}
+/* Explain calculated values after prediction, not just report numbers. */
+.calc-chain{display:grid;gap:9px;text-align:left;font-weight:500;font-variant-numeric:tabular-nums}
+.calc-chain>div{background:#fff;border:1px solid #cbdfe4;border-radius:9px;padding:9px 12px;min-width:0}
+.calc-chain>details{background:#fff;border:1px solid #cbdfe4;border-radius:9px;padding:9px 12px;min-width:0}
+.calc-chain>details summary{font-size:.85rem;font-weight:680;cursor:pointer;color:#08738c}
+.calc-chain>details[open] .math-sm{padding-top:8px}
+.calc-chain .math-sm{font-size:clamp(1.12rem,1.7vw,1.5rem);overflow-x:auto;line-height:1.65;margin:4px 0}
+.calc-chain math{display:block;max-width:100%}
+.calc-chain .small{margin:6px 0 2px;font-size:.84rem;font-weight:500}
+@media print{header,.crumb,.mode-banner,.editor,.foot{display:none!important}.stage{padding:0;box-shadow:none;border:0}.slide{display:block!important;break-after:page}.answer{display:block!important}}
+</style></head>
 <body data-subject="jordens-magnetfalt">
 <header><div class="brand">FYSIK 2 · ELEKTROMAGNETISM<span>Jordens magnetfält · Inklination, missvisning och kompass i spole</span></div><div class="controls"><button id="class" class="selected" aria-pressed="true">Klassrum</button><button id="repetition" aria-pressed="false">Repetition</button><button id="teacher" aria-pressed="false">Lärarstöd</button><button id="fullscreen">Helskärm</button><button id="settings">Arbetsbild</button></div></header>
 <nav class="crumb"><a href="../../">Fysik, nivå 2</a> › <a href="../">Elektromagnetism</a> › <strong>Jordens magnetfält</strong></nav>
@@ -6,4 +27,205 @@
 <aside id="editor" class="editor" hidden><b>Ändra hänvisningar inför nästa undervisningstillfälle</b><div class="controls"><label>Dagens lässidor<input type="text" data-ref-input="read" value="167–170"></label><label>Bokens uppgifter<input type="text" data-ref-input="tasks" value="351–357"></label><label>Inför nästa lektion<input type="text" data-ref-input="next" value="171–182"></label></div><button id="apply" class="primary">Uppdatera arbetsbilder</button> <button id="download">Hämta fristående HTML</button><p class="small">Hänvisningarna ändras endast i denna vy. Inga elevuppgifter skickas.</p></aside>
 <main class="stage" id="slides"></main>
 <footer class="foot"><div class="controls"><button id="prev">← Föregående</button><strong class="mono" id="counter">1 / 1</strong></div><div class="controls"><select id="jump" aria-label="Hoppa till bild"></select><button id="reset">Återställ bild</button><button id="step" class="primary">Visa nästa steg</button><button id="next">Nästa bild →</button></div></footer>
-<script src="./content.js"></script><script src="../gemensamt/base.js"></script><script src="../gemensamt/physics.js"></script><script src="./lesson.js"></script></body></html>
+<script data-fy2-bundled="content">
+(()=>{"use strict";const pages=[["Måste en laddning påverkas?","<span class=\"kicker\">01 · Start</span><h1>Måste en laddning påverkas av en kraft?</h1><div class=\"panel\"><p>En proton rör sig parallellt med ett magnetfält.</p><div class=\"question\">Är den magnetiska kraften noll eller skild från noll? Motivera med riktningarna eller ett samband.</div></div><p class=\"small\">Tänk själv först. Jämför sedan era motiveringar.</p>"],["Parallell rörelse","<span class=\"kicker\">02 · Återkoppling</span><h1>Parallell rörelse ger ingen magnetisk kraft</h1><div class=\"panel\"><p class=\"math\">F = |q|vB sin θ</p><p class=\"math\">θ = 0° ⇒ F = 0</p><p>Det är hastighetens komponent vinkelrät mot B som ger magnetisk kraft.</p></div><p class=\"sub\">Nu undersöker vi magnetfältet som finns runt oss på jorden.</p>"],["Vad visar kompassen?","<span class=\"kicker\">03 · Syfte och mål</span><h1>Vad visar egentligen en kompass?</h1><p class=\"sub\">Koppla jordens magnetfält till kompassens riktning och använda fältkomponenter för en mätning.</p><div class=\"panel\"><h2>Efter lektionen ska du kunna</h2><ol><li>Skilja inklination från missvisning.</li><li>Dela upp jordfältet i horisontell och vertikal komponent.</li><li>Förklara och beräkna kompassens avvikelse nära en spole.</li></ol></div>"],["Jordens magnetfält","<span class=\"kicker\">04 · Modell</span><h1>Jorden omges av ett magnetfält</h1><div class=\"grid\"><div class=\"diagram\"><svg viewBox=\"0 0 640 390\" role=\"img\" aria-label=\"Schematisk modell av jordens magnetfält. Fältlinjer går från geografiskt söder till geografiskt norr utanför jorden.\"><rect width=\"640\" height=\"390\" rx=\"14\" fill=\"#eef7f9\"/><ellipse cx=\"310\" cy=\"193\" rx=\"103\" ry=\"145\" fill=\"#cde6ec\" stroke=\"#8eb7c2\" stroke-width=\"2\"/><ellipse cx=\"310\" cy=\"193\" rx=\"30\" ry=\"145\" stroke=\"#9ac4cc\" fill=\"none\"/><ellipse cx=\"310\" cy=\"193\" rx=\"103\" ry=\"38\" stroke=\"#9ac4cc\" fill=\"none\"/><text x=\"293\" y=\"31\" font-size=\"20\">Norr</text><text x=\"291\" y=\"370\" font-size=\"20\">Söder</text><path d=\"M310 335 C148 356 107.5 63 310 50\" fill=\"none\" stroke=\"#08778d\" stroke-width=\"2\"/><path d=\"M310 335 C472 356 512.5 63 310 50\" fill=\"none\" stroke=\"#08778d\" stroke-width=\"2\"/><path d=\"M310 335 C103.6 356 52 63 310 50\" fill=\"none\" stroke=\"#08778d\" stroke-width=\"2\"/><path d=\"M310 335 C516.4 356 568 63 310 50\" fill=\"none\" stroke=\"#08778d\" stroke-width=\"2\"/><path d=\"M310 335 C61.60000000000002 356 -0.5 63 310 50\" fill=\"none\" stroke=\"#08778d\" stroke-width=\"2\"/><path d=\"M310 335 C558.4 356 620.5 63 310 50\" fill=\"none\" stroke=\"#08778d\" stroke-width=\"2\"/><path d=\"M128 220L116 194L144 201 M494 220L506 194L478 201\" stroke=\"#08778d\" stroke-width=\"3\" fill=\"none\"/><text x=\"30\" y=\"365\" font-size=\"15\">Schematisk dipol – inte geografi eller styrka i skala</text></svg></div><div class=\"panel\"><p>Jordens fältlinjer går in i jorden i det norra polarområdet.</p><p>Vid Sverige lutar fältet <b>nedåt</b> i marken.</p><p>Inklinationen <b>i</b> mäts från horisontalplanet.</p><p>En fritt vridbar horisontell kompass följer i huvudsak fältets <b>horisontella komponent Bₕ</b>.</p></div></div><div class=\"question\">Hur kan fältet luta nedåt samtidigt som kompassen pekar mot norr?</div><div class=\"teacher-note\">Dipolmodell schematisk. Jordens geografiska nordpol ligger nära en magnetisk sydpol (för fältlinjernas riktning). En verklig kompass påverkas av lokala magnetiska fält.</div>"],["Två vinklar i två plan","<span class=\"kicker\">05 · Begrepp</span><h1>Två vinklar i två olika plan</h1><div class=\"grid\"><div class=\"panel\"><h2>Inklination i</h2><p>Ses från sidan i ett <b>vertikalt plan</b>.</p><p>Vinkeln mellan hela jordfältet och horisontalplanet.</p></div><div class=\"panel\"><h2>Missvisning / deklination</h2><p>Ses uppifrån i ett <b>horisontellt plan</b>.</p><p>Vinkeln mellan geografiskt norr och magnetiskt norr.</p></div></div><div class=\"repeat-card\" data-quiz data-correct=\"0\" data-hint=\"Inklinationen mäts från horisontalplanet.\" data-why=\"Inklination i är fältets lutning i ett vertikalplan.\"><span class=\"tag\">Självtest · repetition</span><h3>Vilken vinkel beskriver att magnetfältet lutar nedåt?</h3><div class=\"choice\"><button data-choice=\"0\">A. Inklination</button><button data-choice=\"1\">B. Missvisning</button><button data-choice=\"2\">C. Spolens kompassavvikelse α</button></div><p class=\"feedback\" role=\"status\">Välj och motivera.</p></div>"],["Fältets komponenter","<span class=\"kicker\">06 · Undersök komponenter</span><h1>Komponenterna kommer före beräkningen</h1><div class=\"lab\"><div class=\"diagram\" id=\"earth-components\"></div><div class=\"panel\"><p class=\"math-sm\">Bₕ = B cos i<br>Bᵥ = B sin i</p><div class=\"slider\"><label for=\"earth-B\">Hela jordfältet B <b id=\"earth-B-value\">42 μT</b></label><input id=\"earth-B\" type=\"range\" min=\"20\" max=\"65\" step=\"1\" value=\"42\"></div><div class=\"slider\"><label for=\"earth-i\">Inklination i <b id=\"earth-i-value\">73°</b></label><input id=\"earth-i\" type=\"range\" min=\"0\" max=\"90\" step=\"1\" value=\"73\"></div><div class=\"readout\" id=\"earth-components-result\">Förutsäg komponenterna.</div><button id=\"earth-components-reveal\" class=\"primary\">Visa komponenterna</button> <button id=\"earth-components-reset\">Återställ</button></div></div><div class=\"question\">Om i ökar medan B är konstant, vilken komponent minskar? Förklara med triangeln.</div>"],["Spole och kompass – förutsäg","<span class=\"kicker\">07 · Förutsäg före demo</span><h1>Spole och kompass: förutsäg och pröva</h1><div class=\"grid\"><div class=\"panel\"><p>En kompass står i centrum av en vertikal, platt spole. Spolens plan ligger i nord–syd-riktningen.</p><p>Jordens horisontella fält är riktat mot norr; spolens fält är vinkelrätt mot detta.</p><div class=\"question\">Hur vrids nålen när spolströmmen ökar? Vad händer när strömmen vänds?</div><p><b>Genomför experimentet i klassrummet.</b></p></div><div class=\"diagram\" id=\"earth-compass-predict\"></div></div>"],["När spolens fält ökar","<span class=\"kicker\">08 · Undersök</span><h1>Följ nålen när spolens fält ökar</h1><p class=\"sub\">Kompassen följer det sammanlagda horisontella fältet – inte endast spolens fält.</p><div class=\"lab\"><div class=\"diagram\" id=\"earth-compass\"></div><div class=\"panel\"><div class=\"slider\"><label for=\"earth-coil\">Spolens horisontella fält Bsp <b id=\"earth-coil-value\">0 μT</b></label><input id=\"earth-coil\" type=\"range\" min=\"-75\" max=\"75\" step=\"1\" value=\"0\"></div><div class=\"controls\"><button id=\"earth-compass-show\" class=\"primary\">Visa resultant och nål</button><button id=\"earth-compass-reset\">Återställ</button></div><div class=\"readout\" id=\"earth-compass-result\">Förutsäg nålens riktning först.</div><p class=\"small\">Jordfältet Bₕ = 12,3 μT hålls konstant. Spolfältet antas horisontellt och vinkelrätt mot detta.</p></div></div>"],["Kompassens vinkel","<span class=\"kicker\">09 · Modell</span><h1>Nålen följer det sammanlagda fältet</h1><div class=\"grid\"><div class=\"panel\"><p class=\"math\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mi>tan</mi><mi>α</mi><mo>=</mo><mfrac><mrow><msub><mi>B</mi><mtext>sp</mtext></msub></mrow><mrow><msub><mi>B</mi><mi>h</mi></msub></mrow></mfrac></math></p><p class=\"math\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><msub><mi>B</mi><mtext>sp</mtext></msub><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac></math></p><p>α är kompassens <b>avvikelse</b> i försöket, inte jordfältets inklination i.</p><p>Om strömmen vänds kan α bli negativ, alltså vrids kompassen åt andra hållet.</p></div><div id=\"earth-triangle\" class=\"diagram\"></div></div>"],["Hur mycket vrids kompassen?","<span class=\"kicker\">10 · Exempel / tänk först</span><h1>Hur mycket vrids kompassen?</h1><div class=\"grid\"><div class=\"panel\"><p>Jordfältet: B = 42 μT och i = 73°.</p><p>Spole: 3 varv med diameter 12 cm.</p><p>Ström: 1,5 A.</p><div class=\"question\">Bestäm kompassens avvikelse α. Vilket blir det första steget?</div></div><div class=\"panel\"><h2>Ställ upp före beräkning</h2><ol><li>Beräkna Bₕ.</li><li>Omvandla spolens diameter till radie.</li><li>Beräkna Bsp och sedan α.</li></ol></div></div>"],["Tre steg till avvikelsen","<span class=\"kicker\">11 · Återkoppling</span><h1>Tre steg ger avvikelsen</h1><div class=\"grid\"><div class=\"panel\"><p class=\"math-sm\">Bₕ = 42 cos(73°) μT ≈ 12,3 μT</p><p class=\"math-sm\">r = 0,12 / 2 m = 0,060 m</p><p class=\"math-sm\">Bsp = (4π·10⁻⁷·3·1,5)/(2·0,060) T ≈ 47,1 μT</p><p class=\"math\">α ≈ arctan(47,1 / 12,3) ≈ 75°</p></div><div class=\"diagram\" id=\"earth-example-compass\"></div></div><div class=\"question\">Rimlighetskontroll: Bsp är större än Bₕ. Varför måste α vara större än 45°?</div>"],["Från mätning till jordfält","<span class=\"kicker\">12 · Prova själv</span><h1>Prova själv: från mätning till jordfält</h1><div class=\"grid\"><div class=\"panel\"><p>Spolens fält är 18 μT. Kompassens avvikelse α är 45°. Inklination i är 60°.</p><div class=\"question\">Bestäm jordfältets horisontella komponent Bₕ och hela fältet B.</div><p class=\"small\">Arbeta enskilt och jämför sedan med en kamrat.</p></div><div class=\"diagram\" id=\"earth-example-reverse\"></div></div>"],["Från komponent till hela fältet","<span class=\"kicker\">13 · Återkoppling</span><h1>Från horisontalkomponenten till hela fältet</h1><div class=\"grid\"><div class=\"panel\"><h2>1. Kompassens avvikelse</h2><p class=\"math-sm\">tan α = Bsp / Bₕ</p><p class=\"math-sm\">Bₕ = 18 μT / tan(45°) = 18 μT</p></div><div class=\"panel\"><h2>2. Jordfältets lutning</h2><p class=\"math-sm\">Bₕ = B cos i</p><p class=\"math\">B = 18 / cos 60° = 36 μT</p></div></div><p class=\"small\">Kontroll: hela fältets belopp är större än den horisontella komponenten.</p><div class=\"repeat-card\" data-quiz data-correct=\"2\" data-hint=\"B=Bₕ/cos i, cos 60°=0,5.\" data-why=\"B=18/0,5=36 μT.\"><span class=\"tag\">Självtest · repetition</span><h3>Om i=60° och Bₕ=18 μT, hur stort är hela B?</h3><div class=\"choice\"><button data-choice=\"0\">A. 9 μT</button><button data-choice=\"1\">B. 18 μT</button><button data-choice=\"2\">C. 36 μT</button></div><p class=\"feedback\" role=\"status\">Välj och motivera.</p></div>"],["Jordfältet och partiklar","<span class=\"kicker\">14 · Tillämpning</span><h1>Jordfältet och laddade partiklar</h1><div class=\"panel\"><p>Jordens magnetfält uppstår huvudsakligen genom elektriska strömmar i den flytande yttre kärnan.</p><p>Det kan påverka banor för laddade partiklar från rymden. Vissa partiklar fångas i strålningsbälten.</p><p>Norrsken uppstår när energirika partiklar överför energi till atmosfären.</p></div><div class=\"question\">Koppla till föregående lektion: varför kan ett magnetfält ändra partiklars banor utan att magnetkraften ökar deras fart?</div>"],["Arbeta med boken och avsluta","<span class=\"kicker\">15 · Arbetsbild och exit</span><h1>Eget arbete och avslut</h1><div class=\"grid\"><div class=\"workbox\"><h2>Fysikboken</h2><p><b>Läs dagens teori:</b> s. <strong data-ref=\"read\">167–170</strong>.</p><p><b>Uppgifter / till räknestugan:</b> <strong data-ref=\"tasks\">351–357</strong>.</p><p><b>Inför nästa innehållslektion:</b> läs gula rutorna s. <strong data-ref=\"next\">171–182</strong>.</p></div><div class=\"panel\"><h2>Visa vad du kan</h2><p>1. Varför ger en horisontell kompass sämre riktningsstöd när Bₕ närmar sig noll?</p><p>2. Vad skiljer inklinationen i från avvikelsen α i kompassförsöket?</p><p><b>Mål:</b> vinklar · komponenter · avvikelse.</p><button data-reveal>Visa återkopplingen</button><div class=\"answer\">1. Mycket liten horisontell komponent ger litet vridande moment i horisontalplanet och lokala störningar får stor betydelse. 2. i är fältets lutning mot horisontalplanet; α är kompassens vridning i horisontalplanet av spolfältet.</div></div></div>"]];document.getElementById("slides").innerHTML=pages.map(([t,c],i)=>'<section class="slide'+(i===0?' active':'')+'" data-title="'+t+'">'+c+'</section>').join('');})();
+</script>
+<script data-fy2-bundled="navigation">
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id),slides=[...document.querySelectorAll('.slide')];let current=0,repeat=false,showTeacher=false;
+function render(){slides.forEach((s,i)=>s.classList.toggle('active',i===current));$('#counter').textContent=(current+1)+' / '+slides.length;$('#jump').value=String(current);$('#prev').disabled=current===0;$('#next').disabled=current===slides.length-1;const a=slides[current].querySelector('.answer:not(.open)');$('#step').textContent=a?'Visa nästa steg':current===slides.length-1?'Slut':'Nästa bild';$('#step').disabled=!a&&current===slides.length-1;}
+function go(n){current=Math.max(0,Math.min(slides.length-1,n));if(!repeat)slides[current].querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));render();window.scrollTo(0,0)}
+function reveal(){const a=slides[current].querySelector('.answer:not(.open)');if(a){a.classList.add('open');render()}else if(current<slides.length-1)go(current+1)}
+$('#prev').onclick=()=>go(current-1);$('#next').onclick=()=>go(current+1);$('#step').onclick=reveal;
+$('#reset').onclick=()=>{slides[current].querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));slides[current].dispatchEvent(new Event('lesson:reset'));render()};
+slides.forEach((s,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=(i+1)+'. '+s.dataset.title;$('#jump').appendChild(o)});$('#jump').onchange=e=>go(+e.target.value);
+document.querySelectorAll('[data-reveal]').forEach(btn=>btn.onclick=()=>{btn.nextElementSibling?.classList.toggle('open');render()});
+function mode(r){repeat=r;document.body.classList.toggle('repeat',r);$('#class').classList.toggle('selected',!r);$('#repetition').classList.toggle('selected',r);$('#class').setAttribute('aria-pressed',String(!r));$('#repetition').setAttribute('aria-pressed',String(r));document.dispatchEvent(new Event('fy2:mode'))}$('#class').onclick=()=>mode(false);$('#repetition').onclick=()=>mode(true);
+$('#teacher').onclick=()=>{showTeacher=!showTeacher;document.body.classList.toggle('show-teacher',showTeacher);$('#teacher').setAttribute('aria-pressed',String(showTeacher))};
+$('#fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen().catch(()=>{}):document.documentElement.requestFullscreen().catch(()=>{});
+document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select,button,summary')||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();reveal()}if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}});
+document.querySelectorAll('[data-quiz]').forEach(box=>{const msg=box.querySelector('.feedback');box.querySelectorAll('button[data-choice]').forEach(b=>b.onclick=()=>{box.querySelectorAll('button[data-choice]').forEach(x=>x.classList.remove('selected','good','wrong'));b.classList.add('selected');if(repeat||box.dataset.open==='yes'){const ok=b.dataset.choice===box.dataset.correct;msg.textContent=(ok?'Rätt. ':'Inte riktigt. ')+(ok?box.dataset.why:box.dataset.hint);b.classList.add(ok?'good':'wrong')}else msg.textContent='Markerat. Förklara för en kamrat innan återkopplingen visas.'});let show=box.querySelector('[data-feedback]');if(!show){show=document.createElement('button');show.type='button';show.textContent='Visa återkoppling';show.dataset.feedback='';box.appendChild(show)}show.onclick=()=>{box.dataset.open=box.dataset.open==='yes'?'no':'yes';if(box.dataset.open==='yes'){msg.textContent=box.dataset.why;const right=box.querySelector('button[data-choice="'+box.dataset.correct+'"]');if(right)right.classList.add('good');}else{msg.textContent='Förutsäg först.';box.querySelectorAll('button.good').forEach(x=>x.classList.remove('good'))}show.textContent=box.dataset.open==='yes'?'Dölj återkoppling':'Visa återkoppling';};box.closest('.slide')?.addEventListener('lesson:reset',()=>{box.querySelectorAll('button.selected').forEach(b=>b.classList.remove('selected','good','wrong'));box.dataset.open='no';msg.textContent='Förutsäg och motivera.'})});
+if($('#settings'))$('#settings').onclick=()=>{$('#editor').hidden=!$('#editor').hidden};if($('#apply'))$('#apply').onclick=()=>{document.querySelectorAll('#editor [data-ref-input]').forEach(el=>document.querySelectorAll('[data-ref="'+el.dataset.refInput+'"]').forEach(x=>x.textContent=el.value.trim()||'Ej angivet'));$('#editor').hidden=true};
+let timerDuration=1200,remaining=1200,timerInterval=null,deadline=0;
+function clock(){if(!$('#timer'))return;const n=Math.max(0,Math.ceil(remaining));$('#timer').textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
+function pause(){if(timerInterval){clearInterval(timerInterval);timerInterval=null}if($('#timer-toggle'))$('#timer-toggle').textContent='Starta'}
+document.querySelectorAll('[data-minutes]').forEach(b=>b.onclick=()=>{pause();remaining=timerDuration=Number(b.dataset.minutes)*60;clock()});if($('#timer-toggle'))$('#timer-toggle').onclick=()=>{if(timerInterval){remaining=Math.max(0,(deadline-Date.now())/1000);pause();return}deadline=Date.now()+remaining*1000;$('#timer-toggle').textContent='Pausa';timerInterval=setInterval(()=>{remaining=Math.max(0,(deadline-Date.now())/1000);clock();if(remaining===0)pause()},200)};if($('#timer-reset'))$('#timer-reset').onclick=()=>{pause();remaining=timerDuration;clock()};
+if($('#download'))$('#download').onclick=async()=>{try{const clone=document.documentElement.cloneNode(true);clone.querySelector('#jump').replaceChildren();clone.querySelectorAll('textarea').forEach(x=>{x.value='';x.textContent=''});clone.querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));clone.querySelectorAll('.slide').forEach((x,i)=>x.classList.toggle('active',i===0));let html='<!doctype html>\n'+clone.outerHTML;if(!document.querySelector('script[data-fy2-bundled]'))for(const entry of [['../gemensamt/lektion.css','css'],['./content.js','js'],['../gemensamt/base.js','js'],['../gemensamt/physics.js','js'],['./lesson.js','js']]){const r=await fetch(entry[0]);if(!r.ok)throw Error('File unavailable: '+entry[0]);const raw=await r.text();if(entry[1]==='css')html=html.replace('<link rel="stylesheet" href="../gemensamt/lektion.css">','<style>'+raw+'</style>');else html=html.replace('<script src="'+entry[0]+'"></'+'script>','<script>'+raw.replaceAll('</'+'script>','<\\/script>')+'</'+'script>')}const url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Fy2_'+document.body.dataset.subject+'.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}catch(e){alert('Kunde inte göra en fristående kopia. Prova från den publicerade webbversionen.')}};
+window.Fy2Nav={go,reveal,mode,$};mode(false);clock();go(0);
+})();
+</script>
+<script data-fy2-bundled="physics">
+(()=>{
+'use strict';
+const n=v=>Number(v),fmt=(x,d=1)=>n(x).toLocaleString('sv-SE',{minimumFractionDigits:d,maximumFractionDigits:d});
+const L=(x,y,X,Y,c='#087b91',w=4)=>'<path d="M'+x+' '+y+'L'+X+' '+Y+'" stroke="'+c+'" stroke-width="'+w+'" fill="none" stroke-linecap="round"/>';
+const A=(x,y,X,Y,c='#087b91',w=4)=>{let dx=X-x,dy=Y-y,len=Math.hypot(dx,dy)||1,ux=dx/len,uy=dy/len;return L(x,y,X,Y,c,w)+L(X-11*ux-6*uy,Y-11*uy+6*ux,X,Y,c,w-1)+L(X-11*ux+6*uy,Y-11*uy-6*ux,X,Y,c,w-1)};
+const T=(x,y,t,c='#254655',size=18)=>'<text x="'+x+'" y="'+y+'" style="font-size:'+size+'px;font-weight:650;fill:'+c+'">'+t+'</text>';
+const field=(cols=10,rows=6,x=76,y=78,dx=54,dy=42)=>{let s='';for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)s+=T(x+i*dx,y+j*dy,'×','#80aab7',20);return s};
+const S=(body,w=680,h=360,alt='Schematisk fysikalisk modell')=>'<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+alt+'"><rect x="0" y="0" width="'+w+'" height="'+h+'" rx="14" fill="#eef7f9"/>'+body+'</svg>';
+function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1,showForce=true){
+ const bend=sign*fieldSign,x0=92,y0=183,R=150*speed/B,theta=.85*progress,pts=[];
+ for(let i=0;i<=70;i++){const a=theta*i/70;pts.push([x0+R*Math.sin(a),y0-bend*R*(1-Math.cos(a))]);}
+ const p=pts[70],vx=Math.cos(theta),vy=-bend*Math.sin(theta),fx=-Math.sin(theta),fy=-bend*Math.cos(theta);
+ const route=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
+ const color=sign>0?'#bd6947':'#0b8095';
+ const fieldGlyph=fieldSign>0?field(11,7,47,59,54,43):field(11,7,47,59,54,43).replaceAll('×','•');
+ const fieldOpacity=Math.min(.98,.37+.37*B),vLength=53*speed,fLength=41*speed*B;
+ const content='<g opacity="'+fieldOpacity.toFixed(3)+'">'+fieldGlyph+'</g>'+
+ T(42,345,(fieldSign>0?'B in i bilden':'B ut ur bilden')+' · relativt B='+B.toFixed(1).replace('.',','),'#0b748e',17)+
+ '<path d="'+route+'" fill="none" stroke="'+color+'" stroke-width="4"/>'+
+ '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="white" stroke="'+color+'" stroke-width="3"/>'+
+ T(p[0]-7,p[1]+6,sign>0?'+':'−',color,22)+
+ A(p[0],p[1],p[0]+vx*vLength,p[1]+vy*vLength,'#20886d',4)+
+ (showForce?A(p[0],p[1],p[0]+fx*fLength,p[1]+fy*fLength,'#be6a42',4):'')+
+ T(510,38,'v (grön) ∝ fart','#20886d',17)+
+ (showForce?T(510,62,'F (orange) ∝ vB','#ae6343',16):'');
+ return S(content,710,370,'Partikelbana i homogent magnetfält. Hastighetspilens längd ändras med fart, kraftpilen med fart gånger fältstyrka.');
+}
+function fieldOnRod(charges=false,moving=true,L=.20,B=.40,v=3){
+ const cy=194,Lm=Math.max(.10,Math.min(.40,Number(L))),top=cy-(100+160*(Lm-.10)/.30)/2;
+ const height=2*(cy-top),vArrow=38+14*Math.max(0,Number(v));
+ const glyphs='<g opacity="'+Math.min(.98,.30+.67*Math.max(0,Number(B))/.8).toFixed(3)+'">'+field(10,6,80,72,54,43)+'</g>';
+ let s=glyphs+
+ '<rect x="261" y="'+top.toFixed(1)+'" width="28" height="'+height.toFixed(1)+'" rx="9" fill="#d6a473" stroke="#9f7948" stroke-width="2"/>'+
+ (moving&&Number(v)>0?A(298,cy,298+vArrow,cy,'#218a73')+T(309+vArrow,cy+5,'v','#26846e',20):T(380,205,'v = 0','#26846e',20))+
+ T(479,38,'B = '+B.toFixed(2).replace('.',',')+' T, inåt','#0e788e',18)+
+ T(480,68,'L = '+(100*Lm).toFixed(0)+' cm','#476c78',17);
+ if(charges){
+  for(let j=0;j<3;j++){
+   s+=T(269,top+24+j*19,'+','#b65540',20)+T(269,top+height-14-j*19,'−','#0c7d93',20);
+  }
+  s+=A(315,cy,315,cy-62,'#14758f')+T(327,cy-65,'Fₑ','#14758f',18)+
+    A(245,cy,245,cy+62,'#bb6340')+T(190,cy+71,'Fₘ','#af6544',18);
+ }
+ return S(s,690,370,'Metallstav med längd och hastighet som följer valda värden; fältmarkeringarnas synlighet ökar med B.');
+}
+function compass(Bh,Bcoil,show=true){
+ const cx=320,cy=207,B=Math.hypot(Bh,Bcoil)||1,ux=Bcoil/B,uy=-Bh/B,scale=3;
+ let s=A(cx,cy,cx,cy-Bh*scale,'#087d96')+T(cx+12,cy-Bh*scale-12,'Bₕ','#087d96');
+ if(Bcoil) s+=A(cx,cy,cx+Bcoil*scale,cy,'#bd704b')+T(cx+Bcoil*scale/2,cy+28,'Bsp','#ad6544');
+ s+=L(55,cy,635,cy,'#b8ccd2',1)+L(cx,320,cx,48,'#b8ccd2',1);
+ if(show){s+=A(cx,cy,cx+Bcoil*scale,cy-Bh*scale,'#263e52',4);let px=-uy*12,py=ux*12;const north=[cx+68*ux,cy+68*uy],south=[cx-68*ux,cy-68*uy];
+ s+='<path d="M'+cx+' '+cy+'L'+(north[0]+px)+' '+(north[1]+py)+'L'+(north[0]-px)+' '+(north[1]-py)+'Z" fill="#cf453b" stroke="#98372d"/>'+
+ '<path d="M'+cx+' '+cy+'L'+(south[0]+px)+' '+(south[1]+py)+'L'+(south[0]-px)+' '+(south[1]-py)+'Z" fill="white" stroke="#264b59" stroke-width="2"/>'+
+ '<circle cx="'+cx+'" cy="'+cy+'" r="5" fill="#285667"/>'+T(523,52,'Bres','#244559',17);
+ }else s+=T(cx+13,cy-12,'?','#315769',24);
+ s+=T(32,42,'SETT UPPIFRÅN','#3d6475',17)+T(555,330,'Norr ↑','#366271',18);
+ return {html:S(s,690,370,'Kompass sedd uppifrån, röd nordände och vit sydände'),angle:Math.atan2(Bcoil,Bh)*180/Math.PI};
+}
+function components(B,i){
+ const r=i*Math.PI/180,Bh=B*Math.cos(r),Bv=B*Math.sin(r);
+ const scale=3,x=125,y=96,X=x+Bh*scale,Y=y+Bv*scale;
+ let s=A(x,y,X,y,'#0e8399')+A(x,y,x,Y,'#b97250')+A(x,y,X,Y,'#293c53',5)+L(X,y,X,Y,'#acbec5',1)+L(x,Y,X,Y,'#acbec5',1)+T(X+10,y-9,'Bₕ','#0c7b90')+T(x-38,Y,'Bᵥ','#b86b4c')+T(X+10,Y,'B','#253e50')+T(28,38,'Vertikalt plan · lutning nedåt','#50717a',18);
+ return {html:S(s,690,340,'Vektorsumma av jordfältets horisontella och nedåtriktade komponent'),Bh,Bv};
+}
+function fluxAngle(B=.4,area=.08,deg=0){
+ const t=deg*Math.PI/180,cx=270,cy=181,nx=Math.cos(t),ny=-Math.sin(t),px=-ny,py=nx;
+ const s=A(cx,cy,cx+170,cy,'#07859a',5)+T(cx+175,cy-12,'B','#0b7991')+
+ L(cx-140*px,cy-140*py,cx+140*px,cy+140*py,'#bf7248',6)+
+ A(cx,cy,cx+117*nx,cy+117*ny,'#273f55',4)+T(cx+125*nx,cy+126*ny,'n','#253f53')+
+ T(35,42,'θ = '+fmt(deg,0)+'° mellan B och normalen','#3a6270');
+ return {html:S(s,650,345,'Ytans normal och magnetfält med valbar vinkel'),phi:B*area*Math.cos(t)};
+}
+function fluxPiece(t){
+ const x=u=>85+530*u,y=u=>252-50*u,phi=u=>u<.3?10*u:u<.6?3:u<.8?3*(.8-u)/.2:0,pts=[[0,0],[.3,3],[.6,3],[.8,0],[1,0]];
+ const slope=t<.3?10:t<.6?0:t<.8?-15:0,U=[.3,.6,.8].some(k=>Math.abs(t-k)<1e-10)?NaN:slope===0?0:-.2*slope;
+ let s=A(85,258,640,258,'#6d8a94',2)+A(85,258,85,40,'#6d8a94',2)+T(24,36,'Φ (mWb)','#0c7690')+T(608,288,'t (s)','#50717c')+
+ '<path d="'+pts.map((p,i)=>(i?'L':'M')+x(p[0])+' '+y(p[1])).join('')+'" stroke="#078498" stroke-width="5" fill="none"/>';
+ for(const z of [.3,.6,.8])s+=T(x(z)-10,290,fmt(z,1),'#52707c',14);
+ s+='<circle cx="'+x(t)+'" cy="'+y(phi(t))+'" r="7" fill="#bc6748" stroke="white" stroke-width="2"/>';
+ return {html:S(s,690,320,'Styckvis linjär flödesgraf och markerad tid'),phi:phi(t),U};
+}
+function tangent(t){
+ const x=u=>80+530*u,y=v=>252-51*v,phi=u=>3*Math.sin(Math.PI*u),slope=3*Math.PI*Math.cos(Math.PI*t),pts=[];
+ for(let i=0;i<=100;i++){const u=i/100;pts.push((i?'L':'M')+x(u).toFixed(1)+' '+y(phi(u)).toFixed(1));}
+ const lo=Math.max(0,t-.16),hi=Math.min(1,t+.16);
+ const s=A(80,258,638,258,'#6c8894',2)+A(80,258,80,42,'#6c8894',2)+'<path d="'+pts.join('')+'" stroke="#087c90" stroke-width="4" fill="none"/>'+
+ L(x(lo),y(phi(t)+slope*(lo-t)),x(hi),y(phi(t)+slope*(hi-t)),'#bc6746',3)+
+ '<circle cx="'+x(t)+'" cy="'+y(phi(t))+'" r="7" fill="#bd6440" stroke="white" stroke-width="2"/>'+
+ T(23,40,'Φ (mWb)','#0b8095')+T(609,288,'t (s)','#57717c');
+ return {html:S(s,690,330,'Flöde som sinusformad kurva med korrekt tangentlutning'),phi:phi(t),U:-.2*slope};
+}
+function loopMotion(t){
+ const fract=t<=.2?0:t>=.65?1:(t-.2)/.45,xx=305+158*fract,yy=130;
+ let s=field(11,6,61,68,54,42)+L(160,yy,xx,yy,'#aa704b',5)+L(160,yy+150,xx,yy+150,'#aa704b',5)+L(160,yy,160,yy+150,'#aa704b',5)+L(xx,yy,xx,yy+150,'#c17045',9)+
+ T(xx+12,yy+72,'stav','#9f654a')+T(18,36,'B in i bilden','#08798d');
+ if(t>.2&&t<.65)s+=A(xx+15,220,xx+75,220,'#228a71',4)+A(xx,260,xx,150,'#b66a46',4)+T(xx+28,148,'I uppåt','#a76545',16);
+ return S(s,690,360,'Stav glider på skenor och ökar arean i magnetfält');
+}
+window.Fy2Physics={fmt,L,A,T,S,field,particle,fieldOnRod,compass,components,fluxAngle,fluxPiece,tangent,loopMotion};
+})();
+</script>
+<script data-fy2-bundled="lesson">
+(()=>{
+"use strict";
+const {$}=window.Fy2Nav,{fmt,compass,components}=window.Fy2Physics;
+
+const math=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
+const chain=(law,sub,result,note)=>'<div class="calc-chain">'+
+ '<div><span class="tag">1 · Samband</span><div class="math-sm">'+math(law)+'</div></div>'+
+ '<details class="calc-ins"><summary>2 · Visa insättning med enheter</summary><div class="math-sm">'+math(sub)+'</div></details>'+
+ '<div><span class="tag">3 · Resultat och tolkning</span><div class="math-sm">'+math(result)+'</div><p class="small">'+note+'</p></div></div>';
+const val=(x,dp,unit)=>'<mrow><mn>'+fmt(x,dp)+'</mn><mtext> '+unit+'</mtext></mrow>';
+
+const mu0=4*Math.PI*1e-7;
+let componentsShown=false,compassShown=false;
+function drawComponents(){
+ const B=Number($("earth-B").value),i=Number($("earth-i").value),v=components(B,i);
+ $("earth-components").innerHTML=v.html;
+ $("earth-B-value").textContent=fmt(B,0)+" μT";
+ $("earth-i-value").textContent=fmt(i,0)+"°";
+ $("earth-components-result").innerHTML=componentsShown?
+ chain('<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo><mi>B</mi><mi>cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo><mi>B</mi><mi>sin</mi><mi>i</mi>',
+ '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi>cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo><mspace width="1em"/>'+
+ '<msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi>sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
+ '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(v.Bh,1,'μT')+'<mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(v.Bv,1,'μT'),
+ 'Bᵥ är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar Bₕ.') :
+ 'Förutsäg först: om inklinationen ökar men B är konstant, vilken komponent minskar?';
+ $("earth-components-reveal").textContent=componentsShown?"Dölj värden":"Visa komponenterna";
+}
+$("earth-B").oninput=()=>{drawComponents()};
+$("earth-i").oninput=()=>{drawComponents()};
+$("earth-components-reveal").onclick=()=>{componentsShown=!componentsShown;drawComponents()};
+function resetComponents(){componentsShown=false;componentsShown=false;$("earth-B").value=42;$("earth-i").value=73;drawComponents()}
+$("earth-components-reset").onclick=resetComponents;
+$("earth-components").closest(".slide").addEventListener("lesson:reset",resetComponents);
+const Bh=42*Math.cos(73*Math.PI/180);
+$("earth-compass-predict").innerHTML=compass(Bh,30,false).html;
+function drawCompass(){
+ const b=Number($("earth-coil").value),v=compass(Bh,b,compassShown);
+ $("earth-compass").innerHTML=v.html;
+ $("earth-coil-value").textContent=fmt(b,0)+" μT";
+ $("earth-compass-result").innerHTML=compassShown?
+ chain('<mi>tan</mi><mi>α</mi><mo>=</mo><mfrac><mrow><msub><mi>B</mi><mtext>sp</mtext></msub></mrow><mrow><msub><mi>B</mi><mi>h</mi></msub></mrow></mfrac>',
+ '<mi>α</mi><mo>=</mo><mi>arctan</mi><mo>(</mo><mfrac><mrow>'+val(b,0,'μT')+'</mrow><mrow>'+val(Bh,1,'μT')+'</mrow></mfrac><mo>)</mo>',
+ '<mi>α</mi><mo>≈</mo><mn>'+fmt(v.angle,1)+'</mn><mo>°</mo>',
+ (b>0?'Röd nordände vrids åt öster.':b<0?'Röd nordände vrids åt väster.':'Röd nordände förblir i magnetisk nordriktning.')+
+ ' Spolens fält är här vinkelrätt mot jordfältets horisontella komponent; α är inte inklinationen i.') :
+ 'Förutsäg nålens riktning innan du visar svaret. Bₕ är konstant medan Bsp ändras.';
+ $("earth-compass-show").textContent=compassShown?"Dölj resultant och nål":"Visa resultant och nål";
+}
+$("earth-coil").oninput=()=>{drawCompass()};
+$("earth-compass-show").onclick=()=>{compassShown=!compassShown;drawCompass()};
+function resetCompass(){compassShown=false;compassShown=false;$("earth-coil").value=0;drawCompass()}
+$("earth-compass-reset").onclick=resetCompass;
+$("earth-compass").closest(".slide").addEventListener("lesson:reset",resetCompass);
+$("earth-triangle").innerHTML=compass(Bh,47.1,true).html;
+const solB=mu0*3*1.5/(2*.06)*1e6;
+$("earth-example-compass").innerHTML=compass(Bh,solB,true).html;
+$("earth-example-reverse").innerHTML=compass(18,18,true).html;
+resetComponents();resetCompass();
+})();
+</script><script>
+window.addEventListener('load',()=>{
+ const total=document.querySelectorAll('#slides > section.slide').length;
+ const navigation=document.getElementById('counter')?.textContent||'';
+ if(total<2||!navigation.includes(' / '+total)){
+  const message=document.createElement('p');message.setAttribute('role','alert');
+  message.style.cssText='margin:12px auto;max-width:900px;background:#fff1df;padding:15px;color:#8a301b;font:16px system-ui;border:2px solid #a84a33;border-radius:10px';
+  message.textContent='Något gick fel när lektionsbilderna skulle startas. Ladda om sidan eller meddela läraren.';
+  document.getElementById('slides')?.prepend(message);
+ }
+});
+</script></body></html>
