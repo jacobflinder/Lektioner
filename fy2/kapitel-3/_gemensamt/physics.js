@@ -7,23 +7,41 @@ const T=(x,y,t,c='#254655',size=18)=>'<text x="'+x+'" y="'+y+'" style="font-size
 const field=(cols=10,rows=6,x=76,y=78,dx=54,dy=42)=>{let s='';for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)s+=T(x+i*dx,y+j*dy,'×','#80aab7',20);return s};
 const S=(body,w=680,h=360,alt='Schematisk fysikalisk modell')=>'<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+alt+'"><rect x="0" y="0" width="'+w+'" height="'+h+'" rx="14" fill="#eef7f9"/>'+body+'</svg>';
 function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1,showForce=true){
- const bend=sign*fieldSign,x0=92,y0=215,R=170*speed/B,theta=1.1*progress,pts=[];
+ const bend=sign*fieldSign,x0=92,y0=215,R=150*speed/B,theta=1.1*progress,pts=[];
  for(let i=0;i<=70;i++){const a=theta*i/70;pts.push([x0+R*Math.sin(a),y0-bend*R*(1-Math.cos(a))]);}
  const p=pts[70],vx=Math.cos(theta),vy=-bend*Math.sin(theta),fx=-Math.sin(theta),fy=-bend*Math.cos(theta);
- const path=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
+ const route=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
  const color=sign>0?'#bd6947':'#0b8095';
- const content=(fieldSign>0?field(11,7,47,59,54,43):field(11,7,47,59,54,43).replaceAll('×','•'))+T(45,345,fieldSign>0?'B in i bilden':'B ut ur bilden','#0b748e',18)+'<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="4"/>'+
- '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="white" stroke="'+color+'" stroke-width="3"/>'+T(p[0]-7,p[1]+6,sign>0?'+':'−',color,22)+
- A(p[0],p[1],p[0]+vx*72,p[1]+vy*72,'#20886d',4)+(showForce?A(p[0],p[1],p[0]+fx*64,p[1]+fy*64,'#be6a42',4):'')+
- T(520,38,'v (grön)','#20886d',17)+(showForce?T(520,62,'F (orange)','#ae6343',17):'');
- return S(content,710,370,'Partikelbana i B in i bilden; v tangentiell, F vinkelrät');
+ const fieldGlyph=fieldSign>0?field(11,7,47,59,54,43):field(11,7,47,59,54,43).replaceAll('×','•');
+ const fieldOpacity=Math.min(.98,.37+.37*B),vLength=53*speed,fLength=41*speed*B;
+ const content='<g opacity="'+fieldOpacity.toFixed(3)+'">'+fieldGlyph+'</g>'+
+ T(42,345,(fieldSign>0?'B in i bilden':'B ut ur bilden')+' · relativt B='+B.toFixed(1).replace('.',','),'#0b748e',17)+
+ '<path d="'+route+'" fill="none" stroke="'+color+'" stroke-width="4"/>'+
+ '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="white" stroke="'+color+'" stroke-width="3"/>'+
+ T(p[0]-7,p[1]+6,sign>0?'+':'−',color,22)+
+ A(p[0],p[1],p[0]+vx*vLength,p[1]+vy*vLength,'#20886d',4)+
+ (showForce?A(p[0],p[1],p[0]+fx*fLength,p[1]+fy*fLength,'#be6a42',4):'')+
+ T(510,38,'v (grön) ∝ fart','#20886d',17)+
+ (showForce?T(510,62,'F (orange) ∝ vB','#ae6343',16):'');
+ return S(content,710,370,'Partikelbana i homogent magnetfält. Hastighetspilens längd ändras med fart, kraftpilen med fart gånger fältstyrka.');
 }
-function fieldOnRod(charges=false,moving=true){
- let s=field(10,6,80,72,54,43)+'<rect x="261" y="72" width="28" height="244" rx="9" fill="#d6a473" stroke="#9f7948" stroke-width="2"/>'+
- (moving?A(290,198,400,198,'#218a73')+T(410,203,'v','#26846e',20):T(380,205,'v = 0','#26846e',20))+T(484,38,'B in i bilden','#0e788e',19);
- if(charges){for(let j=0;j<4;j++)s+=T(270,96+j*20,'+','#b65540',20)+T(270,252+j*18,'−','#0c7d93',20);
- s+=A(304,175,304,112,'#14758f')+T(315,123,'Fₑ','#14758f',18)+A(245,214,245,277,'#bb6340')+T(195,282,'Fₘ','#af6544',18);}
- return S(s,690,370,'Metallstav rörs åt höger i B in i bildplanet');
+function fieldOnRod(charges=false,moving=true,L=.20,B=.40,v=3){
+ const cy=194,Lm=Math.max(.10,Math.min(.40,Number(L))),top=cy-(100+160*(Lm-.10)/.30)/2;
+ const height=2*(cy-top),vArrow=38+14*Math.max(0,Number(v));
+ const glyphs='<g opacity="'+Math.min(.98,.30+.67*Math.max(0,Number(B))/.8).toFixed(3)+'">'+field(10,6,80,72,54,43)+'</g>';
+ let s=glyphs+
+ '<rect x="261" y="'+top.toFixed(1)+'" width="28" height="'+height.toFixed(1)+'" rx="9" fill="#d6a473" stroke="#9f7948" stroke-width="2"/>'+
+ (moving&&Number(v)>0?A(298,cy,298+vArrow,cy,'#218a73')+T(309+vArrow,cy+5,'v','#26846e',20):T(380,205,'v = 0','#26846e',20))+
+ T(479,38,'B = '+B.toFixed(2).replace('.',',')+' T, inåt','#0e788e',18)+
+ T(480,68,'L = '+(100*Lm).toFixed(0)+' cm','#476c78',17);
+ if(charges){
+  for(let j=0;j<3;j++){
+   s+=T(269,top+24+j*19,'+','#b65540',20)+T(269,top+height-14-j*19,'−','#0c7d93',20);
+  }
+  s+=A(315,cy,315,cy-62,'#14758f')+T(327,cy-65,'Fₑ','#14758f',18)+
+    A(245,cy,245,cy+62,'#bb6340')+T(190,cy+71,'Fₘ','#af6544',18);
+ }
+ return S(s,690,370,'Metallstav med längd och hastighet som följer valda värden; fältmarkeringarnas synlighet ökar med B.');
 }
 function compass(Bh,Bcoil,show=true){
  const cx=320,cy=207,B=Math.hypot(Bh,Bcoil)||1,ux=Bcoil/B,uy=-Bh/B,scale=3;
