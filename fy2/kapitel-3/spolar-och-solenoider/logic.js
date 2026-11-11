@@ -173,7 +173,7 @@ function renderSol(){
  syncPrediction("sol");
 }
 for(const id of ["sol-i","sol-n","sol-l"])$(id).addEventListener("input",renderSol);
-$("sol-flip").addEventListener("click",()=>{solDir*=-1;solShown=false;renderSol()});
+$("sol-flip").addEventListener("click",()=>{solDir*=-1;renderSol()});
 $("sol-show").addEventListener("click",()=>{solShown=!solShown;renderSol()});
 $("sol-reset").addEventListener("click",()=>{
  $("sol-i").value="0.8";$("sol-n").value="300";$("sol-l").value="0.3";
@@ -198,7 +198,7 @@ function renderFlat(){
  syncPrediction("flat");
 }
 for(const id of ["flat-n","flat-i","flat-r"])$(id).addEventListener("input",renderFlat);
-$("flat-flip").addEventListener("click",()=>{flatDir*=-1;flatShown=false;renderFlat()});
+$("flat-flip").addEventListener("click",()=>{flatDir*=-1;renderFlat()});
 $("flat-show").addEventListener("click",()=>{flatShown=!flatShown;renderFlat()});
 $("flat-reset").addEventListener("click",()=>{
  $("flat-i").value="0.8";$("flat-n").value="5";$("flat-r").value="4";
