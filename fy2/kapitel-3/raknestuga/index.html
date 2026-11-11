@@ -40,7 +40,18 @@ function reveal(){const el=slides[current].querySelector(".answer:not(.shown)");
 $("next").onclick=()=>{const i=main.indexOf(current);if(i>=0&&i<3)go(main[i+1])};
 $("prev").onclick=()=>{const i=main.indexOf(current);go(i<=0?2:main[i-1])};
 $("reveal").onclick=reveal;
-$("reset").onclick=()=>{slides[current].querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));slides[current].querySelectorAll("textarea").forEach(el=>el.value="");render()};
+$("reset").onclick=()=>{
+ const slide=slides[current];
+ slide.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
+ slide.querySelectorAll("textarea").forEach(el=>el.value="");
+ slide.querySelectorAll('input[type="checkbox"]').forEach(el=>el.checked=false);
+ slide.querySelectorAll("[data-check] button.selected").forEach(el=>el.classList.remove("selected"));
+ for(const id of ["electron-feedback","flux-feedback"]){
+  const feedback=slide.querySelector("#"+id);
+  if(feedback)feedback.textContent="Välj och motivera för dig själv.";
+ }
+ render();
+};
 document.querySelectorAll("[data-reveal]").forEach(btn=>btn.onclick=()=>{const el=btn.nextElementSibling;if(el&&el.classList.contains("answer")){el.classList.toggle("shown");render()}});
 document.querySelectorAll("[data-go]").forEach(btn=>btn.onclick=()=>go(Number(btn.dataset.go)));
 function setMode(repeat){document.body.classList.toggle("repeat",repeat);$("class").classList.toggle("selected",!repeat);$("repeat").classList.toggle("selected",repeat);$("class").setAttribute("aria-pressed",String(!repeat));$("repeat").setAttribute("aria-pressed",String(repeat));}
