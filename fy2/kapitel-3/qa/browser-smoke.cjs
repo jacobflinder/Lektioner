@@ -22,22 +22,25 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
      const n=await page.locator('.slide').count();
      check(n===expected,label+' slide count '+n+' expected '+expected);
      if(sharedAssetLessons.has(lesson)){
-      const assetState=await page.evaluate(()=>{
-       const assetUrls=[...document.querySelectorAll('link[rel="stylesheet"][href],script[src]')].map(el=>el.getAttribute('href')||el.getAttribute('src'));
-       const slides=[...document.querySelectorAll('.slide')];
+      const state=await page.evaluate(()=>{
+       const slides=[...document.querySelectorAll('#slides > .slide')];
        return {
-        assetUrls,
+        bundled:document.querySelectorAll('script[data-fy2-bundled]').length,
         styled:getComputedStyle(document.body).fontFamily.includes('system-ui'),
-        hidden:slides.length>1&&getComputedStyle(slides[1]).display==='none',
-        computedStyle:getComputedStyle(slides[1]||document.body).display
+        hidden:slides.length>1 && getComputedStyle(slides[1]).display==='none',
+        counter:document.getElementById('counter')?.textContent,
+        navigationOptions:document.querySelectorAll('#jump option').length,
+        externalAssets:document.querySelectorAll('script[src],link[rel="stylesheet"][href]').length,
+        warning:!!document.querySelector('#slides [role="alert"]')
        };
       });
-      check(assetState.assetUrls.filter(url=>url.includes('gemensamt/')).length===3,
-       label+' must reference 3 shared CSS/JS assets, found '+assetState.assetUrls.join(', '));
-      check(!assetState.assetUrls.some(url=>/\/_[^/]+\//.test(url)),
-       label+' contains underscore-prefixed directory that Jekyll does not publish');
-      check(assetState.styled,label+' missing common CSS: body is not using system-ui');
-      check(assetState.hidden,label+' missing common CSS: inactive lesson slides remain visible (display='+assetState.computedStyle+')');
+      check(state.bundled===4,label+' expected four inline scripts: '+state.bundled);
+      check(state.styled,label+' CSS not applied');
+      check(state.hidden,label+' second slide not hidden');
+      check(state.counter==='1 / '+expected,label+' counter not initialized: '+state.counter);
+      check(state.navigationOptions===expected,label+' jump selector has '+state.navigationOptions+' options, expected '+expected);
+      check(!state.warning,label+' lesson start warning is visible');
+      check(state.externalAssets===0,label+' bundled page still relies on external scripts or CSS');
      }
      const next=page.locator('#next-slide, #next').last();
      check(await next.count()===1,label+' missing Next button');
