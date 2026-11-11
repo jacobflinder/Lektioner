@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const $=id=>document.getElementById(id),slides=[...document.querySelectorAll(".slide")],MAIN=20,OPTIONAL=20,mu02pi=2e-7;
+const $=id=>document.getElementById(id),slides=[...document.querySelectorAll(".slide")],MAIN=18,OPTIONAL=18,mu02pi=2e-7;
 let current=0,remaining=1200,timerMinutes=20,timerId=null,deadline=0;
 const fmt=(n,d=1)=>Number(n).toLocaleString("sv-SE",{minimumFractionDigits:d,maximumFractionDigits:d});
 function render(){
@@ -114,7 +114,7 @@ function updateModel(){
 }
 ["i-slider","r-slider","dir-select"].forEach(id=>$(id).addEventListener("input",updateModel));
 $("model-reset").addEventListener("click",()=>{
- $("i-slider").value=5;$("r-slider").value=4;$("dir-select").value="out";updateModel();
+ $("i-slider").value=6;$("r-slider").value=4;$("dir-select").value="out";updateModel();
 });
 function timerText(){
  const t=Math.max(0,Math.ceil(remaining));
@@ -131,14 +131,14 @@ $("timer-toggle").addEventListener("click",()=>{
 });
 $("timer-reset").addEventListener("click",()=>{pauseTimer();remaining=timerMinutes*60;timerText()});
 function applyRefs(){
- const data=[[".task-ref",$("task-setting").value.trim()||"Ej angivna"],[".read-ref",$("read-setting").value.trim()||"Sidor ännu inte verifierade"],[".next-ref",$("next-setting").value.trim()||"ännu inte verifierade"],[".topic-ref",$("topic-setting").value.trim()||"Ämne ännu inte angivet"]];
+ const data=[[".homework-ref",$("homework-setting").value.trim()||"Ej angivna"],[".task-ref",$("task-setting").value.trim()||"Ej angivna"],[".read-ref",$("read-setting").value.trim()||"Sidor ännu inte verifierade"],[".next-ref",$("next-setting").value.trim()||"ännu inte verifierade"],[".topic-ref",$("topic-setting").value.trim()||"Ämne ännu inte angivet"]];
  data.forEach(q=>document.querySelectorAll(q[0]).forEach(x=>x.textContent=q[1]));
 }
 $("setting-btn").addEventListener("click",()=>{$("editor").hidden=!$("editor").hidden;});
 $("apply-setting").addEventListener("click",()=>{applyRefs();$("editor").hidden=true;});
 $("download-btn").addEventListener("click",async()=>{
  applyRefs();
- ["task-setting","read-setting","next-setting","topic-setting"].forEach(id=>$(id).setAttribute("value",$(id).value));
+ ["task-setting","read-setting","next-setting","topic-setting","homework-setting"].forEach(id=>$(id).setAttribute("value",$(id).value));
  try {
   const clone=document.documentElement.cloneNode(true);
   clone.querySelector("#slides").innerHTML="";
@@ -157,5 +157,41 @@ $("download-btn").addEventListener("click",async()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1500);
  }catch(err){alert("Kunde inte skapa fristående fil. Försök från onlineversionen.");}
 });
-setMode(false);updateModel();timerText();applyRefs();render();
+
+function updateCurrentComparison(){
+ const ratio=Number($("current-factor").value);
+ $("current-factor-value").textContent=fmt(ratio,1);
+ const p=(x,m,label)=>{
+  const bottom=215, len=48*m;
+  return '<circle cx="'+x+'" cy="'+bottom+'" r="5" fill="#c7883f"/>'+
+  '<path d="M'+x+' '+bottom+'V'+(bottom-len)+'" stroke="#077e8f" stroke-width="6"/>'+
+  '<path d="M'+(x-11)+' '+(bottom-len+14)+'L'+x+' '+(bottom-len)+'L'+(x+11)+' '+(bottom-len+14)+'" stroke="#077e8f" stroke-width="5" fill="none"/>'+
+  '<text x="'+(x-50)+'" y="248" style="font-size:18px">'+label+'</text>';
+ };
+ $("current-comparison").innerHTML='<rect x="0" y="0" width="660" height="260" fill="#f0f7f8"/>'+
+  p(190,1,"I = I₀, B = B₀")+p(455,ratio,"I = "+fmt(ratio,1)+" I₀")+
+  '<text x="265" y="28" style="font-size:22px;font-weight:700">B/B₀ = '+fmt(ratio,1)+'</text>';
+ $("current-conclusion").textContent="B = "+fmt(ratio,1)+" B₀ i samma punkt; riktningen är oförändrad.";
+}
+$("current-factor").addEventListener("input",updateCurrentComparison);
+$("current-reset").addEventListener("click",()=>{$("current-factor").value="1";updateCurrentComparison()});
+function updateDistanceComparison(){
+ const ratio=Number($("distance-factor").value);
+ $("distance-factor-value").textContent=fmt(ratio,1);
+ const x=185+ratio*102,bottom=220,len=118/ratio;
+ $("distance-comparison").innerHTML='<rect x="0" y="0" width="690" height="270" fill="#f0f7f8"/>'+
+  '<circle cx="145" cy="144" r="23" fill="#fff" stroke="#0c7085" stroke-width="3"/>'+
+  '<text x="134" y="156" style="font-size:34px;fill:#0b7888">⊙</text>'+
+  '<line x1="168" y1="'+bottom+'" x2="'+x+'" y2="'+bottom+'" stroke="#7598a5" stroke-width="2"/>'+
+  '<circle cx="'+x+'" cy="'+bottom+'" r="6" fill="#c7883f"/>'+
+  '<path d="M'+x+' '+bottom+'V'+(bottom-len)+'" stroke="#087d90" stroke-width="6"/>'+
+  '<path d="M'+(x-11)+' '+(bottom-len+14)+'L'+x+' '+(bottom-len)+'L'+(x+11)+' '+(bottom-len+14)+'" stroke="#087d90" stroke-width="5" fill="none"/>'+
+  '<text x="'+(x-16)+'" y="250" style="font-size:17px">P</text>'+
+  '<text x="385" y="38" style="font-size:21px;font-weight:700">B/B₀ = '+fmt(1/ratio,2)+'</text>';
+ $("distance-conclusion").textContent="r = "+fmt(ratio,1)+" r₀ ger B = "+fmt(1/ratio,2)+" B₀. Samma radiella riktning på P ger B uppåt.";
+}
+$("distance-factor").addEventListener("input",updateDistanceComparison);
+$("distance-reset").addEventListener("click",()=>{$("distance-factor").value="1";updateDistanceComparison()});
+
+setMode(false);updateModel();updateCurrentComparison();updateDistanceComparison();timerText();applyRefs();render();
 })();
