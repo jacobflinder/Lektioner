@@ -72,7 +72,7 @@ function drawView(){
   '<text x="400" y="178" style="font-size:23px;font-weight:750;fill:#0d738a">B åt höger</text>'+
   '<text x="24" y="355">Orange: ström i övre/undre delen · blått: fält i mitten</text>';
  const end='<rect x="0" y="0" width="650" height="390" rx="17" fill="#f0f7f8"/>'+
-  '<text x="25" y="37" style="font-size:18px">Sett från höger – längs B åt vänster i sidebildens perspektiv</text>'+
+  '<text x="25" y="37" style="font-size:18px">Sett från höger – betraktaren tittar åt vänster längs spolens axel</text>'+
   '<circle cx="324" cy="197" r="119" fill="#fff" stroke="#b76b48" stroke-width="5"/>'+
   '<path d="M335 77 C268 73 219 114 208 186" stroke="#b76b48" stroke-width="5" fill="none"/>'+
   '<path d="M207 185 l-11 -19 m11 19 15 -16" stroke="#b76b48" stroke-width="5" fill="none"/>'+
@@ -97,14 +97,14 @@ function drawCore(){
   const x=135+i*44;
   path.push("M"+x+" 174 C"+(x-22)+" 83 "+(x+20)+" 83 "+(x+19)+" 174 C"+(x+20)+" 270 "+(x-20)+" 270 "+(x+44)+" 174");
  }
- const P=565,base=215,len=core?104:62;
+ const P=565,base=174,len=core?86:47;
  svg.innerHTML='<rect x="0" y="0" width="700" height="325" rx="15" fill="#eff7f8"/>'+
   '<path d="'+path.join(" ")+'" stroke="#bd7150" stroke-width="3.5" fill="none"/>'+
   (core?'<rect x="122" y="161" width="409" height="29" rx="7" fill="#90a4ad" opacity=".86"/>':'')+
   '<circle cx="'+P+'" cy="'+base+'" r="6" fill="#ca864b"/>'+
   '<text x="'+(P+15)+'" y="'+(base+4)+'">P</text>'+
-  '<path d="M'+P+' '+base+' V'+(base-len)+'" stroke="#0b7e94" stroke-width="6"/>'+
-  '<path d="M'+(P-12)+' '+(base-len+16)+'L'+P+' '+(base-len)+'L'+(P+12)+' '+(base-len+16)+'" fill="none" stroke="#0b7e94" stroke-width="4"/>'+
+  '<path d="M'+P+' '+base+' H'+(P+len)+'" stroke="#0b7e94" stroke-width="6"/>'+
+  '<path d="M'+(P+len-15)+' '+(base-12)+'L'+(P+len)+' '+base+'L'+(P+len-15)+' '+(base+12)+'" fill="none" stroke="#0b7e94" stroke-width="4"/>'+
   '<text x="23" y="31">'+(core?"Mjukjärnskärnan i spolen":"Luftspole, mjukjärnskärnan utanför")+'</text>'+
   '<text x="27" y="302">Samma ström · samma spole · samma punkt P · schematiskt relativt B</text>';
  $("core-explanation").textContent=core?
