@@ -37,6 +37,17 @@ En mobil skärmbild av **Induktion** visade rå HTML, standardtypsnitt och alla 
 
 **Åtgärd:** tre gemensamma filer kopierades till `gemensamt/`, samtliga fem lektioners CSS/JS-referenser uppdaterades och fristående HTML-export i `base.js` pekar nu också på den publicerbara mappen. Källkodskontroll bekräftar att ingen av de fem sidornas länkar längre hänvisar till `_gemensamt/`. Browser-testscriptet kontrollerar nu också Jekyll-uteslutna kataloger, faktiskt tillämpade CSS-regler, att inaktiva bilder är dolda samt misslyckade resursanrop. **Den verkliga publicerade sidan är ännu inte nätverksverifierad i denna granskning.**
 
+## Kritisk uppföljning: 1/1 och tomma bilder (2026-11-11)
+
+Efter att formgivningen återställts visade användarens skärmbild av Induktion fortfarande **1/1** och en tom diagramyta. De 24 bilderna fanns kvar i `content.js`, men den gemensamma navigeringen avbröts av ett **bekräftat JavaScript-fel**: hjälpfunktionen `document.getElementById(id)` anropades med bland annat `'#prev'`, trots att `getElementById` kräver `'prev'`. Då lämnades ursprungliga HTML-texten `1 / 1` och den tomma bildväljaren kvar; fysikmodellen startade inte.
+
+Åtgärder:
+- Navigeringshjälpen normaliserar nu ID:n genom att ta bort inledande `#`.
+- Alla fem berörda sidor är sammanbyggda till **självständiga HTML-sidor** med inbäddad CSS, bilddata, navigering, fysikfunktioner och lektionsinteraktioner. Det minskar risken att delade JS-resurser tappas bort i publiceringen.
+- Ett simuleringstest av uppstarten visar **1/24 → 2/24** för Induktion och motsvarande korrekt bildbyte för alla fem sidor. Bilddata, scriptsyntax och interaktiva mål-ID:n har kontrollerats.
+- Webbtestet har utökats så att det kräver att aktuell bild faktiskt byts vid varje klick på Nästa. Det räcker inte längre att endast en bild är synlig.
+- Fullständig rendering i Safari/iOS och publicerad GitHub Pages-version har ännu inte bekräftats i realtid. De tillagda testerna är inte likvärdiga med en genomförd iOS-testning.
+
 ## Rättningar genomförda under revisionen
 
 - **Gemensam regel för undersökningar:** beräknat resultat förblir synligt och uppdateras efter att användaren har visat det första gången. Ett nytt reglagevärde ska inte tvinga fram ett nytt facitklick. Gäller induktionens fem undersökningar, jordfältets två och magnetismens flödesmodell. Återställ går tillbaka till en obesvarad fråga.
