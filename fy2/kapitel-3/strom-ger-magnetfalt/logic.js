@@ -84,7 +84,7 @@ function wireSVG(dir,point,shown,radius=108){
   return p;
  }
  // One equal-length arrow per decorative circle: direction only, independent of r.
- [46,95,151].forEach((r,k)=>{
+ if(shown) [46,95,151].forEach((r,k)=>{
   const th=k*2.2+.6;
   const x=cx+r*Math.cos(th),y=cy+r*Math.sin(th);
   const tx=-Math.sin(th)*sign,ty=Math.cos(th)*sign;
