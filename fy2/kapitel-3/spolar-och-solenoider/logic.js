@@ -157,10 +157,11 @@ function renderSol(){
  const I=Number($("sol-i").value),N=Number($("sol-n").value),L=Number($("sol-l").value);
  const mT=(mu0*N*I/L)*1e3;
  const relSol=(N/300)*(I/0.8)*(0.30/L);
+ // One immutable state per render supplies both formula and field drawing.
  $("sol-i-value").textContent=swFmt(I,2)+" A";
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
- $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:6+Math.round((N-100)/100)});
+ $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:5+Math.round((N-100)/65),lengthMeters:L,fieldMilliTesla:mT});
  $("sol-result").innerHTML=solShown?
  calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',
  '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
@@ -185,7 +186,7 @@ function renderFlat(){
  $("flat-i-value").textContent=swFmt(I,2)+" A";
  $("flat-n-value").textContent=String(N);
  $("flat-r-value").textContent=swFmt(r,1)+" cm";
- $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N});
+ $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N,radiusCm:r,currentA:I,fieldMicroTesla:B});
  $("flat-result").innerHTML=flatShown?
  calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',
  '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow><mrow><mn>2</mn><mo>·</mo>'+mult(r/100,'m',3)+'</mrow></mfrac>',
