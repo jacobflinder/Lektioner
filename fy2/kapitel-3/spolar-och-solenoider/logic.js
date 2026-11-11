@@ -125,6 +125,11 @@ $("download-btn").addEventListener("click",async()=>{
  try{
   const copy=document.documentElement.cloneNode(true);
   copy.querySelector("#slides").innerHTML="";
+  copy.querySelector("#jump").replaceChildren(); // Rebuilt by the offline script.
+  copy.querySelector("#editor").hidden=true;
+  copy.querySelector("body").classList.remove("repeat");
+  copy.querySelector("#class-btn").classList.add("selected");
+  copy.querySelector("#repeat-btn").classList.remove("selected");
   let html="<!doctype html>\n"+copy.outerHTML;
   for(const name of ["content.js","logic.js","practice.js"]){
    const r=await fetch("./"+name);if(!r.ok)throw new Error(name);
