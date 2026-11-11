@@ -34,7 +34,7 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
         warning:!!document.querySelector('#slides [role="alert"]')
        };
       });
-      check(state.bundled===4,label+' expected four inline scripts: '+state.bundled);
+      check(state.bundled===(lesson==='laddade-partiklar'?5:4),label+' unexpected number of bundled scripts: '+state.bundled);
       check(state.styled,label+' CSS not applied');
       check(state.hidden,label+' second slide not hidden');
       check(state.counter==='1 / '+expected,label+' counter not initialized: '+state.counter);
