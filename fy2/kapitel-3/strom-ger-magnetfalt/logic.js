@@ -142,6 +142,11 @@ $("download-btn").addEventListener("click",async()=>{
  try {
   const clone=document.documentElement.cloneNode(true);
   clone.querySelector("#slides").innerHTML="";
+  clone.querySelector("#jump").replaceChildren(); // Repopulate only once when saved document runs.
+  clone.querySelector("#editor").hidden=true;
+  clone.querySelector("body").classList.remove("repeat");
+  clone.querySelector("#class-btn").classList.add("selected");
+  clone.querySelector("#repeat-btn").classList.remove("selected");
   clone.querySelectorAll("textarea").forEach(x=>{x.value="";x.textContent=""});
   let html="<!doctype html>\n"+clone.outerHTML;
   for(const name of ["content.js","logic.js","practice.js"]){
