@@ -4,6 +4,11 @@ const $=id=>document.getElementById(id);
 const slides=[...document.querySelectorAll(".slide")];
 let current=0,remaining=1200,timerMinutes=20,timerId=null,deadline=0,magnetFlipped=false,compassPoint="top",domainApplied=false;
 const fmt=(x,d=2)=>Number(x).toLocaleString("sv-SE",{minimumFractionDigits:d,maximumFractionDigits:d});
+function syncCompassReveal(){
+ const slide=$("magnet-svg")?.closest(".slide");
+ const revealed=!!slide?.querySelector(".answer.shown");
+ $("magnet-svg").classList.toggle("compass-predicting",!revealed);
+}
 function render(){
  slides.forEach((s,i)=>s.classList.toggle("active",i===current));
  $("counter").textContent=(current+1)+" / "+slides.length;
@@ -15,7 +20,7 @@ function render(){
 function go(i){current=Math.max(0,Math.min(slides.length-1,i));render();window.scrollTo(0,0)}
 function revealNext(){
  const el=slides[current].querySelector(".answer:not(.shown)");
- if(el){el.classList.add("shown");render()}else if(current<slides.length-1){go(current+1)}
+ if(el){el.classList.add("shown");syncCompassReveal();render()}else if(current<slides.length-1){go(current+1)}
 }
 $("prev").addEventListener("click",()=>go(current-1));
 $("next").addEventListener("click",()=>go(current+1));
@@ -24,13 +29,13 @@ function resetCurrent(){
  slides[current].querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
  slides[current].querySelectorAll("textarea").forEach(el=>el.value="");
  slides[current].dispatchEvent(new CustomEvent("lesson:reset",{bubbles:false}));
- render();
+ syncCompassReveal();render();
 }
 $("reset-slide").addEventListener("click",resetCurrent);
 document.querySelectorAll("[data-reveal]").forEach(button=>{
  button.addEventListener("click",()=>{
   const next=button.nextElementSibling;
-  if(next?.classList.contains("answer")){next.classList.toggle("shown");render()}
+  if(next?.classList.contains("answer")){next.classList.toggle("shown");syncCompassReveal();render()}
  })
 });
 function setMode(repetition){
@@ -173,5 +178,5 @@ $("download").addEventListener("click",async()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1500);
  }catch(e){alert("Kunde inte skapa den fristående filen. Försök från den publicerade sidan.")}
 });
-drawCompass();drawDomains();updateFlux();timerText();refs();setMode(false);render();
+drawCompass();drawDomains();updateFlux();timerText();refs();setMode(false);syncCompassReveal();render();
 })();
