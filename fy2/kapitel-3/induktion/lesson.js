@@ -6,7 +6,7 @@ const m=(expr)=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block
 const qty=(v,d,unit)=>'<mrow><mo>(</mo><mn>'+fmt(v,d)+'</mn><mtext> '+unit+'</mtext><mo>)</mo></mrow>';
 const chain=(law,sub,result,meaning)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+m(law)+'</div></div>'+
- '<div><span class="tag">2 · Insättning med enheter</span><div class="math-sm">'+m(sub)+'</div></div>'+
+ '<details class="calc-ins"><summary>2 · Visa insättning med enheter</summary><div class="math-sm">'+m(sub)+'</div></details>'+
  '<div><span class="tag">3 · Resultat och tolkning</span><div class="math-sm">'+m(result)+'</div><p class="small">'+meaning+'</p></div>'+
  '</div>';
 const Uformula='<mi>U</mi><mo>=</mo><mi>B</mi><mi>L</mi><mi>v</mi>';
