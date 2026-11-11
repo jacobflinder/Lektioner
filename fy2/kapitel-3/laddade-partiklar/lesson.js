@@ -2,7 +2,7 @@
 'use strict';
 const {$,particle,S,field,A,T}=Object.assign({},window.Fy2Nav,window.Fy2Physics);
 function staticParticle(sign,show){
- let html=particle(sign,0,1,1,1);
+ let html=particle(sign,show?.65:0,1,1,1,show);
  if(show){const body=sign>0?'Riktning: uppåt':'Riktning: nedåt';html=html.replace('</svg>',T(45,340,body,'#a95d3e',18)+'</svg>')}
  return html;
 }
