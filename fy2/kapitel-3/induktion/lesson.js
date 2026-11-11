@@ -1,6 +1,19 @@
 (()=>{
 "use strict";
 const {$}=window.Fy2Nav,{fmt,particle,fieldOnRod,fluxAngle,loopMotion,fluxPiece,tangent,S,A,T}=window.Fy2Physics;
+
+const m=(expr)=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+expr+'</math>';
+const qty=(v,d,unit)=>'<mrow><mo>(</mo><mn>'+fmt(v,d)+'</mn><mtext> '+unit+'</mtext><mo>)</mo></mrow>';
+const chain=(law,sub,result,meaning)=>'<div class="calc-chain">'+
+ '<div><span class="tag">1 · Samband</span><div class="math-sm">'+m(law)+'</div></div>'+
+ '<div><span class="tag">2 · Insättning med enheter</span><div class="math-sm">'+m(sub)+'</div></div>'+
+ '<div><span class="tag">3 · Resultat och tolkning</span><div class="math-sm">'+m(result)+'</div><p class="small">'+meaning+'</p></div>'+
+ '</div>';
+const Uformula='<mi>U</mi><mo>=</mo><mi>B</mi><mi>L</mi><mi>v</mi>';
+const Pformula='<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mi>cos</mi><mi>θ</mi>';
+const Fformula='<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mi>Δ</mi><mi>Φ</mi></mrow><mrow><mi>Δ</mi><mi>t</mi></mrow></mfrac>';
+const unitResult=(name,value,d,unit)=>'<mi>'+name+'</mi><mo>=</mo><mn>'+fmt(value,d)+'</mn><mtext> '+unit+'</mtext>';
+
 $("ind-electron-start").innerHTML=particle(-1,0,1,1,1,false);
 $("ind-electron-answer").innerHTML=particle(-1,0,1,1,1,true);
 for(const id of ["ind-rod-start","ind-rod-example"])$(id).innerHTML=fieldOnRod(false);
@@ -18,11 +31,12 @@ function renderRod(){
  $("rod-B-value").textContent=fmt(B,2)+" T";
  $("rod-v-value").textContent=fmt(v,1)+" m/s";
  $("rod-L-value").textContent=fmt(L*100,0)+" cm";
- $("rod-result").textContent=rodShown?
- "Jämvikt vid U = BLv = "+fmt(Ueq,3)+" V (övre änden positiv när v åt höger, B inåt). "+
- (v===0?"Staven står stilla och ingen magnetisk separation byggs upp.":"Vid fullt utslag balanserar |q|E magnetkraften |q|vB."):
- "Schematiskt läge: Fₘ är konstant för vald v och B, medan det motriktade elektriska fältet växer mot jämvikt. "+
- "Beräknad del av jämviktsspänningen: "+fmt(U,3)+" V.";
+ $("rod-result").innerHTML=rodShown?
+ chain(Uformula,
+ '<mi>U</mi><mo>=</mo>'+qty(B,2,'T')+'<mo>·</mo>'+qty(L,2,'m')+'<mo>·</mo>'+qty(v,1,'m/s'),
+ unitResult('U',Ueq,3,'V'),
+ v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. Övre änden blir positiv. Vid jämvikt gäller |q|E = |q|vB.') :
+ 'Förutsäg först. Det schematiska reglaget visar laddningsseparation, inte en uppmätt tidskurva. Vilket samband gäller i jämvikt?';
  $("rod-show").textContent=rodShown?"Dölj jämviktsresultatet":"Visa jämvikt och spänning";
 }
 function resetRod(){rodShown=false;for(const [id,val] of [["charge-progress","0"],["rod-B",".4"],["rod-v","3"],["rod-L","20"]])$(id).value=val;renderRod()}
@@ -36,9 +50,12 @@ function renderAngle(){
  const d=fluxAngle(.4,.08,theta);
  $("ind-flux-angle").innerHTML=d.html;
  $("flux-theta-value").textContent=fmt(theta,0)+"°";
- $("flux-angle-result").textContent=fluxShown?
- "Orienterat flöde Φ = BA cosθ = "+fmt(d.phi*1000,1)+" mWb. Vid θ=90° är flödet noll. Negativt värde betyder motsatt vald normal.":
- "Förutsäg hur flödet förändras när vinkeln mellan B och normalvektorn ökar.";
+ $("flux-angle-result").innerHTML=fluxShown?
+ chain(Pformula,
+ '<mi>Φ</mi><mo>=</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(.08,3,'m²')+'<mo>·</mo><mi>cos</mi><mo>(</mo><mn>'+fmt(theta,0)+'</mn><mo>°</mo><mo>)</mo>',
+ unitResult('Φ',Math.abs(d.phi*1000)<1e-9?0:d.phi*1000,1,'mWb'),
+ 'Vinkeln mäts mellan fältet och den valda normalen. Flödets tecken visar orientering, inte negativ fältstyrka.') :
+ 'Förutsäg hur flödet ändras när normalen vrids. B och A hålls konstanta.';
  $("flux-angle-show").textContent=fluxShown?"Dölj flödet":"Visa flödet";
 }
 $("flux-theta").oninput=()=>{fluxShown=false;renderAngle()};
@@ -54,10 +71,13 @@ function renderLoop(){
  const phi=12+18*fraction,emf=moving?-.04:0;
  $("ind-loop").innerHTML=loopMotion(t);
  $("loop-t-value").textContent=fmt(t,2)+" s";
- $("loop-result").textContent=loopShown?
- "Φ = "+fmt(phi,1)+" mWb (in i bilden). Inducerad U = "+fmt(emf,3)+" V. "+
- (moving?"Det valda positiva omloppet är medurs; den negativa U driver ström moturs och bromsar staven.":"Slingan har flöde men ingen flödesändring just nu: U = 0."):
- "Förutsäg om U är noll eller inte. B=0,40 T, stavlängd 0,20 m, under rörelse v=0,50 m/s. Startarean 0,030 m².";
+ $("loop-result").innerHTML=loopShown?
+ chain('<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width="1em"/><mi>U</mi><mo>=</mo><mo>−</mo><mi>B</mi><mi>L</mi><mi>v</mi>',
+ '<mi>Φ</mi><mo>=</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(phi/400,4,'m²')+
+ '<mspace width="1em"/><mi>U</mi><mo>=</mo><mo>−</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(.2,2,'m')+'<mo>·</mo>'+qty(moving?.5:0,2,'m/s'),
+ '<mi>Φ</mi><mo>=</mo><mn>'+fmt(phi,1)+'</mn><mtext> mWb</mtext><mspace width="1em"/><mi>U</mi><mo>=</mo><mn>'+fmt(emf,3)+'</mn><mtext> V</mtext>',
+ moving?'Positiv normal in i bilden innebär positivt omlopp medurs. När flödet ökar blir U negativ och den inducerade strömmen moturs; den bromsar staven.':'Flödet finns kvar men ändras inte: den inducerade spänningen är noll.') :
+ 'Förutsäg när U är skild från noll. B = 0,40 T, L = 0,20 m, och v = 0,50 m/s endast under rörelsen.';
  $("loop-show").textContent=loopShown?"Dölj Φ och U":"Visa Φ och U";
 }
 $("loop-t").oninput=()=>{loopShown=false;renderLoop()};
@@ -71,10 +91,15 @@ function renderGraph(){
  const t=Number($("flux-time").value),v=fluxPiece(t);
  $("ind-flux-graph").innerHTML=v.html;
  $("flux-time-value").textContent=fmt(t,2)+" s";
- $("flux-time-result").textContent=graphShown?
- "Φ = "+fmt(v.phi,2)+" mWb · U = −N dΦ/dt = "+fmt(v.U,1)+" V för N=200 varv. "+
- (v.U===0?"Horisontell graf: ingen inducerad spänning.":v.U<0?"Flödet ökar, den orienterade spänningen är negativ.":"Flödet minskar, spänningen är positiv."):
- "Förutsäg tecknet för U. Det är flödets lutning, inte dess höjd, som avgör.";
+ const edges=[.3,.6,.8],atCorner=edges.some(edge=>Math.abs(t-edge)<.000001);
+ const rise=t<.3?.003:t<.6?0:t<.8?-.003:0,interval=t<.3?.3:t<.6?.3:t<.8?.2:1;
+ $("flux-time-result").innerHTML=graphShown?
+ atCorner?'<b>Brytpunkt vid t = '+fmt(t,1)+' s.</b> Lutningen byts tvärt. En idealiserad U(t) har inget entydigt momentant värde exakt i denna punkt; jämför lutningen före och efter.' :
+ chain(Fformula,
+ '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mfrac><mrow><mn>'+fmt(rise*1000,0)+'</mn><mtext> mWb</mtext></mrow><mrow><mn>'+fmt(interval,1)+'</mn><mtext> s</mtext></mrow></mfrac>',
+ unitResult('U',v.U,1,'V'),
+ 'Φ genom ett varv är '+fmt(v.phi,2)+' mWb. '+(v.U===0?'Lutningen är noll, trots att flödet kan vara stort.':v.U<0?'Ökande flöde ger negativ orienterad spänning.':'Minskande flöde ger positiv orienterad spänning.')) :
+ 'Förutsäg spänningens tecken. Läs två punkter för att bestämma lutningen ΔΦ/Δt.';
  $("flux-time-show").textContent=graphShown?"Dölj resultat":"Visa lutning och spänning";
 }
 $("flux-time").oninput=()=>{graphShown=false;renderGraph()};
@@ -87,10 +112,12 @@ function renderTangent(){
  const t=Number($("ind-tangent-time").value),v=tangent(t);
  $("ind-tangent-graph").innerHTML=v.html;
  $("ind-tangent-time-value").textContent=fmt(t,2)+" s";
- $("ind-tangent-result").textContent=tangentShown?
- "Φ = "+fmt(v.phi,2)+" mWb · inducerad U = "+fmt(v.U,2)+" V. "+
- "Vid flödets maximum är tangenten horisontell och U=0.":
- "Förutsäg tangentens lutning. Vid grafens maximum blir U=0 trots att Φ är stort.";
+ $("ind-tangent-result").innerHTML=tangentShown?
+ chain('<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mi>d</mi><mi>Φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac>',
+ '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mn>0,003</mn><mo>·</mo><mi>π</mi><mo>·</mo><mi>cos</mi><mo>(</mo><mi>π</mi><mo>·</mo><mn>'+fmt(t,2)+'</mn><mo>)</mo><mtext> V</mtext>',
+ unitResult('U',Math.abs(v.U)<1e-10?0:v.U,2,'V'),
+ 'Exempelkurva: Φ(t) = 3 sin(πt) mWb per varv. Vid maximum är tangentens lutning noll, alltså U = 0.') :
+ 'Förutsäg tangentens lutning och spänningens tecken. Grafens höjd är inte U.';
  $("ind-tangent-show").textContent=tangentShown?"Dölj spänningen":"Visa tangentens spänning";
 }
 $("ind-tangent-time").oninput=()=>{tangentShown=false;renderTangent()};
