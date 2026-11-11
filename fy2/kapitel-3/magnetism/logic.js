@@ -66,6 +66,8 @@ function drawCompass(){
  $("loop-inside").setAttribute("d",magnetFlipped?"M201 217H400":"M400 217H201");
  const p=points[compassPoint],dx=(compassPoint==="top"?1:-1)*(magnetFlipped?-1:1);
  $("compass-needle").setAttribute("transform","translate("+p.x+" "+p.y+") rotate("+(dx>0?0:180)+")");
+ $("compass-question").setAttribute("x",p.x);
+ $("compass-question").setAttribute("y",p.y+8);
  $("compass-needle").setAttribute("aria-label","Kompass: röd nordände pekar "+(dx>0?"åt höger":"åt vänster")+", vit sydände åt motsatt håll");
  $("needle-caption").setAttribute("x",p.x-35);
  $("needle-caption").setAttribute("y",p.y-37);
