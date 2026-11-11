@@ -34,11 +34,11 @@ polar:{roots:[{re:2,im:-2},{re:-2,im:2}],hint:'|−8i| = 8 och argumentet är �
 rect:{roots:[{re:3,im:-3},{re:-3,im:3}],hint:'Sätt z = a + bi. Då är a² − b² = 0 och 2ab = −18. Vilka tecken måste a och b ha?',answer:'a² = b² och ab = −9 ger b = −a och a = ±3. Alltså z = 3 − 3i eller −3 + 3i.',kind:'square'}
 };
 function parseComplex(raw){
- let x=raw.toLowerCase().replace(/\\s+/g,'').replace(/−/g,'-').replace(/,/g,'.').replace(/\\*/g,'').replace(/j/g,'i');
+ let x=raw.toLowerCase().replace(/\s+/g,'').replace(/−/g,'-').replace(/,/g,'.').replace(/\*/g,'').replace(/j/g,'i');
  if(!x)return null;
  if(x==='i'||x==='+i')return {re:0,im:1};
  if(x==='-i')return {re:0,im:-1};
- if(!x.includes('i'))return /^[-+]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(x)?{re:Number(x),im:0}:null;
+ if(!x.includes('i'))return /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(x)?{re:Number(x),im:0}:null;
  if(!x.endsWith('i')||x.slice(0,-1).includes('i'))return null;
  let core=x.slice(0,-1),split=-1;
  for(let k=1;k<core.length;k++)if(core[k]==='+'||core[k]==='-')split=k;
@@ -46,7 +46,7 @@ function parseComplex(raw){
  if(split!==-1){re=Number(core.slice(0,split));imPart=core.slice(split)}
  if(imPart===''||imPart==='+')imPart='1';
  if(imPart==='-')imPart='-1';
- if(!/^[-+]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(imPart)||!Number.isFinite(re))return null;
+ if(!/^[-+]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(imPart)||!Number.isFinite(re))return null;
  return {re,im:Number(imPart)};
 }
 function sameComplex(a,b){return Math.abs(a.re-b.re)<1e-8&&Math.abs(a.im-b.im)<1e-8}
