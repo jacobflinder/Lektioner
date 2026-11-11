@@ -1,6 +1,14 @@
 (()=>{
 "use strict";
 const {$}=window.Fy2Nav,{fmt,compass,components}=window.Fy2Physics;
+
+const math=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
+const chain=(law,sub,result,note)=>'<div class="calc-chain">'+
+ '<div><span class="tag">1 · Samband</span><div class="math-sm">'+math(law)+'</div></div>'+
+ '<div><span class="tag">2 · Insättning</span><div class="math-sm">'+math(sub)+'</div></div>'+
+ '<div><span class="tag">3 · Resultat och tolkning</span><div class="math-sm">'+math(result)+'</div><p class="small">'+note+'</p></div></div>';
+const val=(x,dp,unit)=>'<mrow><mn>'+fmt(x,dp)+'</mn><mtext> '+unit+'</mtext></mrow>';
+
 const mu0=4*Math.PI*1e-7;
 let componentsShown=false,compassShown=false;
 function drawComponents(){
@@ -8,9 +16,13 @@ function drawComponents(){
  $("earth-components").innerHTML=v.html;
  $("earth-B-value").textContent=fmt(B,0)+" μT";
  $("earth-i-value").textContent=fmt(i,0)+"°";
- $("earth-components-result").textContent=componentsShown?
- "Bₕ = "+fmt(v.Bh,1)+" μT och Bᵥ = "+fmt(v.Bv,1)+" μT nedåt. Bₕ=B cos i, Bᵥ=B sin i.":
- "Förutsäg först: om inklinationen ökar och B är konstant, vad händer med Bₕ?";
+ $("earth-components-result").innerHTML=componentsShown?
+ chain('<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo><mi>B</mi><mi>cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo><mi>B</mi><mi>sin</mi><mi>i</mi>',
+ '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi>cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo><mspace width="1em"/>'+
+ '<msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi>sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
+ '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(v.Bh,1,'μT')+'<mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(v.Bv,1,'μT'),
+ 'Bᵥ är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar Bₕ.') :
+ 'Förutsäg först: om inklinationen ökar men B är konstant, vilken komponent minskar?';
  $("earth-components-reveal").textContent=componentsShown?"Dölj värden":"Visa komponenterna";
 }
 $("earth-B").oninput=()=>{componentsShown=false;drawComponents()};
@@ -25,10 +37,13 @@ function drawCompass(){
  const b=Number($("earth-coil").value),v=compass(Bh,b,compassShown);
  $("earth-compass").innerHTML=v.html;
  $("earth-coil-value").textContent=fmt(b,0)+" μT";
- $("earth-compass-result").textContent=compassShown?
- "Kompassens nordände följer Bₕ+Bsp. α = "+fmt(v.angle,1)+"°. "+
- (b>0?"Den vrids åt öster.":b<0?"Den vrids åt väster.":"Nålen pekar mot magnetiskt norr."):
- "Förutsäg nålens riktning. Bₕ hålls konstant, medan Bsp kan vara positivt eller negativt.";
+ $("earth-compass-result").innerHTML=compassShown?
+ chain('<mi>tan</mi><mi>α</mi><mo>=</mo><mfrac><mrow><msub><mi>B</mi><mtext>sp</mtext></msub></mrow><mrow><msub><mi>B</mi><mi>h</mi></msub></mrow></mfrac>',
+ '<mi>α</mi><mo>=</mo><mi>arctan</mi><mo>(</mo><mfrac><mrow>'+val(b,0,'μT')+'</mrow><mrow>'+val(Bh,1,'μT')+'</mrow></mfrac><mo>)</mo>',
+ '<mi>α</mi><mo>≈</mo><mn>'+fmt(v.angle,1)+'</mn><mo>°</mo>',
+ (b>0?'Röd nordände vrids åt öster.':b<0?'Röd nordände vrids åt väster.':'Röd nordände förblir i magnetisk nordriktning.')+
+ ' Spolens fält är här vinkelrätt mot jordfältets horisontella komponent; α är inte inklinationen i.') :
+ 'Förutsäg nålens riktning innan du visar svaret. Bₕ är konstant medan Bsp ändras.';
  $("earth-compass-show").textContent=compassShown?"Dölj resultant och nål":"Visa resultant och nål";
 }
 $("earth-coil").oninput=()=>{compassShown=false;drawCompass()};
