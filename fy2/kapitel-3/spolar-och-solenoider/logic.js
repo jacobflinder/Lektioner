@@ -149,7 +149,7 @@ function renderSol(){
  $("sol-i-value").textContent=swFmt(I,2)+" A";
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
- $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown});
+ $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:6+Math.round((N-100)/100)});
  $("sol-result").textContent=solShown?
  "B ≈ "+swFmt(mT,3)+" mT · fältet inuti riktat "+(solDir>0?"åt höger (N till höger)":"åt vänster (N till vänster)")+
  ". För denna idealiserade luftsolenoid gäller B ∝ NI/L.":
@@ -170,7 +170,7 @@ function renderFlat(){
  $("flat-i-value").textContent=swFmt(I,2)+" A";
  $("flat-n-value").textContent=String(N);
  $("flat-r-value").textContent=swFmt(r,1)+" cm";
- $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown});
+ $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N});
  $("flat-result").textContent=flatShown?
  "B ≈ "+swFmt(B,1)+" μT i centrum · riktat "+(flatDir>0?"ut ur bilden (mot dig)":"in i bilden (från dig)")+
  ". Ideal modell: N täta varv med samma radie.":
