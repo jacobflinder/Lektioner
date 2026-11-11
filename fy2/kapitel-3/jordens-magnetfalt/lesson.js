@@ -25,10 +25,10 @@ function drawComponents(){
  'Förutsäg först: om inklinationen ökar men B är konstant, vilken komponent minskar?';
  $("earth-components-reveal").textContent=componentsShown?"Dölj värden":"Visa komponenterna";
 }
-$("earth-B").oninput=()=>{componentsShown=false;drawComponents()};
-$("earth-i").oninput=()=>{componentsShown=false;drawComponents()};
+$("earth-B").oninput=()=>{drawComponents()};
+$("earth-i").oninput=()=>{drawComponents()};
 $("earth-components-reveal").onclick=()=>{componentsShown=!componentsShown;drawComponents()};
-function resetComponents(){componentsShown=false;$("earth-B").value=42;$("earth-i").value=73;drawComponents()}
+function resetComponents(){componentsShown=false;componentsShown=false;$("earth-B").value=42;$("earth-i").value=73;drawComponents()}
 $("earth-components-reset").onclick=resetComponents;
 $("earth-components").closest(".slide").addEventListener("lesson:reset",resetComponents);
 const Bh=42*Math.cos(73*Math.PI/180);
@@ -46,9 +46,9 @@ function drawCompass(){
  'Förutsäg nålens riktning innan du visar svaret. Bₕ är konstant medan Bsp ändras.';
  $("earth-compass-show").textContent=compassShown?"Dölj resultant och nål":"Visa resultant och nål";
 }
-$("earth-coil").oninput=()=>{compassShown=false;drawCompass()};
+$("earth-coil").oninput=()=>{drawCompass()};
 $("earth-compass-show").onclick=()=>{compassShown=!compassShown;drawCompass()};
-function resetCompass(){compassShown=false;$("earth-coil").value=0;drawCompass()}
+function resetCompass(){compassShown=false;compassShown=false;$("earth-coil").value=0;drawCompass()}
 $("earth-compass-reset").onclick=resetCompass;
 $("earth-compass").closest(".slide").addEventListener("lesson:reset",resetCompass);
 $("earth-triangle").innerHTML=compass(Bh,47.1,true).html;
