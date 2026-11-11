@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOKflex-uppgifter · Polynomdivision</title>
+<style>
+:root{font:18px system-ui,-apple-system,"Segoe UI",sans-serif;color:#183247;background:#edf2f7}*{box-sizing:border-box}body{margin:0}header{background:#102a40;color:white;padding:16px max(18px,calc((100vw - 1100px)/2))}header a{color:white}main{max-width:1100px;margin:26px auto;padding:0 18px}section{background:white;border-radius:18px;box-shadow:0 8px 30px #19375113;padding:clamp(20px,4vw,42px)}.eyebrow{color:#557286;letter-spacing:.08em;font-weight:800;font-size:.8rem;text-transform:uppercase}h1{font-size:clamp(2rem,4vw,3.2rem);margin:12px 0}p{line-height:1.55}.lead{font-size:1.18rem;color:#416176}.task{background:#e6f5ee;border-left:5px solid #0b866b;padding:18px;border-radius:9px}.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:22px 0}.level{display:flex;gap:13px;align-items:flex-start;border:2px solid #c9d9e6;border-radius:13px;padding:20px 15px;cursor:pointer}.level:has(input:checked){border-color:#087f67;background:#e2f6ee}.level input{width:23px;height:23px;accent-color:#087f67;flex:none;margin-top:3px}.level strong{display:block;font-size:1.12rem}.level small{display:block;font-size:.98rem;color:#32576b;margin-top:10px}.status{font-weight:750;background:#f0f5f9;padding:13px 17px;border-radius:8px}.status.complete{background:#d4f2e5;color:#075b43}.panel{background:#f1f6fa;border-radius:11px;padding:15px 20px;margin-top:20px}.panel li{margin:12px 0}.math{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.15rem}.hint{font-size:.88rem;color:#536e7e}.action{display:inline-block;color:white;background:#116c9e;padding:12px 17px;text-decoration:none;border-radius:9px;font-weight:700;margin-top:14px}@media(max-width:600px){:root{font-size:16px}}
+</style></head><body>
+<header><a href="../">← Tillbaka till lektionen Polynomdivision</a></header>
+<main><section><div class="eyebrow">4.4 Polynomekvationer · Polynomdivision</div><h1>NOKflex – välj tre av fem nivåer</h1>
+<p class="lead">Här är arbetsinstruktionen för vår lektion. Öppna <strong>Övningslista</strong> i NOKflex under Polynomdivision och arbeta med uppgifterna i dina valda nivåer.</p>
+<div class="task"><strong>Uppdrag: välj exakt tre olika nivåer.</strong> Lös alla uppgifterna inom de nivåer du väljer. Gör beräkningarna för hand och kontrollera kvot och rest. Börja på en nivå där du får grepp om metoden och fortsätt med en som utmanar dig.</div>
+<div class="levels" id="levels">
+<label class="level"><input type="checkbox" value="1"><span><strong>Nivå 1</strong><small>4421 och 4422</small></span></label>
+<label class="level"><input type="checkbox" value="2"><span><strong>Nivå 2</strong><small>4423 och 4424</small></span></label>
+<label class="level"><input type="checkbox" value="3"><span><strong>Nivå 3</strong><small>4425 och 4426</small></span></label>
+<label class="level"><input type="checkbox" value="4"><span><strong>Nivå 4</strong><small>4427</small></span></label>
+<label class="level"><input type="checkbox" value="5"><span><strong>Nivå 5</strong><small>4428, 4429 och 4430</small></span></label>
+</div><p class="status" id="status" role="status" aria-live="polite">0 av 3 nivåer valda.</p>
+<div class="panel"><strong>Så redovisar du ditt arbete</strong><ol><li>Skriv uppställningen av liggande stolen för hand. Placera termer med samma grad under varandra.</li><li>Visa hur du väljer nästa kvotterm, multiplicerar med hela divisorn och subtraherar.</li><li>Ange <strong>kvot och rest</strong>. Kontrollera att <span class="math">P(x) = D(x) · Q(x) + R(x)</span>.</li><li>Jämför minst en beräkningsrad med en kamrat efter ett eget försök.</li></ol></div>
+<p class="hint">De fem nivåerna och uppgiftsnumren kommer från övningslistan i NOKflex. Instruktionen att välja tre nivåer hör till vår lektion. Valen stannar i webbläsaren och sparas inte.</p>
+<a class="action" href="../">Tillbaka till lektionen</a>
+</section></main>
+<script>
+const checks=[...document.querySelectorAll('#levels input')],status=document.getElementById('status');
+checks.forEach(check=>check.addEventListener('change',()=>{let selected=checks.filter(c=>c.checked);if(selected.length>3){check.checked=false;status.textContent='Du ska välja exakt tre nivåer. Avmarkera en om du vill byta.';return}
+status.textContent=selected.length===3?'Klart: nivå '+selected.map(c=>c.value).join(', ')+'. Lös uppgifterna i dessa tre nivåer.':selected.length+' av 3 nivåer valda.';
+status.classList.toggle('complete',selected.length===3)}));
+</script></body></html>
