@@ -146,7 +146,9 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
  '<path d="'+p+'" stroke="'+COIL_COLORS.light+'" stroke-width="1.2" fill="none" stroke-linecap="round"/>'+
  '<path d="M'+startX.toFixed(1)+' '+startY+'L'+Math.min(435,leadX).toFixed(1)+' '+(startY-26)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="3" fill="none"/>'+
  '<path d="M'+endX.toFixed(1)+' '+endY+'L'+(endX+15).toFixed(1)+' '+(endY+18)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="3" fill="none"/>'+
- '<path d="M'+(cx-14).toFixed(1)+' '+(cy-R-14).toFixed(1)+'l'+(dir>0?'-10 11 5 -16':'10 11 -5 -16')+'" stroke="#873a2c" stroke-width="4" fill="none"/>'+
+ '<path d="M'+(cx+dir*16).toFixed(1)+' '+(cy-R).toFixed(1)+'L'+(cx-dir*16).toFixed(1)+' '+(cy-R).toFixed(1)+
+  'M'+(cx-dir*16+dir*9).toFixed(1)+' '+(cy-R-7).toFixed(1)+'L'+(cx-dir*16).toFixed(1)+' '+(cy-R).toFixed(1)+
+  'L'+(cx-dir*16+dir*9).toFixed(1)+' '+(cy-R+7).toFixed(1)+'" stroke="#873a2c" stroke-width="4" stroke-linecap="round" fill="none"/>'+
  '<text x="447" y="74" font-size="19" font-weight="750" fill="#184957">I: '+(dir>0?'moturs':'medurs')+'</text>'+
  (field?'<text x="447" y="114" font-size="18" fill="'+blue+'">B i centrum:</text>'+
  '<text x="447" y="144" font-size="24" font-weight="800" fill="'+blue+'">'+B.toLocaleString('sv-SE',{maximumFractionDigits:1})+' μT</text>'+
