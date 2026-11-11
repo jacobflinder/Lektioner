@@ -33,7 +33,7 @@ svg text{font-family:system-ui,sans-serif;fill:#284c5a}svg .bfield{stroke:#08768
 <script data-fy2-bundled="navigation">
 (()=>{
 'use strict';
-const $=id=>document.getElementById(id),slides=[...document.querySelectorAll('.slide')];let current=0,repeat=false,showTeacher=false;
+const $=id=>document.getElementById(id.startsWith('#')?id.slice(1):id),slides=[...document.querySelectorAll('.slide')];let current=0,repeat=false,showTeacher=false;
 function render(){slides.forEach((s,i)=>s.classList.toggle('active',i===current));$('#counter').textContent=(current+1)+' / '+slides.length;$('#jump').value=String(current);$('#prev').disabled=current===0;$('#next').disabled=current===slides.length-1;const a=slides[current].querySelector('.answer:not(.open)');$('#step').textContent=a?'Visa nästa steg':current===slides.length-1?'Slut':'Nästa bild';$('#step').disabled=!a&&current===slides.length-1;}
 function go(n){current=Math.max(0,Math.min(slides.length-1,n));if(!repeat)slides[current].querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));render();window.scrollTo(0,0)}
 function reveal(){const a=slides[current].querySelector('.answer:not(.open)');if(a){a.classList.add('open');render()}else if(current<slides.length-1)go(current+1)}
