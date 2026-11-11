@@ -18,9 +18,9 @@ function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1,showForce=true){
  T(520,38,'v (grön)','#20886d',17)+(showForce?T(520,62,'F (orange)','#ae6343',17):'');
  return S(content,710,370,'Partikelbana i B in i bilden; v tangentiell, F vinkelrät');
 }
-function fieldOnRod(charges=false){
+function fieldOnRod(charges=false,moving=true){
  let s=field(10,6,80,72,54,43)+'<rect x="261" y="72" width="28" height="244" rx="9" fill="#d6a473" stroke="#9f7948" stroke-width="2"/>'+
- A(290,198,400,198,'#218a73')+T(410,203,'v','#26846e',20)+T(484,38,'B in i bilden','#0e788e',19);
+ (moving?A(290,198,400,198,'#218a73')+T(410,203,'v','#26846e',20):T(380,205,'v = 0','#26846e',20))+T(484,38,'B in i bilden','#0e788e',19);
  if(charges){for(let j=0;j<4;j++)s+=T(270,96+j*20,'+','#b65540',20)+T(270,252+j*18,'−','#0c7d93',20);
  s+=A(304,175,304,112,'#14758f')+T(315,123,'Fₑ','#14758f',18)+A(245,214,245,277,'#bb6340')+T(195,282,'Fₘ','#af6544',18);}
  return S(s,690,370,'Metallstav rörs åt höger i B in i bildplanet');
