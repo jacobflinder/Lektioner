@@ -39,8 +39,8 @@ function renderRod(){
  'Förutsäg först. Det schematiska reglaget visar laddningsseparation, inte en uppmätt tidskurva. Vilket samband gäller i jämvikt?';
  $("rod-show").textContent=rodShown?"Dölj jämviktsresultatet":"Visa jämvikt och spänning";
 }
-function resetRod(){rodShown=false;for(const [id,val] of [["charge-progress","0"],["rod-B",".4"],["rod-v","3"],["rod-L","20"]])$(id).value=val;renderRod()}
-for(const id of ["charge-progress","rod-B","rod-v","rod-L"])$(id).oninput=()=>{rodShown=false;renderRod()};
+function resetRod(){rodShown=false;rodShown=false;for(const [id,val] of [["charge-progress","0"],["rod-B",".4"],["rod-v","3"],["rod-L","20"]])$(id).value=val;renderRod()}
+for(const id of ["charge-progress","rod-B","rod-v","rod-L"])$(id).oninput=()=>{renderRod()};
 $("rod-show").onclick=()=>{rodShown=!rodShown;renderRod()};
 $("rod-reset").onclick=resetRod;
 $("ind-rod-dynamic").closest(".slide").addEventListener("lesson:reset",resetRod);
@@ -58,9 +58,9 @@ function renderAngle(){
  'Förutsäg hur flödet ändras när normalen vrids. B och A hålls konstanta.';
  $("flux-angle-show").textContent=fluxShown?"Dölj flödet":"Visa flödet";
 }
-$("flux-theta").oninput=()=>{fluxShown=false;renderAngle()};
+$("flux-theta").oninput=()=>{renderAngle()};
 $("flux-angle-show").onclick=()=>{fluxShown=!fluxShown;renderAngle()};
-function resetAngle(){fluxShown=false;$("flux-theta").value=0;renderAngle()}
+function resetAngle(){fluxShown=false;fluxShown=false;$("flux-theta").value=0;renderAngle()}
 $("flux-angle-reset").onclick=resetAngle;
 $("ind-flux-angle").closest(".slide").addEventListener("lesson:reset",resetAngle);
 let loopShown=false;
@@ -80,10 +80,10 @@ function renderLoop(){
  'Förutsäg när U är skild från noll. B = 0,40 T, L = 0,20 m, och v = 0,50 m/s endast under rörelsen.';
  $("loop-show").textContent=loopShown?"Dölj Φ och U":"Visa Φ och U";
 }
-$("loop-t").oninput=()=>{loopShown=false;renderLoop()};
-document.querySelectorAll("[data-loop]").forEach(b=>b.onclick=()=>{$("loop-t").value=b.dataset.loop;loopShown=false;renderLoop()});
+$("loop-t").oninput=()=>{renderLoop()};
+document.querySelectorAll("[data-loop]").forEach(b=>b.onclick=()=>{$("loop-t").value=b.dataset.loop;renderLoop()});
 $("loop-show").onclick=()=>{loopShown=!loopShown;renderLoop()};
-function resetLoop(){loopShown=false;$("loop-t").value=0;renderLoop()}
+function resetLoop(){loopShown=false;loopShown=false;$("loop-t").value=0;renderLoop()}
 $("loop-reset").onclick=resetLoop;
 $("ind-loop").closest(".slide").addEventListener("lesson:reset",resetLoop);
 let graphShown=false;
@@ -102,9 +102,9 @@ function renderGraph(){
  'Förutsäg spänningens tecken. Läs två punkter för att bestämma lutningen ΔΦ/Δt.';
  $("flux-time-show").textContent=graphShown?"Dölj resultat":"Visa lutning och spänning";
 }
-$("flux-time").oninput=()=>{graphShown=false;renderGraph()};
+$("flux-time").oninput=()=>{renderGraph()};
 $("flux-time-show").onclick=()=>{graphShown=!graphShown;renderGraph()};
-function resetGraph(){graphShown=false;$("flux-time").value=.1;renderGraph()}
+function resetGraph(){graphShown=false;graphShown=false;$("flux-time").value=.1;renderGraph()}
 $("flux-time-reset").onclick=resetGraph;
 $("ind-flux-graph").closest(".slide").addEventListener("lesson:reset",resetGraph);
 let tangentShown=false;
@@ -120,9 +120,9 @@ function renderTangent(){
  'Förutsäg tangentens lutning och spänningens tecken. Grafens höjd är inte U.';
  $("ind-tangent-show").textContent=tangentShown?"Dölj spänningen":"Visa tangentens spänning";
 }
-$("ind-tangent-time").oninput=()=>{tangentShown=false;renderTangent()};
+$("ind-tangent-time").oninput=()=>{renderTangent()};
 $("ind-tangent-show").onclick=()=>{tangentShown=!tangentShown;renderTangent()};
-function resetTangent(){tangentShown=false;$("ind-tangent-time").value=.5;renderTangent()}
+function resetTangent(){tangentShown=false;tangentShown=false;$("ind-tangent-time").value=.5;renderTangent()}
 $("ind-tangent-reset").onclick=resetTangent;
 $("ind-tangent-graph").closest(".slide").addEventListener("lesson:reset",resetTangent);
 resetRod();resetAngle();resetLoop();resetGraph();resetTangent();
