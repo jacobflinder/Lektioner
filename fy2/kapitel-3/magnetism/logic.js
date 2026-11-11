@@ -130,6 +130,11 @@ function updateFlux(){
  :'<span style="font-family:system-ui;font-size:.64em;font-weight:600">Förutsäg först: ändrar B och A flödet på samma sätt?</span>';
  $("flux-show").textContent=fluxShown?"Dölj beräkningen":"Visa sambandet och beräkningen";
  $("flux-area").setAttribute("width",165*A/24);
+ const visibleScale=.62+.45*(B/.4);
+ $("flux-dots").querySelectorAll("circle").forEach((c,i)=>{
+  c.setAttribute("r",(i%2?2:7)*visibleScale);
+  c.setAttribute("opacity",Math.min(.98,.38+.41*B/.4));
+ });
 }
 for(const id of ["field-strength","flux-area-slider"])$(id).addEventListener("input",()=>{fluxShown=false;updateFlux()});
 $("flux-show").addEventListener("click",()=>{fluxShown=!fluxShown;updateFlux()});
