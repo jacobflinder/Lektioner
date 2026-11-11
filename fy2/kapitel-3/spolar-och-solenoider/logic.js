@@ -66,6 +66,16 @@ document.addEventListener("keydown",e=>{
 let viewDir=1,viewShown=false,coreDir=1,solDir=1,flatDir=1,solShown=false,flatShown=false;
 const mu0=4*Math.PI*1e-7;
 const swFmt=(x,n=1)=>Number(x).toLocaleString("sv-SE",{minimumFractionDigits:n,maximumFractionDigits:n});
+
+const ml=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
+const mult=(n,unit,dec)=>'<mrow><mn>'+swFmt(n,dec)+'</mn><mtext> '+unit+'</mtext></mrow>';
+const calc=(law,sub,result,note)=>'<div class="calc-chain">'+
+ '<div><span class="tag">1 · Samband</span><div class="math-sm">'+ml(law)+'</div></div>'+
+ '<details class="calc-ins"><summary>2 · Visa insättningen med enheter</summary><div class="math-sm">'+ml(sub)+'</div></details>'+
+ '<div><span class="tag">3 · Resultat och fysikalisk tolkning</span><div class="math-sm">'+ml(result)+'</div><p class="small">'+note+'</p></div>'+
+ '</div>';
+const mu='<msub><mi>μ</mi><mn>0</mn></msub>';
+
 const coreHost=$("core-svg").parentElement;
 function endViewLoop(sign,revealed){
  const cx=325,cy=174,R=108;
@@ -151,10 +161,13 @@ function renderSol(){
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
  $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:6+Math.round((N-100)/100)});
- $("sol-result").textContent=solShown?
- "B ≈ "+swFmt(mT,3)+" mT · fältet inuti riktat "+(solDir>0?"åt höger (N till höger)":"åt vänster (N till vänster)")+
- ". Jämfört med utgångsfallet: "+swFmt(relSol,2)+" gånger så stort belopp. För luftsolenoiden gäller B ∝ NI/L.":
- "Föreslå riktning och storlek innan du visar beräkningen. Håll två reglage stilla när du ändrar det tredje.";
+ $("sol-result").innerHTML=solShown?
+ calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',
+ '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4π</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
+ '<mi>B</mi><mo>≈</mo>'+mult(mT,'mT',3),
+ 'Luftsolenoid, idealiserat långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
+ '. Jämfört med utgångsfallet är beloppet '+swFmt(relSol,2)+' gånger så stort. Vänd strömmen ⇒ vänd riktningen, inte beloppet.') :
+ "Förutsäg först belopp och riktning. Ändra en storhet i taget och visa sedan sambandet.";
  $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";
  syncPrediction("sol");
 }
@@ -173,10 +186,13 @@ function renderFlat(){
  $("flat-n-value").textContent=String(N);
  $("flat-r-value").textContent=swFmt(r,1)+" cm";
  $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N});
- $("flat-result").textContent=flatShown?
- "B ≈ "+swFmt(B,1)+" μT i centrum · riktat "+(flatDir>0?"ut ur bilden (mot dig)":"in i bilden (från dig)")+
- ". Jämfört med utgångsfallet: "+swFmt(relFlat,2)+" gånger så stort belopp. Ideal modell: N täta varv med samma radie.":
- "Räkna själv innan facit. Ändra N, I eller r och pröva ett samband i taget.";
+ $("flat-result").innerHTML=flatShown?
+ calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',
+ '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4π</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow><mrow><mn>2</mn><mo>·</mo>'+mult(r/100,'m',3)+'</mrow></mfrac>',
+ '<mi>B</mi><mo>≈</mo>'+mult(B,'μT',1),
+ 'Fältets riktning är '+(flatDir>0?'ut ur bilden':'in i bilden')+'. Relativt startfallet: '+swFmt(relFlat,2)+
+ ' gånger så stort belopp. Detta gäller i centrum för idealiserat lika stora varv i luft.') :
+ "Förutsäg innan facit. Varje gång r ändras måste cm först omvandlas till meter.";
  $("flat-show").textContent=flatShown?"Dölj beräkning och riktning":"Visa beräkning och riktning";
  syncPrediction("flat");
 }
