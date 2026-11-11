@@ -117,6 +117,41 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
   await charge.locator('#particle-speed').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
   const charge1=await charge.locator('#particle-dynamic svg').evaluate(el=>el.outerHTML);
   check(charge0!==charge1,'Particle model: changing speed did not change vectors and trajectory');
+  // Magnetic particle simulations: actual time animation, physics-vector reveal,
+  // charge/field reversals, and the live conductor model.
+  await charge.locator('#particle-force').click();
+  const shownForce=await charge.locator('#particle-dynamic svg').evaluate(el=>el.outerHTML);
+  check(shownForce.includes('#bd6b44'),'Charged particles: force vector was not revealed');
+  await charge.locator('#particle-restart').click();
+  await charge.locator('#particle-play').click();
+  await charge.waitForTimeout(650);
+  const progressed=Number(await charge.locator('#particle-time').inputValue());
+  check(progressed>2,'Charged particles: Start does not advance the time slider: '+progressed);
+  await charge.locator('#particle-play').click();
+  const paused=Number(await charge.locator('#particle-time').inputValue());
+  await charge.waitForTimeout(250);
+  check(Math.abs(Number(await charge.locator('#particle-time').inputValue())-paused)<.05,
+    'Charged particles: Pause does not freeze the position');
+  await charge.locator('#particle-flip').click();
+  const reversed=await charge.locator('#particle-dynamic svg').evaluate(el=>el.outerHTML);
+  check(reversed.includes('B ut ur bilden'),'Charged particles: magnetic field reversal not visualized');
+  await charge.locator('#jump').selectOption('11');
+  await charge.locator('#conductor-show').click();
+  check((await charge.locator('#conductor-feedback').innerText()).includes('uppåt'),
+    'Conductor: I right and B inward should give F upward');
+  await charge.locator('#conductor-flip-I').click();
+  check((await charge.locator('#conductor-feedback').innerText()).includes('nedåt'),
+    'Conductor: reverse I should reverse F');
+  await charge.locator('#conductor-flip-B').click();
+  check((await charge.locator('#conductor-feedback').innerText()).includes('uppåt'),
+    'Conductor: reverse both I and B should keep original F');
+  await charge.locator('#jump').selectOption('16');
+  const d0=await charge.locator('#double-feedback').innerText();
+  await charge.locator('#double-flip-both').click();
+  const d1=await charge.locator('#double-feedback').innerText();
+  check(d0.includes('nedåt')&&d1.includes('nedåt'),
+    'Double reversal: force direction should not change');
+  await charge.screenshot({path:path.join(dir,'laddade-partiklar-interaktiv-17.png')});
   await charge.close();
  }finally{await browser.close()}
  fs.writeFileSync(path.join(dir,'summary.json'),JSON.stringify({errors,warnings,checkedAt:new Date().toISOString()},null,2));
