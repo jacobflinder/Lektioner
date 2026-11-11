@@ -31,7 +31,7 @@ function resetCurrent(){
  slides[current].dispatchEvent(new CustomEvent("lesson:reset",{bubbles:false}));
  if(current===1){magnetFlipped=false;compassPoint="top";drawCompass();}
  if(current===3){domainStage=0;drawDomains();}
- if(current===4){$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux();}
+ if(current===4){$("field-strength").value="0.4";$("flux-area-slider").value="24";fluxShown=false;updateFlux();}
  if(current===6){pauseTimer();remaining=timerMinutes*60;timerText();}
  syncCompassReveal();render();
 }
@@ -115,17 +115,25 @@ function circle(group,x,y,r=8){
 }
 for(let row=0;row<6;row++)for(let col=0;col<11;col++)circle($("flux-dots"),62+col*47,39+row*43,7);
 for(let row=0;row<3;row++)for(let col=0;col<5;col++)circle($("example-dots"),155+col*67,106+row*59,9);
+let fluxShown=false;
 function updateFlux(){
  const B=Number($("field-strength").value),A=Number($("flux-area-slider").value);
  const phi=B*A*1e-4;
  $("field-value").textContent=fmt(B,2)+" T";
  $("area-value").textContent=fmt(A,0)+" cm²";
- $("flux-result").textContent="Φ = "+fmt(phi*1000,2)+" mWb";
+ $("flux-result").innerHTML=fluxShown?
+ '<div style="font-size:.72em;font-family:system-ui;font-weight:650;margin-bottom:7px">Samband → insättning → svar</div>'+
+ '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>'+
+ '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(B,2)+'</mn><mtext> T</mtext><mo>·</mo><mn>'+fmt(A/10000,4)+'</mn><mtext> m²</mtext></math>'+
+ '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(phi*1000,2)+'</mn><mtext> mWb</mtext></math>'+
+ '<p style="font-size:.55em;font-family:system-ui;font-weight:500">A = '+fmt(A,0)+' cm² = '+fmt(A/10000,4)+' m². Fältet är homogent och vinkelrätt mot ytan.</p>'
+ :'<span style="font-family:system-ui;font-size:.64em;font-weight:600">Förutsäg först: ändrar B och A flödet på samma sätt?</span>';
+ $("flux-show").textContent=fluxShown?"Dölj beräkningen":"Visa sambandet och beräkningen";
  $("flux-area").setAttribute("width",165*A/24);
 }
-$("field-strength").addEventListener("input",updateFlux);
-$("flux-area-slider").addEventListener("input",updateFlux);
-$("flux-reset").addEventListener("click",()=>{$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux()});
+for(const id of ["field-strength","flux-area-slider"])$(id).addEventListener("input",()=>{fluxShown=false;updateFlux()});
+$("flux-show").addEventListener("click",()=>{fluxShown=!fluxShown;updateFlux()});
+$("flux-reset").addEventListener("click",()=>{$("field-strength").value="0.4";$("flux-area-slider").value="24";fluxShown=false;updateFlux()});
 function timerText(){
  const t=Math.max(0,Math.ceil(remaining));
  $("timer").textContent=String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0");
