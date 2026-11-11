@@ -14,7 +14,25 @@ document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.tar
 document.getElementById('mode').addEventListener('click',e=>{const on=document.body.classList.toggle('classroom');e.currentTarget.textContent=on?'Repetitionsläge':'Klassrumsläge';e.currentTarget.setAttribute('aria-pressed',String(on))});
 document.querySelectorAll('[data-reveal]').forEach(b=>{const target=document.getElementById(b.dataset.reveal);const initial=b.textContent;b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>{const opening=target.classList.toggle('hidden')===false;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Dölj återkoppling':initial})});
 document.querySelectorAll('[data-sequence]').forEach(box=>{let n=0;const steps=[...box.querySelectorAll('[data-seq-item]')];const back=box.querySelector('[data-seq-back]'),next=box.querySelector('[data-seq-next]'),reset=box.querySelector('[data-seq-reset]'),count=box.querySelector('[data-seq-count]'),prompt=box.querySelector('[data-seq-prompt]');function render(){steps.forEach((e,i)=>{e.classList.toggle('hidden',i>=n);e.classList.toggle('latest',i===n-1)});back.disabled=n===0;next.disabled=n===steps.length;count.textContent=n+' av '+steps.length+' steg visade';prompt.textContent=n<steps.length?steps[n].dataset.question:'Kontrollera med den ursprungliga uppgiften och förklara metoden.'}back.onclick=()=>{n=Math.max(0,n-1);render()};next.onclick=()=>{n=Math.min(n+1,steps.length);render()};reset.onclick=()=>{n=0;render()};render()});
-document.querySelectorAll('[data-quiz]').forEach(box=>box.querySelectorAll('button[data-correct]').forEach(b=>b.addEventListener('click',()=>{box.querySelectorAll('button[data-correct]').forEach(x=>x.classList.remove('correct','wrong'));const ok=b.dataset.correct==='true';b.classList.add(ok?'correct':'wrong');const p=box.querySelector('.feedback');p.className='feedback '+(ok?'ok':'no');p.textContent=ok?box.dataset.correctText||'Rätt. Förklara varför.':box.dataset.wrongText||'Inte riktigt. Kontrollera resonemanget och pröva igen.'})));
+document.querySelectorAll('[data-quiz]').forEach(box=>{
+ const choices=[...box.querySelectorAll('button[data-correct]')];
+ choices.forEach(b=>{
+  b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>{
+   choices.forEach(x=>{
+    x.classList.remove('correct','wrong');
+    x.setAttribute('aria-pressed',String(x===b));
+   });
+   const ok=b.dataset.correct==='true';
+   b.classList.add(ok?'correct':'wrong');
+   const p=box.querySelector('.feedback');
+   p.className='feedback '+(ok?'ok':'no');
+   p.textContent=ok
+     ?(box.dataset.correctText||'Rätt. Förklara varför.')
+     :(box.dataset.wrongText||'Inte riktigt. Kontrollera resonemanget och pröva igen.');
+  });
+ });
+});
 const canvas=document.getElementById('ink'),panel=document.getElementById('inkpanel'),ctx=canvas.getContext('2d');let strokes=[],active=null,eraser=false;const button=document.getElementById('ink-toggle');function resize(){if(!panel.classList.contains('open'))return;const r=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.max(1,Math.round(r.width*dpr));canvas.height=Math.max(1,Math.round(r.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);paint()}function paint(){const w=canvas.clientWidth,h=canvas.clientHeight;ctx.clearRect(0,0,w,h);ctx.fillStyle='white';ctx.fillRect(0,0,w,h);for(const s of [...strokes,...(active?[active]:[])]){ctx.beginPath();ctx.strokeStyle=s.eraser?'white':'#163c55';ctx.lineWidth=s.eraser?27:2.7;ctx.lineCap='round';ctx.lineJoin='round';s.points.forEach((pt,i)=>i?ctx.lineTo(pt[0]*w,pt[1]*h):ctx.moveTo(pt[0]*w,pt[1]*h));if(s.points.length===1){let p=s.points[0];ctx.lineTo(p[0]*w+.01,p[1]*h+.01)}ctx.stroke()}}function point(e){const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]}
 button.onclick=()=>{const open=panel.classList.toggle('open');button.textContent=open?'Dölj skrivyta':'Visa skrivyta';button.setAttribute('aria-expanded',String(open));if(open)requestAnimationFrame(resize)};
 canvas.addEventListener('pointerdown',e=>{if(active)return;e.preventDefault();canvas.setPointerCapture(e.pointerId);active={eraser,points:[point(e)]};paint()});
