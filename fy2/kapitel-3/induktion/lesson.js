@@ -22,11 +22,19 @@ let rodShown=false;
 function renderRod(){
  const p=Number($("charge-progress").value)/100,B=Number($("rod-B").value),v=Number($("rod-v").value),L=Number($("rod-L").value)/100;
  const eff=v===0?0:p,Ueq=B*L*v,U=Ueq*eff,number=Math.floor(eff*4+.05);
+ // The same physical state controls rod geometry, field appearance, speed arrow,
+ // magnetic force, charge separation and the calculation. The progression
+ // control is illustrative, not a clock or a calibrated transient model.
+ const h=100+160*(L-.10)/.30,top=194-h/2,bottom=194+h/2;
+ const fMag=Math.min(110,53*v*B/(3*.40)),fElectric=fMag*eff;
  let symbols="";
- for(let i=0;i<number;i++)symbols+=T(265,98+i*19,"+","#bc5742",19)+T(265,249+i*19,"−","#0f7992",19);
- if(eff>0)symbols+=A(318,205,318,205-68*eff,"#127a93",3)+T(330,193-68*eff,"Fₑ","#0d7b97",17);
- if(v>0)symbols+=A(231,205,231,274,"#ba6643",3)+T(177,272,"Fₘ","#b36543",17);
- $("ind-rod-dynamic").innerHTML=fieldOnRod(false,v>0).replace("</svg>",symbols+"</svg>");
+ for(let i=0;i<number;i++){
+  symbols+=T(265,top+23+i*19,"+","#bc5742",19);
+  symbols+=T(265,bottom-13-i*19,"−","#0f7992",19);
+ }
+ if(eff>0)symbols+=A(318,194,318,194-fElectric,"#127a93",3)+T(330,186-fElectric,"Fₑ","#0d7b97",17);
+ if(v>0)symbols+=A(231,194,231,194+fMag,"#ba6643",3)+T(180,202+fMag,"Fₘ","#b36543",17);
+ $("ind-rod-dynamic").innerHTML=fieldOnRod(false,v>0,L,B,v).replace("</svg>",symbols+"</svg>");
  $("charge-pct").textContent=fmt(p*100,0)+" %";
  $("rod-B-value").textContent=fmt(B,2)+" T";
  $("rod-v-value").textContent=fmt(v,1)+" m/s";
