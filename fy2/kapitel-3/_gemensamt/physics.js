@@ -6,13 +6,13 @@ const A=(x,y,X,Y,c='#087b91',w=4)=>{let dx=X-x,dy=Y-y,len=Math.hypot(dx,dy)||1,u
 const T=(x,y,t,c='#254655',size=18)=>'<text x="'+x+'" y="'+y+'" style="font-size:'+size+'px;font-weight:650;fill:'+c+'">'+t+'</text>';
 const field=(cols=10,rows=6,x=76,y=78,dx=54,dy=42)=>{let s='';for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)s+=T(x+i*dx,y+j*dy,'×','#80aab7',20);return s};
 const S=(body,w=680,h=360,alt='Schematisk fysikalisk modell')=>'<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+alt+'"><rect x="0" y="0" width="'+w+'" height="'+h+'" rx="14" fill="#eef7f9"/>'+body+'</svg>';
-function particle(sign=1,progress=0,speed=1,B=1){
- const x0=92,y0=215,R=170*speed/B,theta=1.1*progress,pts=[];
- for(let i=0;i<=70;i++){const a=theta*i/70;pts.push([x0+R*Math.sin(a),y0-sign*R*(1-Math.cos(a))]);}
- const p=pts[70],vx=Math.cos(theta),vy=-sign*Math.sin(theta),fx=-Math.sin(theta),fy=-sign*Math.cos(theta);
+function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1){
+ const bend=sign*fieldSign,x0=92,y0=215,R=170*speed/B,theta=1.1*progress,pts=[];
+ for(let i=0;i<=70;i++){const a=theta*i/70;pts.push([x0+R*Math.sin(a),y0-bend*R*(1-Math.cos(a))]);}
+ const p=pts[70],vx=Math.cos(theta),vy=-bend*Math.sin(theta),fx=-Math.sin(theta),fy=-bend*Math.cos(theta);
  const path=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
  const color=sign>0?'#bd6947':'#0b8095';
- const content=field(11,7,47,59,54,43)+'<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="4"/>'+
+ const content=(fieldSign>0?field(11,7,47,59,54,43):field(11,7,47,59,54,43).replaceAll('×','•'))+T(45,345,fieldSign>0?'B in i bilden':'B ut ur bilden','#0b748e',18)+'<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="4"/>'+
  '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="white" stroke="'+color+'" stroke-width="3"/>'+T(p[0]-7,p[1]+6,sign>0?'+':'−',color,22)+
  A(p[0],p[1],p[0]+vx*72,p[1]+vy*72,'#20886d',4)+A(p[0],p[1],p[0]+fx*64,p[1]+fy*64,'#be6a42',4)+
  T(520,38,'v (grön)','#20886d',17)+T(520,62,'F (orange)','#ae6343',17);
