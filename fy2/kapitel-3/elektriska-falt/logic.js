@@ -99,12 +99,21 @@ $("download").addEventListener("click",async()=>{
  updateRefs();
  for(const id of ["tasks-setting","reading-setting","next-setting"]){$(id).setAttribute("value",$(id).value)}
  try{
-  const resp=await fetch("./logic.js");
-  if(!resp.ok)throw new Error("Kunde inte läsa lektionsskriptet.");
-  let script=await resp.text();
-  script=script.replaceAll("</"+"script>","<\\/script>");
-  let html="<!doctype html>\n"+document.documentElement.outerHTML;
-  html=html.replace('<script src="./logic.js"></'+'script>','<script>'+script+'</'+'script>');
+  const names=["logic.js","practice.js"];
+  const copy=document.documentElement.cloneNode(true);
+  copy.querySelectorAll(".practice-card,.mode-message").forEach(el=>el.remove());
+  copy.querySelectorAll(".answer.shown,.step.shown").forEach(el=>el.classList.remove("shown"));
+  copy.querySelectorAll("textarea").forEach(el=>{el.value="";el.textContent=""});
+  copy.querySelectorAll(".slide").forEach((el,i)=>el.classList.toggle("active",i===0));
+  let html="<!doctype html>\n"+copy.outerHTML;
+  for(const name of names){
+    const resp=await fetch("./"+name);
+    if(!resp.ok)throw new Error("Kunde inte läsa skriptet "+name);
+    const script=(await resp.text()).replaceAll("</"+"script>","<\\/script>");
+    const anchor='<script src="./'+name+'"></'+'script>';
+    if(!html.includes(anchor))throw new Error("Kunde inte packa skriptet "+name);
+    html=html.replace(anchor,'<script>'+script+'</'+'script>');
+  }
   const blob=new Blob([html],{type:"text/html;charset=utf-8"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url;a.download="Fy2_Elektriska_falt.html";document.body.appendChild(a);a.click();a.remove();
