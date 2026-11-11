@@ -1,7 +1,7 @@
 (()=>{"use strict";
 const COIL_COLORS={copper:"#bb653e",light:"#ebad74",back:"#b0a0a0",blue:"#076f87",iron:"#9caeb8"};
 function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false}={}){
- const w=700,h=330,x0=134,pitch=49,cy=166,ry=77,depth=24,total=2*Math.PI*turns,dt=Math.PI/34;
+ const w=700,h=330,x0=134,pitch=392/turns,cy=166,ry=77,depth=24,total=2*Math.PI*turns,dt=Math.PI/34;
  const pt=t=>({x:x0+pitch*t/(2*Math.PI)+depth*Math.cos(t),y:cy+ry*Math.sin(t)});
  const front=[],back=[];let last=null,segment="";
  for(let t=0;t<total-1e-7;t+=dt){
@@ -29,9 +29,9 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false}
  '<text x="67" y="306" font-size="16" fill="#486b78">Orange: strömförande koppartråd · ljus: baksida · '+(core?"grå: järnkärna":"luft i spolen")+'</text>'+
  '</svg>';
 }
-function coilPlanar({dir=1,field=true}={}){
- const cx=323,cy=177,R=119,n=5;let pts=[];
- for(let i=0;i<=1100;i++){const t=i/1100*n*2*Math.PI,r=R-7*t/(2*Math.PI);pts.push((i?"L":"M")+(cx-r*Math.cos(t)).toFixed(2)+" "+(cy+r*Math.sin(t)).toFixed(2));}
+function coilPlanar({dir=1,field=true,turns=5}={}){
+ const cx=323,cy=177,R=119,n=Math.max(1,Math.min(10,Math.round(turns)));let pts=[];
+ for(let i=0;i<=1100;i++){const t=i/1100*n*2*Math.PI,r=R-3.5*t/(2*Math.PI);pts.push((i?"L":"M")+(cx-r*Math.cos(t)).toFixed(2)+" "+(cy+r*Math.sin(t)).toFixed(2));}
  const p=pts.join("");
  const ccw=dir===1;const currentArrow=ccw?
   '<path d="M317 64L294 68L304 48" stroke="#873a2c" stroke-width="5" fill="none" stroke-linejoin="round"/>':
@@ -39,12 +39,12 @@ function coilPlanar({dir=1,field=true}={}){
  const center=field?(dir>0?'<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="white" stroke="'+COIL_COLORS.blue+'" stroke-width="3"/><circle cx="'+cx+'" cy="'+cy+'" r="6" fill="'+COIL_COLORS.blue+'"/>':'<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="white" stroke="'+COIL_COLORS.blue+'" stroke-width="3"/><path d="M311 165L335 189M335 165L311 189" stroke="'+COIL_COLORS.blue+'" stroke-width="5"/>'):'<text x="'+(cx-7)+'" y="'+(cy+10)+'" font-size="37" fill="#164758">?</text>';
  return '<svg viewBox="0 0 650 350" role="img" aria-label="Fem varvs sammanhängande plan kopparspiral sedd längs spolens axel.">'+
   '<rect width="650" height="350" rx="16" fill="#f0f7f8"/>'+
-  '<path d="'+p+'" stroke="#853c2d" stroke-width="7" fill="none" stroke-linecap="round"/>'+
-  '<path d="'+p+'" stroke="'+COIL_COLORS.light+'" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+  '<path d="'+p+'" stroke="#853c2d" stroke-width="3.2" fill="none" stroke-linecap="round"/>'+
+  '<path d="'+p+'" stroke="'+COIL_COLORS.light+'" stroke-width="1.1" fill="none" stroke-linecap="round"/>'+
   currentArrow+center+
   '<text x="471" y="104" font-size="19" font-weight="750" fill="#174857">I: '+(ccw?"moturs":"medurs")+'</text>'+
   (field?'<text x="470" y="139" font-size="17" fill="'+COIL_COLORS.blue+'">B: '+(ccw?"ut ur":"in i")+' bilden</text>':"")+
-  '<text x="26" y="323" font-size="17" fill="#536d77">Fem täta varv visas · centrumfältet gäller vald modell</text></svg>';
+  '<text x="26" y="323" font-size="17" fill="#536d77">'+n+' varv visas · formeln idealiserar lika varvradier</text></svg>';
 }
 function coilSingleLoop({dir=1,field=false}={}){
  const cx=325,cy=177,rx=39,ry=107;
@@ -52,9 +52,9 @@ function coilSingleLoop({dir=1,field=false}={}){
  const top=dir>0?"⊙":"⊗",bot=dir>0?"⊗":"⊙";
  return '<svg viewBox="0 0 650 350" role="img" aria-label="Ett helt cirkulärt strömvarv från sidan med fram- och baksida tydligt åtskilda.">'+
   '<rect width="650" height="350" rx="16" fill="#f0f7f8"/>'+
-  '<path d="M325 70C376 70 376 284 325 284" fill="none" stroke="#bb9e92" stroke-width="7" opacity=".62"/>'+
-  '<path d="M325 70C274 70 274 284 325 284" fill="none" stroke="'+COIL_COLORS.copper+'" stroke-width="8"/>'+
-  '<path d="M325 70C274 70 274 284 325 284" fill="none" stroke="'+COIL_COLORS.light+'" stroke-width="2.5"/>'+
+  '<path d="M325 70C274 70 274 284 325 284" fill="none" stroke="#bb9e92" stroke-width="7" opacity=".62"/>'+
+  '<path d="M325 70C376 70 376 284 325 284" fill="none" stroke="'+COIL_COLORS.copper+'" stroke-width="8"/>'+
+  '<path d="M325 70C376 70 376 284 325 284" fill="none" stroke="'+COIL_COLORS.light+'" stroke-width="2.5"/>'+
   '<circle cx="325" cy="70" r="22" fill="white" stroke="'+COIL_COLORS.copper+'" stroke-width="2"/><text x="308" y="80" font-size="35" fill="'+COIL_COLORS.copper+'">'+top+'</text>'+
   '<circle cx="325" cy="284" r="22" fill="white" stroke="'+COIL_COLORS.copper+'" stroke-width="2"/><text x="308" y="294" font-size="35" fill="'+COIL_COLORS.copper+'">'+bot+'</text>'+
   arrow+'<text x="25" y="324" font-size="16" fill="#536d77">Betraktaren står framför bildplanet. Orange: närmaste tråddel.</text></svg>';
