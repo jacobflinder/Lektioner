@@ -161,7 +161,7 @@ function renderSol(){
  $("sol-i-value").textContent=swFmt(I,2)+" A";
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
- $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:5+Math.round((N-100)/65),lengthMeters:L,fieldMilliTesla:mT});
+ $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:12+Math.round((N-100)/42),lengthMeters:L,fieldMilliTesla:mT});
  $("sol-result").innerHTML=solShown?
  calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',
  '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
