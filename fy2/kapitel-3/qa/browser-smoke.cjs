@@ -46,6 +46,8 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
      check(await next.count()===1,label+' missing Next button');
      for(let i=0;i<Math.min(expected,n);i++){
       check(await page.locator('.slide.active').count()===1,label+' active slide '+(i+1));
+      const activeIndex=await page.locator('.slide').evaluateAll(nodes=>nodes.findIndex(el=>el.classList.contains('active')));
+      check(activeIndex===i,label+' navigation stuck: expected slide '+(i+1)+' got '+(activeIndex+1));
       const overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
       if(overflow>36)warnings.push(label+' slide '+(i+1)+' horizontal overflow '+overflow+'px');
       const slideBottom=await page.locator('.slide.active').evaluate(el=>el.getBoundingClientRect().bottom);
