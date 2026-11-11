@@ -49,6 +49,7 @@ function mode(repeat){
  $("repeat-btn").classList.toggle("selected",repeat);
  $("class-btn").setAttribute("aria-pressed",String(!repeat));
  $("repeat-btn").setAttribute("aria-pressed",String(repeat));
+ syncPrediction("sol");syncPrediction("flat");
 }
 $("class-btn").addEventListener("click",()=>mode(false));
 $("repeat-btn").addEventListener("click",()=>mode(true));
@@ -110,6 +111,38 @@ function drawCore(){
 $("core-insert").addEventListener("click",()=>{core=true;drawCore()});
 $("core-remove").addEventListener("click",()=>{core=false;drawCore()});
 $("core-direction").addEventListener("click",()=>{coreDir*=-1;drawCore()});
+
+function syncPrediction(kind){
+ const root=document.querySelector('[data-inquiry="'+kind+'"]');if(!root)return;
+ const active=root.querySelector("button.selected");
+ const feedback=root.querySelector(".inquiry-feedback");
+ if(!active){feedback.textContent="Välj ditt svar och motivera innan du visar beräkningen.";return;}
+ const available=document.body.classList.contains("repeat")||(kind==="sol"?solShown:flatShown);
+ if(!available){
+  feedback.textContent="Ditt svar är markerat. Motivera för en kamrat innan du visar beräkningen.";
+  return;
+ }
+ const correct=active.dataset.choice===root.dataset.correct;
+ feedback.textContent=correct?(kind==="sol"?
+  "Rätt. I en lång luftsolenoid är B ≈ μ₀NI/L. Om N fördubblas vid samma I och L, fördubblas B.":
+  "Rätt. I centrum av en platt luftspole är B ≈ μ₀NI/(2r). Om r fördubblas, halveras B."):
+  (kind==="sol"?
+  "Inte riktigt. I B ≈ μ₀NI/L finns N i täljaren. Ändra bara N och pröva igen.":
+  "Inte riktigt. I B ≈ μ₀NI/(2r) står r i nämnaren. Ändra bara r och pröva igen.");
+ feedback.style.fontWeight=correct?"700":"600";
+}
+document.querySelectorAll("[data-inquiry]").forEach(group=>{
+ group.querySelectorAll("button[data-choice]").forEach(button=>button.addEventListener("click",()=>{
+  group.querySelectorAll("button").forEach(b=>b.classList.remove("selected"));
+  button.classList.add("selected");
+  syncPrediction(group.dataset.inquiry);
+ }));
+});
+function resetPrediction(kind){
+ const group=document.querySelector('[data-inquiry="'+kind+'"]');
+ if(group)group.querySelectorAll("button.selected").forEach(b=>b.classList.remove("selected"));
+ syncPrediction(kind);
+}
 function renderSol(){
  const I=Number($("sol-i").value),N=Number($("sol-n").value),L=Number($("sol-l").value);
  const mT=(mu0*N*I/L)*1e3;
@@ -122,13 +155,14 @@ function renderSol(){
  ". För denna idealiserade luftsolenoid gäller B ∝ NI/L.":
  "Föreslå riktning och storlek innan du visar beräkningen. Håll två reglage stilla när du ändrar det tredje.";
  $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";
+ syncPrediction("sol");
 }
 for(const id of ["sol-i","sol-n","sol-l"])$(id).addEventListener("input",renderSol);
 $("sol-flip").addEventListener("click",()=>{solDir*=-1;solShown=false;renderSol()});
 $("sol-show").addEventListener("click",()=>{solShown=!solShown;renderSol()});
 $("sol-reset").addEventListener("click",()=>{
  $("sol-i").value="0.8";$("sol-n").value="300";$("sol-l").value="0.3";
- solDir=1;solShown=false;renderSol();
+ solDir=1;solShown=false;resetPrediction("sol");renderSol();
 });
 function renderFlat(){
  const I=Number($("flat-i").value),N=Number($("flat-n").value),r=Number($("flat-r").value);
@@ -142,13 +176,14 @@ function renderFlat(){
  ". Ideal modell: N täta varv med samma radie.":
  "Räkna själv innan facit. Ändra N, I eller r och pröva ett samband i taget.";
  $("flat-show").textContent=flatShown?"Dölj beräkning och riktning":"Visa beräkning och riktning";
+ syncPrediction("flat");
 }
 for(const id of ["flat-n","flat-i","flat-r"])$(id).addEventListener("input",renderFlat);
 $("flat-flip").addEventListener("click",()=>{flatDir*=-1;flatShown=false;renderFlat()});
 $("flat-show").addEventListener("click",()=>{flatShown=!flatShown;renderFlat()});
 $("flat-reset").addEventListener("click",()=>{
  $("flat-i").value="0.8";$("flat-n").value="5";$("flat-r").value="4";
- flatDir=1;flatShown=false;renderFlat();
+ flatDir=1;flatShown=false;resetPrediction("flat");renderFlat();
 });
 function applyRefs(){
  const data=[[".read-ref",$("read-setting").value.trim()||"Ej angivna"],[".task-ref",$("task-setting").value.trim()||"Ej angivna"],[".next-ref",$("next-setting").value.trim()||"Ej angivna"]];
