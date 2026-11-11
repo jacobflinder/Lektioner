@@ -31,7 +31,7 @@ function resetCurrent(){
  slides[current].dispatchEvent(new CustomEvent("lesson:reset",{bubbles:false}));
  if(current===1){magnetFlipped=false;compassPoint="top";drawCompass();}
  if(current===3){domainStage=0;drawDomains();}
- if(current===4){$("field-strength").value="0.4";$("flux-area-slider").value="24";fluxShown=false;updateFlux();}
+ if(current===4){$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux();}
  if(current===6){pauseTimer();remaining=timerMinutes*60;timerText();}
  syncCompassReveal();render();
 }
@@ -136,9 +136,9 @@ function updateFlux(){
   c.setAttribute("opacity",Math.min(.98,.38+.41*B/.4));
  });
 }
-for(const id of ["field-strength","flux-area-slider"])$(id).addEventListener("input",()=>{fluxShown=false;updateFlux()});
+for(const id of ["field-strength","flux-area-slider"])$(id).addEventListener("input",()=>{updateFlux()});
 $("flux-show").addEventListener("click",()=>{fluxShown=!fluxShown;updateFlux()});
-$("flux-reset").addEventListener("click",()=>{$("field-strength").value="0.4";$("flux-area-slider").value="24";fluxShown=false;updateFlux()});
+$("flux-reset").addEventListener("click",()=>{fluxShown=false;$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux()});
 function timerText(){
  const t=Math.max(0,Math.ceil(remaining));
  $("timer").textContent=String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0");
