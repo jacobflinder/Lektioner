@@ -43,7 +43,7 @@ for(let x=-3;x<=2;x++){add('line',{x1:X(x),y1:py,x2:X(x),y2:py+ih,class:'gridlin
 for(let y=-8;y<=12;y+=4)add('line',{x1:px,y1:Y(y),x2:px+iw,y2:Y(y),class:'gridline'});
 add('line',{x1:X(0),y1:py,x2:X(0),y2:py+ih,class:'axis'});add('line',{x1:px,y1:Y(0),x2:px+iw,y2:Y(0),class:'axis'});
 add('text',{x:px+iw-4,y:Y(0)-9},'x');add('text',{x:X(0)+9,y:25},'y');let path='';for(let i=0;i<=700;i++){let x=xmin+(xmax-xmin)*i/700;path+=(i?'L':'M')+X(x).toFixed(2)+' '+Y(fn(x)).toFixed(2)+' '}
-add('path',{d:path,clipPath:'url(#multi-clip)',class:'curve'});
+add('path',{d:path,'clip-path':'url(#multi-clip)',class:'curve'});
 for(let x of [-2,1]){add('circle',{cx:X(x),cy:Y(0),r:6.5,class:'mark'});add('text',{x:X(x)+11,y:Y(0)-11},String(x))}
 })();
 </script></body></html>
