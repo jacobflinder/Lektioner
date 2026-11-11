@@ -15,7 +15,8 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
   (f?front:back).push('M'+fmtPt(a)+'L'+fmtPt(b));
  }
  const p0=pt(0),p1=pt(total),B=Math.max(0,Number(fieldMilliTesla)||0);
- const scale=B/(B+1.15); // B-field arrow length has a saturation scale, not metric.
+ const scale0=B/(B+1.15); // Numerically derived field for an air coil.
+ const scale=core?scale0+.34*(1-scale0):scale0; // Qualitative emphasis only; never a numerical iron-core multiplier.
  const blue=COIL_COLORS.blue,inside=[],returnLines=[];
  function arrow(x,y,sign,len,op,sw){
   const u=sign>=0?1:-1,tail=x-u*len/2,head=x+u*len/2;
@@ -66,10 +67,10 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
  '" fill="none" stroke="#b8d1da" stroke-width="2" stroke-dasharray="5 6"/>'+
  '<ellipse cx="'+x0.toFixed(1)+'" cy="'+cy+'" rx="'+depth+'" ry="'+ry+'" stroke="#bbd1d9" fill="none" stroke-width="2"/>'+
  '<ellipse cx="'+x1.toFixed(1)+'" cy="'+cy+'" rx="'+depth+'" ry="'+ry+'" stroke="#bbd1d9" fill="none" stroke-width="2"/>'+
- inside.join('')+
  '<path d="'+back.join('')+'" stroke="'+COIL_COLORS.back+'" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".69"/>'+
  (core?'<rect x="'+x0.toFixed(1)+'" y="'+(cy-25)+'" width="'+span.toFixed(1)+'" height="50" rx="9" fill="'+COIL_COLORS.iron+
- '" stroke="#79909c" stroke-width="1.8" opacity=".91"/>':'')+
+ '" stroke="#79909c" stroke-width="1.8" opacity=".86"/>':'')+
+ inside.join('')+
  vector+
  '<path d="M47 '+(cy+23)+'L'+fmtPt(p0)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="5" fill="none"/>'+
  '<path d="M'+fmtPt(p1)+'L654 '+(cy-25)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="5" fill="none"/>'+
@@ -78,7 +79,7 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
  arrows.join('')+poleLabels+
  (withP?'<circle cx="'+((x0+x1)/2).toFixed(1)+'" cy="'+cy+'" r="5" fill="#133e50"/><text x="'+((x0+x1)/2+10).toFixed(1)+'" y="'+(cy-14)+'" font-size="18">P</text>':'')+
  '<text x="24" y="305" font-size="16" fill="#355d6d">'+(field?'Blå pilar visar B i hela inre volymen; utanför syns returgrenar.':'Förutsäg fältriktningen innan du visar den.')+'</text>'+
- '<text x="24" y="328" font-size="14" fill="#526e78">Längden följer reglaget · radien är överdriven · pilarna är inte linjärt skalenliga</text>'+
+ '<text x="24" y="328" font-size="14" fill="#526e78">'+(core?'Järnkärna: starkare B är kvalitativt visat, ingen bestämd förstärkningsfaktor.':'Längden följer L · radien är överdriven · pilskalan är icke-linjär.')+'</text>'+
  '</svg>';
 }
 function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroTesla=null}={}){
