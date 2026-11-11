@@ -5,7 +5,7 @@ const {$}=window.Fy2Nav,{fmt,compass,components}=window.Fy2Physics;
 const math=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
 const chain=(law,sub,result,note)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+math(law)+'</div></div>'+
- '<div><span class="tag">2 · Insättning</span><div class="math-sm">'+math(sub)+'</div></div>'+
+ '<details class="calc-ins"><summary>2 · Visa insättning med enheter</summary><div class="math-sm">'+math(sub)+'</div></details>'+
  '<div><span class="tag">3 · Resultat och tolkning</span><div class="math-sm">'+math(result)+'</div><p class="small">'+note+'</p></div></div>';
 const val=(x,dp,unit)=>'<mrow><mn>'+fmt(x,dp)+'</mn><mtext> '+unit+'</mtext></mrow>';
 
