@@ -26,15 +26,18 @@ function renderRod(){
  // magnetic force, charge separation and the calculation. The progression
  // control is illustrative, not a clock or a calibrated transient model.
  const h=100+160*(L-.10)/.30,top=194-h/2,bottom=194+h/2;
- const fMag=Math.min(110,53*v*B/(3*.40)),fElectric=fMag*eff;
+ const direction=Math.sign(v)||1;
+ const fMag=Math.min(110,53*Math.abs(v)*B/(3*.40)),fElectric=fMag*eff;
  let symbols="";
  for(let i=0;i<number;i++){
-  symbols+=T(265,top+23+i*19,"+","#bc5742",19);
-  symbols+=T(265,bottom-13-i*19,"−","#0f7992",19);
+  symbols+=T(265,top+23+i*19,v<0?"−":"+","#bc5742",19);
+  symbols+=T(265,bottom-13-i*19,v<0?"+":"−","#0f7992",19);
  }
- if(eff>0)symbols+=A(318,194,318,194-fElectric,"#127a93",3)+T(330,186-fElectric,"Fₑ","#0d7b97",17);
- if(v>0)symbols+=A(231,194,231,194+fMag,"#ba6643",3)+T(180,202+fMag,"Fₘ","#b36543",17);
- $("ind-rod-dynamic").innerHTML=fieldOnRod(false,v>0,L,B,v).replace("</svg>",symbols+"</svg>");
+ if(eff>0)symbols+=A(318,194,318,194-direction*fElectric,"#127a93",3)+T(330,186-direction*fElectric,"Fₑ","#0d7b97",17);
+ if(v!==0)symbols+=A(231,194,231,194+direction*fMag,"#ba6643",3)+T(180,202+direction*fMag,"Fₘ","#b36543",17);
+ let base=fieldOnRod(false,v>0,L,B,Math.abs(v));
+ if(v<0)base=base.replace(/<text[^>]*>v = 0<\/text>/,'').replace('</svg>',A(440,194,350,194,'#218a73')+T(450,190,'v åt vänster','#218a73',18)+'</svg>');
+ $("ind-rod-dynamic").innerHTML=base.replace("</svg>",symbols+"</svg>");
  $("charge-pct").textContent=fmt(p*100,0)+" %";
  $("rod-B-value").textContent=fmt(B,2)+" T";
  $("rod-v-value").textContent=fmt(v,1)+" m/s";
@@ -43,7 +46,7 @@ function renderRod(){
  chain(Uformula,
  '<mi>U</mi><mo>=</mo>'+qty(B,2,'T')+'<mo>·</mo>'+qty(L,2,'m')+'<mo>·</mo>'+qty(v,1,'m/s'),
  unitResult('U',Ueq,3,'V'),
- v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. Övre änden blir positiv. Vid jämvikt gäller |q|E = |q|vB.') :
+ v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. '+(v<0?'Övre änden blir negativ.':'Övre änden blir positiv.')+' Vid jämvikt gäller |q|E = |q|vB.') :
  'Förutsäg först. Det schematiska reglaget visar laddningsseparation, inte en uppmätt tidskurva. Vilket samband gäller i jämvikt?';
  $("rod-show").textContent=rodShown?"Dölj jämviktsresultatet":"Visa jämvikt och spänning";
 }
@@ -52,6 +55,9 @@ for(const id of ["charge-progress","rod-B","rod-v","rod-L"])$(id).oninput=()=>{r
 $("rod-show").onclick=()=>{rodShown=!rodShown;renderRod()};
 $("rod-reset").onclick=resetRod;
 $("ind-rod-dynamic").closest(".slide").addEventListener("lesson:reset",resetRod);
+$("rod-start").onclick=()=>{$("rod-v").value=3;$("charge-progress").value=100;renderRod()};
+$("rod-stop").onclick=()=>{$("rod-v").value=0;$("charge-progress").value=0;renderRod()};
+$("rod-reverse").onclick=()=>{$("rod-v").value=-(Number($("rod-v").value)||3);$("charge-progress").value=100;renderRod()};
 let fluxShown=false;
 function renderAngle(){
  const theta=Number($("flux-theta").value);
@@ -163,4 +169,38 @@ $("transfer-check").onclick=()=>{const v=parseVoltage($("transfer-u").value);$("
 $("transfer-u").oninput=()=>{$("transfer-feedback").textContent='';};
 $("transfer-u").closest('.slide').addEventListener('lesson:reset',()=>{$("transfer-u").value='';$("transfer-feedback").textContent='';});
 document.addEventListener('fy2:mode',()=>{if(!document.body.classList.contains('repeat')){clearPractice();$("transfer-u").value='';$("transfer-feedback").textContent='';}});
+// One shared physical model drives geometry, flux, emf and direction.
+let passGraphs=false,passCurrent=false,passForce=false,passFrame=0,passLast=0,passTime=0;
+function passModel(t){const front=.5*t-.1,back=front-.2,overlap=Math.max(0,Math.min(front,.6)-Math.max(back,0));const edge=[.2,.6,1.4,1.8].some(e=>Math.abs(t-e)<1e-7),enter=t>.2&&t<.6,leave=t>1.4&&t<1.8;return {front,back,phi:.4*.2*overlap,u:edge?null:enter?-.04:leave?.04:0,enter,leave};}
+function renderPass(){const t=Number($('pass-time').value),p=passModel(t),x=v=>170+v*420;let scene='<rect x="170" y="70" width="252" height="170" fill="#e0f0f1"/>';
+for(let a=190;a<422;a+=42)for(let b=95;b<240;b+=45)scene+=T(a,b,'×','#50858e',20);
+scene+='<rect x="'+x(p.back)+'" y="105" width="84" height="84" fill="none" stroke="#b46a45" stroke-width="5"/>';
+scene+=A(x(p.front)-60,265,x(p.front)+5,265,'#218a73')+T(x(p.front)-60,295,'v →','#218a73',18)+T(130,40,'B in i bilden','#254655',20);
+if(passCurrent&&p.u){scene+=p.u<0?A(x(p.back)+75,105,x(p.back)+20,105,'#137c96'):A(x(p.back)+20,105,x(p.back)+75,105,'#137c96');scene+=T(15,330,p.u<0?'Ström moturs · eget fält ut':'Ström medurs · eget fält in','#137c96',19);}
+if(passForce&&p.u)scene+=A(x(p.back)+48,153,x(p.back)-18,153,'#b24d40')+T(20,365,'Magnetisk nettokraft ←','#b24d40',19);
+$('pass-scene').innerHTML=S(scene,690,390,'Sluten slinga passerar ett begränsat homogent magnetfält');$('pass-clock').textContent=fmt(t,2)+' s';
+let lines=[];if(passGraphs)lines.push('Φ = '+fmt(p.phi*1000,1)+' mWb. '+(p.u===null?'Fältkant: jämför U precis före och efter.':'U = '+fmt(p.u,3)+' V.'));
+if(passCurrent)lines.push(p.u===null?'Vid kanten byter strömmen idealiserat värde.':p.u===0?'Ingen induktionsström: flödet ändras inte.':p.enter?'Flödet inåt ökar: ström moturs motverkar ökningen.':'Flödet inåt minskar: ström medurs motverkar minskningen.');
+if(passForce)lines.push(p.u===null?'Nettokraften byter värde vid kanten.':p.u===0?'Ingen magnetisk bromskraft i denna modell.':'Den magnetiska kraften bromsar. Det yttre arbetet omvandlas till värme i slingan.');
+$('pass-feedback').textContent=lines.join(' ')||'Förutsäg flöde, spänning, ström och kraft. Visa ett samband i taget.';
+$('pass-plots').hidden=!passGraphs;
+if(passGraphs){const gx=t=>60+t*245,fy=v=>130-v*5000,uy=v=>290-v*1000;
+let g=T(15,25,'Φ / mWb','#137c96',18)+T(15,205,'U / V','#b24d40',18);
+g+='<path d="M60 130H648 M60 50V145 M60 290H648 M60 235V345" fill="none" stroke="#8aa0aa"/>';
+g+='<polyline points="'+[0,.2,.6,1.4,1.8,2.4].map(a=>gx(a)+','+fy(passModel(a).phi)).join(' ')+'" fill="none" stroke="#137c96" stroke-width="4"/>';
+for(const [a,b,u] of [[0,.2,0],[.2,.6,-.04],[.6,1.4,0],[1.4,1.8,.04],[1.8,2.4,0]])g+='<path d="M'+gx(a)+' '+uy(u)+'H'+gx(b)+'" stroke="#b24d40" stroke-width="4" fill="none"/>';
+for(const a of [0,.2,.6,1,1.4,1.8,2.4])g+=T(gx(a)-10,165,fmt(a,1),'#254655',14)+T(gx(a)-10,365,fmt(a,1),'#254655',14);
+g+=T(12,55,'16','#137c96',15)+T(25,135,'0','#137c96',15)+T(3,255,'+0,04','#b24d40',15)+T(25,295,'0','#b24d40',15)+T(3,335,'−0,04','#b24d40',15)+T(620,190,'t / s','#254655',15)+T(620,390,'t / s','#254655',15);
+g+='<path d="M'+gx(t)+' 45V345" stroke="#254655" stroke-dasharray="5 5"/><circle cx="'+gx(t)+'" cy="'+fy(p.phi)+'" r="6" fill="#137c96"/>';
+if(p.u!==null)g+='<circle cx="'+gx(t)+'" cy="'+uy(p.u)+'" r="6" fill="#b24d40"/>';
+$('pass-plots').innerHTML=S(g,690,410,'Samtidiga grafer: flöde ökar, är konstant och minskar; spänning negativ, noll och positiv.');}
+for(const [id,show,name] of [['pass-graphs',passGraphs,'grafer'],['pass-current',passCurrent,'ström'],['pass-force',passForce,'kraft']])$(id).textContent=(show?'Dölj ':'Visa ')+name;
+}
+function pausePass(){cancelAnimationFrame(passFrame);passFrame=0;$('pass-play').textContent='Spela långsamt';}
+function tickPass(now){if(!$('passage').open||!$('passage').closest('.slide').classList.contains('active')){pausePass();return;}passTime=Math.min(2.4,passTime+Math.min(.1,(now-passLast)/1000)/5);passLast=now;$('pass-time').value=passTime;renderPass();if(passTime>=2.4)pausePass();else passFrame=requestAnimationFrame(tickPass);}
+$('pass-play').onclick=()=>{pausePass();passTime=Number($('pass-time').value);if(passTime>=2.4)passTime=0;passLast=performance.now();$('pass-play').textContent='Spelar …';passFrame=requestAnimationFrame(tickPass)};
+$('pass-pause').onclick=pausePass;$('pass-time').oninput=()=>{pausePass();renderPass()};document.querySelectorAll('[data-pass]').forEach(b=>b.onclick=()=>{pausePass();$('pass-time').value=b.dataset.pass;renderPass()});
+$('pass-graphs').onclick=()=>{passGraphs=!passGraphs;renderPass()};$('pass-current').onclick=()=>{passCurrent=!passCurrent;renderPass()};$('pass-force').onclick=()=>{passForce=!passForce;renderPass()};
+function resetPass(){pausePass();passGraphs=passCurrent=passForce=false;$('pass-time').value=0;renderPass()}
+$('pass-reset').onclick=resetPass;$('passage').closest('.slide').addEventListener('lesson:reset',resetPass);document.addEventListener('fy2:mode',resetPass);renderPass();
 })();
