@@ -1,6 +1,11 @@
 # Kvalitetsgranskning – Ma4, kapitel 4
 Uppdaterad 2026-11-11. Internt arbetsdokument för fortsatt utveckling, **inte en elevsida**.
 
+## Från publicerad lektion till förbättrat lärande
+Detta dokument kontrollerar i första hand matematik och teknik. **Didaktisk kvalitet måste dessutom följas upp med elevernas självständiga lösningar och förklaringar.** Använd [DIDAKTISK_UPPFOLJNING.md](DIDAKTISK_UPPFOLJNING.md) före och efter varje lektion.
+
+Låt eleverna tänka före klicket, behåll avgörande matematik synlig, minska stöd från modellering till eget problem och bevara tillräcklig tid i NOKflex. Frivilliga metodjämförelser ska inte bli ytterligare obligatoriskt nytt innehåll. Utcheckningen ska ge belägg för det som anges som mål, inte bara självskattning.
+
 ## Gemensam kontroll före varje lektion
 1. **Matematik:** lös varje uppgift oberoende av den visade lösningen; kontrollera tecken, faktorer, rötter, rest, multiplicitet och fullständighet. Figurernas koordinater ska komma från rätt matematiska modell.
 2. **Matematisk notation:** alla nödvändiga mellanled ska vara synliga; inga led får antyda ett felaktigt resonemang. Uppställningar ska visuellt följa matematikens regler.
@@ -14,8 +19,8 @@ Uppdaterad 2026-11-11. Internt arbetsdokument för fortsatt utveckling, **inte e
 | Lektion | Interaktivitet | NOKflex | Senaste genomgång |
 |---|---|---|---|
 | Eulers formel | 13 ordinarie bilder, 3 frivilliga. Klickbar enhetscirkel, omvandling, kontroller och målanknuten utcheckning. | 4329–4338 | Källkod och simulerade interaktioner kontrollerade |
-| Andragradsekvationer i komplexa tal | Metodval, kontroller av två komplexa rötter, matematiskt ordnade steg på två genomgångsbilder, separat återkoppling. | 4401–4420 | Källkod, algebra och svarstolkare kontrollerade |
-| Polynomdivision | Liggande stolen i tio lägen, handskriftsstöd och självständig tillämpning. | 4421–4430 | Källkod, uppställningslägen och navigering kontrollerade |
+| Andragradsekvationer i komplexa tal | Polär form som huvudspår, valfri jämförelse med real-/imaginärdel, separat återkoppling. | 4401–4420 | Källkod, algebra, svarstolkare och metodnavigering kontrollerade |
+| Polynomdivision | Liggande stolen i tio lägen, handskriftsstöd och diagnostisk utcheckning med rest 1. | 4421–4430 | Källkod, uppställningslägen, rest och navigering kontrollerade |
 | Faktorsatsen | Klickbart bevis, interaktiv graf, faktorform och begreppskontroll. | 4431–4443 | Källkod, algebra och simulerad navigation kontrollerade |
 | Polynomekvationer av högre grad | Handskriven polynomdivision, konjugatregel och koefficientjämförelse uppdelade på två bilder, multiplicitet. | 4447–4460 | Källkod, algebra och simulerad navigation kontrollerade |
 
