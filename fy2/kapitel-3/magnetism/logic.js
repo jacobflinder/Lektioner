@@ -29,6 +29,10 @@ function resetCurrent(){
  slides[current].querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
  slides[current].querySelectorAll("textarea").forEach(el=>el.value="");
  slides[current].dispatchEvent(new CustomEvent("lesson:reset",{bubbles:false}));
+ if(current===1){magnetFlipped=false;compassPoint="top";drawCompass();}
+ if(current===3){domainStage=0;drawDomains();}
+ if(current===4){$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux();}
+ if(current===6){pauseTimer();remaining=timerMinutes*60;timerText();}
  syncCompassReveal();render();
 }
 $("reset-slide").addEventListener("click",resetCurrent);
