@@ -1,50 +1,139 @@
 (()=>{"use strict";
 const COIL_COLORS={copper:"#bb653e",light:"#ebad74",back:"#b0a0a0",blue:"#076f87",iron:"#9caeb8"};
-function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false}={}){
- const w=700,h=330,x0=134,pitch=392/turns,cy=166,ry=77,depth=24,total=2*Math.PI*turns,dt=Math.PI/34;
+function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,lengthMeters=.30,fieldMilliTesla=1}={}){
+ const w=700,h=345,cy=160,ry=66,depth=17;
+ // The visible axial length is proportional to the user-selected physical length.
+ // Coil radius is deliberately exaggerated for readability, never presented to scale.
+ const L=Math.min(.60,Math.max(.15,Number(lengthMeters)||.30));
+ const span=528*L/.60,x0=(w-span)/2,x1=x0+span;
+ const loops=Math.max(2,Math.min(16,Math.round(turns))),pitch=span/loops;
  const pt=t=>({x:x0+pitch*t/(2*Math.PI)+depth*Math.cos(t),y:cy+ry*Math.sin(t)});
- const front=[],back=[];let last=null,segment="";
- for(let t=0;t<total-1e-7;t+=dt){
+ const fmtPt=p=>p.x.toFixed(2)+' '+p.y.toFixed(2);
+ const front=[],back=[],dt=Math.PI/32,total=loops*2*Math.PI;
+ for(let t=0;t<total-1e-6;t+=dt){
   const a=pt(t),b=pt(Math.min(total,t+dt)),f=Math.cos(t+dt/2)>=0;
-  (f?front:back).push("M"+a.x.toFixed(2)+" "+a.y.toFixed(2)+"L"+b.x.toFixed(2)+" "+b.y.toFixed(2));
+  (f?front:back).push('M'+fmtPt(a)+'L'+fmtPt(b));
  }
- const p0=pt(0),p1=pt(total);
- const arrow=(x,y,sign)=>{const ex=x+sign*88,by=y;return '<path d="M'+x+' '+by+'H'+ex+'" stroke="'+COIL_COLORS.blue+'" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M'+(ex-sign*13)+' '+(by-10)+'L'+ex+' '+by+'L'+(ex-sign*13)+' '+(by+10)+'" stroke="'+COIL_COLORS.blue+'" stroke-width="4" fill="none" stroke-linecap="round"/>';};
- const currentArrows=[1.1,3.1,5.1].map(k=>{const t=k*2*Math.PI+0.25;if(t>total)return "";const p=pt(t),d=0.22,pp=pt(t+dir*d),pp0=pt(t-dir*d),dx=pp.x-pp0.x,dy=pp.y-pp0.y,n=Math.hypot(dx,dy)||1,ux=dx/n,uy=dy/n;const endX=p.x+ux*17,endY=p.y+uy*17;return '<path d="M'+(p.x-ux*16).toFixed(1)+' '+(p.y-uy*16).toFixed(1)+'L'+endX.toFixed(1)+' '+endY.toFixed(1)+'m'+(-ux*10-uy*6).toFixed(1)+' '+(-uy*10+ux*6).toFixed(1)+'l'+(ux*10+uy*6).toFixed(1)+' '+(uy*10-ux*6).toFixed(1)+'l'+(-ux*10+uy*6).toFixed(1)+' '+(-uy*10-ux*6).toFixed(1)+'" stroke="#7c3026" stroke-width="3.5" fill="none" stroke-linejoin="round"/>';}).join("");
- const mainB=field?'<g>'+[142,166,190].map((yy,k)=>arrow(284,yy,dir)).join("")+'<text x="320" y="122" font-size="22" font-weight="750" fill="'+COIL_COLORS.blue+'">B</text><text x="76" y="64" font-size="21" font-weight="800" fill="'+COIL_COLORS.blue+'">'+(dir>0?"S":"N")+'</text><text x="604" y="64" font-size="21" font-weight="800" fill="'+COIL_COLORS.blue+'">'+(dir>0?"N":"S")+'</text></g>':"";
- return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Lindad, sammanhängande koppartråd runt en genomskinlig cylindrisk stomme; baksidans varv är ljusare.">'+
+ const p0=pt(0),p1=pt(total),B=Math.max(0,Number(fieldMilliTesla)||0);
+ const scale=B/(B+1.15); // B-field arrow length has a saturation scale, not metric.
+ const blue=COIL_COLORS.blue,inside=[],returnLines=[];
+ function arrow(x,y,sign,len,op,sw){
+  const u=sign>=0?1:-1,tail=x-u*len/2,head=x+u*len/2;
+  return '<g opacity="'+op.toFixed(3)+'"><path d="M'+tail.toFixed(2)+' '+y.toFixed(2)+'H'+head.toFixed(2)+
+   '" stroke="'+blue+'" stroke-width="'+sw.toFixed(2)+'" stroke-linecap="round"/>'+
+   '<path d="M'+(head-u*5).toFixed(2)+' '+(y-4).toFixed(2)+'L'+head.toFixed(2)+' '+y.toFixed(2)+
+   'L'+(head-u*5).toFixed(2)+' '+(y+4).toFixed(2)+'" fill="none" stroke="'+blue+'" stroke-width="'+sw.toFixed(2)+'"/></g>';
+ }
+ if(field){
+  // Cover the cross-section inside the entire winding, not just two rows.
+  const cols=span<195?2:span<325?3:span<450?4:5,rows=[-.70,-.36,0,.36,.70];
+  const len=9+25*scale,opacity=.35+.58*scale,sw=1.5+2.6*scale;
+  inside.push('<rect x="'+x0.toFixed(1)+'" y="'+(cy-ry*.90).toFixed(1)+'" width="'+span.toFixed(1)+
+   '" height="'+(ry*1.8).toFixed(1)+'" rx="22" fill="'+blue+'" fill-opacity="'+(.035+.115*scale).toFixed(3)+'"/>');
+  for(let j=0;j<cols;j++)for(const y of rows){
+   const x=x0+span*(j+.5)/cols;
+   inside.push(arrow(x,cy+y*ry,dir,len,opacity,sw));
+  }
+  // Return branches belong to a schematic cross-section. They bend around
+  // the ends, while the axial field points uniformly near the middle.
+  for(const yside of [-1,1]){
+   const y=cy+yside*(ry+14),peak=cy+yside*(ry+60);
+   const d='M'+(dir>0?x1:x0).toFixed(1)+' '+y.toFixed(1)+
+    'C'+(dir>0?x1+38:x0-38).toFixed(1)+' '+peak.toFixed(1)+' '+
+    (dir>0?x0-38:x1+38).toFixed(1)+' '+peak.toFixed(1)+' '+
+    (dir>0?x0:x1).toFixed(1)+' '+y.toFixed(1);
+   returnLines.push('<path d="'+d+'" stroke="'+blue+'" stroke-width="2.1" stroke-opacity="'+(.34+.17*scale).toFixed(2)+'" fill="none"/>');
+   returnLines.push(arrow((x0+x1)/2,peak, -dir,13+.45*len,.46+.2*scale,1.8));
+  }
+ }
+ const poleLabels=field?'<text x="'+(x0-15).toFixed(1)+'" y="44" fill="'+blue+'" font-size="23" font-weight="750">'+(dir>0?'S':'N')+
+ '</text><text x="'+(x1+8).toFixed(1)+'" y="44" fill="'+blue+'" font-size="23" font-weight="750">'+(dir>0?'N':'S')+'</text>':'';
+ const arrows=[];
+ for(const k of [.18,.52,.83]){
+  const t=k*total,p=pt(t),q=pt(t+dir*.14),r=pt(t-dir*.14),dx=q.x-r.x,dy=q.y-r.y,den=Math.hypot(dx,dy)||1;
+  const ux=dx/den,uy=dy/den;
+  arrows.push('<path d="M'+(p.x-ux*8).toFixed(1)+' '+(p.y-uy*8).toFixed(1)+
+   'L'+(p.x+ux*11).toFixed(1)+' '+(p.y+uy*11).toFixed(1)+
+   'm'+(-ux*7-uy*4).toFixed(1)+' '+(-uy*7+ux*4).toFixed(1)+
+   'l'+(ux*7+uy*4).toFixed(1)+' '+(uy*7-ux*4).toFixed(1)+'" stroke="#873a2c" stroke-width="3.5" fill="none"/>');
+ }
+ const vector=field?arrow((x0+x1)/2,cy,dir,Math.min(55,15+41*scale),.95,4.8)+
+ '<text x="'+((x0+x1)/2+9).toFixed(1)+'" y="'+(cy-28)+'" fill="'+blue+'" font-size="20" font-weight="800">B</text>':'';
+ return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Lindad solenoid. Spolens ritade längd ändras med L. Fältets utbredning visas över hela spolens inre volym och returkurvor utanför.">'+
  '<rect width="'+w+'" height="'+h+'" rx="15" fill="#f0f7f8"/>'+
- '<path d="M'+(x0-8)+' '+(cy-ry)+'H'+(x0+pitch*turns+20)+'M'+(x0-8)+' '+(cy+ry)+'H'+(x0+pitch*turns+20)+'" stroke="#b8d1da" stroke-width="2.5" fill="none" stroke-dasharray="5 6"/>'+
- '<ellipse cx="'+(x0+10)+'" cy="'+cy+'" rx="25" ry="'+ry+'" stroke="#b8d1da" stroke-width="2" fill="none"/>'+
- '<ellipse cx="'+(x0+pitch*turns+7)+'" cy="'+cy+'" rx="25" ry="'+ry+'" stroke="#b8d1da" stroke-width="2" fill="none"/>'+
- '<path d="'+back.join("")+'" stroke="'+COIL_COLORS.back+'" stroke-width="5" fill="none" stroke-linecap="round" opacity=".66"/>'+
- (core?'<rect x="'+(x0-16)+'" y="'+(cy-33)+'" width="'+(pitch*turns+60)+'" height="66" rx="12" fill="'+COIL_COLORS.iron+'" stroke="#778f9c" stroke-width="2" opacity=".93"/><path d="M'+(x0-12)+' '+(cy-15)+'H'+(x0+pitch*turns+36)+'" stroke="#cfdae0" stroke-width="5" opacity=".8"/>':'')+
- mainB+
- '<path d="M64 '+(cy+20)+'L'+p0.x.toFixed(1)+' '+p0.y.toFixed(1)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="6" fill="none" stroke-linecap="round"/>'+
- '<path d="M'+p1.x.toFixed(1)+' '+p1.y.toFixed(1)+'L630 '+(cy-16)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="6" fill="none" stroke-linecap="round"/>'+
- '<path d="'+front.join("")+'" stroke="'+COIL_COLORS.copper+'" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
- '<path d="'+front.join("")+'" stroke="'+COIL_COLORS.light+'" stroke-width="2.8" fill="none" stroke-linecap="round" opacity=".82"/>'+
- currentArrows+
- (withP?'<circle cx="356" cy="'+cy+'" r="5" fill="#073f52"/><text x="363" y="'+(cy-13)+'" style="font-size:20px;font-weight:800;fill:#163c4b">P</text>':"")+
- '<text x="67" y="306" font-size="16" fill="#486b78">Orange: strömförande koppartråd · ljus: baksida · '+(core?"grå: järnkärna":"luft i spolen")+'</text>'+
+ returnLines.join('')+
+ '<path d="M'+(x0-8).toFixed(1)+' '+(cy-ry)+'H'+(x1+8).toFixed(1)+'M'+(x0-8).toFixed(1)+' '+(cy+ry)+'H'+(x1+8).toFixed(1)+
+ '" fill="none" stroke="#b8d1da" stroke-width="2" stroke-dasharray="5 6"/>'+
+ '<ellipse cx="'+x0.toFixed(1)+'" cy="'+cy+'" rx="'+depth+'" ry="'+ry+'" stroke="#bbd1d9" fill="none" stroke-width="2"/>'+
+ '<ellipse cx="'+x1.toFixed(1)+'" cy="'+cy+'" rx="'+depth+'" ry="'+ry+'" stroke="#bbd1d9" fill="none" stroke-width="2"/>'+
+ inside.join('')+
+ '<path d="'+back.join('')+'" stroke="'+COIL_COLORS.back+'" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".69"/>'+
+ (core?'<rect x="'+x0.toFixed(1)+'" y="'+(cy-25)+'" width="'+span.toFixed(1)+'" height="50" rx="9" fill="'+COIL_COLORS.iron+
+ '" stroke="#79909c" stroke-width="1.8" opacity=".91"/>':'')+
+ vector+
+ '<path d="M47 '+(cy+23)+'L'+fmtPt(p0)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="5" fill="none"/>'+
+ '<path d="M'+fmtPt(p1)+'L654 '+(cy-25)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="5" fill="none"/>'+
+ '<path d="'+front.join('')+'" stroke="'+COIL_COLORS.copper+'" stroke-width="6.6" fill="none" stroke-linecap="round"/>'+
+ '<path d="'+front.join('')+'" stroke="'+COIL_COLORS.light+'" stroke-width="2.1" fill="none" stroke-linecap="round" opacity=".83"/>'+
+ arrows.join('')+poleLabels+
+ (withP?'<circle cx="'+((x0+x1)/2).toFixed(1)+'" cy="'+cy+'" r="5" fill="#133e50"/><text x="'+((x0+x1)/2+10).toFixed(1)+'" y="'+(cy-14)+'" font-size="18">P</text>':'')+
+ '<text x="24" y="305" font-size="16" fill="#355d6d">'+(field?'Blå pilar visar B i hela inre volymen; utanför syns returgrenar.':'Förutsäg fältriktningen innan du visar den.')+'</text>'+
+ '<text x="24" y="328" font-size="14" fill="#526e78">Längden följer reglaget · radien är överdriven · pilarna är inte linjärt skalenliga</text>'+
  '</svg>';
 }
-function coilPlanar({dir=1,field=true,turns=5}={}){
- const cx=323,cy=177,R=119,n=Math.max(1,Math.min(10,Math.round(turns)));let pts=[];
- for(let i=0;i<=1100;i++){const t=i/1100*n*2*Math.PI,r=R-3.5*t/(2*Math.PI);pts.push((i?"L":"M")+(cx-r*Math.cos(t)).toFixed(2)+" "+(cy+r*Math.sin(t)).toFixed(2));}
- const p=pts.join("");
- const ccw=dir===1;const currentArrow=ccw?
-  '<path d="M317 64L294 68L304 48" stroke="#873a2c" stroke-width="5" fill="none" stroke-linejoin="round"/>':
-  '<path d="M317 64L338 69L329 47" stroke="#873a2c" stroke-width="5" fill="none" stroke-linejoin="round"/>';
- const center=field?(dir>0?'<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="white" stroke="'+COIL_COLORS.blue+'" stroke-width="3"/><circle cx="'+cx+'" cy="'+cy+'" r="6" fill="'+COIL_COLORS.blue+'"/>':'<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="white" stroke="'+COIL_COLORS.blue+'" stroke-width="3"/><path d="M311 165L335 189M335 165L311 189" stroke="'+COIL_COLORS.blue+'" stroke-width="5"/>'):'<text x="'+(cx-7)+'" y="'+(cy+10)+'" font-size="37" fill="#164758">?</text>';
- return '<svg viewBox="0 0 650 350" role="img" aria-label="Fem varvs sammanhängande plan kopparspiral sedd längs spolens axel.">'+
-  '<rect width="650" height="350" rx="16" fill="#f0f7f8"/>'+
-  '<path d="'+p+'" stroke="#853c2d" stroke-width="3.2" fill="none" stroke-linecap="round"/>'+
-  '<path d="'+p+'" stroke="'+COIL_COLORS.light+'" stroke-width="1.1" fill="none" stroke-linecap="round"/>'+
-  currentArrow+center+
-  '<text x="471" y="104" font-size="19" font-weight="750" fill="#174857">I: '+(ccw?"moturs":"medurs")+'</text>'+
-  (field?'<text x="470" y="139" font-size="17" fill="'+COIL_COLORS.blue+'">B: '+(ccw?"ut ur":"in i")+' bilden</text>':"")+
-  '<text x="26" y="323" font-size="17" fill="#536d77">'+n+' varv visas · formeln idealiserar lika varvradier</text></svg>';
+function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroTesla=null}={}){
+ const w=650,h=365,cx=264,cy=175,n=Math.max(1,Math.min(10,Math.round(turns)));
+ const rCm=Math.max(2,Math.min(10,Number(radiusCm)||4)),R=14*rCm+4;
+ const spacing=1.9,outer=R+spacing*(n-1)/2,total=n*2*Math.PI,pts=[];
+ for(let i=0;i<=Math.max(250,n*170);i++){
+  const t=i/Math.max(250,n*170)*total,r=outer-spacing*t/(2*Math.PI);
+  const a=dir*t, x=cx+r*Math.cos(a),y=cy-r*Math.sin(a);
+  pts.push((i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2));
+ }
+ const p=pts.join(''),rInner=R-spacing*(n-1)/2,blue=COIL_COLORS.blue;
+ const B=fieldMicroTesla===null?4*Math.PI*1e-7*n*Number(currentA)/(2*(rCm/100))*1e6:Math.max(0,Number(fieldMicroTesla)||0);
+ const strength=B/(B+85),rad=3.3+7.3*strength,sw=1.25+1.6*strength;
+ function mark(x,y,sign,k=1){
+  const rr=rad*k,op=(.48+.48*strength)*k;
+  return '<g opacity="'+op.toFixed(3)+'"><circle cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+rr.toFixed(2)+'" fill="#fff" fill-opacity=".7" stroke="'+blue+'" stroke-width="'+(sw*k).toFixed(2)+'"/>'+
+   (sign>0?'<circle cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+(rr*.30).toFixed(2)+'" fill="'+blue+'"/>':
+    '<path d="M'+(x-rr*.48).toFixed(1)+' '+(y-rr*.48).toFixed(1)+'L'+(x+rr*.48).toFixed(1)+' '+(y+rr*.48).toFixed(1)+
+    'M'+(x+rr*.48).toFixed(1)+' '+(y-rr*.48).toFixed(1)+'L'+(x-rr*.48).toFixed(1)+' '+(y+rr*.48).toFixed(1)+
+    '" fill="none" stroke="'+blue+'" stroke-width="'+(sw*k).toFixed(2)+'"/>')+'</g>';
+ }
+ let fieldMarks='',exterior='';
+ if(field){
+  const disk=Math.max(15,rInner-5),step=Math.max(16,Math.min(31,disk/3.6));
+  fieldMarks='<circle cx="'+cx+'" cy="'+cy+'" r="'+disk.toFixed(1)+'" fill="'+blue+'" fill-opacity="'+(.05+.20*strength).toFixed(3)+'"/>';
+  for(let y=-disk;y<=disk;y+=step)for(let x=-disk;x<=disk;x+=step){
+   if(x*x+y*y>disk*disk*.91)continue;
+   // Direction symbols across the entire interior area, not an assertion
+   // that local field magnitude equals the calculated central value.
+   fieldMarks+=mark(cx+x,cy+y,dir);
+  }
+  for(const t of [.34*Math.PI,.74*Math.PI,1.26*Math.PI,1.66*Math.PI]){
+   const rExt=outer+22,x=cx+rExt*Math.cos(t),y=cy+rExt*Math.sin(t);
+   if(x>17&&x<w-155&&y>20&&y<h-43)exterior+=mark(x,y,-dir,.58);
+  }
+ }
+ const startX=cx+outer,leadX=startX+22,startY=cy;
+ const endR=rInner,endX=cx+endR,endY=cy;
+ return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Platt lindad spole framifrån. Magnetfältets normalkomponent visas över hela öppningen. Tecknet utanför visar returkomponent, inte exakt fältlinjegeometri.">'+
+ '<rect width="'+w+'" height="'+h+'" rx="15" fill="#f0f7f8"/>'+
+ fieldMarks+exterior+
+ '<path d="'+p+'" stroke="#833e31" stroke-width="3.1" fill="none" stroke-linecap="round"/>'+
+ '<path d="'+p+'" stroke="'+COIL_COLORS.light+'" stroke-width="1.2" fill="none" stroke-linecap="round"/>'+
+ '<path d="M'+startX.toFixed(1)+' '+startY+'L'+Math.min(435,leadX).toFixed(1)+' '+(startY-26)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="3" fill="none"/>'+
+ '<path d="M'+endX.toFixed(1)+' '+endY+'L'+(endX+15).toFixed(1)+' '+(endY+18)+'" stroke="'+COIL_COLORS.copper+'" stroke-width="3" fill="none"/>'+
+ '<path d="M'+(cx-14).toFixed(1)+' '+(cy-R-14).toFixed(1)+'l'+(dir>0?'-10 11 5 -16':'10 11 -5 -16')+'" stroke="#873a2c" stroke-width="4" fill="none"/>'+
+ '<text x="447" y="74" font-size="19" font-weight="750" fill="#184957">I: '+(dir>0?'moturs':'medurs')+'</text>'+
+ (field?'<text x="447" y="114" font-size="18" fill="'+blue+'">B i centrum:</text>'+
+ '<text x="447" y="144" font-size="24" font-weight="800" fill="'+blue+'">'+B.toLocaleString('sv-SE',{maximumFractionDigits:1})+' μT</text>'+
+ '<text x="447" y="179" font-size="16" fill="'+blue+'">'+(dir>0?'⊙ ut ur bilden':'⊗ in i bilden')+'</text>':
+ '<text x="446" y="135" font-size="20" fill="#3e6070">Förutsäg B</text>')+
+ '<text x="26" y="334" font-size="16" fill="#355d6d">'+n+' varv · radie '+rCm.toLocaleString('sv-SE',{maximumFractionDigits:1})+' cm · B finns genom hela öppningen</text>'+
+ '<text x="26" y="355" font-size="14" fill="#536f79">Symbolstorlek visar ändrad styrka, ej linjär skala. Formeln gäller centrum, ej hela ytan.</text>'+
+ '</svg>';
 }
 function coilSingleLoop({dir=1,field=false}={}){
  const cx=325,cy=177,rx=39,ry=107;
