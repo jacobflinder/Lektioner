@@ -12,6 +12,9 @@ svg text{font-family:system-ui,sans-serif;fill:#284c5a}svg .bfield{stroke:#08768
 /* Explain calculated values after prediction, not just report numbers. */
 .calc-chain{display:grid;gap:9px;text-align:left;font-weight:500;font-variant-numeric:tabular-nums}
 .calc-chain>div{background:#fff;border:1px solid #cbdfe4;border-radius:9px;padding:9px 12px;min-width:0}
+.calc-chain>details{background:#fff;border:1px solid #cbdfe4;border-radius:9px;padding:9px 12px;min-width:0}
+.calc-chain>details summary{font-size:.85rem;font-weight:680;cursor:pointer;color:#08738c}
+.calc-chain>details[open] .math-sm{padding-top:8px}
 .calc-chain .math-sm{font-size:clamp(1.12rem,1.7vw,1.5rem);overflow-x:auto;line-height:1.65;margin:4px 0}
 .calc-chain math{display:block;max-width:100%}
 .calc-chain .small{margin:6px 0 2px;font-size:.84rem;font-weight:500}
