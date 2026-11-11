@@ -16,7 +16,22 @@ header{display:flex;justify-content:space-between;align-items:center;gap:14px;fl
 textarea{width:100%;min-height:88px;border:1px solid #a8c8d1;padding:12px;border-radius:10px}
 @media(max-width:800px){:root{font-size:17px}.stage{border-radius:0}.grid,.two{grid-template-columns:1fr}.mode-info{border-radius:0}.foot button{padding:9px}.fig svg{max-height:360px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}@media print{header,.crumb,.mode-info,.editor,.foot,.review,.action{display:none!important}.slide{display:block!important;break-after:page}.stage{box-shadow:none;border:0}}
-.switcher{display:flex;gap:8px;flex-wrap:wrap}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:15px}.comparison .panel{margin:0}.comparison svg{width:100%;height:auto;max-height:340px}.state{margin:12px 0;padding:14px;border-radius:9px;background:#f2f8f9;font-weight:650}.hidden-at-first{display:none}.hidden-at-first.shown{display:block}.vocab{color:#52727a;font-size:.9rem}@media(max-width:800px){.comparison{grid-template-columns:1fr}}</style></head>
+.switcher{display:flex;gap:8px;flex-wrap:wrap}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:15px}.comparison .panel{margin:0}.comparison svg{width:100%;height:auto;max-height:340px}.state{margin:12px 0;padding:14px;border-radius:9px;background:#f2f8f9;font-weight:650}.hidden-at-first{display:none}.hidden-at-first.shown{display:block}.vocab{color:#52727a;font-size:.9rem}@media(max-width:800px){.comparison{grid-template-columns:1fr}}
+/* Inquiry panels: each student makes a prediction before revealing the calculated result. */
+.inquiry{margin:18px 0 5px;border-radius:14px;background:#f3f9fa;border:1px solid #c5dfe5;border-left:5px solid #0a7c90;padding:15px 20px}
+.inquiry p{margin:8px 0 12px}
+.inquiry .choice-options{margin:9px 0;gap:10px}
+.inquiry .choice-options button.selected{background:#d8edf1;border:2px solid #087b8f;padding:9px 14px}
+.inquiry-feedback{min-height:30px;font-weight:600}
+#sol-result,#flat-result,#view-caption,#core-explanation{line-height:1.5}
+#solenoid-visual svg,#flat-visual svg,#view-holder svg{max-height:405px;width:100%;height:auto}
+.model-controls{margin:13px 0}.model-controls label{display:block;margin:12px 0 4px;font-size:.86rem;color:#284e5c}
+.model-controls input[type=range]{display:block;width:100%;margin:4px 0 15px;accent-color:#087c91}
+.model-controls .controls{margin-top:14px}
+.fig svg,.comparison svg{overflow:visible}
+@media(max-width:1000px){.comparison .panel{padding:13px}.comparison svg{max-height:245px}}
+@media(max-width:800px){.inquiry{padding:12px}.choice-options button{flex:1 1 160px}.comparison svg{max-height:290px}}
+</style></head>
 <body>
 <header><div class="brand">FYSIK 2 / SPOLAR OCH SOLENOIDER <span>Från strömvarv till elektromagnet · Strömvarv · magnetisk kärna · flödestäthet</span></div><div class="controls"><button id="class-btn" class="selected" aria-pressed="true">Klassrum</button><button id="repeat-btn" aria-pressed="false">Repetition</button><button id="setting-btn">Arbetsbild</button><button id="fullscreen-btn" title="Helskärm för projektor">Helskärm</button></div></header>
 <nav class="crumb" aria-label="Bibliotek"><a href="../../../index.html">Alla kurser</a><span>›</span><a href="../../index.html">Fysik, nivå 2</a><span>›</span><a href="../index.html">Elektromagnetism</a><span>›</span><strong>Spolar och solenoider</strong></nav>
