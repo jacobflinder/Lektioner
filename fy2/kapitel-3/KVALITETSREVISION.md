@@ -31,6 +31,12 @@
 
 > Antalet webbdelar är inte antalet schemalagda lektioner. Exempelvis är induktionsmaterialet omfattande och bör delas pedagogiskt när eleverna behöver tid för prövning, demonstration och bokarbete. Räkneuppgifter/sidhänvisningar ska inte hittas på.
 
+## Akut publiceringsfel upptäckt 2026-11-11
+
+En mobil skärmbild av **Induktion** visade rå HTML, standardtypsnitt och alla 24 sidor staplade i samma dokument. Orsaken i källkoden var att CSS och gemensamma JavaScript-filer låg under `_gemensamt/`. Vid normal GitHub Pages/Jekyll-publicering exkluderas mappar som börjar med understreck. HTML-sidan kunde därför visas, men inte dess formgivning och beteende. Felet gällde potentiellt fem delade lektionsskal.
+
+**Åtgärd:** tre gemensamma filer kopierades till `gemensamt/`, samtliga fem lektioners CSS/JS-referenser uppdaterades och fristående HTML-export i `base.js` pekar nu också på den publicerbara mappen. Källkodskontroll bekräftar att ingen av de fem sidornas länkar längre hänvisar till `_gemensamt/`. Browser-testscriptet kontrollerar nu också Jekyll-uteslutna kataloger, faktiskt tillämpade CSS-regler, att inaktiva bilder är dolda samt misslyckade resursanrop. **Den verkliga publicerade sidan är ännu inte nätverksverifierad i denna granskning.**
+
 ## Rättningar genomförda under revisionen
 
 - **Gemensam regel för undersökningar:** beräknat resultat förblir synligt och uppdateras efter att användaren har visat det första gången. Ett nytt reglagevärde ska inte tvinga fram ett nytt facitklick. Gäller induktionens fem undersökningar, jordfältets två och magnetismens flödesmodell. Återställ går tillbaka till en obesvarad fråga.
