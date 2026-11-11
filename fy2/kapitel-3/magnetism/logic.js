@@ -60,13 +60,11 @@ function drawCompass(){
  $("loop-down").setAttribute("d","M"+startL+" 230 C"+c1+" 365 "+c2+" 365 "+endR+" 230");
  $("loop-inside").setAttribute("d",magnetFlipped?"M201 217H400":"M400 217H201");
  const p=points[compassPoint],dx=(compassPoint==="top"?1:-1)*(magnetFlipped?-1:1);
- $("needle-line").setAttribute("x1",p.x-20*dx);
- $("needle-line").setAttribute("x2",p.x+20*dx);
- $("needle-line").setAttribute("y1",p.y);$("needle-line").setAttribute("y2",p.y);
- $("needle-center").setAttribute("cx",p.x);$("needle-center").setAttribute("cy",p.y);
- $("needle-caption").setAttribute("x",p.x-20);
- $("needle-caption").setAttribute("y",p.y-17);
- $("needle-caption").textContent="N-änden "+(dx>0?"→":"←");
+ $("compass-needle").setAttribute("transform","translate("+p.x+" "+p.y+") rotate("+(dx>0?0:180)+")");
+ $("compass-needle").setAttribute("aria-label","Kompass: röd nordände pekar "+(dx>0?"åt höger":"åt vänster")+", vit sydände åt motsatt håll");
+ $("needle-caption").setAttribute("x",p.x-35);
+ $("needle-caption").setAttribute("y",p.y-37);
+ $("needle-caption").textContent="Röd = N · vit = S";
  document.querySelectorAll("[data-point]").forEach(b=>b.classList.toggle("selected",b.dataset.point===compassPoint));
 }
 document.querySelectorAll("[data-point]").forEach(b=>b.addEventListener("click",()=>{compassPoint=b.dataset.point;drawCompass()}));
