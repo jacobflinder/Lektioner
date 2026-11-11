@@ -92,9 +92,25 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
  }
  const p=pts.join(''),rInner=R-spacing*(n-1)/2,blue=COIL_COLORS.blue;
  const B=fieldMicroTesla===null?4*Math.PI*1e-7*n*Number(currentA)/(2*(rCm/100))*1e6:Math.max(0,Number(fieldMicroTesla)||0);
- const strength=B/(B+85),rad=3.3+7.3*strength,sw=1.25+1.6*strength;
- function mark(x,y,sign,k=1){
-  const rr=rad*k,op=(.48+.48*strength)*k;
+ const strength=B/(B+85);
+ // Off-axis B_z of a single equal-radius circular turn, numerically
+ // integrated from Biot-Savart in a plane 0.15R above the winding.
+ // It is normalized by the field on the axis in that same plane.
+ // The winding has N tightly packed turns, so this illustrates the shape
+ // of B_z; the exact central B is still computed from μ0 N I/(2r).
+ function relativeNormalField(ratio){
+  const z=.15,samples=64;let sum=0;
+  for(let i=0;i<samples;i++){
+   const cosine=Math.cos(2*Math.PI*(i+.5)/samples);
+   const d=1+ratio*ratio+z*z-2*ratio*cosine;
+   sum+=(1-ratio*cosine)/Math.pow(d,1.5);
+  }
+  return sum/samples*Math.pow(1+z*z,1.5);
+ }
+ function mark(x,y,sign,k=1,localRatio=1){
+  const localStrength=(B*Math.abs(localRatio))/(B*Math.abs(localRatio)+85);
+  const rr=(3.3+7.3*localStrength)*k,sw=1.25+1.6*localStrength;
+  const op=(.48+.48*localStrength)*k;
   return '<g opacity="'+op.toFixed(3)+'"><circle cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+rr.toFixed(2)+'" fill="#fff" fill-opacity=".7" stroke="'+blue+'" stroke-width="'+(sw*k).toFixed(2)+'"/>'+
    (sign>0?'<circle cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+(rr*.30).toFixed(2)+'" fill="'+blue+'"/>':
     '<path d="M'+(x-rr*.48).toFixed(1)+' '+(y-rr*.48).toFixed(1)+'L'+(x+rr*.48).toFixed(1)+' '+(y+rr*.48).toFixed(1)+
@@ -109,12 +125,16 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
    if(x*x+y*y>disk*disk*.91||x*x+y*y<step*step*.39)continue;
    // Direction symbols across the entire interior area, not an assertion
    // that local field magnitude equals the calculated central value.
-   fieldMarks+=mark(cx+x,cy+y,dir);
+   const ratio=relativeNormalField(Math.hypot(x,y)/R);
+   fieldMarks+=mark(cx+x,cy+y,dir*Math.sign(ratio||1),1,ratio);
   }
-  fieldMarks+=mark(cx,cy,dir,1.22); // explicit central field vector
+  fieldMarks+=mark(cx,cy,dir,1.22); // central B used in the calculation
   for(const t of [.34*Math.PI,.74*Math.PI,1.26*Math.PI,1.66*Math.PI]){
    const rExt=outer+22,x=cx+rExt*Math.cos(t),y=cy+rExt*Math.sin(t);
-   if(x>17&&x<w-155&&y>20&&y<h-43)exterior+=mark(x,y,-dir,.58);
+   if(x>17&&x<w-155&&y>20&&y<h-43){
+    const ratio=relativeNormalField(rExt/R);
+    exterior+=mark(x,y,dir*Math.sign(ratio||1),.68,ratio);
+   }
   }
  }
  const startX=cx+outer,leadX=startX+22,startY=cy;
@@ -133,7 +153,7 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
  '<text x="447" y="179" font-size="16" fill="'+blue+'">'+(dir>0?'⊙ ut ur bilden':'⊗ in i bilden')+'</text>':
  '<text x="446" y="135" font-size="20" fill="#3e6070">Förutsäg B</text>')+
  '<text x="26" y="334" font-size="16" fill="#355d6d">'+n+' varv · radie '+rCm.toLocaleString('sv-SE',{maximumFractionDigits:1})+' cm · B finns genom hela öppningen</text>'+
- '<text x="26" y="355" font-size="14" fill="#536f79">Symbolstorlek visar ändrad styrka, ej linjär skala. Formeln gäller centrum, ej hela ytan.</text>'+
+ '<text x="26" y="355" font-size="14" fill="#536f79">Symboler: B:s normalkomponent nära lindningen (icke-linjär skala). Formeln gäller centrum.</text>'+
  '</svg>';
 }
 function coilSingleLoop({dir=1,field=false}={}){
