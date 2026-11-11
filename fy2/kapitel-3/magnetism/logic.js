@@ -78,10 +78,14 @@ function drawDomains(){
  $("domain-field").textContent=domainApplied?"Visa fältet borttaget (schematiskt)":"Lägg på yttre fält →";
 }
 $("domain-field").addEventListener("click",()=>{
- if(!domainApplied){domainApplied=true;drawDomains();}
- else{ $("domain-state").textContent="När det yttre fältet tas bort kan en del magnetisering finnas kvar. Använd Återställ för den ursprungliga demonstrationsbilden."; }
+ domainApplied=true;drawDomains();
+ $("domain-field").disabled=true;
+ $("domain-field").textContent="Yttre fält på";
 });
-$("domain-reset").addEventListener("click",()=>{domainApplied=false;drawDomains()});
+$("domain-reset").addEventListener("click",()=>{
+ domainApplied=false;drawDomains();
+ $("domain-field").disabled=false;
+});
 function circle(group,x,y,r=8){
  const ns="http://www.w3.org/2000/svg";
  const c=document.createElementNS(ns,"circle"),p=document.createElementNS(ns,"circle");
