@@ -42,6 +42,7 @@ function grid(root,group,{X,Y,xTicks,yTicks,left,right,top,bottom,font=18}){
  if(X(0)>=left&&X(0)<=right)node(group,'line',{x1:X(0),y1:top,x2:X(0),y2:bottom,stroke:'#708794','stroke-width':1.9});
 }
 const hChoices=[1,.5,.2,.1,.05,.02];
+let showSecantNumbers=false,showJumpNumbers=false;
 function plotCurve(id,fn,{small=false,h=null}={}){
  const root=$(id);root.replaceChildren();
  const w=small?460:680,hg=small?350:430,offset=small?55:72;
@@ -59,7 +60,7 @@ function plotCurve(id,fn,{small=false,h=null}={}){
   node(grp,'line',{x1:X(1),y1:Y(2),x2:X(1+right),y2:Y(2+mr*right),stroke:'#b24b56','stroke-width':3.6,'stroke-linecap':'round'});
   filledDot(grp,X(1-h),Y(fn(1-h)),'#286cb9',5.8);
   filledDot(grp,X(1+h),Y(fn(1+h)),'#b24b56',5.8);
-  text(root,113,33,'V: '+format(ml)+'   H: '+format(mr),{bold:true,fill:'#174e6a',size:20});
+  text(root,113,33,showSecantNumbers?'V: '+format(ml)+'   H: '+format(mr):'Jämför V och H själv',{bold:true,fill:'#174e6a',size:20});
  }else{text(root,111,33,'Undersök x = 1',{bold:true,fill:'#195d72',size:small?16:20})}
  text(root,w-30,hg-11,'x',{anchor:'end',size:small?14:18});
 }
@@ -78,7 +79,7 @@ function plotJump(id,h=null,{small=false}={}){
   node(grp,'line',{x1:X(2),y1:Y(3),x2:X(2+h),y2:Y(3),stroke:'#b24b56','stroke-width':3.6});
   filledDot(grp,X(2-h),Y(1),'#286cb9',6);
   filledDot(grp,X(2+h),Y(3),'#b24b56',6);
-  text(root,110,29,'Från vänster: 2/h = '+format(2/h),{bold:true,size:19,fill:'#286cb9'});
+  text(root,110,29,showJumpNumbers?'Från vänster: 2/h = '+format(2/h):'Beräkna vänsterkvoten',{bold:true,size:19,fill:'#286cb9'});
  }
  text(root,608,427,'x',{anchor:'end',size:19});
 }
@@ -126,6 +127,10 @@ function updateSecants(){
  for(const btn of document.querySelectorAll('[data-h]'))btn.setAttribute('aria-pressed',String(Number(btn.dataset.h)===h));
 }
 $('secant-h').addEventListener('input',updateSecants);
+document.querySelector('[data-reveal="secant-readouts"]').addEventListener('click',()=>{
+ showSecantNumbers=!$('secant-readouts').classList.contains('hidden');
+ updateSecants();
+});
 for(const btn of document.querySelectorAll('[data-h]'))btn.addEventListener('click',()=>{
  const h=Number(btn.dataset.h),index=secantValues.indexOf(h);if(index>=0){$('secant-h').value=String(index);updateSecants()}
 });
@@ -138,7 +143,12 @@ function updateJump(){
  $('jump-left').textContent=format(2/h);
  $('jump-right').textContent='0,00';
 }
-$('jump-h').addEventListener('input',updateJump);updateJump();
+$('jump-h').addEventListener('input',updateJump);
+document.querySelector('[data-reveal="jump-readouts"]').addEventListener('click',()=>{
+ showJumpNumbers=!$('jump-readouts').classList.contains('hidden');
+ updateJump();
+});
+updateJump();
 $('stitch-a').addEventListener('input',updateStitch);
 $('stitch-b').addEventListener('input',updateStitch);
 for(const b of document.querySelectorAll('[data-stitch]'))b.addEventListener('click',()=>{
