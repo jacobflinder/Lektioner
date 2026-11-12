@@ -19,7 +19,21 @@
 <p class="math">|z/i| = √(b² + (−a)²) = √(a² + b²)</p></div><p>Alla tre absolutbelopp är lika. För <span class="math">z = 0</span> blir resultatet fortfarande 0; argumentet är då inte definierat.</p></div>
 </div>
 <div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></section>
-<section id="plot" class="slide" data-teacher="Be eleverna skissa först; visningen är kontroll och inte facit från start."><div class="eyebrow">03 · Undersök på talplanet</div><h2>Välj tal – visa rotationsresultat</h2><div class="two"><div class="plot-box"><svg id="rot-plane" class="plot" viewBox="0 0 680 430" role="img" aria-label="Komplext talplan med skalenliga rotationsvektorer"></svg><div class="plane-buttons"><button data-rot="2,1" aria-pressed="true">2 + i</button><button data-rot="-1,2" aria-pressed="false" class="secondary">−1 + 2i</button><button data-rot="-2,-1" aria-pressed="false" class="secondary">−2 − i</button></div></div><div><div class="task"><strong>Förutsäg före klick</strong>Var hamnar iz respektive z/i? Vilken av pilarna är en 90° rotation medurs?</div><p class="math" id="rot-z">z = 2 + i</p><button id="rot-toggle" class="secondary" aria-pressed="false" type="button">Visa båda rotationerna</button><div id="rot-answers" class="answer hidden"><p class="math" id="rot-iz">iz = −1 + 2i</p><p class="math" id="rot-div">z/i = 1 − 2i</p><p id="rot-length">Alla tre har längden √5.</p></div><p class="muted">Cirkeln anger gemensamt absolutbelopp och bygger på samma skala som koordinaterna.</p></div></div></section>
+<section id="plot" class="slide" data-teacher="Den ursprungliga PDF-figuren visar alla tre vektorer. På webben bygger vi upp samma jämförelse: först bara z, sedan iz, sedan z/i och till sist en cirkel som kontroll av samma absolutbelopp. Låt eleverna förutsäga och rita innan varje klick. Talen i de tre valen har alla längden √5.">
+<div class="eyebrow">03 · Interaktivt talplan · förutsäg → visa</div><h2>Två rotationer – samma längd</h2>
+<div class="two"><div>
+<div class="plot-box"><svg id="rot-plane" class="plot" viewBox="0 0 680 430" role="img" aria-label="Likskaligt komplext talplan där multiplikation och division med i visas i separata steg"></svg></div>
+<div class="plane-buttons"><button type="button" data-rot="2,1" aria-pressed="true">2 + i</button><button type="button" data-rot="-1,2" class="secondary" aria-pressed="false">−1 + 2i</button><button type="button" data-rot="-2,-1" class="secondary" aria-pressed="false">−2 − i</button></div>
+<p class="muted">Alla tre starttalen har samma absolutbelopp √5. Axlarna har samma längdskala. Byter du tal återställs figuren.</p>
+</div>
+<div><p class="math math-big" id="rot-z">z = 2 + i</p>
+<div class="task"><strong>Rita och förutsäg innan nästa klick</strong><p id="rot-question" aria-live="polite">Beräkna iz. Vilken punkt får du om z roteras 90° moturs?</p></div>
+<div class="seq-controls"><button id="rot-back" class="secondary" type="button">← Tillbaka</button><button id="rot-next" type="button">Visa nästa steg →</button><button id="rot-reset" class="secondary" type="button">Börja om</button></div>
+<p class="muted" id="rot-step" aria-live="polite">Steg 0 av 3</p>
+<div id="rot-answers" class="answer hidden">
+<p class="math hidden" id="rot-iz"></p><p class="math hidden" id="rot-div"></p><p class="math hidden" id="rot-length"></p>
+<p id="rot-feedback"></p></div>
+</div></div></section>
 <section id="trap" class="slide" data-teacher="Använd konstruerad missuppfattning, inte 'My Favorite No' – det är inget autentiskt elevsvar. Eleverna skriver konjugat, multiplikation och division med i utan facit och förklarar varför spegling inte är samma transformation som rotation.">
 <div class="eyebrow">04 · Hitta och rätta missuppfattningen</div><h2>Konjugering är inte samma sak som rotation</h2>
 <div class="panel"><strong>Konstruerat påstående</strong><p>”Att konjugera z är samma sak som att multiplicera z med i.”</p></div>
@@ -55,9 +69,61 @@
 <p class="math">|iz| = √(2² + 1²) = √5</p>
 <p class="math">|z/i| = √((−2)² + (−1)²) = √5</p></div>
 <p>Multiplikationen roterar 90° moturs; divisionen 90° medurs. Det är samma längd, bara olika riktningar.</p></div>
-<div class="panel"><strong>Dagens mål</strong><p>Jag kan beräkna och rita både iz och z/i, förklara varför rotationerna går åt olika håll och visa att absolutbeloppet bevaras.</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span class="pill" id="progress"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller insamling av elevsvar.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>(()=>{'use strict';let a=2,b=1,visible=false;
-function fmt(x,y){return x+(y>=0?' + ':' − ')+Math.abs(y)+'i'}
-function render(){const rad=Math.hypot(a,b);Ma4Plane.plot('rot-plane',{minX:-4.5,maxX:4.5,minY:-4.5,maxY:4.5,circles:[{cx:0,cy:0,r:rad,color:'#bad3dc'}],vectors:[{x:a,y:b,label:'z',color:'blue'},...(visible?[{x:-b,y:a,label:'iz',color:'teal'},{x:b,y:-a,label:'z/i',color:'orange',dy:18}]:[])]});
-document.getElementById('rot-z').textContent='z = '+fmt(a,b);document.getElementById('rot-iz').textContent='iz = '+fmt(-b,a);document.getElementById('rot-div').textContent='z/i = '+fmt(b,-a);document.getElementById('rot-length').textContent='Alla tre har absolutbeloppet √'+(a*a+b*b)+'.';document.getElementById('rot-answers').classList.toggle('hidden',!visible);const button=document.getElementById('rot-toggle');button.textContent=visible?'Dölj rotationerna':'Visa båda rotationerna';button.setAttribute('aria-pressed',String(visible));
-document.querySelectorAll('[data-rot]').forEach(el=>{let selected=el.dataset.rot===a+','+b;el.setAttribute('aria-pressed',String(selected));el.classList.toggle('secondary',!selected)})}
-document.getElementById('rot-toggle').onclick=()=>{visible=!visible;render()};document.querySelectorAll('[data-rot]').forEach(el=>el.onclick=()=>{[a,b]=el.dataset.rot.split(',').map(Number);visible=false;render()});render()})();</script></body></html>
+<div class="panel"><strong>Dagens mål</strong><p>Jag kan beräkna och rita både iz och z/i, förklara varför rotationerna går åt olika håll och visa att absolutbeloppet bevaras.</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span class="pill" id="progress"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller insamling av elevsvar.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
+(()=>{'use strict';
+let a=2,b=1,stage=0;
+const svg=document.getElementById('rot-plane'),back=document.getElementById('rot-back'),next=document.getElementById('rot-next');
+function fmt(x,y){
+ const real=x===0?'':String(x);
+ const im=y===0?'':((real&&y>=0)?' + ':real?' − ':y<0?'−':'')+(Math.abs(y)===1?'i':Math.abs(y)+'i');
+ return real+im||'0';
+}
+function add(tag,attrs,content){
+ const item=document.createElementNS('http://www.w3.org/2000/svg',tag);
+ for(const [key,value] of Object.entries(attrs||{}))item.setAttribute(key,String(value));
+ if(content!==undefined)item.textContent=content;
+ svg.append(item);return item;
+}
+function drawRotationArc(graph,angle,direction,radius,caption,color){
+ const start=angle,end=angle+direction*Math.PI/2,r=radius*graph.scale;
+ const point=t=>[graph.X(0)+r*Math.cos(t),graph.Y(0)-r*Math.sin(t)];
+ const p1=point(start),p2=point(end),sweep=direction===1?0:1;
+ add('path',{d:'M '+p1[0]+' '+p1[1]+' A '+r+' '+r+' 0 0 '+sweep+' '+p2[0]+' '+p2[1],fill:'none',stroke:color,'stroke-width':2.8});
+ const mid=angle+direction*Math.PI/4,labelPoint=point(mid);
+ add('text',{x:labelPoint[0]+(direction===1?6:9),y:labelPoint[1]+(direction===1?-8:18),fill:color,'font-size':16,'font-weight':750},caption);
+}
+function render(){
+ const rotPlus={x:-b,y:a},rotMinus={x:b,y:-a},rad=Math.hypot(a,b),theta=Math.atan2(b,a);
+ const vectors=[{x:a,y:b,label:'z',color:'blue',dx:12,dy:-11}];
+ if(stage>=1)vectors.push({...rotPlus,label:'iz',color:'teal',dx:12,dy:-10});
+ if(stage>=2)vectors.push({...rotMinus,label:'z/i',color:'orange',dx:12,dy:18});
+ const graph=Ma4Plane.plot(svg,{minX:-4.5,maxX:4.5,minY:-4.5,maxY:4.5,alt:'Komplext talplan. z=('+a+','+b+'). Steg '+stage+' av 3. '+(stage===0?'Endast z visas.':stage===1?'Rotationen +90° och iz visas.':stage===2?'Både iz och z/i visas med +90° respektive −90°.':'Alla tre vektorerna ligger på en cirkel med centrum i origo och radie √5.'),vectors,circles:stage>=3?[{cx:0,cy:0,r:rad,color:'#91aebb',dashed:true}]:[]});
+ if(stage>=1)drawRotationArc(graph,theta,1,.9,'+90°','#087d70');
+ if(stage>=2)drawRotationArc(graph,theta,-1,1.25,'−90°','#ad5336');
+ document.getElementById('rot-z').textContent='z = '+fmt(a,b);
+ const prompts=[
+ 'Beräkna iz. Var hamnar vektorn när z roteras 90° moturs?',
+ 'Kan du nu förutsäga z/i? Rita rotationen 90° medurs innan du visar.',
+ 'Varför bör z, iz och z/i ha samma längd? Beräkna den med Pythagoras.',
+ 'Vad är det som ändras vid multiplikation och division med i – och vad bevaras?'
+ ];
+ document.getElementById('rot-question').textContent=prompts[stage];
+ document.getElementById('rot-step').textContent='Steg '+stage+' av 3';
+ back.disabled=stage===0;next.disabled=stage===3;
+ const answers=document.getElementById('rot-answers');answers.classList.toggle('hidden',stage===0);
+ document.getElementById('rot-iz').textContent='iz = '+fmt(-b,a);
+ document.getElementById('rot-div').textContent='z/i = '+fmt(b,-a);
+ document.getElementById('rot-length').textContent='|z| = |iz| = |z/i| = √( '+(a*a)+' + '+(b*b)+' ) = √'+(a*a+b*b);
+ document.getElementById('rot-iz').classList.toggle('hidden',stage<1);
+ document.getElementById('rot-div').classList.toggle('hidden',stage<2);
+ document.getElementById('rot-length').classList.toggle('hidden',stage<3);
+ document.getElementById('rot-feedback').textContent=stage===1?'Multiplikation med i roterar 90° moturs.':stage===2?'Division med i roterar 90° medurs.':stage===3?'Cirkeln visar att alla tre ligger lika långt från origo.':'';
+ document.querySelectorAll('[data-rot]').forEach(button=>{const active=button.dataset.rot===a+','+b;button.setAttribute('aria-pressed',String(active));button.classList.toggle('secondary',!active)});
+}
+next.addEventListener('click',()=>{stage=Math.min(3,stage+1);render()});
+back.addEventListener('click',()=>{stage=Math.max(0,stage-1);render()});
+document.getElementById('rot-reset').addEventListener('click',()=>{stage=0;render()});
+document.querySelectorAll('[data-rot]').forEach(button=>button.addEventListener('click',()=>{[a,b]=button.dataset.rot.split(',').map(Number);stage=0;render()}));
+render();
+})();
+</script></body></html>
