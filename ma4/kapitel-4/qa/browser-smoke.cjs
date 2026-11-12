@@ -69,7 +69,65 @@ async function active(page){
       await page.selectOption('#jump','8');
       assert.deepEqual(problems,[],'Andragrad: fel innan valbar aktivitet');
       await page.locator('#quadraticError').click();
-      assert.equal(await (await active(page)).getAttribute('id'),'quadratic-optional-error','Andragrad: felanalys går att nå; aktiv text='+JSON.stringify((await (await active(page)).innerText()).slice(0,220))+'; slide-id-lista='+JSON.stringify(await page.locator('.slide').evaluateAll(els=>els.map((el,i)=>({i,id:el.id,active:el.classList.contains('active')})))));
+
+      assert.equal(await (await active(page)).getAttribute('id'),'quadratic-optional-error','Andragrad: frivillig felanalys går att nå');
+      // Pedagogisk integritet: den första prognosen får INTE innehålla facit.
+      await page.selectOption('#jump','4');
+      assert.ok(await page.locator('#r5a').isHidden()&&await page.locator('#r5b').isHidden(),'Andragrad: stödtrappan dold');
+      await page.locator('button[data-reveal="r5a"]').click();
+      assert.ok(await page.locator('#r5a').isVisible(),'Andragrad: stödtrappans första nivå fungerar');
+      assert.ok(!(await page.locator('#r5a').innerText()).includes('2 + 2i'),'Andragrad: ledtråd avslöjar inte roten');
+      // Geometriska lösningen kommer först efter elevens klick.
+      await page.selectOption('#jump','5');
+      assert.ok(await page.locator('#rootA').isHidden()&&await page.locator('#rootB').isHidden(),'Andragrad: rotpunkter dolda före prognos');
+      assert.ok(!(await page.locator('#quadratic-plane').getAttribute('aria-label')).includes('2 + 2i'),'Andragrad: ingen svarsläcka för skärmläsare');
+      await page.locator('#squareReveal').click();
+      assert.ok(await page.locator('#rootA').isVisible()&&await page.locator('#rootB').isVisible(),'Andragrad: rotpunkter syns efter prognos');
+      assert.ok(await page.locator('#squareText').isVisible(),'Andragrad: geometriskt svar syns på begäran');
+      await page.locator('#squareReset').click();
+      assert.ok(await page.locator('#rootA').isHidden()&&await page.locator('#squareText').isHidden(),'Andragrad: återställning fungerar');
+      // En ny självständig uppgift och orsaksspecifik återkoppling.
+      await page.selectOption('#jump','6');
+      const polarField=page.locator('#polar-input');
+      assert.ok(!(await polarField.getAttribute('placeholder')).includes('4-4i'),'Andragrad: ingen facitläcka i svarsfält');
+      const polarCheck=page.locator('[data-check="polar"]');
+      const full=polarCheck.locator('button').last();
+      assert.ok(await full.isDisabled(),'Andragrad: full lösning låst före elevens försök');
+      await polarField.fill('4-4i;4+4i');
+      await polarCheck.locator('[data-check-action="check"]').click();
+      assert.ok((await polarCheck.locator('.sc-feedback').innerText()).includes('konjugatet'),'Andragrad: fel relation identifieras specifikt');
+      await polarField.fill('4+4i;-4-4i');
+      await polarCheck.locator('[data-check-action="check"]').click();
+      assert.ok((await polarCheck.locator('.sc-feedback').innerText()).includes('fel tecken'),'Andragrad: felaktig argumentriktning ger orsaksspecifik feedback');
+      await polarField.fill('4-4i;-4+4i');
+      assert.ok(await full.isDisabled(),'Andragrad: ändrat svar måste kontrolleras igen');
+      await polarCheck.locator('[data-check-action="check"]').click();
+      assert.ok((await polarCheck.locator('.sc-feedback').innerText()).includes('Rätt'),'Andragrad: korrekt svar accepteras');
+      assert.ok(await full.isEnabled(),'Andragrad: full lösning blir tillgänglig efter kontrollerat försök');
+      await full.click();
+      assert.ok(await polarCheck.locator('.sc-answer').isVisible(),'Andragrad: eleven kan se full lösning efter försök');
+      // Diagnos av komplexa koefficienter.
+      await page.selectOption('#jump','2');
+      const variant=page.locator('[data-check="variant"]'),variantInput=page.locator('#variant-input');
+      assert.ok(await page.locator('button[data-reveal="r3b"]').isDisabled(),'Andragrad: variantfacit låst');
+      await variantInput.fill('5i;-i');
+      await variant.locator('[data-check-action="check"]').click();
+      assert.ok((await variant.locator('.sc-feedback').innerText()).includes('Rätt'),'Andragrad: komplexkoefficient-varianten accepteras');
+      assert.ok(await page.locator('button[data-reveal="r3b"]').isEnabled(),'Andragrad: facit kan öppnas efter giltigt försök');
+      // Begrepp: motsatt och konjugat kan gälla samtidigt.
+      await page.selectOption('#jump','10');
+      await page.locator('[data-quiz="q11b"] button[data-correct="false"]').first().click();
+      assert.ok((await page.locator('[data-quiz="q11b"] .feedback').innerText()).includes('motsatta'),'Andragrad: förklarar begreppsfel');
+      await page.locator('[data-quiz="q11b"] button[data-correct="true"]').click();
+      assert.ok((await page.locator('[data-quiz="q11b"] .feedback').innerText()).includes('både'),'Andragrad: rätt relation återkopplas');
+      // Ett helt nytt exit-test, inga tidigare lösningssvar före elevförsök.
+      await page.selectOption('#jump','13');
+      const exitText=await (await active(page)).innerText();
+      assert.ok(exitText.includes('z² − 2iz + 8 = 0')&&exitText.includes('z² = 18i'),'Andragrad: nya exit-ekvationer');
+      assert.ok(!exitText.includes('z² = −8i'),'Andragrad: tidigare övning återanvänds inte');
+      assert.ok(await page.locator('#r13a').isHidden()&&await page.locator('#r13b').isHidden(),'Andragrad: exitfacit dolt');
+      assert.ok(!exitText.includes('Till läraren'),'Andragrad: läraranteckningar visas inte för eleverna');
+
     }
     if(slug==='hogre-grad'){
       await page.selectOption('#jump','4');
