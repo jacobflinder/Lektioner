@@ -53,14 +53,8 @@ function drawGraph(id,rightBound,labels=true){
   el(grid,'circle',{cx:X(x),cy:Y(f(x)),r:x===rightBound?8.5:7,fill:color,stroke:'#fff','stroke-width':2.5});
   if(labels){
    const label=fmt(f(x),1);
-   const shift=x===-2?37:x===0?29:x===3?-11:-15;
-   el(svg,'text',{x:X(x)+9,y:Y(f(x))+shift,'font-size':18,fill:color,'font-weight':'800'},label);
+   el(svg,'text',{x:X(x)+9,y:Y(f(x))-14,'font-size':18,fill:color,'font-weight':'800'},label);
   }
- }
- if(labels&&!seen.some(x=>Math.abs(x-rightBound)<1e-8)){
-  el(svg,'text',{x:X(rightBound)+9,y:Y(f(rightBound))-15,'font-size':18,'font-weight':'800',fill:'#b24a58'},fmt(f(rightBound),1));
- }else if(labels&&rightBound!==3){
-  el(svg,'text',{x:X(rightBound)+7,y:Y(f(rightBound))-16,'font-size':18,'font-weight':'800',fill:'#b24a58'},fmt(f(rightBound),1));
  }
  el(svg,'text',{x:plotX0+8,y:34,fill:'#225e70','font-size':20,'font-weight':'700'},'f(x) = x³ − 4,5x² + 5');
 }
