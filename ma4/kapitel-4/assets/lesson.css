@@ -39,3 +39,15 @@ main{max-width:1200px;padding:0 16px;margin:18px auto}.stage{background:#fff;bor
 .math-chain{display:grid;gap:4px;background:#f8fbfe;padding:10px 12px;border-radius:8px}
 .math-chain .math{margin:2px 0;overflow-wrap:anywhere}
 @media(max-width:720px){.fraction{font-size:.85em}.math-chain .math{font-size:1.17rem}}
+
+/* Aktiva begreppsbeslut: ett matematiskt val krävs före återkoppling. */
+.decision-check{margin:12px 0}
+.decision-check .decision-options{display:grid;gap:6px;margin:10px 0}
+.decision-check .choice{margin:0;background:#e4eef4;color:#173a54;line-height:1.32;min-height:44px}
+.decision-check .choice.selected{outline:3px solid #0d698e;outline-offset:0;background:#d9eaf2}
+.decision-check .choice.correct{background:#d1f0e0}
+.decision-check .choice.wrong{background:#f9ded9}
+.decision-check [data-decision-submit]{margin-top:4px}
+.decision-check .feedback{margin:12px 0 0;padding:10px 12px;border-radius:8px;background:#fff}
+.decision-check .feedback.ok{border-left:4px solid #087d70}
+.decision-check .feedback.no{border-left:4px solid #bd5d3a}
