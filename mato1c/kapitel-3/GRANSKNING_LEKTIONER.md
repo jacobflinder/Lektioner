@@ -69,3 +69,32 @@
 - Statiskt kontrollerat: inga duplicerade id, alla JavaScript-mål och återkopplingsmål finns, läroboksspår och läxa finns, ingen insamling eller lagring av elevsvar.
 - **Webbläsartest:** `qa/extrempunkter-browser.cjs` testar dynamiska grafer, alla tre funktioner, klassrum/repetition, lärarstöd, exempelsteg, fel och rätt svar, referens till boken, dold utcheckning och 390 px mobilbredd. GitHub Actions kör detta tillsammans med befintligt test för lektion 1.
 - **Återstående verklighetskontroll:** visuell kontroll på klassrummets projektor och faktisk klassrumsuppföljning av elevers självständiga resonemang. Ingen lärandeeffekt kan påstås utifrån testkörningar.
+
+
+## Lektion 3 · Andraderivatan
+
+**Originalunderlag:** PDF `Andraderivatan`, sex sidor, läroboken s. 149. Lektionsadress `/mato1c/kapitel-3/andraderivatan/`. Bedömd och skapad 2026-11-12.
+
+### Källtrohet
+- Samtliga centrala originalmoment bevaras: start med `x²` och `2x`, målet efter starten, kedjan `f, f′, f″`, derivatorna av polynom och exponentialfunktion, uppgiften `h=x³−6x²`, facit, läroboksarbete, läxa och den individuella utcheckningsfrågan.
+- Bok, s. 149: nivå 1+2 `3125, 3126–3127, 3130–3131`; nivå 2+3 `3130–3131, 3132, 3133`; mer träning `3128–3129`. **3130–3131 står i båda originalspåren, vilket bibehålls.** Minst två av tre nivåer.
+- Ingen Socrative införs eftersom den inte fanns i originalet.
+
+### Oberoende matematisk kontroll
+- `(x²)′=2x`, `(2x)′=2`, `(x²)″=2`, `(2x)″=0`. Båda funktionerna växer på det illustrerade intervallet `0≤x≤2,5` men tangentens lutning ökar endast för `x²`.
+- `(x³−5x²+3x)′=3x²−10x+3`; `f″(x)=6x−10`.
+- `(4e^(2x))′=8e^(2x)`; `g″(x)=16e^(2x)`. Den inre derivatan 2 multipliceras in vid vardera deriveringen.
+- `h(x)=x³−6x²`: `h′=3x²−12x`, `h″=6x−12`, `h″(0)=−12`, `h″(x)=0` ger `x=2`. Samtidigt är `h′(2)=−12`; alltså är `h″=0` inte detsamma som horisontell tangent.
+- Utcheckningsfrågan besvaras med `f(x)=x²` vid `x=−1`: `f′(−1)=−2<0` men `f″(−1)=2>0`.
+- Numeriska centrala differenskvoter för de egna grafmodellerna och testuppgiften överensstämmer med analytiska derivator inom rimlig tolerans.
+
+### Teknisk och didaktisk kontroll
+- 8 slides, samma kurslokala navigations- och visningsmotor som lektion 1 och 2. Inga gemensamma Ma4- eller fysikfiler ändrade.
+- Den synkroniserade interaktionen använder funktionens uttryck och analytiska derivata för både tangent och återkopplingsvärde.
+- Två oberoende sekvenser med tre matematiska steg vardera, som kan öppnas, backas och återställas; fråga före varje avslöjande.
+- Eget försök med lokal svarskontroll och specifika felmeddelanden; fullständigt facit visas först efter eget försök. Originalets utcheckningsfråga är kvar och har ett extra verifierbart exempel.
+- Statisk kontroll: unika element-id, befintliga JS-element- och facitmål, korrekta läroboksnummer, inga nätverksanrop eller lagringsfunktioner i lektionens egen interaktionskod.
+- **Godkänt automatiskt webbläsartest:** GitHub Actions `Ma1c web lesson browser quality checks`, körning [43236076352](https://github.com/jacobflinder/Lektioner/actions/runs/43236076352), prövar samtliga tre befintliga lektioner i Chromium. Lektion 3 kontrolleras för navigation, visningslägen, grafer och faktiska tangentvärden, fel/rätt i quiz, två sekvenser, lokal kontroll, läroboksspår, dold utcheckning, mobilbredd 390 px och inga JavaScript-fel. Fem skärmbilder produceras i Actions-artifakten.
+- **Godkänd Pages-publicering:** [43236076218](https://github.com/jacobflinder/Lektioner/actions/runs/43236076218) för commit `16ea776cd202ba29857959827d283f0ba7114cf7`. Testet ovan laddar siten från en lokal HTTP-server i Chromium; GitHub Pages-körningen visar att publiceringen har lyckats, men är inte samma sak som ett manuellt webbläsartest på den publika adressen.
+
+**Återstår:** visuell kontroll på lärarens faktiska projektor och klassrumsobservationer av elevers självständiga lösningar. Lektionen betecknas inte som perfekt och ingen specifik effekt på lärandet har ännu verifierats.
