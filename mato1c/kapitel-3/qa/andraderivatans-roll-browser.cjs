@@ -1,0 +1,116 @@
+/* Ma1c L4 real browser QA: Chromium, existing classroom shell and novel math. */
+const {chromium}=require('playwright');
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const root='http://127.0.0.1:8123',url=root+'/mato1c/kapitel-3/andraderivatans-roll-for-grafen/';
+const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+ let checks=0;const errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ async function ok(condition,message){assert.ok(condition,message);checks++}
+ async function go(n){await page.selectOption('#jump',String(n-1));await ok(await page.locator('.slide.active').count()===1,'Precis en aktiv slide i steg '+n)}
+ try{
+  await page.goto(root+'/mato1c/kapitel-3/',{waitUntil:'networkidle'});
+  await ok(await page.locator('a[href="andraderivatans-roll-for-grafen/"]').count()===1,'Kapitelindex länkar L4');
+  await page.goto(url,{waitUntil:'networkidle'});
+  await ok(await page.locator('.slide').count()===12,'Tolv didaktiska avsnitt');
+  await ok(await page.locator('#start').isVisible(),'Startfrågan visas först');
+  await ok(!await page.locator('#start-answer').isVisible(),'Facit på start döljs');
+  await page.screenshot({path:out+'/lesson4-start-desktop.png',fullPage:true});
+  await page.locator('#mode').click();
+  await ok(await page.locator('body.classroom').count()===1,'Klassrumsläge');
+  await page.locator('#teacher-toggle').click();
+  await ok(await page.locator('.teacher.open').isVisible(),'Lärarstöd går att visa');
+  await page.locator('#mode').click();
+  await ok(await page.locator('body.classroom').count()===0,'Repetitionsläge');
+  await page.locator('[data-reveal="start-answer"]').click();
+  await ok(await page.locator('#start-answer').isVisible(),'Startfacit visas efter elevförsök');
+  await go(3);
+  await ok(await page.locator('#compare-f path').count()>0&&await page.locator('#compare-g path').count()>0,'Två grafer ritade');
+  await ok((await page.locator('#compare-f-readout').innerText()).includes('−3,00'),'x² vid −1,5 ger lutning −3');
+  await ok((await page.locator('#compare-g-readout').innerText()).includes('3,00'),'−x² vid −1,5 ger lutning +3');
+  await page.locator('#compare-reset').click();
+  await ok((await page.locator('#compare-f-readout').innerText()).includes('0,00'),'x² vid 0 har horisontell tangent');
+  await ok((await page.locator('#compare-g-readout').innerText()).includes('0,00'),'−x² vid 0 har horisontell tangent');
+  await page.locator('#compare-x').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  await ok((await page.locator('#compare-f-readout').innerText()).includes('3,00'),'x² vid 1,5 ger lutning +3');
+  await ok((await page.locator('#compare-g-readout').innerText()).includes('−3,00'),'−x² vid 1,5 ger lutning −3');
+  await page.locator('#compare [data-correct="false"]').first().click();
+  await ok((await page.locator('#compare .feedback').innerText()).includes('Jämför'),'Matematisk återkoppling vid fel val');
+  await page.locator('#compare [data-correct="true"]').click();
+  await ok((await page.locator('#compare .feedback').innerText()).includes('Rätt'),'Rätt grafslutsats bekräftas');
+  await page.screenshot({path:out+'/lesson4-comparison-desktop.png',fullPage:true});
+  await go(4);
+  await page.locator('#criterion [data-correct="true"]').click();
+  await ok((await page.locator('#criterion .feedback').innerText()).includes('maximum'),'Andraderivatatest med negativ f″ ger maximum');
+  await go(5);
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===0,'Inga lösningssteg visade på förhand');
+  const sequence=page.locator('#example [data-sequence]');
+  await ok((await sequence.locator('[data-seq-prompt]').innerText()).length>10,'Sekvens har matematisk prediktionsfråga');
+  for(let i=0;i<5;i++)await sequence.locator('[data-seq-next]').click();
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===5,'Fem genomarbetade steg visas');
+  const solution=await page.locator('#example .steps').innerText();
+  await ok(solution.includes('(−1, 4)')&&solution.includes('(1, 0)'),'Maximi- och minimipunkter korrekta');
+  await sequence.locator('[data-seq-reset]').click();
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===0,'Sekvensen återställs');
+  await go(6);
+  await page.locator('#own-x').fill('2');
+  await page.selectOption('#own-kind','max');
+  await page.locator('#own-y').fill('3');
+  await page.locator('#own-check').click();
+  await ok((await page.locator('#own-feedback').innerText()).includes('h″(x)=2'),'Felkategori max får specifik återkoppling');
+  await page.selectOption('#own-kind','min');
+  await page.locator('#own-y').fill('0');
+  await page.locator('#own-check').click();
+  await ok((await page.locator('#own-feedback').innerText()).includes('h(2)'),'Felhöjd får hänvisning till ursprungsfunktionen');
+  await page.locator('#own-y').fill('3');
+  await page.locator('#own-check').click();
+  await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Korrekt minimum (2,3)');
+  await go(7);
+  await ok(await page.locator('#zero-p path').count()>0&&await page.locator('#zero-q path').count()>0,'Kubik/quartikplottar finns');
+  await page.locator('#zero-test [data-correct="true"]').click();
+  await ok((await page.locator('#zero-test .feedback').innerText()).includes('minimum'),'f″=0 fall avgörs av f′-tecken');
+  await go(8);
+  await ok((await page.locator('#inflect-slope').innerText()).includes('3,75'),'f′(−1,5)=3,75');
+  await ok((await page.locator('#inflect-second').innerText()).includes('−9,00'),'f″(−1,5)=−9');
+  await page.locator('#inflect-zero').click();
+  await ok((await page.locator('#inflect-y').innerText()).includes('2,00'),'Inflexionshöjd f(0)=2');
+  await ok((await page.locator('#inflect-slope').innerText()).includes('−3,00'),'Inflexionstangenten är inte horisontell');
+  await ok((await page.locator('#inflect-second').innerText()).includes('0,00'),'f″(0)=0');
+  await page.locator('#inflect-x').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  await ok((await page.locator('#inflect-second').innerText()).includes('9,00'),'f″(1,5)=9');
+  await page.screenshot({path:out+'/lesson4-inflection-desktop.png',fullPage:true});
+  await go(9);
+  await ok(await page.locator('#inflect-algebra [data-seq-item]:visible').count()===0,'Inflexionshärledning dold');
+  for(let i=0;i<4;i++)await page.locator('#inflect-algebra [data-seq-next]').click();
+  await ok(await page.locator('#inflect-algebra [data-seq-item]:visible').count()===4,'Fyra härledningssteg');
+  await page.locator('#inflect-algebra [data-correct="true"]').click();
+  await ok((await page.locator('#inflect-algebra .feedback').innerText()).includes('12x²'),'Kvartikmotexempel korrekt');
+  await go(10);
+  const book=await page.locator('#book').innerText();
+  for(const item of ['s. 152','3136–3138','3139','3140','3141','3142','3143','minst två']){
+   await ok(book.includes(item),'Lärobok innehåller '+item);
+  }
+  await go(11);
+  await page.locator('#control [data-quiz]').nth(0).locator('[data-correct="true"]').click();
+  await page.locator('#control [data-quiz]').nth(1).locator('[data-correct="true"]').click();
+  await page.locator('#control [data-quiz]').nth(2).locator('[data-correct="true"]').click();
+  await ok(await page.locator('#control .feedback.ok').count()===3,'Tre fristående kunskapskontroller');
+  await go(12);
+  await ok(!await page.locator('#exit-answer').isVisible(),'Utcheckningens facit dolt');
+  await ok((await page.locator('#exit').innerText()).includes('3138 och 3141 a–b'),'Exakta läxuppgifter');
+  await page.locator('[data-reveal="exit-answer"]').click();
+  const final=await page.locator('#exit-answer').innerText();
+  await ok(final.includes('(3, 5)')&&final.includes('r″(x)=−2'),'Utcheckningens maximum och koordinater korrekta');
+  await page.screenshot({path:out+'/lesson4-exit-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  for(let n=1;n<=12;n++){await go(n);await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobil utan sidöverspill steg '+n)}
+  await go(8);await page.screenshot({path:out+'/lesson4-mobile-inflection.png',fullPage:true});
+  await go(10);await page.screenshot({path:out+'/lesson4-mobile-book.png',fullPage:true});
+  await ok(errors.length===0,'Inga ohanterade JavaScript-fel');
+  console.log(JSON.stringify({result:'PASS',checks,errors,screenshots:6},null,2));
+ }catch(e){console.error('Ma1c L4 browser QA failed:',e.stack||e);await page.screenshot({path:out+'/lesson4-FAIL.png',fullPage:true}).catch(()=>{});process.exitCode=1}
+ finally{await browser.close()}
+})();
