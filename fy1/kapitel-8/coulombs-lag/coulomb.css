@@ -1,0 +1,57 @@
+/* Lokal designputsning för 8.1. Påverkar inga andra webblektioner. */
+.stage{background:#fff}
+.body-copy{line-height:1.48}
+.body-copy .question{font-size:1.07em}
+.lesson-figure{margin:0 0 14px;min-width:0}
+.lesson-figure svg{width:100%;height:auto;display:block;overflow:visible;background:#fbfeff;border:1px solid #d6e5eb;border-radius:12px;padding:8px}
+.lesson-figure figcaption{font-size:.78rem;color:#53717d;line-height:1.4;margin-top:6px}
+.lesson-figure .step{margin-top:12px}
+.body-copy .lesson-figure{margin:10px 0}
+.body-copy .step{margin:10px 0 13px;padding:13px 16px}
+.body-copy .step p:first-child{margin-top:0}
+.body-copy .step p:last-child{margin-bottom:0}
+.body-copy .step .lesson-figure{margin-top:9px}
+.tight{padding-left:1.2em;margin-top:8px}
+.tight li{margin:6px 0}
+.goals-min{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:12px}
+.goals-min strong{width:100%}
+.goals-min span{display:inline-block;background:#e4f2f5;border:1px solid #c8e2e7;color:#245b6b;border-radius:7px;padding:5px 9px;font-size:.84rem}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini-card{background:#eff6f7;border:1px solid #d6e6e8;border-radius:12px;padding:13px}
+.mini-card h2{font-size:1.1rem;margin:0 0 6px}
+.mini-card p{margin:8px 0}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.work-grid .socrative,.work-grid .bookbox{margin:0;padding:19px}
+.work-grid strong{font-size:1.18em}
+.work-grid p{margin:10px 0}
+.mini-label{color:#167b8c;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem;font-weight:800;margin-bottom:7px}
+.exit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.exit-grid>div{padding:16px;background:#eff7f9;border:1px solid #d8e8ec;border-radius:11px}
+.exit-grid h2{margin:0 0 7px}
+.exit-grid p{margin:0}
+.endbook{margin-top:17px;display:grid;grid-template-columns:1.7fr 1fr;gap:12px;background:#e9f5ee;padding:15px 17px;border-radius:10px}
+.endbook p{font-size:.92rem;margin:6px 0}
+.coulomb-visual svg{width:100%;height:auto;display:block;max-width:680px;margin:0 auto}
+.coulomb-visual{background:#f8fcfd;border:1px solid #d3e6e9;border-radius:10px;min-width:0}
+.model-root .model-controls{margin-top:15px}
+.model-root .model-help{font-size:.82rem;line-height:1.45;color:#476c77;margin:9px 0}
+.coulomb-result{display:flex;flex-direction:column;gap:5px;min-height:75px;font-size:.94rem;font-weight:450}
+.coulomb-result strong{color:#1c604f}
+.coulomb-result b{color:#235769}
+.model-result span{display:block}
+.mathrow{overflow-x:auto;max-width:100%}
+.mathrow math{font-size:clamp(.9em,1.5vw,1em)}
+.answer{border-top:1px solid #c3e1d0;padding-top:6px}
+@media(max-width:1100px){.task-grid,.work-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.exit-grid,.endbook{grid-template-columns:1fr}.task-grid{grid-template-columns:1fr}.page-title{font-size:clamp(1.7rem,5vw,2.2rem)}.body-copy{font-size:1rem}.lesson-figure svg{padding:3px}.stage{padding:17px}.socrative code{overflow-wrap:anywhere}}
+@media print{.lesson-figure svg{max-width:100%}.step{display:block!important}}
+
+/* Fråga, förutsägelse och återkoppling ligger intill respektive figur. */
+#bild-1 .body-copy .quiz,#bild-3 .body-copy .quiz{margin:16px 0 0;padding:13px}
+#bild-3 .body-copy .quiz b{font-size:.92rem}
+#bild-3 .model-controls{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#bild-3 .model-controls .control label{display:block;font-size:.72rem}
+#bild-3 .model-controls .control label b{display:block;font-size:.78rem}
+#bild-3 .coulomb-visual svg{max-height:265px}
+#bild-3 .model-root .model-result{font-size:.87rem}
+@media(max-width:575px){#bild-3 .model-controls{grid-template-columns:1fr}}
