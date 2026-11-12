@@ -49,3 +49,10 @@ Webbens tre nya frågemoment är tydligt skilda från originalets Socrative. Ing
 ## Viktig avgränsning
 
 Detta avser **källgranskning, kodgranskning, lokala Chromium-tester och visuell skärmbildskontroll**. Det är inte en fullständig kontroll av faktiskt publicerad GitHub Pages-URL i Safari, iPad, projektor, skärmläsare eller klassrum. Vetenskaplig grund avser undervisningsprinciperna, inte ett bevis för att just denna webbdesign förbättrat lärandet.
+
+
+## Uppföljning 2026-11-12 – självtest med pappersberäkning
+- Självtestet är ändrat från numerisk inmatning till **beräkning på papper**, tre frivilligt avslöjade lösningssteg och **begreppsfråga med specifik förklarande återkoppling**.
+- Uppgift 1 har ett första steg och uppgift 2 saknar förhandsstöd. Ingen ny Socrative och inga ändrade bokuppgifter eller demonstrationer.
+- Fysikkontroll: 9,0 V över 1,0+2,0 Ω ger 3,0 A. V_C = +6,0 V om A = 0 V; referensbyte till C = 0 V ger V_B = +3,0 V men oförändrat U_BC.
+- Separat lokal interaktionsprototyp med motsvarande två uppgifter granskades i Chromium (300 kontroller sammanlagt för båda lektionerna), vid 320, 390, 768, 1280 och 1440 px. Detta verifierar **inte** live-publicerad Pages, Safari eller faktiskt elevlärande.

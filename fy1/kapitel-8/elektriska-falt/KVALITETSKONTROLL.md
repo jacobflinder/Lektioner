@@ -43,3 +43,10 @@
 - Publicerade GitHub Pages-resurser som webbplats (verifieras separat efter commit, om möjligt).
 
 **Status:** Källkod reviderad och lokalt testad; inte klassrumsverifierad.
+
+
+## Uppföljning 2026-11-12 – självtest med pappersberäkning
+- Självtestet är ändrat från numerisk inmatning till **beräkning på papper**, tre frivilligt avslöjade lösningssteg och **begreppsfråga med specifik förklarande återkoppling**.
+- Uppgift 1 har ett första steg och uppgift 2 saknar förhandsstöd. Ingen ny Socrative och inga ändrade bokuppgifter eller demonstrationer.
+- Fysikkontroll: F = (−4,0 nC)(+3,0 kN/C) = −12 µN. Vid samma U och halverat d fördubblas |E|, |F| och a; energiändringen för en elektron över hela spänningen är fortsatt eU.
+- Separat lokal interaktionsprototyp med motsvarande två uppgifter granskades i Chromium (300 kontroller sammanlagt för båda lektionerna), vid 320, 390, 768, 1280 och 1440 px. Detta verifierar **inte** live-publicerad Pages, Safari eller faktiskt elevlärande.

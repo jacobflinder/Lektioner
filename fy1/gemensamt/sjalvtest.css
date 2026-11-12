@@ -24,7 +24,7 @@
 .fy1-traning-footer{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
 @media(max-width:575px){.fy1-traning-dialog{width:calc(100vw - 12px);max-height:94dvh;padding:12px}.fy1-task{padding:11px}.fy1-answer-row input{width:100%;max-width:none}.fy1-answer-row button{flex:1}}
 @media print{.fy1-traning-dialog,.fy1-traning-open{display:none!important}}
-/* 8.1–8.4: penna och papper först; webbens val kontrollerar enbart resonemang. */
+/* 8.1–8.6: penna och papper först; webbens val kontrollerar enbart resonemang. */
 .fy1-paper-instruction{font-size:.87rem;color:#476572}.fy1-paper-step,.fy1-paper-done,.fy1-paper-check{margin:7px 0;font-size:.86rem;padding:8px 12px}
 .fy1-paper-steps{padding-left:1.4em;margin:8px 0}
 .fy1-paper-steps li{margin:7px 0;background:#e5f3eb;border-left:3px solid #488b70;border-radius:7px;padding:9px;font-size:.9rem;line-height:1.5}
