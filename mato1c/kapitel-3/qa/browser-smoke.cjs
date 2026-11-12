@@ -45,6 +45,9 @@ fs.mkdirSync(out,{recursive:true});
 
    await go(3);
    await check(await page.locator('#tangent-graph path').count()>0,'Grafens kurva har ritats');
+   await check(!await page.locator('#tangent-info').isVisible(),'Numeriskt svar dolt före elevens förutsägelse');
+   await page.locator('[data-reveal="tangent-info"]').click();
+   await check(await page.locator('#tangent-info').isVisible(),'Eleven/läraren kan visa värden efter förutsägelsen');
    await check((await page.locator('#value-y').innerText()).includes('0,50'),'f(0) visas rätt');
    await check((await page.locator('#value-slope').innerText()).includes('−1,50'),'f′(0) visas rätt');
    await page.locator('#tangent-x').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
