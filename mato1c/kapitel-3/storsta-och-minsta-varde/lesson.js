@@ -86,7 +86,7 @@ $('range-check').addEventListener('click',()=>{
  const r=Number($('right-bound').value),points=candidates(r),max=Math.max(...points.map(v=>v.y)),min=Math.min(...points.map(v=>v.y));
  const whereMax=points.filter(p=>Math.abs(p.y-max)<1e-8),whereMin=points.filter(p=>Math.abs(p.y-min)<1e-8);
  const out=$('range-feedback');out.className='feedback ok';
- out.textContent='Största värdet är '+fmt(max)+' vid '+formatLocations(whereMax)+'. Minsta värdet är '+fmt(min)+' vid '+formatLocations(whereMin)+'. Kandidaterna är: '+points.map(p=>'x='+fmt(p.x,1)).join(', ')+'.';
+ out.textContent='Största värdet är '+fmt(max)+' vid '+formatLocations(whereMax)+'. Minsta värdet är '+fmt(min)+' vid '+formatLocations(whereMin)+'. Kandidaterna är: '+points.map(p=>'x='+fmt(p.x,Math.abs(p.x-Math.round(p.x))<1e-9?0:2)).join('; ')+'.';
 });
 updateRange();
 
