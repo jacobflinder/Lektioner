@@ -5,9 +5,9 @@
 const $=id=>document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
 const models={
- a:{f:x=>x*x,d:x=>2*x,title:'x²',type:'min',signs:'− 0 +',description:'minimipunkt',why:'För x² är f′(−1) = −2 < 0 och f′(1) = 2 > 0. Grafen går från att sjunka till att stiga.'},
- b:{f:x=>-x*x,d:x=>-2*x,title:'−x²',type:'max',signs:'+ 0 −',description:'maximipunkt',why:'För −x² är g′(−1) = 2 > 0 och g′(1) = −2 < 0. Grafen går från att stiga till att sjunka.'},
- c:{f:x=>x*x*x,d:x=>3*x*x,title:'x³',type:'terrass',signs:'+ 0 +',description:'terrasspunkt',why:'För x³ är h′(−1) = 3 > 0 och h′(1) = 3 > 0. Grafen fortsätter att stiga trots en horisontell tangent i origo.'}
+ a:{name:'f',f:x=>x*x,d:x=>2*x,title:'x²',type:'min',signs:'− 0 +',description:'minimipunkt',why:'För x² är f′(−1) = −2 < 0 och f′(1) = 2 > 0. Grafen går från att sjunka till att stiga.'},
+ b:{name:'g',f:x=>-x*x,d:x=>-2*x,title:'−x²',type:'max',signs:'+ 0 −',description:'maximipunkt',why:'För −x² är g′(−1) = 2 > 0 och g′(1) = −2 < 0. Grafen går från att stiga till att sjunka.'},
+ c:{name:'h',f:x=>x*x*x,d:x=>3*x*x,title:'x³',type:'terrass',signs:'+ 0 +',description:'terrasspunkt',why:'För x³ är h′(−1) = 3 > 0 och h′(1) = 3 > 0. Grafen fortsätter att stiga trots en horisontell tangent i origo.'}
 };
 const fmt=(v,n=2)=>(Math.abs(v)<1e-9?0:v).toFixed(n).replace('.',',').replace(/-/g,'−');
 function el(parent,tag,attrs={},value){
@@ -50,7 +50,7 @@ function plot(svg,model,{interactive=false,at=null}={}){
  el(svg,'text',{x:X(0)+7,y:23,fill:'#395a6d','font-size':interactive?16:13},'y');
  if(interactive){
   for(const x of [-1,0,1])el(svg,'text',{x:X(x),y:Y(0)+20,'text-anchor':'middle',fill:'#526f7f','font-size':14},String(x).replace('-','−'));
-  el(svg,'text',{x:w-margin-10,y:30,'text-anchor':'end','font-size':19,'font-weight':750,fill:'#0c7e75'},'f(x) = '+model.title);
+  el(svg,'text',{x:w-margin-10,y:30,'text-anchor':'end','font-size':19,'font-weight':750,fill:'#0c7e75'},model.name+'(x) = '+model.title);
  }
 }
 plot($('graph-a'),models.a);plot($('graph-b'),models.b);plot($('graph-c'),models.c);
@@ -69,8 +69,8 @@ const render=()=>{
  const slopeLabel=slope>1e-8?'positiv: grafen stiger här':slope<-1e-8?'negativ: grafen sjunker här':'noll: tangenten är horisontell';
  $('graph-x-out').textContent=fmt(x);
  $('graph-readout').replaceChildren();
- const p=document.createElement('strong');p.textContent='f′('+fmt(x)+') = '+fmt(slope);
- const desc=document.createElement('p');desc.textContent='Lutningen är '+slopeLabel+'. Funktionsvärdet är '+fmt(model.f(x))+'.';
+ const p=document.createElement('strong');p.textContent=model.name+'′('+fmt(x)+') = '+fmt(slope);
+ const desc=document.createElement('p');desc.textContent='Lutningen är '+slopeLabel+'. '+model.name+'('+fmt(x)+') = '+fmt(model.f(x))+'.';
  $('graph-readout').append(p,desc);
 };
 for(const b of document.querySelectorAll('[data-model]'))b.addEventListener('click',()=>choose(b.dataset.model));
