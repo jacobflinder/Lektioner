@@ -102,27 +102,27 @@
 
 ## Lektion 4 · Andraderivatan och funktionens graf
 
-**Original:** \`261110 Andraderivatan och funktionens graf Na25.pdf\` (18 sidor, 2026-11-10). **Adress:** \`/mato1c/kapitel-3/andraderivatans-roll-for-grafen/\`. Webbversionen omfattar 12 avsnitt; originalets animationsgrupper är sammanförda till två undersökningsmodeller.
+**Original:** `261110 Andraderivatan och funktionens graf Na25.pdf` (18 sidor, 2026-11-10). **Adress:** `/mato1c/kapitel-3/andraderivatans-roll-for-grafen/`. Webbversionen omfattar 12 avsnitt; originalets animationsgrupper är sammanförda till två undersökningsmodeller.
 
 ### Källtrohet
-- Bevarade matematikfall: \`x²\` / \`−x²\` (krökning och lokala extrempunkter), \`x³−3x+2\` (maximipunkt, minimipunkt och separat inflexion), \`x²−4x+7\` (eget försök), \`x³\` mot \`x⁴\` (andraderivatatestet ger inget besked), samt avslutande \`r(x)=−x²+6x−4\`.
+- Bevarade matematikfall: `x²` / `−x²` (krökning och lokala extrempunkter), `x³−3x+2` (maximipunkt, minimipunkt och separat inflexion), `x²−4x+7` (eget försök), `x³` mot `x⁴` (andraderivatatestet ger inget besked), samt avslutande `r(x)=−x²+6x−4`.
 - Läroboken s.152: nivå 1 3136–3138, fortsättning 3139; nivå 2 3140–3141; nivå 3 3142–3143. Minst två av tre nivåer. Originalets stödspår och 20 min tyst arbete kvar.
-- Originalets särskilda läxa \`3138\` och \`3141 a–b\` med motivering via derivator, **inte** en generell ”gör klart valda uppgifter”-läxa.
+- Originalets särskilda läxa `3138` och `3141 a–b` med motivering via derivator, **inte** en generell ”gör klart valda uppgifter”-läxa.
 - Samtliga tre korta originalkontroller och individuella utcheckningsfrågor finns kvar. Ingen Socrative lades till.
 
 ### Oberoende matematisk kontroll
-- \`f=x²\`: \`f′=2x\`, \`f″=2>0\`, stationär \`x=0\` är minimum. \`g=−x²\`: \`g′=−2x\`, \`g″=−2<0\`, stationär \`x=0\` är maximum. Vid \`x=−1,5\` är lutningarna \`−3\` respektive \`+3\`; vid \`x=+1,5\` \`+3\` respektive \`−3\`.
-- Andraderivatatestet kräver en stationär punkt \`f′(a)=0\`. \`f″(a)=0\` ger **inget** klassificerande besked från testet. Det räcker inte att enbart f″ är positiv/negativ utan att f′(a)=0 har kontrollerats.
-- \`f=x³−3x+2\`: \`f′=3x²−3\`, stationära \`x=±1\`, \`f″=6x\`, \`f″(−1)=−6\`, \`f″(1)=6\`; max \`(−1,4)\` och min \`(1,0)\`.
-- \`h=x²−4x+7\`: \`h′=2x−4\`, \`h″=2\`, minimum \`x=2\`, \`h(2)=3\` ⇒ minimipunkt \`(2,3)\`. \`h′(2)=0\` är inte höjden.
-- \`p=x³\`: \`p′=3x²\` positiv före/efter 0, terrasspunkt \`(0,0)\`. \`q=x⁴\`: \`q′=4x³\` negativ före 0 och positiv efter, minimipunkt \`(0,0)\`. Båda har \`f′(0)=f″(0)=0\`.
-- Inflexion för \`x³−3x+2\`: \`f″=6x\` byter från negativ till positiv vid 0; \`f(0)=2\`; \`f′(0)=−3\`. Alltså inflexionspunkt \`(0,2)\` med *icke-horisontell* tangent. \`q=x⁴\`: \`q″=12x²\` byter inte tecken vid 0, alltså ingen inflexion där.
-- Utcheckning: \`r′=−2x+6=0\` ger x=3; \`r″=−2<0\` ⇒ lokalt maximum; \`r(3)=−9+18−4=5\` ⇒ \`(3,5)\`.
+- `f=x²`: `f′=2x`, `f″=2>0`, stationär `x=0` är minimum. `g=−x²`: `g′=−2x`, `g″=−2<0`, stationär `x=0` är maximum. Vid `x=−1,5` är lutningarna `−3` respektive `+3`; vid `x=+1,5` `+3` respektive `−3`.
+- Andraderivatatestet kräver en stationär punkt `f′(a)=0`. `f″(a)=0` ger **inget** klassificerande besked från testet. Det räcker inte att enbart f″ är positiv/negativ utan att f′(a)=0 har kontrollerats.
+- `f=x³−3x+2`: `f′=3x²−3`, stationära `x=±1`, `f″=6x`, `f″(−1)=−6`, `f″(1)=6`; max `(−1,4)` och min `(1,0)`.
+- `h=x²−4x+7`: `h′=2x−4`, `h″=2`, minimum `x=2`, `h(2)=3` ⇒ minimipunkt `(2,3)`. `h′(2)=0` är inte höjden.
+- `p=x³`: `p′=3x²` positiv före/efter 0, terrasspunkt `(0,0)`. `q=x⁴`: `q′=4x³` negativ före 0 och positiv efter, minimipunkt `(0,0)`. Båda har `f′(0)=f″(0)=0`.
+- Inflexion för `x³−3x+2`: `f″=6x` byter från negativ till positiv vid 0; `f(0)=2`; `f′(0)=−3`. Alltså inflexionspunkt `(0,2)` med *icke-horisontell* tangent. `q=x⁴`: `q″=12x²` byter inte tecken vid 0, alltså ingen inflexion där.
+- Utcheckning: `r′=−2x+6=0` ger x=3; `r″=−2<0` ⇒ lokalt maximum; `r(3)=−9+18−4=5` ⇒ `(3,5)`.
 
 ### Didaktik och teknik
 - Fråga och eget matematiskt beslut före facit; lektionens två interaktiva grafer visar tangentlutning från exakt analytisk derivata. Inflexionsmodellen färgmarkerar f″ negativ/positiv och visar att f′(0) inte är noll.
 - Två exempel med minskat stöd, ett separat motexempel när testet misslyckas, längre bokpass och individuell utcheckning utan modell.
-- Inga nya ändringar i Ma4, Fy1 eller Fy2. Gemensamma resurser i Ma1c återanvänds. Testskriptet är \`qa/andraderivatans-roll-browser.cjs\` och körs tillsammans med de tre föregående lektionernas Chromium-kontroller.
+- Inga nya ändringar i Ma4, Fy1 eller Fy2. Gemensamma resurser i Ma1c återanvänds. Testskriptet är `qa/andraderivatans-roll-browser.cjs` och körs tillsammans med de tre föregående lektionernas Chromium-kontroller.
 - Statiskt verifierat: 12 avsnitt, samtliga JavaScript-mål och återkopplingsmål finns, inga dubbla HTML-ID och inga nätverks-/lagringsanrop i lektionens egen JavaScript-kod.
 - Första browserkörningen upptäckte att s.152 bara fanns som avsnittsetikett, inte uttryckligen i bokarbetets huvudtext; detta korrigerades och testet kördes om. Ingen ändring gjordes i originalets uppgiftsnummer.
 - [Automatiska webbläsartester](https://github.com/jacobflinder/Lektioner/actions/workflows/mato1c-browser-qa.yml) prövar klassrumsläge, lärarstöd, båda matematiska reglagen, rätt och fel feedback, exempelsteg, bok, utcheckning och samtliga 12 vyer i mobilbredd 390px. GitHub Pages hanterar själva publiceringen.
