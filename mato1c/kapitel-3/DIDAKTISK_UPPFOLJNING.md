@@ -133,3 +133,28 @@ Blir elevernas förklaringar bättre på att särskilja `f′` från `f″` och 
 
 ### Utvärdera i klassrummet (anonymt)
 Kan eleverna vid samma x förklara skillnaden mellan f, f′ och f″, istället för att enbart läsa av tre färgade kurvor? Är de självständigt förmögna att skissa två funktioner med samma derivata och motivera varför konstanten inte syns i derivatan? Kan de skilja inflexion från terrass när f′ inte är noll? Använd klassens lösningar och erfarenheter, inte sidans mängd interaktioner, för att avgöra om designen ska ändras.
+
+
+## Lektion 6 · Största och minsta värde (kapitel 3.1)
+
+**Källa:** `Ma3c_Storsta_och_minsta_varde.pdf`, 8 sidor. **Huvudmål:** bestämma största och minsta funktionsvärde för ett polynom på ett slutet intervall med derivata, och ange vid vilket/vilka x värdena antas.
+
+### Originalinnehåll som måste bestå
+- Start `g(x)=x²`, `−1≤x≤2`: g(−1)=1, g(0)=0, g(2)=4. Minsta värde 0 vid 0, största värde 4 vid 2. Eleven skiljer **värdet** från **x-värdet där det antas**. Tänk själv → jämför i par.
+- Metoden i originalets sida 2: hitta derivatans nollställen inom intervallet, **ta med båda ändpunkterna**, beräkna alla funktionsvärden och jämför. Lokal extrempunkt är inte automatiskt det globala största/minsta värdet.
+- Intervallanimationen sida 3–4: `f(x)=x³−4,5x²+5`, först `−2≤x≤3` med största 5 vid x=0 och minsta −21 vid x=−2, sedan ändras **endast högra gränsen** till 5 utan att grafens form eller axlarnas skala ändras. Webben låter läraren flytta högra gränsen mellan 3 och 5 med reglage och fråga före återkoppling.
+- Genomarbetat **exempel 3156, s.159**: `f′(x)=3x(x−3)`, kandidater −2,0,3,5, värden −21,5,−8,5,17,5. Största 17,5 vid x=5, minsta −21 vid x=−2.
+- Elevens eget exempel `h(x)=−x²+4x` på `0≤x≤5`: `h′=−2x+4`, kandidater 0,2,5, värden 0,4,−5. Största 4 vid x=2, minsta −5 vid x=5. Förklara varför x=0 ändå ska testas.
+- Lärobok **s.159–160**: nivå 1 `3157–3163`; nivå 2 `3164–3166`; nivå 3 `3167–3168`. **Minst två av tre nivåer**. Föreslagen start `3158,3161,3164`, för vana elever `3164–3166` sedan `3167–3168`. Ungefär 20 min lugnt eget bokarbete i sammanhängande pass.
+- Läxa: **`3161 a` och `3164 a–b`** färdiga till nästa lektion. Extra: **`3168`** med motivering.
+- Individuell utcheckning på `p(x)=x³−3x`, `0≤x≤3`; `p′=3x²−3`, x=±1 men **−1 är otillåtet**. Jämför x=0,1,3 med värden 0,−2,18. Största 18 vid x=3, minsta −2 vid x=1. Originalets sista återkopplingssida används efter elevens arbete, inte som startfacit.
+- Ingen Socrative finns i originalet, och ingen har lagts till.
+
+### Två avgränsade didaktiska förbättringar
+1. Den planerade animationen ersätts av en **klickstyrd graf med flyttbar högra intervallgräns**. Funktionen och axelskalorna hålls konstanta; utanför intervallet är kurvan streckad. Eleven förutsäger först hur största/minsta värdet kommer att ändras och måste aktivt be om återkoppling efter förflyttningen.
+2. Egen uppgift får **lokal, stegvis diagnostisk kontroll** av både största/minsta värdet och x där det antas. Responsen tar först upp det matematiska missförstånd som framgår av svaret (t.ex. glömd ändpunkt), utan att ersätta elevens motiverade lösning.
+
+Ett verkligt matematiskt specialfall synliggörs: vid högra gränsen b=4,5 har grafen samma största värde **5** på två olika platser, x=0 och x=4,5. Detta framgår av `f(4,5)=5` och leder till en fördjupad diskussion om hur man svarar när ett största värde antas på flera ställen.
+
+### Följ upp i verklig undervisning
+Titta anonymt på utcheckningen: vilka elever glömmer en ändpunkt, vilka förväxlar största värdet med x-koordinaten, och vilka sorterar bort −1 när intervallet är [0,3]? Observera om det flyttbara intervallet ger *motiverade* förutsägelser och självständiga lösningar, inte bara fler klick. Dokumentera en justering inför nästa gång.
