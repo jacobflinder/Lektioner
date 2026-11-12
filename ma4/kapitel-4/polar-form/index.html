@@ -12,6 +12,7 @@
 <div class="task"><strong>Förutsäg innan nästa klick</strong><p id="polar-question" aria-live="polite">Vilka är koordinaterna (a, b)? Markera punkten själv.</p></div>
 <div class="seq-controls"><button type="button" class="secondary" id="polar-back">← Tillbaka</button><button type="button" id="polar-next">Visa nästa steg →</button><button type="button" class="secondary" id="polar-reset">Börja om</button></div>
 <p id="polar-step" class="muted" aria-live="polite">Steg 0 av 3</p>
+<p id="polar-live" class="math" aria-live="polite"></p>
 <div class="answer hidden" id="polar-discovery"><p class="math" id="polar-reading"></p><p class="math" id="polar-polar"></p><p id="polar-why"></p></div>
 </div></div></section>
 <section id="procedure" class="slide" data-teacher="Genomarbetat exempel från original-PDF: z=−3+3i. Börja med punktens läge, beräkna sedan avstånd och referensvinkel, välj först därefter argumentet med kvadranten som kontroll. Ingen elev ska behöva gissa tecken från arctan utan att använda geometrin."><div class="eyebrow">03 · Genomarbetat exempel · klick för klick</div><h2>Bestäm absolutbelopp och argument</h2><p class="math math-big">z = −3 + 3i</p>
@@ -41,10 +42,50 @@
 <section id="exit" class="slide" data-teacher="Eleverna visar både rektangulär→polär och polär→rektangulär form för att pröva hela dagens mål. Avsluta här, utan att introducera nästa moment."><div class="eyebrow">09 · Individuell utcheckning</div><h2>Kan du byta koordinater åt båda hållen?</h2><div class="task"><strong>4 minuter själv – visa mellanled</strong><p><strong>1.</strong> Skriv <span class="math">z = −√3 + i</span> på polär form med argument mellan 0° och 360°.</p><p><strong>2.</strong> Skriv <span class="math">w = 2(cos 240° + i sin 240°)</span> i rektangulär form.</p></div>
 <button type="button" class="reveal" data-reveal="exit-ans">Visa återkoppling</button>
 <div class="answer hidden" id="exit-ans"><p class="math">|z| = √(3 + 1) = 2</p><p>Andra kvadranten, referensvinkel 30° ger <span class="math">v = 150°</span>.</p><p class="math">z = 2(cos 150° + i sin 150°)</p><div class="math-working"><p class="math">w = 2(−1/2 − i√3/2)</p><p class="math">= −1 − √3i</p></div><p>Kontroll: w ligger i tredje kvadranten och har absolutbelopp 2.</p></div>
-<div class="panel"><strong>Dagens mål</strong><p>Jag kan bestämma både absolutbeloppet och argumentet, byta mellan koordinatformer och kontrollera riktningen med figur och tecken.</p><p>Vilket steg kan jag förklara själv, och vilket behöver jag träna vidare på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller datainsamling.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>(()=>{'use strict';let a=3,b=4;
-function draw(){const r=Math.hypot(a,b),v=(a===0&&b===0)?null:(Math.atan2(b,a)*180/Math.PI+360)%360;
-Ma4Plane.plot('polar-plane',{minX:-5,maxX:5,minY:-5,maxY:5,alt:'Likskaligt talplan för '+a+' och '+b+'i',vectors:(a||b)?[{x:a,y:b,label:'z',color:'blue'}]:[],segments:[{x1:a,y1:0,x2:a,y2:b,dashed:true},{x1:0,y1:0,x2:a,y2:0,dashed:true}],points:[{x:a,y:b}]});
-document.getElementById('polar-current').textContent='z = '+a+(b>=0?' + ':' − ')+Math.abs(b)+'i';
-document.getElementById('polar-reading').textContent='r = '+(Number.isInteger(r)?r:r.toFixed(3).replace('.',','))+(v===null?', argumentet saknas':', v ≈ '+v.toFixed(1).replace('.',',')+'°');
-document.querySelectorAll('[data-point]').forEach(el=>{let yes=el.dataset.point===a+','+b;el.setAttribute('aria-pressed',String(yes));el.classList.toggle('secondary',!yes)})}
-document.querySelectorAll('[data-point]').forEach(el=>el.onclick=()=>{[a,b]=el.dataset.point.split(',').map(Number);draw()});draw()})();</script></body></html>
+<div class="panel"><strong>Dagens mål</strong><p>Jag kan bestämma både absolutbeloppet och argumentet, byta mellan koordinatformer och kontrollera riktningen med figur och tecken.</p><p>Vilket steg kan jag förklara själv, och vilket behöver jag träna vidare på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller datainsamling.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
+(()=>{'use strict';
+let a=3,b=4,stage=0;
+const pointInfo={
+ '3,4':{r:'5',angle:'53,13°',polar:'z ≈ 5(cos 53,13° + i sin 53,13°)',why:'Vinkeln är avrundad. Den exakta riktningen bestäms av koordinaterna (3,4).'},
+ '-3,3':{r:'3√2',angle:'135°',polar:'z = 3√2(cos 135° + i sin 135°)',why:'Andra kvadranten: cos v är negativ och sin v är positiv.'},
+ '-1,-1':{r:'√2',angle:'225°',polar:'z = √2(cos 225° + i sin 225°)',why:'Tredje kvadranten: både cos v och sin v är negativa.'},
+ '0,3':{r:'3',angle:'90°',polar:'z = 3(cos 90° + i sin 90°)',why:'Punkten ligger på positiva imaginära axeln. Kvoten b/a är odefinierad; läs riktningen direkt ur figuren.'},
+ '0,0':{r:'0',angle:'inte definierat',polar:'z = 0',why:'Origo har inget entydigt argument. Varje vinkel ger noll när r = 0.'}
+};
+const svg=document.getElementById('polar-plane'),next=document.getElementById('polar-next'),back=document.getElementById('polar-back');
+function current(){return pointInfo[a+','+b]}
+function asComplex(){if(a===0&&b===0)return 'z = 0';if(b===0)return 'z = '+a;if(a===0)return 'z = '+(b===1?'i':b===-1?'−i':b+'i');return 'z = '+a+(b<0?' − ':' + ')+(Math.abs(b)===1?'i':Math.abs(b)+'i')}
+function label(text,x,y,color){let el=document.createElementNS('http://www.w3.org/2000/svg','text');el.setAttribute('x',String(x));el.setAttribute('y',String(y));el.setAttribute('fill',color||'#34576a');el.setAttribute('font-size','18');el.setAttribute('font-weight','650');el.textContent=text;svg.append(el)}
+function draw(){
+ const r=Math.hypot(a,b),angle=r===0?null:(Math.atan2(b,a)*180/Math.PI+360)%360;
+ const segments=[];
+ if(stage>=1&&r!==0){segments.push({x1:0,y1:0,x2:a,y2:0,dashed:true,color:'#7395a7'}, {x1:a,y1:0,x2:a,y2:b,dashed:true,color:'#7395a7'});}
+ const vectors=stage>=2&&r!==0?[{x:a,y:b,label:'z',color:'teal',dx:10,dy:-12}]:[];
+ const p=Ma4Plane.plot(svg,{minX:-5,maxX:5,minY:-5,maxY:5,alt:'Polär form: punkt ('+a+','+b+'); steg '+stage+' av 3. '+(stage>=3&&angle!==null?'Avstånd '+current().r+' och vinkel '+current().angle:stage===2?'Radien från origo visas.':stage===1?'Koordinatkomponenterna visas.':'Endast punkten visas.'),segments,vectors,points:stage>=2&&r!==0?[]:[{x:a,y:b,label:r===0?'0':'z',color:'blue'}]});
+ if(stage>=1&&r!==0){if(a!==0)label('a',p.X(a/2)-4,p.Y(0)+(b<0?-12:22));if(b!==0)label('b',p.X(a)+(a<0?12:15),p.Y(b/2));}
+ if(stage>=2&&r!==0){label('r',p.X(a/2)+(b<0?9:-15),p.Y(b/2)+(a<0?-12:12),'#086e65');}
+ if(stage>=3&&angle!==null&&angle>0.05&&angle<359.95){
+  const theta=angle*Math.PI/180,arcRadius=Math.min(54,Math.max(27,r*p.scale*.32));
+  const cx=p.X(0),cy=p.Y(0),endX=cx+arcRadius*Math.cos(theta),endY=cy-arcRadius*Math.sin(theta);
+  const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d','M '+(cx+arcRadius)+' '+cy+' A '+arcRadius+' '+arcRadius+' 0 '+(angle>180?1:0)+' 0 '+endX+' '+endY);
+  path.setAttribute('fill','none');path.setAttribute('stroke','#c18423');path.setAttribute('stroke-width','3');svg.append(path);
+  const mid=theta/2;label('v',cx+(arcRadius+18)*Math.cos(mid),cy-(arcRadius+18)*Math.sin(mid),'#a36a1b');
+ }
+ document.getElementById('polar-current').textContent=asComplex();
+ document.getElementById('polar-step').textContent='Steg '+stage+' av 3';
+ document.getElementById('polar-question').textContent=stage===0?'Vilka är koordinaterna (a, b)? Rita gärna punkten själv.':stage===1?'Hur långt är det från origo till punkten? Beräkna r med Pythagoras.':stage===2?'Vilket argument v har riktningen? Kontrollera med punkten och koordinaternas tecken.':'Stämmer den polära formen med ursprungstalets realdel och imaginärdel?';
+ const live=document.getElementById('polar-live');
+ live.textContent=stage===0?'':stage===1?'a = '+a+', b = '+b:stage===2?'r = '+current().r:'r = '+current().r+', v = '+current().angle;
+ const reveal=document.getElementById('polar-discovery');reveal.classList.toggle('hidden',stage<3);
+ if(stage===3){document.getElementById('polar-reading').textContent='r = '+current().r+'; v = '+current().angle;document.getElementById('polar-polar').textContent=current().polar;document.getElementById('polar-why').textContent=current().why;}
+ back.disabled=stage===0;next.disabled=stage===3;
+ document.querySelectorAll('[data-point]').forEach(el=>{const yes=el.dataset.point===a+','+b;el.setAttribute('aria-pressed',String(yes));el.classList.toggle('secondary',!yes)});
+}
+document.querySelectorAll('[data-point]').forEach(el=>el.addEventListener('click',()=>{[a,b]=el.dataset.point.split(',').map(Number);stage=0;draw()}));
+next.addEventListener('click',()=>{stage=Math.min(3,stage+1);draw()});
+back.addEventListener('click',()=>{stage=Math.max(0,stage-1);draw()});
+document.getElementById('polar-reset').addEventListener('click',()=>{stage=0;draw()});
+draw();
+})();
+</script></body></html>
