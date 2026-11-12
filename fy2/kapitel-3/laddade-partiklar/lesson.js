@@ -29,7 +29,7 @@ function render(){
  $('particle-time-value').textContent=String(Math.round(p*100))+' %';
  $('particle-speed-value').textContent=v.toFixed(1).replace('.',',');
  $('particle-B-value').textContent=B.toFixed(1).replace('.',',');
- $('particle-note').textContent='Relativ krökningsradie r ∝ v/|B| = '+(v/B).toFixed(2).replace('.',',')+
+ $('particle-note').textContent='Relativ krökningsradie r ∝ v/B = '+(v/B).toFixed(2).replace('.',',')+
   '. F pekar alltid vinkelrätt mot v. B '+(Bsgn===1?'in i':'ut ur')+' bilden.';
  $('particle-positive').classList.toggle('selected',q===1);
  $('particle-negative').classList.toggle('selected',q===-1);
