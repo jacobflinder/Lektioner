@@ -1,0 +1,36 @@
+name: Ma4 web lesson browser quality checks
+on:
+  push:
+    paths:
+      - "ma4/**"
+      - ".github/workflows/ma4-browser-qa.yml"
+  workflow_dispatch:
+jobs:
+  ma4-chapter4:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Start lesson site locally
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/ma4-http.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8123/ma4/kapitel-4/ >/dev/null && break; sleep 1; done
+      - name: Check every Ma4 lesson on desktop and mobile
+        run: |
+          node ma4/kapitel-4/qa/browser-smoke.cjs
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ma4-browser-quality-evidence
+          path: ma4-qa-screenshots/
+          retention-days: 14
