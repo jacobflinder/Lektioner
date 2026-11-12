@@ -31,6 +31,7 @@
 .check-control{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
 .check-control label{font-weight:700}
 .check-control select{border:2px solid #b4ced9;border-radius:8px;padding:8px;color:#17334b;background:white;font:inherit}
+.coordinate-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;width:100%;margin:12px 0}.coordinate-pair{background:#f2f7fa;border:1px solid #cadde6;padding:13px;border-radius:10px;min-width:0}.coordinate-pair strong{display:block;margin-bottom:8px;color:#0b6768}.coordinate-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.coordinate-fields label{display:block;font-weight:700}.coordinate-fields input{width:100%;min-width:0;font:inherit;color:#16354e;border:2px solid #b4ced9;border-radius:8px;background:#fff;padding:9px}@media(max-width:650px){.coordinate-inputs{grid-template-columns:1fr}}
 .book-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .lesson-emphasis{color:#075e58;font-weight:800}
 @media(max-width:760px){.graph-grid{grid-template-columns:1fr}.graph-preview svg{max-height:200px}.step-grid,.book-choices{grid-template-columns:1fr}.points-table th,.points-table td{padding:7px 3px;font-size:.88rem}.points-table select{padding:5px 2px;font-size:.87rem}}
@@ -108,10 +109,11 @@
 </div>
 <div class="graph-controls">
 <label for="graph-x">Flytta tangentpunkten</label>
-<input id="graph-x" type="range" min="-1.6" max="1.6" step="0.05" value="-1" aria-describedby="graph-readout">
+<input id="graph-x" type="range" min="-1.6" max="1.6" step="0.05" value="-1" aria-describedby="graph-x-out">
 <output id="graph-x-out" for="graph-x">−1,00</output>
 </div>
-<div class="point-info" id="graph-readout" aria-live="polite"><strong>f′(−1) = −2,00</strong><p>Lutningen är negativ: grafen sjunker här.</p></div>
+<button type="button" class="secondary" data-reveal="graph-readout">Visa lutningsvärden efter din förutsägelse</button>
+<div class="point-info hidden" id="graph-readout" aria-live="polite"><strong>f′(−1) = −2,00</strong><p>Lutningen är negativ: grafen sjunker här.</p></div>
 <button id="go-left" class="secondary" type="button">Undersök x = −1</button>
 <button id="go-zero" class="secondary" type="button">Undersök x = 0</button>
 <button id="go-right" class="secondary" type="button">Undersök x = 1</button>
@@ -169,11 +171,16 @@
 <p class="math math-big">h(x) = −x³ + 3x</p>
 <div class="task"><strong>Lös utan steglista på papper.</strong> Bestäm de stationära punkternas karaktär och båda koordinater. Ge en fullständig motivering som en annan elev kan följa. Stödknappen finns om du fastnar.</div>
 <div class="check-control">
-<label for="own-max">Maximipunkten:</label>
-<select id="own-max"><option value="">Välj</option><option value="neg">(−1, −2)</option><option value="pos">(1, 2)</option><option value="zero">(1, 0)</option></select>
-<label for="own-min">Minimipunkten:</label>
-<select id="own-min"><option value="">Välj</option><option value="neg">(−1, −2)</option><option value="pos">(1, 2)</option><option value="zero">(−1, 0)</option></select>
-<button id="check-own" type="button">Kontrollera</button>
+<div class="coordinate-inputs" role="group" aria-label="Ange koordinaterna för de båda extrempunkterna">
+<div class="coordinate-pair"><strong>Maximipunkt</strong><div class="coordinate-fields">
+<div><label for="own-max-x">x</label><input id="own-max-x" inputmode="decimal" autocomplete="off" placeholder="x-värde" aria-label="Maximipunktens x-koordinat"></div>
+<div><label for="own-max-y">y</label><input id="own-max-y" inputmode="decimal" autocomplete="off" placeholder="y-värde" aria-label="Maximipunktens y-koordinat"></div>
+</div></div>
+<div class="coordinate-pair"><strong>Minimipunkt</strong><div class="coordinate-fields">
+<div><label for="own-min-x">x</label><input id="own-min-x" inputmode="decimal" autocomplete="off" placeholder="x-värde" aria-label="Minimipunktens x-koordinat"></div>
+<div><label for="own-min-y">y</label><input id="own-min-y" inputmode="decimal" autocomplete="off" placeholder="y-värde" aria-label="Minimipunktens y-koordinat"></div>
+</div></div></div>
+<button id="check-own" type="button">Kontrollera mina koordinater</button>
 </div>
 <p id="own-feedback" class="feedback" role="status" aria-live="polite"></p>
 <button class="secondary" type="button" data-reveal="own-help">Visa stöd om du fastnar</button>
