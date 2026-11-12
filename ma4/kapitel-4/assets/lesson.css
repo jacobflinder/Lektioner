@@ -26,3 +26,16 @@ main{max-width:1200px;padding:0 16px;margin:18px auto}.stage{background:#fff;bor
 .interactive-check .plot-box{margin:10px 0}
 .interactive-check .graph-controls output{min-width:2rem;text-align:right}
 @media(max-width:720px){.longdiv-demo td{min-width:58px;padding:6px 5px}.longdiv-demo td:nth-child(5){min-width:76px}}
+
+/* Tidigare lektioner: bråktal, förutsägelsefrågor och matematiskt likskalig geometri. */
+.fraction{display:inline-flex;vertical-align:middle;align-items:stretch;flex-direction:column;text-align:center;line-height:1.25;white-space:nowrap;font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:.95em;margin:0 .16em}
+.fraction>span:first-child{border-bottom:1.6px solid currentColor;padding:0 .25em .12em}
+.fraction>span:last-child{padding:.12em .25em 0}
+.fraction .fraction{font-size:.95em}
+.plane-label{font-size:.85rem;font-weight:600;color:#395c70}
+.plot-info{font-size:.92rem;color:#506d7b;margin:6px 0 2px}
+.plane-buttons{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.plane-buttons button[aria-pressed=true]{background:#096b60;color:#fff}
+.math-chain{display:grid;gap:4px;background:#f8fbfe;padding:10px 12px;border-radius:8px}
+.math-chain .math{margin:2px 0;overflow-wrap:anywhere}
+@media(max-width:720px){.fraction{font-size:.85em}.math-chain .math{font-size:1.17rem}}
