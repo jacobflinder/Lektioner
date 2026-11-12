@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Största och minsta värde · Matematik – fortsättning, nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.24rem,2.3vw,1.72rem);line-height:1.6}
+.mathline sup{font-size:.7em}
+.mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
+.graph-panel{background:#f8fbfd;border:1px solid #ccdfe8;padding:14px;border-radius:14px;min-width:0}
+.graph-panel svg{display:block;width:100%;height:auto}
+.graph-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(250px,2fr);gap:18px;margin:16px 0}
+.graph-meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;justify-content:space-between;font-size:.88rem;color:#476679}
+.graph-key{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.graph-key span{display:inline-flex;align-items:center;gap:5px}
+.graph-key i{display:inline-block;width:15px;height:4px;border-radius:3px;background:#0b8077}
+.graph-key i.outside{background:#a5b9c3}
+.graph-control{padding:13px 16px;border:1px solid #bfd7df;background:#eef7f8;border-radius:12px}
+.graph-control label{display:block;font-weight:780;margin:5px 0}
+.graph-control input[type=range]{width:100%;min-height:32px;accent-color:#087d70}
+.graph-control output{font-size:1.2rem;font-weight:800;color:#116e65;font-variant-numeric:tabular-nums}
+.graph-shortcuts{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.graph-shortcuts button{padding:8px 11px;font-size:.92rem}
+.graph-shortcuts button[aria-pressed=true]{background:#09786e;color:white}
+.values-table{border-collapse:collapse;width:100%;table-layout:fixed}
+.values-table th,.values-table td{text-align:center;padding:8px 4px;border:1px solid #c6d8e1;overflow-wrap:anywhere}
+.values-table th{background:#e7f0f5}
+.values-table [data-status="max"]{color:#087463;font-weight:850;background:#e8f6ef}
+.values-table [data-status="min"]{color:#a1404d;font-weight:850;background:#fceef0}
+.graph-readout{border-radius:10px;background:#eff6f8;padding:12px;margin:12px 0;font-variant-numeric:tabular-nums}
+.graph-readout strong{color:#125568}
+.graph-graph-note{font-size:.86rem;color:#516b7b}
+.threshold{border-left:4px solid #b67f1c;background:#fff7e9;padding:13px 17px;border-radius:10px}
+.focus-math{color:#0c776d;font-weight:820}
+.input-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
+.input-grid label{font-weight:760;font-size:.94rem;display:block}
+.input-grid input{font:inherit;color:#17334b;background:#fff;border:2px solid #a8c2cf;border-radius:9px;padding:9px;width:100%;min-width:0}
+.math-check{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.math-check>div{padding:12px 14px;background:#edf6f9;border:1px solid #cee1e8;border-radius:11px}
+.math-check strong{display:block;color:#13615a}
+.math-check p{margin:7px 0}
+.book-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.book-levels>div{background:#f2f7fa;padding:16px;border:1px solid #cbdce6;border-radius:12px}
+.book-levels b{font-size:1.17rem;display:block;margin:8px 0}
+.book-levels strong{color:#087b70;display:block}
+.working-table{width:100%;border-collapse:collapse;margin:12px 0}
+.working-table th,.working-table td{border:1px solid #c1d7e2;padding:9px;text-align:center}
+.working-table th{background:#e6f0f4}
+.soft-note{font-size:.9rem;color:#4e6e7d}
+@media(max-width:940px){.graph-grid{grid-template-columns:1fr}}
+@media(max-width:740px){.math-check,.book-levels{grid-template-columns:1fr}.input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.graph-panel{padding:7px}}
+@media(max-width:390px){.input-grid{grid-template-columns:1fr}.values-table th,.values-table td{font-size:.89rem;padding:6px 3px}}
+</style>
+</head>
+<body>
+<header>
+<a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.1</strong>
+<div class="head-actions">
+<button type="button" id="ink-toggle" class="secondary" aria-expanded="false">Visa skrivyta</button>
+<button type="button" id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button>
+<button type="button" id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button>
+</div>
+</header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Enskilt → par vid starten. Visa inte slutsatsen förrän eleverna försökt. Använd reglaget för gemensamma förutsägelser, inte som en ersättning för derivataberäkningarna och det självständiga bokarbetet.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Gör beräkningarna på papper innan du visar återkoppling. Inga elevsvar sparas eller skickas.</div>
+<div class="stage" id="stage">
+
+<section class="slide active" id="start" data-teacher="Original-PDF s.1. Börja med tyst enskilt svar, därefter kort parjämförelse. g=x² på [−1,2], stationärt x=0, ändpunkter −1 och 2, värden 1,0,4. Låt en elev förklara varför bara g′=0 inte räcker.">
+<div class="eyebrow">01 · Start · enskilt → par</div>
+<h1>Var finns det största värdet?</h1>
+<p class="lead">Ett <strong>slutet intervall</strong> betyder att båda ändpunkterna ingår.</p>
+<p class="mathline">g(x)=x², &nbsp; −1 ≤ x ≤ 2</p>
+<div class="task"><strong>Ta ställning innan facit visas:</strong>
+<ol class="spaced">
+<li>Bestäm största och minsta värde.</li>
+<li>Vid vilka <span class="mathsmall">x</span> antas värdena?</li>
+<li>Räcker det att lösa <span class="mathsmall">g′(x)=0</span>?</li>
+</ol>Skissa grafen och markera båda ändpunkterna.</div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling efter eget svar</button>
+<div class="answer hidden" id="start-answer">
+<p class="mathline">g′(x)=2x=0 ⇒ x=0</p>
+<p class="mathline">g(−1)=1, &nbsp; g(0)=0, &nbsp; g(2)=4</p>
+<p><strong>Minsta värdet är 0 vid x=0.</strong> <strong>Största värdet är 4 vid x=2.</strong></p>
+<p>Nej, det räcker inte med nollställen till derivatan. Den största höjden finns här vid <strong>intervallets högra ändpunkt</strong>.</p>
+</div>
+</section>
+
+<section class="slide" id="goal" data-teacher="Original s.1–2: gör målet synligt efter startfrågan. Lyft skillnaden mellan lokala extrema och globala största/minsta värden på det aktuella intervallet. Metoden gäller här en deriverbar polynomfunktion på ett slutet intervall.">
+<div class="eyebrow">02 · Mål och metod</div>
+<h2>Jämför alla möjliga kandidater</h2>
+<p class="lead"><strong>Efter lektionen ska du kunna bestämma största och minsta värde i ett slutet intervall med derivata – och ange var värdena antas.</strong></p>
+<div class="math-check">
+<div><strong>1 · Hitta kandidater</strong><p>Lös <span class="mathsmall">f′(x)=0</span> och behåll de stationära x-värden som ligger i intervallet.</p></div>
+<div><strong>2 · Ta med ändpunkterna</strong><p>Beräkna funktionsvärdet både vid stationära punkter och <strong>vid båda ändpunkterna</strong>.</p></div>
+<div><strong>3 · Jämför höjder</strong><p>Välj största och minsta <em>funktionsvärde</em>. Ange också vid vilka <span class="mathsmall">x</span> de antas.</p></div>
+</div>
+<div class="panel"><p><strong>Lokalt extremum</strong> betyder störst eller minst jämfört med närliggande punkter. <strong>Största/minsta värdet i intervallet</strong> betyder störst eller minst jämfört med <em>alla tillåtna</em> x.</p></div>
+<div class="task"><strong>Snabbt beslut – välj kandidater utan att räkna deras värden.</strong>
+<p class="mathline">f(x)=x³−4,5x²+5, &nbsp; −2 ≤ x ≤ 5</p>
+<p class="mathline">f′(x)=3x(x−3)</p>
+<p>Vilka fyra x-värden ska jämföras?</p></div>
+<button type="button" class="reveal" data-reveal="candidate-answer">Visa kandidaterna</button>
+<div class="answer hidden" id="candidate-answer"><p>Stationära x-värden: <span class="mathsmall">0</span> och <span class="mathsmall">3</span>. Ändpunkter: <span class="mathsmall">−2</span> och <span class="mathsmall">5</span>. Jämför därför <strong>f(−2), f(0), f(3) och f(5)</strong>.</p></div>
+</section>
+
+<section class="slide" id="predict" data-teacher="Original s.3. Visa oförändrade axelskalor och en fast graf på −2≤x≤5. Intervallet −2 till 3 är hel linje och delen 3–5 streckad. Fråga utan facit: Blir 5 största värdet även om högra gränsen ökar? Kan minimum ändras? Beräkningarna i original: f(−2)=−21, f(0)=5, f(3)=−8,5.">
+<div class="eyebrow">03 · Förutsäg · samma graf, större intervall</div>
+<h2>Blir det lokala maximumet störst även om intervallet växer?</h2>
+<p class="mathline">f(x)=x³−4,5x²+5</p>
+<div class="graph-grid">
+<div class="graph-panel">
+<div class="graph-meta"><strong>Först: −2 ≤ x ≤ 3</strong><div class="graph-key"><span><i></i> Ingår</span><span><i class="outside"></i> Utanför intervallet</span></div></div>
+<svg id="predict-graph" viewBox="0 0 920 520" role="img" aria-label="Polynomgraf i intervallet minus två till fem, heldragen till tre och streckad därefter."></svg>
+</div>
+<div>
+<div class="panel">
+<strong>Vi har redan beräknat:</strong>
+<p class="mathline">f(−2)=−21</p><p class="mathline">f(0)=5</p><p class="mathline">f(3)=−8,5</p>
+<p><strong>Största värdet: 5 vid x=0.</strong><br><strong>Minsta värdet: −21 vid x=−2.</strong></p>
+</div>
+<div class="task"><strong>Nu flyttas högra gränsen till x=5.</strong> Blir 5 fortfarande det största värdet? Kan det minsta värdet ändras? <em>Motivera utifrån grafens höjd.</em></div>
+<p class="soft-note">Axlarna och funktionen ändras inte. Endast det tillåtna intervallet växer.</p>
+</div></div>
+</section>
+
+<section class="slide" id="explore" data-teacher="Original s.4 animation. En interaktiv graf ersätter den gamla animationen, men huvudmålet är att jämföra kandidatvärden. Enbart högerändpunkten flyttas från 3 till 5; hela grafen och skalan förblir fasta. Låt eleverna först förutsäga när det största värdet ändras. Viktigt vid r=4,5: globalt maximum 5 antas vid både x=0 och x=4,5; detta särskilda fall är matematiskt korrekt.">
+<div class="eyebrow">04 · Animation att styra</div>
+<h2>Flytta högra ändpunkten – när ändras svaret?</h2>
+<div class="task"><strong>Förutsäg först:</strong> Ungefär vid vilket x-värde för högra gränsen blir värdet vid ändpunkten lika stort som det lokala maximumet 5 vid x=0? <strong>Varför kan två olika x ge samma största värde?</strong></div>
+<div class="graph-grid">
+<div>
+<div class="graph-panel">
+<div class="graph-meta"><strong>Funktionen och koordinatsystemet är fasta</strong><div class="graph-key"><span><i></i> Ingår</span><span><i class="outside"></i> Utanför</span></div></div>
+<svg id="range-graph" viewBox="0 0 920 520" role="img" aria-label="Samma kubiska funktionsgraf med flyttbar högra intervallgräns från x tre till fem."></svg></div>
+</div>
+<div>
+<div class="graph-control">
+<label for="right-bound">Högra intervallgränsen b</label>
+<input type="range" id="right-bound" min="3" max="5" step=".05" value="3" aria-describedby="range-readout">
+<output id="right-bound-output" for="right-bound">−2 ≤ x ≤ 3,00</output>
+<div class="graph-shortcuts" role="group" aria-label="Särskilda intervallgränser">
+<button type="button" class="secondary" data-bound="3">b = 3</button>
+<button type="button" class="secondary" data-bound="4.5">b = 4,5</button>
+<button type="button" class="secondary" data-bound="5">b = 5</button>
+</div>
+</div>
+<div class="graph-readout" id="range-readout" aria-live="polite">
+<p><strong>Givet intervall:</strong> <span id="range-span">−2 till 3,00</span></p>
+<p><strong>Högra ändpunktens höjd:</strong> <span id="bound-value">f(3,00)=−8,50</span></p>
+</div>
+<button id="range-check" type="button">Kontrollera största och minsta värde</button>
+<p id="range-feedback" class="feedback" aria-live="polite" role="status"></p>
+<div class="threshold"><strong>Tänk särskilt på b = 4,5.</strong> Där kan det finnas <em>två olika x</em> där samma största värde antas.</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="example" data-teacher="Original s.5, exempel 3156 s.159. Samma f=x³−4,5x²+5 på [−2,5]. f′=3x(x−3) stationära x 0,3; kandidater −2,0,3,5. f(-2)=-21, f(0)=5, f(3)=-8,5, f(5)=17,5. Största 17,5 vid 5, minsta −21 vid −2. Lös fram steg för steg, inga omotiverade språng.">
+<div class="eyebrow">05 · Genomarbetat exempel 3156 · s. 159</div>
+<h2>Jämför alla fyra funktionsvärden</h2>
+<p class="mathline">f(x)=x³−4,5x²+5, &nbsp; −2 ≤ x ≤ 5</p>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Före varje steg:</strong> Lös eller förutsäg nästa matematiska beslut på papper. Det är funktionsvärdena som ska jämföras.</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilken derivata får du, och hur faktoriserar du den?"><strong>1 · Derivera och faktorisera</strong><p class="mathline">f′(x)=3x²−9x=3x(x−3)</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden gör f′=0, och vilka två ändpunkter måste läggas till?"><strong>2 · Välj alla kandidater</strong><p class="mathline">f′(x)=0 ⇒ x=0 eller x=3</p><p>Ändpunkterna är −2 och 5. <strong>Hela listan: −2, 0, 3 och 5.</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid −2 och 0?"><strong>3 · Beräkna första paret</strong><p class="mathline">f(−2)=−8−4,5·4+5=−21</p><p class="mathline">f(0)=0−0+5=5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid 3 och 5?"><strong>4 · Beräkna andra paret</strong><p class="mathline">f(3)=27−40,5+5=−8,5</p><p class="mathline">f(5)=125−112,5+5=17,5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Jämför alla fyra FUNKTIONSVÄRDEN. Vilket är störst och minst? Ange också x."><strong>5 · Jämför och svara</strong>
+<table class="working-table"><thead><tr><th>x</th><th>−2</th><th>0</th><th>3</th><th>5</th></tr></thead><tbody><tr><th>f(x)</th><td>−21</td><td>5</td><td>−8,5</td><td>17,5</td></tr></tbody></table>
+<p><strong>Största värdet är 17,5 vid x=5.</strong><br><strong>Minsta värdet är −21 vid x=−2.</strong></p></div>
+</div>
+<div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
+</div>
+<div class="key-insight"><strong>Slutsats:</strong> Det lokala maximumet 5 vid x=0 är inte längre det största värdet på hela intervallet. Det är <span class="focus-math">17,5 vid x=5</span>.</div>
+</section>
+
+<section class="slide" id="own" data-teacher="Original s.5–6. Elevens egen uppgift h=−x²+4x på [0,5]. Med minskat stöd: h′=−2x+4=0 → x=2. Kandidater x=0,2,5; värden h(0)=0, h(2)=4, h(5)=−5. Max4 vid x2; min−5 vid x5. Kontrollera värdet och var värdet antas – olika slags uppgifter. Utförlig återkoppling först efter eget försök.">
+<div class="eyebrow">06 · Din tur · mindre stöd</div>
+<h2>Bestäm både värdet och var det antas</h2>
+<p class="mathline">h(x)=−x²+4x, &nbsp; 0 ≤ x ≤ 5</p>
+<div class="task"><strong>Skriv en fullständig lösning på papper.</strong>
+<ol class="spaced"><li>Bestäm stationära x-värden och lägg till intervallets ändpunkter.</li>
+<li>Beräkna funktionsvärdena vid alla kandidater.</li>
+<li>Ange största och minsta <strong>värde</strong> samt de <strong>x-värden</strong> där de antas.</li></ol>
+</div>
+<div class="panel">
+<strong>Kontrollera när din lösning är färdig</strong>
+<div class="input-grid">
+<div><label for="own-max-value">Största värdet</label><input id="own-max-value" type="text" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
+<div><label for="own-max-x">Antas vid x</label><input id="own-max-x" type="text" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
+<div><label for="own-min-value">Minsta värdet</label><input id="own-min-value" type="text" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
+<div><label for="own-min-x">Antas vid x</label><input id="own-min-x" type="text" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
+</div>
+<button type="button" id="check-own">Kontrollera svaret</button>
+<p class="feedback" id="own-feedback" role="status" aria-live="polite"></p>
+</div>
+<button type="button" class="secondary" data-reveal="own-hint">Visa stöd om du fastnar</button>
+<div class="panel hidden" id="own-hint"><p>Derivera <span class="mathsmall">h′(x)=−2x+4</span> och lös <span class="mathsmall">h′(x)=0</span>. Glöm inte <span class="mathsmall">x=0</span> och <span class="mathsmall">x=5</span> när du jämför funktionsvärdena.</p></div>
+<button type="button" class="reveal" data-reveal="own-answer">Visa genomarbetad lösning efter eget försök</button>
+<div id="own-answer" class="answer hidden">
+<p class="mathline">h′(x)=−2x+4=0 ⇒ x=2</p>
+<p>Vi testar x=0, x=2 och x=5.</p>
+<p class="mathline">h(0)=0, &nbsp; h(2)=−4+8=4</p>
+<p class="mathline">h(5)=−25+20=−5</p>
+<p><strong>Största värdet är 4 vid x=2.</strong><br><strong>Minsta värdet är −5 vid x=5.</strong></p>
+<p>Varför testar vi x=0 fast det inte blev något av svaren? Därför att vi måste undersöka <strong>båda ändpunkterna</strong> innan vi kan jämföra hela intervallet.</p>
+</div>
+</section>
+
+<section class="slide" id="book" data-teacher="Original s.6. Huvuddelen av lektionstiden bör vara sammanhängande bokarbete (20 min lugnt) på s.159–160. Nivå1 3157–3163, nivå2 3164–3166, nivå3 3167–3168. Minst två av tre nivåer. Start 3158,3161,3164; säkra 3164–3166 och sedan 3167–3168. LÄXA exakt 3161a och 3164a–b. Extra 3168 med motivering. Ingen Socrative i originalet.">
+<div class="eyebrow">07 · Eget arbete · s. 159–160</div>
+<h2>Öva, förklara och kontrollera</h2>
+<p class="lead">Arbeta med <strong>minst två av lärobokens tre nivåer</strong>.</p>
+<div class="book-levels">
+<div><strong>Nivå 1</strong><b>3157–3163</b><p>Träna att hitta och jämföra kandidater.</p></div>
+<div><strong>Nivå 2</strong><b>3164–3166</b><p>Bestäm värden och motivera slutsatser.</p></div>
+<div><strong>Nivå 3</strong><b>3167–3168</b><p>Fördjupa lösning och argumentation.</p></div>
+</div>
+<div class="task"><strong>Börja med 20 minuter lugnt eget arbete.</strong> Försök själv. Kontrollera. Rätta och förstå dina fel. Därefter: fortsätt och diskutera vid behov.</div>
+<div class="panel"><strong>Välj en bra start.</strong>
+<p>Behöver du komma igång? Börja med <strong>3158, 3161 och 3164</strong>.</p>
+<p>Redan säker? Börja med <strong>3164–3166</strong> och fortsätt med <strong>3167–3168</strong>.</p></div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3161 a och 3164 a–b</strong>. Redan klar? Gör <strong>3168</strong> och motivera.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="Original s.7. Individuell utcheckning med p=x³−3x på [0,3]. Frågor om vilka x ska testas, värdena, var de antas och varför −1 inte räknas. Här finns inget facit på denna slide; gå till nästa först efter att eleverna skrivit. Kontrollerar om de kan skilja stationära nollställen från tillåtna kandidater.">
+<div class="eyebrow">08 · Individuell utcheckning</div>
+<h2>Visa vad du kan – på egen hand</h2>
+<p class="lead">Bestäm största och minsta värde och ange <strong>var värdena antas</strong>.</p>
+<p class="mathline">p(x)=x³−3x, &nbsp; 0 ≤ x ≤ 3</p>
+<div class="task">
+<strong>Svara enskilt på papper utan modellen:</strong>
+<ol class="spaced"><li>Vilka x-värden behöver du undersöka?</li>
+<li>Beräkna och jämför funktionsvärdena.</li>
+<li>Svara med största och minsta <strong>värde samt x</strong>.</li>
+<li>Förklara varför <span class="mathsmall">x=−1</span> inte ska vara med.</li></ol>
+</div>
+<div class="panel">
+<h3>Dagens mål</h3>
+<p>Bestäm största och minsta värde i ett slutet intervall med derivata. Ange var värdena antas.</p>
+<p><strong>Har du tagit med båda ändpunkterna?</strong> Kontrollera innan du går vidare.</p>
+</div>
+</section>
+
+<section class="slide" id="exit-answer" data-teacher="Original s.8. Visa först efter elevernas självständiga lösning. p'=3x²−3=0 ⇒ ±1, men −1 ligger utanför [0,3]. Kandidater 0,1,3. p(0)=0, p(1)=−2, p(3)=18. Största 18 vid 3; minsta −2 vid 1. Gemensam återkoppling på det första steget där eleven eventuellt missat en kandidat.">
+<div class="eyebrow">09 · Återkoppling till utcheckningen</div>
+<h2>Intervallet styr urvalet</h2>
+<p class="lead">Jämför din lösning. Komplettera det första steg som saknas.</p>
+<div class="sequence panel" data-sequence>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilka x gör p′(x)=0, och vilka av dem ligger inom intervallet?"><strong>1 · Derivera och lös</strong><p class="mathline">p′(x)=3x²−3=0 ⇒ x²=1 ⇒ x=−1 eller x=1</p><p><strong>x=−1 ligger utanför intervallet och väljs bort.</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka ändpunkter lägger vi till innan vi räknar funktionsvärdena?"><strong>2 · Välj alla tillåtna kandidater</strong><p><strong>x = 0, 1 och 3.</strong> Båda ändpunkterna måste med.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka är p(0), p(1) och p(3)?"><strong>3 · Beräkna och jämför</strong><p class="mathline">p(0)=0</p><p class="mathline">p(1)=1−3=−2</p><p class="mathline">p(3)=27−9=18</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket värde är störst/minst och vid vilket x antas det?"><strong>4 · Svara med värde och plats</strong><p><strong>Största värdet är 18 vid x=3.</strong><br><strong>Minsta värdet är −2 vid x=1.</strong></p><p>Ett lokalt maximum behöver inte vara det största värdet på hela intervallet.</p></div>
+</div>
+<div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
+</div>
+<div class="key-insight"><strong>Du har lyckats när du</strong> väljer rätt kandidater inom intervallet, tar med båda ändpunkterna och jämför funktionsvärden samt anger var de antas.</div>
+<div class="notice"><strong>Läxa:</strong> 3161 a och 3164 a–b, extra 3168 med motivering.</div>
+</section>
+</div>
+
+<div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex">
+<button type="button" class="secondary" id="ink-undo">Ångra</button>
+<button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button>
+<button type="button" class="secondary" id="ink-clear">Rensa</button>
+<button type="button" class="secondary" id="ink-max">Förstora</button>
+</div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
+<div class="controls">
+<div><button type="button" id="prev" class="secondary">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
+<div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div>
+</div>
+<footer>Matematik – fortsättning, nivå 1c · 3.1 Största och minsta värde · Bok s. 158–160. Inga elevsvar samlas in.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="lesson.js"></script>
+</body></html>
