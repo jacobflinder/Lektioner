@@ -1,0 +1,25 @@
+/* 8.6 – lektionsspecifikt, samma övergripande Fy1-design. */
+.potential-figure{margin:0;background:linear-gradient(145deg,#f6fbfc,#ecf6f8);border:1px solid #d5e5e8;border-radius:13px;padding:11px}
+.potential-figure svg{display:block;width:100%;height:auto;max-height:430px}
+.potential-figure figcaption{font-size:.81rem;color:#486c79;line-height:1.45;padding:8px 3px 1px}
+.potential-math{margin:10px 0;padding:9px 11px;border-radius:8px;background:#f6fafb;border:1px solid #d9e7ec;font-size:clamp(1.05rem,1.55vw,1.36rem);font-family:"STIX Two Math", "Cambria Math", Cambria, serif;line-height:1.48;overflow-x:auto}
+.potential-math math{font-size:1em}
+.potential-math strong,.potential-math b{color:#176e86}
+.goal-card{border:1px solid #d1e4e8;border-left:4px solid #2a859b;border-radius:10px;background:#ecf6f8;padding:13px 17px;margin:15px 0}
+.goal-card ol{margin:7px 0 0;padding-left:23px}
+.goal-card li{margin:6px 0}
+.small-context{font-size:.85rem;color:#516d77;line-height:1.45}
+.potential-model .model-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.potential-model .model-controls .control:only-child{grid-column:span 2}
+.potential-model .model-result{font-weight:500;line-height:1.5}
+.potential-model .model-result b{color:#166c84}
+.potential-model .drawing svg{max-height:480px}
+.book-main{background:#eaf4ec;border-left:5px solid #6b9c7a;border-radius:10px;padding:16px 18px;margin:8px 0 18px}
+.book-main>b{color:#286647;font-size:1.09rem}
+.book-main p{margin:8px 0 0}
+.body-copy .quiz{margin:15px 0}
+.body-copy .steps-label{margin-top:15px}
+.socrative{margin:12px 0}
+.stage .layout .body-copy{min-width:0}
+@media(max-width:930px){.potential-figure svg{max-height:none}}
+@media(max-width:575px){.potential-figure{padding:7px}.potential-figure figcaption{font-size:.74rem}.potential-model .model-controls{grid-template-columns:1fr}.potential-model .model-controls .control:only-child{grid-column:span 1}.potential-math{font-size:1.06rem;padding:7px}.goal-card{padding:11px}.potential-model .drawing svg{max-height:none}}
