@@ -1,0 +1,64 @@
+/* 8.2 — lokala förbättringar: inga ändringar i andra Fy1-lektioner. */
+.phys-figure{margin:0;background:linear-gradient(155deg,#f6fbfc,#ebf5f8);padding:10px;border:1px solid #d6e6e8;border-radius:13px}
+.phys-figure svg{width:100%;height:auto;display:block;max-height:420px}
+.phys-figure figcaption{font-size:.8rem;color:#4c6c77;line-height:1.45;padding:6px 5px 0}
+.duo-concepts{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:8px 0 16px}
+.duo-concepts>div{border-radius:12px;border:1px solid #cfe1e5;background:#f1f8fa;padding:13px 15px}
+.duo-concepts span{font-size:.83rem;letter-spacing:.045em;font-weight:790;color:#147487}
+.duo-concepts p{font-size:.91rem;margin:5px 0 0}
+.equation{font-size:1.38rem;margin-top:4px}
+.equation math{vertical-align:middle;font-family:'STIX Two Math','Cambria Math',Cambria,serif}
+.goalcard{background:#e7f1f4;border:1px solid #cce0e5;border-radius:12px;padding:12px 17px;margin-top:14px;font-size:.93rem}
+.goalcard ol{margin:7px 0 0;padding-left:19px}
+.goalcard li{margin:4px 0}
+.compare-cases{display:grid;gap:8px;margin:10px 0}
+.compare-cases>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;background:#f0f7f8;padding:8px 12px;border-radius:7px;border-left:4px solid #33849a;font-size:.88rem}
+.compare-cases>div:nth-child(2){border-left-color:#b48a5b}.compare-cases>div:nth-child(3){border-left-color:#468c73}
+.compare-cases span{color:#446b75}
+.kretsar-model .drawing svg{max-height:415px}
+.kretsar-model .model-controls{grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0}
+.kretsar-model .model-hint{font-size:.86rem;color:#426e7a;line-height:1.35;margin:6px 0 9px}
+.kretsar-model .model-result{display:grid;gap:5px;margin-top:5px;font-size:.91rem;font-weight:500}
+.kretsar-model .model-result strong,.kretsar-model .model-result b{color:#086880}
+.kretsar-model .model-result>div{line-height:1.4}
+.kretsar-model .model-button{display:flex;gap:8px;flex-wrap:wrap}
+.kretsar-model .model-button button{font-size:.9rem;flex:1}
+.kretsar-model .figcap{font-size:.78rem;line-height:1.4}
+.case-buttons{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:6px 0 10px}
+.case-label{font-size:.82rem;flex-basis:100%;font-weight:760;color:#315f6e}
+.case-buttons button{font-size:.8rem;padding:8px 10px;border:1px solid #b4cbd3;background:#fff}
+.case-buttons button[aria-pressed=true]{background:#d5f0ec;border-color:#468b78}
+.worked{display:block}
+.worked b{display:block}
+.worked .mathrow{margin:4px 0;font-size:1.3rem}
+.book-priority{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:14px 0 18px}
+.book-priority>div{padding:14px 16px;border-radius:12px}
+.book-primary{background:#e6f1e9;border:1px solid #cfdfd0}
+.book-others{background:#f0f7f9;border:1px solid #d6e8ec}
+.book-priority h2{font-size:1.25rem;margin:2px 0 14px}
+.book-priority p{margin:8px 0}
+.exit-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.exit-items>div{padding:13px 14px;border-radius:12px;background:#f2f8fa;border:1px solid #d1e4e7}
+.exit-items b{color:#137d91}.exit-items p{font-size:.93rem;line-height:1.5}
+.selfcheck{font-weight:650;color:#315b6c}
+.ref-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ref-grid section{background:#f3f8f9;border:1px solid #d6e7eb;border-radius:10px;padding:12px 14px}
+.ref-grid h2{font-size:1.05rem;letter-spacing:0;margin:0 0 6px}
+.ref-grid p{margin:5px 0;font-size:.91rem}
+#bild-1 .body-copy>.feedback-box{background:#eaf5f8;margin:10px 0 0}
+#bild-1 .answers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#bild-1 .answers button{min-width:0;line-height:1.25}
+#bild-7 .layout.single{max-width:1120px}
+#bild-8 .layout.single{max-width:1250px}
+#bild-8 .page-title{margin-bottom:22px}
+#bild-8 .body-copy{font-size:1rem}
+#bild-8 .step{max-width:1230px}
+#bild-9 .ref-grid{grid-template-columns:1fr}
+@media(max-width:1000px){.exit-items{grid-template-columns:1fr}.book-priority{grid-template-columns:1fr}.exit-items>div p{margin:8px 0}}
+@media(max-width:575px){.duo-concepts{grid-template-columns:1fr}.kretsar-model .model-controls{grid-template-columns:1fr}.case-buttons button{flex:1}.goalcard{font-size:.87rem}.ref-grid{grid-template-columns:1fr}#bild-1 .answers{grid-template-columns:1fr}.exit-items{gap:8px}.phys-figure{padding:4px}.phys-figure svg{min-height:190px}}
+@media print{.kretsar-model .model-result{display:block}.case-buttons,.model-hint{display:none}}
+/* On pages without solution steps, the shared navigation would otherwise show two identical "Nästa bild" buttons. */
+.end-controls #step[hidden]{display:none!important}
+#bild-3 .body-copy>.quiz,#bild-4 .body-copy>.quiz,#bild-5 .body-copy>.quiz{margin-top:14px}
+#bild-3 .body-copy>.quiz button,#bild-4 .body-copy>.quiz button,#bild-5 .body-copy>.quiz button{font-size:.86rem}
+#bild-2 .body-copy .step,#bild-3 .body-copy .step,#bild-4 .body-copy .step,#bild-5 .body-copy .step,#bild-6 .body-copy .step{font-size:.94rem}
