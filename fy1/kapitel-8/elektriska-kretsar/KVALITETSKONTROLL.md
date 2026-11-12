@@ -52,3 +52,9 @@
 - Mätning av faktiskt lektionsflöde och om 25 min bokarbete ryms för elevgruppen.
 
 **Slutsats:** Fysik, innehåll, lokala funktioner och visualiseringsprinciper granskade och korrigerade. Tekniskt klar för produktionskontroll; *inte* klassrumsverifierad.
+
+## Avgränsad förbättring: resonemangskontroll (2026-11-12)
+
+- 8.2:s frivilliga självtest kräver efter rätt numeriskt svar en motivering av laddningens bevarande respektive R ∝ l/d². Specifika felslut får återkoppling. Fullständig lösning är valfri och tillgänglig efter rätt resonemang; fritext bedöms inte automatiskt.
+- Förutsägelser finns redan i lektionsbilderna och används utan digitala dubbelfrågor. Den verkliga demonstrationen, originalets bokuppgifter och separat PhET-labb påverkas inte.
+- Tidsram och skyddad boktid är oförändrade. En avgränsad lokal Chromium-kontroll av förklaringsflödet passerade tillsammans med 8.1 (36 av 36 testpunkter totalt i revisionsunderlaget), men Pages/Safari och elevprövning återstår.

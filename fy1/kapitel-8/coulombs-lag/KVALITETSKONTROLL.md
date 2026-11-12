@@ -43,3 +43,10 @@ Revision: 2026-11-12. Källfil: `261102 Coulombs lag Fy1.pdf`, nio uppladdade si
 - Test i Safari på iPhone/iPad och på klassrumsprojektor, inklusive MathML/visuell läsbarhet i 16:9.
 - Elevprövning: får eleverna verklig återkoppling i rätt ögonblick och minst 20 minuter för eget bokarbete?
 - Full WCAG-/skärmläsargranskning har inte genomförts. Statusen är inte ”perfekt/färdigtestad”.
+
+## Avgränsad förbättring: resonemangskontroll (2026-11-12)
+
+- 8.1:s frivilliga självtest får ett andra led efter korrekt numeriskt svar: eleven måste välja ett fysikaliskt resonemang, får diagnosspecifik återkoppling vid felslut och kan först därefter öppna full beräkningslösning. Egen muntlig/skriftlig motivering rekommenderas, men bedöms **inte automatiskt**.
+- Originalets demonstration, Socrative 901, bokuppgifter 801–811 och figurer påverkas inte.
+- Modellens förutsägelsefråga på befintlig bild används i stället för en duplicerad digital fråga. Ingen extra obligatorisk lektionstid tillkommer.
+- En avgränsad lokal Chromium-kontroll av förklaringsflödet passerade tillsammans med 8.2 (36 av 36 testpunkter totalt i revisionsunderlaget). Detta ersätter inte kontroll på publicerad GitHub Pages eller elevprövning.
