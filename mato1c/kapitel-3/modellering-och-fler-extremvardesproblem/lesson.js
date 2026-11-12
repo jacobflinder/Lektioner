@@ -155,5 +155,5 @@ function drawFraction(){
  label(root,375,471,'x (lampor/dag)',{anchor:'middle',bold:true,size:compact?28:19});
 }
 drawFraction();
-window.addEventListener('resize',()=>{const newValue=window.innerWidth<720;if(newValue===compact)return;compact=newValue;drawSheet('box-start',5,true);updateBox();drawRectangle('rectangle-preview',.65);updateRect();drawFraction()});
+window.addEventListener('resize',()=>{const newValue=window.innerWidth<720;if(newValue===compact)return;compact=newValue;drawSheet('box-start',5,true);updateBox();drawRectangle('rectangle-preview',.65,{showBaseLabel:false});updateRect();drawFraction()});
 })();
