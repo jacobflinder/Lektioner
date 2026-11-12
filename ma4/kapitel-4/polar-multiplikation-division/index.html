@@ -24,14 +24,20 @@
 <p class="math">z₁ = 2(cos 30° + i sin 30°)</p><p class="math">z₂ = 3(cos 60° + i sin 60°), &nbsp; z₂ ≠ 0</p>
 <div class="sequence panel" data-sequence><div class="task"><strong>Förutsäg före varje klick</strong>Hur ändras längden? Hur ändras riktningen? Skriv först, klicka sedan.</div><div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div><div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilka två absolutbelopp och två argument har vi? Vad måste gälla för nämnaren?"><strong>1 · Identifiera storheterna</strong><p class="math">r₁ = 2, &nbsp; r₂ = 3</p><p class="math">v₁ = 30°, &nbsp; v₂ = 60°</p><p>Divisorn är inte noll eftersom r₂ = 3 &gt; 0.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vad är 2/3 och vad betyder det för kvotens längd?"><strong>2 · Dividera absolutbeloppen</strong><p class="math">|z₁/z₂| = r₁/r₂ = 2/3</p><p>Kvoten är kortare än z₁ eftersom vi dividerar dess längd med 3.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är 2/3 och vad betyder det för kvotens längd?"><strong>2 · Dividera absolutbeloppen</strong><p class="math">|z₁/z₂| = <span class="fraction"><span>r₁</span><span>r₂</span></span> = <span class="fraction"><span>2</span><span>3</span></span></p><p>Kvoten är kortare än z₁ eftersom vi dividerar dess längd med 3.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilken vinkel får kvoten när vi subtraherar nämnarens argument?"><strong>3 · Subtrahera argumenten</strong><p class="math">v = 30° − 60° = −30°</p><p>En lika giltig positiv vinkel är 330°.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Skriv kvoten i polär form och kontrollera genom att multiplicera tillbaka med z₂."><strong>4 · Skriv kvoten och kontrollera</strong>
 <div class="math-working"><p class="math">z₁/z₂ = (2/3)[cos(30° − 60°) + i sin(30° − 60°)]</p>
 <p class="math">= (2/3)(cos(−30°) + i sin(−30°))</p>
-<p class="math">= √3/3 − i/3</p></div>
+<p class="math">= <span class="fraction"><span>√3</span><span>3</span></span> − <span class="fraction"><span>1</span><span>3</span></span>i</p></div>
 <p>Kontroll i polär form: kvotens längd 2/3 multipliceras med 3 till 2, och vinkeln −30° adderas med 60° till 30°. Alltså får vi tillbaka z₁.</p></div>
-</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></section>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<details class="panel"><summary>Varför subtraheras vinklarna? Visa förklaringen</summary>
+<p>Om <span class="math">w = z₁/z₂</span>, måste <span class="math">wz₂ = z₁</span> för <span class="math">z₂ ≠ 0</span>. Vi använder multiplikationsregeln baklänges.</p>
+<div class="math-working"><p class="math">|w| · r₂ = r₁ ⇒ |w| = <span class="fraction"><span>r₁</span><span>r₂</span></span></p>
+<p class="math">arg(w) + v₂ = v₁ (mod 360°)</p>
+<p class="math">arg(w) = v₁ − v₂ (mod 360°)</p></div>
+<p>Det är därför division både <strong>delar absolutbeloppen</strong> och <strong>subtraherar argumenten</strong>.</p></details></section>
 <section id="plot" class="slide" data-teacher="Grafen visar själva operationen, inte bara slutresultatet. Start: z₁ och z₂. Första klicket: skala z₁ med |z₂| vid produkt, eller 1/|z₂| vid division; riktningen är oförändrad. Andra klicket: rotera med +60° eller −60°. Stanna upp före varje klick. Alla lägen använder samma axelskala.">
 <div class="eyebrow">04 · Undersök geometriskt · längd och riktning</div>
 <h2>Först skala – sedan rotera</h2>
@@ -53,7 +59,7 @@
 <button class="reveal" type="button" data-reveal="selfans">Visa återkoppling</button>
 <div class="answer hidden" id="selfans"><div class="math-working">
 <p class="math">|w₁w₂| = 4 · 2 = 8</p><p class="math">arg(w₁w₂) = 150° + 30° = 180°</p><p class="math">w₁w₂ = 8(cos 180° + i sin 180°) = −8</p>
-<p class="math">|w₁/w₂| = 4/2 = 2</p><p class="math">arg(w₁/w₂) = 150° − 30° = 120°</p><p class="math">w₁/w₂ = 2(cos 120° + i sin 120°)</p></div><p>Kontroll: den första produkten ligger på negativa realaxeln, kvoten i andra kvadranten.</p></div></section>
+<p class="math">|w₁/w₂| = <span class="fraction"><span>4</span><span>2</span></span> = 2</p><p class="math">arg(w₁/w₂) = 150° − 30° = 120°</p><p class="math">w₁/w₂ = 2(cos 120° + i sin 120°)</p></div><p>Kontroll: den första produkten ligger på negativa realaxeln, kvoten i andra kvadranten.</p></div></section>
 <section id="nok" class="slide" data-teacher="Original-PDF:en anger uppgifter 4217–4231 och tre nivåer eller mer. Använd den etablerade formuleringen minst tre av fem nivåer. Eleverna väljer efter svårighet under arbetet, utan digitala förhandsval.">
 <div class="eyebrow">06 · Eget arbete · NOKflex</div><h2>Jobba i NOKflex</h2>
 <div class="panel"><p class="lead">NOKflex → 4.2 Komplexa tal i polär form → Multiplikation och division i polär form</p>
@@ -70,7 +76,7 @@
 <button class="reveal" type="button" data-reveal="exitans">Visa återkoppling</button>
 <div class="answer hidden" id="exitans"><div class="math-working">
 <p class="math">|z₁z₂| = 3 · 2 = 6, &nbsp; v = 20° + 80° = 100°</p><p class="math">z₁z₂ = 6(cos 100° + i sin 100°)</p>
-<p class="math">|z₁/z₂| = 3/2, &nbsp; v = 20° − 80° = −60°</p><p class="math">z₁/z₂ = (3/2)(cos(−60°) + i sin(−60°))</p></div>
+<p class="math">|z₁/z₂| = <span class="fraction"><span>3</span><span>2</span></span>, &nbsp; v = 20° − 80° = −60°</p><p class="math">z₁/z₂ = (3/2)(cos(−60°) + i sin(−60°))</p></div>
 <p>Multiplikation ger vinkelsumman. Division gör den omvända rotationen och ger vinkeldifferensen. Kvotens argument kan också skrivas 300°.</p></div>
 <div class="panel"><strong>Dagens mål</strong><p>Jag kan multiplicera och dividera i polär form, visa både längd och vinkel i beräkningen och förklara resultatets riktning.</p><p>Vilken del kan jag göra utan hjälp? Vad behöver jag träna mer på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller lagring av elevsvar.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
 (()=>{'use strict';
