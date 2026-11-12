@@ -64,7 +64,12 @@
 </div>
 </header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Enskilt → par vid starten. Visa inte slutsatsen förrän eleverna försökt. Använd reglaget för gemensamma förutsägelser, inte som en ersättning för derivataberäkningarna och det självständiga bokarbetet.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Enskilt → par vid starten. Visa inte slutsatsen förrän eleverna försökt. Använd reglaget för gemensamma förutsägelser, inte som en ersättning för derivataberäkningarna och det självständiga bokarbetet.</small>
+<details class="route-guide"><summary><strong>Kärnväg · tid · vägval efter elevsvar</strong></summary>
+<p><strong>Kärnväg:</strong> start/grundmetod 1–2; förutsäg med fast graf och följ en flyttad ändpunkt 3–4 (kort demonstration, inte en fristående räknestuga); genomarbetat exempel 3156 stegvis 5; självständig tillämpning 6; minst 20 min sammanhängande bokarbete 7; individuell utcheckning och facit i två separata steg 8–9. Inget av originalets exempel eller läxa tas bort.</p>
+<p><strong>Tidsriktmärke vid cirka 70 minuter:</strong> start och mål 5–7 min; förutsägelse/intervallgraf 6–9 min; genomarbetat exempel 8–10 min; självständig uppgift 7–9 min; bokarbete minst 20 min; utcheckning och återkoppling 5–7 min. Justera efter schemat och prioriteringen av bokarbetet.</p>
+<p><strong>Beslutsregler:</strong> Om eleverna bara löser f′(x)=0, peka på ändpunkterna innan facit visas. Om eleverna har rätt kandidater men jämför x-värden i stället för funktionsvärden, gå direkt till steg 5:s värdetabell. Om egen uppgift i steg 6 görs korrekt utan hjälp, skydda boktid och förkorta resten av genomgången.</p>
+<p><strong>Fördröjd kontroll:</strong> nästa lektion, utan graf eller färdig lista: bestäm största/minsta värde för k(x)=−x²+6x på 0≤x≤5. Kontrollera att eleven använder båda ändpunkterna, stationär x=3, och skiljer själva värdet 9 från var det antas.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Gör beräkningarna på papper innan du visar återkoppling. Inga elevsvar sparas eller skickas.</div>
 <div class="stage" id="stage">
 
@@ -139,21 +144,23 @@
 <div>
 <div class="graph-control">
 <label for="right-bound">Högra intervallgränsen b</label>
-<input type="range" id="right-bound" min="3" max="5" step=".05" value="3" aria-describedby="range-readout">
+<input type="range" id="right-bound" min="3" max="5" step=".05" value="3" aria-describedby="right-bound-output">
 <output id="right-bound-output" for="right-bound">−2 ≤ x ≤ 3,00</output>
 <div class="graph-shortcuts" role="group" aria-label="Särskilda intervallgränser">
 <button type="button" class="secondary" data-bound="3">b = 3</button>
-<button type="button" class="secondary" data-bound="4.5">b = 4,5</button>
+<button type="button" class="secondary hidden" id="bound-45" data-bound="4.5">b = 4,5</button>
 <button type="button" class="secondary" data-bound="5">b = 5</button>
 </div>
 </div>
-<div class="graph-readout" id="range-readout" aria-live="polite">
+<button type="button" class="secondary" data-reveal="range-readout">Visa beräknad ändpunktshöjd efter förutsägelsen</button>
+<div class="graph-readout hidden" id="range-readout" aria-live="polite">
 <p><strong>Givet intervall:</strong> <span id="range-span">−2 till 3,00</span></p>
 <p><strong>Högra ändpunktens höjd:</strong> <span id="bound-value">f(3,00)=−8,50</span></p>
 </div>
 <button id="range-check" type="button">Kontrollera största och minsta värde</button>
 <p id="range-feedback" class="feedback" aria-live="polite" role="status"></p>
-<div class="threshold"><strong>Tänk särskilt på b = 4,5.</strong> Där kan det finnas <em>två olika x</em> där samma största värde antas.</div>
+<button type="button" class="secondary" data-reveal="range-special">Undersök gränsfallet där två x ger samma största värde</button>
+<div class="threshold hidden" id="range-special"><strong>Tänk särskilt på b = 4,5.</strong> Där kan det finnas <em>två olika x</em> där samma största värde antas. <button type="button" class="secondary" data-reveal="bound-45">Visa snabbvalet b = 4,5</button></div>
 </div>
 </div>
 </section>
@@ -183,11 +190,13 @@
 <div class="eyebrow">06 · Din tur · mindre stöd</div>
 <h2>Bestäm både värdet och var det antas</h2>
 <p class="mathline">h(x)=−x²+4x, &nbsp; 0 ≤ x ≤ 5</p>
-<div class="task"><strong>Skriv en fullständig lösning på papper.</strong>
-<ol class="spaced"><li>Bestäm stationära x-värden och lägg till intervallets ändpunkter.</li>
+<div class="task"><strong>Skriv en fullständig lösning utan steglista.</strong> Bestäm funktionens <strong>största och minsta värde</strong> på intervallet och ange <strong>var de antas</strong>. Motivera valet av alla kandidater och varför jämförelsen räcker.</div>
+<button type="button" class="secondary" data-reveal="own-original-steps">Visa originalets arbetsgång om du fastnar</button>
+<div id="own-original-steps" class="panel hidden"><ol class="spaced">
+<li>Bestäm stationära x-värden och lägg till intervallets ändpunkter.</li>
 <li>Beräkna funktionsvärdena vid alla kandidater.</li>
-<li>Ange största och minsta <strong>värde</strong> samt de <strong>x-värden</strong> där de antas.</li></ol>
-</div>
+<li>Ange största och minsta värde samt x-värdena där de antas.</li>
+</ol></div>
 <div class="panel">
 <strong>Kontrollera när din lösning är färdig</strong>
 <div class="input-grid">
