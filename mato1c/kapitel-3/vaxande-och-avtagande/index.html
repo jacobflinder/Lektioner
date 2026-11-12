@@ -18,7 +18,13 @@
   </div>
 </header>
 <main>
-<div class="teacher" id="teacher-panel"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Ställ matematikfrågan, ge tid för ett eget försök, använd sedan återkoppling. Eleverna behöver inte ha datorerna öppna under klassgenomgången.</small></div>
+<div class="teacher" id="teacher-panel"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Ställ matematikfrågan, ge tid för ett eget försök, använd sedan återkoppling. Eleverna behöver inte ha datorerna öppna under klassgenomgången.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tidsprioritering och beslut</strong></summary>
+<p><strong>Kärnväg:</strong> steg 1–6 och 8–10. Steg 7 om x³ är ett relevant motexempel för just elevgruppen – annars nås bokarbetet direkt med Nästa. Ingen central bokuppgift, läxa eller utcheckning hoppas över.</p>
+<p><strong>Riktmärke om lektionen är cirka 70 minuter:</strong> start/mål 5–7 min; graf, teckentabell och gemensamt exempel 12–17 min; elevens eget försök 6–8 min; minst 20 min sammanhängande eget bokarbete; utcheckning/återkoppling 4–6 min. Resterande tid är lärarens marginal för stöd och övergångar. Anpassa efter faktiskt schema.</p>
+<p><strong>Avläs elevsvaren:</strong> Om flera bedömer derivatan utifrån grafens höjd, stanna i steg 3 och jämför f(0) med f′(0). Om tecknen stämmer men motiveringen saknas, låt eleverna skriva testvärden i steg 5 innan facit. Om den egna uppgiften fungerar, gå direkt till boken.</p>
+<p><strong>Följ upp nästa lektion:</strong> låt alla utan graf avgöra tecknen för f′(x)=2x−4 vid x=1 och x=3. Lyssna särskilt efter sammanblandning av tecken och funktionsvärde. Notera bara mönster på klassnivå.</p>
+</details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Skriv en lösning innan du öppnar återkopplingen. Grafen är ett stöd; öva också utan den. Inga personuppgifter eller elevsvar skickas eller lagras.</div>
 <div class="stage" id="stage">
   <section class="slide active" id="start" data-teacher="Börja direkt med grafen. Två minuter enskilt, sedan kort parjämförelse. Låt eleverna peka ut lutningarnas tecken utan att visa lösningen. Obs: lektionens PDF hade inga Socrative-inslag.">
@@ -62,7 +68,7 @@
     <div class="two">
       <div class="plot-box"><svg id="tangent-graph" class="svg-large" viewBox="0 0 720 450" role="img" aria-label="Graf med tangent som kan flyttas med ett reglage. Grafens och tangentens koordinater beräknas från samma funktion."></svg></div>
       <div>
-        <div class="task"><strong>Förutsäg först</strong>Kan <span class="math">f(x) &gt; 0</span> samtidigt som <span class="math">f′(x) &lt; 0</span>? Välj en punkt och motivera innan du flyttar tangenten.</div>
+        <div class="task"><strong>Förutsäg först.</strong> Kan <span class="math">f(x) &gt; 0</span> samtidigt som <span class="math">f′(x) &lt; 0</span>? Välj en punkt och motivera innan du flyttar tangenten.</div>
         <label for="tangent-x"><strong>Välj tangentpunktens x-värde</strong></label>
         <div class="graph-controls"><input id="tangent-x" type="range" min="-1.8" max="1.8" step="0.05" value="0" aria-describedby="tangent-info"><output id="tangent-x-number" for="tangent-x">0,00</output></div>
         <div class="dynamic-readout" id="tangent-info" aria-live="polite">
@@ -131,7 +137,7 @@
     <div class="eyebrow">06 · Eget försök · mindre stöd</div>
     <h2>Samma idé – ny funktion</h2>
     <p class="math math-big">f(x) = 3x² − 12x</p>
-    <div class="task"><strong>Lös på papper först.</strong> Bestäm var funktionen växer och avtar. Visa derivata, nollställe, testvärden, teckentabell och slutsats med intervall.</div>
+    <div class="task"><strong>Lös utan steglista på papper först.</strong> Bestäm var funktionen växer och avtar. Motivera ditt svar så att någon annan kan följa hur du tänkte. Öppna stödet bara om du fastnar.</div>
     <div class="check-row">
       <label for="own-zero">Mitt nollställe till derivatan: <span class="math">x = </span></label><input id="own-zero" inputmode="decimal" placeholder="x-värde">
     </div>
@@ -152,11 +158,13 @@
       <p><strong>Avtagande</strong> för <span class="math">x ≤ 2</span>; <strong>växande</strong> för <span class="math">x ≥ 2</span>.</p>
       <p>Extra: skissa en graf som stämmer. Vid <span class="math">x=2</span> är tangenten horisontell, så punkten kan ingå i båda de slutna monotoniintervallen.</p>
     </div>
+    <button type="button" class="secondary" data-go="exception">Valbart motexempel: f′(0)=0 utan extrempunkt</button>
   </section>
 
-  <section class="slide" id="exception" data-teacher="Kort begreppslig kontrast: f′=0 är inte tillräckligt för ett extremum. Motexemplet x³. Låt eleverna rösta efter enskilt beslut och förklara. Fortsätt därefter till boken.">
-    <div class="eyebrow">07 · Fördjupning · viktigt motexempel</div>
+  <section class="slide" id="exception" data-optional="true" data-teacher="Kort begreppslig kontrast: f′=0 är inte tillräckligt för ett extremum. Motexemplet x³. Låt eleverna rösta efter enskilt beslut och förklara. Fortsätt därefter till boken.">
+    <div class="eyebrow">07 · Valbar fördjupning · viktigt motexempel</div>
     <h2>Räcker det att derivatan är noll?</h2>
+    <p class="muted">Det här steget är valbart och kan öppnas vid behov. Nästa steg i kärnvägen är bokarbetet.</p>
     <p class="math math-big">g(x) = x³ &nbsp; ⇒ &nbsp; g′(x) = 3x² &nbsp; ⇒ &nbsp; g′(0) = 0</p>
     <div class="panel" data-quiz data-correct-text="Rätt. Derivatan är positiv på båda sidor om 0, så funktionen fortsätter att växa. Ingen extrempunkt." data-wrong-text="Undersök derivatans tecken på båda sidor: g′(−1) = 3 och g′(1) = 3. Ändrar derivatan tecken?">
       <div class="task"><strong>Ta ställning och motivera</strong>Är påståendet sant: ”Horisontell tangent betyder alltid en topp eller en dal”?</div>
@@ -168,6 +176,7 @@
       <p class="math">g′(−1) = 3 &gt; 0, &nbsp; g′(0) = 0, &nbsp; g′(1) = 3 &gt; 0</p>
       <p>Derivatan har tecknen <span class="math">+ &nbsp; 0 &nbsp; +</span>. Grafen har en horisontell tangent vid <span class="math">x=0</span> men ingen topp eller dal där.</p>
     </div>
+    <button type="button" class="secondary" data-go="book">Till självständigt bokarbete →</button>
   </section>
 
   <section class="slide" id="book" data-teacher="Bevara lång sammanhängande boktid, exempelvis inledningsvis cirka 20 minuter lugnt arbete. Uppgifterna och läxan är direkt hämtade från original-PDF s. 8 och 10. Minst två av bokens tre nivåer – inte Ma4:s fem nivåer.">
