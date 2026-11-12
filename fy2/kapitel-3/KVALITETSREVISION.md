@@ -27,7 +27,7 @@
 | Räknestuga 1 | 8 PDF-sidor inkl. stöd / 7 webbsidor | veckans två läxor | två målstyrda arbetspass, mindmap och stöd vid behov |
 | Ström ger magnetfält | 18 / 19 | s. 149–153; 324–334, läxa 325–334 | cirkelfält, högerhandsregel, B som funktion av I och r |
 | Spolar och solenoider | 15 / 15 | s. 154–161; 335–342 | korrekt 3D-lindning, L, N, I, radie, hel fältutbredning, järnkärna |
-| Laddade partiklar | 18 / 18 | s. 162 och 164–166; 343–350 | tecken, partikelbana, F vinkelrätt mot v, kraft på ledare |
+| Laddade partiklar | 18 / 19 | s. 162 och 164–166; 343–350 | tecken, partikelbana, F vinkelrätt mot v, kraft på ledare |
 | Jordens magnetfält | 15 / 15 | s. 167–170; 351–357 | inklination / missvisning / α och vektorsumma |
 | Induktion | 24 / 24 | s. 171–182; 358–366 (denna och nästa lektion) | laddningsseparation, U=BLv, Φ, Lenz, graflutning |
 | Räknestuga 2 | kompletterande / 4 | 343–350 och 351–357 | begrepp, riktning, SI-insättning och korrekt utcheckning |
@@ -62,6 +62,18 @@ Efter att formgivningen återställts visade användarens skärmbild av Induktio
 - PDF:ens 18 bilder, bokhänvisningar 162 samt 164–166, uppgifter 343–350 och de två riktiga klassrumsdemonstrationerna är kvar.
 
 **Kontroller utförda:** båda kodkällorna är synkroniserade med den publicerbara, självständiga HTML-sidan; 18 bilder och inga dubbla ID:n; 180 kombinationer av v, B, tecken, riktning och tidsläge har kontrollerats matematiskt för att F·v=0 samt att kraft- och hastighetspilar ryms i bildområdet. JavaScript-test visar också att Starta/Pausa fungerar, att kraften inledningsvis döljs, att B/v förändrar grafik och återkoppling, att enbart I eller B vänder kraften och att båda tillsammans lämnar kraften oförändrad. Separata tester visar att klassrumsläget inte avslöjar svaret före lärarens återkoppling och att repetition ger direkt återkoppling. Chromium-testscriptet har fått nya tester för dessa funktioner. **Verklig rendering i publicerad Safari/iPad kvarstår.**
+
+## Ny granskning av laddade partiklar – 12 november 2026
+
+Efter användarens genomgång har följande särskilda fel rättats i `laddade-partiklar`:
+
+- **Tre-fingerregeln:** Tummen visar alltid den konventionella strömriktningen. För en elektron som rör sig åt höger pekar tummen åt vänster. Pekfinger följer B; långfinger visar F direkt. Inget extra steg där kraften vänds efteråt. Förklaringen i huvudtext, genomarbetat exempel, interaktiv återkoppling och lärarstöd är reviderad.
+- **PDF-fotot:** Originalbilden av handen på PDF-bild 4 har extraherats och lagts i webbild 4. Den komprimerade bildfilens kodade bytesträng är kontrollerad med kontrollsumma.
+- **Banradien:** Originalets 18 bilder finns kvar, och en 19:e bild har lagts in direkt efter kraftformeln. Den låter eleverna klicka fram centripetalkraften, jämställa med magnetkraften och härleda `mv²/r=qvB ⇒ r=mv/(qB)`. Symbolen q används som positiv laddningsstorlek i skalärberäkningar i enlighet med projektets fastslagna notation.
+- **Fältfigurer:** statiska partikelbilder har tätare, jämnt fördelade fältmarkeringar. Dubbla etiketter som överlappade fältmarkeringarna har tagits bort, och figurtexten klargör grön vektor v, orange F och kryss = inåt.
+- **Navigering:** återstående bildrubriker är renumrerade till 19, och automatiska webbläsartestet förväntar sig 19 och kontrollerar även handbilden och den klickbara härledningen.
+
+**Kontroller genomförda:** JavaScript-filerna har syntaxtestats, den publiceringsbundna HTML-sidan har synkroniserats med källfilerna, alla 19 sektioner har kontrollerats i renderad HTML-struktur och originalbildens data är kontrollerade mot en oberoende kontrollsumma. **Kvar:** faktisk visuellt renderad kontroll i Safari/iPad samt klassrumspilot; inga påståenden görs om sådana tester förrän de genomförts.
 
 ## Rättningar genomförda under revisionen
 
