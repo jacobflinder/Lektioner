@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="sv"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Funktionens graf och derivatornas grafer · Matematik – fortsättning, nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.deriv-label{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.14rem,2vw,1.48rem)}
+.deriv-label sup{font-size:.68em}
+.graph-board{border:1px solid #cbdae5;background:#f8fbfd;border-radius:13px;padding:12px;min-width:0}
+.graph-board svg{display:block;width:100%;height:auto}
+.graph-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.graph-header strong{color:#1d5d70}
+.graph-legend{font-size:.83rem;color:#486778}
+.graph-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(260px,2fr);gap:15px;margin-top:14px}
+.readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0}
+.readout{background:#f0f6f8;border:1px solid #c9dbe3;padding:10px;border-radius:10px;min-width:0}
+.readout span{font-size:.83rem;color:#4c6574;display:block}
+.readout output{display:block;font-weight:780;font-size:clamp(.94rem,1.6vw,1.21rem);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.graph-btns{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.graph-btns button{padding:8px 13px}
+.graph-btns button[aria-pressed=true]{background:#078274;color:white}
+.math-work{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.2rem,2.4vw,1.7rem);line-height:1.65}
+.math-work sup{font-size:.68em}
+.math-sm{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.12em}
+.interaction-controls{padding:12px 14px;background:#f0f7f9;border:1px solid #c2d6df;border-radius:11px}
+.interaction-controls label{display:block;font-weight:760}
+.interaction-controls input[type=range]{width:100%;accent-color:#087d70;min-height:29px}
+.interaction-controls output{font-weight:780;font-variant-numeric:tabular-nums}
+.quiz-selects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+.quiz-selects label{display:block;font-weight:730}
+.quiz-selects select,.quiz-selects input,.check-grid input,.check-grid select{font:inherit;border:2px solid #98b7c7;padding:8px;border-radius:8px;color:#17334b;background:white;width:100%;min-width:0}
+.check-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+.check-grid label{display:block;font-weight:730}
+.graph-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.graph-compare>.graph-board{margin:0}
+.book-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.book-levels>div{padding:16px 14px;background:#f3f8fa;border:1px solid #cedee6;border-radius:12px}
+.book-levels strong{display:block;color:#076a65;font-size:1.12rem}
+.book-levels b{display:block;font-size:1.17rem;margin-top:7px}
+.clean-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:12px 0;font-size:clamp(.84rem,1.5vw,1rem)}
+.clean-table td,.clean-table th{border:1px solid #bcd3dd;text-align:center;padding:7px 4px;overflow-wrap:anywhere}
+.clean-table th{background:#e4eff5}
+.teacher-warning{border-left:4px solid #b78322;background:#fff7e9;padding:12px 15px;border-radius:8px}
+.key-insight{border-left:4px solid #0c8476;background:#eaf6f2;padding:12px 15px;border-radius:8px}
+.shaft{font-weight:800;color:#0b776b}
+.slope-readout{font-size:.91rem;color:#305b6f;margin:8px 0}
+@media(max-width:930px){.graph-grid,.graph-compare{grid-template-columns:1fr}}
+@media(max-width:680px){.quiz-selects,.check-grid,.book-levels,.readouts{grid-template-columns:1fr}.graph-board{padding:7px}.readout{padding:8px}}
+</style></head>
+<body>
+<header>
+<a href="../">← Kapitel 3</a>
+<strong>Matematik – fortsättning, nivå 1c · 3.1</strong>
+<div class="head-actions">
+<button id="ink-toggle" type="button" class="secondary" aria-expanded="false">Visa skrivyta</button>
+<button id="teacher-toggle" type="button" class="secondary" aria-expanded="false">Visa lärarstöd</button>
+<button id="mode" type="button" class="secondary" aria-pressed="false">Klassrumsläge</button>
+</div>
+</header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Starta med elevernas egna formuleringar. Styr från fråga till motiverad återkoppling. De interaktiva modellerna ersätter inte arbete på papper och i boken.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Skriv din förutsägelse innan du rör modellen och pröva slutsatsen utan modellen efteråt. Inga elevsvar eller personuppgifter sparas eller skickas.</div>
+<div class="stage" id="stage">
+
+<section class="slide active" id="start" data-teacher="Källa: original-PDF s.1. Cirka 3 min. Enskilt → par → kort gemensam återkoppling. Svar: f<0 och f′>0. Andraderivatans tecken kan vara positivt, negativt eller noll. Håll lösningsexemplen dolda tills eleven svarat.">
+<div class="eyebrow">01 · Start · tänk före återkoppling</div>
+<h1>Under x-axeln – men stiger!</h1>
+<p class="lead">En graf ligger under x-axeln men stiger åt höger.</p>
+<div class="task"><strong>Skriv själv först. Jämför sedan med en kamrat.</strong>
+<ol class="spaced"><li>Vilket tecken har <span class="math-sm">f(x)</span>?</li>
+<li>Vilket tecken har <span class="math-sm">f′(x)</span>?</li>
+<li>Måste <span class="math-sm">f″(x)</span> vara positiv? Motivera med ett eget exempel.</li></ol>
+</div>
+<div class="notice"><strong>Undvik en vanlig sammanblandning:</strong> Grafens <em>höjd</em> är inte detsamma som dess <em>lutning</em>.</div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling</button>
+<div id="start-answer" class="answer hidden">
+<p><strong>f(x) &lt; 0</strong> och <strong>f′(x) &gt; 0</strong>. Andraderivatans tecken är inte bestämt av detta.</p>
+<p>Vid x = 0 ger alla tre exemplen negativt funktionsvärde och positiv derivata, men olika andraderivata:</p>
+<p class="math-work">f₁(x)=x−3: &nbsp; f₁″(0)=0</p>
+<p class="math-work">f₂(x)=x²+x−3: &nbsp; f₂″(0)=2</p>
+<p class="math-work">f₃(x)=−x²+x−3: &nbsp; f₃″(0)=−2</p>
+<p>Alla tre har <span class="math-sm">f(0)=−3</span> och <span class="math-sm">f′(0)=1</span>, men kröker olika eller inte alls.</p>
+</div>
+</section>
+
+<section class="slide" id="goal" data-teacher="Källa: original-PDF s.1, målen efter startfrågan. Dessa mål återkommer ordagrant i sista steget. Låt eleverna peka på vilken matematik de kommer att kunna göra, inte bara namnen på derivatorna.">
+<div class="eyebrow">02 · Lektionsmål</div>
+<h2>Tre grafer – samma samband</h2>
+<div class="panel">
+<p>Efter lektionen ska du kunna:</p>
+<ol class="spaced">
+<li><strong>Koppla ihop</strong> graferna för <span class="math-sm">f</span>, <span class="math-sm">f′</span> och <span class="math-sm">f″</span>.</li>
+<li><strong>Motivera</strong> när funktionen växer och avtar samt vilken typ av punkt grafen har.</li>
+<li><strong>Skissa en möjlig funktion</strong> när du känner till derivatans graf.</li>
+</ol>
+</div>
+<p class="lead">Du kan beskriva hur en funktion förändras även när du inte känner dess formel.</p>
+<div class="key-insight"><strong>Håll reda på tre frågor:</strong> Var ligger grafen? Hur lutar den? Hur ändras lutningen?</div>
+</section>
+
+<section class="slide" id="linked" data-teacher="Källa: original-PDF s.2. Det finns inga funktionsformler för den visade trion i originalet. Här används en EXAKT algebraisk modell vald för att efterlikna nollställena 2,6 och inflexionen 4. Börja med att peka vid x=2,4,6 och be eleverna förutsäga lutningens tecken före slider. Flytta sedan markören med samma x genom alla tre kurvor. Resonemang minst lika viktigt som klicken.">
+<div class="eyebrow">03 · Undersök samma x i tre grafer</div>
+<h2>En punkt på f – en höjd på f′ – en lutning hos f′</h2>
+<div class="task"><strong>Förutsäg innan du flyttar markören:</strong> Vid vilka x är <span class="math-sm">f′(x)=0</span>? Var är <span class="math-sm">f′(x)</span> störst? Vad betyder det för <span class="math-sm">f</span>?</div>
+<div class="graph-grid">
+<div>
+<div class="graph-board">
+<div class="graph-header"><strong>En gemensam x-markör</strong><span class="graph-legend">Grön: f · Röd: f′ · Ockra: f″</span></div>
+<svg id="linked-plot" viewBox="0 0 780 595" role="img" aria-label="Tre vertikalt arrangerade grafer f, f prim och f dubbelprim med samma flyttbara x-markör. f har minimipunkt vid x 2, maximipunkt vid x 6; f prim har nollställen 2 och 6, maximum 4; f dubbelprim byter tecken vid x 4."></svg>
+</div>
+</div>
+<div>
+<div class="interaction-controls">
+<label for="linked-x">Undersök ett x-värde</label>
+<input type="range" id="linked-x" min="0" max="8" step="0.25" value="2" aria-describedby="linked-readouts">
+<div class="graph-btns" role="group" aria-label="Välj särskilt x-värde">
+<button type="button" class="secondary" data-focus-x="2">x = 2</button>
+<button type="button" class="secondary" data-focus-x="4">x = 4</button>
+<button type="button" class="secondary" data-focus-x="6">x = 6</button>
+</div>
+<output id="linked-x-value" for="linked-x">x = 2,00</output>
+</div>
+<div class="readouts" id="linked-readouts" aria-live="polite">
+<div class="readout"><span>Höjd på f</span><output id="val-f">f = 0,83</output></div>
+<div class="readout"><span>Lutning hos f</span><output id="val-d1">f′ = 0,00</output></div>
+<div class="readout"><span>Lutning hos f′</span><output id="val-d2">f″ = 1,00</output></div>
+</div>
+<p class="small-note">Diagrammen använder ett eget matematiskt exakt exempel med samma kritiska x-värden och teckenmönster som originalets skiss.</p>
+<div class="check-panel">
+<strong>Bestäm vad som händer vid de tre x-värdena</strong>
+<div class="quiz-selects">
+<div><label for="class-2">Vid x = 2</label><select id="class-2"><option value="">Välj</option><option value="min">Minimum</option><option value="max">Maximum</option><option value="infl">Inflexion</option></select></div>
+<div><label for="class-4">Vid x = 4</label><select id="class-4"><option value="">Välj</option><option value="min">Minimum</option><option value="max">Maximum</option><option value="infl">Inflexion</option></select></div>
+<div><label for="class-6">Vid x = 6</label><select id="class-6"><option value="">Välj</option><option value="min">Minimum</option><option value="max">Maximum</option><option value="infl">Inflexion</option></select></div>
+</div>
+<button type="button" id="check-classes">Kontrollera mina resonemang</button>
+<p class="feedback" id="class-feedback" role="status" aria-live="polite"></p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="interpret" data-teacher="Original-PDF s.2 lärarstöd s.6. Detta är återkoppling till graferna, inte tre nya genomgångar. Be varje par förklara en av punkterna och få svar från paren eller tyst skrift. Vid x4 är f′=1 inte noll: inflexion men ingen terrass. Enbart f″(a)=0 ger inte inflexion generellt – krökningen måste byta riktning.">
+<div class="eyebrow">04 · Från graf till slutsats</div>
+<h2>Varför är x = 4 ingen terrasspunkt?</h2>
+<div class="task"><strong>Förklara för en kamrat:</strong> Vid x = 4 är <span class="math-sm">f″(4)=0</span>. Varför är det ändå <em>inte</em> en terrasspunkt?</div>
+<div class="panel">
+<table class="clean-table">
+<thead><tr><th>x</th><th>f′(x)</th><th>f″(x)</th><th>Slutsats för f</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>0</td><td>positiv</td><td>Minimipunkt</td></tr>
+<tr><td>4</td><td>positiv</td><td>0, teckenbyte</td><td>Inflexionspunkt</td></tr>
+<tr><td>6</td><td>0</td><td>negativ</td><td>Maximipunkt</td></tr>
+</tbody>
+</table>
+<p>För x mellan 2 och 6 är <span class="math-sm">f′(x)&gt;0</span>: funktionen växer. Före 2 och efter 6 avtar den.</p>
+</div>
+<button type="button" data-reveal="interpret-answer" class="reveal">Visa den avgörande motiveringen</button>
+<div id="interpret-answer" class="answer hidden">
+<p>Vid <span class="math-sm">x=4</span> är <strong>f′(4)=1</strong> och <strong>f″(4)=0</strong>. Andraderivatan byter från positiv till negativ: krökningen byter riktning. Alltså <strong>inflexionspunkt</strong> men <strong>inte terrasspunkt</strong> (tangenten är inte horisontell).</p>
+<p>Andraderivatans nollställe ensamt räcker inte som inflexionsbevis; kontrollera teckenbyte eller kurvans form.</p>
+</div>
+<button type="button" class="secondary" data-reveal="triple-formula">Visa uttrycken bakom det exakta grafexemplet</button>
+<div id="triple-formula" class="panel hidden">
+<p class="math-work">f(x)=−x³/12 + x² − 3x + 7/2</p>
+<p class="math-work">f′(x)=−(x−2)(x−6)/4</p>
+<p class="math-work">f″(x)=2−x/2</p>
+<p>Detta är en egen funktion som ger kurvorna i webbmodellen. Original-PDF:en anger inte denna formel.</p>
+</div>
+</section>
+
+<section class="slide" id="example" data-teacher="Original-PDF s.3. g′(x)=−1 ger familjen g=−x+C. Visa g1=−x och g2=−x+2. Förutsäg innan vart och ett av de två matematiska stegen. Demonstrationsfiguren visar parallella linjer med samma lutning.">
+<div class="eyebrow">05 · Genomarbetat exempel</div>
+<h2>Samma derivata – olika funktioner</h2>
+<p class="math-work">g′(x)=−1</p>
+<div class="two">
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Tänk först:</strong> Hur måste en funktionsgraf se ut om tangentens lutning är −1 överallt?</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilken typ av graf har konstant negativ lutning?"><strong>1 · Beskriv formen</strong><p>En <strong>fallande rät linje</strong>. När x ökar med 1 minskar g med 1.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Ge två olika linjära funktioner med samma lutning −1."><strong>2 · Skriv två möjligheter</strong><p class="math-work">g₁(x)=−x</p><p class="math-work">g₂(x)=−x+2</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är derivatan av båda uttrycken?"><strong>3 · Kontrollera</strong><p class="math-work">g₁′(x)=g₂′(x)=−1</p><p>De kan flyttas i höjdled och fortfarande ha exakt samma derivata.</p></div>
+</div>
+<div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Föregående</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Återställ</button></div>
+<p class="muted" data-seq-count></p>
+</div>
+<div class="graph-board">
+<div class="graph-header"><strong>Två parallella linjer</strong><span class="graph-legend">Konstant skillnad 2 i höjd</span></div>
+<svg id="parallel-graph" viewBox="0 0 560 370" role="img" aria-label="Graferna g1 lika med minus x och g2 lika med minus x plus två, två parallella fallande linjer med identisk lutning minus ett."></svg>
+</div>
+</div>
+</section>
+
+<section class="slide" id="own" data-teacher="Original-PDF s.3 elevförsök: f′(x)=2x−4. Eleverna ska först lösa nollställe, göra teckentabell, skissa TVÅ parabler och beskriva f″. Kontrollera först efter eget försök på papper. Demonstrera sedan vertikal förskjutning C: derivatan och andraderivatan ändras inte. Bevara originalets f1=(x−2)² och f2=(x−2)²+3.">
+<div class="eyebrow">06 · Din tur · gradvis minskat stöd</div>
+<h2>Från derivatan till en möjlig funktion</h2>
+<p class="math-work">f′(x)=2x−4</p>
+<div class="task"><strong>Skriv själv före digital kontroll:</strong>
+<ol class="spaced"><li>Lös <span class="math-sm">2x−4=0</span> och gör en teckentabell.</li>
+<li>Skissa <strong>två</strong> möjliga grafer för f.</li>
+<li>Beskriv grafen till <span class="math-sm">f″</span>. Jämför dina resonemang i par.</li></ol></div>
+<div class="check-grid">
+<div><label for="own-root">Nollställe för f′: x =</label><input id="own-root" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
+<div><label for="own-shape">Vilken form har f?</label><select id="own-shape"><option value="">Välj</option><option value="up">Uppåtvänd parabel</option><option value="down">Nedåtvänd parabel</option><option value="line">Rät linje</option></select></div>
+<div><label for="own-second">f″(x) =</label><input id="own-second" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
+</div>
+<button id="check-own" type="button">Kontrollera efter eget försök</button>
+<p id="own-feedback" class="feedback" role="status" aria-live="polite"></p>
+<button type="button" class="reveal" data-reveal="own-answer">Visa hela lösningen efter mitt försök</button>
+<div id="own-answer" class="answer hidden">
+<p class="math-work">2x−4=0 ⇒ x=2</p><p>Derivatans tecken: <span class="shaft">− &nbsp; 0 &nbsp; +</span>. Därför har f ett minimum vid x=2.</p>
+<p class="math-work">f₁(x)=(x−2)²</p><p class="math-work">f₂(x)=(x−2)²+3</p>
+<p>Båda ger <span class="math-sm">f′(x)=2x−4</span>. Andraderivatan <span class="math-sm">f″(x)=2</span> är en horisontell linje ovanför x-axeln.</p>
+</div>
+<button type="button" class="secondary" data-reveal="shift-reveal">Öppna visualiseringen efter din skiss</button>
+<div id="shift-reveal" class="panel hidden">
+<p><strong>Vad händer när du ändrar konstanten C?</strong> Förutsäg innan du flyttar reglaget.</p>
+<div class="graph-grid">
+<div class="graph-board"><svg id="shift-graph" viewBox="0 0 650 365" role="img" aria-label="Två uppåtvända parabler, en fast f1 lika med x minus två i kvadrat och en rörlig vertikal förskjutning C."></svg></div>
+<div>
+<div class="interaction-controls"><label for="shift-c">Ändra höjdförskjutningen C</label><input id="shift-c" type="range" min="0" max="3" step=".5" value="3">
+<output id="shift-c-output" for="shift-c">C = 3,0</output></div>
+<p id="shift-description" class="math-work">f₂(x)=(x−2)²+3</p>
+<p class="slope-readout">Derivatan förblir <span class="math-sm">2x−4</span> och andraderivatan är fortfarande <span class="math-sm">2</span>.</p>
+<button type="button" class="secondary" id="shift-reset">Visa originalets C = 3</button>
+</div></div>
+<p class="key-insight"><strong>Slutsats:</strong> En bestämd derivata ger samma lutning vid varje x, men funktionen kan skilja sig med en konstant.</p>
+</div>
+</section>
+
+<section class="slide" id="book" data-teacher="Original-PDF s.4: här ligger huvudtiden. Uppgifter 3146–3149 nivå1, 3150–3152 nivå2, 3153–3154 nivå3. 3148 instruktionen rita med digitalt verktyg bevaras. Minst två nivåer. Börja 20 min tyst individuellt, sedan jämför en lösning i par. Läxa exakt 3149 och 3150; redan klar extra 3153, skriv motiveringar. Ingen färdig Socrative finns i originalet.">
+<div class="eyebrow">07 · Självständigt bokarbete</div>
+<h2>Öva, förklara, kontrollera</h2>
+<p class="lead">Boken <strong>s. 154–155</strong> · Arbeta med <strong>minst två av de tre nivåerna</strong>.</p>
+<div class="book-levels">
+<div><strong>Nivå 1</strong><b>3146–3149</b><p>Koppla formel och graf. Beskriv f, f′ och f″.</p><p><strong>3148:</strong> Rita med digitalt verktyg.</p></div>
+<div><strong>Nivå 2</strong><b>3150–3152</b><p>Jämför lutningar. Skissa från givna egenskaper. Motivera punkttyp.</p></div>
+<div><strong>Nivå 3</strong><b>3153–3154</b><p>Tolka derivatans graf. Skilj extremum från terrass. Kombinera två teckenvillkor.</p></div>
+</div>
+<div class="task"><strong>Börja med 20 minuter lugnt eget arbete.</strong> Försök själv. Kontrollera. Rätta och förklara dina fel. Därefter: jämför en lösning med en kamrat och fortsätt på nästa nivå.</div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3149 och 3150</strong>. Redan klar? Gör <strong>3153</strong>. Skriv motiveringar – inte bara svar.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="Original-PDF s.5 och lärarstöd s.6. Individuell kontroll i häftet. h′=(x−1)(x−3): h växer x<1 och x>3, avtar 1<x<3; x1 max, x3 min; h″=2x−4 byter tecken vid x2, inflexion, ej terrass då h′(2)=−1. En funktion h=x³/3−2x²+3x+C, och en annan med annan C. Extra p′=(x−2)² ger terrass vid x2. Socrative var en MÖJLIGHET i lärarstödet, ingen quiz finns: skapa inget automatiskt. Motivera alla slutsatser.">
+<div class="eyebrow">08 · Individuell utcheckning</div>
+<h2>Kan du läsa sambanden själv?</h2>
+<p class="lead">Svara enskilt. Motivera med derivatans tecken och lutning.</p>
+<div class="two">
+<div class="graph-board">
+<strong class="graph-header">Grafen till h′(x)=(x−1)(x−3)</strong>
+<svg id="exit-derivative" viewBox="0 0 570 390" role="img" aria-label="Derivatan h prim lika med x minus ett gånger x minus tre, parabel med nollställen ett och tre och minimivärde minus ett vid x två."></svg>
+<p class="graph-legend">Här är det <strong>derivatans graf</strong> du ser, inte h:s graf.</p>
+</div>
+<div>
+<div class="task"><strong>Lös på papper utan andra grafer:</strong>
+<ol class="spaced"><li>Var växer respektive avtar h?</li>
+<li>Vid vilka x har h maximi- och minimipunkt?</li>
+<li>Var byter h″ tecken? Är punkten på h en inflexions- eller terrasspunkt?</li>
+<li>Skissa en möjlig graf till h. Rita en till med samma derivata.</li></ol>
+</div>
+<div class="notice"><strong>Extra kontroll:</strong> <span class="math-sm">p′(x)=(x−2)²</span>. Vilken punkttyp har p vid x=2? Varför?</div>
+</div></div>
+<button type="button" class="reveal" data-reveal="exit-answer">Visa lösningen först när du har svarat</button>
+<div id="exit-answer" class="answer hidden">
+<p><strong>1.</strong> <span class="math-sm">h′(x)&gt;0</span> när <span class="math-sm">x&lt;1</span> eller <span class="math-sm">x&gt;3</span>. h växer där; h avtar för <span class="math-sm">1&lt;x&lt;3</span>.</p>
+<p><strong>2.</strong> Vid <span class="math-sm">x=1</span> byter h′ tecken <span class="math-sm">+→−</span>: lokal maximipunkt. Vid <span class="math-sm">x=3</span> blir det <span class="math-sm">−→+</span>: lokal minimipunkt. Utan vald vertikal förskjutning känner vi inte punkternas höjder.</p>
+<p><strong>3.</strong> <span class="math-sm">h″(x)=2x−4</span> byter från minus till plus vid <span class="math-sm">x=2</span>. Där har h en <strong>inflexionspunkt</strong> men <strong>ingen terrasspunkt</strong>, eftersom <span class="math-sm">h′(2)=−1</span>.</p>
+<p><strong>4.</strong> Ett exempel är <span class="math-sm">h₁(x)=x³/3−2x²+3x</span>. Ett andra exempel är <span class="math-sm">h₂(x)=h₁(x)+2</span>. Båda har samma derivata.</p>
+<p><strong>Extra:</strong> <span class="math-sm">p′(x)=(x−2)²</span> är positiv på båda sidor om 2 och noll vid 2. <span class="math-sm">p″(x)=2(x−2)</span> byter tecken: <strong>terrasspunkt</strong> vid x=2. Höjden bestäms inte av p′ ensam.</p>
+</div>
+<div class="panel">
+<h3>Dagens mål – kan du visa dem?</h3>
+<p>Koppla <span class="math-sm">f</span>, <span class="math-sm">f′</span> och <span class="math-sm">f″</span>. Motivera förändring och punkttyp. Skissa en funktion från derivatan.</p>
+<p class="muted">Lärarens återkoppling bör bedöma motiveringarna, inte enbart rätt punkttyp.</p>
+<p><strong>Läxa:</strong> 3149 och 3150 på s. 154–155. Extra 3153.</p>
+</div>
+</section>
+</div>
+<div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Skrivyta · endast på din enhet</strong><div class="flex">
+<button type="button" class="secondary" id="ink-undo">Ångra</button>
+<button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button>
+<button type="button" class="secondary" id="ink-clear">Rensa</button>
+<button type="button" class="secondary" id="ink-max">Förstora</button>
+</div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
+<div class="controls">
+<div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
+<div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div>
+</div>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · Kapitel 3.1 · Funktionens graf och derivatornas grafer. Sidreferenser 153–155. Interaktioner körs lokalt utan elevkonton eller insamling av elevsvar.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="lesson.js"></script>
+</body></html>
