@@ -1,6 +1,6 @@
 # Kvalitetsgranskning – Matematik fortsättning, nivå 1c · Kapitel 3
 
-**Status 2026-11-12:** Sex webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
+**Status 2026-11-12:** Sju webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
 
 ## Allmän kontroll för varje lektion
 1. **Källtrohet:** jämför systematiskt med lektions-PDF, lärobokssidor, exakta uppgiftsnummer, läxa och eventuella Socrative-inslag. Ma1c: minst två av tre nivåer.
@@ -191,3 +191,27 @@
 
 
 **Slutlig teknisk verifiering av lektion 6 (2026-11-12):** Alla sex Chromium-testskript passerade i [körning 43249420573](https://github.com/jacobflinder/Lektioner/actions/runs/43249420573), inklusive samtliga nio steg i 390px mobilbredd och båda globala maximiplatserna vid högra gränsen 4,5. Efter granskning av skärmbilderna förtydligades boksidornas placering och kandidaternas notation. [GitHub Pages-publikationen 43249418414](https://github.com/jacobflinder/Lektioner/actions/runs/43249418414) avslutades också med resultat success för samma ändring `fccce0ea0a7fa3278df8bef719b6cc814582c343`. Som tidigare kvarstår manuell klassrums- och projektorkontroll.
+
+
+## Lektion 7 · Extremvärdesproblem med polynomfunktioner
+
+**Underlag:** `Ma3c_Extremvardesproblem_polynom.pdf` (9 sidor), kapitel 3.2, s.162–164. **Lektionsadress:** `/mato1c/kapitel-3/extremvardesproblem-polynomfunktioner/`.
+
+### Källtrohet och didaktisk struktur
+- Källans tre huvudfall (kostnad/3201, biljettintäkt/3202, raket/3204) är bevarade med variabeldefinition, enhet, teckentolkning och svar i situationen; dess självständiga utcheckning är separat från facit.
+- Bok s.163–164: nivå 1 3202–3207, nivå 2 3208–3210, nivå 3 3211–3214; minst två nivåer. Ursprunglig rekommendation 3203,3205,3209 samt alternativ 3208–3210 följt av nivå3. Eget bokarbete ca 20 min. Läxa 3205 och 3209, extra 3212.
+- Mål efter startfråga, genomarbetade exempel i avsiktliga steg, en egen uppgift med mindre stöd, lokala kontroller med riktad återkoppling, individuellt exit-svar i rätt enheter. Ingen Socrative i originalet och ingen introducerad.
+
+### Oberoende matematisk kontroll
+- Kostnad: `K=x³−9x²+15x+50`, `K′=3x²−18x+15=3(x−1)(x−5)`, K′(0)=15, K′(2)=−9, K′(6)=15. K(0)=50, K(1)=57, K(5)=25. På x≥0 växer K från x0 till1, sjunker till5 och ökar sedan, så minimum 25 tusen kronor per dag vid x5; 5 är ett giltigt antal skärmar.
+- Biljetter: `I=1000x−5x²`, `I′=1000−10x`, enda stationära x100 (maximum då I′ växlar +→−), I(100)=50 000 kr. Vid x100 är `1000−5·100=500` sålda; 100·500=50 000. I(0)=I(200)=0. Dynamikens testvärden: x50 ⇒ 750 sålda och 37 500 kr; x200 ⇒ 0 sålda och 0 kr.
+- Raket: `h=40+10t−5t²`, `h′=10−10t=0` ⇒ t1. h(1)=45 m, och h(0)=40, h(4)=0. Rötterna till h=0 är t−2 och t4; modellens tillåtna tider är 0≤t≤4. Därmed globalt maximum efter 1 s på höjden 45 m.
+- Vinst: `V=−x²+6x−5`, `V′=−2x+6` ⇒ x3, derivatatecken +→−, V(3)=4, ändpunkterna V(0)=V(6)=−5. Om x är tusen enheter per dag och V tusen kr per dag svarar man 3 000 enheter/dag och 4 000 kr/dag.
+- Modellantaganden: I beskriver biljettintäkten endast på intervallet [0,200]. Kostnadsexemplet börjar med en kontinuerlig hjälpfunktion men slutar med giltigt icke-negativt heltal. Raketens negativa tidsrot måste sorteras bort. Inga påståenden om empiriskt uppmätt efterfrågan, verkliga kostnadskurvor eller faktisk raketfysik görs.
+
+### Kvalitetskontroller och öppna begränsningar
+- 10 lektionsavsnitt. Noll dubbla HTML-id, inga saknade JS- eller facitmål. Separata originaltrogna bok- och exit-avsnitt. Gemensam Ma1c-motor och CSS återanvänds; Ma4 och fysikfiler är orörda.
+- SVG-grafen använder `I(x)` direkt, samma pris x styr antalet sålda biljetter och total intäkt; ingen autoanimering eller insamling av elevsvar. Tydliga enheter, grafaxlar, textbaserade värden och tangentsensitiv återkoppling. Raketens svarskontroll särskiljer tid/höjd och otillåten negativ tid.
+- Webbläsartestet `qa/extremvardesproblem-polynom-browser.cjs` kontrollerar lektionens tio steg, start/mål, kostnadsexemplets facit, biljettmodellen vid priserna 0/50/100/200, derivatariktad återkoppling, raketens enheter, bokuppgifter, läxa, utcheckning och mobilvyer. Det körs efter alla sex tidigare regressionstester.
+- Första automatiska körningen upptäckte att s.163–164 stod i avsnittsrubriken men inte i bokinstruktionens huvudtext. Sidan korrigerades så att hänvisningen även finns där; därefter krävs omtest.
+- **Återstår:** manuell prövning på lärarens projektor, iPad och fysisk undervisning samt uppföljning av elevernas lösningar. Tekniska tester bevisar inte förbättrade läranderesultat.
