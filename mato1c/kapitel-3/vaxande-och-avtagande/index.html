@@ -91,11 +91,11 @@
         <div class="task"><strong>Enskilt → jämför i par</strong>Fyll i <span class="math">+</span> eller <span class="math">−</span> i de tre intervallen. Derivatan är <span class="math">0</span> vid <span class="math">x = −1</span> och <span class="math">x = 1</span>.</div>
         <table class="sign-table"><thead><tr><th scope="col">x</th><th scope="col">&lt; −1</th><th scope="col">−1</th><th scope="col">−1 &lt; x &lt; 1</th><th scope="col">1</th><th scope="col">&gt; 1</th></tr></thead>
         <tbody><tr><th scope="row">f′(x)</th>
-          <td><label class="muted" for="sign-left">Tecken vänster</label><select id="sign-left"><option value="">Välj</option><option value="+">+</option><option value="-">−</option></select></td>
+          <td><select id="sign-left" aria-label="Tecken för x mindre än minus ett"><option value="">Välj</option><option value="+">+</option><option value="-">−</option></select></td>
           <td>0</td>
-          <td><label class="muted" for="sign-middle">Tecken mellan</label><select id="sign-middle"><option value="">Välj</option><option value="+">+</option><option value="-">−</option></select></td>
+          <td><select id="sign-middle" aria-label="Tecken mellan minus ett och ett"><option value="">Välj</option><option value="+">+</option><option value="-">−</option></select></td>
           <td>0</td>
-          <td><label class="muted" for="sign-right">Tecken höger</label><select id="sign-right"><option value="">Välj</option><option value="+">+</option><option value="-">−</option></select></td>
+          <td><select id="sign-right" aria-label="Tecken för x större än ett"><option value="">Välj</option><option value="+">+</option><option value="-">−</option></select></td>
         </tr></tbody></table>
         <button type="button" id="check-signs">Kontrollera mina tecken</button>
         <p id="sign-feedback" class="feedback" role="status" aria-live="polite"></p>
