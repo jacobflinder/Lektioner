@@ -39,6 +39,13 @@ try{
  await ok(!await page.locator('#box-readouts').isVisible(),'Lådans siffervärden dolda innan förutsägelsen');
  await page.locator('[data-reveal="box-readouts"]').click();
  await ok(await page.locator('#box-readouts').isVisible(),'Numeriska lådvärden visas på begäran');
+ await go(2);
+ await ok(!await page.locator('#prior-recall').isVisible(),'Återkallning från lektion 7 är valbar och dold');
+ await page.locator('[data-reveal="prior-recall"]').click();
+ await ok(await page.locator('#prior-recall').isVisible(),'Återkallning kan öppnas');
+ await ok(!await page.locator('#prior-recall-answer').isVisible(),'Återkallningsfacit först dolt');
+ await page.locator('[data-reveal="prior-recall-answer"]').click();
+ await ok((await page.locator('#prior-recall-answer').innerText()).includes('3 000 enheter per dag'),'Rätt tusentalsenheter vid återkallning');
  await go(3);
  await ok(await page.locator('#box-volume path').count()===1,'Volymgraf från en formel');
  await ok((await page.locator('#box-bottom').innerText()).includes('44,00 × 24,00 cm'),'x3 ger 44×24 botten');
