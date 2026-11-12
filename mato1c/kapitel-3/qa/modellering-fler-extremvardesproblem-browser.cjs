@@ -69,6 +69,7 @@ try{
  await ok(await boxSteps.locator('[data-seq-item]:visible').count()===0,'Lådans facit går att återställa');
  await go(5);
  await ok(await page.locator('#rectangle-preview path').count()===1,'Parabel y3−x² visas');
+ await ok(!(await page.locator('#rectangle-preview').innerText()).includes('bas = 2x'),'Förhandsfiguren avslöjar inte basformeln');
  await ok(!await page.locator('#rect-base-hint').isVisible(),'Hela basen 2x avslöjas inte under modelleringen');
  await page.locator('[data-reveal="rect-base-hint"]').click();
  await ok((await page.locator('#rect-base-hint').innerText()).includes('2x'),'Basen 2x finns kvar som stöd');
@@ -114,6 +115,7 @@ try{
  await page.locator('#fraction-own [data-correct="true"]').click();
  await ok((await page.locator('#fraction-own .feedback').innerText()).includes('+40/x²'),'Korrekt positiv derivata');
  await go(9);
+ await ok(!(await page.locator('#fraction-solution .eyebrow').innerText()).includes('maximum vid 20'),'Återkopplingsrubriken avslöjar inte optimum');
  await ok(!await page.locator('#fraction-graph-wrap').isVisible(),'Vinstgraf med maxpunkt dold innan beviset');
  await page.locator('[data-reveal="fraction-graph-wrap"]').click();
  await ok(await page.locator('#fraction-graph-wrap').isVisible(),'Grafen kan visas efter beviset');
@@ -146,6 +148,7 @@ try{
   await go(k);
   await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Ingen mobil överspill '+k);
  }
+ await go(5);await ok(!(await page.locator('#rectangle-preview').innerText()).includes('bas = 2x'),'Basen förblir okänd i mobil förhandsfigur');
  await go(6);await page.screenshot({path:out+'/lesson8-rectangle-mobile.png',fullPage:true});
  await go(10);await page.screenshot({path:out+'/lesson8-book-mobile.png',fullPage:true});
  await ok(errors.length===0,'Inga JavaScript-fel');
