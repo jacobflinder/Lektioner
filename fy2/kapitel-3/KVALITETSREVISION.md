@@ -4,6 +4,10 @@
 **Underlag:** projektets undervisningsstruktur v1.3, elevönskemål, åtta ursprungliga lektions-PDF:er och den kompletterade induktions-PDF:en.  
 **Senast:** 2026-11-11.
 
+## Fast notationsregel – fysikformler
+
+**Inga beloppstecken i elevmaterialets fysikformler.** Följ lärobokens skrivsätt: `F=qvB`, `F=qvB sinθ`, `r=mv/(qB)` och för elektriska fält `F=qE` i lämpligt sammanhang. I skalära storleksberäkningar används q som ett positivt tal för laddningens storlek; laddningstecknet hanteras separat när riktningen avgörs. Vektorsambandet med tecknad laddning är ett särskilt begrepp. Regeln gäller även repetitionstexter, interaktiva återkopplingar, härledningar, exempel, lärarstöd och framtida lektioner. Lägg inte tillbaka beloppstecken vid senare teknisk eller didaktisk revision.
+
 ## Kvalitetskriterier som varje lektion ska uppfylla
 
 1. **Fysik:** varje riktning, diagram, gränsfall, modellantagande och uträkning måste tåla granskning.
