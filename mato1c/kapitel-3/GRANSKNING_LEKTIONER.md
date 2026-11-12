@@ -160,3 +160,31 @@
 - Automatiserad Chromium-granskning via `qa/funktionens-graf-browser.cjs`: navigation genom kursdelen, klassrums- och repetitionsläge, start och dolt facit, de tre derivatavärdena vid x=2,4,6, fel/rätt återkoppling, alla tre stegen i exempel, elevkontroll av f′=2x−4, styrbar C-förskjutning, bokuppgifter, utcheckningsfacit, hela 390px mobilvyn, inga JavaScript-fel eller externa anrop.
 - **Skärmbildsgranskning:** datorvyer för start, tre grafer, höjdförskjutning och utcheckning samt mobilvyer för tre grafer och bokarbete. Efter granskningen justerades SVG-etiketternas storlek för bättre läsbarhet i mobilen.
 - **Återstår:** full manuell testning med lärarens egna projektor, iPad och telefon och elevlösningar under faktisk undervisning. Godkänt smoketest är inte evidens för en påvisad lärandeeffekt.
+
+
+## Lektion 6 · Största och minsta värde
+
+**Grundkälla:** `Ma3c_Storsta_och_minsta_varde.pdf`, åtta sidor. Publicerad i `/mato1c/kapitel-3/storsta-och-minsta-varde/`. Originalets sidreferenser är 158–160, med uppgifter på s.159–160.
+
+### Källtrohet
+- Elevens originalmoment är bevarade: start med `g=x²` och intervallet [−1,2], metod för kandidater, förutsägelse med växande högergräns, originalets exempel 3156, egen uppgift `h=−x²+4x`, bokarbete med nivåer och exakt läxa samt individuell utcheckning med `p=x³−3x`.
+- Bok s.159–160: nivå1 3157–3163, nivå2 3164–3166, nivå3 3167–3168, minst två nivåer. Föreslagen start 3158/3161/3164; vana elever 3164–3166 och 3167–3168. Tyst egen träning ca 20 min. Läxa **3161 a samt 3164 a–b**, extra 3168 med motivering.
+- Ingen Socrative var förberedd i originalet, alltså ingen i webben. Originalets återkopplingssida används efter den individuella utcheckningen.
+
+### Oberoende matematisk granskning
+- `g(x)=x²` på [−1,2] har kandidater −1,0,2, med funktionsvärden 1,0,4. Minsta 0 vid x0, största 4 vid x2.
+- `f(x)=x³−4,5x²+5`, `f′(x)=3x²−9x=3x(x−3)`. Stationära x0,x3. För [−2,3] ger −2,0,3 värden −21,5,−8,5: störst 5 vid x0 och minst −21 vid x−2. För [−2,5] tillkommer x5 med f(5)=17,5, vilket blir nytt globalt maximum. Övriga kandidatvärden oförändrade.
+- **Noggrant gränsfall:** `f(0)=5` och `f(b)=5` löses för b större än 3: `b³−4,5b²=0` ⇒ b=4,5. Alltså på [−2,4,5] antas största värdet 5 vid **både 0 och 4,5**. Koden kontrollerar likvärdiga funktionsvärden med rimlig numerisk tolerans.
+- `h(x)=−x²+4x` på [0,5]: `h′=−2x+4`, stationär x2; h(0)=0, h(2)=4, h(5)=−5. Största 4 vid x2, minsta −5 vid x5.
+- `p(x)=x³−3x` på [0,3]: `p′=3x²−3`; −1 hör inte till intervallet, 1 gör det. Kandidater 0,1,3 har p-värden 0,−2,18. Största 18 vid x3, minsta −2 vid x1.
+- **Räckvidd:** Originalmetoden är här avsedd för de deriverbara polynomen på ett slutet intervall som lektionen behandlar. Mer generellt måste även inre punkter där derivatan saknas och andra domänfrågor hanteras separat; webbversionen framställer inte metoden som generell för alla funktioner.
+
+### Didaktisk och teknisk kontroll
+- Nio lektionssteg efter samma Ma1c-ram. Fråga före facit, ett steg i taget i genomarbetade lösningar, minskat stöd i egen uppgift och separat individuell utcheckning.
+- Grafen är uppbyggd direkt från `f(x)` med identisk skala för samtliga intervall, heldragen del innanför och streckad del utanför. Matematisk återkoppling jämför alla giltiga kandidater med aktuellt b och anger såväl värde som *samtliga x där det antas*.
+- Lokala interaktioner utan inloggning, nätverksanrop eller lagring av elevsvar. Ma4/Fy1/Fy2-filer ändras inte.
+- Statiskt verifierat: nio avsnitt; inga dubbla HTML-id; inga saknade JavaScript-element eller facitmål; bokuppgifter och läxa exakt bevarade.
+- Automatiskt Chromium-test: `qa/storsta-minsta-browser.cjs` testar grafens och intervallgränsens beteende (inklusive dubbla maximiplatser), frågor och åtgärdsfeedback, stegvis exempel 3156, bokhänvisningarna, utcheckningen och samtliga nio avsnitt vid 390px mobilbredd. Det körs tillsammans med regressionstesterna för föregående fem lektioner.
+- Det första testet efter registrering fann ett **för strikt textmatchningsvillkor** i testskriptet, inte något felaktigt kandidatvärde på webbsidan. Testet justerades för att kontrollera innehållet i stället för en viss ordalydelse.
+
+**Återstår för verklig undervisning:** manuell kontroll på lärarens projektor/surfplatta, och klassrumsuppföljning av elevlösningar. Godkända tekniska tester utgör inte bevis på ökat lärande.
