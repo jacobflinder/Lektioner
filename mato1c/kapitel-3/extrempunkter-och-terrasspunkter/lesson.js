@@ -82,13 +82,33 @@ $('check-model').addEventListener('click',()=>{
  if(selected===model.type){box.className='feedback ok';box.textContent='Rätt: '+model.description+'. Tecknen är '+model.signs+'. '+model.why}
  else {box.className='feedback no';box.textContent='Undersök tecknet för x = −1 och x = 1. '+model.why+' Pröva igen.'}
 });
+// Fria koordinatsvar: först en komplett papperslösning, sedan lokal diagnostisk kontroll.
+// Parenteser behövs inte, för varje koordinat har ett eget fält.
+function readCoordinate(id){
+ const raw=$(id).value.trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(',','.');
+ return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN;
+}
 $('check-own').addEventListener('click',()=>{
- const max=$('own-max').value,min=$('own-min').value,box=$('own-feedback');
- if(!max||!min){box.className='feedback no';box.textContent='Ange både maximi- och minimipunkten. En punkt måste ha två koordinater.';return}
- if(max==='pos'&&min==='neg'){box.className='feedback ok';box.textContent='Rätt: maximipunkt (1, 2) och minimipunkt (−1, −2). Motivera nu med − 0 + 0 − i din teckentabell.';return}
- box.className='feedback no';
- if(max==='zero'||min==='zero')box.textContent='En y-koordinat är inte automatiskt noll när derivatan är noll. Beräkna h(−1) och h(1) i ursprungsfunktionen.';
- else box.textContent='Pröva derivatans tecken före, mellan och efter x = −1 och x = 1. Har du förväxlat max och min?';
+ const maxX=readCoordinate('own-max-x'),maxY=readCoordinate('own-max-y'),
+       minX=readCoordinate('own-min-x'),minY=readCoordinate('own-min-y'),
+       out=$('own-feedback');
+ const near=(a,b)=>Math.abs(a-b)<1e-8;
+ let error='';
+ if([maxX,maxY,minX,minY].some(x=>!Number.isFinite(x))){
+  error='Fyll i både x- och y-koordinat för varje punkt. De ska komma från din egen beräkning på papper.';
+ }else if(near(maxX,-1)&&near(minX,1)){
+  error='Du har förväxlat maximum och minimum. Undersök tecknen för h′(x) före, mellan och efter −1 och 1.';
+ }else if(near(maxX,1)&&near(minX,-1)&&(!near(maxY,2)||!near(minY,-2))){
+  error='Båda x-värdena och punkttyperna är rätt, men ett y-värde stämmer inte. Beräkna h(1) och h(−1) med ursprungsfunktionen, inte med h′.';
+ }else if(near(maxY,0)||near(minY,0)){
+  error='En horisontell tangent betyder h′(a)=0, inte h(a)=0. Sätt in punkternas x-värden i själva funktionen.';
+ }else if(!near(maxX,1)||!near(minX,-1)){
+  error='Kontrollera vilka x-värden som ger h′(x)=0 och jämför derivatans tecken på båda sidor om varje x.';
+ }else if(!near(maxY,2)||!near(minY,-2)){
+  error='Kontrollera funktionsvärdena h(1) och h(−1); derivatan ger inte punktens höjd.';
+ }
+ out.className='feedback '+(error?'no':'ok');
+ out.textContent=error||'Rätt: maximipunkt (1, 2) och minimipunkt (−1, −2). Visa också på papper teckenföljden − 0 + 0 − och varför den ger dessa punkttyper.';
 });
 render();
 })();
