@@ -86,19 +86,19 @@ Förklarar eleverna `f″` som hur lutningen förändras, eller förväxlar de `
 
 ## Lektion 4 · Andraderivatan och funktionens graf (original 2026-11-10)
 
-**Källa:** \`261110 Andraderivatan och funktionens graf Na25.pdf\`, 18 sidor; läroboken s. 152. **Syfte:** Använda andraderivatan för att klassificera stationära punkter när testet ger besked och känna igen inflexion genom krökningsbyte. Det här är en fördjupning av lektion 3, inte ytterligare ett mekaniskt pass där man bara deriverar.
+**Källa:** `261110 Andraderivatan och funktionens graf Na25.pdf`, 18 sidor; läroboken s. 152. **Syfte:** Använda andraderivatan för att klassificera stationära punkter när testet ger besked och känna igen inflexion genom krökningsbyte. Det här är en fördjupning av lektion 3, inte ytterligare ett mekaniskt pass där man bara deriverar.
 
 ### Innehåll som bevarats
 - Originalets start: derivatan är noll i en punkt – vad mer behövs för att avgöra punkttypen? Målen anges tydligt.
-- Sammanhanget \`f → f′ → f″\`. Negativ lutning kan öka (\`−3→−2→−1\`).
-- Demonstrationen med \`f=x²\` och \`g=−x²\` från originalets före-/GIF-/slutbild (s. 3–5). Synkroniserad flyttbar tangent i webbversionen, med elevens förutsägelse före förflyttningen.
-- Villkoret \`f′(a)=0\` före testet. \`f″(a)>0\` ger lokal minimipunkt; \`f″(a)<0\` ger lokal maximipunkt. \`f″(a)=0\` ger inte besked.
-- Genomarbetat exempel \`f=x³−3x+2\`: max \`(−1,4)\`, min \`(1,0)\`. Eget försök \`h=x²−4x+7\`: minimipunkt \`(2,3)\`.
-- Motexempel \`p=x³\` och \`q=x⁴\` för att visa att både \`f′(0)=0\` och \`f″(0)=0\` kan leda till olika punktkaraktär.
-- Den andra före-/GIF-/slutbildssekvensen om inflexion: \`f=x³−3x+2\`, \`f″=6x\`, krökningsbyte vid \`x=0\`, inflexion \`(0,2)\`, och \`f′(0)=−3\` – den behöver alltså inte ha vågrät tangent.
-- Algebraisk kontroll av \`f″\` på båda sidor och kontrast med \`q=x⁴\` där \`q″=12x²\` inte byter tecken.
-- Tre snabba originalfrågor och individuell utcheckning \`r(x)=−x²+6x−4\`. Originalets specifika läxa: **s. 152, 3138 och 3141 a–b, motivera med derivator**.
-- Bokarbete på s. 152, minst två av tre nivåer: nivå 1 \`3136–3138\`, fortsättning \`3139\`; nivå 2 \`3140,3141\`; nivå 3 \`3142,3143\`. Behöver du stöd: \`3136,3137\` och sedan \`3140 a\`; säkrare elever börjar \`3140,3141\`, vidare \`3142–3143\`. 20 minuter tyst arbete som riktmärke, inte låst regel.
+- Sammanhanget `f → f′ → f″`. Negativ lutning kan öka (`−3→−2→−1`).
+- Demonstrationen med `f=x²` och `g=−x²` från originalets före-/GIF-/slutbild (s. 3–5). Synkroniserad flyttbar tangent i webbversionen, med elevens förutsägelse före förflyttningen.
+- Villkoret `f′(a)=0` före testet. `f″(a)>0` ger lokal minimipunkt; `f″(a)<0` ger lokal maximipunkt. `f″(a)=0` ger inte besked.
+- Genomarbetat exempel `f=x³−3x+2`: max `(−1,4)`, min `(1,0)`. Eget försök `h=x²−4x+7`: minimipunkt `(2,3)`.
+- Motexempel `p=x³` och `q=x⁴` för att visa att både `f′(0)=0` och `f″(0)=0` kan leda till olika punktkaraktär.
+- Den andra före-/GIF-/slutbildssekvensen om inflexion: `f=x³−3x+2`, `f″=6x`, krökningsbyte vid `x=0`, inflexion `(0,2)`, och `f′(0)=−3` – den behöver alltså inte ha vågrät tangent.
+- Algebraisk kontroll av `f″` på båda sidor och kontrast med `q=x⁴` där `q″=12x²` inte byter tecken.
+- Tre snabba originalfrågor och individuell utcheckning `r(x)=−x²+6x−4`. Originalets specifika läxa: **s. 152, 3138 och 3141 a–b, motivera med derivator**.
+- Bokarbete på s. 152, minst två av tre nivåer: nivå 1 `3136–3138`, fortsättning `3139`; nivå 2 `3140,3141`; nivå 3 `3142,3143`. Behöver du stöd: `3136,3137` och sedan `3140 a`; säkrare elever börjar `3140,3141`, vidare `3142–3143`. 20 minuter tyst arbete som riktmärke, inte låst regel.
 - Ingen Socrative fanns i denna original-PDF, och ingen har införts.
 
 ### Didaktiskt designval för webben
@@ -108,4 +108,4 @@ Förklarar eleverna `f″` som hur lutningen förändras, eller förväxlar de `
 - Eget bokarbete prioriteras och utcheckningen löses utan interaktiv hjälp. Endast lokal JS, inga konton/insamlingar.
 
 ### Att pröva i klassrummet
-Blir elevernas förklaringar bättre på att särskilja \`f′\` från \`f″\` och på att skilja nollställe i \`f″\` från verkligt krökningsbyte? Klarar de att motivera stationär punkt med \`f′(a)=0\` **innan** de använder testet? Kan de ge koordinater med \`f(a)\`? Studera anonyma elevsvar och justera därför; påstå inte effekt utifrån webbens funktionalitet.
+Blir elevernas förklaringar bättre på att särskilja `f′` från `f″` och på att skilja nollställe i `f″` från verkligt krökningsbyte? Klarar de att motivera stationär punkt med `f′(a)=0` **innan** de använder testet? Kan de ge koordinater med `f(a)`? Studera anonyma elevsvar och justera därför; påstå inte effekt utifrån webbens funktionalitet.
