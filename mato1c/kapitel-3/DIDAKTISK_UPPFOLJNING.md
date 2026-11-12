@@ -59,3 +59,26 @@ Innan kod skrivs: läs *just den* PDF:en och eventuella läroboksbilder. Markera
 **Matematisk precisering:** Den källbaserade grundtabellen behandlar `+0+` och `−0−` som terrassfall. Det utesluter en extrempunkt men ger inte utan ytterligare antaganden ett allmänt bevis för en terrasspunkt. En terrasspunkt är en stationär inflexionspunkt (böjningsbyte). Skillnaden förklaras varsamt i webbmaterialet, utan att ta bort uppgiftens avsedda metod på denna nivå.
 
 **Följ upp i klass:** Kan eleven motivera punktens typ med teckentabell *och* bestämma y med funktionen? Vilka elever skriver felaktigt `(a,0)` när `f′(a)=0`? Räcker interaktionen, eller behövs handskrivna exempel? Notera endast anonym klassnivå.
+
+
+## Lektion 3 · Andraderivatan
+
+**Original:** tidigare PDF för Andraderivatan, sex sidor, läroboken s. 149. **Mål:** beräkna `f″` och förklara hur `f′` förändras. Inget Socrative-inslag fanns i originalet.
+
+### Bevarat från tidigare undervisning
+- Start: `f(x)=x²` och `g(x)=2x` växer båda för x≥0, men deras tangentlutningar är `f′(x)=2x` respektive `g′(x)=2`. Eleverna funderar först enskilt och jämför i par.
+- Målet efter starten och kedjan `f(x) → f′(x) → f″(x)`, med `x² → 2x → 2` och `g″(x)=0`.
+- Genomarbetade exempel: `f(x)=x³−5x²+3x`, `f′=3x²−10x+3`, `f″=6x−10`; `g(x)=4e^(2x)`, `g′=8e^(2x)`, `g″=16e^(2x)`.
+- Egen uppgift: `h(x)=x³−6x²`, hitta `h′(x)`, `h″(x)`, `h″(0)`, lös `h″(x)=0`. Jämförelse mellan `h″(x)` som uttryck och `h″(0)` som värde.
+- Facit med kontroll och tolkning. Utcheckningsfrågan: kan `f` vara avtagande när `f″` är positiv?
+- Originalets bokspår på s. 149: nivå 1+2 (3125, 3126–3127, 3130–3131), nivå 2+3 (3130–3131, 3132, 3133), extra 3128–3129; läxan är att göra klart valt spår före nästa lektion.
+
+### Didaktiskt motiverade förbättringar – hypoteser, inte bevisade effekter
+- Synkroniserade tangentgrafer för `x²` och `2x`. Ett x-reglage styr båda; eleven jämför ett positivt x-värde där f:s lutning ändras men g:s är konstant. Fråga och förutsägelse före själva undersökningen.
+- Två separata klickstyrda lösningsföljder med frågor före varje steg, för att tydliggöra beräkningarna snarare än visa alla algebraiska rader samtidigt.
+- Eget försök på papper före lokal kontroll av andraderivatans uttryck, funktionsvärde och nollställe. Feedback riktas mot första rimliga fel, i stället för att visa facit direkt.
+- En matematiskt korrekt kontrast infördes: `h″(2)=0` betyder inte att `h′(2)=0`. Utcheckningen kompletteras med krav på ett motexempel där `f′<0` och `f″>0`. Exempel `f(x)=x²` vid `x=−1`.
+- Eleverna arbetar fortfarande med minst två av bokens tre nivåer och får tydligt tid för självständigt läroboksarbete.
+
+### Följ upp anonymt efter klassrumstillfälle
+Förklarar eleverna `f″` som hur lutningen förändras, eller förväxlar de `f′` med `f″`? Kan elever som hittar `h″(0)` också korrekt skilja det från lösningen till `h″(x)=0`? Är de synkroniserade tangenterna hjälp eller distraktion? Notera endast övergripande elevexempel, aldrig personuppgifter.
