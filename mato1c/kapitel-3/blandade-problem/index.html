@@ -51,7 +51,12 @@
 <button id="mode" type="button" class="secondary" aria-pressed="false">Klassrumsläge</button>
 </div></header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Välj uttryck utifrån vad som söks. Låt eleverna skriva själva först och jämföra i par; använd grafen till riktad återkoppling efter en förutsägelse. Bokarbete och individuell utcheckning prioriteras.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Välj uttryck utifrån vad som söks. Låt eleverna skriva själva först och jämföra i par; använd grafen till riktad återkoppling efter en förutsägelse. Bokarbete och individuell utcheckning prioriteras.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tid och beslut utifrån elevernas svar</strong></summary>
+<p><strong>Kärnväg:</strong> start och mål (1–2), vattenmodellens matematiska återkoppling (4), robotens eget försök och facit (5–6), två villkorsproblem med facit (7–8), minst 20 min sammanhängande bokarbete (9) och två individuella exitproblem (10–11). Den styrbara vattenanimationen (steg 3) är valbar och kan öppnas från målsteget – använd den om eleverna inte kan skilja vattenmängdens höjd från tangentens lutning.</p>
+<p><strong>Tidsriktmärke om cirka 70 minuter:</strong> start/mål 5–7 min, vatten och riktad grafkontroll 6–9 min, robot 9–12 min, villkorsproblem 9–12 min, bokarbete minst 20 min, exit 5–7 min. Om fler behöver hjälp, korta den gemensamma visningen snarare än bokpasset.</p>
+<p><strong>Beslutsregler:</strong> Om elever väljer V(5) i stället för V′(5) för inflödet, fråga först efter rätt enhet. Om V″ negativt förväxlas med minskande vattenmängd, öppna vattenanimationen och fråga om V′ är positiv. Om eleven maximerar s i stället för s′ i robotproblemet, pröva dimensionerna meter och m/s. Om dubbelroten hos g′ felaktigt klassas som extrempunkt, kräv en teckentabell före grafstöd.</p>
+<p><strong>Återkallning efter någon lektion:</strong> R(t)=30(1−e<sup>−0,2t</sup>), t minuter och R liter. Bestäm R′(0), dess enhet samt om mängden någonsin blir 30 liter. Svar: 6 liter/min; nej, bara gränsvärde. Samla anonymt upp vilka uttrycksval som är svåra.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Gör ett eget försök innan du visar ett exempelsteg. Inga elevsvar eller personuppgifter samlas in.</div>
 <div class="stage" id="stage">
 
@@ -86,11 +91,17 @@
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
 </div>
 <div class="task"><strong>Förutsäg:</strong> Kan vattenmängden öka samtidigt som inflödet minskar? Vad betyder det för grafens lutning? Kan modellen ge mer än 120 liter?</div>
+<button type="button" class="secondary" data-go="water">Valbar vattenanimation: undersök tangent och inflöde</button>
+<p class="muted">Om du redan kan motivera de tre storheternas betydelse kan du gå direkt vidare till den matematiska återkopplingen.</p>
+<button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning från modellering (1 minut)</button>
+<div class="panel hidden" id="prior-recall"><p><strong>Utan graf:</strong> C(x)=x+9/x för x&gt;0. Varför är x=3 ett minimum och vad är minimivärdet?</p>
+<button type="button" class="reveal" data-reveal="prior-recall-answer">Kontrollera efter eget försök</button>
+<div class="answer hidden" id="prior-recall-answer"><p>C′(x)=1−9/x². Derivatan är negativ före 3 och positiv efter 3. Därför är C(3)=3+3=6 ett globalt minimum för x&gt;0.</p></div></div>
 </section>
 
-<section class="slide" id="water" data-teacher="Original s.3 animation: vattenmängdens punkt och röd tangent rör sig, med tid att tänka. Webbens exakta, manuellt styrda modell kombinerar V, tangent och V′. Inga animeringar kör automatiskt. Be om förutsägelse vid t=0,5,10,20. 120 liter är horisontell asymptot och nås ej vid ändlig tid.">
+<section class="slide" id="water" data-optional="true" data-teacher="Original s.3 animation: vattenmängdens punkt och röd tangent rör sig, med tid att tänka. Webbens exakta, manuellt styrda modell kombinerar V, tangent och V′. Inga animeringar kör automatiskt. Be om förutsägelse vid t=0,5,10,20. 120 liter är horisontell asymptot och nås ej vid ändlig tid.">
 <div class="eyebrow">03 · Undersök · punkt, tangent och inflöde</div>
-<h2>Mer vatten – men allt långsammare</h2>
+<h2>Hur förändras vattenmängden och tangentens lutning?</h2>
 <div class="task"><strong>Förutsäg innan du flyttar reglaget:</strong> Vid t=5 har vattenmängden ökat. Är tangentens lutning större eller mindre än vid t=0? Vad händer när t fortsätter öka?</div>
 <div class="sliders">
 <label for="water-t">Flytta tiden t (minuter)</label>
@@ -109,12 +120,14 @@
 <figcaption>Grön kurva: V(t). Röd linje: tangent vid vald tid. Streckad linje: gränsvärdet 120 liter. Skalorna ändras inte.</figcaption>
 </figure>
 <div>
-<div class="metrics" style="grid-template-columns:1fr" aria-live="polite">
+<button type="button" class="secondary" data-reveal="water-readouts">Visa de beräknade värdena efter min förutsägelse</button>
+<div class="metrics hidden" id="water-readouts" style="grid-template-columns:1fr" aria-live="polite">
 <div class="metric"><span>Vattenmängd V(t)</span><strong id="water-amount">0,00 liter</strong></div>
 <div class="metric"><span>Inflöde V′(t)</span><strong id="water-inflow">24,00 liter/min</strong></div>
 <div class="metric"><span>Inflödets förändring V″(t)</span><strong id="water-change">−4,80 liter/min²</strong></div>
 </div>
-<div class="math-note"><strong>Var uppmärksam på tecknen:</strong> <span class="mathsmall">V′&gt;0</span> och <span class="mathsmall">V″&lt;0</span> samtidigt. Mängden ökar, men allt långsammare.</div>
+<button type="button" class="secondary" data-reveal="water-signs">Visa teckentolkningen efter undersökningen</button>
+<div class="math-note hidden" id="water-signs"><strong>Var uppmärksam på tecknen:</strong> <span class="mathsmall">V′&gt;0</span> och <span class="mathsmall">V″&lt;0</span> samtidigt. Mängden ökar, men allt långsammare.</div>
 </div></div>
 </section>
 
@@ -138,12 +151,9 @@
 <h2>Robotens rörelse</h2>
 <p class="lead">En robot rör sig framåt. Sträckan s mäts i meter och tiden t i sekunder.</p>
 <p class="mathline">s(t)=12√(t+1)−12, &nbsp; 0≤t≤8</p>
-<div class="task"><strong>Lös på papper innan återkopplingen:</strong>
-<ol class="spaced"><li>Bestäm hastigheten vid t=3.</li>
-<li>Bestäm och tolka s″(3).</li>
-<li><strong>När är hastigheten störst?</strong> Motivera.</li>
-<li>Bestäm tangentens ekvation vid t=3.</li></ol>
-<p>Börja själv. Jämför sedan i par vilken funktion ni maximerade och varför.</p></div>
+<div class="task"><strong>Välj själv matematisk metod:</strong> Bestäm hastigheten och accelerationen vid t=3, när hastigheten är störst, samt tangentens ekvation vid t=3. Motivera med storheter, derivator och enheter. Jämför sedan i par vilken funktion ni maximerade och varför.</div>
+<button type="button" class="secondary" data-reveal="robot-original-steps">Visa originalets uppgiftslista om du fastnar</button>
+<div class="panel hidden" id="robot-original-steps"><ol class="spaced"><li>Bestäm hastigheten vid t=3.</li><li>Bestäm och tolka s″(3).</li><li>När är hastigheten störst? Motivera.</li><li>Bestäm tangentens ekvation vid t=3.</li></ol></div>
 <button type="button" class="secondary" data-reveal="robot-hint">Stöd om du fastnar</button>
 <div id="robot-hint" class="panel hidden">
 <p class="mathline">√(t+1)=(t+1)<sup>1/2</sup></p>
@@ -205,7 +215,8 @@
 <div class="seq-item hidden" data-seq-item data-question="Vilken punkttyp ger teckenväxlingen vid x=1? Vad händer vid x=3?"><strong>Klassificera</strong><p>Vid x=1: −→+ ger en lokal <strong>minimipunkt</strong>. Vid x=3: +→+ ger <strong>ingen extrempunkt</strong>.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur kan du visa att x=3 är en terrasspunkt?"><strong>Terrasspunkten</strong><p class="mathline">g″(x)=(x−3)(3x−5)</p><p>g″ byter tecken vid x=3 och g′(3)=0. Alltså har g en <strong>terrasspunkt</strong> vid x=3. Dess y-koordinat är okänd eftersom g inte är given.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></div>
-<div class="plotgrid">
+<button type="button" class="secondary" data-reveal="sign-explorer">Valbar grafkontroll av g′ efter min teckentabell</button>
+<div class="plotgrid hidden" id="sign-explorer">
 <figure class="visual">
 <h3 class="visual-title">Teckenkontroll: här visas g′ – inte g</h3>
 <svg id="sign-graph" viewBox="0 0 760 435" role="img" aria-label="Derivatans graf g prim lika med x minus ett gånger x minus tre i kvadrat med nollställen vid x ett och tre och en flyttbar markör"></svg>
@@ -218,7 +229,7 @@
 </div>
 <div class="metric"><span>Derivata och tecken</span><strong id="sign-val">g′(0,50) = −3,13</strong><span id="sign-meaning">g avtar här</span></div>
 <p class="caution"><strong>Enskilt kriterium:</strong> För att avgöra extrempunkt måste du jämföra derivatans tecken <em>på båda sidor</em>, inte bara kontrollera om derivatan är noll.</p>
-</div></div>
+</div></div></div>
 </section>
 
 <section class="slide" id="book" data-teacher="Original s.9: Lärobokens blandade problem s174–176. Nivå1 3247–3253 (174–175), nivå2 3254–3265 (175–176), nivå3 3266–3271 (176). Minst två nivåer. Start 3247→3249→3252→3254→3261; redan säker 3258→3262→3266→3268→3271. 20 min tyst eget, digitala verktyg när uppgiften kräver eller kontroll. Läxa 3248 och 3260, extra 3264. Ingen Socrative.">
