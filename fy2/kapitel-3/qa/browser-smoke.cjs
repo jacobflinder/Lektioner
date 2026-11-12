@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
 const {chromium}=require('playwright');
-const lessons=[['elektriska-falt',18],['magnetism',10],['raknestuga',7],['strom-ger-magnetfalt',19],['spolar-och-solenoider',15],['laddade-partiklar',19],['jordens-magnetfalt',15],['induktion',24],['raknestuga-kraft-jordfalt',4],['demonstrationer-elektromagnetism',6]];
+const lessons=[['elektriska-falt',9],['magnetism',10],['raknestuga',7],['strom-ger-magnetfalt',19],['spolar-och-solenoider',15],['laddade-partiklar',19],['jordens-magnetfalt',15],['induktion',24],['raknestuga-kraft-jordfalt',4],['demonstrationer-elektromagnetism',6]];
 const base=process.env.FY2_URL||'http://127.0.0.1:8123/fy2/kapitel-3/';
 const dir='fy2-qa-screenshots';fs.mkdirSync(dir,{recursive:true});
 const errors=[],warnings=[];function check(ok,msg){if(!ok)errors.push(msg)}
@@ -42,9 +42,10 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
       check(!state.warning,label+' lesson start warning is visible');
       check(state.externalAssets===0,label+' bundled page still relies on external scripts or CSS');
      }
-     const next=page.locator('#next-slide, #next').last();
+     const next=page.locator('#next-slide, #next, #next-btn').last();
      check(await next.count()===1,label+' missing Next button');
-     for(let i=0;i<Math.min(expected,n);i++){
+     const route=lesson==='raknestuga'?[0,1,2,4]:Array.from({length:Math.min(expected,n)},(_,i)=>i);
+     for(const [position,i] of route.entries()){
       check(await page.locator('.slide.active').count()===1,label+' active slide '+(i+1));
       const activeIndex=await page.locator('.slide').evaluateAll(nodes=>nodes.findIndex(el=>el.classList.contains('active')));
       check(activeIndex===i,label+' navigation stuck: expected slide '+(i+1)+' got '+(activeIndex+1));
@@ -54,7 +55,18 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
       if(slideBottom>vp.height+5)warnings.push(label+' slide '+(i+1)+' extends below projector viewport by '+Math.round(slideBottom-vp.height)+'px');
       if(vp.width===1440||i===0||i===n-1)
        await page.screenshot({path:path.join(dir,label+'-'+String(i+1).padStart(2,'0')+'.png')});
-      if(i<n-1&&await next.count())await next.click({timeout:7000});
+      if(position<route.length-1&&await next.count())await next.click({timeout:7000});
+     }
+     if(lesson==='raknestuga'){
+      // Support and extension slides intentionally sit outside the main route.
+      await page.locator('#prev').click();
+      for(const optional of [3,5,6]){
+       await page.locator('[data-go="'+optional+'"]').click();
+       const actual=await page.locator('.slide').evaluateAll(nodes=>nodes.findIndex(el=>el.classList.contains('active')));
+       check(actual===optional,label+' optional slide '+optional+' not reachable');
+       await page.locator('.slide.active [data-go="2"]').click();
+       check(await page.locator('.slide').nth(2).isVisible(),label+' return from support failed');
+      }
      }
      check(consoleErrors.length===0,label+' console: '+consoleErrors.join('; ').slice(0,350));
     }catch(e){errors.push(label+' '+e.message)}
@@ -105,10 +117,10 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
   await earth.goto(base+'jordens-magnetfalt/',{waitUntil:'networkidle'});
   await earth.locator('#jump').selectOption('5');
   await earth.locator('#earth-components-reveal').click();
-  const earth0=await earth.locator('#earth-components-result').innerText();
+  const earth0=await earth.locator('#earth-components-result').textContent();
   await earth.locator('#earth-i').evaluate(el=>{el.value='60';el.dispatchEvent(new Event('input',{bubbles:true}))});
-  const earth1=await earth.locator('#earth-components-result').innerText();
-  check(earth0!==earth1&&earth1.includes('Samband'),'Earth components: revealed math not kept live during slider exploration');
+  const earth1=await earth.locator('#earth-components-result').textContent();
+  check(earth0!==earth1&&earth1.includes('21,0')&&earth1.includes('36,4'),'Earth components: revealed math not kept live during slider exploration');
   await earth.close();
   const charge=await browser.newPage();
   await charge.goto(base+'laddade-partiklar/',{waitUntil:'networkidle'});
