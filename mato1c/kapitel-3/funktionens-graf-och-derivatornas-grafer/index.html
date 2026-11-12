@@ -59,7 +59,13 @@
 </div>
 </header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Starta med elevernas egna formuleringar. Styr från fråga till motiverad återkoppling. De interaktiva modellerna ersätter inte arbete på papper och i boken.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Starta med elevernas egna formuleringar. Styr från fråga till motiverad återkoppling. De interaktiva modellerna ersätter inte arbete på papper och i boken.</small>
+<details class="route-guide"><summary><strong>Kärnväg · tidsprioritering · beslut från elevsvar</strong></summary>
+<p><strong>Kärnväg:</strong> start och mål (1–2); läs de tre graferna (3–4); ett kort exempel om lika derivata men olika höjd (5); elevens skiss och möjliga funktioner (6); minst 20 minuter ostört bokarbete på s. 154–155 (7); individuell utcheckning (8). Visning av extra algebraisk grafmodell och vertikalförskjutning är valbar, inte ytterligare helklassgenomgång.</p>
+<p><strong>Tidsriktmärke vid cirka 70 minuter:</strong> start/mål 5–7 min; samband och återkoppling 9–12 min; genomarbetat exempel 4–6 min; eget försök och stöd vid behov 8–10 min; bokarbete minst 20 min; avslut 4–6 min. Anpassa till faktisk lektionslängd.</p>
+<p><strong>Diagnosbeslut:</strong> Om eleverna förväxlar f och f′, fråga efter <em>höjd jämfört med lutning</em> innan grafvärden öppnas. Om de väljer rätt extrempunkt men fel inflexion, återvänd till f′(4) och teckenbytet hos f″. Om de klarar två egna grafer och f″ utan stöd, börja bokarbetet direkt. Lägg inte till en Socrative-aktivitet: originalet har bara ett möjligt förslag, ingen färdig quiz.</p>
+<p><strong>Återkalla nästa lektion:</strong> utan graf: g′(x)=2x−6. Ange en möjlig g, en annan g med samma derivata och hur g″ ser ut. Bedöm anonyma resonemang – inte bara rätta svar.</p>
+</details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Skriv din förutsägelse innan du rör modellen och pröva slutsatsen utan modellen efteråt. Inga elevsvar eller personuppgifter sparas eller skickas.</div>
 <div class="stage" id="stage">
 
@@ -97,6 +103,11 @@
 </div>
 <p class="lead">Du kan beskriva hur en funktion förändras även när du inte känner dess formel.</p>
 <div class="key-insight"><strong>Håll reda på tre frågor:</strong> Var ligger grafen? Hur lutar den? Hur ändras lutningen?</div>
+<button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning: när ger andraderivatan inget besked?</button>
+<div class="panel hidden" id="prior-recall">
+<p><strong>Utan stöd:</strong> Vid x=0 är p′(0)=0 och p″(0)=0 för p(x)=x³. Vad kan du säga om punkten? Vad måste du kontrollera?</p>
+<button type="button" class="reveal" data-reveal="prior-recall-answer">Visa kontroll efter eget försök</button>
+<div id="prior-recall-answer" class="answer hidden"><p>Andraderivatatestet ger inget besked. p′(x)=3x² är positivt på båda sidor: ingen extrempunkt. p″(x)=6x byter tecken, alltså terrasspunkt i (0,0).</p></div></div>
 </section>
 
 <section class="slide" id="linked" data-teacher="Källa: original-PDF s.2. Det finns inga funktionsformler för den visade trion i originalet. Här används en EXAKT algebraisk modell vald för att efterlikna nollställena 2,6 och inflexionen 4. Börja med att peka vid x=2,4,6 och be eleverna förutsäga lutningens tecken före slider. Flytta sedan markören med samma x genom alla tre kurvor. Resonemang minst lika viktigt som klicken.">
@@ -113,7 +124,7 @@
 <div>
 <div class="interaction-controls">
 <label for="linked-x">Undersök ett x-värde</label>
-<input type="range" id="linked-x" min="0" max="8" step="0.25" value="2" aria-describedby="linked-readouts">
+<input type="range" id="linked-x" min="0" max="8" step="0.25" value="2" aria-describedby="linked-x-value">
 <div class="graph-btns" role="group" aria-label="Välj särskilt x-värde">
 <button type="button" class="secondary" data-focus-x="2">x = 2</button>
 <button type="button" class="secondary" data-focus-x="4">x = 4</button>
@@ -121,7 +132,8 @@
 </div>
 <output id="linked-x-value" for="linked-x">x = 2,00</output>
 </div>
-<div class="readouts" id="linked-readouts" aria-live="polite">
+<button type="button" class="secondary" data-reveal="linked-readouts">Visa de tre grafvärdena efter din förutsägelse</button>
+<div class="readouts hidden" id="linked-readouts" aria-live="polite">
 <div class="readout"><span>Höjd på f</span><output id="val-f">f = 0,83</output></div>
 <div class="readout"><span>Lutning hos f</span><output id="val-d1">f′ = 0,00</output></div>
 <div class="readout"><span>Lutning hos f′</span><output id="val-d2">f″ = 1,00</output></div>
@@ -145,7 +157,8 @@
 <div class="eyebrow">04 · Från graf till slutsats</div>
 <h2>Varför är x = 4 ingen terrasspunkt?</h2>
 <div class="task"><strong>Förklara för en kamrat:</strong> Vid x = 4 är <span class="math-sm">f″(4)=0</span>. Varför är det ändå <em>inte</em> en terrasspunkt?</div>
-<div class="panel">
+<button type="button" class="secondary" data-reveal="interpret-table">Visa teckentabell efter din motivering</button>
+<div class="panel hidden" id="interpret-table">
 <table class="clean-table">
 <thead><tr><th>x</th><th>f′(x)</th><th>f″(x)</th><th>Slutsats för f</th></tr></thead>
 <tbody>
@@ -186,21 +199,25 @@
 <div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Föregående</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Återställ</button></div>
 <p class="muted" data-seq-count></p>
 </div>
-<div class="graph-board">
+<div><button type="button" class="secondary" data-reveal="parallel-panel">Visa de två linjerna efter din skiss</button>
+<div class="graph-board hidden" id="parallel-panel">
 <div class="graph-header"><strong>Två parallella linjer</strong><span class="graph-legend">Konstant skillnad 2 i höjd</span></div>
 <svg id="parallel-graph" viewBox="0 0 560 370" role="img" aria-label="Graferna g1 lika med minus x och g2 lika med minus x plus två, två parallella fallande linjer med identisk lutning minus ett."></svg>
 </div>
-</div>
+</div></div>
 </section>
 
 <section class="slide" id="own" data-teacher="Original-PDF s.3 elevförsök: f′(x)=2x−4. Eleverna ska först lösa nollställe, göra teckentabell, skissa TVÅ parabler och beskriva f″. Kontrollera först efter eget försök på papper. Demonstrera sedan vertikal förskjutning C: derivatan och andraderivatan ändras inte. Bevara originalets f1=(x−2)² och f2=(x−2)²+3.">
 <div class="eyebrow">06 · Din tur · gradvis minskat stöd</div>
 <h2>Från derivatan till en möjlig funktion</h2>
 <p class="math-work">f′(x)=2x−4</p>
-<div class="task"><strong>Skriv själv före digital kontroll:</strong>
-<ol class="spaced"><li>Lös <span class="math-sm">2x−4=0</span> och gör en teckentabell.</li>
-<li>Skissa <strong>två</strong> möjliga grafer för f.</li>
-<li>Beskriv grafen till <span class="math-sm">f″</span>. Jämför dina resonemang i par.</li></ol></div>
+<div class="task"><strong>Lös utan färdig steglista:</strong> f′(x)=2x−4. Skissa <strong>två olika funktioner</strong> som båda har denna derivata. Motivera var de växer och avtar, vilken punkttyp de har och hur deras andraderivata ser ut. Jämför sedan resonemangen i par.</div>
+<button type="button" class="secondary" data-reveal="own-original-steps">Visa originalets stegvisa stöd vid behov</button>
+<div class="panel hidden" id="own-original-steps"><ol class="spaced">
+<li>Lös 2x−4=0 och gör en teckentabell.</li>
+<li>Skissa två möjliga grafer för f.</li>
+<li>Beskriv grafen till f″. Jämför i par.</li>
+</ol></div>
 <div class="check-grid">
 <div><label for="own-root">Nollställe för f′: x =</label><input id="own-root" inputmode="decimal" autocomplete="off" placeholder="tal"></div>
 <div><label for="own-shape">Vilken form har f?</label><select id="own-shape"><option value="">Välj</option><option value="up">Uppåtvänd parabel</option><option value="down">Nedåtvänd parabel</option><option value="line">Rät linje</option></select></div>
