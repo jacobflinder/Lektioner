@@ -46,7 +46,7 @@ function renderRod(){
  chain(Uformula,
  '<mi>U</mi><mo>=</mo>'+qty(B,2,'T')+'<mo>·</mo>'+qty(L,2,'m')+'<mo>·</mo>'+qty(v,1,'m/s'),
  unitResult('U',Ueq,3,'V'),
- v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. '+(v<0?'Övre änden blir negativ.':'Övre änden blir positiv.')+' Vid jämvikt gäller |q|E = |q|vB.') :
+ v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. '+(v<0?'Övre änden blir negativ.':'Övre änden blir positiv.')+' Vid jämvikt gäller qE = qvB.') :
  'Förutsäg först. Det schematiska reglaget visar laddningsseparation, inte en uppmätt tidskurva. Vilket samband gäller i jämvikt?';
  $("rod-show").textContent=rodShown?"Dölj jämviktsresultatet":"Visa jämvikt och spänning";
 }
