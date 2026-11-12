@@ -1,6 +1,6 @@
 # Kvalitetsgranskning – Matematik fortsättning, nivå 1c · Kapitel 3
 
-**Status 2026-11-12:** Åtta webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
+**Status 2026-11-12:** Nio webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
 
 ## Allmän kontroll för varje lektion
 1. **Källtrohet:** jämför systematiskt med lektions-PDF, lärobokssidor, exakta uppgiftsnummer, läxa och eventuella Socrative-inslag. Ma1c: minst två av tre nivåer.
@@ -243,3 +243,27 @@
 - Chromium-test `qa/modellering-fler-extremvardesproblem-browser.cjs`: alla 12 steg, mode-switch och lärarstöd, lådans mått/volym vid x3/6/10, samordnade rektangel- och areamarkörer x0,5/1/1,5, negativ derivatafelsvar, bråkfunktionens gräns/maximum, sex boknivåspår, två separata utcheckningsfacit, 390px mobilvyer utan horisontellt sidöverspill och inget externt anrop.
 - Bildgranskning av desktop och mobil efter en godkänd testkörning upptäckte att `figure`-elementets standardmarginal minskade SVG-diagrammens bredd, och att märkningen `30 cm` i klippmallen delvis klipptes och `x` delvis doldes av överkorsning. Figuren korrigerades så att den första hörnkvadraten visar x tydligt, 30 cm placeras innanför SVG-ytan och diagramskalan utnyttjar hela tillgängliga bredden.
 - **Återstår för verklig kvalitetssäkring:** genomgång på projektor och iPad samt undersökning av elevernas självständiga lösningar. Varken matematikcheck eller Chromium-godkännande garanterar en viss lärandeeffekt.
+
+
+## Lektion 9 · Blandade problem
+
+**Original:** `Ma3c_Blandade_problem.pdf` (11 sidor), kapitel 3.2, läroboken s.173–176. **Publicerad URL:** `/mato1c/kapitel-3/blandade-problem/`. Elva webbsteg: startval, mål/derivator, grafundersökning, vattenfacit, robotens eget försök/facit, två villkorsproblem/facit med g′-graf, bokpass, individuell exit och separat återkoppling.
+
+### Källtrohet och progression
+- Alla ursprungliga situationer och beräkningsuppgifter finns kvar: vattenmängd och flöde, robotens rörelse och tangent, villkoret `a`, klassificering av `g′`, bokarbete och de två exituppgifterna. Sidor och exakta nummer bevarade.
+- Bokens nivå 1 **3247–3253 (s.174–175)**, nivå 2 **3254–3265 (s.175–176)** och nivå 3 **3266–3271 (s.176)**. Minst två nivåer; originalets båda uppgiftsspår kvar. Läxa **3248 och 3260**, extra **3264**. Originalet har ingen Socrative och webben inför inte någon.
+- Fråga–eget försök–återkoppling; separat aktivering av exempelsteg, individuellt bokarbete och självständig exit. Klassen behöver inte presentera lösningar spontant för helgrupp.
+
+### Oberoende matematisk kontroll
+- **Vatten:** `V=120(1−e^(−0,2t))` ⇒ `V′=24e^(−0,2t)>0`, `V″=−4,8e^(−0,2t)<0`, t≥0. `V(5)=120(1−e^(−1))≈75,8545` liter, `V′(5)=24e^(−1)≈8,8291` liter/min, `V″(5)=−4,8e^(−1)≈−1,7658` liter/min². Störst inflöde `V′(0)=24` liter/min, men **inget största vattenvärde** på t≥0: för varje ändligt t är `V(t)<120` och `lim_(t→∞)V(t)=120`. Visuellt streckad asymptot, inte en nådd maxpunkt.
+- **Robot:** `s=12√(t+1)−12`, `0≤t≤8`, `s′=6/√(t+1)`, `s′(3)=3` m/s, `s″=−3(t+1)^(−3/2)`, `s″(3)=−3/8=−0,375` m/s². Eftersom s″<0 är s′ störst vid t0: 6 m/s. `s(3)=12`, tangent `y=12+3(t−3)=3t+3`; t3,1 approx 12,3 m genom tangentens lokala linjeargument.
+- **Konstanten:** `f=x³+ax`, `f′=3x²+a`, `f′(2)=0` ger a−12. `f″(2)=6·2=12>0`, och `f(2)=8−24=−16`, alltså minimipunkt (2,−16).
+- **Dubbelroten:** `g′=(x−1)(x−3)²`; x1,3 är stationära. g′ har tecknen − för x<1, + för 1<x<3 och + för x>3. Därför minimipunkt vid x1, **ingen extrempunkt vid x3**. `g″=(x−3)(3x−5)` byter tecken vid 3 och `g′(3)=0`, alltså terrasspunkt vid x3. g:s okända integrationskonstant innebär att y-koordinat inte är bestämd. Webbmodellen visar **g′**, inte g, och använder samma analytiska polynom för kurva, punkter och talvärden.
+- **Exit 1:** `M=50(1−e^(−0,1t))`, `M′=5e^(−0,1t)`, M′0=5 g/min. `M″=−0,5e^(−0,1t)<0` ⇒ störst M′ vid t0. M närmar sig 50 g underifrån men når aldrig 50 vid ändlig tid.
+- **Exit 2:** `h=x²+bx`, `h′(1)=2+b=0` ⇒ b=−2, `h″=2>0`, h(1)=−1. Detta är lokalt och globalt minimum för h, med koordinat (1,−1).
+
+### Teknik och kritisk kvalitet
+- Synkroniserad SVG-vattengraf med tangent, exakt V/V′/V″-avläsning och 120-litersasymptot. Separat SVG för g′ med markör över enkel och dubbel nollpunkt. Båda styrs utan autoanimation; de visar hela funktionen med fixerade axlar, har textalternativ för numeriska värden och ingångar som fungerar med tangentbord.
+- Inga HTML-ID-dubbletter, inga saknade JavaScript-mål eller facitmål. Befintliga Ma4/Fy1/Fy2-filer är orörda. Ingen extern dataöverföring, inga användarkonton eller personuppgifter i den egna JS-koden.
+- Testfil `qa/blandade-problem-browser.cjs` täcker startens metodval och felspecifik respons, klassrumsläge, lärarstöd, analytiska vattenvärden och tangentflyttning, robotens enheter, dubbelrotens tecken, samtliga boknivåer och läxan samt två oberoende exitsekvenser. Alla 11 steg granskas även i 390px mobilbredd. Körs med regressionstesterna för tidigare åtta lektioner.
+- **Återstår:** verklig manuell projektor-/iPad-prövning och kvalitetsuppföljning av elevlösningar. Godkänd webbläsarfunktionalitet är inte belägg för mätbar lärandeeffekt.
