@@ -227,3 +227,24 @@ Be eleverna peka ut den första felaktiga modellen eller definitionsmängden i e
 - Återkopplingen på dubbelroten kommer först efter att eleven motiverat med teckentabell. Interaktiviteten förtydligar att nollställe till derivatan inte automatiskt innebär extrempunkt.
 - Väsentligt med långa tysta bokpass och individuell utcheckning, även om de interaktiva delarna skulle engagera. Minimera övertydlig styrning i de två korta villkorsproblemen.
 - **Följ upp anonymt:** Kan eleverna välja rätt derivata innan de räknar? Kan de skilja ”största inflöde” från ”största mängd” och förklara varför 120 inte antas? Använder de enheter för att kontrollera slutsatser? Kan de på egen hand visa varför x=3 är terrass men inte maximum/minimum?
+
+
+## Lektion 10 · Deriverbarhet (3.2)
+
+**Original:** `Ma3c_Deriverbarhet.pdf` (12 sidor). **Lärobok:** s.177–178. **Lärandemål:** Avgöra deriverbarhet genom vänster- och högersekantens gränslutning, skilja kontinuitet från deriverbarhet och skapa en mjuk skarv mellan två funktionsuttryck.
+
+### Originalmaterial som bevarats
+- **Start s.1–2:** Tre grafer A/B/C med mjuk parabel vid x=1, V-format hörn vid x=1 och hopp vid x=2. Enskilt först, sedan par. A deriverbar, B kontinuerlig men inte deriverbar, C inte kontinuerlig och inte deriverbar. Samma visuella klassificering och ordning som originalet.
+- **Teori s.2:** Vänsterkvot `[f(a)−f(a−h)]/h`, högerkvot `[f(a+h)−f(a)]/h`, med **h>0 och h→0⁺**, i överensstämmelse med lärobokens/original-PDF:ens skrivsätt. Samma *ändliga* gränsvärde krävs. **Deriverbar ⇒ kontinuerlig**, inte tvärtom. För att inte benämna två olika resultat som `f′(a)` innan existensen är klar rubriceras uttrycken separat som vänster- och högergränsvärde.
+- **Originalets animation s.3–5:** `p(x)=(x−1)²+2` och `q(x)=2|x−1|+2`. Eleverna förutsäger före reglaget; båda modellerna delar ett h. p:s vänstersekant −h och högersekant +h ger samma gränslutning 0, tangent `y=2`. q:s motsvarigheter −2 och +2 ger ett hörn och saknad derivata. h kan närma sig **0,02**, men inte bli 0 eller sättas in som 0 i kvoten.
+- **Eget försök/återkoppling s.6–7:** Hoppfunktionen `r(x)=1` när x<2 och `r(x)=3` när x≥2. r(2)=3, vänstersekantlutning `2/h` (h=1→2, h=0,5→4, h=0,1→20), ingen ändlig vänsterderivata; högerkvot 0. Den digitala modellen har fylld punkt (2,3) och öppen punkt (2,1). Slutsats: r är inte kontinuerlig och inte deriverbar vid x2.
+- **Mjuk skarv s.8–9:** Styckvis funktion `f=ax+b` för x<1 och `f=x²+1` för x≥1. Kontinuitet ger `a+b=2`, lika lutningar `a=2`; således `b=0`. Eleven formulerar två villkor **innan** reglagen används. Tre tydliga tillstånd att jämföra: möts med hörn (a1,b1), samma lutning men hopp (a2,b1), samt mjuk deriverbar skarv (a2,b0). Det tredje exemplet är den fullständiga ursprungslösningen.
+- **Läroboksarbete s.10, på s.178:** nivå 1 **3272–3274**, nivå 2 **3275 a–b**, nivå 3 **3276–3277**, minst två nivåer. Grundspår **3272→3273→3275 a–b**, säkert spår **3275 a–b→3277→3276**. Cirka 20 min tyst eget arbete. Digitalt verktyg är stöd; matematiska ensidiga lutningar motiverar svaret.
+- **Läxa:** **3274 och 3275**, extra **3277** till nästa lektion. Ingen Socrative i originalet; ingen har införts.
+- **Självständig utcheckning/återkoppling s.11–12:** `F=cx+d` för x<2 och `F=x²` för x≥2. Kontinuitet `2c+d=4`, lutning `c=4` ger `d=−4`, `F′(2)=4`. Felsvaret `c=4,d=0` ger hopp (vänsterhöjd8 mot F(2)=4). q(x)=2|x−1|+2 kontinuerlig men inte deriverbar. Facit ligger i separat avslutningssteg efter eget svar.
+
+### Didaktiska hypoteser och klassrumsuppföljning
+- **Manuellt styrbar sekantundersökning** kan göra det lättare att förstå skillnaden mellan ett litet h och gränsvärdet när h→0⁺. Sekantlinjerna ritas förlängda för att lutningarna fortfarande ska vara läsbara när punkterna ligger tätt; de anknyter alltid till den matematiskt beräknade differenskvoten.
+- **Hoppfunktionen** synliggör varför man måste använda funktionens verkliga punktvärde och kontinuitet innan en derivata kan diskuteras.
+- **Tvåreglagesmodellen** prövar en kritisk insikt: lika lutningar räcker inte när gränsvärdena för själva funktionen skiljer sig. Modellen ska användas som återkoppling efter villkorsekvationerna, inte som genväg till facit.
+- Granska anonymt elevers två villkorsekvationer i utcheckningen: vilka nöjer sig med derivatorna? Vilka kan formulera h>0 och jämföra kvoterna korrekt? Finns tid att arbeta självständigt i minst två nivåer? Värdera faktisk förståelse, inte antal klick.
