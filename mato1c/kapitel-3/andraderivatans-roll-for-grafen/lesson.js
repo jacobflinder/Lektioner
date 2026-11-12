@@ -56,7 +56,7 @@ function inflect(){
  add(g,'path',{d:path(m,-2.1,0,X,Y),stroke:showCurvature?'#c47739':'#12877f','stroke-width':4,fill:'none'});
  add(g,'path',{d:path(m,0,2.1,X,Y),stroke:showCurvature?'#0a887e':'#12877f','stroke-width':4,fill:'none'});
  for(const x of [-1,1])add(g,'circle',{cx:X(x),cy:Y(m.f(x)),r:5.5,stroke:'#fff','stroke-width':2,fill:'#25435b'});
- add(g,'circle',{cx:X(0),cy:Y(2),r:7,stroke:'#fff','stroke-width':2.3,fill:'#a34374'});
+ if(showCurvature)add(g,'circle',{cx:X(0),cy:Y(2),r:7,stroke:'#fff','stroke-width':2.3,fill:'#a34374'});
  const dx=.68,val=m.f(at),sl=m.d(at),line=x=>val+sl*(x-at);
  add(g,'line',{x1:X(at-dx),y1:Y(line(at-dx)),x2:X(at+dx),y2:Y(line(at+dx)),stroke:'#314b75','stroke-width':3.8,'stroke-linecap':'round'});
  add(g,'circle',{cx:X(at),cy:Y(val),r:7.5,stroke:'#fff','stroke-width':2.4,fill:'#314b75'});
