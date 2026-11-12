@@ -53,7 +53,13 @@
 <button type="button" id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button>
 </div></header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna skissa, formulera samband och bestämma definitionsmängd före modellerna. Interaktivitet används till förutsägelse och kontroll, inte som ett nytt genomgångsmål.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna skissa, formulera samband och bestämma definitionsmängd före modellerna. Interaktivitet används till förutsägelse och kontroll, inte som ett nytt genomgångsmål.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tid och vägval efter elevsvar</strong></summary>
+<p><strong>Kärnväg:</strong> öppna lådans modell (steg 1–2) och dess deriverade lösning (4); rektangeln från figur till bevis (5 och 7); bråkfunktionen som elevens försök och återkoppling (8–9); därefter minst 20 min självständigt bokarbete i båda avsnitten (10) och individuell utcheckning (11–12). De två animerade undersökningarna (3 och 6) är **valbara**: välj i första hand den där elevernas svar visar att samband mellan måtten är svårast att se. Båda finns kvar och kan väljas med knappar.</p>
+<p><strong>Riktmärke om cirka 70 minuter:</strong> start/mål/lådan 6–8 min, genomarbetad lådlösning 6–8 min, rektangelmodell och bevis 8–10 min, bråkfunktionens egna försök och återkoppling 10–13 min, bokarbete minst 20 min, individuell utcheckning 5–7 min. Om en animation behövs: visa en kort styrd sekvens och förkorta annan gemensam tid, inte bokpasset.</p>
+<p><strong>Beslutsregler:</strong> Skriver eleverna (50−x)(30−x) för botten? Öppna lådvisualiseringen och återvänd till båda hörnen. Skriver flera basen x i den symmetriska rektangeln? Öppna rektangelvisualiseringen för att se −x till +x. Svarar eleverna bråkderivatan med fel tecken? Låt dem skriva −40x⁻¹ på papper innan återkoppling. Kan de modellera och ange definitionsmängd utan bilder? Gå vidare till bokarbetet.</p>
+<p><strong>Fördröjd återkallning:</strong> nästa lektion: en 20×12 cm skiva får hörnkvadrater med sida x. Utan figurstöd, skriv volymfunktionen och 0&lt;x&lt;6, samt förklara varför båda sidmåtten minskar med 2x. Observera felmönster på klassnivå; samla inga personuppgifter.</p>
+</details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Skissa och räkna själv innan du öppnar återkopplingen. Inga svar skickas eller sparas.</div>
 <div class="stage" id="stage">
 
@@ -93,9 +99,11 @@
 <p class="eq"><strong>0 &lt; x &lt; 15</strong></p>
 </div>
 <div class="task"><strong>Förutsäg:</strong> Blir volymen störst om x är mycket litet, mycket stort eller någonstans däremellan? Motivera innan du flyttar reglaget.</div>
+<button type="button" class="secondary" data-go="box-explore">Valbar animation: pröva olika lådmått innan derivatan</button>
+<p class="muted">Om din modell och definitionsmängd redan stämmer kan du gå direkt vidare till den matematiska lösningen.</p>
 </section>
 
-<section class="slide" id="box-explore" data-teacher="Källa s.2 med volymgraf. Den interaktiva modellen är webbens eget bidrag, med kontinuerlig x inom 0<x<15. Låt eleven förutsäga, jämföra x3, x6 och x10, och sedan räkna med derivata. Rör inte facit på nästa sida innan matematikförsöket. Inte ett nytt uppgiftstal.">
+<section class="slide" id="box-explore" data-optional="true" data-teacher="Källa s.2 med volymgraf. Den interaktiva modellen är webbens eget bidrag, med kontinuerlig x inom 0<x<15. Låt eleven förutsäga, jämföra x3, x6 och x10, och sedan räkna med derivata. Rör inte facit på nästa sida innan matematikförsöket. Inte ett nytt uppgiftstal.">
 <div class="eyebrow">03 · Undersök innan derivatan</div>
 <h2>När ökar volymen – och när minskar den?</h2>
 <div class="task"><strong>Skriv en hypotes:</strong> Om x ökar från 3 till 10 cm – vad händer med höjden, bottenarean och volymen? Vilket klippmått tror du är bäst?</div>
@@ -116,7 +124,8 @@
 <svg id="box-volume" viewBox="0 0 650 440" role="img" aria-label="Volymkurva på intervallet 0 till 15 centimeter med gemensam markerad x-position"></svg>
 <figcaption>Öppna cirklar vid 0 och 15: där finns ingen verklig låda.</figcaption></figure>
 </div>
-<div class="mini-data" aria-live="polite">
+<button type="button" class="secondary" data-reveal="box-readouts">Visa beräknade mått och volym efter förutsägelsen</button>
+<div class="mini-data hidden" id="box-readouts" aria-live="polite">
 <div><span>Botten</span><strong id="box-bottom">44,00 × 24,00 cm</strong></div>
 <div><span>Höjd</span><strong id="box-height">3,00 cm</strong></div>
 <div><span>Volym</span><strong id="box-value">3168 cm³</strong></div>
@@ -159,11 +168,13 @@
 <li>Bestäm definitionsmängden.</li>
 <li>Gissa var arean är störst och motivera.</li>
 </ol></div>
-<p class="caution"><strong>Vanlig fallgrop:</strong> Basen sträcker sig från −x till x och är därför <strong>2x</strong>, inte x.</p>
+<button type="button" class="secondary" data-reveal="rect-base-hint">Visa stöd om hela basen om du fastnar</button>
+<div class="caution hidden" id="rect-base-hint"><strong>Vanlig fallgrop:</strong> Basen sträcker sig från −x till x och är därför <strong>2x</strong>, inte x.</div>
+<button type="button" class="secondary" data-go="rectangle-explore">Valbar animation: pröva bas, höjd och area</button>
 </div></div>
 </section>
 
-<section class="slide" id="rectangle-explore" data-teacher="Original animation s.4 och förklaringsbild s.5. Länka samma x till rektangelns bas, höjd och punkten på areagrafen. Behåll konstant skala och tillåt endast strikt 0<x<sqrt(3). Knapp x1 är modellens max men först efter gissningen. Låt eleverna berätta varför höjd och bas inte båda kan öka.">
+<section class="slide" id="rectangle-explore" data-optional="true" data-teacher="Original animation s.4 och förklaringsbild s.5. Länka samma x till rektangelns bas, höjd och punkten på areagrafen. Behåll konstant skala och tillåt endast strikt 0<x<sqrt(3). Knapp x1 är modellens max men först efter gissningen. Låt eleverna berätta varför höjd och bas inte båda kan öka.">
 <div class="eyebrow">06 · Styr modellen · samma x, två bilder</div>
 <h2>Basen ökar, höjden minskar – vad händer med arean?</h2>
 <div class="task"><strong>Förutsäg före reglaget:</strong> Om x ökar mot √3 blir rektangeln bredare. Vad händer samtidigt med höjden? Är arean störst i närheten av ändpunkten?</div>
@@ -176,7 +187,8 @@
 <figure class="visual"><h3 class="visual-title">Punkten P och den symmetriska rektangeln</h3><svg id="rectangle-live" viewBox="0 0 650 470" role="img" aria-label="Parabel y lika med tre minus x i kvadrat och symmetrisk rektangel med reglerbar bredd 2x"></svg></figure>
 <figure class="visual"><h3 class="visual-title">Areagrafen A(x)</h3><svg id="rectangle-area" viewBox="0 0 650 470" role="img" aria-label="Areafunktionen A lika med sex x minus två x i kubik, med samma flyttbara x-markör"></svg></figure>
 </div>
-<div class="mini-data" aria-live="polite">
+<button type="button" class="secondary" data-reveal="rect-readouts">Visa beräknad bas, höjd och area efter min förutsägelse</button>
+<div class="mini-data hidden" id="rect-readouts" aria-live="polite">
 <div><span>Bas</span><strong id="rect-width">1,00</strong></div>
 <div><span>Höjd</span><strong id="rect-height">2,75</strong></div>
 <div><span>Area</span><strong id="rect-area-value">2,75</strong></div>
@@ -206,13 +218,14 @@
 <h2>Samma strategi – nu en bråkfunktion</h2>
 <p class="eq">V(x)=15−0,1x−<span class="frac"><span class="num">40</span><span class="den">x</span></span>, &nbsp; x≥4</p>
 <p class="lead"><strong>x</strong> är antal lampor som tillverkas per dag och <strong>V(x)</strong> är vinsten i tusentals kronor per dag.</p>
-<div class="task"><strong>Försök själv på papper först.</strong><ol class="spaced">
+<div class="task"><strong>Bestäm bästa möjliga produktion och vinst själv utan färdig steglista.</strong><p>Visa definitionsmängd, derivata, tillåtna kandidater, motivering och svar med enheter.</p><button type="button" class="secondary" data-reveal="frac-original-steps">Visa originalets fyra stödfrågor vid behov</button><div class="panel hidden" id="frac-original-steps"><ol class="spaced">
 <li>Skriv bråktermen som en potens.</li>
 <li>Bestäm <span class="eq-sm">V′(x)</span> och lös <span class="eq-sm">V′(x)=0</span>.</li>
 <li>Välj ett tillåtet x och motivera att det ger ett maximum.</li>
 <li>Beräkna vinsten och ange rätt enhet.</li>
-</ol><p>Jämför sedan i par: varför blir derivatan av <span class="eq-sm">−40/x</span> <em>positiv</em>?</p></div>
-<div class="panel" data-quiz data-correct-text="Rätt. −40/x=−40x⁻¹, så derivatan är (−40)(−1)x⁻²=+40/x². Minustecknen tar ut varandra." data-wrong-text="Skriv om −40/x till −40x⁻¹. Derivera med potensregeln: koefficienten multipliceras med exponenten −1. Kontrollera tecknet.">
+</ol></div><p>Jämför sedan i par: vilket tecken får derivatan av <span class="eq-sm">−40/x</span>, och varför?</p></div>
+<button type="button" class="secondary" data-reveal="frac-check">Kontrollera derivatans tecken efter eget försök</button>
+<div class="panel hidden" id="frac-check" data-quiz data-correct-text="Rätt. −40/x=−40x⁻¹, så derivatan är (−40)(−1)x⁻²=+40/x². Minustecknen tar ut varandra." data-wrong-text="Skriv om −40/x till −40x⁻¹. Derivera med potensregeln: koefficienten multipliceras med exponenten −1. Kontrollera tecknet.">
 <strong>Vilken term får du när du deriverar −40/x?</strong>
 <div class="quiz-options">
 <button type="button" class="choice" data-correct="false">−40/x²</button>
@@ -225,7 +238,7 @@
 
 <section class="slide" id="fraction-solution" data-teacher="Original s.7, exempel 3233. V′=−0.1+40/x²; root ±20, -20 invalid x≥4. V4=4.6, V20=11 thousand SEK, derivative >0 for x 4..20, <0 after 20, global max 11000 SEK at20 lamps/day; 20 is integer. Optional static graph visual confirmation. Do not claim x could be any fractional number of lamps.">
 <div class="eyebrow">09 · Återkoppling · varför är maximum vid 20?</div>
-<h2>Derivatan av bråktermen är positiv</h2>
+<h2>Hur deriveras bråktermen – och vilket x får vi?</h2>
 <div class="layout-2">
 <div class="sequence panel" data-sequence>
 <div class="nextprompt"><strong>Förutsäg nästa steg:</strong> <span data-seq-prompt></span></div>
@@ -237,10 +250,11 @@
 </div>
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
 </div>
-<figure class="visual"><h3 class="visual-title">Digital kontroll · V(x) för x ≥ 4</h3>
+<div><button type="button" class="secondary" data-reveal="fraction-graph-wrap">Visa grafen efter mitt matematiska bevis</button>
+<figure class="visual hidden" id="fraction-graph-wrap"><h3 class="visual-title">Digital kontroll · V(x) för x ≥ 4</h3>
 <svg id="fraction-graph" viewBox="0 0 650 470" role="img" aria-label="Graf för vinstfunktionen 15 minus 0,1x minus 40/x, med markering vid maximum 20 och vinst 11 tusen kronor per dag"></svg>
 <figcaption>Grafen är en kontroll; derivatan och definitionsmängden motiverar maximum.</figcaption>
-</figure>
+</figure></div>
 </div>
 </section>
 
