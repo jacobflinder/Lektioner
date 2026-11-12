@@ -39,4 +39,6 @@
 - Delade kontroller för framåt/bakåt, lägen, lärarstöd och skrivyta har motsvarande HTML-element.
 - Inga anrop till nätverk, lokal lagring eller insamling av elevsvar i lektionens egen kod eller kopierade lektionsmotor.
 
-**Öppet:** En fullständig interaktiv webbläsar- och visuell kontroll av GitHub Pages samt fysisk projektor-/mobiltest har inte kunnat bekräftas i denna granskning. Koden har inte observerats tillsammans med elever. Nästa förbättring bör utgå från detta, inte från att lektionen redan skulle vara perfekt.
+**Verifierat i Chromium:** GitHub Actions-körningen [43230819577](https://github.com/jacobflinder/Lektioner/actions/runs/43230819577) lyckades den 12 november 2026. Playwright prövade startsida och kursnavigering, tio lektionssteg, klassrums-/repetitionsläge, lärarstöd, graf/tangent, riktad felåterkoppling, teckentabell, stegsekvens och återställning, egen uppgift, motexempel, bokhänvisningar, utcheckning och mobilbredd (390 px). Skärmbilder finns i Actions-artifakten `mato1c-browser-quality-evidence`. GitHub Pages byggde och publicerade också samma kodändring utan fel.
+
+**Återstår att följa upp:** Faktisk undervisning på projektor, manuell visuell kontroll på lärarens enheter och elevers självständiga lösningar. En lyckad Chromium-smoketest är inte liktydig med att varje graf, formel och interaktionsdetalj är perfekt, eller att en lärandeeffekt har fastställts.
