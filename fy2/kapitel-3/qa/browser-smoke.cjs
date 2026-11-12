@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
 const {chromium}=require('playwright');
-const lessons=[['elektriska-falt',18],['magnetism',10],['raknestuga',7],['strom-ger-magnetfalt',19],['spolar-och-solenoider',15],['laddade-partiklar',18],['jordens-magnetfalt',15],['induktion',24],['raknestuga-kraft-jordfalt',4],['demonstrationer-elektromagnetism',6]];
+const lessons=[['elektriska-falt',18],['magnetism',10],['raknestuga',7],['strom-ger-magnetfalt',19],['spolar-och-solenoider',15],['laddade-partiklar',19],['jordens-magnetfalt',15],['induktion',24],['raknestuga-kraft-jordfalt',4],['demonstrationer-elektromagnetism',6]];
 const base=process.env.FY2_URL||'http://127.0.0.1:8123/fy2/kapitel-3/';
 const dir='fy2-qa-screenshots';fs.mkdirSync(dir,{recursive:true});
 const errors=[],warnings=[];function check(ok,msg){if(!ok)errors.push(msg)}
@@ -135,7 +135,7 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
   await charge.locator('#particle-flip').click();
   const reversed=await charge.locator('#particle-dynamic svg').evaluate(el=>el.outerHTML);
   check(reversed.includes('B ut ur bilden'),'Charged particles: magnetic field reversal not visualized');
-  await charge.locator('#jump').selectOption('11');
+  await charge.locator('#jump').selectOption('12');
   await charge.locator('#conductor-show').click();
   check((await charge.locator('#conductor-feedback').innerText()).includes('uppåt'),
     'Conductor: I right and B inward should give F upward');
@@ -145,13 +145,24 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
   await charge.locator('#conductor-flip-B').click();
   check((await charge.locator('#conductor-feedback').innerText()).includes('uppåt'),
     'Conductor: reverse both I and B should keep original F');
-  await charge.locator('#jump').selectOption('16');
+  await charge.locator('#jump').selectOption('17');
   const d0=await charge.locator('#double-feedback').innerText();
   await charge.locator('#double-flip-both').click();
   const d1=await charge.locator('#double-feedback').innerText();
   check(d0.includes('nedåt')&&d1.includes('nedåt'),
     'Double reversal: force direction should not change');
-  await charge.screenshot({path:path.join(dir,'laddade-partiklar-interaktiv-17.png')});
+  await charge.locator('#jump').selectOption('3');
+  const originalHand=charge.locator('img[src="./assets/hogerhandsregeln.svg"]');
+  check(await originalHand.count()===1,'Charged particles: original right-hand-rule photograph missing from slide 4');
+  if(await originalHand.count()){
+    const imageLoaded=await originalHand.evaluate(img=>img.complete&&img.naturalWidth>0);
+    check(imageLoaded,'Charged particles: original hand photograph failed to load');
+  }
+  await charge.locator('#jump').selectOption('8');
+  check(await charge.locator('button[data-reveal]').count()>0,
+    'Charged particles: centripetal-force derivation is not revealable');
+  await charge.locator('#jump').selectOption('17');
+  await charge.screenshot({path:path.join(dir,'laddade-partiklar-interaktiv-18.png')});
   await charge.close();
  }finally{await browser.close()}
  fs.writeFileSync(path.join(dir,'summary.json'),JSON.stringify({errors,warnings,checkedAt:new Date().toISOString()},null,2));
