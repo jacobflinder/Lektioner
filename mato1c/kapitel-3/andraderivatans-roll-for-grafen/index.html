@@ -104,9 +104,13 @@
 <div class="flex"><output id="compare-x-out" for="compare-x">x = −1,50</output><button type="button" id="compare-reset" class="secondary">Till x = 0</button></div>
 </div>
 <div class="plot-pair">
-<div class="plot-card"><h3>f(x) = x²</h3><svg id="compare-f" viewBox="0 0 550 320" role="img" aria-label="Parabel x i kvadrat med tangent vid reglerbart x-värde"></svg><div class="plot-readout" id="compare-f-readout" aria-live="polite">f′(−1,50) = −3,00</div></div>
-<div class="plot-card"><h3>g(x) = −x²</h3><svg id="compare-g" viewBox="0 0 550 320" role="img" aria-label="Nedåtvänd parabel minus x i kvadrat med tangent vid samma x-värde"></svg><div class="plot-readout" id="compare-g-readout" aria-live="polite">g′(−1,50) = 3,00</div></div>
+<div class="plot-card"><h3>f(x) = x²</h3><svg id="compare-f" viewBox="0 0 550 320" role="img" aria-label="Parabel x i kvadrat med tangent vid reglerbart x-värde"></svg></div>
+<div class="plot-card"><h3>g(x) = −x²</h3><svg id="compare-g" viewBox="0 0 550 320" role="img" aria-label="Nedåtvänd parabel minus x i kvadrat med tangent vid samma x-värde"></svg></div>
 </div>
+<button type="button" class="secondary" data-reveal="compare-readouts">Visa beräknade tangentlutningar efter förutsägelsen</button>
+<div class="panel hidden" id="compare-readouts" aria-live="polite">
+<p><strong>f:</strong> <span class="plot-readout" id="compare-f-readout">f′(−1,50) = −3,00</span></p>
+<p><strong>g:</strong> <span class="plot-readout" id="compare-g-readout">g′(−1,50) = 3,00</span></p></div>
 <div class="panel" data-quiz data-correct-text="Rätt. f′(x)=2x ökar när x ökar, medan g′(x)=−2x minskar. Därför är f″=2>0 och g″=−2<0." data-wrong-text="Jämför tangentens lutning när x går från negativt till positivt. En lutning som går från −3 till 0 till 3 ökar.">
 <strong>Vilken slutsats stämmer?</strong>
 <div class="answer-choices">
@@ -203,7 +207,8 @@
 <div class="control-deck"><label for="inflect-x">Flytta tangentpunkten längs grafen</label><input id="inflect-x" type="range" min="-1.8" max="1.8" step="0.05" value="-1.5">
 <div class="flex"><output id="inflect-x-out" for="inflect-x">x = −1,50</output><button id="inflect-zero" class="secondary" type="button">Till x = 0</button></div></div>
 <div class="plot-single"><svg id="inflect-graph" viewBox="0 0 720 440" role="img" aria-label="Kurva x kubik minus tre x plus två, tangent som flyttas och färger för böjningsbyte vid noll"></svg></div>
-<div class="discussion-grid">
+<button type="button" class="secondary" data-reveal="inflect-readouts">Visa värden efter undersökningen</button>
+<div class="discussion-grid hidden" id="inflect-readouts" aria-live="polite">
 <div><b>Funktionsvärde</b><p id="inflect-y" class="math-display">f(x) = 3,13</p></div>
 <div><b>Tangentens lutning</b><p id="inflect-slope" class="math-display">f′(x) = 3,75</p></div>
 <div><b>Lutningens förändring</b><p id="inflect-second" class="math-display">f″(x) = −9,00</p></div>
