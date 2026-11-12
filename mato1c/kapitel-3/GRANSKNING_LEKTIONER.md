@@ -1,6 +1,6 @@
 # Kvalitetsgranskning – Matematik fortsättning, nivå 1c · Kapitel 3
 
-**Status 2026-11-12:** En webblektion är byggd och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
+**Status 2026-11-12:** Fem webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
 
 ## Allmän kontroll för varje lektion
 1. **Källtrohet:** jämför systematiskt med lektions-PDF, lärobokssidor, exakta uppgiftsnummer, läxa och eventuella Socrative-inslag. Ma1c: minst två av tre nivåer.
@@ -128,3 +128,35 @@
 - [Automatiska webbläsartester](https://github.com/jacobflinder/Lektioner/actions/workflows/mato1c-browser-qa.yml) prövar klassrumsläge, lärarstöd, båda matematiska reglagen, rätt och fel feedback, exempelsteg, bok, utcheckning och samtliga 12 vyer i mobilbredd 390px. GitHub Pages hanterar själva publiceringen.
 
 **Återstår att pröva:** manuell visuell kontroll på klassrummets projektor, tillgänglighet med verkliga tangentbord/skärmläsare samt elevlösningar i faktisk undervisning. Ett godkänt automatiskt test är inte belägg för att lektionen ger bättre läranderesultat.
+
+
+## Lektion 5 · Funktionens graf och derivatornas grafer
+
+**Grundkälla:** `Ma3c_Funktionens_graf_och_derivatornas_grafer.pdf`, 6 sidor (1–5 elevmaterial, 6 lärarstöd). Den tillhör lektionsserien 3.1 och behandlar bok s. 153–155. **Adress:** `/mato1c/kapitel-3/funktionens-graf-och-derivatornas-grafer/`.
+
+### Källtrohet
+- Innehållet på originalets s.1–5 bevarat i 8 webbsteg: startfrågan, mål, tre grafer vid samma x och tillhörande förklaring, exemplet g′=−1, elevuppgiften f′=2x−4, bokarbete och individuell utcheckning.
+- Originalets lärarsida bevarad som innehåll i separat lärarstöd. Ingen färdig Socrative fanns i originalet; bara ett möjligt framtida arbetssätt nämns. Ingen Socrative har lagts till.
+- Exakta bokreferenser: s.154–155; nivå 1 3146–3149, inklusive digital ritning i 3148; nivå 2 3150–3152; nivå 3 3153–3154. Eleverna arbetar med minst två av tre nivåer.
+- Läxa till nästa lektion: 3149 och 3150, extra 3153. Inte ersatt av en generell läxa.
+- Elevens avslut: h′(x)=(x−1)(x−3) och extra p′(x)=(x−2)². Lärarstödets facit visas först efter individuellt svar.
+
+### Oberoende matematisk granskning
+- **Start:** f(0)=−3 och f′(0)=1 för funktionerna x−3, x²+x−3 och −x²+x−3; deras andraderivator vid 0 är respektive 0, +2, −2. Så f<0 och f′>0 bestämmer inte f″.
+- **Eget grafexempel:** Originalskissen anger inga funktionsuttryck för de tre graferna. Webbversionen använder den **egna exakta modellen**
+  `f(x)=−x³/12+x²−3x+7/2`,
+  `f′(x)=−(x−2)(x−6)/4`,
+  `f″(x)=2−x/2`.
+  Här är f′(2)=0, f″(2)=+1, f′(6)=0, f″(6)=−1, och vid x=4 är f′(4)=1 men f″(4)=0 med teckenbyte från positivt till negativt. Följaktligen min vid x2, max vid x6, inflexion vid x4 men **ingen terrasspunkt**. Funktionen är avtagande för x<2 och x>6, växande för 2<x<6. Funktionen är vald för att återge originalets kritiska x-värden och tecken, inte för att tillskriva skissen en ej given formel.
+- **Numerisk kontroll:** Symmetriska differenskvoter jämförda med analytiska f′ och f″ vid x=0,1,2,4,6,8. Maximal avvikelse omkring 1,3×10⁻¹⁰.
+- **Genomarbetat exempel:** g′(x)=−1 ⇒ g(x)=−x+C. g₁=−x och g₂=−x+2 ger samma derivata.
+- **Eget försök:** f′(x)=2x−4 har nollställe x=2 och tecken − 0 +. En funktion är f=(x−2)²+C; för C=0 respektive C=3 fås originalets två grafer. f″(x)=2 är positiv och konstant.
+- **Utcheckning:** h′(x)=(x−1)(x−3)=x²−4x+3, h″(x)=2x−4. h växer för x<1 samt x>3, avtar för 1<x<3. h har lokalt maximum vid x=1, lokalt minimum vid x=3. Inflexion vid x=2 eftersom h″ byter tecken, **inte** terrass eftersom h′(2)=−1. Exempel h=x³/3−2x²+3x+C där C kan varieras för att ge flera grafer. Extra p′=(x−2)² är positiv på var sida om x2, p′(2)=0 och p″=2(x−2) byter tecken: terrasspunkt vid x2.
+
+### Didaktik och teknik
+- 8 elevavsnitt. Klassrumsläge, repetitionsläge, styrbar stegvis återkoppling, separat lärarstöd, skrivyta, tangentbordsnavigation. Ma1c:s befintliga resurser används utan att Ma4- eller fysiklektionernas filer ändrats.
+- En sammanlänkad tredelad SVG med ett x-reglage, tre punktkaraktärsval och situationsspecifik återkoppling. En separat visualisering av vertikal förskjutning hålls dold tills eleverna arbetat själva. Ingen extern grafmotor, ingen inloggning eller nätverksinsamling.
+- Statiskt kontrollerat: unika HTML-id, inga saknade svarskontroll- och avslöjandemål, rätt matematisk precision, bokhänvisningar och läxa.
+- Automatiserad Chromium-granskning via `qa/funktionens-graf-browser.cjs`: navigation genom kursdelen, klassrums- och repetitionsläge, start och dolt facit, de tre derivatavärdena vid x=2,4,6, fel/rätt återkoppling, alla tre stegen i exempel, elevkontroll av f′=2x−4, styrbar C-förskjutning, bokuppgifter, utcheckningsfacit, hela 390px mobilvyn, inga JavaScript-fel eller externa anrop.
+- **Skärmbildsgranskning:** datorvyer för start, tre grafer, höjdförskjutning och utcheckning samt mobilvyer för tre grafer och bokarbete. Efter granskningen justerades SVG-etiketternas storlek för bättre läsbarhet i mobilen.
+- **Återstår:** full manuell testning med lärarens egna projektor, iPad och telefon och elevlösningar under faktisk undervisning. Godkänt smoketest är inte evidens för en påvisad lärandeeffekt.
