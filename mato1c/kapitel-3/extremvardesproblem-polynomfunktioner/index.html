@@ -26,7 +26,7 @@
 .shortcut-row button{padding:7px 11px;font-size:.91rem}
 .shortcut-row button[aria-pressed=true]{background:#067b71;color:#fff}
 .mini-bars{margin:13px 0}
-.mini-bars label{display:block;font-weight:700;font-size:.94rem}
+.mini-bars .bar-label{display:block;font-weight:700;font-size:.94rem;margin:0}
 .bar-track{height:18px;width:100%;background:#dce7ee;border-radius:9px;overflow:hidden;margin:5px 0 14px}
 .bar-fill{height:100%;background:#167f8c;border-radius:9px;transition:width .12s linear}
 .bar-fill.revenue{background:#a86833}
@@ -162,8 +162,8 @@
 <div class="metric"><span>Sålda biljetter i modellen</span><strong id="tickets-sold">750 st</strong></div>
 <div class="metric"><span>Total intäkt</span><strong id="ticket-revenue">37 500 kr</strong></div></div>
 <div class="mini-bars" aria-label="Jämför försäljning och intäkt som relativa staplar">
-<label for="sold-bar">Antal biljetter av möjliga 1 000</label><div class="bar-track"><div class="bar-fill" id="sold-bar" style="width:75%"></div></div>
-<label for="revenue-bar">Intäkt av maximala 50 000 kr</label><div class="bar-track"><div class="bar-fill revenue" id="revenue-bar" style="width:75%"></div></div></div>
+<p class="bar-label">Antal sålda biljetter av möjliga 1 000</p><div class="bar-track"><div class="bar-fill" id="sold-bar" style="width:75%"></div></div>
+<p class="bar-label">Intäkt – jämför priserna i stapeln</p><div class="bar-track"><div class="bar-fill revenue" id="revenue-bar" style="width:75%"></div></div></div>
 <button type="button" id="ticket-check">Kontrollera min hypotes om bästa priset</button>
 <p id="ticket-feedback" class="feedback" role="status" aria-live="polite"></p>
 </div></div>
