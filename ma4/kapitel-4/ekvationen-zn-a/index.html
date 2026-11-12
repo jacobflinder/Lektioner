@@ -58,7 +58,7 @@ function render(){
  document.getElementById('roots-explanation').textContent=explanations[stage];
  document.getElementById('roots-back').disabled=stage===0;
  document.getElementById('roots-next').disabled=stage===4;
- document.getElementById('roots-next').textContent=stage===3?'Kontrollera k = 3 →':'Visa nästa rot →';
+ document.getElementById('roots-next').textContent=stage===4?'Alla olika rötter visade':stage===3?'Kontrollera k = 3 →':'Visa nästa rot →';
 }
 document.getElementById('roots-next').addEventListener('click',()=>{stage=Math.min(4,stage+1);render()});
 document.getElementById('roots-back').addEventListener('click',()=>{stage=Math.max(0,stage-1);render()});
