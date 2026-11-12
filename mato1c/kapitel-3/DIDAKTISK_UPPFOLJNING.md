@@ -38,3 +38,24 @@ Använd inte personuppgifter, individuella loggar eller automatisk svarssamling.
 
 ## Förbered kommande lektioner
 Innan kod skrivs: läs *just den* PDF:en och eventuella läroboksbilder. Markera innehåll att bevara, förbättringar som är didaktiskt motiverade och nya interaktioner med tydligt matematiskt syfte. Publicera först efter matematik- och kodgranskning; ange kvarstående praktiska testbegränsningar öppet.
+
+## Lektion 2 · Extrempunkter och terrasspunkter (2026-11-05)
+**PDF:** `261105 Extrempunkter och terrasspunkter.pdf`, sex sidor. **Mål:** bestäm stationära punkters karaktär *och koordinater* med derivatans tecken samt värdet i ursprungsfunktionen.
+
+**Original bevarat**
+- Start: jämför `x²`, `−x²`, `x³`, alla med vågrät tangent i origo. Eleven gör en förutsägelse före återkoppling.
+- Koppling `f′` före/efter nollstället → max/min/terrass; skilj `f′(a)=0` från koordinaten `(a,f(a))`.
+- Genomarbetat `f(x)=x³−3x+2`: `f′=3(x−1)(x+1)`, tecken `+ 0 − 0 +`, max `(−1,4)`, min `(1,0)`.
+- Motexempel `f(x)=x³+2`: `f′=3x²`, tecken `+0+`, terrass `(0,2)`.
+- Bokens sidor 145–148. Uppgifter på s. 148. Originalets två rekommenderade **spår**, inklusive den avsiktliga dubbla förekomsten av 3119, har behållits. Mer träning: 3116 eller 3121.
+- Läxa: gör klart valt spår före nästa lektion. Individuell utcheckning har bevarade uppgifter om `+0−`, `−0−` och felslutet `f′(3)=0 ⇒ (3,0)`.
+- Ingen Socrative fanns i originalet.
+
+**Nytt webbvärde, som hypotes att pröva**
+- Samma flyttbara tangent och exakt beräknade derivata för alla tre jämförelsefunktionerna. Eleven förutsäger tecken på båda sidor om noll och väljer punktkaraktär; återkopplingen är situationsspecifik.
+- Det genomarbetade exemplet visar ett motiverat steg i taget. En egen ny polynomuppgift `−x³+3x` används för mindre stöd och för att skilja koordinater från derivatans nollställen.
+- Utcheckning sker utan att webben förser eleven med en graf eller automatiskt visar facit.
+
+**Matematisk precisering:** Den källbaserade grundtabellen behandlar `+0+` och `−0−` som terrassfall. Det utesluter en extrempunkt men ger inte utan ytterligare antaganden ett allmänt bevis för en terrasspunkt. En terrasspunkt är en stationär inflexionspunkt (böjningsbyte). Skillnaden förklaras varsamt i webbmaterialet, utan att ta bort uppgiftens avsedda metod på denna nivå.
+
+**Följ upp i klass:** Kan eleven motivera punktens typ med teckentabell *och* bestämma y med funktionen? Vilka elever skriver felaktigt `(a,0)` när `f′(a)=0`? Räcker interaktionen, eller behövs handskrivna exempel? Notera endast anonym klassnivå.
