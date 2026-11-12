@@ -32,7 +32,20 @@
 <p class="math">= √3/3 − i/3</p></div>
 <p>Kontroll i polär form: kvotens längd 2/3 multipliceras med 3 till 2, och vinkeln −30° adderas med 60° till 30°. Alltså får vi tillbaka z₁.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></section>
-<section id="plot" class="slide" data-teacher="Grafen är kontroll efter matematisk förutsägelse. Inte klickande utan resonemang."><div class="eyebrow">04 · Visuell prövning</div><h2>Förutsäg → välj operation → förklara</h2><div class="two"><div class="plot-box"><svg class="plot" id="pd-plane" viewBox="0 0 680 430" aria-label="Likskaligt komplext talplan med faktorer och produkt eller kvot"></svg><div class="plane-buttons"><button data-operation="mul" aria-pressed="true">Produkt</button><button data-operation="div" class="secondary" aria-pressed="false">Kvot</button></div></div><div><div class="task"><strong>Innan du klickar</strong>Förutsäg resultatpilens längd och riktning och jämför med en kamrat.</div><button id="pd-show" class="secondary" aria-pressed="false" type="button">Visa resultatet</button><div id="pd-answer" class="answer hidden"><p class="math" id="pd-result">z₁z₂ = 6(cos 90° + i sin 90°)</p></div><p class="muted">Blå och turkos pil är faktorerna. Orange pil är resultatet. Samma skala används på båda axlarna.</p></div></div></section>
+<section id="plot" class="slide" data-teacher="Grafen visar själva operationen, inte bara slutresultatet. Start: z₁ och z₂. Första klicket: skala z₁ med |z₂| vid produkt, eller 1/|z₂| vid division; riktningen är oförändrad. Andra klicket: rotera med +60° eller −60°. Stanna upp före varje klick. Alla lägen använder samma axelskala.">
+<div class="eyebrow">04 · Undersök geometriskt · längd och riktning</div>
+<h2>Först skala – sedan rotera</h2>
+<div class="two"><div>
+<div class="plot-box"><svg class="plot" id="pd-plane" viewBox="0 0 680 430" role="img" aria-label="Komplext talplan där z₁ skalas och sedan roteras stegvis vid multiplikation och division"></svg></div>
+<div class="flex"><button type="button" data-operation="mul" aria-pressed="true">Multiplikation</button><button type="button" data-operation="div" class="secondary" aria-pressed="false">Division</button></div>
+<p class="muted">Blå pil: z₁. Turkos: z₂. Streckad lila: skalad z₁. Orange: resultat. Samma skala på axlarna och i båda operationslägena.</p>
+</div><div>
+<p class="math">z₁ = 2(cos 30° + i sin 30°)</p><p class="math">z₂ = 3(cos 60° + i sin 60°)</p>
+<div class="task"><strong>Förutsäg före nästa steg</strong><p id="pd-question" aria-live="polite">Vilken längd och riktning har z₁? Hur påverkas längden först?</p></div>
+<div class="seq-controls"><button type="button" id="pd-back" class="secondary">← Tillbaka</button><button type="button" id="pd-next">Visa nästa steg →</button><button type="button" id="pd-reset" class="secondary">Börja om</button></div>
+<p id="pd-step" class="muted" aria-live="polite">Steg 0 av 2</p>
+<div id="pd-answer" class="answer hidden"><p class="math" id="pd-result"></p><p id="pd-explain"></p></div>
+</div></div></section>
 <section id="self" class="slide" data-teacher="Stödet minskar. Eleverna beslutar om operation, väljer r och v, räknar och kontrollerar. Använd inte en färdig lösning före försöket. Låt dem beskriva varför produktens riktning blir 180°.">
 <div class="eyebrow">05 · Självständigt arbete · mindre stöd</div><h2>Räkna både produkt och kvot själv</h2>
 <div class="task"><strong>Enskilt → par → kontroll</strong><p class="math">w₁ = 4(cos 150° + i sin 150°)</p><p class="math">w₂ = 2(cos 30° + i sin 30°)</p>
@@ -59,9 +72,46 @@
 <p class="math">|z₁z₂| = 3 · 2 = 6, &nbsp; v = 20° + 80° = 100°</p><p class="math">z₁z₂ = 6(cos 100° + i sin 100°)</p>
 <p class="math">|z₁/z₂| = 3/2, &nbsp; v = 20° − 80° = −60°</p><p class="math">z₁/z₂ = (3/2)(cos(−60°) + i sin(−60°))</p></div>
 <p>Multiplikation ger vinkelsumman. Division gör den omvända rotationen och ger vinkeldifferensen. Kvotens argument kan också skrivas 300°.</p></div>
-<div class="panel"><strong>Dagens mål</strong><p>Jag kan multiplicera och dividera i polär form, visa både längd och vinkel i beräkningen och förklara resultatets riktning.</p><p>Vilken del kan jag göra utan hjälp? Vad behöver jag träna mer på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller lagring av elevsvar.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>(()=>{'use strict';let op='mul',revealed=false;const v=(r,d)=>({x:r*Math.cos(d*Math.PI/180),y:r*Math.sin(d*Math.PI/180)});const z1=v(2,30),z2=v(3,60);
-function draw(){const result=op==='mul'?v(6,90):v(2/3,-30);
-Ma4Plane.plot('pd-plane',{minX:-4,maxX:7,minY:-4,maxY:7,vectors:[{...z1,label:'z₁',color:'blue'},{...z2,label:'z₂',color:'teal'},...(revealed?[{...result,label:op==='mul'?'z₁z₂':'z₁/z₂',color:'orange',dy:19}]:[])]});
-document.getElementById('pd-result').textContent=op==='mul'?'z₁z₂ = 6(cos 90° + i sin 90°)':'z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))';document.getElementById('pd-answer').classList.toggle('hidden',!revealed);document.getElementById('pd-show').textContent=revealed?'Dölj resultatet':'Visa resultatet';document.getElementById('pd-show').setAttribute('aria-pressed',String(revealed));
-document.querySelectorAll('[data-operation]').forEach(b=>{const yes=b.dataset.operation===op;b.setAttribute('aria-pressed',String(yes));b.classList.toggle('secondary',!yes)})}
-document.querySelectorAll('[data-operation]').forEach(b=>b.onclick=()=>{op=b.dataset.operation;revealed=false;draw()});document.getElementById('pd-show').onclick=()=>{revealed=!revealed;draw()};draw()})();</script></body></html>
+<div class="panel"><strong>Dagens mål</strong><p>Jag kan multiplicera och dividera i polär form, visa både längd och vinkel i beräkningen och förklara resultatets riktning.</p><p>Vilken del kan jag göra utan hjälp? Vad behöver jag träna mer på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna matematiska beräkningar"></canvas></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller lagring av elevsvar.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
+(()=>{'use strict';
+let op='mul',step=0;
+const svg=document.getElementById('pd-plane');
+const polar=(radius,deg)=>({x:radius*Math.cos(deg*Math.PI/180),y:radius*Math.sin(deg*Math.PI/180)});
+const z1=polar(2,30),z2=polar(3,60);
+function el(tag,attrs={},body){const node=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))node.setAttribute(k,String(v));if(body!==undefined)node.textContent=body;svg.append(node);return node}
+function draw(){
+ const multiplication=op==='mul',scaled=polar(multiplication?6:2/3,30),result=polar(multiplication?6:2/3,multiplication?90:-30);
+ const vectors=[{...z1,label:'z₁',color:'blue',dx:12,dy:18},{...z2,label:'z₂',color:'teal',dx:11,dy:-8}];
+ if(step>=1)vectors.push({...scaled,label:multiplication?'Skalad z₁':'Skalad z₁',color:'purple',dashed:true,dx:12,dy:17,width:3});
+ if(step>=2)vectors.push({...result,label:multiplication?'z₁z₂':'z₁/z₂',color:'orange',dx:multiplication?12:10,dy:multiplication?-8:20,width:4});
+ // Samma geografiska skala i båda lägena för att längderna ska vara jämförbara.
+ const g=Ma4Plane.plot(svg,{minX:-2.2,maxX:6.7,minY:-2.2,maxY:6.7,alt:'Lika skalenheter i både reell och imaginär riktning. '+(multiplication?'Multiplikation':'Division')+', steg '+step+' av 2. '+(step===0?'Endast z₁ och z₂ visas.':step===1?'z₁ har skalats utan rotation.':'Resultatvektorn har roterats med '+(multiplication?'+60°':'−60°')+'.'),vectors});
+ if(step>=2){
+  const rad=multiplication?1.35:.42, rPx=rad*g.scale,cx=g.X(0),cy=g.Y(0);
+  const angle1=30*Math.PI/180,angle2=(multiplication?90:-30)*Math.PI/180;
+  const pt=(a)=>[cx+rPx*Math.cos(a),cy-rPx*Math.sin(a)],p1=pt(angle1),p2=pt(angle2);
+  const arc='M '+p1[0]+' '+p1[1]+' A '+rPx+' '+rPx+' 0 0 '+(multiplication?0:1)+' '+p2[0]+' '+p2[1];
+  el('path',{d:arc,stroke:'#9b631c','stroke-width':3,fill:'none'});
+  const mid=(angle1+angle2)/2,lab=multiplication?'+60°':'−60°';
+  el('text',{x:cx+(rPx+15)*Math.cos(mid)+(multiplication?-2:7),y:cy-(rPx+15)*Math.sin(mid)-2,'font-size':17,'font-weight':750,fill:'#9b631c'},lab);
+ }
+ const question=step===0
+  ?(multiplication?'Vad blir längden om z₁ multipliceras med |z₂| = 3? Vilken riktning har den skalade vektorn?':'Vad blir längden om z₁ divideras med |z₂| = 3? Vilken riktning har den skalade vektorn?')
+  :step===1?(multiplication?'Den streckade pilen har längden 6. Var hamnar spetsen om den roteras +60°?':'Den streckade pilen har längden 2/3. Var hamnar spetsen om den roteras −60°?')
+  :(multiplication?'Varför blir argumentet 90° och absolutbeloppet 6?':'Varför blir argumentet −30° och absolutbeloppet 2/3?');
+ document.getElementById('pd-question').textContent=question;
+ document.getElementById('pd-step').textContent='Steg '+step+' av 2';
+ document.getElementById('pd-back').disabled=step===0;
+ document.getElementById('pd-next').disabled=step===2;
+ const answer=document.getElementById('pd-answer');answer.classList.toggle('hidden',step!==2);
+ if(step===2){document.getElementById('pd-result').textContent=multiplication?'z₁z₂ = 6(cos 90° + i sin 90°) = 6i':'z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))';
+ document.getElementById('pd-explain').textContent=multiplication?'Först skalar z₂ längden 2 till 6. Sedan roterar den vektorn 60° moturs, från 30° till 90°.':'Divisionen skalar först längden 2 till 2/3, sedan roteras vektorn 60° medurs, från 30° till −30°.';}
+ document.querySelectorAll('[data-operation]').forEach(button=>{const selected=button.dataset.operation===op;button.setAttribute('aria-pressed',String(selected));button.classList.toggle('secondary',!selected)});
+}
+document.querySelectorAll('[data-operation]').forEach(button=>button.addEventListener('click',()=>{op=button.dataset.operation;step=0;draw()}));
+document.getElementById('pd-next').addEventListener('click',()=>{step=Math.min(2,step+1);draw()});
+document.getElementById('pd-back').addEventListener('click',()=>{step=Math.max(0,step-1);draw()});
+document.getElementById('pd-reset').addEventListener('click',()=>{step=0;draw()});
+draw();
+})();
+</script></body></html>
