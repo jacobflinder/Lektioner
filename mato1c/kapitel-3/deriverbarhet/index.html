@@ -58,7 +58,12 @@
 <button id="mode" type="button" class="secondary" aria-pressed="false">Klassrumsläge</button>
 </div></header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Eleverna förutsäger innan reglagen flyttas. Låt dem skriva enskilt och jämföra i par. Formeln för ensidiga differenskvoter följer originalets h→0⁺-skrivsätt; inga kvoter beräknas genom att sätta h=0.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Eleverna förutsäger innan reglagen flyttas. Låt dem skriva enskilt och jämföra i par. Formeln för ensidiga differenskvoter följer originalets h→0⁺-skrivsätt; inga kvoter beräknas genom att sätta h=0.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tidsprioritering och beslut utifrån elevsvar</strong></summary>
+<p><strong>Kärnväg:</strong> tre startgrafer och mål (1–2), förutsäg sekantlutningar och matematiskt gränsvärde (3 och 5), hoppproblem med återkoppling (6–7), egen skarv med villkor och facit (8–9), minst 20 min sammanhängande bokarbete (10), individuell utcheckning och separat återkoppling (11–12). Den styrbara dubbelgrafen med sekantlinjer (4) är **valbar** och nås från steg 3 – visa den om eleverna behöver se varför lika små avstånd kan ge olika lutningar.</p>
+<p><strong>Tidsriktmärke vid cirka 70 minuter:</strong> start och mål 6–8 min, ensidiga gränslutningar 7–10 min, hoppproblem 7–9 min, egen skarv och återkoppling 9–12 min, bokarbete minst 20 min, utcheckning 5–7 min. Komprimera gemensamma delar vid behov, inte det egna arbetet.</p>
+<p><strong>Beslutsregler:</strong> Om eleverna säger att alla kontinuerliga funktioner är deriverbara, öppna sekantjämförelsen av hörnet. Om de använder (2,1) som funktionsvärde i hoppkvoten, peka på öppen kontra fylld punkt. Om två grenlutningar stämmer men eleven glömmer kontinuiteten, låt dem undersöka en skarv med hopp och beräkna den verkliga ensidiga kvoten. Om två villkor formuleras självständigt, gå vidare till boken.</p>
+<p><strong>Fördröjd återkallning:</strong> Nästa lektion, utan bild: undersök p(x)=|x−2| vid x=2. Den är kontinuerlig men vänsterderivatans gränsvärde är −1 och högerderivatans är +1. Motivera med bokens ensidiga differenskvoter, inte bara grafens utseende.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Lös själv först och använd graferna för att pröva ditt resonemang. Inga elevsvar samlas in eller lagras.</div>
 <div class="stage" id="stage">
 
@@ -91,6 +96,11 @@
 </div>
 <div class="insight"><strong>Samma ändliga gränsvärde</strong> från båda håll innebär att <span class="mathsmall">f′(a)</span> finns och har detta värde. Om de skiljer sig, eller något ändligt gränsvärde saknas, finns ingen derivata.</div>
 <div class="warning"><strong>Deriverbar ⇒ kontinuerlig.</strong> Däremot gäller inte omvändningen. En graf kan hänga ihop men ändå ha ett hörn.</div>
+<button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning från Blandade problem (1 minut)</button>
+<div class="panel hidden" id="prior-recall">
+<p><strong>Utan graf:</strong> V(t)=120(1−e<sup>−0,2t</sup>), t≥0. Varför saknar vattenmängden ett största värde, trots att V′(t)&gt;0?</p>
+<button type="button" class="reveal" data-reveal="prior-recall-answer">Kontrollera efter eget resonemang</button>
+<div id="prior-recall-answer" class="answer hidden"><p>V′(t)=24e<sup>−0,2t</sup>&gt;0, så mängden växer. Men V(t)&lt;120 vid varje ändlig t och V(t)→120 när t→∞. Funktionen når aldrig 120 och har därför inget största värde för t≥0.</p></div></div>
 </section>
 
 <section class="slide" id="predict" data-teacher="Original s.3. p=(x−1)²+2 och q=2|x−1|+2, båda kontinuerliga vid x1. Eleverna ska förutsäga ensidiga sekantlutningar från x1±h innan reglage: p left −h right +h →0; q left −2 right +2. Låt inga resultat eller förklaringar avslöjas i förväg.">
@@ -102,9 +112,11 @@
 </div>
 <div class="task"><strong>Skriv en förutsägelse:</strong> När punkterna närmar sig <span class="mathsmall">(1,2)</span> från vänster respektive höger, kommer de två sekantlutningarna att bli lika för båda graferna? Vilka gränslutningar tror du att de får?</div>
 <p class="small-note">Blå sekant: från vänster. Röd sekant: från höger. Båda har samma positiva avstånd h till mittpunkten.</p>
+<button type="button" class="secondary" data-go="secants">Valbar sekantanimation: pröva båda graferna med samma h</button>
+<p class="muted">Om du redan kan visa gränslutningarna algebraiskt kan du gå direkt till återkopplingen i nästa kärnsteg.</p>
 </section>
 
-<section class="slide" id="secants" data-teacher="Original animation s.4 och slutbild s.5. Samma h i två grafer och båda riktningarna. Vänster p-lutning −h, höger +h. Vänster q −2, höger +2. Kontrollera h=1, 0,5, 0,1, 0,02. Det är viktigt att vi låter h→0⁺ men aldrig sätter h=0 i nämnaren.">
+<section class="slide" id="secants" data-optional="true" data-teacher="Original animation s.4 och slutbild s.5. Samma h i två grafer och båda riktningarna. Vänster p-lutning −h, höger +h. Vänster q −2, höger +2. Kontrollera h=1, 0,5, 0,1, 0,02. Det är viktigt att vi låter h→0⁺ men aldrig sätter h=0 i nämnaren.">
 <div class="eyebrow">04 · Styr båda sekantparen</div>
 <h2>Se vad som händer när avståndet krymper</h2>
 <div class="sliders"><label for="secant-h">Gemensamt avstånd h från x=1</label>
@@ -118,7 +130,8 @@
 <figure class="graph-frame"><strong>p(x)=(x−1)²+2</strong><svg id="p-graph" viewBox="0 0 680 430" role="img" aria-label="Parabel och två sekantlinjer genom (1,2), en blå från vänster och en röd från höger med reglerbart positivt avstånd h"></svg></figure>
 <figure class="graph-frame"><strong>q(x)=2|x−1|+2</strong><svg id="q-graph" viewBox="0 0 680 430" role="img" aria-label="Absolutbeloppsgraf med blå vänstersekant och röd högersekant genom (1,2) med gemensamt positivt h"></svg></figure>
 </div>
-<div class="metric-grid" aria-live="polite">
+<button type="button" class="secondary" data-reveal="secant-readouts">Visa sekantlutningarna efter min beräkning</button>
+<div class="metric-grid hidden" id="secant-readouts" aria-live="polite">
 <div class="metric"><span>Avstånd</span><strong id="h-readout">h = 1,00</strong></div>
 <div class="metric blue"><span>p · vänster / höger</span><strong id="p-slopes">−1,00 / 1,00</strong></div>
 <div class="metric red"><span>q · vänster / höger</span><strong id="q-slopes">−2,00 / 2,00</strong></div>
@@ -159,7 +172,8 @@
 <figure class="graph-frame"><strong>Hopp vid x=2</strong><svg id="jump-graph" viewBox="0 0 650 440" role="img" aria-label="Styckvis konstant graf y=1 före x2 med öppen punkt och y=3 från x2 med fylld punkt och sekant från vänster till den fyllda punkten"></svg>
 <figcaption>Blå sekant från vänster går genom r(2)=3.</figcaption></figure>
 <div class="sliders"><label for="jump-h">Förminska avståndet h</label><input id="jump-h" type="range" min="0" max="4" step="1" value="0"><output id="jump-h-out" for="jump-h">h = 1,00</output></div>
-<div class="metric-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))" aria-live="polite">
+<button type="button" class="secondary" data-reveal="jump-readouts">Visa vänster- och högerlutningarna efter mitt försök</button>
+<div class="metric-grid hidden" id="jump-readouts" style="grid-template-columns:repeat(2,minmax(0,1fr))" aria-live="polite">
 <div class="metric blue"><span>Från vänster</span><strong id="jump-left">2,00</strong></div>
 <div class="metric red"><span>Från höger</span><strong id="jump-right">0,00</strong></div></div>
 </div></div>
@@ -193,17 +207,21 @@
 </div><div>
 <div class="sliders"><label for="stitch-a">Vänstra linjens lutning a</label><input id="stitch-a" type="range" min="0" max="4" step=".5" value="1">
 <label for="stitch-b">Vänstra linjens konstant b</label><input id="stitch-b" type="range" min="-2" max="3" step=".5" value="1">
+</div>
+<button type="button" class="secondary" data-reveal="stitch-check">Visa kontrollvärden och färdiga jämförelsefall efter min lösning</button>
+<div id="stitch-check" class="hidden">
 <div class="shortcut-row">
 <button type="button" class="secondary" data-stitch="1,1">Möts med hörn</button>
 <button type="button" class="secondary" data-stitch="2,1">Samma lutning, hopp</button>
 <button type="button" class="secondary" data-stitch="2,0">Mjuk skarv</button>
-</div></div>
+</div>
 <div class="stitch-data" aria-live="polite">
 <div><span>Vänsterhöjd a+b</span><strong id="stitch-left-height">2,00</strong></div>
 <div><span>Högerhöjd</span><strong>2,00</strong></div>
 <div><span>Vänsterlutning a</span><strong id="stitch-left-slope">1,00</strong></div>
 <div><span>Högerlutning</span><strong>2,00</strong></div>
-</div><p class="feedback" id="stitch-status" aria-live="polite" role="status">Delarna möts, men lutningarna är olika: hörn, inte deriverbar.</p></div></div>
+</div><p class="feedback" id="stitch-status" aria-live="polite" role="status">Delarna möts, men lutningarna är olika: hörn, inte deriverbar.</p>
+</div></div></div>
 <figure class="graph-frame"><strong>Skarven vid x=1 · samma koordinatskala</strong><svg id="stitch-graph" viewBox="0 0 790 445" role="img" aria-label="Linje till vänster om x1 och parabel till höger, med reglage för linjens lutning a och konstant b"></svg><figcaption>Öppen cirkel visar vänsterdelens slutvärde; fylld cirkel visar f(1)=2 på högerdelen. De kan sammanfalla.</figcaption></figure>
 <div class="task"><strong>Motivera:</strong> Om lutningarna stämmer men höjderna inte gör det – har funktionen då någon derivata i skarven?</div>
 </section>
