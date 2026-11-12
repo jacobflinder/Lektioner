@@ -1,6 +1,6 @@
 # Kvalitetsgranskning – Matematik fortsättning, nivå 1c · Kapitel 3
 
-**Status 2026-11-12:** Sju webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
+**Status 2026-11-12:** Åtta webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
 
 ## Allmän kontroll för varje lektion
 1. **Källtrohet:** jämför systematiskt med lektions-PDF, lärobokssidor, exakta uppgiftsnummer, läxa och eventuella Socrative-inslag. Ma1c: minst två av tre nivåer.
@@ -218,3 +218,28 @@
 
 
 **Slutlig verifiering av lektion 7, 2026-11-12:** Chromium-körning [43252467370](https://github.com/jacobflinder/Lektioner/actions/runs/43252467370) passerade alla sju lektionsskript utan fel. Den omfattade interaktionen vid biljettpriserna 0/50/100/200, raketens felsvar, källans boknivåer och utcheckning samt tio mobila vyer utan horisontellt sidöverspill. [GitHub Pages 43252466075](https://github.com/jacobflinder/Lektioner/actions/runs/43252466075) publicerade samma kodversion `02ebb7025cb9651647fad93e9e41f55d2dcd5868` med resultat success. Efter manuell skärmbildsgranskning förbättrades mobilgrafens etiketter, och en stapelrubrik som avslöjade maxintäkten för tidigt gjordes neutral. Skärmbilder från den slutgiltiga Chromium-körningen granskades. Fysisk projektorprövning och elevrespons återstår.
+
+
+## Lektion 8 · Modellering och fler extremvärdesproblem
+
+**Original:** `Ma3c_Modellering_och_fler_extremvardesproblem.pdf` (10 sidor), två innehållsavsnitt ur kapitel 3.2 på s.166–172. **URL:** `/mato1c/kapitel-3/modellering-och-fler-extremvardesproblem/`. Webbversionen innehåller 12 steg med tre matematiska problem och två utcheckningar.
+
+### Källtrohet
+- Samtliga exempel **3215** (50×30-låda), **3216** (rektangel under `y=3−x²`) och **3233** (vinsten `15−0,1x−40/x`) har behållits, inklusive uppgifts- och sidnummer, definitionsmängder, otillåtna kandidater och svar med korrekta enheter.
+- Originalets animation om rektangelns bas/höjd/area har förts över till två *manuellt styrbara* exakta SVG-vyer med samma x. Lådmodellen har kompletterats med liknande förutsägelse-styrd interaktivitet. Ingen onödig autoanimation.
+- Båda fullständiga bokavsnitten är med: **s.168–170** (3217–3221, 3222–3228, 3229–3232) och **s.172** (3234–3238, 3239–3241, 3242–3244). Båda rekommenderade uppgiftsspåren kvar. Minst två av tre nivåer och tjugo minuter lugnt arbete.
+- Läxa **3221 och 3236**, extra **3241**. Originalets två individuella utcheckningsuppgifter finns kvar med separata dolda lösningssekvenser. Ingen Socrative fanns i originalet eller infördes i lektionen.
+
+### Matematisk kvalitetssäkring
+- **Lådan:** `V=x(50−2x)(30−2x)=4x³−160x²+1500x`, domän `0<x<15`; `V′=12x²−320x+1500`. Stationära `x=(40±5√19)/3` ≈6,06850 och20,59816. Endast den första är tillåten. Derivatan byter +→−, volymen närmar sig noll vid båda otillåtna ändlägena; globalt maximum ≈4104,41037 cm³, avrundat ≈4100 cm³ vid höjd ≈6,07 cm. Kontrollvärden: V(3)=3168, V(6)=4104, V(10)=3000. SVG-figuren följer geometrin med skala 10 px/cm.
+- **Rektangeln:** `P=(x,3−x²)`, bas`2x`, höjd`3−x²`, domän `0<x<√3`. Arean `A=6x−2x³`, derivatan `6−6x²`. Kandidater ±1 och bara +1 tillåten; `A′(0,5)=4,5` och `A′(1,5)=−7,5`. `A(1)=4`, bas2/höjd2; enheter *areaenheter* och *längdenheter*, inte påhittade cm². Testpunkter A(0,5)=2,75 och A(1,5)=2,25.
+- **Bråkvinsten:** `V=15−0,1x−40/x`, x≥4; `V′=−0,1+40/x²`, nollställen ±20, −20 otillåten. V′ positiv för 4≤x<20, negativ för x>20. V(4)=4,6, V(20)=11 i *tusentals kr/dag*; 20 tillåtet heltal lampor, vinst 11 000 kr/dag. Kontinuerlig modell används som analysstöd, inte som möjlighet att tillverka delar av lampor.
+- **Utcheckning 1:** `A=x(6−x)`, `0<x<6`, `A′=6−2x`, x3 max, A3=9, mått3×3.
+- **Utcheckning 2:** `C=x+9/x` för x>0, `C′=1−9/x²`, x3 giltig, C3=6 min. PDF-textutdraget för s.9 hade en tvetydig radbrytning av bråket; tolkningen `9/x` verifierades med s.10:s uttryck `C′=1−9/x²`, dess lösning `x=±3` och `C(3)=6`. Det är alltså inte ett obestyrkt nytt funktionsuttryck.
+
+### Teknisk och didaktisk granskning
+- 12 avsnitt i samma kurslokala komponentram, lärarstöd i klassrumsläge, repetitionsläge, grafmodeller, stegvis explicit lösning, individuell exit och kontrollåterkoppling.
+- Statiskt: inga dubbletter av HTML-ID, inga saknade JavaScript-mål eller återkopplingsmål, samtliga bokreferenser och läxor; inga nätverksanrop eller lagringsfunktioner i lektionens JS. Befintliga Ma4- och fysikfiler har inte ändrats.
+- Chromium-test `qa/modellering-fler-extremvardesproblem-browser.cjs`: alla 12 steg, mode-switch och lärarstöd, lådans mått/volym vid x3/6/10, samordnade rektangel- och areamarkörer x0,5/1/1,5, negativ derivatafelsvar, bråkfunktionens gräns/maximum, sex boknivåspår, två separata utcheckningsfacit, 390px mobilvyer utan horisontellt sidöverspill och inget externt anrop.
+- Bildgranskning av desktop och mobil efter en godkänd testkörning upptäckte att `figure`-elementets standardmarginal minskade SVG-diagrammens bredd, och att märkningen `30 cm` i klippmallen delvis klipptes och `x` delvis doldes av överkorsning. Figuren korrigerades så att den första hörnkvadraten visar x tydligt, 30 cm placeras innanför SVG-ytan och diagramskalan utnyttjar hela tillgängliga bredden.
+- **Återstår för verklig kvalitetssäkring:** genomgång på projektor och iPad samt undersökning av elevernas självständiga lösningar. Varken matematikcheck eller Chromium-godkännande garanterar en viss lärandeeffekt.
