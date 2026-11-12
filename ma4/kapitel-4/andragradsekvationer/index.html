@@ -83,12 +83,12 @@
 <p><button type="button" data-reveal="r13c" class="secondary">C · Resonemang om rotpar</button></p><div id="r13c" class="answer hidden">
 <p>Rötterna i B är motsatta eftersom den ena är den andras negativa tal. De är inte konjugerade eftersom konjugatet till 3 + 3i är 3 − 3i.</p>
 <p>För polynom med reella koefficienter förekommer icke-reella rötter i konjugatpar. För z² = w ≠ 0 gäller alltid att de två rötterna är motsatta; dessa påståenden kan båda vara sanna.</p></div></div>
-<div class="panel"><strong>Återkoppla till dagens mål</strong><p>Jag kan välja metod, hitta och kontrollera alla rötter och avgöra när relationerna ”motsatta” respektive ”konjugerade” gäller.</p><p><strong>Till läraren vid genomgång:</strong> använd svaren för att avgöra vilken idé som ska återkallas nästa gång.</p></div>
+<div class="panel"><strong>Återkoppla till dagens mål</strong><p>Jag kan välja metod, hitta och kontrollera alla rötter och avgöra när relationerna ”motsatta” respektive ”konjugerade” gäller.</p></div>
 <div class="panel"><strong>Hemuppgift – repetition utan facit</strong><p>Gör om ett av dagens nya exempel dagen efter och kontrollera genom insättning. Förklara skillnaden mellan ett motsatt tal och ett konjugat.</p></div></section>
 
 </div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionssteg"></select></div></div><footer>Gy25: Matematik – fortsättning, nivå 2 · Lektionsinnehåll efter kursens tidigare Ma4-material. Dina inmatade svar kontrolleras endast i webbläsaren. Sidan skickar inte svar till en server eller sparar dem mellan besök.</footer></main>
 <script>
-const slides=[...document.querySelectorAll('.slide')],jump=document.getElementById('jump'),prompts=["Presentera målen och samla ett första svar på begreppsfrågan.","Två minuter själv, en minut par; låt flera visa mellanled.","Täck lösningen. Diskutera om konjugatregeln verkligen gäller.","Låt eleverna beskriva geometriska speglingar.","Låt eleverna förutsäga vinklar och belopp före ledtråden. Koppla till tidigare lektion om de Moivres formel.","Visa först punkterna, sedan gemensam kvadrat. Låt eleverna formulera varför.","Polär form är huvudspåret. Visa ett matematiskt steg i taget, be alla om förutsägelse och gör sedan en närliggande individuell variant. Alternativmetoden är valfri.","Valfri alternativ metod med real- och imaginärdel. Visa bara när metoden kan bidra till förståelse, inte som ytterligare krav för elever som ännu behöver befästa den polära.","Eleverna väljer metod för två uppgifter och motiverar valet. Alla behöver kunna lösa dem med någon fungerande metod, inte båda metoderna.","Förberedd felanalys, inte My Favorite No: lyft fram det korrekta och låt eleverna komplettera lösningen.","Samla svar och fråga varför koefficientvillkoret behövs.","NOKflex 4401–4420: välj minst tre av fem nivåer under arbetet. Nivåer kan ändras; följ upp individuella metodval.","Valfri utmaning efter NOKflex. Elever kan välja att gå direkt till utcheckningen.","Avsätt 6–8 minuter. Bedöm anonymt tre saker: korrekt lösning av ekvation med komplex koefficient, korrekt lösning av z²=-8i samt förklaring av motsatta rötter kontra konjugatpar. Använd vanligaste hindret till en kort återkallningsfråga nästa gång."];let index=0;
+const slides=[...document.querySelectorAll('.slide')],jump=document.getElementById('jump'),prompts=["Presentera målen och samla ett första svar på begreppsfrågan.","Två minuter själv, en minut par; låt flera visa mellanled.","Täck lösningen. Diskutera om konjugatregeln verkligen gäller.","Låt eleverna beskriva geometriska speglingar.","Låt eleverna förutsäga vinklar och belopp före ledtråden. Koppla till tidigare lektion om de Moivres formel.","Visa först punkterna, sedan gemensam kvadrat. Låt eleverna formulera varför.","Polär form är huvudspåret. Visa ett matematiskt steg i taget, be alla om förutsägelse och gör sedan en närliggande individuell variant. Alternativmetoden är valfri.","Valfri alternativ metod med real- och imaginärdel. Visa bara när metoden kan bidra till förståelse, inte som ytterligare krav för elever som ännu behöver befästa den polära.","Eleverna väljer och motiverar metod för två nya uppgifter. Om många hittar bara en rot: använd frivillig felanalys. Om de kan motivera båda rötterna: gå vidare till NOKflex.","Förberedd felanalys, inte My Favorite No: lyft fram det korrekta och låt eleverna komplettera lösningen.","Samla svar och fråga varför koefficientvillkoret behövs.","NOKflex 4401–4420: välj minst tre av fem nivåer under arbetet. Nivåer kan ändras; följ upp individuella metodval.","Valfri utmaning efter NOKflex. Elever kan välja att gå direkt till utcheckningen.","Avsätt 8–9 minuter. Bedöm anonymt metodval, rötterna till z²=18i och förklaring av motsatta kontra konjugerade rötter. Båda exit-ekvationerna är nya. Använd vanligaste felet i en kort återkallningsfråga nästa lektion. Använd vanligaste hindret till en kort återkallningsfråga nästa gång."];let index=0;
 slides.forEach((s,i)=>{const op=document.createElement('option');op.value=i;op.textContent=(i+1)+' · '+(s.querySelector('h1,h2')?.textContent||'Steg');jump.append(op)});
 function show(i){index=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>{s.classList.toggle('active',j===index);s.setAttribute('aria-hidden',String(j!==index))});const total=slides.filter(s=>s.dataset.optional!=='true').length;const current=slides.slice(0,index+1).filter(s=>s.dataset.optional!=='true').length;document.getElementById('progress').textContent=slides[index].dataset.optional==='true'?'Frivillig aktivitet':current+' / '+total;document.getElementById('teacherprompt').textContent=prompts[index];jump.value=index;document.getElementById('prev').disabled=index===0;document.getElementById('next').disabled=index===slides.length-1;document.getElementById('stage').focus({preventScroll:true});window.scrollTo(0,0)}
 function nextSlide(){let n=index+1;while(n<slides.length-1&&slides[n].dataset.optional==='true')n++;show(n)}
@@ -104,12 +104,35 @@ for(const ids of [['r7a','r7b','r7c'],['r8a','r8b','r8c']]){
   update();
  }));update();
 }
-document.querySelectorAll('[data-quiz]').forEach(g=>{g.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{g.querySelectorAll('button').forEach(c=>c.classList.remove('correct','wrong'));b.classList.add(b.dataset.correct==='true'?'correct':'wrong');g.querySelector('.feedback').textContent=b.dataset.correct==='true'?'Rätt! Förklara varför för en kamrat.':'Inte riktigt. Pröva att använda definitionerna och välj igen.'}))});
-document.getElementById('squareReveal').onclick=()=>{document.getElementById('squareTarget').classList.remove('hidden');document.getElementById('squareText').classList.remove('hidden')};document.getElementById('squareReset').onclick=()=>{document.getElementById('squareTarget').classList.add('hidden');document.getElementById('squareText').classList.add('hidden')};
+// Varje svarsalternativ förklarar elevens matematiska val direkt.
+document.querySelectorAll('[data-quiz]').forEach(group=>{
+ const buttons=[...group.querySelectorAll('button[data-correct]')];
+ buttons.forEach(button=>{
+  button.setAttribute('aria-pressed','false');
+  button.addEventListener('click',()=>{
+   buttons.forEach(option=>{
+    option.classList.remove('correct','wrong');
+    option.setAttribute('aria-pressed',String(option===button));
+   });
+   const correct=button.dataset.correct==='true';
+   button.classList.add(correct?'correct':'wrong');
+   group.querySelector('.feedback').textContent=button.dataset.feedback||(correct?'Rätt. Förklara varför.':'Pröva att jämföra definitionerna och välj igen.');
+  });
+ });
+});
+const squarePlane=document.getElementById('quadratic-plane'),rootA=document.getElementById('rootA'),rootB=document.getElementById('rootB'),squareTarget=document.getElementById('squareTarget'),squareText=document.getElementById('squareText'),squareButton=document.getElementById('squareReveal');
+function showSquare(visible){
+ for(const node of [rootA,rootB,squareTarget,squareText])node.classList.toggle('hidden',!visible);
+ squareButton.setAttribute('aria-expanded',String(visible));
+ squarePlane.setAttribute('aria-label',visible?'Komplext talplan: rötterna 2 + 2i och −2 − 2i är motsatta, och båda får kvadraten 8i.':'Komplext talplan med omarkerade rötter. Förutsäg deras koordinater innan visningen.');
+}
+squareButton.addEventListener('click',()=>showSquare(true));
+document.getElementById('squareReset').addEventListener('click',()=>showSquare(false));
+showSquare(false);
 const checks={
 variant:{roots:[{re:0,im:5},{re:0,im:-1}],hint:'Använd pq-formeln med p = −4i och q = 5. Beräkna (p/2)² − q innan du drar roten.',answer:'z = 2i ± √(−4 − 5) = 2i ± 3i, alltså 5i och −i.',kind:'coeff'},
-polar:{roots:[{re:2,im:-2},{re:-2,im:2}],hint:'|−8i| = 8 och argumentet är −π/2. Halvera argumentet och glöm inte den motsatta roten.',answer:'z = 2 − 2i eller −2 + 2i. Båda ger −8i när de kvadreras.',kind:'square'},
-rect:{roots:[{re:3,im:-3},{re:-3,im:3}],hint:'Sätt z = a + bi. Då är a² − b² = 0 och 2ab = −18. Vilka tecken måste a och b ha?',answer:'a² = b² och ab = −9 ger b = −a och a = ±3. Alltså z = 3 − 3i eller −3 + 3i.',kind:'square'}
+polar:{roots:[{re:4,im:-4},{re:-4,im:4}],hint:'|−32i| = 32 och ett argument är −π/2. Lös r² = 32 och 2v = −π/2 + 2πk. Halvera inte beloppet.',answer:'r = 4√2 och v = −π/4 + πk. Alltså z = 4 − 4i eller −4 + 4i. Kontroll: (4 − 4i)² = −32i.',kind:'square',targetIm:-32},
+rect:{roots:[{re:3,im:-3},{re:-3,im:3}],targetIm:-18,hint:'Sätt z = a + bi. Då är a² − b² = 0 och 2ab = −18. Vilka tecken måste a och b ha?',answer:'a² = b² och ab = −9 ger b = −a och a = ±3. Alltså z = 3 − 3i eller −3 + 3i.',kind:'square'}
 };
 function parseComplex(raw){
  let x=raw.toLowerCase().replace(/\s+/g,'').replace(/−/g,'-').replace(/,/g,'.').replace(/\*/g,'').replace(/j/g,'i');
@@ -130,27 +153,68 @@ function parseComplex(raw){
 function sameComplex(a,b){return Math.abs(a.re-b.re)<1e-8&&Math.abs(a.im-b.im)<1e-8}
 function checkRoots(raw,config){
  const parts=raw.split(';').map(v=>v.trim()).filter(Boolean);
- if(parts.length===0)return {status:'empty',message:'Skriv först dina rötter.'};
- if(parts.length!==2)return {status:'incomplete',message:'Skriv båda rötterna med semikolon mellan dem. Kontrollera att du inte har tappat en rot.'};
+ if(parts.length===0)return {status:'empty',message:'Skriv först dina båda rötter.'};
+ if(parts.length!==2)return {status:'incomplete',message:'Två rötter behövs, med semikolon mellan. Vilken rot saknas och hur kan du kontrollera att du fått alla?'};
  const values=parts.map(parseComplex);
- if(values.some(v=>!v))return {status:'format',message:'Jag kan inte tolka något av talen. Skriv till exempel 2+3i;-2-3i, utan z =.'};
+ if(values.some(v=>!v))return {status:'format',message:'Använd två komplexa tal på formen a+bi, till exempel 1+2i;-1-2i. Skriv inte z =.'};
  const correct=values.every(v=>config.roots.some(r=>sameComplex(v,r)))&&config.roots.every(r=>values.some(v=>sameComplex(v,r)));
- if(correct)return {status:'correct',message:'Rätt – båda rötterna stämmer, oavsett ordning. Kontrollera gärna en genom insättning och förklara varför den andra behövs.'};
- const match=values.filter(v=>config.roots.some(r=>sameComplex(v,r))).length;
- if(match===1)return {status:'incorrect',message:'En av dina rötter stämmer. Undersök den andra: kontrollera tecknen och sätt in den i ursprungsekvationen.'};
+ if(correct)return {status:'correct',message:'Rätt: båda rötterna stämmer oavsett ordning. Kontrollera minst en genom insättning och motivera varför båda behövs.'};
  const duplicate=sameComplex(values[0],values[1]);
- if(duplicate)return {status:'incorrect',message:'Du har skrivit samma rot två gånger. En andragradsekvation av den här typen har två olika rötter.'};
- return {status:'incorrect',message:config.kind==='square'?'Ingen av rötterna stämmer ännu. Kvadrera ett av dina tal och jämför med högerledet.':'Ingen av rötterna stämmer ännu. Kontrollera tecknet i diskriminanten och pröva att sätta in en rot.'};
+ if(duplicate)return {status:'incorrect',message:'Du har skrivit samma rot två gånger. Kontrollera ekvationens två olika rötter genom att använda både plus och minus.'};
+ const match=values.filter(v=>config.roots.some(r=>sameComplex(v,r))).length;
+ if(match===1){
+   if(config.kind==='square'){
+     const right=values.find(v=>config.roots.some(r=>sameComplex(v,r)));
+     const other=values.find(v=>!config.roots.some(r=>sameComplex(v,r)));
+     const conj={re:right.re,im:-right.im},opposite={re:-right.re,im:-right.im};
+     if(sameComplex(other,conj)&&!sameComplex(other,opposite))return {status:'incorrect',message:'En rot är korrekt. Du har sedan använt konjugatet i stället för det motsatta talet. För z² = w följer den andra roten av (−z)² = z².'};
+     return {status:'incorrect',message:'En rot stämmer. För z² = w är den andra roten alltid det motsatta talet. Byt tecken på både realdel och imaginärdel och pröva igen.'};
+   }
+   return {status:'incorrect',message:'En rot är korrekt. I pq-formeln uppstår två rötter ur tecknet ±. Beräkna det andra teckenfallet och pröva det i ursprungsekvationen.'};
+ }
+ if(config.kind==='square'){
+   const z=values[0],sq={re:z.re*z.re-z.im*z.im,im:2*z.re*z.im};
+   const fmt=n=>Number.isInteger(n)?String(n):String(Number(n.toFixed(3)));
+   if(Math.abs(sq.re)>1e-8)return {status:'incorrect',message:'Kvadrera din första rot: realdelen blir '+fmt(sq.re)+'. Högerledet är rent imaginärt, så realdelen måste bli 0. Kontrollera a² − b² och pröva igen.'};
+   if(Math.abs(sq.im+config.targetIm)<1e-8)return {status:'incorrect',message:'Din första rot ger kvadraten med fel tecken på imaginärdelen ('+fmt(sq.im)+'i i stället för '+fmt(config.targetIm)+'i). Kontrollera kvadrant och tecken.'};
+   return {status:'incorrect',message:'Din första rot ger imaginärdelen '+fmt(sq.im)+'i efter kvadrering, men högerledet är '+fmt(config.targetIm)+'i. Kontrollera 2ab och rötternas belopp.'};
+ }
+ return {status:'incorrect',message:'Inga rötter stämmer ännu. För z² − 4iz + 5 = 0: beräkna (p/2)² − q, ta kvadratroten och använd båda tecknen ±. Kontrollera sedan en rot genom insättning.'};
 }
 document.querySelectorAll('[data-check]').forEach(box=>{
  const config=checks[box.dataset.check],input=box.querySelector('input'),feedback=box.querySelector('.sc-feedback'),hint=box.querySelector('.sc-hint'),answer=box.querySelector('.sc-answer');
- const respond=()=>{const r=checkRoots(input.value,config);feedback.dataset.status=r.status==='correct'?'correct':'incorrect';feedback.textContent=r.message;answer.hidden=true;};
+ const full=document.createElement('button');
+ full.type='button';full.className='secondary';full.textContent='Visa full lösning efter kontrollerat försök';full.disabled=true;box.append(full);
+ const variantReveal=box.dataset.check==='variant'?document.querySelector('button[data-reveal="r3b"]'):null;
+ if(variantReveal)variantReveal.disabled=true;
+ let response=null;
+ const respond=()=>{
+  response=checkRoots(input.value,config);
+  feedback.dataset.status=response.status==='correct'?'correct':'incorrect';
+  feedback.textContent=response.message;
+  answer.hidden=true;
+  const valid=response.status==='correct'||response.status==='incorrect';
+  full.disabled=!valid;
+  if(variantReveal)variantReveal.disabled=!valid;
+ };
  box.querySelector('[data-check-action="check"]').addEventListener('click',respond);
- input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();respond()}});
- box.querySelector('[data-check-action="hint"]').addEventListener('click',()=>{hint.hidden=!hint.hidden;hint.textContent=config.hint;if(!hint.hidden&&feedback.dataset.status==='incorrect')feedback.textContent+=' Använd ledtråden och försök igen.'});
- box.querySelector('[data-check-action="reset"]').addEventListener('click',()=>{input.value='';feedback.textContent='';feedback.removeAttribute('data-status');hint.hidden=true;answer.hidden=true;input.focus()});
- const showSolution=document.createElement('button');showSolution.type='button';showSolution.className='secondary';showSolution.textContent='Visa full lösning efter försök';box.append(showSolution);
- showSolution.addEventListener('click',()=>{if(!input.value.trim()){feedback.textContent='Gör ett eget försök först, så kan du jämföra med lösningen.';return}answer.hidden=!answer.hidden;answer.textContent=config.answer});
+ input.addEventListener('input',()=>{
+  feedback.textContent='';feedback.removeAttribute('data-status');
+  answer.hidden=true;full.disabled=true;response=null;
+  if(variantReveal)variantReveal.disabled=true;
+ });
+ input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();respond()}});
+ box.querySelector('[data-check-action="hint"]').addEventListener('click',()=>{
+  hint.hidden=!hint.hidden;hint.textContent=config.hint;
+  if(!hint.hidden&&response?.status==='incorrect')feedback.textContent=response.message+' Använd ledtråden och försök igen.';
+ });
+ box.querySelector('[data-check-action="reset"]').addEventListener('click',()=>{
+  input.value='';feedback.textContent='';feedback.removeAttribute('data-status');hint.hidden=true;answer.hidden=true;
+  full.disabled=true;response=null;
+  if(variantReveal){variantReveal.disabled=true;document.getElementById('r3b').classList.add('hidden');variantReveal.setAttribute('aria-expanded','false');variantReveal.textContent=variantReveal.dataset.original}
+  input.focus();
+ });
+ full.addEventListener('click',()=>{if(!response||response.status==='empty'||response.status==='incomplete'||response.status==='format')return;answer.hidden=!answer.hidden;answer.textContent=config.answer});
 });
 document.getElementById('quadraticError').addEventListener('click',()=>show(slides.findIndex(x=>x.id==='quadratic-optional-error')));
 document.getElementById('quadraticSkip').addEventListener('click',()=>show(slides.length-1));document.getElementById('methodAlternate').addEventListener('click',()=>show(7));document.getElementById('quadraticExtra').addEventListener('click',()=>show(12));
