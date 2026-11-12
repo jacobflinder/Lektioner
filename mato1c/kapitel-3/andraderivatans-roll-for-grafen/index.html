@@ -49,7 +49,12 @@
 <button class="secondary" type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
 </div></header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Enskilt försök före återkoppling. Använd de dynamiska modellerna som korta demonstrationssekvenser och lämna gott om sammanhängande tid för boken.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Enskilt försök före återkoppling. Använd de dynamiska modellerna som korta demonstrationssekvenser och lämna gott om sammanhängande tid för boken.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tid och beslut utifrån elevsvaren</strong></summary>
+<p><strong>Kärnväg:</strong> steg 1–2, 3–6, 8–10 och 12. Det viktiga kontrastfallet <em>f″(a)=0 ger inget besked</em> finns också i steg 9. Steg 7 (djupare jämförelse x³/x⁴) och 11 (tre extrakontroller) är valbara men fortfarande åtkomliga via knappar och avsnittsmenyn.</p>
+<p><strong>Riktmärke vid cirka 70 minuter:</strong> start och mål 5–7 min; tangent och andraderivatatest 8–10 min; genomarbetat exempel och eget försök 10–14 min; inflexion med graf och teckenbyte 7–9 min; minst 20 min sammanhängande bokarbete; individuell utcheckning 4–6 min. Välj stödmoment efter vad eleverna behöver.</p>
+<p><strong>Beslutsregler:</strong> Om eleverna tror att f″ ensam räcker för extrempunkt, återvänd till villkoret f′(a)=0 i steg 4. Om många säger att f″(a)=0 alltid ger terrass, öppna valbara steg 7. Om de klarar egen uppgift i steg 6 med korrekt punkt och motivering, gå direkt till inflexion och sedan boken. Om de blandar inflexion med horisontell tangent, visa f′(0)=−3 i steg 8–9.</p>
+<p><strong>Fördröjd återkallning:</strong> nästa lektion, utan grafer, pröva f(x)=x³ och g(x)=x⁴ vid x=0: vad ger f′, f″ och vad kan man faktiskt dra för slutsats? Undvik personuppgifter; notera anonyma klassmönster.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Skriv först, kontrollera sedan. Graferna ger stöd men ersätter inte ett matematiskt argument. Inga elevsvar sparas eller skickas.</div>
 <div id="stage" class="stage">
 
@@ -65,6 +70,11 @@
 </div>
 <button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling</button>
 <div id="start-answer" class="answer hidden"><p><strong>Horisontell tangent räcker inte.</strong> Jämför <span class="inline-math">x²</span>, <span class="inline-math">−x²</span> och <span class="inline-math">x³</span> vid <span class="inline-math">x=0</span>: alla har derivata noll men olika beteende.</p></div>
+<button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning från föregående lektion (1 minut)</button>
+<div id="prior-recall" class="panel hidden"><p><strong>Utan stöd:</strong> Om H(x)=x²−4x+7, bestäm H′(x) och H″(x). Vad berättar tecknet på H″?</p>
+<button type="button" class="reveal" data-reveal="prior-recall-answer">Visa svar efter ditt eget försök</button>
+<div id="prior-recall-answer" class="answer hidden"><p>H′(x)=2x−4 och H″(x)=2&gt;0. Tangentens lutning <em>ökar</em> när x ökar. Det säger ännu inte att H′ är positiv överallt.</p></div>
+</div>
 </section>
 
 <section class="slide" id="goal" data-teacher="Original s. 1–2. Målet kopplar båda delarna: klassificera stationära punkter med andraderivatan när testet fungerar, och identifiera inflexion via teckenbyte i andraderivatan. Säg att punkten måste vara stationär innan det vanliga andraderivatatestet används.">
@@ -151,7 +161,7 @@
 <div class="eyebrow">06 · Din tur · mindre stöd</div>
 <h2>Samma metod. Ditt eget resonemang.</h2>
 <p class="math-display">h(x) = x² − 4x + 7</p>
-<div class="task"><strong>Lös själv på papper:</strong><ol><li>Bestäm de stationära punkternas x-värden.</li><li>Avgör typ med andraderivatan.</li><li>Beräkna y-koordinaten med h och svara med båda koordinaterna.</li></ol></div>
+<div class="task"><strong>Lös på papper utan steglista:</strong> Bestäm alla stationära punkter, deras karaktär och båda koordinaterna. Motivera så att en annan elev kan följa dina matematiska beslut. Öppna stödet om du fastnar.</div>
 <div class="check-panel"><strong>Kontrollera först när du har en full lösning</strong>
 <div class="control-row"><label for="own-x">Stationärt x-värde</label><input id="own-x" inputmode="decimal" autocomplete="off" placeholder="x =">
 <label for="own-kind">Typ</label><select id="own-kind"><option value="">Välj</option><option value="max">Maximipunkt</option><option value="min">Minimipunkt</option><option value="unknown">Inget besked</option></select>
@@ -161,10 +171,11 @@
 <button type="button" class="secondary" data-reveal="own-hint">Stöd om du fastnar</button><div id="own-hint" class="panel hidden"><p>1. Lös <span class="inline-math">h′(x)=0</span>. 2. Bestäm <span class="inline-math">h″(x)</span> och dess tecken. 3. Sätt in x-värdet i <span class="inline-math">h(x)</span>.</p></div>
 <button type="button" class="reveal" data-reveal="own-answer">Visa genomarbetat facit</button>
 <div class="answer hidden" id="own-answer"><p class="math-display">h′(x)=2x−4=0 ⇒ x=2</p><p class="math-display">h″(x)=2&gt;0 ⇒ lokalt minimum</p><p class="math-display">h(2)=4−8+7=3</p><p><strong>Minimipunkt (2, 3).</strong> Värdet <span class="inline-math">h′(2)=0</span> är tangentens lutning, inte punktens höjd.</p></div>
+<button type="button" class="secondary" data-go="zero-test">Valbar jämförelse: x³ och x⁴ när f″=0</button>
 </section>
 
-<section class="slide" id="zero-test" data-teacher="Original s.10–11. Avgör avgörande felslut: p=x³ och q=x⁴ har båda f'(0)=f''(0)=0, men p har terrass och q minimum. Låt eleverna först självständigt testa första derivatans tecken och sedan välja. Mer exakt: f''=0 kan också ge ingen inflexion.">
-<div class="eyebrow">07 · När andraderivatatestet inte räcker</div>
+<section class="slide" id="zero-test" data-optional="true" data-teacher="Original s.10–11. Avgör avgörande felslut: p=x³ och q=x⁴ har båda f'(0)=f''(0)=0, men p har terrass och q minimum. Låt eleverna först självständigt testa första derivatans tecken och sedan välja. Mer exakt: f''=0 kan också ge ingen inflexion.">
+<div class="eyebrow">07 · Valbar fördjupning · när testet inte räcker</div><p class="muted">Fördjupningen går att välja vid behov. Den ordinarie lektionsvägen fortsätter till inflexion.</p>
 <h2>Samma testresultat. Olika punkter.</h2>
 <div class="plot-pair">
 <div class="plot-card"><h3>p(x) = x³</h3><svg id="zero-p" viewBox="0 0 550 320" role="img" aria-label="Kurva x i kubik genom origo med vågrät tangent"></svg><p class="math-display">p′(0)=0, &nbsp; p″(0)=0</p></div>
@@ -232,10 +243,11 @@
 </div>
 <div class="task"><strong>Välj en start:</strong> Behöver du stöd? Gör 3136 och 3137, sedan 3140 a. Är du säker? Börja med 3140 och 3141 och gå vidare till 3142–3143. Försök själv → kontrollera → förklara och rätta.</div>
 <div class="teacher-pause"><strong>Arbetsro:</strong> Avsätt gärna cirka 20 minuter lugnt eget arbete; tiden kan anpassas efter lektionen. Webbmodellerna är inget substitut för räkning i boken.</div>
+<button type="button" class="secondary" data-go="control">Valbar extra kunskapskontroll innan utcheckningen</button>
 </section>
 
-<section class="slide" id="control" data-teacher="Original s.17: tre snabba frågor. Genomför gärna individuellt på papper före gemensam kontroll. f'(3)=0 f''(3)=4 => minimum; f'=f''=0 => undersök f' på båda sidor; f'' växlar minus till plus vid x=2 => inflexion. Varje val får återkoppling på varför.">
-<div class="eyebrow">11 · Tre snabba frågor · eget beslut</div>
+<section class="slide" id="control" data-optional="true" data-teacher="Original s.17: tre snabba frågor. Genomför gärna individuellt på papper före gemensam kontroll. f'(3)=0 f''(3)=4 => minimum; f'=f''=0 => undersök f' på båda sidor; f'' växlar minus till plus vid x=2 => inflexion. Varje val får återkoppling på varför.">
+<div class="eyebrow">11 · Valbar kontroll · eget beslut</div><p class="muted">Extra kontroll för de elever som behöver eller vill pröva begreppen före utcheckningen.</p>
 <h2>Kontrollera förståelsen utan modellen</h2>
 <div class="panel" data-quiz data-correct-text="Rätt. f′(3)=0 och f″(3)=4>0 ger ett lokalt minimum vid x=3; y-koordinaten kräver f(3)." data-wrong-text="Testets villkor f′(3)=0 är uppfyllt. Positiv f″ ger minimum, inte maximum.">
 <strong>1. f′(3)=0 och f″(3)=4. Vilken punkttyp?</strong>
