@@ -1,0 +1,96 @@
+/* Chromium-kontroll av Ma1c 3.1, lektion 2; utan elevdata. */
+const {chromium}=require('playwright');
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const root='http://127.0.0.1:8123';
+const base=root+'/mato1c/kapitel-3/extrempunkter-och-terrasspunkter/';
+const out='mato1c-qa-screenshots';
+fs.mkdirSync(out,{recursive:true});
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ const checks=[];
+ async function ok(yes,message){assert.ok(yes,message);checks.push(message)}
+ async function step(n){await page.selectOption('#jump',String(n-1));await ok(await page.locator('.slide.active').count()===1,'Enbart ett aktivt steg '+n)}
+ try{
+  await page.goto(root+'/mato1c/kapitel-3/',{waitUntil:'networkidle'});
+  await ok(await page.locator('a[href="extrempunkter-och-terrasspunkter/"]').count()===1,'Kapitelöversikten länkar nya lektionen');
+  await page.goto(base,{waitUntil:'networkidle'});
+  await ok(await page.locator('.slide').count()===9,'Nio lektionssteg');
+  await ok(await page.locator('#start').isVisible(),'Starten är först');
+  await ok(await page.locator('#graph-a path').count()>0&&await page.locator('#graph-b path').count()>0&&await page.locator('#graph-c path').count()>0,'Alla tre graferna ritade');
+  await ok(!await page.locator('#start-answer').isVisible(),'Startens återkoppling dold från början');
+  await page.screenshot({path:out+'/lesson2-desktop-start.png',fullPage:true});
+  await page.locator('[data-reveal="start-answer"]').click();
+  await ok(await page.locator('#start-answer').isVisible(),'Startens återkoppling går att visa');
+  await page.locator('#mode').click();
+  await ok(await page.locator('body.classroom').count()===1,'Klassrumsläget växlar');
+  await page.locator('#teacher-toggle').click();
+  await ok(await page.locator('.teacher.open').isVisible(),'Lärarstödet visas efter aktivt val');
+  await page.locator('#mode').click();
+  await ok(await page.locator('body.classroom').count()===0,'Repetitionsläget återställs');
+  await step(3);
+  await ok((await page.locator('#graph-readout').innerText()).includes('−2,00'),'x²: vänsterderivata vid minus ett');
+  await page.locator('#go-right').click();
+  await ok((await page.locator('#graph-readout').innerText()).includes('2,00'),'x²: högerderivata vid ett');
+  await page.selectOption('#model-type','max');
+  await page.locator('#check-model').click();
+  await ok((await page.locator('#model-feedback').innerText()).includes('Pröva igen'),'Fel val får specifik återkoppling');
+  await page.selectOption('#model-type','min');await page.locator('#check-model').click();
+  await ok((await page.locator('#model-feedback').innerText()).includes('minimipunkt'),'x²: rätt punkt');
+  await page.locator('[data-model="b"]').click();
+  await ok((await page.locator('#model-type').inputValue())==='','Funktionsbyte rensar tidigare svar');
+  await page.locator('#go-left').click();
+  await ok((await page.locator('#graph-readout').innerText()).includes('2,00'),'minus x²: derivata till vänster');
+  await page.selectOption('#model-type','max');await page.locator('#check-model').click();
+  await ok((await page.locator('#model-feedback').innerText()).includes('maximipunkt'),'minus x²: max korrekt');
+  await page.locator('[data-model="c"]').click();
+  await page.locator('#go-left').click();
+  await ok((await page.locator('#graph-readout').innerText()).includes('3,00'),'x³: positiv derivata till vänster');
+  await page.locator('#go-zero').click();
+  await ok((await page.locator('#graph-readout').innerText()).includes('0,00'),'x³: vågrät tangent');
+  await page.locator('#go-right').click();
+  await ok((await page.locator('#graph-readout').innerText()).includes('3,00'),'x³: positiv derivata till höger');
+  await page.selectOption('#model-type','terrass');await page.locator('#check-model').click();
+  await ok((await page.locator('#model-feedback').innerText()).includes('terrasspunkt'),'x³: terrass korrekt');
+  await page.screenshot({path:out+'/lesson2-desktop-graph.png',fullPage:true});
+  await step(4);
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===0,'Algebra döljs innan egen prediktion');
+  for(let i=0;i<5;i++)await page.locator('#example [data-seq-next]').click();
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===5,'Fem genomarbetade steg kan visas');
+  await ok((await page.locator('#example .steps').innerText()).includes('(−1, 4)'),'Maximipunktens koordinater korrekta');
+  await ok((await page.locator('#example .steps').innerText()).includes('(1, 0)'),'Minimipunktens koordinater korrekta');
+  await page.locator('#example [data-seq-reset]').click();
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===0,'Lösningsstegen går att återställa');
+  await step(5);
+  await page.locator('#terrace [data-correct="false"]').first().click();
+  await ok((await page.locator('#terrace .feedback').innerText()).includes('Pröva'),'Fel terrassklassificering får återkoppling');
+  await page.locator('#terrace [data-correct="true"]').click();
+  await ok((await page.locator('#terrace .feedback').innerText()).includes('(0, 2)'),'Korrekt terrasspunkt och höjd');
+  await step(6);
+  await page.selectOption('#own-max','zero');await page.selectOption('#own-min','neg');await page.locator('#check-own').click();
+  await ok((await page.locator('#own-feedback').innerText()).includes('y-koordinat'),'Klassificering/koordinatfel möts specifikt');
+  await page.selectOption('#own-max','pos');await page.locator('#check-own').click();
+  await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Eget svar rätt');
+  await step(7);
+  const book=await page.locator('#book').innerText();
+  for(const token of ['3113','3114','3115','3117','3119','3118–3119','3120','3122','3123','3116','3121','s. 148','minst två','Läxa'])await ok(book.includes(token),'Bokens originalinnehåll: '+token);
+  await step(8);
+  await ok(!await page.locator('#exit-answer').isVisible(),'Utcheckningsfacit dolt');
+  await page.locator('[data-reveal="exit-answer"]').click();
+  await ok(await page.locator('#exit-answer').isVisible(),'Utcheckningsfacit visas manuellt');
+  await ok((await page.locator('#exit-answer').innerText()).includes('(−1, 4)'),'Terrasspunktens koordinater i utcheckningen korrekta');
+  await page.setViewportSize({width:390,height:844});
+  for(const n of [1,2,3,4,6,7,8]){
+    await step(n);
+    await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Inget horisontellt överspill i mobil steg '+n);
+  }
+  await page.screenshot({path:out+'/lesson2-mobile-exit.png',fullPage:true});
+  await step(3);
+  await page.screenshot({path:out+'/lesson2-mobile-graph.png',fullPage:true});
+  await ok(errors.length===0,'Inga JavaScript-pageerror');
+  console.log(JSON.stringify({result:'PASS',checks:checks.length,screenshots:4,errors},null,2));
+ }catch(e){console.error('Ma1c L2 browser QA failed:',e.stack||e);await page.screenshot({path:out+'/lesson2-failure.png',fullPage:true}).catch(()=>{});process.exitCode=1}
+ finally{await browser.close()}
+})();
