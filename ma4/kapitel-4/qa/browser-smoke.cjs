@@ -82,7 +82,14 @@ async function active(page){
       assert.ok(await page.locator('#rootA').isHidden()&&await page.locator('#rootB').isHidden(),'Andragrad: rotpunkter dolda före prognos');
       assert.ok(!(await page.locator('#quadratic-plane').getAttribute('aria-label')).includes('2 + 2i'),'Andragrad: ingen svarsläcka för skärmläsare');
       await page.locator('#squareReveal').click();
-      assert.ok(await page.locator('#rootA').isVisible()&&await page.locator('#rootB').isVisible(),'Andragrad: rotpunkter syns efter prognos');
+      assert.ok(await page.locator('#rootA').isVisible()&&await page.locator('#rootB').isHidden()&&await page.locator('#squareTarget').isHidden(),'Andragrad: endast första roten efter första beslutet');
+      await page.locator('#squareReveal').click();
+      assert.ok(await page.locator('#rootB').isVisible()&&await page.locator('#squareTarget').isHidden(),'Andragrad: andra roten före kvadrering');
+      await page.locator('#squareReveal').click();
+      assert.ok(await page.locator('#squareTarget').isVisible(),'Andragrad: gemensam kvadrat efter tredje beslutet');
+      assert.ok((await page.locator('#squareText').innerText()).includes('5π/2'),'Andragrad: båda argumenten förklaras');
+      await page.locator('#squareBack').click();
+      assert.ok(await page.locator('#squareTarget').isHidden()&&await page.locator('#rootB').isVisible(),'Andragrad: backning bevarar rötterna');
       assert.ok(await page.locator('#squareText').isVisible(),'Andragrad: geometriskt svar syns på begäran');
       await page.locator('#squareReset').click();
       assert.ok(await page.locator('#rootA').isHidden()&&await page.locator('#squareText').isHidden(),'Andragrad: återställning fungerar');
@@ -91,7 +98,7 @@ async function active(page){
       const polarField=page.locator('#polar-input');
       assert.ok(!(await polarField.getAttribute('placeholder')).includes('4-4i'),'Andragrad: ingen facitläcka i svarsfält');
       const polarCheck=page.locator('[data-check="polar"]');
-      const full=polarCheck.locator('button').last();
+      const full=polarCheck.locator('.digital-solution');
       assert.ok(await full.isDisabled(),'Andragrad: full lösning låst före elevens försök');
       await polarField.fill('4-4i;4+4i');
       await polarCheck.locator('[data-check-action="check"]').click();
@@ -109,11 +116,19 @@ async function active(page){
       // Diagnos av komplexa koefficienter.
       await page.selectOption('#jump','2');
       const variant=page.locator('[data-check="variant"]'),variantInput=page.locator('#variant-input');
-      assert.ok(await page.locator('button[data-reveal="r3b"]').isDisabled(),'Andragrad: variantfacit låst');
+      assert.ok(await variant.locator('.digital-solution').isDisabled(),'Andragrad: variantfacit låst');
       await variantInput.fill('5i;-i');
       await variant.locator('[data-check-action="check"]').click();
       assert.ok((await variant.locator('.sc-feedback').innerText()).includes('Rätt'),'Andragrad: komplexkoefficient-varianten accepteras');
-      assert.ok(await page.locator('button[data-reveal="r3b"]').isEnabled(),'Andragrad: facit kan öppnas efter giltigt försök');
+      assert.ok(await variant.locator('.digital-solution').isEnabled(),'Andragrad: facit kan öppnas efter giltigt försök');
+      await variant.locator('[data-check-action="reset"]').click();
+      await page.locator('#mode').click();
+      assert.ok(await variantInput.isHidden(),'Andragrad: inmatning dold i klassrum');
+      assert.ok(await variant.locator('.classroom-solution').isEnabled(),'Andragrad: lärare styr återkoppling efter pappersförsök');
+      await variant.locator('.classroom-solution').click();
+      assert.ok(await variant.locator('.sc-answer').isVisible(),'Andragrad: pappersförsök kräver ingen digital inmatning');
+      await page.locator('#mode').click();
+      assert.ok(await variant.locator('.sc-answer').isHidden()&&await variant.locator('.digital-solution').isDisabled(),'Andragrad: repetitionsläget återställer försökskravet');
       // Begrepp: motsatt och konjugat kan gälla samtidigt.
       await page.selectOption('#jump','10');
       await page.locator('[data-quiz="q11b"] button[data-correct="false"]').first().click();
