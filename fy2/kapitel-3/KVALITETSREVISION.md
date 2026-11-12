@@ -53,7 +53,7 @@ Efter att formgivningen återställts visade användarens skärmbild av Induktio
 **Laddade partiklar i magnetiska fält, bilder 5, 6, 12 och 17** har byggts om till styrda undersökningar:
 - Två klickbara förutsägelser för positiv/negativ laddning; i klassrumsläge avvaktar återkopplingen lärarens knapp, i repetitionsläge är den omedelbar.
 - Partikelbana med **Starta, Pausa, Börja om och stegning** samt oberoende val av laddningstecken och magnetfältets riktning. Hastighets- och kraftvektorer kan visas/döljas var för sig.
-- Rörelsemodellen har normaliserad tid: för lika m och |q| gäller **r∝v/B**, **ω∝B** och **|F|∝vB**. Det är inte en jämförelse av faktiska proton- och elektronmassor; pilskalorna är schematiska.
+- Rörelsemodellen har normaliserad tid: för lika m och q gäller **r∝v/B**, **ω∝B** och **F∝vB**. Det är inte en jämförelse av faktiska proton- och elektronmassor; pilskalorna är schematiska.
 - Ledarmodell med klickbar vändning av I och B, fördröjd visning av F och separat kontroll av att två samtidiga vändningar lämnar F oförändrad.
 - PDF:ens 18 bilder, bokhänvisningar 162 samt 164–166, uppgifter 343–350 och de två riktiga klassrumsdemonstrationerna är kvar.
 
