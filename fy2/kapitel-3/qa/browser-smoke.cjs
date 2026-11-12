@@ -44,7 +44,7 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
      }
      const next=page.locator('#next-slide, #next, #next-btn').last();
      check(await next.count()===1,label+' missing Next button');
-     const route=lesson==='raknestuga'?[0,1,2,4]:Array.from({length:Math.min(expected,n)},(_,i)=>i);
+     const route=lesson==='raknestuga'?[0,1,2,4]:Array.from({length:Math.min(lesson==='strom-ger-magnetfalt'?18:expected,n)},(_,i)=>i);
      for(const [position,i] of route.entries()){
       check(await page.locator('.slide.active').count()===1,label+' active slide '+(i+1));
       const activeIndex=await page.locator('.slide').evaluateAll(nodes=>nodes.findIndex(el=>el.classList.contains('active')));
@@ -56,6 +56,13 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
       if(vp.width===1440||i===0||i===n-1)
        await page.screenshot({path:path.join(dir,label+'-'+String(i+1).padStart(2,'0')+'.png')});
       if(position<route.length-1&&await next.count())await next.click({timeout:7000});
+     }
+     if(lesson==='strom-ger-magnetfalt'){
+      await page.locator('#open-optional').click();
+      check(await page.locator('.slide').nth(18).isVisible(),label+' Ampere extension not reachable');
+      await page.screenshot({path:path.join(dir,label+'-19.png')});
+      await page.locator('#return-main').click();
+      check(await page.locator('.slide').nth(17).isVisible(),label+' return from Ampere extension failed');
      }
      if(lesson==='raknestuga'){
       // Support and extension slides intentionally sit outside the main route.
