@@ -116,11 +116,48 @@ Målet är **självständigt matematiskt lärande**, inte maximalt antal reglage
 - **Begränsning:** Det vi kan bekräfta digitalt är matematisk konsekvens, funktion och design. Om elevernas förståelse, självständighet eller långtidsminne faktiskt förbättras kräver klassrumsobservation, arbete i boken och senare återkallning.
 
 
+
+## Omgång 4 · lektion 7–8
+
+### Lektion 7: Extremvärdesproblem med polynomfunktioner
+
+**Originalkälla:** `Ma3c_Extremvardesproblem_polynom.pdf` (9 sidor). **Bibehållet:** Exempel 3201 om datorskärmar `K=x³−9x²+15x+50`, x heltal ≥0 och kostnad i tusentals kronor; biljettmodellen `I(x)=1000x−5x²` för 0≤x≤200 i uppgift 3202; raketen `h(t)=40+10t−5t²` i uppgift 3204 (s.163); läroboken s.163–164 nivå 1 **3202–3207**, nivå 2 **3208–3210**, nivå 3 **3211–3214**, med utvalda starter 3203/3205/3209; läxa **3205 och 3209**, extra **3212**; individuell utcheckning `V(x)=−x²+6x−5`, x i tusental enheter och V i tusentals kr/dag, samt separat stegvis återkoppling. Ingen Socrative fanns i originalet och ingen har införts.
+
+**Förbättringar:**
+- Lärarstöd beskriver **kärnväg med tidsprioritering**, diagnosbeslut utifrån enhetsfel/otillåtna x/kontinuerlig modell kontra diskret produktion, samt minst 20 min sammanhängande bokarbete. Riktmärket är för en *hypotetisk* 70-minuterslektion, inte fast lektionstid.
+- I biljettanimationen finns samma styrbara pris, grafmarkör, sålda biljetter och intäkt kvar, men de **numeriska svaren för antalet sålda och intäkten** syns först efter aktiva förutsägelsen. Grafen används till hypotesprövning, inte som enda bevis.
+- Lösningens rubrik avslöjar inte längre optimum 100 kr redan innan algebran synliggörs. Exakt matematisk återkoppling består: `I′=1000−10x`, maximalt 50 000 kr vid 100 kr och 500 sålda biljetter, ändpunktsvärden 0.
+- Raketuppgiftens **förskrivna steglista** visas bara som valbart stöd. Alla ursprungsfrågor och facit finns kvar. Eleven måste själv visa varför optimum t=1 s, höjd 45 m, tid till havsytan 4 s och hur domänen påverkar svaret.
+- En valbar 1-minutsåterkallning från lektion 6 använder `k(x)=−x²+6x` på [0,5]. Korrekt maximum 9 vid 3, minimum 0 vid 0, efter jämförelse av alla kandidater.
+
+**Följ upp i klass:** Kan eleverna skilja mellan antal, kronor och tusental i originalmodellen och ange tillåtna heltal? Kan de bevisa ett optimum med derivatan efter grafutforskning? Hur många behöver öppna stegen för raketlösningen och påverkar det boktiden?
+
+### Lektion 8: Modellering och fler extremvärdesproblem
+
+**Originalkälla:** `Ma3c_Modellering_och_fler_extremvardesproblem.pdf` (10 sidor). **Bibehållet:** Öppen låda av 50×30 cm-papper, `V=x(50−2x)(30−2x)` för 0<x<15 och maximum cirka 4 100 cm³ vid x≈6,07 cm (ex.3215 s.166). Symmetrisk rektangel under `y=3−x²`, `A=2x(3−x²)` för 0<x<√3, maximum 4 areaenheter vid x=1 (ex.3216 s.167); bråkmodellen `V=15−0,1x−40/x` för x≥4, maximum 11 000 kr vid 20 lampor/dag (ex.3233 s.171); bokarbete i **två separata avsnitt**: s.168–170 nivå 1 **3217–3221**, nivå 2 **3222–3228**, nivå 3 **3229–3232** och s.172 nivå 1 **3234–3238**, nivå 2 **3239–3241**, nivå 3 **3242–3244**. Minst två nivåer, uppgiftsspåren 3217→3222→3234→3239 respektive 3225→3230→3241→3242; läxa **3221 och 3236**, extra **3241**. Båda individuella exitproblemen och deras två oberoende återkopplingssekvenser finns kvar. Ingen Socrative har tillagts.
+
+**Förbättringar:**
+- **Kärnvägen prioriterar tre slags modellering** och minst 20 minuter självständigt bokarbete. Låd- och rektangelundersökningens animerade extrasteg (3 och 6) finns kvar men är valbara och nås via synliga knappar. Läraren väljer helst den animation som direkt svarar mot ett faktiskt elevproblem, i stället för att automatiskt göra två omfattande uppvisningar. Originalets samtliga exempel och deras deriverade lösningar tillhör kärnvägen.
+- Båda animationsreglagens **numeriska mått, volymer och areor** är dolda tills elevens förutsägelse är gjord. Samma dynamiska figurer och kurvor används för att följa sambandet mellan mått och värde.
+- Vid rektangeln avslöjas inte basen 2x förrän eleven bett om hjälp: ursprungstexten om sträckan −x till x finns kvar i en valbar ledtråd. Här ska eleven först bygga modellen.
+- Bråkfunktionen ger eleven **eget matematiskt val före stegen**; originalets fyra frågor finns kvar som valbar hjälp. Flervalsalternativen för derivatans tecken visas först efter eget försök, och vinstgrafen med optimum visas först efter att matematiskt bevis diskuterats.
+- Valbar 1-minutsåterkallning från lektion 7 tränar enhetstolkningen: `V(3)=4` betyder produktion av **3 000 enheter/dag** och vinst **4 000 kr/dag**, inte 3 kr eller 4 enheter.
+- Lärarstödet pekar ut de vanligaste formelfelen `50−x` mot `50−2x`, rektangelns `x` mot `2x`, och den felaktigt negativa derivatan av `−40/x`, med olika svar på dessa fel.
+
+**Kognitivt att pröva:** Antalet nya modeller under ett pass kan fortfarande bli högt. Använd de valbara visualiseringarna selektivt och undersök om eleverna hinner formulera funktion och tillåten domän självständigt. Utcheckningen prövar både geometri och bråktal, inte antalet klick.
+
+### Kvalitetskontroll och kvarstående osäkerhet
+
+Automatiska Chromium-fall för lektion 7–8 är utökade med kärnväg, lärarval, valbara/hjälpsamma steg, skriftlig återkallning med dolt facit, osynliga siffervärden före elevens förutsägelse, originalets exakta modellvärden, facit, bokhänvisningar och mobila vyer. Sviten körs tillsammans med alla övriga åtta lektioner. Testutfallet ska noteras med en länk till den **senaste godkända** GitHub Actions-körningen innan rond 4 betraktas som godkänd.
+
+Det är fortfarande **inte visat** att dessa designval ökar elevernas faktiska lärande; uppföljning av elevsvar, tidsåtgång, projektor/iPad och fördröjd problemlösning behövs i klassrummet.
+
+
 ## Kommande omgångar
 
 - **Omgång 2 avslutad:** lektion 3–4, andraderivatan och dess roll för grafen.
 - **Omgång 3 avslutad:** lektion 5–6, grafrelationer och största/minsta värde.
-- **Omgång 4:** lektion 7–8, tillämpade och geometriska extremvärdesproblem.
+- **Omgång 4 avslutad:** lektion 7–8, tillämpade och geometriska extremvärdesproblem.
 - **Omgång 5:** lektion 9–10, blandade problem och deriverbarhet.
 
 **Arbetsregel:** Publicera och verifiera endast det aktuella paret innan nästa omgång påbörjas. Ingen förändring av kursens ursprungliga uppgifter, läxor eller förberedda Socrative-inslag utan nytt uttryckligt beslut.
