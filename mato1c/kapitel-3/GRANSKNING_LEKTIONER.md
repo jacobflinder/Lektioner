@@ -1,6 +1,6 @@
 # Kvalitetsgranskning – Matematik fortsättning, nivå 1c · Kapitel 3
 
-**Status 2026-11-12:** Nio webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
+**Status 2026-11-12:** Tio webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
 
 ## Allmän kontroll för varje lektion
 1. **Källtrohet:** jämför systematiskt med lektions-PDF, lärobokssidor, exakta uppgiftsnummer, läxa och eventuella Socrative-inslag. Ma1c: minst två av tre nivåer.
@@ -267,3 +267,27 @@
 - Inga HTML-ID-dubbletter, inga saknade JavaScript-mål eller facitmål. Befintliga Ma4/Fy1/Fy2-filer är orörda. Ingen extern dataöverföring, inga användarkonton eller personuppgifter i den egna JS-koden.
 - Testfil `qa/blandade-problem-browser.cjs` täcker startens metodval och felspecifik respons, klassrumsläge, lärarstöd, analytiska vattenvärden och tangentflyttning, robotens enheter, dubbelrotens tecken, samtliga boknivåer och läxan samt två oberoende exitsekvenser. Alla 11 steg granskas även i 390px mobilbredd. Körs med regressionstesterna för tidigare åtta lektioner.
 - **Återstår:** verklig manuell projektor-/iPad-prövning och kvalitetsuppföljning av elevlösningar. Godkänd webbläsarfunktionalitet är inte belägg för mätbar lärandeeffekt.
+
+
+## Lektion 10 · Deriverbarhet
+
+**Källa:** `Ma3c_Deriverbarhet.pdf`, 12 sidor, kapitel 3.2. **Adress:** `/mato1c/kapitel-3/deriverbarhet/`. Tolv steg med exakt originalinnehåll och tre begränsade interaktiva SVG-funktioner: gemensamma ensidiga sekantkvoter för två grafer; diskontinuitet; mjuk skarv.
+
+### Källtrohet
+- Start: A mjuk, B hörn, C hopp; undervisningsordning och elevtänkande före facit bevarade. Ensidiga kvoter använder h>0 och h→0⁺ med vänster- och högeruttrycken från originalets sida 2. Särskild didaktisk/matematisk försiktighet: `f′(a)` används först när gränsvärdena visats vara samma ändliga tal, så två olika ensidiga resultat inte felaktigt ges samma derivatabeteckning.
+- p och q, r, de båda skarvproblemen, exakt lärobok s.178, uppgifter och läxa samt två återkopplingsnivåer bevarade; ingen Socrative tillagd.
+- **Nivå1** 3272–3274; **nivå2** 3275 a–b; **nivå3** 3276–3277, minst två nivåer. Grundspår 3272→3273→3275 a–b, säker 3275 a–b→3277→3276. 20 min tyst eget. Läxa **3274 och 3275**, extra **3277**.
+
+### Oberoende matematisk kontroll
+- `p(x)=(x−1)²+2` och `p(1)=2`, `p(1±h)=h²+2`, vänsterkvot `−h` och högerkvot `+h`. Båda →0 då h→0⁺ ⇒ `p′(1)=0`, tangent y=2.
+- `q(x)=2|x−1|+2`, `q(1)=2`, `q(1±h)=2h+2`. Vänsterkvot −2, högerkvot +2 för alla positiva h ⇒ ingen derivata vid x1, trots kontinuitet.
+- `r(x)=1` för x<2, `r(x)=3` för x≥2. r2=3. Vänsterkvoten `[3−1]/h=2/h` →+∞, utan ändligt gränsvärde; högerkvoten 0. r är diskontinuerlig i x2 och kan inte vara deriverbar där. h1→2, h0,5→4, h0,1→20.
+- **Första skarven:** f=ax+b för x<1, f=x²+1 för x≥1. Kontinuitet `a+b=2`, lutning `a=2` ⇒ b0. För `a=1,b=1` möts delarna men lutningen skiljer; för `a=2,b=1` matchar lutningen men höjderna skiljer (hopp); för `a=2,b=0` är både höjd och lutning lika (deriverbar).
+- **Utcheckningsskarven:** F=cx+d x<2, F=x² x≥2. Kontinuitet `2c+d=4`, högerlutning4 ⇒ c4, d−4, F′(2)=4. Felsvaret c4,d0 ger vänstervärde8 men F(2)=4 och diskontinuitet. q är kontinuerlig men icke-deriverbar i x1 med ensidiga lutningar ±2.
+
+### Teknik och kritisk granskning
+- Matematiskt exakta JS-funktioner styr grafens punkter och sekantlutningar. Läraren kan minska h från 1 till 0,02, men aldrig h=0. Sekantlinjerna är **förlängningar av exakta sekantlinjer** så skillnader syns visuellt vid små h, inte närmevärden från ritade pixlar.
+- En styckvis graf för r markerar (2,1) öppen och (2,3) fylld. Skarvmodellen varierar a och b separat och rapporterar kontinuitet och lutning – inte bara en allmän rätt/fel-markering.
+- Statisk kontroll: 12 slides, unika HTML-ID, kopplingar till alla SVG/reglage och facitmål, bok och läxa. Den första statiska genomgången hittade ett HTML-ID som kolliderade med lektionsmotorns navigering; detta korrigerades *före* webbläsartestet.
+- Chromium QA: `qa/deriverbarhet-browser.cjs`, körs tillsammans med regression för lektionerna 1–9. Testar bildgraf A/B/C, h=1/0,5/0,02 och samtliga gränslutningar, hoppkvot=2/h, skarv med både olika och lika villkor, bokuppgifter/läxa, separat utcheckningsfacit, klassrum/repetitionsläge och samtliga 12 steg i 390px mobilbredd.
+- **Begränsningar:** Full manuell projektorkontroll, verklig iPad-genomgång och elevlösningar återstår. Godkända automatiska tester kan inte styrka förbättrad begreppsförståelse i klassrummet.
