@@ -91,7 +91,7 @@ drawSheet('box-start',5,true);updateBox();
 
 // Koordinatsystemet är gemensamt för rektangelns två symmetriska övre hörn.
 const XR=x=>325+148*x,YR=y=>408-105*y;
-function drawRectangle(id,x){
+function drawRectangle(id,x,{showBaseLabel=true}={}){
  const root=$(id);root.replaceChildren();
  const g=clipLayer(root,'rect-clip-'+id,[59,52,536,365]);
  const fs=compact?26:17;
@@ -107,7 +107,7 @@ function drawRectangle(id,x){
  for(const x0 of [-1,0,1])label(root,XR(x0),438,String(x0).replace('-','−'),{size:fs,anchor:'middle'});
  for(const y0 of [1,2,3])label(root,XR(0)-11,YR(y0)+5,String(y0),{size:fs,anchor:'end'});
  label(root,83,41,'y = 3 − x²',{size:compact?29:21,fill:'#116d70',bold:true});
- label(root,XR(0),465,'bas = 2x',{anchor:'middle',size:compact?29:21,fill:'#a36c25',bold:true});
+ if(showBaseLabel)label(root,XR(0),465,'bas = 2x',{anchor:'middle',size:compact?29:21,fill:'#a36c25',bold:true});
 }
 function drawArea(x){
  const root=$('rectangle-area');root.replaceChildren();
@@ -137,7 +137,7 @@ function updateRect(){
 }
 $('rectangle-x').addEventListener('input',updateRect);
 document.querySelectorAll('[data-rect-x]').forEach(b=>b.addEventListener('click',()=>{$('rectangle-x').value=b.dataset.rectX;updateRect()}));
-drawRectangle('rectangle-preview',.65);updateRect();
+drawRectangle('rectangle-preview',.65,{showBaseLabel:false});updateRect();
 
 function drawFraction(){
  const root=$('fraction-graph');root.replaceChildren();
