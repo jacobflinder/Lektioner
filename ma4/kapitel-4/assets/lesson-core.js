@@ -33,5 +33,38 @@ document.querySelectorAll('[data-quiz]').forEach(box=>{
   });
  });
 });
+// Begreppsbeslut: eleven måste välja ett alternativ före återkoppling.
+// Gammal data-quiz-funktion behålls oförändrad för andra lektioner.
+document.querySelectorAll('[data-decision]').forEach(box=>{
+ const options=[...box.querySelectorAll('button[data-answer]')];
+ const submit=box.querySelector('[data-decision-submit]');
+ const feedback=box.querySelector('.feedback');
+ if(!submit||!feedback||!options.length)return;
+ let selected=null;
+ submit.disabled=true;
+ options.forEach(option=>{
+  option.setAttribute('aria-pressed','false');
+  option.addEventListener('click',()=>{
+   selected=option;
+   options.forEach(o=>{
+    const chosen=o===option;
+    o.setAttribute('aria-pressed',String(chosen));
+    o.classList.toggle('selected',chosen);
+    o.classList.remove('correct','wrong');
+   });
+   submit.disabled=false;
+   feedback.className='feedback hidden';
+   feedback.textContent='';
+  });
+ });
+ submit.addEventListener('click',()=>{
+  if(!selected)return;
+  const ok=selected.dataset.correct==='true';
+  options.forEach(o=>o.classList.remove('correct','wrong'));
+  selected.classList.add(ok?'correct':'wrong');
+  feedback.className='feedback '+(ok?'ok':'no');
+  feedback.textContent=selected.dataset.feedback||(ok?'Rätt. Förklara varför.':'Pröva att motivera ditt val och välj igen.');
+ });
+});
 go(0);window.lessonCore={go,slides};
 })();
