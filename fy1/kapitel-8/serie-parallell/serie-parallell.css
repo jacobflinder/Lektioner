@@ -1,0 +1,37 @@
+/* 8.3 — enbart lektionslokal layout och bilder; övriga Fy1 påverkas inte. */
+.circuit-figure{margin:0;padding:12px;background:linear-gradient(150deg,#f8fcfd,#edf6f9);border:1px solid #d1e4e8;border-radius:14px}
+.circuit-figure svg{width:100%;height:auto;display:block;max-height:420px}
+.circuit-figure figcaption{font-size:.77rem;line-height:1.42;color:#526f7a;margin-top:9px}
+.goalcard,.book-main,.exit-items section{background:#eaf4ee;border:1px solid #cfe5d7;border-radius:13px;padding:14px 19px}
+.goalcard{margin-top:14px;font-size:.92rem}.goalcard ol{margin:5px 0 0}.goalcard li{margin:5px 0}
+.predict-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.predict-cards>div{border:1px solid #c5dce5;background:#edf6f9;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.predict-cards span{font-size:.88rem;color:#50727c}
+.worked{margin:3px 0}.worked>b{color:#126d7d}.worked p{margin:6px 0}
+.equation{font-family:'STIX Two Math','Cambria Math',Cambria,serif;font-size:clamp(1.13rem,1.7vw,1.38rem);line-height:1.55;margin:5px 0;overflow-x:auto}
+.meter-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:8px}.meter-points p{background:#f1f8fa;border-radius:11px;padding:11px 12px;font-size:.9rem;margin:0}
+.safety-small{font-size:.84rem;color:#7b4a38;background:#fff3e7;padding:9px 12px;border-radius:10px}
+.book-main{margin:0 0 10px}.book-main h2{margin:0;font-size:1.23rem}.book-main p{margin:9px 0}.big-assignment{font-size:1.25rem}.book-other{background:#f1f7f9;padding:13px 18px;border-radius:12px}.book-other p{margin:7px 0}
+.exit-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:12px 0}.exit-items section{background:#f1f7f9;border-color:#d7e9ec}.exit-items section p{margin:6px 0;font-size:.92rem}.selfcheck{background:#e8f3ee;border-left:4px solid #5b9b7d;padding:12px 14px;border-radius:10px;margin:15px 0}
+.socrative{font-size:1.1rem}.socrative code{display:inline-block;margin:4px 0 10px}.socrative p{line-height:1.65}
+.circuit-model .drawing svg{width:100%;height:auto;display:block}.circuit-model .model-controls{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px}
+.circuit-model .switch-group{display:flex;flex-wrap:wrap;gap:8px;padding:9px 0 4px;align-items:center}
+.circuit-model .switch-group>span{font-size:.84rem;color:#3a6775;font-weight:700}
+.circuit-model .switch-group button[aria-pressed="true"]{background:#176f86;color:white;border-color:#176f86}
+.circuit-model .switch-group button{min-width:105px}
+.circuit-model .model-result{font-weight:500;line-height:1.5;margin-top:10px}.circuit-model .model-result b{color:#125c71}
+.circuit-model .model-note{font-size:.85rem;color:#456d78;background:#edf6f9;border-radius:8px;padding:9px 12px;margin-top:8px}
+.circuit-model .model-controls label{font-size:.82rem}
+.circuit-model .model-button{display:flex;flex-wrap:wrap;gap:8px}
+.circuit-model .figcap{line-height:1.45}
+.circuit-model .compare-strip{margin:8px 0 0;border-top:1px solid #cee1e6;padding-top:8px;font-size:.85rem;color:#456a75}
+/* Keep feedback and stepwise calculations adjacent to diagrams and prompts. */
+.body-copy>.quiz{margin:13px 0 0}.body-copy>.steps-label{margin-top:15px}.body-copy>.step{font-size:.96rem;line-height:1.5}
+.body-copy>.step .mathrow{font-size:clamp(1.05rem,1.65vw,1.45rem)}
+.stage .layout{gap:clamp(16px,2.4vw,30px)}
+@media(min-width:1200px){.stage{padding:clamp(24px,3.1vw,42px)}.stage .layout{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr)}}
+@media(max-width:930px){.circuit-figure{max-width:740px;margin-inline:auto}.exit-items{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.predict-cards,.meter-points,.exit-items{grid-template-columns:1fr}.circuit-model .model-controls{grid-template-columns:1fr}.circuit-figure{padding:7px}.stage .body-copy .equation{font-size:1.15rem}}
+@media print{.circuit-figure{break-inside:avoid}.circuit-model .model-controls,.circuit-model .switch-group,.circuit-model .model-button{display:none!important}}
+/* Narrow iPhone: very long Swedish physics terms may otherwise force horizontal scrolling. */
+.page-head>div{min-width:0}.page-title{hyphens:auto;overflow-wrap:anywhere}
