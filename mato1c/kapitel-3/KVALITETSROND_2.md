@@ -51,9 +51,38 @@ Målet är **självständigt matematiskt lärande**, inte maximalt antal reglage
 - `mato1c-browser-qa.yml` kör dessutom regressionstest för resterande åtta lektioner. För full spårbarhet: använd senaste godkända GitHub Actions-körning och skärmbilderna därifrån. Automatisk godkänd kontroll är **inte** detsamma som observerad klassrumseffekt.
 - Fullständig projektor-/iPad-prövning, faktisk tidsmätning och anonyma elevlösningar kräver användning i klassrummet.
 
+
+## Omgång 2 · lektion 3–4
+
+### Lektion 3: Andraderivatan
+
+**Original och ramverk bevarat:** 8 lektionssteg med förutsägelse utifrån f(x)=x² och g(x)=2x, synkroniserade tangentgrafer och två genomarbetade exempel (polynom och exponentialfunktion), elevens egen h(x)=x³−6x², återkoppling, bok s.149 med båda originalspåren och 3128–3129 som merträning, läxa som valt spår och individuell utcheckning om f avtar när f″>0. Ingen Socrative fanns i källan.
+
+**Ändringar efter kritisk didaktisk granskning:**
+- De numeriska tangentlutningarna f′(x) och g′(x) visas **först när eleven aktivt väljer återkopplingen**; graferna och reglerbar tangentrörelse finns kvar för undersökningen. Eleverna måste själva jämföra vad som händer när x ökar.
+- I eget försök skrivs **h″(x) som ett fritt uttryck** i stället för att välja bland fyra svarsalternativ, som tidigare råkade visa rätt uttryck. Kontrollen accepterar ax+b och ekvivalent omvänd termordning och skiljer på att ha stannat vid h′, tappat konstantterm, felpotens, fel värde vid 0 och fel nollställe.
+- Lärarstöd anger en kärnväg med tidsramar som *riktmärke* vid cirka 70 minuter, bevarar båda genomarbetade exemplen, skyddar **minst 20 minuters sammanhängande bokarbete** och kopplar konkreta elevfel till vägval. Kort återkallning av begreppet f″ planeras till nästa lektion.
+
+**Ännu att pröva i klass:** Räknar eleverna h″ korrekt utan svarsalternativen? Kan de skilja h″(x), h″(0) och h″(x)=0? Hur ofta behöver de se båda modelleringsexemplen i helklass?
+
+### Lektion 4: Andraderivatans roll för grafen
+
+**Original och ramverk bevarat:** samtliga 12 steg med mål och kognitiv aktivering, tangentundersökning av x²/−x², nödvändigt villkor f′(a)=0 före andraderivatatestet, arbetat exempel f=x³−3x+2, eget h=x²−4x+7, kontrasten x³/x⁴ då andraderivatatestet är obestämt, inflexionens kurva och teckenbevis, bok s.152 med alla tre nivåer och originaluppgiftsspår, tre snabba kontrollfrågor, individuell utcheckning och **läxa 3138 och 3141 a–b**. Ingen Socrative skapad.
+
+**Ändringar efter kritisk didaktisk granskning:**
+- **Kärnvägen** prioriterar f′(a)=0 → andraderivatatest → egen tillämpning → inflexion med matematiskt teckenbevis → bok → individuell utcheckning. Kontraststeget x³/x⁴ (steg 7) och extra kontrollfrågor (steg 11) är **valbara via synliga knappar och kapitelmenyn** och hoppas annars över i den vanliga navigeringen. Inget originalinnehåll har tagits bort.
+- En kort, **valfri återkallning från lektion 3** av H′(x), H″(x) för H=x²−4x+7 ligger på startsidan med dolt facit.
+- Siffror för tangentlutning och andraderivata är **dolda tills eleven efterfrågar dem**. Vid inflexionen ritas hela kurvan först utan färgfacit om krökningen; färgerna och teckenmarkeringarna visas först när slutsatsen öppnas.
+- Den egna uppgiften ber nu om en **självständigt motiverad lösning utan punktlista**. Kontrollen av x-värde, klassificering och y-koordinat finns kvar.
+- Lärarstödet innehåller realistisk tidsprioritering, **minst 20 minuters bokarbete**, diagnosvägar för missuppfattningarna f′(a)=0, f″(a)=0 och inflexion kontra horisontell tangent, samt plan för senare återkallning.
+
+**Matematiska skyddsräcken:** f″(a)>0/<0 ger klassificering *för stationär punkt* f′(a)=0. f″(a)=0 ger inget besked om max/min, och ett ensamt nollställe för f″ bevisar inte inflexion utan teckenbyte. Inflexionspunkten (0,2) hos x³−3x+2 har f′(0)=−3 och därmed sned tangent.
+
+**QA:** `qa/andraderivatan-browser.cjs` och `qa/andraderivatans-roll-browser.cjs` utökades för dolda svar före förutsägelse, fria uttryck och felkategorier, lärarstöd/tidsprioritering, valbar återkallning, valbara steg som nås med klick och hoppas över i kärnvägen, numerisk inflexion och matematiska facit. Alla tio lektionsskripten körs tillsammans med Chromium-regression. Godkänt tekniskt test är ännu inte bevis på förbättrad faktisk inlärning; följ upp boktid och individuella elevlösningar.
+
 ## Kommande omgångar
 
-- **Omgång 2:** lektion 3–4, andraderivatan och dess roll för grafen.
+- **Omgång 2 avslutad:** lektion 3–4, andraderivatan och dess roll för grafen.
 - **Omgång 3:** lektion 5–6, grafrelationer och största/minsta värde.
 - **Omgång 4:** lektion 7–8, tillämpade och geometriska extremvärdesproblem.
 - **Omgång 5:** lektion 9–10, blandade problem och deriverbarhet.
