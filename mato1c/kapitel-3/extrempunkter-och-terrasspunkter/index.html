@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Extrempunkter och terrasspunkter · Matematik – fortsättning, nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.graph-preview{min-width:0}.graph-preview svg{width:100%;height:auto;display:block;max-height:230px}
+.graph-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.graph-card{border:1px solid #cadae3;background:#f8fbfd;border-radius:13px;padding:10px}
+.graph-card strong{display:block;font-size:1rem;margin:4px 7px}
+.points-table{border-collapse:collapse;width:100%;table-layout:fixed;margin:14px 0}
+.points-table th,.points-table td{border:1px solid #c7d7df;padding:10px 8px;text-align:center;overflow-wrap:anywhere}
+.points-table th{background:#e8f2f4}
+.points-table select{width:100%;min-width:0;max-width:155px;font:inherit;border:2px solid #b4ced9;border-radius:8px;padding:8px;background:white;color:#17334b}
+.points-table .good{color:#007663;font-weight:850}
+.points-table .bad{color:#ac3d42;font-weight:850}
+.graph-selected{outline:3px solid #08806c;outline-offset:2px}
+.graph-options{display:flex;flex-wrap:wrap;gap:8px;margin:11px 0}
+.graph-options button[aria-pressed=true]{background:#087d70;color:white}
+.graph-board{max-width:680px;margin:0 auto}
+.graph-board svg{width:100%;height:auto;display:block}
+.point-info{background:#f1f7fa;border-radius:10px;padding:12px 16px;margin:12px 0;min-height:55px}
+.math-inline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.16em}
+.step-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.step-grid>.panel{margin:0}
+.book-track{border:1px solid #c8dce5;background:#f3f8fa;border-radius:14px;padding:18px 20px}
+.book-track h3{color:#087d70}
+.book-track .numbers{font-weight:800;font-size:1.15rem;line-height:1.6}
+.check-control{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.check-control label{font-weight:700}
+.check-control select{border:2px solid #b4ced9;border-radius:8px;padding:8px;color:#17334b;background:white;font:inherit}
+.book-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.lesson-emphasis{color:#075e58;font-weight:800}
+@media(max-width:760px){.graph-grid{grid-template-columns:1fr}.graph-preview svg{max-height:200px}.step-grid,.book-choices{grid-template-columns:1fr}.points-table th,.points-table td{padding:7px 3px;font-size:.88rem}.points-table select{padding:5px 2px;font-size:.87rem}}
+</style>
+</head>
+<body>
+<header>
+<a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.1</strong>
+<div class="head-actions">
+<button id="ink-toggle" class="secondary" type="button" aria-expanded="false">Visa skrivyta</button>
+<button id="teacher-toggle" class="secondary" type="button" aria-expanded="false">Visa lärarstöd</button>
+<button id="mode" class="secondary" type="button" aria-pressed="false">Klassrumsläge</button>
+</div>
+</header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna besvara frågan på papper först. Öppna inte återkopplingen förrän de fått tid att tänka. Dator av under gemensamma delar är möjligt.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Lös på papper innan du kontrollerar. Graferna hjälper dig att förstå, men utcheckningen kräver eget resonemang utan den interaktiva modellen. Inga elevsvar samlas in eller lagras.</div>
+<div id="stage" class="stage">
+
+<section class="slide active" id="start" data-teacher="PDF s. 1. Starta med tre kurvor utan facit. Eleverna jämför enskilt och sedan par: alla har horisontell tangent i origo. Be dem motivera med lutningen före och efter 0.">
+<div class="eyebrow">01 · Start · enskilt → par</div>
+<h1>Vågrät tangent. Samma sorts punkt?</h1>
+<p class="lead">Alla tre har derivatan noll vid <span class="math-inline">x = 0</span>. Vilka grafer vänder? Vilken fortsätter åt samma håll?</p>
+<div class="graph-grid">
+<div class="graph-card"><strong>A · f(x) = x²</strong><div class="graph-preview"><svg id="graph-a" viewBox="0 0 330 225" role="img" aria-label="Parabel med nedre vändpunkt i origo"></svg></div></div>
+<div class="graph-card"><strong>B · g(x) = −x²</strong><div class="graph-preview"><svg id="graph-b" viewBox="0 0 330 225" role="img" aria-label="Nedåtvänd parabel med övre vändpunkt i origo"></svg></div></div>
+<div class="graph-card"><strong>C · h(x) = x³</strong><div class="graph-preview"><svg id="graph-c" viewBox="0 0 330 225" role="img" aria-label="Växande kubisk kurva med horisontell tangent i origo"></svg></div></div>
+</div>
+<div class="task"><strong>Ta ställning före klicket</strong>Vilken är minimipunkt, maximipunkt respektive terrasspunkt? Förklara varför <span class="math-inline">f′(0)=0</span> inte räcker för att skilja dem åt.</div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa och resonera</button>
+<div id="start-answer" class="answer hidden"><p><strong>A:</strong> minimipunkt – grafen går från att sjunka till att stiga. <strong>B:</strong> maximipunkt – grafen går från att stiga till att sjunka. <strong>C:</strong> terrasspunkt – grafen fortsätter att stiga genom en horisontell tangent.</p><p>Samma lutning i själva punkten ger alltså inte samma punktkaraktär.</p></div>
+</section>
+
+<section class="slide" id="goal" data-teacher="PDF s. 2. Klargör dagens två samhörande uppgifter: punktens typ och båda koordinaterna. Anslut till förra lektionens teckentabell. Diskutera f(a) jämfört med f′(a).">
+<div class="eyebrow">02 · Mål och begrepp</div>
+<h2>Tecknet runt nollstället avgör</h2>
+<p class="lead"><strong>Efter lektionen ska du kunna bestämma en stationär punkts karaktär och dess koordinater med hjälp av derivatan.</strong></p>
+<table class="points-table">
+<thead><tr><th scope="col">Punkttyp</th><th scope="col">f′ före</th><th scope="col">f′ i punkten</th><th scope="col">f′ efter</th><th scope="col">Grafen</th></tr></thead>
+<tbody><tr><th scope="row">Maximipunkt</th><td>+</td><td>0</td><td>−</td><td>stiger → sjunker</td></tr>
+<tr><th scope="row">Minimipunkt</th><td>−</td><td>0</td><td>+</td><td>sjunker → stiger</td></tr>
+<tr><th scope="row">Terrasspunkt</th><td>+</td><td>0</td><td>+</td><td>fortsätter stiga</td></tr>
+<tr><th scope="row">Terrasspunkt</th><td>−</td><td>0</td><td>−</td><td>fortsätter sjunka</td></tr></tbody></table>
+<div class="two">
+<div class="panel"><strong>Lokalt maximum/minimum</strong><p>Högsta/lägsta funktionsvärde i närheten.</p></div>
+<div class="panel"><strong>En punkt har två koordinater</strong><p class="math">Punkten: (a, f(a))</p><p>Värdet är <span class="math-inline">f(a)</span> – inte <span class="math-inline">f′(a)</span>.</p></div>
+</div>
+<div class="notice"><strong>Viktig skillnad:</strong> <span class="math-inline">f′(a) = 0</span> betyder horisontell tangent. Det räcker inte för att avgöra punktens karaktär.</div>
+</section>
+
+<section class="slide" id="explore" data-teacher="Interaktiv jämförelse, webbens tydliga mervärde. Be eleverna först ange tecknen vid x = −1 respektive +1 för en vald funktion. Flytta x-reglaget först efter förutsägelsen. Samma graf och derivata styr tangent och siffror. Undvik att låta klassen fastna i reglagelek.">
+<div class="eyebrow">03 · Undersök · en tangent, tre kurvor</div>
+<h2>Vad händer på var sin sida om noll?</h2>
+<div class="two">
+<div class="graph-board"><svg id="interactive-graph" viewBox="0 0 660 390" role="img" aria-label="Valbar graf x², minus x² eller x³ med flyttbar tangent och numerisk derivata"></svg></div>
+<div>
+<div class="task"><strong>Förutsäg innan du testar</strong>Välj en funktion. Vilket tecken har derivatan till vänster och höger om <span class="math-inline">x = 0</span>? Vad betyder tecknen för punktens typ?</div>
+<div class="graph-options" role="group" aria-label="Välj funktion">
+<button type="button" class="secondary" data-model="a" aria-pressed="true">A · x²</button>
+<button type="button" class="secondary" data-model="b" aria-pressed="false">B · −x²</button>
+<button type="button" class="secondary" data-model="c" aria-pressed="false">C · x³</button>
+</div>
+<div class="graph-controls">
+<label for="graph-x">Flytta tangentpunkten</label>
+<input id="graph-x" type="range" min="-1.6" max="1.6" step="0.05" value="-1" aria-describedby="graph-readout">
+<output id="graph-x-out" for="graph-x">−1,00</output>
+</div>
+<div class="point-info" id="graph-readout" aria-live="polite"><strong>f′(−1) = −2,00</strong><p>Lutningen är negativ: grafen sjunker här.</p></div>
+<button id="go-left" class="secondary" type="button">Undersök x = −1</button>
+<button id="go-zero" class="secondary" type="button">Undersök x = 0</button>
+<button id="go-right" class="secondary" type="button">Undersök x = 1</button>
+<div class="panel" style="margin-top:16px"><strong>Beslut</strong>
+<div class="check-control"><label for="model-type">Punktens typ vid x = 0:</label><select id="model-type"><option value="">Välj</option><option value="max">Maximipunkt</option><option value="min">Minimipunkt</option><option value="terrass">Terrasspunkt</option></select></div>
+<p><button type="button" id="check-model">Kontrollera resonemanget</button></p>
+<p id="model-feedback" class="feedback" role="status" aria-live="polite"></p></div>
+</div>
+</div>
+<p class="muted">Kurvorna är beräknade utifrån sina uttryck; tangenten ritas med derivatans verkliga lutning. Denna undersökning stödjer teckentabellen men ersätter inte den algebraiska metoden.</p>
+</section>
+
+<section class="slide" id="example" data-teacher="PDF s. 3. Visa steg för steg, inte all algebra samtidigt. Den första frågan är vilket led man behöver innan man vet punktkaraktären. Varje klick följer elevernas resonemang. Markera att f ger y-koordinaten.">
+<div class="eyebrow">04 · Genomarbetat exempel</div>
+<h2>Bestäm extrempunkterna</h2>
+<p class="math math-big">f(x) = x³ − 3x + 2</p>
+<p>Bestäm de stationära punkternas <strong>karaktär och koordinater</strong>.</p>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Förutsäg före varje steg</strong>Vad måste vi räkna ut för att bestämma typen av punkt? Vilket uttryck ger y-koordinaten?</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden gör derivatan noll?"><strong>1 · Derivera och faktorisera</strong><p class="math">f′(x) = 3x² − 3 = 3(x − 1)(x + 1)</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka testvärden använder vi i de tre intervallen?"><strong>2 · Bestäm stationära x-värden</strong><p class="math">f′(x) = 0 ⇒ x = −1 eller x = 1</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur ser teckentabellen ut?"><strong>3 · Testa derivatans tecken</strong><p class="math">f′(−2) = 9 &gt; 0</p><p class="math">f′(0) = −3 &lt; 0</p><p class="math">f′(2) = 9 &gt; 0</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken är maximi- respektive minimipunkt?"><strong>4 · Klassificera genom teckenbyte</strong>
+<table class="sign-table"><tr><th>x</th><td>&lt; −1</td><td>−1</td><td>−1 &lt; x &lt; 1</td><td>1</td><td>&gt; 1</td></tr><tr><th>f′(x)</th><td class="pos">+</td><td>0</td><td class="neg">−</td><td>0</td><td class="pos">+</td></tr><tr><th>f(x)</th><td>↗</td><td>max</td><td>↘</td><td>min</td><td>↗</td></tr></table></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur kontrollerar vi koordinaterna och slutsatsen?"><strong>5 · Sätt in i ursprungsfunktionen</strong><p class="math">f(−1) = (−1)³ − 3(−1) + 2 = 4</p><p class="math">f(1) = 1³ − 3 · 1 + 2 = 0</p><p><strong>Maximipunkt (−1, 4)</strong> och <strong>minimipunkt (1, 0)</strong>.</p></div>
+</div>
+<div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Börja om</button><span class="muted" data-seq-count></span></div>
+</div>
+</section>
+
+<section class="slide" id="terrace" data-teacher="PDF s. 4. Nytt begreppsligt kontrastfall, samma metod. Inget nytt algebraiskt trick. Låt eleverna pröva −1 och +1 före facit. Förtydliga att f(0)=2 ger punktens höjd, medan f′(0)=0 endast ger lutningen.">
+<div class="eyebrow">05 · Samma metod · annan punkttyp</div>
+<h2>Derivatan är noll – men grafen vänder inte</h2>
+<p class="math math-big">f(x) = x³ + 2</p>
+<div class="task"><strong>Försök först på papper</strong>Derivera, lös <span class="math-inline">f′(x) = 0</span> och testa derivatans tecken till vänster och höger. Finns någon extrempunkt? Vilken punkt har grafen?</div>
+<div class="panel" data-quiz data-correct-text="Rätt: +, 0, +. Grafen fortsätter att växa och har ingen extrempunkt vid noll. Vi kallar (0, 2) en terrasspunkt." data-wrong-text="Pröva f′(−1) = 3 och f′(1) = 3. Är derivatans tecken olika på sidorna om noll?">
+<strong>Vilken teckenföljd får derivatan?</strong>
+<div class="flex"><button type="button" class="choice" data-correct="false">+ · 0 · −</button><button type="button" class="choice" data-correct="true">+ · 0 · +</button><button type="button" class="choice" data-correct="false">− · 0 · +</button></div>
+<p class="feedback" role="status" aria-live="polite"></p>
+</div>
+<button type="button" data-reveal="terrace-answer" class="reveal">Visa hela lösningen</button>
+<div class="answer hidden" id="terrace-answer">
+<p class="math">f′(x) = 3x², &nbsp; f′(x) = 0 ⇒ x = 0</p>
+<p class="math">f′(−1) = 3 &gt; 0, &nbsp; f′(1) = 3 &gt; 0</p>
+<table class="sign-table"><tr><th>x</th><td>&lt; 0</td><td>0</td><td>&gt; 0</td></tr><tr><th>f′(x)</th><td>+</td><td>0</td><td>+</td></tr><tr><th>f(x)</th><td>↗</td><td>terrass</td><td>↗</td></tr></table>
+<p><strong>f(0) = 2 ⇒ terrasspunkt (0, 2).</strong> Vågrät tangent, inget lokalt max eller min.</p>
+</div>
+</section>
+
+<section class="slide" id="you-try" data-teacher="Kort tillämpning med minskat stöd. Behåll matematiken hos eleven: eget papper, förklara derivatans tecken, beräkna höjd. Vid rätt klassificering men fel koordinat: be eleven sätta in i funktionen, inte derivatan.">
+<div class="eyebrow">06 · Din tur · mindre stöd</div>
+<h2>Kan du bestämma både typ och koordinater?</h2>
+<p class="math math-big">h(x) = −x³ + 3x</p>
+<div class="task"><strong>Skriv en fullständig lösning.</strong> Bestäm alla stationära punkter, klassificera dem med en teckentabell och ange deras koordinater. Vilken är maximi- och vilken minimipunkt?</div>
+<div class="check-control">
+<label for="own-max">Maximipunkten:</label>
+<select id="own-max"><option value="">Välj</option><option value="neg">(−1, −2)</option><option value="pos">(1, 2)</option><option value="zero">(1, 0)</option></select>
+<label for="own-min">Minimipunkten:</label>
+<select id="own-min"><option value="">Välj</option><option value="neg">(−1, −2)</option><option value="pos">(1, 2)</option><option value="zero">(−1, 0)</option></select>
+<button id="check-own" type="button">Kontrollera</button>
+</div>
+<p id="own-feedback" class="feedback" role="status" aria-live="polite"></p>
+<button class="secondary" type="button" data-reveal="own-help">Visa stöd om du fastnar</button>
+<div class="panel hidden" id="own-help"><p>1. Derivera. 2. Lös <span class="math-inline">h′(x)=0</span>. 3. Bestäm tecknet i de tre intervallen. 4. Beräkna <span class="math-inline">h(a)</span> för båda x-värdena.</p></div>
+<button class="reveal" type="button" data-reveal="own-answer">Visa genomarbetad återkoppling</button>
+<div class="answer hidden" id="own-answer">
+<p class="math">h′(x) = −3x² + 3 = −3(x − 1)(x + 1)</p>
+<p class="math">h′(x) = 0 ⇒ x = −1 eller x = 1</p>
+<p class="math">h′(−2) = −9 &lt; 0, &nbsp; h′(0) = 3 &gt; 0, &nbsp; h′(2) = −9 &lt; 0</p>
+<table class="sign-table"><tr><th>x</th><td>&lt; −1</td><td>−1</td><td>−1 &lt; x &lt; 1</td><td>1</td><td>&gt; 1</td></tr><tr><th>h′(x)</th><td>−</td><td>0</td><td>+</td><td>0</td><td>−</td></tr><tr><th>h(x)</th><td>↘</td><td>min</td><td>↗</td><td>max</td><td>↘</td></tr></table>
+<p class="math">h(−1) = −(−1)³ + 3(−1) = −2</p><p class="math">h(1) = −1 + 3 = 2</p>
+<p><strong>Minimipunkt (−1, −2).</strong> <strong>Maximipunkt (1, 2).</strong> Notera att punktens y-koordinat kommer från <span class="math-inline">h</span>, inte <span class="math-inline">h′</span>.</p>
+</div>
+</section>
+
+<section class="slide" id="book" data-teacher="PDF s. 5. Viktigt: bevara förslagsspåren ordagrant med 3119 i båda, undvik att klassificera enskilda uppgifter i en egen nivåindelning. Normalt minst två av bokens tre nivåer, ge god sammanhängande tid. Läxa: avsluta valt spår till nästa lektion. Ingen Socrative i originalet.">
+<div class="eyebrow">07 · Arbeta självständigt · boken</div>
+<h2>Öva, förklara och kontrollera</h2>
+<p class="lead">Läroboken <strong>s. 145–148</strong>. Uppgifter på <strong>s. 148</strong>. Arbeta med <strong>minst två av bokens tre nivåer</strong>.</p>
+<div class="book-choices">
+<div class="book-track"><h3>Spår · Nivå 1 + 2</h3><p><strong>3113:</strong> metoden steg för steg</p><p><strong>3114:</strong> från teckentabell till graf</p><p><strong>3115 och 3117:</strong> extrem- och terrasspunkter</p><p><strong>3119:</strong> tolka derivatans graf</p></div>
+<div class="book-track"><h3>Spår · Nivå 2 + 3</h3><p><strong>3118–3119:</strong> bestäm och tolka</p><p><strong>3120:</strong> undersök med teckentabell</p><p><strong>3122:</strong> konstruera egna exempel</p><p><strong>3123:</strong> bestäm en parameter</p></div>
+</div>
+<div class="panel"><strong>Mer träning vid behov:</strong> 3116 eller 3121. Fortsätt med fler uppgifter om du behöver.</div>
+<div class="task"><strong>Arbeta ordentligt med boken</strong>Försök själv. Diskutera vid behov. Kontrollera och förstå dina fel. Fortsätt med ett spår som utmanar dig på minst två nivåer.</div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart ditt valda spår ovan.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="PDF s. 6; individuell utcheckning, ingen interaktiv graf. Eleverna måste skilja f′(a)=0 från f(a) och bevisa klassificeringen genom tecken före/efter. Vänta med facit tills de skrivit. Se om svaren verkligen visar dagens mål.">
+<div class="eyebrow">08 · Individuell utcheckning</div>
+<h2>Vad säger tecknen – och vad saknas?</h2>
+<p class="lead">Svara själv på papper. Motivera med grafens beteende.</p>
+<div class="two">
+<div>
+<div class="task"><strong>1</strong> <span class="math-inline">f′</span> har tecknen <span class="math-inline">+ 0 −</span> runt <span class="math-inline">x = 2</span>. Dessutom är <span class="math-inline">f(2) = 5</span>. Vilken punkt har grafen? Ange karaktär och koordinater.</div>
+<div class="task"><strong>2</strong> <span class="math-inline">g′</span> har tecknen <span class="math-inline">− 0 −</span> runt <span class="math-inline">x = −1</span>. Dessutom är <span class="math-inline">g(−1) = 4</span>. Vilken punkt har grafen? Ange karaktär och koordinater.</div>
+<div class="task"><strong>3</strong> En elev säger: ”<span class="math-inline">f′(3) = 0</span>, alltså är <span class="math-inline">(3, 0)</span> en minimipunkt.” Vilka <em>två saker</em> behöver eleven undersöka?</div>
+<button class="reveal" type="button" data-reveal="exit-answer">Visa svar först efter eget försök</button>
+<div id="exit-answer" class="answer hidden">
+<p><strong>1:</strong> Maximipunkt <span class="math-inline">(2, 5)</span>. Derivatan går från positiv till negativ.</p>
+<p><strong>2:</strong> Terrasspunkt <span class="math-inline">(−1, 4)</span> i uppgiftens teckenmodell. Derivatan är negativ på båda sidor: grafen fortsätter sjunka genom en horisontell tangent.</p>
+<p><strong>3:</strong> Undersök först <em>derivatans tecken på båda sidor om x = 3</em> för att avgöra om punkten är ett minimum. Beräkna sedan <em>f(3)</em> för att bestämma punktens y-koordinat; derivatans nollställe ger inte höjden.</p>
+</div>
+</div>
+<div class="panel"><h3>Dagens mål</h3><p>Du kan bestämma <strong>punkttyp</strong> genom derivatans tecken på båda sidor.</p><p>Du kan ange <strong>koordinaterna</strong> genom att beräkna funktionsvärdet i punkten.</p><p class="muted">Enbart rätt namn på punkttypen räcker inte – motiveringen är viktig.</p></div>
+</div>
+</section>
+
+<section class="slide" id="summary" data-teacher="Återkoppla kort till målet; be eleverna formulera skillnaden mellan f′(a)=0 och f(a). Påminn om läxan. Nästa lektion bygger vidare mot andraderivatan; föregå inte dess genomgång nu.">
+<div class="eyebrow">09 · Sammanfattning och läxa</div>
+<h2>Typ först. Koordinater sedan.</h2>
+<div class="panel">
+<p><span class="math-inline">f′(a)=0</span> visar att tangenten är horisontell.</p>
+<p><strong>Tecknet före och efter</strong> visar hur grafen förändras: <span class="math-inline">+ 0 −</span> maximum, <span class="math-inline">− 0 +</span> minimum, och i dagens terrassexempel <span class="math-inline">+ 0 +</span> eller <span class="math-inline">− 0 −</span>.</p>
+<p><strong>Koordinater:</strong> <span class="math-inline">(a, f(a))</span> – inte <span class="math-inline">(a, f′(a))</span>.</p>
+</div>
+<div class="task"><strong>Läxa till nästa lektion</strong>Gör klart ditt valda spår på <strong>s. 148</strong>, med uppgifter från minst två av bokens tre nivåer.</div>
+<p><strong>Kontrollera dig själv:</strong> Om du vet att <span class="math-inline">f′(a)=0</span>, vad behöver du ta reda på för att kunna ge ett fullständigt svar?</p>
+</section>
+
+</div>
+<div id="inkpanel" class="inkpanel">
+<div class="inkhead"><strong>Skrivyta – finns bara på din enhet</strong><div class="flex"><button type="button" class="secondary" id="ink-undo">Ångra</button><button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button><button type="button" class="secondary" id="ink-clear">Rensa</button><button type="button" class="secondary" id="ink-max">Förstora</button></div></div>
+<canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas>
+</div>
+<div class="controls">
+<div><button id="prev" type="button" class="secondary">← Föregående</button><button id="next" type="button">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
+<div><label for="jump">Gå till</label><select id="jump" aria-label="Välj avsnitt i lektionen"></select></div>
+</div>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Källa: den tidigare lektionen 2026-11-05. Webbens modeller är egna beräknade figurer. Inga elevsvar samlas in.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="lesson.js"></script>
+</body>
+</html>
