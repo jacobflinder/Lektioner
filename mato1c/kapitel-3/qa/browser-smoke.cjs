@@ -38,6 +38,8 @@ fs.mkdirSync(out,{recursive:true});
    await check(await page.locator('#teacher-toggle').isVisible(),'Lärarstöd kan öppnas i klassrumsläget');
    await page.locator('#teacher-toggle').click();
    await check(await page.locator('.teacher.open').isVisible(),'Lärarstöd faktiskt synligt');
+   await check(await page.locator('.route-guide').count()===1,'Lärarstöd innehåller kärnväg och beslut');
+   await check((await page.locator('.route-guide').textContent()).includes('20 min')&&(await page.locator('.route-guide').textContent()).includes('f′(x)=2x−4'),'Tidsprioritet och återkallning från lektion 1 dokumenterade');
    await page.locator('#mode').click();
    await check(await page.locator('body.classroom').count()===0,'Tillbaka till repetition');
 
@@ -68,6 +70,7 @@ fs.mkdirSync(out,{recursive:true});
    await check(await page.locator('#example [data-seq-item]:visible').count()===0,'Stegsekvensen går att återställa');
 
    await go(6);
+   await check((await page.locator('#own .task').innerText()).includes('utan steglista'),'Minskat stöd i eget försök');
    await page.locator('#own-zero').fill('2');
    await page.selectOption('#own-left','-');
    await page.selectOption('#own-right','+');
@@ -77,6 +80,11 @@ fs.mkdirSync(out,{recursive:true});
    await page.locator('#check-own').click();
    await check((await page.locator('#own-feedback').innerText()).includes('Kontrollera ekvationen'),'Felaktigt nollställe bemöts');
 
+   await page.locator('#next').click();
+   await check(await page.locator('#book').isVisible(),'Kärnvägens Nästa hoppar över valbar fördjupning');
+   await go(6);
+   await page.locator('[data-go="exception"]').click();
+   await check(await page.locator('#exception').isVisible(),'Eleven/läraren kan öppna fördjupningen aktivt');
    await go(7);
    await page.locator('#exception [data-correct="true"]').click();
    await check((await page.locator('#exception .feedback').innerText()).includes('Ingen extrempunkt'),'Motexemplets feedback korrekt');
@@ -99,6 +107,7 @@ fs.mkdirSync(out,{recursive:true});
    await go(4);
    await page.screenshot({path:out+'/mobile-sign-table.png',fullPage:true});
    await check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Inget horisontellt sidöverspill på mobil under teckentabellen');
+   for(let n=1;n<=10;n++){await go(n);await check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Ingen horisontell mobilscroll steg '+n)}
 
    assert.deepEqual(exceptions,[],'Inga JavaScript-fel');
    console.log(JSON.stringify({result:'PASS',visitedSlides:visited,checks:'start, mode, graph, feedback, sequence, book, exit, mobile',pageErrors:exceptions},null,2));
