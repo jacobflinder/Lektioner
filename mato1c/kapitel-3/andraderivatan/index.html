@@ -49,7 +49,12 @@
 </div>
 </header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Fråga → eget tänkande → återkoppling. Styr visningen efter elevernas resonemang. Håll modellen avstängd tills eleverna har gjort sin förutsägelse.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Fråga → eget tänkande → återkoppling. Styr visningen efter elevernas resonemang. Håll modellen avstängd tills eleverna har gjort sin förutsägelse.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tid och beslut utifrån elevsvaren</strong></summary>
+<p><strong>Kärnväg:</strong> behåll alla åtta steg, men använd de genomarbetade exemplen så länge eleverna behöver dem. När klassen kan härleda f″, gå vidare till elevens eget försök och boken. Exponentialexemplet finns kvar i materialet.</p>
+<p><strong>Riktmärke vid cirka 70 minuter:</strong> återkallning/start/mål 6–8 min; tangentgrafer 5–7 min; exempel 9–12 min; eget försök och återkoppling 8–10 min; minst 20 min sammanhängande bokarbete; individuell utcheckning 4–6 min. Anpassa efter lektionens längd.</p>
+<p><strong>Beslutsregler:</strong> Förväxlar flera f′ och f″? Låt dem beskriva hur tangenten ändras i steg 3. Fungerar den första derivatan men inte den andra? Visa bara nästa nödvändiga led i steg 4. Kan eleverna skriva andraderivatan själva? Gå till bokarbetet.</p>
+<p><strong>Återkalla nästa lektion:</strong> bestäm f′ och f″ utan graf för f(x)=x²−4x+7 och förklara vad tecknet hos f″ innebär. Samla endast felmönster på klassnivå.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Försök lösa uppgifterna på papper innan du öppnar återkopplingen. Inga elevsvar sparas eller skickas.</div>
 <div class="stage" id="stage">
 <section class="slide active" id="start" data-teacher="Original-PDF s. 1. Enskilt→par: Båda funktionerna växer på x≥0. f'(x)=2x och g'(x)=2 visas redan, men be eleverna formulera vad skillnaden innebär innan facit. Låt dem förutspå hur tangenten lutar längre till höger.">
@@ -92,9 +97,13 @@
 </div>
 </div>
 <div class="graph-compare">
-<div class="graph-panel"><h3>A · f(x) = x²</h3><svg id="graph-f" viewBox="0 0 540 285" role="img" aria-label="Parabel x i kvadrat med en tangent vid gemensamt x-värde"></svg><div id="readout-f" class="graph-readout" aria-live="polite">f′(0,50) = 1,00</div></div>
-<div class="graph-panel"><h3>B · g(x) = 2x</h3><svg id="graph-g" viewBox="0 0 540 285" role="img" aria-label="Rät linje två x med en tangent vid gemensamt x-värde"></svg><div id="readout-g" class="graph-readout" aria-live="polite">g′(0,50) = 2,00</div></div>
+<div class="graph-panel"><h3>A · f(x) = x²</h3><svg id="graph-f" viewBox="0 0 540 285" role="img" aria-label="Parabel x i kvadrat med en tangent vid gemensamt x-värde"></svg></div>
+<div class="graph-panel"><h3>B · g(x) = 2x</h3><svg id="graph-g" viewBox="0 0 540 285" role="img" aria-label="Rät linje två x med en tangent vid gemensamt x-värde"></svg></div>
 </div>
+<button type="button" class="secondary" data-reveal="explore-readouts">Visa tangentlutningarna efter min förutsägelse</button>
+<div id="explore-readouts" class="panel hidden" aria-live="polite">
+<p><strong>A:</strong> <span id="readout-f" class="graph-readout">f′(0,50) = 1,00</span></p>
+<p><strong>B:</strong> <span id="readout-g" class="graph-readout">g′(0,50) = 2,00</span></p></div>
 <div class="panel" data-quiz data-correct-text="Rätt. För f(x)=x² förändras derivatan 2x när x ökar. För g(x)=2x är derivatan konstant 2." data-wrong-text="Jämför tangenternas lutning vid x=0,5 och x=2. Vilket uttryck, 2x eller 2, ändras när x ändras?">
 <strong>Vilken första derivata förändras när x ökar?</strong>
 <div class="answer-choices"><button type="button" class="choice" data-correct="true">f′(x) = 2x</button><button type="button" class="choice" data-correct="false">g′(x) = 2</button><button type="button" class="choice" data-correct="false">Båda lika mycket</button></div>
@@ -156,7 +165,7 @@
 <div><label for="own-at-zero">Vad är h″(0)?</label><input id="own-at-zero" type="text" inputmode="decimal" autocomplete="off" aria-describedby="own-feedback" placeholder="Skriv ett tal"></div>
 <div><label for="own-root">Lös h″(x)=0. Vad är x?</label><input id="own-root" type="text" inputmode="decimal" autocomplete="off" aria-describedby="own-feedback" placeholder="Skriv ett tal"></div>
 </div>
-<div class="check-control"><label for="own-formula">Vilket uttryck fick du för h″(x)?</label><select id="own-formula"><option value="">Välj</option><option value="a">3x² − 12x</option><option value="b">6x − 12</option><option value="c">6x</option><option value="d">6x² − 12</option></select></div>
+<div class="check-control"><label for="own-formula">Skriv ett förenklat uttryck för h″(x) på formen ax+b:</label><input id="own-formula" type="text" autocomplete="off" inputmode="text" spellcheck="false" placeholder="Skriv ett uttryck med x" aria-describedby="own-feedback"></div>
 <p><button type="button" id="check-own">Kontrollera</button></p><p id="own-feedback" class="feedback" role="status" aria-live="polite"></p>
 </div>
 <button type="button" class="secondary" data-reveal="own-hint">Visa ett stöd om du fastnar</button>
