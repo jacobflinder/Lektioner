@@ -14,10 +14,10 @@ nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 @media print{header,nav,.actions,.practice-only,.class-only{display:none!important}.slide{display:block!important;break-after:page}.stage{border:0;box-shadow:none}}
 .series-eq{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.05rem,2.25vw,1.65rem);line-height:1.9;overflow-x:auto;white-space:nowrap}.real-series{color:#075d92;font-weight:650}.imag-series{color:#a33b56;font-weight:650}.series-stage{min-height:205px}.series-frame strong{display:block;margin-bottom:12px}.series-result{font-size:clamp(1.6rem,3vw,2.4rem)}body.projector .series-eq{font-size:clamp(1.4rem,2.8vw,2.2rem)}
-</style></head><body>
-<header><a href="../">← Kapitel 4 · Komplexa tal</a><strong>Matematik – fortsättning, nivå 2 · 4.3 Potenser och komplexa tal</strong><div class="actions" style="margin:0"><button id="teacher-toggle" class="alt" type="button" aria-expanded="false">Visa lärarstöd</button><button id="mode" type="button" aria-pressed="false" aria-label="Växla till klassrumsläge">Klassrumsläge</button></div></header>
+</style><link rel="stylesheet" href="../assets/lesson-inkpad.css"></head><body>
+<header><a href="../">← Kapitel 4 · Komplexa tal</a><strong>Matematik – fortsättning, nivå 2 · 4.3 Potenser och komplexa tal</strong><div class="actions" style="margin:0"><button id="hw-toggle" class="alt" type="button" aria-expanded="false" aria-controls="hw-panel">Visa skrivyta</button><button id="teacher-toggle" class="alt" type="button" aria-expanded="false">Visa lärarstöd</button><button id="mode" type="button" aria-pressed="false" aria-label="Växla till klassrumsläge">Klassrumsläge</button></div></header>
 <aside class="class-only teacher-note" aria-label="Lärarstöd"><strong>Klassrumsläge · gemensamt tänkande</strong><p id="teacher-step">Låt eleverna tänka själva innan du visar lösningen. Använd diskussionen för att välja nästa steg.</p><p class="muted">Höger/vänster pil byter steg. Dölj lösningen igen innan du går tillbaka till en uppgift.</p></aside>
-<main><div class="practice-only practice-guide" aria-label="Instruktioner för repetition"><strong>Repetitionsläge</strong><span> Lös först på papper. Välj ett svar eller öppna förklaringen först efter ett eget försök. Vid fel: korrigera och gör om utan facit.</span></div><div class="stage" id="stage" tabindex="-1">
+<main><div class="practice-only practice-guide" aria-label="Instruktioner för repetition"><strong>Repetitionsläge</strong><span> Lös först på papper eller i skrivytan. Välj ett svar eller öppna förklaringen först efter ett eget försök. Vid fel: korrigera och gör om utan facit.</span></div><div class="stage" id="stage" tabindex="-1">
 <section class="slide active"><div class="eyebrow">01 · Start och mål</div><h1>Eulers formel</h1><p class="lead">En ny skrivform som gör rotationer, multiplikation och potenser enklare.</p>
 <h3>Efter lektionen ska du kunna</h3><ol><li>Förklara sambandet <strong>polär form ↔ exponentialform</strong> och tolka belopp och argument.</li><li>Omvandla från exponentialform till rektangulär form, även vid negativa argument.</li><li>Multiplicera komplexa tal i exponentialform och förklara <strong>Eulers identitet</strong> med Eulers formel.</li></ol>
 <div class="task"><strong>Arbetssätt</strong>Tänk själv → jämför i par → motivera → kontrollera → pröva på nytt.</div><p class="muted">Ingen inloggning. Svar kontrolleras lokalt i webbläsaren; de skickas inte till någon server och lagras inte.</p></section>
@@ -134,4 +134,13 @@ let seriesStep=0;const seriesFrames=Array.from(document.querySelectorAll('[data-
 document.getElementById('eulerError').addEventListener('click',()=>show(12));document.getElementById('eulerExtra').addEventListener('click',()=>show(13));document.querySelectorAll('.euler-skip').forEach(b=>b.addEventListener('click',()=>show(slides.length-1)));
 range.addEventListener('input',updateCircle);document.getElementById('resetangle').onclick=()=>{range.value=120;updateCircle()};document.getElementById('quarter').onclick=()=>{range.value=-90;updateCircle()};updateCircle();show(0)
 })();
-</script></body></html>
+</script><section id="hw-panel" class="hw-panel" hidden aria-label="Digital skrivyta">
+<div class="hw-tools"><strong>Skrivyta för egna uträkningar</strong><div>
+<button type="button" id="hw-eraser" aria-pressed="false">Sudd</button>
+<button type="button" id="hw-undo">Ångra</button>
+<button type="button" id="hw-clear">Rensa</button>
+<button type="button" id="hw-max">Förstora</button></div></div>
+<canvas id="hw-canvas" aria-label="Skriv för hand med mus, finger eller penna"></canvas>
+<p class="hw-hint">Skrivytan används lokalt på din enhet och rensas när sidan laddas om. Du kan också skriva på papper eller i Notability.</p>
+</section>
+<script src="../assets/lesson-inkpad.js"></script></body></html>
