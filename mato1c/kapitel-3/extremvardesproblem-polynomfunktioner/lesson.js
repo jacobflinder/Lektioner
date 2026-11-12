@@ -11,34 +11,35 @@ function add(root,tag,attrs={},text){
  if(text!==undefined)element.textContent=String(text);
  root.append(element);return element;
 }
-const X=x=>77+3.17*x,Y=y=>431-0.0074*y;
+let compact=false;
+const X=x=>(compact?120+2.85*x:77+3.17*x),Y=y=>431-0.0074*y;
 function revenuePath(){
  let d='';
  for(let x=0;x<=200;x++){d+=(x===0?'M':'L')+X(x).toFixed(3)+' '+Y(revenue(x)).toFixed(3)+' ';}
  return d;
 }
 function draw(x){
- const svg=$('revenue-graph');svg.replaceChildren();
+ const svg=$('revenue-graph');svg.replaceChildren();compact=window.innerWidth<=690;
  const defs=add(svg,'defs'),clip=add(defs,'clipPath',{id:'revenue-clip'});
- add(clip,'rect',{x:70,y:51,width:652,height:383});
+ add(clip,'rect',{x:compact?112:70,y:51,width:compact?590:652,height:383});
  const g=add(svg,'g',{'clip-path':'url(#revenue-clip)'});
- for(const p of [0,25,50,75,100,125,150,175,200]){
+ for(const p of compact?[0,50,100,150,200]:[0,25,50,75,100,125,150,175,200]){
   add(g,'line',{x1:X(p),y1:56,x2:X(p),y2:432,stroke:'#e1ebf0','stroke-width':1});
-  add(svg,'text',{x:X(p),y:453,'text-anchor':'middle',fill:'#496778','font-size':15},p);
+  add(svg,'text',{x:X(p),y:453,'text-anchor':'middle',fill:'#496778','font-size':compact?28:15},p);
  }
  for(const v of [0,10000,20000,30000,40000,50000]){
-  add(g,'line',{x1:73,y1:Y(v),x2:719,y2:Y(v),stroke:'#e1ebf0','stroke-width':1});
-  add(svg,'text',{x:68,y:Y(v)+5,'text-anchor':'end',fill:'#496778','font-size':16},v===0?'0':String(v/1000)+' 000');
+  add(g,'line',{x1:X(0)-4,y1:Y(v),x2:X(200)+8,y2:Y(v),stroke:'#e1ebf0','stroke-width':1});
+  add(svg,'text',{x:X(0)-9,y:Y(v)+7,'text-anchor':'end',fill:'#496778','font-size':compact?28:16},v===0?'0':String(v/1000)+' 000');
  }
- add(g,'line',{x1:73,y1:Y(0),x2:719,y2:Y(0),stroke:'#60798b','stroke-width':2});
+ add(g,'line',{x1:X(0)-4,y1:Y(0),x2:X(200)+8,y2:Y(0),stroke:'#60798b','stroke-width':2});
  add(g,'line',{x1:X(0),y1:55,x2:X(0),y2:435,stroke:'#60798b','stroke-width':2});
  add(g,'path',{d:revenuePath(),stroke:'#0b887d','stroke-width':4,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'});
  const pRev=revenue(x);
  add(g,'line',{x1:X(x),y1:Y(pRev),x2:X(x),y2:Y(0),stroke:'#a4603b','stroke-width':2,'stroke-dasharray':'6 5'});
  add(g,'line',{x1:X(0),y1:Y(pRev),x2:X(x),y2:Y(pRev),stroke:'#a4603b','stroke-width':2,'stroke-dasharray':'6 5'});
  add(g,'circle',{cx:X(x),cy:Y(pRev),r:8,stroke:'#fff','stroke-width':3,fill:'#b55158'});
- add(svg,'text',{x:390,y:480,'text-anchor':'middle',fill:'#33566e','font-size':18,'font-weight':'700'},'Biljettpris x (kr)');
- add(svg,'text',{x:23,y:46,fill:'#33566e','font-size':17,'font-weight':'700'},'Intäkt I(x) (kr)');
+ add(svg,'text',{x:390,y:480,'text-anchor':'middle',fill:'#33566e','font-size':compact?27:18,'font-weight':'700'},'Biljettpris x (kr)');
+ add(svg,'text',{x:23,y:46,fill:'#33566e','font-size':compact?27:17,'font-weight':'700'},'Intäkt I(x) (kr)');
  $('ticket-price-output').textContent='x = '+x+' kr';
  $('tickets-sold').textContent=fkr(tickets(x))+' st';
  $('ticket-revenue').textContent=fkr(pRev)+' kr';
@@ -64,6 +65,7 @@ $('ticket-check').addEventListener('click',()=>{
  }
 });
 draw(50);
+window.addEventListener('resize',()=>draw(Number($('ticket-price').value)));
 
 function parseNumber(id){
  const raw=$(id).value.trim().replace(/\s/g,'').replace(/[−–]/g,'-').replace(',','.');
