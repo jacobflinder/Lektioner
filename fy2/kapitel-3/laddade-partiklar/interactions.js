@@ -11,7 +11,7 @@ const tInput=$('particle-time'),vInput=$('particle-speed'),bInput=$('particle-B'
 function chargeDiagram(){
  const t=Number(tInput.value)/100,v=Number(vInput.value),B=Number(bInput.value);
  const curvature=q*bSign;
- // Same m and |q| in the simulation: omega proportional to B,
+ // Same mass and charge magnitude in the simulation: omega proportional to B,
  // radius proportional to v/B. This is normalized time, not measured seconds.
  const theta=.65*B*t,R=170*v/B,x0=93,y0=186;
  const route=[];
@@ -39,8 +39,8 @@ function chargeDiagram(){
  $('particle-time-value').textContent=Math.round(t*100)+' %';
  $('particle-speed-value').textContent=decimal(v,1);
  $('particle-B-value').textContent=decimal(B,1);
- $('particle-note').innerHTML='<b>r ∝ v/|B|:</b> relativ radie '+decimal(v/B)+
- '. <b>F ∝ v|B|:</b> relativ kraft '+decimal(v*B)+'. '+
+ $('particle-note').innerHTML='<b>r ∝ v/B:</b> relativ radie '+decimal(v/B)+
+ '. <b>F ∝ vB:</b> relativ kraft '+decimal(v*B)+'. '+
  (showF?'Den orange kraften är hela tiden vinkelrät mot den gröna hastigheten.':'Förutsäg kraftens riktning och klicka sedan på <b>Visa F</b>.');
  for(const [id,selected]of [['particle-positive',q===1],['particle-negative',q===-1],['particle-flip',bSign===-1]]){
   $(id).classList.toggle('selected',selected);$(id).setAttribute('aria-pressed',String(selected));
