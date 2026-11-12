@@ -34,6 +34,7 @@ jobs:
           node mato1c/kapitel-3/qa/storsta-minsta-browser.cjs
           node mato1c/kapitel-3/qa/extremvardesproblem-polynom-browser.cjs
           node mato1c/kapitel-3/qa/modellering-fler-extremvardesproblem-browser.cjs
+          node mato1c/kapitel-3/qa/blandade-problem-browser.cjs
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@v4
