@@ -3,7 +3,7 @@
 const data={
 'coulombs-lag':{title:'8.1 Coulombs lag',first:'F₂/F₁ = (ny/gammal laddningsprodukt) · (gammalt/nytt avstånd)².',tasks:[
  ['En punktladdning fördubblas samtidigt som avståndet fördubblas. Vilken faktor får den elektriska kraftens storlek?','faktor',0.5,.000001,'Kraften är proportionell mot laddningen och omvänt proportionell mot avståndet i kvadrat.','2/(2²) = 0,5. Det är kraftens storlek; laddningstecknen avgör attraktion eller repulsion.'],
- ['Ett klot har laddningen −3,2 nC. Hur många elektroner ska ungefär tas bort för att klotet ska bli neutralt? Svara som t.ex. 2e10.','elektroner',2e10,.04,'Varje elektron har laddningens storlek 1,602·10⁻¹⁹ C.','N = (3,2·10⁻⁹)/(1,602·10⁻¹⁹) ≈ 2,0·10¹⁰. Elektroner ska tas bort eftersom klotet har överskott.']],
+ ['Ett klot har laddningen −3,2 nC. Hur många elektroner ska ungefär tas bort för att klotet ska bli neutralt? Visa mellanled och svar med lämplig avrundning.','elektroner',2e10,.04,'Varje elektron har laddningens storlek 1,602·10⁻¹⁹ C.','N = (3,2·10⁻⁹)/(1,602·10⁻¹⁹) ≈ 2,0·10¹⁰. Elektroner ska tas bort eftersom klotet har överskott.']],
 later:'Om båda laddningarna fördubblas och avståndet tredubblas, vilken faktor får kraftens storlek? Motivera.'},
 'elektriska-kretsar':{title:'8.2 Elektriska kretsar',first:'Skriv laddningsbalansen i knutpunkten: 0,80 A = 0,30 A + 0,10 A + I₃.',tasks:[
  ['0,80 A går in i en knutpunkt och 0,30 A samt 0,10 A lämnar via två grenar. Hur stor ström lämnar via tredje grenen?','A',.4,.000001,'Strömmarna in är lika med strömmarna ut vid stationärt tillstånd.','I₃ = 0,80 − 0,30 − 0,10 = 0,40 A. Laddning förbrukas inte.'],
@@ -53,6 +53,7 @@ const paperChecks = {
  {q:'Varför blir polspänningen lägre än ems när batteriet levererar ström?',o:['Laddning förbrukas i den yttre resistorn.','Ems och polspänning måste alltid vara lika för ett riktigt batteri.','En del av ems går åt till spänningsfallet rI över batteriets inre resistans.'],c:2,f:['Laddning förbrukas inte; elektrisk energi omvandlas.','Vid belastning ger den inre resistansen ett spänningsfall.','Rätt. I batterimodellen gäller U = ℰ − rI.'],why:'I seriemodellen gäller ℰ = U + rI. Vid ökad belastning ökar I och därmed det inre spänningsfallet.'}
  ]
 };
+if(paperChecks[slug]){launch.textContent='Självtest · papper';dialog.querySelector('.fy1-reset-all').textContent='Återställ självtestet';}
 function drawPaper() {
  const list=dialog.querySelector('.fy1-tasks'); list.replaceChildren();
  dialog.querySelector('.fy1-traning-intro').innerHTML='<strong>Räkna med penna och papper.</strong> Rita figur där det behövs, välj samband och visa mellanled och enheter. Jämför sedan lösningen stegvis och välj en fysikalisk förklaring. Inga svar sparas.';
