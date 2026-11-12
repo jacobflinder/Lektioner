@@ -68,11 +68,78 @@
 <div id="exitans" class="answer hidden"><p class="math">u − z = (2 − (−1)) + (3 − 1)i = 3 + 2i</p><p class="math">|u − z| = √(3² + 2²) = √13</p>
 <p><span class="math">|w − 3| = 2</span> beskriver en cirkel med centrum (3, 0) och radie 2. Randen ingår eftersom det står likhet.</p>
 <p>Nej. Villkoret kräver <span class="math">Im w &lt; 2</span>, så den övre randen ingår inte.</p></div>
-<div class="panel"><strong>Dagens mål</strong><p>Jag kan tolka punkt och positionsvektor, räkna vektorsumma och differens, använda absolutbelopp som avstånd och förstå geometriska villkor.</p><p>Vilket resonemang kan jag förklara utan hjälp, och vad behöver jag träna mer på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink"></canvas></div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Skrivytan och interaktionerna använder ingen datainsamling.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>(()=>{'use strict';let op='add',center=0,region='line',revealed=false;
-function toggle(sel,key,active){document.querySelectorAll(sel).forEach(b=>{const v=b.dataset[key]===active;b.setAttribute('aria-pressed',String(v));b.classList.toggle('secondary',!v)})}
-function drawVector(){const plus=op==='add',x=plus?4:2,y=plus?5:-3;Ma4Plane.plot('vector-plane',{minX:-1.5,maxX:5.6,minY:-5.7,maxY:6.7,vectors:[{x:3,y:1,label:'u',color:'blue'},{x:1,y:4,label:'z',color:'teal'},...(revealed?[{x,y,label:plus?'u+z':'u−z',color:'orange',dy:18},{fromX:3,fromY:1,x,y,dashed:true,color:'purple',label:plus?'z':'−z'}]:[])]});document.getElementById('vector-formula').textContent=plus?'u + z = 4 + 5i':'u − z = 2 − 3i';document.getElementById('vector-length').textContent=plus?'|u + z| = √41':'|u − z| = √13';document.getElementById('vector-result').classList.toggle('hidden',!revealed);document.getElementById('vector-show').textContent=revealed?'Dölj resultatet':'Visa resultatet';document.getElementById('vector-show').setAttribute('aria-pressed',String(revealed));toggle('[data-vector-op]','vectorOp',op)}
-document.querySelectorAll('[data-vector-op]').forEach(b=>b.onclick=()=>{op=b.dataset.vectorOp;revealed=false;drawVector()});document.getElementById('vector-show').onclick=()=>{revealed=!revealed;drawVector()};
-function drawCircle(){Ma4Plane.plot('circle-plane',{minX:-4.7,maxX:4.7,minY:-4.6,maxY:6.1,circles:[{cx:0,cy:center,r:3}],points:[{x:0,y:center,label:center?'2i':'0'}]});document.getElementById('circle-equation').textContent=center?'|z − 2i| = 3':'|z| = 3';document.getElementById('circle-explain').textContent=center?'Alla punkter på avståndet 3 från 2i.':'Alla punkter på avståndet 3 från origo.';toggle('[data-circle]','circle',String(center))}
-document.querySelectorAll('[data-circle]').forEach(b=>b.onclick=()=>{center=Number(b.dataset.circle);drawCircle()});
-function drawRegion(){let opts={minX:-4,maxX:4,minY:-4,maxY:4};if(region==='line'){opts.lines=[{vertical:2,color:'#bb5c42'}];document.getElementById('region-equation').textContent='Re z = 2';document.getElementById('region-explain').textContent='Alla tal med realdelen 2. Linjen ingår.'}else if(region==='band'){opts.regions=[{kind:'band',low:-1,high:2,lowOpen:false,highOpen:true}];document.getElementById('region-equation').textContent='−1 ≤ Im z < 2';document.getElementById('region-explain').textContent='Horisontellt band. −1 ingår, 2 ingår inte.'}else{opts.regions=[{kind:'disk',cx:0,cy:-1,r:2,open:true}];opts.points=[{x:0,y:-1,label:'−i'}];document.getElementById('region-equation').textContent='|z + i| < 2';document.getElementById('region-explain').textContent='Öppen cirkelskiva, centrum −i, radie 2; randen ingår inte.'}Ma4Plane.plot('region-plane',opts);toggle('[data-region]','region',region)}
-document.querySelectorAll('[data-region]').forEach(b=>b.onclick=()=>{region=b.dataset.region;drawRegion()});drawVector();drawCircle();drawRegion()})();</script></body></html>
+<div class="panel"><strong>Dagens mål</strong><p>Jag kan tolka punkt och positionsvektor, räkna vektorsumma och differens, använda absolutbelopp som avstånd och förstå geometriska villkor.</p><p>Vilket resonemang kan jag förklara utan hjälp, och vad behöver jag träna mer på?</p></div></section></div><div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Valfri skrivyta</strong><div class="flex"><button id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button id="ink-undo" class="secondary">Ångra</button><button id="ink-clear" class="secondary">Rensa</button><button id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink"></canvas></div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Skrivytan och interaktionerna använder ingen datainsamling.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
+(()=>{'use strict';
+let operation='add',vectorStage=0,circleCenter=0,circleRevealed=false,regionType='line',regionRevealed=false;
+function toggle(selector,key,value){document.querySelectorAll(selector).forEach(button=>{const active=button.dataset[key]===String(value);button.setAttribute('aria-pressed',String(active));button.classList.toggle('secondary',!active)})}
+function vectorDetails(){const add=operation==='add';return {add,x:add?4:2,y:add?5:-3,result:add?'u + z':'u − z',helper:add?'z':'−z'};}
+function drawVector(){
+ const d=vectorDetails();
+ const vectors=[{x:3,y:1,label:'u',color:'blue',dx:10,dy:18},{x:1,y:4,label:'z',color:'teal',dx:11,dy:-10}];
+ if(vectorStage>=1)vectors.push({fromX:3,fromY:1,x:d.x,y:d.y,label:d.add?'z (flyttad)':'−z (flyttad)',color:'purple',dashed:true,dx:-108,dy:-14});
+ if(vectorStage>=2)vectors.push({x:d.x,y:d.y,label:d.result,color:'orange',dx:12,dy:22,width:4});
+ Ma4Plane.plot('vector-plane',{minX:-2.8,maxX:5.8,minY:-5.1,maxY:6.1,alt:'Vektorillustration med u=(3,1), z=(1,4), '+(vectorStage>=1?'en flyttad '+d.helper:'endast grundvektorerna')+(vectorStage>=2?' och resultatet '+d.result+'=('+d.x+','+d.y+')':''),vectors});
+ const q=document.getElementById('vector-question');
+ if(vectorStage===0)q.textContent=d.add?'Hur flyttar du en kopia av z så att dess början hamnar i spetsen på u?':'Vilken riktning och vilka koordinater har −z? Hur kan du flytta −z till spetsen på u?';
+ else if(vectorStage===1)q.textContent=d.add?'Den streckade pilen är en flyttad kopia av z. Var slutar summavektorn från origo?':'Den streckade pilen är en flyttad kopia av −z. Var slutar differensvektorn från origo?';
+ else q.textContent='Jämför den geometriska konstruktionen med koordinatberäkningen. Varför ger båda samma resultat?';
+ document.getElementById('vector-step').textContent='Steg '+vectorStage+' av 2';
+ document.getElementById('vector-back').disabled=vectorStage===0;
+ document.getElementById('vector-next').disabled=vectorStage===2;
+ const answer=document.getElementById('vector-result');answer.classList.toggle('hidden',vectorStage!==2);
+ if(vectorStage===2){
+ document.getElementById('vector-formula').textContent=d.add?'u + z = (3 + 1) + (1 + 4)i = 4 + 5i':'u − z = (3 − 1) + (1 − 4)i = 2 − 3i';
+ document.getElementById('vector-length').textContent=d.add?'|u + z| = √(4² + 5²) = √41':'|u − z| = √(2² + (−3)²) = √13';
+ document.getElementById('vector-note').textContent=d.add?'Den streckade pilen är vektorn z, parallellflyttad till spetsen på u. Den orange pilen är summan från origo.':'Den streckade pilen är −z, parallellflyttad till spetsen på u. Den orange pilen är u − z. En lika lång och likriktad vektor går från spetsen på z till spetsen på u.';
+ }
+ toggle('[data-vector-op]','vectorOp',operation);
+}
+document.querySelectorAll('[data-vector-op]').forEach(b=>b.addEventListener('click',()=>{operation=b.dataset.vectorOp;vectorStage=0;drawVector()}));
+document.getElementById('vector-back').addEventListener('click',()=>{vectorStage=Math.max(0,vectorStage-1);drawVector()});
+document.getElementById('vector-next').addEventListener('click',()=>{vectorStage=Math.min(2,vectorStage+1);drawVector()});
+document.getElementById('vector-reset').addEventListener('click',()=>{vectorStage=0;drawVector()});
+const circleShow=document.getElementById('circle-show');
+function drawCircle(){
+ const p={minX:-4.7,maxX:4.7,minY:-4.6,maxY:6.1,alt:circleRevealed?'Cirkel med centrum '+(circleCenter?'2i':'0')+' och radie 3':'Talplan med endast centrum '+(circleCenter?'2i':'0')+' utmärkt',points:[{x:0,y:circleCenter,label:circleCenter?'2i':'0',color:'blue'}]};
+ if(circleRevealed){p.circles=[{cx:0,cy:circleCenter,r:3}];p.segments=[{x1:0,y1:circleCenter,x2:1.8,y2:circleCenter+2.4,color:'#ba632a',width:3}];p.points.push({x:1.8,y:circleCenter+2.4,label:'z',color:'orange'})}
+ const t=Ma4Plane.plot('circle-plane',p);
+ if(circleRevealed){
+  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+  text.setAttribute('x',String(t.X(.9)+12));text.setAttribute('y',String(t.Y(circleCenter+1.2)+3));
+  text.setAttribute('fill','#a7572f');text.setAttribute('font-size','17');text.setAttribute('font-weight','700');text.textContent='3';
+  document.getElementById('circle-plane').append(text);
+ }
+ document.getElementById('circle-equation').textContent=circleCenter?'|z − 2i| = 3':'|z| = 3';
+ const ans=document.getElementById('circle-explain');ans.classList.toggle('hidden',!circleRevealed);
+ if(circleRevealed)ans.textContent=circleCenter?'Centrum är punkten 2i = (0,2). Varje punkt på cirkeln har avståndet 3 från centrum; den markerade sträckan har längden 3.':'Centrum är origo och varje punkt på cirkeln har avståndet 3 från origo; den markerade sträckan har längden 3.';
+ circleShow.setAttribute('aria-pressed',String(circleRevealed));circleShow.textContent=circleRevealed?'Dölj cirkeln':'Visa cirkel och radie';
+ toggle('[data-circle]','circle',circleCenter);
+}
+document.querySelectorAll('[data-circle]').forEach(b=>b.addEventListener('click',()=>{circleCenter=Number(b.dataset.circle);circleRevealed=false;drawCircle()}));
+circleShow.addEventListener('click',()=>{circleRevealed=!circleRevealed;drawCircle()});
+const regionShow=document.getElementById('region-show');
+const regionCases={
+ line:{formula:'Re z = 2',explain:'En lodrät linje genom alla punkter med realdelen 2. Likheten betyder att samtliga punkter på linjen ingår.'},
+ band:{formula:'−1 ≤ Im z < 2',explain:'Ett horisontellt band. Undre randen Im z = −1 ingår (heldragen); övre randen Im z = 2 ingår inte (streckad).'},
+ disk:{formula:'|z + i| < 2',explain:'En öppen cirkelskiva med centrum −i = (0, −1) och radien 2. Bara punkter på mindre avstånd än 2 ingår; randen är streckad.'}
+};
+function drawRegion(){
+ const c=regionCases[regionType];
+ const opts={minX:-4,maxX:4,minY:-4,maxY:4,alt:regionRevealed?'Talplan med geometriskt område: '+c.formula:'Talplan utan markerat område; eleverna förutsäger '+c.formula};
+ if(regionRevealed){
+  if(regionType==='line')opts.lines=[{vertical:2,color:'#bb5c42',width:3}];
+  if(regionType==='band')opts.regions=[{kind:'band',low:-1,high:2,lowOpen:false,highOpen:true}];
+  if(regionType==='disk'){opts.regions=[{kind:'disk',cx:0,cy:-1,r:2,open:true}];opts.points=[{x:0,y:-1,label:'−i',color:'blue'}]}
+ }
+ Ma4Plane.plot('region-plane',opts);
+ document.getElementById('region-equation').textContent=c.formula;
+ const ans=document.getElementById('region-explain');ans.classList.toggle('hidden',!regionRevealed);if(regionRevealed)ans.textContent=c.explain;
+ regionShow.setAttribute('aria-pressed',String(regionRevealed));
+ regionShow.textContent=regionRevealed?'Dölj figuren':'Visa figuren och gränserna';
+ toggle('[data-region]','region',regionType);
+}
+document.querySelectorAll('[data-region]').forEach(b=>b.addEventListener('click',()=>{regionType=b.dataset.region;regionRevealed=false;drawRegion()}));
+regionShow.addEventListener('click',()=>{regionRevealed=!regionRevealed;drawRegion()});
+drawVector();drawCircle();drawRegion();
+})();
+</script></body></html>
