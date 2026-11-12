@@ -23,7 +23,7 @@ function graphAxes(group,{X,Y,left,right,yTicks,top,bottom,zeroHorizontal=true})
  }
  for(const y of yTicks){
   create(group,'line',{x1:X(left),y1:Y(y),x2:X(right),y2:Y(y),stroke:'#e1ebf0','stroke-width':'1'});
-  create(group,'text',{x:X(left)-10,y:Y(y)+4,'font-size':'13',fill:'#557181','text-anchor':'end'},y);
+  create(group,'text',{x:X(left)-10,y:Y(y)+4,'font-size':'19',fill:'#557181','text-anchor':'end'},y);
  }
  if(zeroHorizontal)create(group,'line',{x1:X(left),y1:Y(0),x2:X(right),y2:Y(0),stroke:'#657d8c','stroke-width':'1.8'});
  create(group,'line',{x1:X(left),y1:top,x2:X(left),y2:bottom,stroke:'#657d8c','stroke-width':'1.8'});
@@ -46,10 +46,10 @@ function renderLinked(){
   create(grp,'path',{d:curve(item.fn,0,8,X,item.Y),fill:'none',stroke:item.stroke,'stroke-width':'3.3','stroke-linecap':'round','stroke-linejoin':'round'});
   create(grp,'line',{x1:X(x),y1:item.top,x2:X(x),y2:item.bottom,stroke:'#40566d','stroke-width':'1.6','stroke-dasharray':'5 4'});
   create(grp,'circle',{cx:X(x),cy:item.Y(item.fn(x)),r:'6.3',stroke:'#fff','stroke-width':'2.4',fill:item.stroke});
-  create(plot,'text',{x:14,y:item.top+22,'font-size':'18','font-weight':'700',fill:item.stroke},item.label);
+  create(plot,'text',{x:14,y:item.top+22,'font-size':'24','font-weight':'700',fill:item.stroke},item.label);
  }
- for(const xTick of [0,2,4,6,8])create(plot,'text',{x:X(xTick),y:584,'text-anchor':'middle','font-size':16,fill:'#456474'},xTick);
- create(plot,'text',{x:736,y:584,'font-size':16,fill:'#456474'},'x');
+ for(const xTick of [0,2,4,6,8])create(plot,'text',{x:X(xTick),y:584,'text-anchor':'middle','font-size':21,fill:'#456474'},xTick);
+ create(plot,'text',{x:736,y:584,'font-size':21,fill:'#456474'},'x');
  $('linked-x-value').textContent='x = '+fmt(x);
  $('val-f').textContent='f = '+fmt(f(x));
  $('val-d1').textContent='f′ = '+fmt(d1(x));
