@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Andraderivatan · Matematik – fortsättning, nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.graph-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+.graph-panel{min-width:0;border:1px solid #cfdee6;border-radius:14px;background:#f8fbfd;padding:14px}
+.graph-panel h3{margin:3px 0 10px;color:#154c62}
+.graph-panel svg{display:block;width:100%;height:auto;max-height:325px}
+.graph-readout{margin:10px 0;border-radius:10px;background:#e8f3f4;padding:10px 12px;font-weight:750;font-variant-numeric:tabular-nums}
+.tangent-controls{padding:12px 15px;border:1px solid #c9dbe4;border-radius:12px;background:#f4f8fa}
+.tangent-controls label{display:block;font-weight:750}
+.tangent-controls input[type=range]{width:100%;max-width:660px;accent-color:#087d70;min-height:32px}
+.tangent-controls output{font-size:1.15rem;font-weight:800;color:#087d70}
+.math-fresh{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.23rem,2.3vw,1.72rem);line-height:1.7}
+.math-fresh sup{font-size:.7em;vertical-align:super}
+.chains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+.chain{border-radius:13px;border:1px solid #c5dce5;background:#f3f8fa;padding:16px}
+.chain strong{color:#096c70;font-size:clamp(1.4rem,3vw,2rem)}
+.chain span{display:block;margin:8px 0}
+.chain p{color:#526d7d}
+.compare-derivatives{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:12px 0}
+.compare-derivatives>.panel{margin:0;min-width:0}
+.answer-choices{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.answer-choices button[aria-pressed=true]{outline:3px solid #e7a62e}
+.check-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.check-inputs label{font-weight:700;display:block}
+.check-inputs input{font:inherit;color:#17334b;border:2px solid #9db9ca;border-radius:9px;padding:10px;max-width:100%;width:165px}
+.number-card{padding:13px 16px;background:#f4f8fa;border:1px solid #c4d9e5;border-radius:12px}
+.number-card p{margin:5px 0}
+.book-tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.book-track{background:#f2f8fa;border:1px solid #c9dce4;padding:18px;border-radius:14px}
+.book-track h3{color:#087d70}
+.note-warning{border-left:4px solid #be8a31;background:#fff7e8;padding:12px 16px;border-radius:8px}
+@media(max-width:780px){.graph-compare,.chains,.compare-derivatives,.check-inputs,.book-tracks{grid-template-columns:1fr}.graph-panel svg{max-height:265px}.math-fresh{overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<header>
+<a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.1</strong>
+<div class="head-actions">
+<button type="button" id="ink-toggle" class="secondary" aria-expanded="false">Visa skrivyta</button>
+<button type="button" id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button>
+<button type="button" id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button>
+</div>
+</header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Fråga → eget tänkande → återkoppling. Styr visningen efter elevernas resonemang. Håll modellen avstängd tills eleverna har gjort sin förutsägelse.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Försök lösa uppgifterna på papper innan du öppnar återkopplingen. Inga elevsvar sparas eller skickas.</div>
+<div class="stage" id="stage">
+<section class="slide active" id="start" data-teacher="Original-PDF s. 1. Enskilt→par: Båda funktionerna växer på x≥0. f'(x)=2x och g'(x)=2 visas redan, men be eleverna formulera vad skillnaden innebär innan facit. Låt dem förutspå hur tangenten lutar längre till höger.">
+<div class="eyebrow">01 · Start · förutsäg</div>
+<h1>Båda växer. Vad skiljer lutningarna?</h1>
+<p class="lead">Tänk själv → diskutera i par → förklara med egna ord.</p>
+<div class="graph-compare">
+<div class="graph-panel"><h3>A · f(x) = x²</h3><svg id="start-f" viewBox="0 0 540 285" role="img" aria-label="Graf för f(x) lika med x i kvadrat för positiva x"></svg><p class="math-fresh">f′(x) = 2x</p></div>
+<div class="graph-panel"><h3>B · g(x) = 2x</h3><svg id="start-g" viewBox="0 0 540 285" role="img" aria-label="Växande rät linje g(x) lika med två x"></svg><p class="math-fresh">g′(x) = 2</p></div>
+</div>
+<div class="task"><strong>När x ökar:</strong> ökar tangentens lutning, minskar den eller är den konstant? Jämför de två graferna och motivera.</div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling</button>
+<div class="answer hidden" id="start-answer"><p><strong>A:</strong> f′(x)=2x växer när x ökar – tangenterna blir allt brantare. <strong>B:</strong> g′(x)=2 är konstant – linjen har samma lutning överallt.</p><p>Båda funktionerna kan vara växande, men <em>lutningen förändras på olika sätt</em>.</p></div>
+</section>
+
+<section class="slide" id="goal" data-teacher="Original-PDF s. 2. Startfrågan ger ett konkret behov av begreppet andraderivata. Avgränsa målet till beräkning och tolkning – punkttypstest med f'' hör en annan lektion till.">
+<div class="eyebrow">02 · Mål · begrepp</div>
+<h2>Derivera lutningen</h2>
+<p class="lead"><strong>Efter lektionen ska du kunna beräkna andraderivatan och förklara vad den beskriver.</strong></p>
+<div class="chains">
+<div class="chain"><strong class="math-fresh">f(x)</strong><span>Funktionsvärdet</span><p class="math-fresh">x²</p></div>
+<div class="chain"><strong class="math-fresh">f′(x)</strong><span>Tangentens lutning</span><p class="math-fresh">2x</p></div>
+<div class="chain"><strong class="math-fresh">f″(x)</strong><span>Hur lutningen förändras</span><p class="math-fresh">2</p></div>
+</div>
+<p><strong>Första derivatan</strong> berättar hur funktionen förändras när x ökar. <strong>Andraderivatan</strong> berättar hur första derivatan förändras.</p>
+<div class="notice">Från starten: <span class="math-fresh">g′(x) = 2</span> och <span class="math-fresh">g″(x) = 0</span>. Den räta linjens lutning är konstant.</div>
+</section>
+
+<section class="slide" id="explore" data-teacher="Webbens mervärde: samma x-värde för två matematiskt beräknade tangenter. Förutspå före varje förflyttning. Börja x=0,5, gå sedan till x=2. Visa andraderivata först efter eget resonemang. Poängtera att båda f' är positiva vid visade x men bara f' för x² förändras.">
+<div class="eyebrow">03 · Interaktiv undersökning</div>
+<h2>Samma x – men olika förändring av lutningen</h2>
+<div class="task"><strong>Innan du flyttar reglaget:</strong> Vid x = 0,5, vilken tangent lutar mest? Vad tror du händer vid x = 2? Förklara för en kamrat.</div>
+<div class="tangent-controls">
+<label for="slope-x">Flytta samma x-värde i båda graferna</label>
+<input id="slope-x" type="range" min="0" max="2.5" step="0.05" value="0.5">
+<output id="slope-x-value" for="slope-x">x = 0,50</output>
+<div class="flex">
+<button id="set-half" class="secondary" type="button">Pröva x = 0,5</button>
+<button id="set-two" class="secondary" type="button">Pröva x = 2</button>
+</div>
+</div>
+<div class="graph-compare">
+<div class="graph-panel"><h3>A · f(x) = x²</h3><svg id="graph-f" viewBox="0 0 540 285" role="img" aria-label="Parabel x i kvadrat med en tangent vid gemensamt x-värde"></svg><div id="readout-f" class="graph-readout" aria-live="polite">f′(0,50) = 1,00</div></div>
+<div class="graph-panel"><h3>B · g(x) = 2x</h3><svg id="graph-g" viewBox="0 0 540 285" role="img" aria-label="Rät linje två x med en tangent vid gemensamt x-värde"></svg><div id="readout-g" class="graph-readout" aria-live="polite">g′(0,50) = 2,00</div></div>
+</div>
+<div class="panel" data-quiz data-correct-text="Rätt. För f(x)=x² förändras derivatan 2x när x ökar. För g(x)=2x är derivatan konstant 2." data-wrong-text="Jämför tangenternas lutning vid x=0,5 och x=2. Vilket uttryck, 2x eller 2, ändras när x ändras?">
+<strong>Vilken första derivata förändras när x ökar?</strong>
+<div class="answer-choices"><button type="button" class="choice" data-correct="true">f′(x) = 2x</button><button type="button" class="choice" data-correct="false">g′(x) = 2</button><button type="button" class="choice" data-correct="false">Båda lika mycket</button></div>
+<p class="feedback" role="status" aria-live="polite"></p>
+</div>
+<button type="button" class="reveal" data-reveal="explore-answer">Visa hur andraderivatan förklarar skillnaden</button>
+<div class="answer hidden" id="explore-answer">
+<p class="math-fresh">f″(x) = (2x)′ = 2 &gt; 0</p>
+<p class="math-fresh">g″(x) = (2)′ = 0</p>
+<p>För <span class="math-fresh">f</span> ökar lutningen med 2 när x ökar med 1. För <span class="math-fresh">g</span> ändras inte lutningen. En interaktiv graf ska hjälpa dig att <em>förklara detta samband</em>, inte ersätta deriveringen.</p>
+</div>
+</section>
+
+<section class="slide" id="examples" data-teacher="Original-PDF s. 3. Två derivator i rad. Eleverna ska själva förutsäga nästa mellanled, särskilt: konstanten +3 försvinner; faktorn 2 i exponenten följer med vid varje derivering. Två åtskilda stegsekvenser för att undvika överbelastning.">
+<div class="eyebrow">04 · Genomarbetade exempel</div>
+<h2>Två deriveringar – ett steg i taget</h2>
+<p class="lead">Bestäm andraderivatan. Använd <strong>första derivatan som mellanled</strong>.</p>
+<div class="compare-derivatives">
+<div class="panel sequence" data-sequence>
+<h3>Polynom</h3><p class="math-fresh">f(x) = x³ − 5x² + 3x</p>
+<div class="task"><strong>Förutsäg:</strong> Vad händer med varje term när vi deriverar?</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div data-seq-item class="seq-item hidden" data-question="Derivera resultatet en gång till. Vad händer med konstanten 3?"><strong>1 · Första derivatan</strong><p class="math-fresh">f′(x) = 3x² − 10x + 3</p></div>
+<div data-seq-item class="seq-item hidden" data-question="Hur kontrollerar vi att vi faktiskt deriverat två gånger?"><strong>2 · Andraderivatan</strong><p class="math-fresh">f″(x) = 6x − 10</p><p>Konstanten 3 i f′ blir 0.</p></div>
+<div data-seq-item class="seq-item hidden" data-question="Hur tolkar vi tecknet hos andraderivatan?"><strong>3 · Kontrollera mellanleden</strong><p>Vi har deriverat <em>f′</em>, inte deriverat ursprungsuttrycket på ett nytt sätt. Vid x = 0 är <span class="math-fresh">f″(0) = −10</span>; där minskar tangentens lutning när x ökar.</p></div>
+</div>
+<div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div>
+<p class="muted" data-seq-count></p>
+</div>
+<div class="panel sequence" data-sequence>
+<h3>Exponentialfunktion</h3><p class="math-fresh">g(x) = 4e<sup>2x</sup></p>
+<div class="task"><strong>Förutsäg:</strong> Vad händer med faktorn 2 när vi deriverar en gång till?</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div data-seq-item class="seq-item hidden" data-question="Derivera 8e upphöjt till 2x. Vilken faktor tillkommer?"><strong>1 · Första derivatan</strong><p class="math-fresh">g′(x) = 4 · 2e<sup>2x</sup> = 8e<sup>2x</sup></p></div>
+<div data-seq-item class="seq-item hidden" data-question="Varifrån kommer faktorn 2 vid varje derivering?"><strong>2 · Andraderivatan</strong><p class="math-fresh">g″(x) = 8 · 2e<sup>2x</sup> = 16e<sup>2x</sup></p></div>
+<div data-seq-item class="seq-item hidden" data-question="Vilken del av g′(x) blir derivatan av exponentens inre funktion?"><strong>3 · Förstå faktorn</strong><p>Derivatan av exponentens inre funktion <span class="math-fresh">2x</span> är <span class="math-fresh">2</span>. Därför multipliceras koefficienten med 2 <em>vid varje derivering</em>.</p></div>
+</div>
+<div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div>
+<p class="muted" data-seq-count></p>
+</div>
+</div>
+</section>
+
+<section class="slide" id="own" data-teacher="Original-PDF s. 4. Eleverna löser helt på papper innan de prövar svarskontrollen. Det behövs tydligt mindre stöd än i två genomarbetade exempel. Webben kontrollerar enbart andraderivatans uttryck samt två värden; själva första derivatan och argumentationen måste framgå i elevens lösning.">
+<div class="eyebrow">05 · Din tur · mindre stöd</div>
+<h2>Uttryck, värde och nollställe</h2>
+<p class="lead">Försök själv först. Jämför sedan mellanleden i par.</p>
+<p class="math-fresh">h(x) = x³ − 6x²</p>
+<div class="task"><strong>Arbeta på papper:</strong><ol class="spaced">
+<li>Bestäm <span class="math-fresh">h′(x)</span> och <span class="math-fresh">h″(x)</span>.</li>
+<li>Beräkna <span class="math-fresh">h″(0)</span>.</li>
+<li>Lös ekvationen <span class="math-fresh">h″(x) = 0</span>.</li>
+</ol><p>Vad är skillnaden mellan <em>att bestämma h″(x)</em> och <em>att beräkna h″(0)</em>?</p></div>
+<div class="panel">
+<strong>Kontrollera dina svar efter eget försök</strong>
+<div class="check-inputs">
+<div><label for="own-at-zero">Vad är h″(0)?</label><input id="own-at-zero" type="text" inputmode="decimal" autocomplete="off" aria-describedby="own-feedback" placeholder="Skriv ett tal"></div>
+<div><label for="own-root">Lös h″(x)=0. Vad är x?</label><input id="own-root" type="text" inputmode="decimal" autocomplete="off" aria-describedby="own-feedback" placeholder="Skriv ett tal"></div>
+</div>
+<div class="check-control"><label for="own-formula">Vilket uttryck fick du för h″(x)?</label><select id="own-formula"><option value="">Välj</option><option value="a">3x² − 12x</option><option value="b">6x − 12</option><option value="c">6x</option><option value="d">6x² − 12</option></select></div>
+<p><button type="button" id="check-own">Kontrollera</button></p><p id="own-feedback" class="feedback" role="status" aria-live="polite"></p>
+</div>
+<button type="button" class="secondary" data-reveal="own-hint">Visa ett stöd om du fastnar</button>
+<div id="own-hint" class="panel hidden"><p>Derivera varje term. Använd sedan <span class="math-fresh">h′(x)</span> som start för nästa derivering. När du löser <span class="math-fresh">h″(x)=0</span> ska du hitta ett x-värde, inte ett uttryck.</p></div>
+</section>
+
+<section class="slide" id="feedback" data-teacher="Original-PDF s. 5. Låt eleverna hitta det första steg där deras lösning avviker från facit. Betona h''(0) som ett tal och h''(x) som funktion. Påminn att h''(x)=0 inte innebär att h'(x)=0; h'(2)=-12.">
+<div class="eyebrow">06 · Återkoppling och förklaring</div>
+<h2>Kontrollera det första steget där ni skiljer er åt</h2>
+<div class="task"><strong>Innan facit:</strong> Behöver ni beräkna ett uttryck, ett funktionsvärde eller ett nollställe? Diskutera vad skillnaden betyder.</div>
+<button type="button" class="reveal" data-reveal="feedback-answer">Visa genomarbetad lösning</button>
+<div class="answer hidden" id="feedback-answer">
+<div class="step-grid">
+<div class="number-card"><strong>1 · Två derivator</strong><p class="math-fresh">h′(x) = 3x² − 12x</p><p class="math-fresh">h″(x) = 6x − 12</p></div>
+<div class="number-card"><strong>2 · Sätt in x = 0</strong><p class="math-fresh">h″(0) = 6 · 0 − 12 = −12</p></div>
+<div class="number-card"><strong>3 · Lös ekvationen</strong><p class="math-fresh">h″(x) = 0</p><p class="math-fresh">6x − 12 = 0 ⇒ x = 2</p></div>
+<div class="number-card"><strong>4 · Tolka</strong><p>Vid x = 0 är h′ avtagande: tangentens lutning minskar när x ökar.</p><p>Att <span class="math-fresh">h″(2)=0</span> betyder inte att tangenten till h är horisontell: <span class="math-fresh">h′(2) = −12</span>.</p></div>
+</div>
+</div>
+<p class="note-warning"><strong>Skilj uttrycken:</strong> <span class="math-fresh">h″(x)</span> är en funktion, <span class="math-fresh">h″(0)</span> är ett tal och <span class="math-fresh">h″(x)=0</span> är en ekvation.</p>
+</section>
+
+<section class="slide" id="book" data-teacher="Original-PDF s. 6: bevara de två spåren med alla uppgiftsnummer, inklusive att 3130–3131 ingår i båda. För sammanhängande självständigt arbete avsätt ordentlig tid. Den nya kursen har tre nivåer och varje elev ska jobba med minst två. Läxan är att göra klart valt spår. Inga Socrative-inslag finns i denna original-PDF.">
+<div class="eyebrow">07 · Sammanhängande eget arbete</div>
+<h2>Arbeta vidare i boken</h2>
+<p class="lead">Läroboken <strong>s. 149</strong>. Välj ett spår som innehåller <strong>minst två av bokens tre nivåer</strong>.</p>
+<div class="book-tracks">
+<div class="book-track"><h3>Nivå 1 + 2</h3>
+<p><strong>3125:</strong> derivera två gånger</p><p><strong>3126–3127:</strong> värden och nollställen</p><p><strong>3130–3131:</strong> förenkla och undersök</p></div>
+<div class="book-track"><h3>Nivå 2 + 3</h3>
+<p><strong>3130–3131:</strong> förenkla och undersök</p><p><strong>3132:</strong> bestäm konstanten k</p><p><strong>3133:</strong> upptäck ett mönster</p></div>
+</div>
+<div class="task"><strong>Försök själv, kontrollera och förstå dina fel.</strong> Mer träning: <strong>3128–3129</strong>. Det viktigaste är att du kan förklara hur du deriverat – inte bara att du fått samma svar som facit.</div>
+<div class="notice"><strong>Läxa:</strong> Gör klart ditt valda spår före nästa lektion.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="Original-PDF s. 6: avsluta med frågan kan f vara avtagande samtidigt som f'' är positiv? Fördjupningen ber eleven ange ett eget exempel och beräkna derivatorna, så att frågan prövar målet. Facit är dolt. Återkoppla tydligt till målet på högersidan och repetera läxan.">
+<div class="eyebrow">08 · Individuell utcheckning</div>
+<h2>Kan f vara avtagande samtidigt som f″ är positiv?</h2>
+<div class="two">
+<div>
+<div class="task"><strong>Svara individuellt – utan interaktiv graf.</strong>
+<ol class="spaced"><li>Kan en funktion vara <em>avtagande</em> samtidigt som <span class="math-fresh">f″(x) &gt; 0</span>? Förklara.</li>
+<li>Visa med en funktion eller graf där du kan motivera tecknen för både <span class="math-fresh">f′</span> och <span class="math-fresh">f″</span>.</li>
+</ol></div>
+<button type="button" class="reveal" data-reveal="exit-answer">Visa lösning efter eget försök</button>
+<div class="answer hidden" id="exit-answer">
+<p><strong>Ja.</strong> <span class="math-fresh">f′ &lt; 0</span> betyder att funktionen avtar, medan <span class="math-fresh">f″ &gt; 0</span> betyder att <em>lutningen ökar</em>.</p>
+<p>Ett exempel från startens funktion: <span class="math-fresh">f(x)=x²</span>. Vid <span class="math-fresh">x=−1</span> är <span class="math-fresh">f′(−1)=−2&lt;0</span> och <span class="math-fresh">f″(−1)=2&gt;0</span>.</p>
+<p>Grafen sjunker där, men dess tangent lutar allt mindre negativt när x ökar. Funktionen är avtagande för x &lt; 0 trots positiv andraderivata.</p>
+</div>
+</div>
+<div class="panel"><h3>Dagens mål</h3><p><strong>Beräkna andraderivatan:</strong> derivera först en gång och sedan en gång till.</p><p><strong>Förklara vad den visar:</strong> hur tangentens lutning förändras när x ökar.</p><p class="muted">Styrkan i en förklaring är att du kan skilja <span class="math-fresh">f′</span> från <span class="math-fresh">f″</span>.</p>
+<div class="notice"><strong>Läxa:</strong> Gör klart valt spår på s. 149 före nästa lektion.</div></div>
+</div>
+</section>
+</div>
+<div id="inkpanel" class="inkpanel">
+<div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex">
+<button type="button" class="secondary" id="ink-undo">Ångra</button>
+<button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button>
+<button type="button" class="secondary" id="ink-clear">Rensa</button>
+<button type="button" class="secondary" id="ink-max">Förstora</button>
+</div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas>
+</div>
+<div class="controls">
+<div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
+<div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div>
+</div>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Lektion 3: Andraderivatan. Bokens s. 149. Alla interaktioner fungerar lokalt utan inloggning eller datainsamling.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="lesson.js"></script>
+</body>
+</html>
