@@ -1,0 +1,34 @@
+/* Lektion 8.4 – lektionslokal grafik, presentation och tillgänglighet. */
+.effect-figure{margin:0;border:1px solid #d0e1e6;background:linear-gradient(150deg,#f9fdff,#eff7fa);border-radius:14px;padding:12px}
+.effect-figure svg{width:100%;max-height:420px;height:auto;display:block}
+.effect-figure figcaption{font-size:.80rem;line-height:1.43;color:#4e6c77;margin:10px 3px 0}
+.goallocal,.book-main{background:#eaf5ee;border:1px solid #cfe4d7;padding:12px 17px;border-radius:12px;margin:11px 0}
+.goallocal ol{padding-left:1.18em;margin:7px 0 2px}.goallocal li{margin:6px 0}
+.lesson-route{font-size:.9rem;color:#486c77;padding-top:5px}
+.safety-small{font-size:.89rem;color:#764c38;background:#fff3e9;border-radius:10px;padding:11px 13px;margin:14px 0}
+.worked{margin:0}.worked>b{color:#136e83}.worked p{margin:7px 0}
+.equation{font-family:'STIX Two Math','Cambria Math','DejaVu Serif',serif;font-size:clamp(1.06rem,1.7vw,1.38rem);line-height:1.6;max-width:100%;overflow-x:auto;white-space:normal;margin:7px 0}
+.equation math{font-size:1em}.equation strong,.equation b{font-weight:750;color:#176f83}
+.effect-model{background:linear-gradient(145deg,#eff8fb,#f9fcfc)}
+.effect-model .model-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.effect-model label{font-size:.85rem;font-weight:680;display:flex;gap:5px;justify-content:space-between;line-height:1.3}
+.effect-model .model-controls input{width:100%;accent-color:#147b91;margin-top:8px;cursor:pointer}
+.effect-model svg{width:100%;height:auto;display:block}
+.effect-model .model-result{background:white;font-size:.95rem;font-weight:500;line-height:1.5;margin:12px 0;padding:12px 13px;border-radius:11px;border:1px solid #cadee3}
+.effect-model .model-result b{color:#126c83}
+.effect-model .model-button{display:flex;flex-wrap:wrap;gap:9px}
+.effect-model .figcap{font-size:.8rem;line-height:1.4}
+.effect-model .model-note{font-size:.83rem;line-height:1.42;color:#4a6874;margin:8px 0}
+.effect-model .scale-key{font-size:.81rem;color:#536d79;margin:7px 0}
+.body-copy>.quiz{margin-top:15px}
+.body-copy>.steps-label{margin-top:19px;font-size:.87rem}
+.body-copy>.step{line-height:1.48;font-size:.96rem;padding:10px 12px}
+.body-copy>.step .mathrow{font-size:1.12rem}
+.stage .layout{gap:clamp(20px,2.5vw,34px)}
+.socrative{font-size:1.04rem}.socrative code{font-size:1.27rem;display:block;margin:8px 0}
+.book-main h2{font-size:1.24rem;margin:0 0 12px}.book-main p{margin:9px 0}
+.stage .page-title{letter-spacing:-.04em}
+.end-controls{position:relative}
+@media(min-width:1180px){.stage{padding:clamp(24px,3vw,42px)}.layout{grid-template-columns:1.05fr .95fr}}
+@media(max-width:930px){.effect-model .model-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.effect-figure svg{max-height:none}}
+@media(max-width:540px){.effect-model .model-controls{grid-template-columns:1fr}.effect-figure{padding:6px}.body-copy{font-size:1rem}.body-copy>.step{font-size:.91rem}.equation{font-size:1.07rem}.goallocal{padding:10px 12px}.effect-model .model-result{font-size:.91rem}}
