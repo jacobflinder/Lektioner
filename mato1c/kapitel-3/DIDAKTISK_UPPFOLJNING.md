@@ -158,3 +158,28 @@ Ett verkligt matematiskt specialfall synliggörs: vid högra gränsen b=4,5 har 
 
 ### Följ upp i verklig undervisning
 Titta anonymt på utcheckningen: vilka elever glömmer en ändpunkt, vilka förväxlar största värdet med x-koordinaten, och vilka sorterar bort −1 när intervallet är [0,3]? Observera om det flyttbara intervallet ger *motiverade* förutsägelser och självständiga lösningar, inte bara fler klick. Dokumentera en justering inför nästa gång.
+
+
+## Lektion 7 · Extremvärdesproblem med polynomfunktioner (3.2)
+
+**Källa:** `Ma3c_Extremvardesproblem_polynom.pdf` (9 sidor), s. 162–164 i boken. **Mål:** tolka en polynommodell, välja rimliga x-värden och bestämma/motivera extremvärden med derivata; svara i situationen med rätt enhet.
+
+### Original som bevarats
+- Start, exempel **3201**: `K(x)=x³−9x²+15x+50`, antal datorskärmar/dag, kostnad i tusental kronor. Frågorna om tillåtna x, betydelsen av `K(0)=50` och vad som faktiskt ska minimeras. Först enskilt, sedan i par.
+- Metod för kostnadsmodellen: `K′=3(x−1)(x−5)`, x1 lokalt maximum, x5 lokalt minimum; jämför även gränsen x0. Värdena K0=50, K1=57, K5=25. För icke-negativa heltal blir globalt minimum 25 tusen kronor/dag vid 5 skärmar/dag. Notera att i andra modeller med heltalskrav kan närliggande heltal behöva jämföras.
+- Biljettmodell från **3202**: `I(x)=1000x−5x²=x(1000−5x)` i intervallet [0,200]. x pris i kr, sålda biljetter `1000−5x`, intäkt i kr. Hypotes före animation: högt pris ger inte nödvändigtvis högre total intäkt.
+- Originalets avslöjande: `I′=1000−10x` ger x100, tecken +→−; I(100)=50 000 kr, I(0)=I(200)=0 och 500 sålda biljetter vid optimalt pris. Svara pris och intäkt med sina respektive enheter.
+- Elevens självständiga uppgift **3204 s.163**, `h(t)=40+10t−5t²`: t i sekunder efter avfyrning, h i meter över havet. Tid för max t1, högsta höjd45 m, giltigt tidsspann [0,4] när havsytan nås; rot t−2 väljs bort. Förklaring av skillnaden mellan **när** och **hur högt**.
+- Boken **s. 163–164**: nivå 1 **3202–3207**, nivå 2 **3208–3210**, nivå 3 **3211–3214**. Minst två nivåer; originalets startsförslag **3203, 3205, 3209**, annars **3208–3210** följt av nivå3. Cirka 20 min lugnt eget arbete.
+- Läxa exakt **3205 och 3209** till nästa lektion; extra **3212**.
+- Individuell utcheckning: `V(x)=−x²+6x−5`, x tusen enheter/dag och V tusen kr/dag, intervallet [0,6]. x3 ger V4; svar 3 000 enheter/dag, 4 000 kr/dag. Återkopplingen finns i separat steg enligt originalet.
+- Ingen färdig Socrative i originalet – ingen sådan har lagts till.
+
+### Hypoteser om webbens mervärde
+- Originalets före/animation/efter-sekvens för biljettpris ersätts av ett **styrbart prisreglage** där samma x styr antalet sålda biljetter, biljettintäkten, två proportionsstaplar och en exakt ritad intäktskurva. Styrningen är manuell och går att pausa före återkopplingen.
+- Återkoppling när eleven väljer ett pris skiljer matematisk riktning hos I′: för lågt pris → intäkten ökar vid prishöjning; för högt pris → intäkten ökar vid prissänkning. När x100 nås får eleven den matematiska kontrollfrågan.
+- Exempel 3201 och 3202 öppnas i steg efter elevens eget beslut. Den egna raketuppgiftens kontroll skiljer systematiskt mellan tid, höjd och orimliga negativa tider.
+- **Ingen webbinteraktion ersätter elevens fullständiga beräkning på papper, lärobokspasset eller individuella utcheckning.** Ingen insamling/lagring av svar sker.
+
+### Utvärdera anonymt i klass
+Kan eleverna särskilja x-värdets enhet från funktionsvärdets enhet? Anger de både optimal produktionsmängd och kostnad? Gör eleverna ett *matematiskt argument* för priset100, eller läser de endast av kurvans topp? Undersöker de giltiga tider för raketen? Låt korta elevlösningar, inte antal klick, avgöra en eventuell revidering.
