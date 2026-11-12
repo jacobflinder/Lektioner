@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="sv"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#122d44">
+<title>Deriverbarhet · Matematik – fortsättning, nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.17rem,2.5vw,1.75rem);line-height:1.6}
+.mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
+.mathline sup,.mathsmall sup{font-size:.72em}
+.eq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:15px 0}
+.eq-box{background:#f3f8fb;border:1px solid #cbdfe7;border-radius:12px;padding:15px;min-width:0}
+.eq-box h3{font-size:1.1rem;margin:0 0 10px}
+.eq-box.left h3{color:#266ab5}.eq-box.right h3{color:#b94c56}
+.fraction{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.08;white-space:nowrap;font-family:"Cambria Math","STIX Two Math",Georgia,serif}
+.fraction .num{border-bottom:1.5px solid currentColor;padding:0 5px 4px}
+.fraction .den{padding:3px 5px 0}
+.formula-line{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.18rem,2.6vw,1.65rem);line-height:1.9;overflow-wrap:anywhere}
+.graph-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.graph-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:13px 0}
+.graph-frame{background:#f9fcfd;border:1px solid #c8dbe4;border-radius:12px;margin:0;padding:10px;min-width:0}
+.graph-frame svg{display:block;width:100%;height:auto}
+.graph-frame figcaption{font-size:.87rem;color:#527080;margin:8px 0 0}
+.graph-frame strong{display:block;font-size:.98rem;color:#185e73;margin:0 0 5px}
+.graph-three .graph-frame strong{font-size:.9rem}
+.sliders{background:#ebf5f9;border:1px solid #c4dbe4;padding:15px;border-radius:12px}
+.sliders label{display:block;font-weight:780;margin:5px 0}
+.sliders input[type=range]{accent-color:#097e72;width:100%;min-height:35px}
+.sliders output{display:block;font-weight:790;color:#0b6d68;font-variant-numeric:tabular-nums;margin:6px 0;font-size:1.14rem}
+.shortcut-row{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
+.shortcut-row button{padding:8px 12px}
+.shortcut-row button[aria-pressed=true]{background:#0b8477;color:#fff}
+.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:13px 0}
+.metric{background:#f2f8fa;border:1px solid #cbdee7;border-radius:11px;padding:12px;min-width:0}
+.metric span{display:block;color:#506c7d;font-size:.88rem}
+.metric strong{display:block;font-size:clamp(1rem,2vw,1.2rem);color:#0f6570;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.metric.blue strong{color:#2468ad}.metric.red strong{color:#ad4c59}
+.insight{border-left:4px solid #0a867b;background:#e9f6f1;border-radius:9px;padding:13px 16px}
+.warning{border-left:4px solid #b48129;background:#fff7e9;border-radius:9px;padding:13px 16px}
+.stitch-panel{display:grid;grid-template-columns:minmax(0,3fr) minmax(250px,2fr);gap:15px;margin:16px 0}
+.stitch-data{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:9px 0}
+.stitch-data>div{border-radius:9px;background:#f2f7fa;border:1px solid #c9dfe8;padding:10px;min-width:0}
+.stitch-data span{display:block;font-size:.85rem;color:#567081}
+.stitch-data strong{display:block;color:#185d70;overflow-wrap:anywhere}
+.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.book-grid>div{background:#f2f7fa;border:1px solid #cedeE6;border-radius:11px;padding:15px}
+.book-grid strong{color:#09796e;display:block}
+.book-grid b{font-size:1.16rem;display:block;margin-top:7px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.two>*{min-width:0}
+.corrective{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.corrective select{width:100%;background:white;color:#153c56;border:2px solid #abc5d2;border-radius:9px;padding:9px;font:inherit}
+.corrective label{display:block;font-weight:740}
+@media(max-width:930px){.stitch-panel{grid-template-columns:1fr}}
+@media(max-width:720px){.graph-three,.graph-grid,.eq-grid,.book-grid,.metric-grid,.corrective,.two,.stitch-data{grid-template-columns:1fr}.graph-frame{padding:6px}.formula-line{font-size:1.08rem}}
+</style></head>
+<body><header><a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.2</strong><div class="head-actions">
+<button id="ink-toggle" type="button" class="secondary" aria-expanded="false">Visa skrivyta</button>
+<button id="teacher-toggle" type="button" class="secondary" aria-expanded="false">Visa lärarstöd</button>
+<button id="mode" type="button" class="secondary" aria-pressed="false">Klassrumsläge</button>
+</div></header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Eleverna förutsäger innan reglagen flyttas. Låt dem skriva enskilt och jämföra i par. Formeln för ensidiga differenskvoter följer originalets h→0⁺-skrivsätt; inga kvoter beräknas genom att sätta h=0.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Lös själv först och använd graferna för att pröva ditt resonemang. Inga elevsvar samlas in eller lagras.</div>
+<div class="stage" id="stage">
+
+<section class="slide active" id="start" data-teacher="Original s.1. A: parabolen p=(x−1)²+2, x=1 kontinuerlig och deriverbar. B: q=2|x−1|+2, x1 kontinuerlig men hörn, inte deriverbar. C: r=1 före x2 och r=3 från x2, hopp, inte kontinuerlig och inte deriverbar. Figurerna ska eleverna tolka utan formler först. Fråga enskilt → par.">
+<div class="eyebrow">01 · Start · tre grafer</div>
+<h1>Finns det en bestämd lutning i punkten?</h1>
+<p class="lead">Starta med en gissning. Motivera kort och jämför i par.</p>
+<div class="graph-three">
+<figure class="graph-frame"><strong>A · Undersök x=1</strong><svg id="start-a" viewBox="0 0 460 350" role="img" aria-label="Mjuk parabel med lägsta punkt vid x ett och höjden två"></svg><figcaption>Hur möts kurvorna när vi närmar oss punkten?</figcaption></figure>
+<figure class="graph-frame"><strong>B · Undersök x=1</strong><svg id="start-b" viewBox="0 0 460 350" role="img" aria-label="V-formad graf med hörn vid x ett och höjden två"></svg><figcaption>Hur lutar grafen från vardera håll?</figcaption></figure>
+<figure class="graph-frame"><strong>C · Undersök x=2</strong><svg id="start-c" viewBox="0 0 460 350" role="img" aria-label="Hoppfunktion med öppen punkt vid (2,1) och fylld punkt vid (2,3)"></svg><figcaption>Vilken punkt tillhör egentligen grafen?</figcaption></figure>
+</div>
+<div class="task"><strong>Svara utan att räkna:</strong> Vilka grafer hänger ihop där? Vilka har en enda ändlig tangentlutning?</div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling efter gissningen</button>
+<div class="answer hidden" id="start-answer"><p><strong>A</strong> är kontinuerlig och deriverbar vid x=1. <strong>B</strong> är kontinuerlig men har ett hörn och saknar derivata vid x=1. <strong>C</strong> har ett hopp vid x=2 och är varken kontinuerlig eller deriverbar där.</p></div>
+</section>
+
+<section class="slide" id="goal" data-teacher="Original s.1–2. Samma skrivsätt som i originalets PDF: vänster och höger anges som f′(a)=lim med h→0⁺ och h>0, men kvoterna skiljer f(a−h) och f(a+h). För matematisk tydlighet ska f′(a) läsas som resultat endast om gränsvärdena sammanfaller. Här har vi tydliga etiketter för gränsvärden var för sig. Deriverbar ⇒ kontinuerlig, inte omvänt.">
+<div class="eyebrow">02 · Mål och huvudidé</div>
+<h2>Derivatan måste bli densamma från båda håll</h2>
+<p class="lead"><strong>Efter lektionen ska du kunna jämföra lutningar från vänster och höger, skilja kontinuitet från deriverbarhet och skapa en mjuk övergång mellan två funktionsdelar.</strong></p>
+<p>För en inre punkt <span class="mathsmall">a</span> undersöker vi två differenskvoter med <span class="mathsmall">h&gt;0</span> och <span class="mathsmall">h→0<sup>+</sup></span>:</p>
+<div class="eq-grid">
+<div class="eq-box left"><h3>Från vänster</h3>
+<p class="formula-line">lim<sub>h→0<sup>+</sup></sub> <span class="fraction"><span class="num">f(a) − f(a−h)</span><span class="den">h</span></span></p>
+<p>Vänsterderivatans gränsvärde – om det finns ändligt.</p></div>
+<div class="eq-box right"><h3>Från höger</h3>
+<p class="formula-line">lim<sub>h→0<sup>+</sup></sub> <span class="fraction"><span class="num">f(a+h) − f(a)</span><span class="den">h</span></span></p>
+<p>Högerderivatans gränsvärde – om det finns ändligt.</p></div>
+</div>
+<div class="insight"><strong>Samma ändliga gränsvärde</strong> från båda håll innebär att <span class="mathsmall">f′(a)</span> finns och har detta värde. Om de skiljer sig, eller något ändligt gränsvärde saknas, finns ingen derivata.</div>
+<div class="warning"><strong>Deriverbar ⇒ kontinuerlig.</strong> Däremot gäller inte omvändningen. En graf kan hänga ihop men ändå ha ett hörn.</div>
+</section>
+
+<section class="slide" id="predict" data-teacher="Original s.3. p=(x−1)²+2 och q=2|x−1|+2, båda kontinuerliga vid x1. Eleverna ska förutsäga ensidiga sekantlutningar från x1±h innan reglage: p left −h right +h →0; q left −2 right +2. Låt inga resultat eller förklaringar avslöjas i förväg.">
+<div class="eyebrow">03 · Förutsäg före animationen</div>
+<h2>Två kontinuerliga grafer – räcker det?</h2>
+<div class="eq-grid">
+<div class="eq-box"><h3>p · mjuk parabel</h3><p class="mathline">p(x)=(x−1)²+2</p><p>Undersök x=1.</p></div>
+<div class="eq-box"><h3>q · skarpt hörn</h3><p class="mathline">q(x)=2|x−1|+2</p><p>Undersök x=1.</p></div>
+</div>
+<div class="task"><strong>Skriv en förutsägelse:</strong> När punkterna närmar sig <span class="mathsmall">(1,2)</span> från vänster respektive höger, kommer de två sekantlutningarna att bli lika för båda graferna? Vilka gränslutningar tror du att de får?</div>
+<p class="small-note">Blå sekant: från vänster. Röd sekant: från höger. Båda har samma positiva avstånd h till mittpunkten.</p>
+</section>
+
+<section class="slide" id="secants" data-teacher="Original animation s.4 och slutbild s.5. Samma h i två grafer och båda riktningarna. Vänster p-lutning −h, höger +h. Vänster q −2, höger +2. Kontrollera h=1, 0,5, 0,1, 0,02. Det är viktigt att vi låter h→0⁺ men aldrig sätter h=0 i nämnaren.">
+<div class="eyebrow">04 · Styr båda sekantparen</div>
+<h2>Se vad som händer när avståndet krymper</h2>
+<div class="sliders"><label for="secant-h">Gemensamt avstånd h från x=1</label>
+<input id="secant-h" type="range" min="0" max="5" step="1" value="0">
+<output id="secant-h-label" for="secant-h">h = 1,00</output>
+<div class="shortcut-row" role="group" aria-label="Välj sekantavstånd">
+<button type="button" class="secondary" data-h="1">h = 1</button><button type="button" class="secondary" data-h="0.5">h = 0,5</button>
+<button type="button" class="secondary" data-h="0.1">h = 0,1</button><button type="button" class="secondary" data-h="0.02">h = 0,02</button></div>
+</div>
+<div class="graph-grid">
+<figure class="graph-frame"><strong>p(x)=(x−1)²+2</strong><svg id="p-graph" viewBox="0 0 680 430" role="img" aria-label="Parabel och två sekantlinjer genom (1,2), en blå från vänster och en röd från höger med reglerbart positivt avstånd h"></svg></figure>
+<figure class="graph-frame"><strong>q(x)=2|x−1|+2</strong><svg id="q-graph" viewBox="0 0 680 430" role="img" aria-label="Absolutbeloppsgraf med blå vänstersekant och röd högersekant genom (1,2) med gemensamt positivt h"></svg></figure>
+</div>
+<div class="metric-grid" aria-live="polite">
+<div class="metric"><span>Avstånd</span><strong id="h-readout">h = 1,00</strong></div>
+<div class="metric blue"><span>p · vänster / höger</span><strong id="p-slopes">−1,00 / 1,00</strong></div>
+<div class="metric red"><span>q · vänster / höger</span><strong id="q-slopes">−2,00 / 2,00</strong></div>
+</div>
+<div class="task"><strong>Stanna vid h=0,02.</strong> Hur skulle sekantlutningarna fortsätta att förändras om h kunde bli ännu mindre? Varför ska vi <em>inte</em> sätta h=0 direkt i differenskvoten?</div>
+</section>
+
+<section class="slide" id="secant-answer" data-teacher="Original s.5. p(1±h)=h²+2, so left −h and right +h→0; tangent y=2. q(1±h)=2h+2 left −2, right +2, so no derivative at1. Both continuous, only p differentiable. Explicit h=0,02 is approximate stage, not substitution h0.">
+<div class="eyebrow">05 · Återkoppling · jämför gränsvärden</div>
+<h2>Samma punkt – men inte alltid samma lutning</h2>
+<div class="eq-grid">
+<div class="eq-box left"><h3>p(x)=(x−1)²+2</h3>
+<p class="mathline">p(1)=2, &nbsp; p(1±h)=h²+2</p>
+<p class="formula-line">V: <span class="fraction"><span class="num">2−(h²+2)</span><span class="den">h</span></span> = −h → 0</p>
+<p class="formula-line">H: <span class="fraction"><span class="num">(h²+2)−2</span><span class="den">h</span></span> = h → 0</p>
+<p><strong>p′(1)=0.</strong> Gemensam horisontell tangent <span class="mathsmall">y=2</span>.</p></div>
+<div class="eq-box right"><h3>q(x)=2|x−1|+2</h3>
+<p class="mathline">q(1)=2, &nbsp; q(1±h)=2h+2</p>
+<p class="formula-line">V: <span class="fraction"><span class="num">2−(2h+2)</span><span class="den">h</span></span> = −2</p>
+<p class="formula-line">H: <span class="fraction"><span class="num">(2h+2)−2</span><span class="den">h</span></span> = 2</p>
+<p><strong>q′(1) finns inte.</strong> Olika ensidiga gränslutningar trots kontinuitet.</p></div>
+</div>
+<div class="insight"><strong>Kom ihåg:</strong> Vi låter <span class="mathsmall">h→0<sup>+</sup></span>. Vi <strong>sätter inte h=0</strong> i kvoten eftersom den då innehåller division med noll. Det är gränsvärdet som avgör derivatan.</div>
+</section>
+
+<section class="slide" id="jump" data-teacher="Original s.6. r=1 om x<2 och r=3 om x≥2, r2=3. Be eleverna först avgöra kontinuitet och vänstersekantens lutning h=1,0,5,0,1 och högersekanten. Dynamisk figur med vänster öppen (2,1), höger fylld (2,3). Den vänstra sekanten måste gå till (2,3), inte till hålets punkt.">
+<div class="eyebrow">06 · Din tur · en diskontinuerlig graf</div>
+<h2>Två horisontella delar – derivata noll?</h2>
+<div class="two"><div>
+<p class="mathline">r(x)=1 &nbsp; om x&lt;2</p><p class="mathline">r(x)=3 &nbsp; om x≥2</p>
+<div class="task"><strong>Lös före återkopplingen:</strong><ol class="spaced">
+<li>Är r kontinuerlig vid x=2?</li>
+<li>Beräkna vänstersekantens lutning för h=1; 0,5 och 0,1.</li>
+<li>Undersök högersekantens lutning.</li>
+<li>Finns r′(2)? Motivera.</li></ol></div>
+<p class="warning"><strong>Utgå alltid från den faktiska punkten:</strong> r(2)=3.</p></div>
+<div>
+<figure class="graph-frame"><strong>Hopp vid x=2</strong><svg id="jump-graph" viewBox="0 0 650 440" role="img" aria-label="Styckvis konstant graf y=1 före x2 med öppen punkt och y=3 från x2 med fylld punkt och sekant från vänster till den fyllda punkten"></svg>
+<figcaption>Blå sekant från vänster går genom r(2)=3.</figcaption></figure>
+<div class="sliders"><label for="jump-h">Förminska avståndet h</label><input id="jump-h" type="range" min="0" max="4" step="1" value="0"><output id="jump-h-out" for="jump-h">h = 1,00</output></div>
+<div class="metric-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))" aria-live="polite">
+<div class="metric blue"><span>Från vänster</span><strong id="jump-left">2,00</strong></div>
+<div class="metric red"><span>Från höger</span><strong id="jump-right">0,00</strong></div></div>
+</div></div>
+</section>
+
+<section class="slide" id="jump-answer" data-teacher="Original s.7. (r2−r(2−h))/h=(3−1)/h=2/h. h1→2, .5→4, .1→20, h→0+ gives +infty (not finite derivative). right (r(2+h)−r2)/h=0. r not continuous from left: left limit 1, r2=3, hence not differentiable.">
+<div class="eyebrow">07 · Återkoppling · hoppfunktionen</div>
+<h2>Sekanten måste gå genom rätt punkt</h2>
+<div class="eq-grid">
+<div class="eq-box left"><h3>Från vänster</h3>
+<p class="formula-line"><span class="fraction"><span class="num">r(2)−r(2−h)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−1</span><span class="den">h</span></span> = <span class="fraction"><span class="num">2</span><span class="den">h</span></span></p>
+<p>h=1 ⇒ lutning 2</p><p>h=0,5 ⇒ lutning 4</p><p>h=0,1 ⇒ lutning 20</p>
+<p class="formula-line">lim<sub>h→0<sup>+</sup></sub> 2/h = +∞</p><p><strong>Ingen ändlig vänsterderivata.</strong></p></div>
+<div class="eq-box right"><h3>Från höger</h3>
+<p class="formula-line"><span class="fraction"><span class="num">r(2+h)−r(2)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−3</span><span class="den">h</span></span> = 0</p>
+<p>Högersekantens lutning är 0 för alla h&gt;0.</p></div>
+</div>
+<div class="warning"><strong>r är inte kontinuerlig vid x=2:</strong> från vänster närmar sig r(x) värdet 1 men r(2)=3. Därför kan r inte vara deriverbar i punkten. Det räcker inte att båda funktionsdelarna är horisontella.</div>
+</section>
+
+<section class="slide" id="stitch" data-teacher="Original s.8. F(x)=ax+b för x<1, och x²+1 för x≥1. Två villkor: kontinuitet a+b=2 och lutning a=2. Skriv först två ekvationer innan widgeten används. Denna modell tillåter elev att ställa in a och b, så att de kan se tre olika lägen: kontinuerlig med hörn (a1,b1), samma lutning men hopp (a2,b1), samt mjuk skarv (a2,b0). Facit på nästa slide.">
+<div class="eyebrow">08 · Bygg en mjuk skarv</div>
+<h2>Det räcker inte att lutningarna stämmer</h2>
+<div class="two"><div>
+<p class="mathline">f(x)=ax+b &nbsp; om x&lt;1</p>
+<p class="mathline">f(x)=x²+1 &nbsp; om x≥1</p>
+<div class="task"><strong>Skriv de två villkoren själv innan du använder reglagen:</strong><ol class="spaced">
+<li><strong>Kontinuitet:</strong> Delarna måste mötas. Vilken ekvation ger det?</li>
+<li><strong>Deriverbarhet:</strong> Lutningarna måste stämma. Vilken ekvation ger det?</li></ol>
+<p>Bestäm a och b så att f är kontinuerlig och deriverbar vid x=1.</p></div>
+</div><div>
+<div class="sliders"><label for="stitch-a">Vänstra linjens lutning a</label><input id="stitch-a" type="range" min="0" max="4" step=".5" value="1">
+<label for="stitch-b">Vänstra linjens konstant b</label><input id="stitch-b" type="range" min="-2" max="3" step=".5" value="1">
+<div class="shortcut-row">
+<button type="button" class="secondary" data-stitch="1,1">Möts med hörn</button>
+<button type="button" class="secondary" data-stitch="2,1">Samma lutning, hopp</button>
+<button type="button" class="secondary" data-stitch="2,0">Mjuk skarv</button>
+</div></div>
+<div class="stitch-data" aria-live="polite">
+<div><span>Vänsterhöjd a+b</span><strong id="stitch-left-height">2,00</strong></div>
+<div><span>Högerhöjd</span><strong>2,00</strong></div>
+<div><span>Vänsterlutning a</span><strong id="stitch-left-slope">1,00</strong></div>
+<div><span>Högerlutning</span><strong>2,00</strong></div>
+</div></div></div>
+<figure class="graph-frame"><strong>Skarven vid x=1 · samma koordinatskala</strong><svg id="stitch-graph" viewBox="0 0 790 445" role="img" aria-label="Linje till vänster om x1 och parabel till höger, med reglage för linjens lutning a och konstant b"></svg><figcaption>Öppen cirkel visar vänsterdelens slutvärde; fylld cirkel visar f(1)=2 på högerdelen. De kan sammanfalla.</figcaption></figure>
+<div class="task"><strong>Motivera:</strong> Om lutningarna stämmer men höjderna inte gör det – har funktionen då någon derivata i skarven?</div>
+</section>
+
+<section class="slide" id="stitch-answer" data-teacher="Original s.9. Kontinuitet a+b=1²+1=2; lutning a=2·1=2 => b0; same height and slope, f(x)=2x left and x²+1 right. Deriverbar i öppet intervall om derivatan finns varje punkt. Interactive model separate before answer.">
+<div class="eyebrow">09 · Återkoppling · två villkor</div>
+<h2>Samma höjd och samma lutning</h2>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Förutsäg varje steg:</strong> Kan en funktion ha samma lutning från båda grenarna men ändå ett hopp? Varför kräver vi kontinuitet?</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilket villkor får du när vänster- och högerdelen ska mötas vid x=1?"><strong>1 · Kontinuitet</strong><p class="mathline">a+b=1²+1=2</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken derivata har linjen? Vilken har parabeln vid x=1?"><strong>2 · Samma lutning</strong><p class="mathline">a=2·1=2</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Lös ut b och beskriv skarven."><strong>3 · Båda villkoren uppfyllda</strong><p class="mathline">2+b=2 ⇒ b=0</p><p><strong>a=2, b=0.</strong> Vänsterdel: 2x. Högerdel: x²+1. Båda närmar sig 2 och har lutning 2 vid skarven.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<div class="insight"><strong>Deriverbar i ett öppet intervall</strong> betyder att derivatan finns i varje punkt i intervallet. I en skarv mellan två funktionsuttryck krävs både att kurvorna möts och att lutningen är densamma.</div>
+</section>
+
+<section class="slide" id="book" data-teacher="Original s.10. Lärobok s178. Nivå1 3272–3274, nivå2 3275 a–b, nivå3 3276–3277. Minst två nivåer. Originalets spår 3272→3273→3275a-b och 3275a-b→3277→3276. 20 min tyst eget arbete, försök själv, kontrollera, rätta. Digitalt verktyg endast stöd; ensidiga lutningar motiverar. Läxa 3274 och3275, extra3277. Ingen Socrative i original.">
+<div class="eyebrow">10 · Självständigt bokarbete</div>
+<h2>Öva på att se skillnaden och visa varför</h2>
+<p class="lead">Boken <strong>s. 178</strong>. Skriv punktens x-värde, kontrollera kontinuitet och jämför lutningarna.</p>
+<div class="book-grid">
+<div><strong>Nivå 1</strong><b>3272–3274</b><p>Känn igen mjuk graf, hörn och hopp.</p></div>
+<div><strong>Nivå 2</strong><b>3275 a–b</b><p>Undersök ensidiga lutningar.</p></div>
+<div><strong>Nivå 3</strong><b>3276–3277</b><p>Motivera en skarv och deriverbarhet.</p></div>
+</div>
+<div class="task"><strong>Börja med 20 minuter tyst eget arbete.</strong> Arbeta med <strong>minst två nivåer</strong>. Försök själv, kontrollera och rätta. Digitalt verktyg kan hjälpa dig att se, men låt ensidiga lutningar motivera svaret.</div>
+<div class="panel"><p><strong>Grund och nästa steg:</strong> 3272 → 3273 → 3275 a–b.</p><p><strong>Redan säker:</strong> 3275 a–b → 3277 → 3276.</p></div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3274 och 3275</strong>. Redan klar? Gör <strong>3277</strong>.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="Original s.11: F(x)=cx+d för x<2 och x² för x≥2. Conditions 2c+d=4 and c=4 => d=-4. Mistake c4 d0 same slope but F left8 right4, jump. Example continuous not differentiable q=2|x−1|+2. Independently on paper, then feedback next separate slide.">
+<div class="eyebrow">11 · Individuell utcheckning</div>
+<h2>Visa vad du kan – en ny skarv</h2>
+<p class="lead">Svara självständigt. Motivera med <strong>två villkor</strong>.</p>
+<div class="panel"><p class="mathline">F(x)=cx+d &nbsp; om x&lt;2</p><p class="mathline">F(x)=x² &nbsp; om x≥2</p></div>
+<div class="task"><ol class="spaced">
+<li>Bestäm c och d så att F är deriverbar vid x=2.</li>
+<li>En elev väljer c=4 och d=0 eftersom lutningarna då stämmer. <strong>Förklara vad som saknas.</strong></li>
+<li>Kan en funktion vara kontinuerlig i en punkt utan att vara deriverbar där? <strong>Ge ett exempel.</strong></li>
+</ol></div>
+<div class="panel"><strong>Dagens mål – visa att du kan</strong><p>Jämför ensidiga lutningar. Skilj kontinuitet från deriverbarhet. Bygg en mjuk övergång.</p></div>
+</section>
+
+<section class="slide" id="exit-answer" data-teacher="Original s.12: continuity 2c+d=4, slope c=2*2=4, d=-4, F′2=4. Wrong c4 d0 left8, right4, jump => not derivable. Continuous nonsmooth q=2|x−1|+2: left−2 right+2. Reveal after independent answer, no Socrative.">
+<div class="eyebrow">12 · Återkoppling efter eget försök</div>
+<h2>Båda villkoren behövs</h2>
+<div class="sequence panel" data-sequence>
+<div class="nextprompt"><strong>Förutsäg nästa steg:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilket villkor får du av kontinuitet när x=2?"><strong>1 · Delarna möts</strong><p class="mathline">2c+d=2²=4</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka lutningar ska jämföras och vad blir c?"><strong>2 · Lutningarna stämmer</strong><p class="mathline">c=2·2=4</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Bestäm d och derivatan vid x=2."><strong>3 · Den deriverbara skarven</strong><p class="mathline">8+d=4 ⇒ d=−4</p><p><strong>c=4, d=−4 och F′(2)=4.</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Varför fungerar inte c=4, d=0 trots att derivatorna hos de två delarna blir 4?"><strong>4 · Felsvaret</strong><p>För c=4 och d=0 närmar sig vänsterdelen <strong>8</strong> vid x=2 men <strong>F(2)=4</strong>. Hopp ⇒ inte kontinuerlig ⇒ inte deriverbar.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Ge ett kontinuerligt exempel med olika vänster- och högerlutning."><strong>5 · Kontinuerlig utan derivata</strong><p class="mathline">q(x)=2|x−1|+2</p><p>Vid x=1 hänger grafen ihop, men vänsterlutningen är <strong>−2</strong> och högerlutningen <strong>+2</strong>. Därför finns ingen derivata där.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<div class="notice"><strong>Läxa:</strong> 3274 och 3275. Extra 3277.</div>
+</section>
+
+</div>
+<div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex"><button type="button" class="secondary" id="ink-undo">Ångra</button><button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button><button type="button" class="secondary" id="ink-clear">Rensa</button><button type="button" class="secondary" id="ink-max">Förstora</button></div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
+<div class="controls"><div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
+<footer>Matematik – fortsättning, nivå 1c · Kapitel 3.2 · Deriverbarhet · Boken s. 177–178. Inga elevsvar skickas eller lagras.</footer>
+</main><script src="../assets/lesson-core.js"></script><script src="lesson.js"></script></body></html>
