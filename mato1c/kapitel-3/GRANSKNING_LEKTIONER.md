@@ -1,6 +1,6 @@
 # Kvalitetsgranskning – Matematik fortsättning, nivå 1c · Kapitel 3
 
-**Status 2026-11-12:** Fem webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
+**Status 2026-11-12:** Sex webblektioner är byggda och filerna publicerade på GitHubs `main`. Följande är kod- och matematikgranskning; det är **inte** ett påstående om fullständig visuell verifiering eller bevisad elevnytta.
 
 ## Allmän kontroll för varje lektion
 1. **Källtrohet:** jämför systematiskt med lektions-PDF, lärobokssidor, exakta uppgiftsnummer, läxa och eventuella Socrative-inslag. Ma1c: minst två av tre nivåer.
@@ -188,3 +188,6 @@
 - Det första testet efter registrering fann ett **för strikt textmatchningsvillkor** i testskriptet, inte något felaktigt kandidatvärde på webbsidan. Testet justerades för att kontrollera innehållet i stället för en viss ordalydelse.
 
 **Återstår för verklig undervisning:** manuell kontroll på lärarens projektor/surfplatta, och klassrumsuppföljning av elevlösningar. Godkända tekniska tester utgör inte bevis på ökat lärande.
+
+
+**Slutlig teknisk verifiering av lektion 6 (2026-11-12):** Alla sex Chromium-testskript passerade i [körning 43249420573](https://github.com/jacobflinder/Lektioner/actions/runs/43249420573), inklusive samtliga nio steg i 390px mobilbredd och båda globala maximiplatserna vid högra gränsen 4,5. Efter granskning av skärmbilderna förtydligades boksidornas placering och kandidaternas notation. [GitHub Pages-publikationen 43249418414](https://github.com/jacobflinder/Lektioner/actions/runs/43249418414) avslutades också med resultat success för samma ändring `fccce0ea0a7fa3278df8bef719b6cc814582c343`. Som tidigare kvarstår manuell klassrums- och projektorkontroll.
