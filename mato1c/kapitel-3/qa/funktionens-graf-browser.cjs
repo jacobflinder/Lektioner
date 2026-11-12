@@ -1,0 +1,114 @@
+/* Ma1c 3.1 L5: faktisk Chromium-granskning. Lokalt serverad, ingen persondata. */
+const {chromium}=require('playwright');
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const root='http://127.0.0.1:8123';
+const lesson=root+'/mato1c/kapitel-3/funktionens-graf-och-derivatornas-grafer/';
+const out='mato1c-qa-screenshots';
+fs.mkdirSync(out,{recursive:true});
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+ const errors=[],outside=[];let checks=0;
+ page.on('pageerror',e=>errors.push(e.message));
+ page.on('request',r=>{if(!r.url().startsWith(root))outside.push(r.url())});
+ async function ok(condition,message){assert.ok(condition,message);checks++}
+ async function go(n){await page.selectOption('#jump',String(n-1));await ok(await page.locator('.slide.active').count()===1,'Ett aktivt steg '+n)}
+ try{
+  await page.goto(root+'/mato1c/kapitel-3/',{waitUntil:'networkidle'});
+  await ok(await page.locator('a[href="funktionens-graf-och-derivatornas-grafer/"]').count()===1,'Kapitelindex har lektion 5');
+  await page.goto(lesson,{waitUntil:'networkidle'});
+  await ok(await page.locator('.slide').count()===8,'Åtta lektionssteg');
+  await ok(await page.locator('#start').isVisible(),'Startuppgift först');
+  await ok(!await page.locator('#start-answer').isVisible(),'Dolt facit på start');
+  await page.screenshot({path:out+'/lesson5-start-desktop.png',fullPage:true});
+  await page.locator('#mode').click();
+  await ok(await page.locator('body.classroom').count()===1,'Klassrumsläge');
+  await page.locator('#teacher-toggle').click();
+  await ok(await page.locator('.teacher.open').isVisible(),'Lärarstöd visas i klassrumsläget');
+  await page.locator('#mode').click();
+  await ok(await page.locator('body.classroom').count()===0,'Repetitionsläge');
+  await page.locator('[data-reveal="start-answer"]').click();
+  await ok((await page.locator('#start-answer').innerText()).includes('f₂″(0)=2'),'Tre konkreta motexempel för andraderivatan');
+  await go(3);
+  await ok(await page.locator('#linked-plot path').count()===3,'Tre matematiskt genererade grafer');
+  await ok((await page.locator('#val-d1').innerText()).includes('0,00'),'f′(2)=0');
+  await ok((await page.locator('#val-d2').innerText()).includes('1,00'),'f″(2)=+1');
+  await page.locator('[data-focus-x="4"]').click();
+  await ok((await page.locator('#val-d1').innerText()).includes('1,00'),'f′(4)=1 vid inflexion');
+  await ok((await page.locator('#val-d2').innerText()).includes('0,00'),'f″(4)=0');
+  await page.locator('[data-focus-x="6"]').click();
+  await ok((await page.locator('#val-d1').innerText()).includes('0,00'),'f′(6)=0');
+  await ok((await page.locator('#val-d2').innerText()).includes('−1,00'),'f″(6)=−1');
+  await page.selectOption('#class-2','min');
+  await page.selectOption('#class-4','min');
+  await page.selectOption('#class-6','max');
+  await page.locator('#check-classes').click();
+  await ok((await page.locator('#class-feedback').innerText()).includes('f′ positiv'),'Specifik felåterkoppling om inflexion');
+  await page.selectOption('#class-4','infl');
+  await page.locator('#check-classes').click();
+  await ok((await page.locator('#class-feedback').innerText()).startsWith('Rätt'),'Alla tre punkttyper verifierade');
+  await page.screenshot({path:out+'/lesson5-linked-graphs-desktop.png',fullPage:true});
+  await go(4);
+  await ok(!await page.locator('#interpret-answer').isVisible(),'Inflexionsmotiveringen visas inte automatiskt');
+  await page.locator('[data-reveal="interpret-answer"]').click();
+  await ok((await page.locator('#interpret-answer').innerText()).includes('f′(4)=1'),'Inflexion men inte terrass');
+  await page.locator('[data-reveal="triple-formula"]').click();
+  await ok((await page.locator('#triple-formula').innerText()).includes('−(x−2)(x−6)/4'),'Egen exakt modell dokumenterad');
+  await go(5);
+  await ok(await page.locator('#parallel-graph path').count()===2,'Två parallella linjer ritade');
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===0,'Exemplet börjar dolt');
+  for(let i=0;i<3;i++)await page.locator('#example [data-seq-next]').click();
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===3,'Tre sekvenssteg visas');
+  const worked=await page.locator('#example .steps').innerText();
+  await ok(worked.includes('g₁(x)=−x')&&worked.includes('g₂(x)=−x+2'),'Originalets genomarbetade exempel bevarat');
+  await page.locator('#example [data-seq-reset]').click();
+  await ok(await page.locator('#example [data-seq-item]:visible').count()===0,'Steg kan återställas');
+  await go(6);
+  await page.locator('#own-root').fill('2');
+  await page.selectOption('#own-shape','down');
+  await page.locator('#own-second').fill('2');
+  await page.locator('#check-own').click();
+  await ok((await page.locator('#own-feedback').innerText()).includes('negativ för x<2'),'Fel form får förklaring');
+  await page.selectOption('#own-shape','up');
+  await page.locator('#own-second').fill('−2');
+  await page.locator('#check-own').click();
+  await ok((await page.locator('#own-feedback').innerText()).includes('konstanten −4'),'Fel andraderivata får återkoppling');
+  await page.locator('#own-second').fill('2');
+  await page.locator('#check-own').click();
+  await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Korrekt eget svar');
+  await ok(!await page.locator('#own-answer').isVisible(),'Fullt facit döljs');
+  await page.locator('[data-reveal="own-answer"]').click();
+  await ok((await page.locator('#own-answer').innerText()).includes('(x−2)²+3'),'Originalets andra lösning bevarad');
+  await ok(!await page.locator('#shift-reveal').isVisible(),'Visualisering visas först efter eget försök');
+  await page.locator('[data-reveal="shift-reveal"]').click();
+  await ok(await page.locator('#shift-graph path').count()===2,'Två kurvor för vertikalförskjutning');
+  await ok((await page.locator('#shift-c-output').innerText()).includes('3,0'),'Startar på C=3');
+  await page.locator('#shift-c').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  await ok((await page.locator('#shift-c-output').innerText()).includes('1,5'),'C ändras med tangentbordskompatibelt reglage');
+  await ok((await page.locator('#shift-description').innerText()).includes('+1,5'),'Funktionsbeskrivningen ändras med höjdförskjutningen');
+  await page.screenshot({path:out+'/lesson5-vertical-shift-desktop.png',fullPage:true});
+  await go(7);
+  const book=await page.locator('#book').innerText();
+  for(const value of ['s. 154–155','3146–3149','3148','3150–3152','3153–3154','3149 och 3150','3153','20 minuter','minst två']){
+   await ok(book.includes(value),'Lärobok och läxa: '+value);
+  }
+  await go(8);
+  await ok(await page.locator('#exit-derivative path').count()===1,'Originalets derivatagraf');
+  await ok(!await page.locator('#exit-answer').isVisible(),'Utcheckningen har dolt facit');
+  await ok((await page.locator('#exit').innerText()).includes('p′(x)=(x−2)²'),'Extra kontroll bevarad');
+  await page.locator('[data-reveal="exit-answer"]').click();
+  const solution=await page.locator('#exit-answer').innerText();
+  await ok(solution.includes('h″(x)=2x−4')&&solution.includes('h′(2)=−1'),'Inflexion inte terrass korrekt');
+  await ok(solution.includes('h₁(x)=x³/3−2x²+3x'),'Ett giltigt exempel på primitiv');
+  await page.screenshot({path:out+'/lesson5-exit-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  for(let i=1;i<=8;i++){await go(i);await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobil utan dokumentöverspill steg '+i)}
+  await go(3);await page.screenshot({path:out+'/lesson5-linked-mobile.png',fullPage:true});
+  await go(7);await page.screenshot({path:out+'/lesson5-book-mobile.png',fullPage:true});
+  await ok(errors.length===0,'Inga JavaScript-fel');
+  await ok(outside.length===0,'Ingen extern nätverkstrafik');
+  console.log(JSON.stringify({result:'PASS',checks,errors,outside,screenshots:6},null,2));
+ }catch(e){console.error('Ma1c L5 QA FAILED:',e.stack||e);await page.screenshot({path:out+'/lesson5-FAIL.png',fullPage:true}).catch(()=>{});process.exitCode=1}
+ finally{await browser.close()}
+})();
