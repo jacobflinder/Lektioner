@@ -1,0 +1,30 @@
+/* Fysik 1 – 8.5 Elektriska fält: lokala pedagogiska figurer och kontrollområden */
+.field-figure{margin:0;background:linear-gradient(145deg,#f9fdff,#edf6f9);border:1px solid #d0e3e8;border-radius:14px;padding:12px}
+.field-figure svg{width:100%;height:auto;max-height:430px;display:block}
+.field-figure figcaption{font-size:.80rem;line-height:1.47;color:#4c6c77;margin:8px 4px 0}
+.goal-card,.book-main{padding:14px 17px;background:#eaf6ef;border:1px solid #cfdfd3;border-radius:11px;margin:14px 0}
+.goal-card ol{margin:10px 0 0;padding-left:1.25rem}.goal-card li{margin:6px 0}
+.goal-card p,.book-main p{margin:8px 0 0}
+.small-context{font-size:.88rem;color:#456875}
+.field-math{font-family:"STIX Two Math","Cambria Math", "DejaVu Serif",serif;font-size:clamp(1.03rem,1.85vw,1.40rem);line-height:1.65;margin:5px 0;max-width:100%;overflow-x:auto}
+.field-math math{font-size:1em}
+.field-math b{color:#1a7387}
+.field-model{background:linear-gradient(140deg,#f2f9fb,#eaf5f7)}
+.field-model .drawing svg{width:100%;height:auto;display:block;max-height:450px}
+.field-model .model-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.field-model .model-controls .control{min-width:0}
+.field-model label{display:flex;justify-content:space-between;gap:10px;font-size:.82rem;font-weight:675;align-items:center}
+.field-model .range-value{white-space:nowrap;color:#116c80;font-variant-numeric:tabular-nums}
+.field-model input[type=range]{display:block;width:100%;accent-color:#11869c;margin:10px 0}
+.field-model .control select{display:block;width:100%;margin:10px 0;font-size:.90rem}
+.field-model .model-result{font-size:.92rem;line-height:1.55;font-weight:500;overflow-wrap:anywhere}
+.field-model .model-result b{font-weight:770;color:#156d84}
+.field-model .model-button{display:flex;flex-wrap:wrap;gap:8px}
+.field-model .model-button button{font-size:.84rem;padding:9px 12px}
+.field-model .figcap{line-height:1.5}
+.slide .body-copy .feedback-box{margin-top:13px}
+.slide .body-copy .steps-label{margin-top:15px}
+.slide .source-note{clear:both}
+@media(max-width:930px){.field-model .drawing svg{max-height:none}}
+@media(max-width:520px){.field-figure{padding:6px}.field-model .model-controls{grid-template-columns:1fr}.field-figure figcaption{font-size:.78rem}.field-model .model-result{font-size:.89rem}}
+@media(prefers-reduced-motion:reduce){.field-model svg{animation:none}}
