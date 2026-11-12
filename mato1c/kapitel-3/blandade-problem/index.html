@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="sv"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Blandade problem · Matematik – fortsättning, nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.18rem,2.4vw,1.64rem);line-height:1.58}
+.mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
+.plotgrid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,1fr);gap:16px;margin:15px 0;align-items:start}
+.visual{background:#f9fcfd;border:1px solid #cbdfe7;border-radius:14px;padding:12px;margin:0;min-width:0}
+.visual svg{display:block;width:100%;height:auto}
+.visual figcaption{font-size:.85rem;color:#4d6c7a;margin-top:8px}
+.visual-title{font-size:1.04rem;color:#145c71;margin:0 0 8px}
+.sliders{border-radius:12px;background:#eaf5f9;border:1px solid #c7dbe5;padding:14px}
+.sliders label{display:block;font-weight:780}
+.sliders input[type=range]{width:100%;min-height:36px;accent-color:#087e75}
+.sliders output{font-size:1.13rem;font-weight:800;color:#0b6a67;font-variant-numeric:tabular-nums}
+.shortcut-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.shortcut-buttons button{padding:8px 11px;font-size:.91rem}
+.shortcut-buttons button[aria-pressed=true]{background:#097970;color:white}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
+.metric{min-width:0;border:1px solid #cadce4;border-radius:11px;padding:13px;background:#f0f7fa}
+.metric span{display:block;color:#4f6979;font-size:.88rem}
+.metric strong{display:block;color:#105f69;font-size:clamp(1rem,2vw,1.28rem);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.questions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+.questions-grid>div{background:#f0f6fa;border:1px solid #cbdce5;border-radius:11px;padding:12px;min-width:0}
+.questions-grid select,.check-row input{border:2px solid #9ebdcb;border-radius:9px;padding:10px;color:#163b52;background:#fff;font:inherit;width:100%;min-width:0}
+.questions-grid label,.check-row label{display:block;font-weight:740;margin:3px 0}
+.book-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:16px 0}
+.book-levels>div{background:#f3f8fa;border:1px solid #cadde5;border-radius:12px;padding:17px}
+.book-levels strong{display:block;color:#0b746a}
+.book-levels b{display:block;margin:7px 0;font-size:1.17rem}
+.math-note{border-left:4px solid #0b8576;background:#eaf6f2;padding:13px 17px;border-radius:9px}
+.caution{border-left:4px solid #b47b26;background:#fff7eb;padding:13px 17px;border-radius:9px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.pair>.panel,.pair>.task,.pair>.sequence{min-width:0;margin:0}
+.signline{font-variant-numeric:tabular-nums;word-spacing:9px;font-size:1.1rem;font-weight:780}
+.check-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:13px 0}
+.fraction{display:inline-flex;vertical-align:middle;flex-direction:column;align-items:center;line-height:1.07;white-space:nowrap}
+.fraction .numerator{border-bottom:1.5px solid currentColor;padding:0 4px 3px}
+.fraction .denominator{padding:3px 4px 0}
+@media(max-width:930px){.plotgrid{grid-template-columns:1fr}}
+@media(max-width:730px){.metrics,.questions-grid,.book-levels,.pair,.check-row{grid-template-columns:1fr}.visual{padding:7px}.mathline{overflow-wrap:anywhere}}
+</style></head><body>
+<header>
+<a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.2</strong>
+<div class="head-actions">
+<button id="ink-toggle" type="button" class="secondary" aria-expanded="false">Visa skrivyta</button>
+<button id="teacher-toggle" type="button" class="secondary" aria-expanded="false">Visa lärarstöd</button>
+<button id="mode" type="button" class="secondary" aria-pressed="false">Klassrumsläge</button>
+</div></header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Välj uttryck utifrån vad som söks. Låt eleverna skriva själva först och jämföra i par; använd grafen till riktad återkoppling efter en förutsägelse. Bokarbete och individuell utcheckning prioriteras.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Gör ett eget försök innan du visar ett exempelsteg. Inga elevsvar eller personuppgifter samlas in.</div>
+<div class="stage" id="stage">
+
+<section class="slide active" id="start" data-teacher="Original s.1: vattenmodellen V(t)=120(1−e^(−0,2t)) för t≥0. Starten är att välja rätt uttryck för mängd, inflöde och inflödets förändring vid 5 min. Eleverna svarar enskilt och diskuterar sedan i par. Mål visas som nästa del efter start.">
+<div class="eyebrow">01 · Start · välj matematik före beräkningen</div>
+<h1>Vad är det egentligen vi ska bestämma?</h1>
+<p class="lead">Vatten samlas i en behållare. Modellen är förenklad.</p>
+<p class="mathline">V(t)=120(1−e<sup>−0,2t</sup>), &nbsp; t≥0</p>
+<p><strong>t</strong> mäts i minuter och <strong>V</strong> i liter.</p>
+<div class="task"><strong>Skriv själv – jämför sedan i par:</strong> Vilket uttryck behöver du i var och en av de tre frågorna? Ange också enheten.</div>
+<div class="questions-grid">
+<div><label for="choose-amount">1 · Vattenmängden efter 5 min</label><select id="choose-amount"><option value="">Välj uttryck</option><option value="V">V(5)</option><option value="d1">V′(5)</option><option value="d2">V″(5)</option></select></div>
+<div><label for="choose-rate">2 · Inflödet just efter 5 min</label><select id="choose-rate"><option value="">Välj uttryck</option><option value="V">V(5)</option><option value="d1">V′(5)</option><option value="d2">V″(5)</option></select></div>
+<div><label for="choose-accel">3 · Hur snabbt inflödet då ändras</label><select id="choose-accel"><option value="">Välj uttryck</option><option value="V">V(5)</option><option value="d1">V′(5)</option><option value="d2">V″(5)</option></select></div>
+</div>
+<button type="button" id="start-check">Kontrollera mina val</button>
+<p class="feedback" id="start-feedback" role="status" aria-live="polite"></p>
+</section>
+
+<section class="slide" id="goal" data-teacher="Original s.1–2. Mål: välja rätt funktion eller derivata, tolka värden med enhet och motivera förändring, extremvärden och gränsvärden. Duktiga elever bör förklara att V′>0 kan sammanfalla med V″<0. Ställ gärna frågan före förklaringen.">
+<div class="eyebrow">02 · Mål och begrepp</div>
+<h2>Mängd, förändring och förändringens förändring</h2>
+<p class="lead"><strong>Efter lektionen ska du kunna välja rätt funktion eller derivata, tolka värden med enhet och motivera förändring, extremvärden och gränsvärden.</strong></p>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Förutsäg innan varje steg.</strong> Vad betyder enheten för derivatan?</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Utveckla V(t). Vilken enhet har själva funktionen?"><strong>1 · Vattenmängden</strong><p class="mathline">V(t)=120−120e<sup>−0,2t</sup></p><p>V mäts i <strong>liter</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Derivera exponentialtermen. Hur snabbt ökar V?"><strong>2 · Inflödet</strong><p class="mathline">V′(t)=24e<sup>−0,2t</sup></p><p>V′ mäts i <strong>liter/min</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Derivera igen. Vilken enhet får förändringen av inflödet?"><strong>3 · Inflödets förändring</strong><p class="mathline">V″(t)=−4,8e<sup>−0,2t</sup></p><p>V″ mäts i <strong>liter/min²</strong>.</p></div>
+</div>
+<div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
+</div>
+<div class="task"><strong>Förutsäg:</strong> Kan vattenmängden öka samtidigt som inflödet minskar? Vad betyder det för grafens lutning? Kan modellen ge mer än 120 liter?</div>
+</section>
+
+<section class="slide" id="water" data-teacher="Original s.3 animation: vattenmängdens punkt och röd tangent rör sig, med tid att tänka. Webbens exakta, manuellt styrda modell kombinerar V, tangent och V′. Inga animeringar kör automatiskt. Be om förutsägelse vid t=0,5,10,20. 120 liter är horisontell asymptot och nås ej vid ändlig tid.">
+<div class="eyebrow">03 · Undersök · punkt, tangent och inflöde</div>
+<h2>Mer vatten – men allt långsammare</h2>
+<div class="task"><strong>Förutsäg innan du flyttar reglaget:</strong> Vid t=5 har vattenmängden ökat. Är tangentens lutning större eller mindre än vid t=0? Vad händer när t fortsätter öka?</div>
+<div class="sliders">
+<label for="water-t">Flytta tiden t (minuter)</label>
+<input type="range" id="water-t" min="0" max="25" step=".25" value="0">
+<output id="water-t-out" for="water-t">t = 0,00 min</output>
+<div class="shortcut-buttons" role="group" aria-label="Jämför tidpunkter">
+<button type="button" class="secondary" data-water-t="0">0 min</button>
+<button type="button" class="secondary" data-water-t="5">5 min</button>
+<button type="button" class="secondary" data-water-t="10">10 min</button>
+<button type="button" class="secondary" data-water-t="20">20 min</button>
+</div></div>
+<div class="plotgrid">
+<figure class="visual">
+<h3 class="visual-title">Vattenmängd och tangent</h3>
+<svg id="water-graph" viewBox="0 0 760 490" role="img" aria-label="Vattenmängd V i liter som ökar mot asymptoten 120 med styrbar tangent vars lutning ger inflödet"></svg>
+<figcaption>Grön kurva: V(t). Röd linje: tangent vid vald tid. Streckad linje: gränsvärdet 120 liter. Skalorna ändras inte.</figcaption>
+</figure>
+<div>
+<div class="metrics" style="grid-template-columns:1fr" aria-live="polite">
+<div class="metric"><span>Vattenmängd V(t)</span><strong id="water-amount">0,00 liter</strong></div>
+<div class="metric"><span>Inflöde V′(t)</span><strong id="water-inflow">24,00 liter/min</strong></div>
+<div class="metric"><span>Inflödets förändring V″(t)</span><strong id="water-change">−4,80 liter/min²</strong></div>
+</div>
+<div class="math-note"><strong>Var uppmärksam på tecknen:</strong> <span class="mathsmall">V′&gt;0</span> och <span class="mathsmall">V″&lt;0</span> samtidigt. Mängden ökar, men allt långsammare.</div>
+</div></div>
+</section>
+
+<section class="slide" id="water-feedback" data-teacher="Original s.4. V5=120(1−e^-1)=75,85≈75,9L; V′5=24/e=8,829≈8,83 L/min; V″5=−4,8/e=−1,766≈−1,77 L/min². V′0=24 greatest inflow because V″ negative. V(t) tends to120 from below, does not reach 120 in finite time, therefore no greatest water amount on t≥0; avoid false claim maximum120.">
+<div class="eyebrow">04 · Återkoppling till vattenmodellen</div>
+<h2>Växande betyder inte allt snabbare</h2>
+<p class="mathline">V(t)=120(1−e<sup>−0,2t</sup>), &nbsp; t≥0</p>
+<div class="sequence panel" data-sequence>
+<div class="nextprompt"><strong>Förutsäg nästa steg:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Beräkna V(5) och svara i liter."><strong>1 · Mängden efter fem minuter</strong><p class="mathline">V(5)=120(1−e<sup>−1</sup>)≈75,9</p><p>Det finns cirka <strong>75,9 liter</strong> i behållaren.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Beräkna V′(5). Vad säger enheten?"><strong>2 · Inflödet just då</strong><p class="mathline">V′(5)=24e<sup>−1</sup>≈8,83</p><p>Mängden ökar just då med cirka <strong>8,83 liter/min</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Beräkna V″(5). Hur ska minustecknet tolkas?"><strong>3 · Förändringen av inflödet</strong><p class="mathline">V″(5)=−4,8e<sup>−1</sup>≈−1,77</p><p>Inflödet <strong>minskar</strong> då med cirka <strong>1,77 liter/min per minut</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="När är inflödet störst? Når mängden 120 liter någon gång vid ändlig tid?"><strong>4 · Störst inflöde, men inget största vattenvärde</strong><p>V″(t)&lt;0 för alla t≥0, alltså avtar V′. <strong>Största inflödet är V′(0)=24 liter/min.</strong></p><p class="mathline">lim<sub>t→∞</sub> V(t)=120</p><p>För varje ändlig tid är V(t)&lt;120. Mängden närmar sig <strong>120 liter underifrån</strong> men når aldrig 120 enligt modellen. <strong>Inget största vattenvärde finns</strong> på t≥0.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<div class="caution"><strong>Viktig skillnad:</strong> Ett gränsvärde behöver inte vara ett funktionsvärde som verkligen antas. Här finns ingen tidpunkt då modellen ger exakt 120 liter.</div>
+</section>
+
+<section class="slide" id="robot" data-teacher="Original s.5: robotens sträcka s(t)=12sqrt(t+1)−12, 0≤t≤8, s meter, t sekunder. Egen uppgift: s′3, s″3, när s′ max, tangentekvationen vid t3. Stöd sqrt(t+1)=(t+1)^1/2 och tangent y=s3+s′3(t−3). Eleven ska välja att maximera s′, inte s. Gör på papper innan facit.">
+<div class="eyebrow">05 · Din tur · en annan storhet</div>
+<h2>Robotens rörelse</h2>
+<p class="lead">En robot rör sig framåt. Sträckan s mäts i meter och tiden t i sekunder.</p>
+<p class="mathline">s(t)=12√(t+1)−12, &nbsp; 0≤t≤8</p>
+<div class="task"><strong>Lös på papper innan återkopplingen:</strong>
+<ol class="spaced"><li>Bestäm hastigheten vid t=3.</li>
+<li>Bestäm och tolka s″(3).</li>
+<li><strong>När är hastigheten störst?</strong> Motivera.</li>
+<li>Bestäm tangentens ekvation vid t=3.</li></ol>
+<p>Börja själv. Jämför sedan i par vilken funktion ni maximerade och varför.</p></div>
+<button type="button" class="secondary" data-reveal="robot-hint">Stöd om du fastnar</button>
+<div id="robot-hint" class="panel hidden">
+<p class="mathline">√(t+1)=(t+1)<sup>1/2</sup></p>
+<p class="mathline">v(t)=s′(t)</p><p class="mathline">y=s(3)+s′(3)(t−3)</p>
+<p>Fundera på vad derivatan av sträckan betyder innan du söker ett maximum.</p></div>
+</section>
+
+<section class="slide" id="robot-feedback" data-teacher="Original s.6. s′=6/sqrt(t+1), s′3=3m/s; s″=−3(t+1)^(-3/2), at3=−3/8=−0,375m/s²; s′ decreasing entire [0,8], max s′0=6m/s. s3=12, tangent y=12+3(t−3)=3t+3, at3.1 gives12.3m linear approx. Check graph curvature if demo; none needed.">
+<div class="eyebrow">06 · Återkoppling · roboten</div>
+<h2>Högst hastighet är inte längst sträcka</h2>
+<div class="sequence panel" data-sequence>
+<div class="nextprompt"><strong>Förutsäg nästa steg:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Skriv om roten som potens och derivera. Vad är hastigheten vid t=3?"><strong>1 · Hastighet</strong><p class="mathline">s′(t)=6/√(t+1)</p><p class="mathline">s′(3)=6/√4=3 m/s</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Derivera hastigheten. Hur tolkar du s″(3)?"><strong>2 · Acceleration</strong><p class="mathline">s″(t)=−3(t+1)<sup>−3/2</sup></p><p class="mathline">s″(3)=−3/8=−0,375 m/s²</p><p>Hastigheten minskar vid den tidpunkten med 0,375 m/s varje sekund, momentant.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="När är s′ störst? Varför räcker det inte att maximera s?"><strong>3 · Största hastigheten</strong><p>Eftersom s″&lt;0 på hela intervallet avtar s′. Största hastigheten fås vid <strong>t=0</strong>:</p><p class="mathline">s′(0)=6 m/s</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är s(3)? Vilken tangent får du vid t=3?"><strong>4 · Tangent och lokal approximation</strong><p class="mathline">s(3)=12√4−12=12</p><p class="mathline">y=12+3(t−3)=3t+3</p><p>Nära t=3 ger tangenten t.ex. <span class="mathsmall">s(3,1)≈12+3·0,1=12,3 m</span>.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<div class="math-note"><strong>Fysikalisk tolkning:</strong> positiv hastighet och negativ acceleration kan förekomma samtidigt. Roboten rör sig framåt men saktar ned.</div>
+</section>
+
+<section class="slide" id="conditions" data-teacher="Original s.7: två korta problem, först enskilt och sedan par. f=x³+ax, minimum vid x2 => derivative3x²+a zero, a=-12, second6x at2 positive. g′=(x−1)(x−3)² => stationary1 and3, at1 min, at3 terrace no extremum; cannot classify simply by multiplicity without sign check. Don't reveal solutions before next slide.">
+<div class="eyebrow">07 · Två villkor · två metoder</div>
+<h2>Översätt villkor till matematik</h2>
+<p class="lead">Skriv först ett matematiskt villkor. Räkna sedan. Försök enskilt och jämför motiveringarna i par.</p>
+<div class="pair">
+<div class="task">
+<strong>1 · En okänd konstant</strong>
+<p class="mathline">f(x)=x³+ax</p>
+<p>Bestäm a så att f har en <strong>minimipunkt vid x=2</strong>. Visa att punkten verkligen är ett minimum.</p>
+<p><strong>Räcker det att bara lösa f′(2)=0?</strong></p>
+</div>
+<div class="task">
+<strong>2 · Du får derivatan</strong>
+<p class="mathline">g′(x)=(x−1)(x−3)²</p>
+<p>Bestäm och klassificera de stationära punkternas x-värden <strong>utan att bestämma g</strong>.</p>
+<p>Undersök tecknet på båda sidor. Vad händer vid en dubbelrot?</p>
+</div></div>
+</section>
+
+<section class="slide" id="conditions-feedback" data-teacher="Original s.8: f′=3x²+a so a=-12, f″=6x so f″2=12 positive, f2=-16, minimum (2,-16). For g′=(x−1)(x−3)²: sign negative x<1, positive 1<x<3 and x>3 => min at1, at3 no extrema. g″=(x−3)(3x−5), g″ flips at3, g′3=0 so terrace point at3; g itself unspecified, y coordinate cannot be known. Added interactive sign explorer shows g′, not g.">
+<div class="eyebrow">08 · Återkoppling och teckenundersökning</div>
+<h2>Ett nollställe är bara början</h2>
+<div class="pair">
+<div class="sequence panel" data-sequence>
+<h3>1 · Konstanten a</h3>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilket värde på a gör f′(2)=0?"><strong>Villkoret</strong><p class="mathline">f′(x)=3x²+a</p><p class="mathline">f′(2)=12+a=0 ⇒ a=−12</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur vet du att det är en minimipunkt och inte en maximipunkt?"><strong>Klassificera</strong><p class="mathline">f″(x)=6x, &nbsp; f″(2)=12&gt;0</p><p>Alltså en lokal <strong>minimipunkt</strong> vid x=2.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken koordinat har minimipunkten?"><strong>Beräkna koordinaten</strong><p class="mathline">f(2)=8−24=−16</p><p>Minimipunkten är <strong>(2, −16)</strong>.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<div class="sequence panel" data-sequence>
+<h3>2 · Derivatan g′</h3>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilka är nollställena för g′?"><strong>Stationära x</strong><p class="mathline">g′(x)=0 ⇒ x=1 eller x=3</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket tecken har g′ i de tre intervallen?"><strong>Teckenundersökning</strong><p>För x≠3 är <span class="mathsmall">(x−3)²</span> positiv, så tecknet styrs av x−1.</p><p class="signline">x&lt;1: − &nbsp; 1&lt;x&lt;3: + &nbsp; x&gt;3: +</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken punkttyp ger teckenväxlingen vid x=1? Vad händer vid x=3?"><strong>Klassificera</strong><p>Vid x=1: −→+ ger en lokal <strong>minimipunkt</strong>. Vid x=3: +→+ ger <strong>ingen extrempunkt</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur kan du visa att x=3 är en terrasspunkt?"><strong>Terrasspunkten</strong><p class="mathline">g″(x)=(x−3)(3x−5)</p><p>g″ byter tecken vid x=3 och g′(3)=0. Alltså har g en <strong>terrasspunkt</strong> vid x=3. Dess y-koordinat är okänd eftersom g inte är given.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></div>
+<div class="plotgrid">
+<figure class="visual">
+<h3 class="visual-title">Teckenkontroll: här visas g′ – inte g</h3>
+<svg id="sign-graph" viewBox="0 0 760 435" role="img" aria-label="Derivatans graf g prim lika med x minus ett gånger x minus tre i kvadrat med nollställen vid x ett och tre och en flyttbar markör"></svg>
+<figcaption>En dubbelrot kan ge g′=0 utan att g′ byter tecken.</figcaption>
+</figure>
+<div>
+<div class="sliders"><label for="sign-x">Undersök tecknet på g′(x)</label><input id="sign-x" type="range" min="0" max="4.5" step=".1" value=".5">
+<output id="sign-x-output" for="sign-x">x = 0,50</output>
+<div class="shortcut-buttons"><button type="button" class="secondary" data-sign-x=".5">Före 1</button><button type="button" class="secondary" data-sign-x="2">Mellan 1 och 3</button><button type="button" class="secondary" data-sign-x="3">Vid 3</button><button type="button" class="secondary" data-sign-x="3.5">Efter 3</button></div>
+</div>
+<div class="metric"><span>Derivata och tecken</span><strong id="sign-val">g′(0,50) = −3,13</strong><span id="sign-meaning">g avtar här</span></div>
+<p class="caution"><strong>Enskilt kriterium:</strong> För att avgöra extrempunkt måste du jämföra derivatans tecken <em>på båda sidor</em>, inte bara kontrollera om derivatan är noll.</p>
+</div></div>
+</section>
+
+<section class="slide" id="book" data-teacher="Original s.9: Lärobokens blandade problem s174–176. Nivå1 3247–3253 (174–175), nivå2 3254–3265 (175–176), nivå3 3266–3271 (176). Minst två nivåer. Start 3247→3249→3252→3254→3261; redan säker 3258→3262→3266→3268→3271. 20 min tyst eget, digitala verktyg när uppgiften kräver eller kontroll. Läxa 3248 och 3260, extra 3264. Ingen Socrative.">
+<div class="eyebrow">09 · Eget arbete i boken</div>
+<h2>Blandade problem – välj metod själv</h2>
+<p class="lead">Boken <strong>s. 174–176</strong>. Skriv vad som söks, välj uttryck, beräkna, motivera och tolka med rätt enhet.</p>
+<div class="book-levels">
+<div><strong>Nivå 1 · s. 174–175</strong><b>3247–3253</b><p>Välj storhet och använd derivatan korrekt.</p></div>
+<div><strong>Nivå 2 · s. 175–176</strong><b>3254–3265</b><p>Kombinera metoder och motiveringar.</p></div>
+<div><strong>Nivå 3 · s. 176</strong><b>3266–3271</b><p>Tillämpa på nya förutsättningar.</p></div>
+</div>
+<div class="task"><strong>Börja med 20 minuter tyst eget arbete.</strong> Arbeta med <strong>minst två nivåer</strong>. Försök själv före hjälp, kontrollera och förstå dina fel. Använd digitalt verktyg när uppgiften kräver det eller som kontroll, och <strong>motivera</strong> det grafen verkar visa.</div>
+<div class="panel"><p><strong>Grund och nästa steg:</strong> 3247 → 3249 → 3252 → 3254 → 3261.</p><p><strong>Redan säker:</strong> 3258 → 3262 → 3266 → 3268 → 3271.</p></div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> 3248 och 3260. Redan klar? Gör även 3264.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="Original s.10. Elevens individuella exit: M(t)=50(1−e^(−0,1t)) gram t minuter, determine M′0=5g/min, largest increasing rate at t0 because M″<0, limit 50 approached not attained. Second h(x)=x²+bx, horizontal tangent x1 => b=-2, min because h″=2. Do not expose solutions until feedback slide 11.">
+<div class="eyebrow">10 · Individuell utcheckning</div>
+<h2>Visa vad du kan – utan att kopiera en metod</h2>
+<p class="lead">Svara självständigt på papper. En kort motivering är viktigare än många decimaler.</p>
+<div class="pair">
+<div class="task"><strong>1 · Mängd och förändring</strong>
+<p class="mathline">M(t)=50(1−e<sup>−0,1t</sup>), &nbsp; t≥0</p>
+<p>M mäts i gram och t i minuter.</p><ol class="spaced">
+<li>Bestäm M′(0) och tolka med enhet.</li>
+<li>När är ökningstakten störst? Motivera.</li>
+<li>Vilket värde närmar sig M(t)? Antar funktionen det värdet?</li>
+</ol></div>
+<div class="task"><strong>2 · Villkor och tangent</strong>
+<p class="mathline">h(x)=x²+bx</p>
+<p>Bestäm b så att tangenten vid x=1 är <strong>horisontell</strong>.</p>
+<p>Är punkten ett maximum eller minimum? <strong>Motivera.</strong></p>
+</div></div>
+<div class="panel"><strong>Dagens mål</strong><p>Välj rätt funktion eller derivata. Tolka med enhet. Motivera förändring, extremvärden och gränsvärden.</p></div>
+</section>
+
+<section class="slide" id="exit-feedback" data-teacher="Original s.11. M′(t)=5e^(−0,1t), M′0=5g/min; M″=−0,5e^(−0,1t)<0, largest rate at t0. Limit M50 as t→∞, not attained finite t. h′=2x+b, h′1=0=>b−2; h″=2>0 local and global minimum for h=x²−2x, h(1)=−1, point(1,−1). Two separate sequences with independent reveal.">
+<div class="eyebrow">11 · Återkoppling efter eget försök</div>
+<h2>Betydelse före beräkning</h2>
+<p class="lead">Kontrollera både svaret och varför metoden fungerar.</p>
+<div class="pair">
+<div class="sequence panel" data-sequence>
+<h3>1 · Mängd och förändring</h3>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Derivera M. Vad är M′(0), inklusive enhet?"><strong>Startens ökningstakt</strong><p class="mathline">M′(t)=5e<sup>−0,1t</sup></p><p class="mathline">M′(0)=5 g/min</p><p>I början ökar mängden med <strong>5 g/min</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="När är M′ som störst? Använd M″ för att motivera."><strong>Största ökningstakten</strong><p class="mathline">M″(t)=−0,5e<sup>−0,1t</sup>&lt;0</p><p>M′ avtar och är som störst vid <strong>t=0</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket är gränsvärdet och når funktionen det?"><strong>Gränsvärdet är inget största värde</strong><p class="mathline">lim<sub>t→∞</sub> M(t)=50</p><p>Mängden närmar sig <strong>50 g underifrån</strong>, men når inte 50 vid någon ändlig tid.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<div class="sequence panel" data-sequence>
+<h3>2 · Villkor och tangent</h3>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilket värde på b ger horisontell tangent vid x=1?"><strong>Översätt villkoret</strong><p class="mathline">h′(x)=2x+b</p><p class="mathline">h′(1)=0 ⇒ 2+b=0 ⇒ b=−2</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Visa punkttypen med andraderivatan."><strong>Kontrollera minimum</strong><p class="mathline">h″(x)=2&gt;0</p><p>En <strong>lokal minimipunkt</strong>. För h(x)=x²−2x är det också funktionens <strong>globala minimum</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är y-koordinaten?"><strong>Koordinaten</strong><p class="mathline">h(1)=1−2=−1</p><p>Minimipunkten är <strong>(1, −1)</strong>.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> 3248 och 3260. Extra 3264.</div>
+</section>
+
+</div>
+<div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex">
+<button type="button" class="secondary" id="ink-undo">Ångra</button>
+<button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button>
+<button type="button" class="secondary" id="ink-clear">Rensa</button>
+<button type="button" class="secondary" id="ink-max">Förstora</button>
+</div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
+<div class="controls"><div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
+<footer>Matematik – fortsättning, nivå 1c · 3.2 Blandade problem · Boken s. 173–176. Ingen insamling av elevsvar.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="lesson.js"></script>
+</body></html>
