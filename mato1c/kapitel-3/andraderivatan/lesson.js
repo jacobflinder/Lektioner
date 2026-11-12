@@ -65,14 +65,17 @@ function numericValue(id){
  return Number(raw);
 }
 $('check-own').addEventListener('click',()=>{
- const out=$('own-feedback'),formula=$('own-formula').value,a=numericValue('own-at-zero'),b=numericValue('own-root');
+ const out=$('own-feedback'),formula=$('own-formula').value.trim().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/[×·]/g,'*'),a=numericValue('own-at-zero'),b=numericValue('own-root');
  let wrong='';
- if(!formula)wrong='Välj först vilket uttryck som är h″(x). Kontrollera att du har deriverat två gånger.';
- else if(formula!=='b'){
-   if(formula==='a')wrong='3x² − 12x är h′(x), inte h″(x). Derivera det uttrycket en gång till.';
-   else if(formula==='c')wrong='Konstanttermen −12 finns kvar när du deriverar −12x. Kontrollera båda termerna i h′.';
-   else wrong='Kontrollera exponenterna: derivatan av 3x² är 6x, inte 6x².';
- }else if(!Number.isFinite(a))wrong='Skriv ett tal för h″(0). Uttrycket h″(x) är inte samma sak som värdet h″(0).';
+ const correct=/^(?:6\*?x-12|-12\+6\*?x|6\*?\(x-2\))$/.test(formula);
+ if(!formula)wrong='Skriv ditt eget uttryck för h″(x). Derivera h′(x) en gång till och förenkla till ax+b.';
+ else if(!correct){
+   if(/^(?:3\*?x\^?2-12\*?x|3x²-12x)$/.test(formula))wrong='Det här är h′(x), inte h″(x). Derivera båda termerna en gång till.';
+   else if(formula==='6x'||formula==='6*x')wrong='Du har missat konstanttermen från derivatan av −12x. Vad är derivatan av −12x?';
+   else if(/^(?:6\*?x\^?2-12|6x²-12)$/.test(formula))wrong='Kontrollera exponenten: derivatan av 3x² är 6x, inte 6x².';
+   else wrong='Kontrollera din andra derivering. Skriv svaret som ax+b. Du kan också skriva −12+6x.';
+ }
+ else if(!Number.isFinite(a))wrong='Skriv ett tal för h″(0). Uttrycket h″(x) är inte samma sak som värdet h″(0).';
  else if(Math.abs(a+12)>1e-9)wrong='Sätt x = 0 i h″(x) = 6x − 12. Vad blir 6 · 0 − 12?';
  else if(!Number.isFinite(b))wrong='Ange x-värdet som löser ekvationen h″(x) = 0.';
  else if(Math.abs(b-2)>1e-9)wrong='Lös 6x − 12 = 0. Skilj ekvationens lösning från andraderivatans värde vid 0.';
