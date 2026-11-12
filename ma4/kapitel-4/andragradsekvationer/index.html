@@ -78,7 +78,7 @@ function checkRoots(raw,config){
  return {status:'incorrect',message:config.kind==='square'?'Ingen av rötterna stämmer ännu. Kvadrera ett av dina tal och jämför med högerledet.':'Ingen av rötterna stämmer ännu. Kontrollera tecknet i diskriminanten och pröva att sätta in en rot.'};
 }
 document.querySelectorAll('[data-check]').forEach(box=>{
- const config=checks[box.dataset.check],input=box.querySelector('input'),feedback=box.query('.sc-feedback'),hint=box.query('.sc-hint'),answer=box.query('.sc-answer');
+ const config=checks[box.dataset.check],input=box.querySelector('input'),feedback=box.querySelector('.sc-feedback'),hint=box.querySelector('.sc-hint'),answer=box.querySelector('.sc-answer');
  const respond=()=>{const r=checkRoots(input.value,config);feedback.dataset.status=r.status==='correct'?'correct':'incorrect';feedback.textContent=r.message;answer.hidden=true;};
  box.querySelector('[data-check-action="check"]').addEventListener('click',respond);
  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();respond()}});
