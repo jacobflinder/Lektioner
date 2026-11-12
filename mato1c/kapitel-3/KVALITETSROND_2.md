@@ -153,11 +153,47 @@ Automatiska Chromium-fall för lektion 7–8 är utökade med kärnväg, lärarv
 Det är fortfarande **inte visat** att dessa designval ökar elevernas faktiska lärande; uppföljning av elevsvar, tidsåtgång, projektor/iPad och fördröjd problemlösning behövs i klassrummet.
 
 
-## Kommande omgångar
+
+## Omgång 5 · lektion 9–10
+
+### Lektion 9: Blandade problem
+
+**Grundkälla:** `Ma3c_Blandade_problem.pdf` (11 sidor). **Allt originalinnehåll bevarat:** start med `V(t)=120(1−e^(−0,2t))`, rätt val av V(5), V′(5), V″(5) och enheter; vattenmodellens derivator, gränsvärde 120 liter, inget antaget största vattenvärde och V′(0)=24 liter/min; robot `s(t)=12√(t+1)−12`, hastighet, acceleration, största hastighet och tangent; villkorsproblemen `f=x³+ax` och `g′=(x−1)(x−3)²`; boken s.174–176 och alla tre nivåer; individuella exituppgifterna om `M(t)=50(1−e^(−0,1t))` och `h(x)=x²+bx` med separata lösningar. Nivå 1 **3247–3253**, nivå 2 **3254–3265**, nivå 3 **3266–3271**; grundspår **3247→3249→3252→3254→3261**, säkert spår **3258→3262→3266→3268→3271**. Läxa **3248 och 3260**, extra **3264**. Ingen Socrative i originalet och ingen har lagts till.
+
+**Kvalitetsändringar:**
+- Lärarstödet innehåller kärnväg (1–2, 4–11), beslutsregler utifrån elevfel, riktmärke för cirka 70-minuterslektion, minst **20 min sammanhängande bokarbete** och senare återkallning med ny exponentialmodell. Den manuellt styrbara vattenanimationen (3) är **valbar via en knapp från målsteget**; den matematiska återkopplingen (4) är fortfarande obligatorisk.
+- Grafens exakta V-, V′- och V″-värden samt den färdiga teckentolkningen är **dolda före förutsägelsen** och öppnas individuellt på begäran. Graf och tangent förblir synliga så att eleverna kan resonera från representationen.
+- Robotproblemet uppmanar till ett **eget metodval** med samtliga fyra ursprungliga krav uttryckligen i huvudtexten. Originalets punktlista och matematiskt stöd ligger kvar som valbara hjälpnivåer.
+- Grafen över g′ i villkorsproblemet är **valbar återkoppling** först efter teckentabellen och de två klickstyrda matematiska faciten. Därmed kan eleverna inte ersätta egen teckenmotivering med ett förhandsvisat diagram.
+- En frivillig 1-minutsåterkallning från lektion 8 prövar `C(x)=x+9/x` för x>0, där minimum 6 antas vid x=3, med facit dolt under elevförsöket.
+
+**Matematiska skyddsräcken:** V′>0 och V″<0 samtidigt betyder ökande vattenmängd med avtagande inflöde. Eftersom V(t)<120 för varje ändlig tid kan 120 inte kallas maximum på t≥0. För `g′=(x−1)(x−3)²` är x1 minimum, x3 **inte** extrempunkt; terrass klassificeras med ytterligare böjningsbyte via `g″=(x−3)(3x−5)`. Inga y-koordinater för g kan bestämmas från g′ ensam.
+
+### Lektion 10: Deriverbarhet
+
+**Grundkälla:** `Ma3c_Deriverbarhet.pdf` (12 sidor). **Allt originalinnehåll bevarat:** startens A-mjuk/B-hörn/C-hopp, ensidiga differenskvoter med h>0 och h→0⁺ enligt originalets uttryck, `p=(x−1)²+2` jämfört med `q=2|x−1|+2`, hoppfunktionen med r(2)=3 och vänsterkvot 2/h, skarv med `ax+b` för x<1 och `x²+1` för x≥1, bok s.178 och två självständiga exitkontroller med `F=cx+d` vid x<2. Nivå 1 **3272–3274**, nivå 2 **3275 a–b**, nivå 3 **3276–3277**; grundspår **3272→3273→3275 a–b**, säkert spår **3275 a–b→3277→3276**. Läxa **3274 och 3275**, extra **3277**. Ingen Socrative.
+
+**Kvalitetsändringar:**
+- Lärarstödet skiljer kärnväg (1–3, 5–12) från **valbar sekantanimation** (4), som öppnas från förutsägelsesteget. Därmed kan en grupp som redan motiverar ensidiga differenskvoter komma vidare utan ett extra reglagepass, medan den grafiska jämförelsen finns fullt tillgänglig för andra. Riktmärke för lektionstid, minst 20 min eget bokarbete och konkreta undervisningsbeslut finns i lärarstödet.
+- I de två reglerbara sekantgraferna är **numeriska vänster- och högerlutningar dolda tills eleverna själva har räknat eller formulerat en gränslutning**. h är alltid strikt positivt; att sätta h=0 i kvoten förekommer inte.
+- I hoppfunktionen med r(2)=3 finns fortfarande graf, sekantlinjer och reglervärden; däremot är de exakta kvotvärdena 2/h och 0 dolda till egen beräkning. Det matematiska facitsteget finns kvar.
+- I skarvmodellen får eleverna först skriva sina två villkor och styra a och b själva. **Snabbvalen med färdiga etiketter** (hörn, hopp, mjuk skarv), de numeriska höjd-/lutningsavläsningarna och den direkta statusbedömningen är dolda tills eleven väljer återkoppling. Modellen visar fortfarande två funktionsgrenar och öppna/fyllda punkter under eget försök. Facit om a=2,b=0 och fördjupningen om att lika *grenlutningar* inte räcker vid hopp behålls.
+- En valfri 1-minutsåterkallning från lektion 9 prövar skillnaden mellan gränsvärde och antaget maximum för vattenmängden, med eget försök och separat facit.
+
+**Matematiska skyddsräcken:** Enbart lika derivator för grenuttrycken bevisar inte deriverbarhet om funktionen inte är kontinuerlig. För a=2,b=1 är verklig vänsterkvot vid skarven `2−1/h→−∞` även om grenarna formellt har samma lutning. För q vid x1 är vänster- och högerkvot −2 respektive +2. Enbart att två delar är horisontella gör inte hoppfunktionen deriverbar.
+
+### Teknisk kontroll och återstående didaktisk prövning
+
+Webbläsartesterna `qa/blandade-problem-browser.cjs` och `qa/deriverbarhet-browser.cjs` har utökats för valbar kärnväg, dolda resultat före elevbeslut, oberoende återkallning med dolt facit, styrbar matematik, oförändrade uppgifter och läxor, samt samtliga mobilavsnitt. Alla tio lektioner körs i den gemensamma Chromium-regressionen. Dokumentation och godkänd slutkörning ska stämmas av mot den publicerade GitHub Pages-versionen.
+
+**Rond 2 är en teknisk och didaktiskt motiverad kvalitetshöjning – inte ett bevis på maximal lärandeeffekt.** Nästa fas är klassrumsprövning: vad kan eleverna lösa utan stöd, hur mycket boktid återstår i praktiken, vad minns de efter några dagar, och vilka interaktioner behövs faktiskt? Följ upp på klassnivå och justera utifrån elevlösningar.
+
+
+## Genomförda omgångar
 
 - **Omgång 2 avslutad:** lektion 3–4, andraderivatan och dess roll för grafen.
 - **Omgång 3 avslutad:** lektion 5–6, grafrelationer och största/minsta värde.
 - **Omgång 4 avslutad:** lektion 7–8, tillämpade och geometriska extremvärdesproblem.
-- **Omgång 5:** lektion 9–10, blandade problem och deriverbarhet.
+- **Omgång 5 avslutad:** lektion 9–10, blandade problem och deriverbarhet.
 
 **Arbetsregel:** Publicera och verifiera endast det aktuella paret innan nästa omgång påbörjas. Ingen förändring av kursens ursprungliga uppgifter, läxor eller förberedda Socrative-inslag utan nytt uttryckligt beslut.
