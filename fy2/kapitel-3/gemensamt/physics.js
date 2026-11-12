@@ -12,7 +12,7 @@ function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1,showForce=true){
  const p=pts[70],vx=Math.cos(theta),vy=-bend*Math.sin(theta),fx=-Math.sin(theta),fy=-bend*Math.cos(theta);
  const route=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
  const color=sign>0?'#bd6947':'#0b8095';
- const fieldGlyph=fieldSign>0?field(11,7,47,59,54,43):field(11,7,47,59,54,43).replaceAll('×','•');
+ const fieldGlyph=fieldSign>0?field(13,8,35,47,52,40):field(13,8,35,47,52,40).replaceAll('×','•');
  const fieldOpacity=Math.min(.98,.37+.37*B),vLength=53*speed,fLength=41*speed*B;
  const content='<g opacity="'+fieldOpacity.toFixed(3)+'">'+fieldGlyph+'</g>'+
  T(42,345,(fieldSign>0?'B in i bilden':'B ut ur bilden')+' · relativt B='+B.toFixed(1).replace('.',','),'#0b748e',17)+
