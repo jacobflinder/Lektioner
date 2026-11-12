@@ -82,10 +82,44 @@ Målet är **självständigt matematiskt lärande**, inte maximalt antal reglage
 
 **QA:** `qa/andraderivatan-browser.cjs` och `qa/andraderivatans-roll-browser.cjs` utökades för dolda svar före förutsägelse, fria uttryck och felkategorier, lärarstöd/tidsprioritering, valbar återkallning, valbara steg som nås med klick och hoppas över i kärnvägen, numerisk inflexion och matematiska facit. Alla tio lektionsskripten körs tillsammans med Chromium-regression. Godkänt tekniskt test är ännu inte bevis på förbättrad faktisk inlärning; följ upp boktid och individuella elevlösningar.
 
+
+## Omgång 3 · lektion 5–6
+
+### Lektion 5: Funktionens graf och derivatornas grafer
+
+**Källa:** `Ma3c_Funktionens_graf_och_derivatornas_grafer.pdf` (6 sidor, varav sista är lärarstöd). **Bevarat:** startfrågan f<0 men f′>0, jämförelse av tre grafer med samma x, minimum x=2, inflexion x=4 med f′(4)>0, maximum x=6; två möjliga g utifrån g′=−1; elevens egen f′=2x−4 med två parabler och f″=2; alla boknivåer s.154–155 (3146–3149, 3150–3152, 3153–3154), instruktionen att 3148 ska ritas digitalt, läxa 3149 och 3150 (extra 3153), samt individuell utcheckning h′=(x−1)(x−3) med extra p′=(x−2)². PDF:ens lärarstöd föreslår att frågorna *kan* användas i Socrative, men det finns inget färdigt Socrative – inget sådant har lagts till.
+
+**Didaktisk omarbetning:**
+- Undersökningen med tre grafer börjar med **förutsägelse och grafanalys**. De direktavlästa talen för f, f′ och f″ visas först när eleven/läraren aktivt begär dem; därmed ger inte gränssnittet facit före resonemanget.
+- Teckentabellens klassificering av punkterna vid x=2,4,6 hålls dold under frågan *varför är x=4 inte en terrasspunkt?*. Samma princip gäller det arbetade exemplet g′=−1: figuren med två parallella linjer visas först efter att eleverna gissat hur två funktioner med samma derivata kan se ut.
+- Elevens eget problem f′=2x−4 kräver **två egna skisser och motivering utan föreskriven arbetsgång**. Originalets steglista har inte tagits bort utan är valbar hjälp. Den styrbara vertikalförskjutningen C fanns redan och ligger kvar efter eget försök.
+- En kort valbar återkallning från lektion 4 använder p(x)=x³ och testet p′(0)=p″(0)=0, med dolt facit.
+- Lärarstöd: kärnväg för 8 befintliga steg, tidsprioritering om cirka 70 minuter som *riktmärke*, minst 20 minuter sammanhängande bokarbete, beslut utifrån om elever blandar höjd/lutning eller inflexion/terrass samt en senare fråga om g′(x)=2x−6 och flera möjliga g.
+
+**Prövbar fråga:** Kan eleverna utan siffrorna från modellen dra slutsatser om f′ och f″ från graferna, och självständigt ange minst två funktioner med samma derivata? Hur stor del av boken hinner de arbeta med på två nivåer?
+
+### Lektion 6: Största och minsta värde
+
+**Källa:** `Ma3c_Storsta_och_minsta_varde.pdf` (8 sidor). **Bevarat:** startfunktionen g=x² på [−1,2], mål om *största/minsta värde* på slutet intervall, polynomexempel 3156 s.159 för f=x³−4,5x²+5 på [−2,5], egen uppgift h=−x²+4x på [0,5], grafik där bara högra intervallgränsen ändras mellan 3 och 5, bok s.159–160 (3157–3163, 3164–3166, 3167–3168), läxa 3161 a och 3164 a–b (extra 3168), individuell exit p=x³−3x på [0,3] och separat, dolt utcheckningsfacit.
+
+**Didaktisk omarbetning:**
+- Lektionskärna för 9 befintliga steg; grafreglaget ingår som en **kort hypotesprövning**, inte som ersättning för hela kandidaten-/värdejämförelsen. Lärarstöd anger beslutsregler om eleverna glömmer ändpunkter eller blandar funktionsvärden med x-värden.
+- Siffran för högra ändpunktens höjd **f(b)** är dold tills eleven väljer att se beräkningen. Den ursprungliga ledtråden om exakt b=4,5 och två x med samma maximala värde är valbar, och snabbknappen b=4,5 visas först efter att eleven aktivt begärt gränsfallet. De korrekta matematiska kontrollvärdena och specialfallet finns kvar.
+- Elevuppgiften h=−x²+4x kräver egen metod och motivering av jämförelsen utan färdig steglista; originalets tre steg visas som hjälp vid behov. Den befintliga **fria inmatningen av värde och x-position**, med riktad återkoppling, behålls.
+- Lärarens tidsriktmärke skyddar minst 20 minuter ostört bokarbete. Fördröjd återkallning kan ske utan graf med k(x)=−x²+6x på 0≤x≤5: ändpunkter, stationärt x=3, största värdet 9 vid x=3, minsta värdet 0 vid x=0.
+
+**Matematisk precision:** På [−2,3] är största f-värdet 5 vid x=0, minsta −21 vid x=−2. Vid b=4,5 är f(4,5)=5, så samma största värde antas vid både x=0 och x=4,5; vid b=5 blir största f-värdet 17,5 vid x=5. Skalan hålls fast, och diagrammet visar vad som faktiskt hör till intervallet. I egen uppgift är största 4 vid x=2 och minsta −5 vid x=5.
+
+### QA och fortsatt observation
+
+- Webbläsartesterna `qa/funktionens-graf-browser.cjs` och `qa/storsta-minsta-browser.cjs` täcker aktiv visning av dolda grafvärden/teckentabell/arbetsgång, valbar återkallning och gränsfallet b=4,5, alla ursprungliga matematiska värden och bokens spår, lärarstöd samt mobilvyer. Övriga åtta lektioner ingår i automatiska regressionstester.
+- **Begränsning:** Det vi kan bekräfta digitalt är matematisk konsekvens, funktion och design. Om elevernas förståelse, självständighet eller långtidsminne faktiskt förbättras kräver klassrumsobservation, arbete i boken och senare återkallning.
+
+
 ## Kommande omgångar
 
 - **Omgång 2 avslutad:** lektion 3–4, andraderivatan och dess roll för grafen.
-- **Omgång 3:** lektion 5–6, grafrelationer och största/minsta värde.
+- **Omgång 3 avslutad:** lektion 5–6, grafrelationer och största/minsta värde.
 - **Omgång 4:** lektion 7–8, tillämpade och geometriska extremvärdesproblem.
 - **Omgång 5:** lektion 9–10, blandade problem och deriverbarhet.
 
