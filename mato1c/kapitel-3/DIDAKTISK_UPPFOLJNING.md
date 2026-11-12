@@ -183,3 +183,26 @@ Titta anonymt på utcheckningen: vilka elever glömmer en ändpunkt, vilka förv
 
 ### Utvärdera anonymt i klass
 Kan eleverna särskilja x-värdets enhet från funktionsvärdets enhet? Anger de både optimal produktionsmängd och kostnad? Gör eleverna ett *matematiskt argument* för priset100, eller läser de endast av kurvans topp? Undersöker de giltiga tider för raketen? Låt korta elevlösningar, inte antal klick, avgöra en eventuell revidering.
+
+
+## Lektion 8 · Modellering och fler extremvärdesproblem (3.2)
+
+**Grundkälla:** `Ma3c_Modellering_och_fler_extremvardesproblem.pdf`, 10 sidor. **Mål:** Bygga en funktion av en variabel, ange tillåtna värden och motivera ett extremvärde. **Omfång:** Geometrisk modellering s.166–170 och ytterligare extremvärdesproblem med bråkfunktion s.171–172.
+
+### Bevarad matematisk och didaktisk struktur
+- Originalets start med öppen låda från pappskiva **50 × 30 cm**, där fyra hörnkvadrater med sidan x klipps bort. Eleverna skissar, formulerar bottenmåtten, höjd och definitionsmängd och jämför i par **innan** modellen visas. `V(x)=x(50−2x)(30−2x)`, `0<x<15`.
+- **Exempel 3215 s.166**: `V=4x³−160x²+1500x`, `V′=12x²−320x+1500`, rötter `(40±5√19)/3`; x≈6,07 tillåten och x≈20,60 utanför. V≈4104,41 cm³, i original avrundat till **cirka 4100 cm³ vid höjden 6,07 cm**. Gränser x=0,15 ger inga verkliga lådor.
+- **Exempel 3216 s.167**, symmetrisk rektangel under `y=3−x²`, med `P=(x,3−x²)`. Basen är **2x** och höjden `3−x²`, inte bara x. Eleven bygger modellen på papper och förutsäger först. `A(x)=2x(3−x²)`, `0<x<√3`. Derivatan ger tillåten x=1 och maximal area 4 med bas 2 och höjd 2 *längdenheter*.
+- **Exempel 3233 s.171**, `V(x)=15−0,1x−40/x`, x≥4 lampor/dag, V i tusentals kr/dag. Försök själv först: skriv om `−40/x=−40x⁻¹`; derivatan blir `−0,1+40/x²`, *positiv bråkterm*. Kandidater ±20, endast +20 tillåten. V(20)=11 tusen kr; V(4)=4,6. Maximal vinst 11 000 kr/dag vid 20 lampor/dag.
+- **Båda separata bokavsnitten från original s.8:** Modellering s.168–170, nivå1 3217–3221, nivå2 3222–3228, nivå3 3229–3232; Fler extremvärden s.172, nivå1 3234–3238, nivå2 3239–3241, nivå3 3242–3244. Arbeta med minst två nivåer. Grundspåret 3217→3222→3234→3239 och säkra spåret 3225→3230→3241→3242. Minst 20 min lugnt självständigt arbete; digitalt verktyg för kontroll eller vid behov.
+- Originalets **läxa 3221 och 3236**, extra **3241** före nästa lektion, utan nya Socrative-inslag.
+- **Individuell dubbel utcheckning:** (1) rektangel under `y=6−x` i första kvadranten, nedre vänstra hörnet origo: `A=x(6−x)`, `0<x<6`, area9 vid x3 och mått3×3; (2) `C=x+9/x`, x>0: `C′=1−9/x²`, min6 vid x3. Faciten hålls separata och dolda tills eleven själv försökt.
+
+### Motiverade förbättringar att pröva
+- **Lådan:** SVG-klippmall och volymgraf uppdateras från samma x-reglage. Bottenmått, höjd och volym beräknas direkt ur originalets modell; fixerade skalor, öppna gränspunkter och separata måttenheter. Hypotes före klick, matematikbevis efter undersökning.
+- **Rektangeln:** samma x styr två vyer: symmetrisk rektangel under parabeln och punkten på areagrafen. Basen `2x` är explicit och x hålls strikt inom `0<x<√3`. Eleverna får tolka varför större bas inte innebär större area.
+- **Bråkderivatan:** kort formativ svarskontroll pekar på teckenfelet för `−40/x`; inget facit på maxvärdet visas före det egna försöket. En statisk vinstgraf fungerar som kontroll, inte som ersättning för derivatan.
+- **Skärmbildsdriven kvalitet:** figurerna använder full bredd även på mobil, och etiketter för `30 cm` och hörnkvadratens `x` går att läsa tydligt.
+
+### Lärarnas klassrumsuppföljning
+Be eleverna peka ut den första felaktiga modellen eller definitionsmängden i ett anonymt lösningsexempel. Klarar eleverna att modellera själva utan reglaget? Kan de motivera att den negativa lösningen till bråkfunktionens derivata är otillåten? Visar bokens lösningar att minst två nivåer hinns med i båda avsnitten, eller behöver läraren prioritera? Mät kvaliteten i elevresonemang, inte klick.
