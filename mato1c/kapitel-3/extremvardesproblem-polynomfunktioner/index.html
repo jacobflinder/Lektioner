@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Extremvärdesproblem med polynomfunktioner · Matematik – fortsättning, nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+.mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.18rem,2.3vw,1.68rem);line-height:1.65}
+.mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
+.mathline sup{font-size:.68em}
+.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.metric{padding:16px 14px;background:#f0f7fa;border:1px solid #cddfe8;border-radius:13px;min-width:0}
+.metric span{display:block;color:#527082;font-size:.92rem}
+.metric strong{display:block;color:#0d6869;font-size:clamp(1.2rem,2.3vw,1.8rem);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.metric small{display:block;color:#587180}
+.graph-layout{display:grid;grid-template-columns:minmax(0,3fr) minmax(240px,2fr);gap:17px;margin:16px 0}
+.graph-frame{background:#f9fbfd;border:1px solid #c8dce5;padding:13px;border-radius:14px;min-width:0}
+.graph-frame svg{width:100%;height:auto;display:block}
+.graph-frame figcaption{font-size:.88rem;color:#56717f;margin:8px 0 0}
+.plot-controls{background:#edf6f9;border:1px solid #c3d8e3;padding:14px 16px;border-radius:12px}
+.plot-controls label{display:block;font-weight:800}
+.plot-controls input[type=range]{width:100%;accent-color:#087d70;min-height:34px}
+.plot-controls output{display:block;font-weight:800;font-size:1.22rem;color:#086d68;font-variant-numeric:tabular-nums}
+.shortcut-row{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.shortcut-row button{padding:7px 11px;font-size:.91rem}
+.shortcut-row button[aria-pressed=true]{background:#067b71;color:#fff}
+.mini-bars{margin:13px 0}
+.mini-bars label{display:block;font-weight:700;font-size:.94rem}
+.bar-track{height:18px;width:100%;background:#dce7ee;border-radius:9px;overflow:hidden;margin:5px 0 14px}
+.bar-fill{height:100%;background:#167f8c;border-radius:9px;transition:width .12s linear}
+.bar-fill.revenue{background:#a86833}
+.situation{background:#f0f6fa;border-radius:12px;border:1px solid #cbdfe7;padding:16px 19px}
+.compare-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:12px 0}
+.compare-table td,.compare-table th{border:1px solid #c5d8e3;padding:9px 7px;text-align:center;overflow-wrap:anywhere}
+.compare-table th{background:#e8f2f6}
+.sensible{border-left:4px solid #b17b25;background:#fff7e9;padding:12px 16px;border-radius:9px}
+.success-rule{border-left:4px solid #0b8475;background:#eaf6f0;padding:12px 16px;border-radius:9px}
+.input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:13px 0}
+.input-grid label{display:block;font-weight:750;margin-bottom:4px}
+.input-grid input,.input-grid select{font:inherit;color:#17334b;background:#fff;border:2px solid #a2becb;border-radius:9px;padding:10px;width:100%;min-width:0}
+.input-grid input:focus-visible,.input-grid select:focus-visible{outline:3px solid #e7a62e;outline-offset:2px}
+.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.book-grid>div{border:1px solid #cbdce5;background:#f2f8fa;border-radius:13px;padding:15px}
+.book-grid strong{display:block;color:#08776a}
+.book-grid b{display:block;font-size:1.16rem;margin-top:7px}
+.figure-label{font-weight:750;color:#165a71}
+.muted-note{color:#536e7d;font-size:.88rem}
+@media(max-width:920px){.graph-layout{grid-template-columns:1fr}}
+@media(max-width:690px){.metric-grid,.input-grid,.book-grid{grid-template-columns:1fr}.graph-frame{padding:6px}.compare-table td,.compare-table th{padding:6px 3px;font-size:.88rem}}
+</style>
+</head>
+<body>
+<header>
+<a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.2</strong>
+<div class="head-actions">
+<button type="button" id="ink-toggle" class="secondary" aria-expanded="false">Visa skrivyta</button>
+<button type="button" id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button>
+<button type="button" id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button>
+</div>
+</header>
+<main>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna formulera situation, variabel, tillåtna värden och rätt enhet innan de räknar. Interaktionerna är korta tänkestöd; den självständiga lösningen görs på papper.</small></div>
+<div class="repetition"><strong>Repetitionsläge:</strong> Lös och motivera först på papper. Öppna steg och återkoppling efter eget försök. Inga elevsvar lagras eller skickas.</div>
+<div id="stage" class="stage">
+
+<section class="slide active" id="start" data-teacher="Original PDF s.1. Start exempel 3201. Eleverna tänker enskilt och sedan par. x är antal skärmar/dag (heltal ≥0), K är kostnad i tusental kronor. K(0)=50 betyder 50 000 kr. Det är K, inte antalet skärmar, som ska minimeras. Avslöja efter förutsägelser.">
+<div class="eyebrow">01 · Start · tolka modellen</div>
+<h1>Från situation till bästa möjliga värde</h1>
+<p class="lead">Vad betyder variabeln, funktionen och ditt svar?</p>
+<p class="mathline">K(x) = x³ − 9x² + 15x + 50</p>
+<div class="situation">
+<p><strong>x</strong> är antalet datorskärmar som tillverkas per dag.</p>
+<p><strong>K(x)</strong> är produktionskostnaden i <strong>tusentals kronor per dag</strong>.</p>
+</div>
+<div class="task"><strong>Exempel 3201 · skriv innan du klickar</strong>
+<ol class="spaced">
+<li>Vilka x-värden är rimliga?</li>
+<li>Vad betyder <span class="mathsmall">K(0)=50</span>?</li>
+<li>Vad ska minimeras – <span class="mathsmall">x</span> eller <span class="mathsmall">K(x)</span>?</li>
+</ol><p>Tänk själv. Jämför sedan i par.</p></div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa och resonera om startsvaren</button>
+<div id="start-answer" class="answer hidden"><p><strong>Domän:</strong> x är ett icke-negativt heltal (0, 1, 2, …). <strong>K(0)=50</strong> betyder en kostnad på 50 000 kr även vid noll tillverkade skärmar. Vi minimerar kostnaden <strong>K(x)</strong> – inte x.</p><p>Vi kan använda en kontinuerlig funktion för att hitta kandidater, men måste sedan kontrollera att produktionsmängden är tillåten.</p></div>
+</section>
+
+<section class="slide" id="goal" data-teacher="Källans mål s.1 efter start: tolka polynommodell, välja rimliga x, derivata för extremvärde, svar med enhet. Metod samma som föregående lektion med tre tillägg: verklighetens storheter, rimliga värden, enheter. Visa vad svaret ska innehålla, inte bara formel.">
+<div class="eyebrow">02 · Mål och metod</div>
+<h2>Ett extremvärde är inte ett färdigt svar</h2>
+<p class="lead"><strong>Efter lektionen ska du kunna tolka en polynommodell, välja rimliga x-värden och använda derivatan för att bestämma och motivera ett extremvärde. Du ska svara i situationen med rätt enhet.</strong></p>
+<div class="metric-grid">
+<div class="metric"><span>1 · Tolka situationen</span><strong>Vad är x?</strong><small>Vad mäts? Vilka värden får x ha?</small></div>
+<div class="metric"><span>2 · Motivera matematiskt</span><strong>Derivera</strong><small>Stationära punkter, gränser och tecken</small></div>
+<div class="metric"><span>3 · Svara begripligt</span><strong>Enhet + innebörd</strong><small>När, hur mycket, vid vilken produktion?</small></div>
+</div>
+<div class="notice"><strong>Tre vanliga fallgropar:</strong> förväxla x med funktionsvärdet; acceptera otillåtna x; glömma att modellen kan använda <em>tusental</em> och inte kronor eller enheter direkt.</div>
+</section>
+
+<section class="slide" id="cost" data-teacher="Original s.2. K′=3x²−18x+15=3(x−1)(x−5). x1 lokalt max K(1)=57, x5 lokalt min K(5)=25, K(0)=50; K växer efter x5. För x≥0 blir globalt min vid 5. Eftersom x5 är heltal behövs ingen närliggande heltalskontroll i just denna uppgift. Låt eleverna tänka vad som ska jämföras efter två stationära x.">
+<div class="eyebrow">03 · Genomarbetat exempel 3201</div>
+<h2>Hitta kandidater – motivera – tolka</h2>
+<p class="mathline">K(x) = x³ − 9x² + 15x + 50</p>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Förutsäg varje nästa steg.</strong> Funktionen beskriver kostnad i tusentals kronor; domänen är icke-negativa heltal.</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilken derivata får du, och hur faktoriseras den?"><strong>1 · Undersök den kontinuerliga modellen</strong><p class="mathline">K′(x)=3x²−18x+15=3(x−1)(x−5)</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka stationära x-värden får du från K′(x)=0?"><strong>2 · Hitta stationära kandidater</strong><p class="mathline">K′(x)=0 ⇒ x=1 eller x=5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur ändras kostnaden före, mellan och efter de stationära punkterna?"><strong>3 · Avgör hur K förändras</strong><p class="mathline">K′(0)=15&gt;0</p><p class="mathline">K′(2)=−9&lt;0</p><p class="mathline">K′(6)=15&gt;0</p><p><strong>K växer fram till 1, avtar mellan 1 och 5 och växer för x&gt;5.</strong> x=1 ger lokalt max, x=5 lokalt min.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken gränspunkt måste vi jämföra med x=5?"><strong>4 · Jämför med x=0</strong><p class="mathline">K(0)=50, &nbsp; K(1)=57</p><p class="mathline">K(5)=125−225+75+50=25</p><p>Eftersom K ökar för x&gt;5 är <strong>25 det globala minsta värdet</strong> i modellen för x≥0.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad betyder x=5 och K(5)=25 i den ursprungliga situationen?"><strong>5 · Svara i situationen</strong><p><strong>Lägsta kostnaden är 25 000 kr per dag vid produktion av 5 datorskärmar per dag.</strong></p><p>x=5 är ett tillåtet heltal. I andra modeller kan närliggande heltal behöva jämföras.</p></div>
+</div>
+<div class="seq-controls">
+<button type="button" class="secondary" data-seq-back>← Föregående steg</button>
+<button type="button" data-seq-next>Visa nästa steg →</button>
+<button type="button" class="secondary" data-seq-reset>Börja om</button>
+</div><p class="muted" data-seq-count></p>
+</div>
+<div class="success-rule"><strong>Modellens enhet styr slutsatsen.</strong> Svaret ”25 vid x=5” är matematiskt ofullständigt. I situationen betyder det <strong>25 000 kr per dag</strong> och <strong>5 skärmar per dag</strong>.</div>
+</section>
+
+<section class="slide" id="predict" data-teacher="Original s.3. Uppgift 3202; I(x)=1000x−5x²=x(1000−5x), där x biljettpris i kr och I kr. Antal sålda biljetter 1000−5x, prisintervall [0,200]. Fråga före animation: Var bästa pris? Hur intäkt nära 200? Vid 0 eller 200 är intäkt 0. Låt eleverna skriva egen hypotes innan reglaget.">
+<div class="eyebrow">04 · Förutsäg före animationen</div>
+<h2>Ger ett högre biljettpris alltid större intäkt?</h2>
+<p class="mathline">I(x) = 1000x − 5x² = x(1000−5x)</p>
+<div class="situation">
+<p><strong>x</strong> är biljettpriset i kronor, <strong>0 ≤ x ≤ 200</strong>.</p>
+<p><strong>I(x)</strong> är den totala biljettintäkten i kronor.</p>
+<p><strong>1000−5x</strong> kan tolkas som antalet sålda biljetter i modellen.</p>
+</div>
+<div class="metric-grid">
+<div class="metric"><span>Pris per biljett</span><strong>x kr</strong><small>Högre pris per biljett kan ge mer per såld biljett.</small></div>
+<div class="metric"><span>Antal sålda biljetter</span><strong>1000−5x</strong><small>Färre säljs när priset ökar.</small></div>
+<div class="metric"><span>Total intäkt</span><strong>x · (1000−5x)</strong><small>Vad blir produkten av båda storheterna?</small></div>
+</div>
+<div class="task"><strong>Skriv en förutsägelse med motivering:</strong> Vilket biljettpris tror du ger störst intäkt? Vad händer med intäkten när priset närmar sig 200 kr?</div>
+<div class="notice">Du behöver inte ha exakt rätt pris ännu. Det viktiga är att förklara varför ett högre pris kan ge lägre total intäkt.</div>
+</section>
+
+<section class="slide" id="tickets" data-teacher="Original s.4 animation och s.5 statiskt facit. Ersätt med pausbar, elevstyrd modell. Samma x styr intäkt I(x), antal sålda 1000−5x och en grafmarkör. Börja gärna med 50, fråga först vad som händer vid 100 och 200. Alla värden beräknas från originalets uttryck. Facit är dolt tills eleven kontrollerat hypotesen.">
+<div class="eyebrow">05 · Styr animationen · pris, antal och intäkt</div>
+<h2>Vad händer med den totala intäkten?</h2>
+<div class="graph-layout">
+<div>
+<figure class="graph-frame">
+<svg id="revenue-graph" viewBox="0 0 790 485" role="img" aria-label="Parabel för biljettintäkt på intervallet 0 till 200 kr med flyttbar markör för pris och intäkt"></svg>
+<figcaption>Samma intäktsmodell i hela undersökningen. Koordinatsystemets skala ändras inte.</figcaption>
+</figure>
+</div>
+<div>
+<div class="plot-controls">
+<label for="ticket-price">Välj biljettpris x</label>
+<input type="range" id="ticket-price" min="0" max="200" step="5" value="50" aria-describedby="ticket-readout">
+<output for="ticket-price" id="ticket-price-output">x = 50 kr</output>
+<div class="shortcut-row" role="group" aria-label="Testa några biljettpriser">
+<button type="button" class="secondary" data-price="0">0 kr</button>
+<button type="button" class="secondary" data-price="50">50 kr</button>
+<button type="button" class="secondary" data-price="100">100 kr</button>
+<button type="button" class="secondary" data-price="150">150 kr</button>
+<button type="button" class="secondary" data-price="200">200 kr</button>
+</div></div>
+<div class="metric-grid" style="grid-template-columns:1fr;margin:12px 0" id="ticket-readout" aria-live="polite">
+<div class="metric"><span>Sålda biljetter i modellen</span><strong id="tickets-sold">750 st</strong></div>
+<div class="metric"><span>Total intäkt</span><strong id="ticket-revenue">37 500 kr</strong></div></div>
+<div class="mini-bars" aria-label="Jämför försäljning och intäkt som relativa staplar">
+<label for="sold-bar">Antal biljetter av möjliga 1 000</label><div class="bar-track"><div class="bar-fill" id="sold-bar" style="width:75%"></div></div>
+<label for="revenue-bar">Intäkt av maximala 50 000 kr</label><div class="bar-track"><div class="bar-fill revenue" id="revenue-bar" style="width:75%"></div></div></div>
+<button type="button" id="ticket-check">Kontrollera min hypotes om bästa priset</button>
+<p id="ticket-feedback" class="feedback" role="status" aria-live="polite"></p>
+</div></div>
+<div class="task"><strong>Efter undersökningen:</strong> Hur kan det komma sig att sålda biljetter minskar hela tiden, medan totalintäkten först ökar och sedan minskar?</div>
+</section>
+
+<section class="slide" id="ticket-proof" data-teacher="Original s.5: I′=1000−10x, x100, I′ positive before negative after; I(100)=50000, I(0)=I(200)=0, antal sålda =500. Klickstyrd formell återkoppling efter elevernas grafundersökning. Betona att 100 är priset, 500 antal, 50 000 intäkten.">
+<div class="eyebrow">06 · Återkoppling · uppgift 3202</div>
+<h2>100 kr ger störst intäkt – varför?</h2>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Gör först på papper:</strong> Bestäm bästa biljettpris med derivata. Visa varför det är ett maximum och ge intäkt och antal sålda biljetter.</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Derivera I(x)=1000x−5x². Vad blir I′(x)?"><strong>1 · Derivera</strong><p class="mathline">I′(x)=1000−10x</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vid vilket pris är derivatan noll?"><strong>2 · Hitta den stationära kandidaten</strong><p class="mathline">1000−10x=0 ⇒ x=100</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur ser tecknen för I′ ut före och efter x=100?"><strong>3 · Visa att det är ett maximum</strong><p>Derivatan är <strong>positiv för x&lt;100</strong> och <strong>negativ för x&gt;100</strong>. Intäkten ökar, når sin topp och minskar sedan.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur stor är intäkten vid x=100 och vad gäller vid ändpunkterna?"><strong>4 · Jämför intäkter</strong><p class="mathline">I(100)=1000·100−5·100²=50 000</p><p class="mathline">I(0)=0, &nbsp; I(200)=0</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket biljettpris, hur många biljetter och hur stor intäkt svarar du med?"><strong>5 · Svara med rätt enheter</strong><p><strong>Största intäkten är 50 000 kr vid priset 100 kr per biljett.</strong></p><p>Antal sålda: <span class="mathline">1000−5·100=500</span>. Kontroll: <strong>100 kr × 500 biljetter = 50 000 kr.</strong></p></div>
+</div>
+<div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
+</div>
+</section>
+
+<section class="slide" id="rocket" data-teacher="Original s.6: uppgift 3204, s.163. h=40+10t−5t², t i sekunder, h i meter över havet, från avfyrning till vattenytan. Eleven måste kontrollera att relevanta t ligger [0,4] – eftersom h=0 ger t=4 eller t=−2. Självständig lösning först: max t1 h45 m, start40, slut0. Kontrollen ger specifika fel om tid/höjd förväxlas.">
+<div class="eyebrow">07 · Din tur · uppgift 3204 s. 163</div>
+<h2>När är raketen högst?</h2>
+<p class="mathline">h(t)=40+10t−5t²</p>
+<div class="situation">
+<p><strong>t</strong> är tiden i sekunder efter avfyrningen.</p><p><strong>h(t)</strong> är höjden över havet i meter. Modellen gäller från avfyrningen tills raketen når havsytan.</p>
+</div>
+<div class="task"><strong>Lös utan att öppna facit:</strong>
+<ol class="spaced">
+<li>Bestäm <strong>när</strong> raketen når sin högsta höjd.</li>
+<li>Motivera att det verkligen är ett maximum.</li>
+<li>Beräkna <strong>hur högt</strong> raketen når och svara med enheter.</li>
+<li>Vilka tider är rimliga enligt modellen?</li>
+</ol>
+<p>Eget försök först. Jämför därefter i par: betyder era två svar samma sak?</p></div>
+<div class="panel">
+<strong>Kontrollera efter att du löst själv</strong>
+<div class="input-grid">
+<div><label for="rocket-time">Tid för max (sekunder)</label><input id="rocket-time" type="text" inputmode="decimal" autocomplete="off" placeholder="s"></div>
+<div><label for="rocket-height">Högsta höjd (meter)</label><input id="rocket-height" type="text" inputmode="decimal" autocomplete="off" placeholder="m"></div>
+<div><label for="rocket-end">Tid vid havsytan (sekunder)</label><input id="rocket-end" type="text" inputmode="decimal" autocomplete="off" placeholder="s"></div>
+</div>
+<button type="button" id="rocket-check">Kontrollera mitt resonemang</button>
+<p id="rocket-feedback" class="feedback" role="status" aria-live="polite"></p>
+</div>
+<button type="button" class="secondary" data-reveal="rocket-hint">Stöd om du fastnar</button>
+<div id="rocket-hint" class="panel hidden"><p>Derivera <span class="mathsmall">h′(t)=10−10t</span>. Lös h′(t)=0 och avgör tecken före och efter. Sätt sedan in tiden i h(t). Kontrollera när h(t)=0 och välj en rimlig tid efter avfyrningen.</p></div>
+<button type="button" class="reveal" data-reveal="rocket-answer">Visa den genomarbetade lösningen</button>
+<div id="rocket-answer" class="answer hidden">
+<p class="mathline">h′(t)=10−10t=0 ⇒ t=1</p><p>h′ är positiv före t=1 och negativ efter. Raketen når alltså ett maximum.</p>
+<p class="mathline">h(1)=40+10−5=45</p>
+<p>Havsytan: <span class="mathline">40+10t−5t²=0</span>, vilket ger <span class="mathline">t=4</span> och <span class="mathline">t=−2</span>. Negativ tid väljs bort; modellens tid är <strong>0≤t≤4</strong>.</p>
+<p>Ändvärden: <span class="mathline">h(0)=40, h(4)=0</span>.</p>
+<p><strong>Raketen når 45 meters höjd 1 sekund efter avfyrningen.</strong> En tid svarar på ”när?” och ett funktionsvärde på ”hur högt?”.</p>
+</div>
+</section>
+
+<section class="slide" id="book" data-teacher="Original s.7. Lärobok s.163–164, nivå 1 3202–3207, nivå 2 3208–3210, nivå 3 3211–3214. Minst två nivåer. Skriv riktiga motiveringar med situation, domän, derivata och enhet. Startuppgifter 3203,3205,3209, vana elever 3208–3210 sen nivå3. 20 minuter tyst eget arbete. Läxa exakt 3205+3209; extra3212. Ingen Socrative i original.">
+<div class="eyebrow">08 · Självständigt bokarbete · s. 163–164</div>
+<h2>Öva på att lösa verkliga extremvärdesproblem</h2>
+<p class="lead">Arbeta med <strong>minst två av bokens tre nivåer</strong>. Redovisa varför svaret är rimligt och vad det betyder i verkligheten.</p>
+<div class="book-grid">
+<div><strong>Nivå 1</strong><b>3202–3207</b><p>Träna modell, derivata och tolkning.</p></div>
+<div><strong>Nivå 2</strong><b>3208–3210</b><p>Motivera och jämför lösningar.</p></div>
+<div><strong>Nivå 3</strong><b>3211–3214</b><p>Fördjupa resonemang och gränser.</p></div>
+</div>
+<div class="task"><strong>20 minuter lugnt eget arbete.</strong> Försök själv. Kontrollera. Rätta och förstå dina fel. Fortsätt sedan, diskutera vid behov.</div>
+<div class="panel"><p><strong>Välj start:</strong> börja med <strong>3203, 3205 och 3209</strong>. Är du redan säker? Börja med <strong>3208–3210</strong> och fortsätt sedan på nivå 3.</p></div>
+<div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3205 och 3209</strong>. Redan klar? Gör <strong>3212</strong>.</div>
+</section>
+
+<section class="slide" id="exit" data-teacher="Original s.8–9. En modell för vinst V(x)=−x²+6x−5, 0≤x≤6; x mäts i tusental enheter per dag och V i tusentals kr per dag. Låt eleverna lösa individuellt, separat facit på nästa slide. x3 ger V4. Ändvärden V0=V6=−5, V′ positiv före3 negativ efter3. Slutligt enhetssvar 3000 enheter/dag, 4000 kr/dag.">
+<div class="eyebrow">09 · Individuell utcheckning</div>
+<h2>Visa vad du kan – självständigt</h2>
+<p class="lead">En modell för en verksamhets vinst är:</p>
+<p class="mathline">V(x)=−x²+6x−5, &nbsp; 0≤x≤6</p>
+<div class="situation">
+<p><strong>x</strong> är antal <strong>tusen enheter per dag</strong>.</p>
+<p><strong>V(x)</strong> är vinsten i <strong>tusentals kronor per dag</strong>.</p>
+</div>
+<div class="task"><strong>Svara individuellt på papper:</strong>
+<ol class="spaced">
+<li>Vilken produktion ger störst vinst?</li>
+<li>Hur stor blir vinsten?</li>
+<li>Visa varför ditt svar ger det största värdet.</li>
+</ol>
+<p><strong>Svara med antal enheter och kronor per dag.</strong></p></div>
+<div class="panel"><strong>Dagens mål</strong><p>Tolka modellen och tillåtna x. Bestäm och motivera extremvärde. Svara med rätt enheter.</p></div>
+</section>
+
+<section class="slide" id="exit-feedback" data-teacher="Original s.9. Visa först efter den individuella utcheckningen. V′=−2x+6=0 =>x3, tecken +−, V3=−9+18−5=4, V0=V6=−5. Max 4000kr/dag vid 3000enheter/dag. Stegvisa frågor för att eleven ska hitta första bristande ledet. Ingen automatiserad insamling.">
+<div class="eyebrow">10 · Återkoppling till utcheckningen</div>
+<h2>Modellens enheter avgör svaret</h2>
+<div class="sequence panel" data-sequence>
+<div class="task"><strong>Jämför och komplettera:</strong> Identifiera det första ledet som saknas i din egen lösning. Öppna sedan nästa steg.</div>
+<div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
+<div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Derivera V(x). Vilket x-värde gör derivatan noll?"><strong>1 · Derivera och lös</strong><p class="mathline">V′(x)=−2x+6=0 ⇒ x=3</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur vet vi att x=3 ger ett maximum i det tillåtna intervallet?"><strong>2 · Motivera maximum</strong><p>V′ är positiv före 3 och negativ efter 3. Vinsten växer och avtar sedan.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka vinster får vi vid x=3 och vid gränserna 0 och 6?"><strong>3 · Jämför värden</strong><p class="mathline">V(3)=−9+18−5=4</p><p class="mathline">V(0)=−5, &nbsp; V(6)=−36+36−5=−5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad betyder x=3 och V=4 i antal enheter och kronor?"><strong>4 · Svara i situationen</strong><p><strong>Största vinsten är 4 000 kr per dag vid produktion av 3 000 enheter per dag.</strong></p><p>”3 och 4” är inte ett tillräckligt svar när modellen mäter i tusental.</p></div>
+</div>
+<div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
+</div>
+<div class="success-rule"><strong>Sammanfattning:</strong> Situation → modell och gränser → derivata → jämförelse → svar med enhet.</div>
+<div class="notice"><strong>Läxa:</strong> Gör klart 3205 och 3209 före nästa lektion. Extra 3212.</div>
+</section>
+</div>
+
+<div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex">
+<button type="button" class="secondary" id="ink-undo">Ångra</button><button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button><button type="button" class="secondary" id="ink-clear">Rensa</button><button type="button" class="secondary" id="ink-max">Förstora</button>
+</div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
+<div class="controls">
+<div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
+<div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.2 Extremvärdesproblem med polynomfunktioner · s. 162–164. Inga elevsvar samlas in.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="lesson.js"></script>
+</body></html>
