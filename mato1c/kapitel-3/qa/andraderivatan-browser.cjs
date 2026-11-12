@@ -33,9 +33,13 @@ try{
  await ok(await page.locator('body.classroom').count()===1,'Klassrumsläge');
  await page.locator('#teacher-toggle').click();
  await ok(await page.locator('.teacher.open').isVisible(),'Lärarstöd efter aktivt val');
+ await ok((await page.locator('.route-guide').textContent()).includes('20 min'),'Lärare får kärnväg och prioritering av boktid');
  await page.locator('#mode').click();
  await ok(await page.locator('body.classroom').count()===0,'Repetitionsläge');
  await go(3);
+ await ok(!await page.locator('#explore-readouts').isVisible(),'Numeriskt facit dolt före grafens förutsägelse');
+ await page.locator('[data-reveal="explore-readouts"]').click();
+ await ok(await page.locator('#explore-readouts').isVisible(),'Lutningsvärden visas först på begäran');
  await ok((await page.locator('#readout-f').innerText()).includes('1,00'),'f′(0,5)=1');
  await ok((await page.locator('#readout-g').innerText()).includes('2,00'),'g′(0,5)=2');
  await ok(await page.locator('#graph-f path').count()>0 && await page.locator('#graph-g path').count()>0,'Synkroniserade tangentgrafer');
@@ -64,12 +68,16 @@ try{
   await ok(await part.locator('[data-seq-item]:visible').count()===0,'Exempel '+j+' kan återställas');
  }
  await go(5);
- await page.selectOption('#own-formula','a');
+ await page.locator('#own-formula').fill('3x²−12x');
  await page.locator('#own-at-zero').fill('-12');
  await page.locator('#own-root').fill('2');
  await page.locator('#check-own').click();
  await ok((await page.locator('#own-feedback').innerText()).includes('h′(x)'),'Förväxlad första-/andraderivata får riktad återkoppling');
- await page.selectOption('#own-formula','b');
+ await page.locator('#own-formula').fill('6x−12');
+ await page.locator('#own-formula').fill('6x');
+ await page.locator('#check-own').click();
+ await ok((await page.locator('#own-feedback').innerText()).includes('konstanttermen'),'Förlorad konstantterm diagnostiseras');
+ await page.locator('#own-formula').fill('6x−12');
  await page.locator('#own-at-zero').fill('12');
  await page.locator('#check-own').click();
  await ok((await page.locator('#own-feedback').innerText()).includes('6 · 0 − 12'),'Fel värde får riktad återkoppling');
@@ -80,6 +88,9 @@ try{
  await page.locator('#own-root').fill('2');
  await page.locator('#check-own').click();
  await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Alla svar korrekta');
+ await page.locator('#own-formula').fill('−12+6x');
+ await page.locator('#check-own').click();
+ await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Ekvivalent uttryck med omvänd termordning accepteras');
  await go(6);
  await ok(!await page.locator('#feedback-answer').isVisible(),'Genomarbetat facit dolt före klick');
  await page.locator('[data-reveal="feedback-answer"]').click();
