@@ -46,7 +46,13 @@
 </div>
 </header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna besvara frågan på papper först. Öppna inte återkopplingen förrän de fått tid att tänka. Dator av under gemensamma delar är möjligt.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna besvara frågan på papper först. Öppna inte återkopplingen förrän de fått tid att tänka. Dator av under gemensamma delar är möjligt.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tid och anpassning</strong></summary>
+<p><strong>Kärnväg:</strong> börja med graferna i steg 1 och målet i 2. Om eleverna redan motiverar alla tre punkttyperna korrekt kan du korta reglageundersökningen i 3 och gå vidare till exempel 4. Bevara terrasskontrasten 5, egen uppgift 6, bokpass 7 och individuell exit 8. Steg 9 avslutar med läxan.</p>
+<p><strong>Riktmärke om lektionen är cirka 70 minuter:</strong> start och mål 5–7 min; representation och gemensamt exempel 12–16 min; terrasskontrast och eget försök 8–12 min; minst 20 min sammanhängande bokarbete; utcheckning och avslut 4–6 min. Använd marginalen utifrån elevernas svar.</p>
+<p><strong>Beslutsregler:</strong> Blandar flera ihop f′(a)=0 med f(a)=0? Låt dem ange vilken funktion som ger punkthöjden innan de får facit. Kan de välja rätt punkttyp men inte förklara teckenbytet? Använd testvärden i steg 4. Kan de självständigt skriva båda koordinaterna i steg 6? Gå vidare till boken.</p>
+<p><strong>Korrigera en vanlig generalisering:</strong> Tecknen + 0 + eller − 0 − utesluter extrempunkt, men visar inte ensamma en terrasspunkt för en godtycklig funktion. I våra polynomexempel visar vi också böjningsbyte.</p>
+<p><strong>Återkalla senare:</strong> jämför f(x)=x² och g(x)=x³ vid x=0 utan att visa grafer. Be var och en visa tecken före/efter och formulera skillnaden.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Lös på papper innan du kontrollerar. Graferna hjälper dig att förstå, men utcheckningen kräver eget resonemang utan den interaktiva modellen. Inga elevsvar samlas in eller lagras.</div>
 <div id="stage" class="stage">
 
@@ -72,13 +78,20 @@
 <thead><tr><th scope="col">Punkttyp</th><th scope="col">f′ före</th><th scope="col">f′ i punkten</th><th scope="col">f′ efter</th><th scope="col">Grafen</th></tr></thead>
 <tbody><tr><th scope="row">Maximipunkt</th><td>+</td><td>0</td><td>−</td><td>stiger → sjunker</td></tr>
 <tr><th scope="row">Minimipunkt</th><td>−</td><td>0</td><td>+</td><td>sjunker → stiger</td></tr>
-<tr><th scope="row">Terrasspunkt</th><td>+</td><td>0</td><td>+</td><td>fortsätter stiga</td></tr>
-<tr><th scope="row">Terrasspunkt</th><td>−</td><td>0</td><td>−</td><td>fortsätter sjunka</td></tr></tbody></table>
+<tr><th scope="row">Ingen extrempunkt*</th><td>+</td><td>0</td><td>+</td><td>fortsätter stiga</td></tr>
+<tr><th scope="row">Ingen extrempunkt*</th><td>−</td><td>0</td><td>−</td><td>fortsätter sjunka</td></tr></tbody></table>
+<p class="muted">* I våra polynomexempel finns en <strong>terrasspunkt</strong> om grafen dessutom byter böjning. Samma tecken hos derivatan på båda sidor bevisar inte ensamt böjningsbyte för alla funktioner.</p>
 <div class="two">
 <div class="panel"><strong>Lokalt maximum/minimum</strong><p>Högsta/lägsta funktionsvärde i närheten.</p></div>
 <div class="panel"><strong>En punkt har två koordinater</strong><p class="math">Punkten: (a, f(a))</p><p>Värdet är <span class="math-inline">f(a)</span> – inte <span class="math-inline">f′(a)</span>.</p></div>
 </div>
 <div class="notice"><strong>Viktig skillnad:</strong> <span class="math-inline">f′(a) = 0</span> betyder horisontell tangent. Det räcker inte för att avgöra punktens karaktär. En terrasspunkt har dessutom ett byte i grafens böjning – det undersöker vi närmare i nästa moment.</div>
+<button type="button" class="secondary" data-reveal="recall-signs">Valbar återkallning från förra lektionen (1 minut)</button>
+<div id="recall-signs" class="panel hidden">
+<p><strong>Utan graf eller stöd:</strong> Om f′(x)=2x−4, var växer respektive avtar f? Visa ett testvärde på var sida om x=2.</p>
+<button type="button" class="reveal" data-reveal="recall-signs-answer">Kontrollera efter eget försök</button>
+<div id="recall-signs-answer" class="answer hidden"><p>f′(1)=−2 och f′(3)=2. Därför avtar f för x&lt;2 och växer för x&gt;2. Vid x=2 är derivatan noll.</p></div>
+</div>
 </section>
 
 <section class="slide" id="explore" data-teacher="Interaktiv jämförelse, webbens tydliga mervärde. Be eleverna först ange tecknen vid x = −1 respektive +1 för en vald funktion. Flytta x-reglaget först efter förutsägelsen. Samma graf och derivata styr tangent och siffror. Undvik att låta klassen fastna i reglagelek.">
@@ -154,7 +167,7 @@
 <div class="eyebrow">06 · Din tur · mindre stöd</div>
 <h2>Kan du bestämma både typ och koordinater?</h2>
 <p class="math math-big">h(x) = −x³ + 3x</p>
-<div class="task"><strong>Skriv en fullständig lösning.</strong> Bestäm alla stationära punkter, klassificera dem med en teckentabell och ange deras koordinater. Vilken är maximi- och vilken minimipunkt?</div>
+<div class="task"><strong>Lös utan steglista på papper.</strong> Bestäm de stationära punkternas karaktär och båda koordinater. Ge en fullständig motivering som en annan elev kan följa. Stödknappen finns om du fastnar.</div>
 <div class="check-control">
 <label for="own-max">Maximipunkten:</label>
 <select id="own-max"><option value="">Välj</option><option value="neg">(−1, −2)</option><option value="pos">(1, 2)</option><option value="zero">(1, 0)</option></select>
@@ -196,12 +209,12 @@
 <div class="two">
 <div>
 <div class="task"><strong>1</strong> <span class="math-inline">f′</span> har tecknen <span class="math-inline">+ 0 −</span> runt <span class="math-inline">x = 2</span>. Dessutom är <span class="math-inline">f(2) = 5</span>. Vilken punkt har grafen? Ange karaktär och koordinater.</div>
-<div class="task"><strong>2</strong> <span class="math-inline">g′</span> har tecknen <span class="math-inline">− 0 −</span> runt <span class="math-inline">x = −1</span>. Dessutom är <span class="math-inline">g(−1) = 4</span>. Vilken punkt har grafen? Ange karaktär och koordinater.</div>
+<div class="task"><strong>2</strong> <span class="math-inline">g′</span> har tecknen <span class="math-inline">− 0 −</span> runt <span class="math-inline">x = −1</span>. Dessutom är <span class="math-inline">g(−1) = 4</span>. Vilken stationär punkt kan du ange säkert, och är den en extrempunkt? Räcker uppgifterna för att säkert kalla den en terrasspunkt?</div>
 <div class="task"><strong>3</strong> En elev säger: ”<span class="math-inline">f′(3) = 0</span>, alltså är <span class="math-inline">(3, 0)</span> en minimipunkt.” Vilka <em>två saker</em> behöver eleven undersöka?</div>
 <button class="reveal" type="button" data-reveal="exit-answer">Visa svar först efter eget försök</button>
 <div id="exit-answer" class="answer hidden">
 <p><strong>1:</strong> Maximipunkt <span class="math-inline">(2, 5)</span>. Derivatan går från positiv till negativ.</p>
-<p><strong>2:</strong> Grafen fortsätter att avta, alltså finns ingen extrempunkt vid <span class="math-inline">x = −1</span>. I lektionens vanliga terrassmodell är svaret <strong>terrasspunkt (−1, 4)</strong>. Strikt matematiskt krävs också att grafen byter böjning; enbart teckenföljden <span class="math-inline">− 0 −</span> bevisar inte det.</p>
+<p><strong>2:</strong> Grafen fortsätter att avta, alltså finns ingen extrempunkt vid <span class="math-inline">x = −1</span>. Vi vet att <strong>den stationära punkten är (−1, 4)</strong>. Om grafen också byter böjning är det en <em>terrasspunkt</em>, som i våra polynomexempel – men det följer inte säkert av enbart tecknen <span class="math-inline">− 0 −</span>.</p>
 <p><strong>3:</strong> Undersök först <em>derivatans tecken på båda sidor om x = 3</em> för att avgöra om punkten är ett minimum. Beräkna sedan <em>f(3)</em> för att bestämma punktens y-koordinat; derivatans nollställe ger inte höjden.</p>
 </div>
 </div>
@@ -214,7 +227,7 @@
 <h2>Typ först. Koordinater sedan.</h2>
 <div class="panel">
 <p><span class="math-inline">f′(a)=0</span> visar att tangenten är horisontell.</p>
-<p><strong>Tecknet före och efter</strong> visar hur grafen förändras: <span class="math-inline">+ 0 −</span> maximum, <span class="math-inline">− 0 +</span> minimum, och i dagens terrassexempel <span class="math-inline">+ 0 +</span> eller <span class="math-inline">− 0 −</span>.</p>
+<p><strong>Tecknet före och efter</strong> visar hur grafen förändras: <span class="math-inline">+ 0 −</span> maximum, <span class="math-inline">− 0 +</span> minimum. <span class="math-inline">+ 0 +</span> eller <span class="math-inline">− 0 −</span> ger ingen extrempunkt; i våra polynomexempel med böjningsbyte är det en terrasspunkt.</p>
 <p><strong>Koordinater:</strong> <span class="math-inline">(a, f(a))</span> – inte <span class="math-inline">(a, f′(a))</span>.</p>
 </div>
 <div class="task"><strong>Läxa till nästa lektion</strong>Gör klart ditt valda spår på <strong>s. 148</strong>, med uppgifter från minst två av bokens tre nivåer.</div>
