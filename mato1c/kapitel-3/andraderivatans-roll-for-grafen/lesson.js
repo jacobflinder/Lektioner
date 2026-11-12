@@ -42,6 +42,7 @@ function compare(){
 $('compare-x').addEventListener('input',compare);
 $('compare-reset').addEventListener('click',()=>{$('compare-x').value='0';compare()});
 ordinary('zero-p',M.p);ordinary('zero-q',M.q);compare();
+let showCurvature=false;
 function inflect(){
  const at=Number($('inflect-x').value),s=$('inflect-graph'),m=M.c;
  const X=x=>365+117*x,Y=y=>333-58*y;
@@ -52,8 +53,8 @@ function inflect(){
  for(const y of [0,1,2,3,4])add(g,'line',{x1:96,y1:Y(y),x2:624,y2:Y(y),stroke:'#e0ebf0','stroke-width':1});
  add(g,'line',{x1:96,y1:Y(0),x2:624,y2:Y(0),stroke:'#627d86','stroke-width':1.8});
  add(g,'line',{x1:X(0),y1:44,x2:X(0),y2:370,stroke:'#627d86','stroke-width':1.8});
- add(g,'path',{d:path(m,-2.1,0,X,Y),stroke:'#c47739','stroke-width':4,fill:'none'});
- add(g,'path',{d:path(m,0,2.1,X,Y),stroke:'#0a887e','stroke-width':4,fill:'none'});
+ add(g,'path',{d:path(m,-2.1,0,X,Y),stroke:showCurvature?'#c47739':'#12877f','stroke-width':4,fill:'none'});
+ add(g,'path',{d:path(m,0,2.1,X,Y),stroke:showCurvature?'#0a887e':'#12877f','stroke-width':4,fill:'none'});
  for(const x of [-1,1])add(g,'circle',{cx:X(x),cy:Y(m.f(x)),r:5.5,stroke:'#fff','stroke-width':2,fill:'#25435b'});
  add(g,'circle',{cx:X(0),cy:Y(2),r:7,stroke:'#fff','stroke-width':2.3,fill:'#a34374'});
  const dx=.68,val=m.f(at),sl=m.d(at),line=x=>val+sl*(x-at);
@@ -63,8 +64,10 @@ function inflect(){
  for(const y of [1,2,3,4])add(s,'text',{x:X(0)-12,y:Y(y)+5,'font-size':14,fill:'#4d6979','text-anchor':'end'},String(y));
  add(s,'text',{x:628,y:Y(0)-8,'font-size':16,fill:'#4d6979'},'x');
  add(s,'text',{x:X(0)+10,y:54,'font-size':16,fill:'#4d6979'},'y');
+ if(showCurvature){
  add(s,'text',{x:111,y:75,'font-size':17,fill:'#b66a2d','font-weight':700},'f″ < 0');
  add(s,'text',{x:556,y:75,'font-size':17,fill:'#087f75','font-weight':700},'f″ > 0');
+ }
  $('inflect-x-out').textContent='x = '+fmt(at);
  $('inflect-y').textContent='f('+fmt(at)+') = '+fmt(val);
  $('inflect-slope').textContent='f′('+fmt(at)+') = '+fmt(sl);
@@ -72,6 +75,10 @@ function inflect(){
 }
 $('inflect-x').addEventListener('input',inflect);
 $('inflect-zero').addEventListener('click',()=>{$('inflect-x').value='0';inflect()});inflect();
+document.querySelector('[data-reveal="inflect-answer"]').addEventListener('click',()=>{
+ showCurvature=!$('inflect-answer').classList.contains('hidden');
+ inflect();
+});
 function numeric(id){const raw=$(id).value.trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(',','.');return/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN}
 $('own-check').addEventListener('click',()=>{
  const x=numeric('own-x'),y=numeric('own-y'),kind=$('own-kind').value,out=$('own-feedback');let msg='';
