@@ -1,0 +1,43 @@
+(()=>{
+'use strict';
+const slides=[...document.querySelectorAll('.slide')],jump=document.getElementById('jump'),teacher=document.getElementById('teacher-text');
+let position=0;
+slides.forEach((el,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=(i+1)+' · '+(el.querySelector('h1,h2')?.textContent||'Steg');jump.append(o)});
+function go(i){position=Math.max(0,Math.min(slides.length-1,Number(i)));slides.forEach((s,j)=>{s.classList.toggle('active',j===position);s.setAttribute('aria-hidden',String(j!==position))});jump.value=String(position);teacher.textContent=slides[position].dataset.teacher||'Styr takten med elevernas resonemang.';document.getElementById('progress').textContent=(position+1)+' / '+slides.length;document.getElementById('prev').disabled=position===0;document.getElementById('next').disabled=position===slides.length-1;window.scrollTo({top:0,behavior:'auto'})}
+function next(){let n=position+1;while(n<slides.length-1&&slides[n].dataset.optional==='true')n++;go(n)}
+function previous(){let n=position-1;while(n>0&&slides[n].dataset.optional==='true')n--;go(n)}
+document.getElementById('prev').addEventListener('click',previous);
+document.getElementById('next').addEventListener('click',next);
+jump.addEventListener('change',()=>go(jump.value));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{let i=slides.findIndex(x=>x.id===b.dataset.go);if(i>=0)go(i)}));
+document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.closest('button,input,textarea,select,[contenteditable]'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')previous()});
+document.getElementById('mode').addEventListener('click',e=>{const on=document.body.classList.toggle('classroom');document.querySelector('.teacher').classList.remove('open');document.getElementById('teacher-toggle').textContent='Visa lärarstöd';document.getElementById('teacher-toggle').setAttribute('aria-expanded','false');e.currentTarget.textContent=on?'Repetitionsläge':'Klassrumsläge';e.currentTarget.setAttribute('aria-pressed',String(on))});document.getElementById('teacher-toggle').addEventListener('click',e=>{const open=document.querySelector('.teacher').classList.toggle('open');e.currentTarget.textContent=open?'Dölj lärarstöd':'Visa lärarstöd';e.currentTarget.setAttribute('aria-expanded',String(open))});
+document.querySelectorAll('[data-reveal]').forEach(b=>{const target=document.getElementById(b.dataset.reveal);const initial=b.textContent;b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>{const opening=target.classList.toggle('hidden')===false;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Dölj återkoppling':initial})});
+document.querySelectorAll('[data-sequence]').forEach(box=>{let n=0;const steps=[...box.querySelectorAll('[data-seq-item]')];const back=box.querySelector('[data-seq-back]'),next=box.querySelector('[data-seq-next]'),reset=box.querySelector('[data-seq-reset]'),count=box.querySelector('[data-seq-count]'),prompt=box.querySelector('[data-seq-prompt]');function render(){steps.forEach((e,i)=>{e.classList.toggle('hidden',i>=n);e.classList.toggle('latest',i===n-1)});back.disabled=n===0;next.disabled=n===steps.length;count.textContent=n+' av '+steps.length+' steg visade';prompt.textContent=n<steps.length?steps[n].dataset.question:'Kontrollera med den ursprungliga uppgiften och förklara metoden.'}back.onclick=()=>{n=Math.max(0,n-1);render()};next.onclick=()=>{n=Math.min(n+1,steps.length);render()};reset.onclick=()=>{n=0;render()};render()});
+document.querySelectorAll('[data-quiz]').forEach(box=>{
+ const choices=[...box.querySelectorAll('button[data-correct]')];
+ choices.forEach(b=>{
+  b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>{
+   choices.forEach(x=>{
+    x.classList.remove('correct','wrong');
+    x.setAttribute('aria-pressed',String(x===b));
+   });
+   const ok=b.dataset.correct==='true';
+   b.classList.add(ok?'correct':'wrong');
+   const p=box.querySelector('.feedback');
+   p.className='feedback '+(ok?'ok':'no');
+   p.textContent=ok
+     ?(box.dataset.correctText||'Rätt. Förklara varför.')
+     :(box.dataset.wrongText||'Inte riktigt. Kontrollera resonemanget och pröva igen.');
+  });
+ });
+});
+const canvas=document.getElementById('ink'),panel=document.getElementById('inkpanel'),ctx=canvas.getContext('2d');let strokes=[],active=null,eraser=false;const button=document.getElementById('ink-toggle');function resize(){if(!panel.classList.contains('open'))return;const r=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.max(1,Math.round(r.width*dpr));canvas.height=Math.max(1,Math.round(r.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);paint()}function paint(){const w=canvas.clientWidth,h=canvas.clientHeight;ctx.clearRect(0,0,w,h);ctx.fillStyle='white';ctx.fillRect(0,0,w,h);for(const s of [...strokes,...(active?[active]:[])]){ctx.beginPath();ctx.strokeStyle=s.eraser?'white':'#163c55';ctx.lineWidth=s.eraser?27:2.7;ctx.lineCap='round';ctx.lineJoin='round';s.points.forEach((pt,i)=>i?ctx.lineTo(pt[0]*w,pt[1]*h):ctx.moveTo(pt[0]*w,pt[1]*h));if(s.points.length===1){let p=s.points[0];ctx.lineTo(p[0]*w+.01,p[1]*h+.01)}ctx.stroke()}}function point(e){const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]}
+button.onclick=()=>{const open=panel.classList.toggle('open');button.textContent=open?'Dölj skrivyta':'Visa skrivyta';button.setAttribute('aria-expanded',String(open));if(open)requestAnimationFrame(resize)};
+canvas.addEventListener('pointerdown',e=>{if(active)return;e.preventDefault();canvas.setPointerCapture(e.pointerId);active={eraser,points:[point(e)]};paint()});
+canvas.addEventListener('pointermove',e=>{if(!active||!canvas.hasPointerCapture(e.pointerId))return;active.points.push(point(e));paint()});
+function finish(){if(active){strokes.push(active);active=null;paint()}}canvas.addEventListener('pointerup',finish);canvas.addEventListener('pointercancel',finish);
+document.getElementById('ink-eraser').onclick=e=>{eraser=!eraser;e.currentTarget.textContent=eraser?'Sudd valt':'Sudd';e.currentTarget.setAttribute('aria-pressed',String(eraser))};document.getElementById('ink-undo').onclick=()=>{strokes.pop();paint()};document.getElementById('ink-clear').onclick=()=>{if(strokes.length&&confirm('Rensa hela skrivytan?')){strokes=[];paint()}};document.getElementById('ink-max').onclick=e=>{panel.classList.toggle('maximized');e.currentTarget.textContent=panel.classList.contains('maximized')?'Minska':'Förstora';requestAnimationFrame(resize)};window.addEventListener('resize',resize);
+go(0);window.lessonCore={go,slides};
+})();
