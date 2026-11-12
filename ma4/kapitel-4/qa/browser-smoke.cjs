@@ -67,6 +67,7 @@ async function active(page){
       await page.locator('#next').click();
       assert.ok((await (await active(page)).innerText()).includes('11 ·'),'Andragrad: felanalys valfri i huvudvägen');
       await page.selectOption('#jump','8');
+      assert.deepEqual(problems,[],'Andragrad: fel innan valbar aktivitet');
       await page.locator('#quadraticError').click();
       assert.equal(await (await active(page)).getAttribute('id'),'quadratic-optional-error','Andragrad: felanalys går att nå; aktiv text='+JSON.stringify((await (await active(page)).innerText()).slice(0,220))+'; slide-id-lista='+JSON.stringify(await page.locator('.slide').evaluateAll(els=>els.map((el,i)=>({i,id:el.id,active:el.classList.contains('active')})))));
     }
