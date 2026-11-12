@@ -109,3 +109,27 @@ Förklarar eleverna `f″` som hur lutningen förändras, eller förväxlar de `
 
 ### Att pröva i klassrummet
 Blir elevernas förklaringar bättre på att särskilja `f′` från `f″` och på att skilja nollställe i `f″` från verkligt krökningsbyte? Klarar de att motivera stationär punkt med `f′(a)=0` **innan** de använder testet? Kan de ge koordinater med `f(a)`? Studera anonyma elevsvar och justera därför; påstå inte effekt utifrån webbens funktionalitet.
+
+
+## Lektion 5 · Funktionens graf och derivatornas grafer
+
+**Original:** `Ma3c_Funktionens_graf_och_derivatornas_grafer.pdf`, elevsidor 1–5, lärarstöd s. 6. **Mål:** koppla graferna för f, f′ och f″; motivera växande, avtagande och punkttyp; skissa en möjlig funktion från derivatans graf.
+
+### Bevarat från originalet
+- Start: grafen under x-axeln men stiger. Eleven ska skilja f:s höjd från f′:s tecken och avgöra om f″ nödvändigtvis är positiv. Svar: f<0, f′>0; f″ kan vara positiv, negativ eller noll.
+- Tre grafer läses vid samma x, med kritiska x=2 (lokalt minimum), x=6 (lokalt maximum), x=4 (inflexionspunkt men **inte terrass**, eftersom f′(4)>0).
+- Kort genomarbetat exempel g′(x)=−1: g₁(x)=−x och g₂(x)=−x+2. Elevuppgift f′(x)=2x−4: lös nollställe, teckentabell, skissa två funktioner, beskriv f″. Exempel f₁=(x−2)², f₂=(x−2)²+3, och f″=2.
+- Lärobok s. 154–155: nivå 1 3146–3149 (uppgift 3148 ritas med digitalt verktyg); nivå 2 3150–3152; nivå 3 3153–3154. Minst två nivåer. Tyst bokarbete cirka 20 minuter inledningsvis, sedan diskussion av en lösning och fortsatt arbete.
+- Läxa exakt 3149 och 3150 klara till nästa lektion; för den som är klar 3153. Motiveringar krävs.
+- Individuell utcheckning: given graf h′(x)=(x−1)(x−3) med fyra frågor om intervall, punkttyp, inflexion kontra terrass och två möjliga funktioner. Extra p′(x)=(x−2)².
+- Lärarstöd s. 6 nämner en **möjlighet** att lägga utcheckningen i öppna Socrative-frågor, men säger uttryckligen att ingen quiz är skapad. Därför har ingen Socrative lagts till i webblektionen.
+
+### Webbens didaktiska mervärde – prövbara hypoteser
+- Tre matematiskt sammanhängande grafer med **en och samma flyttbara x-markör**. Eleverna ska förutsäga f′ och f″ innan de kontrollerar värden och punktkaraktär. Modellen använder ett explicit eget funktionsuttryck, inte en påstådd formel från originalskissen.
+- En andra interaktiv modell visar att vertikal förskjutning C i f(x)=(x−2)²+C påverkar f-värdet men **inte** f′(x)=2x−4 eller f″(x)=2. Den visas först efter elevernas skisser.
+- Uppdelning av exemplet g′=−1 i tydliga, klickstyrda steg med förutsägelsefråga före varje steg.
+- Specificerad återkoppling på typiska fel: ihopblandning av funktionens höjd och lutning, att f″(4)=0 skulle ge en terrasspunkt, fel parabelorientering och fel andra derivata.
+- Självständig utcheckning utan den interaktiva modellen. Facit går att visa efter elevförsök, ingen lagring av svar.
+
+### Utvärdera i klassrummet (anonymt)
+Kan eleverna vid samma x förklara skillnaden mellan f, f′ och f″, istället för att enbart läsa av tre färgade kurvor? Är de självständigt förmögna att skissa två funktioner med samma derivata och motivera varför konstanten inte syns i derivatan? Kan de skilja inflexion från terrass när f′ inte är noll? Använd klassens lösningar och erfarenheter, inte sidans mängd interaktioner, för att avgöra om designen ska ändras.
