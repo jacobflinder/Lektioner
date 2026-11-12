@@ -26,7 +26,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await page.locator('#teacher-toggle').click();
   await ok(await page.locator('.teacher.open').isVisible(),'Lärarstöd visas endast efter aktivt val');
   await ok((await page.locator('.route-guide').textContent()).includes('20 min'),'Lärarstöd prioriterar ostört bokarbete');
-  await ok((await page.locator('.route-guide').textContent()).includes('Diagnosbeslut'),'Läraren kan välja väg utifrån elevsvar');
+  await ok((await page.locator('.route-guide').textContent()).includes('Beslutsregler'),'Läraren kan välja väg utifrån elevsvar');
   await page.locator('#mode').click();
   await ok(await page.locator('body.classroom').count()===0,'Återgång till repetitionsläge');
   await go(2);
