@@ -97,7 +97,7 @@ document.querySelectorAll('[data-particle-prediction]').forEach(box=>{
   const direction=expected==='up'?'uppåt':'nedåt';
   const ok=picked===expected;
   feedback.textContent=(picked?(ok?'Rätt. ':'Pröva igen. '):'Modellens resultat: ')+
-   'Kraften är '+direction+'. För positiv laddning: v åt höger och B inåt ger F uppåt. För negativ laddning vänds kraftens riktning.';
+   'Kraften är '+direction+'. '+(expected==='up'?'Positiv laddning: tummen åt höger längs I.':'Elektron: tummen åt vänster eftersom konventionell ström går motsatt elektronens rörelse.')+' Pekfingret följer B in i bilden och långfingret visar F direkt.';
   choiceButtons.forEach(b=>b.classList.toggle('good',b.dataset.direction===expected));
  }
  choiceButtons.forEach(btn=>btn.onclick=()=>{
