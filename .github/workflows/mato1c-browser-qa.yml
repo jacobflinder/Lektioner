@@ -25,7 +25,9 @@ jobs:
           python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/mato1c-http.log 2>&1 &
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/mato1c/kapitel-3/ >/dev/null && break; sleep 1; done
       - name: Verify navigation, interactivity, responsivity and screenshots
-        run: node mato1c/kapitel-3/qa/browser-smoke.cjs
+        run: |
+          node mato1c/kapitel-3/qa/browser-smoke.cjs
+          node mato1c/kapitel-3/qa/extrempunkter-browser.cjs
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@v4
