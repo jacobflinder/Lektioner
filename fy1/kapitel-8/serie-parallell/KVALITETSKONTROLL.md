@@ -54,3 +54,11 @@ Ingen elevinloggning, inga formulär som skickar elevdata och ingen lokal lagrin
 ## Ändringsavgränsning
 
 Endast `fy1/kapitel-8/serie-parallell/` ändras. Andra Fysik 1-lektioner, Fysik 2, Ma4 och bibliotekets gemensamma CSS/JS är orörda.
+
+## Didaktisk uppdatering – penna och papper först (2026-11-12)
+
+I avsnitt 8.3 används nu ett separat frivilligt självtest: två nya beräkningsproblem löses på **papper** utan numeriska inmatningsfält på webben. Den första uppgiften ger ett startsteg, den andra ska lösas mer självständigt. Eleven kan visa ledtråd och beräkningslösning stegvis. Efter papperslösningen väljer eleven en fysikalisk begreppsförklaring bland tre alternativ och får specificerad återkoppling på vanliga missuppfattningar.
+
+Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
+
+**Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.

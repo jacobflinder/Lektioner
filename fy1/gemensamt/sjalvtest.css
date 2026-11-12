@@ -24,3 +24,17 @@
 .fy1-traning-footer{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
 @media(max-width:575px){.fy1-traning-dialog{width:calc(100vw - 12px);max-height:94dvh;padding:12px}.fy1-task{padding:11px}.fy1-answer-row input{width:100%;max-width:none}.fy1-answer-row button{flex:1}}
 @media print{.fy1-traning-dialog,.fy1-traning-open{display:none!important}}
+/* 8.1–8.4: penna och papper först; webbens val kontrollerar enbart resonemang. */
+.fy1-paper-instruction{font-size:.87rem;color:#476572}.fy1-paper-step,.fy1-paper-done,.fy1-paper-check{margin:7px 0;font-size:.86rem;padding:8px 12px}
+.fy1-paper-steps{padding-left:1.4em;margin:8px 0}
+.fy1-paper-steps li{margin:7px 0;background:#e5f3eb;border-left:3px solid #488b70;border-radius:7px;padding:9px;font-size:.9rem;line-height:1.5}
+.fy1-paper-quiz{margin-top:12px;padding-top:12px;border-top:1px solid #cadae0}
+.fy1-paper-quiz fieldset{border:0;padding:0;min-width:0}.fy1-paper-quiz legend{font-weight:750}.fy1-paper-quiz fieldset p{font-weight:650;font-size:.92rem}
+.fy1-paper-quiz label{display:flex;gap:10px;align-items:flex-start;background:white;border:1px solid #cfdee3;padding:9px;border-radius:9px;margin:6px 0;font-size:.9rem;line-height:1.45;cursor:pointer}
+.fy1-paper-quiz input{margin-top:5px;flex-shrink:0;accent-color:#087b92}
+.fy1-paper-quiz label:has(input:checked){border-color:#087b92;background:#e7f4f7}
+.fy1-paper-feedback{background:#e6f0f5;border-radius:9px;padding:10px;font-size:.9rem;line-height:1.5}
+.fy1-paper-feedback[data-state=correct]{background:#e0f3e9;color:#1a513b}.fy1-paper-feedback[data-state=incorrect]{background:#fff0de;color:#70431a}
+.fy1-paper-explain{margin:10px 0;background:#e8f2f6;padding:10px;border-radius:9px;font-size:.9rem}
+.fy1-paper-explain summary{cursor:pointer;font-weight:680}
+@media(max-width:575px){.fy1-paper-quiz label{padding:9px}.fy1-paper-step,.fy1-paper-done{width:100%}}

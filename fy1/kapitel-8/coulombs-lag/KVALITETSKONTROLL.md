@@ -50,3 +50,12 @@ Revision: 2026-11-12. Källfil: `261102 Coulombs lag Fy1.pdf`, nio uppladdade si
 - Originalets demonstration, Socrative 901, bokuppgifter 801–811 och figurer påverkas inte.
 - Modellens förutsägelsefråga på befintlig bild används i stället för en duplicerad digital fråga. Ingen extra obligatorisk lektionstid tillkommer.
 - En avgränsad lokal Chromium-kontroll av förklaringsflödet passerade tillsammans med 8.2 (36 av 36 testpunkter totalt i revisionsunderlaget). Detta ersätter inte kontroll på publicerad GitHub Pages eller elevprövning.
+
+
+## Didaktisk uppdatering – penna och papper först (2026-11-12)
+
+I avsnitt 8.1 används nu ett separat frivilligt självtest: två nya beräkningsproblem löses på **papper** utan numeriska inmatningsfält på webben. Den första uppgiften ger ett startsteg, den andra ska lösas mer självständigt. Eleven kan visa ledtråd och beräkningslösning stegvis. Efter papperslösningen väljer eleven en fysikalisk begreppsförklaring bland tre alternativ och får specificerad återkoppling på vanliga missuppfattningar.
+
+Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
+
+**Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.

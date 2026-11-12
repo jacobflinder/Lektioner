@@ -34,7 +34,57 @@ const dialog=document.createElement('dialog');dialog.className='fy1-traning-dial
 dialog.innerHTML='<header class="fy1-traning-head"><div><small>Frivillig repetition · ny situation</small><h2 id="fy1-traning-title">'+esc(item.title)+' · Pröva själv</h2></div><button type="button" class="fy1-close" aria-label="Stäng självtest">Stäng ×</button></header><p class="fy1-traning-intro">Två nya uppgifter, skilda från Socrative och boken. <strong>Rita och räkna själv först.</strong> Begär stöd vid behov. Inga elevsvar sparas.</p><div class="fy1-tasks"></div><details class="fy1-next-time"><summary>Pröva minnet igen vid nästa lektion</summary><p>'+esc(item.later)+'</p><p>En lärarledd fråga för senare – ingen automatisk påminnelse.</p></details><footer class="fy1-traning-footer"><button type="button" class="fy1-reset-all">Börja om utan stöd</button><button type="button" class="fy1-close-bottom">Stäng</button></footer>';
 document.body.append(dialog);
 const numeric=s=>{const n=String(s).trim().replace(/[\s\u00a0\u202f]/g,'').replace('−','-').replace(',','.');return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(n)?Number(n):NaN};
-function draw(){
+
+const paperChecks = {
+ 'coulombs-lag': [
+ {q:'Varför blir kraftens storlek hälften?',o:['Den fördubblade laddningen gör att den totala kraften alltid fördubblas.','Dubbla laddningen ger faktor 2, medan dubbla avståndet ger faktor 1/4. Tillsammans blir det faktor 1/2.','Dubbelt avstånd ger alltid halva kraften, oavsett laddningarna.'],c:1,f:['Coulombs lag beror även på avståndet. Du måste väga in r².','Rätt. Produkten av båda förändringarna ger 2/4 = 1/2.','Dubbelt avstånd ger en fjärdedel av kraften, inte hälften.'],why:'F är proportionell mot |Q₁Q₂|/r². Tecknen avgör attraktion eller repulsion, men inte kraftens storlek.'},
+ {q:'Varför ska elektroner tas bort från klotet?',o:['Protoner har lämnat klotet och behöver ersättas.','Fler elektroner gör alltid ett föremål mer neutralt.','Klotets negativa nettoladdning betyder elektronöverskott.'],c:2,f:['Vid vanlig laddningsöverföring är det elektroner som flyttas, inte protoner mellan föremålen.','Tillförda elektroner skulle göra klotet mer negativt.','Rätt. Genom att ta bort elektroner minskar elektronöverskottet.'],why:'Ett negativt klot har fler elektroner än motsvarande positiva protonladdning. N = |Q|/e.'}
+ ],
+ 'elektriska-kretsar': [
+ {q:'Varför måste alla utgående grenströmmar tillsammans vara 0,80 A?',o:['Varje parallellgren får alltid en lika stor ström.','Laddning bevaras och ingen nettoladdning byggs upp i knutpunkten vid stationär ström.','Ström omvandlas till energi inne i knutpunkten.'],c:1,f:['Grenströmmar behöver inte vara lika; det är summan som måste stämma.','Rätt. Summan av strömmarna in och ut är lika stor.','Ström är laddningsflöde. Laddning förbrukas inte i knutpunkten.'],why:'Kirchhoffs första lag följer av laddningens bevarande i stationärt tillstånd.'},
+ {q:'Varför är det fel att säga att dubbla diametern bara ger dubbla arean?',o:['Tvärsnittsarean är proportionell mot diameterns kvadrat: A ∝ d².','Tvärsnittsarean beror bara på hur lång tråden är.','Större diameter ger alltid större resistans.'],c:0,f:['Rätt. Dubbla diametern ger fyra gånger arean.','Längden påverkar resistansen, men tvärsnittsarean bestäms av diametern.','Större tvärsnitt minskar resistansen om material och längd är oförändrade.'],why:'A = πd²/4 och R = ρl/A. Här blir resistansfaktorn 3/4.'}
+ ],
+ 'serie-parallell': [
+ {q:'Varför är strömmen lika stor genom de två seriekopplade resistorerna?',o:['Resistorn med störst resistans förbrukar mest ström.','Strömmarna blir lika enbart för att batteriet är märkt 12 V.','Det finns ingen förgrening och laddning byggs inte upp i komponenterna vid stationär ström.'],c:2,f:['Resistorer omvandlar energi, men förbrukar inte laddning.','Samma ström följer av den oförgrenade strömvägen, inte av ett särskilt spänningsvärde.','Rätt. Samma laddningsflöde går genom varje del av seriekretsen.'],why:'I en oförgrenad seriekrets är I lika genom alla komponenter, även om spänningsfallen kan skilja sig.'},
+ {q:'Varför blir strömmen större genom 90 Ω-grenen än genom 180 Ω-grenen?',o:['Resistorn med högre resistans drar också högre ström.','Grenarna har samma spänning; vid samma U ger lägre R större I.','Parallellkoppling kräver att strömmen är lika stor i alla grenar.'],c:1,f:['Vid samma spänning ger större resistans mindre ström enligt I = U/R.','Rätt. Grenströmmarna är 0,10 A respektive 0,050 A.','Parallellgrenar har samma spänning, men inte nödvändigtvis samma ström.'],why:'Grenströmmarna beror på respektive resistans och summeras till batteriets ström.'}
+ ],
+ 'effekt': [
+ {q:'Vilken förklaring skiljer effekt från energi?',o:['Effekt anger energiomvandling per sekund, medan energi också beror på hur länge en apparat är igång.','750 W betyder att värmaren alltid omvandlar totalt 750 J, oavsett tid.','En högre effekt anger direkt vattnets sluttemperatur.'],c:0,f:['Rätt. Vid konstant P ökar E proportionellt med t.','W betyder J/s, inte joule.','Sluttemperaturen beror även på vattenmassa, värmeförluster och energi.'],why:'P = E/t och E = Pt. Effekt beskriver takten, energi den totala omvandlingen.'},
+ {q:'Varför blir polspänningen lägre än ems när batteriet levererar ström?',o:['Laddning förbrukas i den yttre resistorn.','Ems och polspänning måste alltid vara lika för ett riktigt batteri.','En del av ems går åt till spänningsfallet rI över batteriets inre resistans.'],c:2,f:['Laddning förbrukas inte; elektrisk energi omvandlas.','Vid belastning ger den inre resistansen ett spänningsfall.','Rätt. I batterimodellen gäller U = ℰ − rI.'],why:'I seriemodellen gäller ℰ = U + rI. Vid ökad belastning ökar I och därmed det inre spänningsfallet.'}
+ ]
+};
+function drawPaper() {
+ const list=dialog.querySelector('.fy1-tasks'); list.replaceChildren();
+ dialog.querySelector('.fy1-traning-intro').innerHTML='<strong>Räkna med penna och papper.</strong> Rita figur där det behövs, välj samband och visa mellanled och enheter. Jämför sedan lösningen stegvis och välj en fysikalisk förklaring. Inga svar sparas.';
+ launch.textContent='Självtest · papper';
+ item.tasks.forEach((t,i)=>{
+   const info=paperChecks[slug][i],task=document.createElement('section');task.className='fy1-task fy1-paper-task';
+   task.innerHTML='<h3>'+(i===0?'1 · Med startstöd':'2 · Räkna självständigt')+'</h3><p class="fy1-task-question">'+esc(t[0])+'</p>'
+    +(i===0?'<p class="fy1-partial-solution"><strong>Första steget:</strong> '+esc(item.first)+'</p>':'')
+    +'<p class="fy1-paper-instruction">Räkna klart på papper innan du öppnar lösningen.</p>'
+    +'<button class="fy1-paper-step" type="button">Visa ett lösningssteg</button><ol class="fy1-paper-steps"></ol>'
+    +'<button class="fy1-paper-done" type="button">Jag har räknat – visa begreppsfrågan</button>'
+    +'<div class="fy1-paper-quiz" hidden><fieldset><legend>Förklara fysiken</legend><p>'+esc(info.q)+'</p>'
+    +info.o.map((o,j)=>'<label><input type="radio" name="fy1-paper-'+i+'" value="'+j+'"><span>'+esc(o)+'</span></label>').join('')
+    +'</fieldset><button class="fy1-paper-check" type="button">Kontrollera förklaringen</button><p class="fy1-paper-feedback" aria-live="polite">Välj först en förklaring och motivera den.</p>'
+    +'<details class="fy1-paper-explain"><summary>Jämför med en fullständig fysikförklaring</summary><p>'+esc(info.why)+'</p></details></div>';
+   const steps=task.querySelector('.fy1-paper-steps'),stepButton=task.querySelector('.fy1-paper-step');
+   let step=0;const stages=[t[4],t[5]];
+   stepButton.onclick=()=>{if(step>=stages.length)return; const li=document.createElement('li');li.textContent=stages[step++];steps.appendChild(li);if(step>=stages.length){stepButton.disabled=true;stepButton.textContent='Lösningen är komplett';}};
+   task.querySelector('.fy1-paper-done').onclick=()=>{const el=task.querySelector('.fy1-paper-quiz');el.hidden=false;task.querySelector('.fy1-paper-done').hidden=true;};
+   const feedback=task.querySelector('.fy1-paper-feedback');
+   task.querySelector('.fy1-paper-check').onclick=()=>{
+      const chosen=task.querySelector('input[type=radio]:checked');
+      if(!chosen){feedback.textContent='Välj ett resonemang först.';feedback.dataset.state='neutral';return;}
+      const index=Number(chosen.value),good=index===info.c;
+      feedback.textContent=info.f[index]+(good?' Förklara också med egna ord utifrån din papperslösning.':' Fundera igen och välj ett annat alternativ om du vill.');
+      feedback.dataset.state=good?'correct':'incorrect';
+   };
+   list.appendChild(task);
+ });
+}
+
+function draw(){if(paperChecks[slug]){drawPaper();return;}
  const root=dialog.querySelector('.fy1-tasks');root.replaceChildren();
  item.tasks.forEach((t,i)=>{
   const el=document.createElement('section');el.className='fy1-task';

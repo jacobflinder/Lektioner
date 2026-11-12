@@ -58,3 +58,12 @@
 - 8.2:s frivilliga självtest kräver efter rätt numeriskt svar en motivering av laddningens bevarande respektive R ∝ l/d². Specifika felslut får återkoppling. Fullständig lösning är valfri och tillgänglig efter rätt resonemang; fritext bedöms inte automatiskt.
 - Förutsägelser finns redan i lektionsbilderna och används utan digitala dubbelfrågor. Den verkliga demonstrationen, originalets bokuppgifter och separat PhET-labb påverkas inte.
 - Tidsram och skyddad boktid är oförändrade. En avgränsad lokal Chromium-kontroll av förklaringsflödet passerade tillsammans med 8.1 (36 av 36 testpunkter totalt i revisionsunderlaget), men Pages/Safari och elevprövning återstår.
+
+
+## Didaktisk uppdatering – penna och papper först (2026-11-12)
+
+I avsnitt 8.2 används nu ett separat frivilligt självtest: två nya beräkningsproblem löses på **papper** utan numeriska inmatningsfält på webben. Den första uppgiften ger ett startsteg, den andra ska lösas mer självständigt. Eleven kan visa ledtråd och beräkningslösning stegvis. Efter papperslösningen väljer eleven en fysikalisk begreppsförklaring bland tre alternativ och får specificerad återkoppling på vanliga missuppfattningar.
+
+Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
+
+**Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.

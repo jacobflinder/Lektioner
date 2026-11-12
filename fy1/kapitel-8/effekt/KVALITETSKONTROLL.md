@@ -46,3 +46,11 @@ Sidbreddskontroll av alla **elva** bilder vid 1440, 1280, 768, 390 och 320 px: *
 ## Avgränsning
 
 Detta är **lokalt Chromium-testad** kod, inte en fullständig verifiering av faktiskt publicerad GitHub Pages-sida, Safari/iPad/iPhone, skärmläsare, projektor eller kunskapsutfall i klassrummet. Efter publicering ska resursvägar och live-visning kontrolleras separat, och undervisningen utvärderas med faktiska elever.
+
+## Didaktisk uppdatering – penna och papper först (2026-11-12)
+
+I avsnitt 8.4 används nu ett separat frivilligt självtest: två nya beräkningsproblem löses på **papper** utan numeriska inmatningsfält på webben. Den första uppgiften ger ett startsteg, den andra ska lösas mer självständigt. Eleven kan visa ledtråd och beräkningslösning stegvis. Efter papperslösningen väljer eleven en fysikalisk begreppsförklaring bland tre alternativ och får specificerad återkoppling på vanliga missuppfattningar.
+
+Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
+
+**Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.
