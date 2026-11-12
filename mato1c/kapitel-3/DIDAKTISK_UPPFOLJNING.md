@@ -248,3 +248,5 @@ Be eleverna peka ut den första felaktiga modellen eller definitionsmängden i e
 - **Hoppfunktionen** synliggör varför man måste använda funktionens verkliga punktvärde och kontinuitet innan en derivata kan diskuteras.
 - **Tvåreglagesmodellen** prövar en kritisk insikt: lika lutningar räcker inte när gränsvärdena för själva funktionen skiljer sig. Modellen ska användas som återkoppling efter villkorsekvationerna, inte som genväg till facit.
 - Granska anonymt elevers två villkorsekvationer i utcheckningen: vilka nöjer sig med derivatorna? Vilka kan formulera h>0 och jämföra kvoterna korrekt? Finns tid att arbeta självständigt i minst två nivåer? Värdera faktisk förståelse, inte antal klick.
+
+**Kritisk fördjupning efter skärmbildsgranskning:** I skarvmodellen kan a=2,b=1 ge samma **grenlutning** på vardera sidan, men grenarnas höjder skiljer sig. I en separat, elevstyrd återkoppling visas att den faktiska vänsterkvoten mot den fyllda punkten är `2−1/h` och går mot `−∞`. Därmed undviks missuppfattningen att lika lutningar hos grenuttrycken i sig ger samma ensidiga derivata. Fördjupningen visas inte förrän eleven väljer den.
