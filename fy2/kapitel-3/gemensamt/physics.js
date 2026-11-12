@@ -12,17 +12,16 @@ function particle(sign=1,progress=0,speed=1,B=1,fieldSign=1,showForce=true){
  const p=pts[70],vx=Math.cos(theta),vy=-bend*Math.sin(theta),fx=-Math.sin(theta),fy=-bend*Math.cos(theta);
  const route=pts.map((a,i)=>(i?'L':'M')+a[0].toFixed(2)+' '+a[1].toFixed(2)).join('');
  const color=sign>0?'#bd6947':'#0b8095';
- const fieldGlyph=fieldSign>0?field(13,8,35,47,52,40):field(13,8,35,47,52,40).replaceAll('×','•');
+ const fieldGlyph=fieldSign>0?field(13,7,35,57,52,40):field(13,7,35,57,52,40).replaceAll('×','•');
  const fieldOpacity=Math.min(.98,.37+.37*B),vLength=53*speed,fLength=41*speed*B;
  const content='<g opacity="'+fieldOpacity.toFixed(3)+'">'+fieldGlyph+'</g>'+
- T(42,345,(fieldSign>0?'B in i bilden':'B ut ur bilden')+' · relativt B='+B.toFixed(1).replace('.',','),'#0b748e',17)+
+ T(40,346,fieldSign>0?'× B in i bilden':'• B ut ur bilden','#0b748e',17)+
  '<path d="'+route+'" fill="none" stroke="'+color+'" stroke-width="4"/>'+
  '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="white" stroke="'+color+'" stroke-width="3"/>'+
  T(p[0]-7,p[1]+6,sign>0?'+':'−',color,22)+
  A(p[0],p[1],p[0]+vx*vLength,p[1]+vy*vLength,'#20886d',4)+
  (showForce?A(p[0],p[1],p[0]+fx*fLength,p[1]+fy*fLength,'#be6a42',4):'')+
- T(510,38,'v (grön) ∝ fart','#20886d',17)+
- (showForce?T(510,62,'F (orange) ∝ vB','#ae6343',16):'');
+ '';
  return S(content,710,370,'Partikelbana i homogent magnetfält. Hastighetspilens längd ändras med fart, kraftpilen med fart gånger fältstyrka.');
 }
 function fieldOnRod(charges=false,moving=true,L=.20,B=.40,v=3){
