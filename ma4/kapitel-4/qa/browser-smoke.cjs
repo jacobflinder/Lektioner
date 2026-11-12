@@ -51,25 +51,24 @@ async function active(page){
     if(slug==='komplexa-tal-som-vektorer'){
       await page.selectOption('#jump','2');
       await page.locator('#next').click();
-      assert.equal(await active(page).getAttribute('id'),'try','Vektorer: huvudväg hoppar över frivillig geometri');
-      await page.locator('[data-go="circles"]').first().click().catch(()=>{});
+      assert.equal(await (await active(page)).getAttribute('id'),'try','Vektorer: huvudväg hoppar över frivillig geometri');
       await page.selectOption('#jump','3');
-      assert.equal(await active(page).getAttribute('id'),'circles','Vektorer: geometri finns tillgänglig');
+      assert.equal(await (await active(page)).getAttribute('id'),'circles','Vektorer: geometri finns tillgänglig');
     }
     if(slug==='eulers-formel'){
       await page.selectOption('#jump','1');
       await page.locator('#next').click();
-      assert.ok((await active(page).innerText()).includes('04 ·'),'Euler: huvudvägen hoppar över extra diagnos');
+      assert.ok((await (await active(page)).innerText()).includes('04 ·'),'Euler: huvudvägen hoppar över extra diagnos');
       await page.locator('#euler-open-notation').click();
-      assert.equal(await active(page).getAttribute('id'),'euler-notation-help','Euler: stödspår kan öppnas');
+      assert.equal(await (await active(page)).getAttribute('id'),'euler-notation-help','Euler: stödspår kan öppnas');
     }
     if(slug==='andragradsekvationer'){
       await page.selectOption('#jump','8');
       await page.locator('#next').click();
-      assert.ok((await active(page).innerText()).includes('11 ·'),'Andragrad: felanalys valfri i huvudvägen');
+      assert.ok((await (await active(page)).innerText()).includes('11 ·'),'Andragrad: felanalys valfri i huvudvägen');
       await page.selectOption('#jump','8');
       await page.locator('#quadraticError').click();
-      assert.equal(await active(page).getAttribute('id'),'quadratic-optional-error','Andragrad: felanalys går att nå');
+      assert.equal(await (await active(page)).getAttribute('id'),'quadratic-optional-error','Andragrad: felanalys går att nå');
     }
     if(slug==='hogre-grad'){
       await page.selectOption('#jump','4');
