@@ -78,6 +78,8 @@ Målet är **självständigt matematiskt lärande**, inte maximalt antal reglage
 
 **Matematiska skyddsräcken:** f″(a)>0/<0 ger klassificering *för stationär punkt* f′(a)=0. f″(a)=0 ger inget besked om max/min, och ett ensamt nollställe för f″ bevisar inte inflexion utan teckenbyte. Inflexionspunkten (0,2) hos x³−3x+2 har f′(0)=−3 och därmed sned tangent.
 
+**Visuell andragranskning:** Sparade Chromium-skärmbilder av båda lektionerna har granskats i dator- och mobilvy. Den grafiska genomgången var läsbar utan horisontell rullning. I lektion 4 upptäcktes ett svarsläckage: jämförelserubriken berättade redan före förutsägelsen vilken kurva som hade växande respektive avtagande lutning, och inflexionsgrafen markerade x=0 i förväg. Rubriken gjordes neutral och inflexionspunkten visas nu först när elevens återkoppling öppnas. Automatiskt test kontrollerar detta.
+
 **QA:** `qa/andraderivatan-browser.cjs` och `qa/andraderivatans-roll-browser.cjs` utökades för dolda svar före förutsägelse, fria uttryck och felkategorier, lärarstöd/tidsprioritering, valbar återkallning, valbara steg som nås med klick och hoppas över i kärnvägen, numerisk inflexion och matematiska facit. Alla tio lektionsskripten körs tillsammans med Chromium-regression. Godkänt tekniskt test är ännu inte bevis på förbättrad faktisk inlärning; följ upp boktid och individuella elevlösningar.
 
 ## Kommande omgångar
