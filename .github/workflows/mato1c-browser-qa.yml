@@ -1,0 +1,35 @@
+name: Ma1c web lesson browser quality checks
+on:
+  push:
+    paths:
+      - "mato1c/**"
+      - ".github/workflows/mato1c-browser-qa.yml"
+  workflow_dispatch:
+jobs:
+  classroom-and-repetition:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Start lesson site locally
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/mato1c-http.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8123/mato1c/kapitel-3/ >/dev/null && break; sleep 1; done
+      - name: Verify navigation, interactivity, responsivity and screenshots
+        run: node mato1c/kapitel-3/qa/browser-smoke.cjs
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mato1c-browser-quality-evidence
+          path: mato1c-qa-screenshots/
+          retention-days: 14
