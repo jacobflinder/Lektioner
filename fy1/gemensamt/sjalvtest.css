@@ -1,0 +1,26 @@
+/* Gemensamt valfritt självtest, utan påverkan på ordinarie lektionsbild. */
+.fy1-traning-open{font-size:.84rem}
+.fy1-traning-dialog{color:#153b49;background:white;border:1px solid #bad3dd;border-radius:18px;padding:clamp(14px,3vw,28px);width:min(760px,calc(100vw - 20px));max-height:90dvh;overflow:auto;box-shadow:0 22px 70px #0d263647}
+.fy1-traning-dialog::backdrop{background:#0d1f29a8}
+.fy1-traning-head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.fy1-traning-head small{font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;font-weight:750;color:#087588}
+.fy1-traning-head h2{font-size:clamp(1.25rem,3vw,1.7rem);line-height:1.2;margin:.2rem 0 .5rem}
+.fy1-traning-intro{color:#3b626e;font-size:.9rem;line-height:1.45}
+.fy1-task{border:1px solid #d2e5e9;background:#f7fbfc;padding:15px;border-radius:13px;margin:12px 0}
+.fy1-task h3{font-size:1.04rem;margin:0 0 7px}
+.fy1-task-question{line-height:1.45;margin:5px 0 12px}
+.fy1-partial-solution{background:#e7f0f5;border-left:4px solid #3f8aa0;padding:10px 12px;font-size:.88rem;border-radius:7px}
+.fy1-task-form label{display:block;font-size:.88rem;font-weight:700;margin:7px 0}
+.fy1-answer-row{display:flex;gap:8px;flex-wrap:wrap}
+.fy1-answer-row input{min-width:150px;max-width:300px;flex:1;background:white;color:#194453;border-radius:8px;border:1px solid #9bbdc9;padding:10px 11px}
+.fy1-hint-trigger,.fy1-solution-trigger{margin-top:8px;padding:8px 10px;font-size:.83rem}
+.fy1-hint{font-size:.88rem;background:#ebf2f6;padding:10px 12px;border-left:3px solid #398c9a}
+.fy1-task-feedback{background:#e7f4f6;padding:9px 11px;border-radius:8px;font-size:.87rem;line-height:1.45}
+.fy1-task-feedback[data-state=ok],.fy1-solution{background:#e5f5eb;color:#17543a}
+.fy1-task-feedback[data-state=try]{background:#fff0df;color:#69441a}
+.fy1-solution{font-size:.89rem;padding:11px;border-left:3px solid #31855a;border-radius:8px}
+.fy1-next-time{background:#eef5f7;padding:11px 13px;border-radius:10px;margin-top:14px}
+.fy1-next-time summary{font-size:.91rem;font-weight:650;cursor:pointer}
+.fy1-traning-footer{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
+@media(max-width:575px){.fy1-traning-dialog{width:calc(100vw - 12px);max-height:94dvh;padding:12px}.fy1-task{padding:11px}.fy1-answer-row input{width:100%;max-width:none}.fy1-answer-row button{flex:1}}
+@media print{.fy1-traning-dialog,.fy1-traning-open{display:none!important}}
