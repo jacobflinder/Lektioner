@@ -60,7 +60,12 @@
 </div>
 </header>
 <main>
-<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna formulera situation, variabel, tillåtna värden och rätt enhet innan de räknar. Interaktionerna är korta tänkestöd; den självständiga lösningen görs på papper.</small></div>
+<div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Låt eleverna formulera situation, variabel, tillåtna värden och rätt enhet innan de räknar. Interaktionerna är korta tänkestöd; den självständiga lösningen görs på papper.</small>
+<details class="route-guide"><summary><strong>Kärnväg, tidsprioritering och lärarbeslut</strong></summary>
+<p><strong>Kärnväg:</strong> start och mål (1–2), ett genomarbetat kostnadsexempel (3), biljettprisets förutsägelse och kort styrbar undersökning (4–5), matematiskt bevis (6), elevens eget raketproblem (7), bokarbete (8), individuell utcheckning (9–10). Alla originalproblem behålls. Använd biljettmodellen som kontroll av en hypotes – inte som en andra lång genomgång.</p>
+<p><strong>Riktmärke vid cirka 70 minuter:</strong> start/mål 5–7 min; kostnadsexempel 8–10 min; biljettmodell + bevis 8–10 min; raketuppgift 7–9 min; minst 20 min sammanhängande bokarbete; utcheckning/återkoppling 5–7 min. Resten är marginal för förflyttning och individuellt stöd. Anpassa efter schemat.</p>
+<p><strong>Beslutsregler:</strong> Om flera väljer fel x-domän, stanna vid skillnaden mellan kontinuerlig modell och verkliga antal skärmar. Om rätt optimum hittas men eleven svarar utan enhet, låt hen tolka x, K och I muntligt innan nästa steg. Om raketproblemet löses självständigt med korrekt tid och höjd, gå direkt till boken. För elever som behöver det: visa den tillgängliga kontrollen men låt dem åter förklara utan graf.</p>
+<p><strong>Återkallning nästa lektion:</strong> Utan graf – modellen R(x)=−2x²+16x−6, x antal tusen sålda enheter och R tusentals kronor. Vilket tillåtet x ger störst R om 0≤x≤6? Låt eleven skriva både 4 000 enheter och 26 000 kr och motivera maximum. Observera anonymt om tecken och enheter skiljs åt.</p></details></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Lös och motivera först på papper. Öppna steg och återkoppling efter eget försök. Inga elevsvar lagras eller skickas.</div>
 <div id="stage" class="stage">
 
@@ -149,7 +154,7 @@
 <div>
 <div class="plot-controls">
 <label for="ticket-price">Välj biljettpris x</label>
-<input type="range" id="ticket-price" min="0" max="200" step="5" value="50" aria-describedby="ticket-readout">
+<input type="range" id="ticket-price" min="0" max="200" step="5" value="50" aria-describedby="ticket-price-output">
 <output for="ticket-price" id="ticket-price-output">x = 50 kr</output>
 <div class="shortcut-row" role="group" aria-label="Testa några biljettpriser">
 <button type="button" class="secondary" data-price="0">0 kr</button>
@@ -158,7 +163,8 @@
 <button type="button" class="secondary" data-price="150">150 kr</button>
 <button type="button" class="secondary" data-price="200">200 kr</button>
 </div></div>
-<div class="metric-grid" style="grid-template-columns:1fr;margin:12px 0" id="ticket-readout" aria-live="polite">
+<button type="button" class="secondary" data-reveal="ticket-readout">Visa de beräknade värdena efter min förutsägelse</button>
+<div class="metric-grid hidden" style="grid-template-columns:1fr;margin:12px 0" id="ticket-readout" aria-live="polite">
 <div class="metric"><span>Sålda biljetter i modellen</span><strong id="tickets-sold">750 st</strong></div>
 <div class="metric"><span>Total intäkt</span><strong id="ticket-revenue">37 500 kr</strong></div></div>
 <div class="mini-bars" aria-label="Jämför försäljning och intäkt som relativa staplar">
@@ -172,7 +178,7 @@
 
 <section class="slide" id="ticket-proof" data-teacher="Original s.5: I′=1000−10x, x100, I′ positive before negative after; I(100)=50000, I(0)=I(200)=0, antal sålda =500. Klickstyrd formell återkoppling efter elevernas grafundersökning. Betona att 100 är priset, 500 antal, 50 000 intäkten.">
 <div class="eyebrow">06 · Återkoppling · uppgift 3202</div>
-<h2>100 kr ger störst intäkt – varför?</h2>
+<h2>Vilket pris ger störst intäkt – och hur bevisar vi det?</h2>
 <div class="sequence panel" data-sequence>
 <div class="task"><strong>Gör först på papper:</strong> Bestäm bästa biljettpris med derivata. Visa varför det är ett maximum och ge intäkt och antal sålda biljetter.</div>
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
@@ -194,14 +200,9 @@
 <div class="situation">
 <p><strong>t</strong> är tiden i sekunder efter avfyrningen.</p><p><strong>h(t)</strong> är höjden över havet i meter. Modellen gäller från avfyrningen tills raketen når havsytan.</p>
 </div>
-<div class="task"><strong>Lös utan att öppna facit:</strong>
-<ol class="spaced">
-<li>Bestäm <strong>när</strong> raketen når sin högsta höjd.</li>
-<li>Motivera att det verkligen är ett maximum.</li>
-<li>Beräkna <strong>hur högt</strong> raketen når och svara med enheter.</li>
-<li>Vilka tider är rimliga enligt modellen?</li>
-</ol>
-<p>Eget försök först. Jämför därefter i par: betyder era två svar samma sak?</p></div>
+<div class="task"><strong>Lös utan färdig arbetsgång på papper:</strong> När når raketen sin högsta höjd, och hur högt är det? Visa varför det är modellens maximum och ange vilka tider som faktiskt är möjliga. Svara med båda enheterna.<p>Gör först ett eget försök. Jämför sedan i par: betyder era två svar samma sak?</p></div>
+<button type="button" class="secondary" data-reveal="rocket-original-steps">Visa originalets stegvisa uppgift om du fastnar</button>
+<div class="panel hidden" id="rocket-original-steps"><ol class="spaced"><li>Bestäm när raketen når sin högsta höjd.</li><li>Motivera att det verkligen är ett maximum.</li><li>Beräkna hur högt raketen når och svara med enheter.</li><li>Vilka tider är rimliga enligt modellen?</li></ol></div>
 <div class="panel">
 <strong>Kontrollera efter att du löst själv</strong>
 <div class="input-grid">
