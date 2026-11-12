@@ -29,7 +29,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await ok(await page.locator('body.classroom').count()===0,'Repetitionsläge');
   await page.locator('[data-reveal="start-answer"]').click();
   await ok(await page.locator('#start-answer').isVisible(),'Startfacit visas efter elevförsök');
-  await go(2);
+  await go(1);
   await ok(!await page.locator('#prior-recall').isVisible(),'Valbar återkallning från lektion 3 dold');
   await page.locator('[data-reveal="prior-recall"]').click();
   await ok(await page.locator('#prior-recall').isVisible(),'Återkallningen öppnas på begäran');
