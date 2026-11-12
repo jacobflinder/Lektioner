@@ -206,3 +206,24 @@ Kan eleverna särskilja x-värdets enhet från funktionsvärdets enhet? Anger de
 
 ### Lärarnas klassrumsuppföljning
 Be eleverna peka ut den första felaktiga modellen eller definitionsmängden i ett anonymt lösningsexempel. Klarar eleverna att modellera själva utan reglaget? Kan de motivera att den negativa lösningen till bråkfunktionens derivata är otillåten? Visar bokens lösningar att minst två nivåer hinns med i båda avsnitten, eller behöver läraren prioritera? Mät kvaliteten i elevresonemang, inte klick.
+
+
+## Lektion 9 · Blandade problem (3.2)
+
+**Grundkälla:** `Ma3c_Blandade_problem.pdf`, 11 sidor. **Mål:** Välja rätt funktion eller derivata, tolka värden med enhet samt motivera förändring, extremvärden och gränsvärden. Här är *metodvalet* nytt, inte derivatareglerna. Originalet bygger på växling mellan mängd, inflöde, acceleration, största hastighet och stationära punkttyper.
+
+### Originalinnehåll och aktiviteter bevarade
+- **Start, s.1:** Förenklad vattenmodell `V(t)=120(1−e^(−0,2t))` för `t≥0`, t i minuter, V i liter. Eleverna kopplar frågor till **V(5), V′(5), V″(5)** med rätt enheter. Först enskilt, sedan par. Målet kommer direkt efter startfrågan.
+- **Vatten, s.2–4:** `V′=24e^(−0,2t)` liter/min och `V″=−4,8e^(−0,2t)` liter/min². Positiv V′ och negativ V″ samtidigt; mängden ökar allt långsammare. Ursprunglig GIF/tangent-demo ersatt med **manuellt styrbar** graf och röd tangent med samma x/t som modellvärdena; förutsägelse före flyttning och detaljerad algebra/återkoppling efter. Originalets V(5)≈75,9 liter, V′(5)≈8,83 liter/min, V″(5)≈−1,77 liter/min², största inflöde V′(0)=24 liter/min och vattenmängdens gränsvärde 120 liter som aldrig uppnås finns kvar.
+- **Robot, s.5–6:** Elevens eget försök `s(t)=12√(t+1)−12`, `0≤t≤8`, s meter, t sekunder. Hastighet `s′(3)=3` m/s, acceleration `s″(3)=−3/8≈−0,375` m/s², största hastighet `s′(0)=6` m/s och tangent vid t=3 `y=12+3(t−3)=3t+3`. Stöd `√(t+1)=(t+1)^(1/2)` och `y=s(3)+s′(3)(t−3)` finns på begäran.
+- **Villkor, s.7–8:** `f(x)=x³+ax` med minpunkt vid x=2 ⇒ `a=−12`, `f″(2)=12>0`, koordinat `(2,−16)`. `g′=(x−1)(x−3)²`, stationära x=1 och 3. Derivatans teckenväxling −→+ vid x=1 ger minimum, medan +→+ vid x=3 ger **ingen extrempunkt**, däremot terrasspunkt när `g″=(x−3)(3x−5)` byter tecken. Inget g-värde/y-koordinat kan bestämmas utan g. En extra styrbar **g′-graf (inte g)** hjälper eleven att förstå dubbelrot efter det egna försöket.
+- **Bok, s.9:** s.174–176, nivå 1 **3247–3253**, nivå 2 **3254–3265**, nivå 3 **3266–3271**. Minst två nivåer och 20 minuter sammanhängande tyst eget arbete. Grundspår **3247→3249→3252→3254→3261** och säkert spår **3258→3262→3266→3268→3271**. Digitalt verktyg bara när uppgiften kräver eller för kontroll; eleven ska ändå motivera grafens slutsats.
+- **Läxa:** **3248 och 3260** till nästa lektion, extra **3264**. Ingen Socrative i originalet och ingen ny har lagts till.
+- **Exit, s.10–11:** Två separata individuella frågor: `M(t)=50(1−e^(−0,1t))` gram, t i minuter: `M′(0)=5` g/min, största inflödet vid start, gränsvärde 50 g antas aldrig. `h(x)=x²+bx` med horisontell tangent vid x=1 ⇒ `b=−2`, lokalt och globalt minimum `(1,−1)`. Två självständigt styrda facitsekvenser efter egen insats.
+
+### Lärandemässiga val och prövbara hypoteser
+- Eleverna väljer V, V′ eller V″ före uträkningen; återkopplingen är specifik för felvalet, inte bara ”fel”.
+- Grafen visar att stigande funktionsvärde och avtagande hastighet kan samexistera. Mängd, flöde och flödets förändring syns med korrekta enheter och manuellt styrbar tangent, men all analys måste också motiveras med derivator.
+- Återkopplingen på dubbelroten kommer först efter att eleven motiverat med teckentabell. Interaktiviteten förtydligar att nollställe till derivatan inte automatiskt innebär extrempunkt.
+- Väsentligt med långa tysta bokpass och individuell utcheckning, även om de interaktiva delarna skulle engagera. Minimera övertydlig styrning i de två korta villkorsproblemen.
+- **Följ upp anonymt:** Kan eleverna välja rätt derivata innan de räknar? Kan de skilja ”största inflöde” från ”största mängd” och förklara varför 120 inte antas? Använder de enheter för att kontrollera slutsatser? Kan de på egen hand visa varför x=3 är terrass men inte maximum/minimum?
