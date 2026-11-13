@@ -78,6 +78,8 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   await screenshot('02-motiv-desktop');console.log('PASS bild 02/08: allmän regel, nollvillkor och återställning');
   // 03: sju elevstyrda steg, fyra faktorer och återkontroll.
   await slide(2);
+  await one('#d-princip > p.math math[aria-label="z = −3 + 2i"]','03 första givna talet är en egen ekvation');
+  await one('#d-princip > p.math math[aria-label="u = 1 − 3i"]','03 andra givna talet är en egen ekvation');
   const worked=page.locator('#d-princip [data-sequence]');
   assert.equal(await worked.locator('[data-seq-item]:not(.hidden)').count(),0);
   for(let k=1;k<=7;k++){
