@@ -112,7 +112,9 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   await quiz.locator('[data-correct="true"]').click();
   assert.ok((await quiz.locator('.feedback').innerText()).includes('Rätt'),'05 rätt återkoppling');
   await page.locator('[data-reveal="k-check"]').click();
-  await has('#k-check math[aria-label="= (−3)(−3) + (−3)(−4i) + (4i)(−3) + (4i)(−4i)"]','05 explicit produkt');
+  for(const term of ['(−3)(−3) = 9','(−3)(−4i) = 12i','(4i)(−3) = −12i','(4i)(−4i) = −16i²']){
+   await has('#k-check math[aria-label="'+term+'"]','05 alla fyra produkter, mobilanpassade');
+  }
   await has('#k-check math[aria-label="= 9 − 16(−1)"]','05 tecken vid i²');
   await has('#k-check .ma4-final math[aria-label="z z̄ = 25 = |z|²"]','05 svar');
   console.log('PASS bild 05: missuppfattning, feedback och korrekt produkt');
@@ -133,7 +135,9 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   await active(7);
   assert.ok(await page.locator('#k-exitfacit').isHidden(),'08 exitfacit dolt');
   await page.locator('[data-reveal="k-exitfacit"]').click();
-  await has('#k-exitfacit math[aria-label="= (−2)(−2) + (−2)(3i) + (−3i)(−2) + (−3i)(3i)"]','08 fyra produkter');
+  for(const term of ['(−2)(−2) = 4','(−2)(3i) = −6i','(−3i)(−2) = 6i','(−3i)(3i) = −9i²']){
+   await has('#k-exitfacit math[aria-label="'+term+'"]','08 fyra tydliga produkter på mobil');
+  }
   await has('#k-exitfacit math[aria-label="= 4 − 6i + 6i − 9i²"]','08 imaginära termer');
   await has('#k-exitfacit math[aria-label="= 4 − 9(−1)"]','08 sätt in imaginära enheten');
   await has('#k-exitfacit math[aria-label="|z|² = (√13)² = 13"]','08 kontrollera beloppets kvadrat');
@@ -155,6 +159,7 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
    await active(n);
    const w=await page.evaluate(()=>({page:document.documentElement.scrollWidth,viewport:innerWidth}));
    assert.ok(w.page<=w.viewport+4,'Mobilbild '+(n+1)+' horisontell overflow '+JSON.stringify(w));
+   await page.screenshot({path:out+'/ma4-02-mobile-bild-'+(n+1)+'.png',fullPage:true});
   }
   await page.screenshot({path:out+'/ma4-02-mobile.png',fullPage:true});
   assert.deepEqual(errors,[],'Inga Javascriptfel eller misslyckade nätresurser');

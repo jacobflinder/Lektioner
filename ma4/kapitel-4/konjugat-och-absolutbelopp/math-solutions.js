@@ -16,7 +16,7 @@ insertSolutions({
 ),
 'k-check':solution(
  step('1 · Skilj på tre begrepp',['z = −3 + 4i','Im(z) = 4','z̄ = −3 − 4i','|z| = √(9 + 16) = 5']),
- step('2 · Multiplicera med konjugatet',['z z̄ = (−3 + 4i)(−3 − 4i)','= (−3)(−3) + (−3)(−4i) + (4i)(−3) + (4i)(−4i)','= 9 + 12i − 12i − 16i²','= 9 − 16i²','= 9 − 16(−1)','= 9 + 16']),
+ step('2 · Multiplicera med konjugatet',['z z̄ = (−3 + 4i)(−3 − 4i)','(−3)(−3) = 9','(−3)(−4i) = 12i','(4i)(−3) = −12i','(4i)(−4i) = −16i²','z z̄ = 9 + 12i − 12i − 16i²','= 9 − 16i²','= 9 − 16(−1)','= 9 + 16'],'Beräkna alla fyra produkter var för sig. Först därefter samlar du termerna.'),
  answer(['z z̄ = 25 = |z|²'])
 ),
 'k-selfanswer':solution(
@@ -30,7 +30,7 @@ insertSolutions({
  step('1 · Konjugera',['z = −2 − 3i','z̄ = −2 + 3i']),
  step('2 · Beräkna avståndet',['|z| = √((−2)² + (−3)²)','= √(4 + 9)']),
  answer(['|z| = √13']),
- step('3 · Kontrollera algebraiskt',['z z̄ = (−2 − 3i)(−2 + 3i)','= (−2)(−2) + (−2)(3i) + (−3i)(−2) + (−3i)(3i)','= 4 − 6i + 6i − 9i²','= 4 − 9i²','= 4 − 9(−1)','= 4 + 9 = 13','|z|² = (√13)² = 13']),
+ step('3 · Kontrollera algebraiskt',['z z̄ = (−2 − 3i)(−2 + 3i)','(−2)(−2) = 4','(−2)(3i) = −6i','(−3i)(−2) = 6i','(−3i)(3i) = −9i²','z z̄ = 4 − 6i + 6i − 9i²','= 4 − 9i²','= 4 − 9(−1)','= 4 + 9 = 13','|z|² = (√13)² = 13'],'Varje produkt visas separat så att samtliga tecken går att kontrollera.'),
  answer(['z z̄ = |z|²'])
 )
 });
