@@ -128,6 +128,8 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await shot('07-desktop');
   // 08: frivillig metod med båda teckenfallen
   await go(7);for(const id of ['r8a','r8b','r8c'])await reveal(id);
+  await formula('#r8a','(a + bi)² = a² + abi + abi + b²i²');
+  assert.equal(await page.locator('#r8a mi').filter({hasText:/^abi$/}).count(),0,'Produkten abi får inte typograferas som en enda variabel');
   for(const x of ['a² − b² = 0','2ab = 8','ab = 4'])await formula('#r8b',x);
   for(const x of ['b = −a ⇒ ab = −a² = 4','a² = 4 ⇒ a = ±2'])await formula('#r8c',x);
   await gap('#quadratic-optional-rect > .math-givens > .math',2);
