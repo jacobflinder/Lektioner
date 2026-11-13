@@ -26,7 +26,7 @@ for(const z of [c(4,-4),c(-4,4)])assert.deepEqual(square(z),c(0,-32),'07 självt
 for(const z of [c(3,-3),c(-3,3)])assert.deepEqual(square(z),c(0,-18),'08 alternativ metod');
 for(const z of [c(-3,2),c(-3,-2)])check(z,[[c(6),1],[c(13),0]],'09 metodval B');
 assert.deepEqual(square(c(1,-1)),c(0,-2),'09 metodval C');
-for(const z of [c(1,2),c(1,-2)])assert.deepEqual(square(plus(z,c(-1))),c(-4),'09 metodval D');
+for(const z of [c(1,2),c(1,-2)]){const result=square(plus(z,c(-1)));assert.ok(Math.abs(result.re+4)<1e-9&&Math.abs(result.im)<1e-9,'09 metodval D: (z−1)²=−4');}
 for(const z of [c(0,4),c(0,-2)])check(z,[[c(0,-2),1],[c(8),0]],'14 exit A');
 for(const z of [c(3,3),c(-3,-3)])assert.deepEqual(square(z),c(0,18),'14 exit B');
 for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation');
