@@ -53,7 +53,7 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   await go(2);await quiz(0,0,1);await pic('03-desktop');
   // 04: enhetscirkel och återställning, med både gradtal och projektioner.
   await go(3);await reveal('circlewrap');
-  await page.locator('#angle').fill('90');assert.ok((await page.locator('#values').innerText()).includes('1.000'));
+  await page.locator('#angle').evaluate(el=>{el.value='90';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.ok((await page.locator('#values').innerText()).includes('1.000'));
   await page.locator('#quarter').click();assert.equal(await page.locator('#angle').inputValue(),'-90');
   await page.locator('#resetangle').click();assert.equal(await page.locator('#angle').inputValue(),'120');
   await pic('04-desktop');
