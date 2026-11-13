@@ -133,12 +133,16 @@ function syncPrediction(kind){
   return;
  }
  const correct=active.dataset.choice===root.dataset.correct;
- feedback.textContent=correct?(kind==="sol"?
-  "Rätt. I en lång luftsolenoid är B ≈ μ₀NI/L. Om N fördubblas vid samma I och L, fördubblas B.":
-  "Rätt. I centrum av en platt luftspole är B ≈ μ₀NI/(2r). Om r fördubblas, halveras B."):
+ const solLaw='<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>';
+ const flatLaw='<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>';
+ const selected=kind==="sol"?solLaw:flatLaw;
+ const rendered='<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+selected+'</math>';
+ feedback.innerHTML=correct?(kind==="sol"?
+  "Rätt. I en lång luftsolenoid är "+rendered+". Om N fördubblas vid samma I och L, fördubblas B.":
+  "Rätt. I centrum av en platt luftspole är "+rendered+". Om r fördubblas, halveras B."):
   (kind==="sol"?
-  "Inte riktigt. I B ≈ μ₀NI/L finns N i täljaren. Ändra bara N och pröva igen.":
-  "Inte riktigt. I B ≈ μ₀NI/(2r) står r i nämnaren. Ändra bara r och pröva igen.");
+  "Inte riktigt. I "+rendered+" finns N i täljaren. Ändra bara N och pröva igen.":
+  "Inte riktigt. I "+rendered+" står r i nämnaren. Ändra bara r och pröva igen.");
  feedback.style.fontWeight=correct?"700":"600";
 }
 document.querySelectorAll("[data-inquiry]").forEach(group=>{
