@@ -62,6 +62,9 @@ const prose=s=>'<p class="worked-prose">'+escape(s)+'</p>';
 const result=(...lines)=>'<div class="worked-result"><span class="worked-result-title">Svar</span>'+lines.map(eq).join('')+'</div>';
 const worked=(...sections)=>'<div class="worked-math">'+sections.join('')+'</div>';
 const html={
+ square1:worked(step('Första roten',eq('z₀ = 2 + 2i'),eq('r = 2√2'),eq('v₀ = π/4'))),
+ square2:worked(step('Motsatt rot',eq('z₀ = 2 + 2i'),eq('z₁ = −2 − 2i'),eq('v₀ = π/4'),eq('v₁ = 5π/4'),prose('Argumenten skiljer π. Båda rötterna har beloppet 2√2.'))),
+ square3:worked(step('Samma kvadrat och samma riktning',eq('(2√2)² = 8'),eq('2 · π/4 = π/2'),eq('2 · 5π/4 = 5π/2 = π/2 + 2π')),step('Kontrollera genom kvadrering',eq('(2 + 2i)² = 4 + 8i − 4 = 8i'),eq('(−2 − 2i)² = 4 + 8i − 4 = 8i'),eq('(2 − 2i)² = −8i'),prose('Konjugatet ger alltså inte samma kvadrat i detta exempel.'))),
  variant:worked(
   step('1 · Identifiera koefficienterna',eq('z² − 4iz + 5 = 0'),eq('p = −4i, q = 5')),
   step('2 · Beräkna uttrycket under roten',eq('−p/2 = 2i'),eq('(p/2)² − q = (−2i)² − 5 = −9')),
