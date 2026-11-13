@@ -13,7 +13,7 @@ const FR=(a,b)=>'<mfrac>'+a+b+'</mfrac>';
 const E=exponent=>SUP(I('e'),R(exponent));
 const π=I('π'),i=I('i'),v=I('v'),x=I('x');
 const piFrac=n=>FR(π,N(String(n)));
-const trig=(fn,argument)=>R(I(fn),argument);
+const trig=(fn,argument)=>R(I(fn),O('('),argument,O(')'));
 const pth=(...parts)=>R(O('('),...parts,O(')'));
 const styled=(color,...content)=>'<mstyle mathcolor="'+color+'">'+content.join('')+'</mstyle>';
 function mathML(expression,label,display='block'){
@@ -23,6 +23,7 @@ const L=(expression,label)=>'<div class="ma4-equation">'+mathML(expression,label
 const S=(heading,content)=>'<section class="ma4-step"><h4>'+enc(heading)+'</h4>'+content+'</section>';
 const A=content=>'<div class="ma4-final"><span>SVAR</span>'+content+'</div>';
 const eq=M.eq;
+const givens=lines=>'<div class="math-givens">'+lines.map(([expression,label])=>'<div class="math" data-math-presentation="true">'+mathML(expression,label)+'</div>').join('')+'</div>';
 const expI=θ=>E(R(i,θ));
 const P=theta=>R(O('('),theta,O(')'));
 
@@ -30,37 +31,82 @@ const P=theta=>R(O('('),theta,O(')'));
 // matematik i löptext och sätt uträkningar i separata, tydligt namngivna steg.
 const need=document.querySelector('#need1 p');
 if(need)need.outerHTML=S('Bestäm produktens belopp och argument',
- eq('r₁r₂ = 2 · 3 = 6')+eq('v = π/6 + π/3 = π/2')+eq('z₁z₂ = 6i'));
+ eq('r₁ = 2')+eq('r₂ = 3')+eq('r₁r₂ = 2 · 3 = 6')+eq('v = π/6 + π/3')+eq('v = π/6 + 2π/6 = 3π/6 = π/2')+eq('z₁z₂ = 6i'));
 
 // Den första produktuppställningen använder samma bråktypografi som lösningen.
 const productInputs=document.querySelectorAll('.slide')[6]?.querySelector('.math');
 if(productInputs){
- productInputs.innerHTML=mathML(R(
-  SUB(I('z'),N('1')),O('='),N('2'),expI(piFrac(6)),
-  O(','),SUB(I('z'),N('2')),O('='),N('3'),expI(piFrac(3))
- ),'z₁ = 2e^(iπ/6), z₂ = 3e^(iπ/3)');
+ productInputs.outerHTML=givens([
+ [R(SUB(I('z'),N('1')),O('='),N('2'),expI(piFrac(6))),'z₁ = 2e^(iπ/6)'],
+ [R(SUB(I('z'),N('2')),O('='),N('3'),expI(piFrac(3))),'z₂ = 3e^(iπ/3)']
+ ]);
 }
 const multiply=document.getElementById('multiply');
 if(multiply){
- const exponentSum=expI(R(O('('),piFrac(6),O('+'),piFrac(3),O(')')));
- const exponentHalf=expI(piFrac(2));
- const expr=R(SUB(I('z'),N('1')),SUB(I('z'),N('2')),O('='),N('6'),exponentSum);
+ const product=R(SUB(I('z'),N('1')),SUB(I('z'),N('2')));
+ const p6=piFrac(6),p3=piFrac(3),p2=piFrac(2);
+ const eSum=expI(P(R(p6,O('+'),p3)));
  multiply.innerHTML='<div class="ma4-worked">'+
- S('1 · Multiplicera beloppen',eq('2 · 3 = 6'))+
- S('2 · Addera argumenten',eq('π/6 + π/3 = π/2'))+
- S('3 · Använd exponentiallagen',L(expr,'z₁z₂ = 6 e^(i(π/6+π/3))')+
-   L(R(SUB(I('z'),N('1')),SUB(I('z'),N('2')),O('='),N('6'),exponentHalf),'z₁z₂ = 6 e^(iπ/2)'))+
- S('4 · Återgå till rektangulär form',L(R(exponentHalf,O('='),i),'e^(iπ/2) = i'))+
- A(eq('z₁z₂ = 6i'))+
- S('Samma regel gäller för potenser',L(R(SUP(P(R(I('r'),expI(v))),I('n')),O('='),SUP(I('r'),I('n')),E(R(i,I('n'),v))),
+ S('1 · Identifiera belopp och argument',eq('r₁ = 2')+eq('r₂ = 3')+eq('v₁ = π/6')+eq('v₂ = π/3'))+
+ S('2 · Multiplicera beloppen',eq('r = r₁r₂ = 2 · 3 = 6'))+
+ S('3 · Addera argumenten i radianer',eq('v = v₁ + v₂ = π/6 + π/3')+
+   eq('v = π/6 + 2π/6')+eq('v = 3π/6 = π/2'))+
+ S('4 · Sätt in och använd exponentiallagen',
+   L(R(product,O('='),pth(N('2'),expI(p6)),pth(N('3'),expI(p3))),
+     'z₁z₂ = (2e^(iπ/6))(3e^(iπ/3))')+
+   L(R(product,O('='),N('2'),O('·'),N('3'),expI(p6),expI(p3)),
+     'z₁z₂ = 2·3·e^(iπ/6)·e^(iπ/3)')+
+   L(R(product,O('='),N('6'),eSum),'z₁z₂ = 6e^(i(π/6+π/3))')+
+   L(R(product,O('='),N('6'),expI(p2)),'z₁z₂ = 6e^(iπ/2)'))+
+ S('5 · Använd Eulers formel och kontrollera riktningen',
+   L(R(expI(p2),O('='),trig('cos',p2),O('+'),i,trig('sin',p2)),
+      'e^(iπ/2) = cos(π/2) + i sin(π/2)')+
+   eq('cos(π/2) = 0')+eq('sin(π/2) = 1')+
+   eq('z₁z₂ = 6(0 + i·1)')+
+   A(eq('z₁z₂ = 6i')))+
+ S('Samma regel för heltalspotenser (r > 0, n ∈ ℤ)',
+   L(R(SUP(P(R(I('r'),expI(v))),I('n')),O('='),SUP(I('r'),I('n')),E(R(i,I('n'),v))),
  '(re^(iv))^n = r^n e^(inv)'))+
  '</div>';
 }
 const conversion=document.querySelectorAll('[data-conversion-step]')[2];
-if(conversion)conversion.innerHTML='<strong>3 · Exakta trigonometriska värden och kontroll</strong><div class="ma4-worked">'+
- S('Värden från enhetscirkeln',eq('cos(π/3) = 1/2')+eq('sin(π/3) = √3/2'))+
- S('Sätt in och förenkla',eq('z = 2(1/2 + i√3/2)')+eq('z = 1 + i√3'))+
- S('Kontrollera beloppet',eq('|z| = √(1² + (√3)²) = 2'))+
+if(conversion){
+ conversion.innerHTML='<strong>3 · Exakta trigonometriska värden och förenkling</strong><div class="ma4-worked">'+
+  S('Värden från enhetscirkeln',eq('cos(π/3) = 1/2')+eq('sin(π/3) = √3/2'))+
+  S('Sätt in och multiplicera in faktorn 2',eq('z = 2(1/2 + i√3/2)')+
+    eq('z = 2·(1/2) + 2·i·(√3/2)')+
+    eq('z = (2/2) + i(2√3/2)')+eq('z = 1 + i√3'))+
+  '</div>';
+ const control=document.createElement('div');
+ control.className='hidden';
+ control.dataset.conversionStep='';
+ control.innerHTML='<strong>4 · Kontrollera belopp och riktning</strong><div class="ma4-worked">'+
+  S('Kontrollera beloppet',eq('|z| = √(1² + (√3)²)')+
+    eq('|z| = √(1 + 3) = √4 = 2'))+
+  '<p>Realdelen 1 och imaginärdelen √3 är båda positiva. Punkten ligger i första kvadranten, samma som argumentet π/3.</p>'+
+  '</div>';
+ conversion.after(control);
+}
+const negativeMath=document.querySelector('#negative .math');
+if(negativeMath)negativeMath.outerHTML='<div class="ma4-worked">'+
+ S('Använd Eulers formel',eq('z = 3(cos(−π/2) + i sin(−π/2))'))+
+ S('Sätt in exakta trigonometriska värden',
+   eq('cos(−π/2) = 0')+eq('sin(−π/2) = −1')+
+   eq('z = 3(0 + i(−1))'))+
+ S('Förenkla',eq('z = 3(0 − i)')+A(eq('z = −3i')))+
+ '</div>';
+const half=document.getElementById('final1');
+if(half)half.innerHTML=L(R(expI(π),O('='),trig('cos',π),O('+'),i,trig('sin',π)),
+ 'e^(iπ) = cos(π) + i sin(π)');
+const identity=document.getElementById('final2');
+if(identity)identity.innerHTML='<div class="ma4-worked">'+
+ S('1 · Läs av enhetscirkeln',eq('cos(π) = −1')+eq('sin(π) = 0'))+
+ S('2 · Sätt in i Eulers formel',
+   L(R(expI(π),O('='),O('−'),N('1'),O('+'),i,O('·'),N('0')),
+     'e^(iπ) = −1 + i·0')+
+   L(R(expI(π),O('='),O('−'),N('1')),'e^(iπ) = −1'))+
+ S('3 · Addera 1 i båda leden',
+   A(L(R(expI(π),O('+'),N('1'),O('='),N('0')),'e^(iπ) + 1 = 0')))+
  '</div>';
 
 const fav=document.getElementById('fav');
@@ -93,16 +139,48 @@ if(transfer){
  }
 }
 const check1=document.getElementById('e-exit1');
-if(check1){
- const p=check1.querySelector('p');
- if(p)p.outerHTML='<div class="euler-exit-coordinates">'+eq('r = 2')+eq('v = −π/2')+'</div>';
+if(check1)check1.innerHTML='<div class="ma4-worked">'+
+ S('1 · Läs av belopp och argument',eq('r = 2')+eq('v = −π/2'))+
+ S('2 · Sätt in i Eulers formel',eq('z = 2(cos(−π/2) + i sin(−π/2))'))+
+ S('3 · Använd enhetscirkelns exakta värden',eq('cos(−π/2) = 0')+eq('sin(−π/2) = −1'))+
+ S('4 · Förenkla och kontrollera',eq('z = 2(0 + i(−1))')+eq('z = 2(−i)')+
+   A(eq('z = −2i'))+
+   '<p>Kontroll: punkten (0; −2) ligger två enheter från origo, på negativa imaginära axeln.</p>')+
+ '</div>';
+
+const exitInputs=document.getElementById('e-exit2')?.parentElement?.querySelector('.math');
+if(exitInputs)exitInputs.outerHTML=givens([
+ [R(SUB(I('z'),N('1')),O('='),N('2'),expI(piFrac(3))),'z₁ = 2e^(iπ/3)'],
+ [R(SUB(I('z'),N('2')),O('='),N('3'),expI(R(O('−'),i,piFrac(3)))),'z₂ = 3e^(−iπ/3)']
+]);
+const check2=document.getElementById('e-exit2');
+if(check2){
+ const product=R(SUB(I('z'),N('1')),SUB(I('z'),N('2')));
+ check2.innerHTML='<div class="ma4-worked">'+
+ S('1 · Identifiera belopp och argument',
+   eq('r₁ = 2')+eq('r₂ = 3')+eq('v₁ = π/3')+eq('v₂ = −π/3'))+
+ S('2 · Multiplicera beloppen och addera argumenten',
+   eq('r = r₁r₂ = 2 · 3 = 6')+
+   eq('v = v₁ + v₂ = π/3 + (−π/3) = 0'))+
+ S('3 · Använd exponentiallagen och förenkla',
+   L(R(product,O('='),pth(N('2'),expI(piFrac(3))),pth(N('3'),expI(R(O('−'),i,piFrac(3))))),'z₁z₂ = (2e^(iπ/3))(3e^(−iπ/3))')+
+   L(R(product,O('='),N('2'),O('·'),N('3'),expI(R(i,P(R(piFrac(3),O('−'),piFrac(3)))))), 'z₁z₂ = 2·3 e^(i(π/3−π/3))')+
+   L(R(product,O('='),N('6'),E(R(i,N('0')))),'z₁z₂ = 6e^(i·0)')+
+   L(R(E(N('0')),O('='),N('1')),'e⁰ = 1')+
+   eq('z₁z₂ = 6 · 1')+A(eq('z₁z₂ = 6')))+
+ '</div>';
 }
 const check3=document.getElementById('e-exit3');
-if(check3){
- const p=check3.querySelectorAll('p')[1];
- if(p)p.outerHTML='<div class="euler-exit-coordinates">'+eq('cos π = −1')+eq('sin π = 0')+
-  L(R(E(R(i,π)),O('+'),N('1'),O('='),N('0')),'e^(iπ) + 1 = 0')+'</div>';
-}
+if(check3)check3.innerHTML='<div class="ma4-worked">'+
+ S('1 · Utgå från Eulers formel',
+   L(R(expI(π),O('='),trig('cos',π),O('+'),i,trig('sin',π)),
+      'e^(iπ) = cos(π) + i sin(π)'))+
+ S('2 · Använd enhetscirkeln',eq('cos(π) = −1')+eq('sin(π) = 0'))+
+ S('3 · Sätt in och förenkla',eq('−1 + i·0 = −1')+
+   L(R(expI(π),O('='),O('−'),N('1')),'e^(iπ) = −1'))+
+ S('4 · Addera 1 i båda leden',
+   A(L(R(expI(π),O('+'),N('1'),O('='),N('0')),'e^(iπ) + 1 = 0')))+
+ '</div>';
 
 // Befintliga små HTML-exponenter normaliseras till riktiga semantiska uttryck.
 // Byggs efter deras exakta författade innehåll, aldrig från elevinmatning.
@@ -136,7 +214,7 @@ const factTerms=(base)=>[
 ];
 const [v2,v3,v4,v5]=factTerms(v);
 const [x2,x3,x4,x5]=factTerms(x);
-const [iv2,iv3,iv4,iv5]=factTerms(iv);
+const [iv2,iv3,iv4,iv5]=factTerms(pth(i,v));
 const imagFrac=n=>FR(R(i,power(v,n)),factorial(n));
 const seriesRows=[
  R(E(x),equal,N('1'),plus,x,plus,x2,plus,x3,plus,x4,plus,x5,plus,dots),
@@ -155,7 +233,13 @@ const seriesEls=[...document.querySelectorAll('#euler-option-series .series-eq')
 if(seriesEls.length!==seriesRows.length)throw new Error('Felaktigt antal potensserier i Eulers lektion');
 seriesEls.forEach((el,n)=>{
  const original=el.textContent.trim().replace(/\s+/g,' ');
- el.innerHTML=mathML(seriesRows[n],original);
+ if(n===4){
+  el.classList.add('series-powers');
+  el.innerHTML=[0,1,2,3,4,5].map((k)=>{
+   const result=k%4===0?N('1'):k%4===1?i:k%4===2?R(O('−'),N('1')):R(O('−'),i);
+   return L(R(power(i,k),O('='),result),'i^'+k+' = '+(['1','i','−1','−i'][k%4]));
+  }).join('');
+ }else el.innerHTML=mathML(seriesRows[n],original);
  el.dataset.mathPresentation='true';
 });
 M.typesetStatic();
