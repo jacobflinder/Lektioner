@@ -34,3 +34,20 @@
 - Automatisk funktionalitet och typografisk kontroll är **inte** ett bevis för bättre lärandeeffekt. Resultaten behöver fortfarande prövas på projektor och med elevlösningar.
 
 **Källtrohet:** Endast presentation och typografi justeras. Originalens matematiska exempel, konkreta uppgiftsnummer, läxor, Socrative och undervisningens innehåll ändras inte.
+
+## Förnyad helgranskning · 2026-11-13
+
+**Orsak:** Det första automatiska typografitestet öppnade bara *ett* matematiskt lösningssteg per lektion. Det kunde inte belägga att alla beräkningssteg eller alla dolda facit var läsbara.
+
+**Utökad täckning:** Det nya Chromium-testet `qa/math-typography-deep-browser.cjs` öppnar **samtliga steg i alla genomarbetade lösningar**, tar fram facitområden, granskar läsbar matematikstil, återstående löptext med många likhetstecken, mobilens dokumentbredd och långa formler, och tar skärmbilder från hela uppställningar i mobil- och datorvy. Det körs efter både de tio ordinarie regressionstesterna och det första typografitestet.
+
+**Ursprunglig djupgranskning:** 10 lektioner, 102 lösningssteg, 227 matematiska rader och 40 facitområden. Ingen matematisk rad saknade den gemensamma typografiska stilen och ingen lektion fick helsidig horisontell rullning på 390 px mobilbredd. **Men** sju rader krävde intern horisontell rullning, som mest cirka 30 procent i en utcheckningsberäkning i lektion 6. Det fanns också ett längre svar i lektion 5 med flera formler i löptext.
+
+**Åtgärder efter djupgranskningen:**
+- **Lektion 5:** Utcheckningens fem delresonemang har nu egna matematiska rader för tecken, klassificering, inflexion och två möjliga funktioner. Bråket x³/3 är vertikalt satt; förklaringar och matematiska satser är tydligt skilda.
+- **Lektion 6:** Den längsta ekvationskedjan delas upp i derivata, nollvillkor och två kandidater.
+- **Lektion 2, 4, 7:** Några ytterligare breda faktoriserings- och teckenkedjor delas upp.
+- **Lektion 10:** Differenskvoten vid hopp delas mellan två matematiska rader så att det vertikala bråket får plats bättre.
+- Kontrollskripten för lektion 5 och 7 har anpassats till den nya presentationen och prövar fortfarande matematik och fullständiga svar, inklusive korrekt bråkstreck.
+
+**Viktig distinktion:** Att ett uttryck är tillgängligt via intern horisontell rullning är ett tekniskt godkänt läge, men inte idealiskt för klassrumsprojektion. Vi försöker därför **minska behovet av intern rullning** utan att förenkla bort beräkningar. Fullständig matematiktypografisk perfektion kan inte garanteras av automatisk QA – skärmbilder och undervisningsanvändning är fortsatt viktiga.
