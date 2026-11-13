@@ -173,10 +173,32 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    await spacing('#pd-result',op==='mul'?4:3);
    if(op==='mul'){
     assert.equal(await page.locator('#pd-plane path[stroke="#9b631c"]').count(),1,'04 vinkelbåge i huvudfiguren');
+    const collision=await page.locator('#pd-plane').evaluate(svg=>{
+     const texts=[...svg.querySelectorAll('text')];
+     const result=texts.find(e=>e.textContent==='z₁z₂'),axis=texts.find(e=>e.textContent==='Im');
+     if(!result||!axis)return true;
+     const a=result.getBBox(),b=axis.getBBox();
+     return a.x<b.x+b.width+3&&a.x+a.width+3>b.x&&a.y<b.y+b.height+3&&a.y+a.height+3>b.y;
+    });
+    assert.equal(collision,false,'04 resultatetiketten får inte ligga över Im-axelns etikett');
    }else{
     assert.equal(await page.locator('#pd-plane path[stroke="#9b631c"]').count(),0,'04 ingen överlappande liten vinkelbåge i huvudfiguren');
     assert.equal(await page.locator('#pd-zoom-plane path[stroke="#9b631c"]').count(),1,'04 inzoomad och läsbar medurs vinkelbåge');
     await geom('#bc633a',2/3,-30,2,'#pd-zoom-plane');
+    const touches=await page.locator('#pd-zoom-plane').evaluate(svg=>{
+     const label=[...svg.querySelectorAll('text')].find(e=>e.textContent==='skalad');
+     const blue=svg.querySelector('line[stroke="#19739f"]');
+     if(!label||!blue)return true;
+     const b=label.getBBox();
+     const x1=+blue.getAttribute('x1'),y1=+blue.getAttribute('y1');
+     const x2=+blue.getAttribute('x2'),y2=+blue.getAttribute('y2');
+     for(let i=0;i<=200;i++){
+      const t=i/200,x=x1+t*(x2-x1),y=y1+t*(y2-y1);
+      if(x>=b.x-3&&x<=b.x+b.width+3&&y>=b.y-3&&y<=b.y+b.height+3)return true;
+     }
+     return false;
+    });
+    assert.equal(touches,false,'04 etiketten för skalad vektor får inte ligga på den blå pilen');
     assert.equal(await page.locator('#pd-plane text').filter({hasText:'kvot'}).count(),0,'04 inga trängande kvotetiketter i huvudfiguren');
    }
    if(op==='mul')await one('#pd-result math[aria-label="= 6i"]','04 korrekt produkt');
