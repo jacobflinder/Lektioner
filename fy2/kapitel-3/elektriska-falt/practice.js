@@ -1,6 +1,24 @@
 (() => {
 "use strict";
 /* Repetition exercises: all responses live in DOM memory only. No account, analytics, or storage. */
+// Render authored mathematical fragments with native MathML. No user input is parsed.
+const mathFragments=[["v = √(2eU/mₚ) ≈ 2,19 · 10⁵ m/s","<mi>v</mi><mo>=</mo><msqrt><mfrac><mrow><mn>2</mn><mi>e</mi><mi>U</mi></mrow><mrow><msub><mi>m</mi><mi>p</mi></msub></mrow></mfrac></msqrt><mo>≈</mo><mn>2,19</mn><mo>·</mo><msup><mn>10</mn><mn>5</mn></msup><mtext> m/s</mtext>"],["y = (|q|UL²)/(2mdv₀²)","<mi>y</mi><mo>=</mo><mfrac><mrow><mo>|</mo><mi>q</mi><mo>|</mo><mi>U</mi><msup><mi>L</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi><mi>d</mi><msup><msub><mi>v</mi><mn>0</mn></msub><mn>2</mn></msup></mrow></mfrac>"],["ΔEₖ = eU = mₚv²/2","<msub><mrow><mo>Δ</mo><mi>E</mi></mrow><mi>k</mi></msub><mo>=</mo><mi>e</mi><mi>U</mi><mo>=</mo><mfrac><mrow><msub><mi>m</mi><mi>p</mi></msub><msup><mi>v</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn></mrow></mfrac>"],["v = √(2eU/mₚ)","<mi>v</mi><mo>=</mo><msqrt><mfrac><mrow><mn>2</mn><mi>e</mi><mi>U</mi></mrow><mrow><msub><mi>m</mi><mi>p</mi></msub></mrow></mfrac></msqrt>"],["6,9/4≈1,7 mm","<mfrac><mrow><mn>6,9</mn></mrow><mrow><mn>4</mn></mrow></mfrac><mo>≈</mo><mn>1,7</mn><mtext> mm</mtext>"],["eU = mₚv²/2","<mi>e</mi><mi>U</mi><mo>=</mo><mfrac><mrow><msub><mi>m</mi><mi>p</mi></msub><msup><mi>v</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn></mrow></mfrac>"],["2/2² = 1/2","<mfrac><mrow><mn>2</mn></mrow><mrow><msup><mn>2</mn><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac>"],["v = 2eU/mₚ","<mi>v</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>e</mi><mi>U</mi></mrow><mrow><msub><mi>m</mi><mi>p</mi></msub></mrow></mfrac>"],["a = |q|E/m","<mi>a</mi><mo>=</mo><mfrac><mrow><mo>|</mo><mi>q</mi><mo>|</mo><mi>E</mi></mrow><mrow><mi>m</mi></mrow></mfrac>"],["y ∝ U/v₀²","<mi>y</mi><mo>∝</mo><mfrac><mrow><mi>U</mi></mrow><mrow><msup><msub><mi>v</mi><mn>0</mn></msub><mn>2</mn></msup></mrow></mfrac>"],["v = eU/mₚ","<mi>v</mi><mo>=</mo><mfrac><mrow><mi>e</mi><mi>U</mi></mrow><mrow><msub><mi>m</mi><mi>p</mi></msub></mrow></mfrac>"],["y = at²/2","<mi>y</mi><mo>=</mo><mfrac><mrow><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn></mrow></mfrac>"],["eU = mₚv","<mi>e</mi><mi>U</mi><mo>=</mo><msub><mi>m</mi><mi>p</mi></msub><mi>v</mi>"],["mₚg = eU","<msub><mi>m</mi><mi>p</mi></msub><mi>g</mi><mo>=</mo><mi>e</mi><mi>U</mi>"],["t = L/v₀","<mi>t</mi><mo>=</mo><mfrac><mrow><mi>L</mi></mrow><mrow><msub><mi>v</mi><mn>0</mn></msub></mrow></mfrac>"],["E = U/d","<mi>E</mi><mo>=</mo><mfrac><mrow><mi>U</mi></mrow><mrow><mi>d</mi></mrow></mfrac>"],["a = F/m","<mi>a</mi><mo>=</mo><mfrac><mrow><mi>F</mi></mrow><mrow><mi>m</mi></mrow></mfrac>"],["Fₓ = 0","<msub><mi>F</mi><mi>x</mi></msub><mo>=</mo><mn>0</mn>"],["F = qE","<mi>F</mi><mo>=</mo><mi>q</mi><mi>E</mi>"],["α≈3,9°","<mi>α</mi><mo>≈</mo><mn>3,9</mn><mo>°</mo>"],["q < 0","<mi>q</mi><mo>&lt;</mo><mn>0</mn>"],["vᵧ/vₓ","<mfrac><mrow><msub><mi>v</mi><mi>y</mi></msub></mrow><mrow><msub><mi>v</mi><mi>x</mi></msub></mrow></mfrac>"]];
+function formattedMathText(value){
+ const s=String(value),escape=x=>x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ let html="",pos=0;
+ while(pos<s.length){
+  let best=null;
+  for(const [raw,body] of mathFragments){
+   const at=s.indexOf(raw,pos);
+   if(at>=0&&(!best||at<best.at||(at===best.at&&raw.length>best.raw.length)))best={at,raw,body};
+  }
+  if(!best){html+=escape(s.slice(pos));break;}
+  html+=escape(s.slice(pos,best.at));
+  html+='<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+best.body+"</math>";
+  pos=best.at+best.raw.length;
+ }
+ return html;
+}
 const checks = [
  {slide:0,title:"Fält, kraft och acceleration",question:"Övre plattan är positiv och undre negativ. Vilket alternativ beskriver krafterna och accelerationernas belopp korrekt?",options:["Protonen nedåt, elektronen uppåt. Elektronen accelererar mest.","Båda får kraft nedåt. Protonen accelererar mest.","Elektronen nedåt, protonen uppåt. De accelererar lika mycket."],right:0,hint:"Fältet går från + till −. Jämför F = qE och a = F/m. Vilken partikel har lägst massa?",explain:"Fältet pekar nedåt. En proton (+e) får kraft nedåt, en elektron (−e) uppåt. Kraftbeloppen är lika eftersom |q| är samma. Elektronens betydligt mindre massa ger större acceleration."},
  {slide:2,title:"Tecknet bestämmer kraftens riktning",question:"Fältet pekar åt vänster och en elektron släpps från vila. Hur accelererar den?",options:["Åt vänster, med fältet.","Åt höger, mot fältet.","Ingen acceleration; den börjar ju i vila."],right:1,hint:"Skriv kraftlagen med laddningens tecken: q är negativt för elektronen.",explain:"F = qE med q < 0 ger kraft i motsatt riktning mot fältet. Elektronen accelererar åt höger."},
@@ -23,11 +41,11 @@ for(const [index,c] of checks.entries()){
  box.dataset.check=String(index);
  box.innerHTML='<div class="practice-head"><span class="tag">REPETITION · KONTROLLERA DIN FÖRUTSÄGELSE</span><h2></h2></div><p class="practice-question"></p><div class="practice-options" role="group"></div><p class="practice-response" role="status" aria-live="polite">Tänk först och välj ett svar. Du kan försöka igen.</p><div class="practice-help"><button type="button" class="practice-hint">Ge mig en ledtråd</button><button type="button" class="practice-explain" hidden>Visa förklaringen</button><button type="button" class="practice-reset" hidden>Pröva igen</button></div><p class="practice-detail" hidden></p>';
  box.querySelector("h2").textContent=c.title;
- box.querySelector(".practice-question").textContent=c.question;
+ box.querySelector(".practice-question").innerHTML=formattedMathText(c.question);
  const opts=box.querySelector(".practice-options");
  c.options.forEach((option,j)=>{
   const b=document.createElement("button");b.type="button";b.className="practice-option";
-  b.textContent=String.fromCharCode(65+j)+". "+option;
+  b.innerHTML=String.fromCharCode(65+j)+". "+formattedMathText(option);
   b.addEventListener("click",()=>answer(j));opts.appendChild(b);
  });
  let wrong=0,solved=false;
@@ -40,7 +58,7 @@ for(const [index,c] of checks.entries()){
   buttons.forEach((b,k)=>{b.classList.toggle("selected",j===k);b.classList.remove("correct");});
   if(j===c.right){
    solved=true;msg.className="practice-response is-correct";
-   msg.textContent="Rätt! "+c.explain;
+   msg.innerHTML="Rätt! "+formattedMathText(c.explain);
    buttons[c.right].classList.add("correct");
    buttons.forEach(b=>b.disabled=true);
    hint.hidden=true;explain.hidden=true;reset.hidden=false;detail.hidden=true;
@@ -48,11 +66,11 @@ for(const [index,c] of checks.entries()){
    wrong+=1;msg.className="practice-response is-wrong";
    msg.textContent=wrong===1?"Inte riktigt. Fundera på sambandet och försök igen.":"Fortfarande inte rätt. Använd ledtråden och gör ett nytt försök.";
    hint.hidden=false;explain.hidden=false;reset.hidden=false;
-   detail.hidden=false;detail.textContent=c.hint;
+   detail.hidden=false;detail.innerHTML=formattedMathText(c.hint);
   }
  }
- hint.addEventListener("click",()=>{detail.hidden=false;detail.textContent=c.hint;});
- explain.addEventListener("click",()=>{detail.hidden=false;detail.textContent=c.explain;});
+ hint.addEventListener("click",()=>{detail.hidden=false;detail.innerHTML=formattedMathText(c.hint);});
+ explain.addEventListener("click",()=>{detail.hidden=false;detail.innerHTML=formattedMathText(c.explain);});
  function resetAll(){
   wrong=0;solved=false;
   msg.className="practice-response";msg.textContent="Tänk först och välj ett svar. Du kan försöka igen.";
