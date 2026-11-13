@@ -102,7 +102,7 @@
 <div class="panel hidden" id="prior-recall">
 <p><strong>Utan graf eller steglista:</strong> Bestäm största och minsta värdet för k(x)=−x²+6x på 0≤x≤5. Vid vilka x antas värdena?</p>
 <button type="button" class="reveal" data-reveal="prior-recall-answer">Kontrollera först efter eget försök</button>
-<div class="answer hidden" id="prior-recall-answer"><p>k′(x)=−2x+6=0 ⇒ x=3. Kandidaterna är 0,3 och 5. k(0)=0, k(3)=9, k(5)=5. <strong>Största värdet är 9 vid x=3; minsta värdet är 0 vid x=0.</strong> Vi jämför även ändpunkterna, inte enbart där derivatan är noll.</p></div>
+<div class="answer hidden" id="prior-recall-answer"><div class="solution-math-group"><p class="mathline">k′(x) = −2x + 6 = 0 ⇒ x = 3</p><p class="mathline">k(0) = 0</p><p class="mathline">k(3) = 9</p><p class="mathline">k(5) = 5</p></div><p class="solution-explanation">Kandidaterna är 0, 3 och 5. Vi jämför även ändpunkterna, inte enbart där derivatan är noll.</p><p class="math-result"><strong>Största värdet är 9 vid x=3; minsta värdet är 0 vid x=0.</strong></p></div>
 </div>
 </section>
 
@@ -117,7 +117,7 @@
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata får du, och hur faktoriseras den?"><strong>1 · Undersök den kontinuerliga modellen</strong><p class="mathline">K′(x)=3x²−18x+15=3(x−1)(x−5)</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka stationära x-värden får du från K′(x)=0?"><strong>2 · Hitta stationära kandidater</strong><p class="mathline">K′(x)=0 ⇒ x=1 eller x=5</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur ändras kostnaden före, mellan och efter de stationära punkterna?"><strong>3 · Avgör hur K förändras</strong><p class="mathline">K′(0)=15&gt;0</p><p class="mathline">K′(2)=−9&lt;0</p><p class="mathline">K′(6)=15&gt;0</p><p><strong>K växer fram till 1, avtar mellan 1 och 5 och växer för x&gt;5.</strong> x=1 ger lokalt max, x=5 lokalt min.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilken gränspunkt måste vi jämföra med x=5?"><strong>4 · Jämför med x=0</strong><p class="mathline">K(0)=50, &nbsp; K(1)=57</p><p class="mathline">K(5)=125−225+75+50=25</p><p>Eftersom K ökar för x&gt;5 är <strong>25 det globala minsta värdet</strong> i modellen för x≥0.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken gränspunkt måste vi jämföra med x=5?"><strong>4 · Jämför med x=0</strong><div class="solution-math-group"><p class="mathline">K(0) = 50</p><p class="mathline">K(1) = 57</p></div><p class="mathline">K(5)=125−225+75+50=25</p><p>Eftersom K ökar för x&gt;5 är <strong>25 det globala minsta värdet</strong> i modellen för x≥0.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad betyder x=5 och K(5)=25 i den ursprungliga situationen?"><strong>5 · Svara i situationen</strong><p><strong>Lägsta kostnaden är 25 000 kr per dag vid produktion av 5 datorskärmar per dag.</strong></p><p>x=5 är ett tillåtet heltal. I andra modeller kan närliggande heltal behöva jämföras.</p></div>
 </div>
 <div class="seq-controls">
@@ -192,8 +192,8 @@
 <div class="seq-item hidden" data-seq-item data-question="Derivera I(x)=1000x−5x². Vad blir I′(x)?"><strong>1 · Derivera</strong><p class="mathline">I′(x)=1000−10x</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vid vilket pris är derivatan noll?"><strong>2 · Hitta den stationära kandidaten</strong><p class="mathline">1000−10x=0 ⇒ x=100</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur ser tecknen för I′ ut före och efter x=100?"><strong>3 · Visa att det är ett maximum</strong><p>Derivatan är <strong>positiv för x&lt;100</strong> och <strong>negativ för x&gt;100</strong>. Intäkten ökar, når sin topp och minskar sedan.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Hur stor är intäkten vid x=100 och vad gäller vid ändpunkterna?"><strong>4 · Jämför intäkter</strong><p class="mathline">I(100)=1000·100−5·100²=50 000</p><p class="mathline">I(0)=0, &nbsp; I(200)=0</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilket biljettpris, hur många biljetter och hur stor intäkt svarar du med?"><strong>5 · Svara med rätt enheter</strong><p><strong>Största intäkten är 50 000 kr vid priset 100 kr per biljett.</strong></p><p>Antal sålda: <span class="mathline">1000−5·100=500</span>. Kontroll: <strong>100 kr × 500 biljetter = 50 000 kr.</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur stor är intäkten vid x=100 och vad gäller vid ändpunkterna?"><strong>4 · Jämför intäkter</strong><p class="mathline">I(100)=1000·100−5·100²=50 000</p><div class="solution-math-group"><p class="mathline">I(0) = 0</p><p class="mathline">I(200) = 0</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket biljettpris, hur många biljetter och hur stor intäkt svarar du med?"><strong>5 · Svara med rätt enheter</strong><p><strong>Största intäkten är 50 000 kr vid priset 100 kr per biljett.</strong></p><p class="solution-explanation">Antal sålda biljetter:</p><p class="mathline">1000 − 5·100 = 500</p><p class="math-result"><strong>Kontroll: 100 kr × 500 biljetter = 50 000 kr.</strong></p></div>
 </div>
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
 </div>
@@ -225,8 +225,8 @@
 <div id="rocket-answer" class="answer hidden">
 <p class="mathline">h′(t)=10−10t=0 ⇒ t=1</p><p>h′ är positiv före t=1 och negativ efter. Raketen når alltså ett maximum.</p>
 <p class="mathline">h(1)=40+10−5=45</p>
-<p>Havsytan: <span class="mathline">40+10t−5t²=0</span>, vilket ger <span class="mathline">t=4</span> och <span class="mathline">t=−2</span>. Negativ tid väljs bort; modellens tid är <strong>0≤t≤4</strong>.</p>
-<p>Ändvärden: <span class="mathline">h(0)=40, h(4)=0</span>.</p>
+<p class="solution-explanation">Vid havsytan gäller:</p><p class="mathline">40 + 10t − 5t² = 0</p><p class="mathline">t = 4 eller t = −2</p><p class="solution-explanation">Negativ tid väljs bort; modellens tid är <strong>0≤t≤4</strong>.</p>
+<div class="solution-math-group"><p class="mathline">h(0) = 40</p><p class="mathline">h(4) = 0</p></div>
 <p><strong>Raketen når 45 meters höjd 1 sekund efter avfyrningen.</strong> En tid svarar på ”när?” och ett funktionsvärde på ”hur högt?”.</p>
 </div>
 </section>
@@ -273,7 +273,7 @@
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Derivera V(x). Vilket x-värde gör derivatan noll?"><strong>1 · Derivera och lös</strong><p class="mathline">V′(x)=−2x+6=0 ⇒ x=3</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur vet vi att x=3 ger ett maximum i det tillåtna intervallet?"><strong>2 · Motivera maximum</strong><p>V′ är positiv före 3 och negativ efter 3. Vinsten växer och avtar sedan.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka vinster får vi vid x=3 och vid gränserna 0 och 6?"><strong>3 · Jämför värden</strong><p class="mathline">V(3)=−9+18−5=4</p><p class="mathline">V(0)=−5, &nbsp; V(6)=−36+36−5=−5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka vinster får vi vid x=3 och vid gränserna 0 och 6?"><strong>3 · Jämför värden</strong><p class="mathline">V(3)=−9+18−5=4</p><div class="solution-math-group"><p class="mathline">V(0) = −5</p><p class="mathline">V(6) = −36 + 36 − 5 = −5</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad betyder x=3 och V=4 i antal enheter och kronor?"><strong>4 · Svara i situationen</strong><p><strong>Största vinsten är 4 000 kr per dag vid produktion av 3 000 enheter per dag.</strong></p><p>”3 och 4” är inte ett tillräckligt svar när modellen mäter i tusental.</p></div>
 </div>
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
