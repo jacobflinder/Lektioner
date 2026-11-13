@@ -175,15 +175,17 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await page.locator('#mode').click();
   // Mobil: skärmklipp och sidscroll kontrolleras på samtliga 14 bilder.
   await page.setViewportSize({width:390,height:844});
+  const allMobileOverflows=[];
   for(let i=0;i<14;i++){
    await go(i);
    const d=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,width:innerWidth}));
    assert.ok(d.doc<=d.width+3,'Ingen total sidscroll på mobilbild '+(i+1)+' '+JSON.stringify(d));
    if(i===7){const giv=page.locator('.slide.active .math-givens').first();assert.ok(await giv.count()===1);await gap('.slide.active > .math-givens > .math',2);}
    const cropped=await page.locator('.slide.active .worked-equation:visible, .slide.active .worked-mobile-line:visible').evaluateAll(es=>es.filter(e=>e.scrollWidth>e.clientWidth+3).map(e=>({width:e.clientWidth,scroll:e.scrollWidth,text:e.innerText.slice(0,100),label:e.querySelector('math')?.getAttribute('aria-label')})));
-   assert.deepEqual(cropped,[],'Alla synliga matematiska mellanled måste rymmas utan intern sidscroll i mobilbild '+(i+1));
+   if(cropped.length)allMobileOverflows.push({bild:i+1,formler:cropped});
    await shot('mobil-'+String(i+1).padStart(2,'0'));
   }
+  assert.deepEqual(allMobileOverflows,[],'Alla synliga matematiska mellanled måste rymmas i samtliga 14 mobilbilder: '+JSON.stringify(allMobileOverflows));
   await go(6);await page.locator('#methodAlternate').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),7,'Valfri alternativmetod nås');
   await go(11);await page.locator('#quadraticExtra').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),12,'Valfri extraaktivitet nås');
   await page.locator('#quadraticSkip').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),13,'Gå direkt till exit');
