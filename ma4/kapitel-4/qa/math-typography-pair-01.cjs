@@ -20,7 +20,7 @@ fs.mkdirSync(output,{recursive:true});
    try{
     const res=await page.goto(base+slug+'/',{waitUntil:'networkidle'});
     assert.equal(res.status(),200);
-    assert.ok(await page.locator('script[src$="math-solutions.js"]').count(),'Lektionen laddar egna korrekturlästa lösningar');
+    assert.ok(await page.locator('script[src*="math-solutions.js"]').count(),'Lektionen laddar egna korrekturlästa lösningar');
     assert.ok(await page.locator('.slide .math[data-math-presentation="true"] math').count()>=12,'Grundformler och mellanled är satta med MathML');
     assert.ok(await page.locator('.slide .math msup').count()>=3,'Potenser skrivs som potenser');
     const target=page.locator('#'+prefix+'-start');
