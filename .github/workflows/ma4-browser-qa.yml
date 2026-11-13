@@ -33,6 +33,7 @@ jobs:
       - name: Check every Ma4 lesson on desktop and mobile
         run: |
           node ma4/kapitel-4/qa/browser-smoke.cjs
+          node ma4/kapitel-4/qa/math-typography-pair-01.cjs
           node ma4/kapitel-4/qa/unit-circle-browser.cjs
           node ma4/kapitel-4/qa/understand-browser.cjs
       - name: Upload browser evidence
