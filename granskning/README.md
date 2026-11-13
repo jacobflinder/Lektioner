@@ -170,7 +170,11 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Åtgärd:** Båda lektionerna visar nu varje givet komplext tal i ett eget matematiskt block i `.math-givens`. En återanvändbar CSS-regel ger minst **16 CSS-pixlars vertikalt mellanrum**. Riktade Chromiumtester kontrollerar både separata MathML-uttryck och deras uppmätta mellanrum på desktop och mobil (390 px). Dessutom är kravet permanent infört i `AGENTS.md` och som granskningskriterium ovan.
 
-**Status:** Denna typografiska korrigering ändrar inte antalet genomförda lektioner (3/41) eller deras matematiska lösningar. Kod- och publiceringsbevis hör till den separat testade och sammanslagna ändringen.
+**Uppföljande kontroll av lektion 1–3:** Den första ändringen omfattade bara de stora givna talparen i lektion 1 och 3. Vid kontroll av **samtliga tre lektioner** hittades ytterligare självständiga ekvationer som fortfarande stod i ett enda matematikblock. De har nu delats upp i egna `.math-givens`-rader: standardform och `a`/`b` i lektion 1, konjugeringsregel, absolutbelopp, två tal i samma exempel samt begrepps- och utcheckningsfacit i lektion 2, och `u` och `ū` i lektion 3. Den stegvisa matematiska framställningen och alla uppgifter bevaras.
+
+**Permanent kontroll:** `qa/equation-spacing-ma4-01-03.cjs` verifierar separata MathML-element, läsbarhet och uppmätt avstånd om minst 16 CSS-pixlar på både 1280 px dator och 390 px mobil. De individuella djupgranskningstesterna uppdateras där typografin påverkar förväntade MathML-uttryck.
+
+**Status:** Korrigeringen ändrar inte antalet genomförda lektioner (3/41) eller deras matematiska slutsvar. Kodändringen testas och publiceras separat; verifierade GitHub Actions-länkar och PR ska läggas till när alla kontroller har godkänts.
 
 ### FORTSÄTT HÄR I NÄSTA CHATT
 

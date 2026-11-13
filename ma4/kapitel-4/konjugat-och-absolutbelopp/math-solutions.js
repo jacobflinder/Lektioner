@@ -4,7 +4,7 @@
 const {step,answer,solution,insertSolutions,typesetStatic}=window.Ma4Math;
 insertSolutions({
 'k-start':solution(
- step('1 · Punkt i det komplexa talplanet',['z = 3 − 4i','Re(z) = 3, Im(z) = −4','P = (3; −4)']),
+ step('1 · Punkt i det komplexa talplanet',['z = 3 − 4i','Re(z) = 3','Im(z) = −4','P = (3; −4)']),
  step('2 · Avståndet enligt Pythagoras',['d = √(3² + (−4)²)','= √(9 + 16)','= √25']),
  answer(['d = 5'])
 ),

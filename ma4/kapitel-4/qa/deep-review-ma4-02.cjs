@@ -36,7 +36,8 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   assert.ok(await page.locator('#k-start').isHidden(),'01 startfacit dolt');
   assert.ok(await page.locator('#k-goals').isHidden(),'01 målen visas först efter startfrågan');
   await page.locator('[data-reveal="k-start"]').click();
-  await has('#k-start math[aria-label="Re(z) = 3, Im(z) = −4"]','01 koordinater med rätt tecken');
+  await has('#k-start math[aria-label="Re(z) = 3"]','01 realdelen');
+  await has('#k-start math[aria-label="Im(z) = −4"]','01 imaginärdelen');
   await has('#k-start .ma4-final math[aria-label="d = 5"]','01 rätt avstånd');
   await page.locator('[data-reveal="k-goals"]').click();
   assert.ok(await page.locator('#k-goals').isVisible(),'01 målen kan öppnas');
