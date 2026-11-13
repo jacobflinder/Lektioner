@@ -51,3 +51,5 @@
 - Kontrollskripten för lektion 5 och 7 har anpassats till den nya presentationen och prövar fortfarande matematik och fullständiga svar, inklusive korrekt bråkstreck.
 
 **Viktig distinktion:** Att ett uttryck är tillgängligt via intern horisontell rullning är ett tekniskt godkänt läge, men inte idealiskt för klassrumsprojektion. Vi försöker därför **minska behovet av intern rullning** utan att förenkla bort beräkningar. Fullständig matematiktypografisk perfektion kan inte garanteras av automatisk QA – skärmbilder och undervisningsanvändning är fortsatt viktiga.
+
+**Extra visuell kontroll i lektion 5:** Skärmbilden av den öppnade utcheckningen visade att SVG-klippområdet dolde den nedersta delen av grafen till h′(x)=(x−1)(x−3), just där derivatan är negativ. Den vertikala skalan justerades så att **minimum (2, −1)** och dess markör ligger helt innanför klippområdet. Ett nytt webbläsartest kontrollerar både markören och klippgränsen. Detta är en grafisk lärandefråga utöver den rent typografiska granskningen.
