@@ -11,7 +11,8 @@
 .question .fy1-typeset, .feedback .fy1-typeset,
 .fy1-task-question .fy1-typeset, .fy1-paper-steps .fy1-typeset,
 .model-result .fy1-typeset { font-weight: 400; }
-.mathrow { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+.mathrow, .fy1-partial-solution, .fy1-paper-steps li, .fy1-paper-feedback, .feedback, .model-result { max-width: 100%; overflow-x: auto; }
+.mathrow { overflow-y: hidden; }
 .mathrow math, .fy1-traning-dialog math { max-width: 100%; }
 @media (max-width: 600px) {
   .fy1-typeset { font-size: 1em; }
