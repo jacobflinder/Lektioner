@@ -10,7 +10,7 @@ const mo=value=>'<mo>'+esc(value)+'</mo>';
 const mn=value=>'<mn>'+esc(value)+'</mn>';
 const mi=value=>'<mi'+(['Re','Im','sin','cos','tan','eller'].includes(value)?' mathvariant="normal"':'')+'>'+esc(value)+'</mi>';
 function typeFormula(source,display='block'){
- const raw=String(source).replaceAll('\u00a0',' ').replaceAll('−','−').replaceAll('—','−').replaceAll('–','−').replaceAll('->','⇒').replace(/\s+/g,' ').trim();
+ const raw=String(source).replaceAll('\u00a0',' ').replaceAll('ū','u\u0304').replaceAll('ā','a\u0304').replaceAll('—','−').replaceAll('–','−').replaceAll('->','⇒').replace(/\s+/g,' ').trim();
  const glyphs=Array.from(raw);let cursor=0;
  const isDigit=v=>v!==undefined&&/^[0-9]$/.test(v);
  const isLetter=v=>v!==undefined&&/^[a-zA-Z]$/.test(v);
