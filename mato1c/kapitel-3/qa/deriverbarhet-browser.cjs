@@ -111,8 +111,8 @@ fs.mkdirSync(out,{recursive:true});
   await ok(await exit.locator('[data-seq-item]:visible').count()===0,'Utcheckning dold');
   for(let k=0;k<5;k++)await exit.locator('[data-seq-next]').click();
   const result=await exit.innerText();
-  await ok(result.includes('c=4, d=−4')&&result.includes('F′(2)=4'),'Deriverbar skarv i exit');
-  await ok(result.includes('vänsterdelen 8')&&result.includes('−2')&&result.includes('+2'),'Felaktig skarv och hörn');
+  await ok(result.replace(/\s+/g,'').includes('c=4,d=−4')&&result.replace(/\s+/g,'').includes('F′(2)=4'),'Deriverbar skarv i exit');
+  await ok(result.includes('lim')&&result.replace(/\s+/g,'').includes('F(x)=8')&&result.includes('−2')&&result.includes('+2'),'Felaktig skarv och hörn');
   await page.screenshot({path:out+'/lesson10-exit-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});
   for(let k=1;k<=12;k++){await go(k);await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobilöverspill steg '+k)}
