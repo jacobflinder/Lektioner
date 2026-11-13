@@ -197,7 +197,7 @@
 <div class="key-insight"><strong>Slutsats:</strong> Det lokala maximumet 5 vid x=0 är inte längre det största värdet på hela intervallet. Det är <span class="focus-math">17,5 vid x=5</span>.</div>
 </section>
 
-<section class="slide" id="own" data-teacher="Original s.5–6. Elevens egen uppgift h=−x²+4x på [0,5]. Med minskat stöd: h′=−2x+4=0 → x=2. Kandidater x=0,2,5; värden h(0)=0, h(2)=4, h(5)=−5. Max4 vid x2; min−5 vid x5. Kontrollera värdet och var värdet antas – olika slags uppgifter. Utförlig återkoppling först efter eget försök.">
+<section class="slide" id="own" data-teacher="Original s.5–6. Elevens egen uppgift h=−x²+4x på [0,5]. Med minskat stöd: h′=−2x+4=0 → x=2. NYTT: repetera h″=−2 &lt;0 för lokal klassificering innan vi jämför h(0), h(2), h(5). Max4 vid x2; min−5 vid x5. Gör tydligt att andraderivatan bara avgör lokal karaktär, inte intervallmaximum. Utförlig återkoppling först efter eget försök.">
 <div class="eyebrow">06 · Din tur · mindre stöd</div>
 <h2>Bestäm både värdet och var det antas</h2>
 <p class="mathline">h(x)=−x²+4x, &nbsp; 0 ≤ x ≤ 5</p>
@@ -220,11 +220,16 @@
 <p class="feedback" id="own-feedback" role="status" aria-live="polite"></p>
 </div>
 <button type="button" class="secondary" data-reveal="own-hint">Visa stöd om du fastnar</button>
-<div class="panel hidden" id="own-hint"><p>Derivera <span class="mathsmall">h′(x)=−2x+4</span> och lös <span class="mathsmall">h′(x)=0</span>. Glöm inte <span class="mathsmall">x=0</span> och <span class="mathsmall">x=5</span> när du jämför funktionsvärdena.</p></div>
+<div class="panel hidden" id="own-hint"><p>Derivera <span class="mathsmall">h′(x)=−2x+4</span> och lös <span class="mathsmall">h′(x)=0</span>. Använd gärna <span class="mathsmall">h″(x)</span> för att klassificera den stationära punkten <em>lokalt</em>. Glöm inte <span class="mathsmall">x=0</span> och <span class="mathsmall">x=5</span> när du jämför funktionsvärdena i hela intervallet.</p></div>
 <button type="button" class="reveal" data-reveal="own-answer">Visa genomarbetad lösning efter eget försök</button>
 <div id="own-answer" class="answer hidden">
 <p class="mathline">h′(x)=−2x+4=0 ⇒ x=2</p>
-<p>Vi testar x=0, x=2 och x=5.</p>
+<p class="solution-explanation"><strong>Klassificera den stationära punkten med andraderivatan:</strong></p>
+<div class="solution-math-group">
+<p class="mathline">h″(x) = −2</p>
+<p class="mathline">h″(2) = −2 &lt; 0</p>
+</div>
+<p class="solution-explanation">Alltså har h ett <strong>lokalt maximum vid x=2</strong>. Men det säger ännu inte vilket värde som är störst eller minst i hela intervallet. Därför jämför vi samtliga kandidater: <strong>x=0, x=2 och x=5</strong>.</p>
 <div class="solution-math-group"><p class="mathline">h(0) = 0</p><p class="mathline">h(2) = −4 + 8 = 4</p></div>
 <p class="mathline">h(5)=−25+20=−5</p>
 <div class="solution-math-group"><p class="math-result"><strong>Största värdet är 4 vid x=2.</strong></p><p class="math-result"><strong>Minsta värdet är −5 vid x=5.</strong></p></div>
@@ -267,7 +272,7 @@
 </div>
 </section>
 
-<section class="slide" id="exit-answer" data-teacher="Original s.8. Visa först efter elevernas självständiga lösning. p'=3x²−3=0 ⇒ ±1, men −1 ligger utanför [0,3]. Kandidater 0,1,3. p(0)=0, p(1)=−2, p(3)=18. Största 18 vid 3; minsta −2 vid 1. Gemensam återkoppling på det första steget där eleven eventuellt missat en kandidat.">
+<section class="slide" id="exit-answer" data-teacher="Original s.8. Visa först efter elevernas självständiga lösning. p'=3x²−3=0 ⇒ ±1, men −1 ligger utanför [0,3]. NYTT: p″(x)=6x och p″(1)=6&gt;0 klassificerar x=1 som lokalt minimum. Kandidater 0,1,3. p(0)=0, p(1)=−2, p(3)=18. Största 18 vid 3; minsta −2 vid 1. Andraderivatan avgör inte globalt värde; jämför alltid ändpunkter.">
 <div class="eyebrow">09 · Återkoppling till utcheckningen</div>
 <h2>Intervallet styr urvalet</h2>
 <p class="lead">Jämför din lösning. Komplettera det första steg som saknas.</p>
@@ -275,7 +280,13 @@
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilka x gör p′(x)=0, och vilka av dem ligger inom intervallet?"><strong>1 · Derivera och lös</strong><div class="solution-math-group"><p class="mathline">p′(x)=3x²−3</p><p class="mathline">p′(x)=0 ⇒ x²=1</p><p class="mathline">x=−1 eller x=1</p></div><p><strong>x=−1 ligger utanför intervallet och väljs bort.</strong></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka ändpunkter lägger vi till innan vi räknar funktionsvärdena?"><strong>2 · Välj alla tillåtna kandidater</strong><p><strong>x = 0, 1 och 3.</strong> Båda ändpunkterna måste med.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är p″(1), vilken lokal karaktär har x=1, och vilka ändpunkter måste läggas till?">
+<strong>2 · Klassificera lokalt – välj kandidater globalt</strong>
+<div class="solution-math-group">
+<p class="mathline">p″(x) = 6x</p>
+<p class="mathline">p″(1) = 6 &gt; 0 ⇒ lokalt minimum</p>
+</div>
+<p class="solution-explanation"><strong>x=−1 ligger utanför intervallet</strong> och är därför ingen kandidat. För hela intervallet behöver vi jämföra <strong>x=0, x=1 och x=3</strong>, inklusive båda ändpunkterna.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka är p(0), p(1) och p(3)?"><strong>3 · Beräkna och jämför</strong><p class="mathline">p(0)=0</p><p class="mathline">p(1)=1−3=−2</p><p class="mathline">p(3)=27−9=18</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilket värde är störst/minst och vid vilket x antas det?"><strong>4 · Svara med värde och plats</strong><div class="solution-math-group"><p class="math-result"><strong>Största värdet är 18 vid x=3.</strong></p><p class="math-result"><strong>Minsta värdet är −2 vid x=1.</strong></p></div><p>Ett lokalt maximum behöver inte vara det största värdet på hela intervallet.</p></div>
 </div>
