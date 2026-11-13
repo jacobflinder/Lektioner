@@ -1,0 +1,19 @@
+/* Gemensam matematisk typografi för Fy1 8.1–8.2.
+   Inbyggt MathML utan tredjepartstjänster; påverkar inte övriga lektioner. */
+.fy1-typeset {
+  font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", "Noto Sans Math", serif;
+  font-size: 1.07em;
+  font-weight: 400;
+  white-space: nowrap;
+  vertical-align: -0.12em;
+  margin-inline: 0.045em;
+}
+.question .fy1-typeset, .feedback .fy1-typeset,
+.fy1-task-question .fy1-typeset, .fy1-paper-steps .fy1-typeset,
+.model-result .fy1-typeset { font-weight: 400; }
+.mathrow { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+.mathrow math, .fy1-traning-dialog math { max-width: 100%; }
+@media (max-width: 600px) {
+  .fy1-typeset { font-size: 1em; }
+  .model-result, .fy1-paper-steps li { overflow-wrap: anywhere; }
+}
