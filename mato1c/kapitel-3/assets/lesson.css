@@ -68,3 +68,71 @@ main{max-width:1200px;padding:0 16px;margin:18px auto}.stage{background:#fff;bor
 .tight p{margin:5px 0}
 .alert-contrast{background:#fff6e7;border-left:4px solid #c28019;padding:13px 16px;border-radius:8px}
 @media(max-width:800px){.booklevels{grid-template-columns:1fr}.dynamic-readout{grid-template-columns:1fr}.sign-table th,.sign-table td{padding:7px 4px}.sign-table select{min-width:60px}}
+
+/* Ma1c · tredje kvalitetsronden: konsekvent matematisk sättning i lösningar.
+   Gemensam stil för kursens tidigare matematikklasser, utan externa bibliotek.
+   Rena beräkningsrader visas skilt från förklarande löptext. */
+:root{--solution-math-serif:"Cambria Math","STIX Two Math","Latin Modern Math","Times New Roman",Georgia,serif}
+.slide :is(.answer,.seq-item,.panel,.math-chain) :is(p.math,p.mathline,p.math-display,p.math-work,p.math-fresh,p.eq,p.formula-line,p.solution-equation),
+.slide :is(.answer,.seq-item,.panel) .solution-equation{
+  display:block;
+  max-width:100%;
+  margin:10px 0;
+  padding:7px 12px;
+  border-left:3px solid #9abfce;
+  border-radius:6px;
+  background:rgba(255,255,255,.68);
+  font-family:var(--solution-math-serif);
+  font-size:clamp(1.1rem,2.4vw,1.46rem);
+  font-weight:520;
+  font-variant-numeric:lining-nums tabular-nums;
+  font-feature-settings:"tnum";
+  line-height:1.65;
+  letter-spacing:.005em;
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:thin;
+}
+.slide .seq-item :is(p.math,p.mathline,p.math-display,p.math-work,p.math-fresh,p.eq,p.formula-line,p.solution-equation){
+  margin:9px 0;
+}
+.slide :is(.answer,.seq-item) .solution-math-inline{
+  font-family:var(--solution-math-serif);
+  font-size:1.07em;
+  white-space:normal;
+  font-variant-numeric:lining-nums;
+}
+.slide :is(.answer,.seq-item) .solution-math-group{
+  display:grid;
+  gap:5px;
+  padding:4px 0;
+  margin:8px 0 11px;
+}
+.slide :is(.answer,.seq-item) .solution-math-group > :is(p,.solution-equation){
+  margin:0;
+}
+.slide :is(.answer,.seq-item) .solution-explanation{
+  margin:9px 0;
+  line-height:1.55;
+}
+.slide :is(.answer,.seq-item) :is(.sign-table,.working-table){
+  font-variant-numeric:tabular-nums;
+}
+.slide :is(.answer,.seq-item) .math-result{
+  border-left:3px solid #087d70;
+  padding:8px 12px;
+  background:#e8f5f0;
+  border-radius:6px;
+}
+.slide .solution-equation sub,.slide .solution-equation sup{font-size:.7em}
+.slide .solution-equation .fraction{vertical-align:middle}
+.slide .answer .solution-equation:first-child{margin-top:4px}
+@media(max-width:720px){
+  .slide :is(.answer,.seq-item,.panel,.math-chain) :is(p.math,p.mathline,p.math-display,p.math-work,p.math-fresh,p.eq,p.formula-line,p.solution-equation){
+    font-size:clamp(1.04rem,4.4vw,1.26rem);
+    padding:6px 9px;
+    line-height:1.6;
+  }
+  .slide :is(.answer,.seq-item,.panel){min-width:0}
+}
