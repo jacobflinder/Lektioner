@@ -39,6 +39,8 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      await page.locator('[data-reveal="r7a"]').click();
      assert.ok(await page.locator('#r7a math').count()>0,'Polära steget rätt typograferat');
      assert.ok(await page.locator('#r7c').isHidden(),'Nästa beräkning är dold');
+     assert.ok(await page.locator('[data-reveal="r7c"]').isDisabled(),'Steg 3 väntar tills steg 2 är genomgånget');
+     await page.locator('[data-reveal="r7b"]').click();
      await page.locator('[data-reveal="r7c"]').click();
      assert.ok(await page.locator('#r7c math').count()>=3,'Exakta steg synliga efter val');
      assert.ok((await page.locator('#r7c').innerText()).includes('Fortsätt själv före nästa klick'),'Elevens egna beräkningssteg finns kvar');
