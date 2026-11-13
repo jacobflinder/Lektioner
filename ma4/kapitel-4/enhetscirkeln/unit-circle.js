@@ -344,5 +344,6 @@ $('solution-btn').addEventListener('click',revealSolution);
 $('next-btn').addEventListener('click',()=>{if(ready){cursor++;renderQuestion()}});
 $('again-btn').addEventListener('click',()=>startSession(mode));
 $('restart-btn').addEventListener('click',()=>startSession(mode));
+renderStudy();
 chooseTab('foundation');
 })();
