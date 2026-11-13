@@ -252,6 +252,11 @@ Object.assign(html,{
   step('Kontrollera genom kvadrering',eq('(2 + 2i)² = 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i'),eq('(−2 − 2i)² = 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
   prose('k = 2 ger v = 9π/4, samma riktning som π/4 efter ett helt varv. Ingen tredje rot tillkommer.')
  ),
+ r8a:worked(step('Kvadrera utan att hoppa över några produkter',
+  eq('(a + bi)² = (a + bi)(a + bi)'),
+  eq('(a + bi)² = a² + abi + abi + b²i²'),
+  eq('= a² + 2abi − b²'),
+  eq('= (a² − b²) + 2abi'))),
  r8b:worked(step('Jämför realdel och imaginärdel',eq('(a² − b²) + 2abi = 8i'),eq('a² − b² = 0'),eq('2ab = 8'),eq('a² = b²'),eq('ab = 4'),prose('Vilket teckenfall är möjligt när ab är positivt?'))),
  r8c:worked(
   step('Pröva båda teckenfallen',eq('a² = b²')+eq('b = a')+eq('b = −a'),eq('b = −a ⇒ ab = −a² = 4'),prose('Det är omöjligt för reella a, eftersom −a² inte kan vara positivt.'),eq('b = a ⇒ ab = a² = 4'),eq('a² = 4 ⇒ a = ±2')),
