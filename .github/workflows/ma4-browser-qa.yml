@@ -28,6 +28,7 @@ jobs:
         run: |
           node ma4/kapitel-4/qa/browser-smoke.cjs
           node ma4/kapitel-4/qa/unit-circle-browser.cjs
+          node ma4/kapitel-4/qa/understand-browser.cjs
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@v4
