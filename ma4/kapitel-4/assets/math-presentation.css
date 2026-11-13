@@ -29,3 +29,8 @@ body.classroom .ma4-equation math{font-size:clamp(1.35rem,2.9vw,1.95rem)}
  .ma4-final math{font-size:clamp(1.23rem,4.8vw,1.55rem)}
  .answer[data-math-presentation="true"]{padding:9px}
 }
+
+/* Två oberoende givna uttryck är två skilda matematiska block.
+   Separera semantiskt och visuellt: MathML-renderaren slår ihop &nbsp;-avstånd. */
+.math-givens{display:grid;row-gap:clamp(16px,2.5vw,24px);justify-items:start;margin:18px 0 24px}
+.math-givens > .math{min-width:0;margin:0}

@@ -54,6 +54,9 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   console.log('PASS bild 03: eleven försöker innan lösningen visas');
   // 4. Sju elevstyrda steg, varje beräkning utan hopp.
   await active(3);
+  const givens=await page.locator('#i-exempel .math-givens > p.math').evaluateAll(rows=>rows.map(node=>({label:node.querySelector('math')?.getAttribute('aria-label'),top:node.getBoundingClientRect().top,bottom:node.getBoundingClientRect().bottom})));
+  assert.deepEqual(givens.map(r=>r.label),['u = 1 − 3i','z = −3 + 2i'],'04 givna tal är två egna MathML-ekvationer');
+  assert.ok(givens[1].top-givens[0].bottom>=15,'04 tydligt avstånd mellan u och z på desktop');
   const seq=page.locator('#i-exempel [data-sequence]');
   assert.equal(await seq.locator('[data-seq-item]:not(.hidden)').count(),0);
   for(let k=0;k<7;k++){
@@ -112,6 +115,10 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   await page.setViewportSize({width:390,height:844});
   for(let k=0;k<9;k++){
    await active(k);
+   if(k===3){
+    const gap=await page.locator('#i-exempel .math-givens > p.math').evaluateAll(rows=>rows[1].getBoundingClientRect().top-rows[0].getBoundingClientRect().bottom);
+    assert.ok(gap>=15,'04 tydligt avstånd mellan u och z även på mobil');
+   }
    const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,viewport:innerWidth}));
    assert.ok(width.page<=width.viewport+4,'Bild '+(k+1)+' horisontell scroll '+JSON.stringify(width));
   }
