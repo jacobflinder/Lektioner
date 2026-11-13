@@ -97,37 +97,46 @@
           </section>
           <section class="u-step" data-u-step="2" hidden>
             <span class="u-section">3 · Härled de exakta värdena</span>
-            <h3>Varför blir det √2/2 och √3/2?</h3>
-            <p>Nu använder vi geometri i stället för att memorera en tabell. Hypotenusan är en radie med längden 1. Triangelns kateter är <strong>cos v</strong> och <strong>sin v</strong>.</p>
+            <h3>Varifrån kommer de exakta värdena?</h3>
+            <div class="u-math-rule"><strong>hypotenusa = 1</strong><span>·</span><strong>kateter = cos v, sin v</strong></div>
             <div class="pillrow u-small-controls" aria-label="Välj triangel">
               <button type="button" data-u-triangle="45">45°</button>
               <button type="button" data-u-triangle="30">30°</button>
               <button type="button" data-u-triangle="60">60°</button>
             </div>
-            <div class="task"><strong>Förutsäg:</strong> Vilken av kateterna är längst, eller är de lika? Rita först en enkel triangel.</div>
-            <button type="button" id="u-triangle-reveal" class="secondary">Visa härledning med Pythagoras</button>
-            <div id="u-triangle-answer" class="answer" hidden></div>
-            <p class="micro">För 45° används en likbent rätvinklig triangel. För 30° och 60° utgår vi från halva en liksidig triangel. Förstå dessa två trianglar, så kan du återskapa sex positiva värden.</p>
+            <div class="task"><strong>Förutsäg:</strong> Vilken katet är längst? Eller är de lika?</div>
+            <button type="button" id="u-triangle-reveal" class="secondary">Visa första mellanledet</button>
+            <div id="u-triangle-answer" class="answer u-solution" hidden></div>
+            <details class="u-extra"><summary>Varifrån kommer de två trianglarna?</summary><p>Vid 45° får vi en likbent rätvinklig triangel. Vid 30° och 60° får vi halva en liksidig triangel. Pythagoras ger de exakta längderna.</p></details>
           </section>
           <section class="u-step" data-u-step="3" hidden>
             <span class="u-section">4 · Kvadranter och spegling</span>
-            <h3>Varför byter cos tecken vid 150°?</h3>
-            <p>Börja med <strong>30°</strong> i första kvadranten. Den ligger 30° över positiva x-axeln. Spegla punkten i <strong>y-axeln</strong>: då hamnar den vid <strong>150°</strong>.</p>
-            <p class="task"><strong>Innan du speglar:</strong> Vad händer med x? Vad händer med y? Ska cos 150° vara positiv eller negativ?</p>
+            <h3>Vad händer när 30° speglas till 150°?</h3>
+            <p class="task"><strong>Förutsäg:</strong> Vilken koordinat byter tecken vid spegling i y-axeln?</p>
             <div class="pillrow u-small-controls">
               <button type="button" id="u-reflect-start" class="secondary">Visa 30°</button>
               <button type="button" id="u-reflect-mirror">Spegla till 150°</button>
             </div>
-            <label class="u-slider-label" for="u-reflect-slider">Undersök riktningen: <strong id="u-reflect-deg">30°</strong></label>
+            <label class="u-slider-label" for="u-reflect-slider">Dra mellan <strong id="u-reflect-deg">30°</strong> och 150°</label>
             <input type="range" id="u-reflect-slider" min="30" max="150" step="5" value="30">
-            <button type="button" id="u-reflect-reveal" class="secondary">Visa jämförelsen med exakta koordinater</button>
-            <div id="u-reflect-answer" class="answer" hidden><p><strong>30°:</strong> (√3/2; 1/2)</p><p><strong>150°:</strong> (−√3/2; 1/2)</p><p><strong>Varför?</strong> Spegling i y-axeln ger motsatt x-koordinat men samma y-koordinat. Så cos byter tecken medan sin behåller sitt.</p><p>Och 150° = 180° − 30° = <strong>5π/6 rad</strong>.</p></div>
+            <div class="u-options" data-u-answer="mirror">
+              <button type="button" data-u-option="x">Bara x byter tecken</button>
+              <button type="button" data-u-option="y">Bara y byter tecken</button>
+              <button type="button" data-u-option="both">Båda byter tecken</button>
+            </div>
+            <p class="feedback" id="u-mirror-feedback" role="status" aria-live="polite" hidden></p>
+            <button type="button" id="u-reflect-reveal" class="secondary" disabled>Visa koordinater efter ditt val</button>
+            <div id="u-reflect-answer" class="answer u-solution" hidden>
+              <div class="u-equation-row"><span>30°</span><strong>(√3/2; 1/2)</strong></div>
+              <div class="u-equation-row"><span>150°</span><strong>(−√3/2; 1/2)</strong></div>
+              <div class="u-equation-row u-highlight"><span>Spegling i y-axeln</span><strong>x → −x, y oförändrad</strong></div>
+              <p class="micro">150° = 180° − 30° = 5π/6 rad.</p>
+            </div>
           </section>
           <section class="u-step" data-u-step="4" hidden>
             <span class="u-section">5 · Mindre stöd · egen lösning</span>
             <h3>Kan du återskapa 210°?</h3>
-            <p>Du känner nu axlarna, trianglarna, referensvinkeln och grader–radianer. Nu får du använda dem tillsammans.</p>
-            <div class="task"><strong>Skriv på papper först.</strong> Bestäm <strong>cos 210°</strong> och <strong>sin 210°</strong> exakt. Vilken kvadrant? Vilken referensvinkel? Vilket radianmått?</div>
+            <div class="task"><strong>Utan figur:</strong> Bestäm cos 210° och sin 210° exakt. Skriv först kvadrant och referensvinkel på papper.</div>
             <label for="u-210-input" class="u-input-label">Skriv cos 210°; sin 210° (semikolon mellan värdena)</label>
             <input type="text" id="u-210-input" class="u-input" placeholder="cos; sin" autocomplete="off" autocapitalize="off" spellcheck="false">
             <div class="controls"><button type="button" id="u-210-check">Kontrollera mitt svar</button><button type="button" id="u-210-hint" class="secondary">Visa ett stöd</button></div>
@@ -139,8 +148,8 @@
           <section class="u-step" data-u-step="5" hidden>
             <span class="u-section">6 · Överför till Matematik 4</span>
             <h3>Nu har du nytta av detta i komplexa tal</h3>
-            <p>En punkt på enhetscirkeln har beloppet 1. Ett komplext tal med beloppet <strong>2</strong> får koordinaterna som är <strong>dubbelt så stora</strong>.</p>
-            <p class="task"><strong>Utan figur:</strong> Det komplexa talet har beloppet 2 och argumentet <strong>240°</strong>. Bestäm det i rektangulär form <strong>z = a + bi</strong>. Visa mellanled på papper.</p>
+            <div class="u-math-rule"><strong>z = r(cos v + i sin v)</strong></div>
+            <p class="task"><strong>Utan figur:</strong> r = 2 och v = 240°. Bestäm z = a + bi. Visa mellanled.</p>
             <label for="u-240-input" class="u-input-label">Skriv z i rektangulär form (exempel på skrivsätt: a+bi)</label>
             <input type="text" id="u-240-input" class="u-input" placeholder="Skriv exakt värde på formen a+bi" autocomplete="off" autocapitalize="off" spellcheck="false">
             <div class="controls"><button type="button" id="u-240-check">Kontrollera svaret</button><button type="button" id="u-240-hint" class="secondary">Visa ett stöd</button></div>
@@ -150,7 +159,7 @@
             <div id="u-240-answer" class="answer" hidden><p><strong>240° = 180° + 60° = 4π/3 rad.</strong> I tredje kvadranten är båda koordinater negativa:</p><p class="math">cos 240° = −1/2, &nbsp; sin 240° = −√3/2</p><p class="math">z = 2(−1/2 − √3/2 i) = <strong>−1 − √3i</strong></p></div>
             <div id="u-final" class="u-final" hidden>
               <h3>Pröva på en helt ny vinkel</h3>
-              <p>Beloppet är fortfarande 2, men argumentet är nu <strong>300°</strong>. Vad är z i rektangulär form? Lös först utan figur.</p>
+              <p>r = 2 och v = <strong>300°</strong>. Bestäm z = a + bi utan figur.</p>
               <label for="u-300-input" class="u-input-label">Skriv z = a + bi</label>
               <input type="text" id="u-300-input" class="u-input" placeholder="Ditt exakta z" autocomplete="off" autocapitalize="off" spellcheck="false">
               <button type="button" id="u-300-check">Kontrollera den nya uppgiften</button>
@@ -257,7 +266,7 @@
   </div>
   <div class="teacher-note">
     <details><summary>För läraren · föreslaget klassrumsbruk</summary>
-      <p><strong>Start (2 min):</strong> Alla skriver på papper vad 150° är i radianer och uppskattar cos 150° samt sin 150°. Visa inte lösningen direkt. <strong>För elever som inte förstår:</strong> välj Förstå från början och gör steg 1–4 med gemensamma förutsägelser innan självständiga försök.</p>
+      <p><strong>Start (2 min):</strong> Alla uppskattar cos 150° och sin 150°. Vänta med facit. <strong>Behövs grunderna?</strong> Kör steg 1–4 gemensamt med förutsägelse och återkoppling innan självständiga försök.</p>
       <p><strong>Gemensam återkoppling (3 min):</strong> Låt en elev förklara referensvinkel, en annan kvadrant och en tredje sambandet mellan 180° och π rad. Visa sedan punkten i Utforska.</p>
       <p><strong>Individuell återkallning (5–8 min):</strong> Träna eller Snabbkoll. Eleverna skriver först själva. Använd inte poängen för betyg eller ranking, utan för att identifiera vilken typ av vinkelfel som behöver repeteras.</p>
       <p><strong>Återbesök:</strong> 2–3 nya frågor i nästa Ma4-lektion. Detta är ett repetitionsstöd, inte ett nytt obligatoriskt långt teoripass. Ingen Socrative och inga nya NOKflex-uppgifter har lagts till.</p>
