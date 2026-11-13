@@ -1,0 +1,147 @@
+/* Ma4 kapitel 4, par 4 · Polär multiplikation/division och de Moivres formel.
+   Testar matematikens typografi, rätt uttryck, stegvis avslöjande och mobilvy. */
+'use strict';
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const ROOT='http://127.0.0.1:8123/ma4/kapitel-4/';
+const OUT='ma4-qa-screenshots';
+fs.mkdirSync(OUT,{recursive:true});
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const slug of ['polar-multiplikation-division','de-moivre']){
+   const page=await browser.newPage({viewport:{width:1280,height:850},deviceScaleFactor:1});
+   const problems=[];
+   page.on('pageerror',e=>problems.push(e.message));
+   page.on('requestfailed',r=>problems.push('Resurs: '+r.url()));
+   try {
+    const res=await page.goto(ROOT+slug+'/',{waitUntil:'networkidle',timeout:30000});
+    assert.equal(res.status(),200);
+    assert.equal(await page.locator('script[src$="math-solutions.js"]').count(),1,'Korrekturlästa facit laddas lokalt');
+    assert.ok(await page.locator('.slide .math math').count()>=10,'Matematiska uttryck använder MathML');
+    if(slug==='polar-multiplikation-division'){
+     assert.equal(await page.locator('.slide').count(),7,'Sju lektionsbilder oförändrade');
+     assert.ok(await page.locator('#startans').isHidden(),'Startfacit dolt');
+     await page.locator('[data-reveal="startans"]').click();
+     assert.ok(await page.locator('#startans').isVisible(),'Startfacit öppnas först vid klick');
+     assert.ok(await page.locator('#startans msqrt').count()>0,'Absolutbelopp med riktig rot');
+     assert.ok(await page.locator('#startans mfrac').count()>0,'Tan argument som riktigt bråk');
+     await page.selectOption('#jump','1');
+     const prod=page.locator('#product [data-sequence]');
+     assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0);
+     for(let i=0;i<4;i++)await prod.locator('[data-seq-next]').click();
+     assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),4,'Fyra elevstyrda produktsteg');
+     assert.ok((await prod.locator('math[aria-label*="6i"]').count())>=1,'Produkten slutar i 6i');
+     await page.screenshot({path:OUT+'/ma4-polar-mult-math-steps.png',fullPage:true});
+     await page.selectOption('#jump','2');
+     const quotient=page.locator('#quotient [data-sequence]');
+     for(let i=0;i<4;i++)await quotient.locator('[data-seq-next]').click();
+     assert.equal(await quotient.locator('[data-seq-item]:not(.hidden)').count(),4,'Fyra elevstyrda kvotsteg');
+     assert.ok(await quotient.locator('mfrac').count()>=3,'Kvoter och trigonometriska tal har matematiska bråkstreck');
+     assert.ok(await quotient.locator('math[aria-label*="√3"]').count()>=1,'Kvotens exakta rektangulära form bevaras');
+     await page.screenshot({path:OUT+'/ma4-polar-division-math-steps.png',fullPage:true});
+     await page.selectOption('#jump','3');
+     assert.ok(await page.locator('#pd-answer').isHidden(),'Grafens slutresultat är dolt före två steg');
+     await page.locator('#pd-next').click();
+     assert.ok(await page.locator('#pd-answer').isHidden(),'Grafens första klick visar bara skalning');
+     await page.locator('#pd-next').click();
+     assert.ok(await page.locator('#pd-answer').isVisible(),'Grafens resultat visas efter rotation');
+     assert.ok(await page.locator('#pd-result math').count()===1,'Dynamiskt produktsvar sätts i MathML');
+     assert.ok((await page.locator('#pd-result math').getAttribute('aria-label')).includes('6i'),'Produktens argument 90° och svar 6i');
+     await page.locator('[data-operation="div"]').click();
+     assert.ok(await page.locator('#pd-answer').isHidden(),'Ändrad operation återställer elevförutsägelse');
+     await page.locator('#pd-next').click();
+     await page.locator('#pd-next').click();
+     assert.ok(await page.locator('#pd-result mfrac').count()>=1,'Divisionens dynamiska svar visar riktigt bråk');
+     assert.ok((await page.locator('#pd-result math').getAttribute('aria-label')).includes('−30°'),'Kvotens argument −30°');
+     await page.selectOption('#jump','4');
+     assert.ok(await page.locator('#selfans').isHidden(),'Eget arbete dolt före försök');
+     await page.locator('[data-reveal="selfans"]').click();
+     assert.equal(await page.locator('#selfans .ma4-final').count(),2,'Produkt och kvot har var sitt slutsvar');
+     assert.ok(await page.locator('#selfans mfrac').count()>0,'Egen division har riktigt bråk');
+     await page.selectOption('#jump','5');
+     assert.ok((await page.locator('#nok').innerText()).includes('4217–4231'),'Bokens uppgifter oförändrade');
+     await page.selectOption('#jump','6');
+     await page.locator('[data-reveal="exitans"]').click();
+     assert.equal(await page.locator('#exitans .ma4-final').count(),2,'Utcheckningen kontrollerar båda operationerna');
+     assert.ok(await page.locator('#exitans mfrac').count()>=1,'Exakt division i utcheckningen');
+     await page.screenshot({path:OUT+'/ma4-polar-multdiv-exit-math.png',fullPage:true});
+    } else {
+     assert.equal(await page.locator('.slide').count(),10,'Tio lektionsbilder kvar');
+     assert.ok(await page.locator('#intro-facit').isHidden(),'Startfacit initialt dolt');
+     await page.locator('[data-reveal="intro-facit"]').click();
+     assert.ok(await page.locator('#intro-facit math msup').count()>=4,'Potenser i inledningen skrivs med exponenter');
+     await page.selectOption('#jump','1');
+     assert.ok(await page.locator('#moivre-answer').isHidden(),'Interaktivt facit initialt dolt');
+     await page.locator('#moivre-next').click();
+     assert.ok(await page.locator('#moivre-length').isVisible(),'Första klicket visar bara längden');
+     assert.ok(await page.locator('#moivre-answer').isHidden(),'Riktningen är ännu dold');
+     assert.ok(await page.locator('#moivre-length math msup').count()>=1,'Dynamisk potensen visar upphöjning');
+     await page.locator('#moivre-next').click();
+     assert.ok(await page.locator('#moivre-answer').isVisible(),'Andra klicket visar riktningen');
+     assert.ok(await page.locator('#moivre-status math').count()===1,'Polär potens matematiskt satt');
+     assert.ok(await page.locator('#moivre-angle math').count()===1,'Argumentet på egen matematikrad');
+     assert.ok(await page.locator('#moivre-rect math').count()===1,'Rektangulär form på egen matematikrad');
+     await page.screenshot({path:OUT+'/ma4-de-moivre-math-geometry.png',fullPage:true});
+     await page.locator('[data-length="1.4142135623730951"]').click();
+     assert.ok(await page.locator('#moivre-answer').isHidden(),'Bytt radie döljer förra lösningen');
+     await page.locator('[data-power="3"]').click();
+     await page.locator('#moivre-next').click();
+     await page.locator('#moivre-next').click();
+     assert.ok((await page.locator('#moivre-rect math').getAttribute('aria-label')).includes('−2 + 2i'),'r=√2, n=3: resultat −2+2i');
+     await page.locator('[data-length="0.5"]').click();
+     await page.locator('#moivre-next').click();
+     await page.locator('#moivre-next').click();
+     assert.ok((await page.locator('#moivre-rect math').getAttribute('aria-label')).includes('√2/16'),'r=1/2, n=3: exakta koordinater');
+     assert.ok(await page.locator('#moivre-rect mfrac').count()>=1,'Exakt bråk för en halv radie');
+     await page.selectOption('#jump','2');
+     const deriv=page.locator('#formula [data-sequence]');
+     for(let i=0;i<4;i++)await deriv.locator('[data-seq-next]').click();
+     assert.equal(await deriv.locator('[data-seq-item]:not(.hidden)').count(),4,'Fyra härledningssteg bevarade');
+     assert.ok(await deriv.locator('msup > mi').count()>=2,'Generell exponent n visas matematiskt som exponent');
+     assert.ok(await deriv.locator('mfrac').count()>=1,'Negativ exponent får riktigt bråk');
+     await page.selectOption('#jump','3');
+     const worked=page.locator('#worked [data-sequence]');
+     for(let i=0;i<5;i++)await worked.locator('[data-seq-next]').click();
+     assert.equal(await worked.locator('[data-seq-item]:not(.hidden)').count(),5);
+     assert.ok(await worked.locator('msqrt').count()>=2,'Femte potensens exakta rötter');
+     assert.ok(await worked.locator('mfrac').count()>=1,'Exakta 30°-värden är bråk');
+     assert.ok((await worked.innerText()).includes('750°'),'Argumentet 750° finns kvar');
+     await page.selectOption('#jump','4');
+     assert.ok(await page.locator('#practiceans').isHidden(),'Elevuppgift utan tidigt facit');
+     await page.locator('[data-reveal="practiceans"]').click();
+     assert.ok(await page.locator('#practiceans .ma4-final').count()===1,'Resultatet −8−8√3i klart markerat');
+     assert.ok((await page.locator('#practiceans .ma4-final math').getAttribute('aria-label')).includes('−8 − 8√3i'));
+     await page.selectOption('#jump','5');
+     const radians=page.locator('#radians [data-sequence]');
+     for(let i=0;i<3;i++)await radians.locator('[data-seq-next]').click();
+     assert.ok(await radians.locator('mfrac').count()>=4,'Exakta radianbråk och rektangulär form');
+     await page.selectOption('#jump','6');
+     await page.locator('[data-reveal="errorans"]').click();
+     assert.ok((await page.locator('#errorans .ma4-final').first().innerText()).includes('8'),'Fel 2·3=6 rättat till 2³=8');
+     await page.selectOption('#jump','7');
+     assert.ok((await page.locator('#nok').innerText()).includes('4301–4314'),'Bokens uppgifter oförändrade');
+     await page.selectOption('#jump','8');
+     await page.locator('[data-reveal="optionalans"]').click();
+     assert.ok(await page.locator('#optionalans .ma4-final').count()===1,'Båda dubbelvinkelformlerna');
+     await page.selectOption('#jump','9');
+     assert.ok(await page.locator('#exitans').isHidden());
+     await page.locator('[data-reveal="exitans"]').click();
+     assert.ok((await page.locator('#exitans .ma4-final math').getAttribute('aria-label')).includes('−64i'),'Utcheckningen korrekt');
+     await page.screenshot({path:OUT+'/ma4-de-moivre-exit-math.png',fullPage:true});
+    }
+    await page.setViewportSize({width:390,height:844});
+    const width=await page.evaluate(()=>({page:document.documentElement.scrollWidth,viewport:innerWidth}));
+    assert.ok(width.page<=width.viewport+4,slug+': ingen mobilöverskjutning '+JSON.stringify(width));
+    await page.screenshot({path:OUT+'/'+slug+'-math-mobile.png',fullPage:true});
+    assert.deepEqual(problems,[],'Inga JavaScript- eller resursfel');
+    console.log('PASS Ma4 par 4: '+slug+' – matte, steg, figurer, mobil');
+   } catch(err){
+    console.error('FAIL Ma4 par 4: '+slug+': '+(err.stack||err));
+    await page.screenshot({path:OUT+'/'+slug+'-math-FAIL.png',fullPage:true}).catch(()=>{});
+    process.exitCode=1;break;
+   } finally{await page.close()}
+  }
+ } finally{await browser.close()}
+})();
