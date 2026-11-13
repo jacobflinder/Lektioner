@@ -43,6 +43,10 @@ function atomic(src){
 }
 function layout(text){
  const s=text.trim();if(!s)return '';
+ if(s[0]==='√')return element('msqrt',layout(s.slice(1)));
+ // Compound units are upright unit text, not italic mathematical variables.
+ const quantity=/^([+−-]?\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?)\s+(kN\/C|kV\/m|N\/C|V\/m|m\/s²|m\/s|eV|fN|ns|kV|µN|nC|kg|kN|kW|Ah|mm²|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)$/.exec(s);
+ if(quantity)return element('mrow',layout(quantity[1])+'<mspace width="0.2em"/>'+element('mtext',esc(quantity[2])));
  // A product such as π(d/2)² keeps the exponent attached to the parentheses.
  if(/^[πρ]\(/u.test(s))return element('mrow',element('mi',esc(s[0]))+layout(s.slice(1)));
  if(s[0]==='('){
@@ -67,7 +71,7 @@ function layout(text){
  return element('mrow',atomic(s));
 }
 function mathHTML(text){return '<math xmlns="'+NS+'" class="fy1-typeset" display="inline"><semantics>'+layout(text)+'<annotation encoding="text/plain">'+esc(text)+'</annotation></semantics></math>';}
-const atom=String.raw`(?:[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s+(?:N·m²/C²|Ω·mm²/m|(?:m|mm|cm)/s²|C/s|J/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)?(?:_[A-Za-z0-9]+)?|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)?(?:_[A-Za-z0-9]+)?)`;
+const atom=String.raw`(?:√[A-Za-zℰρπµΩ]+|[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s+(?:N·m²/C²|Ω·mm²/m|(?:m|mm|cm)/s²|C/s|J/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)?(?:_[A-Za-z0-9]+)?|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)?(?:_[A-Za-z0-9]+)?)`;
 const term=String.raw`[+−-]?${atom}(?:\s*[+−·×/-]\s*${atom}|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*)*`;
 const unit=String.raw`(?:\s+(?:N·m²/C²|Ω·mm²/m|C/s|J/C|kV/m|kN/C|N/C|V/m|m/s²|m/s|(?:mm|cm|m)/s²|(?:kg|Ah|mm²|nC|µN|kN|kW|fN|eV|ns|kV|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])))?`;
 const equation=new RegExp(String.raw`(?<![\p{L}\p{N}₀-₉])${term}${unit}(?:\s*(?:=|≈|∝)\s*${term}${unit})+`,'gu');
@@ -80,7 +84,7 @@ function findMath(text){
     re.lastIndex=0;let match;while((match=re.exec(text))){
       if(kind==='equation'||kind==='incomplete'){
        const lhs=match[0].split(/[=≈∝]/)[0].trim();
-       if(!/^(?:[+−(-]?\d|[A-Zℰρπ]|[a-z])/.test(lhs))continue;
+       if(!/^(?:\([+−-]?\d|[+−(-]?\d|[A-Zℰρπ]|[a-z])/.test(lhs))continue;
        if(/^[a-z]{2,}$/u.test(lhs))continue;
       }
       found.push({from:match.index,to:match.index+match[0].length,value:match[0],kind});
