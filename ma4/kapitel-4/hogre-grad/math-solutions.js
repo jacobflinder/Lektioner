@@ -99,8 +99,8 @@ document.querySelectorAll('#h-kand .longdiv-demo td').forEach(cell=>{
 // Sätt själva matematiken separat från dess villkor och tolkning.
 const degreeIdea=document.querySelector('#h-rakna .math.math-big');
 if(!degreeIdea)throw Error('Huvudidén om antalet rötter saknas');
-degreeIdea.replaceChildren();
-setFormula(degreeIdea,'n > 0','block');
+degreeIdea.innerHTML='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="grad p = n"><mrow><mi mathvariant="normal">grad</mi><mi>p</mi><mo>=</mo><mi>n</mi></mrow></math>';
+degreeIdea.dataset.mathPresentation='true';
 const theorem=document.createElement('p');
 theorem.className='ma4-note';
 theorem.textContent='Ett polynom av grad n har n komplexa rötter, räknade med multiplicitet.';
