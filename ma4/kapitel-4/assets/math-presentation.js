@@ -17,7 +17,7 @@ function typeFormula(source,display='block'){
  const isSup=v=>Object.prototype.hasOwnProperty.call(supMap,v);
  const isSub=v=>Object.prototype.hasOwnProperty.call(subMap,v);
  function suffix(base){
-  if(glyphs[cursor]==='\u0304'){cursor++;base='<mover accent="true">'+base+mo('¯')+'</mover>'}
+  if(glyphs[cursor]==='\u0304'){cursor++;/* Chromium visar inte alltid överstrecket med accent=true. */base='<mover>'+base+mo('¯')+'</mover>'}
   const subs=[],sups=[];
   while(isSup(glyphs[cursor])||isSub(glyphs[cursor])){
    if(isSub(glyphs[cursor]))subs.push(subMap[glyphs[cursor++]]);
