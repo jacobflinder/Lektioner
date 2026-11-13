@@ -155,9 +155,9 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
    assert.equal(await deriv.locator('[data-seq-item]:not(.hidden)').count(),i,'03 exakt ett nytt härledningssteg');
   }
   await formulas('#formula .math-givens',2);
-  for(const e of ['z² = z · z','= r²(cos 2v + i sin 2v)','z³ = z² · z','= r³(cos 3v + i sin 3v)',
+  for(const e of ['z² = z · z','= r²(cos(2v) + i sin(2v))','z³ = z² · z','= r³(cos(3v) + i sin(3v))',
    '|z²| = r · r = r²','v₂ = v + v = 2v','|z³| = r² · r = r³','v₃ = 2v + v = 3v',
-   'zⁿ = rⁿ(cos nv + i sin nv)','z⁰ = 1','z⁻¹ = (cos v − i sin v)/r']){
+   'zⁿ = rⁿ(cos(nv) + i sin(nv))','z⁰ = 1','z⁻¹ = (cos v − i sin v)/r']){
    await has('#formula math[aria-label="'+e+'"]','03 härledning '+e);
   }
   await has('#formula math[aria-label="0⁰"]','03 0⁰ uttryckligen behandlat som specialfall');
