@@ -17,6 +17,16 @@ nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-
 .quiz-submit{display:block;margin:9px 0 6px;background:#e0eaf4;color:#163750}
 .quiz .choice[aria-pressed="true"]{outline:3px solid #125e91;outline-offset:0;background:#daeaf7}
 .quiz .feedback.hidden{display:none}
+</style><link rel="stylesheet" href="../assets/math-presentation.css"><style>
+/* Maths preserved as semantic MathML, with clear steps and horizontally scrollable series. */
+.math-inline math{font-size:1em;vertical-align:-.12em}
+.series-eq math{font-size:1em;line-height:1.6;text-align:left;white-space:nowrap}
+.series-eq{max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.euler-exit-coordinates{display:grid;gap:5px}
+.euler-exit-coordinates .ma4-equation{margin:4px 0}
+.ma4-worked{margin-top:12px}
+.ma4-step .ma4-equation{margin:2px 0}
+@media(max-width:650px){.series-eq math{font-size:clamp(1rem,3.9vw,1.35rem)}}
 </style></head><body>
 <header><a href="../">← Kapitel 4 · Komplexa tal</a><strong>Matematik – fortsättning, nivå 2 · 4.3 Potenser och komplexa tal</strong><div class="actions" style="margin:0"><button id="teacher-toggle" class="alt" type="button" aria-expanded="false">Visa lärarstöd</button><button id="mode" type="button" aria-pressed="false" aria-label="Växla till klassrumsläge">Klassrumsläge</button></div></header>
 <aside class="class-only teacher-note" aria-label="Lärarstöd"><strong>Klassrumsläge · gemensamt tänkande</strong><p id="teacher-step">Låt eleverna tänka själva innan du visar lösningen. Använd diskussionen för att välja nästa steg.</p><p class="muted">Höger/vänster pil byter steg. Dölj lösningen igen innan du går tillbaka till en uppgift.</p></aside>
@@ -102,7 +112,7 @@ nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-
 <div class="panel"><strong>Dagens tre mål</strong><ol><li>Jag förstår sambandet mellan polär form och exponentialform och kan tolka belopp och argument.</li><li>Jag kan omvandla med Eulers formel även för negativa argument.</li><li>Jag kan multiplicera komplexa tal i exponentialform och förklara Eulers identitet.</li></ol></div>
 <div class="panel"><strong>Snabb självbedömning</strong><label><input type="checkbox"> Jag kan göra detta utan facit.</label><p><label><input type="checkbox"> Jag behöver öva något av stegen igen.</label></p><p class="muted">Kryssen skickas inte in eller sparas.</p></div>
 </div></div></section></div></main><nav><label for="jump" class="sr">Välj lektionssteg</label><select id="jump" aria-label="Hoppa till lektionssteg"></select><button class="alt" id="prev" type="button">← Föregående</button><span class="progress" id="counter" aria-live="polite">1 / 12</span><button id="next" type="button">Nästa →</button></nav>
-<script>
+<script src="../assets/math-presentation.js"></script><script src="./math-polish.js"></script><script>
 (()=>{'use strict';
 const slides=Array.from(document.querySelectorAll('.slide'));let index=0;const teacherPrompts=["Presentera målen; fråga vad eleverna redan vet.","Enskilt 45 sekunder, sedan par och gemensam motivering.","Alla väljer tecken innan återkopplingen visas.","Be eleverna namnge realdel, imaginärdel, belopp och argument vid samma punkt. Om sambandet mellan dessa saknas, stanna här – lägg inte till mer notation ännu.","Låt eleverna själva beräkna produktens belopp och argument. Visa sedan exponentiallagens kompakta mönster som motivation, inte som bevis för Eulers formel.","Visa först Eulers formel och låt eleverna förklara varför de två skrivsätten beskriver samma tal.","Låt eleverna sedan lösa produkten med exponentiallagen före facit.","Skriv gärna ett led för hand. Låt varje elev formulera nästa led innan du klickar vidare. Den som fastnar får först trigonometritabell eller stöd för enhetscirkeln, inte hela svaret.","Låt eleverna rita före enhetscirkeln visas.","Låt eleverna förutsäga e^(iπ) och förklara Eulers identitet med cos π och sin π.","Skydda självständig övningstid: NOKflex 4329–4338, minst tre av fem nivåer; nivåvalet anpassas under arbetet. Prioritera arbetsro framför frivilliga extrabilder.","Frivillig felanalys efter NOKflex. Svaret är konstruerat: vi känner inte elevens avsikt.","Valfri utmaning för elever som är klara med grunduppgifterna.","Visa serien stegvis. Låt eleverna förutsäga vilka termer som är reella och imaginära före varje klick. Kan hoppas över.","Exit utan gemensam ledtråd. Observera anonymt: (1) korrekt belopp, argument och tecken, (2) korrekt multiplikation av belopp/vinklar, (3) förklarad identitet. Vanligt fel avgör nästa korta repetitionsfråga. Självskattning ensam är inte belägg."];const jump=document.getElementById('jump');slides.forEach((slide,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=slide.querySelector('.eyebrow')?.textContent||'Steg '+(i+1);jump.appendChild(o)});jump.addEventListener('change',()=>show(Number(jump.value)));
 function show(n){index=Math.max(0,Math.min(n,slides.length-1));slides.forEach((slide,i)=>{slide.classList.toggle('active',i===index);slide.setAttribute('aria-hidden',String(i!==index))});
