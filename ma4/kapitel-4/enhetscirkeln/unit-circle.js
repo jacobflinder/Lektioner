@@ -64,7 +64,8 @@ function drawCircle(angle,showPoint,showAnswer,showAxisLabels){
 }
 function setText(id,value){$(id).textContent=value}
 function chooseTab(name){
- currentTab=name;
+ currentTab=name;document.body.dataset.activeTab=name;
+ $('practice-panel').setAttribute('aria-labelledby',name==='challenge'?'tab-challenge':'tab-train');
  for(const b of document.querySelectorAll('[data-tab]')){
   const selected=b.dataset.tab===name;
   b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;
