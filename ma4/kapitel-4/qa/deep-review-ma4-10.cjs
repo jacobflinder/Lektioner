@@ -118,7 +118,7 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   }
   await go(10);await page.locator('#eulerExtra').click();
   assert.equal(await page.locator('.slide.active').getAttribute('id'),'euler-option-transfer');
-  await page.locator('.euler-skip:visible').click();assert.ok((await page.locator('.slide.active').innerText()).includes('Utcheckning'));
+  await page.locator('.euler-skip:visible').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),14,'Hoppa över frivillig fördjupning till den sista utcheckningsbilden');
   await go(3);await page.locator('#euler-open-notation').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'euler-notation-help');
   assert.deepEqual(errors,[],'Ingen JavaScript-krasch eller missad resurs');
   console.log('PASS Ma4 10/41: 15/15 bilder, exakta beräkningar, dolda facit, 390px, projektor, 4 seriesteg och bilder');
