@@ -34,7 +34,7 @@ function drawCircle(angle,showPoint,showAnswer,showAxisLabels){
   svg.appendChild(line(p1.x,p1.y,p2.x,p2.y,'tick'));
  }
  for(const [a,x,y] of [['I',316,143],['II',145,143],['III',145,329],['IV',316,329]])svg.appendChild(elem('text',{x,y,class:'quadrant','text-anchor':'middle'},a));
- svg.appendChild(elem('text',{x:430,y:CY-12,'text-anchor':'middle',class:'cardinal'},'x = cos v'));
+ svg.appendChild(elem('text',{x:411,y:CY-12,'text-anchor':'end',class:'cardinal'},'x = cos v'));
  svg.appendChild(elem('text',{x:CX+10,y:27,class:'cardinal'},'y = sin v'));
  svg.appendChild(elem('text',{x:CX-8,y:CY+17,class:'axis-label'},'0'));
  if(showAxisLabels){
@@ -73,7 +73,7 @@ function chooseTab(name){
  $('practice-panel').hidden=name==='study';
  $('learn-prompt').hidden=name!=='study';
  $('practice-guide').hidden=name==='study';
- $('practice-focus').hidden=name!=='train';
+ $('practice-focus-wrap').hidden=name!=='train';
  if(name==='study')renderStudy();
  else{
   if(name==='challenge'){setText('session-heading','Snabbkoll utan ledtrådar');setText('session-lead','Sex blandade frågor. Skriv först själv; återkoppling visas när du kontrollerar.');}
@@ -182,12 +182,12 @@ function exactNumber(raw){
  let s=normalize(raw);
  if(s==='')return null;
  if(s[0]==='+')s=s.slice(1);
- const m=s.match(/^(-?)(?:(\d+)(?:\/(\d+))?|sqrt\(?([23])\)?(?:\/(\d+))?|1\/sqrt\(?2\)?)$/);
+ if(/^\-?1\/sqrt\(?2\)?$/.test(s))return s.startsWith('-')?-1/Math.sqrt(2):1/Math.sqrt(2);
+ const m=s.match(/^(-?)(?:(\d+)(?:\/(\d+))?|sqrt\(?([23])\)?(?:\/(\d+))?)$/);
  if(!m)return null;
  const sign=m[1]==='-'?-1:1;
- if(m[6]!==undefined)return sign/Math.sqrt(2);
- if(m[2]!==undefined)return sign*Number(m[2])/Number(m[3]||1);
- return sign*Math.sqrt(Number(m[4]))/Number(m[5]||1);
+ if(m[2]!==undefined)return Number(m[3]||1)>0?sign*Number(m[2])/Number(m[3]||1):null;
+ return Number(m[5]||1)>0?sign*Math.sqrt(Number(m[4]))/Number(m[5]||1):null;
 }
 function parsePair(raw){
  const s=raw.trim().replace(/^\(/,'').replace(/\)$/,'');
@@ -255,7 +255,7 @@ function renderQuestion(){
  const q=question;
  setText('q-number','Fråga '+(cursor+1)+' av '+queue.length+(q.repeat?' · återbesök':''));
  setText('q-prompt',questionLabel(q));
- setText('q-example',q.kind==='coords'?'Skriv x;y, exempelvis 1/2;√3/2.':q.kind==='sign'?'Skriv till exempel -;+ för x och y.':q.kind==='rad'?'Svara med π, exempelvis π/3.':q.kind==='deg'?'Svara i grader, exempelvis 60°.':'Svara exakt med bråk och rot, till exempel √3/2.');
+ setText('q-example',q.kind==='coords'?'Skriv först cos v och sedan sin v, åtskilda med semikolon.':q.kind==='sign'?'Skriv två tecken med semikolon i ordningen cos; sin. Använd +, − eller 0.':q.kind==='rad'?'Skriv ett exakt uttryck med π, inte ett decimalvärde.':q.kind==='deg'?'Skriv gradmåttet i grader, med eller utan °.':'Skriv ett exakt bråk eller rotuttryck, inte en decimalapproximation.');
  const inp=$('q-answer');inp.value='';
  inp.placeholder=q.kind==='coords'?'cos v; sin v':q.kind==='sign'?'tecken för cos; sin':'Skriv ditt exakta svar';
  $('q-hint').hidden=true;$('q-solution').hidden=true;$('q-feedback').hidden=true;
