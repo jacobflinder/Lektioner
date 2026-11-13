@@ -3,8 +3,8 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id),S='http://www.w3.org/2000/svg',svg=$('u-svg');
 const CX=230,CY=230,R=147;
-let step=0,axisDeg=90,axisSolved=false,radianDeg=60,radianReveal=false;
-let triDeg=45,triReveal=false,reflectDeg=30,reflectReveal=false;
+let step=0,axisDeg=90,axisSolved=false,radianDeg=180,radianReveal=false;
+let triDeg=45,triReveal=false,trianglePhase=0,reflectDeg=30,reflectReveal=false;
 let helped210=0,helped240=0,tries210=0,tries240=0,tries300=0,answer210=false,answer240=false,answer300=false;
 const tabs=[...document.querySelectorAll('.u-step')];
 const stages=['Koordinaterna','Radianer är båglängd','Exakta värden ur trianglar','Referensvinkel och spegling','Lös själv: 210°','Ma4: överför till komplexa tal'];
@@ -119,30 +119,71 @@ document.querySelectorAll('[data-u-answer="axis"] button').forEach(b=>b.addEvent
 }));
 document.querySelectorAll('[data-u-axis]').forEach(b=>b.addEventListener('click',()=>{axisDeg=Number(b.dataset.uAxis);draw()}));
 $('u-radian-slider').addEventListener('input',e=>{radianDeg=Number(e.target.value);radianReveal=false;$('u-radian-answer').hidden=true;$('u-radian-reveal').textContent='Visa båglängd och radianmått';$('u-radian-deg').textContent=radianDeg+'°';draw()});
-const knownRads=new Map([[0,'0'],[30,'π/6'],[45,'π/4'],[60,'π/3'],[90,'π/2'],[120,'2π/3'],[135,'3π/4'],[150,'5π/6'],[180,'π'],[210,'7π/6'],[225,'5π/4'],[240,'4π/3'],[270,'3π/2'],[300,'5π/3'],[315,'7π/4'],[330,'11π/6'],[360,'2π']]);
+function gcd(a,b){while(b){const rem=a%b;a=b;b=rem}return a}
+function exactRadian(deg){
+ if(deg===0)return'0';
+ const d=gcd(deg,180),num=deg/d,den=180/d;
+ const numerator=num===1?'π':num+'π';
+ return numerator+(den===1?'':'/'+den);
+}
 function showRadian(){
  radianReveal=!radianReveal;
  $('u-radian-answer').hidden=!radianReveal;
- $('u-radian-reveal').textContent=radianReveal?'Dölj radianmåttet':'Visa båglängd och radianmått';
+ $('u-radian-reveal').textContent=radianReveal?'Dölj sambandet':'Visa båglängd och samband';
  if(radianReveal){
-  const frac=(radianDeg/180).toFixed(3).replace('.',',').replace(/0+$/,'').replace(/,$/,'');
-  $('u-radian-work').textContent=radianDeg+'° är '+(radianDeg/180)+' halva varv. s/r = v = '+(knownRads.get(radianDeg)||'cirka '+fmt(radianDeg*Math.PI/180))+' rad. '+(knownRads.has(radianDeg)?'Exakt vinkelmått med π.':'Detta är ett avrundat radianmått för reglagets vinkel.');
+  const deg=radianDeg,measure=exactRadian(deg);
+  $('u-radian-work').textContent=deg+'° av 180° = '+deg+'/180 av ett halvt varv. Båglängd / radie = '+measure+' rad.';
+  if(deg===180)$('u-radian-challenge').hidden=false;
  }
  draw();
 }
 $('u-radian-reveal').addEventListener('click',showRadian);
-document.querySelectorAll('[data-u-answer="radian"] button').forEach(b=>b.addEventListener('click',()=>{
- const correct=b.dataset.uOption==='π/3';
- fb('u-radian-feedback',correct?'Rätt. 60° är en tredjedel av 180°. En tredjedel av π rad är π/3 rad.':'Jämför med 180° = π rad. 60° är en tredjedel, inte en sjättedel eller två tredjedelar, av ett halvt varv.',correct);
-}));
-const triangleText={
- 45:'<strong>45°:</strong> De två kateterna är lika långa: kalla dem a. Pythagoras ger a² + a² = 1², alltså 2a² = 1 och <strong>a = √2/2</strong>. Därför är <strong>cos 45° = sin 45° = √2/2</strong>.',
- 30:'<strong>30°:</strong> Halvera en liksidig triangel med sidan 2. Halva basen blir 1 och höjden blir √(2² − 1²) = √3. Skala ned så hypotenusan blir 1: kateterna blir 1/2 och √3/2. Vid 30° är den liggande kateten längst, alltså <strong>cos 30° = √3/2 och sin 30° = 1/2</strong>.',
- 60:'<strong>60°:</strong> Samma halva liksidiga triangel används. Med hypotenusan 1 är kateterna 1/2 och √3/2. Nu är den lodräta kateten längst, alltså <strong>cos 60° = 1/2 och sin 60° = √3/2</strong>.'
+document.querySelectorAll('[data-u-answer="radian"] button').forEach(b=>{
+ b.setAttribute('aria-pressed','false');
+ b.addEventListener('click',()=>{
+  const correct=b.dataset.uOption==='π/3';
+  document.querySelectorAll('[data-u-answer="radian"] button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  fb('u-radian-feedback',correct?'Rätt! 60° är en tredjedel av 180°. Därför blir radianmåttet π/3.':'60° är en tredjedel av 180°, så du behöver ta en tredjedel av π. Välj igen.',correct);
+ });
+});
+const triangleStages={
+ 45:[
+  '<span class="u-stage">1 · Se triangeln</span><strong>Kateterna är lika långa: x = y = a.</strong>',
+  '<span class="u-stage">2 · Använd Pythagoras</span><div class="u-math-step">a² + a² = 1² ⇒ 2a² = 1</div><div class="u-math-step">a² = 1/2 ⇒ a = √2/2</div>',
+  '<span class="u-stage">3 · Koppla till cirkeln</span><div class="u-math-step">cos 45° = sin 45° = √2/2</div>'
+ ],
+ 30:[
+  '<span class="u-stage">1 · Bygg triangeln</span><strong>Halvera en liksidig triangel med sidan 2.</strong><div class="u-math-step">Halv bas = 1, hypotenusa = 2.</div>',
+  '<span class="u-stage">2 · Använd Pythagoras</span><div class="u-math-step">höjd = √(2² − 1²) = √3</div><div class="u-math-step">Skala sidan 2 till radien 1 ⇒ kateterna 1/2 och √3/2.</div>',
+  '<span class="u-stage">3 · Koppla till cirkeln</span><div class="u-math-step">cos 30° = √3/2</div><div class="u-math-step">sin 30° = 1/2</div>'
+ ],
+ 60:[
+  '<span class="u-stage">1 · Samma triangel</span><strong>Halva en liksidig triangel med hypotenusa 1.</strong>',
+  '<span class="u-stage">2 · Kateternas längder</span><div class="u-math-step">1/2 och √3/2</div><div class="u-math-step">Vid 60° är den lodräta kateten längst.</div>',
+  '<span class="u-stage">3 · Koppla till cirkeln</span><div class="u-math-step">cos 60° = 1/2</div><div class="u-math-step">sin 60° = √3/2</div>'
+ ]
 };
-function chooseTriangle(a){triDeg=a;triReveal=false;$('u-triangle-answer').hidden=true;$('u-triangle-reveal').textContent='Visa härledning med Pythagoras';document.querySelectorAll('[data-u-triangle]').forEach(b=>b.classList.toggle('active',Number(b.dataset.uTriangle)===a));draw()}
+function chooseTriangle(a){
+ triDeg=a;triReveal=false;trianglePhase=0;
+ $('u-triangle-answer').hidden=true;$('u-triangle-answer').replaceChildren();
+ $('u-triangle-reveal').textContent='Visa första mellanledet';
+ document.querySelectorAll('[data-u-triangle]').forEach(b=>{
+  const selected=Number(b.dataset.uTriangle)===a;
+  b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));
+ });
+ draw();
+}
 document.querySelectorAll('[data-u-triangle]').forEach(b=>b.addEventListener('click',()=>chooseTriangle(Number(b.dataset.uTriangle))));
-$('u-triangle-reveal').addEventListener('click',()=>{triReveal=!triReveal;$('u-triangle-answer').hidden=!triReveal;$('u-triangle-answer').innerHTML=triangleText[triDeg];$('u-triangle-reveal').textContent=triReveal?'Dölj härledningen':'Visa härledning med Pythagoras';draw()});
+$('u-triangle-reveal').addEventListener('click',()=>{
+ const answer=$('u-triangle-answer');
+ if(trianglePhase===3){trianglePhase=0;triReveal=false;answer.hidden=true;answer.replaceChildren();$('u-triangle-reveal').textContent='Visa första mellanledet';draw();return}
+ trianglePhase++;
+ answer.hidden=false;
+ answer.innerHTML=triangleStages[triDeg].slice(0,trianglePhase).map(html=>'<div class="u-worked-row">'+html+'</div>').join('');
+ triReveal=trianglePhase===3;
+ $('u-triangle-reveal').textContent=trianglePhase===3?'Dölj mellanleden':'Visa nästa mellanled ('+(trianglePhase+1)+'/3)';
+ draw();
+});
 chooseTriangle(45);
 function setReflect(a){reflectDeg=a;$('u-reflect-slider').value=String(a);$('u-reflect-deg').textContent=a+'°';draw()}
 $('u-reflect-slider').addEventListener('input',e=>setReflect(Number(e.target.value)));
