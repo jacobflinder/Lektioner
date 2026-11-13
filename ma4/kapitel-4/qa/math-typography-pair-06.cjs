@@ -33,7 +33,7 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      assert.ok(await page.locator('#r3').isHidden(),'Facit dolt före förutsägelse');
      await page.locator('[data-reveal="r3"]').click();
      assert.ok(await page.locator('#r3 math').count()>=9,'Korrekt facit och samtliga mellanled satta som matematik');
-     assert.ok(await page.locator('script[src="./math-format.js?v=pq-insatt-20261113-v2"]').count()===1,'Uppdaterad matematikkod hämtas med nytt versionsnamn');
+     assert.ok(await page.locator('script[src="./math-format.js?v=ma4-11-complete-20261113"]').count()===1,'Uppdaterad matematikkod hämtas med nytt versionsnamn');
      const discrim=page.locator('#r3 .worked-step').nth(1);
      assert.ok(await discrim.locator('math[aria-label="z = −p/2 ± √((p/2)² − q)"]').count()===1,'Allmän pq-formel syns i rätt beräkningssteg');
      assert.ok(await discrim.locator('math[aria-label="z = −(2i)/2 ± √(((2i)/2)² − 8)"]').count()===1,'Koefficienterna sätts in i hela pq-formeln, också under rottecknet');

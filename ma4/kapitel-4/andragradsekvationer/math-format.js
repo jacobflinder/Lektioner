@@ -11,7 +11,7 @@ function math(expr){
  const M=(t,v)=>'<'+t+'>'+v+'</'+t+'>';
  const op=x=>M('mo',escape(x));
  const num=x=>M('mn',escape(x));
- const ident=x=>x==='cos'||x==='sin'?'<mi mathvariant="normal">'+x+'</mi>':M('mi',escape(x));
+ const ident=x=>['cos','sin','Re','Im'].includes(x)?'<mi mathvariant="normal">'+x+'</mi>':(/^[a-zA-Z]{2,}$/.test(x)?Array.from(x,letter=>M('mi',escape(letter))).join(''):M('mi',escape(x)));
  function atom(){
   const t=tokens[at++];
   if(t===undefined)return'';
@@ -169,6 +169,147 @@ const html={
   step('När gäller konjugatregeln?',prose('Polynom med reella koefficienter har konjugerade par av icke-reella rötter. För z² = w ≠ 0 är rötterna alltid motsatta. Båda relationerna kan gälla samtidigt.'))
  )
 };
+
+// Fördjupad ämnesgranskning 11/41: utskrivna insättningar, teckenfall, kontroller.
+// Samma lösnings-ID och samma elevstyrda avslöjande bevaras; ingen facitläcka.
+Object.assign(html,{
+ r2:worked(
+  step('1 · Kvadrera i korrekt ordning',eq('(2i)² = 2²·i² = 4·(−1) = −4'),eq('(1 − i)² = 1 − 2i + i²'),eq('(1 − i)² = 1 − 2i − 1 = −2i')),
+  step('2 · Identifiera koefficienter och välj pq-formeln',eq('z² + 4z + 8 = 0'),eq('p = 4'),eq('q = 8'),eq('z = −p/2 ± √((p/2)² − q)')),
+  step('3 · Sätt in och beräkna under roten',eq('z = −4/2 ± √((4/2)² − 8)'),eq('z = −2 ± √(2² − 8)'),eq('z = −2 ± √(4 − 8)'),eq('z = −2 ± √(−4)'),eq('z = −2 ± 2i')),
+  result('z₁ = −2 + 2i','z₂ = −2 − 2i'),
+  step('4 · Kontrollera med insättning',eq('(−2 + 2i)² = 4 − 8i + 4i² = −8i'),eq('4(−2 + 2i) = −8 + 8i'),eq('(−2 + 2i)² + 4(−2 + 2i) + 8'),eq('= −8i − 8 + 8i + 8 = 0'),prose('Koefficienterna är reella. De två icke-reella rötterna är därför konjugerade.'))
+ ),
+ r3:worked(
+  step('1 · Identifiera koefficienterna',eq('z² + 2iz + 8 = 0'),eq('p = 2i'),eq('q = 8')),
+  step('2 · Skriv pq-formeln och sätt in koefficienterna',eq('z = −p/2 ± √((p/2)² − q)'),eq('z = −(2i)/2 ± √(((2i)/2)² − 8)')),
+  step('3 · Beräkna uttrycket under roten',eq('(p/2)² − q = ((2i)/2)² − 8'),eq('= i² − 8 = −1 − 8 = −9')),
+  step('4 · Beräkna båda teckenfallen',eq('z = −i ± √(−9)'),eq('z = −i ± 3i'),eq('z₁ = −i + 3i = 2i'),eq('z₂ = −i − 3i = −4i')),
+  result('z₁ = 2i','z₂ = −4i'),
+  step('5 · Kontrollera båda i ursprungsekvationen',
+   eq('(2i)² + 2i(2i) + 8 = −4 − 4 + 8 = 0'),
+   eq('(−4i)² + 2i(−4i) + 8'),eq('= −16 + 8 + 8 = 0'),
+   prose('Koefficienten p är komplex. Rötterna behöver därför inte vara konjugerade.'))
+ ),
+ square1:worked(
+  step('Belopp och argument för första roten',
+   eq('8i = 8(cos(π/2) + i sin(π/2))'),
+   eq('r² = 8'),eq('r = √8 = √(4·2) = 2√2'),
+   eq('2v = π/2 + 2πk'),eq('v = π/4 + πk'),eq('k = 0 ⇒ v₀ = π/4')),
+  step('Sätt in exakta trigonometriska värden',
+   eq('cos(π/4) = √2/2'),eq('sin(π/4) = √2/2'),
+   eq('z₀ = 2√2(√2/2 + i√2/2)'),
+   eq('z₀ = 2 + 2i'))
+ ),
+ square2:worked(
+  step('Den andra roten är det motsatta talet',
+   eq('z₀ = 2 + 2i'),eq('z₁ = −z₀ = −2 − 2i'),
+   eq('v₀ = π/4'),eq('v₁ = π/4 + π = 5π/4'),
+   prose('Samma belopp 2√2, men riktningen skiljer ett halvt varv, π radianer.'))
+ ),
+ square3:worked(
+  step('Kvadreringen av belopp och argument',eq('(2√2)² = 4·2 = 8'),eq('2·π/4 = π/2'),eq('2·5π/4 = 5π/2 = π/2 + 2π')),
+  step('Kontrollera den första roten',eq('(2 + 2i)² = 2² + 2·2·2i + (2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
+  step('Kontrollera den andra roten',eq('(−2 − 2i)² = (−2)² + 2·(−2)·(−2i) + (−2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
+  step('Jämför med konjugatet',eq('(2 − 2i)² = 4 − 8i + 4i²'),eq('= 4 − 8i − 4 = −8i'),prose('Konjugatet är alltså inte den andra roten till z² = 8i.'))
+ ),
+ variant:worked(
+  step('1 · Identifiera p och q',eq('z² − 4iz + 5 = 0'),eq('p = −4i'),eq('q = 5')),
+  step('2 · Skriv formeln och sätt in värden',eq('z = −p/2 ± √((p/2)² − q)'),eq('z = −(−4i)/2 ± √(((−4i)/2)² − 5)')),
+  step('3 · Beräkna de ingående delarna',eq('−p/2 = −(−4i)/2 = 2i'),eq('(p/2)² − q = (−2i)² − 5'),eq('= 4i² − 5 = −4 − 5 = −9')),
+  step('4 · Förenkla och använd båda tecknen',eq('z = 2i ± √(−9)'),eq('z = 2i ± 3i'),eq('z₁ = 2i + 3i = 5i'),eq('z₂ = 2i − 3i = −i')),
+  result('z₁ = 5i','z₂ = −i'),
+  step('5 · Kontrollera båda genom insättning',eq('(5i)² − 4i(5i) + 5 = −25 + 20 + 5 = 0'),eq('(−i)² − 4i(−i) + 5 = −1 − 4 + 5 = 0'))
+ ),
+ polar:worked(
+  step('1 · Utgå från högerledets polära form',eq('z² = −32i'),eq('−32i = 32(cos(−π/2) + i sin(−π/2))')),
+  step('2 · Lös villkoret för rotens belopp',eq('r² = 32'),eq('r = √32 = √(16·2) = 4√2')),
+  step('3 · Lös villkoret för argumentet',eq('2v = −π/2 + 2πk'),eq('k ∈ ℤ'),eq('v = (−π/2 + 2πk)/2'),eq('v = −π/4 + πk')),
+  step('4 · Första roten för k = 0',eq('v₀ = −π/4 + π·0 = −π/4'),eq('cos(−π/4) = √2/2'),eq('sin(−π/4) = −√2/2'),eq('z₀ = 4√2(√2/2 − i√2/2)'),eq('z₀ = 4 − 4i')),
+  step('5 · Andra roten för k = 1',eq('v₁ = −π/4 + π·1 = 3π/4'),eq('cos(3π/4) = −√2/2'),eq('sin(3π/4) = √2/2'),eq('z₁ = 4√2(−√2/2 + i√2/2)'),eq('z₁ = −4 + 4i')),
+  result('z = 4 − 4i','z = −4 + 4i'),
+  step('6 · Kontrollera båda',eq('(4 − 4i)² = 16 − 32i + 16i²'),eq('= 16 − 32i − 16 = −32i'),eq('(−4 + 4i)² = 16 − 32i + 16i²'),eq('= 16 − 32i − 16 = −32i'),prose('Den andra roten är motsatt; k = 2 upprepar den första.'))
+ ),
+ rect:worked(
+  step('1 · Skriv z i rektangulär form',eq('z = a + bi'),eq('a,b ∈ ℝ'),eq('z² = (a + bi)²'),eq('z² = a² + 2abi + b²i²'),eq('z² = (a² − b²) + 2abi')),
+  step('2 · Jämför reella och imaginära delar',eq('(a² − b²) + 2abi = −18i'),eq('a² − b² = 0'),eq('2ab = −18'),eq('a² = b²'),eq('ab = −9')),
+  step('3 · Pröva båda teckenfallen',eq('b = a'),eq('ab = a² = −9'),prose('Omöjligt: a är reellt, så a² kan inte vara negativt.'),eq('b = −a'),eq('ab = −a² = −9'),eq('a² = 9 ⇒ a = ±3'),eq('b = −a')),
+  result('z₁ = 3 − 3i','z₂ = −3 + 3i'),
+  step('4 · Kontrollera',eq('(3 − 3i)² = 9 − 18i + 9i²'),eq('= 9 − 18i − 9 = −18i'),eq('(−3 + 3i)² = 9 − 18i + 9i²'),eq('= 9 − 18i − 9 = −18i'))
+ ),
+ r7b:worked(
+  step('1 · Bestäm beloppet',eq('r² = 8'),eq('r = √8 = √(4·2) = 2√2')),
+  step('2 · Bestäm argumenten',eq('2v = π/2 + 2πk'),eq('k ∈ ℤ'),eq('v = (π/2 + 2πk)/2'),eq('v = π/4 + πk'))
+ ),
+ r7c:worked(
+  step('Första roten · k = 0',eq('v₀ = π/4 + π·0 = π/4'),eq('cos(π/4) = √2/2'),eq('sin(π/4) = √2/2'),eq('z₀ = 2√2(cos(π/4) + i sin(π/4))'),eq('z₀ = 2√2(√2/2 + i√2/2)'),eq('z₀ = 2 + 2i')),
+  prose('Båda koordinaterna är positiva. Punkten ligger i första kvadranten.'),
+  step('Fortsätt själv före nästa klick',eq('k = 1'),eq('v₁ = π/4 + π = 5π/4'),prose('Bestäm den andra roten med samma metod. Vilka två exakta trigonometriska värden behöver du?'))
+ ),
+ r7d:worked(
+  step('Andra roten · k = 1',eq('v₁ = 5π/4'),eq('cos(5π/4) = −√2/2'),eq('sin(5π/4) = −√2/2'),eq('z₁ = 2√2(cos(5π/4) + i sin(5π/4))'),eq('z₁ = 2√2(−√2/2 − i√2/2)'),eq('z₁ = −2 − 2i')),
+  step('Kontrollera genom kvadrering',eq('(2 + 2i)² = 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i'),eq('(−2 − 2i)² = 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
+  prose('k = 2 ger v = 9π/4, samma riktning som π/4 efter ett helt varv. Ingen tredje rot tillkommer.')
+ ),
+ r8b:worked(step('Jämför realdel och imaginärdel',eq('(a² − b²) + 2abi = 8i'),eq('a² − b² = 0'),eq('2ab = 8'),eq('a² = b²'),eq('ab = 4'),prose('Vilket teckenfall är möjligt när ab är positivt?'))),
+ r8c:worked(
+  step('Pröva båda teckenfallen',eq('a² = b² ⇒ b = a eller b = −a'),eq('b = −a ⇒ ab = −a² = 4'),prose('Det är omöjligt för reella a, eftersom −a² inte kan vara positivt.'),eq('b = a ⇒ ab = a² = 4'),eq('a² = 4 ⇒ a = ±2')),
+  result('z₁ = 2 + 2i','z₂ = −2 − 2i'),
+  step('Kontrollera med kvadrering',eq('(2 + 2i)² = 4 + 8i + 4i² = 8i'),eq('(−2 − 2i)² = 4 + 8i + 4i² = 8i'))
+ ),
+ r9:worked(
+  step('A · Se kvadratskillnaden',eq('z² − 9 = 0'),eq('(z − 3)(z + 3) = 0'),eq('z − 3 = 0 eller z + 3 = 0'),eq('z = 3 eller z = −3')),
+  step('B · Identifiera koefficienter',eq('z² + 6z + 13 = 0'),eq('p = 6'),eq('q = 13')),
+  step('B · Sätt in i pq-formeln',eq('z = −p/2 ± √((p/2)² − q)'),eq('z = −6/2 ± √((6/2)² − 13)'),eq('z = −3 ± √(9 − 13)'),eq('z = −3 ± √(−4)'),eq('z = −3 ± 2i')),
+  result('z₁ = −3 + 2i','z₂ = −3 − 2i'),
+  step('B · Kontrollera en rot',eq('(−3 + 2i)² = 9 − 12i + 4i²'),eq('= 9 − 12i − 4 = 5 − 12i'),eq('6(−3 + 2i) = −18 + 12i'),eq('(−3 + 2i)² + 6(−3 + 2i) + 13'),eq('= 5 − 12i − 18 + 12i + 13 = 0')),
+  step('C · Polär form eller real- och imaginärdel',eq('z² = −2i'),eq('(1 − i)² = 1 − 2i + i² = −2i'),eq('z = 1 − i eller z = −1 + i')),
+  step('D · Redan kvadratkompletterad',eq('(z − 1)² = −4'),eq('z − 1 = ±√(−4)'),eq('z − 1 = ±2i'),eq('z = 1 ± 2i')),
+  prose('Flera metoder är möjliga. Förklara varför en viss form gör just den metoden enkel.')
+ ),
+ r10:worked(
+  step('Roten är korrekt – kontrollera den',eq('(3 − 3i)² = 9 − 18i + 9i²'),eq('= 9 − 18i − 9 = −18i')),
+  step('Hitta den saknade roten',eq('(−z)² = z²'),eq('−(3 − 3i) = −3 + 3i'),eq('(−3 + 3i)² = −18i')),
+  result('z₁ = 3 − 3i','z₂ = −3 + 3i'),
+  prose('Båda rötterna behövs. Ingen slutsats om elevens tanke kan dras av en enda skriven rot.')
+ ),
+ r11:worked(
+  step('När är icke-reella rötter konjugerade?',prose('Ett polynom med reella koefficienter har konjugatpar. Det gäller inte generellt om koefficienterna är komplexa.')),
+  step('När är rötterna motsatta?',eq('z² = w'),eq('(−z)² = z²'),prose('När w inte är noll är z och −z två olika rötter.')),
+  step('Jämför två konkreta exempel',eq('z² = −4 ⇒ z = ±2i'),eq('z² = 8i ⇒ z = ±(2 + 2i)'),prose('För −4 är rötterna både motsatta och konjugerade. För 8i är de motsatta men inte konjugerade.')),
+  step('Varför finns det inga andra rötter?',eq('z² = z₀²'),eq('z² − z₀² = 0'),eq('(z − z₀)(z + z₀) = 0'),eq('z − z₀ = 0 eller z + z₀ = 0'),eq('z = z₀ eller z = −z₀'),prose('När w = 0 är z₀ = 0 och samma rot räknas två gånger: en dubbelrot.'))
+ ),
+ r15:worked(
+  step('1 · Den andra roten enligt konjugatregeln',eq('z₁ = 2 + 3i'),eq('z₂ = 2 − 3i')),
+  step('2 · Skriv ekvationen via faktorerna',eq('(z − (2 + 3i))(z − (2 − 3i)) = 0')),
+  step('3 · Använd kvadratskillnad och förenkla',eq('((z − 2) − 3i)((z − 2) + 3i) = 0'),eq('(z − 2)² − (3i)² = 0'),eq('(z − 2)² + 9 = 0'),eq('z² − 4z + 4 + 9 = 0')),
+  result('z² − 4z + 13 = 0'),
+  prose('Kontroll: rötternas summa är 4 och produkten (2 + 3i)(2 − 3i) = 4 + 9 = 13.')
+ ),
+ r13a:worked(
+  step('1 · Identifiera p och q',eq('z² − 2iz + 8 = 0'),eq('p = −2i'),eq('q = 8')),
+  step('2 · Skriv pq-formeln och sätt in',eq('z = −p/2 ± √((p/2)² − q)'),eq('z = −(−2i)/2 ± √(((−2i)/2)² − 8)')),
+  step('3 · Beräkna under roten',eq('−p/2 = i'),eq('(p/2)² − q = (−i)² − 8'),eq('= i² − 8 = −1 − 8 = −9')),
+  step('4 · Beräkna båda teckenfallen',eq('z = i ± √(−9)'),eq('z = i ± 3i'),eq('z₁ = i + 3i = 4i'),eq('z₂ = i − 3i = −2i')),
+  result('z₁ = 4i','z₂ = −2i'),
+  step('5 · Kontrollera genom insättning',eq('(4i)² − 2i(4i) + 8 = −16 + 8 + 8 = 0'),eq('(−2i)² − 2i(−2i) + 8 = −4 − 4 + 8 = 0'))
+ ),
+ r13b:worked(
+  step('1 · Skriv högerledet i polär form',eq('z² = 18i'),eq('18i = 18(cos(π/2) + i sin(π/2))')),
+  step('2 · Bestäm beloppet',eq('r² = 18'),eq('r = √18 = √(9·2) = 3√2')),
+  step('3 · Bestäm argumenten',eq('2v = π/2 + 2πk'),eq('k ∈ ℤ'),eq('v = (π/2 + 2πk)/2'),eq('v = π/4 + πk')),
+  step('4 · Använd k = 0',eq('v₀ = π/4'),eq('cos(π/4) = √2/2'),eq('sin(π/4) = √2/2'),eq('z₀ = 3√2(√2/2 + i√2/2)'),eq('z₀ = 3 + 3i')),
+  step('5 · Använd k = 1',eq('v₁ = π/4 + π = 5π/4'),eq('cos(5π/4) = −√2/2'),eq('sin(5π/4) = −√2/2'),eq('z₁ = 3√2(−√2/2 − i√2/2)'),eq('z₁ = −3 − 3i')),
+  result('z = 3 + 3i','z = −3 − 3i'),
+  step('6 · Kontrollera',eq('(3 + 3i)² = 9 + 18i + 9i²'),eq('= 9 + 18i − 9 = 18i'),eq('(−3 − 3i)² = 9 + 18i + 9i²'),eq('= 9 + 18i − 9 = 18i'))
+ ),
+ r13c:worked(
+  step('Jämför motsatt tal med konjugat',eq('z₀ = 3 + 3i'),eq('−z₀ = −3 − 3i'),eq('(3 − 3i)² = 9 − 18i + 9i² = −18i')),
+  prose('Den andra roten är alltså det motsatta talet och inte konjugatet.'),
+  step('När garanteras konjugerade rötter?',prose('Icke-reella rötter till ett polynom med reella koefficienter kommer i konjugatpar. För z² = w ≠ 0 gäller att rötterna alltid är motsatta.'))
+ )
+});
+
 function render(id){
  const target=document.getElementById(id);
  if(!target)throw new Error('Matematiklösning saknar mål: '+id);
