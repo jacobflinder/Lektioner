@@ -73,6 +73,16 @@ try{
    await one('#vector-result math[aria-label="'+x+'"]','02 additionsled '+x);
  }
  assert.equal(await page.locator('#vector-plane g line[stroke="#bc633a"]').count(),1,'02 orange resultatvektor');
+ const vectorLabels=await page.locator('#vector-plane > text').evaluateAll(ns=>ns.map(el=>{
+   const r=el.getBBox();return {text:el.textContent,rect:{x:r.x,y:r.y,w:r.width,h:r.height}};
+ }));
+ const overlap=(a,b)=>a.x<b.x+b.w-3&&a.x+a.w>b.x+3&&a.y<b.y+b.h-3&&a.y+a.h>b.y+3;
+ const imLabel=vectorLabels.find(x=>x.text==='Im');
+ const helperLabel=vectorLabels.find(x=>x.text==='z (flyttad)');
+ const sumLabel=vectorLabels.find(x=>x.text==='u + z');
+ assert.ok(imLabel&&helperLabel&&sumLabel,'02 alla figurlabels synliga');
+ assert.ok(!overlap(imLabel.rect,helperLabel.rect),'02 flyttad vektor får inte kollidera med Im-axeln');
+ assert.ok(!overlap(helperLabel.rect,sumLabel.rect),'02 flyttad vektor får inte kollidera med summavektorn');
  await page.locator('#vector-back').click();
  assert.ok(await page.locator('#vector-result').isHidden(),'02 back döljer facit');
  await page.locator('[data-vector-op="sub"]').click();
