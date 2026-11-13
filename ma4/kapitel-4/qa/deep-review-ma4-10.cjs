@@ -49,7 +49,7 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   assert.equal(await page.locator('#jump option').count(),15,'Hoppmenyn');
   // 01–03: mål, förkunskaper och frivillig kvadrantdiagnos.
   await go(0);assert.ok((await page.locator('.slide.active').innerText()).includes('Efter lektionen'));await pic('01-desktop');
-  await go(1);await reveal('recall');assert.ok((await page.locator('#recall').innerText()).includes('realdelen'));await pic('02-desktop');
+  await go(1);await reveal('recall');assert.ok((await page.locator('#recall').innerText()).toLowerCase().includes('realdelen'));await pic('02-desktop');
   await go(2);await quiz(0,0,1);await pic('03-desktop');
   // 04: enhetscirkel och återställning, med både gradtal och projektioner.
   await go(3);await reveal('circlewrap');
