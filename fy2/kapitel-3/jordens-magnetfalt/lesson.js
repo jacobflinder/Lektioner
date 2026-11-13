@@ -18,11 +18,11 @@ function drawComponents(){
  $("earth-B-value").textContent=fmt(B,0)+" μT";
  $("earth-i-value").textContent=fmt(i,0)+"°";
  $("earth-components-result").innerHTML=componentsShown?
- chain('<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">sin</mi><mi>i</mi>',
+ chain('<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">sin</mi><mi>i</mi>',
  '<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo><mspace width="1em"/>'+
- '<msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
- '<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo>'+val(v.Bh,1,'μT')+'<mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(v.Bv,1,'μT'),
- ''+inlineMath('<msub><mi>B</mi><mi>v</mi></msub>')+' är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar '+inlineMath('<msub><mi>B</mi><mtext>h</mtext></msub>')+'.') :
+ '<msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
+ '<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo>'+val(v.Bh,1,'μT')+'<mspace width="1em"/><msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo>'+val(v.Bv,1,'μT'),
+ ''+inlineMath('<msub><mi>B</mi><mtext>v</mtext></msub>')+' är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar '+inlineMath('<msub><mi>B</mi><mtext>h</mtext></msub>')+'.') :
  'Förutsäg först: om inklinationen ökar men B är konstant, vilken komponent minskar?';
  $("earth-components-reveal").textContent=componentsShown?"Dölj värden":"Visa komponenterna";
 }
