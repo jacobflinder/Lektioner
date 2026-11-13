@@ -34,6 +34,14 @@ const cases=[
     try{
      const res=await page.goto(root+entry.slug+'/',{waitUntil:'networkidle'});
      assert.equal(res.status(),200,entry.slug+' tillgänglig');
+     if(entry.slug==='konjugat-och-absolutbelopp'){
+      await page.selectOption('#jump','0');
+      await page.locator('[data-reveal="k-start"]').click();
+      const startLabels=await page.locator('#k-start math').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('aria-label')));
+      assert.ok(startLabels.includes('Re(z) = 3'),'Lektion 2: realdelen i eget facitled');
+      assert.ok(startLabels.includes('Im(z) = −4'),'Lektion 2: imaginärdelen i eget facitled');
+      assert.ok(!startLabels.includes('Re(z) = 3, Im(z) = −4'),'Lektion 2: koefficienter inte sammanslagna');
+     }
      for(const group of entry.groups){
       await page.selectOption('#jump',String(group.slide));
       if(group.click){
