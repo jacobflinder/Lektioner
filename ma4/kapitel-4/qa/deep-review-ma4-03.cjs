@@ -94,6 +94,7 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   ]) await one('#d-princip math[aria-label="'+x+'"]','03 synligt mellanled '+x);
   await one('#d-princip math[aria-label="= (−9 + 20i + 21(−1))/(10)"]','03 kontroll med insatt i²');
   assert.ok(await worked.locator('math mfrac').count()>=8,'03 all division är verkliga MathML-bråk');
+  assert.equal(await worked.locator('[data-seq-item]').nth(5).locator('p.math').count(),2,'03 rektangulär form delas upp i två läsbara ekvationsled');
   await worked.locator('[data-seq-back]').click();
   assert.equal(await worked.locator('[data-seq-item]:not(.hidden)').count(),6,'03 back');
   await worked.locator('[data-seq-reset]').click();
@@ -165,6 +166,11 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
    await slide(n);
    const sizes=await page.evaluate(()=>({body:document.documentElement.scrollWidth,screen:innerWidth}));
    assert.ok(sizes.body<=sizes.screen+4,'Mobilbild '+(n+1)+' sidöverspill '+JSON.stringify(sizes));
+   if(n===2){
+    const widths=await page.locator('#d-princip [data-seq-item]').nth(5).locator('p.math').evaluateAll(xs=>xs.map(x=>({scroll:x.scrollWidth,client:x.clientWidth})));
+    assert.equal(widths.length,2,'03 två mobilanpassade ekvationsled');
+    assert.ok(widths.every(x=>x.scroll<=x.client+2),'03 ingen intern sidscroll i slutsvaret '+JSON.stringify(widths));
+   }
    await screenshot('mobil-bild-'+(n+1));
   }
   assert.deepEqual(errors,[],'Inga JS- eller laddningsfel');
