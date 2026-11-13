@@ -32,8 +32,8 @@ insertSolutions({
   ]),
   answer(['R(x) = −5']),
   step('2 · Stoppvillkoret',[
-    'grad(−5) = 0','grad(x + 2) = 1'
-  ],'Den nya resten har lägre grad än divisorn. Även resterna 12 och 0 är tillåtna när divisorn har grad 1. Man får inte stanna med en rest av grad 1 eller högre.')
+    'R(x) = −5','D(x) = x + 2','0 < 1'
+  ],'Restens grad är 0 och divisorns grad är 1. Den nya resten har därför lägre grad än divisorn. Även resterna 12 och 0 är tillåtna. Man får inte stanna med en rest av grad 1 eller högre.')
  ),
  a6:solution(
   step('1 · Subtraktion av negativ term',[
