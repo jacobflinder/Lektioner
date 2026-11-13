@@ -1,5 +1,24 @@
 (() => {
 "use strict";
+// Authored formula fragments are rendered as native inline MathML, not text glyphs.
+const mathFragments=[["A = 0,040 · 0,060 = 0,0024 m²","<mi>A</mi><mo>=</mo><mn>0,040</mn><mo>·</mo><mn>0,060</mn><mo>=</mo><mn>0,0024</mn><mtext> m²</mtext>"],["0,96 mWb = 0,00096 Wb","<mn>0,96</mn><mtext> mWb</mtext><mo>=</mo><mn>0,00096</mn><mtext> Wb</mtext>"],["24 cm² = 24·10⁻⁴ m²","<mn>24</mn><mtext> cm²</mtext><mo>=</mo><mn>24</mn><mo>·</mo><msup><mn>10</mn><mn>−4</mn></msup><mtext> m²</mtext>"],["24 cm² = 0,0024 m²","<mn>24</mn><mtext> cm²</mtext><mo>=</mo><mn>0,0024</mn><mtext> m²</mtext>"],["B = Φ/A = 0,40 T","<mi>B</mi><mo>=</mo><mfrac><mrow><mi>Φ</mi></mrow><mrow><mi>A</mi></mrow></mfrac><mo>=</mo><mn>0,40</mn><mtext> T</mtext>"],["4,0 cm = 0,040 m","<mn>4,0</mn><mtext> cm</mtext><mo>=</mo><mn>0,040</mn><mtext> m</mtext>"],["6,0 cm = 0,060 m","<mn>6,0</mn><mtext> cm</mtext><mo>=</mo><mn>0,060</mn><mtext> m</mtext>"],["B = 0,0040 T","<mi>B</mi><mo>=</mo><mn>0,0040</mn><mtext> T</mtext>"],["Φ = 0,96 mWb","<mi>Φ</mi><mo>=</mo><mn>0,96</mn><mtext> mWb</mtext>"],["A = 24 cm²","<mi>A</mi><mo>=</mo><mn>24</mn><mtext> cm²</mtext>"],["Φ = BA","<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi>"],["Φ=BA","<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi>"]];
+function formattedMathText(value){
+ const s=String(value);
+ const escape=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ let result='',position=0;
+ while(position<s.length){
+  let best=null;
+  for(const [raw,body] of mathFragments){
+   const at=s.indexOf(raw,position);
+   if(at>=0&&(!best||at<best.at||(at===best.at&&raw.length>best.raw.length)))best={at,raw,body};
+  }
+  if(!best){result+=escape(s.slice(position));break;}
+  result+=escape(s.slice(position,best.at));
+  result+='<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+best.body+'</math>';
+  position=best.at+best.raw.length;
+ }
+ return result;
+}
 const checks=[
  {slide:0,title:"Varför fastnar magneten?",q:"Vad förklarar bäst varför järn attraheras mycket starkare än aluminium av samma stavmagnet?",opts:["Järn har ferromagnetiska domäner som kan ge stark magnetisering.","Aluminium påverkas inte alls av magnetfält.","Järn måste vara en permanentmagnet redan innan."],correct:0,hint:"Tänk på skillnaden mellan ferromagnetism och paramagnetism. Vilket material kan bilda en mycket stor nettomagnetisering?",why:"Järn är ferromagnetiskt och får stark magnetisering via domäner. Aluminium är svagt paramagnetiskt och kan också påverkas, men betydligt svagare."},
  {slide:1,title:"Kompassens nordände",q:"Stavmagneten har N till vänster och S till höger. Åt vilket håll pekar kompassen rakt ovanför magnetens mitt?",opts:["Åt vänster.","Åt höger.","Rakt nedåt."],correct:1,hint:"Utanför magneten går fältlinjer från N till S. Följ den övre slingan.",why:"Utanför en stavmagnet går magnetfältet från N till S. Ovanför mitten pekar det åt höger när N ligger till vänster."},
@@ -15,30 +34,30 @@ for(const c of checks){
  const slide=slides[c.slide];if(!slide)continue;
  const s=document.createElement("section");s.className="review only-repetition";s.setAttribute("aria-label","Repetitionskontroll");
  s.innerHTML='<div class="tag">EGET FÖRSÖK · REPETITION</div><h2></h2><p class="review-question"></p><div class="opts" role="group"></div><div class="status" role="status" aria-live="polite">Tänk själv innan du väljer ett svar.</div><div class="buttons"><button class="hint-button">Visa ledtråd</button><button class="explain-button" hidden>Visa förklaringen</button><button class="retry-button" hidden>Försök igen</button></div><p class="hint" hidden></p>';
- s.querySelector("h2").textContent=c.title;s.querySelector(".review-question").textContent=c.q;
+ s.querySelector("h2").textContent=c.title;s.querySelector(".review-question").innerHTML=formattedMathText(c.q);
  const opts=s.querySelector(".opts"),status=s.querySelector(".status"),hint=s.querySelector(".hint");
  const hintButton=s.querySelector(".hint-button"),explain=s.querySelector(".explain-button"),retry=s.querySelector(".retry-button");
  let correct=false,tries=0;
  const buttons=c.opts.map((label,i)=>{
-  const b=document.createElement("button");b.type="button";b.textContent=String.fromCharCode(65+i)+". "+label;
+  const b=document.createElement("button");b.type="button";b.innerHTML=String.fromCharCode(65+i)+". "+formattedMathText(label);
   b.addEventListener("click",()=>{
    if(correct)return;
    tries++;
    buttons.forEach(x=>x.classList.remove("good","wrong"));
    if(i===c.correct){
     correct=true;b.classList.add("good");buttons.forEach(x=>x.disabled=true);
-    status.textContent="Rätt! "+c.why;status.className="status ok";
+    status.innerHTML="Rätt! "+formattedMathText(c.why);status.className="status ok";
     hintButton.hidden=true;explain.hidden=true;hint.hidden=true;retry.hidden=false;
    }else{
     b.classList.add("wrong");status.textContent="Inte riktigt. "+(tries>1?"Använd ledtråden och pröva igen.":"Tänk om och försök igen.");
-    status.className="status no";hint.hidden=false;hint.textContent=c.hint;
+    status.className="status no";hint.hidden=false;hint.innerHTML=formattedMathText(c.hint);
     explain.hidden=false;retry.hidden=false;
    }
   });
   opts.appendChild(b);return b;
  });
- hintButton.addEventListener("click",()=>{hint.hidden=false;hint.textContent=c.hint});
- explain.addEventListener("click",()=>{hint.hidden=false;hint.textContent=c.why});
+ hintButton.addEventListener("click",()=>{hint.hidden=false;hint.innerHTML=formattedMathText(c.hint)});
+ explain.addEventListener("click",()=>{hint.hidden=false;hint.innerHTML=formattedMathText(c.why)});
  function reset(){
   tries=0;correct=false;status.className="status";status.textContent="Tänk själv innan du väljer ett svar.";
   buttons.forEach(b=>{b.disabled=false;b.classList.remove("good","wrong")});
