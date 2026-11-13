@@ -35,7 +35,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await ok(await page.locator('#prior-recall').isVisible(),'Återkallningen öppnas på begäran');
   await ok(!await page.locator('#prior-recall-answer').isVisible(),'Återkallningens facit dolt');
   await page.locator('[data-reveal="prior-recall-answer"]').click();
-  await ok((await page.locator('#prior-recall-answer').innerText()).includes('2x−4'),'Korrekt f′ från föregående lektion');
+  await ok((await page.locator('#prior-recall-answer').innerText()).replace(/\s+/g,'').includes('2x−4'),'Korrekt f′ från föregående lektion');
   await go(3);
   await ok(!await page.locator('#compare-readouts').isVisible(),'Grafavläsningen dold före förutsägelse');
   await page.locator('[data-reveal="compare-readouts"]').click();
