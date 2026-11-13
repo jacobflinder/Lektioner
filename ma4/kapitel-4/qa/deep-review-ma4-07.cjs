@@ -239,6 +239,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    await has('#exitans math[aria-label="'+f+'"]','07 utcheckning '+f);
   }
   assert.ok((await page.locator('#exit').innerText()).includes('Dagens mål'),'07 återkoppling till målen');
+  assert.ok((await page.locator('#exitans').innerText()).includes('andra faktorns absolutbelopp'),'07 multiplikation beskrivs med faktorer, inte nämnare');
   await shot('07-desktop');
   console.log('PASS 07: båda operationer, kvotens återkontroll, målen');
   await page.locator('#mode').click();

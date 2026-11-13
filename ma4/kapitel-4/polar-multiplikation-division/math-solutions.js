@@ -55,7 +55,7 @@ insertSolutions({
    ['(3/2) · 2 = 3','−60° + 80° = 20°'],
    'Multiplicerar vi kvoten med z₂ får vi tillbaka både absolutbeloppet 3 och argumentet 20° hos z₁.'),
   step('7 · Förklara skillnaden',[],
-   'Multiplikation skalar med nämnarens absolutbelopp och adderar dess vinkel. Division gör den omvända förändringen: delar längderna och subtraherar vinklarna. −60° och 300° beskriver samma riktning.')
+   'Multiplikation skalar med den andra faktorns absolutbelopp och adderar dess vinkel. Division gör den omvända förändringen: delar längderna och subtraherar vinklarna. −60° och 300° beskriver samma riktning.')
  )
 });
 // Äldre dekorativa bråk görs till riktiga MathML-bråk i statiska uppgifter.
