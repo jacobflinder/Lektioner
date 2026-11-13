@@ -15,7 +15,7 @@ const π=I('π'),i=I('i'),v=I('v'),x=I('x');
 const piFrac=n=>FR(π,N(String(n)));
 const trig=(fn,argument)=>R(I(fn),argument);
 const pth=(...parts)=>R(O('('),...parts,O(')'));
-const styled=(color,content)=>'<mstyle mathcolor="'+color+'">'+content+'</mstyle>';
+const styled=(color,...content)=>'<mstyle mathcolor="'+color+'">'+content.join('')+'</mstyle>';
 function mathML(expression,label,display='block'){
  return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="'+display+'" aria-label="'+enc(label)+'"><mrow>'+expression+'</mrow></math>';
 }
@@ -32,6 +32,14 @@ const need=document.querySelector('#need1 p');
 if(need)need.outerHTML=S('Bestäm produktens belopp och argument',
  eq('r₁r₂ = 2 · 3 = 6')+eq('v = π/6 + π/3 = π/2')+eq('z₁z₂ = 6i'));
 
+// Den första produktuppställningen använder samma bråktypografi som lösningen.
+const productInputs=document.querySelectorAll('.slide')[6]?.querySelector('.math');
+if(productInputs){
+ productInputs.innerHTML=mathML(R(
+  SUB(I('z'),N('1')),O('='),N('2'),expI(piFrac(6)),
+  O(','),SUB(I('z'),N('2')),O('='),N('3'),expI(piFrac(3))
+ ),'z₁ = 2e^(iπ/6), z₂ = 3e^(iπ/3)');
+}
 const multiply=document.getElementById('multiply');
 if(multiply){
  const exponentSum=expI(R(O('('),piFrac(6),O('+'),piFrac(3),O(')')));
