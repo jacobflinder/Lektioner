@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 9/41. Återstår 32/41.** Senast färdiggranskad: lektion 9, **Ekvationen zⁿ = a**. **Nästa lektion: 10/41, Eulers formel**, sökväg ma4/kapitel-4/eulers-formel/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 10/41. Återstår 31/41.** Senast färdiggranskad: lektion 10, **Eulers formel**. **Nästa lektion: 11/41, Andragradsekvationer**, sökväg ma4/kapitel-4/andragradsekvationer/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -26,7 +26,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/) — 7/7 bilder, fullständiga r/v-mellanled, frivillig härledning, interaktiv förstoring och 390px mobil
 - [x] [de moivre](../ma4/kapitel-4/de-moivre/) — djupgranskning 10/10 bilder, 9 dynamiska potenser, samtliga mellanled, korrekt MathML-bråk, separat förstoring och 390px mobil
 - [x] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/) — 10/10 bilder, fullständiga rot- och k-värdesberäkningar, dolda rotvinklar, korrekt k=3-låsning, mobilläsbarhet och riktad Chromiumtest
-- [ ] [eulers formel](../ma4/kapitel-4/eulers-formel/)
+- [x] [eulers formel](../ma4/kapitel-4/eulers-formel/) — djupgranskning 15/15 bilder, fyra frivilliga spår, fullständiga Euler-/radianmellanled, 390 px mobil, projektor, separat Chromiumtest(../ma4/kapitel-4/eulers-formel/)
 - [ ] [andragradsekvationer](../ma4/kapitel-4/andragradsekvationer/)
 - [ ] [polynomdivision](../ma4/kapitel-4/polynomdivision/)
 - [ ] [faktorsatsen](../ma4/kapitel-4/faktorsatsen/)
@@ -401,12 +401,56 @@ Den avslutade ämnes- och mobilgranskningen upptäckte efter PR #15 ännu en typ
 
 **Verifieringsgräns:** Publicerad HTML verifierad i GitHubs sammanslagna huvudgren och Pages-deployment är godkänd. En separat direkt HTTP-kontroll av den publika GitHub Pages-adressen kunde inte genomföras genom webbverktyget och påstås inte vara gjord.
 
+## Bild-för-bild-rapport · 10/41 · Eulers formel
+
+**Kurs:** Matematik 4 / Matematik – fortsättning, nivå 2 · 4.3 Potenser och komplexa tal.  
+**Sökväg:** \`ma4/kapitel-4/eulers-formel/\`.  
+**Publicerad adress:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/eulers-formel/  
+**Omfattning:** samtliga **15 av 15 bilder** (10 ordinarie, fem valfria/stödbilder: kvadrantdiagnos, notation, felanalys, komplex exponentialfördjupning och potensserier), alla tre dolda utcheckningsfacit, quiz, stegvisa lösningar, navigering, talplan, återställning, klassrumsläge, projektor, 390 px mobil och fyra skilda potensseriesteg. Alla lösningar kontrollerades oberoende av lektionens facit.
+
+| Bild | Oberoende ämnes- och kognitionsgranskning samt genomförd åtgärd |
+|---|---|
+| **1 · Start och mål** | Målen avgränsar sambandet polär–exponentialform, omvandling av negativa argument och multiplikation/Eulers identitet. Ingen matematisk förhandslösning; arbetssättet förutsäg → försök → parmotivering → kontroll finns kvar. 10 ordinarie bilder (15 med frivilliga), inte ett felaktigt ”1/11”-förhandsvärde. |
+| **2 · Polär form** | \(z=r(\cos(v)+i\sin(v))\), \(r=|z|\), \(v\) argument. Realdel \(r\cos(v)\) och imaginärdel \(r\sin(v)\) kontrollerade. Förklaring dold tills eleverna resonerat. |
+| **3 · Frivillig kvadrantdiagnos** | \(120^\circ=2\pi/3\) i andra kvadranten; \(\cos120^\circ=-1/2<0\), \(\sin120^\circ=\sqrt3/2>0\). Tre val med återkoppling och först valt svar. Inget nytt obligatoriskt moment. |
+| **4 · Enhetscirkeln** | Dynamisk enhetscirkel för \(v=120^\circ\), \(90^\circ\), \(180^\circ\), \(-90^\circ\): \(x=\cos v\), \(y=\sin v\), \(r=1\); SVG-linjer, punkter och återställning kontrollerade. Eleven förutsäger före visning. |
+| **5 · Frivilligt skrivformsmotiv** | \(z_1=2(\cos(\pi/6)+i\sin(\pi/6))\), \(z_2=3(\cos(\pi/3)+i\sin(\pi/3))\). **Rättat utelämnade nämnarled**: \(r=2\cdot3=6\), \(v=\pi/6+\pi/3=\pi/6+2\pi/6=3\pi/6=\pi/2\). Slutpunkt \(6i\). Exponentiallagarna presenteras som motiv, uttryckligen inte som bevis. |
+| **6 · Eulers formel** | \(e^{iv}=\cos(v)+i\sin(v)\), \(z=r e^{iv}\) för \(r>0\), argument \(v\) i **radianer**, argument modulo \(2\pi\). För \(z=0\) finns inte något bestämt argument. Fristående trigonometriska argument med parenteser; begreppsquiz och dold förklaring bevarade. |
+| **7 · Multiplikation** | **Betydande komplettering:** tidigare sammanfogades givna \(z_1,z_2\) i ett enda MathML-element. De ligger nu i skilda block med minst 16 px avstånd. Lösningen visar \(r_1,r_2,v_1,v_2\), \(2\cdot3=6\), hela bråkförlängningen för vinkeln, \((2e^{i\pi/6})(3e^{i\pi/3})\), separat exponentiallag, \(6e^{i\pi/2}=6(\cos(\pi/2)+i\sin(\pi/2))=6i\) och korrekt heltalspotensregel för \(r>0\). Facit dolt före elevens eget försök. |
+| **8 · Omvandling till rektangulär form** | \(2e^{i\pi/3}=2(\cos(\pi/3)+i\sin(\pi/3))\), \(\cos(\pi/3)=1/2\), \(\sin(\pi/3)=\sqrt3/2\). **Fyra** kontrollerbara elevstyrda steg: identifiera belopp/argument, sätt in Eulers formel, multiplicera in \(2\) inklusive \((2/2)+i(2\sqrt3/2)\), sedan separat belopps- och kvadrantkontroll: \(|1+i\sqrt3|=\sqrt{1+3}=2\). Backa och börja om testade. |
+| **9 · Negativt argument** | \(3e^{-i\pi/2}=3(0-i)=-3i\) med synlig Eulers insättning, två exakta trigvärden, tecken och slutled. **Ämnesdidaktiskt fel rättat:** \(-3\) har också beloppet \(3\); det utesluts **på grund av fel riktning**, inte på grund av beloppet. Quiz, enhetscirkel, försök före återkoppling bevarade. |
+| **10 · Eulers identitet** | \(e^{i\pi}=\cos(\pi)+i\sin(\pi)=-1+i\cdot0=-1\), alltså \(e^{i\pi}+1=0\). Första steget visas efter förutsägelse; knappen med den färdiga identiteten låses tills första steget öppnats. Mellanled och Eulers slutsats separat uppställda. |
+| **11 · Eget NOKflex-arbete** | **Bevarat oförändrat:** NOKflex → 4.3 → Eulers formel, **uppgifter 4329–4338**, välj minst tre av fem nivåer, rätta själv, diskutera med kamrat. Frivilliga spår hoppar huvudvägen över; inga påhittade Socrative-moment. |
+| **12 · Frivillig felanalys** | Konstruerat fel \(e^{-i\pi}=1\) rättas med negativt halvvarv, \(\cos(-\pi)=-1\), \(\sin(-\pi)=0\), alltså \(e^{-i\pi}=-1\). Ingen påstådd elevavsikt. Försök före dold återkoppling. |
+| **13 · Frivillig komplex exponent** | \(e^{2-3i}=e^2e^{-3i}=e^2(\cos(-3)+i\sin(-3))=e^2\cos3-i e^2\sin3\). Realdel \(e^2\cos3<0\), imaginärdel \(-e^2\sin3<0\), belopp \(e^2\), argument \(-3\) rad. Exponentiallagar och symmetri visas separat; tidigare fristående real- och imaginärdelar bevarade. |
+| **14 · Frivillig potensseriehärledning** | Potensserierna för \(e^x,\cos(v),\sin(v)\) och \(e^{iv}\) oberoende granskade. Tydliga **parenteser kring \((iv)^2,(iv)^3,\dots\)**, sex separata MathML-uttryck för \(i^0,\dots,i^5\), korrekt växling mellan jämna reella och udda imaginära termer, reella och imaginära färgkoder. Fyra steg, återställning, frivillighetsmarkering och uttryckligt konvergensförbehåll bevarade. Äldre test anpassat till förbättrad typografi utan att avaktiveras. |
+| **15 · Utcheckning och mål** | **Tre tidigare komprimerade facit utökade till fullständiga steg och dolda från början.** (1) \(2e^{-i\pi/2}=-2i\): \(r,v\), insättning, trigvärden, produkt och riktning. (2) \((2e^{i\pi/3})(3e^{-i\pi/3})=6e^0=6\): identifiera storheter, multiplicera, addera motstående vinklar, exponentiallag, slutsvar. (3) \(e^{i\pi}+1=0\): Eulers formel, cosinus/sinus, substitution, addition av 1. Tre återkopplade mål och självbedömning bevarade. |
+
+### Oberoende kontrollräkningar, giltighetsvillkor och bevarat innehåll
+
+1. \(2e^{i\pi/6}=\sqrt3+i\) och \(3e^{i\pi/3}=3/2+(3\sqrt3/2)i\). Rektangulärt:
+   \((\sqrt3+i)(3/2+(3\sqrt3/2)i)=(3\sqrt3/2-3\sqrt3/2)+(9/2+3/2)i=6i\).
+2. \(2e^{i\pi/3}=2(1/2+i\sqrt3/2)=1+i\sqrt3\), med \(|z|=\sqrt{1^2+(\sqrt3)^2}=2\).
+3. \(\cos(-\pi/2)=0\), \(\sin(-\pi/2)=-1\), följaktligen \(3e^{-i\pi/2}=-3i\) och \(2e^{-i\pi/2}=-2i\).
+4. \(\cos(\pi)=\cos(-\pi)=-1\) och \(\sin(\pi)=\sin(-\pi)=0\), så \(e^{i\pi}+1=0\), \(e^{-i\pi}=-1\).
+5. \((2e^{i\pi/3})(3e^{-i\pi/3})=6e^{i(\pi/3-\pi/3)}=6e^0=6\).
+6. \(e^{2-3i}=e^2\cos3-i e^2\sin3\); båda delarna negativa därför att \(\cos3<0,\sin3>0\). Beloppet är \(e^2\), inte \(2\).
+7. Potensserier: \((iv)^{2k}=(-1)^kv^{2k}\), \((iv)^{2k+1}=i(-1)^kv^{2k+1}\). Detta ger \(\cos(v)+i\sin(v)\) genom gruppering där konvergens och termvis omgruppering är giltiga. För \(r=0\) saknas argument; negativa heltalspotenser kräver \(r\neq0\).
+
+**Bevarat:** alla 15 bilder, ursprunglig kärnväg och valfria spår, NOKflex och uppgifterna 4329–4338, quiz med svarsalternativ och återkoppling, lärarstöd och klassrumsläge, interaktiv enhetscirkel med återställning, negativ vinkel-visualisering, felförklaring, transferuppgift, potensserier, lärandemål, utcheckning och lokalt arbete utan elevdata. Inga nya Socrative-inslag eller kopierade läroboksexempel.
+
+### Ändringar, riktade tester, skärmbilder och verifierad publicering
+
+- **Kod och PR:** [PR #18 – djupgranskning och test](https://github.com/jacobflinder/Lektioner/pull/18), sammanslagen till \`main\` som [commit 11454e1ae4ba3f45c5abd279b10eb8f1bc666747](https://github.com/jacobflinder/Lektioner/commit/11454e1ae4ba3f45c5abd279b10eb8f1bc666747). Påverkat: \`ma4/kapitel-4/eulers-formel/index.html\`, \`math-polish.js\`, nytt \`ma4/kapitel-4/qa/deep-review-ma4-10.cjs\`, uppdaterat tidigare \`math-typography-pair-05.cjs\` samt workflowfil.
+- **Riktat Chromiumtest:** \`node ma4/kapitel-4/qa/deep-review-ma4-10.cjs\`, ingår i full \`ma4-browser-qa.yml\`. Testet verifierar 15/15 bilder, samtliga dolda lösningar, quiz, klassrum/projektor, aktiv navigation och reset, radianer/MathML, minst 16 px mellan fristående givna uttryck, 390 px mobil utan övergripande sidscroll samt alla fyra seriesteg. **15 desktopskärmbilder, 15 mobilskärmbilder, fyra serielägen och projektor skärmbild** har framställts och visuellt granskats.
+- **Arbetsgren Chromium + Ma4-regression:** [run 43513783226 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43513783226), [skärmbildsartefakt](https://github.com/jacobflinder/Lektioner/actions/runs/43513783226/artifacts/14079702231).
+- **\`main\` efter merge, full Ma4-regression:** [run 43514310798 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43514310798).
+- **GitHub Pages för den sammanslagna lektionskoden:** [run 43514310596 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43514310596). En ytterligare Pages-körning kan uppstå genom denna granskningsloggs uppdatering och ska då kontrolleras separat.
+- **Ärligt verifieringsläge:** Godkänd Chromium-rendering mot arbetsgren/\`main\` och godkänd GitHub Pages-deployment verifierade. Separat direkt HTTP-avläsning av exakt den offentliga Pages-adressen misslyckades med cache miss och har **inte** påståtts genomförd. Inga kända blockerande ämnes-, interaktions- eller testfel kvarstår.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad lektion:** **9 av 41 – Matematik 4, Ekvationen zⁿ = a**.
-- **Sökväg:** `ma4/kapitel-4/ekvationen-zn-a/`.
-- **Status:** PR #17 sammanslagen i `main`; specifikt test och fullständig Ma4 Chromiumtestsvit godkända på arbetsgren och `main`; GitHub Pages byggd och driftsatt; alla 10/10 bilder och tio mobillägen testade och visuellt kontrollerade; granskningsloggen uppdaterad.
-- **Nästa lektion:** **10 av 41 – Matematik 4, Eulers formel**.
-- **Nästa sökväg:** `ma4/kapitel-4/eulers-formel/`.
-- **Olösta blockerande ämnes-, interaktions- eller publiceringsfel:** inga kända. Separat direkt HTTP-avläsning av den publika Pages-sidan är inte verifierad.
-- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera den verkliga statusen i `main`. Granska **lektion 10 av 41**, en lektion åt gången: varje bild och varje beräkningsled oberoende, korrekta exponentuttryck och bråk, facit som inte avslöjas för tidigt, relevant elevtänkande, mobil/projektor, eventuell animation och begripligt avstånd mellan matematiska uttryck. Bevara NOKflex och originalets undervisningsmoment. Gör en separat gren, sammanhållen ändring, riktat test, godkänd helsvit, merge, Pages-verifiering och permanent logguppdatering före rapporten.
+- **SENAST FÄRDIG:** **10 av 41 – Matematik 4, Eulers formel**. Sökväg: \`ma4/kapitel-4/eulers-formel/\`. **15/15 bilder**, alla facit och frivilliga tillstånd granskade, fulla mellanled och matematisk typografi korrigerade. PR #18 sammanslagen i \`main\` (commit \`11454e1ae4ba3f45c5abd279b10eb8f1bc666747\`); Chromiumtest och full Ma4-regression godkända i arbetsgren och på \`main\`; GitHub Pages-byggning och publicering godkända; granskningsloggen uppdaterad.
+- **NÄSTA LEKTION:** **11 av 41 – Matematik 4, Andragradsekvationer**. GitHub-sökväg: \`ma4/kapitel-4/andragradsekvationer/\`. URL: https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/andragradsekvationer/.
+- **EVENTUELLA ÖPPNA PROBLEM:** Inga kända blockerande ämnes-, matematiktypografi-, interaktions- eller regressionstestfel. Offentlig Pages-URL kunde inte separat HTTP-kontrolleras med tillgänglig webbåtkomst; GitHub Pages Actions är dock godkänd. Kontrollera eventuell ny Pages-körning efter logguppdatering och att \`main\` fortfarande har 10/41.
+- **INSTRUKTION:** Läs \`AGENTS.md\` och hela \`granskning/README.md\`, verifiera senaste \`main\` och alla öppna PR/nyare ändringar, fortsätt sedan från **nästa ofärdiga lektion 11 av 41** med oberoende kontroll av varje bild, dolda beräkningsled och facit, elevens förutsägelse före svar, komplett förståelig matematik, projektor-/mobilscreenshots, riktad Chromiumtest, full befintlig regressionssvit, PR och merge, Pages och en ny fullständig bild-för-bild-rapport. Granska bara en lektion per omgång och markera aldrig klart innan alla verifieringar har passerat.
