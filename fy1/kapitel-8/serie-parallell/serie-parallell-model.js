@@ -32,7 +32,7 @@
     }
     art+=T(312,20,serie?'En strömväg':'Två parallella strömvägar',17,'#255e6f');
     picture.innerHTML=base(art,serie?'Seriekoppling med batteri till vänster och två horisontella resistorer med samma ström.':'Parallellkoppling med batteri till vänster och två vertikala resistorer mellan samma två noder.');
-    result.innerHTML=revealed?`<div><b>R<sub>ers</sub> = ${fmt(eqR,2)} Ω</b> · <b>I från batteriet = ${fmt(Itot,3)} A</b></div><div>R₁: I₁ = ${fmt(I1,3)} A och U₁ = ${fmt(U1,2)} V.</div><div>R₂: I₂ = ${fmt(I2,3)} A och U₂ = ${fmt(U2,2)} V.</div><div>${serie?'Serie: I₁ = I₂, medan U₁ + U₂ = U.':'Parallellt: U₁ = U₂ = U, medan I₁ + I₂ = I.'}</div>`:'<strong>Förutsäg först.</strong> Förklara din hypotes med antalet strömvägar. Visa sedan resultatet.';
+    result.innerHTML=revealed?`<div><b>Rₑᵣₛ = ${fmt(eqR,2)} Ω</b> · <b>Batteriström: Iₜₒₜ = ${fmt(Itot,3)} A</b></div><div>R₁: I₁ = ${fmt(I1,3)} A och U₁ = ${fmt(U1,2)} V.</div><div>R₂: I₂ = ${fmt(I2,3)} A och U₂ = ${fmt(U2,2)} V.</div><div>${serie?'Serie: I₁ = I₂, medan U₁ + U₂ = U.':'Parallellt: U₁ = U₂ = U, medan I₁ + I₂ = I.'}</div>`:'<strong>Förutsäg först.</strong> Förklara din hypotes med antalet strömvägar. Visa sedan resultatet.';
     reveal.textContent=revealed?'Dölj resultat':'Visa resultat';
     root.querySelector('.figcap').textContent=serie?'Seriekoppling: samma ström i alla resistorer. Ändrade värden syns samtidigt i figur och beräkning.':'Parallellkoppling: grenarna ligger mellan samma noder och har samma spänning. Diagram och beräkning bygger på samma tillstånd.';
   }
