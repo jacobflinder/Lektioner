@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplicera och dividera med i</title><link rel="stylesheet" href="../assets/lesson.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök före återkopplingen. Alla interaktioner är lokala.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med den tidigare kända regeln i²=−1. Eleverna räknar själva, skissar och jämför i par innan du visar återkoppling och mål. Knyt beräkningen till geometrin utan att ge förklaringen för tidigt.">
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplicera och dividera med i</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök före återkopplingen. Alla interaktioner är lokala.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med den tidigare kända regeln i²=−1. Eleverna räknar själva, skissar och jämför i par innan du visar återkoppling och mål. Knyt beräkningen till geometrin utan att ge förklaringen för tidigt.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Multiplicera och dividera med i</h2><p class="lead">4.2 Komplexa tal i polär form · Samma längd, en rotation på 90°</p>
 <div class="task"><strong>Enskilt → par · skriv först</strong><p class="math math-big">z = 2 + i</p><p>Beräkna <span class="math">iz</span> med <span class="math">i² = −1</span>. Rita z och iz i samma talplan. Vad förändras? Vad är oförändrat?</p></div>
 <button class="reveal" type="button" data-reveal="startans">Visa och förklara</button><div class="answer hidden" id="startans">
@@ -69,7 +69,7 @@
 <p class="math">|iz| = √(2² + 1²) = √5</p>
 <p class="math">|z/i| = √((−2)² + (−1)²) = √5</p></div>
 <p>Multiplikationen roterar 90° moturs; divisionen 90° medurs. Det är samma längd, bara olika riktningar.</p></div>
-<div class="panel"><strong>Dagens mål</strong><p>Jag kan beräkna och rita både iz och z/i, förklara varför rotationerna går åt olika håll och visa att absolutbeloppet bevaras.</p></div></section></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span class="pill" id="progress"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller insamling av elevsvar.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
+<div class="panel"><strong>Dagens mål</strong><p>Jag kan beräkna och rita både iz och z/i, förklara varför rotationerna går åt olika håll och visa att absolutbeloppet bevaras.</p></div></section></div><div class="controls"><div><button class="secondary" id="prev">← Föregående</button><button id="next">Nästa →</button><span class="pill" id="progress"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Ingen inloggning eller insamling av elevsvar.</footer></main><script src="../assets/math-presentation.js"></script><script src="./math-solutions.js"></script><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
 (()=>{'use strict';
 let a=2,b=1,stage=0;
 const svg=document.getElementById('rot-plane'),back=document.getElementById('rot-back'),next=document.getElementById('rot-next');
@@ -100,7 +100,7 @@ function render(){
  const graph=Ma4Plane.plot(svg,{minX:-4.5,maxX:4.5,minY:-4.5,maxY:4.5,alt:'Komplext talplan. z=('+a+','+b+'). Steg '+stage+' av 3. '+(stage===0?'Endast z visas.':stage===1?'Rotationen +90° och iz visas.':stage===2?'Både iz och z/i visas med +90° respektive −90°.':'Alla tre vektorerna ligger på en cirkel med centrum i origo och radie √5.'),vectors,circles:stage>=3?[{cx:0,cy:0,r:rad,color:'#91aebb',dashed:true}]:[]});
  if(stage>=1)drawRotationArc(graph,theta,1,.9,'+90°','#087d70');
  if(stage>=2)drawRotationArc(graph,theta,-1,1.25,'−90°','#ad5336');
- document.getElementById('rot-z').textContent='z = '+fmt(a,b);
+ Ma4Math.setFormula(document.getElementById('rot-z'),'z = '+fmt(a,b));
  const prompts=[
  'Beräkna iz. Var hamnar vektorn när z roteras 90° moturs?',
  'Kan du nu förutsäga z/i? Rita rotationen 90° medurs innan du visar.',
@@ -111,9 +111,9 @@ function render(){
  document.getElementById('rot-step').textContent='Steg '+stage+' av 3';
  back.disabled=stage===0;next.disabled=stage===3;
  const answers=document.getElementById('rot-answers');answers.classList.toggle('hidden',stage===0);
- document.getElementById('rot-iz').textContent='iz = '+fmt(-b,a);
- document.getElementById('rot-div').textContent='z/i = '+fmt(b,-a);
- document.getElementById('rot-length').textContent='|z| = |iz| = |z/i| = √( '+(a*a)+' + '+(b*b)+' ) = √'+(a*a+b*b);
+ Ma4Math.setFormula(document.getElementById('rot-iz'),'iz = '+fmt(-b,a));
+ Ma4Math.setFormula(document.getElementById('rot-div'),'z/i = '+fmt(b,-a));
+ Ma4Math.setFormula(document.getElementById('rot-length'),'|z| = |iz| = |z/i| = √('+(a*a)+' + '+(b*b)+') = √'+(a*a+b*b));
  document.getElementById('rot-iz').classList.toggle('hidden',stage<1);
  document.getElementById('rot-div').classList.toggle('hidden',stage<2);
  document.getElementById('rot-length').classList.toggle('hidden',stage<3);
