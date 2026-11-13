@@ -149,7 +149,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   }
   await formulas('#formula .math-givens',2);
   for(const e of ['z² = z · z','= r²(cos 2v + i sin 2v)','z³ = z² · z','= r³(cos 3v + i sin 3v)',
-   'zⁿ = rⁿ(cos nv + i sin nv)','z⁰ = 1','z⁻¹ = (1/r)(cos(−v) + i sin(−v))']){
+   'zⁿ = rⁿ(cos nv + i sin nv)','z⁰ = 1','z⁻¹ = r⁻¹(cos v − i sin v)']){
    await has('#formula math[aria-label="'+e+'"]','03 härledning '+e);
   }
   await has('#formula math[aria-label="0⁰"]','03 0⁰ uttryckligen behandlat som specialfall');
