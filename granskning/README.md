@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 4/41. Återstår 37/41.** Senast färdiggranskad: lektion 4, **Komplexa tal som vektorer**. **Nästa lektion: 5/41, Polär form**, sökväg ma4/kapitel-4/polar-form/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 5/41. Återstår 36/41.** Senast färdiggranskad: lektion 5, **Polär form**. **Nästa lektion: 6/41, Multiplicera och dividera med i**, sökväg ma4/kapitel-4/multiplicera-dividera-med-i/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -21,7 +21,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [konjugat och absolutbelopp](../ma4/kapitel-4/konjugat-och-absolutbelopp/) — bildgranskning 8/8, visuellt verifierat konjugatstreck, fullständiga mellanled och separat mobilsvit
 - [x] [multiplikation division komplexa](../ma4/kapitel-4/multiplikation-division-komplexa/) — 8/8 bilder, fullständiga distributiva led, synlighets- och mobilgranskning, Chromiumtest
 - [x] [komplexa tal som vektorer](../ma4/kapitel-4/komplexa-tal-som-vektorer/) — djupgranskning 8/8, fullständiga algebraiska mellanled, interaktiva talplan, 390 px mobil och separat frivillig fördjupning
-- [ ] [polar form](../ma4/kapitel-4/polar-form/)
+- [x] [polar form](../ma4/kapitel-4/polar-form/) — 9/9 bilder, alla kvadranter, fullständiga koordinatbyten, dolt facit, separata MathML-rader och mobilkontroll
 - [ ] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/)
 - [ ] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/)
 - [ ] [de moivre](../ma4/kapitel-4/de-moivre/)
@@ -211,12 +211,47 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 - [GitHub Pages bygge och driftsättning efter sista sammanslagningen](https://github.com/jacobflinder/Lektioner/actions/runs/43469237294) — **success**.
 - [Chromiumskärmbilder från sista körningen på `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43469238300/artifacts/14059404652). Samtliga åtta mobilbilder har granskats visuellt. En separat direkt HTTP-avläsning av den publika Pages-sidan kunde inte utföras från granskningsverktyget; därför anges endast den verifierade Pages-driftsättningen och renderingen mot publicerad kod i Chromium.
 
+## Bild-för-bild-rapport · 05/41 · Polär form
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2, moment 4.2 Komplexa tal i polär form.  
+**Sökväg:** `ma4/kapitel-4/polar-form/`  
+**Publicerad lektion:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polar-form/  
+**Omfattning:** **9 av 9 bilder**, varav bild 8 är frivillig. Samtliga dolda lösningar, alla fem elevstyrda modellsteg, sex interaktiva talpunkter, rätt/fel-feedback, omstart, klassrumsläge, navigering och nio mobillägen kontrollerade.
+
+| Bild | Oberoende matematisk granskning, upptäckt och genomförd åtgärd |
+|---|---|
+| **1. Startfråga** | För `z=3+4i` är `r=√(3²+4²)=√25=5`; 7 och √7 är konstruerade felalternativ med förklarande respons. **Didaktisk brist:** målen var synliga före förkunskapsförsöket. De visas nu efter att eleven räknat och diskuterat. Frivilliga länken till Enhetscirkeln och tänk→par→återkoppling kvar. |
+| **2. Två representationer** | Talplan och vinkelgeometri kontrollräknade för **sex fall**: `3+4i`: r=5, v≈53,13°; `−3+3i`: r=3√2, v=135°; `−1−i`: r=√2, v=225°; **nytt provfall i fjärde kvadranten** `2−2i`: r=2√2, v=315°; `3i`: r=3, v=90°; `0`: r=0, argument odefinierat. Korrekta tecken och vinklar verifierade oberoende genom `r cos v` och `r sin v`, med avrundningstolerans i första fallet. **Väsentliga brister:** omvandlingsformlerna syntes före undersökningen och `a,b` respektive `r,v` delades av enbart skiljetecken i samma matematikblock. Nu visas först punkten, sedan kateter, radie och vinkel; efter sista klicket visas formler och varje värde i ett eget MathML-block med minst 16 px verkligt avstånd. 0°≤v<360° och origos undantag förklaras. Byten, backning och reset döljer tidigare svar. |
+| **3. Genomarbetat exempel** | För `z=−3+3i` identifieras separat a=−3 och b=3. Härledningen visar `r=√(a²+b²)=√(9+9)=√18=3√2`, katetlängder 3 och 3, `tan α=3/3=1`, referensvinkel 45° och, tack vare andra kvadranten, `v=180°−45°=135°`. Återkontroll visar trigonometriska värden och `z=−3+3i` utan försvunnen faktor eller tecken. **Mobilfel hittat vid skärmbildskontroll:** den långa ursprungliga polärformen klipptes i slutet. Den är ersatt med korta, fullt synliga, logiskt sammanhängande ekvationsrader för r, v, cos135°, sin135°, generell polär form, insättning och förenkling. Ett nytt Chromiumtest mäter att samtliga rader ryms på 390px mobil. Fem elevstyrda steg och egen förutsägelse bevarade. |
+| **4. Från polär till rektangulär** | `z=4(cos150°+i sin150°)` ger `a=4(−√3/2)=−2√3`, `b=4(1/2)=2`, alltså `z=−2√3+2i`; `|z|=√(12+4)=4`. Facit omarbetat i fem steg med separata allmänna formler, insättning, faktorförenkling och kontroll. Eleven räknar själv före facit. |
+| **5. Begreppskontroll** | `z₁=1+i` har argument 45° medan `z₂=−1−i` har 225°, trots att `b/a=1` i båda fallen. De två givna talen visas på separata rader. Quizalternativen 45°, 135° och 225° ger missuppfattningsspecifik respons. Specialfallen a=0 och z=0 samt den valda vinkelkonventionen bevarade och förtydligade. Kvadrantkontroll används som verktyg, inte huvudmål. |
+| **6. Eget försök** | För `z=−2−2i` fås `r=√(4+4)=√8=2√2`, `tan α=2/2=1`, `α=45°`, `v=180°+45°=225°`. Kontroll via exakt cos225° och sin225° ger `−2−2i`. Rättad och utbyggd lösning visar alla värden och mellanled utan att ändra elevuppgiften eller avslöja facit före eget arbete. |
+| **7. NOKflex** | Momentet **4.2 Polär form**, **uppgifter 4201–4216** och kravet att arbeta på **minst tre av fem nivåer** bevarade. Ingen digital elevdatainsamling eller onödiga tillägg. |
+| **8. Frivilliga argument** | `495°=135°+360°` och `−225°=135°−360°`. Båda ger samma riktning som 135°; med samma positiva absolutbelopp beskriver samtliga samma komplexa tal. Frivillig fördjupning med separat dolt facit och navigering bevarad. |
+| **9. Individuell utcheckning** | Uppgift 1: `z=−√3+i` har `r=2`, referensvinkel 30° och argument 150°, så `z=2(cos150°+i sin150°)`. Uppgift 2: `w=2(cos240°+i sin240°)=−1−√3i`. Härledning i sju korta steg visar allmän formel, identifiering, insättning, trigonometriska värden, tecken och kontroll av `|w|=2`. Två separata slutsvar. Facit dolt tills eleven försökt; målen visas igen i slutet. |
+
+### Matematik, didaktik, interaktivitet och bevarande
+
+- **Oberoende beräknat och verifierat:** alla sex talplanspunkter och deras `r`, argument och återinsättning; `−3+3i` i andra kvadranten; `−2−2i` i tredje kvadranten; omvandlingen `4(cos150°+i sin150°)=−2√3+2i`; helvarvsexemplet; båda utcheckningssvaren. För nollan gäller `r=0` men inget definierat argument.
+- **Inga felaktiga numeriska slutsvar i originalet identifierades.** De viktigaste felen för lärandet var för tidigt givna samband/mål, saknade algebraiska mellanled, ihoptryckta separata matematiksatser, ett avklippt uttryck i mobilläget och frånvaron av ett konkret undersökningsfall i fjärde kvadranten.
+- **Förutsäg→försök→resonera→fullständig återkoppling→kontroll** bibehålls. Regler syns efter undersökningen; elevens självständiga arbetsuppgifter har eget dolt facit. Lärarstöd, femstegsmodell, interaktiv geometri, NOKflex **4201–4216**, det fria nivåvalet, frivillig länk till Enhetscirkeln och frivillig helvarvsaktivitet är bevarade. Inget Socrative-moment har införts utan stöd i lektionens källa.
+
+### Kod, tester och publicering
+
+**Kodändring:** [PR #12 – systematisk djupgranskning av Polär form](https://github.com/jacobflinder/Lektioner/pull/12), sammanslagen i `main` via commit `8b9809838570c7959333eb2ba08ad29073afc277`.
+
+**Riktat test:** `node ma4/kapitel-4/qa/deep-review-ma4-05.cjs`, integrerat i `.github/workflows/ma4-browser-qa.yml`. Testet kontrollerar alla **9/9 bilder**, svarssynlighet, sex valbara dynamiska punkter, rätt radie och argument, MathML, oberoende trigonometriska återinsättningar, 16 px mellanrum, mobilens fullständiga ekvationsbredder, quiz med rätt och fel, alla facit, navigation, klassrumsläge, lärarstöd och nio mobila skärmbilder. Även det äldre `qa/math-typography-pair-03.cjs` har anpassats till tydligare separata uttryck.
+
+**Verklig status:** [Slutligt Chromiumtest på arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43473601921) **success**; [Ma4 browser QA på `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43474387670) **success**; [GitHub Pages byggning och driftsättning för lektionen](https://github.com/jacobflinder/Lektioner/actions/runs/43474386579) **success**. [Chromium-bildbevis från `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43474387670/artifacts/14062705671). Alla nio mobillägen har testats och bilden av det korrigerade, tidigare avklippta uträkningsexemplet är visuellt granskad.
+
+**Verifieringsgräns:** Pages-build och deployment är direkt verifierade i GitHub Actions. Ett separat försök att läsa den publika Pages-sidans HTTP-innehåll med webbverktyget misslyckades; sådan direktavläsning påstås därför inte vara verifierad.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad:** **4 av 41 – Matematik 4, Komplexa tal som vektorer**.
-- **Sökväg:** `ma4/kapitel-4/komplexa-tal-som-vektorer/`.
-- **Status:** PR #10 och #11 sammanslagna i `main`; Ma4-browser QA godkänd, GitHub Pages-byggning och driftsättning godkända; samtliga 8 bilder och 8 mobillägen granskade; permanent logg uppdaterad.
-- **Nästa lektion:** **5 av 41 – Matematik 4, Polär form**.
+- **Senast avslutad lektion:** **5 av 41 – Matematik 4, Polär form**.
 - **Sökväg:** `ma4/kapitel-4/polar-form/`.
-- **Olösta blockerande fel:** inga kända efter senaste ämnes- och webbläsargranskningen; den separata direkta publika HTTP-kontrollen var inte tillgänglig.
-- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera senaste färdigstatus och fortsätt med **lektion 5**, en lektion i taget. Kontrollera matematiska mellanled, faktisk figurgeometri, visuellt avstånd och dolda svar innan du ändrar. Ändra och testa på separat gren, verifiera Actions samt Pages, och uppdatera granskningsloggen igen efter färdig lektion.
+- **Status:** Kod korrigerad och sammanslagen till `main` via PR #12. Riktat webbläsartest och hela Ma4-testsviten godkända, GitHub Pages-byggning och driftsättning godkända, samtliga nio bilder och mobillägen granskade; granskningsloggen uppdaterad.
+- **Nästa lektion:** **6 av 41 – Matematik 4, Multiplicera och dividera med i**.
+- **Nästa sökväg:** `ma4/kapitel-4/multiplicera-dividera-med-i/`.
+- **Olösta blockerande ämnes- eller testfel:** inga kända. En separat direkt HTTP-kontroll av den publika Pages-sidan kunde inte genomföras.
+- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera senaste huvudgrenens status och börja på nästa ofärdiga lektion, **6 av 41**. Granska en lektion i taget, alla bilder och dolda facit, självständig matematik, nödvändiga mellanled, matematiktypografi, visuellt avstånd och faktiska interaktioner. Ändra i separat arbetsgren, testa före merge, verifiera Actions/Pages och uppdatera denna logg först när lektionen är färdig.
