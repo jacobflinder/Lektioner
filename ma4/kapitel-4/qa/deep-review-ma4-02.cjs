@@ -138,7 +138,7 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   for(const term of ['(−2)(−2) = 4','(−2)(3i) = −6i','(−3i)(−2) = 6i','(−3i)(3i) = −9i²']){
    await has('#k-exitfacit math[aria-label="'+term+'"]','08 fyra tydliga produkter på mobil');
   }
-  await has('#k-exitfacit math[aria-label="= 4 − 6i + 6i − 9i²"]','08 imaginära termer');
+  await has('#k-exitfacit math[aria-label="z z̄ = 4 − 6i + 6i − 9i²"]','08 imaginära termer');
   await has('#k-exitfacit math[aria-label="= 4 − 9(−1)"]','08 sätt in imaginära enheten');
   await has('#k-exitfacit math[aria-label="|z|² = (√13)² = 13"]','08 kontrollera beloppets kvadrat');
   await has('#k-exitfacit .ma4-final math[aria-label="z z̄ = |z|²"]','08 korrekt slutsats');
