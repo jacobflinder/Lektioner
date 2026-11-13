@@ -135,7 +135,7 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await shot('08-desktop');
   // 09: oberoende korrekt lösning av A–D och insättning i B
   await go(8);await reveal('r9');
-  for(const x of ['p = 6','q = 13','z = −6/2 ± √((6/2)² − 13)','z = −3 ± √(−4)','z₁ = −3 + 2i','z₂ = −3 − 2i','z = 1 − i eller z = −1 + i','z = 1 ± 2i'])await formula('#r9',x);
+  for(const x of ['p = 6','q = 13','z = −6/2 ± √((6/2)² − 13)','z = −3 ± √(−4)','z₁ = −3 + 2i','z₂ = −3 − 2i','z = 1 − i','z = −1 + i','z = 1 ± 2i'])await formula('#r9',x);
   await shot('09-desktop');
   // 10: frivillig felanalys visar två rotkontroller
   await go(9);await reveal('r10');await formula('#r10','z₂ = −3 + 3i');await shot('10-desktop');
