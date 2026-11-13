@@ -62,18 +62,19 @@ function layout(text){
  }
  return element('mrow',atomic(s));
 }
-function mathHTML(text){return '<math xmlns="'+NS+'" class="fy1-typeset" display="inline"><semantics>'+layout(text)+'<annotation encoding="application/x-tex">'+esc(text)+'</annotation></semantics></math>';}
+function mathHTML(text){return '<math xmlns="'+NS+'" class="fy1-typeset" display="inline"><semantics>'+layout(text)+'<annotation encoding="text/plain">'+esc(text)+'</annotation></semantics></math>';}
 const atom=String.raw`(?:[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|\d+(?:[,.]\d+)?[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*)`;
 const term=String.raw`[+−-]?${atom}(?:\s*[+−·×/-]\s*${atom})*`;
 const unit=String.raw`(?:\s+(?:N·m²/C²|Ω·mm²/m|C/s|J/C|(?:mm|cm|m)/s²|(?:kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])))?`;
 const equation=new RegExp(String.raw`(?<![\p{L}\p{N}₀-₉])${term}${unit}(?:\s*(?:=|≈|∝)\s*${term}${unit})+`,'gu');
+const incompleteEquation=new RegExp(String.raw`(?<![\p{L}\p{N}₀-₉])${term}${unit}(?:\s*=\s*${term}${unit})+\s*=\s*$`,'gu');
 const fractions=/(?<![\p{L}\p{N}])(?:\|Q₁Q₂\|\/r²|F₀\/4|R\/4|[23]\/[24]|N·m²\/C²)/gu;
 const quantities=/(?<![\p{L}\p{N}₀-₉])[+−-]?\d+(?:[,.]\d+)?(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s*(?:C\/s|J\/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])/gu;
 function findMath(text){
  const found=[];
- for(const [re,kind] of [[equation,'equation'],[fractions,'fraction'],[quantities,'quantity']]){
+ for(const [re,kind] of [[incompleteEquation,'incomplete'],[equation,'equation'],[fractions,'fraction'],[quantities,'quantity']]){
     re.lastIndex=0;let match;while((match=re.exec(text))){
-      if(kind==='equation'){
+      if(kind==='equation'||kind==='incomplete'){
        const lhs=match[0].split(/[=≈∝]/)[0].trim();
        if(!/^(?:[+−(-]?\d|[A-Zℰρπ]|[eikqrltad])/.test(lhs))continue;
        if(/^[a-z]{2,}$/u.test(lhs))continue;
@@ -81,7 +82,7 @@ function findMath(text){
       found.push({from:match.index,to:match.index+match[0].length,value:match[0],kind});
     }
  }
- const ranks={equation:0,fraction:1,quantity:2};
+ const ranks={incomplete:0,equation:1,fraction:2,quantity:3};
  found.sort((a,b)=>a.from-b.from||ranks[a.kind]-ranks[b.kind]||b.to-a.to);
  let end=0;return found.filter(x=>{if(x.from<end)return false;end=x.to;return true;});
 }
