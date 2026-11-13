@@ -169,6 +169,6 @@ function render(id){
  target.innerHTML=html[id];
  target.dataset.mathTypeset='true';
 }
-for(const id of Object.keys(html).filter(id=>id[0]==='r'))render(id);
+for(const id of Object.keys(html).filter(id=>/^r\d/.test(id)))render(id);
 window.quadraticMathSolutions=Object.freeze({html,math});
 })();
