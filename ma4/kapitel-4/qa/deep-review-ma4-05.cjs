@@ -128,7 +128,8 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
   for(const exact of ['r = √(a² + b²)','= √((−3)² + 3²)','= √(9 + 9)','= √18','= √(9 · 2) = 3√2',
    'tan α = |b|/|a|','= 3/3 = 1','α = 45°','v = 180° − α','= 180° − 45°','= 135°',
-   'z = 3√2(cos 135° + i sin 135°)','= −(3 · 2)/2 + ((3 · 2)/2)i','= −3 + 3i']){
+   'r = 3√2','v = 135°','cos 135° = −√2/2','sin 135° = √2/2',
+   'z = r(cos v + i sin v)','= 3√2(−√2/2 + i√2/2)','= −(3 · 2)/2 + ((3 · 2)/2)i','= −3 + 3i']){
    await one('#procedure math[aria-label="'+exact+'"]','03 fullständigt steg: '+exact);
   }
   assert.ok((await seq.locator('math mfrac').count())>=4,'03 exakta MathML-bråk');
@@ -229,6 +230,10 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
    if(i===2){
     for(let j=0;j<5;j++)await page.locator('#procedure [data-seq-next]').click();
     await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
+    await spaced('#procedure [data-seq-item]:nth-child(5) .math-givens',4);
+    const modelLineSizes=await page.locator('#procedure [data-seq-item]:nth-child(5) .math-working > p.math').evaluateAll(xs=>xs.map(x=>({shown:x.clientWidth,needed:x.scrollWidth,formula:x.querySelector('math')?.getAttribute('aria-label')})));
+    assert.equal(modelLineSizes.length,4,'03 fyra algebraiska led');
+    assert.ok(modelLineSizes.every(x=>x.needed<=x.shown+2),'03 ALLA rader i den polära återkontrollen ska vara fullt synliga på 390px: '+JSON.stringify(modelLineSizes));
    }
    if(i===4)await spaced('#traps .math-givens',2);
    const dim=await page.evaluate(()=>({page:document.documentElement.scrollWidth,viewport:innerWidth}));
