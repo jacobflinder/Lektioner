@@ -126,7 +126,7 @@ function updateFlux(){
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>'+
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(B,2)+'</mn><mtext> T</mtext><mo>·</mo><mn>'+fmt(A/10000,4)+'</mn><mtext> m²</mtext></math>'+
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(phi*1000,2)+'</mn><mtext> mWb</mtext></math>'+
- '<p style="font-size:.55em;font-family:system-ui;font-weight:500">A = '+fmt(A,0)+' cm² = '+fmt(A/10000,4)+' m². Fältet är homogent och vinkelrätt mot ytan.</p>'
+ '<p style="font-size:.55em;font-family:system-ui;font-weight:500"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>A</mi><mo>=</mo><mn>'+fmt(A,0)+'</mn><mtext> cm²</mtext><mo>=</mo><mn>'+fmt(A/10000,4)+'</mn><mtext> m²</mtext></math>. Fältet är homogent och vinkelrätt mot ytan.</p>'
  :'<span style="font-family:system-ui;font-size:.64em;font-weight:600">Förutsäg först: ändrar B och A flödet på samma sätt?</span>';
  $("flux-show").textContent=fluxShown?"Dölj beräkningen":"Visa sambandet och beräkningen";
  $("flux-area").setAttribute("width",165*A/24);
