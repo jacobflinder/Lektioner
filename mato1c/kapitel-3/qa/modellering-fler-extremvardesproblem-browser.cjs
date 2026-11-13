@@ -100,7 +100,7 @@ try{
  const areaSteps=page.locator('#rectangle-solution [data-sequence]');
  for(let i=0;i<4;i++)await areaSteps.locator('[data-seq-next]').click();
  const areaText=await areaSteps.innerText();
- for(const token of ['6−6x²','x=±1','A′(0,5)=4,5','A′(1,5)=−7,5','Största arean är 4 areaenheter'])await ok(areaText.includes(token),'Rektangelns facit: '+token);
+ for(const token of ['6−6x²','x=±1','A′(0,5)=4,5','A′(1,5)=−7,5','Största arean är 4 areaenheter'])await ok(areaText.replace(/\s+/g,'').includes(token.replace(/\s+/g,'')),'Rektangelns facit: '+token);
  await go(8);
  await ok(!await page.locator('#frac-hint').isVisible(),'Bråkledtråd dold');
  await ok(!await page.locator('#frac-original-steps').isVisible(),'Fria elevförsöket utan steglista');
