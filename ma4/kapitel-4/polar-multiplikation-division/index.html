@@ -44,6 +44,9 @@
 <div class="plot-box"><svg class="plot" id="pd-plane" viewBox="0 0 680 430" role="img" aria-label="Komplext talplan där z₁ skalas och sedan roteras stegvis vid multiplikation och division"></svg></div>
 <div class="flex"><button type="button" data-operation="mul" aria-pressed="true">Multiplikation</button><button type="button" data-operation="div" class="secondary" aria-pressed="false">Division</button></div>
 <p class="muted">Blå pil: z₁. Turkos: z₂. Streckad lila: skalad z₁. Orange: resultat. Samma skala på axlarna och i båda operationslägena.</p>
+<div id="pd-zoom" class="panel hidden"><strong>Förstorad detalj vid division · annan skala</strong>
+<div class="plot-box"><svg class="plot" id="pd-zoom-plane" viewBox="0 0 680 430" role="img" aria-label="Förstorad detalj kring origo för division, med stegvis skalning och rotation"></svg></div>
+<p class="muted">Den korta kvotvektorn syns tydligare här. Huvudfiguren ovan behåller samma skala i båda lägena. Förutsäg nästa pil innan du klickar.</p></div>
 </div><div>
 <div class="math-givens" role="group" aria-label="Två olika komplexa tal"><p class="math">z₁ = 2(cos 30° + i sin 30°)</p><p class="math">z₂ = 3(cos 60° + i sin 60°)</p></div>
 <div class="task"><strong>Förutsäg före nästa steg</strong><p id="pd-question" aria-live="polite">Vilken längd och riktning har z₁? Hur påverkas längden först?</p></div>
@@ -81,7 +84,7 @@ let op='mul',step=0;
 const svg=document.getElementById('pd-plane');
 const polar=(radius,deg)=>({x:radius*Math.cos(deg*Math.PI/180),y:radius*Math.sin(deg*Math.PI/180)});
 const z1=polar(2,30),z2=polar(3,60);
-function el(tag,attrs={},body){const node=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))node.setAttribute(k,String(v));if(body!==undefined)node.textContent=body;svg.append(node);return node}
+function el(tag,attrs={},body,parent=svg){const node=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))node.setAttribute(k,String(v));if(body!==undefined)node.textContent=body;parent.append(node);return node}
 function showMathRows(parent,expressions){
  parent.replaceChildren();
  for(const expression of expressions){
@@ -92,18 +95,34 @@ function showMathRows(parent,expressions){
 function draw(){
  const multiplication=op==='mul',scaled=polar(multiplication?6:2/3,30),result=polar(multiplication?6:2/3,multiplication?90:-30);
  const vectors=[{...z1,label:'z₁',color:'blue',dx:12,dy:18},{...z2,label:'z₂',color:'teal',dx:11,dy:-8}];
- if(step>=1)vectors.push({...scaled,label:multiplication?'Skalad z₁':'Skalad z₁',color:'purple',dashed:true,dx:12,dy:17,width:3});
- if(step>=2)vectors.push({...result,label:multiplication?'z₁z₂':'z₁/z₂',color:'orange',dx:multiplication?12:10,dy:multiplication?-8:20,width:4});
+ if(step>=1)vectors.push({...scaled,label:multiplication?'Skalad z₁':'',color:'purple',dashed:true,dx:12,dy:17,width:3});
+ if(step>=2)vectors.push({...result,label:multiplication?'z₁z₂':'',color:'orange',dx:12,dy:-8,width:4});
  // Samma geografiska skala i båda lägena för att längderna ska vara jämförbara.
  const g=Ma4Plane.plot(svg,{minX:-2.2,maxX:6.7,minY:-2.2,maxY:6.7,alt:'Lika skalenheter i både reell och imaginär riktning. '+(multiplication?'Multiplikation':'Division')+', steg '+step+' av 2. '+(step===0?'Endast z₁ och z₂ visas.':step===1?'z₁ har skalats utan rotation.':'Resultatvektorn har roterats med '+(multiplication?'+60°':'−60°')+'.'),vectors});
- if(step>=2){
-  const rad=multiplication?1.35:.42, rPx=rad*g.scale,cx=g.X(0),cy=g.Y(0);
-  const angle1=30*Math.PI/180,angle2=(multiplication?90:-30)*Math.PI/180;
+ if(step>=2&&multiplication){
+  const rPx=1.35*g.scale,cx=g.X(0),cy=g.Y(0);
+  const angle1=30*Math.PI/180,angle2=90*Math.PI/180;
   const pt=(a)=>[cx+rPx*Math.cos(a),cy-rPx*Math.sin(a)],p1=pt(angle1),p2=pt(angle2);
-  const arc='M '+p1[0]+' '+p1[1]+' A '+rPx+' '+rPx+' 0 0 '+(multiplication?0:1)+' '+p2[0]+' '+p2[1];
-  el('path',{d:arc,stroke:'#9b631c','stroke-width':3,fill:'none'});
-  const mid=(angle1+angle2)/2,lab=multiplication?'+60°':'−60°';
-  el('text',{x:cx+(rPx+15)*Math.cos(mid)+(multiplication?-2:7),y:cy-(rPx+15)*Math.sin(mid)-2,'font-size':17,'font-weight':750,fill:'#9b631c'},lab);
+  el('path',{d:'M '+p1[0]+' '+p1[1]+' A '+rPx+' '+rPx+' 0 0 0 '+p2[0]+' '+p2[1],stroke:'#9b631c','stroke-width':3,fill:'none'});
+  const mid=(angle1+angle2)/2;
+  el('text',{x:cx+(rPx+15)*Math.cos(mid)-2,y:cy-(rPx+15)*Math.sin(mid)-2,'font-size':17,'font-weight':750,fill:'#9b631c'},'+60°');
+ }
+ const zoom=document.getElementById('pd-zoom');
+ zoom.classList.toggle('hidden',multiplication);
+ if(!multiplication){
+  const zoomSvg=document.getElementById('pd-zoom-plane');
+  const insetVectors=[{...z1,label:'z₁',color:'blue',dx:12,dy:-12}];
+  if(step>=1)insetVectors.push({...scaled,label:'skalad',color:'purple',dashed:true,dx:12,dy:-14,width:3});
+  if(step>=2)insetVectors.push({...result,label:'kvot',color:'orange',dx:12,dy:23,width:4});
+  const zg=Ma4Plane.plot(zoomSvg,{minX:-.4,maxX:2.6,minY:-1,maxY:1.9,showAllTicks:true,
+   alt:'Förstorad detalj kring origo, annan skala än huvudfiguren. '+(step===0?'Bara startvektorn visas.':step===1?'Den skalade vektorn har längden två tredjedelar och vinkeln trettio grader.':'Kvotvektorn har längden två tredjedelar och vinkeln minus trettio grader.'),vectors:insetVectors});
+  if(step>=2){
+   const radius=.43*zg.scale,cx=zg.X(0),cy=zg.Y(0),start=30*Math.PI/180,end=-30*Math.PI/180;
+   const x1=cx+radius*Math.cos(start),y1=cy-radius*Math.sin(start);
+   const x2=cx+radius*Math.cos(end),y2=cy-radius*Math.sin(end);
+   el('path',{d:'M '+x1+' '+y1+' A '+radius+' '+radius+' 0 0 1 '+x2+' '+y2,stroke:'#9b631c','stroke-width':3,fill:'none'},undefined,zoomSvg);
+   el('text',{x:cx+radius+22,y:cy-13,'font-size':17,'font-weight':750,fill:'#9b631c'},'−60°',zoomSvg);
+  }
  }
  const question=step===0
   ?(multiplication?'Vad blir längden om z₁ multipliceras med |z₂| = 3? Vilken riktning har den skalade vektorn?':'Vad blir längden om z₁ divideras med |z₂| = 3? Vilken riktning har den skalade vektorn?')

@@ -49,12 +49,12 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   const rows=await page.locator(q).evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({text:e.querySelector('math')?.getAttribute('aria-label')||'',scroll:e.scrollWidth,client:e.clientWidth})));
   assert.ok(rows.every(x=>x.scroll<=x.client+2),'Alla matematiska rader måste synas utan intern sidscroll: '+q+' '+JSON.stringify(rows.filter(x=>x.scroll>x.client+2)));
  };
- const geom=async (color,expectedRadius,expectedAngle,baseRadius=2)=>{
-  const vector=page.locator('#pd-plane line[stroke="'+color+'"]');
-  await one('#pd-plane line[stroke="'+color+'"]','SVG-vektor '+color);
+ const geom=async (color,expectedRadius,expectedAngle,baseRadius=2,plane='#pd-plane')=>{
+  const vector=page.locator(plane+' line[stroke="'+color+'"]');
+  await one(plane+' line[stroke="'+color+'"]','SVG-vektor '+color);
   const attrs=await vector.evaluate(el=>['x1','y1','x2','y2'].map(k=>Number(el.getAttribute(k))));
   const [x1,y1,x2,y2]=attrs,dx=x2-x1,dy=y1-y2;
-  const blue=await page.locator('#pd-plane line[stroke="#19739f"]').evaluate(el=>['x1','y1','x2','y2'].map(k=>Number(el.getAttribute(k))));
+  const blue=await page.locator(plane+' line[stroke="#19739f"]').evaluate(el=>['x1','y1','x2','y2'].map(k=>Number(el.getAttribute(k))));
   const blueLength=Math.hypot(blue[2]-blue[0],blue[1]-blue[3]);
   near(Math.hypot(dx,dy)/blueLength,expectedRadius/baseRadius,1e-6);
   near(Math.atan2(dy,dx)*180/Math.PI,expectedAngle,1e-6);
@@ -148,6 +148,12 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    await page.locator('[data-operation="'+op+'"]').click();
    assert.equal(await page.locator('#pd-step').innerText(),'Steg 0 av 2','04 operationsbyte återställer');
    assert.ok(await page.locator('#pd-answer').isHidden(),'04 tidigare svar döljs');
+   if(op==='div'){
+    assert.ok(await page.locator('#pd-zoom').isVisible(),'04 inzoomad division visas tydligt och separat');
+    assert.equal(await page.locator('#pd-zoom-plane line[stroke="#7860b5"]').count(),0,'04 inget skalningsfacit i inzoomning före klick');
+    assert.equal(await page.locator('#pd-zoom-plane line[stroke="#bc633a"]').count(),0,'04 inget kvotfacit i inzoomning före klick');
+    await geom('#19739f',2,30,2,'#pd-zoom-plane');
+   }else assert.ok(await page.locator('#pd-zoom').isHidden(),'04 ingen onödig inzoomning vid multiplikation');
    await geom('#19739f',2,30);
    await geom('#0a8176',3,60);
    assert.equal(await page.locator('#pd-plane line[stroke="#7860b5"]').count(),0,'04 skalad pil dold');
@@ -156,12 +162,23 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    assert.ok(await page.locator('#pd-answer').isHidden(),'04 slutresultatet dolt under skalning');
    await spacing('#pd-intermediate',2);
    await geom('#7860b5',op==='mul'?6:2/3,30);
+   if(op==='div'){
+    await geom('#7860b5',2/3,30,2,'#pd-zoom-plane');
+    assert.equal(await page.locator('#pd-zoom-plane line[stroke="#bc633a"]').count(),0,'04 inzoomat slutsvar dolt vid skalning');
+   }
    await page.locator('#pd-next').click();
    assert.ok(await page.locator('#pd-intermediate').isHidden(),'04 mellanled flyttat till slutsvaret');
    assert.ok(await page.locator('#pd-answer').isVisible(),'04 svar visas efter rotation');
    await geom('#bc633a',op==='mul'?6:2/3,op==='mul'?90:-30);
    await spacing('#pd-result',op==='mul'?4:3);
-   assert.equal(await page.locator('#pd-plane path[stroke="#9b631c"]').count(),1,'04 vinkelbåge');
+   if(op==='mul'){
+    assert.equal(await page.locator('#pd-plane path[stroke="#9b631c"]').count(),1,'04 vinkelbåge i huvudfiguren');
+   }else{
+    assert.equal(await page.locator('#pd-plane path[stroke="#9b631c"]').count(),0,'04 ingen överlappande liten vinkelbåge i huvudfiguren');
+    assert.equal(await page.locator('#pd-zoom-plane path[stroke="#9b631c"]').count(),1,'04 inzoomad och läsbar medurs vinkelbåge');
+    await geom('#bc633a',2/3,-30,2,'#pd-zoom-plane');
+    assert.equal(await page.locator('#pd-plane text').filter({hasText:'kvot'}).count(),0,'04 inga trängande kvotetiketter i huvudfiguren');
+   }
    if(op==='mul')await one('#pd-result math[aria-label="= 6i"]','04 korrekt produkt');
    else await one('#pd-result math[aria-label="v = 30° − 60° = −30°"]','04 korrekt kvotvinkel');
    await shot('04-'+op+'-desktop');
