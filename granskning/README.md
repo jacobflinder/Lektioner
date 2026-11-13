@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 7/41. Återstår 34/41.** Senast färdiggranskad: lektion 7, **Multiplikation och division i polär form**. **Nästa lektion: 8/41, de Moivres formel**, sökväg ma4/kapitel-4/de-moivre/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 8/41. Återstår 33/41.** Senast färdiggranskad: lektion 8, **de Moivres formel**. **Nästa lektion: 9/41, Ekvationen zⁿ = a**, sökväg ma4/kapitel-4/ekvationen-zn-a/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -24,7 +24,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [polar form](../ma4/kapitel-4/polar-form/) — 9/9 bilder, alla kvadranter, fullständiga koordinatbyten, dolt facit, separata MathML-rader och mobilkontroll
 - [x] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/) — 7/7 bilder, allmän härledning, tre interaktiva rotationer, fullständiga facit och 390px mobilgranskning
 - [x] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/) — 7/7 bilder, fullständiga r/v-mellanled, frivillig härledning, interaktiv förstoring och 390px mobil
-- [ ] [de moivre](../ma4/kapitel-4/de-moivre/)
+- [x] [de moivre](../ma4/kapitel-4/de-moivre/) — djupgranskning 10/10 bilder, 9 dynamiska potenser, samtliga mellanled, korrekt MathML-bråk, separat förstoring och 390px mobil
 - [ ] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/)
 - [ ] [eulers formel](../ma4/kapitel-4/eulers-formel/)
 - [ ] [andragradsekvationer](../ma4/kapitel-4/andragradsekvationer/)
@@ -317,12 +317,50 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Verifieringsgräns:** Actions verifierar den sammanslagna koden och Pages bekräftar lyckad driftsättning. En separat direkt HTTP-avläsning av den publika Pages-sidans innehåll har inte utförts, vilket inte förväxlas med godkänd deployment.
 
+
+## Bild-för-bild-rapport · 08/41 · de Moivres formel
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2, **4.3 Potenser och komplexa tal**.  
+**GitHub-sökväg:** `ma4/kapitel-4/de-moivre/`.  
+**Publicerad URL:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/de-moivre/  
+**Granskade:** **10 av 10 bilder**, varav bild 9 är frivillig. Alla förhandsdolda facit, fyra teoristeg, femstegsmodell, tre radiansteg, två felanalysdelar, navigering, elevförsök och dynamisk talplansgeometri är granskade. Alla **nio val** (r=1, √2, 1/2 kombinerade med n=2,3,4) är oberoende beräknade och webbläsartestade. Skärmbilder av alla tio mobillägen och förstoringens geometri är visuellt kontrollerade.
+
+| Bild | Oberoende kontroll, brist och genomförd åtgärd |
+|---|---|
+| **1. Start: potenser på enhetscirkeln** | För `z=cos(π/4)+i sin(π/4)` är `r=1`, `v=π/4`. Upprepad multiplikation ger `z²=i`, `z³=cos(3π/4)+i sin(3π/4)`, `z⁴=−1` och absolutbelopp 1 i alla fallen. Facit visar nu längden och vinkeln för **varje** nytt multiplikationssteg och exakta cosinus-/sinusvärden när slutsvaret förenklas. **Målen syntes för tidigt**; de är nu dolda tills eleven fått försöka och jämföra. Enskilt→par och skissuppgift bevarade. |
+| **2. Interaktiv geometri** | Alla **9 r/n-kombinationer** har kontrollräknats som upprepad komplex multiplikation, jämförts med exakta koordinater och testats med verklig SVG-geometri. Vid `r=√2,n=3` fås `−2+2i`, vid `r=1/2,n=3` fås `−√2/16+(√2/16)i`; vid `r=1/2,n=4` fås `−1/16`. Före klick är svar dolt; klick 1 ger endast radien `rⁿ`; klick 2 ger argument `nv`, polär insättning och exakt rektangulärt svar i **separata MathML-rader**. **Viktigt fel vid visuell kontroll:** råformen `1/16(cos180°+isin180°)` satte nämnaren över hela parentesprodukten i MathML. Rättat med **parentes kring bråkfaktorn**, t.ex. `(1/16)(cos180°+isin180°)`, och en särskild regression som mäter att nämnaren är **enbart 16**. Huvudfiguren har samma axelskala i alla val; vid mycket små potenser visas en explicit märkt förstoringsfigur, vars skala anpassas så radien syns tydligt även vid `r⁴=1/16`. Förstoringens annan skala förklaras. Back, reset och byte av radie/exponent återställer och döljer tidigare facit. |
+| **3. Härledning och villkor** | **Didaktisk kärnkorrigering:** de långa raderna för två och tre faktorer var oläsliga på mobil. Nu härleds `z²=z·z`, separat `|z²|=r·r=r²` och `v₂=v+v=2v`; motsvarande för `z³=z²·z`: `|z³|=r²·r=r³`, `v₃=2v+v=3v`. Därmed motiveras `zⁿ=rⁿ(cos(nv)+i sin(nv))` genom upprepad multiplikation, inte bara en minnesregel. Trigonometriska argument skrivs med **parenteser** så `cos(v)` och `sin(v)` inte ser ut som sammanskrivna variabler. Specialfallen `z⁰=1` för `z≠0`, `z⁻¹=(cos v−i sin v)/r` för `r>0`, `0ⁿ=0` för positiva heltal n och att `0⁰` inte är definierat i detta sammanhang visas tydligt. Det matematiska bråkstrecket i inversen är bevarat och testat. |
+| **4. Genomarbetat exempel** | För `z=−√3+i` fås `a=−√3`, `b=1`, `r=√(3+1)=2`, `tan α=|b|/|a|=1/√3`, `α=30°`, alltså `v=180°−30°=150°`. De Moivre ger `r⁵=2⁵=32` och `5v=750°`. Efter `750°−2·360°=30°` och explicit insättning av `cos30°=√3/2`, `sin30°=1/2` fås **`z⁵=16√3+16i`**. Identifiering, insättning, kvadrantbeslut, förenkling av koefficienterna och rimlighetskontroll är nu tydligt separerade. Femstegssekvensen och elevens prognoser finns kvar. |
+| **5. Självständigt försök** | För `(−√3+i)⁴` används `r=2`, `v=150°`. `r⁴=16`, `4v=600°` motsvarar 240°. `cos240°=−1/2` och `sin240°=−√3/2`, vilket ger **`−8−8√3i`**. Facit visar alla nödvändiga steg och kontrollen att talet ligger i tredje kvadranten med absolutbelopp 16. Elevens självständiga arbete och dolt facit bevarade. |
+| **6. Radianexempel** | `w=(3(cos(5π/6)+i sin(5π/6)))⁴` ger separat `r=3`, `v=5π/6`, `r⁴=81`, `4v=20π/6=10π/3`; ett helt varv `2π=6π/3` ger argumentet `4π/3`. Exakta värden i tredje kvadranten `cos(4π/3)=−1/2` och `sin(4π/3)=−√3/2` ger **`w=−81/2−(81√3/2)i`**. Tidigare sammanskrivna självständiga ekvationer är åtskilda; progressionen i tre klick bevarad. |
+| **7. Konstruerad missuppfattning** | För `z=2(cos20°+i sin20°)` är `z³=8(cos60°+i sin60°)`; **2³=8, inte 2·3=6**. Själva falska påståendet visas nu separat och som ett matematiskt uttryck utan svensk löptext inne i MathML. För `w=(1/2)(cos(π/2)+i sin(π/2))` fås `|w³|=1/8`, `arg(w³)=3π/2` och `w³=−i/8`. Alla potens-, vinkel- och trigonometriska mellanled redovisas efter elevens försök. |
+| **8. NOKflex** | Originalets moment **4.3 Potenser och komplexa tal – de Moivres formel**, uppgifter **4301–4314**, **minst tre av fem nivåer** och den sammanhängande arbetsfasen på cirka 20 minuter är bevarade. Ingen digital insamling av elevsvar infördes. |
+| **9. Frivillig fördjupning** | De två påståendena om dubbelvinkelformlerna bevarade. Fyrledsutvecklingen av `(cos v+i sin v)²` redovisas nu som fyra **separata produkter**, därefter `i²=−1`, insamling av real-/imaginärdel och jämförelse med de Moivres formel. Korrekt är `cos(2v)=cos²v−sin²v` och `sin(2v)=2sin v cos v`; påstående A var falskt. Särskilt facit för fördjupningen och möjligheten att hoppa förbi bilden finns kvar. |
+| **10. Individuell utcheckning** | Ursprungligt tal och uppgiften att beräkna sjätte potensen visas som **separata matematikrader**, utan att blanda elevuppgift och svar. `r⁶=2⁶=64`, `6·(π/4)=3π/2`, `cos(3π/2)=0`, `sin(3π/2)=−1`, alltså **`z⁶=−64i`**. Kontroll mot negativa imaginära axeln och absolutbelopp 64. Målen återkopplas på avslutningsbilden. |
+
+### Matematisk/didaktisk slutkontroll och bevarade delar
+
+- **Oberoende beräkningar:** samtliga nio grafval kontrollerade med upprepad multiplikation i kartesiska koordinater, uppgifter `(−√3+i)⁵`, `(−√3+i)⁴`, `(3cis(5π/6))⁴`, båda felanalysfallen och utcheckningen `(2cis(π/4))⁶`. Exponent- och nollvillkor granskade separat.
+- **Ett verkligt fel i den synliga matematiken rättades:** en omarkerad bråkfaktor kunde bli en bråkform med **fel nämnare** i det dynamiska MathML-uttrycket. Exakta numeriska slutsvar i grundmaterialet var i övrigt korrekta, men flera mellanled var otillräckliga och några rader blev avklippta på mobil. Dessa är korrigerade, med automattest för verklig bredd, matematisk tolkning och avstånd.
+- **Metodiken** följer förutsäg→försök→resonera→fullständig återkoppling→kontroll med stegvis stöd som minskar inför självständigt arbete. Inga extra klick har tillförts enbart för aktivitetens skull.
+- **Avsiktligt bevarat:** alla tio bilder, valfri dubbelvinkelfördjupning, alla nio interaktiva val, korta elevprognoser, lärarstöd, klassrumsläge, pappersräkning, originaluppgifterna och NOKflex 4301–4314. Ingen Socrative-aktivitet har lagts till utan stöd i originalet.
+
+### Kodändring, automatiska tester och publicering
+
+**Kod:** [PR #15 – Ma4 08/41, de Moivres formel](https://github.com/jacobflinder/Lektioner/pull/15), sammanslagen i `main` via commit `a843398a994d46235bec4944be22fb3142f843c8`. Ändringar: den aktuella lektions-HTML-filen och facit-JavaScriptet, `qa/deep-review-ma4-08.cjs` samt Ma4-workflowen. Inga orelaterade lektionsfiler har ändrats.
+
+**Riktat Chromiumtest:** `node ma4/kapitel-4/qa/deep-review-ma4-08.cjs` ingår i `.github/workflows/ma4-browser-qa.yml`. Kontroll av **10/10 bilder**, nio val med egna exakt omräknade komplexa potenser, det faktiska SVG-resultatets koordinater/radie i original- och förstoringsfiguren, första respektive andra klickets synlighet, back/reset, alla dolda facit, Matematik i MathML, verkligt bråkstreck och **bråkets nämnare**, 16 px luft mellan självständiga ekvationer, samtliga mobila bilder vid 390px samt en blockerande slutassertion som upptäcker varenda intern sidscroll. De befintliga Ma4-kontrollerna har bevarats och passerats.
+
+**Godkända körningar:** [Arbetsgrenens fullständiga Chromium- och Ma4-kontroll](https://github.com/jacobflinder/Lektioner/actions/runs/43496498309) – **success**, [browser QA på sammanslagen `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43497337638) – **success**, [GitHub Pages-byggning och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43497337077) – **success**. [Skärmbildsartefakt från arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43496498309/artifacts/14072466143), med all tio mobilbilder och var och en av de nio dynamiska varianterna. Skärmbilderna är granskade visuellt i efterhand.
+
+**Verifieringsgräns:** lyckad driftsättning och tester av sammanslagen kod är direkt verifierade via GitHub Actions. Externt webbverktyg kunde inte läsa den publicerade Pages-sidans HTML direkt; sådan separat HTTP-kontroll påstås därför inte vara gjord.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad lektion:** **7 av 41 – Matematik 4, Multiplikation och division i polär form**.
-- **Sökväg:** `ma4/kapitel-4/polar-multiplikation-division/`.
-- **Status:** PR #14 sammanslagen i `main`; riktat test och hela Ma4 Chromiumsviten godkända på arbetsgren och `main`, Pages byggd och driftsatt, 7/7 bilder och mobillägen granskade; permanenta granskningsloggen uppdaterad.
-- **Nästa lektion:** **8 av 41 – Matematik 4, de Moivres formel**.
-- **Nästa sökväg:** `ma4/kapitel-4/de-moivre/`.
-- **Olösta blockerande ämnes-, test- eller publiceringsfel:** inga kända. Direkt HTTP-avläsning av den publika sidan är inte separat verifierad.
-- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md` och kontrollera den aktuella GitHub-historiken. Fortsätt med **lektion 8 av 41**, en lektion i taget. Granska varje bild, varje beräkningsled, samtliga dolda facit, giltighetsvillkor, elevens tänkande före återkoppling, matematikens visuella avstånd, faktiska animationer, mobil och projektor. Bevara NOKflex, Socrative när det finns i original, laborationer och lärarstöd. Gör en sammanhållen ändring på separat gren, testa, slå samman först efter godkänd svit, verifiera Actions/Pages och uppdatera loggen efteråt.
+- **Senast avslutad lektion:** **8 av 41 – Matematik 4, de Moivres formel**.
+- **Sökväg:** `ma4/kapitel-4/de-moivre/`.
+- **Status:** PR #15 sammanslagen till `main`; riktat test och fullständig Ma4 Chromium-svit godkända både på arbetsgren och `main`, GitHub Pages driftsatt utan fel, 10/10 bilder och samtliga mobillägen visuellt granskade, permanent logg uppdaterad.
+- **Nästa lektion:** **9 av 41 – Matematik 4, Ekvationen zⁿ = a**.
+- **Nästa sökväg:** `ma4/kapitel-4/ekvationen-zn-a/`.
+- **Olösta blockerande ämnes-, test- eller publiceringsfel:** inga kända efter den fullständiga ämnes- och teknikgranskningen. Direkt HTTP-avläsning av Pages kunde inte verifieras separat.
+- **Instruktion:** Läs `AGENTS.md` och **hela** `granskning/README.md`. Kontrollera senaste avslutade lektion, GitHub-historik och aktuell huvudgren. Börja med **lektion 9 av 41**. Granska en lektion i taget, varje bild och matematisk/fysikalisk operation oberoende, varje dolt facit, varje kritisk figur och interaktion, nödvändiga mellanled, hela ekvationernas faktiska MathML-tolkning, visuella avstånd och mobil/projektor. Bevara NOKflex, Socrative endast om originalet innehåller det, och lärarstöd. Ändra på separat gren med relevanta test, slå samman först efter godkända tester och verifiera Actions/Pages. Uppdatera sedan loggen med nästa fortsättningspunkt.
