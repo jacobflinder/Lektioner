@@ -63,12 +63,12 @@ function layout(text){
  return element('mrow',atomic(s));
 }
 function mathHTML(text){return '<math xmlns="'+NS+'" class="fy1-typeset" display="inline"><semantics>'+layout(text)+'<annotation encoding="application/x-tex">'+esc(text)+'</annotation></semantics></math>';}
-const atom=String.raw`(?:[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*)`;
+const atom=String.raw`(?:[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|\d+(?:[,.]\d+)?[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*)`;
 const term=String.raw`[+−-]?${atom}(?:\s*[+−·×/-]\s*${atom})*`;
-const unit=String.raw`(?:\s+(?:N·m²/C²|Ω·mm²/m|(?:m|mm|cm)/s²|(?:kg|Ah|mm²|nC|µN|kN|kW|[kµmn]?A|V|C|Ω|N|J|W|s|m|mm|cm|nm)))?`;
+const unit=String.raw`(?:\s+(?:N·m²/C²|Ω·mm²/m|C/s|J/C|(?:mm|cm|m)/s²|(?:kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])))?`;
 const equation=new RegExp(String.raw`(?<![\p{L}\p{N}₀-₉])${term}${unit}(?:\s*(?:=|≈|∝)\s*${term}${unit})+`,'gu');
 const fractions=/(?<![\p{L}\p{N}])(?:\|Q₁Q₂\|\/r²|F₀\/4|R\/4|[23]\/[24]|N·m²\/C²)/gu;
-const quantities=/(?<![\p{L}\p{N}₀-₉])[+−-]?\d+(?:[,.]\d+)?(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s*(?:kg|Ah|mm²|nC|µN|kN|kW|[kµmn]?A|V|C|Ω|N|J|W|s|m|mm|cm|nm)(?![\p{L}])/gu;
+const quantities=/(?<![\p{L}\p{N}₀-₉])[+−-]?\d+(?:[,.]\d+)?(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s*(?:C\/s|J\/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])/gu;
 function findMath(text){
  const found=[];
  for(const [re,kind] of [[equation,'equation'],[fractions,'fraction'],[quantities,'quantity']]){
