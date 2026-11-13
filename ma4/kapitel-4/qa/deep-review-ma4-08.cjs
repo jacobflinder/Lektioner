@@ -43,7 +43,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:900},deviceScaleFactor:1});
  const out='ma4-qa-screenshots';fs.mkdirSync(out,{recursive:true});
- const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('requestfailed',r=>{if(r.url().startsWith('http://127.0.0.1'))errors.push(r.url())});
+ const errors=[],overflowProblems=[];page.on('pageerror',e=>errors.push(e.message));page.on('requestfailed',r=>{if(r.url().startsWith('http://127.0.0.1'))errors.push(r.url())});
  const snap=async key=>page.screenshot({path:out+'/ma4-08-'+key+'.png',fullPage:true});
  const go=async i=>{await page.selectOption('#jump',String(i));assert.equal(await page.locator('.slide.active').getAttribute('id'),ids[i],'Bild '+(i+1));};
  const has=async(q,msg)=>assert.ok((await page.locator(q).count())>=1,msg);
@@ -56,7 +56,8 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
  };
  const noScroll=async q=>{
   const sizes=await page.locator(q).evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({need:e.scrollWidth,have:e.clientWidth,formula:e.querySelector('math')?.getAttribute('aria-label')||''})));
-  assert.ok(sizes.every(x=>x.need<=x.have+2),'Inget matematikled får sidrulla: '+q+' '+JSON.stringify(sizes.filter(x=>x.need>x.have+2)));
+  const over=sizes.filter(x=>x.need>x.have+2);
+  if(over.length){overflowProblems.push({selector:q,over});console.error('QA ÖVERSKJUTNING '+q+' '+JSON.stringify(over));}
  };
  const svgPoint=async(svg,rr,angle,kind,scaleOverride=null)=>{
   const radius=rr;const theta=angle*Math.PI/180;
@@ -271,6 +272,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
    await noScroll('.slide.active .ma4-equation');
    await snap('mobil-bild-'+(i+1));
   }
+  assert.deepEqual(overflowProblems,[],'Inga matematikrader får ha intern sidscroll i någon av de tio mobilbilderna');
   assert.deepEqual(errors,[],'Inga JS-fel eller saknade resurser');
   console.log('PASS Ma4 08/41: 10/10 bilder, 9 dynamiska fall och 10 mobilbilder');
  }catch(e){console.error('FAIL Ma4 08/41 '+(e.stack||e));process.exitCode=1;await snap('FAIL').catch(()=>{});}
