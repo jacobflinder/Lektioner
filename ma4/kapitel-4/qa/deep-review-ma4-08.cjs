@@ -111,17 +111,23 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
     assert.equal(await page.locator('#moivre-zoom-panel').isVisible(),zoom,'02 inzoomning vid mycket korta resultat');
     if(zoom){
      assert.equal(await page.locator('#moivre-zoom line[stroke="#bc633a"]').count(),0,'02 förstorat slutresultat fortfarande dolt');
-     near(Number(await page.locator('#moivre-zoom circle[stroke="#a8c9d1"]').getAttribute('r')),p*260,'02 inzoomad korrekt radie',1e-4);
+     near(Number(await page.locator('#moivre-zoom circle[stroke="#a8c9d1"]').getAttribute('r')),65,'02 inzoomad radie visas med tydlig förstoring',1e-4);
     }
     await page.locator('#moivre-next').click();
     assert.ok(await page.locator('#moivre-answer').isVisible(),'02 slutresultat efter andra klicket');
     await formulas('#moivre-answer .math-givens',4);
     assert.equal(await page.locator('#moivre-answer .math-givens math').count(),4,'02 vinkel, regel, insättning och exakt resultat');
+    if(radius===.5){
+     const frac=page.locator('#moivre-substitution math mfrac');
+     assert.equal(await frac.count(),1,'02 en bråkfaktor framför parentesen, inte bråk över hela uttrycket');
+     assert.equal(await frac.locator(':scope > mrow').last().innerText(),String(2**exponent),'02 nämnaren är endast 2^n');
+     assert.ok((await page.locator('#moivre-substitution math').getAttribute('aria-label')).includes('('+['','', '1/4','1/8','1/16'][exponent]+')'),'02 parentes kring 1/2^n');
+    }
     const exp=exponent===2?'²':exponent===3?'³':'⁴';
     assert.ok((await page.locator('#moivre-rect math').getAttribute('aria-label')).startsWith('= '),'02 exakt rektangulär återkoppling');
     const expectedDeg=exponent*45;
     assert.ok((await page.locator('#moivre-angle math').getAttribute('aria-label')).includes(expectedDeg+'°'),'02 rakt uträknat argument');
-    if(zoom) await svgPoint('#moivre-zoom',p,expectedDeg,'zoom');
+    if(zoom) await svgPoint('#moivre-zoom',p,expectedDeg,'zoom',65/p);
     else await svgPoint('#moivre-plane',p,expectedDeg,'vector');
     assert.equal(await page.locator('#moivre-plane path[stroke="#b97422"]').count(),1,'02 argumentbåge');
     await snap('02-'+String(radius).replaceAll('.','_')+'-'+exponent+'-desktop');

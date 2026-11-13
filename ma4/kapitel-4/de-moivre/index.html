@@ -11,7 +11,7 @@
 <p class="muted">Blå pil visar z. Den markerade cirkeln visar resultatets avstånd och orange visar resultatets riktning. Axlarna har samma skala i alla lägen.</p>
 <div class="panel hidden" id="moivre-zoom-panel"><strong>Förstorad detalj nära origo · annan skala</strong>
 <div class="plot-box"><svg class="plot" id="moivre-zoom" viewBox="0 0 680 430" role="img" aria-label="Förstorad detalj i talplanet när potensens längd blir mindre än 0,35"></svg></div>
-<p class="muted">Förstoringen gör den korta radievektorn synlig. Talplanet ovan behåller samma skala i alla nio val.</p></div>
+<p class="muted">Förstoringen visar enbart potensens avstånd och riktning. Dess skala anpassas efter vald potens; huvudfiguren har samma skala i alla nio val.</p></div>
 </div><div>
 <div class="math-givens" id="moivre-base-group" role="group" aria-label="Grundtalets polära form och rektangulära kontroll"><p class="math" id="moivre-base">z = cos 45° + i sin 45°</p><p class="math hidden" id="moivre-base-rect"></p></div>
 <div class="task"><strong>Förutsäg → skriv → visa</strong><p id="moivre-question" aria-live="polite">Vilket absolutbelopp får z²? Hur förändras argumentet?</p></div>
@@ -61,10 +61,11 @@ function render(){
  const zoomNeeded=rn<.35&&stage>=1;
  zoomPanel.classList.toggle('hidden',!zoomNeeded);
  if(zoomNeeded){
-  const zoomVectors=[{...base,label:'z',color:'blue',dx:10,dy:-14}];
+  const zoomVectors=[];
   const zoomCircles=[{cx:0,cy:0,r:rn,color:'#a8c9d1',dashed:true,width:2.5}];
   if(stage===2)zoomVectors.push({...tip,label:'zⁿ',color:'orange',dx:13,dy:18,width:4});
-  Ma4Plane.plot(zoom,{minX:-.7,maxX:.7,minY:-.7,maxY:.7,
+  const limit=2.8*rn;
+  Ma4Plane.plot(zoom,{minX:-limit,maxX:limit,minY:-limit,maxY:limit,
    alt:'Förstorad figur med annan skala. Grundtalets riktning 45°. '+(stage===1?'Enbart potensens radie synlig.':'Potensens radie och riktning synliga.'),
    vectors:zoomVectors,circles:zoomCircles,showAllTicks:true});
  }
@@ -81,8 +82,9 @@ function render(){
  const output=document.getElementById('moivre-answer');output.classList.toggle('hidden',stage<2);
  if(stage===2){
   Ma4Math.setFormula(document.getElementById('moivre-angle'),'nv = '+n+' · 45° = '+(n*45)+'°','block');
-  Ma4Math.setFormula(document.getElementById('moivre-status'),'z'+exp+' = r'+exp+'(cos nv + i sin nv)','block');
-  Ma4Math.setFormula(document.getElementById('moivre-substitution'),'= '+info.power[n]+'(cos '+n*45+'° + i sin '+n*45+'°)','block');
+  Ma4Math.setFormula(document.getElementById('moivre-status'),'z'+exp+' = r'+exp+'(cos(nv) + i sin(nv))','block');
+  const factor=info.power[n].includes('/')?'('+info.power[n]+')':info.power[n];
+  Ma4Math.setFormula(document.getElementById('moivre-substitution'),'= '+factor+'(cos '+n*45+'° + i sin '+n*45+'°)','block');
   Ma4Math.setFormula(document.getElementById('moivre-rect'),'= '+info.rect[n],'block');
   document.getElementById('moivre-note').textContent=r===.5?'När absolutbeloppet är mindre än 1 krymper längden för högre potenser.':'Längden upphöjs till exponenten och vinkeln multipliceras med den.';
  }
