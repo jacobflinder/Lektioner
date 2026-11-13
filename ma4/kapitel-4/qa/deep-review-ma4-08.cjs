@@ -80,7 +80,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   assert.equal(await page.locator('#intro-facit .ma4-step').count(),5,'01 fem relevanta mellanled');
   for(const f of ['r = 1','v = π/4','|z²| = 1 · 1 = 1','v₂ = π/4 + π/4','= 2π/4 = π/2',
     'z² = cos(π/2) + i sin(π/2)','= i','v₃ = π/2 + π/4','= 3π/4','z³ = cos(3π/4) + i sin(3π/4)',
-    'v₄ = 3π/4 + π/4','= π','z⁴ = cos π + i sin π','= −1']){
+    'v₄ = 3π/4 + π/4','= π','z⁴ = cos(π) + i sin(π)','= −1']){
     await has('#intro-facit math[aria-label="'+f+'"]','01 självständigt kontrollerat led: '+f);
   }
   assert.equal(await page.locator('#intro-facit .ma4-final math').count(),3,'01 tre separata längdresultat');
@@ -157,7 +157,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   await formulas('#formula .math-givens',2);
   for(const e of ['z² = z · z','= r²(cos(2v) + i sin(2v))','z³ = z² · z','= r³(cos(3v) + i sin(3v))',
    '|z²| = r · r = r²','v₂ = v + v = 2v','|z³| = r² · r = r³','v₃ = 2v + v = 3v',
-   'zⁿ = rⁿ(cos(nv) + i sin(nv))','z⁰ = 1','z⁻¹ = (cos v − i sin v)/r']){
+   'zⁿ = rⁿ(cos(nv) + i sin(nv))','z⁰ = 1','z⁻¹ = (cos(v) − i sin(v))/r']){
    await has('#formula math[aria-label="'+e+'"]','03 härledning '+e);
   }
   await has('#formula math[aria-label="0⁰"]','03 0⁰ uttryckligen behandlat som specialfall');
@@ -165,7 +165,8 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   await deriv.locator('[data-seq-back]').click();assert.equal(await deriv.locator('[data-seq-item]:not(.hidden)').count(),3,'03 back');
   await deriv.locator('[data-seq-reset]').click();assert.equal(await deriv.locator('[data-seq-item]:not(.hidden)').count(),0,'03 återställning');
   for(let i=0;i<4;i++)await deriv.locator('[data-seq-next]').click();
-  await snap('03-desktop');
+  await has('#formula math[aria-label="z⁻¹ = (cos(v) − i sin(v))/r"]','03 inverse with explicitly delimited trigonometric arguments');
+    await snap('03-desktop');
   console.log('PASS 03: upprepad multiplikation, heltalsexponenter, nollfall');
   // Bild 4: exakt femte potens och referensvinkel.
   await go(3);const worked=page.locator('#worked [data-sequence]');
@@ -179,9 +180,9 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   for(const e of ['a = −√3','b = 1','r = √(a² + b²)','= √((−√3)² + 1²)','= √(3 + 1)','= √4 = 2',
    'tan α = |b|/|a|','= 1/√3','α = 30°','v = 180° − α','= 150°',
    'r⁵ = 2⁵ = 32','5v = 5 · 150° = 750°',
-   'z⁵ = r⁵(cos(5v) + i sin(5v))','= 32(cos 750° + i sin 750°)',
-   '750° = 2 · 360° + 30°','cos 30° = √3/2','sin 30° = 1/2',
-   'z⁵ = 32(cos 30° + i sin 30°)','= 32(√3/2 + i · 1/2)','= 16√3 + 16i']){
+   'z⁵ = r⁵(cos(5v) + i sin(5v))','= 32(cos(750°) + i sin(750°))',
+   '750° = 2 · 360° + 30°','cos(30°) = √3/2','sin(30°) = 1/2',
+   'z⁵ = 32(cos(30°) + i sin(30°))','= 32(√3/2 + i · 1/2)','= 16√3 + 16i']){
    await has('#worked math[aria-label="'+e+'"]','04 fullständigt steg '+e);
   }
   await snap('04-desktop');
@@ -190,7 +191,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   assert.ok(await page.locator('#practiceans').isHidden(),'05 egen lösning dold');
   await page.locator('[data-reveal="practiceans"]').click();
   assert.equal(await page.locator('#practiceans .ma4-final math').count(),1,'05 ett exakt resultat');
-  for(const e of ['r⁴ = 2⁴','= 16','nv = 4 · 150°','= 600°','600° − 360° = 240°','cos 240° = −1/2','sin 240° = −√3/2',
+  for(const e of ['r⁴ = 2⁴','= 16','nv = 4 · 150°','= 600°','600° − 360° = 240°','cos(240°) = −1/2','sin(240°) = −√3/2',
     'z⁴ = 16(−1/2 − i√3/2)']){
    await has('#practiceans math[aria-label="'+e+'"]','05 korrekt eget facit '+e);
   }
@@ -229,10 +230,10 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   assert.ok(await page.locator('#optionalans').isHidden(),'09 frivilligt bevisfacit dolt');
   await page.locator('[data-reveal="optionalans"]').click();
   assert.equal(await page.locator('#optionalans .ma4-final math').count(),2,'09 två korrekt härledda dubbelvinkelformler');
-  for(const e of ['P = (cos v + i sin v)²','T₁ = cos v · cos v = cos²v',
-   'T₂ = (cos v)(i sin v)','T₃ = (i sin v)cos v','T₄ = (i sin v)(i sin v)',
+  for(const e of ['P = (cos(v) + i sin(v))²','T₁ = cos(v) · cos(v) = cos²v',
+   'T₂ = (cos(v))(i sin(v))','T₃ = (i sin(v))cos(v)','T₄ = (i sin(v))(i sin(v))',
    '= i² sin²v','T₄ = −sin²v',
-   'cos(2v) = cos²v − sin²v','sin(2v) = 2sin v cos v']){
+   'cos(2v) = cos²v − sin²v','sin(2v) = 2sin(v) cos(v)']){
    await has('#optionalans math[aria-label="'+e+'"]','09 distributiva lagen '+e);
   }
   await page.locator('[data-go="exit"]').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'exit','09 tillbaka till utcheckning');
