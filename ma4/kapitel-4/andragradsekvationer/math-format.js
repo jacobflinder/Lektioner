@@ -254,17 +254,17 @@ Object.assign(html,{
  ),
  r8b:worked(step('Jämför realdel och imaginärdel',eq('(a² − b²) + 2abi = 8i'),eq('a² − b² = 0'),eq('2ab = 8'),eq('a² = b²'),eq('ab = 4'),prose('Vilket teckenfall är möjligt när ab är positivt?'))),
  r8c:worked(
-  step('Pröva båda teckenfallen',eq('a² = b² ⇒ b = a eller b = −a'),eq('b = −a ⇒ ab = −a² = 4'),prose('Det är omöjligt för reella a, eftersom −a² inte kan vara positivt.'),eq('b = a ⇒ ab = a² = 4'),eq('a² = 4 ⇒ a = ±2')),
+  step('Pröva båda teckenfallen',eq('a² = b²')+eq('b = a')+eq('b = −a'),eq('b = −a ⇒ ab = −a² = 4'),prose('Det är omöjligt för reella a, eftersom −a² inte kan vara positivt.'),eq('b = a ⇒ ab = a² = 4'),eq('a² = 4 ⇒ a = ±2')),
   result('z₁ = 2 + 2i','z₂ = −2 − 2i'),
   step('Kontrollera med kvadrering',eq('(2 + 2i)² = 4 + 8i + 4i² = 8i'),eq('(−2 − 2i)² = 4 + 8i + 4i² = 8i'))
  ),
  r9:worked(
-  step('A · Se kvadratskillnaden',eq('z² − 9 = 0'),eq('(z − 3)(z + 3) = 0'),eq('z − 3 = 0 eller z + 3 = 0'),eq('z = 3 eller z = −3')),
+  step('A · Se kvadratskillnaden',eq('z² − 9 = 0'),eq('(z − 3)(z + 3) = 0'),eq('z − 3 = 0'),eq('z + 3 = 0'),eq('z = 3'),eq('z = −3')),
   step('B · Identifiera koefficienter',eq('z² + 6z + 13 = 0'),eq('p = 6'),eq('q = 13')),
   step('B · Sätt in i pq-formeln',eq('z = −p/2 ± √((p/2)² − q)'),eq('z = −6/2 ± √((6/2)² − 13)'),eq('z = −3 ± √(9 − 13)'),eq('z = −3 ± √(−4)'),eq('z = −3 ± 2i')),
   result('z₁ = −3 + 2i','z₂ = −3 − 2i'),
   step('B · Kontrollera en rot',eq('(−3 + 2i)² = 9 − 12i + 4i²'),eq('= 9 − 12i − 4 = 5 − 12i'),eq('6(−3 + 2i) = −18 + 12i'),eq('(−3 + 2i)² + 6(−3 + 2i) + 13'),eq('= 5 − 12i − 18 + 12i + 13 = 0')),
-  step('C · Polär form eller real- och imaginärdel',eq('z² = −2i'),eq('(1 − i)² = 1 − 2i + i² = −2i'),eq('z = 1 − i eller z = −1 + i')),
+  step('C · Polär form eller real- och imaginärdel',eq('z² = −2i'),eq('(1 − i)² = 1 − 2i + i² = −2i'),eq('z = 1 − i'),eq('z = −1 + i')),
   step('D · Redan kvadratkompletterad',eq('(z − 1)² = −4'),eq('z − 1 = ±√(−4)'),eq('z − 1 = ±2i'),eq('z = 1 ± 2i')),
   prose('Flera metoder är möjliga. Förklara varför en viss form gör just den metoden enkel.')
  ),
@@ -278,7 +278,7 @@ Object.assign(html,{
   step('När är icke-reella rötter konjugerade?',prose('Ett polynom med reella koefficienter har konjugatpar. Det gäller inte generellt om koefficienterna är komplexa.')),
   step('När är rötterna motsatta?',eq('z² = w'),eq('(−z)² = z²'),prose('När w inte är noll är z och −z två olika rötter.')),
   step('Jämför två konkreta exempel',eq('z² = −4 ⇒ z = ±2i'),eq('z² = 8i ⇒ z = ±(2 + 2i)'),prose('För −4 är rötterna både motsatta och konjugerade. För 8i är de motsatta men inte konjugerade.')),
-  step('Varför finns det inga andra rötter?',eq('z² = z₀²'),eq('z² − z₀² = 0'),eq('(z − z₀)(z + z₀) = 0'),eq('z − z₀ = 0 eller z + z₀ = 0'),eq('z = z₀ eller z = −z₀'),prose('När w = 0 är z₀ = 0 och samma rot räknas två gånger: en dubbelrot.'))
+  step('Varför finns det inga andra rötter?',eq('z² = z₀²'),eq('z² − z₀² = 0'),eq('(z − z₀)(z + z₀) = 0'),eq('z − z₀ = 0 eller z + z₀ = 0'),eq('z = z₀'),eq('z = −z₀'),prose('När w = 0 är z₀ = 0 och samma rot räknas två gånger: en dubbelrot.'))
  ),
  r15:worked(
   step('1 · Den andra roten enligt konjugatregeln',eq('z₁ = 2 + 3i'),eq('z₂ = 2 − 3i')),
