@@ -50,7 +50,8 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   assert.ok((await quiz.locator('.feedback').innerText()).length>0,'03 val får direkt återkoppling');
   await page.locator('[data-reveal="i-standard-answer"]').click();
   await has('#i-standard-answer math[aria-label="z = 2 − 3i = 2 + (−3)i"]','03 omformning till a+bi');
-  await has('#i-standard-answer math[aria-label="a = 2, b = −3"]','03 koefficienterna identifieras');
+  await has('#i-standard-answer math[aria-label="a = 2"]','03 realdelens koefficient separat');
+  await has('#i-standard-answer math[aria-label="b = −3"]','03 imaginärdelens koefficient separat');
   console.log('PASS bild 03: eleven försöker innan lösningen visas');
   // 4. Sju elevstyrda steg, varje beräkning utan hopp.
   await active(3);
