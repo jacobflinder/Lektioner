@@ -23,7 +23,7 @@ function scriptToken(n){
  return element('mtext',esc(n));
 }
 function atomic(src){
- const chunks=src.match(/\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*|[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)*|_[A-Za-z0-9]+|[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+|[\p{L}ℰµΩ]+|\s+|./gu)||[];
+ const chunks=src.match(/\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*|[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)*|_[A-Za-z0-9]+|[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+|[A-Za-zÅÄÖåäöℰµΩρπΔ]+|\s+|./gu)||[];
  const parts=[];let prev='start';
  for(const c of chunks){
    if(/^\s+$/.test(c)){prev='space';continue;}
@@ -31,7 +31,7 @@ function atomic(src){
    if(/^[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)*$/.test(c)){const n=[...c].map(x=>subscript[x]||x).join('');if(parts.length)parts[parts.length-1]=element('msub',parts[parts.length-1]+scriptToken(n));else parts.push(element('mn',esc(n)));prev='sub';continue;}
    if(/^_[A-Za-z0-9]+$/.test(c)){const n=c.slice(1);if(parts.length)parts[parts.length-1]=element('msub',parts[parts.length-1]+element('mtext',esc(n)));else parts.push(element('mtext',esc(n)));prev='sub';continue;}
    if(/^[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+$/.test(c)){const n=[...c].map(x=>superscript[x]||x).join('');if(parts.length)parts[parts.length-1]=element('msup',parts[parts.length-1]+scriptToken(n));else parts.push(element('mn',esc(n)));prev='sup';continue;}
-   if(/^[\p{L}ℰµΩ]+$/u.test(c)){
+   if(/^[A-Za-zÅÄÖåäöℰµΩρπΔ]+$/.test(c)){
      if(units.has(c)&&['number','sup','space'].includes(prev)){parts.push('<mspace width="0.17em"/>'+element('mtext',esc(c)));prev='unit';continue;}
      if(c.length>3){parts.push(element('mtext',esc(c)));prev='word';continue;}
      for(const ch of [...c])parts.push(element('mi',esc(ch)));
