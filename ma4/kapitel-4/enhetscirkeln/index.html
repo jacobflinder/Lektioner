@@ -20,11 +20,11 @@
   <div class="intro">
     <div class="eyebrow">REPETITIONSVERKSTAD · 5–15 MINUTER</div>
     <h1>Enhetscirkeln – från vinkel till exakta värden</h1>
-    <p class="lead">Har du glömt hur enhetscirkeln fungerar? Börja från grunden med radier, båglängder, trianglar och speglingar. Träna sedan exakta värden och pröva dem i komplexa tal – utan att lära dig en hel tabell utantill.</p>
+    <p class="lead">Se sambanden. Prova själv. Förstå varför – innan du tränar på att minnas.</p>
   </div>
   <section class="goal" aria-labelledby="goal-title">
     <strong id="goal-title">Mål: efter repetitionen ska du kunna</strong>
-    <p>byta mellan grader och radianer, bestämma <span class="math">cos v</span> och <span class="math">sin v</span> exakt för standardvinklar, samt kontrollera tecknen med kvadranten.</p>
+    <p><strong>Grader ↔ radianer</strong> · exakta <strong>cos- och sinvärden</strong> · rätt <strong>kvadrant</strong>.</p>
   </section>
   <nav class="tabs" role="tablist" aria-label="Välj repetition">
     <button type="button" role="tab" id="tab-foundation" data-tab="foundation" aria-controls="foundation-panel" aria-selected="true">1 · Förstå från början</button>
@@ -32,7 +32,7 @@
     <button type="button" role="tab" id="tab-train" data-tab="train" aria-controls="practice-panel" aria-selected="false">3 · Träna</button>
     <button type="button" role="tab" id="tab-challenge" data-tab="challenge" aria-controls="practice-panel" aria-selected="false">4 · Snabbkoll</button>
   </nav>
-  <p class="pathnote">Kan du redan grunderna? Välj <strong>Träna</strong> eller <strong>Snabbkoll</strong> direkt. Behöver du förstå varför? Börja här.</p>
+  <p class="pathnote"><strong>Ny på det?</strong> Förstå från början. <strong>Kan du redan?</strong> Välj Träna eller Snabbkoll.</p>
   <div class="workspace">
     <section class="panel left" aria-labelledby="circle-heading">
       <h2 id="circle-heading">Enhetscirkeln</h2>
@@ -52,10 +52,10 @@
     </section>
     <section class="panel right foundation" id="foundation-panel" role="tabpanel" aria-labelledby="tab-foundation">
       <div class="u-top">
-        <div><span class="badge">Från ”fattar inte” till ”aha”</span><h2 id="u-heading">Bygg upp förståelsen steg för steg</h2></div>
+        <div><span class="badge">Förstå · pröva · förklara</span><h2 id="u-heading">Enhetscirkeln från grunden</h2></div>
         <span class="count" id="u-progress">Steg 1 av 6</span>
       </div>
-      <p class="micro">Du behöver inte kunna standardvinklarna utantill för att börja. Förutsäg, utforska figuren och förklara. Skriv gärna på papper. Ingen poängjakt.</p>
+      <p class="micro"><strong>Titta → tänk → välj → visa.</strong> All matematik finns kvar när du öppnar nästa steg.</p>
       <div class="u-workspace">
         <div class="u-figure">
           <svg id="u-svg" viewBox="0 0 460 460" role="img" aria-label="Enhetscirkel, interaktiv figur. Använd reglagen och knapparna i respektive steg."></svg>
@@ -64,9 +64,9 @@
         <div class="u-lesson">
           <section class="u-step" data-u-step="0">
             <span class="u-section">1 · Koordinater är grunden</span>
-            <h3>Vad betyder egentligen cos och sin?</h3>
-            <p>En punkt på cirkeln har avståndet <strong>1</strong> från origo. Tänk dig en radie som vrids moturs från den positiva x-axeln. <strong>Cos v är x-koordinaten, sin v är y-koordinaten.</strong></p>
-            <p class="task"><strong>Förutsäg:</strong> Om radien pekar rakt upp, vilken x-koordinat har punkten? Peka först, välj sedan.</p>
+            <h3>Vad betyder cos och sin?</h3>
+            <div class="u-math-rule"><strong>cos v = x</strong><span>·</span><strong>sin v = y</strong></div>
+            <p class="task"><strong>Radien pekar rakt upp.</strong> Vilken x-koordinat har punkten?</p>
             <div class="u-options" data-u-answer="axis">
               <button type="button" data-u-option="1">x = 1</button>
               <button type="button" data-u-option="0">x = 0</button>
@@ -74,25 +74,26 @@
             </div>
             <p class="u-feedback feedback" id="u-axis-feedback" role="status" aria-live="polite" hidden></p>
             <div class="pillrow u-small-controls"><button type="button" class="secondary" data-u-axis="0">0°</button><button type="button" class="secondary" data-u-axis="90">90°</button><button type="button" class="secondary" data-u-axis="180">180°</button><button type="button" class="secondary" data-u-axis="270">270°</button></div>
-            <p class="micro">Klicka sedan på 0°, 90°, 180° och 270°. Vad händer med koordinaterna? Därför fungerar samma idé i alla fyra kvadranter.</p>
-            <div id="u-axis-answer" class="answer" hidden>Vid 90° ligger punkten i <strong>(0; 1)</strong>: ingen förflyttning i x-led, en radie uppåt i y-led. Alltså <strong>cos 90° = 0</strong> och <strong>sin 90° = 1</strong>.</div>
+            <p class="micro">Pröva de fyra axelvinklarna. Var ligger punkten?</p>
+            <div id="u-axis-answer" class="answer" hidden><strong>(cos 90°; sin 90°) = (0; 1)</strong><p>Rakt upp betyder x = 0 och y = 1. Radien är 1.</p></div>
           </section>
           <section class="u-step" data-u-step="1" hidden>
             <span class="u-section">2 · Från grader till radianer</span>
             <h3>Varifrån kommer π?</h3>
-            <p>På en cirkel med <strong>radie 1</strong> är hela omkretsen <strong>2π</strong>. Radianmåttet är <strong>cirkelbågens längd delat med radien</strong>. Därför motsvarar ett halvt varv <strong>π rad</strong>, inte för att man måste memorera det utan för att halva omkretsen är π.</p>
-            <label class="u-slider-label" for="u-radian-slider">Dra vinkelreglaget: <strong id="u-radian-deg">60°</strong></label>
-            <input type="range" id="u-radian-slider" min="0" max="360" step="15" value="60">
-            <p class="micro">Den <strong>orange cirkelbågen</strong> visar den tillryggalagda båglängden. Drag radien direkt i figuren går också.</p>
-            <button type="button" id="u-radian-reveal" class="secondary">Visa båglängd och radianmått</button>
-            <div class="answer" id="u-radian-answer" hidden><p id="u-radian-work"></p></div>
-            <p class="task"><strong>Din tur:</strong> Om 180° är π rad, hur många radianer är 60°? Motivera med vilken del av ett halvt varv det är.</p>
+            <div class="u-math-rule"><strong>radie = 1</strong><span>·</span><strong>båglängd = radianmått</strong></div>
+            <p class="task"><strong>Halvt varv = 180°.</strong> Hur lång är den orange bågen?</p>
+            <label class="u-slider-label" for="u-radian-slider">Dra radien: <strong id="u-radian-deg">180°</strong></label>
+            <input type="range" id="u-radian-slider" min="0" max="360" step="15" value="180">
+            
+            <button type="button" id="u-radian-reveal" class="secondary">Visa båglängd och samband</button>
+            <div class="answer u-solution" id="u-radian-answer" hidden><div class="u-equation-row"><span>Helt varv</span><strong>2π · 1 = 2π</strong></div><div class="u-equation-row"><span>Halvt varv</span><strong>2π / 2 = π</strong></div><div class="u-equation-row u-highlight"><span>180°</span><strong>= π rad</strong></div><p class="micro" id="u-radian-work"></p></div>
+            <div id="u-radian-challenge" hidden><p class="task"><strong>Din tur utan facit:</strong> Hur många radianer är 60°?</p>
             <div class="u-options" data-u-answer="radian">
               <button type="button" data-u-option="π/6">π/6</button>
               <button type="button" data-u-option="π/3">π/3</button>
               <button type="button" data-u-option="2π/3">2π/3</button>
             </div>
-            <p class="u-feedback feedback" id="u-radian-feedback" role="status" aria-live="polite" hidden></p>
+            <p class="u-feedback feedback" id="u-radian-feedback" role="status" aria-live="polite" hidden></p></div>
           </section>
           <section class="u-step" data-u-step="2" hidden>
             <span class="u-section">3 · Härled de exakta värdena</span>
