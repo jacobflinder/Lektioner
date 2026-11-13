@@ -180,6 +180,8 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
    const d=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,width:innerWidth}));
    assert.ok(d.doc<=d.width+3,'Ingen total sidscroll på mobilbild '+(i+1)+' '+JSON.stringify(d));
    if(i===7){const giv=page.locator('.slide.active .math-givens').first();assert.ok(await giv.count()===1);await gap('.slide.active > .math-givens > .math',2);}
+   const cropped=await page.locator('.slide.active .worked-equation:visible, .slide.active .worked-mobile-line:visible').evaluateAll(es=>es.filter(e=>e.scrollWidth>e.clientWidth+3).map(e=>({width:e.clientWidth,scroll:e.scrollWidth,text:e.innerText.slice(0,100),label:e.querySelector('math')?.getAttribute('aria-label')})));
+   assert.deepEqual(cropped,[],'Alla synliga matematiska mellanled måste rymmas utan intern sidscroll i mobilbild '+(i+1));
    await shot('mobil-'+String(i+1).padStart(2,'0'));
   }
   await go(6);await page.locator('#methodAlternate').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),7,'Valfri alternativmetod nås');
