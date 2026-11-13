@@ -16,12 +16,37 @@ header{display:flex;justify-content:space-between;align-items:center;gap:14px;fl
 textarea{width:100%;min-height:88px;border:1px solid #a8c8d1;padding:12px;border-radius:10px}
 @media(max-width:800px){:root{font-size:17px}.stage{border-radius:0}.grid,.two{grid-template-columns:1fr}.mode-info{border-radius:0}.foot button{padding:9px}.fig svg{max-height:360px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}@media print{header,.crumb,.mode-info,.editor,.foot,.review,.action{display:none!important}.slide{display:block!important;break-after:page}.stage{box-shadow:none;border:0}}
+
+/* Projector: keep question, diagram and controls together. Mobile may scroll. */
+[hidden]{display:none!important}
+[data-reveal][aria-expanded="true"]{display:none}
+.math math{margin:6px 0}
+body.repeat .has-practice:not(.study-open) .lesson-content{display:none}
+body.repeat #reveal-btn{display:none}
+.review{margin:0}.review .prompt{font-size:1.2rem;font-weight:650}
+.panel>svg{display:block;width:100%;height:auto;max-height:300px}
+.symbols span{font-size:2.5rem;color:#087b91;vertical-align:middle}
+details{margin:12px 0;padding:10px;border:1px solid #c7dfe4;border-radius:9px}summary{cursor:pointer}
+.plot svg{max-height:310px}.goal-recap{font-size:.86rem}.goal-recap h2{font-size:1.1rem}
+.foot{position:sticky;bottom:0;background:#ecf3f6f5;padding:8px 12px;z-index:5;margin-bottom:0;border-top:1px solid #c7dfe4}
+@media(min-width:1000px){
+ :root{font-size:18px}
+ header{padding:8px 22px}.crumb{margin-bottom:5px}.mode-info{padding:5px 14px;margin-bottom:7px;font-size:.74rem}
+ .stage{padding:20px 30px;min-height:calc(100dvh - 180px)}
+ h1{font-size:clamp(1.8rem,2.7vw,2.5rem);margin:7px 0 12px}
+ h2{font-size:1.25rem}.sub{margin:0 0 12px}.panel{padding:13px;margin:8px 0}
+ .question{padding:11px 14px;margin:9px 0}p{margin:9px 0}li{margin:6px 0}
+ .answer{padding:11px;margin:8px 0}.model-controls{padding:10px 14px}input[type=range]{margin:5px 0 10px}
+ .math{font-size:1.5rem}.plot{max-width:440px}.plot svg{max-height:270px}
+ button{padding:8px 12px}.mode-info .only-class{line-height:1.35}
+}
+@media print{.answer{display:block!important}.lesson-content{display:block!important}.foot{display:none!important}}
 </style></head>
 <body>
-<header><div class="brand">FYSIK 2 / STRÖM GER MAGNETFÄLT <span>Lång rak ledare · Lång rak ledare · högerhandsregeln · magnetisk flödestäthet</span></div><div class="controls"><button id="class-btn" class="selected" aria-pressed="true">Klassrum</button><button id="repeat-btn" aria-pressed="false">Repetition</button><button id="setting-btn">Arbetsbild</button><button id="fullscreen-btn" title="Helskärm för projektor">Helskärm</button></div></header>
+<header><div class="brand">FYSIK 2 / STRÖM GER MAGNETFÄLT <span>Lång rak ledare · högerhandsregeln · magnetisk flödestäthet</span></div><div class="controls"><button id="class-btn" class="selected" aria-pressed="true">Klassrum</button><button id="repeat-btn" aria-pressed="false">Repetition</button><button id="setting-btn">Arbetsbild</button><button id="fullscreen-btn" title="Helskärm för projektor">Helskärm</button></div></header>
 <nav class="crumb" aria-label="Bibliotek"><a href="../../../index.html">Alla kurser</a><span>›</span><a href="../../index.html">Fysik, nivå 2</a><span>›</span><a href="../index.html">Elektromagnetism</a><span>›</span><strong>Ström ger magnetfält</strong></nav>
-<div class="mode-info"><div class="only-class"><b>Klassrum:</b> Tänk → diskutera → låt läraren visa nästa steg. Repetitionsfrågorna är dolda. <a href="./lararstod.html" target="_blank" rel="noopener">Lärarstöd i separat fönster</a>.</div><div class="only-repeat"><b>Repetition:</b> Välj svar, få ledtråd, försök igen. Ditt svar skickas inte och sparas inte. Förklaringsstegen går att visa när du behöver dem.</div></div>
-<aside id="editor" class="editor" hidden><b>Arbetsbild · uppdaterbara lärobokshänvisningar</b><p class="small">Uppdaterat mot PDF-underlaget daterat 16 november 2026. Socrative kommer före boken.</p><label>Bokens uppgifter <input id="task-setting" value="324–334"></label><label>Dagens lässidor <input id="read-setting" value="149–153"></label><label>Nästa läsning <input id="next-setting" value="154–161"></label><label>Läxa 1 av 2 <input id="homework-setting" value="325–334"></label><label>Nästa innehåll <input id="topic-setting" value="Magnetfält i spolar"></label><button id="apply-setting" class="primary">Uppdatera arbetsbild</button> <button id="download-btn">Hämta fristående HTML</button></aside>
+<div class="mode-info"><div class="only-class"><b>Klassrum:</b> Tänk → diskutera → låt läraren visa nästa steg. Repetitionsfrågorna är dolda. <a href="./lararstod.html" target="_blank" rel="noopener">Lärarstöd i separat fönster</a>.</div><div class="only-repeat"><b>Repetition:</b> Gör skisser och beräkningar på papper. Visa sedan alternativen och jämför. Inget elevsvar skickas eller sparas. Förklaringen öppnas först när du väljer den.</div></div>
+<aside id="editor" class="editor" hidden><b>Arbetsbild · uppdaterbara lärobokshänvisningar</b><p class="small">Befintliga bokhänvisningar och Socrative är bevarade. Socrative kommer före boken.</p><label>Bokens uppgifter <input id="task-setting" value="324–334"></label><label>Dagens lässidor <input id="read-setting" value="149–153"></label><label>Nästa läsning <input id="next-setting" value="154–161"></label><label>Läxa 1 av 2 <input id="homework-setting" value="325–334"></label><label>Nästa innehåll <input id="topic-setting" value="Magnetfält i spolar"></label><button id="apply-setting" class="primary">Uppdatera arbetsbild</button> <button id="download-btn">Hämta fristående HTML</button></aside>
 <main class="stage" id="stage"><div id="slides"></div></main>
 <footer class="foot"><div class="controls"><button id="prev-btn">← Föregående</button><select id="jump" aria-label="Välj presentationsbild"></select><span id="counter" class="small"></span></div><div class="right"><button id="reset-btn">Återställ bild</button><button id="reveal-btn" class="primary">Visa nästa steg</button><button id="next-btn">Nästa bild →</button></div></footer>
 <script src="./content.js"></script><script src="./logic.js"></script><script src="./practice.js"></script>

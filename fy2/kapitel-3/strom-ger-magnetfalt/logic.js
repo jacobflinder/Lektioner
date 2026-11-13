@@ -1,9 +1,18 @@
 (() => {
 "use strict";
-const $=id=>document.getElementById(id),slides=[...document.querySelectorAll(".slide")],MAIN=18,OPTIONAL=18,mu02pi=2e-7;
+const $=id=>document.getElementById(id),slides=[...document.querySelectorAll(".slide")],MAIN=slides.length-1,OPTIONAL=slides.length-1,mu02pi=2e-7;
 let current=0,remaining=1200,timerMinutes=20,timerId=null,deadline=0;
 const fmt=(n,d=1)=>Number(n).toLocaleString("sv-SE",{minimumFractionDigits:d,maximumFractionDigits:d});
 function render(){
+ slides.forEach(slide=>{
+  let waiting=false;
+  slide.querySelectorAll('[data-reveal]').forEach(button=>{
+   button.disabled=waiting;
+   const opened=button.nextElementSibling.classList.contains('shown');
+   button.setAttribute('aria-expanded',String(opened));
+   if(!opened)waiting=true;
+  });
+ });
  slides.forEach((s,i)=>s.classList.toggle("active",i===current));
  $("counter").textContent=current===OPTIONAL?"Fördjupning":(current+1)+" / "+MAIN;
  $("jump").value=String(current);
@@ -24,6 +33,7 @@ function go(i){
  current=n;refreshDiagram();render();window.scrollTo(0,0);
 }
 function revealNext(){
+ if(document.body.classList.contains("repeat")&&slides[current].classList.contains("has-practice")&&!slides[current].classList.contains("study-open"))return;
  const a=slides[current].querySelector(".answer:not(.shown)");
  if(a){a.classList.add("shown");refreshDiagram();render()}
  else if(current<MAIN-1)go(current+1);
@@ -34,12 +44,16 @@ $("reveal-btn").addEventListener("click",revealNext);
 $("reset-btn").addEventListener("click",()=>{
  slides[current].querySelectorAll(".answer.shown").forEach(a=>a.classList.remove("shown"));
  slides[current].querySelectorAll("textarea").forEach(a=>a.value="");
+ slides[current].querySelectorAll('details').forEach(d=>d.open=false);
+ const resets={model:'model-reset','current-test':'current-reset','distance-test':'distance-reset'};
+ const resetId=resets[slides[current].dataset.key];
+ if(resetId)$(resetId).click();
  slides[current].dispatchEvent(new Event("lesson:reset"));
  refreshDiagram();render();
 });
 document.querySelectorAll("[data-reveal]").forEach(b=>b.addEventListener("click",()=>{
  const a=b.nextElementSibling;
- if(a&&a.classList.contains("answer")){a.classList.toggle("shown");refreshDiagram();render();}
+ if(a&&a.classList.contains("answer")){a.classList.add("shown");refreshDiagram();render();}
 }));
 slides.forEach((slide,i)=>{
  const o=document.createElement("option");o.value=String(i);
@@ -67,41 +81,34 @@ document.addEventListener("keydown",e=>{
  else if(e.key==="ArrowLeft"){e.preventDefault();go(current===OPTIONAL?MAIN-1:current-1);}
 });
 function wireSVG(dir,point,shown,radius=108,fieldAtPointUT=null){
- const cx=251,cy=185,sign=dir==="out"?-1:1,measured=fieldAtPointUT!==null;
- let s='<rect x="0" y="0" width="520" height="370" fill="#edf6f7" rx="14"/>';
- [46,95,151].forEach(r=>{s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';});
- // Tangent arrows have identical lengths: they show direction, never field magnitude.
- function tangent(theta,r,label,includeArrow){
-  const x=cx+r*Math.cos(theta),y=cy+r*Math.sin(theta);
-  let p='<circle cx="'+x+'" cy="'+y+'" r="5" fill="#c46c4a"/>';
-  if(label)p+='<text x="'+(x+10)+'" y="'+(y-11)+'" style="font-weight:800">'+label+'</text>';
-  if(includeArrow){
-   const tx=-Math.sin(theta)*sign,ty=Math.cos(theta)*sign;
-   const localUT=measured?fieldAtPointUT*(radius/r):30;
-   const arrowHalf=measured?10+29*localUT/(localUT+30):23;
-   const x0=x-arrowHalf*tx,y0=y-arrowHalf*ty,x1=x+arrowHalf*tx,y1=y+arrowHalf*ty;
-   p+='<path d="M'+x0+' '+y0+' L'+x1+' '+y1+'" stroke="#c15f43" stroke-width="4" stroke-linecap="round"/>';
-   p+='<path d="M'+(x1-11*tx-7*ty)+' '+(y1-11*ty+7*tx)+' L'+x1+' '+y1+' L'+(x1-11*tx+7*ty)+' '+(y1-11*ty-7*tx)+'" fill="none" stroke="#c15f43" stroke-width="3"/>';
-  }
-  return p;
+ const cx=251,cy=185,sign=dir==="out"?-1:1;
+ let s='<rect width="520" height="370" fill="#edf6f7" rx="14"/>';
+ [46,108,151].forEach(r=>{s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';});
+ function arrow(x,y,tx,ty,length,color){
+  const endX=x+length*tx,endY=y+length*ty;
+  return '<path d="M'+x+' '+y+' L'+endX+' '+endY+'" stroke="'+color+'" stroke-width="4"/>'+
+   '<path d="M'+(endX-10*tx-6*ty)+' '+(endY-10*ty+6*tx)+' L'+endX+' '+endY+' L'+(endX-10*tx+6*ty)+' '+(endY-10*ty-6*tx)+'" fill="none" stroke="'+color+'" stroke-width="3"/>';
  }
- // Static slides: arrows only show direction. In the interactive model their lengths vary with calculated local field magnitude.
- if(shown) [46,95,151].forEach((r,k)=>{
-  const th=k*2.2+.6;
-  const x=cx+r*Math.cos(th),y=cy+r*Math.sin(th);
-  const tx=-Math.sin(th)*sign,ty=Math.cos(th)*sign;
-  const localUT=measured?fieldAtPointUT*(radius/r):30;
-  const half=measured?7+19*localUT/(localUT+30):15;
-  const xx=x+half*tx,yy=y+half*ty;
-  s+='<path d="M'+(x-half*tx)+' '+(y-half*ty)+' L'+xx+' '+yy+'" stroke="#0b8195" stroke-width="'+(measured?(2+2*localUT/(localUT+30)).toFixed(2):3)+'"/>';
-  s+='<path d="M'+(xx-9*tx-5*ty)+' '+(yy-9*ty+5*tx)+' L'+xx+' '+yy+' L'+(xx-9*tx+5*ty)+' '+(yy-9*ty-5*tx)+'" stroke="#0b8195" stroke-width="3" fill="none"/>';
+ function pointArrow(theta,r,label){
+  const x=cx+r*Math.cos(theta),y=cy+r*Math.sin(theta);
+  s+='<circle cx="'+x+'" cy="'+y+'" r="5" fill="#c15f43"/><text x="'+(x+12)+'" y="'+(y+22)+'">'+label+'</text>';
+  if(shown)s+=arrow(x,y,-Math.sin(theta)*sign,Math.cos(theta)*sign,36,'#c15f43');
+ }
+ if(shown)[46,108,151].forEach((r,k)=>{
+  const t=k*2.2+.6;
+  s+=arrow(cx+r*Math.cos(t),cy+r*Math.sin(t),-Math.sin(t)*sign,Math.cos(t)*sign,25,'#0b8195');
  });
  s+='<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="white" stroke="#0b798f" stroke-width="3"/>';
- s+='<text x="'+(cx-14)+'" y="'+(cy+10)+'" style="font-size:33px;fill:#0b798f">'+(dir==="out"?"⊙":"⊗")+'</text>';
- s+='<text x="24" y="29">I '+(dir==="out"?"ut ur bilden":"in i bilden")+'</text>';
- if(point==="four"){
-  [["A",-Math.PI/2],["B",0],["C",Math.PI/2],["D",Math.PI]].forEach(q=>{s+=tangent(q[1],109,q[0],shown);});
- }else s+=tangent(0,radius,"P",shown);
+ s+='<text x="'+(cx-14)+'" y="'+(cy+10)+'" style="font-size:33px;fill:#0b798f">'+(dir==="out"?'⊙':'⊗')+'</text>';
+ s+='<text x="24" y="29">I '+(dir==="out"?'ut ur bilden':'in i bilden')+'</text>';
+ if(point==="four")[["A",-Math.PI/2],["B",0],["C",Math.PI/2],["D",Math.PI]].forEach(q=>pointArrow(q[1],108,q[0]));
+ else {
+  pointArrow(0,radius,"P");
+  if(fieldAtPointUT!==null){
+   s+='<path d="M'+cx+' 230H'+(cx+radius)+' M'+cx+' 223V237 M'+(cx+radius)+' 223V237" stroke="#678c99" stroke-width="2" fill="none"/>';
+   s+='<text x="'+(cx+radius/2-5)+'" y="254">r</text>';
+  }
+ }
  return s;
 }
 function drawDiagram(el){
@@ -111,12 +118,14 @@ function drawDiagram(el){
 document.querySelectorAll("[data-wire-plot]").forEach(drawDiagram);
 function updateModel(){
  const I=Number($("i-slider").value),r=Number($("r-slider").value),dir=$("dir-select").value;
+ const wasOpen=$("model-result").querySelector("details")?.open;
  const microTesla=mu02pi*I/(r/100)*1e6;
  $("i-value").textContent=fmt(I)+" A";$("r-value").textContent=fmt(r)+" cm";
  $("model-result").innerHTML='<div style="font-family:Cambria,Georgia,serif;font-size:1.22rem"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn><mtext> μT</mtext></math></div>'+
  '<details style="margin-top:8px;font-size:.84rem;font-weight:500"><summary>Visa insättningen med enheter</summary><div style="font-family:Cambria,Georgia,serif;font-size:1.12rem;overflow-x:auto"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+fmt(I,1)+'</mn><mtext> A</mtext></mrow><mrow><mn>'+fmt(r/100,3)+'</mn><mtext> m</mtext></mrow></mfrac></math></div></details>'+
- '<p style="font-family:system-ui;font-size:.86rem;margin:5px 0 0">Fältriktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+'</b>. Pilarna är längre vid större B och mindre vid större avstånd; deras längder är inte linjärt skalenliga.</p>';
- $("model-svg").innerHTML=wireSVG(dir,"right",true,55+(r-2)*10,microTesla);
+ '<p style="font-family:system-ui;font-size:.86rem;margin:5px 0 0">Fältriktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+'</b>. Pilarna visar bara riktning. B:s storlek anges av talvärdet.</p>';
+ if(wasOpen)$("model-result").querySelector("details").open=true;
+ $("model-svg").innerHTML=wireSVG(dir,"right",true,12*r,microTesla);
 }
 ["i-slider","r-slider","dir-select"].forEach(id=>$(id).addEventListener("input",updateModel));
 $("model-reset").addEventListener("click",()=>{
@@ -153,6 +162,8 @@ $("download-btn").addEventListener("click",async()=>{
   clone.querySelector("body").classList.remove("repeat");
   clone.querySelector("#class-btn").classList.add("selected");
   clone.querySelector("#repeat-btn").classList.remove("selected");
+  clone.querySelector("#class-btn").setAttribute("aria-pressed","true");
+  clone.querySelector("#repeat-btn").setAttribute("aria-pressed","false");
   clone.querySelectorAll("textarea").forEach(x=>{x.value="";x.textContent=""});
   let html="<!doctype html>\n"+clone.outerHTML;
   for(const name of ["content.js","logic.js","practice.js"]){
@@ -189,20 +200,23 @@ $("current-reset").addEventListener("click",()=>{$("current-factor").value="1";u
 function updateDistanceComparison(){
  const ratio=Number($("distance-factor").value);
  $("distance-factor-value").textContent=fmt(ratio,1);
- const x=185+ratio*102,bottom=220,len=118/ratio;
- $("distance-comparison").innerHTML='<rect x="0" y="0" width="690" height="270" fill="#f0f7f8"/>'+
-  '<circle cx="145" cy="144" r="23" fill="#fff" stroke="#0c7085" stroke-width="3"/>'+
-  '<text x="134" y="156" style="font-size:34px;fill:#0b7888">⊙</text>'+
-  '<line x1="168" y1="'+bottom+'" x2="'+x+'" y2="'+bottom+'" stroke="#7598a5" stroke-width="2"/>'+
-  '<circle cx="'+x+'" cy="'+bottom+'" r="6" fill="#c7883f"/>'+
-  '<path d="M'+x+' '+bottom+'V'+(bottom-len)+'" stroke="#087d90" stroke-width="6"/>'+
-  '<path d="M'+(x-11)+' '+(bottom-len+14)+'L'+x+' '+(bottom-len)+'L'+(x+11)+' '+(bottom-len+14)+'" stroke="#087d90" stroke-width="5" fill="none"/>'+
-  '<text x="'+(x-16)+'" y="250" style="font-size:17px">P</text>'+
-  '<text x="385" y="38" style="font-size:21px;font-weight:700">B/B₀ = '+fmt(1/ratio,2)+'</text>';
- $("distance-conclusion").textContent="r = "+fmt(ratio,1)+" r₀ ger B = "+fmt(1/ratio,2)+" B₀. Samma radiella riktning på P ger B uppåt.";
+ const cx=90,cy=185,unit=150,x=cx+ratio*unit,len=120/ratio;
+ const vector=(px,length,color,dashed='')=>'<path d="M'+px+' '+cy+'V'+(cy-length)+'" stroke="'+color+'" stroke-width="5" '+dashed+'/>'+ '<path d="M'+(px-9)+' '+(cy-length+12)+'L'+px+' '+(cy-length)+'L'+(px+9)+' '+(cy-length+12)+'" stroke="'+color+'" stroke-width="4" fill="none"/>';
+ $("distance-comparison").innerHTML='<rect width="690" height="310" fill="#f0f7f8"/>'+
+  '<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+cy+'" stroke="#a0bac3" stroke-dasharray="5 5"/>'+
+  vector(cx+unit,120,'#9dbac4','stroke-dasharray="5 5"')+
+  '<text x="'+(cx+unit-30)+'" y="48">B₀</text>'+vector(x,len,'#087d90')+
+  '<circle cx="'+cx+'" cy="'+cy+'" r="20" fill="#fff" stroke="#0c7085" stroke-width="3"/>'+
+  '<text x="'+(cx-14)+'" y="'+(cy+11)+'" style="font-size:34px">⊙</text>'+
+  '<circle cx="'+x+'" cy="'+cy+'" r="5" fill="#c7883f"/><text x="'+(x+10)+'" y="'+(cy+18)+'">P</text>'+
+  '<path d="M'+cx+' 245H'+x+' M'+cx+' 237V253 M'+x+' 237V253" stroke="#678c99" stroke-width="2" fill="none"/>'+
+  '<text x="'+((cx+x)/2-40)+'" y="280">r = '+fmt(ratio)+' r₀</text>'+
+  '<text x="400" y="38" style="font-size:21px;font-weight:700">B/B₀ = '+fmt(1/ratio,2)+'</text>';
+ $("distance-conclusion").textContent="r = "+fmt(ratio,1)+" r₀ ger B = "+fmt(1/ratio,2)+" B₀. B pekar uppåt i P.";
 }
 $("distance-factor").addEventListener("input",updateDistanceComparison);
 $("distance-reset").addEventListener("click",()=>{$("distance-factor").value="1";updateDistanceComparison()});
 
+slides.forEach(slide=>slide.addEventListener("lesson:refresh",()=>{refreshDiagram();render();}));
 setMode(false);updateModel();updateCurrentComparison();updateDistanceComparison();timerText();applyRefs();render();
 })();
