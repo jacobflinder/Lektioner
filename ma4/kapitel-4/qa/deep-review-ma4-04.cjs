@@ -210,8 +210,10 @@ try{
   assert.ok(dims.body<=dims.viewport+4,'Mobilbild '+(i+1)+' horisontellt överspill '+JSON.stringify(dims));
   await pic('mobil-'+(i+1));
  }
- for(const id of ['intro','vector','algebra','exit'])await expectSpace('#'+id+' .math-givens',2);
- await expectSpace('#circles .math-givens',2);
+ for(const [index,id] of [[0,'intro'],[1,'vector'],[2,'algebra'],[3,'circles'],[7,'exit']]){
+  await go(index);
+  await expectSpace('#'+id+' .math-givens',2);
+ }
  assert.deepEqual(errors,[],'Ingen JavaScript- eller laddningsavvikelse');
  console.log('PASS Ma4 04/41: åtta bilder, talplan, matematiska led, interaktioner och mobil');
 }catch(e){console.error('FAIL Ma4 04/41: '+(e.stack||e));process.exitCode=1}
