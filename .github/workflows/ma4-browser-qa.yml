@@ -5,6 +5,10 @@ on:
       - "ma4/**"
       - ".github/workflows/ma4-browser-qa.yml"
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ma4-chapter4:
     runs-on: ubuntu-24.04
@@ -12,6 +16,8 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Wait for closely spaced updates to settle
+        run: sleep 30
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
