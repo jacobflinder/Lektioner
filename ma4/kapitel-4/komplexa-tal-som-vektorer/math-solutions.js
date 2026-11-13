@@ -34,8 +34,8 @@ insertSolutions({
  ),
  'exitextra':solution(
   step('2 · Cirkeln och dess centrum',['|w − 3| = 2','w₀ = 3 + 0i','r = 2'],'Cirkeln har centrum (3; 0) och radie 2. Alla randpunkter ingår eftersom det står likhet.'),
-  step('3 · Tolka den övre randlinjen',['−1 ≤ Im w < 2','Im w = 2','2 < 2'],'Det sista villkoret är falskt; den övre randen ingår inte. Den nedre gränsen −1 ingår eftersom ≤ används.'),
-  answer(['Im w = 2 är inte tillåtet'])
+  step('3 · Tolka den övre randlinjen',['−1 ≤ Im(w) < 2','Im(w) = 2','2 < 2'],'Det sista villkoret är falskt; den övre randen ingår inte. Den nedre gränsen −1 ingår eftersom ≤ används.'),
+  '<div class="ma4-final"><span>SVAR</span><p class="ma4-note">Nej. Den övre randlinjen ingår inte.</p></div>'
  )
 });
 typesetStatic();

@@ -37,11 +37,11 @@
 <div class="two"><div class="plot-box"><svg id="region-plane" class="plot" viewBox="0 0 680 430" role="img" aria-label="Talplan som på begäran visar en linje, ett band med olika randvillkor eller en öppen cirkelskiva"></svg>
 <div class="flex"><button type="button" data-region="line" aria-pressed="true">Linje</button><button type="button" data-region="band" aria-pressed="false" class="secondary">Band</button><button type="button" data-region="disk" aria-pressed="false" class="secondary">Cirkelskiva</button></div>
 <p class="muted">Heldragen rand ingår. Streckad rand ingår inte. Fylld yta visar de tillåtna punkterna.</p></div>
-<div><p class="math math-big" id="region-equation">Re z = 2</p>
+<div><p class="math math-big" id="region-equation">Re(z) = 2</p>
 <div class="task"><strong>Rita först själv</strong>Vilka punkter uppfyller villkoret? Är det en linje, ett band eller en skiva? Ingår randpunkterna?</div>
 <button id="region-show" type="button" class="secondary" aria-pressed="false">Visa figuren och gränserna</button>
 <div class="answer hidden" id="region-explain"><p>Alla tal med realdelen 2. Linjen ingår.</p></div>
-</div></div><div class="panel decision-check" data-decision><strong>Begreppskontroll: vilka randlinjer ingår? <span class="math">−1 ≤ Im z &lt; 2</span></strong><p class="muted">Rita gärna bandet för hand. Tolka båda olikhetstecknen innan du väljer.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="Den nedre randen ingår, men den övre gör det inte. Det övre tecknet är strikt: Im z &lt; 2.">A · Både Im z = −1 och Im z = 2</button>
+</div></div><div class="panel decision-check" data-decision><strong>Begreppskontroll: vilka randlinjer ingår? <span class="math">−1 ≤ Im(z) &lt; 2</span></strong><p class="muted">Rita gärna bandet för hand. Tolka båda olikhetstecknen innan du väljer.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="Den nedre randen ingår, men den övre gör det inte. Det övre tecknet är strikt: Im z &lt; 2.">A · Både Im z = −1 och Im z = 2</button>
 <button type="button" class="choice" data-answer="1" data-correct="true" data-feedback="Rätt. −1 ≤ Im z tillåter −1. Im z &lt; 2 utesluter 2. Nedre randen är heldragen, övre streckad.">B · Bara Im z = −1</button>
 <button type="button" class="choice" data-answer="2" data-correct="false" data-feedback="Den undre randen ingår eftersom den har tecknet ≤. Bara den övre randen är utesluten.">C · Ingen av randlinjerna</button></div><button type="button" class="secondary" data-decision-submit disabled>Kontrollera mitt val</button><p class="feedback hidden" role="status" aria-live="polite"></p></div><div class="panel"><button type="button" class="secondary" data-go="try">Fortsätt till eget försök</button></div></section>
 <section id="try" class="slide" data-teacher="Minska stödet. Alla löser position och längd utan figur. De geometriska områdesfrågorna är en separat tillämpning efter valfri geometriträning. Eleverna arbetar enskilt och jämför en motivering med en kamrat.">
@@ -60,7 +60,7 @@
 <div class="eyebrow">08 · Individuell utcheckning</div><h2>Visa vad du kan</h2>
 <div class="task"><strong>4 minuter själv – visa minst ett mellanled</strong>
 <div class="math-givens" role="group" aria-label="Separata givna matematiska uttryck"><p class="math">u = 2 + 3i</p><p class="math">z = −1 + i</p></div>
-<ol class="spaced"><li>Bestäm <span class="math">u − z</span> och längden av dess positionsvektor. Motivera beräkningsmetoden.</li></ol><details><summary>Fördjupad utcheckning – om du arbetat med geometriska villkor</summary><ol start="2" class="spaced"><li>Ange centrum och radie för <span class="math">|w − 3| = 2</span>.</li><li>Ingår punkterna med <span class="math">Im w = 2</span> i området <span class="math">−1 ≤ Im w &lt; 2</span>? Varför?</li></ol></details></div>
+<ol class="spaced"><li>Bestäm <span class="math">u − z</span> och längden av dess positionsvektor. Motivera beräkningsmetoden.</li></ol><details><summary>Fördjupad utcheckning – om du arbetat med geometriska villkor</summary><ol start="2" class="spaced"><li>Ange centrum och radie för <span class="math">|w − 3| = 2</span>.</li><li>Ingår punkterna med <span class="math">Im(w) = 2</span> i området <span class="math">−1 ≤ Im(w) &lt; 2</span>? Varför?</li></ol></details></div>
 <button type="button" data-reveal="exitans" class="reveal">Visa kärnuppgiftens återkoppling</button>
 <div id="exitans" class="answer hidden"></div><details><summary>Frivillig återkoppling: geometrisk utcheckning</summary><p>Öppna efter eget försök.</p><button type="button" class="reveal" data-reveal="exitextra">Visa fördjupningens facit</button><div id="exitextra" class="answer hidden"></div></details>
 <div class="panel"><strong>Dagens mål</strong><p>Jag kan tolka punkt och positionsvektor, räkna vektorsumma och differens, använda absolutbelopp som avstånd och förstå geometriska villkor.</p><p>Vilket resonemang kan jag förklara utan hjälp, och vad behöver jag träna mer på?</p></div></section></div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Interaktionerna använder ingen datainsamling.</footer></main><script src="../assets/math-presentation.js"></script><script src="./math-solutions.js"></script><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
@@ -117,8 +117,8 @@ document.querySelectorAll('[data-circle]').forEach(b=>b.addEventListener('click'
 circleShow.addEventListener('click',()=>{circleRevealed=!circleRevealed;drawCircle()});
 const regionShow=document.getElementById('region-show');
 const regionCases={
- line:{formula:'Re z = 2',explain:'En lodrät linje genom alla punkter med realdelen 2. Likheten betyder att samtliga punkter på linjen ingår.'},
- band:{formula:'−1 ≤ Im z < 2',explain:'Ett horisontellt band. Undre randen Im z = −1 ingår (heldragen); övre randen Im z = 2 ingår inte (streckad).'},
+ line:{formula:'Re(z) = 2',explain:'En lodrät linje genom alla punkter med realdelen 2. Likheten betyder att samtliga punkter på linjen ingår.'},
+ band:{formula:'−1 ≤ Im(z) < 2',explain:'Ett horisontellt band. Undre randen Im z = −1 ingår (heldragen); övre randen Im z = 2 ingår inte (streckad).'},
  disk:{formula:'|z + i| < 2',explain:'En öppen cirkelskiva med centrum −i = (0, −1) och radien 2. Bara punkter på mindre avstånd än 2 ingår; randen är streckad.'}
 };
 function drawRegion(){

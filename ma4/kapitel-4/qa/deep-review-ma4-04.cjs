@@ -189,6 +189,8 @@ try{
  assert.ok(await page.locator('#exitextra').isHidden(),'08 extra svar fortfarande dolt');
  await page.locator('[data-reveal="exitextra"]').click();
  await one('#exitextra math[aria-label="2 < 2"]','08 övre randen exkluderad');
+ await one('#exitextra math[aria-label="Im(w) = 2"]','08 funktionsnotation med tydliga parenteser');
+ assert.ok((await page.locator('#exitextra .ma4-final').innerText()).includes('Nej.'),'08 svensk slutsats visas som text, inte som felaktig matematisk ekvation');
  await pic('08-desktop');
  console.log('PASS bild 08: självständig kärnexit, teckenförklaring och frivillig utcheckning');
  // Huvudvägen hoppar över valfria bilder, men tillämpningen är nåbar.

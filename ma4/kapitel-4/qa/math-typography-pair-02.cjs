@@ -89,7 +89,7 @@ const screenshots='ma4-qa-screenshots';fs.mkdirSync(screenshots,{recursive:true}
      assert.ok(await page.locator('#circle-explain').isVisible(),'Cirkelförklaring efter elevval');
      await page.selectOption('#jump','4');
      await page.locator('[data-region="band"]').click();
-     assert.ok((await page.locator('#region-equation math').getAttribute('aria-label')).includes('−1 ≤ Im z < 2'),'Gränsvillkoret bevaras');
+     assert.ok((await page.locator('#region-equation math').getAttribute('aria-label')).includes('−1 ≤ Im(z) < 2'),'Gränsvillkoret bevaras');
      assert.ok(await page.locator('#region-equation math mo').count()>1,'Olikheterna typeras som operatorer');
      await page.locator('#region-show').click();
      assert.ok(await page.locator('#region-explain').isVisible(),'Geometri återkopplas efter försök');
