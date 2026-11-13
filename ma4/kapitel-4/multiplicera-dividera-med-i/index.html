@@ -74,7 +74,7 @@
 let a=2,b=1,stage=0;
 const svg=document.getElementById('rot-plane'),back=document.getElementById('rot-back'),next=document.getElementById('rot-next');
 function fmt(x,y){
- const real=x===0?'':String(x);
+ const real=x===0?'':String(x).replace('-', '−');
  const im=y===0?'':((real&&y>=0)?' + ':real?' − ':y<0?'−':'')+(Math.abs(y)===1?'i':Math.abs(y)+'i');
  return real+im||'0';
 }
