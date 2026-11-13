@@ -130,7 +130,7 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await go(7);for(const id of ['r8a','r8b','r8c'])await reveal(id);
   for(const x of ['a² − b² = 0','2ab = 8','ab = 4'])await formula('#r8b',x);
   for(const x of ['b = −a ⇒ ab = −a² = 4','a² = 4 ⇒ a = ±2'])await formula('#r8c',x);
-  await gap('#quadratic-optional-rect .math-givens:first-of-type > .math',2);
+  await gap('#quadratic-optional-rect > .math-givens > .math',2);
   await checkInput('rect','3+3i;-3-3i','fel tecken','3-3i;-3+3i');
   await shot('08-desktop');
   // 09: oberoende korrekt lösning av A–D och insättning i B
@@ -177,7 +177,7 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
    await go(i);
    const d=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,width:innerWidth}));
    assert.ok(d.doc<=d.width+3,'Ingen total sidscroll på mobilbild '+(i+1)+' '+JSON.stringify(d));
-   if(i===7){const giv=page.locator('.slide.active .math-givens').first();assert.ok(await giv.count()===1);await gap('.slide.active .math-givens:first-of-type > .math',2);}
+   if(i===7){const giv=page.locator('.slide.active .math-givens').first();assert.ok(await giv.count()===1);await gap('.slide.active > .math-givens > .math',2);}
    await shot('mobil-'+String(i+1).padStart(2,'0'));
   }
   await go(6);await page.locator('#methodAlternate').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),7,'Valfri alternativmetod nås');
