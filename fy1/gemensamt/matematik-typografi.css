@@ -1,5 +1,5 @@
-/* Gemensam matematisk typografi för Fy1 8.1–8.2.
-   Inbyggt MathML utan tredjepartstjänster; påverkar inte övriga lektioner. */
+/* Gemensam matematisk typografi för Fy1 8.1–8.4.
+   Inbyggt MathML utan tredjepartstjänster; återanvänds av de fyra första lektionerna. */
 .fy1-typeset {
   font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", "Noto Sans Math", serif;
   font-size: 1.07em;
