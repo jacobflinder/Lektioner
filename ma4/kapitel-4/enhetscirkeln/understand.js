@@ -185,11 +185,30 @@ $('u-triangle-reveal').addEventListener('click',()=>{
  draw();
 });
 chooseTriangle(45);
-function setReflect(a){reflectDeg=a;$('u-reflect-slider').value=String(a);$('u-reflect-deg').textContent=a+'°';draw()}
+function setReflect(a){
+ const moved=reflectDeg!==a;
+ reflectDeg=a;$('u-reflect-slider').value=String(a);$('u-reflect-deg').textContent=a+'°';
+ if(moved&&reflectReveal){reflectReveal=false;$('u-reflect-answer').hidden=true;$('u-reflect-reveal').textContent='Visa koordinater efter ditt val'}
+ draw();
+}
 $('u-reflect-slider').addEventListener('input',e=>setReflect(Number(e.target.value)));
 $('u-reflect-start').addEventListener('click',()=>setReflect(30));
 $('u-reflect-mirror').addEventListener('click',()=>setReflect(150));
-$('u-reflect-reveal').addEventListener('click',()=>{reflectReveal=!reflectReveal;$('u-reflect-answer').hidden=!reflectReveal;$('u-reflect-reveal').textContent=reflectReveal?'Dölj jämförelsen':'Visa jämförelsen med exakta koordinater';draw()});
+document.querySelectorAll('[data-u-answer="mirror"] button').forEach(button=>{
+ button.setAttribute('aria-pressed','false');
+ button.addEventListener('click',()=>{
+  const correct=button.dataset.uOption==='x';
+  document.querySelectorAll('[data-u-answer="mirror"] button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+  fb('u-mirror-feedback',correct?'Rätt! Spegling i y-axeln ändrar x-tecknet. Höjden y är densamma.':'Titta på punkterna 30° och 150°. De har samma höjd (y) men ligger på varsin sida om y-axeln (x). Försök igen.',correct);
+  $('u-reflect-reveal').disabled=false;
+ });
+});
+$('u-reflect-reveal').addEventListener('click',()=>{
+ reflectReveal=!reflectReveal;
+ $('u-reflect-answer').hidden=!reflectReveal;
+ $('u-reflect-reveal').textContent=reflectReveal?'Dölj koordinaterna':'Visa koordinater efter ditt val';
+ draw();
+});
 function norm(s){return s.trim().toLowerCase().replace(/[−–—]/g,'-').replace(/[√]/g,'sqrt').replace(/[π]/g,'pi').replace(/\\pi/g,'pi').replace(/\s+/g,'').replace(/\*/g,'').replace(/\{([23])\}/g,'($1)')}
 function parseExact(raw){
  let s=norm(raw);if(!s)return null;
