@@ -107,7 +107,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await ok((await page.locator('#own-answer').innerText()).replace(/\s+/g,'').includes('h(5)=−25+20=−5'),'Egen uppgifts facit korrekt');
   const ownDerivative=(await page.locator('#own-answer').innerText()).replace(/\s+/g,'');
   await ok(ownDerivative.includes('h″(x)=−2')&&ownDerivative.includes('h″(2)=−2<0'),'Eget facit innehåller korrekt andraderivatatest');
-  await ok(ownDerivative.includes('lokaltmaximumvidx=2')&&ownDerivative.includes('hela intervallet'),'Lokalt maximum skiljs från globalt extremvärde');
+  await ok(ownDerivative.includes('lokaltmaximumvidx=2')&&ownDerivative.includes('helaintervallet'),'Lokalt maximum skiljs från globalt extremvärde');
   await page.screenshot({path:evidence+'/lesson6-own-with-second-derivative-desktop.png',fullPage:true});
   await go(7);
   const book=await page.locator('#book').innerText();
