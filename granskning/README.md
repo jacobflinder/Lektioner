@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 6/41. Återstår 35/41.** Senast färdiggranskad: lektion 6, **Multiplicera och dividera med i**. **Nästa lektion: 7/41, Multiplikation och division i polär form**, sökväg ma4/kapitel-4/polar-multiplikation-division/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 7/41. Återstår 34/41.** Senast färdiggranskad: lektion 7, **Multiplikation och division i polär form**. **Nästa lektion: 8/41, de Moivres formel**, sökväg ma4/kapitel-4/de-moivre/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -23,7 +23,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [komplexa tal som vektorer](../ma4/kapitel-4/komplexa-tal-som-vektorer/) — djupgranskning 8/8, fullständiga algebraiska mellanled, interaktiva talplan, 390 px mobil och separat frivillig fördjupning
 - [x] [polar form](../ma4/kapitel-4/polar-form/) — 9/9 bilder, alla kvadranter, fullständiga koordinatbyten, dolt facit, separata MathML-rader och mobilkontroll
 - [x] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/) — 7/7 bilder, allmän härledning, tre interaktiva rotationer, fullständiga facit och 390px mobilgranskning
-- [ ] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/)
+- [x] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/) — 7/7 bilder, fullständiga r/v-mellanled, frivillig härledning, interaktiv förstoring och 390px mobil
 - [ ] [de moivre](../ma4/kapitel-4/de-moivre/)
 - [ ] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/)
 - [ ] [eulers formel](../ma4/kapitel-4/eulers-formel/)
@@ -282,12 +282,47 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Verifieringsgräns:** GitHub Actions bekräftar byggning/driftsättning och den sammanslagna kodversionen har testats med Chromium. Direkt HTTP-avläsning av Pages via externt webbverktyg var inte möjlig; den uppgiften påstås därför inte vara verifierad.
 
+
+## Bild-för-bild-rapport · 07/41 · Multiplikation och division i polär form
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2, moment 4.2 Komplexa tal i polär form.  
+**GitHub-sökväg:** `ma4/kapitel-4/polar-multiplikation-division/`.  
+**Publicerad URL:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polar-multiplikation-division/  
+**Omfattning:** **7/7 bilder**, två valfria algebraiska motiveringar, fyra steg i vardera elevstyrda huvudgenomgången, dynamisk SVG-figur med både multiplikation och division, skalning och rotation, självständiga facit, utcheckning och sju mobilbilder. All matematik är omräknad oberoende.
+
+| Bild | Upptäckt, ämneskontroll och genomförd korrigering |
+|---|---|
+| **1. Startfråga och mål** | För `z=4+3i` är `a=4`, `b=3`, `r=√(a²+b²)=√(16+9)=√25=5`, `tan v=3/4`, `v≈36,87°` i första kvadranten. Rektangulär återkontroll `5cos36,87°≈4`, `5sin36,87°≈3`; ≈ behövs p.g.a. avrundad vinkel. **Åtgärd:** mål dolda tills eleverna prövat startfrågan, facit kompletterat med koordinatidentifiering, insättning, Pythagoras och rimlighetskontroll. Startfrågan och enskilt→par bevarade. |
+| **2. Multiplikation** | Givna `z₁=2(cos30°+isin30°)`, `z₂=3(cos60°+isin60°)` är åtskilda i egna MathML-block. I fyra förutsäg→visa-steg identifieras **separat** `r₁=2`, `v₁=30°`, `r₂=3`, `v₂=60°`, därefter `r=r₁r₂=2·3=6` och `v=v₁+v₂=30°+60°=90°`. Formeln sätts in i separata läsbara led: `z₁z₂=6(cos90°+isin90°)=6(0+i·1)=6i`. **Viktig saknad förklaring:** den frivilliga härledningen har byggts ut med korta definitioner `c₁,s₁,c₂,s₂`, de två distributiva termerna `T₁,T₂`, `i²=−1`, realdel, imaginärdel och additionsformler; varje term har en redovisad källa. Frivilligheten bevarad. |
+| **3. Division** | Samma två tal, med uttryckligt giltighetsvillkor **`z₂≠0`**, motsvarande `r₂=3>0`. Givna `r₁,r₂,v₁,v₂` är separerade. Eleven ser `r=r₁/r₂=2/3`, `v=v₁−v₂=30°−60°=−30°` (eller 330°). Därefter `cos(−30°)=√3/2`, `sin(−30°)=−1/2`, `z₁/z₂=(2/3)(√3/2−i/2)=√3/3−i/3`. Alla bråk sätts i MathML och inga två oberoende ekvationer pressas ihop. Den frivilliga motiveringen utgår från `wz₂=z₁`, separerar `|w|r₂=r₁` och `arg(w)+v₂≡v₁` modulo 360°. Backning och reset fungerar. |
+| **4. Interaktivt talplan** | Oberoende kontrollräkning av startvektorerna `2∠30°`, `3∠60°`, produktens skalade längd 6 och argument 90°, samt kvotens längd 2/3 och argument −30°. **Åtgärd:** efter första klicket visas bara skalningens `r` och oförändrade `v` i separata MathML-rader; efter andra klicket visas rotation och fullständigt slutresultat. Växling av operation, tillbaka och återställning döljer föregående facit. **Visuell brist hittad trots gröna tester:** divisionens korta pil och vinkeletiketter trängdes vid origo. Ett tydligt märkt **förstoringsfönster med annan skala** visas nu vid division, medan huvudfiguren behåller **identisk skala** mellan båda operationerna. Slutligen flyttades etiketterna för skalad vektor och produkten så att de inte ligger på en vektor eller Im-axeltexten. Matematiska vektorlängder och riktningar, SVG-bågar och faktiska etikettkollisioner kontrolleras automatiskt. |
+| **5. Självständigt arbete** | `w₁=4(cos150°+isin150°)`, `w₂=2(cos30°+isin30°)`. **Produkt:** `r=4·2=8`, `v=150°+30°=180°`, alltså `w₁w₂=8(cos180°+isin180°)=−8`. **Kvot:** `r=4/2=2`, `v=150°−30°=120°`, alltså `w₁/w₂=2(cos120°+isin120°)=−1+√3i`. Facit utbyggt med separata givna värden, regler, explicita insättningar, exakta trigonometriska värden och kvadrantkontroll. Elevens uppgift och självständiga försök före facit bevarade. |
+| **6. NOKflex** | Originalets moment **4.2 Multiplikation och division i polär form**, uppgifter **4217–4231**, och **minst tre av fem nivåer** bevarade ordagrant i funktion. Eleverna väljer nivå under arbetet, ingen digital förhandsinsamling. |
+| **7. Individuell utcheckning** | För `z₁=3(cos20°+isin20°)` och `z₂=2(cos80°+isin80°)` fås `z₁z₂=6(cos100°+isin100°)` och `z₁/z₂=(3/2)(cos(−60°)+isin(−60°))`. Kvotens argument kan också skrivas 300°. Återkontroll genom multiplikation med `z₂`: `(3/2)·2=3`, `−60°+80°=20°`, vilket ger `z₁` tillbaka. Facit visar separat koefficientidentifiering, regel, insättning och slutsvar. **Begreppsfel i återkoppling rättat:** en multiplikation har en *andra faktor*, inte en *nämnare*. Målen och självbedömningsfrågan bevarade. |
+
+### Oberoende matematik, didaktik, interaktivitet och bevarande
+
+- Kontrollräkning genom separat implementerad komplex multiplikation och division av de rektangulära koordinaterna; produkt/kvot för huvudexempel, eget arbete och utcheckning jämförda med polär form inom flyttalstolerans. Nollnämnare ger uttryckligt fel. `z₂≠0` är ett giltighetsvillkor, inte ett valfritt specialfall.
+- Ingen felaktig numerisk slutsats identifierades i de ursprungliga huvuduppgifterna. Kritiska kvalitetsbrister var **saknade distributiva mellanled**, alltför korta lösningar i elevfacit, för tidig exponering av mål, hoptryckta matematiska givna värden, överlappande SVG-etiketter och otydlig kvotpil nära origo. Ett begreppsfel (*nämnare* i en multiplikation) upptäcktes och rättades.
+- **Förutsäg → försök → resonera → fullständig återkoppling → kontroll** är grundspåret. Fördjupad härledning ligger kvar bakom ett frivilligt klick. Allt ursprungligt innehåll som var relevant har bevarats: sju lektionsbilder, två elevstyrda huvudgenomgångar, lärarstöd, interaktivt talplan med två operationer, enskilt→par, pappersarbete, NOKflex **4217–4231**, nivåval och avslutande självbedömning. Inget Socrative har tillförts utan originalstöd.
+- Alla fristående matematiska värden och givna tal använder egna semantiska MathML-block med minst 16 px faktiskt avstånd. De sju mobillägena och desktop med båda figurlägena har **visuellt inspekterats**, inklusive den extra förstoringen efter den första testkörningen.
+
+### Kod, tester och publicering
+
+**Kod:** [PR #14 – Ma4 07/41](https://github.com/jacobflinder/Lektioner/pull/14), sammanslagen i `main` via commit `eefd77722076fe1f746d2c115360242e169c6cbf`. Ändrade endast aktuell lektions HTML/JS, dess befintliga par-typografitest och den gemensamma Ma4-workflowen. Nytt riktat test `ma4/kapitel-4/qa/deep-review-ma4-07.cjs`.
+
+**Verifiering:** [Riktad/fullständig Ma4 browser QA på arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43487225696) **success**; [Ma4 browser QA efter sammanslagning på `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43487922727) **success**; [GitHub Pages byggning och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43487921523) **success**. [Skärmbildsartefakt från arbetsgrenens godkända körning](https://github.com/jacobflinder/Lektioner/actions/runs/43487225696/artifacts/14067419106).
+
+**Testinnehåll:** alla 7/7 bilder och sju 390px-mobilskärmbilder; dolda facit och mål; varje klick i produkt- och kvotsekvenserna; frivillig härledning; MathML-bråk, trigonometriska värden och nollnämnarvillkor; två SVG-lägen med faktisk kontroll av radier och vinklar; förstoringsfönstrets stegvis dolda pilar; etikettkollisioner med vektorer och axeltexter; navigation, tillbaka, återställning, lärarstöd, klassrumsläge och frånvaro av JS-/resursfel. Äldre par-04-testet bevarat och anpassat, inte avstängt.
+
+**Verifieringsgräns:** Actions verifierar den sammanslagna koden och Pages bekräftar lyckad driftsättning. En separat direkt HTTP-avläsning av den publika Pages-sidans innehåll har inte utförts, vilket inte förväxlas med godkänd deployment.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad lektion:** **6 av 41 – Matematik 4, Multiplicera och dividera med i**.
-- **Sökväg:** `ma4/kapitel-4/multiplicera-dividera-med-i/`.
-- **Status:** PR #13 sammanslagen på `main`; Ma4 Chromiumtest godkänt på arbetsgren och `main`, Pages byggd och driftsatt utan fel, alla 7/7 bilder och 7/7 mobilbilder granskade; loggen uppdaterad.
-- **Nästa lektion:** **7 av 41 – Matematik 4, Multiplikation och division i polär form**.
-- **Nästa sökväg:** `ma4/kapitel-4/polar-multiplikation-division/`.
-- **Olösta blockerande fel:** inga kända efter ämnes-, matematik-, interaktions- och mobilgranskning. Endast separat direkt HTTP-avläsning av Pages är inte tillgänglig i granskningsverktyget.
-- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera aktuell huvudgren och fortsätt sedan med **lektion 7**, en lektion åt gången. Granska alla bilder, dolda svar och matematiska mellanled självständigt; bevara originaluppgifter och undervisningsaktiviteter; kontrollera matematisk notation, visuellt avstånd, figurgeometri, mobil och faktisk interaktivitet. Gör en sammanhållen ändring på arbetsgren, kör hela testsviten, verifiera GitHub Pages och uppdatera loggen först efter fullständiga kontroller.
+- **Senast avslutad lektion:** **7 av 41 – Matematik 4, Multiplikation och division i polär form**.
+- **Sökväg:** `ma4/kapitel-4/polar-multiplikation-division/`.
+- **Status:** PR #14 sammanslagen i `main`; riktat test och hela Ma4 Chromiumsviten godkända på arbetsgren och `main`, Pages byggd och driftsatt, 7/7 bilder och mobillägen granskade; permanenta granskningsloggen uppdaterad.
+- **Nästa lektion:** **8 av 41 – Matematik 4, de Moivres formel**.
+- **Nästa sökväg:** `ma4/kapitel-4/de-moivre/`.
+- **Olösta blockerande ämnes-, test- eller publiceringsfel:** inga kända. Direkt HTTP-avläsning av den publika sidan är inte separat verifierad.
+- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md` och kontrollera den aktuella GitHub-historiken. Fortsätt med **lektion 8 av 41**, en lektion i taget. Granska varje bild, varje beräkningsled, samtliga dolda facit, giltighetsvillkor, elevens tänkande före återkoppling, matematikens visuella avstånd, faktiska animationer, mobil och projektor. Bevara NOKflex, Socrative när det finns i original, laborationer och lärarstöd. Gör en sammanhållen ändring på separat gren, testa, slå samman först efter godkänd svit, verifiera Actions/Pages och uppdatera loggen efteråt.
