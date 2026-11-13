@@ -17,7 +17,7 @@ const slugs=[
 ];
 const folder='mato1c-qa-screenshots';fs.mkdirSync(folder,{recursive:true});
 const url=slug=>'http://127.0.0.1:8123/mato1c/kapitel-3/'+slug+'/';
-const formulaSelector='p.math, p.mathline, p.math-display, p.math-work, p.math-fresh, p.eq, p.formula-line, p.solution-equation';
+const formulaSelector=':is(p.math, p.mathline, p.math-display, p.math-work, p.math-fresh, p.eq, p.formula-line, p.solution-equation)';
 (async()=>{
  const browser=await chromium.launch({headless:true});
  let checks=0;
