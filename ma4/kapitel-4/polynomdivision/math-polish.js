@@ -96,8 +96,8 @@ insertSolutions({
   step('2 · Andra kvottermen',['3x²/x = 3x','3x(x − 1) = 3x² − 3x','−5x − (−3x) = −2x']),
   step('3 · Tredje kvottermen och rest',['−2x/x = −2','−2(x − 1) = −2x + 2','(−2x + 4) − (−2x + 2) = 2']),
   step('4 · Kontrollera genom multiplikation',[
-    'x(2x² + 3x − 2) = 2x³ + 3x² − 2x',
-    '−1(2x² + 3x − 2) = −2x² − 3x + 2',
+    'x(2x² + 3x − 2)','= 2x³ + 3x² − 2x',
+    '−1(2x² + 3x − 2)','= −2x² − 3x + 2',
     '3x² − 2x² = x²','−2x − 3x = −5x','2 + 2 = 4'
   ]),
   answer(['Q(x) = 2x² + 3x − 2','R(x) = 2'])
