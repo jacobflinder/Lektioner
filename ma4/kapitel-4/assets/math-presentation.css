@@ -1,0 +1,31 @@
+/* Ma4: matematiken ligger i egna, läsbara ekvationsled – inte i löpande meningar.
+   Laddas bara av de lektioner som har genomgåtts och kvalitetssäkrats. */
+.math[data-math-presentation="true"]{overflow-x:auto;overflow-y:hidden;overflow-wrap:normal;max-width:100%;scrollbar-width:thin}
+.math[data-math-presentation="true"] math{font-size:1em;white-space:nowrap;max-width:none}
+span.math[data-math-presentation="true"]{display:inline-flex;vertical-align:baseline;overflow:visible;line-height:1.2}
+span.math[data-math-presentation="true"] math{vertical-align:-.08em}
+p.math[data-math-presentation="true"]{text-align:left;margin:9px 0}
+.ma4-worked{display:grid;gap:13px;max-width:100%;font:1rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.ma4-step{background:#fff;border:1px solid #ccdde9;border-radius:11px;padding:13px 16px;max-width:100%;min-width:0}
+.ma4-step h4{font:750 .86rem/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;color:#285e7c;margin:0 0 7px}
+.ma4-equation{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:4px 0;scrollbar-width:thin}
+.ma4-equation math{color:#15334b;font-size:clamp(1.24rem,2.65vw,1.82rem);line-height:1.5;text-align:left;white-space:nowrap}
+.ma4-step .ma4-equation:not(:last-of-type){margin-bottom:1px}
+.ma4-final{background:#e5f3ec;border-left:5px solid #087d70;border-radius:10px;padding:13px 17px}
+.ma4-final>span{display:block;color:#146956;font:800 .73rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.075em;margin-bottom:4px}
+.ma4-final math{color:#064f44;font-size:clamp(1.4rem,2.9vw,2rem)}
+.ma4-note{margin:7px 0 0!important;color:#3c5768;font:.94rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.answer[data-math-presentation="true"]{padding:12px;background:#eaf4fa}
+.answer[data-math-presentation="true"] .ma4-worked{margin:0}
+.seq-item .math[data-math-presentation="true"]{line-height:1.65}
+.math-working{max-width:100%}
+.math-working p.math[data-math-presentation="true"]{white-space:nowrap}
+body.classroom .ma4-equation math{font-size:clamp(1.35rem,2.9vw,1.95rem)}
+@media(max-width:720px){
+ .ma4-worked{gap:9px}
+ .ma4-step{padding:10px 11px}
+ .ma4-equation math{font-size:clamp(1.14rem,4.6vw,1.44rem)}
+ .ma4-final{padding:11px 12px}
+ .ma4-final math{font-size:clamp(1.23rem,4.8vw,1.55rem)}
+ .answer[data-math-presentation="true"]{padding:9px}
+}
