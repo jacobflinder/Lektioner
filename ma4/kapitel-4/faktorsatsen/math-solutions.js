@@ -62,7 +62,8 @@ insertSolutions({
  homefacit:solution(
   step('1 · Kontrollera den föreslagna faktorn',['h(x) = x³ + x² − 4x − 4',
     'h(−1) = (−1)³ + (−1)² − 4(−1) − 4','= −1 + 1 + 4 − 4 = 0']),
-  answer(['x + 1 är en faktor']),
+  answer(['h(−1) = 0']),
+  step('Slutsats',[],'x + 1 är en faktor enligt faktorsatsen.'),
   step('2 · Beräkna resten vid division med x − 3',['h(3) = 3³ + 3² − 4 · 3 − 4','= 27 + 9 − 12 − 4']),
   answer(['r = 20'])
  )
