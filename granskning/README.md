@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 11/41. Återstår 30/41.** Senast färdiggranskad: lektion 11, **Andragradsekvationer**. **Nästa lektion: 12/41, Polynomdivision**, sökväg ma4/kapitel-4/polynomdivision/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 12/41. Återstår 29/41.** Senast färdiggranskad: lektion 12, **Polynomdivision**. **Nästa lektion: 13/41, Faktorsatsen**, sökväg ma4/kapitel-4/faktorsatsen/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -28,7 +28,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/) — 10/10 bilder, fullständiga rot- och k-värdesberäkningar, dolda rotvinklar, korrekt k=3-låsning, mobilläsbarhet och riktad Chromiumtest
 - [x] [eulers formel](../ma4/kapitel-4/eulers-formel/) — djupgranskning 15/15 bilder, fyra frivilliga spår, fullständiga Euler-/radianmellanled, 390 px mobil, projektor, separat Chromiumtest
 - [x] [andragradsekvationer](../ma4/kapitel-4/andragradsekvationer/) — 14/14 bilder, fullständiga pq-insättningar, båda teckenfallen, alla egna svar, mobil utan intern formelklippning, riktad Chromiumtest, PR #19 och #20
-- [ ] [polynomdivision](../ma4/kapitel-4/polynomdivision/)
+- [x] [polynomdivision](../ma4/kapitel-4/polynomdivision/) — 11 bilder, sju divisionsmotorer, fullständiga mellanled, 16 px avstånd, mobil/projektor, grön Chromium/Pages och sammanslagen PR #21
 - [ ] [faktorsatsen](../ma4/kapitel-4/faktorsatsen/)
 - [ ] [hogre grad](../ma4/kapitel-4/hogre-grad/)
 - [ ] [enhetscirkeln](../ma4/kapitel-4/enhetscirkeln/)
@@ -498,9 +498,56 @@ Den avslutade ämnes- och mobilgranskningen upptäckte efter PR #15 ännu en typ
 - **Hela Ma4-regressionen på slutlig `main`:** [run 43522933251 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43522933251). **GitHub Pages-deployment på samma commit:** [run 43522932531 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43522932531).
 - **Verifieringsgräns:** Chromiumtest och screenshots kördes mot GitHub-checkout; Pages Actions bekräftar godkänd publicering. Den offentliga URL:en kunde inte oberoende läsas direkt med tillgänglig webbtjänst (otillgängligt svar), vilket inte ska påstås vara verifierat. Ingen känd blockerande matematisk, didaktisk eller teknisk brist kvarstod efter slutkörningen.
 
+## Bild-för-bild-rapport · Lektion 12/41 · Polynomdivision
+
+**Kurs:** Matematik 4, 4.4 Polynomekvationer – Polynomdivision.  
+**GitHub-sökväg:** `ma4/kapitel-4/polynomdivision/`  
+**Elevsida:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polynomdivision/  
+**Omfattning:** **11/11 bilder**, där bild 10 är frivillig. Alla öppningsbara lösningar och sju interaktiva divisioner har granskats. Kvot och rest har verifierats med separat polynommultiplikation, inte bara mot befintliga facit. Samtliga interaktiva tillstånd har prövats genom riktat Chromiumtest.
+
+| Bild | Matematik, didaktik, metodik, kognition och konkret korrigering |
+|---|---|
+| **1 · Startfråga** | Eleverna förutsäger kvottermen till \((2x^3+3x^2-5x+6):(x+2)\). Första termen måste vara \(2x^2\) eftersom \(x\cdot 2x^2=2x^3\). Enskild tänketid (20 sekunder), parsamtal (40 sekunder) och start före förklaringen bevarade. |
+| **2 · Lärandemål** | Fyra handlingssteg är tydliga: välj kvotterm, multiplicera med **hela** divisorn, subtrahera **hela** produkten och avgör stoppvillkoret. Eleverna förklarar varför man inte bara får multiplicera med \(x\). Inga nya passiva lärarmoment har lagts till. |
+| **3 · Koppla till heltalsdivision** | \(17=5\cdot3+2\) och \(P(x)=D(x)Q(x)+R(x)\) ligger i separata MathML-block med **minst 16 px** faktisk luft. Rest till en divisor av grad 1 får vara en konstant eller 0; båda felalternativen i begreppsquizet ger specifik återkoppling. |
+| **4 · Interaktiv liggande stolen** | Huvudexemplet \(P=2x^3+3x^2-5x+6\), divisor \(x+2\), kvot \(Q=2x^2-x-3\), rest \(R=12\). Förutsägelse före klick, samtliga 10 steg, alla produkt- och subtraktionsrader, tillbaka, reset och stoppvillkor kontrollerade. Slutkontrollen visar \(Q\), \(R\), \(P=DQ+R\), produkten med resten och täljaren i **separata** matematikrader; tidigare för breda mobila slutraden delad utan att dölja någon beräkning. |
+| **5 · Återskapa täljaren** | Tidigare kortfattad kontroll har kompletterats: \(x(2x^2-x-3)=2x^3-x^2-3x\) och \(2(2x^2-x-3)=4x^2-2x-6\); sedan samlas \(-x^2+4x^2=3x^2\), \(-3x-2x=-5x\), \(-6+12=6\). Kvot, rest och divisor visas var för sig. Bråkuttrycket \(P(x)/(x+2)\) har villkoret \(x\neq-2\), medan polynomidentiteten gäller för alla \(x\). Extra stoppkontrast visar \((3x+1)-3(x+2)=-5\). |
+| **6 · Teckenfällan** | Det konstruerade felet \(-5x-(-2x)=-7x\) rättas via \(-5x-(-2x)=-5x+2x=-3x\). För den fullständiga raden fås \((-x^2-5x+6)-(-x^2-2x)=-3x+6\). Varje teckenbyte visas före resultatet och följs av kort orsaksförklaring, efter enskilt → par → klass. |
+| **7 · Guidad uppgift** | \(P=x^3+2x^2-5x-6\) och divisor \(x+3\) ger \(Q=x^2-x-2\), \(R=0\). Fullständiga kvotval, produkter, subtraktioner och kontroll utvecklade i det dolda facit. **Faktiskt interaktionsfel rättat:** tillbaka-knappen kunde gå förbi det förvalda stödläget där första kvottermen redan är given. Den stannar nu vid avsedd startpunkt; tillbaka/framåt/reset fungerar i övrigt. |
+| **8 · Självständig uppgift** | \((x^3-4x+3):(x-1)\) ger \(Q=x^2+x-3\), \(R=0\). Frivilligt stöd lyfter \(x^3+0x^2-4x+3\): nollkoefficienten håller kvar rätt gradkolumn utan att ändra polynomet. Det frivilliga divisionsstödet och kontrollen visar varje multiplikation och subtraktion; elevernas pappersträning bevarad. |
+| **9 · NOKflex** | **Oförändrat:** NOKflex → 4.4 Polynomekvationer → Polynomdivision → Övningslista; uppgifter **4421–4430**, minst tre av fem nivåer, val och byte av nivå samt redovisning av mellanled och kontroll med \(P=DQ+R\). Inget nytt Socrative-inslag, ingen kopierad uppgiftstext. |
+| **10 · Frivillig extraträning** | Alla fyra divisioner har fullständiga facit och separat interaktiv uppställning: A \((x^2+5x+6):(x+2)\Rightarrow Q=x+3,R=0\); B \((2x^3+x^2-5x+4):(x-1)\Rightarrow Q=2x^2+3x-2,R=2\); C \((x^3-2x+5):(x+2)\Rightarrow Q=x^2-2x+2,R=1\); D \((x^3-3x^2+4x-12):(x-3)\Rightarrow Q=x^2+4,R=0\). Varje produkt/subtraktion visas före slutkontrollen, lång formel i B har delats i tydliga mobilrader. Bilden kan fortfarande hoppas över vid ordinarie navigering. |
+| **11 · Individuell utcheckning** | \((x^2+x-5):(x+3)\Rightarrow Q=x-2,R=1\). Först \(x^2/x=x\) och \(x(x+3)=x^2+3x\); därefter resten \(-2x-5\); nästa kvotterm \(-2\) och produkten \(-2x-6\); slutrest \((-2x-5)-(-2x-6)=1\). Kontroll \((x+3)(x-2)+1=x^2+x-5\). Stoppvillkor grad \(0<1\), självbedömning, återkoppling till målen, repetition som hemuppgift och framåtblick till faktorsatsen bevarade. |
+
+### Oberoende kontrollräkningar
+
+Alla sju interaktiva fall kontrollerades separat i testfilen genom \((x+d)Q(x)+R=P(x)\), dels med koefficientbaserad polynommultiplikation, dels genom insättning av flera \(x\)-värden. Detta bekräftar både rätt kvot och korrekt rest, inklusive fall med nollrest och rest skild från noll.
+
+| Division | Kvot | Rest |
+|---|---|---:|
+| \((2x^3+3x^2-5x+6):(x+2)\) | \(2x^2-x-3\) | 12 |
+| \((x^3+2x^2-5x-6):(x+3)\) | \(x^2-x-2\) | 0 |
+| \((x^3-4x+3):(x-1)\) | \(x^2+x-3\) | 0 |
+| \((x^2+5x+6):(x+2)\) | \(x+3\) | 0 |
+| \((2x^3+x^2-5x+4):(x-1)\) | \(2x^2+3x-2\) | 2 |
+| \((x^3-2x+5):(x+2)\) | \(x^2-2x+2\) | 1 |
+| \((x^3-3x^2+4x-12):(x-3)\) | \(x^2+4\) | 0 |
+
+Utcheckningen är dessutom kontrollerad oberoende: \((x+3)(x-2)+1=x^2+x-5\). Det matematiska stoppvillkoret används korrekt i alla fall; resten **måste inte** vara noll, men dess grad ska vara lägre än divisorns.
+
+### Ändringar, bevarat innehåll, tester och publicering
+
+- **Matematisk typografi:** fristående givna värden och uttryck är separata semantiska MathML-block med minst **16 px verkligt mätt vertikalt avstånd** på desktop och 390px mobil. Kvot/rest, oberoende förklaringsled och kontrolluppställningar skiljs åt. Saknade distributiva mellanled är tillagda. En olämpligt kursivsatt fyrbokstavsbeteckning för grad ersattes med riktig förklaring och en matematisk olikhet.
+- **Mobil:** alla 11 bilder granskade i 390 px; inga generella horisontella sidöverflöden eller internt avklippta matematikrader i de öppnade faciten. Den interaktiva gradkolumntabellen tillåts fortfarande rulla inom sin egen behållare, eftersom den bevarar en korrekt liggande division. Desktop/projektor och långa, öppnade lösningar har även inspekterats med Chromium-skärmbilder.
+- **Bevarat:** samtliga 11 bilder, huvudaktiviteten, de sju divisionsmotorerna, frivilliga övningar, quiz, lärarstöd och klassrumsläge, elevernas arbete för hand och NOKflex 4421–4430. Facit öppnas först efter elevens försök. Inga elevidentiteter samlas in.
+- **Ny riktad testfil:** `ma4/kapitel-4/qa/deep-review-ma4-12.cjs`. Den testas först i den befintliga Ma4-regressionen, utan att någon tidigare kontroll avaktiverats. Den granskar 11/11 bilder, 7/7 divisioner, alla öppningsbara facit och frivilliga steg, när de avslöjas, back/reset, samtliga kvoter och rester, 16px-krav, fullständig 390px mobil, klassrumsläge, 11 desktopscreenshots, 11 mobilscreenshots, sju divisionsslutbilder och lärarvy.
+- **Sammanslagning:** [PR #21](https://github.com/jacobflinder/Lektioner/pull/21) är sammanslagen; kodcommit [`50a68738bed8a1703ee3e1b238da4f8b18ab099d`](https://github.com/jacobflinder/Lektioner/commit/50a68738bed8a1703ee3e1b238da4f8b18ab099d).
+- **Godkända kontroller:** [riktad/full Chromium-QA på arbetsgren, run 43527324184](https://github.com/jacobflinder/Lektioner/actions/runs/43527324184) med [skärmbildsartefakt](https://github.com/jacobflinder/Lektioner/actions/runs/43527324184/artifacts/14086415956); [full Ma4-regression på sammanslagen main, run 43527901367](https://github.com/jacobflinder/Lektioner/actions/runs/43527901367); [Pages-publicering på samma kodcommit, run 43527900602](https://github.com/jacobflinder/Lektioner/actions/runs/43527900602). Samtliga **success**.
+- **Verifieringsgräns:** Chromium verifierade den kod som GitHub testade; Pages Actions verifierar att driftsättningen lyckades. En separat direkt HTTP-kontroll av den publika sidans innehåll är inte utförd och ska inte förväxlas med den godkända Pages-körningen.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **SENAST FÄRDIG:** **11 av 41 – Matematik 4, Andragradsekvationer**. GitHub-sökväg: `ma4/kapitel-4/andragradsekvationer/`. **14/14 bilder** (inklusive tre frivilliga), samtliga dolda lösningar och digitala interaktioner granskade. Rättade pq-insättningar, fullständiga mellanled och begreppskontroller, responsiv semantisk matematisk typografi. **PR #19 och #20 sammanslagna i `main`**, senaste kodcommit `694e7c70672968fc34042cf17ba8b3b463779b03`. Riktad Chromiumtest och hela Ma4-regressionen på `main` godkända (run **43522933251**); Pages-publicering på samma kodcommit godkänd (run **43522932531**); permanenta loggen uppdaterad.
-- **NÄSTA LEKTION:** **12 av 41 – Matematik 4, Polynomdivision**. GitHub-sökväg: `ma4/kapitel-4/polynomdivision/`. URL: https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polynomdivision/.
-- **EVENTUELLA ÖPPNA PROBLEM:** Inga kända blockerande ämnes-, mellanleds-, interaktions-, mobil- eller regressionstestfel efter senaste godkända körningarna. Separat direkt HTTP-kontroll av den offentliga Pages-URL:ens innehåll kunde inte genomföras; GitHub Pages Actions-deployment är dock bekräftad. Kontrollera eventuell ny Pages-körning från denna granskningsloggs commit och verifiera att ingen annan chatt gjort ändringar.
-- **INSTRUKTION:** Läs först `AGENTS.md` och hela `granskning/README.md` inklusive bildrapporter och detta avsnitt; verifiera den aktuella `main`-grenen, antal färdiga lektioner och öppna pull requests. Fortsätt därefter **endast nästa ofärdiga lektion 12 av 41 – Polynomdivision**. Lös varje uppgift oberoende, kontrollera alla icke-visade mellanled och dolda facit, elevaktivitet före återkoppling, matematikens visuella separation, 390px mobil och projektor; gör riktade Chromiumtester med bilder och full regression, merge och Pages-kontroll. Uppdatera fullständig bild-för-bild-rapport och avsluta åter med samma överlämningsrubrik. Markera aldrig färdigt före tester och publicering.
+- **SENAST FÄRDIG:** **12 av 41 – Matematik 4, Polynomdivision**. GitHub-sökväg: `ma4/kapitel-4/polynomdivision/`. **11/11 bilder och 7/7 interaktiva divisioner** inklusive samtliga dolda facit granskade, matematik oberoende kontrollräknad och alla mellanled tydliggjorda. Minst 16 px mellan matematiska block och ingen intern matematisk mobilscroll. PR #21 sammanslagen med kodcommit `50a68738bed8a1703ee3e1b238da4f8b18ab099d`. Hela Ma4-regressionen på main, **43527901367 success**, och Pages-driftsättning på samma commit, **43527900602 success**. Permanent bild-för-bild-rapport uppdaterad.
+- **NÄSTA LEKTION:** **13 av 41 – Matematik 4, Faktorsatsen**. GitHub-sökväg: `ma4/kapitel-4/faktorsatsen/`. URL: https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/faktorsatsen/.
+- **EVENTUELLA ÖPPNA PROBLEM:** Inga kända blockerande ämnes-, interaktions-, matematiktypsättnings-, mobil- eller regressionstestfel efter slutkörning. Separat direkt HTTP-avläsning av den publika Pages-HTML:en har inte gjorts; GitHub Pages-deployment har dock godkänts. Kontrollera eventuell senare Pages-körning efter loggändringen.
+- **INSTRUKTION:** Läs först `AGENTS.md` och hela `granskning/README.md`, kontrollera aktuell main och eventuella nya öppna PR. Fortsätt **endast** med lektion **13/41 – Faktorsatsen**. Verifiera varje bild och dolt facit med oberoende matematik, eleven ska försöka före avslöjande, givna uttryck separeras med minst 16 px verkligt avstånd och matematik ska vara läsbar på projektor och mobil 390px. Bevara NOKflex och alla ursprungliga aktiviteter, skapa riktad Chromiumtest + screenshots, kör full regression, slå samman PR när grönt, kontrollera Pages och uppdatera den permanenta bild-för-bild-loggen. Stanna efter en lektion och invänta nästa 'Nästa'.
