@@ -3,7 +3,7 @@
    Samma utseende kan återanvändas lektion för lektion. */
 (()=>{'use strict';
 const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-const supMap={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'−','⁺':'+'};
+const supMap={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'−','⁺':'+','ⁿ':'n','ᵏ':'k'};
 const subMap={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9'};
 const operatorChars=new Set(['+','−','=','±','⇔','⇒','≥','≤','≠','∈','⋅','·','×','÷',':',',',';', '↔','>','<']);
 const mo=value=>'<mo>'+esc(value)+'</mo>';
@@ -25,7 +25,7 @@ function typeFormula(source,display='block'){
   }
   if(subs.length&&sups.length)base='<msubsup>'+base+mn(subs.join(''))+mn(sups.join(''))+'</msubsup>';
   else if(subs.length)base='<msub>'+base+mn(subs.join(''))+'</msub>';
-  else if(sups.length)base='<msup>'+base+mn(sups.join(''))+'</msup>';
+  else if(sups.length){const exponent=sups.join('');base='<msup>'+base+(/^[a-z]+$/.test(exponent)?mi(exponent):mn(exponent))+'</msup>';}
   return base;
  }
  function atom(){
