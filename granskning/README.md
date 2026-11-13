@@ -12,13 +12,13 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 2/41. Återstår 39/41.** Senast färdiggranskad: lektion 2, **Konjugat och absolutbelopp**. **Nästa lektion: 3/41, Multiplikation och division med komplexa tal**, sökväg ma4/kapitel-4/multiplikation-division-komplexa/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 3/41. Återstår 38/41.** Senast färdiggranskad: lektion 3, **Multiplikation och division med komplexa tal**. **Nästa lektion: 4/41, Komplexa tal som vektorer**, sökväg ma4/kapitel-4/komplexa-tal-som-vektorer/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
 - [x] [komplexa tal och i](../ma4/kapitel-4/komplexa-tal-och-i/) — bildgranskning 9/9, korrigerade mellanled och nytt webbläsartest
 - [x] [konjugat och absolutbelopp](../ma4/kapitel-4/konjugat-och-absolutbelopp/) — bildgranskning 8/8, visuellt verifierat konjugatstreck, fullständiga mellanled och separat mobilsvit
-- [ ] [multiplikation division komplexa](../ma4/kapitel-4/multiplikation-division-komplexa/)
+- [x] [multiplikation division komplexa](../ma4/kapitel-4/multiplikation-division-komplexa/) — 8/8 bilder, fullständiga distributiva led, synlighets- och mobilgranskning, Chromiumtest
 - [ ] [komplexa tal som vektorer](../ma4/kapitel-4/komplexa-tal-som-vektorer/)
 - [ ] [polar form](../ma4/kapitel-4/polar-form/)
 - [ ] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/)
@@ -126,10 +126,49 @@ u+z=−2−i, u−z=4−5i, uz=3+11i, (−3+2i)²=5−12i, (2+i)(1−2i)=4−3i,
 
 **Verifieringsgräns:** Godkända GitHub Pages-deploy-jobb är direkt verifierade. Separat HTTP-avläsning av publika sidan kunde inte utföras från granskningsverktyget; publika sidans rendering har därför provats i Chromium mot motsvarande commit i lokalt serverad testmiljö.
 
+## Bild-för-bild-rapport · 03/41 · Multiplikation och division med komplexa tal
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2 · moment 4.1.  
+**GitHub-sökväg:** `ma4/kapitel-4/multiplikation-division-komplexa/`  
+**Publicerad URL:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/multiplikation-division-komplexa/  
+**Granskade bilder:** **8/8**, inklusive den frivilliga bilden 7. Fullständiga elevlösningar, dolda facit, stegvisa härledningar, quiz, lärarstöd, val och mobilskärmbilder har granskats.
+
+| Bild | Oberoende ämneskontroll, brist och åtgärd |
+|---|---|
+| **1. Startproblem** | Kvoten (−3+2i)/(1−3i) kontrollräknad till (−9−7i)/10. Förkunskapsfrågan förtydligar nu att **hela kvoten** måste multipliceras med ū/ū=1, inte bara täljaren. Den dolda idéåterkopplingen visar nämnarkonjugatet 1+3i och beräknar (1−3i)(1+3i)=1+3i−3i−9i²=10. Lärandemålen visas efter startfrågan, inte före elevens försök. |
+| **2. Varför förlängningen fungerar** | Allmänt: u=a+bi, ū=a−bi, u·ū=a²−abi+abi−b²i²=a²+b²=|u|². **Utelämnade mellanled:** de fyra produkterna och substitutionen i²=−1 är nu uppdelade och kontrollerbara. Det visas explicit att z/u multipliceras med ū/ū=1 och att u≠0 krävs; då är a²+b²>0. De tre elevstyrda stegen med backning och återställning bevaras. |
+| **3. Genomarbetad division** | Sju steg kontrollerade för z=−3+2i, u=1−3i. Nämnare: (1−3i)(1+3i)=1+3i−3i−9i²=10. Täljare: (−3+2i)(1+3i)=−3−9i+2i+6i²=−9−7i. Resultat: z/u=−9/10−(7/10)i. Multiplikation tillbaka visar (1−3i)(−9−7i)/10=(−9+20i+21(−1))/10=−3+2i. **Visuella blockerare:** ursprungligen trycktes z- och u-värdena ihop till en svårtolkad rad; nu står de separat. Slutsvaret är delat i två ekvationsrader som ryms på mobil utan intern sidscroll. |
+| **4. Konstruerat fel** | (2+i)(3−2i)=6−4i+3i−2i²=8−i; de avsiktligt felaktigt bortglömda korsprodukterna är −4i och +3i. Fyra faktorer, kvadreringen av i och samlingen av termer visas i dolt facit. Quizens rätt- och felåterkoppling och lärarens felanalys bevaras. |
+| **5. Självständig tillämpning** | (2+i)/(1+i)=(3−i)/2=3/2−(1/2)i, kontrollerat genom att multiplicera med 1+i. **Begreppsligt fel rättat:** ursprungligt facit skrev resultatet som z trots att z inte definierats. Täljare, nämnare, i²=−1 och återkontroll har nu egna fullständiga beräkningsled. Eget arbete före facit bevarat. |
+| **6. NOKflex** | **Uppgifter 4125–4142**, moment 4.1, valet av minst tre av fem nivåer, självständigt arbete och markering av en uppgift att diskutera är helt bevarade. Knappen till frivilligt spår fungerar; huvudvägen hoppar korrekt från bild 6 till bild 8. |
+| **7. Frivilligt: rent imaginär nämnare** | (3+i)/(2i)=(1−3i)/2=1/2−(3/2)i kontrollerat. Förlängning med −i, varje produkt och varför 1/i=−i visas separat. Alternativet att förlänga med i är bevarat; u=2i≠0. Bilden ligger kvar som frivilligt extramoment. |
+| **8. Individuell utcheckning** | Oberoende verifierat: (1+i)(2−i)=3+i samt (1+2i)/(1−i)=−1/2+(3/2)i. Facit visar alla fyra produkter, konjugatet 1+i, i²-substitution, nämnaren 2 och multiplikation tillbaka till 1+2i utan försvunna tecken- eller förenklingsled. Båda facit dolda till elevens försök; målen och självbedömningen bevarade. |
+
+### Oberoende kontroll och didaktisk slutsats
+
+- **Alla huvudexemplens slutsvar var numeriskt riktiga.** De allvarliga problemen var en **odefinierad beteckning i elevfacit**, bristfälligt redovisade distributiva produkter, för komprimerade kontrollberäkningar och **två verkliga visuella läsbarhetsproblem**.
+- Oberoende aritmetik verifierade sex exempel: (−3+2i)/(1−3i)=−9/10−(7/10)i; (2+i)(3−2i)=8−i; (2+i)/(1+i)=3/2−(1/2)i; (3+i)/(2i)=1/2−(3/2)i; (1+i)(2−i)=3+i; (1+2i)/(1−i)=−1/2+(3/2)i.
+- Dessutom testades den allmänna regeln u·ū=|u|² för flera typer av u och att division med u=0 **inte** är definierad.
+- Lärandecykeln förutsäg → försök → resonera → visa fullständiga led → kontrollera är förstärkt utan att lägga till onödiga klick. Sju steg, trestegshärledningen, alla åtta bilder, läromedel, felanalys, frivilligt spår, lärarstöd, klassrumsläge och nivåval har avsiktligt bevarats.
+
+### Kodändring, kvalitetstest och publicering
+
+**Ändringshistorik:** [PR #7 – Ma4 bildgranskning 03/41](https://github.com/jacobflinder/Lektioner/pull/7), sammanslagen i `main` via commit `470bee7119c54a6aa2f97f3223d48e3fce6aa401`.
+
+**Riktat Chromiumtest:** `node ma4/kapitel-4/qa/deep-review-ma4-03.cjs` i `.github/workflows/ma4-browser-qa.yml`. Kontrollerar separat beräknad komplex aritmetik, division med noll, alla 8 bilder, samtliga dolda facit, 3+7 elevstyrda steg, rätt/felåterkoppling, back/reset, frivillig väg, läromedel, klassrumsläge, MathML, och 8/8 mobilbilder. Extra regressionstester verifierar att de givna talen **z och u står separat** och att slutsvaret på mobil **inte behöver horisontell sidscroll**.
+
+- [Arbetsgrenen – godkänt heltest](https://github.com/jacobflinder/Lektioner/actions/runs/43452109870), med [webbläsarskärmbilder](https://github.com/jacobflinder/Lektioner/actions/runs/43452109870/artifacts/14053380197).
+- [`main` – godkänt Ma4 Chromiumtest](https://github.com/jacobflinder/Lektioner/actions/runs/43452657367).
+- [`main` – godkänd GitHub Pages-build och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43452657892).
+
+**Verifieringens gräns:** GitHub Actions bekräftar godkänd Pages-driftsättning, och riktiga Chromium-skärmbilder på exakt den publicerade kodversionen är visuellt genomgångna (alla 8 mobilbilder). En separat direkt HTTP-avläsning av den publika Pages-sidan var inte möjlig från granskningsverktyget, varför sådan direktkontroll inte påstås vara utförd.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad lektion:** **2 av 41**, Matematik 4 – Konjugat och absolutbelopp, ma4/kapitel-4/konjugat-och-absolutbelopp/.
-- **Status:** kodändringar sammanslagna via PR #5 och #6, Ma4-browser QA godkänd på main, Pages-byggning och deploy godkända, 8/8 bilder och alla 8 mobillägen kontrollerade.
-- **Nästa lektion:** **3 av 41**, Matematik 4 – Multiplikation och division med komplexa tal, **ma4/kapitel-4/multiplikation-division-komplexa/**.
-- **Olösta ämnes- eller testfel i lektion 2:** inga kända efter genomförd granskning. Se verifieringsgränsen för separat direkt-HTTP-kontroll ovan.
-- **Instruktion:** Läs AGENTS.md och hela granskning/README.md, kontrollera huvudgrenens faktiska status och fortsätt därefter med **nästa ofärdiga lektion, en lektion i taget**. Verifiera kod, tester och Pages innan någon ny lektion markeras färdig.
+- **Senast avslutad:** **lektion 3 av 41 – Matematik 4, Multiplikation och division med komplexa tal**.
+- **Sökväg:** `ma4/kapitel-4/multiplikation-division-komplexa/`.
+- **Status:** kod ändrad och sammanslagen till `main` via PR #7; heltest på gren och `main` godkänt; GitHub Pages-byggning och driftsättning godkända; 8 av 8 bilder och mobillägen granskade.
+- **Nästa lektion:** **4 av 41 – Matematik 4, Komplexa tal som vektorer**.
+- **Nästa sökväg:** `ma4/kapitel-4/komplexa-tal-som-vektorer/`.
+- **Olösta fel i lektion 3:** inga kända ämnesmässiga eller automatiska testfel efter granskningen; separat live-HTTP-avläsning av Pages var inte tillgänglig.
+- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, verifiera senaste huvudgrenens status, och fortsätt med **lektion 4** en lektion åt gången. Uppdatera loggen först efter rättad kod, godkända tester och verifierad Pages-driftsättning.
