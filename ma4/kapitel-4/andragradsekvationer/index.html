@@ -6,12 +6,12 @@ body.classroom .selfcheck label,body.classroom .selfcheck input,body.classroom .
 summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}table{border-collapse:collapse;width:100%}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccdbe6}.table-wrap{overflow-x:auto}
 
 .slide .math-givens{display:grid;row-gap:16px;justify-items:start;margin:18px 0 24px}.slide .math-givens>.math{margin:0;min-width:0}/* Mathematics displayed like worked board examples — never as long inline sentences */
-.worked-math{display:grid;gap:14px;max-width:100%;font:1rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;white-space:normal}
-.worked-step{background:#fff;border:1px solid #d2e1ed;border-radius:12px;padding:13px 17px;max-width:100%}
+.worked-math{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;max-width:100%;min-width:0;font:1rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;white-space:normal}
+.worked-step{background:#fff;border:1px solid #d2e1ed;border-radius:12px;padding:13px 17px;max-width:100%;min-width:0}
 .worked-step h4{margin:0 0 8px;font-size:.88rem;letter-spacing:.012em;color:#2e6280;font-weight:750}
-.worked-equation{padding:3px 0 5px;overflow-x:auto;overflow-y:hidden;max-width:100%;scrollbar-width:thin}.worked-equation + .worked-equation{margin-top:16px}.worked-result .worked-equation + .worked-equation{margin-top:16px}
+.worked-equation{padding:3px 0 5px;overflow-x:auto;overflow-y:hidden;max-width:100%;min-width:0;scrollbar-width:thin}.worked-equation + .worked-equation{margin-top:16px}.worked-result .worked-equation + .worked-equation{margin-top:16px}
 .worked-equation math{font-size:clamp(1.34rem,2.7vw,1.95rem);color:#14334b;line-height:1.6;text-align:left}
-.worked-result{background:#e1f2e9;border:1px solid #a7d5c3;border-left:5px solid #087b70;border-radius:11px;padding:14px 16px}
+.worked-result{min-width:0;max-width:100%;background:#e1f2e9;border:1px solid #a7d5c3;border-left:5px solid #087b70;border-radius:11px;padding:14px 16px}
 .worked-result-title{display:block;color:#126a57;font-size:.73rem;letter-spacing:.075em;text-transform:uppercase;font-weight:850;margin:0 0 5px}
 .worked-result math{font-size:clamp(1.5rem,2.9vw,2.1rem);color:#104f46}
 .worked-caption{margin:9px 0 2px;color:#3c5f71;font-weight:700;font-size:.88rem}
