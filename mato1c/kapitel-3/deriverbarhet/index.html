@@ -100,7 +100,7 @@
 <div class="panel hidden" id="prior-recall">
 <p><strong>Utan graf:</strong> V(t)=120(1−e<sup>−0,2t</sup>), t≥0. Varför saknar vattenmängden ett största värde, trots att V′(t)&gt;0?</p>
 <button type="button" class="reveal" data-reveal="prior-recall-answer">Kontrollera efter eget resonemang</button>
-<div id="prior-recall-answer" class="answer hidden"><p>V′(t)=24e<sup>−0,2t</sup>&gt;0, så mängden växer. Men V(t)&lt;120 vid varje ändlig t och V(t)→120 när t→∞. Funktionen når aldrig 120 och har därför inget största värde för t≥0.</p></div></div>
+<div id="prior-recall-answer" class="answer hidden"><div class="solution-math-group"><p class="mathline">V′(t) = 24e<sup>−0,2t</sup> &gt; 0</p><p class="mathline">V(t) &lt; 120 för varje ändlig t</p><p class="mathline">lim<sub>t→∞</sub> V(t) = 120</p></div><p class="solution-explanation">Mängden växer, men når aldrig 120 och har därför inget största värde för t≥0.</p></div></div>
 </section>
 
 <section class="slide" id="predict" data-teacher="Original s.3. p=(x−1)²+2 och q=2|x−1|+2, båda kontinuerliga vid x1. Eleverna ska förutsäga ensidiga sekantlutningar från x1±h innan reglage: p left −h right +h →0; q left −2 right +2. Låt inga resultat eller förklaringar avslöjas i förväg.">
@@ -185,7 +185,7 @@
 <div class="eq-grid">
 <div class="eq-box left"><h3>Från vänster</h3>
 <p class="formula-line"><span class="fraction"><span class="num">r(2)−r(2−h)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−1</span><span class="den">h</span></span> = <span class="fraction"><span class="num">2</span><span class="den">h</span></span></p>
-<p>h=1 ⇒ lutning 2</p><p>h=0,5 ⇒ lutning 4</p><p>h=0,1 ⇒ lutning 20</p>
+<div class="solution-math-group"><p class="solution-equation">h = 1 ⇒ lutning 2</p><p class="solution-equation">h = 0,5 ⇒ lutning 4</p><p class="solution-equation">h = 0,1 ⇒ lutning 20</p></div>
 <p class="formula-line">lim<sub>h→0<sup>+</sup></sub> 2/h = +∞</p><p><strong>Ingen ändlig vänsterderivata.</strong></p></div>
 <div class="eq-box right"><h3>Från höger</h3>
 <p class="formula-line"><span class="fraction"><span class="num">r(2+h)−r(2)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−3</span><span class="den">h</span></span> = 0</p>
@@ -235,7 +235,7 @@
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilket villkor får du när vänster- och högerdelen ska mötas vid x=1?"><strong>1 · Kontinuitet</strong><p class="mathline">a+b=1²+1=2</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata har linjen? Vilken har parabeln vid x=1?"><strong>2 · Samma lutning</strong><p class="mathline">a=2·1=2</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Lös ut b och beskriv skarven."><strong>3 · Båda villkoren uppfyllda</strong><p class="mathline">2+b=2 ⇒ b=0</p><p><strong>a=2, b=0.</strong> Vänsterdel: 2x. Högerdel: x²+1. Båda närmar sig 2 och har lutning 2 vid skarven.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Lös ut b och beskriv skarven."><strong>3 · Båda villkoren uppfyllda</strong><p class="mathline">2+b=2 ⇒ b=0</p><p class="mathline">a = 2, &nbsp; b = 0</p><div class="solution-math-group"><p class="mathline">f<sub>vänster</sub>(x) = 2x</p><p class="mathline">f<sub>höger</sub>(x) = x² + 1</p></div><p class="solution-explanation">Båda närmar sig 2 och har lutning 2 vid skarven.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
 <div class="insight"><strong>Deriverbar i ett öppet intervall</strong> betyder att derivatan finns i varje punkt i intervallet. I en skarv mellan två funktionsuttryck krävs både att kurvorna möts och att lutningen är densamma.</div>
 <button type="button" class="secondary" data-reveal="stitch-detail">Fördjupning: varför kan två grenars lika lutning ändå ge ett hopp?</button>
@@ -281,8 +281,8 @@
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilket villkor får du av kontinuitet när x=2?"><strong>1 · Delarna möts</strong><p class="mathline">2c+d=2²=4</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka lutningar ska jämföras och vad blir c?"><strong>2 · Lutningarna stämmer</strong><p class="mathline">c=2·2=4</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Bestäm d och derivatan vid x=2."><strong>3 · Den deriverbara skarven</strong><p class="mathline">8+d=4 ⇒ d=−4</p><p><strong>c=4, d=−4 och F′(2)=4.</strong></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Varför fungerar inte c=4, d=0 trots att derivatorna hos de två delarna blir 4?"><strong>4 · Felsvaret</strong><p>För c=4 och d=0 närmar sig vänsterdelen <strong>8</strong> vid x=2 men <strong>F(2)=4</strong>. Hopp ⇒ inte kontinuerlig ⇒ inte deriverbar.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Bestäm d och derivatan vid x=2."><strong>3 · Den deriverbara skarven</strong><p class="mathline">8+d=4 ⇒ d=−4</p><div class="solution-math-group"><p class="mathline">c = 4, &nbsp; d = −4</p><p class="mathline">F′(2) = 4</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Varför fungerar inte c=4, d=0 trots att derivatorna hos de två delarna blir 4?"><strong>4 · Felsvaret</strong><div class="solution-math-group"><p class="mathline">c = 4, &nbsp; d = 0</p><p class="mathline">lim<sub>x→2⁻</sub> F(x) = 8</p><p class="mathline">F(2) = 4</p></div><p class="solution-explanation">Hopp ⇒ inte kontinuerlig ⇒ inte deriverbar.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Ge ett kontinuerligt exempel med olika vänster- och högerlutning."><strong>5 · Kontinuerlig utan derivata</strong><p class="mathline">q(x)=2|x−1|+2</p><p>Vid x=1 hänger grafen ihop, men vänsterlutningen är <strong>−2</strong> och högerlutningen <strong>+2</strong>. Därför finns ingen derivata där.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
 <div class="notice"><strong>Läxa:</strong> 3274 och 3275. Extra 3277.</div>
