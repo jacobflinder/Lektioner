@@ -13,14 +13,14 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 3/41. Återstår 38/41.** Senast färdiggranskad: lektion 3, **Multiplikation och division med komplexa tal**. **Nästa lektion: 4/41, Komplexa tal som vektorer**, sökväg ma4/kapitel-4/komplexa-tal-som-vektorer/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 4/41. Återstår 37/41.** Senast färdiggranskad: lektion 4, **Komplexa tal som vektorer**. **Nästa lektion: 5/41, Polär form**, sökväg ma4/kapitel-4/polar-form/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
 - [x] [komplexa tal och i](../ma4/kapitel-4/komplexa-tal-och-i/) — bildgranskning 9/9, korrigerade mellanled och nytt webbläsartest
 - [x] [konjugat och absolutbelopp](../ma4/kapitel-4/konjugat-och-absolutbelopp/) — bildgranskning 8/8, visuellt verifierat konjugatstreck, fullständiga mellanled och separat mobilsvit
 - [x] [multiplikation division komplexa](../ma4/kapitel-4/multiplikation-division-komplexa/) — 8/8 bilder, fullständiga distributiva led, synlighets- och mobilgranskning, Chromiumtest
-- [ ] [komplexa tal som vektorer](../ma4/kapitel-4/komplexa-tal-som-vektorer/)
+- [x] [komplexa tal som vektorer](../ma4/kapitel-4/komplexa-tal-som-vektorer/) — djupgranskning 8/8, fullständiga algebraiska mellanled, interaktiva talplan, 390 px mobil och separat frivillig fördjupning
 - [ ] [polar form](../ma4/kapitel-4/polar-form/)
 - [ ] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/)
 - [ ] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/)
@@ -176,12 +176,47 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Verifierad status:** Korrigeringen ändrar inte antalet genomförda lektioner (**3/41**) eller matematiska slutsvar. [PR #9](https://github.com/jacobflinder/Lektioner/pull/9) är sammanslagen till main. [Ma4 Chromium QA på main](https://github.com/jacobflinder/Lektioner/actions/runs/43464019182) **godkänd**; [Pages byggning och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43464019161) **godkända**. [Skärmbildsbevis från sista Chromiumkörningen](https://github.com/jacobflinder/Lektioner/actions/runs/43464019182/artifacts/14057965933) visar separata uttryck i alla tre lektioner. Nästa ordinarie granskning är fortfarande lektion 4.
 
+## Bild-för-bild-rapport · 04/41 · Komplexa tal som vektorer
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2 · 4.1 Aritmetik med komplexa tal.  
+**GitHub-sökväg:** \`ma4/kapitel-4/komplexa-tal-som-vektorer/\`  
+**Publicerad URL:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/komplexa-tal-som-vektorer/  
+**Granskade bilder:** **8 av 8**, där bilderna 4–5 är frivilliga geometriska tillämpningar. Dolda facit, samtliga fyra algebraiska steg, tvåstegsvektorer, cirkel- och områdesfigurer, valfria fördjupningar, exit och mobilskärmbilder har kontrollerats. Ingen del av originalets NOKflex-arbete har tagits bort.
+
+| Bild | Oberoende ämnesgranskning, upptäckt och faktisk åtgärd |
+|---|---|
+| **1. Startfråga** | För \`u=3+i\`, \`z=1+4i\` blir \`u+z=4+5i\`, slutpunkten **(4;5)**. Felalternativet (2;−3) motsvarar differensen, inte summan. **Viktigt:** målen syntes innan eleverna hade försökt; nu visas de efter elevens startfråga. Två givna tal har var sitt MathML-block med minst 16 px vertikalt mellanrum. Befintlig enskilt→par→gemensam återkoppling och begreppsförklaring bevarade. |
+| **2. Vektorsumma och differens** | Korrekt additionsvektor från (3;1) och en flyttad kopia av (1;4) till (4;5), samt subtraktion via \`−z=(−1;−4)\` och slutpunkt (2;−3). Figurerna visar först grundvektorer, sedan hjälppilen och först därefter resultatet. **Viktigt:** dynamisk återkoppling var hoptryckt i långa likhetskedjor. Nu visas ursprunglig insättning, koordinatsamling och svar som separata ekvationer; därefter Pythagoras och kvadratsumman. Vid bytt operation/back/reset döljs svaret. **Visuell korrigering:** texten \`z (flyttad)\` låg intill Im-axelns etikett; flyttad och automatiskt testad mot andra SVG-etiketters faktiska rektanglar. |
+| **3. Algebra och minutkontroll** | \`u+z=(3+i)+(1+4i)=(3+1)+(1+4)i=4+5i\`; \`−z=−1−4i\`; \`u−z=(3+i)+(−1−4i)=(3−1)+(1−4)i=2−3i\`. Längderna är **√41** respektive **√13**. Explicita mellanled för insättning, negativa tecken och kvadratsummor tillagda. **Didaktisk brist:** minutsituationen avslöjade längden √13 i frågan. Längden ska nu beräknas av eleven och facit visas separat efter försök. För minutuppgiften \`u=2+3i\`, \`z=−1+i\` kontrolleras \`u−z=3+2i\` med längd √13. Fyra elevstyrda steg, tillbaka och återställning bevarade. |
+| **4. Cirklar (frivillig)** | \`|z−z₀|=r\` med \`r>0\` separerade i egna, läsbara matematiksatser. För \`|z|=3\` är centrum origo; för \`|z−2i|=3\` är centrum (0;2). Båda har radie 3 och endast randen ingår. Interaktiv figur och förutsägelse före visning bevarade. SVG-skalan är lika för båda axlarna och den ritade radiesträckan har exakt samma längd som cirkelradien. Centrumbyte döljer tidigare facit. |
+| **5. Linjer och områden (frivillig)** | \`Re(z)=2\` är en vertikal linje. \`−1≤Im(z)<2\` är ett band där **nedre randen ingår och övre är utesluten**. \`|z+i|<2\` är en öppen skiva med centrum \`−i\` och radie 2. Kontroll av heldragen/streckad rand och skivans öppna rand i faktiskt SVG, samt rätt/fel-feedback i quiz. Matematiknotationen för \`Re(z)\`/\`Im(z)\` gjord tydligare så att funktionsnamn inte ser hoptryckta ut. Alla tre valbara figurer och frågor bevarade. |
+| **6. Självständigt försök** | \`w=−2+3i\` motsvarar punkten (−2;3) och har längden \`√((−2)²+3²)=√(4+9)=√13\`. **Kognitiv förbättring:** kärnfacit visar endast detta exempel. Frivilliga lösningar öppnas separat för områdesfrågor; för \`|z+i|<2\` är centrum −i och punkten z=i ger \`|2i|=2\`, vilket **inte** uppfyller \`2<2\`. Ursprungliga valfria uppgifter och eget arbete bevarade. |
+| **7. NOKflex** | **Uppgifter 4146–4160**, moment 4.1 och elevens val av **minst tre av fem nivåer** kvarstår ordagrant i innehåll och funktion. Digitala svar samlas inte in. Ingen onödig extrauppgift införd. |
+| **8. Individuell utcheckning** | Kärnfrågan \`u=2+3i\`, \`z=−1+i\` ger \`u−z=3+2i\` och längd \`√13\`. Facit visar att subtraktion av hela parentesen ändrar tecknen, sedan insättning och kvadratsumma. Frivilliga frågor ger cirkel med centrum (3;0), radie 2, inkluderad rand för \`|w−3|=2\`; övre randen \`Im(w)=2\` ingår inte i bandet. Frivilliga facit dolda separat. Ett fel där svensk svarstext behandlades som en matematisk ekvation har rättats. Avslutningsbildens lärandemål, självbedömning och lärarstöd bevarade. |
+
+### Matematisk, didaktisk och visuell kontroll
+
+- **Oberoende kontrollerade resultat:** (3;1)+(1;4)=(4;5), (3;1)−(1;4)=(2;−3), \`−z=−1−4i\`, längd² för summan 41 och för differensen 13, samt \`(2+3i)−(−1+i)=3+2i\` med längd² 13. Exemplet \`w=−2+3i\` ger längd² 13. Geometriskt kontrollerades en radiesträcka (1,8;2,4) med längd exakt 3, centrum −i och de olika randvillkoren.
+- **Inga felaktiga numeriska slutsvar hittades.** Viktigaste bristerna var bortfall av nödvändiga algebraiska mellanled, för tidigt synliga svar, visuellt hoptryckt matematik/etiketter och blandning av grund- och fördjupningsfacit.
+- **Bevarat:** samtliga 8 bilder, båda frivilliga bilderna, vektoranimationen i två steg, cirkel- och områdesinteraktionerna, begreppsquiz, elevaktiva förutsägelser, lärarstöd, klassrumsläge och NOKflex-uppgifter 4146–4160. Inget Socrative-inslag har lagts till utan grund i originalet.
+
+### Verifiering, kodändringar och publicering
+
+**Sammanslagna kodändringar:** [PR #10 – djupgranskning och fullständiga mellanled](https://github.com/jacobflinder/Lektioner/pull/10), [PR #11 – överlappningsfri etikett i talplanet](https://github.com/jacobflinder/Lektioner/pull/11).
+
+**Riktat automatiskt test:** \`node ma4/kapitel-4/qa/deep-review-ma4-04.cjs\` integrerat i Ma4:s befintliga Chromiumworkflow. Kontrollerar 8/8 bilder, facitens ordning, omstart/backning, fria navigeringsvägar, matematiskt korrekta resultat, verkliga SVG-cirklar/randvillkor, etikettkollisioner med \`getBBox\`, fel- och rättfeedback, MathML, CSS-avstånd och 390 px mobil. \`qa/math-typography-pair-02.cjs\` har anpassats utan att ta bort sakliga assertions.
+
+**Godkänd verifiering:**
+- [Ma4 Chromium QA på \`main\` efter sista sammanslagningen](https://github.com/jacobflinder/Lektioner/actions/runs/43469238300) — **success**.
+- [GitHub Pages bygge och driftsättning efter sista sammanslagningen](https://github.com/jacobflinder/Lektioner/actions/runs/43469237294) — **success**.
+- [Chromiumskärmbilder från sista körningen på \`main\`](https://github.com/jacobflinder/Lektioner/actions/runs/43469238300/artifacts/14059404652). Samtliga åtta mobilbilder har granskats visuellt. En separat direkt HTTP-avläsning av den publika Pages-sidan kunde inte utföras från granskningsverktyget; därför anges endast den verifierade Pages-driftsättningen och renderingen mot publicerad kod i Chromium.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad:** **lektion 3 av 41 – Matematik 4, Multiplikation och division med komplexa tal**.
-- **Sökväg:** `ma4/kapitel-4/multiplikation-division-komplexa/`.
-- **Status:** kod ändrad och sammanslagen till `main` via PR #7; heltest på gren och `main` godkänt; GitHub Pages-byggning och driftsättning godkända; 8 av 8 bilder och mobillägen granskade.
-- **Nästa lektion:** **4 av 41 – Matematik 4, Komplexa tal som vektorer**.
-- **Nästa sökväg:** `ma4/kapitel-4/komplexa-tal-som-vektorer/`.
-- **Olösta fel i lektion 3:** inga kända ämnesmässiga eller automatiska testfel efter granskningen; separat live-HTTP-avläsning av Pages var inte tillgänglig.
-- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, verifiera senaste huvudgrenens status, och fortsätt med **lektion 4** en lektion åt gången. Uppdatera loggen först efter rättad kod, godkända tester och verifierad Pages-driftsättning.
+- **Senast avslutad:** **4 av 41 – Matematik 4, Komplexa tal som vektorer**.
+- **Sökväg:** \`ma4/kapitel-4/komplexa-tal-som-vektorer/\`.
+- **Status:** PR #10 och #11 sammanslagna i \`main\`; Ma4-browser QA godkänd, GitHub Pages-byggning och driftsättning godkända; samtliga 8 bilder och 8 mobillägen granskade; permanent logg uppdaterad.
+- **Nästa lektion:** **5 av 41 – Matematik 4, Polär form**.
+- **Sökväg:** \`ma4/kapitel-4/polar-form/\`.
+- **Olösta blockerande fel:** inga kända efter senaste ämnes- och webbläsargranskningen; den separata direkta publika HTTP-kontrollen var inte tillgänglig.
+- **Instruktion:** Läs \`AGENTS.md\` och hela \`granskning/README.md\`, kontrollera senaste färdigstatus och fortsätt med **lektion 5**, en lektion i taget. Kontrollera matematiska mellanled, faktisk figurgeometri, visuellt avstånd och dolda svar innan du ändrar. Ändra och testa på separat gren, verifiera Actions samt Pages, och uppdatera granskningsloggen igen efter färdig lektion.
