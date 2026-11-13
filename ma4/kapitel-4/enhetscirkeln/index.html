@@ -8,6 +8,7 @@
 <title>Enhetscirkeln – repetitionsverkstad | Ma4 kapitel 4</title>
 <link rel="stylesheet" href="./style.css">
 <script src="./unit-circle.js" defer></script>
+<script src="./understand.js" defer></script>
 </head>
 <body>
 <header>
@@ -19,17 +20,19 @@
   <div class="intro">
     <div class="eyebrow">REPETITIONSVERKSTAD · 5–15 MINUTER</div>
     <h1>Enhetscirkeln – från vinkel till exakta värden</h1>
-    <p class="lead">Kommer du ihåg <strong>graderna, radianerna och de exakta koordinaterna</strong>? Här får du först förstå sambanden, sedan återkalla dem utan facit och till sist kontrollera att du klarar dem själv.</p>
+    <p class="lead">Har du glömt hur enhetscirkeln fungerar? Börja från grunden med radier, båglängder, trianglar och speglingar. Träna sedan exakta värden och pröva dem i komplexa tal – utan att lära dig en hel tabell utantill.</p>
   </div>
   <section class="goal" aria-labelledby="goal-title">
     <strong id="goal-title">Mål: efter repetitionen ska du kunna</strong>
     <p>byta mellan grader och radianer, bestämma <span class="math">cos v</span> och <span class="math">sin v</span> exakt för standardvinklar, samt kontrollera tecknen med kvadranten.</p>
   </section>
   <nav class="tabs" role="tablist" aria-label="Välj repetition">
-    <button type="button" role="tab" id="tab-study" data-tab="study" aria-controls="study-panel" aria-selected="true">1 · Utforska</button>
-    <button type="button" role="tab" id="tab-train" data-tab="train" aria-controls="practice-panel" aria-selected="false">2 · Träna</button>
-    <button type="button" role="tab" id="tab-challenge" data-tab="challenge" aria-controls="practice-panel" aria-selected="false">3 · Snabbkoll</button>
+    <button type="button" role="tab" id="tab-foundation" data-tab="foundation" aria-controls="foundation-panel" aria-selected="true">1 · Förstå från början</button>
+    <button type="button" role="tab" id="tab-study" data-tab="study" aria-controls="study-panel" aria-selected="false">2 · Utforska</button>
+    <button type="button" role="tab" id="tab-train" data-tab="train" aria-controls="practice-panel" aria-selected="false">3 · Träna</button>
+    <button type="button" role="tab" id="tab-challenge" data-tab="challenge" aria-controls="practice-panel" aria-selected="false">4 · Snabbkoll</button>
   </nav>
+  <p class="pathnote">Kan du redan grunderna? Välj <strong>Träna</strong> eller <strong>Snabbkoll</strong> direkt. Behöver du förstå varför? Börja här.</p>
   <div class="workspace">
     <section class="panel left" aria-labelledby="circle-heading">
       <h2 id="circle-heading">Enhetscirkeln</h2>
@@ -47,7 +50,122 @@
         <p>Skriv svaret själv, gärna först på papper. Figuren markerar inte lösningen förrän du har fått återkoppling.</p>
       </div>
     </section>
-    <section class="panel right" id="study-panel" role="tabpanel" aria-labelledby="tab-study">
+    <section class="panel right foundation" id="foundation-panel" role="tabpanel" aria-labelledby="tab-foundation">
+      <div class="u-top">
+        <div><span class="badge">Från ”fattar inte” till ”aha”</span><h2 id="u-heading">Bygg upp förståelsen steg för steg</h2></div>
+        <span class="count" id="u-progress">Steg 1 av 6</span>
+      </div>
+      <p class="micro">Du behöver inte kunna standardvinklarna utantill för att börja. Förutsäg, utforska figuren och förklara. Skriv gärna på papper. Ingen poängjakt.</p>
+      <div class="u-workspace">
+        <div class="u-figure">
+          <svg id="u-svg" viewBox="0 0 460 460" role="img" aria-label="Enhetscirkel, interaktiv figur. Använd reglagen och knapparna i respektive steg."></svg>
+          <p id="u-figure-caption" class="micro">Enhetscirkeln har radien 1.</p>
+        </div>
+        <div class="u-lesson">
+          <section class="u-step" data-u-step="0">
+            <span class="u-section">1 · Koordinater är grunden</span>
+            <h3>Vad betyder egentligen cos och sin?</h3>
+            <p>En punkt på cirkeln har avståndet <strong>1</strong> från origo. Tänk dig en radie som vrids moturs från den positiva x-axeln. <strong>Cos v är x-koordinaten, sin v är y-koordinaten.</strong></p>
+            <p class="task"><strong>Förutsäg:</strong> Om radien pekar rakt upp, vilken x-koordinat har punkten? Peka först, välj sedan.</p>
+            <div class="u-options" data-u-answer="axis">
+              <button type="button" data-u-option="1">x = 1</button>
+              <button type="button" data-u-option="0">x = 0</button>
+              <button type="button" data-u-option="-1">x = −1</button>
+            </div>
+            <p class="u-feedback feedback" id="u-axis-feedback" role="status" aria-live="polite" hidden></p>
+            <div class="pillrow u-small-controls"><button type="button" class="secondary" data-u-axis="0">0°</button><button type="button" class="secondary" data-u-axis="90">90°</button><button type="button" class="secondary" data-u-axis="180">180°</button><button type="button" class="secondary" data-u-axis="270">270°</button></div>
+            <p class="micro">Klicka sedan på 0°, 90°, 180° och 270°. Vad händer med koordinaterna? Därför fungerar samma idé i alla fyra kvadranter.</p>
+            <div id="u-axis-answer" class="answer" hidden>Vid 90° ligger punkten i <strong>(0; 1)</strong>: ingen förflyttning i x-led, en radie uppåt i y-led. Alltså <strong>cos 90° = 0</strong> och <strong>sin 90° = 1</strong>.</div>
+          </section>
+          <section class="u-step" data-u-step="1" hidden>
+            <span class="u-section">2 · Från grader till radianer</span>
+            <h3>Varifrån kommer π?</h3>
+            <p>På en cirkel med <strong>radie 1</strong> är hela omkretsen <strong>2π</strong>. Radianmåttet är <strong>cirkelbågens längd delat med radien</strong>. Därför motsvarar ett halvt varv <strong>π rad</strong>, inte för att man måste memorera det utan för att halva omkretsen är π.</p>
+            <label class="u-slider-label" for="u-radian-slider">Dra vinkelreglaget: <strong id="u-radian-deg">60°</strong></label>
+            <input type="range" id="u-radian-slider" min="0" max="360" step="15" value="60">
+            <p class="micro">Den <strong>orange cirkelbågen</strong> visar den tillryggalagda båglängden. Drag radien direkt i figuren går också.</p>
+            <button type="button" id="u-radian-reveal" class="secondary">Visa båglängd och radianmått</button>
+            <div class="answer" id="u-radian-answer" hidden><p id="u-radian-work"></p></div>
+            <p class="task"><strong>Din tur:</strong> Om 180° är π rad, hur många radianer är 60°? Motivera med vilken del av ett halvt varv det är.</p>
+            <div class="u-options" data-u-answer="radian">
+              <button type="button" data-u-option="π/6">π/6</button>
+              <button type="button" data-u-option="π/3">π/3</button>
+              <button type="button" data-u-option="2π/3">2π/3</button>
+            </div>
+            <p class="u-feedback feedback" id="u-radian-feedback" role="status" aria-live="polite" hidden></p>
+          </section>
+          <section class="u-step" data-u-step="2" hidden>
+            <span class="u-section">3 · Härled de exakta värdena</span>
+            <h3>Varför blir det √2/2 och √3/2?</h3>
+            <p>Nu använder vi geometri i stället för att memorera en tabell. Hypotenusan är en radie med längden 1. Triangelns kateter är <strong>cos v</strong> och <strong>sin v</strong>.</p>
+            <div class="pillrow u-small-controls" aria-label="Välj triangel">
+              <button type="button" data-u-triangle="45">45°</button>
+              <button type="button" data-u-triangle="30">30°</button>
+              <button type="button" data-u-triangle="60">60°</button>
+            </div>
+            <div class="task"><strong>Förutsäg:</strong> Vilken av kateterna är längst, eller är de lika? Rita först en enkel triangel.</div>
+            <button type="button" id="u-triangle-reveal" class="secondary">Visa härledning med Pythagoras</button>
+            <div id="u-triangle-answer" class="answer" hidden></div>
+            <p class="micro">För 45° används en likbent rätvinklig triangel. För 30° och 60° utgår vi från halva en liksidig triangel. Förstå dessa två trianglar, så kan du återskapa sex positiva värden.</p>
+          </section>
+          <section class="u-step" data-u-step="3" hidden>
+            <span class="u-section">4 · Kvadranter och spegling</span>
+            <h3>Varför byter cos tecken vid 150°?</h3>
+            <p>Börja med <strong>30°</strong> i första kvadranten. Den ligger 30° över positiva x-axeln. Spegla punkten i <strong>y-axeln</strong>: då hamnar den vid <strong>150°</strong>.</p>
+            <p class="task"><strong>Innan du speglar:</strong> Vad händer med x? Vad händer med y? Ska cos 150° vara positiv eller negativ?</p>
+            <div class="pillrow u-small-controls">
+              <button type="button" id="u-reflect-start" class="secondary">Visa 30°</button>
+              <button type="button" id="u-reflect-mirror">Spegla till 150°</button>
+            </div>
+            <label class="u-slider-label" for="u-reflect-slider">Undersök riktningen: <strong id="u-reflect-deg">30°</strong></label>
+            <input type="range" id="u-reflect-slider" min="30" max="150" step="5" value="30">
+            <button type="button" id="u-reflect-reveal" class="secondary">Visa jämförelsen med exakta koordinater</button>
+            <div id="u-reflect-answer" class="answer" hidden><p><strong>30°:</strong> (√3/2; 1/2)</p><p><strong>150°:</strong> (−√3/2; 1/2)</p><p><strong>Varför?</strong> Spegling i y-axeln ger motsatt x-koordinat men samma y-koordinat. Så cos byter tecken medan sin behåller sitt.</p><p>Och 150° = 180° − 30° = <strong>5π/6 rad</strong>.</p></div>
+          </section>
+          <section class="u-step" data-u-step="4" hidden>
+            <span class="u-section">5 · Mindre stöd · egen lösning</span>
+            <h3>Kan du återskapa 210°?</h3>
+            <p>Du känner nu axlarna, trianglarna, referensvinkeln och grader–radianer. Nu får du använda dem tillsammans.</p>
+            <div class="task"><strong>Skriv på papper först.</strong> Bestäm <strong>cos 210°</strong> och <strong>sin 210°</strong> exakt. Vilken kvadrant? Vilken referensvinkel? Vilket radianmått?</div>
+            <label for="u-210-input" class="u-input-label">Skriv cos 210°; sin 210° (semikolon mellan värdena)</label>
+            <input type="text" id="u-210-input" class="u-input" placeholder="cos; sin" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <div class="controls"><button type="button" id="u-210-check">Kontrollera mitt svar</button><button type="button" id="u-210-hint" class="secondary">Visa ett stöd</button></div>
+            <div class="feedback" id="u-210-feedback" role="status" aria-live="polite" hidden></div>
+            <div id="u-210-support" class="hint-panel" hidden></div>
+            <button type="button" class="ghost" id="u-210-solution" hidden>Visa hela resonemanget efter försök</button>
+            <div id="u-210-answer" class="answer" hidden><strong>210° = 180° + 30° = 7π/6 rad.</strong> Tredje kvadranten har negativ x- och y-koordinat. Referensvinkeln är 30°, därför blir cos 210° = −√3/2 och sin 210° = −1/2.</div>
+          </section>
+          <section class="u-step" data-u-step="5" hidden>
+            <span class="u-section">6 · Överför till Matematik 4</span>
+            <h3>Nu har du nytta av detta i komplexa tal</h3>
+            <p>En punkt på enhetscirkeln har beloppet 1. Ett komplext tal med beloppet <strong>2</strong> får koordinaterna som är <strong>dubbelt så stora</strong>.</p>
+            <p class="task"><strong>Utan figur:</strong> Det komplexa talet har beloppet 2 och argumentet <strong>240°</strong>. Bestäm det i rektangulär form <strong>z = a + bi</strong>. Visa mellanled på papper.</p>
+            <label for="u-240-input" class="u-input-label">Skriv z i rektangulär form (exempel på skrivsätt: a+bi)</label>
+            <input type="text" id="u-240-input" class="u-input" placeholder="Skriv exakt värde på formen a+bi" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <div class="controls"><button type="button" id="u-240-check">Kontrollera svaret</button><button type="button" id="u-240-hint" class="secondary">Visa ett stöd</button></div>
+            <p id="u-240-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+            <div id="u-240-support" class="hint-panel" hidden></div>
+            <button type="button" id="u-240-solution" class="ghost" hidden>Visa hela lösningen efter försök</button>
+            <div id="u-240-answer" class="answer" hidden><p><strong>240° = 180° + 60° = 4π/3 rad.</strong> I tredje kvadranten är båda koordinater negativa:</p><p class="math">cos 240° = −1/2, &nbsp; sin 240° = −√3/2</p><p class="math">z = 2(−1/2 − √3/2 i) = <strong>−1 − √3i</strong></p></div>
+            <div id="u-final" class="u-final" hidden>
+              <h3>Pröva på en helt ny vinkel</h3>
+              <p>Beloppet är fortfarande 2, men argumentet är nu <strong>300°</strong>. Vad är z i rektangulär form? Lös först utan figur.</p>
+              <label for="u-300-input" class="u-input-label">Skriv z = a + bi</label>
+              <input type="text" id="u-300-input" class="u-input" placeholder="Ditt exakta z" autocomplete="off" autocapitalize="off" spellcheck="false">
+              <button type="button" id="u-300-check">Kontrollera den nya uppgiften</button>
+              <p id="u-300-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+              <div id="u-complete" class="answer" hidden>Du kan nu bygga upp exakta värden med referensvinklar och kvadranter och använda dem i ett komplext tal. Återkom gärna nästa lektion och gör Snabbkoll utan hjälp.</div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="u-navigation controls">
+        <button type="button" id="u-prev" class="secondary">← Föregående steg</button>
+        <button type="button" id="u-next">Nästa steg →</button>
+      </div>
+      <div class="u-progress-track" aria-hidden="true"><span id="u-progress-fill"></span></div>
+    </section>
+    <section class="panel right" id="study-panel" role="tabpanel" aria-labelledby="tab-study" hidden>
       <span class="badge">Bygg sambanden</span>
       <h2>Utforska och förutsäg</h2>
       <p>Välj vinkel. Börja med enhetscirkeln, inte med en utantillinlärd tabell.</p>
@@ -138,7 +256,7 @@
   </div>
   <div class="teacher-note">
     <details><summary>För läraren · föreslaget klassrumsbruk</summary>
-      <p><strong>Start (2 min):</strong> Alla skriver på papper vad 150° är i radianer och uppskattar cos 150° samt sin 150°. Visa inte lösningen direkt.</p>
+      <p><strong>Start (2 min):</strong> Alla skriver på papper vad 150° är i radianer och uppskattar cos 150° samt sin 150°. Visa inte lösningen direkt. <strong>För elever som inte förstår:</strong> välj Förstå från början och gör steg 1–4 med gemensamma förutsägelser innan självständiga försök.</p>
       <p><strong>Gemensam återkoppling (3 min):</strong> Låt en elev förklara referensvinkel, en annan kvadrant och en tredje sambandet mellan 180° och π rad. Visa sedan punkten i Utforska.</p>
       <p><strong>Individuell återkallning (5–8 min):</strong> Träna eller Snabbkoll. Eleverna skriver först själva. Använd inte poängen för betyg eller ranking, utan för att identifiera vilken typ av vinkelfel som behöver repeteras.</p>
       <p><strong>Återbesök:</strong> 2–3 nya frågor i nästa Ma4-lektion. Detta är ett repetitionsstöd, inte ett nytt obligatoriskt långt teoripass. Ingen Socrative och inga nya NOKflex-uppgifter har lagts till.</p>
