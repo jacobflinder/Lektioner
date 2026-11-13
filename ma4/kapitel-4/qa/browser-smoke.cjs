@@ -113,6 +113,10 @@ async function active(page){
       assert.ok(await full.isEnabled(),'Andragrad: full lösning blir tillgänglig efter kontrollerat försök');
       await full.click();
       assert.ok(await polarCheck.locator('.sc-answer').isVisible(),'Andragrad: eleven kan se full lösning efter försök');
+      assert.ok(await polarCheck.locator('.sc-answer math[display="block"]').count()>=8,'Andragrad: polär lösning visas som matematiska ekvationer');
+      assert.ok(await polarCheck.locator('.sc-answer mfrac').count()>2,'Andragrad: radianbråk sätts som riktiga bråk');
+      assert.ok(await polarCheck.locator('.sc-answer msqrt').count()>1,'Andragrad: kvadratrötter sätts matematiskt');
+      assert.ok(await polarCheck.locator('.sc-answer .worked-result').count()===1,'Andragrad: båda rötter markeras tydligt i ett eget svarsfält');
       // Diagnos av komplexa koefficienter.
       await page.selectOption('#jump','2');
       const variant=page.locator('[data-check="variant"]'),variantInput=page.locator('#variant-input');
@@ -127,6 +131,9 @@ async function active(page){
       assert.ok(await variant.locator('.classroom-solution').isEnabled(),'Andragrad: lärare styr återkoppling efter pappersförsök');
       await variant.locator('.classroom-solution').click();
       assert.ok(await variant.locator('.sc-answer').isVisible(),'Andragrad: pappersförsök kräver ingen digital inmatning');
+      assert.ok(await variant.locator('.sc-answer math').count()>6,'Andragrad: pq-lösning i klassrum visas som matematisk uppställning');
+      assert.ok(await variant.locator('.sc-answer msup').count()>0,'Andragrad: potenser är riktig matematik');
+      assert.ok(await variant.locator('.sc-answer mfrac').count()>0,'Andragrad: pq-formelns bråk är typograferade');
       await page.locator('#mode').click();
       assert.ok(await variant.locator('.sc-answer').isHidden()&&await variant.locator('.digital-solution').isDisabled(),'Andragrad: repetitionsläget återställer försökskravet');
       // Begrepp: motsatt och konjugat kan gälla samtidigt.
@@ -142,6 +149,17 @@ async function active(page){
       assert.ok(!exitText.includes('z² = −8i'),'Andragrad: tidigare övning återanvänds inte');
       assert.ok(await page.locator('#r13a').isHidden()&&await page.locator('#r13b').isHidden(),'Andragrad: exitfacit dolt');
       assert.ok(!exitText.includes('Till läraren'),'Andragrad: läraranteckningar visas inte för eleverna');
+      await page.locator('button[data-reveal="r13a"]').click();
+      assert.ok(await page.locator('#r13a math').count()>5,'Andragrad: utcheckning A har satta ekvationsled');
+      assert.ok(await page.locator('#r13a msqrt').count()>0,'Andragrad: utcheckning A visar riktig rot');
+      await page.locator('button[data-reveal="r13b"]').click();
+      assert.ok(await page.locator('#r13b math').count()>8,'Andragrad: utcheckning B har matematiskt uppställd polär lösning');
+      await page.locator('#jump').selectOption('8');
+      await page.locator('button[data-reveal="r9"]').click();
+      assert.ok(await page.locator('#r9 math').count()>8,'Andragrad: metodvalets facit är uppdelat i tydliga ekvationsblock');
+      await page.locator('#jump').selectOption('2');
+      await page.locator('button[data-reveal="r3"]').click();
+      assert.ok(await page.locator('#r3 math').count()>4,'Andragrad: även de tidiga genomgångarna har satta mellanled');
 
     }
     if(slug==='hogre-grad'){
