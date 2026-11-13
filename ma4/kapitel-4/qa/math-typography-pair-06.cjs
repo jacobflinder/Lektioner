@@ -83,8 +83,8 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      let moves=1;
      while(await main.locator('.forward').isEnabled()&&moves<16){await main.locator('.forward').click();moves++}
      assert.ok(await main.locator('.forward').isDisabled(),'Förklaringen avslutas vid sista steget');
-     assert.ok(await main.locator('.result-summary math').count()===1,'Slutlig kontroll är riktig matematisk ekvation');
-     assert.ok((await main.locator('.result-summary math').getAttribute('aria-label')).replace(/\s+/g,'').includes('2x³+3x²−5x+6'),
+     assert.ok(await main.locator('.result-summary math').count()===4,'Slutlig kontroll är riktig matematisk ekvation');
+     assert.ok((await main.locator('.result-summary math').last().getAttribute('aria-label')).replace(/\s+/g,'').includes('2x³+3x²−5x+6'),
        'Sambandet divisor · kvot + rest återger täljaren');
      assert.ok(await main.locator('.division-table .product td math').count()>0,'Hela produkter inom parentes satt som matematik');
      await page.screenshot({path:OUT+'/ma4-polynomdivision-math-stolen.png',fullPage:true});
@@ -96,7 +96,7 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      await page.selectOption('#jump','5');
      assert.ok(await page.locator('#a6').isHidden(),'Felanalys dolt facit');
      await page.locator('[data-reveal="a6"]').click();
-     assert.ok(await page.locator('#a6 .ma4-step').count()===2,'Teckenfelet rättas i två steg');
+     assert.ok(await page.locator('#a6 .ma4-step').count()>=3,'Teckenfelet rättas med delsteg och orsaksförklaring');
      assert.ok((await page.locator('#a6 math[aria-label*="−3x"]').count())>0,'Tecknen rättade');
      await page.selectOption('#jump','6');
      assert.ok(await page.locator('#a7').isHidden(),'Paruppgiftens facit dolt');
