@@ -2,11 +2,11 @@
 (function fy1MathTypography(){
 'use strict';
 const NS='http://www.w3.org/1998/Math/MathML';
-const enabled=new Set(['coulombs-lag','elektriska-kretsar','serie-parallell','effekt']);
+const enabled=new Set(['coulombs-lag','elektriska-kretsar','serie-parallell','effekt','elektriska-falt','potential']);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const superscript={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'−','⁺':'+'};
-const subscript={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9','ₑ':'e','ᵣ':'r','ₛ':'s','ₜ':'t','ₒ':'o','ᵢ':'i'};
-const units=new Set(['kW','A','V','C','Ω','N','J','W','s','m','mm','cm','nm','kg','Ah','nC','µN','kN','mA']);
+const subscript={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9','ₑ':'e','ᵣ':'r','ₛ':'s','ₜ':'t','ₒ':'o','ᵢ':'i','ₓ':'x','ₐ':'a','ᵦ':'b','ₕ':'h','ₖ':'k','ₗ':'l','ₘ':'m','ₙ':'n','ₚ':'p','ᵤ':'u','ᵥ':'v','ᵧ':'y'};
+const units=new Set(['kW','A','V','C','Ω','N','J','W','s','m','mm','cm','nm','kg','Ah','nC','µN','kN','mA','fN','eV','ns','kV','N/C','kN/C','kV/m','V/m','m/s','m/s²']);
 const element=(tag,inner)=>'<'+tag+'>'+inner+'</'+tag+'>';
 function splitOutside(s,operators){
  let level=0,out=[],last=0;
@@ -23,12 +23,13 @@ function scriptToken(n){
  return element('mtext',esc(n));
 }
 function atomic(src){
- const chunks=src.match(/\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*|[₀-₉ₑᵣₛₜₒᵢ]+|[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+|[\p{L}ℰµΩ]+|\s+|./gu)||[];
+ const chunks=src.match(/\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*|[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)*|_[A-Za-z0-9]+|[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+|[\p{L}ℰµΩ]+|\s+|./gu)||[];
  const parts=[];let prev='start';
  for(const c of chunks){
    if(/^\s+$/.test(c)){prev='space';continue;}
    if(/^\d/.test(c)){parts.push(element('mn',esc(c.trim())));prev='number';continue;}
-   if(/^[₀-₉ₑᵣₛₜₒᵢ]+$/.test(c)){const n=[...c].map(x=>subscript[x]||x).join('');if(parts.length)parts[parts.length-1]=element('msub',parts[parts.length-1]+scriptToken(n));else parts.push(element('mn',esc(n)));prev='sub';continue;}
+   if(/^[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)*$/.test(c)){const n=[...c].map(x=>subscript[x]||x).join('');if(parts.length)parts[parts.length-1]=element('msub',parts[parts.length-1]+scriptToken(n));else parts.push(element('mn',esc(n)));prev='sub';continue;}
+   if(/^_[A-Za-z0-9]+$/.test(c)){const n=c.slice(1);if(parts.length)parts[parts.length-1]=element('msub',parts[parts.length-1]+element('mtext',esc(n)));else parts.push(element('mtext',esc(n)));prev='sub';continue;}
    if(/^[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+$/.test(c)){const n=[...c].map(x=>superscript[x]||x).join('');if(parts.length)parts[parts.length-1]=element('msup',parts[parts.length-1]+scriptToken(n));else parts.push(element('mn',esc(n)));prev='sup';continue;}
    if(/^[\p{L}ℰµΩ]+$/u.test(c)){
      if(units.has(c)&&['number','sup','space'].includes(prev)){parts.push('<mspace width="0.17em"/>'+element('mtext',esc(c)));prev='unit';continue;}
@@ -66,20 +67,20 @@ function layout(text){
  return element('mrow',atomic(s));
 }
 function mathHTML(text){return '<math xmlns="'+NS+'" class="fy1-typeset" display="inline"><semantics>'+layout(text)+'<annotation encoding="text/plain">'+esc(text)+'</annotation></semantics></math>';}
-const atom=String.raw`(?:[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s+(?:N·m²/C²|Ω·mm²/m|(?:m|mm|cm)/s²|C/s|J/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*)`;
+const atom=String.raw`(?:[πρ]\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s+(?:N·m²/C²|Ω·mm²/m|(?:m|mm|cm)/s²|C/s|J/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)?(?:_[A-Za-z0-9]+)?|\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*|[A-Za-zℰρπµΩ][A-Za-zℰρπµΩ₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*(?:,[₀-₉ₑᵣₛₜₒᵢₓₐᵦₕₖₗₘₙₚᵤᵥᵧ]+)?(?:_[A-Za-z0-9]+)?)`;
 const term=String.raw`[+−-]?${atom}(?:\s*[+−·×/-]\s*${atom}|\([^()]{1,82}\)[⁰¹²³⁴⁵⁶⁷⁸⁹]*)*`;
-const unit=String.raw`(?:\s+(?:N·m²/C²|Ω·mm²/m|C/s|J/C|(?:mm|cm|m)/s²|(?:kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])))?`;
+const unit=String.raw`(?:\s+(?:N·m²/C²|Ω·mm²/m|C/s|J/C|kV/m|kN/C|N/C|V/m|m/s²|m/s|(?:mm|cm|m)/s²|(?:kg|Ah|mm²|nC|µN|kN|kW|fN|eV|ns|kV|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])))?`;
 const equation=new RegExp(String.raw`(?<![\p{L}\p{N}₀-₉])${term}${unit}(?:\s*(?:=|≈|∝)\s*${term}${unit})+`,'gu');
 const incompleteEquation=new RegExp(String.raw`(?<![\p{L}\p{N}₀-₉])${term}${unit}(?:\s*=\s*${term}${unit})+\s*=\s*$`,'gu');
 const fractions=/(?<![\p{L}\p{N}])(?:\|Q₁Q₂\|\/r²|F₀\/4|R\/4|[23]\/[24]|N·m²\/C²)/gu;
-const quantities=/(?<![\p{L}\p{N}₀-₉])[+−-]?\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s*(?:C\/s|J\/C|kg|Ah|mm²|nC|µN|kN|kW|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])/gu;
+const quantities=/(?<![\p{L}\p{N}₀-₉])[+−-]?\d+(?:[,.]\d+)?(?:[ \u00a0\u202f]\d{3})*(?:\s*·\s*10[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)?\s*(?:C\/s|J\/C|kV\/m|kN\/C|N\/C|V\/m|m\/s²|m\/s|kg|Ah|mm²|nC|µN|kN|kW|fN|eV|ns|kV|mm|cm|nm|[kµmn]?A|V|C|Ω|N|J|W|s|m)(?![\p{L}])/gu;
 function findMath(text){
  const found=[];
  for(const [re,kind] of [[incompleteEquation,'incomplete'],[equation,'equation'],[fractions,'fraction'],[quantities,'quantity']]){
     re.lastIndex=0;let match;while((match=re.exec(text))){
       if(kind==='equation'||kind==='incomplete'){
        const lhs=match[0].split(/[=≈∝]/)[0].trim();
-       if(!/^(?:[+−(-]?\d|[A-Zℰρπ]|[eikqrltad])/.test(lhs))continue;
+       if(!/^(?:[+−(-]?\d|[A-Zℰρπ]|[a-z])/.test(lhs))continue;
        if(/^[a-z]{2,}$/u.test(lhs))continue;
       }
       found.push({from:match.index,to:match.index+match[0].length,value:match[0],kind});
