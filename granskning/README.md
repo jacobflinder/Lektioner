@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 5/41. Återstår 36/41.** Senast färdiggranskad: lektion 5, **Polär form**. **Nästa lektion: 6/41, Multiplicera och dividera med i**, sökväg ma4/kapitel-4/multiplicera-dividera-med-i/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 6/41. Återstår 35/41.** Senast färdiggranskad: lektion 6, **Multiplicera och dividera med i**. **Nästa lektion: 7/41, Multiplikation och division i polär form**, sökväg ma4/kapitel-4/polar-multiplikation-division/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -22,7 +22,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [multiplikation division komplexa](../ma4/kapitel-4/multiplikation-division-komplexa/) — 8/8 bilder, fullständiga distributiva led, synlighets- och mobilgranskning, Chromiumtest
 - [x] [komplexa tal som vektorer](../ma4/kapitel-4/komplexa-tal-som-vektorer/) — djupgranskning 8/8, fullständiga algebraiska mellanled, interaktiva talplan, 390 px mobil och separat frivillig fördjupning
 - [x] [polar form](../ma4/kapitel-4/polar-form/) — 9/9 bilder, alla kvadranter, fullständiga koordinatbyten, dolt facit, separata MathML-rader och mobilkontroll
-- [ ] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/)
+- [x] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/) — 7/7 bilder, allmän härledning, tre interaktiva rotationer, fullständiga facit och 390px mobilgranskning
 - [ ] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/)
 - [ ] [de moivre](../ma4/kapitel-4/de-moivre/)
 - [ ] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/)
@@ -246,12 +246,48 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Verifieringsgräns:** Pages-build och deployment är direkt verifierade i GitHub Actions. Ett separat försök att läsa den publika Pages-sidans HTTP-innehåll med webbverktyget misslyckades; sådan direktavläsning påstås därför inte vara verifierad.
 
+## Bild-för-bild-rapport · 06/41 · Multiplicera och dividera med i
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2, moment 4.2 Komplexa tal i polär form.  
+**GitHub-sökväg:** `ma4/kapitel-4/multiplicera-dividera-med-i/`  
+**Publicerad URL:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/multiplicera-dividera-med-i/  
+**Omfattning:** Samtliga **7 av 7 bilder**, startfråga, fem elevstyrda generella bevissteg, alla tre starttal i interaktivt talplan, dolda facit, felanalys, eget arbete, NOKflex, utcheckning, lärarstöd, klassrumsläge och sju mobilbilder.
+
+| Bild | Oberoende ämneskontroll, upptäckt och genomförd åtgärd |
+|---|---|
+| **1. Startfråga** | `z=2+i`. Oberoende kontrollerat `iz=i(2+i)=2i+i²=2i−1=−1+2i`. Startpunkten (2;1) roteras moturs till (−1;2), och båda längderna är `√5`. **Brister:** facit redovisade för många steg i samma uttryck och målen var synliga före startförsöket. Nu är det dolda facit uppdelat i fyra steg med distributiva lagen, `i²=−1`, separata punkter och två Pythagoras-beräkningar; målen öppnas efter förkunskapsfrågan. Enskilt→par och ritandet på papper bevarade. |
+| **2. Algebran förklarar geometrin** | Generellt `z=a+bi`, med `a,b∈ℝ`. **Fem steg:** (1) `iz=i(a+bi)=ia+i(bi)=ai+bi²=ai+b(−1)=−b+ai`; (2) `(a;b)→(−b;a)`, 90° moturs; (3) `i(−i)=−i²=1` och `1/i=(1·(−i))/(i(−i))=(−i)/1=−i`, därför `z/i=(a+bi)(−i)=−ai−bi²=−ai−b(−1)=b−ai`; (4) `(a;b)→(b;−a)`, 90° medurs; (5) tre explicita Pythagoras-steg som visar att `|z|=|iz|=|z/i|=√(a²+b²)`. **Åtgärdat:** tidigare utelämnade distributiva produkter, insättningar och rotförenklingar samt otydlig radianformulering. Generellt tal och villkoret på a,b står i **två separata MathML-block med minst 16 px mellanrum**. `z=0` bevaras som specialfall (längden 0, argument odefinierat). Fråga→klick→ett steg, bakåt och reset fungerar. |
+| **3. Interaktivt talplan** | Tre oberoende provfall: `z=2+i` ger `iz=−1+2i`, `z/i=1−2i`; `z=−1+2i` ger `iz=−2−i`, `z/i=2+i`; `z=−2−i` ger `iz=1−2i`, `z/i=−1+2i`. I samtliga fall är `|z|=|iz|=|z/i|=√5`. **Väsentlig didaktisk brist:** figuren visade rätt riktning men återkopplingen innehöll nästan enbart slutsvar. Den visar nu först **tre distributions-/teckenled** för multiplikation, därefter **fyra för division**, och slutligen **tre separata längdberäkningar**. Blå startvektor, motursbåge, medursbåge och cirkel med lika skala bevarade. Varje klick visar bara rätt nästa innehåll; byte av tal, bakåt och reset döljer tidigare facit. Visuellt kontrollerat på dator och 390px mobil utan avklippta matematikrader eller etikettkollisioner. |
+| **4. Konstruerad missuppfattning** | För `z=1+2i` är `z̄=1−2i` (spegling), `iz=i+2i²=−2+i` (moturs) och `z/i=−i−2i²=2−i` (medurs). Alla resultat har samma belopp `√5`, men är olika punkter och operationer. Facit är fortsatt dolt före elevens egen felsökning. Fullständiga insättningar av `i²=−1`, tydliga konjugatstreck och tre separata slutsvar har lagts till. Konstruerat påstående har inte felaktigt presenterats som autentiskt elevsvar. |
+| **5. Självständig tillämpning** | `z=−3+2i`: `iz=−3i+2i²=−2−3i`, `z/i=3i−2i²=2+3i`. `|z|=√((−3)²+2²)=√13`, och samma längd följer för de två roterade talen. Fullständigt, separat dolt facit med koefficienter, distributiv lag, tecken, kvadratsummor och två tydliga slutsvar. Elevens eget pappersarbete och kontroll genom ritning bevarade. |
+| **6. NOKflex** | Moment **4.2**, **uppgifter 4232–4240**, val av **minst tre av fem nivåer**, möjlighet att byta nivå under arbetet och uppgift att markera för diskussion har bevarats utan ändringar i bokinnehållet. Inga nya digitala svarinsamlingar införda. |
+| **7. Individuell utcheckning** | `z=1−2i`: `iz=i−2i²=2+i`, `z/i=−i+2i²=−2−i`. Längderna `|z|=√(1²+(−2)²)=√5`, `|iz|=√(2²+1²)=√5`, `|z/i|=√((−2)²+(−1)²)=√5`. Två slutsvar och tre längdkontroller är nu egna lättlästa matematikkedjor, med mellanled för negativa tecken; facit fortsatt dolt före elevens eget försök. Målen och den avslutande självbedömningen kvar. |
+
+### Matematiska slutsatser, lärande och avsiktligt bevarande
+
+- Alla numeriska slutsvar i originalet var korrekta. De viktigaste bristerna för lärandet var **för tidigt synliga mål**, **överhoppad distributiv lag och `i²=−1`-insättning**, för långa kompakta likhetskedjor samt för lite matematiskt stöd till den dynamiska rotationsfiguren.
+- Oberoende beräkningar kontrollerar `iz=−b+ai`, `z/i=b−ai`, `i(−i)=1`, oförändrade kvadrerade belopp och att `i(z/i)=z`; testat på alla tre interaktiva starttal, båda elevexemplen och `z=0`. Division med **noll** är däremot inte definierad; nämnaren `i` är alltid skild från noll.
+- Grundprincipen **förutsäg → försök själv → resonera → visa fullständig återkoppling → kontrollera** har förstärkts utan extra klick i talplanet. Bevarat: **alla sju originalbilder**, fem allmänna steg, tre starttal, alla rotationsbågar och figurer, konstruerad felanalys, elevens pappersarbete, lärarstöd, klassrumsläge, NOKflex 4232–4240 och nivåval. Inget Socrative-inslag har lagts till utan stöd i källan.
+
+### Kod, automatisk testning och publicering
+
+**Kodändring:** [PR #13 – Ma4 djupgranskning 06/41](https://github.com/jacobflinder/Lektioner/pull/13), sammanslagen till `main` via commit `519a0916ed20199440eeefec06673a11295260d8`.
+
+**Riktat Chromiumtest:** `node ma4/kapitel-4/qa/deep-review-ma4-06.cjs`, infört i `.github/workflows/ma4-browser-qa.yml`. Oberoende komplex aritmetik (inklusive noll och återkontroll), samtliga sju bilder, fem allmänna steg, alla dolda facit, tre interaktiva punkter och medurs/motursbågar, cirkel, dynamiska mellanled, korrekta tecken, back/reset, faktiskt CSS-avstånd, 390px mobil, lärarstöd och klassrumsläge. **Alla sju mobila skärmbilder och datorbilden med det dynamiska talplanet granskades visuellt**, utöver automatiska kontroller av uttryckens bredd.
+
+**Godkänd verifiering:**
+- [Arbetsgrenens Ma4 Chromiumtest](https://github.com/jacobflinder/Lektioner/actions/runs/43482827928) – **success**; [skärmbilder](https://github.com/jacobflinder/Lektioner/actions/runs/43482827928/artifacts/14065403295).
+- [`main` – fullständig Ma4 browser QA](https://github.com/jacobflinder/Lektioner/actions/runs/43483649016) – **success**.
+- [GitHub Pages byggning och driftsättning efter sammanslagning](https://github.com/jacobflinder/Lektioner/actions/runs/43483646680) – **success**.
+
+**Verifieringsgräns:** GitHub Actions bekräftar byggning/driftsättning och den sammanslagna kodversionen har testats med Chromium. Direkt HTTP-avläsning av Pages via externt webbverktyg var inte möjlig; den uppgiften påstås därför inte vara verifierad.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad lektion:** **5 av 41 – Matematik 4, Polär form**.
-- **Sökväg:** `ma4/kapitel-4/polar-form/`.
-- **Status:** Kod korrigerad och sammanslagen till `main` via PR #12. Riktat webbläsartest och hela Ma4-testsviten godkända, GitHub Pages-byggning och driftsättning godkända, samtliga nio bilder och mobillägen granskade; granskningsloggen uppdaterad.
-- **Nästa lektion:** **6 av 41 – Matematik 4, Multiplicera och dividera med i**.
-- **Nästa sökväg:** `ma4/kapitel-4/multiplicera-dividera-med-i/`.
-- **Olösta blockerande ämnes- eller testfel:** inga kända. En separat direkt HTTP-kontroll av den publika Pages-sidan kunde inte genomföras.
-- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera senaste huvudgrenens status och börja på nästa ofärdiga lektion, **6 av 41**. Granska en lektion i taget, alla bilder och dolda facit, självständig matematik, nödvändiga mellanled, matematiktypografi, visuellt avstånd och faktiska interaktioner. Ändra i separat arbetsgren, testa före merge, verifiera Actions/Pages och uppdatera denna logg först när lektionen är färdig.
+- **Senast avslutad lektion:** **6 av 41 – Matematik 4, Multiplicera och dividera med i**.
+- **Sökväg:** `ma4/kapitel-4/multiplicera-dividera-med-i/`.
+- **Status:** PR #13 sammanslagen på `main`; Ma4 Chromiumtest godkänt på arbetsgren och `main`, Pages byggd och driftsatt utan fel, alla 7/7 bilder och 7/7 mobilbilder granskade; loggen uppdaterad.
+- **Nästa lektion:** **7 av 41 – Matematik 4, Multiplikation och division i polär form**.
+- **Nästa sökväg:** `ma4/kapitel-4/polar-multiplikation-division/`.
+- **Olösta blockerande fel:** inga kända efter ämnes-, matematik-, interaktions- och mobilgranskning. Endast separat direkt HTTP-avläsning av Pages är inte tillgänglig i granskningsverktyget.
+- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera aktuell huvudgren och fortsätt sedan med **lektion 7**, en lektion åt gången. Granska alla bilder, dolda svar och matematiska mellanled självständigt; bevara originaluppgifter och undervisningsaktiviteter; kontrollera matematisk notation, visuellt avstånd, figurgeometri, mobil och faktisk interaktivitet. Gör en sammanhållen ändring på arbetsgren, kör hela testsviten, verifiera GitHub Pages och uppdatera loggen först efter fullständiga kontroller.
