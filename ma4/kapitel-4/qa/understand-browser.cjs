@@ -34,10 +34,10 @@ async function active(page){return page.locator('.u-step:not([hidden])')}
   await page.locator('#u-next').click();
   assert.ok((await active(page)).innerText().then(s=>s.includes('Varifrån kommer π')),'radiansteget');
   assert.ok(await page.locator('#u-radian-answer').isHidden(),'radianer dolda initialt');
-  await page.locator('#u-radian-slider').fill('180');
+  await page.locator('#u-radian-slider').evaluate(el=>{el.value='180';el.dispatchEvent(new Event('input',{bubbles:true}))});
   await page.locator('#u-radian-reveal').click();
   assert.ok((await page.locator('#u-radian-answer').innerText()).includes('π rad'),'halvt varv π');
-  await page.locator('#u-radian-slider').fill('60');
+  await page.locator('#u-radian-slider').evaluate(el=>{el.value='60';el.dispatchEvent(new Event('input',{bubbles:true}))});
   await page.locator('#u-radian-reveal').click();
   assert.ok((await page.locator('#u-radian-answer').innerText()).includes('π/3 rad'),'60 grader π/3');
   await page.locator('[data-u-answer="radian"] button[data-u-option="π/6"]').click();
