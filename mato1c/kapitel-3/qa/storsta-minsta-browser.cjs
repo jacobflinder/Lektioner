@@ -93,7 +93,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Korrekt max/min med värde och x');
   await ok(!await page.locator('#own-answer').isVisible(),'Eget facit dolt före klick');
   await page.locator('[data-reveal="own-answer"]').click();
-  await ok((await page.locator('#own-answer').innerText()).includes('h(5)=−25+20=−5'),'Egen uppgifts facit korrekt');
+  await ok((await page.locator('#own-answer').innerText()).replace(/\s+/g,'').includes('h(5)=−25+20=−5'),'Egen uppgifts facit korrekt');
   await go(7);
   const book=await page.locator('#book').innerText();
   for(const v of ['s. 159–160','3157–3163','3164–3166','3167–3168','3158','3161','3164','20 minuter','minst två','3161 a och 3164 a–b','3168'])await ok(book.includes(v),'Bok/läxa korrekt: '+v);
