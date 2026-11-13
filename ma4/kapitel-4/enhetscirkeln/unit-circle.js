@@ -70,11 +70,13 @@ function chooseTab(name){
   const selected=b.dataset.tab===name;
   b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;
  }
+ $('foundation-panel').hidden=name!=='foundation';
  $('study-panel').hidden=name!=='study';
- $('practice-panel').hidden=name==='study';
+ $('practice-panel').hidden=name==='study'||name==='foundation';
  $('learn-prompt').hidden=name!=='study';
- $('practice-guide').hidden=name==='study';
+ $('practice-guide').hidden=name==='study'||name==='foundation';
  $('practice-focus-wrap').hidden=name!=='train';
+ if(name==='foundation')return;
  if(name==='study')renderStudy();
  else{
   if(name==='challenge'){setText('session-heading','Snabbkoll utan ledtrådar');setText('session-lead','Sex blandade frågor. Skriv först själv; återkoppling visas när du kontrollerar.');}
@@ -340,5 +342,5 @@ $('solution-btn').addEventListener('click',revealSolution);
 $('next-btn').addEventListener('click',()=>{if(ready){cursor++;renderQuestion()}});
 $('again-btn').addEventListener('click',()=>startSession(mode));
 $('restart-btn').addEventListener('click',()=>startSession(mode));
-chooseTab('study');
+chooseTab('foundation');
 })();
