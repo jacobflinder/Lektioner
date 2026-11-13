@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Träna enhetscirkeln: exakta vinklar i grader och radianer, cosinus och sinus, kvadranter och koordinater. Direkt återkoppling utan elevkonto.">
+<title>Enhetscirkeln – repetitionsverkstad | Ma4 kapitel 4</title>
+<link rel="stylesheet" href="./style.css">
+<script src="./unit-circle.js" defer></script>
+</head>
+<body>
+<header>
+  <a href="../">← Kapitel 4 · Komplexa tal</a>
+  <strong>Matematik 4 · Repetition inför polär form</strong>
+  <button id="projector" type="button" aria-pressed="false">Stor visning</button>
+</header>
+<main>
+  <div class="intro">
+    <div class="eyebrow">REPETITIONSVERKSTAD · 5–15 MINUTER</div>
+    <h1>Enhetscirkeln – från vinkel till exakta värden</h1>
+    <p class="lead">Kommer du ihåg <strong>graderna, radianerna och de exakta koordinaterna</strong>? Här får du först förstå sambanden, sedan återkalla dem utan facit och till sist kontrollera att du klarar dem själv.</p>
+  </div>
+  <section class="goal" aria-labelledby="goal-title">
+    <strong id="goal-title">Mål: efter repetitionen ska du kunna</strong>
+    <p>byta mellan grader och radianer, bestämma <span class="math">cos v</span> och <span class="math">sin v</span> exakt för standardvinklar, samt kontrollera tecknen med kvadranten.</p>
+  </section>
+  <nav class="tabs" role="tablist" aria-label="Välj repetition">
+    <button type="button" role="tab" id="tab-study" data-tab="study" aria-controls="study-panel" aria-selected="true">1 · Utforska</button>
+    <button type="button" role="tab" id="tab-train" data-tab="train" aria-controls="practice-panel" aria-selected="false">2 · Träna</button>
+    <button type="button" role="tab" id="tab-challenge" data-tab="challenge" aria-controls="practice-panel" aria-selected="false">3 · Snabbkoll</button>
+  </nav>
+  <div class="workspace">
+    <section class="panel left" aria-labelledby="circle-heading">
+      <h2 id="circle-heading">Enhetscirkeln</h2>
+      <div class="statusbar"><span>Radie = 1</span><strong>(cos v; sin v)</strong></div>
+      <div class="plane-wrap">
+        <svg id="circle-svg" viewBox="0 0 460 460" role="img" aria-label="Enhetscirkel med axlarna cosinus och sinus"></svg>
+      </div>
+      <div class="legend" aria-hidden="true"><span>Vinkel och punkt</span><span>Projektioner på axlarna</span></div>
+      <div id="learn-prompt" class="task">
+        <strong>Förutsäg → visa → förklara</strong>
+        <p>Välj en vinkel, tänk på vilken kvadrant den ligger i och försök ange radianmått och exakta koordinater innan du visar svaret.</p>
+      </div>
+      <div id="practice-guide" class="task" hidden>
+        <strong>Arbeta utan facit</strong>
+        <p>Skriv svaret själv, gärna först på papper. Figuren markerar inte lösningen förrän du har fått återkoppling.</p>
+      </div>
+    </section>
+    <section class="panel right" id="study-panel" role="tabpanel" aria-labelledby="tab-study">
+      <span class="badge">Bygg sambanden</span>
+      <h2>Utforska och förutsäg</h2>
+      <p>Välj vinkel. Börja med enhetscirkeln, inte med en utantillinlärd tabell.</p>
+      <div class="pillrow">
+        <label for="study-units">Visa vinkelknappar som</label>
+        <select id="study-units"><option value="degrees">Grader</option><option value="radians">Radianer</option></select>
+      </div>
+      <div class="angle-list" id="angle-buttons" aria-label="Standardvinklar i enhetscirkeln"></div>
+      <div class="task">
+        <strong>Din vinkel: <span class="math math-big" id="study-question">45°</span></strong>
+        <p>Vilket är radianmåttet? Vilka värden har <strong>cos v</strong> och <strong>sin v</strong>? Vilka tecken måste de ha?</p>
+      </div>
+      <div class="controls"><button id="study-reveal" type="button" aria-controls="study-answer" aria-expanded="false">Visa gradtal, radianmått och koordinater</button></div>
+      <div class="answer" id="study-answer" hidden>
+        <div class="formula-line">
+          <div class="formula"><small>Grader</small><div class="math math-strong" id="study-deg">45°</div></div>
+          <div class="formula"><small>Radianer</small><div class="math math-strong" id="study-rad">π/4</div></div>
+          <div class="formula"><small>cos v (x)</small><div class="math math-strong" id="study-cos">√2/2</div></div>
+          <div class="formula"><small>sin v (y)</small><div class="math math-strong" id="study-sin">√2/2</div></div>
+        </div>
+        <p id="study-explain"></p>
+      </div>
+      <div class="study-block">
+        <h3>Tre byggstenar att kunna härleda</h3>
+        <div class="study-grid">
+          <div><strong>30°</strong><span>sin = 1/2</span></div>
+          <div><strong>45°</strong><span>sin = √2/2</span></div>
+          <div><strong>60°</strong><span>sin = √3/2</span></div>
+        </div>
+        <p class="micro">Använd <strong>30°–60°–90°-triangeln</strong> (sidor 1, √3, 2) och <strong>45°–45°–90°-triangeln</strong> (sidor 1, 1, √2) för att härleda värdena. Cosinus är den horisontella koordinaten. Kvadranten avgör tecknen.</p>
+        <div class="line"></div>
+        <p><strong>Hållpunkter:</strong> Ett halvt varv = 180° = π rad. Ett helt varv = 360° = 2π rad.</p>
+        <p class="micro">I andra kvadranten är cos negativ och sin positiv. I tredje är båda negativa. I fjärde är cos positiv och sin negativ. På axlarna är någon koordinat 0.</p>
+      </div>
+      <p class="micro">När du kan göra förutsägelsen: välj <strong>Träna</strong>. Värdena är dolda tills du själv ber om dem.</p>
+    </section>
+    <section class="panel right" id="practice-panel" role="tabpanel" aria-labelledby="tab-train" hidden>
+      <span class="badge" id="round-type">Övningsrunda</span>
+      <h2 id="session-heading">Träna din återkallning</h2>
+      <p id="session-lead">Skriv ett svar i taget. Missade samband återkommer senare.</p>
+      <div id="practice-focus-wrap" class="pillrow">
+        <label for="practice-focus">Vad vill du träna?</label>
+        <select id="practice-focus">
+          <option value="mixed">Blandat: hela enhetscirkeln</option>
+          <option value="convert">Grader ↔ radianer</option>
+          <option value="values">Exakta sin- och cosvärden</option>
+          <option value="quadrants">Kvadranter och tecken</option>
+        </select>
+      </div>
+      <div id="quiz-area">
+        <p class="count" id="q-number">Fråga 1 av 12</p>
+        <div class="task">
+          <strong id="q-prompt">Växla från grader till radianer.</strong>
+          <p class="micro" id="q-example">Svara med π, till exempel π/3.</p>
+        </div>
+        <div class="field-row">
+          <label for="q-answer">Ditt svar – utan facit</label>
+          <input id="q-answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="Skriv ditt exakta svar" aria-describedby="q-example">
+        </div>
+        <div class="controls">
+          <button id="check-btn" type="button">Kontrollera mitt svar</button>
+          <button id="hint-btn" type="button" class="secondary" disabled>Visa ledtråd efter försök</button>
+        </div>
+        <div class="feedback" id="q-feedback" role="status" aria-live="polite" hidden></div>
+        <div class="hint-panel" id="q-hint" hidden><strong>Ledtråd</strong><p id="q-hint-text"></p></div>
+        <div class="controls">
+          <button id="solution-btn" type="button" class="ghost" hidden disabled>Visa lösning efter två försök</button>
+          <button id="next-btn" type="button" disabled>Nästa fråga →</button>
+        </div>
+        <div id="q-solution" class="answer" hidden>
+          <strong>Exakt svar: <span class="math" id="q-solution-text"></span></strong>
+          <p class="explain" id="q-explanation"></p>
+        </div>
+      </div>
+      <div id="result" class="result" hidden>
+        <h3 id="result-heading">Din repetitionsrunda</h3>
+        <p class="math" id="result-score"></p>
+        <p id="result-body"></p>
+        <p class="micro">Resultatet sparas inte. Pröva gärna igen en annan dag med nya vinklar.</p>
+        <button id="again-btn" type="button">Träna en ny runda</button>
+      </div>
+      <div class="study-block">
+        <p class="micro"><strong>Skrivsätt som fungerar:</strong> <code>π/6</code>, <code>5pi/4</code>, <code>−√3/2</code>, <code>-sqrt(2)/2</code>, <code>1/2</code>, <code>0</code>. Skriv två koordinater med semikolon, exempelvis <code>1/2;√3/2</code>. För gradtal fungerar <code>120°</code> eller <code>120</code>.</p>
+        <p class="micro"><strong>Träning:</strong> Först eget svar, sedan specifik återkoppling. När du gör ett fel kommer frågan tillbaka senare i samma runda. <strong>Snabbkoll:</strong> ingen ledtråd före återkoppling.</p>
+        <button id="restart-btn" type="button" class="ghost">Starta om rundan</button>
+      </div>
+    </section>
+  </div>
+  <div class="teacher-note">
+    <details><summary>För läraren · föreslaget klassrumsbruk</summary>
+      <p><strong>Start (2 min):</strong> Alla skriver på papper vad 150° är i radianer och uppskattar cos 150° samt sin 150°. Visa inte lösningen direkt.</p>
+      <p><strong>Gemensam återkoppling (3 min):</strong> Låt en elev förklara referensvinkel, en annan kvadrant och en tredje sambandet mellan 180° och π rad. Visa sedan punkten i Utforska.</p>
+      <p><strong>Individuell återkallning (5–8 min):</strong> Träna eller Snabbkoll. Eleverna skriver först själva. Använd inte poängen för betyg eller ranking, utan för att identifiera vilken typ av vinkelfel som behöver repeteras.</p>
+      <p><strong>Återbesök:</strong> 2–3 nya frågor i nästa Ma4-lektion. Detta är ett repetitionsstöd, inte ett nytt obligatoriskt långt teoripass. Ingen Socrative och inga nya NOKflex-uppgifter har lagts till.</p>
+    </details>
+  </div>
+  <footer class="bottom">Matematik 4 / Matematik – fortsättning, nivå 2 · Kapitel 4. Alla svar kontrolleras lokalt i webbläsaren. Ingen inloggning, spårning, lagring eller överföring av elevsvar.</footer>
+</main>
+</body></html>
