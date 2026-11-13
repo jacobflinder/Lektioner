@@ -6,7 +6,7 @@
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 function math(expr){
  const normalized=expr.replaceAll('-', '−').replaceAll('→','⇒');
- const tokens=normalized.match(/(?:\d+(?:[.,]\d+)?)|(?:[A-Za-z]+)|[π√²³₀₁₂−+÷×±⇔⇒=<>()[\]{}/*|:,;·]/gu)||[];
+ const tokens=normalized.match(/(?:\d+(?:[.,]\d+)?)|(?:[A-Za-z]+)|[π√ℝℤ∈²³₀₁₂−+÷×±⇔⇒=<>()[\]{}/*|:,;·]/gu)||[];
  let at=0;
  const M=(t,v)=>'<'+t+'>'+v+'</'+t+'>';
  const op=x=>M('mo',escape(x));
@@ -17,6 +17,7 @@ function math(expr){
   if(t===undefined)return'';
   let base;
   if(t==='√')base='<msqrt>'+atom()+'</msqrt>';
+  else if(t==='ℝ'||t==='ℤ')base='<mi mathvariant="double-struck">'+(t==='ℝ'?'R':'Z')+'</mi>';
   else if(t==='('||t==='['||t==='{'){
     const close=t==='('?')':t==='['?']':'}';
     const inside=group(close);
@@ -33,7 +34,7 @@ function math(expr){
  }
  function group(stop){
   const result=[];
-  const operators=new Set(['+','−','=','±','⇒','⇔',',',';','·','×','÷','<','>']);
+  const operators=new Set(['+','−','=','±','⇒','⇔',',',';','·','×','÷','<','>','∈']);
   while(at<tokens.length&&tokens[at]!==stop){
     const t=tokens[at];
     if(operators.has(t)){at++;result.push(op(t));continue}
