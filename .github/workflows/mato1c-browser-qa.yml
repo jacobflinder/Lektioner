@@ -43,6 +43,7 @@ jobs:
           node mato1c/kapitel-3/qa/blandade-problem-browser.cjs
           node mato1c/kapitel-3/qa/deriverbarhet-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-browser.cjs
+          node mato1c/kapitel-3/qa/math-typography-deep-browser.cjs
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@v4
