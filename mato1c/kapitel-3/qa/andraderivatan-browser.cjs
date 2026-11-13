@@ -105,7 +105,7 @@ try{
  await ok(!await page.locator('#exit-answer').isVisible(),'Utcheckning utan visat facit');
  await ok((await page.locator('#exit').innerText()).includes('avtagande samtidigt'),'Originalets utcheckningsfråga');
  await page.locator('[data-reveal="exit-answer"]').click();
- await ok((await page.locator('#exit-answer').innerText()).includes('f′(−1)=−2'),'Utcheckningen innehåller numeriskt motexempel');
+ await ok((await page.locator('#exit-answer').innerText()).replace(/\s+/g,'').includes('f′(−1)=−2'),'Utcheckningen innehåller numeriskt motexempel');
  await page.screenshot({path:out+'/lesson3-exit-desktop.png',fullPage:true});
  await page.setViewportSize({width:390,height:844});
  for(let n=1;n<=8;n++){
