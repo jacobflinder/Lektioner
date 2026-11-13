@@ -1,5 +1,5 @@
-/* Gemensam matematisk typografi för Fy1 8.1–8.4.
-   Inbyggt MathML utan tredjepartstjänster; återanvänds av de fyra första lektionerna. */
+/* Gemensam matematisk typografi för Fy1 8.1–8.6.
+   Inbyggt MathML utan tredjepartstjänster; återanvänds nu av samtliga sex lektioner. */
 .fy1-typeset {
   font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", "Noto Sans Math", serif;
   font-size: 1.07em;
@@ -17,4 +17,13 @@
 @media (max-width: 600px) {
   .fy1-typeset { font-size: 1em; }
   .model-result, .fy1-paper-steps li { overflow-wrap: anywhere; }
+}
+
+/* Överskådliga, responsiva uträkningar i fält- och potentiallektionerna. */
+.field-math, .potential-math { max-width:100%; overflow-x:auto; overflow-y:hidden; }
+.field-math math.fy1-typeset, .potential-math math.fy1-typeset {
+  font-size:1.11em; vertical-align:middle;
+}
+@media (max-width:600px) {
+ .field-math math.fy1-typeset, .potential-math math.fy1-typeset { font-size:1.02em; }
 }
