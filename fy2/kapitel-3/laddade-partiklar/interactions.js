@@ -2,6 +2,7 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const P=window.Fy2Physics;
+const mathInline=body=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+body+'</math>';
 const sv=n=>Number(n).toFixed(2);
 const decimal=(n,d=2)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,maximumFractionDigits:d});
 const palette={force:'#bd6b44',velocity:'#178568',field:'#087b92'};
@@ -39,8 +40,8 @@ function chargeDiagram(){
  $('particle-time-value').textContent=Math.round(t*100)+' %';
  $('particle-speed-value').textContent=decimal(v,1);
  $('particle-B-value').textContent=decimal(B,1);
- $('particle-note').innerHTML='<b>r ∝ v/B:</b> relativ radie '+decimal(v/B)+
- '. <b>F ∝ vB:</b> relativ kraft '+decimal(v*B)+'. '+
+ $('particle-note').innerHTML='<b>'+mathInline('<mi>r</mi><mo>∝</mo><mfrac><mi>v</mi><mi>B</mi></mfrac>')+':</b> relativ radie '+decimal(v/B)+
+ '. <b>'+mathInline('<mi>F</mi><mo>∝</mo><mi>v</mi><mi>B</mi>')+':</b> relativ kraft '+decimal(v*B)+'. '+
  (showF?'Den orange kraften är hela tiden vinkelrät mot den gröna hastigheten.':'Förutsäg kraftens riktning och klicka sedan på <b>Visa F</b>.');
  for(const [id,selected]of [['particle-positive',q===1],['particle-negative',q===-1],['particle-flip',bSign===-1]]){
   $(id).classList.toggle('selected',selected);$(id).setAttribute('aria-pressed',String(selected));
@@ -144,7 +145,7 @@ let di=-1,db=1;
 function doubleRender(){
  $('double-visual').innerHTML=conductorSVG(di,db,true);
  const down=di*db<0;
- $('double-feedback').innerHTML='Kraften är <b>0,10 N '+(down?'nedåt':'uppåt')+'</b>. I går '+(di>0?'åt höger':'åt vänster')+
+ $('double-feedback').innerHTML='Kraften är <b>'+mathInline('<mi>F</mi><mo>=</mo><mn>0,10</mn><mtext> N</mtext>')+' '+(down?'nedåt':'uppåt')+'</b>. I går '+(di>0?'åt höger':'åt vänster')+
  ', B går '+(db>0?'in i':'ut ur')+' bilden.';
 }
 $('double-flip-I').onclick=()=>{di*=-1;doubleRender()};
