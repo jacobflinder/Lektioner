@@ -117,6 +117,11 @@ fs.mkdirSync(out,{recursive:true});
   }
   await go(8);
   await ok(await page.locator('#exit-derivative path').count()===1,'Originalets derivatagraf');
+  await ok(await page.locator('#exit-derivative').evaluate(svg=>{
+    const dot=[...svg.querySelectorAll('circle')].find(c=>Math.abs(Number(c.getAttribute('cx'))-298)<0.1);
+    const clip=svg.querySelector('clipPath rect');
+    return !!(dot&&clip&&Number(dot.getAttribute('cy'))+Number(dot.getAttribute('r'))<=Number(clip.getAttribute('y'))+Number(clip.getAttribute('height')));
+  }),'Derivataparabelns minimum vid (2, −1) och markör syns utan klippning');
   await ok(!await page.locator('#exit-answer').isVisible(),'Utcheckningen har dolt facit');
   await ok((await page.locator('#exit').innerText()).includes('p′(x)=(x−2)²'),'Extra kontroll bevarad');
   await page.locator('[data-reveal="exit-answer"]').click();
