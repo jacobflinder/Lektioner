@@ -165,19 +165,30 @@
 </div>
 </section>
 
-<section class="slide" id="example" data-teacher="Original s.5, exempel 3156 s.159. Samma f=x³−4,5x²+5 på [−2,5]. f′=3x(x−3) stationära x 0,3; kandidater −2,0,3,5. f(-2)=-21, f(0)=5, f(3)=-8,5, f(5)=17,5. Största 17,5 vid 5, minsta −21 vid −2. Lös fram steg för steg, inga omotiverade språng.">
+<section class="slide" id="example" data-teacher="Original s.5, exempel 3156 s.159. Samma f=x³−4,5x²+5 på [−2,5]. f′=3x(x−3) stationära x 0,3; kandidater −2,0,3,5. KOMPLETTERING: efter stationära punkterna, låt alla enskilt beräkna f″(x)=6x−9 och klassificera x=0 lokalt max, x=3 lokalt min. Ge cirka 45 sekunders eget försök och kort jämförelse i par innan klick. Fråga sedan: räcker detta för största/minsta värde på hela intervallet? Nej – jämför även ändpunkterna. f(-2)=-21, f(0)=5, f(3)=-8,5, f(5)=17,5. Största 17,5 vid 5, minsta −21 vid −2. Visa detta som repetition av föregående moment, inte en separat lång genomgång.">
 <div class="eyebrow">05 · Genomarbetat exempel 3156 · s. 159</div>
 <h2>Jämför alla fyra funktionsvärden</h2>
 <p class="mathline">f(x)=x³−4,5x²+5, &nbsp; −2 ≤ x ≤ 5</p>
 <div class="sequence panel" data-sequence>
-<div class="task"><strong>Före varje steg:</strong> Lös eller förutsäg nästa matematiska beslut på papper. Det är funktionsvärdena som ska jämföras.</div>
+<div class="task"><strong>Före varje steg:</strong> Lös eller förutsäg nästa matematiska beslut på papper. <strong>Andraderivatatestet</strong> används kort för att klassificera stationära punkter; det är fortfarande <strong>funktionsvärdena</strong> som ska jämföras för hela intervallet.</div>
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata får du, och hur faktoriserar du den?"><strong>1 · Derivera och faktorisera</strong><p class="mathline">f′(x)=3x²−9x=3x(x−3)</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka x-värden gör f′=0, och vilka två ändpunkter måste läggas till?"><strong>2 · Välj alla kandidater</strong><p class="mathline">f′(x)=0 ⇒ x=0 eller x=3</p><p>Ändpunkterna är −2 och 5. <strong>Hela listan: −2, 0, 3 och 5.</strong></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid −2 och 0?"><strong>3 · Beräkna första paret</strong><p class="mathline">f(−2)=−8−4,5·4+5=−21</p><p class="mathline">f(0)=0−0+5=5</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid 3 och 5?"><strong>4 · Beräkna andra paret</strong><p class="mathline">f(3)=27−40,5+5=−8,5</p><p class="mathline">f(5)=125−112,5+5=17,5</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Jämför alla fyra FUNKTIONSVÄRDEN. Vilket är störst och minst? Ange också x."><strong>5 · Jämför och svara</strong>
+<div class="seq-item hidden" data-seq-item data-question="Vad får du för f″(x), f″(0) och f″(3)? Vilka lokala extrempunkter ger tecknen – räcker de för största värdet på hela intervallet?">
+<strong>3 · Återkalla andraderivatatestet</strong>
+<p class="solution-explanation">För stationära punkter kan andraderivatan ge deras <strong>lokala</strong> karaktär:</p>
+<div class="solution-math-group">
+<p class="mathline">f″(x) = 6x − 9</p>
+<p class="mathline">f″(0) = −9 &lt; 0 ⇒ lokalt maximum</p>
+<p class="mathline">f″(3) = 9 &gt; 0 ⇒ lokalt minimum</p>
+</div>
+<p class="solution-explanation"><strong>Räcker det?</strong> Nej. Det största och minsta värdet på hela intervallet kan även finnas vid ändpunkterna. Vi måste därför jämföra <span class="math-inline">f(−2)</span>, <span class="math-inline">f(0)</span>, <span class="math-inline">f(3)</span> och <span class="math-inline">f(5)</span>.</p>
+<p class="muted">Om f″(a)=0 ger andraderivatatestet inget säkert besked. Värdejämförelsen krävs fortfarande.</p>
+</div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid −2 och 0?"><strong>4 · Beräkna första paret</strong><p class="mathline">f(−2)=−8−4,5·4+5=−21</p><p class="mathline">f(0)=0−0+5=5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid 3 och 5?"><strong>5 · Beräkna andra paret</strong><p class="mathline">f(3)=27−40,5+5=−8,5</p><p class="mathline">f(5)=125−112,5+5=17,5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Jämför alla fyra FUNKTIONSVÄRDEN. Vilket är störst och minst? Ange också x."><strong>6 · Jämför och svara</strong>
 <table class="working-table"><thead><tr><th>x</th><th>−2</th><th>0</th><th>3</th><th>5</th></tr></thead><tbody><tr><th>f(x)</th><td>−21</td><td>5</td><td>−8,5</td><td>17,5</td></tr></tbody></table>
 <div class="solution-math-group"><p class="math-result"><strong>Största värdet är 17,5 vid x=5.</strong></p><p class="math-result"><strong>Minsta värdet är −21 vid x=−2.</strong></p></div></div>
 </div>
