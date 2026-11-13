@@ -69,6 +69,8 @@ async function complete(page,max=100){
  try{
   const res=await page.goto(URL,{waitUntil:'networkidle',timeout:30000});
   assert.equal(res.status(),200,'HTTP 200');
+  assert.ok(await page.locator('#foundation-panel').isVisible(),'Den första elevvägen förklarar från början');
+  await page.locator('#tab-study').click();
   assert.equal(await page.locator('#angle-buttons button').count(),17,'17 standardvinklar inklusive 0 och 360');
   for(const [deg,rad,cos,sin] of TABLE){
    await page.locator('#angle-buttons button[data-angle="'+deg+'"]').click();
