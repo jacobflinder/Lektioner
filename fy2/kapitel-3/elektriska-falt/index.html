@@ -148,9 +148,11 @@ function pointField(sign){pointSign=sign;const g=$('point-vectors');g.replaceChi
 function setParticle(x){particle=x;const isE=x==='e';$('s3-particle').setAttribute('fill',isE?'#16718f':'#c3644e');$('s3-charge-text').textContent=isE?'−':'+';$('s3-force').setAttribute('x1',isE?'302':'248');$('s3-force').setAttribute('x2',isE?'391':'155');$('s3-acctext').textContent=isE?'a åt höger (elektron)':'a åt vänster (proton)';document.querySelectorAll('[data-particle]').forEach(b=>b.classList.toggle('selected',b.dataset.particle===x));}document.querySelectorAll('[data-particle]').forEach(b=>b.onclick=()=>setParticle(b.dataset.particle));
 const echarge=1.602176634e-19,me=9.1093837139e-31,mp=1.67262192595e-27,d=0.030,L=0.050;
 function sci(val,exponent=5){return `${fmt(val/10**exponent,2)} · 10${String(exponent).split('').map(c=>({'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'}[c]||c)).join('')}`;}
+function inlineMath(body){return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+body+'</math>';}
+function sciMath(value,exponent,unit){return '<mn>'+fmt(value/10**exponent,2)+'</mn><mo>·</mo><msup><mn>10</mn><mn>'+exponent+'</mn></msup><mtext> '+unit+'</mtext>';}
 function protonSpeed(U){return Math.sqrt(2*echarge*U/mp);}function updateProton(){const U=Number($('s4-slider').value);$('s4-u').textContent=U+' V';
 const math=t=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+t+'</math>';
-$('s4-result').innerHTML='<div class="mathline">'+math('<mi>v</mi><mo>=</mo><msqrt><mfrac><mrow><mn>2</mn><mi>e</mi><mi>U</mi></mrow><msub><mi>m</mi><mi>p</mi></msub></mfrac></msqrt><mo>≈</mo><mtext>'+sci(protonSpeed(U))+' m/s</mtext>')+'</div>'+
+$('s4-result').innerHTML='<div class="mathline">'+math('<mi>v</mi><mo>=</mo><msqrt><mfrac><mrow><mn>2</mn><mi>e</mi><mi>U</mi></mrow><msub><mi>m</mi><mi>p</mi></msub></mfrac></msqrt><mo>≈</mo>'+sciMath(protonSpeed(U),5,'m/s')+'')+'</div>'+
 '<details class="small"><summary>Visa insättning för '+U+' V</summary><div class="mathline">'+math('<mi>v</mi><mo>=</mo><msqrt><mfrac><mrow><mn>2</mn><mo>·</mo><mn>1,602</mn><mo>·</mo><msup><mn>10</mn><mn>−19</mn></msup><mtext> C</mtext><mo>·</mo><mn>'+U+'</mn><mtext> V</mtext></mrow><mrow><mn>1,673</mn><mo>·</mo><msup><mn>10</mn><mn>−27</mn></msup><mtext> kg</mtext></mrow></mfrac></msqrt>')+'</div><p>Farten växer med √U för samma proton som börjar från vila.</p></details>';}
 $('s4-slider').oninput=updateProton;
 function physics(U,vMillion){const v=vMillion*1e6,E=U/d,a=echarge*E/me,t=L/v,y=.5*a*t*t,vy=a*t,angle=Math.atan2(vy,v)*180/Math.PI,hit=y>=d/2,xhit=hit?v*Math.sqrt(d/a):L;return {U,v,E,a,t,y,vy,angle,hit,xhit};}
@@ -162,22 +164,22 @@ const step=(label,formula,extra)=>'<div class="step"><strong>'+label+'</strong><
 let html=step('1 · Fältstyrka',
  '<mi>E</mi><mo>=</mo><mfrac><mi>U</mi><mi>d</mi></mfrac><mo>=</mo><mfrac><mrow><mn>'+U+'</mn><mtext> V</mtext></mrow><mrow><mn>0,030</mn><mtext> m</mtext></mrow></mfrac><mo>=</mo><mtext>'+fmt(p.E,0)+' V/m</mtext>','');
 html+=step('2 · Acceleration uppåt',
- '<msub><mi>a</mi><mi>y</mi></msub><mo>=</mo><mfrac><mrow><mi>e</mi><mi>E</mi></mrow><msub><mi>m</mi><mi>e</mi></msub></mfrac><mo>≈</mo><mtext>'+sci(p.a,14)+' m/s²</mtext>',
- '<p class="small">e = 1,602 · 10⁻¹⁹ C, mₑ = 9,109 · 10⁻³¹ kg.</p>');
+ '<msub><mi>a</mi><mi>y</mi></msub><mo>=</mo><mfrac><mrow><mi>e</mi><mi>E</mi></mrow><msub><mi>m</mi><mi>e</mi></msub></mfrac><mo>≈</mo>'+sciMath(p.a,14,'m/s²')+'',
+ '<p class="small">'+inlineMath('<mi>e</mi><mo>=</mo><mn>1,602</mn><mo>·</mo><msup><mn>10</mn><mn>−19</mn></msup><mtext> C</mtext>')+', '+inlineMath('<msub><mi>m</mi><mi>e</mi></msub><mo>=</mo><mn>9,109</mn><mo>·</mo><msup><mn>10</mn><mn>−31</mn></msup><mtext> kg</mtext>')+'.</p>');
 if(!p.hit){
  html+=step('3 · Tid mellan plattorna',
  '<mi>t</mi><mo>=</mo><mfrac><mi>L</mi><msub><mi>v</mi><mn>0</mn></msub></mfrac><mo>=</mo><mfrac><mrow><mn>0,050</mn><mtext> m</mtext></mrow><mrow><mn>'+fmt(v,1)+'</mn><mo>·</mo><msup><mn>10</mn><mn>6</mn></msup><mtext> m/s</mtext></mrow></mfrac><mo>≈</mo><mtext>'+fmt(p.t*1e9,2)+' ns</mtext>','');
  html+=step('4 · Avböjning vid utgången',
  '<mi>y</mi><mo>=</mo><mfrac><mrow><msub><mi>a</mi><mi>y</mi></msub><msup><mi>t</mi><mn>2</mn></msup></mrow><mn>2</mn></mfrac><mo>≈</mo><mtext>'+fmt(p.y*1000,2)+' mm</mtext>',
- '<p class="small">y = ½ · ('+sci(p.a,14)+' m/s²) · ('+fmt(p.t*1e9,2)+' · 10⁻⁹ s)².</p>');
+ '<p class="small">'+inlineMath('<mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>·</mo><mo>(</mo>'+sciMath(p.a,14,'m/s²')+'<mo>)</mo><mo>·</mo><msup><mrow><mo>(</mo><mn>'+fmt(p.t*1e9,2)+'</mn><mo>·</mo><msup><mn>10</mn><mn>−9</mn></msup><mtext> s</mtext><mo>)</mo></mrow><mn>2</mn></msup>')+'.</p>');
  html+=step('5 · Utgångsvinkel',
  '<mi>α</mi><mo>=</mo><mi>arctan</mi><mo>(</mo><mfrac><msub><mi>v</mi><mi>y</mi></msub><msub><mi>v</mi><mi>x</mi></msub></mfrac><mo>)</mo><mo>≈</mo><mtext>'+fmt(p.angle,2)+'°</mtext>',
- '<p class="small">vᵧ = aᵧt ≈ '+sci(p.vy,6)+' m/s och vₓ = '+fmt(v,1)+' · 10⁶ m/s.</p>');
+ '<p class="small">'+inlineMath('<msub><mi>v</mi><mi>y</mi></msub><mo>=</mo><msub><mi>a</mi><mi>y</mi></msub><mi>t</mi><mo>≈</mo>'+sciMath(p.vy,6,'m/s'))+' och '+inlineMath('<msub><mi>v</mi><mi>x</mi></msub><mo>=</mo><mn>'+fmt(v,1)+'</mn><mo>·</mo><msup><mn>10</mn><mn>6</mn></msup><mtext> m/s</mtext>')+'.</p>');
 }else{
  const tHit=Math.sqrt(d/p.a);
  html+=step('3 · Plattträff före utgången',
  '<msub><mi>t</mi><mtext>träff</mtext></msub><mo>=</mo><msqrt><mfrac><mi>d</mi><msub><mi>a</mi><mi>y</mi></msub></mfrac></msqrt><mo>≈</mo><mtext>'+fmt(tHit*1e9,2)+' ns</mtext>',
- '<p class="small">Elektronen startar mitt i gapet: till plattan är avståndet d/2.</p>');
+ '<p class="small">Elektronen startar mitt i gapet: till plattan är avståndet '+inlineMath('<mfrac><mi>d</mi><mn>2</mn></mfrac>')+'.</p>');
  html+=step('4 · Kollisionspunkt',
  '<msub><mi>x</mi><mtext>träff</mtext></msub><mo>=</mo><msub><mi>v</mi><mn>0</mn></msub><msub><mi>t</mi><mtext>träff</mtext></msub><mo>≈</mo><mtext>'+fmt(p.xhit*100,2)+' cm</mtext>',
  '<p class="small">Utgångsvinkeln vid x = L ska inte beräknas eftersom elektronen träffar plattan först.</p>');
