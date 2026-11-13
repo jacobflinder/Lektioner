@@ -316,7 +316,19 @@ function finishSession(){
  setText('result-body',misses===0?'Du löste alla grundfrågor utan ett första fel. Behåll kunskapen genom att återkomma en annan dag.':'Du fick '+misses+' grundfrågor att repetera. De har kommit tillbaka i rundan så att du fått återkalla samma samband igen.');
  drawCircle(null,false,false,true);
 }
-document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>chooseTab(btn.dataset.tab)));
+const tabButtons=[...document.querySelectorAll('[data-tab]')];
+tabButtons.forEach((btn,i)=>{
+ btn.addEventListener('click',()=>chooseTab(btn.dataset.tab));
+ btn.addEventListener('keydown',event=>{
+  let next=-1;
+  if(event.key==='ArrowRight')next=(i+1)%tabButtons.length;
+  if(event.key==='ArrowLeft')next=(i-1+tabButtons.length)%tabButtons.length;
+  if(event.key==='Home')next=0;
+  if(event.key==='End')next=tabButtons.length-1;
+  if(next<0)return;
+  event.preventDefault();chooseTab(tabButtons[next].dataset.tab);tabButtons[next].focus();
+ });
+});
 $('projector').addEventListener('click',()=>{const yes=document.body.classList.toggle('projector');$('projector').textContent=yes?'Avsluta stor visning':'Stor visning';$('projector').setAttribute('aria-pressed',String(yes))});
 $('study-units').addEventListener('change',event=>{studyUnits=event.target.value;studyRevealed=false;renderStudy()});
 $('study-reveal').addEventListener('click',()=>{studyRevealed=!studyRevealed;renderStudy()});
