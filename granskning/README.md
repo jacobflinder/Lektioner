@@ -355,11 +355,21 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Verifieringsgräns:** lyckad driftsättning och tester av sammanslagen kod är direkt verifierade via GitHub Actions. Externt webbverktyg kunde inte läsa den publicerade Pages-sidans HTML direkt; sådan separat HTTP-kontroll påstås därför inte vara gjord.
 
+### Eftergranskning av mobiltypografi · sista korrigering till 08/41
+
+Den avslutade ämnes- och mobilgranskningen upptäckte efter PR #15 ännu en typografisk brist på bild **2, 3, 4 och 9**. Uttryck som `cos v` och `sin v` klistrades visuellt ihop i MathML, särskilt i den frivilliga fyrledsutvecklingen av dubbelvinkelformlerna. **Faktiska kodändringar:** `cos(v)`, `sin(v)` och parenteser även kring numeriska argument används nu konsekvent i de tio bilderna, de dolda faciten och den dynamiska potensen. Ingen uppgift eller elevaktivitet togs bort. Mobilbildens inre sidomarginaler justerades marginellt för att låta de mer läsbara parenteserna få plats utan minskad matematiktext. En separat visuell granskning av slutbilderna **2, 3, 4 och 9** visar fullständiga beräkningar och en läsbar härledning utan interna avklipp.
+
+- **Kodändring:** [PR #16 – slutlig trigonometrisk notation](https://github.com/jacobflinder/Lektioner/pull/16), sammanslagen i `main` via `555d22c99acfb79f3c20f751d4d8fcba433d7939`.
+- **Tester:** [fullständig Ma4-browser QA på arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43498843706) – **success**; [samma fullständiga testsvit på sammanslagen `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43499677465) – **success**.
+- **Publicering:** [GitHub Pages bygge och driftsättning av den slutliga koden](https://github.com/jacobflinder/Lektioner/actions/runs/43499676586) – **success**.
+- **Skärmbildsbevis:** [Chromium-artifact från sista godkända arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43498843706/artifacts/14073447110).
+- **Granskningsstatus:** fortfarande **8/41 färdiga och 33 kvar**. Nästa ofärdiga lektion är oförändrat **9/41 – Ekvationen zⁿ = a**.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
 - **Senast avslutad lektion:** **8 av 41 – Matematik 4, de Moivres formel**.
 - **Sökväg:** `ma4/kapitel-4/de-moivre/`.
-- **Status:** PR #15 sammanslagen till `main`; riktat test och fullständig Ma4 Chromium-svit godkända både på arbetsgren och `main`, GitHub Pages driftsatt utan fel, 10/10 bilder och samtliga mobillägen visuellt granskade, permanent logg uppdaterad.
+- **Status:** PR #15 och eftergranskning PR #16 sammanslagna i `main`; fullständig Ma4 Chromium-svit godkänd på arbetsgrenar och slutligt `main`, GitHub Pages driftsatt utan fel, 10/10 bilder och samtliga mobillägen visuellt granskade, inklusive trigonometriska funktionsargument och faktisk bråkstruktur; permanent logg uppdaterad.
 - **Nästa lektion:** **9 av 41 – Matematik 4, Ekvationen zⁿ = a**.
 - **Nästa sökväg:** `ma4/kapitel-4/ekvationen-zn-a/`.
 - **Olösta blockerande ämnes-, test- eller publiceringsfel:** inga kända efter den fullständiga ämnes- och teknikgranskningen. Direkt HTTP-avläsning av Pages kunde inte verifieras separat.
