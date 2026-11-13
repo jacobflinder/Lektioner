@@ -87,7 +87,8 @@ async function active(page){
       assert.ok(await page.locator('#rootB').isVisible()&&await page.locator('#squareTarget').isHidden(),'Andragrad: andra roten före kvadrering');
       await page.locator('#squareReveal').click();
       assert.ok(await page.locator('#squareTarget').isVisible(),'Andragrad: gemensam kvadrat efter tredje beslutet');
-      assert.ok((await page.locator('#squareText').innerText()).includes('5π/2'),'Andragrad: båda argumenten förklaras');
+      assert.ok(await page.locator('#squareText math[aria-label*="5π/2"]').count()>0,'Andragrad: båda argumenten förklaras med riktiga ekvationer');
+      assert.ok(await page.locator('#squareText mfrac').count()>0,'Andragrad: vinklar i talplanet visas med bråk');
       await page.locator('#squareBack').click();
       assert.ok(await page.locator('#squareTarget').isHidden()&&await page.locator('#rootB').isVisible(),'Andragrad: backning bevarar rötterna');
       assert.ok(await page.locator('#squareText').isVisible(),'Andragrad: geometriskt svar syns på begäran');
@@ -117,6 +118,7 @@ async function active(page){
       assert.ok(await polarCheck.locator('.sc-answer mfrac').count()>2,'Andragrad: radianbråk sätts som riktiga bråk');
       assert.ok(await polarCheck.locator('.sc-answer msqrt').count()>1,'Andragrad: kvadratrötter sätts matematiskt');
       assert.ok(await polarCheck.locator('.sc-answer .worked-result').count()===1,'Andragrad: båda rötter markeras tydligt i ett eget svarsfält');
+      await page.screenshot({path:OUT+'/andragrad-math-polar-desktop.png',fullPage:true});
       // Diagnos av komplexa koefficienter.
       await page.selectOption('#jump','2');
       const variant=page.locator('[data-check="variant"]'),variantInput=page.locator('#variant-input');
@@ -154,6 +156,7 @@ async function active(page){
       assert.ok(await page.locator('#r13a msqrt').count()>0,'Andragrad: utcheckning A visar riktig rot');
       await page.locator('button[data-reveal="r13b"]').click();
       assert.ok(await page.locator('#r13b math').count()>8,'Andragrad: utcheckning B har matematiskt uppställd polär lösning');
+      await page.screenshot({path:OUT+'/andragrad-math-exit-desktop.png',fullPage:true});
       await page.locator('#jump').selectOption('8');
       await page.locator('button[data-reveal="r9"]').click();
       assert.ok(await page.locator('#r9 math').count()>8,'Andragrad: metodvalets facit är uppdelat i tydliga ekvationsblock');
