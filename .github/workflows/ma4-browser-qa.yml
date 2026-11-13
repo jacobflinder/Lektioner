@@ -42,6 +42,7 @@ jobs:
           node ma4/kapitel-4/qa/math-typography-pair-07.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-01.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-02.cjs
+          node ma4/kapitel-4/qa/deep-review-ma4-03.cjs
           node ma4/kapitel-4/qa/unit-circle-browser.cjs
           node ma4/kapitel-4/qa/understand-browser.cjs
       - name: Upload browser evidence
