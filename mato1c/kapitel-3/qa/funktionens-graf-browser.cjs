@@ -122,7 +122,9 @@ fs.mkdirSync(out,{recursive:true});
   await page.locator('[data-reveal="exit-answer"]').click();
   const solution=await page.locator('#exit-answer').innerText();
   await ok(solution.includes('h″(x)=2x−4')&&solution.includes('h′(2)=−1'),'Inflexion inte terrass korrekt');
-  await ok(solution.includes('h₁(x)=x³/3−2x²+3x'),'Ett giltigt exempel på primitiv');
+  await ok(solution.includes('h₁(x)')&&solution.includes('−2x²+3x')&&solution.includes('h₂(x)=h₁(x)+2'),'Två giltiga funktioner med samma derivata');
+  await ok(await page.locator('#exit-answer .fraction').count()===1,'x³/3 har vertikalt bråkstreck i slutlösningen');
+  await ok((await page.locator('#exit-answer .math-work').count())>=10,'Utcheckningens tecken, derivator och primitiv är separata matematikrader');
   await page.screenshot({path:out+'/lesson5-exit-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});
   for(let i=1;i<=8;i++){await go(i);await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobil utan dokumentöverspill steg '+i)}
