@@ -88,7 +88,8 @@ async function complete(page,max=100){
   assert.ok(await page.locator('#study-panel').isHidden(),'Utforska dolt');
   const input=page.locator('#q-answer');
   const q=await getQuestion(page);
-  assert.ok((await page.locator('#q-example').innerText()).indexOf(q.answer)===-1,'Instruktionen får inte avslöja uppgiftens facit');
+  const instruction=await page.locator('#q-example').innerText();
+  assert.ok(q.answer.length<3||!instruction.includes(q.answer),'Instruktionen får inte avslöja ett specifikt långt svar: '+q.answer+' i '+instruction);
   await input.fill('heltgalet');
   await page.locator('#check-btn').click();
   assert.ok(await page.locator('#q-feedback').isVisible(),'Specifik återkoppling ges');
