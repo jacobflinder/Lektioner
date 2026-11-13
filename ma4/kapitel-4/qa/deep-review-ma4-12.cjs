@@ -39,7 +39,7 @@ for(const [k,c] of Object.entries(CASES)){
   return es.filter(x=>x.getBoundingClientRect().height>0).map((e,i,a)=>{if(!i)return null;const p=a[i-1];return {delta:e.getBoundingClientRect().top-p.getBoundingClientRect().bottom,after:p.querySelector('math')?.getAttribute('aria-label'),before:e.querySelector('math')?.getAttribute('aria-label')}}).filter(Boolean);
  });for(const g of gaps)assert.ok(g.delta>=15.5,'Minst 16 px verkligt mellanrum '+sel+': '+JSON.stringify(g));};
  const stepSpacing=async()=>{
-   const blocks=page.locator('.slide.active .ma4-step, .slide.active .ma4-final');
+   const blocks=page.locator('.slide.active .ma4-step:visible, .slide.active .ma4-final:visible');
    for(let i=0;i<await blocks.count();i++){
     const div=blocks.nth(i).locator(':scope > .ma4-equation');
     if(await div.count()>1)await div.evaluateAll(es=>{for(let k=1;k<es.length;k++){const a=es[k-1].getBoundingClientRect(),b=es[k].getBoundingClientRect();if(b.top-a.bottom<15.5)throw Error('Matematikavstånd under 16 px: '+(b.top-a.bottom))}});
@@ -99,7 +99,7 @@ for(const [k,c] of Object.entries(CASES)){
   await active().locator('details summary').click();
   await reveal('stop-answer');await label('#stop-answer','(3x + 1) − (3x + 6)');
   await stepSpacing();await shot('05-desktop');
-  await go(5);await reveal('a6');await label('#a6','−5x − (−2x)');await label('#a6','= −5x + 2x');await stepSpacing();await shot('06-desktop');
+  await go(5);await reveal('a6');await label('#a6','−5x − (−2x) = −5x + 2x');await label('#a6','= −5x + 2x');await stepSpacing();await shot('06-desktop');
   await go(6);await engine('guided',true);await reveal('a7');await label('#a7','−5x − (−3x) = −2x');await stepSpacing();await shot('07-desktop');
   await go(7);await reveal('zero-help');await label('#zero-help','= x³ + 0x² − 4x + 3');
   await reveal('a8');await label('#a8','0x² − (−x²) = x²');
