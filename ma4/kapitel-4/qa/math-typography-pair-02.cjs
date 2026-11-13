@@ -65,14 +65,15 @@ const screenshots='ma4-qa-screenshots';fs.mkdirSync(screenshots,{recursive:true}
      assert.ok(await page.locator('#vector-result').isVisible(),'Addition visas först efter båda stegen');
      assert.ok(await page.locator('#vector-formula math').count()===1,'Dynamisk summa som matematik');
      assert.ok(await page.locator('#vector-length msqrt').count()>=1,'Vektorlängd är rotuttryck');
-     assert.ok((await page.locator('#vector-formula math').getAttribute('aria-label')).includes('4 + 5i'));
+     assert.ok((await page.locator('#vector-simplify math').getAttribute('aria-label')).includes('4 + 5i'),'Slutsvaret står på egen matematisk rad');
+     assert.ok((await page.locator('#vector-length-step math').getAttribute('aria-label')).includes('√41'),'Räkna kvadratsumman före slutsats');
      await page.screenshot({path:screenshots+'/ma4-vektorer-summa-math.png',fullPage:true});
      await page.locator('[data-vector-op="sub"]').click();
      assert.ok(await page.locator('#vector-result').isHidden(),'Operationbyte återställer elevprognosen');
      await page.locator('#vector-next').click();
      await page.locator('#vector-next').click();
-     assert.ok((await page.locator('#vector-formula math').getAttribute('aria-label')).includes('2 − 3i'),'Subtraktionens matematik korrekt');
-     assert.ok((await page.locator('#vector-length math').getAttribute('aria-label')).includes('√13'),'Skillnadsvektorns längd korrekt');
+     assert.ok((await page.locator('#vector-simplify math').getAttribute('aria-label')).includes('2 − 3i'),'Subtraktionens matematik korrekt');
+     assert.ok((await page.locator('#vector-length-step math').getAttribute('aria-label')).includes('√13'),'Skillnadsvektorns längd korrekt');
      await page.selectOption('#jump','2');
      const seq=page.locator('#algebra [data-sequence]');
      for(let k=0;k<4;k++)await seq.locator('[data-seq-next]').click();
@@ -88,7 +89,7 @@ const screenshots='ma4-qa-screenshots';fs.mkdirSync(screenshots,{recursive:true}
      assert.ok(await page.locator('#circle-explain').isVisible(),'Cirkelförklaring efter elevval');
      await page.selectOption('#jump','4');
      await page.locator('[data-region="band"]').click();
-     assert.ok((await page.locator('#region-equation math').getAttribute('aria-label')).includes('−1 ≤ Im z < 2'),'Gränsvillkoret bevaras');
+     assert.ok((await page.locator('#region-equation math').getAttribute('aria-label')).includes('−1 ≤ Im(z) < 2'),'Gränsvillkoret bevaras');
      assert.ok(await page.locator('#region-equation math mo').count()>1,'Olikheterna typeras som operatorer');
      await page.locator('#region-show').click();
      assert.ok(await page.locator('#region-explain').isVisible(),'Geometri återkopplas efter försök');
