@@ -49,7 +49,7 @@ for(const [k,c] of Object.entries(CASES)){
    const host=page.locator('[data-division="'+key+'"]');assert.ok(await host.isVisible(),'Interaktiv uppställning synlig: '+key);
    const q=CASES[key];await host.locator('button.reset').click();
    assert.ok(await host.locator('button.back').isDisabled(),'Bakåtpil låst vid början '+key);
-   if(key==='guided')assert.ok((await host.locator('.quotient').innerText()).includes('x²'),'Första kvottermen given, inget övrigt facit '+key);
+   if(key==='guided')assert.equal(await host.locator('.quotient math').getAttribute('aria-label'),'x²','Första kvottermen given som riktig upphöjd potens '+key);
    else assert.ok((await host.locator('.quotient').innerText()).includes('Inte bestämd'),'Kvoten dold innan första steget '+key);
    assert.equal(await host.locator('tbody tr').count(),1,'Endast täljaren före första klicket '+key);
    if(firstState){
