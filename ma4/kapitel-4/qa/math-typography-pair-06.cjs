@@ -83,7 +83,7 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      let moves=1;
      while(await main.locator('.forward').isEnabled()&&moves<16){await main.locator('.forward').click();moves++}
      assert.ok(await main.locator('.forward').isDisabled(),'Förklaringen avslutas vid sista steget');
-     assert.ok(await main.locator('.result-summary math').count()===4,'Slutlig kontroll är riktig matematisk ekvation');
+     assert.ok(await main.locator('.result-summary math').count()===5,'Slutlig kontroll är riktig matematisk ekvation');
      assert.ok((await main.locator('.result-summary math').last().getAttribute('aria-label')).replace(/\s+/g,'').includes('2x³+3x²−5x+6'),
        'Sambandet divisor · kvot + rest återger täljaren');
      assert.ok(await main.locator('.division-table .product td math').count()>0,'Hela produkter inom parentes satt som matematik');
