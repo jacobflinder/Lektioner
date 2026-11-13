@@ -99,7 +99,7 @@ for(const [k,c] of Object.entries(CASES)){
   await active().locator('details summary').click();
   await reveal('stop-answer');await label('#stop-answer','(3x + 1) − (3x + 6)');
   await stepSpacing();await shot('05-desktop');
-  await go(5);await reveal('a6');await label('#a6','−5x − (−2x) = −5x + 2x');await label('#a6','= −5x + 2x');await stepSpacing();await shot('06-desktop');
+  await go(5);await reveal('a6');await label('#a6','−5x − (−2x)');await label('#a6','= −5x + 2x');await stepSpacing();await shot('06-desktop');
   await go(6);await engine('guided',true);await reveal('a7');await label('#a7','−5x − (−3x) = −2x');await stepSpacing();await shot('07-desktop');
   await go(7);await reveal('zero-help');await label('#zero-help','= x³ + 0x² − 4x + 3');
   await reveal('a8');await label('#a8','0x² − (−x²) = x²');
