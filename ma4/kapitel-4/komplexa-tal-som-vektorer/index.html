@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Komplexa tal som vektorer</title><link rel="stylesheet" href="../assets/lesson.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.1</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök innan du visar lösningen. Skriv gärna på papper eller i egna anteckningar.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Starta med samma u och z som original-PDF:en. Eleverna ritar och räknar enskilt, diskuterar i par, väljer ett alternativ och får motiverande återkoppling innan målen visas. Kontrollera att de skiljer mellan punktens läge och positionsvektorns längd.">
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Komplexa tal som vektorer</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.1</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök innan du visar lösningen. Skriv gärna på papper eller i egna anteckningar.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Starta med samma u och z som original-PDF:en. Eleverna ritar och räknar enskilt, diskuterar i par, väljer ett alternativ och får motiverande återkoppling innan målen visas. Kontrollera att de skiljer mellan punktens läge och positionsvektorns längd.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Komplexa tal som vektorer</h2><p class="lead">4.1 Aritmetik med komplexa tal · Punkt, vektor, addition och subtraktion</p>
 <div class="task"><strong>Enskilt 45 sekunder → par 30 sekunder</strong><p class="math math-big">u = 3 + i &nbsp;&nbsp; z = 1 + 4i</p><p>Markera punkterna u och z i talplanet. Förutsäg slutpunkten för summan u + z om talen tolkas som positionsvektorer.</p></div>
 <div class="panel decision-check" data-decision><strong>Vilken punkt är slutpunkten för u + z?</strong><p class="muted">Räkna först själv eller rita för hand. Diskutera med en kamrat, välj sedan.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="(2, −3) får du vid u − z, inte vid addition. Addera båda koordinaterna var för sig.">A · (2, −3)</button>
@@ -67,7 +67,7 @@
 <div id="exitans" class="answer hidden"><p class="math">u − z = (2 − (−1)) + (3 − 1)i = 3 + 2i</p><p class="math">|u − z| = √(3² + 2²) = √13</p>
 <p><span class="math">|w − 3| = 2</span> beskriver en cirkel med centrum (3, 0) och radie 2. Randen ingår eftersom det står likhet.</p>
 <p>Nej. Villkoret kräver <span class="math">Im w &lt; 2</span>, så den övre randen ingår inte.</p></div>
-<div class="panel"><strong>Dagens mål</strong><p>Jag kan tolka punkt och positionsvektor, räkna vektorsumma och differens, använda absolutbelopp som avstånd och förstå geometriska villkor.</p><p>Vilket resonemang kan jag förklara utan hjälp, och vad behöver jag träna mer på?</p></div></section></div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Interaktionerna använder ingen datainsamling.</footer></main><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
+<div class="panel"><strong>Dagens mål</strong><p>Jag kan tolka punkt och positionsvektor, räkna vektorsumma och differens, använda absolutbelopp som avstånd och förstå geometriska villkor.</p><p>Vilket resonemang kan jag förklara utan hjälp, och vad behöver jag träna mer på?</p></div></section></div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress" class="pill"></span></div><div><label for="jump">Gå till</label><select id="jump"></select></div></div><footer>Gy25 · Matematik – fortsättning, nivå 2. Interaktionerna använder ingen datainsamling.</footer></main><script src="../assets/math-presentation.js"></script><script src="./math-solutions.js"></script><script src="../assets/lesson-core.js"></script><script src="../assets/complex-plane.js"></script><script>
 (()=>{'use strict';
 let operation='add',vectorStage=0,circleCenter=0,circleRevealed=false,regionType='line',regionRevealed=false;
 function toggle(selector,key,value){document.querySelectorAll(selector).forEach(button=>{const active=button.dataset[key]===String(value);button.setAttribute('aria-pressed',String(active));button.classList.toggle('secondary',!active)})}
@@ -87,8 +87,8 @@ function drawVector(){
  document.getElementById('vector-next').disabled=vectorStage===2;
  const answer=document.getElementById('vector-result');answer.classList.toggle('hidden',vectorStage!==2);
  if(vectorStage===2){
- document.getElementById('vector-formula').textContent=d.add?'u + z = (3 + 1) + (1 + 4)i = 4 + 5i':'u − z = (3 − 1) + (1 − 4)i = 2 − 3i';
- document.getElementById('vector-length').textContent=d.add?'|u + z| = √(4² + 5²) = √41':'|u − z| = √(2² + (−3)²) = √13';
+ Ma4Math.setFormula(document.getElementById('vector-formula'),d.add?'u + z = (3 + 1) + (1 + 4)i = 4 + 5i':'u − z = (3 − 1) + (1 − 4)i = 2 − 3i');
+ Ma4Math.setFormula(document.getElementById('vector-length'),d.add?'|u + z| = √(4² + 5²) = √41':'|u − z| = √(2² + (−3)²) = √13');
  document.getElementById('vector-note').textContent=d.add?'Den streckade pilen är vektorn z, parallellflyttad till spetsen på u. Den orange pilen är summan från origo.':'Den streckade pilen är −z, parallellflyttad till spetsen på u. Den orange pilen är u − z. En lika lång och likriktad vektor går från spetsen på z till spetsen på u.';
  }
  toggle('[data-vector-op]','vectorOp',operation);
@@ -108,7 +108,7 @@ function drawCircle(){
   text.setAttribute('fill','#a7572f');text.setAttribute('font-size','17');text.setAttribute('font-weight','700');text.textContent='3';
   document.getElementById('circle-plane').append(text);
  }
- document.getElementById('circle-equation').textContent=circleCenter?'|z − 2i| = 3':'|z| = 3';
+ Ma4Math.setFormula(document.getElementById('circle-equation'),circleCenter?'|z − 2i| = 3':'|z| = 3');
  const ans=document.getElementById('circle-explain');ans.classList.toggle('hidden',!circleRevealed);
  if(circleRevealed)ans.textContent=circleCenter?'Centrum är punkten 2i = (0,2). Varje punkt på cirkeln har avståndet 3 från centrum; den markerade sträckan har längden 3.':'Centrum är origo och varje punkt på cirkeln har avståndet 3 från origo; den markerade sträckan har längden 3.';
  circleShow.setAttribute('aria-pressed',String(circleRevealed));circleShow.textContent=circleRevealed?'Dölj cirkeln':'Visa cirkel och radie';
@@ -131,7 +131,7 @@ function drawRegion(){
   if(regionType==='disk'){opts.regions=[{kind:'disk',cx:0,cy:-1,r:2,open:true}];opts.points=[{x:0,y:-1,label:'−i',color:'blue'}]}
  }
  Ma4Plane.plot('region-plane',opts);
- document.getElementById('region-equation').textContent=c.formula;
+ Ma4Math.setFormula(document.getElementById('region-equation'),c.formula);
  const ans=document.getElementById('region-explain');ans.classList.toggle('hidden',!regionRevealed);if(regionRevealed)ans.textContent=c.explain;
  regionShow.setAttribute('aria-pressed',String(regionRevealed));
  regionShow.textContent=regionRevealed?'Dölj figuren':'Visa figuren och gränserna';
