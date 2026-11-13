@@ -264,7 +264,6 @@ function renderQuestion(){
  $('hint-btn').disabled=mode==='challenge';$('hint-btn').hidden=mode==='challenge';
  $('solution-btn').hidden=true;$('solution-btn').disabled=true;
  $('next-btn').disabled=true;
- setText('right-label','Räkna innan svaret visas.');
  drawCircle(null,false,false,false);
  $('q-answer').focus({preventScroll:true});
 }
