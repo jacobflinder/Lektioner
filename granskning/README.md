@@ -174,7 +174,7 @@ En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitione
 
 **Permanent kontroll:** `qa/equation-spacing-ma4-01-03.cjs` verifierar separata MathML-element, läsbarhet och uppmätt avstånd om minst 16 CSS-pixlar på både 1280 px dator och 390 px mobil. De individuella djupgranskningstesterna uppdateras där typografin påverkar förväntade MathML-uttryck.
 
-**Status:** Korrigeringen ändrar inte antalet genomförda lektioner (3/41) eller deras matematiska slutsvar. Kodändringen testas och publiceras separat; verifierade GitHub Actions-länkar och PR ska läggas till när alla kontroller har godkänts.
+**Verifierad status:** Korrigeringen ändrar inte antalet genomförda lektioner (**3/41**) eller matematiska slutsvar. [PR #9](https://github.com/jacobflinder/Lektioner/pull/9) är sammanslagen till main. [Ma4 Chromium QA på main](https://github.com/jacobflinder/Lektioner/actions/runs/43464019182) **godkänd**; [Pages byggning och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43464019161) **godkända**. [Skärmbildsbevis från sista Chromiumkörningen](https://github.com/jacobflinder/Lektioner/actions/runs/43464019182/artifacts/14057965933) visar separata uttryck i alla tre lektioner. Nästa ordinarie granskning är fortfarande lektion 4.
 
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
