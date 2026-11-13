@@ -70,10 +70,21 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await go(5);
   const seq=page.locator('#example [data-sequence]');
   await ok(await seq.locator('[data-seq-item]:visible').count()===0,'Genomarbetade algebraiska steg dolda');
-  for(let i=0;i<5;i++)await seq.locator('[data-seq-next]').click();
-  await ok(await seq.locator('[data-seq-item]:visible').count()===5,'Fem steg med förutsägelse');
+  await ok(await seq.locator('[data-seq-item]').count()===6,'Sex steg: originalets fem och kort andraderivatarepetition');
+  await seq.locator('[data-seq-next]').click();
+  await seq.locator('[data-seq-next]').click();
+  await ok(await seq.locator('[data-seq-item]:visible').count()===2,'Stationära punkter öppna före klassificering');
+  await ok(!await seq.locator('[data-seq-item]').nth(2).isVisible(),'Andraderivatans facit dolt före eget försök');
+  await ok((await seq.locator('[data-seq-prompt]').innerText()).includes('f″(0)'),'Eleven förutsäger andraderivatans värden');
+  await seq.locator('[data-seq-next]').click();
+  const second=await seq.locator('[data-seq-item]').nth(2).innerText();
+  for(const v of ['f″(x) = 6x − 9','f″(0) = −9 < 0','f″(3) = 9 > 0','lokalt maximum','lokalt minimum','ändpunkterna','f″(a)=0']){
+    await ok(second.includes(v),'Andraderivatatest korrekt och avgränsat: '+v);
+  }
+  for(let i=0;i<3;i++)await seq.locator('[data-seq-next]').click();
+  await ok(await seq.locator('[data-seq-item]:visible').count()===6,'Alla sex steg kan öppnas');
   const example=await seq.innerText();
-  for(const text of ['−21','−8,5','17,5','−2, 0, 3 och 5'])await ok(example.includes(text),'Korrekt beräkning i exempel: '+text);
+  for(const value of ['−21','−8,5','17,5','−2, 0, 3 och 5'])await ok(example.includes(value),'Korrekt global jämförelse: '+value);
   await seq.locator('[data-seq-reset]').click();
   await ok(await seq.locator('[data-seq-item]:visible').count()===0,'Lösningsföljden kan återställas');
   await go(6);
