@@ -120,7 +120,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
     if(radius===.5){
      const frac=page.locator('#moivre-substitution math mfrac');
      assert.equal(await frac.count(),1,'02 en bråkfaktor framför parentesen, inte bråk över hela uttrycket');
-     assert.equal(await frac.locator(':scope > mrow').last().innerText(),String(2**exponent),'02 nämnaren är endast 2^n');
+     assert.equal(await frac.locator(':scope > mrow').last().evaluate(e=>e.textContent.trim()),String(2**exponent),'02 nämnaren är endast 2^n');
      assert.ok((await page.locator('#moivre-substitution math').getAttribute('aria-label')).includes('('+['','', '1/4','1/8','1/16'][exponent]+')'),'02 parentes kring 1/2^n');
     }
     const exp=exponent===2?'²':exponent===3?'³':'⁴';
