@@ -288,8 +288,10 @@ function check(){
  }
  if(!wasWrong&&!question.repeat){
   wasWrong=true;misses++;
-  const revisited={...question,repeat:true,missed:false};
-  queue.splice(Math.min(cursor+4,queue.length),0,revisited);
+  if(mode==='train'){
+   const revisited={...question,repeat:true,missed:false};
+   queue.splice(Math.min(cursor+4,queue.length),0,revisited);
+  }
  }
  const detail=errorFeedback(question,raw);
  feedback(detail,'wrong');
@@ -314,7 +316,7 @@ function finishSession(){
  const total=mode==='challenge'?6:12;
  setText('result-heading',mode==='challenge'?'Din individuella snabbkoll':'Din repetitionsrunda');
  setText('result-score',firstTry+' av '+total+' grundfrågor rätt på första försöket.');
- setText('result-body',misses===0?'Du löste alla grundfrågor utan ett första fel. Behåll kunskapen genom att återkomma en annan dag.':'Du fick '+misses+' grundfrågor att repetera. De har kommit tillbaka i rundan så att du fått återkalla samma samband igen.');
+ setText('result-body',mode==='challenge'?(misses===0?'Du klarade alla sex på första försöket. Pröva igen en annan dag för att se att du minns.':'Du missade '+misses+' av de sex grundfrågorna på första försöket. Öppna Träna för att bearbeta just dessa typer av samband och gör sedan en ny Snabbkoll.'):(misses===0?'Du löste alla grundfrågor utan ett första fel. Behåll kunskapen genom att återkomma en annan dag.':'Du fick '+misses+' grundfrågor att repetera. De har kommit tillbaka i rundan så att du fått återkalla samma samband igen.'));
  drawCircle(null,false,false,true);
 }
 const tabButtons=[...document.querySelectorAll('[data-tab]')];
