@@ -47,6 +47,7 @@ async function complete(page,max=100){
  while(await page.locator('#result').isHidden()){
   if(++steps>max)throw Error('Runda fastnade efter '+max+' frågor');
   const q=await getQuestion(page);
+  assert.ok((await page.locator('#circle-svg').getAttribute('aria-label')).includes('Räkna innan punkten markeras'),'Tidigare svar får inte ligga kvar i figuren vid ny fråga');
   assert.ok(await page.locator('#q-solution').isHidden(),'Frågefacit dolt före kontroll');
   assert.ok(!(await page.locator('#q-answer').getAttribute('placeholder')).includes('Facit'),'Fältet får inte visa facit');
   const input=page.locator('#q-answer');
