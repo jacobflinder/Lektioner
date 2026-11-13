@@ -4,6 +4,28 @@ body.classroom .selfcheck label,body.classroom .selfcheck input,body.classroom .
 .classroom-solution{display:none}body.classroom .classroom-solution{display:inline-block}
 .sc-answer{white-space:pre-line}.compact-math{font-size:clamp(1.1rem,2vw,1.45rem)}
 summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}table{border-collapse:collapse;width:100%}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccdbe6}.table-wrap{overflow-x:auto}
+
+/* Mathematics displayed like worked board examples — never as long inline sentences */
+.worked-math{display:grid;gap:14px;max-width:100%}
+.worked-step{background:#fff;border:1px solid #d2e1ed;border-radius:12px;padding:13px 17px;max-width:100%}
+.worked-step h4{margin:0 0 8px;font-size:.88rem;letter-spacing:.012em;color:#2e6280;font-weight:750}
+.worked-equation{padding:3px 0 5px;overflow-x:auto;overflow-y:hidden;max-width:100%;scrollbar-width:thin}
+.worked-equation math{font-size:clamp(1.34rem,2.7vw,1.95rem);color:#14334b;line-height:1.6;text-align:left}
+.worked-result{background:#e1f2e9;border:1px solid #a7d5c3;border-left:5px solid #087b70;border-radius:11px;padding:14px 16px}
+.worked-result-title{display:block;color:#126a57;font-size:.73rem;letter-spacing:.075em;text-transform:uppercase;font-weight:850;margin:0 0 5px}
+.worked-result math{font-size:clamp(1.5rem,2.9vw,2.1rem);color:#104f46}
+.worked-caption{margin:9px 0 2px;color:#3c5f71;font-weight:700;font-size:.88rem}
+.worked-prose{margin:9px 0 3px;line-height:1.55;color:#334e63;font-size:.95rem}
+.sc-answer .worked-math{gap:11px}
+.sc-answer .worked-step{border-color:#c7d9e7}
+.answer .worked-math{margin:0}
+@media(max-width:600px){
+ .worked-math{gap:10px}
+ .worked-step{padding:11px 12px}
+ .worked-equation math{font-size:1.31rem}
+ .worked-result math{font-size:1.45rem}
+ .sc-answer{padding:9px!important}
+}
 </style></head>
 <body><header><a href="../">← Kapitel 4</a><strong>Matematik 4 · 4.4</strong><div class="controls"><button id="teacherToggle" class="secondary" aria-expanded="false" type="button">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header>
 <main><div class="teacher" id="teacher"><strong>Klassrumsstöd</strong><p id="teacherprompt"></p><small>Enskilt → par → gemensamt. Visa svar först efter elevförsök. Du styr takten.</small></div><div class="practice"><strong>Repetitionsläge</strong> – försök först för hand på papper eller i egna anteckningar. Kontrollera, förklara felet och försök igen. Inga elevsvar sparas eller skickas.</div>
@@ -98,6 +120,7 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <div class="panel"><strong>Hemuppgift – repetition utan facit</strong><p>Gör om ett av dagens nya exempel dagen efter, utan facit, och kontrollera genom insättning. Förklara skillnaden mellan ett motsatt tal och ett konjugat. Ha lösningen klar till nästa Ma4-lektion; om den är redan dagen efter gör du repetitionen före lektionen.</p></div></section>
 
 </div><div class="controls"><div><button id="prev" class="secondary">← Föregående</button><button id="next">Nästa →</button><span id="progress"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionssteg"></select></div></div><footer>Matematik 4 · Andragradsekvationer i komplexa tal. Dina inmatade svar kontrolleras endast i webbläsaren. Sidan skickar inte svar till en server eller sparar dem mellan besök.</footer></main>
+<script src="./math-format.js"></script>
 <script>
 const slides=[...document.querySelectorAll('.slide')],jump=document.getElementById('jump'),prompts=["Presentera målen och samla ett första svar på begreppsfrågan.","Tre minuter själv, en minut par. Om i²-tecknet blir fel: utveckla (2i)² = 4i² innan ni går vidare. Be om ett eget nytt försök.","Låt alla beräkna (p/2)² − q före visningen. Vid osäkerhet om pq-formeln: öppna kvadratkompletteringen. Vid teckenfel: skilj −p/2 från (p/2)². Använd sedan varianten individuellt.","Låt eleverna beskriva geometriska speglingar.","Låt eleverna förutsäga vinklar och belopp före ledtråden. Koppla till tidigare lektion om de Moivres formel.","Tre stopp: första roten, motsatt rot, gemensam kvadrat. Be alla förutsäga före varje klick. Om någon halverar beloppet: återgå till r² = 8. Vid konjugatfel: jämför kvadraterna av 2 + 2i och 2 − 2i.","Polär form är huvudspåret. Modellera första omvandlingen; alla kompletterar andra roten innan steg 4. Om omvandlingen brister: koppla cos till realdel och sin till imaginärdel med enhetscirkeln. Låt sedan varje elev lösa −32i utan samma stöd. Alternativmetoden är valfri.","Valfri alternativ metod med real- och imaginärdel. Visa bara när metoden kan bidra till förståelse, inte som ytterligare krav för elever som ännu behöver befästa den polära.","Sorteringen ersätter den tidigare dubbla räkneuppgiften. Eleverna väljer första steg för A–D och löser B. Godta välmotiverade alternativ. Vid bara en rot: använd felanalysen. Vid mekaniskt metodval: jämför A och D. Fortsätt sedan med begreppskontrollen.","Förberedd felanalys, inte My Favorite No: lyft fram det korrekta och låt eleverna komplettera lösningen.","Samla egna svar före gemensam återkoppling. Vid sammanblandning: be eleven skriva både −z och konjugatet för 3 + 2i. Förklara tvårotsargumentet med nollprodukt och knyt till faktorisering. Kontrollfråga: vad ändras när w = 0?","NOKflex 4401–4420: välj minst tre av fem nivåer under arbetet. Nivåer kan ändras; följ upp individuella metodval.","Valfri utmaning efter NOKflex. Elever kan välja att gå direkt till utcheckningen.","Avsätt 8–9 minuter. Bedöm anonymt metodval, rötterna till z²=18i och förklaring av motsatta kontra konjugerade rötter. Båda exit-ekvationerna är nya. Använd vanligaste felet i en kort återkallningsfråga nästa lektion. Skilj procedurfel från begreppsfel och låt eleverna göra ett nytt individuellt försök efter återkopplingen."];let index=0;
 slides.forEach((s,i)=>{const op=document.createElement('option');op.value=i;op.textContent=(i+1)+' · '+(s.querySelector('h1,h2')?.textContent||'Steg');jump.append(op)});
@@ -216,7 +239,7 @@ document.querySelectorAll('[data-check]').forEach(box=>{
  answer.id=box.dataset.check+'-solution';
  for(const button of [full,teacherSolution]){button.setAttribute('aria-controls',answer.id);button.setAttribute('aria-expanded','false');box.append(button);}
  function hideAnswer(){answer.hidden=true;full.setAttribute('aria-expanded','false');teacherSolution.setAttribute('aria-expanded','false');}
- function reveal(){answer.hidden=!answer.hidden;answer.textContent=config.answer;for(const button of [full,teacherSolution])button.setAttribute('aria-expanded',String(!answer.hidden));}
+ function reveal(){answer.hidden=!answer.hidden;answer.innerHTML=window.quadraticMathSolutions.html[box.dataset.check];for(const button of [full,teacherSolution])button.setAttribute('aria-expanded',String(!answer.hidden));}
  const respond=()=>{response=checkRoots(input.value,config);feedback.dataset.status=response.status==='correct'?'correct':'incorrect';feedback.textContent=response.message;hideAnswer();full.disabled=!['correct','incorrect'].includes(response.status);};
  box.querySelector('[data-check-action="check"]').addEventListener('click',respond);
  input.addEventListener('input',()=>{feedback.textContent='';feedback.removeAttribute('data-status');hideAnswer();full.disabled=true;response=null;});
