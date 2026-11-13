@@ -1,4 +1,4 @@
-name: Ma1c web lesson browser quality checks
+name: Ma3c / Matematik fortsättning 1c – kvalitetskontroll
 on:
   push:
     paths:
