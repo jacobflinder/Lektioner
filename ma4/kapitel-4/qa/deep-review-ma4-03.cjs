@@ -66,7 +66,7 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   }
   for(const x of ['a·a + a(−bi) = a² − abi','(bi)a + (bi)(−bi) = abi − b²i²',
    'uū = a² − abi + abi − b²i²','uū = a² − b²i²','= a² − b²(−1)']){
-   await one('#d-why math[aria-label="'+x+'"]','02 matematiska mellanled '+x);
+   await one('#d-why math[aria-label="'+x.normalize('NFD')+'"]','02 matematiska mellanled '+x);
   }
   assert.ok(await why.locator('math mfrac').count()>=3,'02 bråk i allmän regel');
   assert.ok(await why.locator('math mover').count()>=2,'02 konjugatstreck');
