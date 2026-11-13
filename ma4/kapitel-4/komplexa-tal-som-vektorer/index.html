@@ -71,7 +71,7 @@ function vectorDetails(){const add=operation==='add';return {add,x:add?4:2,y:add
 function drawVector(){
  const d=vectorDetails();
  const vectors=[{x:3,y:1,label:'u',color:'blue',dx:10,dy:18},{x:1,y:4,label:'z',color:'teal',dx:11,dy:-10}];
- if(vectorStage>=1)vectors.push({fromX:3,fromY:1,x:d.x,y:d.y,label:d.add?'z (flyttad)':'−z (flyttad)',color:'purple',dashed:true,dx:-108,dy:-14});
+ if(vectorStage>=1)vectors.push({fromX:3,fromY:1,x:d.x,y:d.y,label:d.add?'z (flyttad)':'−z (flyttad)',color:'purple',dashed:true,dx:-16,dy:-20});
  if(vectorStage>=2)vectors.push({x:d.x,y:d.y,label:d.result,color:'orange',dx:12,dy:22,width:4});
  Ma4Plane.plot('vector-plane',{minX:-2.8,maxX:5.8,minY:-5.1,maxY:6.1,alt:'Vektorillustration med u=(3,1), z=(1,4), '+(vectorStage>=1?'en flyttad '+d.helper:'endast grundvektorerna')+(vectorStage>=2?' och resultatet '+d.result+'=('+d.x+','+d.y+')':''),vectors});
  const q=document.getElementById('vector-question');
