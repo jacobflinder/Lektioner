@@ -4,19 +4,19 @@
 <button class="reveal" type="button" data-reveal="startans">Visa och förklara</button><div class="answer hidden" id="startans">
 <div class="math-working"><p class="math">iz = i(2 + i)</p><p class="math">= 2i + i² = −1 + 2i</p></div>
 <p>Punkten flyttas från (2, 1) till (−1, 2): en rotation <strong>90° moturs</strong>. Längden är densamma, nämligen <span class="math">√(2² + 1²) = √5</span>.</p></div>
-<div class="panel"><strong>Efter lektionen ska du kunna</strong><p>Beräkna <span class="math">iz</span> och <span class="math">z/i</span>, förklara rotationsriktningarna med algebra och talplan samt visa varför absolutbeloppet är oförändrat.</p></div></section>
+<button type="button" class="reveal" data-reveal="i-goals">Visa målen efter startfrågan</button><div class="panel hidden" id="i-goals"><strong>Efter lektionen ska du kunna</strong><p>Beräkna <span class="math">iz</span> och <span class="math">z/i</span>, förklara rotationsriktningarna med algebra och talplan samt visa varför absolutbeloppet är oförändrat.</p></div></section>
 <section id="proof" class="slide" data-teacher="Skriv de fem stegen för hand tillsammans med eleverna. Fråga särskilt varför division med i är samma sak som multiplikation med −i, och skilj på koordinatförändring och längd. Avsluta med ett kort elevresonemang: vilken regel skulle de använda för att kontrollera figuren?">
-<div class="eyebrow">02 · Varför är det rotationer?</div><h2>Algebran förklarar geometrin</h2><p class="math math-big">z = a + bi, &nbsp; a,b ∈ ℝ</p>
+<div class="eyebrow">02 · Varför är det rotationer?</div><h2>Algebran förklarar geometrin</h2><div class="math-givens" role="group" aria-label="Generellt komplext tal och reala koefficienter"><p class="math math-big">z = a + bi</p><p class="math">a, b ∈ ℝ</p></div>
 <div class="sequence panel" data-sequence><div class="task"><strong>Förutsäg → skriv → visa</strong>Varje klick avslöjar ett matematiskt beslut. Försök skriva nästa rad innan du visar den.</div><div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Vad blir i(a+bi) om du använder distributiva lagen och i²=−1?"><strong>1 · Multiplicera med i</strong><div class="math-working"><p class="math">iz = i(a + bi) = ai + bi²</p><p class="math">= −b + ai</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad blir i(a+bi) om du använder distributiva lagen och i²=−1?"><strong>1 · Multiplicera med i</strong><div class="math-working"><p class="math">iz = i(a + bi)</p><p class="math">= ia + i(bi)</p><p class="math">= ai + bi²</p><p class="math">= ai + b(−1)</p><p class="math">= −b + ai</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka blir koordinaterna? Hur roteras vektorn från (a,b)?"><strong>2 · Tolka koordinatförändringen</strong><p class="math">(a, b) → (−b, a)</p><p>En rotation på 90° moturs. Kontrollera gärna med <span class="math">z = 2 + i</span> från starten.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilket tal multiplicerat med i ger 1? Vad betyder det för z/i?"><strong>3 · Dividera med i</strong><div class="math-working"><p class="math">i · (−i) = −i² = 1</p><p class="math">1/i = −i</p><p class="math">z/i = −iz = −(−b + ai) = b − ai</p></div></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka blir koordinaterna vid division? Vilken rotationsriktning motsvarar det?"><strong>4 · Tolka divisionens rotation</strong><p class="math">(a, b) → (b, −a)</p><p>En rotation på 90° medurs, alltså ett argument som minskar med <span class="math">90° = π/2</span>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket tal multiplicerat med i ger 1? Vad betyder det för z/i?"><strong>3 · Dividera med i</strong><div class="math-working"><p class="math">i(−i) = −i²</p><p class="math">= −(−1) = 1</p><p class="math">1/i = (1 · (−i))/(i(−i))</p><p class="math">= (−i)/1 = −i</p><p class="math">z/i = (a + bi)(−i)</p><p class="math">= −ai − bi²</p><p class="math">= −ai − b(−1)</p><p class="math">= b − ai</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka blir koordinaterna vid division? Vilken rotationsriktning motsvarar det?"><strong>4 · Tolka divisionens rotation</strong><p class="math">(a, b) → (b, −a)</p><p>En rotation på 90° medurs, alltså ett argument som minskar med <span class="math">90°</span> (eller <span class="math">π/2</span> radianer). För <span class="math">z = 0</span> finns ingen definierad riktning.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur kan du visa med Pythagoras att båda rotationerna ger samma längd?"><strong>5 · Bevisa att längden bevaras</strong><div class="math-working">
 <p class="math">|z| = √(a² + b²)</p>
-<p class="math">|iz| = √((−b)² + a²) = √(a² + b²)</p>
-<p class="math">|z/i| = √(b² + (−a)²) = √(a² + b²)</p></div><p>Alla tre absolutbelopp är lika. För <span class="math">z = 0</span> blir resultatet fortfarande 0; argumentet är då inte definierat.</p></div>
+<p class="math">|iz| = √((−b)² + a²)</p><p class="math">= √(b² + a²)</p><p class="math">= √(a² + b²)</p>
+<p class="math">|z/i| = √(b² + (−a)²)</p><p class="math">= √(b² + a²)</p><p class="math">= √(a² + b²)</p></div><p>Alla tre absolutbelopp är lika. För <span class="math">z = 0</span> blir resultatet fortfarande 0; argumentet är då inte definierat.</p></div>
 </div>
 <div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div></section>
 <section id="plot" class="slide" data-teacher="Den ursprungliga PDF-figuren visar alla tre vektorer. På webben bygger vi upp samma jämförelse: först bara z, sedan iz, sedan z/i och till sist en cirkel som kontroll av samma absolutbelopp. Låt eleverna förutsäga och rita innan varje klick. Talen i de tre valen har alla längden √5.">
@@ -30,9 +30,7 @@
 <div class="task"><strong>Rita och förutsäg innan nästa klick</strong><p id="rot-question" aria-live="polite">Beräkna iz. Vilken punkt får du om z roteras 90° moturs?</p></div>
 <div class="seq-controls"><button id="rot-back" class="secondary" type="button">← Tillbaka</button><button id="rot-next" type="button">Visa nästa steg →</button><button id="rot-reset" class="secondary" type="button">Börja om</button></div>
 <p class="muted" id="rot-step" aria-live="polite">Steg 0 av 3</p>
-<div id="rot-answers" class="answer hidden">
-<p class="math hidden" id="rot-iz"></p><p class="math hidden" id="rot-div"></p><p class="math hidden" id="rot-length"></p>
-<p id="rot-feedback"></p></div>
+<div id="rot-answers" class="answer hidden"><div class="math-working hidden" id="rot-work-iz"></div><p class="math hidden" id="rot-iz"></p><div class="math-working hidden" id="rot-work-div"></div><p class="math hidden" id="rot-div"></p><div id="rot-length" class="math-working hidden"></div><p id="rot-feedback"></p></div>
 </div></div></section>
 <section id="trap" class="slide" data-teacher="Använd konstruerad missuppfattning, inte 'My Favorite No' – det är inget autentiskt elevsvar. Eleverna skriver konjugat, multiplikation och division med i utan facit och förklarar varför spegling inte är samma transformation som rotation.">
 <div class="eyebrow">04 · Hitta och rätta missuppfattningen</div><h2>Konjugering är inte samma sak som rotation</h2>
@@ -78,6 +76,14 @@ function fmt(x,y){
  const im=y===0?'':((real&&y>=0)?' + ':real?' − ':y<0?'−':'')+(Math.abs(y)===1?'i':Math.abs(y)+'i');
  return real+im||'0';
 }
+function setMathLines(id,formulas){
+ const wrapper=document.getElementById(id);wrapper.replaceChildren();
+ for(const formula of formulas){
+  const line=document.createElement('p');line.className='math';
+  Ma4Math.setFormula(line,formula,'block');
+  wrapper.append(line);
+ }
+}
 function add(tag,attrs,content){
  const item=document.createElementNS('http://www.w3.org/2000/svg',tag);
  for(const [key,value] of Object.entries(attrs||{}))item.setAttribute(key,String(value));
@@ -111,12 +117,13 @@ function render(){
  document.getElementById('rot-step').textContent='Steg '+stage+' av 3';
  back.disabled=stage===0;next.disabled=stage===3;
  const answers=document.getElementById('rot-answers');answers.classList.toggle('hidden',stage===0);
+ setMathLines('rot-work-iz',['iz = i('+fmt(a,b)+')','= ('+a+')i + ('+b+')i²','= ('+a+')i + ('+b+')(−1)']);
  Ma4Math.setFormula(document.getElementById('rot-iz'),'iz = '+fmt(-b,a));
+ setMathLines('rot-work-div',['z/i = (1/i)('+fmt(a,b)+')','= (−i)('+fmt(a,b)+')','= −('+a+')i − ('+b+')i²','= −('+a+')i − ('+b+')(−1)']);
  Ma4Math.setFormula(document.getElementById('rot-div'),'z/i = '+fmt(b,-a));
- Ma4Math.setFormula(document.getElementById('rot-length'),'|z| = |iz| = |z/i| = √('+(a*a)+' + '+(b*b)+') = √'+(a*a+b*b));
- document.getElementById('rot-iz').classList.toggle('hidden',stage<1);
- document.getElementById('rot-div').classList.toggle('hidden',stage<2);
- document.getElementById('rot-length').classList.toggle('hidden',stage<3);
+ const rr=a*a+b*b;
+ setMathLines('rot-length',['|z| = √(('+a+')² + ('+b+')²)','|iz| = √(('+(-b)+')² + ('+a+')²)','|z/i| = √(('+b+')² + ('+(-a)+')²)','|z| = |iz| = |z/i| = √'+rr]);
+ for(const [id,number] of [['rot-work-iz',1],['rot-iz',1],['rot-work-div',2],['rot-div',2],['rot-length',3]])document.getElementById(id).classList.toggle('hidden',stage<number);
  document.getElementById('rot-feedback').textContent=stage===1?'Multiplikation med i roterar 90° moturs.':stage===2?'Division med i roterar 90° medurs.':stage===3?'Cirkeln visar att alla tre ligger lika långt från origo.':'';
  document.querySelectorAll('[data-rot]').forEach(button=>{const active=button.dataset.rot===a+','+b;button.setAttribute('aria-pressed',String(active));button.classList.toggle('secondary',!active)});
 }
