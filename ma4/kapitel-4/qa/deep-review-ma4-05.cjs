@@ -25,7 +25,7 @@ for(const p of values){
   assert.ok(Math.abs(p.r*Math.sin(rad)-p.b)<rounding,'Riktigt b av r sin v: '+p.id);
  }
 }
-assert.equal((-Math.sqrt(3))**2+1,4,'Exit belopp i kvadrat');
+assert.ok(Math.abs((-Math.sqrt(3))**2+1-4)<1e-12,'Exit belopp i kvadrat, korrekt flyttalstolerans');
 assert.ok(Math.abs(4*Math.cos(150*Math.PI/180)+2*Math.sqrt(3))<1e-12,'Omvänd form realdel');
 assert.ok(Math.abs(4*Math.sin(150*Math.PI/180)-2)<1e-12,'Omvänd form imaginärdel');
 assert.ok(Math.abs(2*Math.cos(240*Math.PI/180)+1)<1e-12,'Exit w realdel');
