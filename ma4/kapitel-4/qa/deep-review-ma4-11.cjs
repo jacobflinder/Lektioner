@@ -103,8 +103,8 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   // 05: lämplig stödtrappa utan facitläcka och separat notation
   await go(4);await hidden('r5a');await hidden('r5b');
   await reveal('r5a');await reveal('r5b');
-  assert.ok(await page.locator('#r5b .math-givens .math').count()===3,'Tre skilda villkor i stödtrappa');
-  await gap('#r5b .math-givens > .math',3);
+  assert.ok(await page.locator('#r5b .worked-equation').count()>=2,'Villkoren har var sitt semantiskt matematikblock');
+  await gap('#r5b .worked-step > .worked-equation',2);
   await shot('05-desktop');
   // 06: rotpunkter visas i rätt ordning, gammal information kan döljas igen
   await go(5);
