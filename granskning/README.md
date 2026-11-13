@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 8/41. Återstår 33/41.** Senast färdiggranskad: lektion 8, **de Moivres formel**. **Nästa lektion: 9/41, Ekvationen zⁿ = a**, sökväg ma4/kapitel-4/ekvationen-zn-a/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 9/41. Återstår 32/41.** Senast färdiggranskad: lektion 9, **Ekvationen zⁿ = a**. **Nästa lektion: 10/41, Eulers formel**, sökväg ma4/kapitel-4/eulers-formel/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -25,7 +25,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [multiplicera dividera med i](../ma4/kapitel-4/multiplicera-dividera-med-i/) — 7/7 bilder, allmän härledning, tre interaktiva rotationer, fullständiga facit och 390px mobilgranskning
 - [x] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/) — 7/7 bilder, fullständiga r/v-mellanled, frivillig härledning, interaktiv förstoring och 390px mobil
 - [x] [de moivre](../ma4/kapitel-4/de-moivre/) — djupgranskning 10/10 bilder, 9 dynamiska potenser, samtliga mellanled, korrekt MathML-bråk, separat förstoring och 390px mobil
-- [ ] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/)
+- [x] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/) — 10/10 bilder, fullständiga rot- och k-värdesberäkningar, dolda rotvinklar, korrekt k=3-låsning, mobilläsbarhet och riktad Chromiumtest
 - [ ] [eulers formel](../ma4/kapitel-4/eulers-formel/)
 - [ ] [andragradsekvationer](../ma4/kapitel-4/andragradsekvationer/)
 - [ ] [polynomdivision](../ma4/kapitel-4/polynomdivision/)
@@ -365,12 +365,48 @@ Den avslutade ämnes- och mobilgranskningen upptäckte efter PR #15 ännu en typ
 - **Skärmbildsbevis:** [Chromium-artifact från sista godkända arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43498843706/artifacts/14073447110).
 - **Granskningsstatus:** fortfarande **8/41 färdiga och 33 kvar**. Nästa ofärdiga lektion är oförändrat **9/41 – Ekvationen zⁿ = a**.
 
+## Bild-för-bild-rapport · 09/41 · Ekvationen zⁿ = a
+
+**Kurs:** Matematik 4 / Matematik – fortsättning nivå 2, moment **4.3 Potenser och komplexa tal – Ekvationen zⁿ = a**.  
+**GitHub-sökväg:** `ma4/kapitel-4/ekvationen-zn-a/`.  
+**Publicerad lektion:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/ekvationen-zn-a/  
+**Omfattning:** **10/10 bilder**, inklusive frivillig fördjupning. Dolda facit, stegsekvenser, k=3-beslut med felalternativ, separat rotgeometri, återställning, navigering, lärarstöd, klassrumsläge och tio mobila skärmbilder kontrollerade. Alla matematiska slutsvar har räknats oberoende.
+
+| Bild | Brister, ämneskontroll och genomförda förändringar |
+|---|---|
+| **1. Startfråga och mål** | `x³=8` ger enda reella lösningen `x=∛8=2`. Detta kontrasteras med `z³=8i`, som inte kan ha någon reell lösning eftersom en reell kub är reell. **Brist:** lärandemålen avslöjades redan före elevens försök. Målen visas nu efter startuppgiften; facit förklarar varför komplexa lösningar krävs utan att ge antalet rötter i förväg. Enskilt 2 min → par 2 min bevarat. |
+| **2. Aktivera de Moivre** | `z=r(cos(v)+isin(v))` ger `z³=r³(cos(3v)+isin(3v))`. Egen förutsägelse föregår dolt facit. Exakta trigonometriska funktionsargument har parenteser; `r≥0`, `r³`, `3v` och argument modulo `2π` förklaras i separata återkopplingsled. |
+| **3. Två villkor** | `z³=8i` och `8i=8(cos(π/2)+isin(π/2))` jämförs med de Moivre. **Allvarlig didaktisk lucka:** tidigare visades `r³=8⇒r=2` utan separata steg, och `v=(π/2+2πk)/3` utan att förtydliga att hela högerledet divideras. Nu visas `r³=8`, `r=∛8=2`; `3v=π/2+2πk`, `k∈ℤ`, `v=(π/2+2πk)/3=(π/2)/3+(2πk)/3=π/6+(2πk)/3`. Eleverna får först motivera varför **hela varv måste läggas till före division**. Samtliga tre klicksteg, tillbaka och reset fungerar. |
+| **4. Beräkna argumenten själv** | Varje k-värde och insättning är separerade från slutsvaret: `k=0` ger `π/6=30°`; `k=1`: `π/6+2π/3=π/6+4π/6=5π/6=150°`; `k=2`: `π/6+4π/3=π/6+8π/6=9π/6=3π/2=270°`. Tidigare komplicerade matematiska led var hoptryckta. Tre självstyrda förutsäg→återkoppling-steg och kvadrantkontroll bevarade. |
+| **5. Interaktiv rotgeometri** | **Kritiskt upptäckt fel:** redan innan första klicket avslöjade sidan vinkeln 30°, och efter ett klick visades **nästa** rotvinkel i stället för den senast uppvisade. Det motverkade elevens förutsägelse. Numera är vinkeln helt dold vid start och visar först efter respektive klick **senast visade rot**: 30°, 150°, 270°. Figuren ritad med samma x-/y-skala; SVG-vektorernas ändkoordinater har oberoende verifierats för `√3+i`, `−√3+i`, `−2i`. Vid `k=3` får eleven först räkna `13π/6=390°`. Felalternativ ger specifik feedback men **låser inte upp nästa steg**; rätt motiverad kontroll visar att 390°=30°+360° och första roten upprepas. Byte av svar, tillbaka och återställning verifierade. Den fysiska skissa→diskutera-aktiviteten och alla rotpilar bevarade. |
+| **6. Exakta rektangulära rötter** | **Brist:** originalet förenklade `2(√3/2+i/2)` direkt till slutsvar och tryckte samman alla tre rotuttryck i samma matematikrad. Nu visas för **varje rot** `r`, `v_j`, båda trigonometriska värdena, allmän polär form, explicit insättning, förenkling och separat slutsvar: `z₁=√3+i`, `z₂=−√3+i`, `z₃=−2i`. Kontroll: `r³=8`; `3v₁=π/2`, `3v₂=5π/2`, `3v₃=9π/2` – samma riktning `8i`. Motivering av exakt tre rötter: `k=0,1,2` ger olika riktningar, `k=3` upprepar den första. Den generella regeln för `a≠0` redovisar `rⁿ=R`, `nv=θ+2πk`, `v=(θ+2πk)/n` för `k=0,…,n−1`, med `a=0⇒z=0` som separat specialfall. |
+| **7. Självständigt försök** | För `z²=−4`: `−4=4(cos π+isin π)`, `r²=4⇒r=2`, `2v=π+2πk`, `v=π/2+πk`, därför `z₁=2i`, `z₂=−2i`. Oberoende kontroll `(±2i)²=−4`; när k ökar med 2 upprepas riktningen. Ursprunglig egen papperstid och flerval med specifika rätt/fel-förklaringar bevarade. Facit har fått fullständig koefficientidentifiering, explicit division och kontroll. Resultaten är två egna MathML-ekvationer. |
+| **8. NOKflex** | Originalmomentet **4.3 Potenser och komplexa tal – Ekvationen zⁿ = a**, uppgifter **4315–4328** samt **minst tre av fem nivåer** är bevarade. Ingen ny digital insamling, inget Socrative som saknades i originalet. Arbetsgång: polär form → längd → argument → rötter → kontroll. |
+| **9. Frivillig fördjupning** | `z⁴=16`: `r⁴=16⇒r=2`, `4v=2πk`, `v=πk/2`. De fyra olika rötterna `2`, `2i`, `−2`, `−2i` redovisas i **fyra separata facitrader**, med `k=0,1,2,3`, vinklar, `2π/4=π/2=90°` och kontroll genom fjärde potens. Bilden är fortsatt frivillig och kan hoppas över i ordinarie navigering. |
+| **10. Individuell utcheckning** | `z³=−8`: `−8=8(cos π+isin π)`, `r³=8⇒r=2`, `3v=π+2πk` och `v=π/3+(2πk)/3`. Insättning av k=0,1,2 ger argumenten `π/3`, `π`, `5π/3`. Alla cosinus-/sinusvärden och multiplikationer redovisas före tre **separata** slutsvar: `z₁=1+√3i`, `z₂=−2`, `z₃=1−√3i`. Vinklarna kuberade blir `π,3π,5π` och r³=8, så alla ger −8. Målen och självbedömningen återkopplas på avslutningen. |
+
+### Oberoende matematisk kontroll, didaktik och bevarade delar
+
+- **Oberoende kontrollräkning:** `(√3+i)³=(-√3+i)³=(-2i)³=8i` (likheten avser tre separata beräkningar); `(2i)²=(-2i)²=-4`; `(±2)⁴=(±2i)⁴=16`; `(1+√3i)³=(-2)³=(1−√3i)³=-8`. Samtliga verifierade med separat komplex multiplikation, inte med tidigare facit.
+- Ursprungliga **numeriska slutsvar var korrekta**. Kritiska fel för förståelsen var att nästa rotvinkel avslöjades i förväg, att ett felaktigt k=3-val kunde låsa upp kontrollsteget, att insättningarna i argumentvillkoret inte visade alla algebraiska led och att självständiga rotuttryck låg ihoptryckta utan tydlig visuell åtskillnad.
+- **Metod:** förutsäg → försök själv på papper → resonera i par → visa exakt ett nytt steg → kontrollera längd och argument → gå vidare. Förklaringar till vanliga fel ges utan att lägga till klick bara för interaktivitetens skull. Fungerande figurer och samtliga **10 bilder**, tre modelleringar, fysiska skisser och diskussioner, lärarstöd, frivillig fördjupning, NOKflex **4315–4328** och nivåval bevarade.
+
+### Kod, automatiska tester, publicering och verifieringsgräns
+
+**Koden:** [PR #17 – Ma4 09/41](https://github.com/jacobflinder/Lektioner/pull/17), sammanslagen i `main` via commit `a309d4feb4dd79f40f40301c4567539b2ad96028`. Ändrade enbart aktuell lektions HTML/JavaScript, den tillhörande befintliga par-05-kontrollen, den nya riktade QA-kontrollen och Ma4-workflowens testlista.
+
+**Riktad testfil:** `ma4/kapitel-4/qa/deep-review-ma4-09.cjs`. Har körts med ordinarie Ma4-svit och verifierar **10/10 bilder**, alla dolt visade facit, tre formler för rötter, beräkningsled, fyra sjätte-/fjärde-/kub- och kvadratfallen, SVG-pilarnas faktiska slutkoordinater, k=3-beslutets rätt- och felrespons, att fel svar **inte** låser upp framtida svar, byte av val, tillbaka, reset, målstyrd utcheckning, matematik i MathML, **≥16 px verkligt mellanrum mellan självständiga matematiska uttryck**, klassrumsläge, lärarstöd och **tio mobila 390px-skärmbilder** utan intern matematikscroll. Den tidigare `math-typography-pair-05.cjs` har anpassats till fördröjt avslöjande av rotvinkel; befintliga ämneskontroller har inte stängts av.
+
+**Faktisk status:** [Arbetsgrenens fullständiga browser QA](https://github.com/jacobflinder/Lektioner/actions/runs/43502401538) – **success**; [browser QA efter merge på `main`](https://github.com/jacobflinder/Lektioner/actions/runs/43503281134) – **success**; [GitHub Pages byggning och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43503280652) – **success**. [Skärmbildsartefakt från den godkända arbetsgrenen](https://github.com/jacobflinder/Lektioner/actions/runs/43502401538/artifacts/14075800017). Mobila skärmbilder för bland annat argumentberäkning, figur, rektangulära rötter och utcheckning är dessutom **visuellt öppnade och granskade**.
+
+**Verifieringsgräns:** Publicerad HTML verifierad i GitHubs sammanslagna huvudgren och Pages-deployment är godkänd. En separat direkt HTTP-kontroll av den publika GitHub Pages-adressen kunde inte genomföras genom webbverktyget och påstås inte vara gjord.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **Senast avslutad lektion:** **8 av 41 – Matematik 4, de Moivres formel**.
-- **Sökväg:** `ma4/kapitel-4/de-moivre/`.
-- **Status:** PR #15 och eftergranskning PR #16 sammanslagna i `main`; fullständig Ma4 Chromium-svit godkänd på arbetsgrenar och slutligt `main`, GitHub Pages driftsatt utan fel, 10/10 bilder och samtliga mobillägen visuellt granskade, inklusive trigonometriska funktionsargument och faktisk bråkstruktur; permanent logg uppdaterad.
-- **Nästa lektion:** **9 av 41 – Matematik 4, Ekvationen zⁿ = a**.
-- **Nästa sökväg:** `ma4/kapitel-4/ekvationen-zn-a/`.
-- **Olösta blockerande ämnes-, test- eller publiceringsfel:** inga kända efter den fullständiga ämnes- och teknikgranskningen. Direkt HTTP-avläsning av Pages kunde inte verifieras separat.
-- **Instruktion:** Läs `AGENTS.md` och **hela** `granskning/README.md`. Kontrollera senaste avslutade lektion, GitHub-historik och aktuell huvudgren. Börja med **lektion 9 av 41**. Granska en lektion i taget, varje bild och matematisk/fysikalisk operation oberoende, varje dolt facit, varje kritisk figur och interaktion, nödvändiga mellanled, hela ekvationernas faktiska MathML-tolkning, visuella avstånd och mobil/projektor. Bevara NOKflex, Socrative endast om originalet innehåller det, och lärarstöd. Ändra på separat gren med relevanta test, slå samman först efter godkända tester och verifiera Actions/Pages. Uppdatera sedan loggen med nästa fortsättningspunkt.
+- **Senast avslutad lektion:** **9 av 41 – Matematik 4, Ekvationen zⁿ = a**.
+- **Sökväg:** `ma4/kapitel-4/ekvationen-zn-a/`.
+- **Status:** PR #17 sammanslagen i `main`; specifikt test och fullständig Ma4 Chromiumtestsvit godkända på arbetsgren och `main`; GitHub Pages byggd och driftsatt; alla 10/10 bilder och tio mobillägen testade och visuellt kontrollerade; granskningsloggen uppdaterad.
+- **Nästa lektion:** **10 av 41 – Matematik 4, Eulers formel**.
+- **Nästa sökväg:** `ma4/kapitel-4/eulers-formel/`.
+- **Olösta blockerande ämnes-, interaktions- eller publiceringsfel:** inga kända. Separat direkt HTTP-avläsning av den publika Pages-sidan är inte verifierad.
+- **Instruktion:** Läs `AGENTS.md` och hela `granskning/README.md`, kontrollera den verkliga statusen i `main`. Granska **lektion 10 av 41**, en lektion åt gången: varje bild och varje beräkningsled oberoende, korrekta exponentuttryck och bråk, facit som inte avslöjas för tidigt, relevant elevtänkande, mobil/projektor, eventuell animation och begripligt avstånd mellan matematiska uttryck. Bevara NOKflex och originalets undervisningsmoment. Gör en separat gren, sammanhållen ändring, riktat test, godkänd helsvit, merge, Pages-verifiering och permanent logguppdatering före rapporten.
