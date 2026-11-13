@@ -162,11 +162,7 @@ const squareQuestions=[
  'Vad händer med beloppet och båda argumenten när rötterna kvadreras? Skriv innan nästa klick.',
  'Förklara med egna ord: varför får två motsatta tal samma kvadrat? Vad ger i stället konjugatet 2 − 2i?'
 ];
-const squareNotes=[ '',
- '<p class="math compact-math">z₀ = 2 + 2i<br>|z₀| = 2√2, v₀ = π/4</p>',
- '<p class="math compact-math">z₀ = 2 + 2i, v₀ = π/4<br>z₁ = −2 − 2i, v₁ = 5π/4</p><p>Båda har beloppet 2√2. Argumenten skiljer π: punkterna är motsatta.</p>',
- '<p class="math compact-math">(2√2)² = 8<br>2 · π/4 = π/2<br>2 · 5π/4 = 5π/2 = π/2 + 2π</p><p>Samma belopp och samma riktning efter kvadrering.</p><p class="math compact-math">(2 + 2i)² = 4 + 8i − 4 = 8i<br>(−2 − 2i)² = 4 + 8i − 4 = 8i</p><p>Konjugatet 2 − 2i ger i stället 4 − 8i − 4 = −8i.</p>'
-];
+const squareNotes=['',window.quadraticMathSolutions.html.square1,window.quadraticMathSolutions.html.square2,window.quadraticMathSolutions.html.square3];
 function showSquare(step){
  squareStep=Math.max(0,Math.min(3,step));
  rootA.classList.toggle('hidden',squareStep<1);rootB.classList.toggle('hidden',squareStep<2);squareTarget.classList.toggle('hidden',squareStep<3);
