@@ -132,6 +132,20 @@ document.getElementById('prev').addEventListener('click',lessonPrevious);documen
 document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||['INPUT','BUTTON','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight')lessonNext();if(e.key==='ArrowLeft')lessonPrevious()});
 document.getElementById('mode').addEventListener('click',e=>{let active=document.body.classList.toggle('projector');document.querySelector('.teacher-note').classList.remove('open');document.getElementById('teacher-toggle').setAttribute('aria-expanded','false');document.getElementById('teacher-toggle').textContent='Visa lärarstöd';e.currentTarget.textContent=active?'Repetitionsläge':'Klassrumsläge';e.currentTarget.setAttribute('aria-label',active?'Växla till repetitionsläge':'Växla till klassrumsläge');e.currentTarget.setAttribute('aria-pressed',String(active))});document.getElementById('teacher-toggle').addEventListener('click',e=>{const open=document.querySelector('.teacher-note').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',String(open));e.currentTarget.textContent=open?'Dölj lärarstöd':'Visa lärarstöd'});
 document.querySelectorAll('[data-show]').forEach(b=>{b.dataset.initialText=b.textContent;b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.show);const hidden=el.classList.toggle('hidden');b.setAttribute('aria-expanded',String(!hidden));b.textContent=hidden?b.dataset.initialText:'Dölj: '+b.dataset.initialText})});
+const firstEulerStep=document.querySelector('[data-show="final1"]');
+const identityReveal=document.querySelector('[data-show="final2"]');
+if(firstEulerStep&&identityReveal){
+ identityReveal.disabled=true;
+ firstEulerStep.addEventListener('click',()=>{
+  const ready=!document.getElementById('final1').classList.contains('hidden');
+  if(!ready){
+   document.getElementById('final2').classList.add('hidden');
+   identityReveal.textContent=identityReveal.dataset.initialText;
+   identityReveal.setAttribute('aria-expanded','false');
+  }
+  identityReveal.disabled=!ready;
+ });
+}
 document.querySelectorAll('.quiz').forEach(q=>{
  const choices=[...q.querySelectorAll('.choice')],submit=q.querySelector('.quiz-submit'),f=q.querySelector('.feedback');
  let selected=-1;

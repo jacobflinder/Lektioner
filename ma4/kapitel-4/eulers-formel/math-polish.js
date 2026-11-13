@@ -70,10 +70,43 @@ if(multiply){
  '</div>';
 }
 const conversion=document.querySelectorAll('[data-conversion-step]')[2];
-if(conversion)conversion.innerHTML='<strong>3 · Exakta trigonometriska värden och kontroll</strong><div class="ma4-worked">'+
- S('Värden från enhetscirkeln',eq('cos(π/3) = 1/2')+eq('sin(π/3) = √3/2'))+
- S('Sätt in och förenkla',eq('z = 2(1/2 + i√3/2)')+eq('z = 1 + i√3'))+
- S('Kontrollera beloppet',eq('|z| = √(1² + (√3)²)')+eq('|z| = √(1 + 3) = √4 = 2'))+
+if(conversion){
+ conversion.innerHTML='<strong>3 · Exakta trigonometriska värden och förenkling</strong><div class="ma4-worked">'+
+  S('Värden från enhetscirkeln',eq('cos(π/3) = 1/2')+eq('sin(π/3) = √3/2'))+
+  S('Sätt in och multiplicera in faktorn 2',eq('z = 2(1/2 + i√3/2)')+
+    eq('z = 2·(1/2) + 2·i·(√3/2)')+
+    eq('z = (2/2) + i(2√3/2)')+eq('z = 1 + i√3'))+
+  '</div>';
+ const control=document.createElement('div');
+ control.className='hidden';
+ control.dataset.conversionStep='';
+ control.innerHTML='<strong>4 · Kontrollera belopp och riktning</strong><div class="ma4-worked">'+
+  S('Kontrollera beloppet',eq('|z| = √(1² + (√3)²)')+
+    eq('|z| = √(1 + 3) = √4 = 2'))+
+  '<p>Realdelen 1 och imaginärdelen √3 är båda positiva. Punkten ligger i första kvadranten, samma som argumentet π/3.</p>'+
+  '</div>';
+ conversion.after(control);
+}
+const negativeMath=document.querySelector('#negative .math');
+if(negativeMath)negativeMath.outerHTML='<div class="ma4-worked">'+
+ S('Använd Eulers formel',eq('z = 3(cos(−π/2) + i sin(−π/2))'))+
+ S('Sätt in exakta trigonometriska värden',
+   eq('cos(−π/2) = 0')+eq('sin(−π/2) = −1')+
+   eq('z = 3(0 + i(−1))'))+
+ S('Förenkla',eq('z = 3(0 − i)')+A(eq('z = −3i')))+
+ '</div>';
+const half=document.getElementById('final1');
+if(half)half.innerHTML=L(R(expI(π),O('='),trig('cos',π),O('+'),i,trig('sin',π)),
+ 'e^(iπ) = cos(π) + i sin(π)');
+const identity=document.getElementById('final2');
+if(identity)identity.innerHTML='<div class="ma4-worked">'+
+ S('1 · Läs av enhetscirkeln',eq('cos(π) = −1')+eq('sin(π) = 0'))+
+ S('2 · Sätt in i Eulers formel',
+   L(R(expI(π),O('='),O('−'),N('1'),O('+'),i,O('·'),N('0')),
+     'e^(iπ) = −1 + i·0')+
+   L(R(expI(π),O('='),O('−'),N('1')),'e^(iπ) = −1'))+
+ S('3 · Addera 1 i båda leden',
+   A(L(R(expI(π),O('+'),N('1'),O('='),N('0')),'e^(iπ) + 1 = 0')))+
  '</div>';
 
 const fav=document.getElementById('fav');
@@ -130,6 +163,8 @@ if(check2){
    eq('r = r₁r₂ = 2 · 3 = 6')+
    eq('v = v₁ + v₂ = π/3 + (−π/3) = 0'))+
  S('3 · Använd exponentiallagen och förenkla',
+   L(R(product,O('='),pth(N('2'),expI(piFrac(3))),pth(N('3'),expI(R(O('−'),i,piFrac(3))))),'z₁z₂ = (2e^(iπ/3))(3e^(−iπ/3))')+
+   L(R(product,O('='),N('2'),O('·'),N('3'),expI(R(i,P(R(piFrac(3),O('−'),piFrac(3)))))), 'z₁z₂ = 2·3 e^(i(π/3−π/3))')+
    L(R(product,O('='),N('6'),E(R(i,N('0')))),'z₁z₂ = 6e^(i·0)')+
    L(R(E(N('0')),O('='),N('1')),'e⁰ = 1')+
    eq('z₁z₂ = 6 · 1')+A(eq('z₁z₂ = 6')))+

@@ -70,14 +70,15 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   // 08: tre steg visas i ordning, bakåt och nollställning fungerar.
   await go(7);
   assert.equal(await page.locator('[data-conversion-step]:visible').count(),0);
-  for(let j=1;j<=3;j++){await page.locator('#worked-next').click();assert.equal(await page.locator('[data-conversion-step]:visible').count(),j);}
-  for(const x of ['cos(π/3) = 1/2','sin(π/3) = √3/2','z = 1 + i√3','|z| = √(1 + 3) = √4 = 2'])await findMath('[data-conversion-step]:nth-child(3)',x);
+  for(let j=1;j<=4;j++){await page.locator('#worked-next').click();assert.equal(await page.locator('[data-conversion-step]:visible').count(),j);}
+  for(const x of ['cos(π/3) = 1/2','sin(π/3) = √3/2','z = (2/2) + i(2√3/2)','z = 1 + i√3'])await findMath('[data-conversion-step]:nth-child(3)',x);
+  await findMath('[data-conversion-step]:nth-child(4)','|z| = √(1 + 3) = √4 = 2');
   await pic('08-desktop');
-  await page.locator('#worked-back').click();assert.equal(await page.locator('[data-conversion-step]:visible').count(),2);
+  await page.locator('#worked-back').click();assert.equal(await page.locator('[data-conversion-step]:visible').count(),3);
   await page.locator('#worked-reset').click();assert.equal(await page.locator('[data-conversion-step]:visible').count(),0);
   // 09–10: kvartsvarv medurs, halvvarv, facit efter försök.
   await go(8);await quiz(0,0,2);await reveal('negative');assert.ok((await page.locator('#negative').innerText()).includes('riktningen som avgör'));await pic('09-desktop');
-  await go(9);await reveal('final1');await reveal('final2');await pic('10-desktop');
+  await go(9);assert.ok(await page.locator('[data-show="final2"]').isDisabled(),'Identiteten skyddas före första steget');await reveal('final1');assert.ok(await page.locator('[data-show="final2"]').isEnabled());await reveal('final2');await pic('10-desktop');
   // 11: originalets bokmoment och huvudväg måste finnas kvar.
   await go(10);const nok=await page.locator('.slide.active').innerText();
   assert.ok(nok.includes('NOKflex')&&nok.includes('4329–4338')&&nok.includes('tre av fem nivåer'));await pic('11-desktop');
