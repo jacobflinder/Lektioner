@@ -43,13 +43,13 @@ function typeFormula(source,display='block'){
    if(glyphs[cursor]==='|')cursor++;
    return suffix('<mrow>'+mo('|')+middle+mo('|')+'</mrow>');
   }
-  if(c==='√'){
+  if(c==='√'||c==='∛'){
    while(glyphs[cursor]===' ')cursor++;
    let body='';
    if(glyphs[cursor]==='('){
     cursor++;body=sequence(')');if(glyphs[cursor]===')')cursor++;
    }else body=atom();
-   return suffix('<msqrt>'+body+'</msqrt>');
+   return suffix(c==='∛'?'<mroot>'+body+mn('3')+'</mroot>':'<msqrt>'+body+'</msqrt>');
   }
   if(isDigit(c)){
    while(isDigit(glyphs[cursor])||glyphs[cursor]==='.'||(glyphs[cursor]===','&&isDigit(glyphs[cursor+1]))){c+=glyphs[cursor++]}
