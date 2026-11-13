@@ -116,7 +116,7 @@ renderShift();
 
 function renderExit(){
  const s=$('exit-derivative');s.replaceChildren();
- const X=x=>74+112*x,Y=y=>296-62*y;
+ const X=x=>74+112*x,Y=y=>282-55*y; // Visa även hela minimumvärdet −1 och markören inom klippområdet
  const g=coordinateAxes(s,{X,Y,ticksX:[0,1,2,3,4],ticksY:[-1,0,1,2,3]});
  const fn=x=>(x-1)*(x-3);
  create(g,'path',{d:curve(fn,0,4,X,Y,.018),stroke:'#bb5454','stroke-width':3.8,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'});
