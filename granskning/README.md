@@ -480,7 +480,7 @@ Den avslutade ämnes- och mobilgranskningen upptäckte efter PR #15 ännu en typ
 - \(z^2=8i\): \((2+2i)^2=4+8i-4=8i\), medan konjugatets kvadrat \((2-2i)^2=-8i\); den andra korrekta roten är **motsatt**: \(-2-2i\).
 - \(z^2=-32i\): \((4-4i)^2=16-32i-16=-32i\), andra roten \(-4+4i\). \(z^2=-18i\): \((3-3i)^2=-18i\), andra roten \(-3+3i\).
 - Metodval B: \((-3+2i)^2+6(-3+2i)+13=(5-12i)+(-18+12i)+13=0\); den andra är konjugatet. Metodval D: \(z=1\pm2i\).
-- Exit A: \((4i)^2-2i(4i)+8=-16+8+8=0\); \((-2i)^2-2i(-2i)+8=-4-4+8=0\). Exit B: \((3+3i)^2=9+18i-9=18i\). Konstruktionen: \((2+3i)(2-3i)=13\), rotenas summa \(4\).
+- Exit A: \((4i)^2-2i(4i)+8=-16+8+8=0\); \((-2i)^2-2i(-2i)+8=-4-4+8=0\). Exit B: \((3+3i)^2=9+18i-9=18i\). Konstruktionen: \((2+3i)(2-3i)=13\), rötternas summa \(4\).
 - **Villkor:** För \(z^2=w\neq0\) finns två olika motsatta rötter; för \(w=0\) en dubbelrot. Konjugerade icke-reella rötter garanteras för polynom med **reella** koefficienter, inte för godtyckliga komplexa koefficienter. Argument behandlas modulo \(2\pi\); för kvadratrötter räcker två värden \(k=0,1\).
 
 ### Förändrat och bevarat
