@@ -156,7 +156,7 @@ function answerLabel(q){
  if(q.kind==='cos')return a.x;
  if(q.kind==='sin')return a.y;
  if(q.kind==='coords')return '('+a.x+'; '+a.y+')';
- return (a.cos>0?'+':a.cos<0?'-':'0')+'; '+(a.sin>0?'+':a.sin<0?'-':'0');
+ return (a.cos>0?'+':a.cos<0?'-':'0')+';'+(a.sin>0?'+':a.sin<0?'-':'0');
 }
 function explanation(q){
  const a=q.angle,base='Tänk på att cos v är x-koordinaten och sin v är y-koordinaten.';
