@@ -147,7 +147,7 @@ async function active(page){
       // Ett helt nytt exit-test, inga tidigare lösningssvar före elevförsök.
       await page.selectOption('#jump','13');
       const exitText=await (await active(page)).innerText();
-      assert.ok(await page.locator('.slide.active math[aria-label="z² − 2iz + 8 = 0"]').count()===1&&await page.locator('.slide.active math[aria-label="z² = 18i"]').count()===1,'Andragrad: nya exit-ekvationer satta som MathML');
+      assert.ok(await page.locator('.slide.active > ol.spaced math[aria-label="z² − 2iz + 8 = 0"]').count()===1&&await page.locator('.slide.active > ol.spaced math[aria-label="z² = 18i"]').count()===1,'Andragrad: nya exit-ekvationer satta som MathML');
       assert.ok(!exitText.includes('z² = −8i'),'Andragrad: tidigare övning återanvänds inte');
       assert.ok(await page.locator('#r13a').isHidden()&&await page.locator('#r13b').isHidden(),'Andragrad: exitfacit dolt');
       assert.ok(!exitText.includes('Till läraren'),'Andragrad: läraranteckningar visas inte för eleverna');

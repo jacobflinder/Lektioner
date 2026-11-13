@@ -50,6 +50,7 @@ jobs:
           node ma4/kapitel-4/qa/deep-review-ma4-08.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-09.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-10.cjs
+          node ma4/kapitel-4/qa/deep-review-ma4-11.cjs
           node ma4/kapitel-4/qa/equation-spacing-ma4-01-03.cjs
           node ma4/kapitel-4/qa/unit-circle-browser.cjs
           node ma4/kapitel-4/qa/understand-browser.cjs
