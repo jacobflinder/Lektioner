@@ -3,6 +3,7 @@
 const {$}=window.Fy2Nav,{fmt,compass,components}=window.Fy2Physics;
 
 const math=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
+const inlineMath=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+x+'</math>';
 const chain=(law,sub,result,note)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+math(law)+'</div></div>'+
  '<details class="calc-ins"><summary>2 · Visa insättning med enheter</summary><div class="math-sm">'+math(sub)+'</div></details>'+
@@ -17,11 +18,11 @@ function drawComponents(){
  $("earth-B-value").textContent=fmt(B,0)+" μT";
  $("earth-i-value").textContent=fmt(i,0)+"°";
  $("earth-components-result").innerHTML=componentsShown?
- chain('<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo><mi>B</mi><mi>cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo><mi>B</mi><mi>sin</mi><mi>i</mi>',
- '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi>cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo><mspace width="1em"/>'+
- '<msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi>sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
+ chain('<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">sin</mi><mi>i</mi>',
+ '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo><mspace width="1em"/>'+
+ '<msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
  '<msub><mi>B</mi><mi>h</mi></msub><mo>=</mo>'+val(v.Bh,1,'μT')+'<mspace width="1em"/><msub><mi>B</mi><mi>v</mi></msub><mo>=</mo>'+val(v.Bv,1,'μT'),
- 'Bᵥ är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar Bₕ.') :
+ ''+inlineMath('<msub><mi>B</mi><mi>v</mi></msub>')+' är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar '+inlineMath('<msub><mi>B</mi><mi>h</mi></msub>')+'.') :
  'Förutsäg först: om inklinationen ökar men B är konstant, vilken komponent minskar?';
  $("earth-components-reveal").textContent=componentsShown?"Dölj värden":"Visa komponenterna";
 }
@@ -38,12 +39,12 @@ function drawCompass(){
  $("earth-compass").innerHTML=v.html;
  $("earth-coil-value").textContent=fmt(b,0)+" μT";
  $("earth-compass-result").innerHTML=compassShown?
- chain('<mi>tan</mi><mi>α</mi><mo>=</mo><mfrac><mrow><msub><mi>B</mi><mtext>sp</mtext></msub></mrow><mrow><msub><mi>B</mi><mi>h</mi></msub></mrow></mfrac>',
- '<mi>α</mi><mo>=</mo><mi>arctan</mi><mo>(</mo><mfrac><mrow>'+val(b,0,'μT')+'</mrow><mrow>'+val(Bh,1,'μT')+'</mrow></mfrac><mo>)</mo>',
+ chain('<mi mathvariant="normal">tan</mi><mi>α</mi><mo>=</mo><mfrac><mrow><msub><mi>B</mi><mtext>sp</mtext></msub></mrow><mrow><msub><mi>B</mi><mi>h</mi></msub></mrow></mfrac>',
+ '<mi>α</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>(</mo><mfrac><mrow>'+val(b,0,'μT')+'</mrow><mrow>'+val(Bh,1,'μT')+'</mrow></mfrac><mo>)</mo>',
  '<mi>α</mi><mo>≈</mo><mn>'+fmt(v.angle,1)+'</mn><mo>°</mo>',
  (b>0?'Röd nordände vrids åt öster.':b<0?'Röd nordände vrids åt väster.':'Röd nordände förblir i magnetisk nordriktning.')+
- ' Spolens fält är här vinkelrätt mot jordfältets horisontella komponent; α är inte inklinationen i.') :
- 'Förutsäg nålens riktning innan du visar svaret. Bₕ är konstant medan Bsp ändras.';
+ ' Spolens fält är här vinkelrätt mot jordfältets horisontella komponent; '+inlineMath('<mi>α</mi>')+' är inte inklinationen '+inlineMath('<mi>i</mi>')+'.') :
+ 'Förutsäg nålens riktning innan du visar svaret. '+inlineMath('<msub><mi>B</mi><mi>h</mi></msub>')+' är konstant medan '+inlineMath('<msub><mi>B</mi><mtext>sp</mtext></msub>')+' ändras.';
  $("earth-compass-show").textContent=compassShown?"Dölj resultant och nål":"Visa resultant och nål";
 }
 $("earth-coil").oninput=()=>{drawCompass()};
