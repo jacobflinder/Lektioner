@@ -9,6 +9,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 3. **Kognitivt sammanhang:** låt eleverna försöka före återkoppling; exponera inte facit genom en annan öppen ruta; visa alla nödvändiga härledningssteg i rätt ordning.
 4. **Oförändrade delar:** behåll NOKflex, Socrative om det finns, klassrumsdemos, lärarstöd, övningar, val och frivilliga aktiviteter.
 5. **Teknisk verifiering:** automatiserade tester av alla bilder inklusive dolda svar, återkopplingsval, skärm och mobil. Kontrollera att både GitHub Actions och Pages passerar efter publicering.
+6. **Visuellt avstånd mellan uttryck:** varje fristående ekvation eller givet tal får ett eget matematikblock. Använd aldrig enbart mellanslag eller `&nbsp;` för att skilja ekvationer i samma MathML-element. Säkerställ luft (minst 16 px i Ma4:s `.math-givens`), tydlig åtskillnad på projektor/dator/mobil, skärmbildskontroll och automatiskt regressionstest för avståndet.
 
 ## Lektioner och status
 
@@ -162,6 +163,14 @@ u+z=−2−i, u−z=4−5i, uz=3+11i, (−3+2i)²=5−12i, (2+i)(1−2i)=4−3i,
 - [`main` – godkänd GitHub Pages-build och driftsättning](https://github.com/jacobflinder/Lektioner/actions/runs/43452657892).
 
 **Verifieringens gräns:** GitHub Actions bekräftar godkänd Pages-driftsättning, och riktiga Chromium-skärmbilder på exakt den publicerade kodversionen är visuellt genomgångna (alla 8 mobilbilder). En separat direkt HTTP-avläsning av den publika Pages-sidan var inte möjlig från granskningsverktyget, varför sådan direktkontroll inte påstås vara utförd.
+
+## Tvärgående efterhandskorrigering · Visuellt åtskilda ekvationer (13 november 2026)
+
+En bild från **Ma4 lektion 1, bild 4**, visade att två fristående definitioner `u = 1 − 3i` och `z = −3 + 2i` renderades utan synligt mellanrum som `u = 1 − 3iz = −3 + 2i`. Även lektion 3 använder samma två tal. **Orsak:** flera ekvationer låg i ett och samma `.math`-element med `&nbsp;` som enda avskiljare; MathML-renderaren normaliserar bort mellanrummet.
+
+**Åtgärd:** Båda lektionerna visar nu varje givet komplext tal i ett eget matematiskt block i `.math-givens`. En återanvändbar CSS-regel ger minst **16 CSS-pixlars vertikalt mellanrum**. Riktade Chromiumtester kontrollerar både separata MathML-uttryck och deras uppmätta mellanrum på desktop och mobil (390 px). Dessutom är kravet permanent infört i `AGENTS.md` och som granskningskriterium ovan.
+
+**Status:** Denna typografiska korrigering ändrar inte antalet genomförda lektioner (3/41) eller deras matematiska lösningar. Kod- och publiceringsbevis hör till den separat testade och sammanslagna ändringen.
 
 ### FORTSÄTT HÄR I NÄSTA CHATT
 

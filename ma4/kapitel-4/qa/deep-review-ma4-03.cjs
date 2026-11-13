@@ -78,8 +78,10 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   await screenshot('02-motiv-desktop');console.log('PASS bild 02/08: allmän regel, nollvillkor och återställning');
   // 03: sju elevstyrda steg, fyra faktorer och återkontroll.
   await slide(2);
-  await one('#d-princip > p.math math[aria-label="z = −3 + 2i"]','03 första givna talet är en egen ekvation');
-  await one('#d-princip > p.math math[aria-label="u = 1 − 3i"]','03 andra givna talet är en egen ekvation');
+  await one('#d-princip .math-givens > p.math math[aria-label="z = −3 + 2i"]','03 första givna talet är en egen ekvation');
+  await one('#d-princip .math-givens > p.math math[aria-label="u = 1 − 3i"]','03 andra givna talet är en egen ekvation');
+  const givensGap=await page.locator('#d-princip .math-givens > p.math').evaluateAll(rows=>rows[1].getBoundingClientRect().top-rows[0].getBoundingClientRect().bottom);
+  assert.ok(givensGap>=15,'03 avstånd mellan separata givna ekvationer');
   const worked=page.locator('#d-princip [data-sequence]');
   assert.equal(await worked.locator('[data-seq-item]:not(.hidden)').count(),0);
   for(let k=1;k<=7;k++){
@@ -167,6 +169,8 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
    const sizes=await page.evaluate(()=>({body:document.documentElement.scrollWidth,screen:innerWidth}));
    assert.ok(sizes.body<=sizes.screen+4,'Mobilbild '+(n+1)+' sidöverspill '+JSON.stringify(sizes));
    if(n===2){
+    const mobileGap=await page.locator('#d-princip .math-givens > p.math').evaluateAll(rows=>rows[1].getBoundingClientRect().top-rows[0].getBoundingClientRect().bottom);
+    assert.ok(mobileGap>=15,'03 separata givna ekvationer med avstånd på mobil');
     const widths=await page.locator('#d-princip [data-seq-item]').nth(5).locator('p.math').evaluateAll(xs=>xs.map(x=>({scroll:x.scrollWidth,client:x.clientWidth})));
     assert.equal(widths.length,2,'03 två mobilanpassade ekvationsled');
     assert.ok(widths.every(x=>x.scroll<=x.client+2),'03 ingen intern sidscroll i slutsvaret '+JSON.stringify(widths));
