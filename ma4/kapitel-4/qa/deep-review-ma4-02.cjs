@@ -57,6 +57,10 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   assert.ok(Math.abs((pts[0].y+pts[1].y)/2-axisY)<.01,'02 korrekt spegling i realaxeln');
   await page.locator('[data-reveal="k-rule"]').click();
   await has('#k-rule math[aria-label="(a; b) ⇒ (a; −b)"]','02 allmän speglingsregel');
+  assert.ok(await page.locator('#k-rule mover').count()>0,'02 konjugatstreck i MathML');
+  assert.equal(await page.locator('#k-rule mover[accent="true"]').count(),0,'02 överstreck får inte döljas av Chromiums accent=true-bugg');
+  const bar=await page.locator('#k-rule mover mo').first().boundingBox();
+  assert.ok(bar&&bar.width>2&&bar.height>0,'02 överstrecket har en mätbar grafisk yta');
   await page.locator('#k-b').evaluate(el=>{el.value='4';el.dispatchEvent(new Event('input',{bubbles:true}))});
   assert.equal(await page.locator('#k-show-conj').getAttribute('aria-pressed'),'false','02 ny parameter döljer gamla facit');
   assert.equal(await page.locator('#k-plane circle').count(),1,'02 ny förutsägelse före spegling');
