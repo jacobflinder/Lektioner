@@ -47,7 +47,8 @@ async function complete(page,max=100){
  while(await page.locator('#result').isHidden()){
   if(++steps>max)throw Error('Runda fastnade efter '+max+' frågor');
   const q=await getQuestion(page);
-  assert.ok(!q.label.includes(q.answer),'Frågetext läcker svaret: '+q.label);
+  assert.ok(await page.locator('#q-solution').isHidden(),'Frågefacit dolt före kontroll');
+  assert.ok(!(await page.locator('#q-answer').getAttribute('placeholder')).includes('Facit'),'Fältet får inte visa facit');
   const input=page.locator('#q-answer');
   await input.fill(q.answer.replaceAll('−','-'));
   await page.locator('#check-btn').click();
