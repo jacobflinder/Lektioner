@@ -82,7 +82,7 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   // 11: originalets bokmoment och huvudväg måste finnas kvar.
   await go(10);const nok=await page.locator('.slide.active').innerText();
   assert.ok(nok.includes('NOKflex')&&nok.includes('4329–4338')&&nok.includes('tre av fem nivåer'));await pic('11-desktop');
-  await page.locator('#next').click();assert.ok((await page.locator('.slide.active').innerText()).includes('15 · Utcheckning'),'Frivilliga bilder hoppas över på huvudvägen');
+  await page.locator('#next').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),14,'Frivilliga bilder hoppas över på huvudvägen');
   // 12/13: frivillig felanalys samt reella och imaginära delar bevarade.
   await go(11);await reveal('fav');await findMath('#fav','e^(−iπ) = −1');await pic('12-desktop');
   await go(12);await reveal('transfer');
