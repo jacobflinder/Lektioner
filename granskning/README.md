@@ -13,7 +13,7 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 
 ## Lektioner och status
 
-**Granskade 10/41. Återstår 31/41.** Senast färdiggranskad: lektion 10, **Eulers formel**. **Nästa lektion: 11/41, Andragradsekvationer**, sökväg ma4/kapitel-4/andragradsekvationer/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
+**Granskade 11/41. Återstår 30/41.** Senast färdiggranskad: lektion 11, **Andragradsekvationer**. **Nästa lektion: 12/41, Polynomdivision**, sökväg ma4/kapitel-4/polynomdivision/. Enhetscirkeln står efter de ordinarie Ma4-lektionerna som separat repetitionsverkstad och räknas in i de 41.
 
 ### Matematik 4 (Matematik – fortsättning nivå 2) · 15 lektioner
 
@@ -26,8 +26,8 @@ Startdatum: **13 november 2026**. Omfattning: **41 webblektioner i fyra kurser**
 - [x] [polar multiplikation division](../ma4/kapitel-4/polar-multiplikation-division/) — 7/7 bilder, fullständiga r/v-mellanled, frivillig härledning, interaktiv förstoring och 390px mobil
 - [x] [de moivre](../ma4/kapitel-4/de-moivre/) — djupgranskning 10/10 bilder, 9 dynamiska potenser, samtliga mellanled, korrekt MathML-bråk, separat förstoring och 390px mobil
 - [x] [ekvationen zn a](../ma4/kapitel-4/ekvationen-zn-a/) — 10/10 bilder, fullständiga rot- och k-värdesberäkningar, dolda rotvinklar, korrekt k=3-låsning, mobilläsbarhet och riktad Chromiumtest
-- [x] [eulers formel](../ma4/kapitel-4/eulers-formel/) — djupgranskning 15/15 bilder, fyra frivilliga spår, fullständiga Euler-/radianmellanled, 390 px mobil, projektor, separat Chromiumtest(../ma4/kapitel-4/eulers-formel/)
-- [ ] [andragradsekvationer](../ma4/kapitel-4/andragradsekvationer/)
+- [x] [eulers formel](../ma4/kapitel-4/eulers-formel/) — djupgranskning 15/15 bilder, fyra frivilliga spår, fullständiga Euler-/radianmellanled, 390 px mobil, projektor, separat Chromiumtest
+- [x] [andragradsekvationer](../ma4/kapitel-4/andragradsekvationer/) — 14/14 bilder, fullständiga pq-insättningar, båda teckenfallen, alla egna svar, mobil utan intern formelklippning, riktad Chromiumtest, PR #19 och #20
 - [ ] [polynomdivision](../ma4/kapitel-4/polynomdivision/)
 - [ ] [faktorsatsen](../ma4/kapitel-4/faktorsatsen/)
 - [ ] [hogre grad](../ma4/kapitel-4/hogre-grad/)
@@ -448,9 +448,59 @@ Den avslutade ämnes- och mobilgranskningen upptäckte efter PR #15 ännu en typ
 - **GitHub Pages för den sammanslagna lektionskoden:** [run 43514310596 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43514310596). En ytterligare Pages-körning kan uppstå genom denna granskningsloggs uppdatering och ska då kontrolleras separat.
 - **Ärligt verifieringsläge:** Godkänd Chromium-rendering mot arbetsgren/`main` och godkänd GitHub Pages-deployment verifierade. Separat direkt HTTP-avläsning av exakt den offentliga Pages-adressen misslyckades med cache miss och har **inte** påståtts genomförd. Inga kända blockerande ämnes-, interaktions- eller testfel kvarstår.
 
+## Bild-för-bild-rapport · Lektion 11/41 · Andragradsekvationer
+
+**Kurs/moment:** Matematik 4, 4.4 Polynomekvationer – Andragradsekvationer med komplexa tal.  
+**GitHub-sökväg:** `ma4/kapitel-4/andragradsekvationer/`  
+**Webb:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/andragradsekvationer/  
+**Omfattning:** **14/14 bilder** inklusive tre frivilliga (alternativ metod, felanalys, bygg en ekvation), alla dolda lösningar och metodsteg, quiz, tre digitala komplexa rotkontroller, lärarstöd/klassrumsläge, förutsägelsestyrt SVG-talplan, NOKflex, 390px mobil och projektor. Genomräkningar nedan är gjorda oberoende av lektionsfacit.
+
+| Bild | Ämnesmässig kontroll, didaktik, kognition och konkret korrigering |
+|---|---|
+| **1 · Start och mål** | Startfrågan ”Är komplexa rötter alltid konjugerade?” kommer **före** målvisning. Målen kan öppnas efter individuellt/parvis tänkande. Begrepp och mål är giltiga: alla rötter, metodval, motsatta rötter till \(z^2=w\neq0\) samt konjugatregeln vid reella koefficienter. |
+| **2 · Återkalla** | \((2i)^2=4i^2=-4\), \((1-i)^2=1-2i+i^2=-2i\). Ekvationen \(z^2+4z+8=0\) får nu hela kedjan \(p=4,q=8\), **allmän pq-formel**, insättning \(-4/2\pm\sqrt{(4/2)^2-8}\), \(-2\pm\sqrt{-4}\), slutsvaren \(-2\pm2i\) och explicit insättningskontroll. Facit dolt före försök. |
+| **3 · Komplexa koefficienter** | För \(z^2+2iz+8=0\) syns \(p=2i,q=8\), formeln \(-p/2\pm\sqrt{(p/2)^2-q}\), **full insättning av båda koefficienterna**, \((p/2)^2-q=-9\), \(z=-i\pm3i\), \(2i\) och \(-4i\), kontroll av båda. Kvadratkompletteringen ger begreppsstöd utan att avslöja facit i förtid. Egen variant \(z^2-4iz+5=0\) kontrolleras digitalt med rötterna \(5i,-i\), rimlig hint och facit efter försök. |
+| **4 · Konjugerade eller motsatta** | För \(2i,-4i\) är de **varken konjugerade eller motsatta**; båda relationerna till \(2i\) skulle kräva \(-2i\). Geometriska speglingar och återkoppling på fel svar kontrollerade. |
+| **5 · Förutsäg rötterna till \(z^2=8i\)** | Rätt villkor \(r^2=8\) och \(2v=\pi/2+2\pi k,\ k\in\mathbb Z\), inte \(r=8/2\). Separata matematikblock för de två villkoren samt \(k\)-domän, minst 16 px mellan oberoende uttryck. Stödtrappan bevarad. |
+| **6 · Interaktivt talplan** | Första roten \(2+2i\), andra \(-2-2i\). Belopp \(2\sqrt2\), argument \(\pi/4\) respektive \(5\pi/4\); vid kvadrering fås \(8i\) i båda fallen. Utökad kontroll visar även att \((2-2i)^2=-8i\). Tre förutsägelser med öppna steg, bakåtknapp och reset testade; figuren visar punkter, inte en fiktiv rörelsebana. |
+| **7 · Polär huvudmetod** | Hela kedjan \(r^2=8\Rightarrow r=\sqrt8=2\sqrt2\), \(2v=\pi/2+2\pi k\Rightarrow v=\pi/4+\pi k\), \(k=0,1\), exakta värden \(\cos(\pi/4)=\sin(\pi/4)=\sqrt2/2\), omvandling \(2+2i\) och \(-2-2i\), kvadreringskontroll. För \(z^2=-32i\): \(r=4\sqrt2,\ v=-\pi/4+\pi k\), rötterna \(4-4i,-4+4i\), båda kontrollerade. Full lösning låses tills digitalt försök (eller lärarens pappersförsök). |
+| **8 · Frivillig rektangulär metod** | Kvadreringen utvecklas med **alla fyra produkter**: \((a+bi)^2=a^2+abi+abi+b^2i^2=(a^2-b^2)+2abi\), med \(a,b\) typograferade som faktorer, inte en variabel \(\text{abi}\). Från \(a^2-b^2=0,\ ab=4\) prövas \(b=a\) och \(b=-a\) explicit; \(b=-a\) förkastas eftersom \(-a^2=4\) saknar reell lösning. Rötterna blir \(\pm(2+2i)\). Egen uppgift \(z^2=-18i\) ger \(3-3i,-3+3i\), digital felåterkoppling och full teckenfallsprövning. |
+| **9 · Välj metod** | Fyra oberoende kontroller: A \(z^2-9=0\Rightarrow z=\pm3\), B \(z^2+6z+13=0\Rightarrow z=-3\pm2i\) efter full pq-insättning och kontroll, C \(z^2=-2i\Rightarrow z=\pm(1-i)\), D \((z-1)^2=-4\Rightarrow z=1\pm2i\). Metodmotiveringen och pararbete bevarade. Oberoende ekvationer/rotfall får egna MathML-rader. |
+| **10 · Frivillig felanalys** | Den konstruerade lösningen \(3-3i\) till \(z^2=-18i\) är **en** korrekt rot men inte fullständig. Kvadrering verifieras; \(-3+3i\) visas som andra rot med \((-z)^2=z^2\). Felet diskuteras utan att tillskriva eleven avsikter. |
+| **11 · Begreppskontroll** | Quiz om reella polynomkoefficienter och dubbla relationen till \(2i,-2i\) kontrollerade. Varför högst två rötter: \(z^2=z_0^2\Rightarrow(z-z_0)(z+z_0)=0\Rightarrow z=\pm z_0\); när \(w=0\) sammanfaller de i dubbelroten \(z=0\). Motsatta rötter och konjugat förklaras som olika generella påståenden. |
+| **12 · NOKflex** | **Bevarat:** NOKflex → 4.4 Polynomekvationer → Andragradsekvationer, **uppgifter 4401–4420**, minst tre av fem nivåer, välj/byt nivå, kontrollera genom insättning, jämför metod med kamrat. Ingen påhittad Socrative-aktivitet och inget bokexempel kopierat. |
+| **13 · Frivilligt: bygg ekvationen** | För en rot \(2+3i\) och **reella koefficienter** måste den andra vara \(2-3i\); faktorerna \((z-(2+3i))(z-(2-3i))\) utvecklas genom \((z-2)^2+9\) till \(z^2-4z+13=0\), med summa \(4\) och produkt \(13\). Hela faktoriseringen visas efter elevförsök. |
+| **14 · Individuell utcheckning** | A \(z^2-2iz+8=0\): \(p=-2i,q=8,D=-9\), \(z=i\pm3i\Rightarrow 4i,-2i\), båda kontrollerade. B \(z^2=18i\): \(r=3\sqrt2,\ v=\pi/4+\pi k\), \(k=0,1\), \(z=3+3i,-3-3i\) och båda kvadreringarna. C relationen motsatt kontra konjugat visas med \((3-3i)^2=-18i\), inte \(18i\). Tre facit från början dolda, målen återkopplas, självständigt skrivande på papper bevarat. |
+
+### Oberoende kontrollräkningar och matematiska villkor
+
+- \(z^2+4z+8=0\): \(D=(4/2)^2-8=-4\), så \(z=-2\pm2i\). En rot ger \((-2+2i)^2+4(-2+2i)+8=-8i-8+8i+8=0\).
+- \(z^2+2iz+8=0\): \(D=i^2-8=-9\), så \(z=-i\pm3i=\{2i,-4i\}\). Kontroll \( (2i)^2+2i(2i)+8=0\) och \((-4i)^2+2i(-4i)+8=0\).
+- \(z^2-4iz+5=0\): \(D=(-2i)^2-5=-9\), så \(z=2i\pm3i=\{5i,-i\}\); båda ger vänsterled \(0\).
+- \(z^2=8i\): \((2+2i)^2=4+8i-4=8i\), medan konjugatets kvadrat \((2-2i)^2=-8i\); den andra korrekta roten är **motsatt**: \(-2-2i\).
+- \(z^2=-32i\): \((4-4i)^2=16-32i-16=-32i\), andra roten \(-4+4i\). \(z^2=-18i\): \((3-3i)^2=-18i\), andra roten \(-3+3i\).
+- Metodval B: \((-3+2i)^2+6(-3+2i)+13=(5-12i)+(-18+12i)+13=0\); den andra är konjugatet. Metodval D: \(z=1\pm2i\).
+- Exit A: \((4i)^2-2i(4i)+8=-16+8+8=0\); \((-2i)^2-2i(-2i)+8=-4-4+8=0\). Exit B: \((3+3i)^2=9+18i-9=18i\). Konstruktionen: \((2+3i)(2-3i)=13\), rotenas summa \(4\).
+- **Villkor:** För \(z^2=w\neq0\) finns två olika motsatta rötter; för \(w=0\) en dubbelrot. Konjugerade icke-reella rötter garanteras för polynom med **reella** koefficienter, inte för godtyckliga komplexa koefficienter. Argument behandlas modulo \(2\pi\); för kvadratrötter räcker två värden \(k=0,1\).
+
+### Förändrat och bevarat
+
+**Åtgärdat:** utelämnade pq-koefficientinsättningar och rottecken, steg mellan allmän regel och specifika svar, nödvändiga distributiva produkter, utelämnad prövning av båda teckenfallen, svag kontrollerbarhet hos de dolda faciten, för tidigt avslöjad lösning i valfritt kvadratkompletteringsstöd, felaktigt ihopskrivna uttryck, sammanfogade variabelnamn som borde vara produkter, radbrytning i lång svensk rubrik. Separata mobila MathML-kedjor ersätter alltför breda formler **utan att minska textstorlek eller ta bort desktopberäkningarna**.
+
+**Bevarat:** alla 14 bilder; 11 ordinarie och tre frivilliga; polär huvudmetod; frivillig jämförelse med real- och imaginärdelar; förutsäg → försök → resonera → återkoppla; tre digitala komplexa rotkontroller med orsaksspecifik feedback; interaktiv SVG, bakåt/reset; quiz; lärarstöd; klassrumsläge; NOKflex 4401–4420; arbete på papper; tydligt avslut med mål. Ingen elevdata skickas till server av denna fristående lektion.
+
+### Riktade tester, skärmbilder, PR och publicering
+
+- [PR #19 – fullständig ämnes- och didaktikgranskning](https://github.com/jacobflinder/Lektioner/pull/19), sammanslagen kodcommit [`9bd96fac721e0ece351182e506ba1ef1fddf8719`](https://github.com/jacobflinder/Lektioner/commit/9bd96fac721e0ece351182e506ba1ef1fddf8719).
+- [PR #20 – läsbara matematikled på 390 px mobil](https://github.com/jacobflinder/Lektioner/pull/20), sammanslagen kodcommit [`694e7c70672968fc34042cf17ba8b3b463779b03`](https://github.com/jacobflinder/Lektioner/commit/694e7c70672968fc34042cf17ba8b3b463779b03).
+- Nytt `ma4/kapitel-4/qa/deep-review-ma4-11.cjs` ingår i hela `ma4-browser-qa.yml`; befintliga tester ligger kvar (inget avaktiverat). Testet går igenom 14/14 bilder, alla dolda facit och frivilliga tillstånd, båda rötterna, digital korrekta/felaktiga svar, lärares klassrumsvy, projektor, 390 px mobil, SVG-visning, back/reset, korrekt MathML, minst 16 px för fristående matematikblock samt **ingen intern sidscroll för någon synlig matematikrad** på alla 14 mobilbilder.
+- [Arbetsgrenskörning PR #19: 43519619450 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43519619450); [arbetsgrenskörning PR #20: 43522404304 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43522404304) med [skärmbildsartefakt](https://github.com/jacobflinder/Lektioner/actions/runs/43522404304/artifacts/14083336987). Visuell skärmbildsgranskning inkluderade 14 desktopbilder, 14 mobilbilder, lång utcheckning, matematikblock i den frivilliga metoden samt projektor.
+- **Hela Ma4-regressionen på slutlig `main`:** [run 43522933251 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43522933251). **GitHub Pages-deployment på samma commit:** [run 43522932531 – success](https://github.com/jacobflinder/Lektioner/actions/runs/43522932531).
+- **Verifieringsgräns:** Chromiumtest och screenshots kördes mot GitHub-checkout; Pages Actions bekräftar godkänd publicering. Den offentliga URL:en kunde inte oberoende läsas direkt med tillgänglig webbtjänst (otillgängligt svar), vilket inte ska påstås vara verifierat. Ingen känd blockerande matematisk, didaktisk eller teknisk brist kvarstod efter slutkörningen.
+
 ### FORTSÄTT HÄR I NÄSTA CHATT
 
-- **SENAST FÄRDIG:** **10 av 41 – Matematik 4, Eulers formel**. Sökväg: `ma4/kapitel-4/eulers-formel/`. **15/15 bilder**, alla facit och frivilliga tillstånd granskade, fulla mellanled och matematisk typografi korrigerade. PR #18 sammanslagen i `main` (commit `11454e1ae4ba3f45c5abd279b10eb8f1bc666747`); Chromiumtest och full Ma4-regression godkända i arbetsgren och på `main`; GitHub Pages-byggning och publicering godkända; granskningsloggen uppdaterad.
-- **NÄSTA LEKTION:** **11 av 41 – Matematik 4, Andragradsekvationer**. GitHub-sökväg: `ma4/kapitel-4/andragradsekvationer/`. URL: https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/andragradsekvationer/.
-- **EVENTUELLA ÖPPNA PROBLEM:** Inga kända blockerande ämnes-, matematiktypografi-, interaktions- eller regressionstestfel. Offentlig Pages-URL kunde inte separat HTTP-kontrolleras med tillgänglig webbåtkomst; GitHub Pages Actions är dock godkänd. Kontrollera eventuell ny Pages-körning efter logguppdatering och att `main` fortfarande har 10/41.
-- **INSTRUKTION:** Läs `AGENTS.md` och hela `granskning/README.md`, verifiera senaste `main` och alla öppna PR/nyare ändringar, fortsätt sedan från **nästa ofärdiga lektion 11 av 41** med oberoende kontroll av varje bild, dolda beräkningsled och facit, elevens förutsägelse före svar, komplett förståelig matematik, projektor-/mobilscreenshots, riktad Chromiumtest, full befintlig regressionssvit, PR och merge, Pages och en ny fullständig bild-för-bild-rapport. Granska bara en lektion per omgång och markera aldrig klart innan alla verifieringar har passerat.
+- **SENAST FÄRDIG:** **11 av 41 – Matematik 4, Andragradsekvationer**. GitHub-sökväg: `ma4/kapitel-4/andragradsekvationer/`. **14/14 bilder** (inklusive tre frivilliga), samtliga dolda lösningar och digitala interaktioner granskade. Rättade pq-insättningar, fullständiga mellanled och begreppskontroller, responsiv semantisk matematisk typografi. **PR #19 och #20 sammanslagna i `main`**, senaste kodcommit `694e7c70672968fc34042cf17ba8b3b463779b03`. Riktad Chromiumtest och hela Ma4-regressionen på `main` godkända (run **43522933251**); Pages-publicering på samma kodcommit godkänd (run **43522932531**); permanenta loggen uppdaterad.
+- **NÄSTA LEKTION:** **12 av 41 – Matematik 4, Polynomdivision**. GitHub-sökväg: `ma4/kapitel-4/polynomdivision/`. URL: https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polynomdivision/.
+- **EVENTUELLA ÖPPNA PROBLEM:** Inga kända blockerande ämnes-, mellanleds-, interaktions-, mobil- eller regressionstestfel efter senaste godkända körningarna. Separat direkt HTTP-kontroll av den offentliga Pages-URL:ens innehåll kunde inte genomföras; GitHub Pages Actions-deployment är dock bekräftad. Kontrollera eventuell ny Pages-körning från denna granskningsloggs commit och verifiera att ingen annan chatt gjort ändringar.
+- **INSTRUKTION:** Läs först `AGENTS.md` och hela `granskning/README.md` inklusive bildrapporter och detta avsnitt; verifiera den aktuella `main`-grenen, antal färdiga lektioner och öppna pull requests. Fortsätt därefter **endast nästa ofärdiga lektion 12 av 41 – Polynomdivision**. Lös varje uppgift oberoende, kontrollera alla icke-visade mellanled och dolda facit, elevaktivitet före återkoppling, matematikens visuella separation, 390px mobil och projektor; gör riktade Chromiumtester med bilder och full regression, merge och Pages-kontroll. Uppdatera fullständig bild-för-bild-rapport och avsluta åter med samma överlämningsrubrik. Markera aldrig färdigt före tester och publicering.
