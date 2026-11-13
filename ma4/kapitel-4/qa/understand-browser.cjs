@@ -7,7 +7,7 @@ const fs=require('node:fs');
 const OUT='ma4-qa-screenshots';
 fs.mkdirSync(OUT,{recursive:true});
 const URL='http://127.0.0.1:8123/ma4/kapitel-4/enhetscirkeln/';
-async function active(page){return page.locator('.u-step:not([hidden])')}
+function active(page){return page.locator('.u-step:not([hidden])')}
 (async()=>{
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:850},deviceScaleFactor:1});
