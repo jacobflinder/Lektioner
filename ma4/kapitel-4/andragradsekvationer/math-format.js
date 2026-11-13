@@ -94,8 +94,15 @@ const html={
  ),
  r3:worked(
   step('Bestäm p och q',eq('p = 2i, q = 8')),
-  step('Beräkna diskriminantuttrycket',eq('(p/2)² − q = i² − 8 = −9')),
-  step('Använd båda tecknen',eq('z = −i ± 3i')),
+  step('Beräkna diskriminantuttrycket',
+   eq('(p/2)² − q'),
+   eq('= ((2i)/2)² − 8'),
+   eq('= i² − 8'),
+   eq('= −1 − 8 = −9')),
+  step('Sätt in i pq-formeln och använd båda tecknen',
+   eq('z = −p/2 ± √((p/2)² − q)'),
+   eq('z = −(2i)/2 ± √(−9)'),
+   eq('z = −i ± 3i')),
   result('z₁ = 2i','z₂ = −4i'),
   step('Kontroll',eq('(2i)² + 2i(2i) + 8'),eq('= −4 − 4 + 8 = 0'),prose('Koefficienten 2i är inte reell. Konjugatregeln gäller inte generellt.'))
  ),
