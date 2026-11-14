@@ -67,7 +67,7 @@ const hpp=x=>2*x-4;
   for(const [id,v,kind] of [['val-f',f(x),'f'],['val-d1',fp(x),'f′'],['val-d2',fpp(x),'f″']]){
    const label=await math('#'+id);
    test(label.startsWith(kind+'(x) = '),'dynamic MathML label '+id);
-   test(near(Number(label.split(' = ')[1].replace(',','.')),v,.0051),'dynamic numeric '+id+' at '+x);
+   test(near(Number(label.split(' = ')[1].replace('−','-').replace(',','.')),v,.0051),'dynamic numeric '+id+' at '+x);
   }
   const pos=await page.locator('#linked-plot circle').evaluateAll(circles=>circles.map(c=>({x:Number(c.getAttribute('cx')),y:Number(c.getAttribute('cy'))})));
   test(pos.length===3,'3 marker points '+x);
