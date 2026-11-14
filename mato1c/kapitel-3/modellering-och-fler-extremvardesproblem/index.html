@@ -5,6 +5,16 @@
 <title>Modellering och fler extremvärdesproblem · Matematik – fortsättning, nivå 1c</title>
 <link rel="stylesheet" href="../assets/lesson.css">
 <style>
+/* Ma3c21: independently typeset formulas, no ambiguous equation clusters. */
+.slide .math-givens{display:grid;gap:16px;margin:14px 0}
+.slide .math-givens>.eq{margin:0!important}
+.slide .solution-math-group{display:grid!important;gap:16px!important}
+.slide .solution-math-group>.eq{margin:0!important}
+.slide .eq{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .eq math[display="block"]{max-width:100%;font-size:clamp(1rem,2vw,1.31rem)}
+.slide .eq-sm math{font-size:1em}
+.slide .eq+.eq{margin-top:16px}
+@media(max-width:720px){.slide .eq math[display="block"]{font-size:1rem}}
 .eq{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.22rem,2.4vw,1.7rem);line-height:1.65}
 .eq-sm{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.13em}
 .eq sup{font-size:.68em}
@@ -337,4 +347,4 @@
 </div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
 <div class="controls"><div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
 <footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.2 Modellering och fler extremvärdesproblem · s. 166–172. Svar behandlas lokalt utan insamling.</footer>
-</main><script src="../assets/lesson-core.js"></script><script src="lesson.js"></script></body></html>
+</main><script src="../assets/lesson-core.js"></script><script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script><script src="lesson.js"></script><script src="math-polish.js"></script></body></html>

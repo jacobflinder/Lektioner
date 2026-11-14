@@ -1,4 +1,4 @@
-/* Ma1c L8 · verkligt Chromium-test: källa, SVG-modeller, algebra, bok och mobil. */
+/* Ma3c L8 · verkligt Chromium-test: källa, SVG-modeller, algebra, bok och mobil. */
 const {chromium}=require('playwright'),fs=require('node:fs'),assert=require('node:assert/strict');
 const root='http://127.0.0.1:8123',url=root+'/mato1c/kapitel-3/modellering-och-fler-extremvardesproblem/';
 const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
@@ -6,6 +6,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
 let checks=0;const errors=[],foreign=[];
+const mathLabels=async selector=>page.locator(selector+' math').evaluateAll(els=>els.map(el=>el.getAttribute('aria-label')).join(' '));
 page.on('pageerror',e=>errors.push(e.message));
 page.on('request',r=>{if(!r.url().startsWith(root))foreign.push(r.url())});
 async function ok(value,message){assert.ok(value,message);checks++}
@@ -29,7 +30,7 @@ try{
  await page.locator('#mode').click();
  await ok(await page.locator('body.classroom').count()===0,'Repetitionsläge');
  await go(2);
- await ok((await page.locator('#goal').innerText()).includes('0 < x < 15'),'Lådans korrekta öppna definitionsmängd');
+ await ok((await mathLabels('#goal')).includes('0 < x < 15')||(await mathLabels('#goal')).includes('0<x<15'),'Lådans korrekta öppna definitionsmängd');
  await page.locator('#next').click();
  await ok(await page.locator('#box-solution').isVisible(),'Kärnvägen hoppar över valbar lådanimering');
  await go(2);
@@ -63,8 +64,8 @@ try{
  await ok(await boxSteps.locator('[data-seq-item]:visible').count()===0,'Lådfacit helt dolt');
  for(let i=0;i<5;i++)await boxSteps.locator('[data-seq-next]').click();
  await ok(await boxSteps.locator('[data-seq-item]:visible').count()===5,'Fem styrbara beräkningssteg');
- const boxText=await boxSteps.innerText();
- for(const content of ['V′(x)=12x²−320x+1500','(40 ± 5√19)/3','20,60','4104,41','4 100 cm³','0<x<15'])await ok(boxText.includes(content),'Lådans matematik: '+content);
+ const boxText=(await boxSteps.innerText())+' '+(await mathLabels('#box-solution'));
+ for(const content of ['V′(x)=12x²−320x+1500','x₁=(40−5√(19))/3','20,60','4104,41','4 100 cm³','0<x<15'])await ok(boxText.includes(content),'Lådans matematik: '+content);
  await boxSteps.locator('[data-seq-reset]').click();
  await ok(await boxSteps.locator('[data-seq-item]:visible').count()===0,'Lådans facit går att återställa');
  await go(5);
@@ -99,8 +100,8 @@ try{
  await go(7);
  const areaSteps=page.locator('#rectangle-solution [data-sequence]');
  for(let i=0;i<4;i++)await areaSteps.locator('[data-seq-next]').click();
- const areaText=await areaSteps.innerText();
- for(const token of ['6−6x²','x=±1','A′(0,5)=4,5','A′(1,5)=−7,5','Största arean är 4 areaenheter'])await ok(areaText.replace(/\s+/g,'').includes(token.replace(/\s+/g,'')),'Rektangelns facit: '+token);
+ const areaText=(await areaSteps.innerText())+' '+(await mathLabels('#rectangle-solution'));
+ for(const token of ['6−6x²','x=1','x=−1','A′(0,5)=4,5','A′(1,5)=−7,5','Största arean är 4 areaenheter'])await ok(areaText.replace(/\s+/g,'').includes(token.replace(/\s+/g,'')),'Rektangelns facit: '+token);
  await go(8);
  await ok(!await page.locator('#frac-hint').isVisible(),'Bråkledtråd dold');
  await ok(!await page.locator('#frac-original-steps').isVisible(),'Fria elevförsöket utan steglista');
@@ -117,14 +118,16 @@ try{
  await go(9);
  await ok(!(await page.locator('#fraction-solution .eyebrow').innerText()).includes('maximum vid 20'),'Återkopplingsrubriken avslöjar inte optimum');
  await ok(!await page.locator('#fraction-graph-wrap').isVisible(),'Vinstgraf med maxpunkt dold innan beviset');
+ const fracSteps=page.locator('#fraction-solution [data-sequence]');
+ await ok(await fracSteps.locator('[data-seq-item]:visible').count()===0,'Bråkfacit dolt');
+ await ok(await page.locator('[data-reveal="fraction-graph-wrap"]').isDisabled(),'Kontrollgraf kräver först fyra öppnade algebrasteg');
+ for(let i=0;i<4;i++)await fracSteps.locator('[data-seq-next]').click();
+ await ok(await page.locator('[data-reveal="fraction-graph-wrap"]').isEnabled(),'Kontrollgraf nu tillgänglig efter beviset');
  await page.locator('[data-reveal="fraction-graph-wrap"]').click();
  await ok(await page.locator('#fraction-graph-wrap').isVisible(),'Grafen kan visas efter beviset');
  await ok(await page.locator('#fraction-graph path').count()===1,'Digital kontrollgraf för V');
- const fracSteps=page.locator('#fraction-solution [data-sequence]');
- await ok(await fracSteps.locator('[data-seq-item]:visible').count()===0,'Bråkfacit dolt');
- for(let i=0;i<4;i++)await fracSteps.locator('[data-seq-next]').click();
- const fracText=await fracSteps.innerText();
- for(const token of ['x=±20','V(4)=15−0,4−10=4,6','V(20)=15−2−2=11','11 000 kr'])await ok(fracText.includes(token),'Bråkmodell: '+token);
+ const fracText=(await fracSteps.innerText())+' '+(await mathLabels('#fraction-solution'));
+ for(const token of ['x=20','x=−20','V(4)=15−0,4−10','V(4)=4,6','V(20)=15−2−2','V(20)=11','11 000 kr'])await ok(fracText.includes(token),'Bråkmodell: '+token);
  await page.screenshot({path:out+'/lesson8-fraction-desktop.png',fullPage:true});
  await go(10);
  const book=await page.locator('#book').innerText();
@@ -132,7 +135,7 @@ try{
  await go(11);
  const exit=await page.locator('#exit').innerText();
  await ok(exit.includes('y=6−x'),'Originalets geometriska exit');
- await ok(exit.includes('C(x)=x+'),'Originalets bråkfunktion exit');
+ await ok((await mathLabels('#exit')).includes('C(x)=x+9/x'),'Originalets bråkfunktion exit');
  await go(12);
  const seqs=page.locator('#exit-feedback [data-sequence]');
  await ok(await seqs.count()===2,'Två separata utcheckningslösningar');
