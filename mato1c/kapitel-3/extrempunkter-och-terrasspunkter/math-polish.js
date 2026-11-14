@@ -12,10 +12,16 @@ const step=(id,n,html)=>{
  if(!elements[n])throw Error('Ma3c25 missing sequence '+id+' '+n);
  elements[n].innerHTML=html;
 };
-const table=(head,values,dirs,labels)=>'<table class="sign-table"><caption>'+head+'</caption>'+
- '<thead><tr><th scope="col">x</th>'+values.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead>'+
- '<tbody><tr><th scope="row">derivatan</th>'+dirs.map(x=>'<td>'+x+'</td>').join('')+'</tr>'+
- '<tr><th scope="row">funktionen</th>'+labels.map(x=>'<td>'+x+'</td>').join('')+'</tr></tbody></table>';
+const table=(head,values,dirs,labels)=>{
+ const wide='<table class="sign-table wide-sign"><caption>'+head+'</caption>'+
+  '<thead><tr><th scope="col">x</th>'+values.map(x=>'<th scope="col">'+x+'</th>').join('')+'</tr></thead>'+
+  '<tbody><tr><th scope="row">derivatan</th>'+dirs.map(x=>'<td>'+x+'</td>').join('')+'</tr>'+
+  '<tr><th scope="row">funktionen</th>'+labels.map(x=>'<td>'+x+'</td>').join('')+'</tr></tbody></table>';
+ const tall='<table class="sign-table tall-sign"><caption>'+head+'</caption>'+
+  '<thead><tr><th scope="col">Intervall eller punkt</th><th scope="col">derivatan</th><th scope="col">funktionen</th></tr></thead>'+
+  '<tbody>'+values.map((x,i)=>'<tr><th scope="row">'+x+'</th><td>'+dirs[i]+'</td><td>'+labels[i]+'</td></tr>').join('')+'</tbody></table>';
+ return '<div class="responsive-sign">'+wide+tall+'</div>';
+};
 // 1. Graph cards: real mathematical names with math-inline, all three
 // original function graphs and on-demand start feedback remain unchanged.
 const cardNames=[['A','f(x)=x²'],['B','g(x)=−x²'],['C','h(x)=x³']];
