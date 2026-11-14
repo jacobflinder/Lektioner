@@ -51,10 +51,27 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  await go(2);
  const slide2=page.locator('.slide.active');
  const text2=await slide2.innerText();
- for(const x of ['Rita riktningarna för I och B','Strömförande ledare eller folie','Gör därefter demonstrationen','Riktningen beror på konventionell'])
+ for(const x of ['Rita riktningarna för I och B','Strömförande ledare eller folie','Gör därefter demonstrationen','Jämför din kraftpil med ledarens verkliga rörelse'])
   test(text2.includes(x),'original conductor demo preserved '+x);
- test(await slide2.locator('math').count()>=1,'original BIL sine MathML preserved');
+ test(await slide2.locator('math').count()===3,'original BIL sine relation retained as accessible MathML plus two limiting cases');
+ test(!await slide2.locator('#force-magnitude-explanation').isVisible(),'formula and definitions are not revealed before prediction');
+ test(await slide2.locator(':scope > .grid math').count()===0,'original prematurely displayed force formula no longer visible in pre-observation panel');
  await show(2);
+ const mag=slide2.locator('#force-magnitude-explanation');
+ test(await mag.isVisible(),'force magnitude can be revealed deliberately');
+ test((await slide2.innerText()).includes('Högerhandens regel anger kraftens riktning'),'direction principle retained after reveal');
+ for(const phrase of ['F</strong>', 'B</strong>', 'I</strong>', 'L</strong>', 'θ</strong>','vinkeln mellan strömriktningen','vinkelrätt','parallell','Kontrollfråga på papper']){
+  test((await mag.innerHTML()).includes(phrase),'complete explicit variable definition or transfer '+phrase);
+ }
+ test(await mag.locator('math').count()===3,'three semantic MathML expressions for general, 90-degree and zero-degree force');
+ const mtexts=await mag.locator('math').evaluateAll(els=>els.map(x=>x.textContent.replace(/\s+/g,'')));
+ test(mtexts[0].includes('F=BILsinθ'),'original general magnitude formula kept');
+ test(mtexts[1].includes('F=BILsin90°=BIL·1=BIL'),'perpendicular case algebra is complete');
+ test(mtexts[2].includes('F=BILsin0°=BIL·0=0'),'parallel zero-force case algebra is complete');
+ const steps=await mag.locator('math').evaluateAll(els=>els.map(e=>{const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,width:r.width}}));
+ test(steps.every(x=>x.width>90),'all three mathematical models actually render');
+ test(steps[2].top-steps[1].bottom>=15,'separate equations have at least 16px visual air');
+
  test((await slide2.innerText()).includes('Tumme:')&&(await slide2.innerText()).includes('Pekfinger:')&&(await slide2.innerText()).includes('Långfinger:'),'explicit physical right-hand rule three fingers');
  for(const i of [1,-1])for(const b of [-1,1]){
   await press('data-force-i',String(i));await press('data-force-b',String(b));
@@ -212,7 +229,7 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   const answers=page.locator('.slide.active>.answer');
   if(await answers.count())await page.locator('.slide.active button[data-reveal]').last().click();
   const sz=await width();test(sz.scroll<=sz.viewport+2,'390px no side scrolling on fully expanded slide '+i+': '+JSON.stringify(sz));
-  if(i===2){test(await page.locator('#demo-force line.force-vector').count()===1,'mobile force arrows rendered')}
+  if(i===2){test(await page.locator('#demo-force line.force-vector').count()===1,'mobile force arrows rendered');test(await page.locator('#force-magnitude-explanation').isVisible(),'mobile complete force formula is visible after reveal')}
   if(i===3){test(await page.locator('#demo-compass path.needle-north').count()===1,'mobile red compass end rendered')}
   await snap('mobile-'+String(i).padStart(2,'0'));
  }
