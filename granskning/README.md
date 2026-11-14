@@ -640,7 +640,7 @@ Testfilen `ma4/kapitel-4/qa/deep-review-ma4-14.cjs` innehåller en fristående i
 **Kurs/moment:** Matematik 4 / Gy25 Matematik – fortsättning nivå 2, repetitionsverkstad inför polär form, **5–15 minuter**.  
 **GitHub-sökväg:** `ma4/kapitel-4/enhetscirkeln/`  
 **Elevsida:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/enhetscirkeln/  
-**Omfattning:** Här används **inte bildspel** utan fyra valbara lägen: *Förstå från början* (sex steg), *Utforska*, *Träna* och *Snabbkoll*. Totalt **10/10 undervisningsdelar** granskade (sex förståelsesteg + fyra tabell-/träningsvyer i den samlade kontrollen). Alla synliga/dolda svar, 17 standardvinklar (0° till 360°), figurer, exakta koordinater, referensvinklar, radianer, överföring till komplexa tal, tecken- och kvadrantval, alternativa skrivsätt, stegvis stöd, mobil och stor visning ingår. Tre ursprungliga fullständiga webbläsartester bevarade och kompletterade med `deep-review-ma4-15.cjs`.
+**Omfattning:** Här används **inte bildspel** utan fyra valbara lägen: *Förstå från början* (sex steg), *Utforska*, *Träna* och *Snabbkoll*. Totalt **10/10 dokumenterade undervisningsdelar** granskade (sex förståelsesteg, de tre övriga lägena samt lärarstöd/stor visning). Alla synliga/dolda svar, 17 standardvinklar (0° till 360°), figurer, exakta koordinater, referensvinklar, radianer, överföring till komplexa tal, tecken- och kvadrantval, alternativa skrivsätt, stegvis stöd, mobil och stor visning ingår. De två ursprungliga riktade webbläsartesterna är bevarade och kompletterade med `deep-review-ma4-15.cjs`.
 
 | Undervisningsdel | Matematisk, didaktisk och teknisk granskning |
 |---|---|
