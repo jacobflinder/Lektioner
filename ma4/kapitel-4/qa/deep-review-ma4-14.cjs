@@ -94,7 +94,7 @@ assert.ok(P(.9)>0&&P(1.1)>0,'Dubbelrot tangerar utan teckenbyte');assert.ok(P(-2
   await label('#h-kand','q(z) = z² + 4');await label('#h-kand','r = 0');
   await label('#h-kand','z₁ = 1');await label('#h-kand','z₂ = 2i');await label('#h-kand','z₃ = −2i');
   assert.ok(await page.locator('#h-kand .longdiv-demo td math').count()>=15,'Alla gradkolumner och subtraktioner MathML');
-  assert.ok((await page.locator('#h-kand .longdiv-demo').innerText()).includes('0z'),'Kvotens nollterm bevarad');
+  assert.ok(await page.locator('#h-kand .longdiv-demo td.place-zero math[aria-label="+ 0z"]').count()===1,'Kvotens nollterm bevarad som semantisk MathML');
   assert.ok(await page.locator('#h-kand details').isHidden()===false,'Alternativ gruppering finns kvar');
   await page.locator('#h-kand details summary').click();
   assert.ok((await page.locator('#h-kand details').innerText()).includes('z²(z − 1)'),'Alternativ lösning bevarad');
