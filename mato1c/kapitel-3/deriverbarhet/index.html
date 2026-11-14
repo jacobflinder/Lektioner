@@ -3,6 +3,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#122d44">
 <title>Deriverbarhet · Matematik – fortsättning, nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css">
 <style>
+/* Ma3c 23: distinguish every independent MathML statement and given. */
+.slide .math-givens{display:grid;gap:16px;margin:14px 0}
+.slide .math-givens>.mathline{margin:0!important}
+.slide .solution-math-group{display:grid!important;gap:16px!important}
+.slide .solution-math-group>.mathline,.slide .solution-math-group>.formula-line{margin:0!important}
+.slide .mathline,.slide .formula-line{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:clamp(1rem,2vw,1.3rem);max-width:100%}
+.slide .mathsmall math{font-size:1em}
+.slide :is(.mathline,.formula-line)+:is(.mathline,.formula-line){margin-top:16px}
+@media(max-width:720px){.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:1rem}}
 .mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.17rem,2.5vw,1.75rem);line-height:1.6}
 .mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
 .mathline sup,.mathsmall sup{font-size:.72em}
@@ -144,12 +154,18 @@
 <h2>Samma punkt – men inte alltid samma lutning</h2>
 <div class="eq-grid">
 <div class="eq-box left"><h3>p(x)=(x−1)²+2</h3>
-<p class="mathline">p(1)=2, &nbsp; p(1±h)=h²+2</p>
+<div class="solution-math-group">
+<p class="mathline">p(1)=2</p>
+<p class="mathline">p(1−h)=(−h)²+2=h²+2</p>
+<p class="mathline">p(1+h)=h²+2</p></div>
 <p class="formula-line">V: <span class="fraction"><span class="num">2−(h²+2)</span><span class="den">h</span></span> = −h → 0</p>
 <p class="formula-line">H: <span class="fraction"><span class="num">(h²+2)−2</span><span class="den">h</span></span> = h → 0</p>
 <p><strong>p′(1)=0.</strong> Gemensam horisontell tangent <span class="mathsmall">y=2</span>.</p></div>
 <div class="eq-box right"><h3>q(x)=2|x−1|+2</h3>
-<p class="mathline">q(1)=2, &nbsp; q(1±h)=2h+2</p>
+<div class="solution-math-group">
+<p class="mathline">q(1)=2</p>
+<p class="mathline">q(1−h)=2|−h|+2=2h+2</p>
+<p class="mathline">q(1+h)=2|h|+2=2h+2</p></div>
 <p class="formula-line">V: <span class="fraction"><span class="num">2−(2h+2)</span><span class="den">h</span></span> = −2</p>
 <p class="formula-line">H: <span class="fraction"><span class="num">(2h+2)−2</span><span class="den">h</span></span> = 2</p>
 <p><strong>q′(1) finns inte.</strong> Olika ensidiga gränslutningar trots kontinuitet.</p></div>
@@ -161,7 +177,10 @@
 <div class="eyebrow">06 · Din tur · en diskontinuerlig graf</div>
 <h2>Två horisontella delar – derivata noll?</h2>
 <div class="two"><div>
-<p class="mathline">r(x)=1 &nbsp; om x&lt;2</p><p class="mathline">r(x)=3 &nbsp; om x≥2</p>
+<div class="math-givens">
+<p class="mathline">r(x)=1</p><p class="mathline">x&lt;2</p>
+<p class="mathline">r(x)=3</p><p class="mathline">x≥2</p>
+</div>
 <div class="task"><strong>Lös före återkopplingen:</strong><ol class="spaced">
 <li>Är r kontinuerlig vid x=2?</li>
 <li>Beräkna vänstersekantens lutning för h=1; 0,5 och 0,1.</li>
@@ -185,7 +204,10 @@
 <div class="eq-grid">
 <div class="eq-box left"><h3>Från vänster</h3>
 <p class="formula-line"><span class="fraction"><span class="num">r(2)−r(2−h)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−1</span><span class="den">h</span></span> = <span class="fraction"><span class="num">2</span><span class="den">h</span></span></p>
-<div class="solution-math-group"><p class="solution-equation">h = 1 ⇒ lutning 2</p><p class="solution-equation">h = 0,5 ⇒ lutning 4</p><p class="solution-equation">h = 0,1 ⇒ lutning 20</p></div>
+<div class="solution-math-group">
+<p class="mathline">h=1 ⇒ 2/h=2</p>
+<p class="mathline">h=0,5 ⇒ 2/h=4</p>
+<p class="mathline">h=0,1 ⇒ 2/h=20</p></div>
 <p class="formula-line">lim<sub>h→0<sup>+</sup></sub> 2/h = +∞</p><p><strong>Ingen ändlig vänsterderivata.</strong></p></div>
 <div class="eq-box right"><h3>Från höger</h3>
 <p class="formula-line"><span class="fraction"><span class="num">r(2+h)−r(2)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−3</span><span class="den">h</span></span> = 0</p>
@@ -198,8 +220,10 @@
 <div class="eyebrow">08 · Bygg en mjuk skarv</div>
 <h2>Det räcker inte att lutningarna stämmer</h2>
 <div class="two"><div>
-<p class="mathline">f(x)=ax+b &nbsp; om x&lt;1</p>
-<p class="mathline">f(x)=x²+1 &nbsp; om x≥1</p>
+<div class="math-givens">
+<p class="mathline">f(x)=ax+b</p><p class="mathline">x&lt;1</p>
+<p class="mathline">f(x)=x²+1</p><p class="mathline">x≥1</p>
+</div>
 <div class="task"><strong>Skriv de två villkoren själv innan du använder reglagen:</strong><ol class="spaced">
 <li><strong>Kontinuitet:</strong> Delarna måste mötas. Vilken ekvation ger det?</li>
 <li><strong>Deriverbarhet:</strong> Lutningarna måste stämma. Vilken ekvation ger det?</li></ol>
@@ -235,7 +259,7 @@
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilket villkor får du när vänster- och högerdelen ska mötas vid x=1?"><strong>1 · Kontinuitet</strong><p class="mathline">a+b=1²+1=2</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata har linjen? Vilken har parabeln vid x=1?"><strong>2 · Samma lutning</strong><p class="mathline">a=2·1=2</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Lös ut b och beskriv skarven."><strong>3 · Båda villkoren uppfyllda</strong><p class="mathline">2+b=2 ⇒ b=0</p><p class="mathline">a = 2, &nbsp; b = 0</p><div class="solution-math-group"><p class="mathline">f<sub>vänster</sub>(x) = 2x</p><p class="mathline">f<sub>höger</sub>(x) = x² + 1</p></div><p class="solution-explanation">Båda närmar sig 2 och har lutning 2 vid skarven.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Lös ut b och beskriv skarven."><strong>3 · Båda villkoren uppfyllda</strong><p class="mathline">2+b=2 ⇒ b=0</p><div class="math-givens"><p class="mathline">a=2</p><p class="mathline">b=0</p></div><div class="solution-math-group"><p class="mathline">f<sub>vänster</sub>(x) = 2x</p><p class="mathline">f<sub>höger</sub>(x) = x² + 1</p></div><p class="solution-explanation">Båda närmar sig 2 och har lutning 2 vid skarven.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
 <div class="insight"><strong>Deriverbar i ett öppet intervall</strong> betyder att derivatan finns i varje punkt i intervallet. I en skarv mellan två funktionsuttryck krävs både att kurvorna möts och att lutningen är densamma.</div>
 <button type="button" class="secondary" data-reveal="stitch-detail">Fördjupning: varför kan två grenars lika lutning ändå ge ett hopp?</button>
@@ -264,7 +288,10 @@
 <div class="eyebrow">11 · Individuell utcheckning</div>
 <h2>Visa vad du kan – en ny skarv</h2>
 <p class="lead">Svara självständigt. Motivera med <strong>två villkor</strong>.</p>
-<div class="panel"><p class="mathline">F(x)=cx+d &nbsp; om x&lt;2</p><p class="mathline">F(x)=x² &nbsp; om x≥2</p></div>
+<div class="panel"><div class="math-givens">
+<p class="mathline">F(x)=cx+d</p><p class="mathline">x&lt;2</p>
+<p class="mathline">F(x)=x²</p><p class="mathline">x≥2</p>
+</div></div>
 <div class="task"><ol class="spaced">
 <li>Bestäm c och d så att F är deriverbar vid x=2.</li>
 <li>En elev väljer c=4 och d=0 eftersom lutningarna då stämmer. <strong>Förklara vad som saknas.</strong></li>
@@ -281,8 +308,8 @@
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilket villkor får du av kontinuitet när x=2?"><strong>1 · Delarna möts</strong><p class="mathline">2c+d=2²=4</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka lutningar ska jämföras och vad blir c?"><strong>2 · Lutningarna stämmer</strong><p class="mathline">c=2·2=4</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Bestäm d och derivatan vid x=2."><strong>3 · Den deriverbara skarven</strong><p class="mathline">8+d=4 ⇒ d=−4</p><div class="solution-math-group"><p class="mathline">c = 4, &nbsp; d = −4</p><p class="mathline">F′(2) = 4</p></div></div>
-<div class="seq-item hidden" data-seq-item data-question="Varför fungerar inte c=4, d=0 trots att derivatorna hos de två delarna blir 4?"><strong>4 · Felsvaret</strong><div class="solution-math-group"><p class="mathline">c = 4, &nbsp; d = 0</p><p class="mathline">lim<sub>x→2⁻</sub> F(x) = 8</p><p class="mathline">F(2) = 4</p></div><p class="solution-explanation">Hopp ⇒ inte kontinuerlig ⇒ inte deriverbar.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Bestäm d och derivatan vid x=2."><strong>3 · Den deriverbara skarven</strong><p class="mathline">8+d=4 ⇒ d=−4</p><div class="solution-math-group"><div class="math-givens"><p class="mathline">c=4</p><p class="mathline">d=−4</p></div><p class="mathline">F′(2) = 4</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Varför fungerar inte c=4, d=0 trots att derivatorna hos de två delarna blir 4?"><strong>4 · Felsvaret</strong><div class="solution-math-group"><div class="math-givens"><p class="mathline">c=4</p><p class="mathline">d=0</p></div><p class="mathline">lim<sub>x→2⁻</sub> F(x) = 8</p><p class="mathline">F(2) = 4</p></div><p class="solution-explanation">Hopp ⇒ inte kontinuerlig ⇒ inte deriverbar.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Ge ett kontinuerligt exempel med olika vänster- och högerlutning."><strong>5 · Kontinuerlig utan derivata</strong><p class="mathline">q(x)=2|x−1|+2</p><p>Vid x=1 hänger grafen ihop, men vänsterlutningen är <strong>−2</strong> och högerlutningen <strong>+2</strong>. Därför finns ingen derivata där.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
 <div class="notice"><strong>Läxa:</strong> 3274 och 3275. Extra 3277.</div>
@@ -292,4 +319,4 @@
 <div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex"><button type="button" class="secondary" id="ink-undo">Ångra</button><button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button><button type="button" class="secondary" id="ink-clear">Rensa</button><button type="button" class="secondary" id="ink-max">Förstora</button></div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
 <div class="controls"><div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
 <footer>Matematik – fortsättning, nivå 1c · Kapitel 3.2 · Deriverbarhet · Boken s. 177–178. Inga elevsvar skickas eller lagras.</footer>
-</main><script src="../assets/lesson-core.js"></script><script src="lesson.js"></script></body></html>
+</main><script src="../assets/lesson-core.js"></script><script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script><script src="lesson.js"></script><script src="math-polish.js"></script></body></html>
