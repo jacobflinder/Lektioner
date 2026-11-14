@@ -15,7 +15,7 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
  const set=(id,v)=>page.locator('#'+id).evaluate((e,x)=>{e.value=String(x);e.dispatchEvent(new Event('input',{bubbles:true}))},v);
  const bounds=(s)=>page.locator(s).evaluateAll(a=>a.map(el=>{let r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom,width:r.width,height:r.height,x:r.x,y:r.y}}));
  const gap=(a,d=15)=>a.length>1&&a.slice(1).every((r,i)=>r.top-a[i].bottom>=d);
- const text=id=>page.locator('#'+id).innerText();
+ const text=id=>page.locator('#'+id).textContent();
  try{
   let r=await page.goto('http://127.0.0.1:8123/fy2/kapitel-3/magnetism/',{waitUntil:'networkidle'});
   test(r?.status()===200,'lesson HTTP 200');
@@ -66,7 +66,8 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   for(let [B,A] of [[.4,24],[.4,48],[.1,10],[.8,50],[.35,30],[.55,40]]){
    await set('field-strength',B);await set('flux-area-slider',A);
    let want=(B*A/10).toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2});
-   test((await text('flux-result')).includes(want+' mWb'),'flux BA physics '+B+'/'+A);
+   const actual=await page.locator('#flux-result math[display="block"]').last().textContent();
+   test(actual.includes(want)&&actual.includes('mWb'),'flux BA physics '+B+'/'+A);
    test((await text('field-value')).includes(B.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2})),'B stays separate from area');
    test(Math.abs(Number(await page.locator('#flux-area').getAttribute('width'))-165*A/24)<.01,'drawn SVG area scales with A');
    test(await page.locator('#flux-result math[display="block"]').count()===3,'law substitution result three MathML');
