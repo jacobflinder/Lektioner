@@ -36,6 +36,7 @@ jobs:
           node fy2/kapitel-3/qa/deep-review-fy2-26.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-27.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-28.cjs
+          node fy2/kapitel-3/qa/deep-review-fy2-29.cjs
       - name: Upload screenshots and QA summary
         if: always()
         uses: actions/upload-artifact@v4
