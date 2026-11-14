@@ -3,6 +3,18 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#122d44">
 <title>Deriverbarhet · Matematik – fortsättning, nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css">
 <style>
+/* Ma3c 23: mathematically separate and genuinely semantic MathML blocks. */
+.slide .math-givens,.slide .solution-math-group{display:grid!important;gap:16px!important;margin:14px 0}
+.slide .math-givens>.mathline,.slide .solution-math-group>.mathline,
+.slide .math-case>.mathline{margin:0!important}
+.slide .math-case{display:grid;gap:16px}
+.slide .mathline,.slide .formula-line{max-width:100%;white-space:normal;overflow-wrap:normal;line-height:1.5}
+.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:clamp(1rem,2vw,1.30rem);max-width:100%}
+.slide .mathsmall math{font-size:1em}
+.slide .mathline+.mathline,.slide .formula-line+.formula-line{margin-top:16px}
+.slide .eq-box math{max-width:100%}
+.slide .math-mathml-note{color:#315d75;font-weight:680;margin-top:9px}
+@media(max-width:720px){.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:1rem}}
 .mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.17rem,2.5vw,1.75rem);line-height:1.6}
 .mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
 .mathline sup,.mathsmall sup{font-size:.72em}
@@ -292,4 +304,4 @@
 <div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex"><button type="button" class="secondary" id="ink-undo">Ångra</button><button type="button" class="secondary" id="ink-eraser" aria-pressed="false">Sudd</button><button type="button" class="secondary" id="ink-clear">Rensa</button><button type="button" class="secondary" id="ink-max">Förstora</button></div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
 <div class="controls"><div><button type="button" class="secondary" id="prev">← Föregående</button><button type="button" id="next">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
 <footer>Matematik – fortsättning, nivå 1c · Kapitel 3.2 · Deriverbarhet · Boken s. 177–178. Inga elevsvar skickas eller lagras.</footer>
-</main><script src="../assets/lesson-core.js"></script><script src="lesson.js"></script></body></html>
+</main><script src="../assets/lesson-core.js"></script><script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script><script src="lesson.js"></script><script src="math-polish.js"></script></body></html>
