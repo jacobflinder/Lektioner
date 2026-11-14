@@ -51,7 +51,7 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  await go(2);
  const slide2=page.locator('.slide.active');
  const text2=await slide2.innerText();
- for(const x of ['Rita riktningarna för I och B','Strömförande ledare eller folie','Gör därefter demonstrationen','Riktningen beror på konventionell'])
+ for(const x of ['Rita riktningarna för I och B','Strömförande ledare eller folie','Gör därefter demonstrationen','Jämför din kraftpil med ledarens verkliga rörelse'])
   test(text2.includes(x),'original conductor demo preserved '+x);
  test(await slide2.locator('math').count()===3,'original BIL sine relation retained as accessible MathML plus two limiting cases');
  test(!await slide2.locator('#force-magnitude-explanation').isVisible(),'formula and definitions are not revealed before prediction');
@@ -59,6 +59,7 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  await show(2);
  const mag=slide2.locator('#force-magnitude-explanation');
  test(await mag.isVisible(),'force magnitude can be revealed deliberately');
+ test((await slide2.innerText()).includes('Högerhandens regel anger kraftens riktning'),'direction principle retained after reveal');
  for(const phrase of ['F</strong>', 'B</strong>', 'I</strong>', 'L</strong>', 'θ</strong>','vinkeln mellan strömriktningen','vinkelrätt','parallell','Kontrollfråga på papper']){
   test((await mag.innerHTML()).includes(phrase),'complete explicit variable definition or transfer '+phrase);
  }
