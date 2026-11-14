@@ -10,7 +10,7 @@ $('mag-pos-start').innerHTML=staticParticle(1,false);
 $('mag-neg-start').innerHTML=staticParticle(-1,false);
 $('mag-pos-answer').innerHTML=staticParticle(1,true);
 $('mag-neg-answer').innerHTML=staticParticle(-1,true);
-$('mag-proton').innerHTML=staticParticle(1,true);
+$('mag-proton').innerHTML=staticParticle(1,false);
 $('mag-electron').innerHTML=staticParticle(-1,false);
 function conductor(dir=1,show=false){
  let s=field(10,6,72,70,56,46)+'<rect x="116" y="175" width="360" height="15" rx="4" fill="#a4afb9"/>'+
@@ -20,29 +20,32 @@ function conductor(dir=1,show=false){
  return S(s,680,360,'Kraft på strömförande ledare i homogent magnetfält');
 }
 $('mag-conductor').innerHTML=conductor(1,false);
-$('mag-conductor-answer').innerHTML=conductor(1,true);
+$('mag-conductor-answer').innerHTML=conductor(1,false);
 $('mag-conductor-reverse').innerHTML=conductor(-1,false);
-let q=1,Bsgn=1;
-function render(){
- const p=Number($('particle-time').value)/100,v=Number($('particle-speed').value),B=Number($('particle-B').value);
- $('particle-dynamic').innerHTML=particle(q,p,v,B,Bsgn);
- $('particle-time-value').textContent=String(Math.round(p*100))+' %';
- $('particle-speed-value').textContent=v.toFixed(1).replace('.',',');
- $('particle-B-value').textContent=B.toFixed(1).replace('.',',');
- $('particle-note').innerHTML='Relativ krökningsradie <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>r</mi><mo>∝</mo><mfrac><mi>v</mi><mi>B</mi></mfrac><mo>=</mo></math> '+(v/B).toFixed(2).replace('.',',')+
-  '. F pekar alltid vinkelrätt mot v. B '+(Bsgn===1?'in i':'ut ur')+' bilden.';
- $('particle-positive').classList.toggle('selected',q===1);
- $('particle-negative').classList.toggle('selected',q===-1);
- $('particle-flip').classList.toggle('selected',Bsgn===-1);
+
+/* The advanced particle simulator is exclusively handled by interactions.js.
+   This small script only prepares static examples and synchronizes reveal figures.
+   Closing or resetting an answer must hide its answer arrow immediately. */
+function attachAnswerFigure(containerId,answerIndex,renderer){
+ const container=$(containerId);
+ const root=container.closest('.slide'),answers=[...root.querySelectorAll('.answer')];
+ const answer=answers[answerIndex];
+ if(!answer)throw Error('Required answer stage missing for '+containerId);
+ const draw=()=>{container.innerHTML=renderer(answer.classList.contains('open'))};
+ new MutationObserver(draw).observe(answer,{attributes:true,attributeFilter:['class']});
+ root.addEventListener('lesson:reset',draw);
+ draw();
 }
-$('particle-positive').onclick=()=>{q=1;render()};
-$('particle-negative').onclick=()=>{q=-1;render()};
-$('particle-flip').onclick=()=>{Bsgn*=-1;render()};
-for(const id of ['particle-time','particle-speed','particle-B'])$(id).oninput=render;
-$('particle-prev').onclick=()=>{$('particle-time').value=Math.max(0,Number($('particle-time').value)-10);render()};
-$('particle-next').onclick=()=>{$('particle-time').value=Math.min(100,Number($('particle-time').value)+10);render()};
-function reset(){q=1;Bsgn=1;$('particle-time').value=0;$('particle-speed').value=1;$('particle-B').value=1;render();}
-$('particle-reset').onclick=reset;
-$('particle-dynamic').closest('.slide').addEventListener('lesson:reset',reset);
-render();
+attachAnswerFigure('mag-proton',1,show=>staticParticle(1,show));
+attachAnswerFigure('mag-conductor-answer',0,show=>conductor(1,show));
+
+/* A voluntary enrichment must not remain open after the lesson answer is hidden. */
+const extension=document.querySelector('details.particle-extension');
+if(extension){
+ const answer=extension.closest('.answer');
+ const sync=()=>{if(!answer.classList.contains('open'))extension.open=false};
+ new MutationObserver(sync).observe(answer,{attributes:true,attributeFilter:['class']});
+ answer.closest('.slide').addEventListener('lesson:reset',()=>{extension.open=false});
+}
+
 })();
