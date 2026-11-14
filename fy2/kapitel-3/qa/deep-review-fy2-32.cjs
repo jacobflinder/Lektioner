@@ -194,6 +194,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
     if(n===4)await step(1);
     const screen=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}));
     ok(screen.scroll<=screen.viewport+2,'no horizontal page overflow '+v.name+'/'+n+' '+JSON.stringify(screen));
+    if(v.name==='projector'&&[2,4].includes(n))ok(screen.height<=1180,'projector current-feedback lesson '+n+' vertically compact: '+screen.height+' px');
     ok(await slide().isVisible(),'slide visible '+v.name+'/'+n);
     if(n===2){
      const math=await rect('.slide.active .two-equations > div');
@@ -202,10 +203,18 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
     await shot(v.name+'-'+String(n).padStart(2,'0'));
    }
    await go(4);await reset();await step(3);
-   const mathRows=await rect('.slide.active .answer.open .physics-steps > div');
-   ok(mathRows.length>=5&&mathRows.every(r=>r.width>30&&r.height>10),'all force and field MathML rows rendered '+v.name);
+   const mathRows=await rect('.slide.active .answer.open:visible .physics-steps > div');
+   ok(mathRows.length===(v.name==='mobile'?5:3)&&mathRows.every(r=>r.width>30&&r.height>10),'active-stage mathematical statements actually legible '+v.name);
+   if(v.name!=='mobile'){
+    ok(!(await slide().locator('.answer.open').first().isVisible()),'projector/desktop previous feedback is visually superseded rather than stacked');
+    ok(await slide().locator('.answer.open').nth(2).isVisible(),'projector/desktop latest feedback retains complete math');
+   }
    const view=await page.evaluate(()=>({inner:innerWidth,scroll:document.documentElement.scrollWidth}));
    ok(view.scroll<=view.inner+2,'no horizontal overflow with ALL exit answers '+v.name);
+   if(v.name==='projector') {
+    const height=await page.evaluate(()=>document.documentElement.scrollHeight);
+    ok(height<=1180,'last complete exit maths fits projector after focus: '+height+' px');
+   }
    await shot(v.name+'-04-all-answers');
    await page.locator('#earth-extension summary').click();
    await set('earth-angle',90);
