@@ -7,31 +7,31 @@ if(!M)throw new Error('MathML-stöd för faktorsatsen saknas');
 const {step,answer,solution,insertSolutions,typesetStatic,setFormula}=M;
 insertSolutions({
  'start-answer':solution(
-  step('1 · Sätt in x = 2',['f(x) = x² − x − 2','f(2) = 2² − 2 − 2','= 4 − 2 − 2']),
+  step('1 · Sätt in x = 2 och beräkna',['f(x) = x² − x − 2','f(2) = 2² − 2 − 2','= 4 − 2 − 2','= 0']),
   answer(['f(2) = 0']),
   step('Tolka',[],'Grafen skär x-axeln vid (2; 0). Det betyder också att x − 2 är en faktor – förklara varför med faktorsatsen.')
  ),
  'graf-answer':solution(
-  step('1 · Pröva det andra nollstället',['f(−1) = (−1)² − (−1) − 2','= 1 + 1 − 2 = 0']),
-  step('2 · Kontrollera det första',['f(2) = 2² − 2 − 2','= 4 − 2 − 2 = 0']),
+  step('1 · Pröva det andra nollstället',['f(−1) = (−1)² − (−1) − 2','= 1 + 1 − 2','= 0']),
+  step('2 · Kontrollera det första',['f(2) = 2² − 2 − 2','= 4 − 2 − 2','= 0']),
   answer(['x₁ = −1','x₂ = 2']),
   step('Skilj begreppen åt',[],'Nollställena är x-värdena −1 och 2. Funktionsvärdet är 0 i båda punkterna.')
  ),
  rest1:solution(
   step('1 · Hitta insättningsvärdet',['x − 1 = 0','a = 1']),
-  step('2 · Beräkna resten',['f(1) = 1³ − 2 · 1² − 5 · 1 + 6','= 1 − 2 − 5 + 6 = 0']),
+  step('2 · Beräkna resten',['f(1) = 1³ − 2 · 1² − 5 · 1 + 6','= 1 − 2 − 5 + 6','= 0']),
   answer(['r = f(1) = 0']),
   step('Slutsats',[],'x − 1 är en faktor, eftersom resten är noll.')
  ),
  rest2:solution(
   step('1 · Hitta insättningsvärdet',['x − 2 = 0','a = 2']),
-  step('2 · Beräkna resten',['f(2) = 2³ − 2 · 2² − 5 · 2 + 6','= 8 − 8 − 10 + 6 = −4']),
+  step('2 · Beräkna resten',['f(2) = 2³ − 2 · 2² − 5 · 2 + 6','= 8 − 8 − 10 + 6','= −4']),
   answer(['r = f(2) = −4']),
   step('Slutsats',[],'x − 2 är inte en faktor, eftersom resten inte är noll.')
  ),
  rest3:solution(
   step('1 · Plustecken i divisorn – negativt insättningsvärde',['x + 2 = 0','a = −2']),
-  step('2 · Beräkna resten',['f(−2) = (−2)³ − 2(−2)² − 5(−2) + 6','= −8 − 8 + 10 + 6 = 0']),
+  step('2 · Beräkna resten',['f(−2) = (−2)³ − 2(−2)² − 5(−2) + 6','= −8 − 8 + 10 + 6','= 0']),
   answer(['r = f(−2) = 0']),
   step('Slutsats',[],'x + 2 är en faktor. Det avgörs av f(−2), inte f(2).')
  ),
@@ -54,8 +54,8 @@ insertSolutions({
   step('Varför räcker det?',[],'Vid division med x − a är resten alltid p(a).')
  ),
  'exit-check3':solution(
-  step('1 · Nollställena bestämmer faktorerna',['h(x) = k(x + 2)x(x − 1)']),
-  step('2 · Punkten (2; 8) bestämmer k',['h(2) = 8','8 = k(2 + 2) · 2 · (2 − 1)','= 8k','k = 1']),
+  step('1 · Nollställena bestämmer faktorerna',['x = −2 ⇒ x + 2','x = 0 ⇒ x','x = 1 ⇒ x − 1','h(x) = k(x + 2)x(x − 1)']),
+  step('2 · Punkten (2; 8) bestämmer k',['h(2) = 8','8 = k(2 + 2)·2·(2 − 1)','= k·4·2·1','= 8k','k = 1']),
   answer(['h(x) = x(x + 2)(x − 1)']),
   step('Kontroll',[],'Funktionen är noll vid −2, 0 och 1 och har funktionsvärdet 8 då x = 2.')
  ),
@@ -64,7 +64,7 @@ insertSolutions({
     'h(−1) = (−1)³ + (−1)² − 4(−1) − 4','= −1 + 1 + 4 − 4 = 0']),
   answer(['h(−1) = 0']),
   step('Slutsats',[],'x + 1 är en faktor enligt faktorsatsen.'),
-  step('2 · Beräkna resten vid division med x − 3',['h(3) = 3³ + 3² − 4 · 3 − 4','= 27 + 9 − 12 − 4']),
+  step('2 · Beräkna resten vid division med x − 3',['h(3) = 3³ + 3² − 4·3 − 4','= 27 + 9 − 12 − 4','= 20']),
   answer(['r = 20'])
  )
 });
@@ -79,7 +79,7 @@ for(const node of Array.from(updated.children)){
 }
 const prelude=solution(
  step('1 · Bestäm skalfaktorn med den nya punkten',['g(x) = k(x + 1)(x − 1)(x − 3)',
-  '6 = k(0 + 1)(0 − 1)(0 − 3)','= 3k']),
+  'g(0) = 6','6 = k(0 + 1)(0 − 1)(0 − 3)','= k·1·(−1)·(−3)','= 3k']),
  answer(['k = 2']),
  step('2 · Skriv det nya polynomet',['g(x) = 2(x + 1)(x − 1)(x − 3)'],
   'Nollställena förblir −1, 1 och 3. Funktionsvärdena fördubblas.')
