@@ -134,6 +134,7 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   await page.locator('#class').click();
   // 16: Lenz increasing, decreasing, constant with actual SVG orientation and mathematical markup.
   await goto(16);await reset();
+  await slide().locator('details.panel').evaluate(el=>el.open=true);
   for(const [mode,word] of [['increase','moturs'],['decrease','medurs'],['constant','Ingen induktionsström']]){
    await page.locator('#lenz-case').selectOption(mode);await page.locator('#lenz-check').click();
    check((await page.locator('#lenz-feedback').innerText()).includes(word),'correct induced current '+mode);
