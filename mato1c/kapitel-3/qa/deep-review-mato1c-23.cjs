@@ -159,7 +159,7 @@ await go(9);
 const stitch=page.locator('#stitch-answer [data-sequence]');
 ok(await stitch.locator('[data-seq-item]:visible').count()===0,'stitch answer hidden');
 for(let i=1;i<=3;i++){await stitch.locator('[data-seq-next]').click();ok(await stitch.locator('[data-seq-item]:visible').count()===i,'stitch steps '+i)}
-for(const v of ['a+b=2','a=2','b=0','f(1−h)=2−2h','f(1+h)=2+2h+h²'])await has('#stitch-answer',v);
+for(const v of ['a+b=2','(ax+b)′=a','(x²+1)′=2x','a=2','b=0','f(1−h)=2−2h','f(1+h)=2+2h+h²'])await has('#stitch-answer',v);
 ok((await labels('#stitch-answer')).some(x=>x?.includes('(f(1)−f(1−h))/h=2')),'true stitch left quotient');
 ok((await labels('#stitch-answer')).some(x=>x?.includes('(f(1+h)−f(1))/h=2+h')),'true stitch right quotient');
 ok(!await page.locator('#stitch-detail').isVisible(),'counterexample optional');
@@ -186,7 +186,7 @@ await go(12);
 const exit=page.locator('#exit-answer [data-sequence]');
 ok(await exit.locator('[data-seq-item]:visible').count()===0,'exit initially concealed');
 for(let i=1;i<=5;i++){await exit.locator('[data-seq-next]').click();ok(await exit.locator('[data-seq-item]:visible').count()===i,'exit progressive '+i)}
-for(const v of ['F(2)=2²=4','2c+d=4','F′_höger(2)=4','c=4','d=−4',
+for(const v of ['F(2)=2²=4','2c+d=4','(cx+d)′=c','(x²)′=2x','2·2=4','c=4','d=−4',
 'F(2−h)=4−4h','F(2+h)=4+4h+h²','lim_(x→2⁻) F(x)=8',
 'F(2−h)=8−4h','q(1−h)=2h+2','q(1+h)=2h+2'])
  await has('#exit-answer',v);
