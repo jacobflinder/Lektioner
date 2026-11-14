@@ -31,7 +31,8 @@ insertSolutions({
  ),
  rest3:solution(
   step('1 · Plustecken i divisorn – negativt insättningsvärde',['x + 2 = 0','a = −2']),
-  step('2 · Beräkna resten',['f(−2) = (−2)³ − 2(−2)² − 5(−2) + 6','= −8 − 8 + 10 + 6','= 0']),
+  step('2 · Beräkna potenser och produkter var för sig',['(−2)³ = −8','−2(−2)² = −8','−5(−2) = 10']),
+  step('3 · Samla och jämför med noll',['−8 − 8 = −16','10 + 6 = 16','f(−2) = −16 + 16','= 0']),
   answer(['r = f(−2) = 0']),
   step('Slutsats',[],'x + 2 är en faktor. Det avgörs av f(−2), inte f(2).')
  ),
@@ -43,8 +44,9 @@ insertSolutions({
  ),
  'exit-check1':solution(
   step('1 · Välj rätt insättningsvärde',['x + 1 = 0','a = −1']),
-  step('2 · Beräkna resten',['p(−1) = (−1)³ + 2(−1)² − 5(−1) − 6','= −1 + 2 + 5 − 6 = 0']),
-  step('3 · Motivera med restsatsen',['p(x) = (x + 1)q(x) + r','p(−1) = 0 · q(−1) + r = r']),
+  step('2 · Beräkna de enskilda termerna',['(−1)³ = −1','2(−1)² = 2','−5(−1) = 5']),
+  step('3 · Summera resten',['p(−1) = −1 + 2 + 5 − 6','= 0']),
+  step('4 · Motivera med restsatsen',['p(x) = (x + 1)q(x) + r','p(−1) = 0 · q(−1) + r = r']),
   answer(['r = 0']),
   step('Slutsats',[],'x + 1 är en faktor eftersom p(−1) = 0.')
  ),
@@ -60,11 +62,12 @@ insertSolutions({
   step('Kontroll',[],'Funktionen är noll vid −2, 0 och 1 och har funktionsvärdet 8 då x = 2.')
  ),
  homefacit:solution(
-  step('1 · Kontrollera den föreslagna faktorn',['h(x) = x³ + x² − 4x − 4',
-    'h(−1) = (−1)³ + (−1)² − 4(−1) − 4','= −1 + 1 + 4 − 4 = 0']),
+  step('1 · Beräkna varje term när x = −1',['h(x) = x³ + x² − 4x − 4',
+    '(−1)³ = −1','(−1)² = 1','−4(−1) = 4']),
+  step('2 · Summera och jämför med noll',['h(−1) = −1 + 1 + 4 − 4','= 0']),
   answer(['h(−1) = 0']),
   step('Slutsats',[],'x + 1 är en faktor enligt faktorsatsen.'),
-  step('2 · Beräkna resten vid division med x − 3',['h(3) = 3³ + 3² − 4·3 − 4','= 27 + 9 − 12 − 4','= 20']),
+  step('3 · Beräkna resten vid division med x − 3',['h(3) = 3³ + 3² − 4·3 − 4','= 27 + 9 − 12 − 4','= 20']),
   answer(['r = 20'])
  )
 });
