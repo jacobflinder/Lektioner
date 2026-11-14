@@ -33,6 +33,7 @@ jobs:
       - name: Verify navigation, interactivity, responsivity and screenshots
         run: |
           node mato1c/kapitel-3/qa/browser-smoke.cjs
+          node mato1c/kapitel-3/qa/deep-review-mato1c-24.cjs
           node mato1c/kapitel-3/qa/extrempunkter-browser.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-16.cjs
           node mato1c/kapitel-3/qa/andraderivatan-browser.cjs
