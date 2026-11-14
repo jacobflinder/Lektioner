@@ -8,7 +8,7 @@ const chain=(law,sub,result,note)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+math(law)+'</div></div>'+
  '<details class="calc-ins"><summary>2 · Visa insättning med enheter</summary><div class="math-sm">'+math(sub)+'</div></details>'+
  '<div><span class="tag">3 · Resultat och tolkning</span><div class="math-sm">'+math(result)+'</div><p class="small">'+note+'</p></div></div>';
-const val=(x,dp,unit)=>'<mrow><mn>'+fmt(x,dp)+'</mn><mtext> '+unit+'</mtext></mrow>';
+const val=(x,dp,unit)=>'<mrow><mn>'+fmt(x,dp)+'</mn><mspace width="0.25em"/><mtext>'+unit+'</mtext></mrow>';
 
 const mu0=4*Math.PI*1e-7;
 let componentsShown=false,compassShown=false;
@@ -18,18 +18,23 @@ function drawComponents(){
  $("earth-B-value").textContent=fmt(B,0)+" μT";
  $("earth-i-value").textContent=fmt(i,0)+"°";
  $("earth-components-result").innerHTML=componentsShown?
- chain('<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">cos</mi><mi>i</mi><mspace width="1em"/><msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">sin</mi><mi>i</mi>',
- '<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo><mspace width="1em"/>'+
- '<msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>',
- '<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo>'+val(v.Bh,1,'μT')+'<mspace width="1em"/><msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo>'+val(v.Bv,1,'μT'),
- ''+inlineMath('<msub><mi>B</mi><mtext>v</mtext></msub>')+' är här komponenten nedåt. Om B hålls konstant och i ökar från 0° till 90° minskar '+inlineMath('<msub><mi>B</mi><mtext>h</mtext></msub>')+'.') :
+ '<div class="earth-component-chains">'+
+ '<div class="earth-component-card"><span class="tag">Horisontell komponent Bₕ</span>'+
+ '<div class="earth-math-stages"><div class="math-sm">'+math('<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">cos</mi><mi>i</mi>')+'</div>'+
+ '<details class="calc-ins"><summary>Visa insättningen för Bₕ</summary><div class="math-sm">'+math('<msub><mi>B</mi><mtext>h</mtext></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>')+'</div></details>'+
+ '<div class="math-sm">'+math('<msub><mi>B</mi><mtext>h</mtext></msub><mo>≈</mo>'+val(v.Bh,1,'μT'))+'</div></div></div>'+
+ '<div class="earth-component-card"><span class="tag">Vertikal komponent Bᵥ (nedåt)</span>'+
+ '<div class="earth-math-stages"><div class="math-sm">'+math('<msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo><mi>B</mi><mi mathvariant="normal">sin</mi><mi>i</mi>')+'</div>'+
+ '<details class="calc-ins"><summary>Visa insättningen för Bᵥ</summary><div class="math-sm">'+math('<msub><mi>B</mi><mtext>v</mtext></msub><mo>=</mo>'+val(B,0,'μT')+'<mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mn>'+fmt(i,0)+'</mn><mo>°</mo><mo>)</mo>')+'</div></details>'+
+ '<div class="math-sm">'+math('<msub><mi>B</mi><mtext>v</mtext></msub><mo>≈</mo>'+val(v.Bv,1,'μT'))+'</div></div></div>'+
+ '<p class="small">Bᵥ anges som positiv storlek <strong>nedåt</strong> i modellen. För fast B och i från 0° till 90° minskar Bₕ och Bᵥ ökar.</p></div>' :
  'Förutsäg först: om inklinationen ökar men B är konstant, vilken komponent minskar?';
  $("earth-components-reveal").textContent=componentsShown?"Dölj värden":"Visa komponenterna";
 }
 $("earth-B").oninput=()=>{drawComponents()};
 $("earth-i").oninput=()=>{drawComponents()};
 $("earth-components-reveal").onclick=()=>{componentsShown=!componentsShown;drawComponents()};
-function resetComponents(){componentsShown=false;componentsShown=false;$("earth-B").value=42;$("earth-i").value=73;drawComponents()}
+function resetComponents(){componentsShown=false;$("earth-B").value=42;$("earth-i").value=73;drawComponents()}
 $("earth-components-reset").onclick=resetComponents;
 $("earth-components").closest(".slide").addEventListener("lesson:reset",resetComponents);
 const Bh=42*Math.cos(73*Math.PI/180);
@@ -49,12 +54,13 @@ function drawCompass(){
 }
 $("earth-coil").oninput=()=>{drawCompass()};
 $("earth-compass-show").onclick=()=>{compassShown=!compassShown;drawCompass()};
-function resetCompass(){compassShown=false;compassShown=false;$("earth-coil").value=0;drawCompass()}
+function resetCompass(){compassShown=false;$("earth-coil").value=0;drawCompass()}
 $("earth-compass-reset").onclick=resetCompass;
 $("earth-compass").closest(".slide").addEventListener("lesson:reset",resetCompass);
 $("earth-triangle").innerHTML=compass(Bh,47.1,true).html;
 const solB=mu0*3*1.5/(2*.06)*1e6;
 $("earth-example-compass").innerHTML=compass(Bh,solB,true).html;
-$("earth-example-reverse").innerHTML=compass(18,18,true).html;
+$("earth-example-reverse").innerHTML=compass(18,18,false).html;
+$("earth-example-reverse-answer").innerHTML=compass(18,18,true).html;
 resetComponents();resetCompass();
 })();
