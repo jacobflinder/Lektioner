@@ -93,3 +93,12 @@ body[data-active-tab="foundation"] .foundation{max-width:1290px;margin:0 auto}
 .u-figure svg{max-height:415px}
 @media(max-width:980px){.u-figure svg{max-height:370px}}
 @media(max-width:600px){.u-figure svg{max-height:300px}.u-math-rule{gap:7px;font-size:1.03rem}.u-equation-row strong{font-size:1.06rem}.u-worked-row{padding:8px 0}}
+
+/* Lektion 15: självständiga matematiska påståenden i separata MathML-block. */
+.unit-math-givens{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;justify-items:start;margin:16px 0 20px;max-width:100%;min-width:0}
+.u-math-rule.unit-math-givens{display:grid;justify-items:start;row-gap:16px;padding:15px 17px;margin:12px 0 10px}
+.unit-math-givens>.math{display:block;margin:0;min-width:0;max-width:100%;overflow-x:auto;white-space:nowrap}
+.unit-math-givens>.math math{font-size:clamp(1.12rem,2.3vw,1.48rem);max-width:none;white-space:nowrap}
+#u-axis-equation{margin:0 0 16px;min-width:0;max-width:100%}
+#u-axis-equation math,#u-axis-sin math{font-size:clamp(1.12rem,2.3vw,1.48rem)}
+@media(max-width:600px){.u-math-rule.unit-math-givens{padding:12px}.unit-math-givens>.math math{font-size:1.12rem}}

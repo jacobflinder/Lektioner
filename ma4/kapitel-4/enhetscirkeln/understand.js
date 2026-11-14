@@ -12,6 +12,15 @@ function node(tag,attrs={},label){const n=document.createElementNS(S,tag);for(co
 function line(x1,y1,x2,y2,cls){return node('line',{x1,y1,x2,y2,class:cls})}
 function pt(deg,r=R){const a=deg*Math.PI/180;return {x:CX+r*Math.cos(a),y:CY-r*Math.sin(a)}}
 function fmt(x){if(Math.abs(x)<1e-9)return'0';return x.toFixed(3).replace('.',',').replace(/0+$/,'').replace(/,$/,'')}
+const AXIS_VALUES=Object.freeze({0:{x:1,y:0},90:{x:0,y:1},180:{x:-1,y:0},270:{x:0,y:-1}});
+function axisValues(deg){const v=AXIS_VALUES[deg];if(!v)throw Error('Okänd axelvinkel: '+deg);return v}
+function renderAxisAnswer(){
+ if(!axisSolved)return;
+ const v=axisValues(axisDeg);
+ window.Ma4Math.setFormula($('u-axis-equation'),'cos '+axisDeg+'° = '+v.x,'block');
+ window.Ma4Math.setFormula($('u-axis-sin'),'sin '+axisDeg+'° = '+v.y,'block');
+ $('u-axis-explain').textContent='Vid '+axisDeg+'° är x = '+v.x+' och y = '+v.y+'. Radien är 1.';
+}
 function arcPath(deg){
  if(deg<=0)return '';
  const p=pt(Math.min(deg,179.999),R),start=pt(0,R);
@@ -85,12 +94,13 @@ function draw(){
   }
  }
  let desc;
- if(step===0)desc=known?'Radien står vid '+angle+'°. Den markerade punkten har koordinaterna cos v och sin v.':'Enhetscirkel med radie 1 och en radie som kan ställas till axelvinklarna. Förutsäg koordinaterna.';
+ if(step===0)desc=known?'Radien står vid '+angle+'°. Koordinaterna är '+axisValues(angle).x+' och '+axisValues(angle).y+'.':'Enhetscirkel med radie 1 och en radie som kan ställas till axelvinklarna. Förutsäg koordinaterna.';
  else if(step===1)desc='Enhetscirkel med båglängd markerad från 0 till '+radianDeg+' grader.'+(known?' Båglängden delas med radien för att ge radianmåttet.':' Inget radianvärde är avslöjat.');
  else if(step===2)desc='Rätvinklig triangel i enhetscirkeln med hypotenusa 1 och vinkel '+triDeg+' grader.'+(known?' Exakta katetvärden framgår också.':' Kateterna är ännu okända.');
  else if(step===3)desc='Enhetscirkel med 30 graders riktning och en justerbar radie vid '+reflectDeg+' grader.'+(known?' Spegling till 150 grader är förklarad.':' Koordinaterna avslöjas inte.');
  else desc=known?'Enhetscirkel som visar den kontrollerade lösningens riktning.':'Tom enhetscirkel inför en individuell uppgift utan figurhjälp.';
  svg.setAttribute('aria-label',desc);
+ if(step===0&&axisSolved)renderAxisAnswer();
  $('u-figure-caption').textContent=step===0?'Dra radien med fingret eller klicka på axelvinklarna. x är cos v; y är sin v.':
  step===1?'Cirkelbågen växer med vinkeln. Radianmått = båglängd / radie.':
  step===2?'Hypotenusa = radie = 1. x och y är kateterna.':
@@ -117,7 +127,11 @@ document.querySelectorAll('[data-u-answer="axis"] button').forEach(b=>b.addEvent
  fb('u-axis-feedback',correct?'Rätt! Uppåt finns ingen förflyttning åt höger eller vänster, alltså x = cos 90° = 0.':'Pröva att följa punkten rakt ned till x-axeln. Vid 90° ligger den precis ovanför origo, inte åt vänster eller höger.',correct);
  if(correct){axisSolved=true;$('u-axis-answer').hidden=false;draw()}
 }));
-document.querySelectorAll('[data-u-axis]').forEach(b=>b.addEventListener('click',()=>{axisDeg=Number(b.dataset.uAxis);draw()}));
+document.querySelectorAll('[data-u-axis]').forEach(b=>b.addEventListener('click',()=>{
+ axisDeg=Number(b.dataset.uAxis);
+ if(axisSolved)fb('u-axis-feedback','Utforska: för '+axisDeg+'° följer punktens exakta koordinater av cosinus (x) och sinus (y).',true);
+ draw();
+}));
 $('u-radian-slider').addEventListener('input',e=>{radianDeg=Number(e.target.value);radianReveal=false;$('u-radian-answer').hidden=true;$('u-radian-reveal').textContent='Visa båglängd och radianmått';$('u-radian-deg').textContent=radianDeg+'°';draw()});
 function gcd(a,b){while(b){const rem=a%b;a=b;b=rem}return a}
 function exactRadian(deg){
