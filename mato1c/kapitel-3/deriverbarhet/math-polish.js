@@ -123,8 +123,9 @@ step('stitch-answer',0,'<strong>1 · Kontinuitet</strong>'+
  '<p>Funktionsvärdet vid skarven är f(1)=1²+1=2. Vänstra grenen måste närma sig samma värde:</p>'+
  group(['lim_(x→1⁻) f(x)=a+b','f(1)=1²+1=2','a+b=2']));
 step('stitch-answer',1,'<strong>2 · Samma lutning</strong>'+
- '<p>För en <em>kontinuerlig</em> skarv måste lutningarna bli lika:</p>'+
- group(['f′_vänster(x)=a','f′_höger(x)=2x','f′_höger(1)=2·1=2','a=2']));
+ '<p>För en <em>kontinuerlig</em> skarv måste grenarnas derivator bli lika. Derivera varje gren för sig:</p>'+
+ '<p>Vänstra linjens derivata:</p>'+group(['(ax+b)′=a'])+
+ '<p>Högra parabelns derivata:</p>'+group(['(x²+1)′=2x','2·1=2','a=2']));
 step('stitch-answer',2,'<strong>3 · Båda villkoren uppfyllda</strong>'+
  group(['a+b=2','a=2','2+b=2','b=0'])+
  '<p>De tillåtna funktionerna är då:</p>'+
@@ -149,7 +150,8 @@ step('exit-answer',0,'<strong>1 · Delarna möts</strong>'+
  group(['F(2)=2²=4','lim_(x→2⁻) F(x)=2c+d','2c+d=4']));
 step('exit-answer',1,'<strong>2 · Lutningarna stämmer</strong>'+
  '<p>När kontinuiteten är uppfylld jämförs grenarnas derivator:</p>'+
- group(['F′_vänster(x)=c','F′_höger(x)=2x','F′_höger(2)=2·2','F′_höger(2)=4','c=4']));
+ '<p>Vänstra linjens derivata:</p>'+group(['(cx+d)′=c'])+
+ '<p>Högra parabelns derivata:</p>'+group(['(x²)′=2x','2·2=4','c=4']));
 step('exit-answer',2,'<strong>3 · Den deriverbara skarven</strong>'+
  group(['2c+d=4','c=4','8+d=4','d=−4'])+
  '<p>Funktionen är nu sammanhängande. Kontrollera ensidiga differenskvoter vid x=2:</p>'+
