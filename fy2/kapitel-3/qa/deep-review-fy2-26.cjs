@@ -41,6 +41,8 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  }
  // 1: teacher-controlled protocol, no fabricated measured outcomes.
  await go(1);
+ const startBottom=await page.locator('.slide.active').evaluate(e=>e.getBoundingClientRect().bottom);
+ test(startBottom<=905,'start slide fits genuine 1440×900 classroom projector, bottom='+Math.round(startBottom));
  const first=await page.locator('.slide.active').innerText();
  for(const x of ['förutsäga','observation','Förutsäg → observera → förklara','samling dokumenterade klassrumsdemonstrationer','inte en färdig tidsplan','inte mätningar'])
   test(first.includes(x),'start protocol '+x);
@@ -198,6 +200,11 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  test(await page.locator('body.show-teacher').count()===1,'teacher notes accessible');
  await page.locator('#teacher').click();
  test(await page.locator('body.show-teacher').count()===0,'teacher notes hide again');
+ // At a 768×1024 tablet the complete intro should also fit without vertical clipping.
+ await page.setViewportSize({width:768,height:1024});
+ await go(1);
+ const tabletBottom=await page.locator('.slide.active').evaluate(e=>e.getBoundingClientRect().bottom);
+ test(tabletBottom<=1029,'start fits 768×1024 tablet without clipping, bottom='+Math.round(tabletBottom));
  // 390px all six with models fully opened to catch real overflow.
  await page.setViewportSize({width:390,height:844});
  for(let i=1;i<=6;i++){
