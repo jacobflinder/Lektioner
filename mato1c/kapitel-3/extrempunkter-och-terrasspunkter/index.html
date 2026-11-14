@@ -35,6 +35,15 @@
 .book-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .lesson-emphasis{color:#075e58;font-weight:800}
 @media(max-width:760px){.graph-grid{grid-template-columns:1fr}.graph-preview svg{max-height:200px}.step-grid,.book-choices{grid-template-columns:1fr}.points-table th,.points-table td{padding:7px 3px;font-size:.88rem}.points-table select{padding:5px 2px;font-size:.87rem}}
+/* Lesson 25: responsive mathematical sign tables, fully visible on phones. */
+.responsive-sign{max-width:100%;min-width:0}
+.responsive-sign .tall-sign{display:none!important}
+.responsive-sign .wide-sign{display:table!important}
+@media(max-width:720px){
+ .responsive-sign .wide-sign{display:none!important}
+ .responsive-sign .tall-sign{display:table!important;width:100%}
+ .responsive-sign .tall-sign th,.responsive-sign .tall-sign td{padding:6px 4px;font-size:.83rem;overflow-wrap:normal}
+}
 /* Lesson 25: independent semantic equations and real vertical spacing. */
 .slide .math-givens,.slide .solution-math-group{display:grid!important;gap:16px!important;margin:14px 0}
 .slide .math-givens>.math,.slide .solution-math-group>.math,
