@@ -119,8 +119,8 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   await step(1);check(await slide().locator('.answer').nth(1).isVisible(),'mv²/r=qvB shown only at second step');
   await step(1);
   check(await slide().locator('.answer').nth(2).isVisible(),'radius result revealed third');
-  check(await slide().locator('.answer').nth(2).locator('.particle-equation-steps math').count()===2,'mv/r=qB and r=mv/qB in distinct MathML');
-  const gap=await mathGap('.slide.active .answer:nth-of-type(3) .particle-equation-steps>div'); // CSS-target may not be nth due button interleaving
+  check(await slide().locator('.answer').nth(2).locator('.particle-equation-steps').first().locator('math').count()===2,'mv/r=qB and r=mv/qB in distinct MathML');
+  const gap=await page.locator('.slide.active .answer > .particle-equation-steps > div').evaluateAll(a=>a.map(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom}}));
   check(gap.length===2&&gap[1].top-gap[0].bottom>=15,'radius two mathematical rows visually separated by 15px');
   const optional=slide().locator('details.particle-extension');
   check(await optional.count()===1&&!await optional.evaluate(el=>el.open),'omega and period extension optional / initially collapsed');
@@ -130,7 +130,7 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   const R=mass*v/(muq*B),omega=muq*B/mass,T=2*Math.PI*mass/(muq*B);
   check(near(R*omega,v,1e-5),'independent v=rω');
   check(near(T*omega,2*Math.PI,1e-10),'independent cyclotron period');
-  await reset();check(!await slide().locator('.answer').nth(2).isVisible(),'radius solutions hidden again on reset');
+  await reset();check(!await slide().locator('.answer').nth(2).isVisible(),'radius solutions hidden again on reset');check(!await optional.evaluate(el=>el.open),'optional extension closes on reset');
   // Slide 10: early SVG force disclosure fixed; law->substitution->answer order.
   await go(10);await reset();
   check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()===0,'no premature proton force vector');
@@ -233,14 +233,14 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
     if(n===5){await slide().locator('[data-particle-prediction="plus"] [data-show-direction]').click();await slide().locator('[data-particle-prediction="minus"] [data-show-direction]').click();}
     if(n===6){await page.locator('#particle-force').click();await set('particle-time',60);}
     if(n===9)await step(3);
-    if(n===10)await slide().locator('button[data-reveal]').nth(1).click();
+    if(n===10)await step(2);
     if(n===15)await slide().locator('button[data-reveal]').click();
     if(n===18||n===19)await slide().locator('button[data-reveal]').click();
     const widths=await page.evaluate(()=>({inner:innerWidth,scroll:document.documentElement.scrollWidth}));
     check(widths.scroll<=widths.inner+2,'no horizontal page overflow '+v.name+' slide '+n+' '+JSON.stringify(widths));
     check(await slide().isVisible(),'slide '+n+' visible at '+v.name);
     if([9,10,12,15,18].includes(n)){
-     const gap=await mathGap('.slide.active .particle-equation-steps:first-of-type>div');
+     const eq=slide().locator('.particle-equation-steps:visible').first();const gap=await eq.locator(':scope > div').evaluateAll(a=>a.map(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom}}));
      if(gap.length>1)check(gap.slice(1).every((r,j)=>r.top-gap[j].bottom>=15),'independent maths separated >=15px '+v.name+' slide '+n);
     }
     if(n===10)check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()>=1,'revealed figure on '+v.name);
