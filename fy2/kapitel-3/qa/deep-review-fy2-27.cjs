@@ -44,7 +44,7 @@ const close=(a,b,tol=1e-5)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   test(await page.locator('.slide.active svg g[data-reveal="1"]').isVisible(),'start E revealed after response');
   test(!await page.locator('.slide.active svg g[data-reveal="2"]').isVisible(),'start F still hidden before next');
   await step(1);
-  const e=await vec('.slide.active svg g[data-reveal="1"] line');
+  const e=await vec('.slide.active svg g[data-reveal="1"] line:first-child');
   test(e[3]>e[1],'positive upper plate gives E downward');
   const forces=await page.locator('.slide.active svg g[data-reveal="2"] line').evaluateAll(ls=>ls.map(e=>[+e.getAttribute('y1'),+e.getAttribute('y2')]));
   test(forces.length===2&&forces[0][1]>forces[0][0]&&forces[1][1]<forces[1][0],'proton F down electron F up rendered');
