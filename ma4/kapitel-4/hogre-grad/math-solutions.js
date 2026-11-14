@@ -7,7 +7,7 @@ if(!M)throw new Error('MathML-stöd för polynomekvationer saknas');
 const {step,answer,solution,insertSolutions,typesetStatic,setFormula}=M;
 insertSolutions({
  'h-startanswer':solution(
-  step('1 · Använd faktorsatsen',['f(1) = 0']),
+  step('1 · Använd faktorsatsen',['f(1) = 0','z − 1 = 0']),
   answer(['z − 1']),
   step('2 · Lös andragradsekvationen',['z² + 4 = 0','z² = −4']),
   answer(['z = 2i','z = −2i']),
@@ -36,15 +36,16 @@ insertSolutions({
   step('3 · Sänk graden och kontrollera faktoriseringen',[
     'z⁴ + 5z² + 4',
     '= (z² + 4)(z² + 1)',
-    '= z⁴ + (4 + 1)z² + 4'
+    '= z⁴ + z² + 4z² + 4',
+    '= z⁴ + 5z² + 4'
   ]),
-  step('4 · Lös båda andragradsfaktorerna',['z² + 4 = 0 ⇒ z = ±2i','z² + 1 = 0 ⇒ z = ±i']),
+  step('4 · Lös båda andragradsfaktorerna',['z² + 4 = 0','z² = −4','z = ±2i','z² + 1 = 0','z² = −1','z = ±i']),
   answer(['z = ±2i','z = ±i']),
   step('Kontrollera antalet',[],'Fyra olika enkla komplexa rötter – precis lika många som graden.')
  ),
  'h-oddans':solution(
-  step('1 · Konjugatregeln',['z','z̄'],
-   'Om ett polynom har reella koefficienter förekommer varje icke-reell rot tillsammans med sitt konjugat, med samma multiplicitet.'),
+  step('1 · Konjugatregeln',['z = a + bi','z̄ = a − bi'],
+   'Här är a och b reella och b ≠ 0. För reella koefficienter förekommer varje icke-reell rot tillsammans med sitt konjugat, med samma multiplicitet.'),
   step('2 · Räkna bidragen',[
     '2m',
     'n = 2m + 1'
@@ -58,7 +59,7 @@ insertSolutions({
     '= z²(z + 2) + 9(z + 2)'
   ]),
   step('2 · Bryt ut en gemensam faktor',['f(z) = (z + 2)(z² + 9)']),
-  step('3 · Använd nollproduktmetoden',['z + 2 = 0 ⇒ z = −2','z² + 9 = 0 ⇒ z² = −9']),
+  step('3 · Använd nollproduktmetoden',['z + 2 = 0','z = −2','z² + 9 = 0','z² = −9','z = ±3i']),
   answer(['z₁ = −2','z₂ = 3i','z₃ = −3i']),
   step('Kontrollera antalet',[],'Tre olika enkla rötter är precis det antal som graden kräver.')
  ),
@@ -77,11 +78,13 @@ insertSolutions({
   step('Multiplicitet',[],'Roten 1 har multiplicitet 2, roten −3 har multiplicitet 1. Tillsammans räknas tre rötter.')
  ),
  'h-homeans':solution(
-  step('1 · Använd den givna roten och faktorisera',['z³ − 3z² + 4z − 12',
-    '= (z − 3)(z² + 4)']),
+  step('1 · Pröva given rot och gruppera',['p(3) = 3³ − 3·3² + 4·3 − 12','= 27 − 27 + 12 − 12','= 0']),
+  step('2 · Sänk graden genom faktorisering',['z³ − 3z² + 4z − 12','= z²(z − 3) + 4(z − 3)','= (z − 3)(z² + 4)']),
+  step('3 · Lös de båda faktorerna',['z − 3 = 0','z² + 4 = 0','z² = −4']),
   answer(['z = 3','z = 2i','z = −2i']),
-  step('2 · Använd konjugatet till den givna roten',['z⁴ + 10z² + 9',
-    '= (z² + 1)(z² + 9)']),
+  step('4 · Använd konjugatet till den givna roten',['z = i','z = −i','(z − i)(z + i) = z² + 1']),
+  step('5 · Identifiera och kontrollera nästa faktor',['z⁴ + 10z² + 9','= (z² + 1)(z² + 9)','= z⁴ + 9z² + z² + 9','= z⁴ + 10z² + 9']),
+  step('6 · Lös resterande faktorn',['z² + 1 = 0','z² + 9 = 0']),
   answer(['z = ±i','z = ±3i']),
   step('Kontrollera',[],'Första polynomet har tre enkla rötter och det andra fyra enkla rötter. Antalen stämmer med respektive grad.')
  )
