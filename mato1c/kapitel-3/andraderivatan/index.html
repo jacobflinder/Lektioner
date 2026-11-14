@@ -39,7 +39,7 @@
 /* Fristående matematiska uttryck i eget MathML-block med mätbar 16px-luft. */
 .lesson-math-stack{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;justify-items:start;margin:12px 0 16px;max-width:100%}
 .lesson-math-stack>p.math-fresh{display:block;margin:0!important;min-width:0;max-width:100%;overflow-x:auto;white-space:nowrap}
-.slide .solution-math-group{row-gap:16px}
+.slide :is(.answer,.seq-item) .solution-math-group{row-gap:16px}
 .lesson-labeled-equation{min-width:0}
 .lesson-labeled-equation>strong{display:block;font-size:.88rem;color:#2b6175}
 .lesson-labeled-equation>p.solution-equation{margin:4px 0 0!important}
