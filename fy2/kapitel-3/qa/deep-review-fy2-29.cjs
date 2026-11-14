@@ -169,7 +169,7 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   // 15: source book and class exit unchanged.
   await go(15);const end=(await sc().innerText());
   for(const word of ['167–170','351–357','171–182','Visa vad du kan','inklinations']){} // content verified below
-  for(const word of ['167–170','351–357','171–182','Visa vad du kan','missvisning'])test(end.includes(word),'original book/exit content '+word);
+  for(const word of ['167–170','351–357','171–182','Visa vad du kan','inklinationen'])test(end.includes(word),'original book/exit content '+word);
   test(!await sc().locator('.answer').isVisible(),'exit answer initially concealed');
   await sc().locator('button[data-reveal]').click();
   test(await sc().locator('.answer').isVisible(),'goal-linked exit reveal works');
@@ -196,7 +196,7 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
     test(width.page<=width.viewport+2,'no horizontal page clipping '+v.name+' '+n+': '+JSON.stringify(width));
     test(await sc().isVisible(),'slide renders '+v.name+' '+n);
     if(n===6){const b=await node('.slide.active .earth-two-equations math');test(b.length===2&&b[1].y-b[0].bottom>=12,'separate equation vertical space '+v.name)}
-    if(n===11){const rect=await node('.slide.active .earth-solution-step:first-of-type .earth-math-stages math');test(rect.length>=2,'visible correct MathML algebra at '+v.name)}
+    if(n===11){const rect=await node('.slide.active .earth-solution-step .earth-math-stages math');test(rect.length>=2,'visible correct MathML algebra at '+v.name)}
     if(n===8){const t=await tip('#earth-compass svg path[fill="#cf453b"]');test(!!t&&t.cx>320&&t.cy<207,'visible correct red north tip at '+v.name)}
     await screenshot(v.name+'-'+String(n).padStart(2,'0'));
    }
