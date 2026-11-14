@@ -97,7 +97,7 @@ assert.ok(P(.9)>0&&P(1.1)>0,'Dubbelrot tangerar utan teckenbyte');assert.ok(P(-2
   assert.ok(await page.locator('#h-kand .longdiv-demo td.place-zero math[aria-label="+ 0z"]').count()===1,'Kvotens nollterm bevarad som semantisk MathML');
   assert.ok(await page.locator('#h-kand details').isHidden()===false,'Alternativ gruppering finns kvar');
   await page.locator('#h-kand details summary').click();
-  assert.ok((await page.locator('#h-kand details').innerText()).includes('z²(z − 1)'),'Alternativ lösning bevarad');
+  await label('#h-kand details','z²(z − 1) + 4(z − 1) = 0');
   await allSpacing();await shot('03-desktop');
   await page.locator('#h-kand [data-seq-reset]').click();
   assert.equal(await page.locator('#h-kand [data-seq-item]:visible').count(),0);
