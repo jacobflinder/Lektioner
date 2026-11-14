@@ -6,6 +6,16 @@
 <title>Största och minsta värde · Matematik – fortsättning, nivå 1c</title>
 <link rel="stylesheet" href="../assets/lesson.css">
 <style>
+/* Ma3c 19: individually typeset equations, measured 16 px vertical separation */
+.slide .math-givens{display:grid;gap:16px;margin:14px 0}
+.slide .math-givens .mathline{margin:0}
+.slide .solution-math-group{gap:16px!important}
+.slide .mathline{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .mathline math[display="block"]{font-size:clamp(1rem,2.1vw,1.34rem);max-width:100%}
+.slide .mathsmall math,.slide .math-inline math{font-size:1em}
+.slide :is(.answer,.seq-item) .mathline+.mathline{margin-top:16px}
+.slide .graph-readout math{font-size:clamp(.96rem,1.5vw,1.17rem)}
+@media(max-width:740px){.slide .mathline math[display="block"]{font-size:1rem}}
 .mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.24rem,2.3vw,1.72rem);line-height:1.6}
 .mathline sup{font-size:.7em}
 .mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
@@ -77,7 +87,7 @@
 <div class="eyebrow">01 · Start · enskilt → par</div>
 <h1>Var finns det största värdet?</h1>
 <p class="lead">Ett <strong>slutet intervall</strong> betyder att båda ändpunkterna ingår.</p>
-<p class="mathline">g(x)=x², &nbsp; −1 ≤ x ≤ 2</p>
+<div class="math-givens"><p class="mathline">g(x)=x²</p><p class="mathline">−1 ≤ x ≤ 2</p></div>
 <div class="task"><strong>Ta ställning innan facit visas:</strong>
 <ol class="spaced">
 <li>Bestäm största och minsta värde.</li>
@@ -86,7 +96,7 @@
 </ol>Skissa grafen och markera båda ändpunkterna.</div>
 <button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling efter eget svar</button>
 <div class="answer hidden" id="start-answer">
-<p class="mathline">g′(x)=2x=0 ⇒ x=0</p>
+<div class="solution-math-group"><p class="mathline">g′(x)=2x</p><p class="mathline">2x=0</p><p class="mathline">x=0</p></div>
 <div class="solution-math-group"><p class="mathline">g(−1) = 1</p><p class="mathline">g(0) = 0</p><p class="mathline">g(2) = 4</p></div>
 <p><strong>Minsta värdet är 0 vid x=0.</strong> <strong>Största värdet är 4 vid x=2.</strong></p>
 <p>Nej, det räcker inte med nollställen till derivatan. Den största höjden finns här vid <strong>intervallets högra ändpunkt</strong>.</p>
@@ -104,11 +114,14 @@
 </div>
 <div class="panel"><p><strong>Lokalt extremum</strong> betyder störst eller minst jämfört med närliggande punkter. <strong>Största/minsta värdet i intervallet</strong> betyder störst eller minst jämfört med <em>alla tillåtna</em> x.</p></div>
 <div class="task"><strong>Snabbt beslut – välj kandidater utan att räkna deras värden.</strong>
-<p class="mathline">f(x)=x³−4,5x²+5, &nbsp; −2 ≤ x ≤ 5</p>
+<div class="math-givens"><p class="mathline">f(x)=x³−4,5x²+5</p><p class="mathline">−2 ≤ x ≤ 5</p></div>
 <p class="mathline">f′(x)=3x(x−3)</p>
 <p>Vilka fyra x-värden ska jämföras?</p></div>
 <button type="button" class="reveal" data-reveal="candidate-answer">Visa kandidaterna</button>
-<div class="answer hidden" id="candidate-answer"><p>Stationära x-värden: <span class="mathsmall">0</span> och <span class="mathsmall">3</span>. Ändpunkter: <span class="mathsmall">−2</span> och <span class="mathsmall">5</span>. Jämför därför <strong>f(−2), f(0), f(3) och f(5)</strong>.</p></div>
+<div class="answer hidden" id="candidate-answer">
+<p>Derivatans nollställen:</p><div class="solution-math-group"><p class="mathline">3x(x−3)=0</p><p class="mathline">x=0 eller x=3</p></div>
+<p>Stationära x-värden: 0 och 3. Ändpunkter: −2 och 5. Alla fyra funktionsvärden ska jämföras:</p>
+<div class="solution-math-group"><p class="mathline">f(−2)</p><p class="mathline">f(0)</p><p class="mathline">f(3)</p><p class="mathline">f(5)</p></div></div>
 </section>
 
 <section class="slide" id="predict" data-teacher="Original s.3. Visa oförändrade axelskalor och en fast graf på −2≤x≤5. Intervallet −2 till 3 är hel linje och delen 3–5 streckad. Fråga utan facit: Blir 5 största värdet även om högra gränsen ökar? Kan minimum ändras? Beräkningarna i original: f(−2)=−21, f(0)=5, f(3)=−8,5.">
@@ -160,7 +173,11 @@
 <button id="range-check" type="button">Kontrollera största och minsta värde</button>
 <p id="range-feedback" class="feedback" aria-live="polite" role="status"></p>
 <button type="button" class="secondary" data-reveal="range-special">Undersök gränsfallet där två x ger samma största värde</button>
-<div class="threshold hidden" id="range-special"><strong>Tänk särskilt på b = 4,5.</strong> Där kan det finnas <em>två olika x</em> där samma största värde antas. <button type="button" class="secondary" data-reveal="bound-45">Visa snabbvalet b = 4,5</button></div>
+<div class="threshold hidden" id="range-special"><strong>Tänk särskilt på b = 4,5.</strong> Där kan det finnas <em>två olika x</em> där samma största värde antas. <button type="button" class="secondary" data-reveal="bound-45">Visa snabbvalet b = 4,5</button>
+<button type="button" class="secondary" data-reveal="range-algebra">Visa algebraisk motivering efter ditt försök</button>
+<div id="range-algebra" class="answer hidden"><p>Samma höjd som det lokala maximumet kräver att</p>
+<div class="solution-math-group"><p class="mathline">f(b)=f(0)</p><p class="mathline">b³−4,5b²+5=5</p><p class="mathline">b³−4,5b²=0</p><p class="mathline">b²(b−4,5)=0</p><p class="mathline">b=0 eller b=4,5</p></div>
+<p>Den högra gränsen får bara ligga mellan <span class="mathsmall">3≤b≤5</span>. Alltså återstår <span class="mathsmall">b=4,5</span>, där maximum 5 antas vid både x=0 och x=4,5. För högre b blir ändpunktshöjden större än 5.</p></div></div>
 </div>
 </div>
 </section>
@@ -168,39 +185,46 @@
 <section class="slide" id="example" data-teacher="Original s.5, exempel 3156 s.159. Samma f=x³−4,5x²+5 på [−2,5]. f′=3x(x−3) stationära x 0,3; kandidater −2,0,3,5. KOMPLETTERING: efter stationära punkterna, låt alla enskilt beräkna f″(x)=6x−9 och klassificera x=0 lokalt max, x=3 lokalt min. Ge cirka 45 sekunders eget försök och kort jämförelse i par innan klick. Fråga sedan: räcker detta för största/minsta värde på hela intervallet? Nej – jämför även ändpunkterna. f(-2)=-21, f(0)=5, f(3)=-8,5, f(5)=17,5. Största 17,5 vid 5, minsta −21 vid −2. Visa detta som repetition av föregående moment, inte en separat lång genomgång.">
 <div class="eyebrow">05 · Genomarbetat exempel 3156 · s. 159</div>
 <h2>Jämför alla fyra funktionsvärden</h2>
-<p class="mathline">f(x)=x³−4,5x²+5, &nbsp; −2 ≤ x ≤ 5</p>
+<div class="math-givens"><p class="mathline">f(x)=x³−4,5x²+5</p><p class="mathline">−2 ≤ x ≤ 5</p></div>
 <div class="sequence panel" data-sequence>
 <div class="task"><strong>Före varje steg:</strong> Lös eller förutsäg nästa matematiska beslut på papper. <strong>Andraderivatatestet</strong> används kort för att klassificera stationära punkter; det är fortfarande <strong>funktionsvärdena</strong> som ska jämföras för hela intervallet.</div>
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Vilken derivata får du, och hur faktoriserar du den?"><strong>1 · Derivera och faktorisera</strong><p class="mathline">f′(x)=3x²−9x=3x(x−3)</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden gör f′=0, och vilka två ändpunkter måste läggas till?"><strong>2 · Välj alla kandidater</strong><p class="mathline">f′(x)=0 ⇒ x=0 eller x=3</p><p>Ändpunkterna är −2 och 5. <strong>Hela listan: −2, 0, 3 och 5.</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken derivata får du, och hur faktoriserar du den?"><strong>1 · Derivera och faktorisera</strong><div class="solution-math-group"><p class="mathline">f′(x)=3x²−9x</p><p class="mathline">f′(x)=3x(x−3)</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden gör f′=0, och vilka två ändpunkter måste läggas till?"><strong>2 · Välj alla kandidater</strong><div class="solution-math-group"><p class="mathline">f′(x)=0</p><p class="mathline">3x(x−3)=0</p><p class="mathline">x=0 eller x=3</p></div>
+<p>De stationära punkterna ligger i intervallet. Lägg till ändpunkterna −2 och 5. <strong>Hela listan: −2, 0, 3 och 5.</strong></p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad får du för f″(x), f″(0) och f″(3)? Vilka lokala extrempunkter ger tecknen – räcker de för största värdet på hela intervallet?">
 <strong>3 · Återkalla andraderivatatestet</strong>
 <p class="solution-explanation">För stationära punkter kan andraderivatan ge deras <strong>lokala</strong> karaktär:</p>
 <div class="solution-math-group">
-<p class="mathline">f″(x) = 6x − 9</p>
-<p class="mathline">f″(0) = −9 &lt; 0 ⇒ lokalt maximum</p>
-<p class="mathline">f″(3) = 9 &gt; 0 ⇒ lokalt minimum</p>
+<p class="mathline">f″(x)=6x−9</p>
+<p class="mathline">f″(0)=6·0−9</p><p class="mathline">f″(0)=−9&lt;0</p>
+<p>Alltså lokalt maximum vid x=0.</p>
+<p class="mathline">f″(3)=6·3−9</p><p class="mathline">f″(3)=9&gt;0</p>
+<p>Alltså lokalt minimum vid x=3.</p>
 </div>
 <p class="solution-explanation"><strong>Räcker det?</strong> Nej. Det största och minsta värdet på hela intervallet kan även finnas vid ändpunkterna. Vi måste därför jämföra <span class="math-inline">f(−2)</span>, <span class="math-inline">f(0)</span>, <span class="math-inline">f(3)</span> och <span class="math-inline">f(5)</span>.</p>
 <p class="muted">Om f″(a)=0 ger andraderivatatestet inget säkert besked. Värdejämförelsen krävs fortfarande.</p>
 </div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid −2 och 0?"><strong>4 · Beräkna första paret</strong><p class="mathline">f(−2)=−8−4,5·4+5=−21</p><p class="mathline">f(0)=0−0+5=5</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid 3 och 5?"><strong>5 · Beräkna andra paret</strong><p class="mathline">f(3)=27−40,5+5=−8,5</p><p class="mathline">f(5)=125−112,5+5=17,5</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid −2 och 0?"><strong>4 · Beräkna första paret</strong><div class="solution-math-group">
+<p class="mathline">f(−2)=(−2)³−4,5·(−2)²+5</p><p class="mathline">f(−2)=−8−4,5·4+5</p><p class="mathline">f(−2)=−8−18+5</p><p class="mathline">f(−2)=−21</p>
+<p class="mathline">f(0)=0³−4,5·0²+5</p><p class="mathline">f(0)=0−0+5</p><p class="mathline">f(0)=5</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka värden får f vid 3 och 5?"><strong>5 · Beräkna andra paret</strong><div class="solution-math-group">
+<p class="mathline">f(3)=3³−4,5·3²+5</p><p class="mathline">f(3)=27−40,5+5</p><p class="mathline">f(3)=−8,5</p>
+<p class="mathline">f(5)=5³−4,5·5²+5</p><p class="mathline">f(5)=125−112,5+5</p><p class="mathline">f(5)=17,5</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Jämför alla fyra FUNKTIONSVÄRDEN. Vilket är störst och minst? Ange också x."><strong>6 · Jämför och svara</strong>
 <table class="working-table"><thead><tr><th>x</th><th>−2</th><th>0</th><th>3</th><th>5</th></tr></thead><tbody><tr><th>f(x)</th><td>−21</td><td>5</td><td>−8,5</td><td>17,5</td></tr></tbody></table>
-<div class="solution-math-group"><p class="math-result"><strong>Största värdet är 17,5 vid x=5.</strong></p><p class="math-result"><strong>Minsta värdet är −21 vid x=−2.</strong></p></div></div>
+<div class="solution-math-group"><p class="math-result"><strong>Största värdet är 17,5 vid x=5.</strong></p><p class="math-result"><strong>Minsta värdet är −21 vid x=−2.</strong></p></div>
+<div class="key-insight"><strong>Slutsats:</strong> Det lokala maximumet 5 vid x=0 är inte längre det största värdet på hela intervallet. Det är <span class="focus-math">17,5 vid x=5</span>.</div></div>
 </div>
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
 </div>
-<div class="key-insight"><strong>Slutsats:</strong> Det lokala maximumet 5 vid x=0 är inte längre det största värdet på hela intervallet. Det är <span class="focus-math">17,5 vid x=5</span>.</div>
 </section>
 
 <section class="slide" id="own" data-teacher="Original s.5–6. Elevens egen uppgift h=−x²+4x på [0,5]. Med minskat stöd: h′=−2x+4=0 → x=2. NYTT: repetera h″=−2 &lt;0 för lokal klassificering innan vi jämför h(0), h(2), h(5). Max4 vid x2; min−5 vid x5. Gör tydligt att andraderivatan bara avgör lokal karaktär, inte intervallmaximum. Utförlig återkoppling först efter eget försök.">
 <div class="eyebrow">06 · Din tur · mindre stöd</div>
 <h2>Bestäm både värdet och var det antas</h2>
-<p class="mathline">h(x)=−x²+4x, &nbsp; 0 ≤ x ≤ 5</p>
+<div class="math-givens"><p class="mathline">h(x)=−x²+4x</p><p class="mathline">0 ≤ x ≤ 5</p></div>
 <div class="task"><strong>Skriv en fullständig lösning utan steglista.</strong> Bestäm funktionens <strong>största och minsta värde</strong> på intervallet och ange <strong>var de antas</strong>. Motivera valet av alla kandidater och varför jämförelsen räcker.</div>
 <button type="button" class="secondary" data-reveal="own-original-steps">Visa originalets arbetsgång om du fastnar</button>
 <div id="own-original-steps" class="panel hidden"><ol class="spaced">
@@ -223,15 +247,16 @@
 <div class="panel hidden" id="own-hint"><p>Derivera <span class="mathsmall">h′(x)=−2x+4</span> och lös <span class="mathsmall">h′(x)=0</span>. Använd gärna <span class="mathsmall">h″(x)</span> för att klassificera den stationära punkten <em>lokalt</em>. Glöm inte <span class="mathsmall">x=0</span> och <span class="mathsmall">x=5</span> när du jämför funktionsvärdena i hela intervallet.</p></div>
 <button type="button" class="reveal" data-reveal="own-answer">Visa genomarbetad lösning efter eget försök</button>
 <div id="own-answer" class="answer hidden">
-<p class="mathline">h′(x)=−2x+4=0 ⇒ x=2</p>
+<div class="solution-math-group"><p class="mathline">h′(x)=−2x+4</p><p class="mathline">−2x+4=0</p><p class="mathline">−2x=−4</p><p class="mathline">x=2</p></div>
 <p class="solution-explanation"><strong>Klassificera den stationära punkten med andraderivatan:</strong></p>
 <div class="solution-math-group">
 <p class="mathline">h″(x) = −2</p>
 <p class="mathline">h″(2) = −2 &lt; 0</p>
 </div>
 <p class="solution-explanation">Alltså har h ett <strong>lokalt maximum vid x=2</strong>. Men det säger ännu inte vilket värde som är störst eller minst i hela intervallet. Därför jämför vi samtliga kandidater: <strong>x=0, x=2 och x=5</strong>.</p>
-<div class="solution-math-group"><p class="mathline">h(0) = 0</p><p class="mathline">h(2) = −4 + 8 = 4</p></div>
-<p class="mathline">h(5)=−25+20=−5</p>
+<div class="solution-math-group"><p class="mathline">h(0)=−0²+4·0</p><p class="mathline">h(0)=0</p>
+<p class="mathline">h(2)=−2²+4·2</p><p class="mathline">h(2)=−4+8</p><p class="mathline">h(2)=4</p>
+<p class="mathline">h(5)=−5²+4·5</p><p class="mathline">h(5)=−25+20</p><p class="mathline">h(5)=−5</p></div>
 <div class="solution-math-group"><p class="math-result"><strong>Största värdet är 4 vid x=2.</strong></p><p class="math-result"><strong>Minsta värdet är −5 vid x=5.</strong></p></div>
 <p>Varför testar vi x=0 fast det inte blev något av svaren? Därför att vi måste undersöka <strong>båda ändpunkterna</strong> innan vi kan jämföra hela intervallet.</p>
 </div>
@@ -257,7 +282,7 @@
 <div class="eyebrow">08 · Individuell utcheckning</div>
 <h2>Visa vad du kan – på egen hand</h2>
 <p class="lead">Bestäm största och minsta värde och ange <strong>var värdena antas</strong>.</p>
-<p class="mathline">p(x)=x³−3x, &nbsp; 0 ≤ x ≤ 3</p>
+<div class="math-givens"><p class="mathline">p(x)=x³−3x</p><p class="mathline">0 ≤ x ≤ 3</p></div>
 <div class="task">
 <strong>Svara enskilt på papper utan modellen:</strong>
 <ol class="spaced"><li>Vilka x-värden behöver du undersöka?</li>
@@ -279,16 +304,19 @@
 <div class="sequence panel" data-sequence>
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Vilka x gör p′(x)=0, och vilka av dem ligger inom intervallet?"><strong>1 · Derivera och lös</strong><div class="solution-math-group"><p class="mathline">p′(x)=3x²−3</p><p class="mathline">p′(x)=0 ⇒ x²=1</p><p class="mathline">x=−1 eller x=1</p></div><p><strong>x=−1 ligger utanför intervallet och väljs bort.</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka x gör p′(x)=0, och vilka av dem ligger inom intervallet?"><strong>1 · Derivera och lös</strong><div class="solution-math-group"><p class="mathline">p′(x)=3x²−3</p><p class="mathline">3x²−3=0</p><p class="mathline">3x²=3</p><p class="mathline">x²=1</p><p class="mathline">x=−1 eller x=1</p></div><p><strong>x=−1 ligger utanför intervallet och väljs bort.</strong></p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad är p″(1), vilken lokal karaktär har x=1, och vilka ändpunkter måste läggas till?">
 <strong>2 · Klassificera lokalt – välj kandidater globalt</strong>
 <div class="solution-math-group">
-<p class="mathline">p″(x) = 6x</p>
-<p class="mathline">p″(1) = 6 &gt; 0 ⇒ lokalt minimum</p>
+<p class="mathline">p″(x)=6x</p><p class="mathline">p″(1)=6·1</p><p class="mathline">p″(1)=6&gt;0</p>
+<p>Alltså lokalt minimum vid x=1 – inte något besked om hela intervallets extremvärde.</p>
 </div>
 <p class="solution-explanation"><strong>x=−1 ligger utanför intervallet</strong> och är därför ingen kandidat. För hela intervallet behöver vi jämföra <strong>x=0, x=1 och x=3</strong>, inklusive båda ändpunkterna.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka är p(0), p(1) och p(3)?"><strong>3 · Beräkna och jämför</strong><p class="mathline">p(0)=0</p><p class="mathline">p(1)=1−3=−2</p><p class="mathline">p(3)=27−9=18</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilket värde är störst/minst och vid vilket x antas det?"><strong>4 · Svara med värde och plats</strong><div class="solution-math-group"><p class="math-result"><strong>Största värdet är 18 vid x=3.</strong></p><p class="math-result"><strong>Minsta värdet är −2 vid x=1.</strong></p></div><p>Ett lokalt maximum behöver inte vara det största värdet på hela intervallet.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka är p(0), p(1) och p(3)?"><strong>3 · Beräkna och jämför</strong><div class="solution-math-group">
+<p class="mathline">p(0)=0³−3·0</p><p class="mathline">p(0)=0</p>
+<p class="mathline">p(1)=1³−3·1</p><p class="mathline">p(1)=1−3</p><p class="mathline">p(1)=−2</p>
+<p class="mathline">p(3)=3³−3·3</p><p class="mathline">p(3)=27−9</p><p class="mathline">p(3)=18</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket värde är störst/minst och vid vilket x antas det?"><strong>4 · Svara med värde och plats</strong><div class="solution-math-group"><p class="math-result"><strong>Största värdet är 18 vid x=3.</strong></p><p class="math-result"><strong>Minsta värdet är −2 vid x=1.</strong></p></div><p>En lokalt klassificerad punkt avgör inte största eller minsta värdet på hela intervallet. Jämför alltid funktionsvärdena vid alla tillåtna kandidater.</p></div>
 </div>
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
 </div>
@@ -310,5 +338,7 @@
 <footer>Matematik – fortsättning, nivå 1c · 3.1 Största och minsta värde · Bok s. 158–160. Inga elevsvar samlas in.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
+<script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
 <script src="lesson.js"></script>
+<script src="math-polish.js"></script>
 </body></html>

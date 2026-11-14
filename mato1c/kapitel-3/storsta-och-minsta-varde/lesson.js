@@ -1,4 +1,4 @@
-/* Ma1c 3.1, lektion 6: största/minsta värde på slutet intervall.
+/* Ma3c 3.1, lektion 6: största/minsta värde på slutet intervall.
    Egen exakt SVG-modell; alla punkter, värden och tecken beräknas från f(x).
    Inga nätverksanrop, ingen lagring av elevsvar. */
 (()=>{'use strict';
@@ -6,6 +6,7 @@ const NS='http://www.w3.org/2000/svg',$=id=>document.getElementById(id);
 const f=x=>x*x*x-4.5*x*x+5;
 const df=x=>3*x*x-9*x;
 const fmt=(v,d=2)=>(Math.abs(v)<1e-10?0:v).toFixed(d).replace('.',',').replace('-','−');
+const setReadout=(id,f,display='inline')=>{if(!window.Ma4Math)throw Error('MathML support missing');window.Ma4Math.setFormula($(id),f,display)};
 function el(parent,tag,attrs={},value){
  const item=document.createElementNS(NS,tag);
  for(const [key,val] of Object.entries(attrs))item.setAttribute(key,String(val));
@@ -70,15 +71,18 @@ function formatLocations(points){
 }
 function updateRange(){
  const r=Number($('right-bound').value);
- drawGraph('range-graph',r,true);
- $('right-bound-output').textContent='−2 ≤ x ≤ '+fmt(r);
+ drawGraph('range-graph',r,!$('range-readout').classList.contains('hidden'));
+ setReadout('right-bound-output','−2 ≤ x ≤ '+fmt(r));
  $('range-span').textContent='−2 till '+fmt(r);
- $('bound-value').textContent='f('+fmt(r)+') = '+fmt(f(r));
+ setReadout('bound-value','f('+fmt(r)+') = '+fmt(f(r)));
  for(const b of document.querySelectorAll('[data-bound]'))b.setAttribute('aria-pressed',String(Math.abs(r-Number(b.dataset.bound))<1e-8));
  $('range-feedback').textContent='';
  $('range-feedback').className='feedback';
 }
 $('right-bound').addEventListener('input',updateRange);
+document.querySelector('[data-reveal="range-readout"]').addEventListener('click',()=>{
+ drawGraph('range-graph',Number($('right-bound').value),!$('range-readout').classList.contains('hidden'));
+});
 for(const b of document.querySelectorAll('[data-bound]')){
  b.addEventListener('click',()=>{$('right-bound').value=b.dataset.bound;updateRange()});
 }
