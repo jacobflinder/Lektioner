@@ -132,7 +132,7 @@ assert.ok(d(f,-1)<0&&d(x=>2*x,-1)>0&&!almost(d(f,-1),0),'Avtagande trots positiv
   // 6. Inga hoppade steg i ekvationen; rötter är inte extrempunkter per automatik.
   await go(5);await shown('feedback-answer');
   for(const formula of ['h′(x) = 3x² − 12x','h″(x) = 6x − 12','h″(0) = −12','6x = 12','x = 2'])assert.equal(await page.locator('#feedback-answer math[aria-label="'+formula+'"]').count(),1,'Ekvationsled saknas: '+formula);
-  assert.ok((await page.locator('#feedback-answer').innerText()).includes('−12'),'Skillnad h″(2) från h′(2)');
+  assert.equal(await page.locator('#feedback-answer math[aria-label="h′(2) = −12"]').count(),1,'h″(2)=0 innebär inte h′(2)=0, och h′(2)=−12');
   await gap('#feedback-answer .number-card:nth-child(3) .lesson-math-stack > p.math-fresh');
   await shot('06-facit-desktop');
   // 7. Bokens korrekta nivåer och gemensamma uppgiftsnummer får inte flyttas.
