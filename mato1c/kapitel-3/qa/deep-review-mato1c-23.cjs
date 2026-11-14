@@ -27,6 +27,17 @@ return items.slice(1).map((e,i)=>({gap:e.getBoundingClientRect().top-items[i].ge
 }));
 for(const v of values)ok(v.gap>=15.9,'16px gap '+rootSelector+' actual '+v.gap.toFixed(2)+' '+v.label);
 };
+const fits=async selector=>{
+ const bad=await page.locator(selector+' :is(.mathline,.formula-line)').evaluateAll(es=>es.flatMap(el=>{
+  const m=el.querySelector('math');if(!m||!el.getClientRects().length)return [];
+  const box=el.getBoundingClientRect();
+  const row=m.querySelector(':scope > mrow')||m;
+  const content=row.getBoundingClientRect();
+  const overflow=Math.max(el.scrollWidth-el.clientWidth,content.right-box.right,box.left-content.left);
+  return overflow>2.5?[{formula:m.getAttribute('aria-label')?.slice(0,95),overflow:Math.round(overflow*10)/10}]:[];
+ }));
+ ok(bad.length===0,'No mathematically clipped formula '+selector+' '+JSON.stringify(bad.slice(0,8)));
+};
 const xy=async (locator,x,y)=>{const v=await locator.evaluate(e=>[+e.getAttribute('cx'),+e.getAttribute('cy')]);ok(near(v[0],x,1e-5)&&near(v[1],y,1e-5),'SVG coords '+v+' expected '+x+','+y)};
 const svgEdge=async (locator,x1,y1,x2,y2)=>{
 const arr=await locator.evaluate(e=>['x1','y1','x2','y2'].map(z=>+e.getAttribute(z)));
@@ -192,7 +203,7 @@ await screenshot('desktop-08');
 // 09 – full three step algebra, then optional actual divergent quotient.
 await go(9);
 const stitch=await sequence('#stitch-answer',3);
-for(const v of ['f(1)=1²+1=2','a·1+b=a+b','a+b=2','D(ax+b)=a','D(x²+1)=2x','2·1=2','a=2','2+b=2','b=0','f(1−h)=2−2h','f(1+h)=(1+h)²+1=2+2h+h²'])await has('#stitch-answer',v);
+for(const v of ['f(1)=1²+1=2','a·1+b=a+b','a+b=2','D(ax+b)=a','D(x²+1)=2x','2·1=2','a=2','2+b=2','b=0','f(1−h)=2−2h','f(1+h)=(1+h)²+1','f(1+h)=2+2h+h²'])await has('#stitch-answer',v);
 ok((await page.locator('#stitch-answer').innerText()).includes('f′(1)=2'),'sided quotient validates smooth join');
 ok(!await page.locator('#stitch-detail').isVisible(),'optional counterexample hidden');
 await reveal('stitch-detail');
@@ -232,6 +243,7 @@ for(let n=1;n<=12;n++){
  await go(n);
  ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'no horizontal mobile overflow frame '+n);
  await gaps('.slide.active');
+ await fits('.slide.active');
  await screenshot('mobile-'+String(n).padStart(2,'0'));
 }
 await go(4);await page.locator('#secant-h').evaluate(e=>{e.value='5';e.dispatchEvent(new Event('input',{bubbles:true}))});
