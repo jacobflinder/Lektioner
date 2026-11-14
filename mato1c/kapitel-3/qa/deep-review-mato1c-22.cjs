@@ -174,7 +174,7 @@ await graphButton.click();ok(await page.locator('#sign-explorer').isVisible(),'g
 for(const x of [.5,1,2,3,3.5,4]){
 await page.locator('#sign-x').evaluate((e,x)=>{e.value=x;e.dispatchEvent(new Event('input',{bubbles:true}))},x);
 const val=Number((await page.locator('#sign-val').textContent()).split('=')[1].trim().replace('−','-').replace(',','.'));
-ok(eq(val,Math.round(dg(x)*100)/100,.0051),'gprime numeric interactive sign '+x);
+ok(eq(val,dg(x),.0051),'gprime numeric interactive sign '+x);
 await coords('#sign-graph',87+130.5*x,237-16*dg(x));
 }
 await seq.nth(1).locator('[data-seq-reset]').click();
