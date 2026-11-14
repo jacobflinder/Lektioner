@@ -152,8 +152,8 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   await page.locator('#settings').click();
   const dlPromise=page.waitForEvent('download',{timeout:15000});
   await page.locator('#download').click();
-  const dl=await dlPromise;const path=await dl.path();
-  const exported=fs.readFileSync(path,'utf8');
+  const dl=await dlPromise;const dlPath=await dl.path();
+  const exported=fs.readFileSync(dlPath,'utf8');
   ok(!exported.includes('<script data-fy2-bundled="content">'),'standalone export contains already rendered slides, not source re-injection');
   ok(!exported.includes('const pages='),'original content script does not overwrite local edited book references');
   ok(exported.includes('<section class="slide')&&exported.includes('data-ref="force"'),'existing 4 slide DOM is retained in standalone export');
@@ -163,7 +163,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   const offlineErrors=[],offlineExternal=[];
   offline.on('pageerror',e=>offlineErrors.push(e.message));
   offline.on('request',r=>{if(r.url().startsWith('https://')||r.url().startsWith('http://'))offlineExternal.push(r.url())});
-  const localFile=path+'.html';fs.copyFileSync(path,localFile);
+  const localFile=dlPath+'.html';fs.copyFileSync(dlPath,localFile);
   await offline.goto('file://'+localFile,{waitUntil:'load'});
   ok(await offline.locator('#slides>section.slide').count()===4,'all 4 already-rendered lesson slides retained when opened offline');
   await offline.locator('#jump').selectOption('3');
