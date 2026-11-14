@@ -68,7 +68,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok(await slide().locator('.answer.open').count()===0,'exit initially all hidden');
   ok(await slide().locator('.electron-question svg').count()===1,'student figure e right, B in with F missing');
   ok(await slide().locator('.electron-question svg .force-result').count()===0,'no force arrow leak in question SVG');
-  ok((await slide().locator('.electron-question svg').getAttribute('aria-label')).includes('kraftens riktning är dolt'),'accessibility: no force direction spoiled');
+  ok((await slide().locator('.electron-question svg').getAttribute('aria-label')).includes('Kraftens riktning är dold tills du visar svaret'),'accessibility: no force direction spoiled');
   ok(await slide().locator('.physics-givens math').count()===2,'B=40uT and i=60 degrees independently rendered');
   const givens=await rect('.slide.active .physics-givens>.math-sm');
   ok(givens.length===2&&givens.every(r=>r.height>12),'two visibly independent given values');
