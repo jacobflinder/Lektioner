@@ -1,4 +1,4 @@
-/* Ma1c · kapitel 3 · lektion 7, extrema i polynommodeller.
+/* Ma3c · kapitel 3 · lektion 7, extrema i polynommodeller.
    Interaktivt biljettpris: exakta uttryck ur originalets uppgift 3202.
    Ingen lagring, ingen identitetsinformation och inga nätverksanrop. */
 (()=>{'use strict';

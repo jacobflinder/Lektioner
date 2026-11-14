@@ -1,4 +1,4 @@
-/* Ma1c L7 · verkligt Chromium-smoketest. Inga elevdata. */
+/* Ma3c L7 · verkligt Chromium-smoketest. Inga elevdata. */
 const {chromium}=require('playwright'),fs=require('node:fs'),assert=require('node:assert/strict');
 const root='http://127.0.0.1:8123';
 const url=root+'/mato1c/kapitel-3/extremvardesproblem-polynomfunktioner/';
@@ -7,6 +7,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
  const errors=[],external=[];let n=0;
+ const mathLabels=async sel=>page.locator(sel+' math').evaluateAll(els=>els.map(el=>el.getAttribute('aria-label')).join(' '));
  page.on('pageerror',e=>errors.push(e.message));
  page.on('request',r=>{if(!r.url().startsWith(root))external.push(r.url())});
  const ok=async(x,label)=>{assert.ok(x,label);n++};
@@ -40,9 +41,9 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   const cost=page.locator('#cost [data-sequence]');
   await ok(await cost.locator('[data-seq-item]:visible').count()===0,'Kostnadsexemplets lösning dold');
   for(let i=0;i<5;i++)await cost.locator('[data-seq-next]').click();
-  const costText=await cost.innerText();
-  await ok(costText.includes('K′(0)=15')&&costText.includes('K′(2)=−9'),'Kostnadens derivatatecken korrekta');
-  await ok(costText.replace(/\s+/g,'').includes('K(5)=125−225+75+50=25'),'Kostnadens minimum korrekt');
+  const costText=(await cost.innerText())+' '+(await mathLabels('#cost'));
+  await ok(costText.includes('K′(0)=3(0−1)(0−5)=15>0')&&costText.includes('K′(2)=3(2−1)(2−5)=−9<0'),'Kostnadens derivatatecken och insättningar korrekta');
+  await ok(costText.includes('K(5)=125−225+75+50')&&costText.includes('K(5)=25'),'Kostnadens fullständiga minimiberäkning korrekt');
   await ok(costText.includes('25 000 kr')&&costText.includes('5 datorskärmar'),'Enheterna i kostnadssvaret');
   await cost.locator('[data-seq-reset]').click();
   await ok(await cost.locator('[data-seq-item]:visible').count()===0,'Kostnadens lösningssteg återställs');
@@ -73,9 +74,9 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   const revenue=page.locator('#ticket-proof [data-sequence]');
   await ok(await revenue.locator('[data-seq-item]:visible').count()===0,'Biljettexempel börjar dolt');
   for(let i=0;i<5;i++)await revenue.locator('[data-seq-next]').click();
-  const revenueText=(await revenue.innerText()).replace(/\s+/g,'');
+  const revenueText=((await revenue.innerText())+' '+(await mathLabels('#ticket-proof'))).replace(/\s+/g,'');
   await ok(revenueText.includes('I(100)=1000·100−5·100²')&&revenueText.includes('I(100)=50000'),'Biljettens ursprungliga beräkning och resultat finns på separata rader');
-  await ok((await revenue.innerText()).replace(/\s+/g,'').includes('I(0)=0'),'Biljettens ändpunkt');
+  await ok((await mathLabels('#ticket-proof')).includes('I(0)=0'),'Biljettens ändpunkt');
   await step(7);
   await ok((await page.locator('#rocket .task').innerText()).includes('utan färdig arbetsgång'),'Raketen kräver självständigt metodval');
   await ok(!await page.locator('#rocket-original-steps').isVisible(),'Originalets steglista hålls dold tills stöd begärs');
@@ -98,7 +99,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await page.locator('#rocket-check').click();
   await ok((await page.locator('#rocket-feedback').innerText()).startsWith('Rätt'),'Raketen 1s 45m, landning 4s');
   await page.locator('[data-reveal="rocket-answer"]').click();
-  await ok((await page.locator('#rocket-answer').innerText()).replace(/\s+/g,'').includes('0≤t≤4'),'Raketens giltiga domän');
+  await ok((await mathLabels('#rocket-answer')).includes('0≤t≤4'),'Raketens giltiga domän');
   await step(8);
   const book=await page.locator('#book').innerText();
   for(const token of ['s. 163–164','3202–3207','3208–3210','3211–3214','3203','3205','3209','3212','20 minuter','minst två']){
@@ -106,7 +107,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   }
   await ok(book.includes('Gör klart 3205 och 3209'),'Exakt läxa');
   await step(9);
-  await ok((await page.locator('#exit').innerText()).includes('−x²+6x−5'),'Originalets vinstuppgift');
+  await ok((await mathLabels('#exit')).includes('V(x)=−x²+6x−5'),'Originalets vinstuppgift');
   await ok((await page.locator('#exit').innerText()).includes('tusen enheter'),'Utcheckningens produktionsenhet');
   await step(10);
   const exit=page.locator('#exit-feedback [data-sequence]');
@@ -125,7 +126,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await ok(external.length===0,'Inga externa nätverksanrop');
   console.log(JSON.stringify({result:'PASS',checks:n,screenshots:5,errors,external},null,2));
  }catch(e){
-  console.error('Ma1c L7 browser QA FAILED:',e.stack||e);
+  console.error('Ma3c L7 browser QA FAILED:',e.stack||e);
   await page.screenshot({path:out+'/lesson7-FAIL.png',fullPage:true}).catch(()=>{});
   process.exitCode=1;
  }finally{await browser.close()}
