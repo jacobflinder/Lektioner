@@ -116,7 +116,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   for(const v of ['s. 159–160','3157–3163','3164–3166','3167–3168','3158','3161','3164','20 minuter','minst två','3161 a och 3164 a–b','3168'])await ok(book.includes(v),'Bok/läxa korrekt: '+v);
   await go(8);
   await ok((await labels('#exit')).includes('p(x)=x³−3x'),'Originalets utcheckning');
-  await ok((await page.locator('#exit').innerText()).includes('x=−1'),'Intervallets exkluderade stationära punkt');
+  await ok((await labels('#exit')).includes('x=−1'),'Intervallets exkluderade stationära punkt');
   await go(9);
   await ok(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,'Utcheckningens facit inte visat automatiskt');
   for(let i=0;i<4;i++)await page.locator('#exit-answer [data-seq-next]').click();
