@@ -60,6 +60,7 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   await page.locator('#domain-reset').click();test((await page.locator('#domain-grid span').allTextContents()).join('')===baseline.join(''),'domain reset original');
   // 05 distinct math + 6 independently checked area/field values
   await go(5);test(await slide().locator('.magnet-equation-steps math').count()===2,'two independent static flux laws');
+  test((await page.locator('#flux-svg text').first().getAttribute('y'))==='20','area caption clears the upper field dot row');
   test(!await slide().locator('.answer').isVisible(),'no static formula answer until pupil attempts');
   await slide().locator('[data-reveal]').click();test(gap(await bounds('.slide.active .magnet-equation-steps > div')),'real math gap >15px');
   await page.locator('#flux-show').click();
@@ -138,6 +139,12 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
     const width=await page.evaluate(()=>({window:innerWidth,document:document.documentElement.scrollWidth}));
     test(width.document<=width.window+2,'no page horizontal clipping '+vp.name+' '+n+' '+JSON.stringify(width));
     if([5,6,8,9].includes(n)){const rows=await bounds('.slide.active .magnet-equation-steps > div');test(rows.length>=2&&rows.every(x=>x.width>20&&x.height>10),'MathML visible '+vp.name+' '+n)}
+    if(n===5&&vp.name==='projector'){
+     const positions=await page.locator('.slide.active .grid .figure,.slide.active .grid > div:first-child > .panel,.slide.active .grid > div:last-child').evaluateAll(nodes=>nodes.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width}}));
+     test(positions.length===3&&positions[0].x<positions[1].x&&positions[1].x<positions[2].x&&positions.every(p=>Math.abs(p.y-positions[0].y)<45),'three physically aligned projector content columns '+JSON.stringify(positions));
+     const h=await page.evaluate(()=>document.documentElement.scrollHeight);
+     test(h<=1200,'revealed flux slide fits within 1200px 1080p projector, observed '+h);
+    }
     await page.screenshot({path:'fy2-qa-screenshots/deep-review-31-'+vp.name+'-'+String(n).padStart(2,'0')+'.png',fullPage:true});shots++;
    }
   }
