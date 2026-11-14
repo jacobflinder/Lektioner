@@ -100,6 +100,8 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   check(loopText.includes('−0,040')||loopText.includes('-0,040'),'entering loop U=-B L v=-0.04 V');
   check(loopText.includes('20,0'),'loop flux 20.0 mWb for 0.4 s');
   check(await page.locator('#loop-result .ind-loop-proof>math').count()===4,'two independent flux and emf equations and results');
+  const alignment=await page.locator('#loop-result .ind-loop-proof>math').first().locator('mi').evaluateAll(a=>a.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width}}));
+  check(alignment.length===3&&alignment.every(p=>Math.abs(p.y-alignment[0].y)<8)&&alignment[0].x<alignment[1].x&&alignment[1].x<alignment[2].x,'ACTUAL MathML horizontal baseline for Φ=B A, not vertically stacked glyphs');
   check(await page.locator('#loop-result .ind-loop-proof details').count()===2,'independent dimensional substitutions offered');
   await page.locator('button[data-loop="0.8"]').click();
   check((await page.locator('#loop-result').innerText()).includes('0,000'),'stopped rod has nonzero flux but zero voltage');
@@ -178,6 +180,8 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   await goto(23);await reset();check((await page.locator('#ind-tangent-result').innerText()).includes('Förutsäg'),'tangent numerical result hidden');
   await page.locator('#ind-tangent-show').click();
   check(await page.locator('#ind-tangent-result .ind-tangent-derivation math').count()===2,'two distinct derived flux and rate equations');
+  const curveAlignment=await page.locator('#ind-tangent-result .ind-tangent-derivation math').first().locator('mi').evaluateAll(a=>a.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y}}));
+  check(curveAlignment.length>=3&&Math.abs(curveAlignment[0].y-curveAlignment[1].y)<8&&curveAlignment[0].x<curveAlignment[1].x,'ACTUAL tangent Φ(t) first symbols typeset horizontally rather than broken column');
   for(const [t,expected] of [[0,-.6*Math.PI],[.5,0],[1,.6*Math.PI]]){
    await set('ind-tangent-time',t);
    const actual=await page.evaluate(t=>window.Fy2Physics.tangent(t).U,t);
@@ -211,6 +215,8 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
     check(width.doc<=width.inner+2,'no horizontal overflow '+vp.name+' slide '+i+' '+JSON.stringify(width));
     if(i===9){const font=Number.parseFloat(await page.locator('.slide.active .ind-result-proof>.math math').evaluate(el=>getComputedStyle(el).fontSize));check(font>=20,'answer U=0.24 V readable at '+vp.name+' font '+font);}
     if(i===23)check(await page.locator('#ind-tangent-result .ind-tangent-derivation math').count()===2,'revealed tangent differentiation visible on '+vp.name);
+    if(i===14){const row=await page.locator('#loop-result .ind-loop-proof>math').first().locator('mi').evaluateAll(a=>a.map(e=>({x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y})));check(row.length===3&&row.every(p=>Math.abs(p.y-row[0].y)<8)&&row[0].x<row[1].x,'loop equations retain true MathML layout in '+vp.name);}
+    if(i===23){const row=await page.locator('#ind-tangent-result .ind-tangent-derivation math').first().locator('mi').evaluateAll(a=>a.map(e=>({x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y})));check(row.length>=3&&Math.abs(row[0].y-row[1].y)<8,'tangent derivatives readable at '+vp.name);}
     check(await page.locator('.slide.active').isVisible(),'slide visible '+vp.name+' '+i);
     await snap(vp.name+'-'+String(i).padStart(2,'0'));
    }
