@@ -65,7 +65,23 @@ let timerDuration=1200,remaining=1200,timerInterval=null,deadline=0;
 function clock(){if(!$('#timer'))return;const n=Math.max(0,Math.ceil(remaining));$('#timer').textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
 function pause(){if(timerInterval){clearInterval(timerInterval);timerInterval=null}if($('#timer-toggle'))$('#timer-toggle').textContent='Starta'}
 document.querySelectorAll('[data-minutes]').forEach(b=>b.onclick=()=>{pause();remaining=timerDuration=Number(b.dataset.minutes)*60;clock()});if($('#timer-toggle'))$('#timer-toggle').onclick=()=>{if(timerInterval){remaining=Math.max(0,(deadline-Date.now())/1000);pause();return}deadline=Date.now()+remaining*1000;$('#timer-toggle').textContent='Pausa';timerInterval=setInterval(()=>{remaining=Math.max(0,(deadline-Date.now())/1000);clock();if(remaining===0)pause()},200)};if($('#timer-reset'))$('#timer-reset').onclick=()=>{pause();remaining=timerDuration;clock()};
-if($('#download'))$('#download').onclick=async()=>{try{const clone=document.documentElement.cloneNode(true);clone.querySelector('#jump').replaceChildren();clone.querySelectorAll('textarea').forEach(x=>{x.value='';x.textContent=''});clone.querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));clone.querySelectorAll('.slide').forEach((x,i)=>x.classList.toggle('active',i===0));let html='<!doctype html>\n'+clone.outerHTML;if(!document.querySelector('script[data-fy2-bundled]'))for(const entry of [['../gemensamt/lektion.css','css'],['./content.js','js'],['../gemensamt/base.js','js'],['../gemensamt/physics.js','js'],['./lesson.js','js']]){const r=await fetch(entry[0]);if(!r.ok)throw Error('File unavailable: '+entry[0]);const raw=await r.text();if(entry[1]==='css')html=html.replace('<link rel="stylesheet" href="../gemensamt/lektion.css">','<style>'+raw+'</style>');else html=html.replace('<script src="'+entry[0]+'"></'+'script>','<script>'+raw.replaceAll('</'+'script>','<\\/script>')+'</'+'script>')}const url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Fy2_'+document.body.dataset.subject+'.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}catch(e){alert('Kunde inte göra en fristående kopia. Prova från den publicerade webbversionen.')}};
+if($('#download'))$('#download').onclick=async()=>{try{const clone=document.documentElement.cloneNode(true);
+clone.querySelector('#jump').replaceChildren();
+clone.querySelector('#editor').hidden=true;
+/* Export the current approved DOM instead of re-running the original content script:
+   this preserves instructor-edited book references and prevents duplicate renderings. */
+clone.querySelector('script[data-fy2-bundled="content"]')?.remove();
+document.querySelectorAll('#editor [data-ref-input]').forEach(input=>{
+ const copy=clone.querySelector('#editor [data-ref-input="'+input.dataset.refInput+'"]');
+ if(copy)copy.setAttribute('value',input.value);
+});
+clone.querySelectorAll('details[open]').forEach(x=>x.removeAttribute('open'));
+clone.querySelectorAll('[data-quiz]').forEach(q=>{
+ q.dataset.open='no';
+ q.querySelectorAll('button.selected,button.good,button.wrong').forEach(b=>b.classList.remove('selected','good','wrong'));
+ const msg=q.querySelector('.feedback');if(msg)msg.textContent='Förutsäg och motivera.';
+ const btn=q.querySelector('[data-feedback]');if(btn)btn.textContent='Visa återkoppling';
+});clone.querySelectorAll('textarea').forEach(x=>{x.value='';x.textContent=''});clone.querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));clone.querySelectorAll('.slide').forEach((x,i)=>x.classList.toggle('active',i===0));let html='<!doctype html>\n'+clone.outerHTML;if(!document.querySelector('script[data-fy2-bundled]'))for(const entry of [['../gemensamt/lektion.css','css'],['./content.js','js'],['../gemensamt/base.js','js'],['../gemensamt/physics.js','js'],['./lesson.js','js']]){const r=await fetch(entry[0]);if(!r.ok)throw Error('File unavailable: '+entry[0]);const raw=await r.text();if(entry[1]==='css')html=html.replace('<link rel="stylesheet" href="../gemensamt/lektion.css">','<style>'+raw+'</style>');else html=html.replace('<script src="'+entry[0]+'"></'+'script>','<script>'+raw.replaceAll('</'+'script>','<\\/script>')+'</'+'script>')}const url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Fy2_'+document.body.dataset.subject+'.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}catch(e){alert('Kunde inte göra en fristående kopia. Prova från den publicerade webbversionen.')}};
 window.Fy2Nav={go,reveal,mode,$};mode(false);clock();go(0);
 })();
 </script>

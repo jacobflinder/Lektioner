@@ -48,8 +48,8 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   const earthRows=await rect('.slide.active .two-equations>.math-sm');
   ok(isGap(earthRows,15),'Bh and Bv physically separated by >= 15px');
   const memo=await slide().innerText();
-  ok(memo.includes('laddningsbeloppet')&&memo.includes('elektron')&&memo.includes('vinkelrätt')===false,'force magnitude explicitly positive, sign direction separate');
-  ok(memo.includes('horisontalplan')&&memo.includes('vertikalt plan')===false,'angle-plane explanations remain distinct');
+  ok(memo.includes('laddningsbeloppet')&&memo.includes('elektron')&&memo.includes('kraft'),'force magnitude explicitly positive, sign direction separate');
+  ok(memo.includes('horisontalplan')&&memo.includes('vertikalt plan'),'angle-plane explanations remain distinct');
   await reset();ok(!await slide().locator('.answer').isVisible(),'retrieval reset hides mathematics again');
   // Slide 3: preserve book time over added new lecture
   await go(3);
@@ -154,6 +154,9 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   await page.locator('#download').click();
   const dl=await dlPromise;const path=await dl.path();
   const exported=fs.readFileSync(path,'utf8');
+  ok(!exported.includes('<script data-fy2-bundled="content">'),'standalone export contains already rendered slides, not source re-injection');
+  ok(!exported.includes('const pages='),'original content script does not overwrite local edited book references');
+  ok(exported.includes('<section class="slide')&&exported.includes('data-ref="force"'),'existing 4 slide DOM is retained in standalone export');
   ok(exported.includes('earth-vector-b')&&exported.includes('electron-svg')&&exported.includes('earth-extension'),'export includes actual 2D physics diagrams and optional interaction');
   ok(exported.includes('data-ref="force"')&&exported.includes('data-ref="earth"'),'export preserves split task identifiers');
   const offline=await browser.newPage({viewport:{width:1440,height:900}});
@@ -162,7 +165,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   offline.on('request',r=>{if(r.url().startsWith('https://')||r.url().startsWith('http://'))offlineExternal.push(r.url())});
   const localFile=path+'.html';fs.copyFileSync(path,localFile);
   await offline.goto('file://'+localFile,{waitUntil:'load'});
-  ok(await offline.locator('#slides>section.slide').count()===4,'all 4 sources rebuilt when opened offline');
+  ok(await offline.locator('#slides>section.slide').count()===4,'all 4 already-rendered lesson slides retained when opened offline');
   await offline.locator('#jump').selectOption('3');
   ok((await offline.locator('#counter').innerText()).includes('4 / 4'),'offline navigation live');
   for(let i=0;i<3;i++)await offline.locator('#step').click();
@@ -175,7 +178,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   // Source learning materials
   const sup=await page.request.get(url+'lararstod.html');ok(sup.status()===200,'teacher notes exist');
   const supText=await sup.text();
-  for(const part of ['343–350','351–357','171–182','utan att','elektron'])ok(supText.includes(part),'teacher retained original material '+part);
+  for(const part of ['343–350','351–357','171–182','elektron','bokhänvisningar'])ok(supText.includes(part),'teacher retained original material '+part);
   ok(await page.locator('input[type=email],textarea').count()===0,'no collection of identifiable pupil answers');
   // 4 × desktop/mobile/projector, then all feedback and voluntary interaction shown in supplemental views.
   for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
