@@ -1,4 +1,4 @@
-/* Ma1c · kapitel 3 · lektion 3, andraderivatan.
+/* Matematik – fortsättning nivå 1c (tidigare Ma3c) · kapitel 3 · lektion 3, andraderivatan.
    Två kurvor och deras tangentlinjer genereras ur samma uttryck och derivator.
    Inga elevsvar skickas eller lagras. */
 (()=>{'use strict';
