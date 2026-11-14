@@ -95,7 +95,7 @@ try{
  await ok(!await page.locator('#feedback-answer').isVisible(),'Genomarbetat facit dolt före klick');
  await page.locator('[data-reveal="feedback-answer"]').click();
  await ok(await page.locator('#feedback-answer').isVisible(),'Facit kan öppnas');
- await ok((await page.locator('#feedback-answer').innerText()).includes('h′(2) = −12'),'Varning att h″=0 inte betyder h′=0');
+ await ok(await page.locator('#feedback-answer math[aria-label="h′(2) = −12"]').count()===1,'Varning: h″(2)=0 men h′(2)=−12 i exakt MathML');
  await go(7);
  const b=await page.locator('#book').innerText();
  for(const token of ['3125','3126–3127','3130–3131','3132','3133','3128–3129','s. 149','minst två','Läxa'])
@@ -105,7 +105,7 @@ try{
  await ok(!await page.locator('#exit-answer').isVisible(),'Utcheckning utan visat facit');
  await ok((await page.locator('#exit').innerText()).includes('avtagande samtidigt'),'Originalets utcheckningsfråga');
  await page.locator('[data-reveal="exit-answer"]').click();
- await ok((await page.locator('#exit-answer').innerText()).replace(/\s+/g,'').includes('f′(−1)=−2'),'Utcheckningen innehåller numeriskt motexempel');
+ await ok(await page.locator('#exit-answer math[aria-label="f′(−1) = −2 < 0"]').count()===1 && await page.locator('#exit-answer math[aria-label="f″(−1) = 2 > 0"]').count()===1,'Utcheckningen ger ett numeriskt verifierat motexempel för f′<0, f″>0');
  await page.screenshot({path:out+'/lesson3-exit-desktop.png',fullPage:true});
  await page.setViewportSize({width:390,height:844});
  for(let n=1;n<=8;n++){
