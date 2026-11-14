@@ -40,7 +40,7 @@
 .assertion{padding:15px;border:1px solid #cbdfe6;background:#f7fafc;border-radius:12px}
 /* En ekvation per semantiskt matematikblock, med mätbar luft. */
 .lesson-math-stack{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;justify-items:start;min-width:0;max-width:100%;margin:12px 0 17px}
-.lesson-math-stack > p.math-display{display:block;min-width:0;max-width:100%;margin:0!important;white-space:nowrap;overflow-x:auto}
+.lesson-math-stack > p.math-display{display:block;width:100%;min-width:0;max-width:100%;margin:0!important;white-space:nowrap;overflow-x:auto}
 .slide :is(.answer,.seq-item) .solution-math-group{row-gap:16px}
 .lesson-labeled-equation{min-width:0;max-width:100%}
 .lesson-labeled-equation>strong{display:block;font:.82rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:#295d70;margin-bottom:5px}
@@ -165,7 +165,7 @@
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Hur tar vi reda på var tangenten är horisontell?"><strong>1 · Derivera</strong><p class="math-display">f′(x)=3x²−3</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden uppfyller f′(x)=0?"><strong>2 · Hitta stationära punkter</strong><div class="solution-math-group"><p class="math-display">3x² − 3 = 0</p><p class="math-display">3x² = 3</p><p class="math-display">x² = 1</p><p class="math-display">x = −1 eller x = 1</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden uppfyller f′(x)=0?"><strong>2 · Hitta stationära punkter</strong><div class="solution-math-group"><p class="math-display">3x² − 3 = 0</p><p class="math-display">3x² = 3</p><p class="math-display">x² = 1</p><p class="math-display">x = −1</p><p class="solution-explanation">eller</p><p class="math-display">x = 1</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata behöver vi nu för att klassificera punkterna?"><strong>3 · Andraderivera</strong><p class="math-display">f″(x)=6x</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad ger tecknet för x=−1 respektive x=1?"><strong>4 · Klassificera</strong><div class="solution-math-group"><p class="math-display">f″(−1)=−6&lt;0</p><p>Lokalt maximum vid x=−1.</p><p class="math-display">f″(1)=6&gt;0</p><p>Lokalt minimum vid x=1.</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka är punkternas y-koordinater? Sätt in i f – inte f′ eller f″."><strong>5 · Ange koordinaterna</strong><div class="lesson-math-stack"><p class="math-display">f(−1) = −1 + 3 + 2</p><p class="math-display">f(−1) = 4</p><p class="math-display">f(1) = 1 − 3 + 2</p><p class="math-display">f(1) = 0</p></div><p><strong>Maximipunkt (−1, 4).</strong> <strong>Minimipunkt (1, 0).</strong></p></div>
