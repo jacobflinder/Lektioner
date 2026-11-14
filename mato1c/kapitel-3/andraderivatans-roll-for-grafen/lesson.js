@@ -1,7 +1,8 @@
-/* Ma1c kapitel 3 lektion 4: två interaktiva matematikmodeller, utan lagring. */
+/* Matematik – fortsättning nivå 1c (tidigare Ma3c): andraderivatans roll för grafen. Lokala matematiska SVG-modeller, utan lagring. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const fmt=(v,d=2)=>(Math.abs(v)<1e-10?0:v).toFixed(d).replace('.',',').replace('-','−');
+function mathReadout(id,formula){if(!window.Ma4Math)throw Error('MathML-stöd saknas för dynamisk figur');window.Ma4Math.setFormula($(id),formula,'block')}
 const M={
  f:{name:'f',f:x=>x*x,d:x=>2*x,dd:x=>2,color:'#12877f'},
  g:{name:'g',f:x=>-x*x,d:x=>-2*x,dd:x=>-2,color:'#2275a3'},
@@ -69,9 +70,9 @@ function inflect(){
  add(s,'text',{x:556,y:75,'font-size':17,fill:'#087f75','font-weight':700},'f″ > 0');
  }
  $('inflect-x-out').textContent='x = '+fmt(at);
- $('inflect-y').textContent='f('+fmt(at)+') = '+fmt(val);
- $('inflect-slope').textContent='f′('+fmt(at)+') = '+fmt(sl);
- $('inflect-second').textContent='f″('+fmt(at)+') = '+fmt(m.dd(at));
+ mathReadout('inflect-y','f('+fmt(at)+') = '+fmt(val));
+ mathReadout('inflect-slope','f′('+fmt(at)+') = '+fmt(sl));
+ mathReadout('inflect-second','f″('+fmt(at)+') = '+fmt(m.dd(at)));
 }
 $('inflect-x').addEventListener('input',inflect);
 $('inflect-zero').addEventListener('click',()=>{$('inflect-x').value='0';inflect()});inflect();

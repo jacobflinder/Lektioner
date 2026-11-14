@@ -38,6 +38,19 @@
 .small-note{font-size:.89rem;color:#526e7b}
 .answer-choices{display:flex;flex-wrap:wrap;gap:10px;margin:11px 0}
 .assertion{padding:15px;border:1px solid #cbdfe6;background:#f7fafc;border-radius:12px}
+/* En ekvation per semantiskt matematikblock, med mätbar luft. */
+.lesson-math-stack{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;justify-items:start;min-width:0;max-width:100%;margin:12px 0 17px}
+.lesson-math-stack > p.math-display{display:block;width:100%;min-width:0;max-width:100%;margin:0!important;white-space:nowrap;overflow-x:auto}
+.slide :is(.answer,.seq-item) .solution-math-group{row-gap:16px}
+.lesson-labeled-equation{min-width:0;max-width:100%}
+.lesson-labeled-equation>strong{display:block;font:.82rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:#295d70;margin-bottom:5px}
+.lesson-labeled-equation>p.math-display{margin:0}
+.slide .math-display[data-math-presentation="true"] math{font-size:1em;max-width:none;white-space:nowrap}
+.slide :is(p.math-display,span.math-display)[data-math-presentation="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.slide .inline-math[data-math-presentation="true"] math{vertical-align:-.12em;max-width:none;white-space:nowrap}
+.lesson-sign-table caption{font-size:.9rem;font-weight:700;text-align:left;color:#28566f;padding-bottom:7px}
+.lesson-sign-table thead th:first-child,.lesson-sign-table tbody th{width:25%;overflow-wrap:normal}
+.lesson-sign-table td{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.16rem;font-weight:700}
 @media(max-width:790px){.plot-pair,.discussion-grid,.book-steps{grid-template-columns:1fr}.plot-card svg{max-height:270px}.test-table th,.test-table td{padding:7px 3px;font-size:.84rem}.control-row{align-items:stretch;flex-direction:column}.control-row>*{max-width:100%}}
 </style>
 </head>
@@ -126,7 +139,7 @@
 <div class="eyebrow">04 · Metod och motivering</div>
 <h2>Testa först att punkten är stationär</h2>
 <div class="panel">
-<p class="math-display">f′(a)=0 &nbsp; är villkoret för testet.</p>
+<p>Kontrollera alltid först att punkten är stationär:</p><p class="math-display">f′(a) = 0</p>
 <table class="test-table">
 <thead><tr><th scope="col">Villkor</th><th scope="col">Slutsats</th><th scope="col">Vad händer med lutningen?</th></tr></thead>
 <tbody>
@@ -152,10 +165,10 @@
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Hur tar vi reda på var tangenten är horisontell?"><strong>1 · Derivera</strong><p class="math-display">f′(x)=3x²−3</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden uppfyller f′(x)=0?"><strong>2 · Hitta stationära punkter</strong><div class="solution-math-group"><p class="math-display">3x²−3=0</p><p class="math-display">x²=1</p><p class="math-display">x=−1 eller x=1</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka x-värden uppfyller f′(x)=0?"><strong>2 · Hitta stationära punkter</strong><div class="solution-math-group"><p class="math-display">3x² − 3 = 0</p><p class="math-display">3x² = 3</p><p class="math-display">x² = 1</p><p class="math-display">x = −1</p><p class="solution-explanation">eller</p><p class="math-display">x = 1</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata behöver vi nu för att klassificera punkterna?"><strong>3 · Andraderivera</strong><p class="math-display">f″(x)=6x</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad ger tecknet för x=−1 respektive x=1?"><strong>4 · Klassificera</strong><div class="solution-math-group"><p class="math-display">f″(−1)=−6&lt;0</p><p>Lokalt maximum vid x=−1.</p><p class="math-display">f″(1)=6&gt;0</p><p>Lokalt minimum vid x=1.</p></div></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilka är punkternas y-koordinater? Sätt in i f – inte f′ eller f″."><strong>5 · Ange koordinaterna</strong><p class="math-display">f(−1)=−1+3+2=4</p><p class="math-display">f(1)=1−3+2=0</p><p><strong>Maximipunkt (−1, 4).</strong> <strong>Minimipunkt (1, 0).</strong></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka är punkternas y-koordinater? Sätt in i f – inte f′ eller f″."><strong>5 · Ange koordinaterna</strong><div class="lesson-math-stack"><p class="math-display">f(−1) = −1 + 3 + 2</p><p class="math-display">f(−1) = 4</p><p class="math-display">f(1) = 1 − 3 + 2</p><p class="math-display">f(1) = 0</p></div><p><strong>Maximipunkt (−1, 4).</strong> <strong>Minimipunkt (1, 0).</strong></p></div>
 </div>
 <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Återställ</button></div><p class="muted" data-seq-count></p>
 </div>
@@ -174,7 +187,7 @@
 <p id="own-feedback" class="feedback" role="status" aria-live="polite"></p></div>
 <button type="button" class="secondary" data-reveal="own-hint">Stöd om du fastnar</button><div id="own-hint" class="panel hidden"><p>1. Lös <span class="inline-math">h′(x)=0</span>. 2. Bestäm <span class="inline-math">h″(x)</span> och dess tecken. 3. Sätt in x-värdet i <span class="inline-math">h(x)</span>.</p></div>
 <button type="button" class="reveal" data-reveal="own-answer">Visa genomarbetat facit</button>
-<div class="answer hidden" id="own-answer"><p class="math-display">h′(x)=2x−4=0 ⇒ x=2</p><p class="math-display">h″(x)=2&gt;0 ⇒ lokalt minimum</p><p class="math-display">h(2)=4−8+7=3</p><p><strong>Minimipunkt (2, 3).</strong> Värdet <span class="inline-math">h′(2)=0</span> är tangentens lutning, inte punktens höjd.</p></div>
+<div class="answer hidden" id="own-answer"><div class="lesson-math-stack"><p class="math-display">h′(x) = 2x − 4</p><p class="math-display">2x − 4 = 0</p><p class="math-display">2x = 4</p><p class="math-display">x = 2</p></div><div class="lesson-math-stack"><p class="math-display">h″(x) = 2 &gt; 0</p></div><p>Stationär punkt och positiv andraderivata ger ett <strong>lokalt minimum</strong>.</p><div class="lesson-math-stack"><p class="math-display">h(2) = 4 − 8 + 7</p><p class="math-display">h(2) = 3</p></div><p><strong>Minimipunkt (2, 3).</strong> Värdet <span class="inline-math">h′(2)=0</span> är tangentens lutning, inte punktens höjd.</p></div>
 <button type="button" class="secondary" data-go="zero-test">Valbar jämförelse: x³ och x⁴ när f″=0</button>
 </section>
 
@@ -182,8 +195,8 @@
 <div class="eyebrow">07 · Valbar fördjupning · när testet inte räcker</div><p class="muted">Fördjupningen går att välja vid behov. Den ordinarie lektionsvägen fortsätter till inflexion.</p>
 <h2>Samma testresultat. Olika punkter.</h2>
 <div class="plot-pair">
-<div class="plot-card"><h3>p(x) = x³</h3><svg id="zero-p" viewBox="0 0 550 320" role="img" aria-label="Kurva x i kubik genom origo med vågrät tangent"></svg><p class="math-display">p′(0)=0, &nbsp; p″(0)=0</p></div>
-<div class="plot-card"><h3>q(x) = x⁴</h3><svg id="zero-q" viewBox="0 0 550 320" role="img" aria-label="Kurva x upphöjt till fyra med botten i origo"></svg><p class="math-display">q′(0)=0, &nbsp; q″(0)=0</p></div>
+<div class="plot-card"><h3>p(x) = x³</h3><svg id="zero-p" viewBox="0 0 550 320" role="img" aria-label="Kurva x i kubik genom origo med vågrät tangent"></svg><div class="lesson-math-stack"><p class="math-display">p′(0) = 0</p><p class="math-display">p″(0) = 0</p></div></div>
+<div class="plot-card"><h3>q(x) = x⁴</h3><svg id="zero-q" viewBox="0 0 550 320" role="img" aria-label="Kurva x upphöjt till fyra med botten i origo"></svg><div class="lesson-math-stack"><p class="math-display">q′(0) = 0</p><p class="math-display">q″(0) = 0</p></div></div>
 </div>
 <div class="task"><strong>Förutsäg:</strong> Är båda terrasspunkter? Kontrollera <span class="inline-math">p′(−1), p′(1)</span> och <span class="inline-math">q′(−1), q′(1)</span> innan du svarar.</div>
 <div class="panel" data-quiz data-correct-text="Rätt. För p är p′=3x² positiv på båda sidor: ingen extrempunkt. För q är q′=4x³ negativ före och positiv efter: minimum vid 0. Andraderivatatestet gav inget besked i något fall." data-wrong-text="Undersök första derivatans tecken på båda sidor: p′(−1)=3, p′(1)=3, q′(−1)=−4 och q′(1)=4.">
@@ -194,8 +207,12 @@
 </div><p class="feedback" role="status" aria-live="polite"></p></div>
 <button class="reveal" type="button" data-reveal="zero-answer">Visa teckentesten</button>
 <div class="answer hidden" id="zero-answer">
-<p class="math-display">p′(x)=3x²: &nbsp; + &nbsp; 0 &nbsp; +</p><p><strong>p:</strong> terrasspunkt (0,0) – stiger på båda sidor och krökningen byter riktning.</p>
-<p class="math-display">q′(x)=4x³: &nbsp; − &nbsp; 0 &nbsp; +</p><p><strong>q:</strong> minimipunkt (0,0), inte terrasspunkt.</p><p>Slutsats: <span class="inline-math">f′(a)=f″(a)=0</span> ger inte automatiskt terrasspunkt.</p>
+<div class="lesson-math-stack"><p class="math-display">p′(x) = 3x²</p><p class="math-display">q′(x) = 4x³</p></div>
+<table class="test-table lesson-sign-table"><caption>Tecknen för första derivatan omkring x = 0</caption><thead><tr><th scope="col">Derivata</th><th scope="col">x &lt; 0</th><th scope="col">x = 0</th><th scope="col">x &gt; 0</th></tr></thead><tbody><tr><th scope="row">p′(x)</th><td>+</td><td>0</td><td>+</td></tr><tr><th scope="row">q′(x)</th><td>−</td><td>0</td><td>+</td></tr></tbody></table>
+<div class="lesson-math-stack"><p class="math-display">p′(−1) = 3</p><p class="math-display">p′(1) = 3</p><p class="math-display">q′(−1) = −4</p><p class="math-display">q′(1) = 4</p></div>
+<p><strong>p:</strong> terrasspunkt (0,0) – stiger på båda sidor och krökningen byter riktning.</p>
+<p><strong>q:</strong> minimipunkt (0,0), inte terrasspunkt.</p>
+<p>Slutsats: att både <span class="inline-math">f′(a)=0</span> och <span class="inline-math">f″(a)=0</span> gäller räcker inte för att avgöra punkttypen.</p>
 </div>
 </section>
 
@@ -214,7 +231,7 @@
 <div><b>Lutningens förändring</b><p id="inflect-second" class="math-display">f″(x) = −9,00</p></div>
 </div>
 <button type="button" class="reveal" data-reveal="inflect-answer">Visa slutsatsen efter undersökningen</button>
-<div id="inflect-answer" class="answer hidden"><div class="solution-math-group"><p class="math-display">x&lt;0: &nbsp; f″(x)&lt;0</p><p class="math-display">x&gt;0: &nbsp; f″(x)&gt;0</p></div><p class="solution-explanation">Lutningen minskar före x=0 och ökar efter. Där byter kurvan böjning och har en <strong>inflexionspunkt (0, 2)</strong>.</p><p class="math-display">f′(0)=−3 ≠ 0</p><p class="solution-explanation">Tangenten är alltså <strong>inte</strong> vågrät.</p></div>
+<div id="inflect-answer" class="answer hidden"><div class="solution-math-group"><div class="lesson-labeled-equation"><strong>För x &lt; 0</strong><p class="math-display">f″(x) &lt; 0</p></div><div class="lesson-labeled-equation"><strong>För x &gt; 0</strong><p class="math-display">f″(x) &gt; 0</p></div></div><p class="solution-explanation">Lutningen minskar före x=0 och ökar efter. Där byter kurvan böjning och har en <strong>inflexionspunkt (0, 2)</strong>.</p><p class="math-display">f′(0)=−3 ≠ 0</p><p class="solution-explanation">Tangenten är alltså <strong>inte</strong> vågrät.</p></div>
 </section>
 
 <section class="slide" id="inflect-algebra" data-teacher="Original s.15. Ta modellen till algebraisk teckenanalys: f''(x)=6x, nollställe 0, teckenbyte −→+, f(0)=2. Kontrast mot q=x⁴ med q''=12x² som inte byter tecken, ingen inflexion. Gör teckentabell och undvik slutsatsen att enbart f''(a)=0 räcker.">
@@ -226,9 +243,9 @@
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Derivera två gånger. Vilket uttryck får vi?"><strong>1 · Andraderivera</strong><p class="math-display">f′(x)=3x²−3</p><p class="math-display">f″(x)=6x</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Var kan böjningen byta riktning?"><strong>2 · Hitta kandidaten</strong><p class="math-display">f″(x)=6x=0 ⇒ x=0</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Var kan böjningen byta riktning?"><strong>2 · Hitta kandidaten</strong><div class="lesson-math-stack"><p class="math-display">f″(x) = 6x</p><p class="math-display">6x = 0</p><p class="math-display">x = 0</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad händer med f″ på båda sidor om noll?"><strong>3 · Undersök tecknen</strong><div class="solution-math-group"><p class="math-display">f″(−1) = −6 &lt; 0</p><p class="math-display">f″(1) = 6 &gt; 0</p></div><p>Tecknet byter från minus till plus. Kurvan byter krökning.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vad är punktens y-värde och tangentens lutning där?"><strong>4 · Ange punkten</strong><p class="math-display">f(0)=2 ⇒ (0,2)</p><p class="math-display">f′(0)=−3 ≠ 0</p><p>Inflexionspunkt med sned tangent.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är punktens y-värde och tangentens lutning där?"><strong>4 · Ange punkten</strong><div class="lesson-math-stack"><p class="math-display">f(0) = 2</p><p class="math-display">f′(0) = −3 ≠ 0</p></div><p>Inflexionspunkten har koordinaterna <strong>(0, 2)</strong>.</p><p>Inflexionspunkt med sned tangent.</p></div>
 </div>
 <div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p>
 </div>
@@ -281,7 +298,7 @@
 </ol></div>
 <button type="button" class="reveal" data-reveal="exit-answer">Visa genomarbetade svar efter eget försök</button>
 <div id="exit-answer" class="answer hidden">
-<p class="math-display">r′(x)=−2x+6=0 ⇒ x=3</p><p class="math-display">r″(x)=−2&lt;0 ⇒ lokalt maximum</p><p class="math-display">r(3)=−9+18−4=5</p><p><strong>Maximipunkt (3, 5).</strong></p>
+<div class="lesson-math-stack"><p class="math-display">r′(x) = −2x + 6</p><p class="math-display">−2x + 6 = 0</p><p class="math-display">−2x = −6</p><p class="math-display">x = 3</p></div><div class="lesson-math-stack"><p class="math-display">r″(x) = −2 &lt; 0</p></div><p>Stationär punkt med negativ andraderivata ger ett <strong>lokalt maximum</strong>.</p><div class="lesson-math-stack"><p class="math-display">r(3) = −9 + 18 − 4</p><p class="math-display">r(3) = 5</p></div><p><strong>Maximipunkt (3, 5).</strong></p>
 <p><strong>2:</strong> <span class="inline-math">f′(a)=0</span> visar bara horisontell tangent. Inflexion kräver att krökningen byter riktning, exempelvis genom teckenbyte för <span class="inline-math">f″</span>.</p>
 <p><strong>3:</strong> Undersök <span class="inline-math">f′</span> på båda sidor om den stationära punkten. <span class="inline-math">+→−</span> ger maximum, <span class="inline-math">−→+</span> minimum, medan lika tecken inte ger något extremum.</p>
 </div>
@@ -298,5 +315,7 @@
 <footer>Matematik – fortsättning, nivå 1c · 3.1 · Andraderivatan och funktionens graf · Bok s. 152. Ingen inloggning eller insamling av elevsvar.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
+<script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
 <script src="lesson.js"></script>
+<script src="math-polish.js"></script>
 </body></html>

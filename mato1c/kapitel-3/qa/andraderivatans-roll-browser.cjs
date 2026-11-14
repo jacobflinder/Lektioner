@@ -1,4 +1,4 @@
-/* Ma1c L4 real browser QA: Chromium, existing classroom shell and novel math. */
+/* Ma3c / Matematik – fortsättning nivå 1c, lektion 4: Chromium och matematiska kontrollpunkter. */
 const {chromium}=require('playwright');
 const fs=require('node:fs');
 const assert=require('node:assert/strict');
@@ -35,7 +35,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await ok(await page.locator('#prior-recall').isVisible(),'Återkallningen öppnas på begäran');
   await ok(!await page.locator('#prior-recall-answer').isVisible(),'Återkallningens facit dolt');
   await page.locator('[data-reveal="prior-recall-answer"]').click();
-  await ok((await page.locator('#prior-recall-answer').innerText()).replace(/\s+/g,'').includes('2x−4'),'Korrekt f′ från föregående lektion');
+  await ok(await page.locator('#prior-recall-answer math[aria-label="H′(x) = 2x − 4"]').count()===1,'Korrekt f′ från föregående lektion visas som semantisk MathML');
   await go(3);
   await ok(!await page.locator('#compare-readouts').isVisible(),'Grafavläsningen dold före förutsägelse');
   await page.locator('[data-reveal="compare-readouts"]').click();
@@ -96,14 +96,14 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await ok(await page.locator('#inflect-graph text').filter({hasText:'f″ < 0'}).count()===0,'Färgkodad krökning avslöjas inte före eleven');
   await page.locator('[data-reveal="inflect-readouts"]').click();
   await ok(await page.locator('#inflect-readouts').isVisible(),'Inflexionens beräkningar öppnas efter undersökning');
-  await ok((await page.locator('#inflect-slope').innerText()).includes('3,75'),'f′(−1,5)=3,75');
-  await ok((await page.locator('#inflect-second').innerText()).includes('−9,00'),'f″(−1,5)=−9');
+  await ok(await page.locator('#inflect-slope math[aria-label="f′(−1,50) = 3,75"]').count()===1,'f′(−1,5)=3,75');
+  await ok(await page.locator('#inflect-second math[aria-label="f″(−1,50) = −9,00"]').count()===1,'f″(−1,5)=−9');
   await page.locator('#inflect-zero').click();
-  await ok((await page.locator('#inflect-y').innerText()).includes('2,00'),'Inflexionshöjd f(0)=2');
-  await ok((await page.locator('#inflect-slope').innerText()).includes('−3,00'),'Inflexionstangenten är inte horisontell');
-  await ok((await page.locator('#inflect-second').innerText()).includes('0,00'),'f″(0)=0');
+  await ok(await page.locator('#inflect-y math[aria-label="f(0,00) = 2,00"]').count()===1,'Inflexionshöjd f(0)=2');
+  await ok(await page.locator('#inflect-slope math[aria-label="f′(0,00) = −3,00"]').count()===1,'Inflexionstangenten är inte horisontell');
+  await ok(await page.locator('#inflect-second math[aria-label="f″(0,00) = 0,00"]').count()===1,'f″(0)=0');
   await page.locator('#inflect-x').evaluate(el=>{el.value='1.5';el.dispatchEvent(new Event('input',{bubbles:true}))});
-  await ok((await page.locator('#inflect-second').innerText()).includes('9,00'),'f″(1,5)=9');
+  await ok(await page.locator('#inflect-second math[aria-label="f″(1,50) = 9,00"]').count()===1,'f″(1,5)=9');
   await page.locator('[data-reveal="inflect-answer"]').click();
   await ok(await page.locator('#inflect-graph text').filter({hasText:'f″ < 0'}).count()===1,'Krökningens teckenmarkering synlig först efter återkoppling');
   await ok(await page.locator('#inflect-graph circle[fill="#a34374"]').count()===1,'Markerad inflexionspunkt visas först i återkoppling');
@@ -135,7 +135,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   await ok((await page.locator('#exit').innerText()).includes('3138 och 3141 a–b'),'Exakta läxuppgifter');
   await page.locator('[data-reveal="exit-answer"]').click();
   const final=await page.locator('#exit-answer').innerText();
-  await ok(final.includes('(3, 5)')&&final.includes('r″(x)=−2'),'Utcheckningens maximum och koordinater korrekta');
+  await ok(final.includes('(3, 5)')&&await page.locator('#exit-answer math[aria-label="r″(x) = −2 < 0"]').count()===1,'Utcheckningens maximum och koordinater korrekta i både text och MathML');
   await page.screenshot({path:out+'/lesson4-exit-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});
   for(let n=1;n<=12;n++){await go(n);await ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobil utan sidöverspill steg '+n)}
