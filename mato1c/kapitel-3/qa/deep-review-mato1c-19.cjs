@@ -50,7 +50,7 @@ const eq=(a,b,t=1e-7)=>Math.abs(a-b)<t;
  await gaps('#start-answer');await snap('desktop-01');
  await go(2);ok(!await page.locator('#candidate-answer').isVisible(),'candidates concealed');
  await reveal('candidate-answer');
- for(const v of ['3x(x−3)=0','x=0 eller x=3','f(−2)','f(0)','f(3)','f(5)'])ok((await labels('#candidate-answer')).includes(v),'candidate calculation '+v);
+ for(const v of ['3x(x−3)=0','x=0','x=3','f(−2)','f(0)','f(3)','f(5)'])ok((await labels('#candidate-answer')).includes(v),'candidate calculation '+v);
  await gaps('#candidate-answer');await snap('desktop-02');
  await go(3);ok(await page.locator('#predict-graph path').count()===2,'two coloured and dashed path segments');
  const graphPoints=await page.locator('#predict-graph circle').evaluateAll(es=>es.map(e=>[Number(e.getAttribute('cx')),Number(e.getAttribute('cy'))]));
@@ -73,7 +73,7 @@ const eq=(a,b,t=1e-7)=>Math.abs(a-b)<t;
  }
  await reveal('range-special');ok(!await page.locator('#range-algebra').isVisible(),'algebra hidden');
  await reveal('range-algebra');
- for(const t of ['f(b)=f(0)','b³−4,5b²+5=5','b³−4,5b²=0','b²(b−4,5)=0','b=0 eller b=4,5'])ok((await labels('#range-algebra')).includes(t),'tie proof '+t);
+ for(const t of ['f(b)=f(0)','b³−4,5b²+5=5','b³−4,5b²=0','b²(b−4,5)=0','b=0','b=4,5'])ok((await labels('#range-algebra')).includes(t),'tie proof '+t);
  await gaps('#range-algebra');
  await reveal('bound-45');await page.locator('[data-bound="4.5"]').click();await page.locator('#range-check').click();
  ok((await page.locator('#range-feedback').textContent()).includes('x = 0 och x = 4,50'),'double maximum');
@@ -111,7 +111,7 @@ const eq=(a,b,t=1e-7)=>Math.abs(a-b)<t;
  await go(9);ok(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,'exit feedback hidden');
  for(let i=0;i<4;i++)await page.locator('#exit-answer [data-seq-next]').click();
  const exit=await labels('#exit-answer');
- for(const t of ['3x²−3=0','3x²=3','x²=1','x=−1 eller x=1','p″(1)=6·1','p(1)=−2','p(3)=18'])ok(exit.includes(t),'exit derivation '+t);
+ for(const t of ['3x²−3=0','3x²=3','x²=1','x=−1','x=1','p″(1)=6·1','p(1)=−2','p(3)=18'])ok(exit.includes(t),'exit derivation '+t);
  await gaps('#exit-answer');await snap('desktop-09');
  await page.setViewportSize({width:390,height:844});
  for(let i=1;i<=9;i++){
