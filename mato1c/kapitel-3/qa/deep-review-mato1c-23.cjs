@@ -46,7 +46,7 @@ try{
 await page.goto(url,{waitUntil:'networkidle'});
 ok(await page.locator('.slide').count()===12,'twelve slides');
 ok(await page.evaluate(()=>document.documentElement.dataset.differentiabilityMath)==='ready','MathML initialized');
-ok(await page.locator('.slide .mathline math').count()>90,'over 90 block MathML statements');
+ok(await page.locator('.slide :is(.mathline,.formula-line,.mathsmall) > math').count()>=95,'at least 95 complete display, quotient and inline MathML statements');
 ok(await page.locator('.slide .formula-line math mfrac').count()>=15,'real MathML fraction bars');
 ok(await page.locator('.slide math munder').count()>=3,'correctly typeset limit subscripts');
 ok(await page.locator('math[aria-label*="h→0"]').count()>=3,'book notation h toward zero from positive side');
