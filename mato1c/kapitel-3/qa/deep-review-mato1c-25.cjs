@@ -12,7 +12,7 @@ const models={
 };
 const f=x=>x**3-3*x+2,df=x=>3*x*x-3,d2f=x=>6*x;
 const t=x=>x**3+2,dt=x=>3*x*x,d2t=x=>6*x;
-const h=x=>-x**3+3*x,dh=x=>-3*x*x+3,d2h=x=>-6*x;
+const h=x=>-(x**3)+3*x,dh=x=>-3*x*x+3,d2h=x=>-6*x;
 const eq=(a,b,tol=1e-6)=>Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a-b)<=tol;
 (async()=>{
 let n=0;const failures=[],errors=[],requests=[],shots=[];
