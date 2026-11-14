@@ -4,7 +4,7 @@ const {$}=window.Fy2Nav,{fmt,particle,fieldOnRod,fluxAngle,loopMotion,fluxPiece,
 
 const m=(expr)=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+expr+'</math>';
 const inlineM=(expr)=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+expr+'</math>';
-const qty=(v,d,unit)=>'<mrow><mo>(</mo><mn>'+fmt(v,d)+'</mn><mtext> '+unit+'</mtext><mo>)</mo></mrow>';
+const qty=(v,d,unit)=>'<mrow><mo>(</mo><mn>'+fmt(v,d)+'</mn><mspace width="0.25em"/><mtext>'+unit+'</mtext><mo>)</mo></mrow>';
 const chain=(law,sub,result,meaning)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+m(law)+'</div></div>'+
  '<details class="calc-ins"><summary>2 · Visa insättning med enheter</summary><div class="math-sm">'+m(sub)+'</div></details>'+
@@ -13,7 +13,7 @@ const chain=(law,sub,result,meaning)=>'<div class="calc-chain">'+
 const Uformula='<mi>U</mi><mo>=</mo><mi>B</mi><mi>L</mi><mi>v</mi>';
 const Pformula='<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mi mathvariant="normal">cos</mi><mi>θ</mi>';
 const Fformula='<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mi>Δ</mi><mi>Φ</mi></mrow><mrow><mi>Δ</mi><mi>t</mi></mrow></mfrac>';
-const unitResult=(name,value,d,unit)=>'<mi>'+name+'</mi><mo>=</mo><mn>'+fmt(value,d)+'</mn><mtext> '+unit+'</mtext>';
+const unitResult=(name,value,d,unit)=>'<mi>'+name+'</mi><mo>=</mo><mn>'+fmt(value,d)+'</mn><mspace width="0.25em"/><mtext>'+unit+'</mtext>';
 
 $("ind-electron-start").innerHTML=particle(-1,0,1,1,1,false);
 $("ind-electron-answer").innerHTML=particle(-1,0,1,1,1,true);
@@ -47,11 +47,11 @@ function renderRod(){
  chain(Uformula,
  '<mi>U</mi><mo>=</mo>'+qty(B,2,'T')+'<mo>·</mo>'+qty(L,2,'m')+'<mo>·</mo>'+qty(v,1,'m/s'),
  unitResult('U',Ueq,3,'V'),
- v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. '+(v<0?'Övre änden blir negativ.':'Övre änden blir positiv.')+' Vid jämvikt gäller '+inlineM('<mi>q</mi><mi>E</mi><mo>=</mo><mi>q</mi><mi>v</mi><mi>B</mi>')+'.') :
+ v===0?'När staven står stilla uppkommer ingen rörelseinducerad laddningsseparation.':'Detta är jämviktsspänningen, inte en spänning uppmätt under uppbyggnaden. '+(v<0?'Övre änden blir negativ.':'Övre änden blir positiv.')+' Vid jämvikt är kraftbeloppen lika, medan kraftpilarna är motriktade: '+inlineM('<mi>e</mi><mi>E</mi><mo>=</mo><mi>e</mi><mo>|</mo><mi>v</mi><mo>|</mo><mi>B</mi>')+'.') :
  'Förutsäg först. Det schematiska reglaget visar laddningsseparation, inte en uppmätt tidskurva. Vilket samband gäller i jämvikt?';
  $("rod-show").textContent=rodShown?"Dölj jämviktsresultatet":"Visa jämvikt och spänning";
 }
-function resetRod(){rodShown=false;rodShown=false;for(const [id,val] of [["charge-progress","0"],["rod-B",".4"],["rod-v","3"],["rod-L","20"]])$(id).value=val;renderRod()}
+function resetRod(){rodShown=false;for(const [id,val] of [["charge-progress","0"],["rod-B",".4"],["rod-v","3"],["rod-L","20"]])$(id).value=val;renderRod()}
 for(const id of ["charge-progress","rod-B","rod-v","rod-L"])$(id).oninput=()=>{renderRod()};
 $("rod-show").onclick=()=>{rodShown=!rodShown;renderRod()};
 $("rod-reset").onclick=resetRod;
@@ -77,7 +77,7 @@ function renderAngle(){
 }
 for(const id of ["flux-theta","flux-B","flux-A"])$(id).oninput=()=>{renderAngle()};
 $("flux-angle-show").onclick=()=>{fluxShown=!fluxShown;renderAngle()};
-function resetAngle(){fluxShown=false;fluxShown=false;$("flux-theta").value=0;$("flux-B").value=.4;$("flux-A").value=.08;renderAngle()}
+function resetAngle(){fluxShown=false;$("flux-theta").value=0;$("flux-B").value=.4;$("flux-A").value=.08;renderAngle()}
 $("flux-angle-reset").onclick=resetAngle;
 $("ind-flux-angle").closest(".slide").addEventListener("lesson:reset",resetAngle);
 let loopShown=false;
@@ -89,18 +89,24 @@ function renderLoop(){
  $("ind-loop").innerHTML=loopMotion(t);
  $("loop-t-value").textContent=fmt(t,2)+" s";
  $("loop-result").innerHTML=loopShown?
- chain('<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width="1em"/><mi>U</mi><mo>=</mo><mo>−</mo><mi>B</mi><mi>L</mi><mi>v</mi>',
- '<mi>Φ</mi><mo>=</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(phi/400,4,'m²')+
- '<mspace width="1em"/><mi>U</mi><mo>=</mo><mo>−</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(.2,2,'m')+'<mo>·</mo>'+qty(moving?.5:0,2,'m/s'),
- '<mi>Φ</mi><mo>=</mo><mn>'+fmt(phi,1)+'</mn><mtext> mWb</mtext><mspace width="1em"/><mi>U</mi><mo>=</mo><mn>'+fmt(emf,3)+'</mn><mtext> V</mtext>',
- moving?'Positiv normal in i bilden innebär positivt omlopp medurs. När flödet ökar blir U negativ och den inducerade strömmen moturs; den bromsar staven.':'Flödet finns kvar men ändras inte: den inducerade spänningen är noll.') :
- 'Förutsäg när '+inlineM('<mi>U</mi>')+' är skild från noll. '+inlineM('<mi>B</mi><mo>=</mo><mn>0,40</mn><mtext> T</mtext>')+', '+inlineM('<mi>L</mi><mo>=</mo><mn>0,20</mn><mtext> m</mtext>')+', och '+inlineM('<mi>v</mi><mo>=</mo><mn>0,50</mn><mtext> m/s</mtext>')+' endast under rörelsen.';
- $("loop-show").textContent=loopShown?"Dölj Φ och U":"Visa Φ och U";
+ '<div class="ind-loop-proof"><span class="tag">1 · Magnetiskt flöde</span>'+
+ m('<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi>')+
+ '<details class="calc-ins"><summary>Visa insättningen för flödet</summary>'+
+ m('<mi>Φ</mi><mo>=</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(phi/400,4,'m²'))+'</details>'+
+ m('<mi>Φ</mi><mo>=</mo><mn>'+fmt(phi,1)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext>')+
+ '<span class="tag">2 · Inducerad spänning</span>'+
+ m('<mi>U</mi><mo>=</mo><mo>−</mo><mi>B</mi><mi>L</mi><mi>v</mi>')+
+ '<details class="calc-ins"><summary>Visa insättningen för spänningen</summary>'+
+ m('<mi>U</mi><mo>=</mo><mo>−</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(.2,2,'m')+'<mo>·</mo>'+qty(moving?.5:0,2,'m/s'))+'</details>'+
+ m('<mi>U</mi><mo>=</mo><mn>'+fmt(emf,3)+'</mn><mspace width="0.25em"/><mtext>V</mtext>')+
+ '<p class="small">'+(moving?'Positiv normal inåt ger positivt omlopp medurs; ökande flöde ger negativ spänning och moturs ström som bromsar staven.':'Flödet finns kvar men ändras inte, så den inducerade spänningen är noll.')+'</p></div>':
+ 'Förutsäg när '+inlineM('<mi>U</mi>')+' är skild från noll. '+inlineM('<mi>B</mi><mo>=</mo><mn>0,40</mn><mspace width="0.25em"/><mtext>T</mtext>')+', '+inlineM('<mi>L</mi><mo>=</mo><mn>0,20</mn><mspace width="0.25em"/><mtext>m</mtext>')+', och '+inlineM('<mi>v</mi><mo>=</mo><mn>0,50</mn><mspace width="0.25em"/><mtext>m/s</mtext>')+' endast under rörelsen.';
+$("loop-show").textContent=loopShown?"Dölj Φ och U":"Visa Φ och U";
 }
 $("loop-t").oninput=()=>{renderLoop()};
 document.querySelectorAll("[data-loop]").forEach(b=>b.onclick=()=>{$("loop-t").value=b.dataset.loop;renderLoop()});
 $("loop-show").onclick=()=>{loopShown=!loopShown;renderLoop()};
-function resetLoop(){loopShown=false;loopShown=false;$("loop-t").value=0;renderLoop()}
+function resetLoop(){loopShown=false;$("loop-t").value=0;renderLoop()}
 $("loop-reset").onclick=resetLoop;
 $("ind-loop").closest(".slide").addEventListener("lesson:reset",resetLoop);
 let graphShown=false;
@@ -111,17 +117,17 @@ function renderGraph(){
  const edges=[.3,.6,.8],atCorner=edges.some(edge=>Math.abs(t-edge)<.000001);
  const rise=t<.3?.003:t<.6?0:t<.8?-.003:0,interval=t<.3?.3:t<.6?.3:t<.8?.2:1;
  $("flux-time-result").innerHTML=graphShown?
- atCorner?'<b>Brytpunkt vid '+inlineM('<mi>t</mi><mo>=</mo><mn>'+fmt(t,1)+'</mn><mtext> s</mtext>')+'.</b> Lutningen byts tvärt. En idealiserad '+inlineM('<mi>U</mi><mo>(</mo><mi>t</mi><mo>)</mo>')+' har inget entydigt momentant värde exakt i denna punkt; jämför lutningen före och efter.' :
+ atCorner?'<b>Brytpunkt vid '+inlineM('<mi>t</mi><mo>=</mo><mn>'+fmt(t,1)+'</mn><mspace width="0.25em"/><mtext>s</mtext>')+'.</b> Lutningen byts tvärt. En idealiserad '+inlineM('<mi>U</mi><mo>(</mo><mi>t</mi><mo>)</mo>')+' har inget entydigt momentant värde exakt i denna punkt; jämför lutningen före och efter.' :
  chain(Fformula,
- '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mfrac><mrow><mn>'+fmt(rise,3)+'</mn><mtext> Wb</mtext></mrow><mrow><mn>'+fmt(interval,1)+'</mn><mtext> s</mtext></mrow></mfrac>',
+ '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mfrac><mrow><mn>'+fmt(rise,3)+'</mn><mspace width="0.25em"/><mtext>Wb</mtext></mrow><mrow><mn>'+fmt(interval,1)+'</mn><mspace width="0.25em"/><mtext>s</mtext></mrow></mfrac>',
  unitResult('U',v.U,1,'V'),
- 'Flödet '+inlineM('<mi>Φ</mi><mo>=</mo><mn>'+fmt(v.phi,2)+'</mn><mtext> mWb</mtext>')+' genom ett varv. '+(v.U===0?'Lutningen är noll, trots att flödet kan vara stort.':v.U<0?'Ökande flöde ger negativ orienterad spänning.':'Minskande flöde ger positiv orienterad spänning.')) :
+ 'Flödet '+inlineM('<mi>Φ</mi><mo>=</mo><mn>'+fmt(v.phi,2)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext>')+' genom ett varv. '+(v.U===0?'Lutningen är noll, trots att flödet kan vara stort.':v.U<0?'Ökande flöde ger negativ orienterad spänning.':'Minskande flöde ger positiv orienterad spänning.')) :
  'Förutsäg spänningens tecken. Läs två punkter för att bestämma lutningen '+inlineM('<mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac>')+'.';
  $("flux-time-show").textContent=graphShown?"Dölj resultat":"Visa lutning och spänning";
 }
 $("flux-time").oninput=()=>{renderGraph()};
 $("flux-time-show").onclick=()=>{graphShown=!graphShown;renderGraph()};
-function resetGraph(){graphShown=false;graphShown=false;$("flux-time").value=.1;renderGraph()}
+function resetGraph(){graphShown=false;$("flux-time").value=.1;renderGraph()}
 $("flux-time-reset").onclick=resetGraph;
 $("ind-flux-graph").closest(".slide").addEventListener("lesson:reset",resetGraph);
 let tangentShown=false;
@@ -130,16 +136,19 @@ function renderTangent(){
  $("ind-tangent-graph").innerHTML=v.html;
  $("ind-tangent-time-value").textContent=fmt(t,2)+" s";
  $("ind-tangent-result").innerHTML=tangentShown?
+ '<div class="ind-tangent-derivation"><p class="small">Omvandla först 3 mWb till 0,003 Wb. Derivera sedan flödet med tiden t uttryckt i sekunder:</p>'+
+ m('<mi>Φ</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>0,003</mn><mspace width="0.25em"/><mtext>Wb</mtext><mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mi>π</mi><mi>t</mi><mo>)</mo>')+
+ m('<mfrac><mrow><mi>d</mi><mi>Φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>0,003</mn><mo>·</mo><mi>π</mi><mi mathvariant="normal">cos</mi><mo>(</mo><mi>π</mi><mi>t</mi><mo>)</mo><mspace width="0.25em"/><mtext>Wb/s</mtext>')+'</div>'+
  chain('<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mi>d</mi><mi>Φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac>',
- '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mn>0,003</mn><mo>·</mo><mi>π</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mi>π</mi><mo>·</mo><mn>'+fmt(t,2)+'</mn><mo>)</mo><mtext> V</mtext>',
+ '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mn>0,003</mn><mo>·</mo><mi>π</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mi>π</mi><mo>·</mo><mn>'+fmt(t,2)+'</mn><mo>)</mo><mspace width="0.25em"/><mtext>V</mtext>',
  unitResult('U',Math.abs(v.U)<1e-10?0:v.U,2,'V'),
- 'Exempelkurva: '+inlineM('<mi>Φ</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>3</mn><mi mathvariant="normal">sin</mi><mo>(</mo><mi>π</mi><mi>t</mi><mo>)</mo><mtext> mWb</mtext>')+' per varv. Vid maximum är tangentens lutning noll, alltså '+inlineM('<mi>U</mi><mo>=</mo><mn>0</mn>')+'.') :
+ 'Exempelkurva: '+inlineM('<mi>Φ</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>3</mn><mi mathvariant="normal">sin</mi><mo>(</mo><mi>π</mi><mi>t</mi><mo>)</mo><mspace width="0.25em"/><mtext>mWb</mtext>')+' per varv. Vid maximum är tangentens lutning noll, alltså '+inlineM('<mi>U</mi><mo>=</mo><mn>0</mn>')+'.') :
  'Förutsäg tangentens lutning och spänningens tecken. Grafens höjd är inte U.';
  $("ind-tangent-show").textContent=tangentShown?"Dölj spänningen":"Visa tangentens spänning";
 }
 $("ind-tangent-time").oninput=()=>{renderTangent()};
 $("ind-tangent-show").onclick=()=>{tangentShown=!tangentShown;renderTangent()};
-function resetTangent(){tangentShown=false;tangentShown=false;$("ind-tangent-time").value=.5;renderTangent()}
+function resetTangent(){tangentShown=false;$("ind-tangent-time").value=.5;renderTangent()}
 $("ind-tangent-reset").onclick=resetTangent;
 $("ind-tangent-graph").closest(".slide").addEventListener("lesson:reset",resetTangent);
 resetRod();resetAngle();resetLoop();resetGraph();resetTangent();
@@ -158,9 +167,9 @@ document.querySelectorAll('[data-loop]').forEach(b=>b.addEventListener('click',p
 $("ind-loop").closest(".slide").addEventListener("lesson:reset",pauseLoop);
 document.addEventListener('fy2:mode',pauseLoop);
 let lenzShown=false;
-function drawLenz(){const state=$("lenz-case").value,up=state==='increase',still=state==='constant';let fig='<circle cx="340" cy="170" r="105" fill="none" stroke="#b46a45" stroke-width="5"/>'+T(25,35,'Yttre flöde in i bilden: '+({increase:'ökar',decrease:'minskar',constant:'konstant'}[state]),'#254655',20);for(const x of [75,145,535,605])fig+=T(x,175,'×','#80aab7',28);if(lenzShown&&!still){fig+=T(320,190,up?'⊙':'⊗','#087b91',50);fig+=up?A(375,65,310,65):A(305,65,370,65);fig+=T(220,320,up?'Eget fält ut · ström moturs':'Eget fält in · ström medurs','#254655',19);}else fig+=T(180,180,lenzShown?'Ingen induktionsström':'Förutsäg eget fält och ström','#254655',18);$("lenz-compare").innerHTML=S(fig,680,350,'Lenz lag sedd rakt framifrån');$("lenz-feedback").textContent=lenzShown?{increase:'Flödet in ökar. Strömmen skapar ett fält ut ur bilden som motverkar ökningen. Högerhandsregeln ger moturs ström.',decrease:'Flödet in minskar. Strömmen skapar ett fält in i bilden som motverkar minskningen. Högerhandsregeln ger medurs ström.',constant:'Flödet ändras inte: '+inlineM('<mi>U</mi><mo>=</mo><mn>0</mn>')+'. Ingen induktionsström i den resistiva modellen utan annan spänningskälla.'}[state]:'';$("lenz-check").textContent=lenzShown?'Dölj förklaring':'Visa förklaring';}
+function drawLenz(){const state=$("lenz-case").value,up=state==='increase',still=state==='constant';let fig='<circle cx="340" cy="170" r="105" fill="none" stroke="#b46a45" stroke-width="5"/>'+T(25,35,'Yttre flöde in i bilden: '+({increase:'ökar',decrease:'minskar',constant:'konstant'}[state]),'#254655',20);for(const x of [75,145,535,605])fig+=T(x,175,'×','#80aab7',28);if(lenzShown&&!still){fig+=T(320,190,up?'⊙':'⊗','#087b91',50);fig+=up?A(375,65,310,65):A(305,65,370,65);fig+=T(220,320,up?'Eget fält ut · ström moturs':'Eget fält in · ström medurs','#254655',19);}else fig+=T(180,180,lenzShown?'Ingen induktionsström':'Förutsäg eget fält och ström','#254655',18);$("lenz-compare").innerHTML=S(fig,680,350,'Lenz lag sedd rakt framifrån');$("lenz-feedback").innerHTML=lenzShown?{increase:'Flödet in ökar. Strömmen skapar ett fält ut ur bilden som motverkar ökningen. Högerhandsregeln ger moturs ström.',decrease:'Flödet in minskar. Strömmen skapar ett fält in i bilden som motverkar minskningen. Högerhandsregeln ger medurs ström.',constant:'Flödet ändras inte: '+inlineM('<mi>U</mi><mo>=</mo><mn>0</mn>')+'. Ingen induktionsström i den resistiva modellen utan annan spänningskälla.'}[state]:'';$("lenz-check").textContent=lenzShown?'Dölj förklaring':'Visa förklaring';}
 $("lenz-case").onchange=()=>{lenzShown=false;drawLenz()};$("lenz-check").onclick=()=>{lenzShown=!lenzShown;drawLenz()};$("lenz-case").closest('.slide').addEventListener('lesson:reset',()=>{lenzShown=false;$("lenz-case").value='increase';drawLenz()});drawLenz();
-const feedbackMathFragments=[["U = −100 · (−0,003)/0,2","<mi>U</mi><mo>=</mo><mo>−</mo><mn>100</mn><mo>·</mo><mfrac><mrow><mo>−</mo><mn>0,003</mn><mtext> Wb</mtext></mrow><mrow><mn>0,2</mn><mtext> s</mtext></mrow></mfrac>"],["0,8 − 0,6 = 0,2 s","<mn>0,8</mn><mo>−</mo><mn>0,6</mn><mo>=</mo><mn>0,2</mn><mtext> s</mtext>"],["3 mWb = 0,003 Wb","<mn>3</mn><mtext> mWb</mtext><mo>=</mo><mn>0,003</mn><mtext> Wb</mtext>"],["U = −N ΔΦ/Δt","<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac>"],["U = −2 V","<mi>U</mi><mo>=</mo><mo>−</mo><mn>2</mn><mtext> V</mtext>"],["U = +3 V","<mi>U</mi><mo>=</mo><mo>+</mo><mn>3</mn><mtext> V</mtext>"],["U = 0 V","<mi>U</mi><mo>=</mo><mn>0</mn><mtext> V</mtext>"],["ΔΦ = 0","<mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0</mn>"],["+1,5 V","<mo>+</mo><mn>1,5</mn><mtext> V</mtext>"],["U = 0","<mi>U</mi><mo>=</mo><mn>0</mn>"]];
+const feedbackMathFragments=[["U = −100 · (−0,003)/0,2","<mi>U</mi><mo>=</mo><mo>−</mo><mn>100</mn><mo>·</mo><mfrac><mrow><mo>−</mo><mn>0,003</mn><mspace width='0.25em'/><mtext>Wb</mtext></mrow><mrow><mn>0,2</mn><mspace width='0.25em'/><mtext>s</mtext></mrow></mfrac>"],["0,8 − 0,6 = 0,2 s","<mn>0,8</mn><mo>−</mo><mn>0,6</mn><mo>=</mo><mn>0,2</mn><mspace width='0.25em'/><mtext>s</mtext>"],["3 mWb = 0,003 Wb","<mn>3</mn><mspace width='0.25em'/><mtext>mWb</mtext><mo>=</mo><mn>0,003</mn><mspace width='0.25em'/><mtext>Wb</mtext>"],["U = −N ΔΦ/Δt","<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac>"],["U = −2 V","<mi>U</mi><mo>=</mo><mo>−</mo><mn>2</mn><mspace width='0.25em'/><mtext>V</mtext>"],["U = +3 V","<mi>U</mi><mo>=</mo><mo>+</mo><mn>3</mn><mspace width='0.25em'/><mtext>V</mtext>"],["U = 0 V","<mi>U</mi><mo>=</mo><mn>0</mn><mspace width='0.25em'/><mtext>V</mtext>"],["ΔΦ = 0","<mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0</mn>"],["+1,5 V","<mo>+</mo><mn>1,5</mn><mspace width='0.25em'/><mtext>V</mtext>"],["U = 0","<mi>U</mi><mo>=</mo><mn>0</mn>"]];
 function formattedFeedback(input){
  const raw=String(input),esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
  let html='',pos=0;
@@ -192,7 +201,7 @@ scene+=A(x(p.front)-60,265,x(p.front)+5,265,'#218a73')+T(x(p.front)-60,295,'v �
 if(passCurrent&&p.u){scene+=p.u<0?A(x(p.back)+75,105,x(p.back)+20,105,'#137c96'):A(x(p.back)+20,105,x(p.back)+75,105,'#137c96');scene+=T(15,330,p.u<0?'Ström moturs · eget fält ut':'Ström medurs · eget fält in','#137c96',19);}
 if(passForce&&p.u)scene+=A(x(p.back)+48,153,x(p.back)-18,153,'#b24d40')+T(20,365,'Magnetisk nettokraft ←','#b24d40',19);
 $('pass-scene').innerHTML=S(scene,690,390,'Sluten slinga passerar ett begränsat homogent magnetfält');$('pass-clock').textContent=fmt(t,2)+' s';
-let lines=[];if(passGraphs)lines.push(inlineM('<mi>Φ</mi><mo>=</mo><mn>'+fmt(p.phi*1000,1)+'</mn><mtext> mWb</mtext>')+'. '+(p.u===null?'Fältkant: jämför spänningen precis före och efter.':inlineM('<mi>U</mi><mo>=</mo><mn>'+fmt(p.u,3)+'</mn><mtext> V</mtext>')+'.'));
+let lines=[];if(passGraphs)lines.push(inlineM('<mi>Φ</mi><mo>=</mo><mn>'+fmt(p.phi*1000,1)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext>')+'. '+(p.u===null?'Fältkant: jämför spänningen precis före och efter.':inlineM('<mi>U</mi><mo>=</mo><mn>'+fmt(p.u,3)+'</mn><mspace width="0.25em"/><mtext>V</mtext>')+'.'));
 if(passCurrent)lines.push(p.u===null?'Vid kanten byter strömmen idealiserat värde.':p.u===0?'Ingen induktionsström: flödet ändras inte.':p.enter?'Flödet inåt ökar: ström moturs motverkar ökningen.':'Flödet inåt minskar: ström medurs motverkar minskningen.');
 if(passForce)lines.push(p.u===null?'Nettokraften byter värde vid kanten.':p.u===0?'Ingen magnetisk bromskraft i denna modell.':'Den magnetiska kraften bromsar. Det yttre arbetet omvandlas till värme i slingan.');
 $('pass-feedback').innerHTML=lines.join(' ')||'Förutsäg flöde, spänning, ström och kraft. Visa ett samband i taget.';
