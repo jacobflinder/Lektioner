@@ -1,4 +1,4 @@
-/* Ma1c L9 · Chromium QA for original math, two SVG interactions, levels, exit and mobile. */
+/* Ma3c L9 · Chromium QA for original math, two SVG interactions, levels, exit and mobile. */
 const {chromium}=require('playwright'),fs=require('node:fs'),assert=require('node:assert/strict');
 const root='http://127.0.0.1:8123',url=root+'/mato1c/kapitel-3/blandade-problem/';
 const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
@@ -6,6 +6,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
  let checks=0;const errors=[],foreign=[];
+ const mathLabels=async sel=>page.locator(sel+' math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')).join(' '));
  page.on('pageerror',e=>errors.push(e.message));
  page.on('request',r=>{if(!r.url().startsWith(root))foreign.push(r.url())});
  async function ok(b,msg){assert.ok(b,msg);checks++}
@@ -93,7 +94,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   const robText=await robot.innerText();
   for(const item of ['3 m/s','−0,375 m/s²','6 m/s','3t+3','12,3 m'])await ok(robText.includes(item),'Robotens matematik '+item);
   await go(7);
-  await ok((await page.locator('#conditions').innerText()).includes('(x−1)(x−3)²'),'Originalets derivataproblem');
+  await ok((await mathLabels('#conditions')).includes('g′(x)=(x−1)(x−3)²'),'Originalets derivataproblem');
   await go(8);
   const pairs=page.locator('#conditions-feedback [data-sequence]');
   await ok(await pairs.count()===2,'Två separata motiveringar');
@@ -103,6 +104,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   for(let k=0;k<4;k++)await pairs.nth(1).locator('[data-seq-next]').click();
   await ok((await pairs.nth(1).innerText()).includes('terrasspunkt'),'Dubbelrot och terrasspunkt korrekt');
   await ok(!await page.locator('#sign-explorer').isVisible(),'g′-graf först dold tills enskild teckentabell finns');
+  await ok(await page.locator('[data-reveal="sign-explorer"]').isEnabled(),'g′-graf kräver först alla fyra bevissteg');
   await page.locator('[data-reveal="sign-explorer"]').click();
   await ok(await page.locator('#sign-explorer').isVisible(),'g′-graf öppnas som frivillig kontroll');
   await ok(await page.locator('#sign-graph path').count()===1,'g′-graf beräknad');
@@ -118,8 +120,8 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   const book=await page.locator('#book').innerText();
   for(const token of ['s. 174–176','3247–3253','3254–3265','3266–3271','3247 → 3249 → 3252 → 3254 → 3261','3258 → 3262 → 3266 → 3268 → 3271','20 minuter','minst två','3248 och 3260','3264'])await ok(book.includes(token),'Bok och läxa '+token);
   await go(10);
-  await ok((await page.locator('#exit').innerText()).includes('50(1−e'),'Exponential exit');
-  await ok((await page.locator('#exit').innerText()).includes('x²+bx'),'Horisontell tangent exit');
+  await ok((await mathLabels('#exit')).includes('M(t)=50(1−e^(−0,1t))'),'Exponential exit');
+  await ok((await mathLabels('#exit')).includes('h(x)=x²+bx'),'Horisontell tangent exit');
   await go(11);
   const exit=page.locator('#exit-feedback [data-sequence]');
   await ok(await exit.count()===2,'Två oberoende exitförklaringar');

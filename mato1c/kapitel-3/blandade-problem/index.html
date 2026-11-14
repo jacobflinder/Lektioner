@@ -5,6 +5,16 @@
 <title>Blandade problem · Matematik – fortsättning, nivå 1c</title>
 <link rel="stylesheet" href="../assets/lesson.css">
 <style>
+/* Ma3c 22: separate semantic mathematical equations and givens. */
+.slide .math-givens{display:grid;gap:16px;margin:14px 0}
+.slide .math-givens>.mathline{margin:0!important}
+.slide .solution-math-group{display:grid!important;gap:16px!important}
+.slide .solution-math-group>.mathline{margin:0!important}
+.slide .mathline{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .mathline math[display="block"]{font-size:clamp(1rem,2vw,1.30rem);max-width:100%}
+.slide .mathsmall math{font-size:1em}
+.slide .mathline+.mathline{margin-top:16px}
+@media(max-width:730px){.slide .mathline math[display="block"]{font-size:1rem}}
 .mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.18rem,2.4vw,1.64rem);line-height:1.58}
 .mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
 .plotgrid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,1fr);gap:16px;margin:15px 0;align-items:start}
@@ -64,7 +74,7 @@
 <div class="eyebrow">01 · Start · välj matematik före beräkningen</div>
 <h1>Vad är det egentligen vi ska bestämma?</h1>
 <p class="lead">Vatten samlas i en behållare. Modellen är förenklad.</p>
-<p class="mathline">V(t)=120(1−e<sup>−0,2t</sup>), &nbsp; t≥0</p>
+<div class="math-givens"><p class="mathline">V(t)=120(1−e<sup>−0,2t</sup>)</p><p class="mathline">t≥0</p></div>
 <p><strong>t</strong> mäts i minuter och <strong>V</strong> i liter.</p>
 <div class="task"><strong>Skriv själv – jämför sedan i par:</strong> Vilket uttryck behöver du i var och en av de tre frågorna? Ange också enheten.</div>
 <div class="questions-grid">
@@ -134,7 +144,7 @@
 <section class="slide" id="water-feedback" data-teacher="Original s.4. V5=120(1−e^-1)=75,85≈75,9L; V′5=24/e=8,829≈8,83 L/min; V″5=−4,8/e=−1,766≈−1,77 L/min². V′0=24 greatest inflow because V″ negative. V(t) tends to120 from below, does not reach 120 in finite time, therefore no greatest water amount on t≥0; avoid false claim maximum120.">
 <div class="eyebrow">04 · Återkoppling till vattenmodellen</div>
 <h2>Växande betyder inte allt snabbare</h2>
-<p class="mathline">V(t)=120(1−e<sup>−0,2t</sup>), &nbsp; t≥0</p>
+<div class="math-givens"><p class="mathline">V(t)=120(1−e<sup>−0,2t</sup>)</p><p class="mathline">t≥0</p></div>
 <div class="sequence panel" data-sequence>
 <div class="nextprompt"><strong>Förutsäg nästa steg:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
@@ -143,14 +153,14 @@
 <div class="seq-item hidden" data-seq-item data-question="Beräkna V″(5). Hur ska minustecknet tolkas?"><strong>3 · Förändringen av inflödet</strong><p class="mathline">V″(5)=−4,8e<sup>−1</sup>≈−1,77</p><p>Inflödet <strong>minskar</strong> då med cirka <strong>1,77 liter/min per minut</strong>.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="När är inflödet störst? Når mängden 120 liter någon gång vid ändlig tid?"><strong>4 · Störst inflöde, men inget största vattenvärde</strong><div class="solution-math-group"><p class="mathline">V″(t) = −4,8e<sup>−0,2t</sup> &lt; 0</p><p class="mathline">V′(0) = 24e<sup>0</sup> = 24 liter/min</p></div><p class="solution-explanation">För alla t≥0 är V″(t) negativ, alltså avtar V′. <strong>Största inflödet är 24 liter/min.</strong></p><p class="mathline">lim<sub>t→∞</sub> V(t)=120</p><p>För varje ändlig tid är V(t)&lt;120. Mängden närmar sig <strong>120 liter underifrån</strong> men når aldrig 120 enligt modellen. <strong>Inget största vattenvärde finns</strong> på t≥0.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
-<div class="caution"><strong>Viktig skillnad:</strong> Ett gränsvärde behöver inte vara ett funktionsvärde som verkligen antas. Här finns ingen tidpunkt då modellen ger exakt 120 liter.</div>
+<div class="caution"><strong>Kontrollfråga:</strong> Om vattenmängden hela tiden ökar men aldrig blir exakt 120 liter, har funktionen då ett största värde? Förklara skillnaden mellan en gräns och ett värde som verkligen antas.</div>
 </section>
 
 <section class="slide" id="robot" data-teacher="Original s.5: robotens sträcka s(t)=12sqrt(t+1)−12, 0≤t≤8, s meter, t sekunder. Egen uppgift: s′3, s″3, när s′ max, tangentekvationen vid t3. Stöd sqrt(t+1)=(t+1)^1/2 och tangent y=s3+s′3(t−3). Eleven ska välja att maximera s′, inte s. Gör på papper innan facit.">
 <div class="eyebrow">05 · Din tur · en annan storhet</div>
 <h2>Robotens rörelse</h2>
 <p class="lead">En robot rör sig framåt. Sträckan s mäts i meter och tiden t i sekunder.</p>
-<p class="mathline">s(t)=12√(t+1)−12, &nbsp; 0≤t≤8</p>
+<div class="math-givens"><p class="mathline">s(t)=12√(t+1)−12</p><p class="mathline">0≤t≤8</p></div>
 <div class="task"><strong>Välj själv matematisk metod:</strong> Bestäm hastigheten och accelerationen vid t=3, när hastigheten är störst, samt tangentens ekvation vid t=3. Motivera med storheter, derivator och enheter. Jämför sedan i par vilken funktion ni maximerade och varför.</div>
 <button type="button" class="secondary" data-reveal="robot-original-steps">Visa originalets uppgiftslista om du fastnar</button>
 <div class="panel hidden" id="robot-original-steps"><ol class="spaced"><li>Bestäm hastigheten vid t=3.</li><li>Bestäm och tolka s″(3).</li><li>När är hastigheten störst? Motivera.</li><li>Bestäm tangentens ekvation vid t=3.</li></ol></div>
@@ -252,7 +262,7 @@
 <p class="lead">Svara självständigt på papper. En kort motivering är viktigare än många decimaler.</p>
 <div class="pair">
 <div class="task"><strong>1 · Mängd och förändring</strong>
-<p class="mathline">M(t)=50(1−e<sup>−0,1t</sup>), &nbsp; t≥0</p>
+<div class="math-givens"><p class="mathline">M(t)=50(1−e<sup>−0,1t</sup>)</p><p class="mathline">t≥0</p></div>
 <p>M mäts i gram och t i minuter.</p><ol class="spaced">
 <li>Bestäm M′(0) och tolka med enhet.</li>
 <li>När är ökningstakten störst? Motivera.</li>
@@ -301,5 +311,7 @@
 <footer>Matematik – fortsättning, nivå 1c · 3.2 Blandade problem · Boken s. 173–176. Ingen insamling av elevsvar.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
+<script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
 <script src="lesson.js"></script>
+<script src="math-polish.js"></script>
 </body></html>
