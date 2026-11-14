@@ -195,10 +195,10 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
     const width=await page.evaluate(()=>({viewport:innerWidth,page:document.documentElement.scrollWidth}));
     test(width.page<=width.viewport+2,'no horizontal page clipping '+v.name+' '+n+': '+JSON.stringify(width));
     test(await sc().isVisible(),'slide renders '+v.name+' '+n);
-    if(n===6){const b=await node('.slide.active .earth-two-equations math');test(b.length===2&&b[1].y-b[0].bottom>=12,'separate equation vertical space '+v.name)}
+    if(n===6){const count=await page.locator('.slide.active .earth-component-card').count();test(count===2,'separate horizontal/vertical component formula cards displayed '+v.name); const layout=await node('.slide.active .earth-component-card .math-sm math');test(layout.length>=4&&layout.some(r=>r.bottom>r.y),'readable native component MathML '+v.name);}
     if(n===11){const rect=await node('.slide.active .earth-solution-step .earth-math-stages math');test(rect.length>=2,'visible correct MathML algebra at '+v.name)}
     if(n===8){const t=await tip('#earth-compass svg path[fill="#cf453b"]');test(!!t&&t.cx>320&&t.cy<207,'visible correct red north tip at '+v.name)}
-    if(v.name==='projector'&&[11,13].includes(n)){const h=await page.evaluate(()=>document.documentElement.scrollHeight);test(h<=1120,'worked example '+n+' projector height '+h+' px (1080px viewport)');}
+    if(v.name==='projector'&&[6,11,13].includes(n)){const h=await page.evaluate(()=>document.documentElement.scrollHeight);test(h<=1120,'worked example '+n+' projector height '+h+' px (1080px viewport)');}
     await screenshot(v.name+'-'+String(n).padStart(2,'0'));
    }
   }

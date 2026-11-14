@@ -67,6 +67,17 @@ svg text{font-family:system-ui,sans-serif;fill:#284c5a}svg .bfield{stroke:#08768
  .earth-solution-grid .earth-solution-step .math{font-size:clamp(1.35rem,2.05vw,1.85rem)}
  .earth-solution-grid .earth-solution-step .small{margin:8px 0 3px}
 }
+
+/* On the projector, the component cards replace the introductory duplicate equations only after feedback is revealed. */
+@media(min-width:1100px){
+ body:not(.repeat) .slide:has(#earth-components-result .earth-component-chains) .earth-two-equations{display:none}
+ body:not(.repeat) .slide:has(#earth-components-result .earth-component-chains)>.question{display:none}
+ .slide:has(#earth-components-result .earth-component-chains) .earth-component-chains{gap:9px}
+ .slide:has(#earth-components-result .earth-component-chains) .earth-component-card{padding:9px 11px}
+ .slide:has(#earth-components-result .earth-component-chains) .earth-component-card .earth-math-stages{gap:8px}
+ .slide:has(#earth-components-result .earth-component-chains) .earth-component-card .math-sm{font-size:1.18rem}
+ .slide:has(#earth-components-result .earth-component-chains) .earth-component-card>.tag{margin-bottom:5px}
+}
 </style></head>
 <body data-subject="jordens-magnetfalt">
 <header><div class="brand">FYSIK 2 · ELEKTROMAGNETISM<span>Jordens magnetfält · Inklination, missvisning och kompass i spole</span></div><div class="controls"><button id="class" class="selected" aria-pressed="true">Klassrum</button><button id="repetition" aria-pressed="false">Repetition</button><button id="teacher" aria-pressed="false">Lärarstöd</button><button id="fullscreen">Helskärm</button><button id="settings">Arbetsbild</button></div></header>
