@@ -25,7 +25,7 @@ function radian(source){
  return (m[1]?Number(m[1]):1)*Math.PI/Number(m[2]||1);
 }
 async function stage(page,n){
- for(let i=0;i<5;i++)await page.locator('#u-prev:not(:disabled)').click().catch(()=>{});
+ while(!(await page.locator('#u-prev').isDisabled()))await page.locator('#u-prev').click();
  for(let i=0;i<n;i++)await page.locator('#u-next').click();
  assert.equal(await page.locator('.u-step:not([hidden])').getAttribute('data-u-step'),String(n));
 }
