@@ -56,6 +56,17 @@ svg text{font-family:system-ui,sans-serif;fill:#284c5a}svg .bfield{stroke:#08768
 @media(min-width:1100px){.earth-reverse-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(min-width:851px) and (max-width:1099px){.earth-reverse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:850px){.earth-reverse-grid{grid-template-columns:1fr}}
+
+/* When third solution step is visible, remove outdated initial instruction and keep the full algebra within a projector. */
+@media(min-width:1100px){
+ .earth-solution-grid:has(.earth-solution-right .earth-solution-step.open)>.panel>.question{display:none}
+ .earth-solution-grid .earth-math-stages{gap:8px}
+ .earth-solution-grid .earth-solution-step{padding:9px 13px;margin:8px 0}
+ .earth-solution-grid .earth-solution-step h2{font-size:1.14rem;margin:3px 0 8px}
+ .earth-solution-grid .earth-solution-step .math-sm{font-size:clamp(1.09rem,1.65vw,1.4rem)}
+ .earth-solution-grid .earth-solution-step .math{font-size:clamp(1.35rem,2.05vw,1.85rem)}
+ .earth-solution-grid .earth-solution-step .small{margin:8px 0 3px}
+}
 </style></head>
 <body data-subject="jordens-magnetfalt">
 <header><div class="brand">FYSIK 2 · ELEKTROMAGNETISM<span>Jordens magnetfält · Inklination, missvisning och kompass i spole</span></div><div class="controls"><button id="class" class="selected" aria-pressed="true">Klassrum</button><button id="repetition" aria-pressed="false">Repetition</button><button id="teacher" aria-pressed="false">Lärarstöd</button><button id="fullscreen">Helskärm</button><button id="settings">Arbetsbild</button></div></header>
