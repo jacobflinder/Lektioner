@@ -5,7 +5,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
 const url='http://127.0.0.1:8123/mato1c/kapitel-3/funktionens-graf-och-derivatornas-grafer/';
 const dir='mato1c-qa-screenshots';fs.mkdirSync(dir,{recursive:true});
 const near=(a,b,tol=1e-7)=>Math.abs(a-b)<=tol;
-const f=x=>-x**3/12+x*x-3*x+3.5;
+const f=x=>-(x**3)/12+x*x-3*x+3.5;
 const fp=x=>-x*x/4+2*x-3;
 const fpp=x=>2-x/2;
 const h=x=>x**3/3-2*x*x+3*x;
