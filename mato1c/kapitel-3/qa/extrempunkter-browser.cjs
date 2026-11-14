@@ -39,7 +39,7 @@ fs.mkdirSync(out,{recursive:true});
   await ok((await page.locator('#recall-signs').innerText()).includes('2x−4'),'Tidigare metod återkallas');
   await ok(!await page.locator('#recall-signs-answer').isVisible(),'Återkallningssvar först dolt');
   await page.locator('[data-reveal="recall-signs-answer"]').click();
-  await ok(/f′\(1\)\s*=\s*−2/.test(await page.locator('#recall-signs-answer').innerText()),'Återkallningssvar korrekt');
+  await ok((await page.locator('#recall-signs-answer math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('f′(1)=2·1−4=−2<0'),'Återkallningssvar korrekt i semantisk MathML');
   await step(3);
   await ok(!await page.locator('#graph-readout').isVisible(),'Lutningens numeriska värden dolda före förutsägelsen');
   await page.locator('[data-reveal="graph-readout"]').click();

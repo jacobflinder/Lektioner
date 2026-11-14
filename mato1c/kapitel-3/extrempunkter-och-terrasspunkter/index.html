@@ -35,6 +35,16 @@
 .book-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .lesson-emphasis{color:#075e58;font-weight:800}
 @media(max-width:760px){.graph-grid{grid-template-columns:1fr}.graph-preview svg{max-height:200px}.step-grid,.book-choices{grid-template-columns:1fr}.points-table th,.points-table td{padding:7px 3px;font-size:.88rem}.points-table select{padding:5px 2px;font-size:.87rem}}
+/* Lesson 25: independent semantic equations and real vertical spacing. */
+.slide .math-givens,.slide .solution-math-group{display:grid!important;gap:16px!important;margin:14px 0}
+.slide .math-givens>.math,.slide .solution-math-group>.math,
+.slide .math-givens>.solution-equation,.slide .solution-math-group>.solution-equation{margin:0!important}
+.slide .math math[display="block"],.slide .solution-equation math[display="block"]{font-size:clamp(1rem,2.1vw,1.32rem)}
+.slide .math-inline math{font-size:1em}
+.slide .sign-table caption{caption-side:top;text-align:left;font-size:.85rem;color:#49697c;padding:5px 0}
+.slide .math-result-panel{margin:13px 0}
+.slide .math-result-panel p{margin:5px 0}
+@media(max-width:720px){.slide .math math[display="block"],.slide .solution-equation math[display="block"]{font-size:1rem}}
 </style>
 </head>
 <body>
@@ -253,6 +263,8 @@
 <footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Källa: den tidigare lektionen 2026-11-05. Webbens modeller är egna beräknade figurer. Inga elevsvar samlas in.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
+<script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
 <script src="lesson.js"></script>
+<script src="math-polish.js"></script>
 </body>
 </html>
