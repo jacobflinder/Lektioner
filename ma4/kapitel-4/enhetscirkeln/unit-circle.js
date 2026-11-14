@@ -104,11 +104,9 @@ function renderStudy(){
  $('study-reveal').setAttribute('aria-expanded',String(studyRevealed));
  setText('study-question',studyUnits==='degrees'?studyDeg+'°':angle.rad+' rad');
  setText('study-deg',angle.deg+'°');setText('study-rad',angle.rad);setText('study-cos',angle.x);setText('study-sin',angle.y);
- const refs=[30,45,60];
  const quadrant=studyDeg===0||studyDeg===360||studyDeg===90||studyDeg===180||studyDeg===270?'axeln':studyDeg<90?'första kvadranten':studyDeg<180?'andra kvadranten':studyDeg<270?'tredje kvadranten':'fjärde kvadranten';
- const ref=studyDeg%90;
- const acute=ref>45?90-ref:ref;
- const refAngle=[0,30,45,60,90].includes(studyDeg)?studyDeg:studyDeg%90===0?null:Math.min(studyDeg%180,180-studyDeg%180);
+ const axis=[0,90,180,270,360].includes(studyDeg);
+ const refAngle=axis?null:Math.min(studyDeg%180,180-studyDeg%180);
  setText('study-explain','Punkten ligger på '+quadrant+'. cos v är x-koordinaten och sin v är y-koordinaten.'+(refAngle===null?' På axlarna är minst en koordinat 0.':' Den spetsiga referensvinkeln är '+refAngle+'°; jämför beloppen med första kvadranten.'));
 }
 function shuffle(values){

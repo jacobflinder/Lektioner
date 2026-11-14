@@ -7,8 +7,11 @@
 <meta name="description" content="Träna enhetscirkeln: exakta vinklar i grader och radianer, cosinus och sinus, kvadranter och koordinater. Direkt återkoppling utan elevkonto.">
 <title>Enhetscirkeln – repetitionsverkstad | Ma4 kapitel 4</title>
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="../assets/math-presentation.css">
+<script src="../assets/math-presentation.js" defer></script>
 <script src="./unit-circle.js" defer></script>
 <script src="./understand.js" defer></script>
+<script src="./math-polish.js" defer></script>
 </head>
 <body>
 <header>
@@ -65,8 +68,8 @@
           <section class="u-step" data-u-step="0">
             <span class="u-section">1 · Koordinater är grunden</span>
             <h3>Vad betyder cos och sin?</h3>
-            <div class="u-math-rule"><strong>cos v = x</strong><span>·</span><strong>sin v = y</strong></div>
-            <p class="task"><strong>Radien pekar rakt upp.</strong> Vilken x-koordinat har punkten?</p>
+            <div class="unit-math-givens u-math-rule"><p class="math unit-math-block">cos v = x</p><p class="math unit-math-block">sin v = y</p></div>
+            <p class="task"><strong>Börja vid 90°: radien pekar rakt upp.</strong> Vilken x-koordinat har punkten? Pröva sedan övriga axelvinklar.</p>
             <div class="u-options" data-u-answer="axis">
               <button type="button" data-u-option="1">x = 1</button>
               <button type="button" data-u-option="0">x = 0</button>
@@ -75,12 +78,12 @@
             <p class="u-feedback feedback" id="u-axis-feedback" role="status" aria-live="polite" hidden></p>
             <div class="pillrow u-small-controls"><button type="button" class="secondary" data-u-axis="0">0°</button><button type="button" class="secondary" data-u-axis="90">90°</button><button type="button" class="secondary" data-u-axis="180">180°</button><button type="button" class="secondary" data-u-axis="270">270°</button></div>
             <p class="micro">Pröva de fyra axelvinklarna. Var ligger punkten?</p>
-            <div id="u-axis-answer" class="answer" hidden><strong>(cos 90°; sin 90°) = (0; 1)</strong><p>Rakt upp betyder x = 0 och y = 1. Radien är 1.</p></div>
+            <div id="u-axis-answer" class="answer" hidden><div id="u-axis-equation" class="math">cos 90° = 0</div><div class="unit-math-givens"><p class="math" id="u-axis-sin">sin 90° = 1</p></div><p id="u-axis-explain">Vid 90° är x = 0 och y = 1. Radien är 1.</p></div>
           </section>
           <section class="u-step" data-u-step="1" hidden>
             <span class="u-section">2 · Från grader till radianer</span>
             <h3>Varifrån kommer π?</h3>
-            <div class="u-math-rule"><strong>radie = 1</strong><span>·</span><strong>båglängd = radianmått</strong></div>
+            <div class="unit-math-givens u-math-rule"><p class="math unit-math-block">r = 1</p><p class="math unit-math-block">v = s/r = s</p></div><p class="micro">Här är s båglängden och v vinkeln i radianer: v = s/r. När r = 1 är det numeriska värdet detsamma.</p>
             <p class="task"><strong>Halvt varv = 180°.</strong> Hur lång är den orange bågen?</p>
             <label class="u-slider-label" for="u-radian-slider">Dra radien: <strong id="u-radian-deg">180°</strong></label>
             <input type="range" id="u-radian-slider" min="0" max="360" step="15" value="180">
@@ -98,7 +101,7 @@
           <section class="u-step" data-u-step="2" hidden>
             <span class="u-section">3 · Härled de exakta värdena</span>
             <h3>Varifrån kommer de exakta värdena?</h3>
-            <div class="u-math-rule"><strong>hypotenusa = 1</strong><span>·</span><strong>kateter = cos v, sin v</strong></div>
+            <div class="unit-math-givens u-math-rule"><p class="math unit-math-block">r = 1</p><p class="math unit-math-block">x = cos v</p><p class="math unit-math-block">y = sin v</p></div><p class="micro">Hypotenusan är radien 1. Kateterna i första kvadranten motsvarar punktens koordinater.</p>
             <div class="pillrow u-small-controls" aria-label="Välj triangel">
               <button type="button" data-u-triangle="45">45°</button>
               <button type="button" data-u-triangle="30">30°</button>
@@ -148,7 +151,7 @@
           <section class="u-step" data-u-step="5" hidden>
             <span class="u-section">6 · Överför till Matematik 4</span>
             <h3>Nu har du nytta av detta i komplexa tal</h3>
-            <div class="u-math-rule"><strong>z = r(cos v + i sin v)</strong></div>
+            <div class="unit-math-givens u-math-rule"><p class="math unit-math-block">z = r(cos v + i sin v)</p></div>
             <p class="task"><strong>Utan figur:</strong> r = 2 och v = 240°. Bestäm z = a + bi. Visa mellanled.</p>
             <label for="u-240-input" class="u-input-label">Skriv z i rektangulär form (exempel på skrivsätt: a+bi)</label>
             <input type="text" id="u-240-input" class="u-input" placeholder="Skriv exakt värde på formen a+bi" autocomplete="off" autocapitalize="off" spellcheck="false">
@@ -156,7 +159,7 @@
             <p id="u-240-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
             <div id="u-240-support" class="hint-panel" hidden></div>
             <button type="button" id="u-240-solution" class="ghost" hidden>Visa hela lösningen efter försök</button>
-            <div id="u-240-answer" class="answer" hidden><p><strong>240° = 180° + 60° = 4π/3 rad.</strong> I tredje kvadranten är båda koordinater negativa:</p><p class="math">cos 240° = −1/2, &nbsp; sin 240° = −√3/2</p><p class="math">z = 2(−1/2 − √3/2 i) = <strong>−1 − √3i</strong></p></div>
+            <div id="u-240-answer" class="answer" hidden><p><strong>240° = 180° + 60° = 4π/3 rad.</strong> I tredje kvadranten är båda koordinater negativa:</p><div class="unit-math-givens"><p class="math unit-math-block">cos 240° = −1/2</p><p class="math unit-math-block">sin 240° = −√3/2</p></div><div class="unit-math-givens"><p class="math unit-math-block">z = 2(−1/2 − √3/2 i)</p><p class="math unit-math-block">z = −1 − √3i</p></div></div>
             <div id="u-final" class="u-final" hidden>
               <h3>Pröva på en helt ny vinkel</h3>
               <p>r = 2 och v = <strong>300°</strong>. Bestäm z = a + bi utan figur.</p>
