@@ -50,6 +50,16 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   test((await slide().innerText()).includes('Physics at School'),'physical demo preserved');
   // 03 materials, three separate reveals
   await go(3);test(await slide().locator('.answer').count()===3,'diamagnetic, para, ferro explanations distinct');
+  const material=await slide().locator('.material-vector svg').count();
+  test(material===3,'all 3 source-PDF material magnetization diagrams restored');
+  for(const [i,sign] of [[0,-1],[1,1],[2,1]]){
+   const svg=slide().locator('.material-vector svg').nth(i);
+   const d=await svg.locator('.material-response').getAttribute('d');
+   const m=String(d).match(/M(\d+) 81H(\d+)/);
+   test(!!m&&Math.sign(Number(m[2])-Number(m[1]))===sign,'real SVG material M direction '+i);
+   test((await svg.getAttribute('aria-label')).includes('yttre B-fältet'),'accessible diagram compares B and material M '+i);
+  }
+
   for(let i=1;i<=3;i++){await reveal(1);test(await slide().locator('.answer.shown').count()===i,'material reveal '+i)}
   await reset();test(await slide().locator('.answer.shown').count()===0,'material answers reset');
   // 04 model hard/soft domain stages
@@ -60,6 +70,8 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   await page.locator('#domain-reset').click();test((await page.locator('#domain-grid span').allTextContents()).join('')===baseline.join(''),'domain reset original');
   // 05 distinct math + 6 independently checked area/field values
   await go(5);test(await slide().locator('.magnet-equation-steps math').count()===2,'two independent static flux laws');
+  test(await page.locator('#flux-reference').count()===1,'original two-field source PDF comparison restored');
+  test(Number(await page.locator('#flux-reference').getAttribute('width'))===120,'fixed reference area geometry corresponds to 24 cm2');
   test((await page.locator('#flux-svg text').first().getAttribute('y'))==='20','area caption clears the upper field dot row');
   test(!await slide().locator('.answer').isVisible(),'no static formula answer until pupil attempts');
   await slide().locator('[data-reveal]').click();test(gap(await bounds('.slide.active .magnet-equation-steps > div')),'real math gap >15px');
@@ -70,8 +82,11 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
    const actual=await page.locator('#flux-result math[display="block"]').last().textContent();
    test(actual.includes(want)&&actual.includes('mWb'),'flux BA physics '+B+'/'+A);
    test((await text('field-value')).includes(B.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2})),'B stays separate from area');
-   test(Math.abs(Number(await page.locator('#flux-area').getAttribute('width'))-165*A/24)<.01,'drawn SVG area scales with A');
-   test(await page.locator('#flux-result math[display="block"]').count()===3,'law substitution result three MathML');
+   test(Math.abs(Number(await page.locator('#flux-area').getAttribute('width'))-120*A/24)<.01,'drawn SVG variable area relative to 24cm2 reference');
+   test(Math.abs(Number(await page.locator('#flux-area').getAttribute('width'))/Number(await page.locator('#flux-reference').getAttribute('width'))-A/24)<.0001,'independent SVG ratio A/A0 '+A);
+   test((await page.locator('#flux-area').getAttribute('aria-label')).includes(String(A)+' cm²'),'accessible comparator gives actual variable area '+A);
+   test(await page.locator('#flux-result math[display="block"]').count()===4,'law, numeric substitution, flux and reference-area ratio MathML');
+   test((await page.locator('#flux-result math[display="block"]').last().textContent()).includes((A/24).toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2})),'numeric flux ratio equal area ratio '+A);
   }
   await reset();test(!(await text('flux-result')).includes('mWb'),'global reset hides dynamic computed result');
   test(!await slide().locator('.answer').isVisible(),'global reset hides static answer');
@@ -123,6 +138,7 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   test(tr.status()===200,'teacher notes accessible');const teacher=await tr.text();
   for(const s of ['Magnetism_lektion_2.pdf','144–148','323, 324, 326, 330 och 331','Physics at School'])test(teacher.includes(s),'teacher original references '+s);
   test(teacher.includes('0,00096 Wb')&&teacher.includes('0,0024'),'teacher numeric steps updated');
+  test(teacher.includes('återförts')&&teacher.includes('A₀=24 cm²')&&teacher.includes('nu jämförd bild för bild'),'teacher accurately identifies source-PDF restoration');
   test(await page.locator('input[name="email"]').count()===0,'no identifying student input');
   // Every original slide at desktop, 390px mobile, projector, full revealed math.
   for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
