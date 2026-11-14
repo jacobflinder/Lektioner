@@ -89,13 +89,19 @@ function renderLoop(){
  $("ind-loop").innerHTML=loopMotion(t);
  $("loop-t-value").textContent=fmt(t,2)+" s";
  $("loop-result").innerHTML=loopShown?
- chain('<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width="1em"/><mi>U</mi><mo>=</mo><mo>−</mo><mi>B</mi><mi>L</mi><mi>v</mi>',
- '<mi>Φ</mi><mo>=</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(phi/400,4,'m²')+
- '<mspace width="1em"/><mi>U</mi><mo>=</mo><mo>−</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(.2,2,'m')+'<mo>·</mo>'+qty(moving?.5:0,2,'m/s'),
- '<mi>Φ</mi><mo>=</mo><mn>'+fmt(phi,1)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext><mspace width="1em"/><mi>U</mi><mo>=</mo><mn>'+fmt(emf,3)+'</mn><mspace width="0.25em"/><mtext>V</mtext>',
- moving?'Positiv normal in i bilden innebär positivt omlopp medurs. När flödet ökar blir U negativ och den inducerade strömmen moturs; den bromsar staven.':'Flödet finns kvar men ändras inte: den inducerade spänningen är noll.') :
+ '<div class="ind-loop-proof"><span class="tag">1 · Magnetiskt flöde</span>'+
+ m('<mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi>')+
+ '<details class="calc-ins"><summary>Visa insättningen för flödet</summary>'+
+ m('<mi>Φ</mi><mo>=</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(phi/400,4,'m²'))+'</details>'+
+ m('<mi>Φ</mi><mo>=</mo><mn>'+fmt(phi,1)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext>')+
+ '<span class="tag">2 · Inducerad spänning</span>'+
+ m('<mi>U</mi><mo>=</mo><mo>−</mo><mi>B</mi><mi>L</mi><mi>v</mi>')+
+ '<details class="calc-ins"><summary>Visa insättningen för spänningen</summary>'+
+ m('<mi>U</mi><mo>=</mo><mo>−</mo>'+qty(.4,2,'T')+'<mo>·</mo>'+qty(.2,2,'m')+'<mo>·</mo>'+qty(moving?.5:0,2,'m/s'))+'</details>'+
+ m('<mi>U</mi><mo>=</mo><mn>'+fmt(emf,3)+'</mn><mspace width="0.25em"/><mtext>V</mtext>')+
+ '<p class="small">'+(moving?'Positiv normal inåt ger positivt omlopp medurs; ökande flöde ger negativ spänning och moturs ström som bromsar staven.':'Flödet finns kvar men ändras inte, så den inducerade spänningen är noll.')+'</p></div>':
  'Förutsäg när '+inlineM('<mi>U</mi>')+' är skild från noll. '+inlineM('<mi>B</mi><mo>=</mo><mn>0,40</mn><mspace width="0.25em"/><mtext>T</mtext>')+', '+inlineM('<mi>L</mi><mo>=</mo><mn>0,20</mn><mspace width="0.25em"/><mtext>m</mtext>')+', och '+inlineM('<mi>v</mi><mo>=</mo><mn>0,50</mn><mspace width="0.25em"/><mtext>m/s</mtext>')+' endast under rörelsen.';
- $("loop-show").textContent=loopShown?"Dölj Φ och U":"Visa Φ och U";
+$("loop-show").textContent=loopShown?"Dölj Φ och U":"Visa Φ och U";
 }
 $("loop-t").oninput=()=>{renderLoop()};
 document.querySelectorAll("[data-loop]").forEach(b=>b.onclick=()=>{$("loop-t").value=b.dataset.loop;renderLoop()});
