@@ -201,6 +201,7 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
    for(let i=1;i<=24;i++){
     if(vp.name==='projector'&&![6,7,12,14,21,23,24].includes(i))continue;
     await goto(i);
+    await reset();
     if(i===6)await page.locator('#rod-show').click();
     if(i===12)await page.locator('#flux-angle-show').click();
     if(i===14)await page.locator('#loop-show').click();
@@ -208,6 +209,8 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
     if(i===23)await page.locator('#ind-tangent-show').click();
     const width=await page.evaluate(()=>({inner:innerWidth,doc:document.documentElement.scrollWidth}));
     check(width.doc<=width.inner+2,'no horizontal overflow '+vp.name+' slide '+i+' '+JSON.stringify(width));
+    if(i===9){const font=Number.parseFloat(await page.locator('.slide.active .ind-result-proof>.math math').evaluate(el=>getComputedStyle(el).fontSize));check(font>=20,'answer U=0.24 V readable at '+vp.name+' font '+font);}
+    if(i===23)check(await page.locator('#ind-tangent-result .ind-tangent-derivation math').count()===2,'revealed tangent differentiation visible on '+vp.name);
     check(await page.locator('.slide.active').isVisible(),'slide visible '+vp.name+' '+i);
     await snap(vp.name+'-'+String(i).padStart(2,'0'));
    }
