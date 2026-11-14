@@ -147,7 +147,10 @@ for(const v of ['f(x)=x³−3x+2','f′(x)=3x²−3','f′(x)=3(x²−1)','f′(
 ok((await seq.innerText()).includes('(−1, 4)')&&(await seq.innerText()).includes('(1, 0)'),'both original coordinates intact');
 ok((await seq.innerText()).includes('inga av dessa punkter är globala'),'correct local-vs-global restriction');
 await seq.locator('[data-seq-back]').click();ok(await seq.locator('[data-seq-item]:visible').count()===4,'back button actually hides last step');
-await seq.locator('[data-seq-next]').click();await gaps('#example');await shot('desktop-04');
+await seq.locator('[data-seq-next]').click();
+ok(await page.locator('#example .wide-sign:visible').count()===1,'desktop shows full five-interval sign table');
+ok(await page.locator('#example .tall-sign:visible').count()===0,'desktop portrait fallback hidden');
+await gaps('#example');await shot('desktop-04');
 // 5: terrace relies on sign without extremum PLUS actual bending proof.
 await go(5);
 await includes('#terrace','f(x)=x³+2');
@@ -217,6 +220,12 @@ await gaps('#summary');await shot('desktop-09');
 await page.setViewportSize({width:390,height:844});
 for(let i=1;i<=9;i++){
  await go(i);
+ if([4,5,6].includes(i)){
+  ok(await page.locator('.slide.active .responsive-sign .tall-sign:visible').count()>=1,
+    'phone has fully visible three-column portrait sign table '+i);
+  ok(await page.locator('.slide.active .responsive-sign .wide-sign:visible').count()===0,
+    'wide table hidden, not clipped on phone '+i);
+ }
  ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'390px no document horizontal overflow slide '+i);
  await gaps('.slide.active');
  await shot('mobile-'+String(i).padStart(2,'0'));
