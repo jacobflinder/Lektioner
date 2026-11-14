@@ -79,8 +79,9 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await ok((await seq.locator('[data-seq-prompt]').innerText()).includes('f″(0)'),'Eleven förutsäger andraderivatans värden');
   await seq.locator('[data-seq-next]').click();
   const second=(await seq.locator('[data-seq-item]').nth(2).textContent())+' '+(await labels('#example [data-seq-item]:nth-child(3)'));
-  for(const v of ['f″(x) = 6x − 9','f″(0) = −9 < 0','f″(3) = 9 > 0','lokalt maximum','lokalt minimum','ändpunkterna','f″(a)=0']){
-    await ok(second.includes(v),'Andraderivatatest korrekt och avgränsat: '+v);
+  const secondCompact=second.replace(/\\s+/g,'');
+  for(const v of ['f″(x)=6x−9','f″(0)=−9<0','f″(3)=9>0','lokaltmaximum','lokaltminimum','ändpunkterna','f″(a)=0']){
+    await ok(secondCompact.includes(v),'Andraderivatatest korrekt och avgränsat: '+v);
   }
   for(let i=0;i<3;i++)await seq.locator('[data-seq-next]').click();
   await ok(await seq.locator('[data-seq-item]:visible').count()===6,'Alla sex steg kan öppnas');
@@ -114,7 +115,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   const book=await page.locator('#book').innerText();
   for(const v of ['s. 159–160','3157–3163','3164–3166','3167–3168','3158','3161','3164','20 minuter','minst två','3161 a och 3164 a–b','3168'])await ok(book.includes(v),'Bok/läxa korrekt: '+v);
   await go(8);
-  await ok((await page.locator('#exit').innerText()).includes('p(x)=x³−3x'),'Originalets utcheckning');
+  await ok((await labels('#exit')).includes('p(x)=x³−3x'),'Originalets utcheckning');
   await ok((await page.locator('#exit').innerText()).includes('x=−1'),'Intervallets exkluderade stationära punkt');
   await go(9);
   await ok(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,'Utcheckningens facit inte visat automatiskt');
