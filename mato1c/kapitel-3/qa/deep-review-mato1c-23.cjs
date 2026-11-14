@@ -31,7 +31,7 @@ const coords=async(id,index,x,y)=>{const c=await page.locator('#'+id+' circle').
 try{
 await page.goto(url,{waitUntil:'networkidle'});
 ok(await page.locator('.slide').count()===12,'exact twelve frames');
-ok(await page.evaluate(()=>document.documentElement.dataset.differentiabilityMath)==='ready','math renderer initialized');
+ok(await page.evaluate(()=>document.documentElement.dataset.differentiabilityMath)==='ready','math renderer initialized: '+errors.join(' | '));
 ok(await page.locator('.slide math').count()>=72,'at least 72 semantic formula nodes');
 ok(await page.locator('.slide math mfrac').count()>=10,'genuine MathML fractions');
 ok(await page.locator('.slide math munder').count()>=4,'genuine MathML one-sided limits');
