@@ -57,7 +57,7 @@ ok(errors.length===0,'no initialization JS errors '+errors.join(';'));
 for(let i=0;i<=1000;i++){
 const x=-2.1+i*.0042,h=.00001;
 ok(close((f(x+h)-f(x-h))/(2*h),df(x),2e-6),'cubic derivative finite difference '+x);
-if(x < -.999)ok(df(x)>0,'cubic growing left '+x);
+if(x < -1.001)ok(df(x)>0,'cubic growing left '+x);
 if(x>-.999&&x<.999)ok(df(x)<0,'cubic decreasing middle '+x);
 if(x>1.001)ok(df(x)>0,'cubic growing right '+x);
 }
@@ -85,7 +85,8 @@ ok(await page.locator('#start-graph g[clip-path] path').count()===1,'start graph
 ok(await page.locator('#start-graph g[clip-path] circle').count()===2,'start two actual stationary dots');
 ok(!await page.locator('#start-feedback').isVisible(),'start solution hidden');
 await reveal('start-feedback');
-ok((await page.locator('#start-feedback').innerText()).includes('−1')&&(await page.locator('#start-feedback').innerText()).includes('1'),'start correct boundaries');
+const startLabels=await lab('#start-feedback');
+ok(startLabels.some(x=>x?.replace(/\s+/g,'')==='x=−1')&&startLabels.some(x=>x?.replace(/\s+/g,'')==='x=1'),'start correct boundaries from semantic MathML');
 await shot('desktop-01');
 
 // Slide 2 objectives are unchanged and followed start.
