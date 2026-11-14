@@ -134,7 +134,7 @@ try{
  for(const token of ['s. 168–170','s. 172','3217–3221','3222–3228','3229–3232','3234–3238','3239–3241','3242–3244','3217 → 3222 → 3234 → 3239','3225 → 3230 → 3241 → 3242','20 minuter','3221 och 3236','3241'])await ok(book.includes(token),'Bok/läxa: '+token);
  await go(11);
  const exit=await page.locator('#exit').innerText();
- await ok(exit.includes('y=6−x'),'Originalets geometriska exit');
+ await ok((await mathLabels('#exit')).includes('y=6−x'),'Originalets geometriska exit');
  await ok((await mathLabels('#exit')).includes('C(x)=x+9/x'),'Originalets bråkfunktion exit');
  await go(12);
  const seqs=page.locator('#exit-feedback [data-sequence]');
