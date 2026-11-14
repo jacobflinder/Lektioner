@@ -8,6 +8,7 @@ function syncCompassReveal(){
  const slide=$("magnet-svg")?.closest(".slide");
  const revealed=!!slide?.querySelector(".answer.shown");
  $("magnet-svg").classList.toggle("compass-predicting",!revealed);
+ $("compass-needle").setAttribute("aria-hidden",String(!revealed));
 }
 function render(){
  slides.forEach((s,i)=>s.classList.toggle("active",i===current));
@@ -31,7 +32,7 @@ function resetCurrent(){
  slides[current].dispatchEvent(new CustomEvent("lesson:reset",{bubbles:false}));
  if(current===1){magnetFlipped=false;compassPoint="top";drawCompass();}
  if(current===3){domainStage=0;drawDomains();}
- if(current===4){$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux();}
+ if(current===4){fluxShown=false;$("field-strength").value="0.4";$("flux-area-slider").value="24";updateFlux();}
  if(current===6){pauseTimer();remaining=timerMinutes*60;timerText();}
  syncCompassReveal();render();
 }
@@ -124,9 +125,9 @@ function updateFlux(){
  $("flux-result").innerHTML=fluxShown?
  '<div style="font-size:.72em;font-family:system-ui;font-weight:650;margin-bottom:7px">Samband → insättning → svar</div>'+
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>'+
- '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(B,2)+'</mn><mtext> T</mtext><mo>·</mo><mn>'+fmt(A/10000,4)+'</mn><mtext> m²</mtext></math>'+
- '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(phi*1000,2)+'</mn><mtext> mWb</mtext></math>'+
- '<p style="font-size:.55em;font-family:system-ui;font-weight:500"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>A</mi><mo>=</mo><mn>'+fmt(A,0)+'</mn><mtext> cm²</mtext><mo>=</mo><mn>'+fmt(A/10000,4)+'</mn><mtext> m²</mtext></math>. Fältet är homogent och vinkelrätt mot ytan.</p>'
+ '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(B,2)+'</mn><mspace width="0.25em"/><mtext>T</mtext><mo>·</mo><mn>'+fmt(A/10000,4)+'</mn><mspace width="0.25em"/><mtext>m²</mtext></math>'+
+ '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(phi*1000,2)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext></math>'+
+ '<p style="font-size:.55em;font-family:system-ui;font-weight:500"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>A</mi><mo>=</mo><mn>'+fmt(A,0)+'</mn><mspace width="0.25em"/><mtext>cm²</mtext><mo>=</mo><mn>'+fmt(A/10000,4)+'</mn><mspace width="0.25em"/><mtext>m²</mtext></math>. Fältet är homogent och vinkelrätt mot ytan.</p>'
  :'<span style="font-family:system-ui;font-size:.64em;font-weight:600">Förutsäg först: ändrar B och A flödet på samma sätt?</span>';
  $("flux-show").textContent=fluxShown?"Dölj beräkningen":"Visa sambandet och beräkningen";
  $("flux-area").setAttribute("width",165*A/24);
