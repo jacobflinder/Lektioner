@@ -142,6 +142,15 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   test(countArrow===(sign===0?0:1),'no induced ring-current at constant flux');
   if(sign){const v=await vector('#demo-ring line.induced-ring-field');test(Math.sign(v.y1-v.y2)===sign,'true ring B vector orientation '+action)}
   test((await page.locator('#demo-ring-text').innerText()).includes(sign<0?'NEDÅT':sign>0?'UPPÅT':'konstant'),'ring explanation physically consistent');
+  if(sign){
+   const nonOverlapping=await page.locator('#demo-ring svg, #demo-ring').last().evaluate(el=>{
+    const ls=[...el.querySelectorAll('text')],a=ls.find(t=>t.textContent.includes('ledande ring')),b=ls.find(t=>t.textContent.includes('Bind'));
+    if(!a||!b)return false;
+    const u=a.getBBox(),v=b.getBBox();
+    return u.x+u.width<v.x||v.x+v.width<u.x||u.y+u.height<v.y||v.y+v.height<u.y;
+   });
+   test(nonOverlapping,'ring and induced-vector labels do not overlap in SVG '+action);
+  }
  }
  for(const body of ['magnet','ordinary']){
   await press('data-pipe-body',body);

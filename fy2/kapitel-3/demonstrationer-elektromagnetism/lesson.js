@@ -126,10 +126,10 @@ function drawRing(){
  const induced=-delta;
  let g='<ellipse cx="336" cy="165" rx="130" ry="51" stroke="#b87546" stroke-width="14" fill="none"/>'+
  arrow(299,205,299,77,'#097e98',5,'external-ring-field')+
- text(228,62,'B yttre ↑','#0c7890',20)+text(360,233,'ledande ring','#9e6c49',20);
+ text(228,62,'B yttre ↑','#0c7890',20)+text(259,253,'ledande ring','#9e6c49',20);
  if(delta!==0){
   g+=arrow(404,induced>0?214:96,404,induced>0?96:214,'#bd6b3e',5,'induced-ring-field')+
-  text(435,induced>0?108:224,'Bind '+(induced>0?'↑':'↓'),'#ad6942',19);
+  text(515,induced>0?115:229,'Bind '+(induced>0?'↑':'↓'),'#ad6942',19);
  }else g+=text(400,95,'Ingen inducerad ström','#ad6942',17);
  g+=text(34,35,'B_yttre väljs uppåt i skissen','#55737e',17);
  renderSvg('demo-ring',g,{action:ring.action,induced});
