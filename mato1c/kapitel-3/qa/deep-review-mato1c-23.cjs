@@ -27,8 +27,8 @@ return items.slice(1).map((e,i)=>({gap:e.getBoundingClientRect().top-items[i].ge
 }));
 for(const v of values)ok(v.gap>=15.9,'16px gap '+rootSelector+' actual '+v.gap.toFixed(2)+' '+v.label);
 };
-const xy=async locator,x,y=>{const v=await locator.evaluate(e=>[+e.getAttribute('cx'),+e.getAttribute('cy')]);ok(near(v[0],x,1e-5)&&near(v[1],y,1e-5),'SVG coords '+v+' expected '+x+','+y)};
-const svgEdge=async locator,x1,y1,x2,y2=>{
+const xy=async (locator,x,y)=>{const v=await locator.evaluate(e=>[+e.getAttribute('cx'),+e.getAttribute('cy')]);ok(near(v[0],x,1e-5)&&near(v[1],y,1e-5),'SVG coords '+v+' expected '+x+','+y)};
+const svgEdge=async (locator,x1,y1,x2,y2)=>{
 const arr=await locator.evaluate(e=>['x1','y1','x2','y2'].map(z=>+e.getAttribute(z)));
 ok(near(arr[0],x1)&&near(arr[1],y1)&&near(arr[2],x2)&&near(arr[3],y2),
 'actual SVG secant segment '+arr+' expected '+[x1,y1,x2,y2]);
