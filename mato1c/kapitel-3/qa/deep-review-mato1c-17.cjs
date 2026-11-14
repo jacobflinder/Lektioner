@@ -134,8 +134,8 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   for(const v of ['h′(x) = 2x − 4','2x − 4 = 0','2x = 4','x = 2','h″(x) = 2 > 0','h(2) = 3'])await math('#own-answer',v);
   await gap('#own-answer .lesson-math-stack:first-child > p.math-display');
   // route: optional section 7 is not forced on core path.
-  await page.locator('#next').click();ok(await page.locator('#inflect').isVisible(),'Kärnvägen går förbi valbara steg 7');
   await shot('06-eget-desktop');
+  await page.locator('#next').click();ok(await page.locator('#inflect').isVisible(),'Kärnvägen går förbi valbara steg 7');
   // 7 optional x³/x⁴ case with genuine sign chart and evaluated values.
   await go(7);
   for(const id of ['zero-p','zero-q'])ok(await page.locator('#'+id+' path').count()===1,'Graf för kontrastexempel '+id);
@@ -177,8 +177,8 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   // 10 exact original book tracks and follow-up without new tasks.
   await go(10);const book=await page.locator('#book').innerText();
   for(const token of ['s. 152','3136–3138','3139','3140','3141','3142','3143','minst två','20 minuter'])ok(book.includes(token),'Bokval och riktmärken bevarade: '+token);
-  await page.locator('#next').click();ok(await page.locator('#exit').isVisible(),'Kärnväg bok → utcheckning förbi valbar kontroll');
   await shot('10-bok-desktop');
+  await page.locator('#next').click();ok(await page.locator('#exit').isVisible(),'Kärnväg bok → utcheckning förbi valbar kontroll');
   // 11 independent optional mini checks.
   await go(11);
   assert.equal(await page.locator('#control [data-quiz]').count(),3);checks++;
