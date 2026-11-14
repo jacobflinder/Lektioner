@@ -136,6 +136,9 @@ function renderTangent(){
  $("ind-tangent-graph").innerHTML=v.html;
  $("ind-tangent-time-value").textContent=fmt(t,2)+" s";
  $("ind-tangent-result").innerHTML=tangentShown?
+ '<div class="ind-tangent-derivation"><p class="small">Omvandla först 3 mWb till 0,003 Wb. Derivera sedan flödet med tiden t uttryckt i sekunder:</p>'+
+ m('<mi>Φ</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>0,003</mn><mspace width="0.25em"/><mtext>Wb</mtext><mo>·</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mi>π</mi><mi>t</mi><mo>)</mo>')+
+ m('<mfrac><mrow><mi>d</mi><mi>Φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>0,003</mn><mo>·</mo><mi>π</mi><mi mathvariant="normal">cos</mi><mo>(</mo><mi>π</mi><mi>t</mi><mo>)</mo><mspace width="0.25em"/><mtext>Wb/s</mtext>')+'</div>'+
  chain('<mi>U</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mi>d</mi><mi>Φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac>',
  '<mi>U</mi><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mn>0,003</mn><mo>·</mo><mi>π</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mi>π</mi><mo>·</mo><mn>'+fmt(t,2)+'</mn><mo>)</mo><mspace width="0.25em"/><mtext>V</mtext>',
  unitResult('U',Math.abs(v.U)<1e-10?0:v.U,2,'V'),
