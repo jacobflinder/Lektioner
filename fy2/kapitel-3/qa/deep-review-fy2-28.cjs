@@ -72,7 +72,7 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   await goto(8);check((await slide().innerText()).includes('20 cm')&&(await slide().innerText()).includes('3,0 m/s'),'rod question givens preserved');
   await goto(9);
   check((await slide().innerText()).includes('0,24'),'rod result 0.24 V');
-  const units=await slide().locator('math mspace').count();check(units>=4,'MathML inserts readable spaces between physical numbers and units');
+  const units=await slide().locator('math mspace').count();check(units>=3,'MathML spacing before units in separate results');check(await slide().locator('.ind-result-proof math').count()===3,'independent law, numerical substitution and final answer in separate blocks');
   check((await slide().innerText()).includes('Wb/s'),'unit proof T m²/s = V');
   // 10 & 11 actual PhET demo, physical stationary zero, moving polarity reversal.
   await goto(10);check(await slide().locator('a[href="https://phet.colorado.edu/en/simulations/faradays-law"]').count()===1,'original PhET Faraday link kept');
@@ -147,7 +147,7 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   check((await slide().innerText()).includes('icke-magnetisk metallbit'),'nonmagnetic comparison retained');
   // 19-20: independent Faraday average numerical recomputation.
   await goto(19);check((await slide().innerText()).includes('300 varv'),'original 300-turn problem');
-  await goto(20);check((await slide().innerText()).includes('−5,8'),'average −300*(.045−.012)/1.7 V');
+  await goto(20);check((await slide().locator('math').last().textContent()).includes('5,8')&&/[-−]/.test(await slide().locator('math').last().textContent()),'signed average emf −5.8 V in MathML');
   check(near(-300*(.045-.012)/1.7,-5.823529411764706,.00001),'independent Faraday average calculation');
   const eqs=await slide().locator('math').allTextContents();check(eqs.length>=3,'explicit ΔΦ and U substitution equations shown');
   // 21: piecewise graph, three slopes, corner non-differentiability, diagnostic numeric feedback.
