@@ -130,10 +130,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
    const list=await page.locator('[data-ref="'+k+'"]').allTextContents();
    ok(list.length===({force:3,earth:3,read:1,next:2}[k])&&list.every(a=>a===v),'every slide and all instances of editable '+k+' updated consistently');
   }
-  // Restore original visible book sources before screenshots
-  await page.locator('#settings').click();
-  for(const [k,v] of [['force','343–350'],['earth','351–357'],['read','162, 164–170'],['next','171–182']])await page.locator('#editor [data-ref-input="'+k+'"]').fill(v);
-  await page.locator('#apply').click();
+  // Keep the edited course task refs in place until they have been checked in the exported offline lesson.
   // Quiz in repetition and classroom; meaningful reset button state check
   await page.locator('#repetition').click();
   const quiz=slide().locator('[data-quiz]');ok(await quiz.isVisible(),'original optional repetition quiz shown');
@@ -166,6 +163,11 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   const localFile=dlPath+'.html';fs.copyFileSync(dlPath,localFile);
   await offline.goto('file://'+localFile,{waitUntil:'load'});
   ok(await offline.locator('#slides>section.slide').count()===4,'all 4 already-rendered lesson slides retained when opened offline');
+  for(const [k,v] of edits){
+   const refs=await offline.locator('[data-ref="'+k+'"]').allTextContents();
+   ok(refs.length&&refs.every(x=>x===v),'offline standalone preserves edited '+k+' book references');
+  }
+
   await offline.locator('#jump').selectOption('3');
   ok((await offline.locator('#counter').innerText()).includes('4 / 4'),'offline navigation live');
   for(let i=0;i<3;i++)await offline.locator('#step').click();
@@ -174,7 +176,10 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok((await offline.locator('#earth-readout').innerText()).includes('40,0'),'offline 90deg inclination calculates Bv=40');
   ok(offlineErrors.length===0&&offlineExternal.length===0,'offline fully self-contained, no errors '+offlineErrors.join('; '));
   await offline.screenshot({path:'fy2-qa-screenshots/deep-review-32-offline.png',fullPage:true});shots++;
-  await offline.close();await page.locator('#settings').click();
+  await offline.close();
+  // Restore the published original references after testing the edited offline export.
+  for(const [k,v] of [['force','343–350'],['earth','351–357'],['read','162, 164–170'],['next','171–182']])await page.locator('#editor [data-ref-input="'+k+'"]').fill(v);
+  await page.locator('#apply').click();
   // Source learning materials
   const sup=await page.request.get(url+'lararstod.html');ok(sup.status()===200,'teacher notes exist');
   const supText=await sup.text();
