@@ -141,6 +141,51 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   test(teacher.includes('återförts')&&teacher.includes('A₀=24 cm²')&&teacher.includes('nu jämförd bild för bild'),'teacher accurately identifies source-PDF restoration');
   test(teacher.includes('70 minuter')&&teacher.includes('Fysikens Flöde')&&teacher.includes('lämnar dessa ifyllnadsfält tomma'),'original timeline and provenance of references');
   test(await page.locator('input[name="email"]').count()===0,'no identifying student input');
+  // Export the complete web lesson after a private draft, then open the result offline.
+  // The file must contain both source scripts but none of the student's answer text.
+  await go(10);await page.locator('#repeat-mode').click();
+  const secret='QA_PRIVATE_DRAFT_NEVER_EXPORT_31';
+  await page.locator('#exit-text').fill(secret);
+  await page.locator('#settings-toggle').click();
+  const pendingDownload=page.waitForEvent('download',{timeout:12000});
+  await page.locator('#download').click();
+  const exported=await pendingDownload;
+  const exportPath=await exported.path();
+  const exportHtml=fs.readFileSync(exportPath,'utf8');
+  test(!exportHtml.includes(secret),'download does not persist typed student response');
+  test(exportHtml.includes('function drawCompass()')&&exportHtml.includes('const checks=['),'self-contained file embeds both interactive JS modules');
+  test(!exportHtml.includes('<script src="./logic.js">')&&!exportHtml.includes('<script src="./practice.js">'),'standalone HTML has no external JavaScript dependency');
+  test(exportHtml.includes('323, 324, 326, 330, 331'),'offline export preserves the original textbook assignment');
+  const offline=await browser.newPage({viewport:{width:1440,height:900}});
+  const offlineErrors=[],offlineRemote=[];
+  offline.on('pageerror',err=>offlineErrors.push(err.message));
+  offline.on('request',r=>{if(r.url().startsWith('http://')||r.url().startsWith('https://'))offlineRemote.push(r.url())});
+  const offlineResponse=await offline.goto('file://'+exportPath,{waitUntil:'load'});
+  test((await offline.locator('#counter').innerText()).trim()==='1 / 10','exported lesson starts on original slide 1');
+  test(await offline.locator('section.slide').count()===10,'all ten PDF slides preserved in offline export');
+  test(await offline.locator('#domain-grid span').count()===6,'six domain tiles regenerated exactly once in exported HTML');
+  test(await offline.locator('#flux-dots circle').count()===132,'66 two-circle B-field dots regenerated once offline');
+  test(await offline.locator('#example-dots circle').count()===30,'15 two-circle example dots regenerated once offline');
+  await offline.locator('#next').click();
+  test((await offline.locator('#counter').innerText()).trim()==='2 / 10','offline slide navigation works');
+  test(await offline.locator('#compass-needle[aria-hidden="true"]').count()===1,'offline prediction keeps compass orientation concealed');
+  await offline.locator('.slide.active [data-reveal]').click();
+  test(await offline.locator('#compass-needle[aria-hidden="false"]').count()===1,'offline compass reveal works');
+  for(let k=0;k<3;k++)await offline.locator('#next').click();
+  test((await offline.locator('#counter').innerText()).trim()==='5 / 10','offline flux slide navigates correctly');
+  test(await offline.locator('#flux-reference').count()===1,'offline two-area source PDF figure intact');
+  await offline.locator('#flux-show').click();
+  await offline.locator('#flux-area-slider').evaluate(el=>{el.value='48';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  const offlineFlux=(await offline.locator('#flux-result math[display="block"]').nth(2).textContent());
+  const offlineRatio=(await offline.locator('#flux-result math[display="block"]').last().textContent());
+  test(offlineFlux.includes('1,92')&&offlineRatio.includes('2,00'),'offline doubled area gives Phi=1.92mWb and ratio 2.00');
+  test(offlineErrors.length===0,'offline interactive lesson has no JS exceptions: '+offlineErrors.join('; '));
+  test(offlineRemote.length===0,'offline lesson needs no network assets: '+offlineRemote.join('; '));
+  await offline.screenshot({path:'fy2-qa-screenshots/deep-review-31-offline-export.png',fullPage:true});shots++;
+  await offline.close();
+  await page.locator('#class-mode').click();
+  await page.locator('#settings-toggle').click();
+
   // Every original slide at desktop, 390px mobile, projector, full revealed math.
   for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
    await page.setViewportSize({width:vp.width,height:vp.height});
@@ -163,6 +208,15 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
      test(h<=1200,'revealed flux slide fits within 1200px 1080p projector, observed '+h);
     }
     await page.screenshot({path:'fy2-qa-screenshots/deep-review-31-'+vp.name+'-'+String(n).padStart(2,'0')+'.png',fullPage:true});shots++;
+    if(n===5){
+      await set('flux-area-slider',48);
+      test(Math.abs(Number(await page.locator('#flux-area').getAttribute('width'))-240)<.01,'real double-size reference SVG area '+vp.name);
+      const aFlux=(await page.locator('#flux-result math[display="block"]').nth(2).textContent());
+      const ratio=(await page.locator('#flux-result math[display="block"]').last().textContent());
+      test(aFlux.includes('1,92')&&ratio.includes('2,00'),'double-area independent B and Phi result on '+vp.name);
+      await page.screenshot({path:'fy2-qa-screenshots/deep-review-31-'+vp.name+'-05-double-area.png',fullPage:true});shots++;
+    }
+
    }
   }
   test(errs.length===0,'zero JS errors '+errs.join('; '));test(externals.length===0,'zero unauthorised network '+externals.join('; '));
