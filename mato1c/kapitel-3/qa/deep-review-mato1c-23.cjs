@@ -203,7 +203,7 @@ await screenshot('desktop-08');
 // 09 – full three step algebra, then optional actual divergent quotient.
 await go(9);
 const stitch=await sequence('#stitch-answer',3);
-for(const v of ['f(1)=1²+1=2','a·1+b=a+b','a+b=2','D(ax+b)=a','D(x²+1)=2x','2·1=2','a=2','2+b=2','b=0','f(1−h)=2−2h','f(1+h)=(1+h)²+1','f(1+h)=2+2h+h²'])await has('#stitch-answer',v);
+for(const v of ['f(1)=1²+1=2','a·1+b=a+b','a+b=2','(ax+b)′=a','(x²+1)′=2x','2·1=2','a=2','2+b=2','b=0','f(1−h)=2−2h','f(1+h)=(1+h)²+1','f(1+h)=2+2h+h²'])await has('#stitch-answer',v);
 ok((await page.locator('#stitch-answer').innerText()).includes('f′(1)=2'),'sided quotient validates smooth join');
 ok(!await page.locator('#stitch-detail').isVisible(),'optional counterexample hidden');
 await reveal('stitch-detail');
@@ -228,7 +228,7 @@ await gaps('#exit');await screenshot('desktop-11');
 // 12 – five step exit, include actual divergent quotient and example.
 await go(12);
 const exit=await sequence('#exit-answer',5);
-for(const v of ['F(2)=2²=4','c·2+d=2c+d','2c+d=4','D(cx+d)=c','D(x²)=2x','c=4','8+d=4','d=−4','F(2−h)=4(2−h)−4=4−4h','F(2+h)=(2+h)²=4+4h+h²',
+for(const v of ['F(2)=2²=4','c·2+d=2c+d','2c+d=4','(cx+d)′=c','(x²)′=2x','c=4','8+d=4','d=−4','F(2−h)=4(2−h)−4=4−4h','F(2+h)=(2+h)²=4+4h+h²',
 'F(2−h)=4(2−h)=8−4h','F(2)=2²=4','q(x)=2|x−1|+2','q(1−h)=2h+2','q(1+h)=2h+2'])await has('#exit-answer',v);
 ok((await exit.innerText()).includes('F′(2)=4'),'exit actually tests side derivatives');
 ok((await exit.innerText()).includes('inte deriverbar'),'bad choice and corner classified');
