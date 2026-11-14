@@ -46,6 +46,8 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok(await slide().locator('.recall-item').count()===4,'particle, conductor, earth, horizontal compass separate');
   for(const num of [0,1,2,3])ok((await slide().locator('.recall-item').nth(num).locator('math').count())===([1,1,2,1][num]),'own MathML block count category '+num);
   const earthRows=await rect('.slide.active .two-equations>.math-sm');
+  const gaps=await page.locator('.slide.active .recall-item math mspace[width="0.2em"]').evaluateAll(a=>a.map(e=>e.getBoundingClientRect().width));
+  ok(gaps.length>=4&&gaps.every(w=>w>1),'trigonometric multiplication visually separated from cos/sin operators');
   ok(isGap(earthRows,15),'Bh and Bv physically separated by >= 15px');
   const memo=await slide().innerText();
   ok(memo.includes('laddningsbeloppet')&&memo.includes('elektron')&&memo.includes('kraft'),'force magnitude explicitly positive, sign direction separate');
