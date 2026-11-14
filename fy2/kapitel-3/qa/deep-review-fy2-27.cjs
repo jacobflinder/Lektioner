@@ -85,7 +85,9 @@ const close=(a,b,tol=1e-5)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   await step(2);
   const eqs=await page.locator('.slide.active .complete-steps math').evaluateAll(a=>a.map(e=>e.textContent.replace(/\s+/g,'')));
   test(eqs.length===4,'energy solution four separate mathematical lines');
-  for(const fragment of ['eU=mpv2/2','2eU=mpv2','v2=2eU/mp','v=2eU/mp']){
+  test(await page.locator('.slide.active .complete-steps math mfrac').count()===3,'actual MathML numerator and denominator in each divided equation');
+  test(await page.locator('.slide.active .complete-steps math msqrt').count()===1,'positive square root is mathematically structured');
+  for(const fragment of ['eU=mpv22','2eU=mpv2','v2=2eUmp','v=2eUmp']){
    test(eqs.some(x=>x.includes(fragment)),'energy intermediate '+fragment);
   }
   test((await page.locator('.slide.active').innerText()).includes('positiva roten'),'speed is nonnegative');
@@ -173,7 +175,7 @@ const close=(a,b,tol=1e-5)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   await snap('desktop-08');
   // Slide 9: preserve learning goals exit, optional depth, book and next reading.
   await go(9);await reset();
-  const exit=await page.locator('.slide.active').innerText();
+  const exit=await page.locator('.slide.active').textContent();
   for(const phrase of ['301–309','144–148','Frivilliga återkallningsfrågor','Varför fastnar en magnet på järn'])test(exit.includes(phrase),'original exit '+phrase);
   test(!await page.locator('.slide.active .step[data-reveal="1"]').isVisible(),'exit feedback gated');
   await step(1);
