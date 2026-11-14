@@ -53,14 +53,14 @@ step('stitch-answer',0,'<strong>1 · Kontinuitet</strong>'+
  '<p>Villkoret är <strong>a+b=2</strong>. Utan det räcker inga påståenden om grenarnas lutningar.</p>');
 step('stitch-answer',1,'<strong>2 · Samma lutning</strong>'+
  '<p>Vänstergrenens derivata är konstant a, högergrenens derivata är 2x. Vid skarven måste de stämma:</p>'+
- lines(['D(ax+b)=a','D(x²+1)=2x','2·1=2','a=2'])+
+ lines(['(ax+b)′=a','(x²+1)′=2x','2·1=2','a=2'])+
  '<p>Detta är det andra oberoende villkoret.</p>');
 step('stitch-answer',2,'<strong>3 · Båda villkoren uppfyllda</strong>'+
- lines(['a+b=2','a=2','2+b=2','b=0'])+
+ lines(['a+b=2','2+b=2'])+
  '<div class="math-givens">'+mathLine('a=2')+mathLine('b=0')+'</div>'+
  '<p>Då blir den vänstra grenen 2x och den högra x²+1:</p>'+
  lines(['f(1)=2','f(1−h)=2−2h','f(1+h)=(1+h)²+1','f(1+h)=2+2h+h²'])+
- '<p>Kontrollera den faktiska differenskvoten genom skarvpunkten. Varje bråkuttryck får egen rad så alla led kan läsas även på 390px mobil:</p>'+
+ '<p>Kontrollera de faktiska ensidiga differenskvoterna genom skarvpunkten. Förenkla varje bråk steg för steg:</p>'+
  '<p class="formula-line">'+frac('f(1)−f(1−h)','h')+'</p>'+
  '<p class="formula-line">='+frac('2−(2−2h)','h')+'</p>'+
  mathLine('=2')+
@@ -77,7 +77,7 @@ step('exit-answer',0,'<strong>1 · Delarna möts</strong>'+
  '<p>Detta är kontinuitetsvillkoret.</p>');
 step('exit-answer',1,'<strong>2 · Lutningarna stämmer</strong>'+
  '<p>Vänstergrenens derivata är c. Högergrenens derivata av x² är 2x, och den är 4 vid x=2:</p>'+
- lines(['D(cx+d)=c','D(x²)=2x','2·2=4','c=4'])+
+ lines(['(cx+d)′=c','(x²)′=2x','2·2=4','c=4'])+
  '<p>Detta är lutningsvillkoret. Båda behövs.</p>');
 step('exit-answer',2,'<strong>3 · Den deriverbara skarven</strong>'+
  lines(['2c+d=4','c=4','2·4+d=4','8+d=4','d=−4'])+
