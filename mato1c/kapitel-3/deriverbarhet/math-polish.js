@@ -102,7 +102,7 @@ const cases=(selector,parts)=>{
 };
 cases('#jump-model .two > div:first-child > .mathline',[['r(x)=1','x<2'],['r(x)=3','x≥2']]);
 cases('#stitch .two > div:first-child > .mathline',[['f(x)=ax+b','x<1'],['f(x)=x²+1','x≥1']]);
-cases('#exit .panel:first-of-type > .mathline',[['F(x)=cx+d','x<2'],['F(x)=x²','x≥2']]);
+cases('#exit .panel > .mathline',[['F(x)=cx+d','x<2'],['F(x)=x²','x≥2']]);
 // Slide 7 – exact r(2) anchor; no false derivative of flat left branch.
 const jumpBoxes=document.querySelectorAll('#jump-answer .eq-box');
 if(jumpBoxes.length!==2)throw Error('Ma3c23 jump boxes missing');
