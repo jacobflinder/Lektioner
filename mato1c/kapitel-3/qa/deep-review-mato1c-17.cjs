@@ -195,7 +195,7 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   // Projector and local drawing pad, including proper pressed state and expanded state.
   await page.locator('#mode').click();ok(await page.locator('body.classroom').count()===1,'Klassrumsläge aktivt');
   await page.locator('#teacher-toggle').click();ok(await page.locator('.teacher.open').isVisible(),'Lärarstöd tillgängligt');
-  ok((await page.locator('.route-guide').innerText()).includes('20 min'),'Kärnväg / 20 min självständigt bokarbete');
+  ok((await page.locator('.route-guide').textContent()).includes('20 min'),'Kärnväg / 20 min självständigt bokarbete');
   await page.locator('#ink-toggle').click();ok(await page.locator('#inkpanel').isVisible(),'Lokal skrivyta öppnas');
   await page.locator('#ink-eraser').click();ok((await page.locator('#ink-eraser').getAttribute('aria-pressed'))==='true','Sudd-knapp fungerar');
   await shot('13-projektor');await page.locator('#ink-toggle').click();await page.locator('#mode').click();
