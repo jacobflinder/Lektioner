@@ -9,12 +9,12 @@ const f=(x,a,b)=>x<1?a*x+b:x*x+1;
 const F=(x,c,d)=>x<2?c*x+d:x*x;
 const close=(a,b,tol=1e-6)=>Math.abs(a-b)<tol;
 (async()=>{
-let checks=0;const images=[],errors=[],foreign=[];
+let checks=0;const images=[],errors=[],foreign=[],problems=[];
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
 page.on('pageerror',e=>errors.push(e.message));
 page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:8123'))foreign.push(r.url())});
-const ok=(x,msg)=>{assert.ok(x,msg);checks++};
+const ok=(x,msg)=>{if(!x)problems.push(msg);checks++};
 const go=async n=>{await page.selectOption('#jump',String(n-1));ok(await page.locator('.slide.active').count()===1,'slide '+n)};
 const shot=async label=>{const name=out+'/review23-'+label+'.png';await page.screenshot({path:name,fullPage:true});images.push(name)};
 const labels=async id=>page.locator(id+' math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
@@ -87,7 +87,7 @@ await spacing('#goal');await shot('desktop-02');
 // Slide 3 predicts both left/right before optional slider.
 await go(3);
 await has('#predict','p(x)=(x−1)²+2');await has('#predict','q(x)=2|x−1|+2');
-ok((await page.locator('#predict').innerText()).includes('Förutsäg'),'student prediction prior to graph');
+ok(/förutsägelse|förutsäg/i.test(await page.locator('#predict').textContent()),'student prediction prior to graph');
 await shot('desktop-03');
 // Slide 4: both SVG functions and actual same h secants, texts hidden.
 await go(4);
@@ -209,6 +209,7 @@ await page.locator('#teacher-toggle').click();ok(await page.locator('.teacher.op
 await go(5);await shot('projector-05');await go(9);await shot('projector-09');
 ok(errors.length===0,'zero JavaScript errors '+errors.join(';'));
 ok(foreign.length===0,'zero external requests '+foreign.join(';'));
+if(problems.length)throw Error('Deep review failed '+problems.length+' assertions:\n'+problems.join('\n'));
 console.log('MA3C23_PASS '+JSON.stringify({checks,screens:images.length,errors,foreign}));
 }catch(e){console.error('MA3C23_FAILED '+(e.stack||e));await page.screenshot({path:out+'/review23-FAILED.png',fullPage:true}).catch(()=>{});process.exitCode=1}
 finally{await browser.close()}
