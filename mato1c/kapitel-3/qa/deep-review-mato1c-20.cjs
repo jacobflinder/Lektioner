@@ -40,7 +40,7 @@ const near=(a,b,eps=1e-6)=>Math.abs(a-b)<eps;
  for(const [f,d,xs,name] of [[K,DK,[0,1,2,3,5,6,9], 'cost'],[I,DI,[0,25,50,100,150,199,200],'revenue'],[h,Dh,[0,0.5,1,2,4],'rocket'],[V,DV,[0,1,2,3,4,5,6],'profit']]){
   for(const x of xs)ok(near((f(x+epsilon)-f(x-epsilon))/(2*epsilon),d(x),1e-4),'numerical derivative '+name+' @'+x);
  }
- for(const [x,val] of [[0,50],[1,57],[5,25],[6,35],[10,300]])ok(near(K(x),val),'cost exact '+x);
+ for(const [x,val] of [[0,50],[1,57],[5,25],[6,32],[10,300]])ok(near(K(x),val),'cost exact '+x);
  for(let x=0;x<=1000;x++)ok(K(x)>=K(5)-1e-7,'global discrete min cost '+x);
  ok(near(DK(0),15)&&near(DK(2),-9)&&near(DK(6),15),'cost sign sequence');
  for(const x of [0,25,50,75,100,125,150,175,200]){
