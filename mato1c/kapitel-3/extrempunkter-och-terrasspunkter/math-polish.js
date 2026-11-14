@@ -61,7 +61,7 @@ step('example',3,'<strong>4 · Klassificera med teckenbyte</strong>'+
 step('example',4,'<strong>5 · Beräkna båda koordinaterna med ursprungsfunktionen</strong>'+
  group(['f(−1)=(−1)³−3(−1)+2','f(−1)=−1+3+2','f(−1)=4',
  'f(1)=1³−3·1+2','f(1)=1−3+2','f(1)=0'])+
- '<p><strong>Lokalt maximipunkt (−1, 4)</strong> och <strong>lokalt minimipunkt (1, 0)</strong>. Derivatans nollställen gav x-värdena; <strong>f</strong> gav y-värdena.</p>');
+ '<p><strong>Lokal maximipunkt (−1, 4)</strong> och <strong>lokal minimipunkt (1, 0)</strong>. Derivatans nollställen gav x-värdena; <strong>f</strong> gav y-värdena.</p>');
 // 5. The original polynom example really DOES have an inflection point.
 // Prove that from the derivative's monotonicity without importing the
 // next lesson's full second-derivative method.
@@ -103,7 +103,7 @@ exit.innerHTML='<p><strong>1 · Tecken och koordinater</strong> Derivatan går f
  '<p><strong>Maximipunkt (2, 5)</strong>. Denna y-koordinat kommer från f(2), inte från derivatan.</p>'+
  '<p><strong>2 · Vad vet vi säkert om g?</strong> Teckenföljden − 0 − betyder att g avtar på båda sidor om x=−1. Punkten är stationär men inte en extrempunkt:</p>'+
  group(['g′(−1)=0','g(−1)=4'])+
- '<p><strong>Stationär punkt (−1, 4), ingen extrempunkt.</strong> Informationen räcker inte till att säkert kalla den en terrasspunkt, eftersom vi inte har visat att kurvan <strong>byter böjningsriktning</strong>. I våra polynomexempel gör vi den extra kontrollen.</p>'+
+ '<p><strong>Stationär punkt (−1, 4), ingen extrempunkt.</strong> Det <strong>följer inte säkert av enbart tecknen</strong> − 0 − att punkten är en terrasspunkt. Vi måste också visa att kurvan <strong>byter böjningsriktning</strong>. I våra polynomexempel gör vi den extra kontrollen.</p>'+
  '<p><strong>3 · Varför räcker inte f′(3)=0?</strong> Först krävs en teckenundersökning till vänster och höger om 3 för att avgöra om punkten är ett minimum. Sedan behöver vi ett funktionsvärde:</p>'+
  group(['f′(3)=0','f(3)=?'])+
  '<p>En horisontell tangent ger varken automatiskt minimipunkt eller punkten (3,0). Utan f(3) är höjden <strong>okänd</strong>.</p>';
