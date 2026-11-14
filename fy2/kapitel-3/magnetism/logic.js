@@ -123,14 +123,17 @@ function updateFlux(){
  $("field-value").textContent=fmt(B,2)+" T";
  $("area-value").textContent=fmt(A,0)+" cm²";
  $("flux-result").innerHTML=fluxShown?
- '<div style="font-size:.72em;font-family:system-ui;font-weight:650;margin-bottom:7px">Samband → insättning → svar</div>'+
+ '<div style="font-size:.59em;font-family:system-ui;font-weight:650;margin-bottom:5px">Lag → insättning → svar</div>'+
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>'+
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(B,2)+'</mn><mspace width="0.25em"/><mtext>T</mtext><mo>·</mo><mn>'+fmt(A/10000,4)+'</mn><mspace width="0.25em"/><mtext>m²</mtext></math>'+
  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mn>'+fmt(phi*1000,2)+'</mn><mspace width="0.25em"/><mtext>mWb</mtext></math>'+
- '<p style="font-size:.55em;font-family:system-ui;font-weight:500"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>A</mi><mo>=</mo><mn>'+fmt(A,0)+'</mn><mspace width="0.25em"/><mtext>cm²</mtext><mo>=</mo><mn>'+fmt(A/10000,4)+'</mn><mspace width="0.25em"/><mtext>m²</mtext></math>. Fältet är homogent och vinkelrätt mot ytan.</p>'
+ '<div style="font-size:.58em;font-family:system-ui;font-weight:650;margin:6px 0 2px">Jämför ytorna:</div>'+ 
+ '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mi>Φ</mi><msub><mi>Φ</mi><mn>0</mn></msub></mfrac><mo>=</mo><mfrac><mi>A</mi><msub><mi>A</mi><mn>0</mn></msub></mfrac><mo>=</mo><mn>'+fmt(A/24,2)+'</mn></math>'+
+ '<p style="font-size:.55em;font-family:system-ui;font-weight:500"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>A</mi><mo>=</mo><mn>'+fmt(A,0)+'</mn><mspace width="0.25em"/><mtext>cm²</mtext><mo>=</mo><mn>'+fmt(A/10000,4)+'</mn><mspace width="0.25em"/><mtext>m²</mtext></math>.</p>'
  :'<span style="font-family:system-ui;font-size:.64em;font-weight:600">Förutsäg först: ändrar B och A flödet på samma sätt?</span>';
  $("flux-show").textContent=fluxShown?"Dölj beräkningen":"Visa sambandet och beräkningen";
- $("flux-area").setAttribute("width",165*A/24);
+ $("flux-area").setAttribute("width",120*A/24);
+ $("flux-area").setAttribute("aria-label","Justerbar yta "+fmt(A,0)+" cm² i samma homogena B-fält som referensytan 24 cm²");
  const visibleScale=.62+.45*(B/.4);
  $("flux-dots").querySelectorAll("circle").forEach((c,i)=>{
   c.setAttribute("r",(i%2?2:7)*visibleScale);
