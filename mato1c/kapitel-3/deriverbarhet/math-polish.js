@@ -59,10 +59,15 @@ step('stitch-answer',2,'<strong>3 · Båda villkoren uppfyllda</strong>'+
  lines(['a+b=2','a=2','2+b=2','b=0'])+
  '<div class="math-givens">'+mathLine('a=2')+mathLine('b=0')+'</div>'+
  '<p>Då blir den vänstra grenen 2x och den högra x²+1:</p>'+
- lines(['f(1)=2','f(1−h)=2−2h','f(1+h)=(1+h)²+1=2+2h+h²'])+
- '<p>Kontrollera den faktiska differenskvoten genom skarvpunkten:</p>'+
- '<p class="formula-line">'+frac('f(1)−f(1−h)','h')+' = '+frac('2−(2−2h)','h')+' = 2</p>'+
- '<p class="formula-line">'+frac('f(1+h)−f(1)','h')+' = '+frac('2+2h+h²−2','h')+' = 2+h</p>'+
+ lines(['f(1)=2','f(1−h)=2−2h','f(1+h)=(1+h)²+1','f(1+h)=2+2h+h²'])+
+ '<p>Kontrollera den faktiska differenskvoten genom skarvpunkten. Varje bråkuttryck får egen rad så alla led kan läsas även på 390px mobil:</p>'+
+ '<p class="formula-line">'+frac('f(1)−f(1−h)','h')+'</p>'+
+ '<p class="formula-line">='+frac('2−(2−2h)','h')+'</p>'+
+ mathLine('=2')+
+ '<p class="formula-line">'+frac('f(1+h)−f(1)','h')+'</p>'+
+ '<p class="formula-line">='+frac('2+2h+h²−2','h')+'</p>'+
+ '<p class="formula-line">='+frac('2h+h²','h')+'</p>'+
+ mathLine('=2+h')+
  '<p>För h→0⁺ får båda kvoterna gränsvärdet 2. <strong>Skarven är kontinuerlig och deriverbar med f′(1)=2</strong>.</p>');
 // Slide 12: separate conditions for F, show why c4,d0 is not merely bad
 // by a tangent comparison but leads to a divergent actual left quotient.
