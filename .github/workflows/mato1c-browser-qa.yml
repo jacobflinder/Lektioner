@@ -44,6 +44,7 @@ jobs:
           node mato1c/kapitel-3/qa/storsta-minsta-browser.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-20.cjs
           node mato1c/kapitel-3/qa/extremvardesproblem-polynom-browser.cjs
+          node mato1c/kapitel-3/qa/deep-review-mato1c-21.cjs
           node mato1c/kapitel-3/qa/modellering-fler-extremvardesproblem-browser.cjs
           node mato1c/kapitel-3/qa/blandade-problem-browser.cjs
           node mato1c/kapitel-3/qa/deriverbarhet-browser.cjs
