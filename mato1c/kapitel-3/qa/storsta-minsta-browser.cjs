@@ -79,7 +79,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await ok((await seq.locator('[data-seq-prompt]').innerText()).includes('f″(0)'),'Eleven förutsäger andraderivatans värden');
   await seq.locator('[data-seq-next]').click();
   const second=(await seq.locator('[data-seq-item]').nth(2).textContent())+' '+(await labels('#example [data-seq-item]:nth-child(3)'));
-  const secondCompact=second.replace(/\\s+/g,'');
+  const secondCompact=second.replace(/\s+/g,'');
   for(const v of ['f″(x)=6x−9','f″(0)=−9<0','f″(3)=9>0','lokaltmaximum','lokaltminimum','ändpunkterna','f″(a)=0']){
     await ok(secondCompact.includes(v),'Andraderivatatest korrekt och avgränsat: '+v);
   }
