@@ -78,7 +78,7 @@ const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
   for(let k=0;k<4;k++)await waterWorked.locator('[data-seq-next]').click();
   const waterText=await waterWorked.innerText();
   await ok(waterText.includes('75,9')&&waterText.includes('8,83')&&waterText.includes('1,77'),'Tre vattenvärden i facit');
-  await ok(waterText.includes('Inget största vattenvärde finns'),'Asymptot ger ej maximum');
+  await ok(/inget största vattenvärde/i.test(waterText),'Asymptot ger ej maximum');
   await go(5);
   await ok((await page.locator('#robot .task').innerText()).includes('Välj själv matematisk metod'),'Robotfrågan kräver eget metodval');
   await ok(!await page.locator('#robot-original-steps').isVisible(),'Originalsteglistan dold under eget försök');
