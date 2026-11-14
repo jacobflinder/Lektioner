@@ -56,7 +56,7 @@ insertSolutions({
   step('Varför räcker det?',[],'Vid division med x − a är resten alltid p(a).')
  ),
  'exit-check3':solution(
-  step('1 · Nollställena bestämmer faktorerna',['x = −2 ⇒ x + 2','x = 0 ⇒ x','x = 1 ⇒ x − 1','h(x) = k(x + 2)x(x − 1)']),
+  step('1 · Nollställena bestämmer faktorerna',['x = −2 ⇒ x + 2 = 0','x = 0','x = 1 ⇒ x − 1 = 0','h(x) = k(x + 2)x(x − 1)']),
   step('2 · Punkten (2; 8) bestämmer k',['h(2) = 8','8 = k(2 + 2)·2·(2 − 1)','= k·4·2·1','= 8k','k = 1']),
   answer(['h(x) = x(x + 2)(x − 1)']),
   step('Kontroll',[],'Funktionen är noll vid −2, 0 och 1 och har funktionsvärdet 8 då x = 2.')
