@@ -1,8 +1,9 @@
-/* Ma1c · 3.1 · Lektion 5: F, F′, F″ vid samma x och samma derivata vid höjdförskjutning.
+/* Ma3c · 3.1 · Lektion 5: F, F′, F″ vid samma x och samma derivata vid höjdförskjutning.
    Egna exakta matematikmodeller, ingen lagring eller elevidentifiering. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const fmt=(v,places=2)=>(Math.abs(v)<1e-10?0:v).toFixed(places).replace('.',',').replace('-','−');
+const showMath=(id,formula,display='inline')=>{if(!window.Ma4Math)throw Error('MathML support is missing');window.Ma4Math.setFormula($(id),formula,display)};
 const f=x=>-(x*x*x)/12+x*x-3*x+3.5;
 const d1=x=>-(x*x)/4+2*x-3;
 const d2=x=>2-x/2;
@@ -50,10 +51,10 @@ function renderLinked(){
  }
  for(const xTick of [0,2,4,6,8])create(plot,'text',{x:X(xTick),y:584,'text-anchor':'middle','font-size':21,fill:'#456474'},xTick);
  create(plot,'text',{x:736,y:584,'font-size':21,fill:'#456474'},'x');
- $('linked-x-value').textContent='x = '+fmt(x);
- $('val-f').textContent='f = '+fmt(f(x));
- $('val-d1').textContent='f′ = '+fmt(d1(x));
- $('val-d2').textContent='f″ = '+fmt(d2(x));
+ showMath('linked-x-value','x = '+fmt(x));
+ showMath('val-f','f(x) = '+fmt(f(x)));
+ showMath('val-d1','f′(x) = '+fmt(d1(x)));
+ showMath('val-d2','f″(x) = '+fmt(d2(x)));
  for(const btn of document.querySelectorAll('[data-focus-x]'))btn.setAttribute('aria-pressed',String(Number(btn.dataset.focusX)===x));
 }
 $('linked-x').addEventListener('input',renderLinked);
@@ -107,8 +108,8 @@ function renderShift(){
  create(g,'circle',{cx:X(2),cy:Y(c),r:'6.5',stroke:'#fff','stroke-width':2.2,fill:'#0e7e7a'});
  create(g,'circle',{cx:X(2),cy:Y(0),r:'5.7',stroke:'#fff','stroke-width':2,fill:'#9b6d1f'});
  create(s,'text',{x:X(2)+12,y:Y(c)-10,'font-size':16,'font-weight':'700',fill:'#0e7e7a'},'min: (2, '+fmt(c,1)+')');
- $('shift-c-output').textContent='C = '+fmt(c,1);
- $('shift-description').textContent='f₂(x)=(x−2)²+'+fmt(c,1);
+ showMath('shift-c-output','C = '+fmt(c,1));
+ showMath('shift-description','f₂(x)=(x−2)²+'+fmt(c,1),'block');
 }
 $('shift-c').addEventListener('input',renderShift);
 $('shift-reset').addEventListener('click',()=>{$('shift-c').value='3';renderShift()});

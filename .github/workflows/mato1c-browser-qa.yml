@@ -38,6 +38,7 @@ jobs:
           node mato1c/kapitel-3/qa/andraderivatan-browser.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-17.cjs
           node mato1c/kapitel-3/qa/andraderivatans-roll-browser.cjs
+          node mato1c/kapitel-3/qa/deep-review-mato1c-18.cjs
           node mato1c/kapitel-3/qa/funktionens-graf-browser.cjs
           node mato1c/kapitel-3/qa/storsta-minsta-browser.cjs
           node mato1c/kapitel-3/qa/extremvardesproblem-polynom-browser.cjs

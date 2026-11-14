@@ -5,6 +5,15 @@
 <title>Funktionens graf och derivatornas grafer · Matematik – fortsättning, nivå 1c</title>
 <link rel="stylesheet" href="../assets/lesson.css">
 <style>
+/* Explicit visual separation, including math in previously hidden solutions. */
+.slide .solution-math-group{gap:16px!important}
+.slide .math-work{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .math-work math{font-size:clamp(1.02rem,2vw,1.35rem);max-width:100%}
+.slide .math-sm math{font-size:1em}
+.slide .readouts math{font-size:clamp(.84rem,1.3vw,1.06rem)}
+.slide .answer .math-work + .math-work,.slide .panel .math-work + .math-work{margin-top:16px}
+.slide .clean-table .math-sm math{font-size:.92em}
+@media(max-width:680px){.slide .math-work math{font-size:1rem}.slide .clean-table{font-size:.74rem}.slide .clean-table td,.slide .clean-table th{padding:6px 2px}}
 .deriv-label{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.14rem,2vw,1.48rem)}
 .deriv-label sup{font-size:.68em}
 .graph-board{border:1px solid #cbdae5;background:#f8fbfd;border-radius:13px;padding:12px;min-width:0}
@@ -81,12 +90,12 @@
 <div class="notice"><strong>Undvik en vanlig sammanblandning:</strong> Grafens <em>höjd</em> är inte detsamma som dess <em>lutning</em>.</div>
 <button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling</button>
 <div id="start-answer" class="answer hidden">
-<p><strong>f(x) &lt; 0</strong> och <strong>f′(x) &gt; 0</strong>. Andraderivatans tecken är inte bestämt av detta.</p>
+<p><strong><span class="math-sm">f(x) &lt; 0</span></strong> och <strong><span class="math-sm">f′(x) &gt; 0</span></strong>. Andraderivatans tecken är inte bestämt av detta.</p>
 <p>Vid x = 0 ger alla tre exemplen negativt funktionsvärde och positiv derivata, men olika andraderivata:</p>
-<div class="solution-math-group"><p class="math-work">f₁(x) = x − 3</p><p class="math-work">f₁″(0) = 0</p></div>
-<div class="solution-math-group"><p class="math-work">f₂(x) = x² + x − 3</p><p class="math-work">f₂″(0) = 2</p></div>
-<div class="solution-math-group"><p class="math-work">f₃(x) = −x² + x − 3</p><p class="math-work">f₃″(0) = −2</p></div>
-<p>Alla tre har <span class="math-sm">f(0)=−3</span> och <span class="math-sm">f′(0)=1</span>, men kröker olika eller inte alls.</p>
+<div class="solution-math-group"><p class="math-work">f₁(x) = x − 3</p><p class="math-work">f₁′(x) = 1</p><p class="math-work">f₁″(x) = 0</p></div>
+<div class="solution-math-group"><p class="math-work">f₂(x) = x² + x − 3</p><p class="math-work">f₂′(x) = 2x + 1</p><p class="math-work">f₂″(x) = 2</p></div>
+<div class="solution-math-group"><p class="math-work">f₃(x) = −x² + x − 3</p><p class="math-work">f₃′(x) = −2x + 1</p><p class="math-work">f₃″(x) = −2</p></div>
+<p>Alla tre har <span class="math-sm">f₁(0)=f₂(0)=f₃(0)=−3</span> och <span class="math-sm">f₁′(0)=f₂′(0)=f₃′(0)=1</span>, men kröker olika eller inte alls.</p>
 </div>
 </section>
 
@@ -159,14 +168,13 @@
 <div class="task"><strong>Förklara för en kamrat:</strong> Vid x = 4 är <span class="math-sm">f″(4)=0</span>. Varför är det ändå <em>inte</em> en terrasspunkt?</div>
 <button type="button" class="secondary" data-reveal="interpret-table">Visa teckentabell efter din motivering</button>
 <div class="panel hidden" id="interpret-table">
-<table class="clean-table">
-<thead><tr><th>x</th><th>f′(x)</th><th>f″(x)</th><th>Slutsats för f</th></tr></thead>
-<tbody>
-<tr><td>2</td><td>0</td><td>positiv</td><td>Minimipunkt</td></tr>
-<tr><td>4</td><td>positiv</td><td>0, teckenbyte</td><td>Inflexionspunkt</td></tr>
-<tr><td>6</td><td>0</td><td>negativ</td><td>Maximipunkt</td></tr>
-</tbody>
-</table>
+<p><strong>Teckentabell för förstaderivatan:</strong> växande, avtagande och extrempunkter.</p>
+<table class="clean-table" aria-label="Förstaderivatans tecken på intervallen omkring 2 och 6"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;2</th><th class="math-sm">x=2</th><th class="math-sm">2&lt;x&lt;6</th><th class="math-sm">x=6</th><th class="math-sm">x&gt;6</th></tr></thead>
+<tbody><tr><th class="math-sm">f′(x)</th><td>−</td><td>0</td><td>+</td><td>0</td><td>−</td></tr><tr><th>Förändring</th><td>Avtar</td><td><abbr title="Minimipunkt">min</abbr></td><td>Växer</td><td><abbr title="Maximipunkt">max</abbr></td><td>Avtar</td></tr></tbody></table>
+<p><strong>Teckentabell för andraderivatan:</strong> hur lutningen f′ förändras.</p>
+<table class="clean-table" aria-label="Andraderivatans tecken på intervallen omkring 4"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;4</th><th class="math-sm">x=4</th><th class="math-sm">x&gt;4</th></tr></thead>
+<tbody><tr><th class="math-sm">f″(x)</th><td>+</td><td>0</td><td>−</td></tr><tr><th>Lutningen f′</th><td>Ökar</td><td>Störst</td><td>Minskar</td></tr></tbody></table>
+<p>Vid <span class="math-sm">x=2</span> byter f′ minus till plus; vid <span class="math-sm">x=6</span> plus till minus. Vid <span class="math-sm">x=4</span> byter i stället f″ tecken samtidigt som <span class="math-sm">f′(4)=1</span>.</p>
 <p>För x mellan 2 och 6 är <span class="math-sm">f′(x)&gt;0</span>: funktionen växer. Före 2 och efter 6 avtar den.</p>
 </div>
 <button type="button" data-reveal="interpret-answer" class="reveal">Visa den avgörande motiveringen</button>
@@ -177,7 +185,7 @@
 <button type="button" class="secondary" data-reveal="triple-formula">Visa uttrycken bakom det exakta grafexemplet</button>
 <div id="triple-formula" class="panel hidden">
 <p class="math-work">f(x)=−x³/12 + x² − 3x + 7/2</p>
-<p class="math-work">f′(x)=−(x−2)(x−6)/4</p>
+<p class="math-work">f′(x)=−x²/4+2x−3</p><p class="math-work">f′(x)=−(x²−8x+12)/4</p><p class="math-work">f′(x)=−(x−2)(x−6)/4</p>
 <p class="math-work">f″(x)=2−x/2</p>
 <p>Detta är en egen funktion som ger kurvorna i webbmodellen. Original-PDF:en anger inte denna formel.</p>
 </div>
@@ -193,7 +201,7 @@
 <div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div>
 <div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilken typ av graf har konstant negativ lutning?"><strong>1 · Beskriv formen</strong><p>En <strong>fallande rät linje</strong>. När x ökar med 1 minskar g med 1.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Ge två olika linjära funktioner med samma lutning −1."><strong>2 · Skriv två möjligheter</strong><p class="math-work">g₁(x)=−x</p><p class="math-work">g₂(x)=−x+2</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Ge två olika linjära funktioner med samma lutning −1."><strong>2 · Skriv två möjligheter</strong><p class="math-work">g₁(x)=−x</p><p class="math-work">g₂(x)=−x+2</p><p class="math-work">g(x)=−x+C</p><p>Konstanten C ändrar höjden, inte lutningen.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vad är derivatan av båda uttrycken?"><strong>3 · Kontrollera</strong><p class="math-work">g₁′(x)=g₂′(x)=−1</p><p>De kan flyttas i höjdled och fortfarande ha exakt samma derivata.</p></div>
 </div>
 <div class="seq-controls"><button class="secondary" type="button" data-seq-back>← Föregående</button><button type="button" data-seq-next>Visa nästa steg →</button><button class="secondary" type="button" data-seq-reset>Återställ</button></div>
@@ -227,9 +235,16 @@
 <p id="own-feedback" class="feedback" role="status" aria-live="polite"></p>
 <button type="button" class="reveal" data-reveal="own-answer">Visa hela lösningen efter mitt försök</button>
 <div id="own-answer" class="answer hidden">
-<p class="math-work">2x−4=0 ⇒ x=2</p><p>Derivatans tecken: <span class="shaft">− &nbsp; 0 &nbsp; +</span>. Därför har f ett minimum vid x=2.</p>
-<p class="math-work">f₁(x)=(x−2)²</p><p class="math-work">f₂(x)=(x−2)²+3</p>
-<p>Båda ger <span class="math-sm">f′(x)=2x−4</span>. Andraderivatan <span class="math-sm">f″(x)=2</span> är en horisontell linje ovanför x-axeln.</p>
+<strong>1 · Lös nollstället utan algebraiskt hopp</strong>
+<div class="solution-math-group"><p class="math-work">2x−4=0</p><p class="math-work">2x=4</p><p class="math-work">x=2</p></div>
+<strong>2 · Undersök tecknet</strong>
+<table class="clean-table" aria-label="Teckentabell för f prim"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;2</th><th class="math-sm">x=2</th><th class="math-sm">x&gt;2</th></tr></thead><tbody><tr><th class="math-sm">f′(x)</th><td>−</td><td>0</td><td>+</td></tr></tbody></table>
+<p>f avtar, har ett minimum vid x=2 och växer sedan.</p>
+<strong>3 · Välj två möjliga grafer</strong>
+<div class="solution-math-group"><p class="math-work">f₁(x)=(x−2)²</p><p class="math-work">f₂(x)=(x−2)²+3</p></div>
+<strong>4 · Derivera båda och kontrollera</strong>
+<div class="solution-math-group"><p class="math-work">f₁′(x)=2(x−2)</p><p class="math-work">f₁′(x)=2x−4</p><p class="math-work">f₂′(x)=2(x−2)+0</p><p class="math-work">f₂′(x)=2x−4</p><p class="math-work">f″(x)=2</p></div>
+<p>Andraderivatans graf är den horisontella linjen <span class="math-sm">y=2</span>. Minimipunkterna är <span class="math-sm">(2,0)</span> och <span class="math-sm">(2,3)</span>. Samma lutningar – olika höjder.</p>
 </div>
 <button type="button" class="secondary" data-reveal="shift-reveal">Öppna visualiseringen efter din skiss</button>
 <div id="shift-reveal" class="panel hidden">
@@ -283,36 +298,36 @@
 <div id="exit-answer" class="answer hidden">
 <strong>1 · Tecken och monotoni</strong>
 <div class="solution-math-group">
-<p class="math-work">x&lt;1: &nbsp; h′(x)&gt;0</p>
-<p class="math-work">1&lt;x&lt;3: &nbsp; h′(x)&lt;0</p>
-<p class="math-work">x&gt;3: &nbsp; h′(x)&gt;0</p>
+<p class="math-work">h′(x)=(x−1)(x−3)</p><p class="math-work">h′(1)=0</p><p class="math-work">h′(3)=0</p>
+<table class="clean-table" aria-label="Tecken hos h prim"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;1</th><th class="math-sm">x=1</th><th class="math-sm">1&lt;x&lt;3</th><th class="math-sm">x=3</th><th class="math-sm">x&gt;3</th></tr></thead>
+<tbody><tr><th class="math-sm">h′(x)</th><td>+</td><td>0</td><td>−</td><td>0</td><td>+</td></tr></tbody></table>
 </div>
 <p class="solution-explanation">h växer på de yttre intervallen och avtar mellan 1 och 3.</p>
 <strong>2 · Klassificera de stationära punkterna</strong>
 <div class="solution-math-group">
-<p class="math-work">x=1: &nbsp; +→−</p>
-<p class="math-work">x=3: &nbsp; −→+</p>
+<p class="math-work">h′: +→− vid x=1</p>
+<p class="math-work">h′: −→+ vid x=3</p>
 </div>
 <p class="solution-explanation">Vid x=1 har h ett lokalt maximum; vid x=3 ett lokalt minimum. Utan vald vertikal förskjutning känner vi inte punkternas höjder.</p>
 <strong>3 · Undersök böjningen</strong>
 <div class="solution-math-group">
+<p class="math-work">h′(x)=x²−4x+3</p>
 <p class="math-work">h″(x)=2x−4</p>
-<p class="math-work">h″(2)=0</p>
-<p class="math-work">h′(2)=−1</p>
+<p class="math-work">h″(2)=2·2−4</p><p class="math-work">h″(2)=0</p>
+<p class="math-work">h″(1)=−2</p><p class="math-work">h″(3)=2</p>
+<p class="math-work">h′(2)=(2−1)(2−3)</p><p class="math-work">h′(2)=−1</p>
 </div>
 <p class="solution-explanation">Andraderivatan byter från minus till plus vid x=2. Där har h en <strong>inflexionspunkt</strong>, men <strong>ingen terrasspunkt</strong> eftersom tangenten inte är horisontell.</p>
 <strong>4 · Två möjliga funktioner</strong>
 <div class="solution-math-group">
-<p class="math-work">h₁(x)=<span class="fraction"><span>x³</span><span>3</span></span>−2x²+3x</p>
-<p class="math-work">h₂(x)=h₁(x)+2</p>
+<p class="math-work">h₁(x)=x³/3−2x²+3x</p><p class="math-work">h₁′(x)=x²−4x+3</p><p class="math-work">h₁′(x)=(x−1)(x−3)</p><p class="math-work">h₂(x)=h₁(x)+2</p><p class="math-work">h₂′(x)=h₁′(x)</p>
 </div>
 <p class="solution-explanation">Funktionerna skiljer sig bara med en konstant och har samma derivata.</p>
 <strong>Extra · En terrasspunkt</strong>
 <div class="solution-math-group">
-<p class="math-work">p′(x)=(x−2)²</p>
-<p class="math-work">p″(x)=2(x−2)</p>
+<p class="math-work">p′(x)=(x−2)²</p><p class="math-work">p′(2)=0</p><p class="math-work">p″(x)=2(x−2)</p><p class="math-work">p″(2)=0</p>
 </div>
-<p class="solution-explanation">p′ är positiv på båda sidor om x=2 och noll i punkten. p″ byter tecken: <strong>terrasspunkt</strong> vid x=2. Höjden kan inte bestämmas från enbart p′.</p>
+<p class="solution-explanation">p′ är positiv på båda sidor om x=2 och noll just där: inget maximum eller minimum. p″ är negativ till vänster om 2 och positiv till höger, så krökningen byter riktning: <strong>terrasspunkt</strong> vid x=2. Höjden kan inte bestämmas från enbart p′.</p>
 </div>
 <div class="panel">
 <h3>Dagens mål – kan du visa dem?</h3>
@@ -335,5 +350,7 @@
 <footer>Matematik – fortsättning, nivå 1c · Gy25 · Kapitel 3.1 · Funktionens graf och derivatornas grafer. Sidreferenser 153–155. Interaktioner körs lokalt utan elevkonton eller insamling av elevsvar.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
+<script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
 <script src="lesson.js"></script>
+<script src="math-polish.js"></script>
 </body></html>
