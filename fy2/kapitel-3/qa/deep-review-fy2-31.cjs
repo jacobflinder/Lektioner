@@ -3,7 +3,7 @@ const {chromium}=require('playwright'),fs=require('fs');
 fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
 (async()=>{
  const browser=await chromium.launch({headless:true});
- const page=await browser.newPage({viewport:{width:1440,height:900}});
+ const page=await browser.newPage({viewport:{width:1440,height:900},acceptDownloads:true});
  const errs=[],externals=[],bad=[];let checks=0,shots=0,num=1;
  const test=(condition,label)=>{checks++;if(!condition)bad.push(label)};
  page.on('pageerror',e=>errs.push(e.message));page.on('console',e=>{if(e.type()==='error')errs.push(e.text())});
@@ -79,7 +79,7 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   for(let [B,A] of [[.4,24],[.4,48],[.1,10],[.8,50],[.35,30],[.55,40]]){
    await set('field-strength',B);await set('flux-area-slider',A);
    let want=(B*A/10).toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2});
-   const actual=await page.locator('#flux-result math[display="block"]').last().textContent();
+   const actual=await page.locator('#flux-result math[display="block"]').nth(2).textContent();
    test(actual.includes(want)&&actual.includes('mWb'),'flux BA physics '+B+'/'+A);
    test((await text('field-value')).includes(B.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2})),'B stays separate from area');
    test(Math.abs(Number(await page.locator('#flux-area').getAttribute('width'))-120*A/24)<.01,'drawn SVG variable area relative to 24cm2 reference');
@@ -102,13 +102,13 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   await reset();test(await slide().locator('.answer.shown').count()===0,'worked example resets');
   // 07 original textbook and timer
   await go(7);
-  for(let phrase of ['144–148','323, 324, 326, 330, 331','20 MINUTER'])test((await slide().innerText()).includes(phrase),'book work '+phrase);
+  for(let phrase of ['144–148','323, 324, 326, 330, 331','20 MINUTER TYST ENSKILT ARBETE'])test((await slide().innerText()).includes(phrase),'book work '+phrase);
   test((await text('timer'))==='20:00','timer initial');
   await page.locator('[data-minutes="10"]').click();test((await text('timer'))==='10:00','timer 10 min');
   await page.locator('#timer-toggle').click();test((await text('timer-toggle'))==='Pausa','start time');
   await page.locator('#timer-toggle').click();test((await text('timer-toggle'))==='Starta','pause time');
   // 08 intentional pupil misconception, four correction equations
-  await go(8);test((await slide().innerText()).includes('0,24')&&(await slide().innerText()).includes('0,0040'),'original incorrect pupil work preserved');
+  await go(8);test((await slide().innerText()).includes('Utse någon som återger gruppens resonemang'),'group presenter remains from PDF');test((await slide().innerText()).includes('0,24')&&(await slide().innerText()).includes('0,0040'),'original incorrect pupil work preserved');
   test(!await slide().locator('.answer').first().isVisible()&&!await slide().locator('.answer').nth(1).isVisible(),'two answers hidden before group work');
   await slide().locator('[data-reveal]').first().click();test(await slide().locator('.answer').first().isVisible()&&!await slide().locator('.answer').nth(1).isVisible(),'first explanation not spoil next');
   await slide().locator('[data-reveal]').nth(1).click();test(await slide().locator('.answer').nth(1).locator('.magnet-equation-steps math').count()===4,'area and field corrections four independent MathML blocks');
@@ -139,6 +139,7 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   for(const s of ['Magnetism_lektion_2.pdf','144–148','323, 324, 326, 330 och 331','Physics at School'])test(teacher.includes(s),'teacher original references '+s);
   test(teacher.includes('0,00096 Wb')&&teacher.includes('0,0024'),'teacher numeric steps updated');
   test(teacher.includes('återförts')&&teacher.includes('A₀=24 cm²')&&teacher.includes('nu jämförd bild för bild'),'teacher accurately identifies source-PDF restoration');
+  test(teacher.includes('70 minuter')&&teacher.includes('Fysikens Flöde')&&teacher.includes('lämnar dessa ifyllnadsfält tomma'),'original timeline and provenance of references');
   test(await page.locator('input[name="email"]').count()===0,'no identifying student input');
   // Every original slide at desktop, 390px mobile, projector, full revealed math.
   for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
