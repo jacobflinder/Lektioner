@@ -119,14 +119,19 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
    await page.locator('#pass-graphs').click();await page.locator('#pass-current').click();await page.locator('#pass-force').click();
   }
   await page.locator('#pass-reset').click();check((await page.locator('#pass-feedback').innerText()).includes('Förutsäg'),'passage reset back to prediction');
-  // 15: rate and flux math + classroom quiz keeps answer hidden until educator opens it.
+  // 15: original self-test is repetition-only and should stay out of the projected classroom slide.
   await goto(15);
   const quiz=slide().locator('[data-quiz]');
-  check(await quiz.count()===1,'flux zero-test preserved');await quiz.locator('[data-choice="1"]').click();
-  check((await quiz.locator('.feedback').innerText()).includes('Markerat'),'classroom quiz answer hidden even for wrong choice');
-  await quiz.locator('[data-feedback]').click();
-  check((await quiz.locator('.feedback').innerText()).length>20,'quiz explain available after teacher release');
+  check(await quiz.count()===1,'flux zero-test preserved in original slide');
+  check(!await quiz.isVisible(),'repetition-only self-test does not clutter teacher-controlled classroom');
+  await page.locator('#repetition').click();
+  check(await quiz.isVisible(),'self-test becomes visible in repetition mode');
+  await quiz.locator('[data-choice="1"]').click();
+  check((await quiz.locator('.feedback').innerText()).includes('Inte riktigt'),'wrong choice gives diagnostic hint without revealing right answer');
+  await quiz.locator('[data-choice="0"]').click();
+  check((await quiz.locator('.feedback').innerText()).includes('Rätt'),'constant nonzero flux gives zero emf in feedback');
   await reset();
+  await page.locator('#class').click();
   // 16: Lenz increasing, decreasing, constant with actual SVG orientation and mathematical markup.
   await goto(16);await reset();
   for(const [mode,word] of [['increase','moturs'],['decrease','medurs'],['constant','Ingen induktionsström']]){
