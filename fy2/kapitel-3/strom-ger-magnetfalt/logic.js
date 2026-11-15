@@ -228,9 +228,17 @@ $("download-btn").addEventListener("click",async()=>{
   clone.querySelector("#repeat-btn").setAttribute("aria-pressed","false");
   clone.querySelectorAll("textarea").forEach(x=>{x.value="";x.textContent=""});
   let html="<!doctype html>\n"+clone.outerHTML;
+  const photoResponse=await fetch("./assets/handgrepp-hoger.webp");
+  if(!photoResponse.ok)throw new Error("Högerhandsfoto saknas");
+  const photoBlob=await photoResponse.blob();
+  const photoUri=await new Promise((resolve,reject)=>{
+   const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));
+   reader.onerror=reject;reader.readAsDataURL(photoBlob);
+  });
   for(const name of ["content.js","logic.js","practice.js"]){
    const r=await fetch("./"+name);if(!r.ok)throw new Error(name);
-   const code=(await r.text()).replaceAll("</"+"script>","<\\/script>");
+   let code=(await r.text()).replaceAll("</"+"script>","<\\/script>");
+   if(name==="content.js")code=code.replaceAll("./assets/handgrepp-hoger.webp",photoUri);
    const tag='<script src="./'+name+'"></'+'script>';
    if(!html.includes(tag))throw new Error(tag);
    html=html.replace(tag,'<script>'+code+'</'+'script>');

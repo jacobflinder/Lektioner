@@ -23,17 +23,47 @@ const almost=(a,b,eps=.04)=>Number.isFinite(Number(a))&&Math.abs(Number(a)-Numbe
   const resp=await page.goto('http://127.0.0.1:8123/fy2/kapitel-3/strom-ger-magnetfalt/',{waitUntil:'networkidle'});
   check(resp.status()===200,'pilot HTTP 200');
   check(await page.locator('.slide').count()===19,'18 main + optional unchanged');
-  // A physical right-hand guide is feedback, never given before a prediction.
+  // The real hand grip is instructional input: visible before the answer.
   await go(3);
-  check(await page.locator('.slide.active .right-hand-guide').count()===1,'physical grip guide exists');
-  check(!await page.locator('.slide.active .right-hand-guide').isVisible(),'right-hand guide hidden until learner thinks');
+  const hand=page.locator('.slide.active .direction-photo');
+  check(await hand.isVisible(),'hand photo visible when direction slide starts');
+  check(await hand.evaluate(e=>e.complete&&e.naturalWidth>0),'actual photographic pixels loaded');
+  check(await hand.getAttribute('src')==='./assets/handgrepp-hoger.webp','hand reference served as real image asset');
+  const fig=page.locator('.slide.active [data-wire-plot]');
+  check(await fig.getAttribute('data-shown')!=='true','point P tangent hidden before student prediction');
+  check(!await page.locator('.slide.active .answer').isVisible(),'direction answer hidden before student prediction');
+  const grip=await hand.boundingBox();check(grip.width>140&&grip.height>160,'hand large enough to distinguish grip and thumb');
   await page.locator('.slide.active [data-reveal]').click();
-  check(await page.locator('.slide.active .right-hand-guide').isVisible(),'right-hand guide revealed');
-  check((await page.locator('.slide.active .right-hand-guide').innerText()).includes('Betrakta ledaren från den ände som tummen pekar mot.'),'correct observer viewpoint explained in rendered feedback');
-  check(await page.locator('.slide.active svg.hand-grip').count()===1,'gripping hand illustration');
-  check(await page.locator('.slide.active svg.hand-cross').count()===1,'top view tied to thumb direction');
-  check(await page.locator('.slide.active svg .hand-b-at-p').getAttribute('d')==='M176 105L176 62','actual top view tangent upward in P for out current');
+  check(await fig.getAttribute('data-shown')==='true','tangent revealed after own prediction');
+  const vector=await fig.locator('svg path[stroke="#c15f43"]').first().getAttribute('d');
+  check(vector.includes('M359 185')&&vector.includes('L359 149'),'right-point B tangent is actually upward');
+  const view=await page.evaluate(()=>{
+   const photo=document.querySelector('.slide.active .direction-photo').getBoundingClientRect();
+   const graph=document.querySelector('.slide.active [data-wire-plot] svg').getBoundingClientRect();
+   const ans=document.querySelector('.slide.active .answer.shown').getBoundingClientRect();
+   const foot=document.querySelector('.foot').getBoundingClientRect();
+   return {photoBottom:photo.bottom,graphBottom:graph.bottom,answerBottom:ans.bottom,footerTop:foot.top,width:innerWidth,overflow:document.documentElement.scrollWidth-innerWidth};
+  });
+  check(view.photoBottom<=view.footerTop+3,'photo visible above sticky footer at desktop '+JSON.stringify(view));
+  check(view.answerBottom<=view.footerTop+3,'answer visible above sticky footer at desktop '+JSON.stringify(view));
+  check(view.overflow<=2,'slide4 no horizontal scrolling');
   await page.screenshot({path:output+'/figure-pilot-hand-desktop.png',fullPage:true});
+  // In the error-correction slide the wrong illustration must not be the ONLY image after feedback.
+  await go(10);
+  check(await page.locator('.slide.active .error-before svg').isVisible(),'initial incorrect diagram available for diagnosis');
+  check(!await page.locator('.slide.active .error-corrected-svg').isVisible(),'corrected diagram concealed before own attempt');
+  await page.locator('.slide.active [data-reveal]').click();
+  check(await page.locator('.slide.active .error-corrected-svg').isVisible(),'corrected tangent shown beside incorrect diagram');
+  check((await page.locator('.slide.active .correct-b-vector').getAttribute('d'))==='M240 126V47','corrected SVG vector points upwards at P');
+  await page.screenshot({path:output+'/figure-pilot-error-before-after.png',fullPage:true});
+  // Paper solution is a real diagram: top point, labeled radius and left-facing B.
+  await go(12);
+  check(!await page.locator('.slide.active .paper-solution-svg').isVisible(),'paper solution figure hidden before student attempt');
+  await page.locator('.slide.active [data-reveal]').first().click();
+  check(await page.locator('.slide.active .paper-solution-svg').isVisible(),'paper solution figure appears with first solution step');
+  check((await page.locator('.slide.active .paper-b-left').getAttribute('d'))==='M207 62H118','actual B vector points left from P above conductor');
+  check((await page.locator('.slide.active .paper-solution-figure').innerText()).includes('ovanför'),'paper diagram has explanatory caption');
+  await page.screenshot({path:output+'/figure-pilot-paper-solution.png',fullPage:true});
   await go(9);
   const strength=page.locator('#model-strength');
   check(!await strength.isVisible(),'B strength visualization initially concealed');
@@ -90,7 +120,9 @@ const almost=(a,b,eps=.04)=>Number.isFinite(Number(a))&&Math.abs(Number(a)-Numbe
   // Layout at both 390px mobile and real projector size, with feedback visible.
   for(const v of [{w:390,h:844,n:'mobile'},{w:1920,h:1080,n:'projector'}]){
    await page.setViewportSize({width:v.w,height:v.h});
-   await go(3);await page.locator('.slide.active [data-reveal]').click();
+   await go(3);
+   check(await page.locator('.slide.active .direction-photo').isVisible(),'photo visible in '+v.n+' before revealing answer');
+   await page.locator('.slide.active [data-reveal]').click();
    let overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
    check(overflow<=2,'hand-guide '+v.n+' has no horizontal overflow: '+overflow);
    await page.screenshot({path:output+'/figure-pilot-hand-'+v.n+'.png',fullPage:true});
@@ -100,6 +132,7 @@ const almost=(a,b,eps=.04)=>Number.isFinite(Number(a))&&Math.abs(Number(a)-Numbe
    let ge=await geom();check(ge.w>0,'B strength bar visually exists on '+v.n);
    await page.screenshot({path:output+'/figure-pilot-model-'+v.n+'.png',fullPage:true});
   }
+
   check(errors.length===0,'zero JS exceptions '+JSON.stringify(errors));
   if(fails.length)throw Error(fails.length+' FAILED:\\n'+fails.join('\\n'));
   console.log('FY2_FIGURE_PILOT_PASS '+JSON.stringify({checks,screenshots:6,errors:errors.length}));
