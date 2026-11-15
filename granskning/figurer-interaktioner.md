@@ -12,6 +12,12 @@
 > **Kodversion:** Senaste publicerade pilotkod i `main`: commit `e017f0e1c0eaff5bf766676d35c181217bdb3e46`, squash-merge [PR #64](https://github.com/jacobflinder/Lektioner/pull/64) från `docs/visual-begriplighet-20261115`, efter tidigare [PR #63](https://github.com/jacobflinder/Lektioner/pull/63). Ingen annan lektionskod ändrad.  
 > **Publicerad verifiering av den nya pilotkoden:** [Fy2 webbläsarregression på main 43750441056](https://github.com/jacobflinder/Lektioner/actions/runs/43750441056) **SUCCESS** och [GitHub Pages 43750440733](https://github.com/jacobflinder/Lektioner/actions/runs/43750440733) **SUCCESS** på **samma kod-SHA `e017f0e1c0eaff5bf766676d35c181217bdb3e46`**. På grenen passerade [43750083480](https://github.com/jacobflinder/Lektioner/actions/runs/43750083480). Publicerad lektion: https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/strom-ger-magnetfalt/.
 
+> **Arbetsläge 2026-11-15:** **Granskning av vald nästa lektion: Ma4 – Polynomdivision (#23 i 41-registret; andra lektionen som behandlas i denna serie).** Användaren har uttryckligen valt denna URL som nästa, vilket åsidosätter den tidigare föreslagna kursordningen för just nästa steg. **Fy2-pilotens figurer har uttryckligen accepterats som kvalitetsnivå; användaren påpekade vissa märkliga beräkningssteg men bad att lämna dem tills vidare.** Detta är inte samma sak som att matematikstegen har nygranskats eller korrigerats.
+>
+> **Nuvarande lektionsstatus:** Ma4 Polynomdivision **under verifiering på arbetsgrenen** `figurer-ma4-polynomdivision-20261115`. De nya figurerna och testerna är inte publicerade; GitHub Actions/Pages och faktisk visuell inspektion återstår.
+>
+> **Nästa handling:** Verifiera faktisk gradkolumnsgeometri, stegvis avslöjande, koefficientmatris, tallinje, 0x²-placering och projektor/mobil. Granska skärmbilder. Korrigera eventuella fel och kör Ma4-regression innan PR/Pages. Rapportera och **stanna vid polynomdivision** tills användaren väljer en ny lektion.
+>
 ## Varaktiga granskningsinstruktioner
 
 Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md) och `AGENTS.md` vid varje ny chatt. Separera detta arbete från [matematikgranskningen](README.md). Varje lektion ska inventeras från behov, inte bara befintliga figurer. Prioritera fysikalisk riktighet och saknade förklaringssteg över kosmetik. Bevara fullständig matematisk lösning, Socrative enbart där det redan finns, bokuppgifter, läxor och demonstrationer. Låt eleverna förutsäga före återkoppling. Koppla figurer, formler och reglage till samma tillstånd. Verifiera faktiskt ritad geometri oberoende av programmets egna tal. Dokumentera både utförda och ej utförda kontroller. **Godkänn inte en lektion med enbart gröna knappar eller med kvarstående obligatorisk verifiering.**
@@ -50,7 +56,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 20 | Matematik 4 | Ekvationen zⁿ = a | `ma4/kapitel-4/ekvationen-zn-a/` | Ej påbörjad |
 | 21 | Matematik 4 | Eulers formel | `ma4/kapitel-4/eulers-formel/` | Ej påbörjad |
 | 22 | Matematik 4 | Andragradsekvationer i komplexa tal | `ma4/kapitel-4/andragradsekvationer/` | Ej påbörjad |
-| 23 | Matematik 4 | Polynomdivision | `ma4/kapitel-4/polynomdivision/` | Ej påbörjad |
+| 23 | Matematik 4 | Polynomdivision | `ma4/kapitel-4/polynomdivision/` | **Pågående figurgranskning – användarvalt nästa steg** |
 | 24 | Matematik 4 | Faktorsatsen | `ma4/kapitel-4/faktorsatsen/` | Ej påbörjad |
 | 25 | Matematik 4 | Polynomekvationer av högre grad | `ma4/kapitel-4/hogre-grad/` | Ej påbörjad |
 | 26 | Fysik 1 | Coulombs lag | `fy1/kapitel-8/coulombs-lag/` | Ej påbörjad |
@@ -93,3 +99,16 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 **Verifierat:** **56 nya Playwright-assertioner, 468 äldre pilottester och full Fy2-kursregression passerar**. Testet kontrollerar fotots faktiska laddning och synliga storlek, inga förtida B-svar, rätt synliga SVG-pilar, korrigerad före/efter-riktning och pappersexemplets B åt vänster. De tre faktiskt renderade skärmbilderna för 1280×800 har granskats via CI-loggen; en sista layoutjustering använder handfotots kort bättre och har efterföljande grön CI. Det kvarstår 68 äldre icke-blockerande layoutvarningar i generell Fy2-smoke, inklusive tidigare dokumenterade 768px-situationer. [PR #64](https://github.com/jacobflinder/Lektioner/pull/64) är sammanförd och slutgiltig Pages/QA på samma kod-SHA är gröna. **Elevförståelse och användarens estetiska godkännande kan inte bevisas med enbart automation; invänta lärarens synpunkter.**
 
 **Status 2026-11-15 efter PR #64:** **Pilotlektion 1/41 publicerad och automatiskt verifierad enligt de nya kontrollerna, men inväntar användarens visuella godkännande.** Kod och tidigare verifiering är dokumenterade. **Börja inte lektion 2.** Nästa arbete är eventuella synpunkter på handbild, layout och de nya facitfigurerna.
+
+## Ma4 · Polynomdivision · vald nästföljande lektion (#23/41 i inventeringen)
+
+**Utgångspunkt:** Eleven ska inte bara räkna rätt utan tydligt kunna se **varför högsta termen försvinner**, vilken grad som behandlas och varför övriga termer inte får flytta kolumn. Lektionssidan har 11 bilder (10 i huvudvägen och frivillig extrabild) och sju stegvisa divisioner. Innehåller redan fullständiga divisionsrader och pappersaktivitet; dessa ska inte ersättas av figurer.
+
+**Nya brister identifierade:** (1) Gradkolumner i interaktiva uppställningen saknade uttryckliga gradetiketter och aktuell grad markerades inte visuellt, trots att texten krävde att eleverna skulle hålla ordning på gradplatser. (2) Multiplikationskontrollen på bild 5 saknade samlad koefficientrepresentation som gör att elev ser hur ursprungspolynomet återkommer utan nya symboliska hopp. (3) Bild 6 hade endast text för dubbelnegationen, ingen bild som tydligt skiljer fel subtraktionsriktning från korrekt addition av 2. (4) Bild 8 beskrev platsen för 0x² men visade ingen visuell 4-kolumnsuppställning.
+
+**Åtgärder på arbetsgren (ännu ej publicerade):** Fyra visuellt separata metodfaser 1–4 och markerad aktiv gradkolumn med kontinuerlig rad-/rubriklinjering; tydlig etikett för aktuellt uppgiftsskede utan att nästa resultat avslöjas. Separat dold koefficientmatris x·Q, 2·Q, R, P på bild 5; färg-/textmärkt tallinje för subtraktion `-5-(-2)` på bild 6 efter eget försök; dold gradkarta x³, 0x², −4x, +3 på bild 8. Samma polynom, samma steg, samma ursprungliga frågor och facit. NOKflex 4421–4430 och undervisningsrytmen bevarade.
+
+**Oberoende kontrollfall före publicering:** För `P=2x³+3x²−5x+6`, `D=x+2`, `Q=2x²−x−3`, `R=12` ska koefficientvektorerna vara `xQ=[2,-1,-3,0]`, `2Q=[0,4,-2,-6]`, `R=[0,0,0,12]`; summa `[2,3,-5,6]`. Efter första subtraktionen ska x³-kolumnen elimineras, nästa aktiva grad vara x², inte föregående x³. Vid dubbelnegation ska koefficienten −5 flyttas **+2** till −3, inte **−2** till −7. På bild 8 ska `x³+0x²−4x+3` återges med x²-positionen reserverad. Riktat Chromium-test `ma4/kapitel-4/qa/figure-interaction-polynomdivision.cjs` kontrollerar bland annat faktisk pixelcentrering av gradkolumner och att figur/facit hålls dolt till rätt steg.
+
+**Teststatus:** CI på arbetsgren initierad. **Ingen PASS-status eller publicering påstås förrän verifierad.** Ändra inte nästa lektion.
+

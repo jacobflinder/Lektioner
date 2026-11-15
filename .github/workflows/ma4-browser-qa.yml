@@ -36,6 +36,7 @@ jobs:
           node ma4/kapitel-4/qa/deep-review-ma4-14.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-13.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-12.cjs
+          node ma4/kapitel-4/qa/figure-interaction-polynomdivision.cjs
           node ma4/kapitel-4/qa/browser-smoke.cjs
           node ma4/kapitel-4/qa/math-typography-pair-01.cjs
           node ma4/kapitel-4/qa/math-typography-pair-02.cjs
