@@ -82,7 +82,7 @@
   for(const i of [1,5,6,7]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),quiz=sec?.querySelector(':scope > .quiz');if(body&&quiz)body.appendChild(quiz)}
   for(const i of [3,4,5,6,7,10,11]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),label=sec?.querySelector(':scope > .steps-label'),steps=[...(sec?.querySelectorAll(':scope > .step')||[])];if(body&&label)body.append(label,...steps)}
   const stepButton=document.getElementById('step'),stage=document.getElementById('stage');
-  function syncStep(){const slide=stage?.querySelector('.slide.active');if(stepButton)stepButton.hidden=!slide?.querySelector('.step')}
+  function syncStep(){const slide=stage?.querySelector('.slide.active');if(stepButton)stepButton.hidden=!slide?.querySelector('.step:not(.open)')}
   if(stage){new MutationObserver(syncStep).observe(stage,{subtree:true,attributes:true,attributeFilter:['class']});syncStep()}
   // Shared shell does not reset answer visibility when returning from repetition;
   // correct it only for this lesson, without touching other lectures.
