@@ -99,6 +99,17 @@ const almost=(a,b,eps=.04)=>Number.isFinite(Number(a))&&Math.abs(Number(a)-Numbe
    let ge=await geom();check(ge.w>0,'B strength bar visually exists on '+v.n);
    await page.screenshot({path:output+'/figure-pilot-model-'+v.n+'.png',fullPage:true});
   }
+  // Temporary visual-inspection evidence: compact JPEG chunks in CI logs,
+  // allowing a reviewer without an artifact browser to inspect the rendered UI.
+  await page.setViewportSize({width:1440,height:900});
+  for(const [name,index,selector] of [['hand',3,'.slide.active .right-hand-guide'],['model',9,'.slide.active .grid']]){
+   await go(index);
+   if(name==='hand')await page.locator('.slide.active [data-reveal]').click();
+   else await page.locator('#model-show').click();
+   const jpeg=await page.locator(selector).screenshot({type:'jpeg',quality:48});
+   const base64=jpeg.toString('base64');
+   for(let i=0;i<base64.length;i+=12000)console.log('FIG_PREVIEW_'+name+'_'+String(i/12000).padStart(3,'0')+':'+base64.slice(i,i+12000));
+  }
   check(errors.length===0,'zero JS exceptions '+JSON.stringify(errors));
   if(fails.length)throw Error(fails.length+' FAILED:\\n'+fails.join('\\n'));
   console.log('FY2_FIGURE_PILOT_PASS '+JSON.stringify({checks,screenshots:6,errors:errors.length}));
