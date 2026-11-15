@@ -28,7 +28,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   const count=await active().locator('.step').count();
   ck(await active().locator('.step.open').count()===0,'answer hidden before steps '+await active().getAttribute('id'));
   for(let k=0;k<count;k++)await page.locator('#step').click();
-  ck(await active().locator('.step.open').count()===count,'reveal all '+count+' steps '+await active().getAttribute('id'));
+  ck(await active().locator('.step.open').count()===count,'reveal all '+count+' steps '+await active().getAttribute('id'));if(count)ck(!(await page.locator('#step').isVisible()),'no duplicate next button once all steps revealed');
  };
  const noOverflow=async(tag)=>{
   const width=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
@@ -83,11 +83,11 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   for(let n=1;n<=11;n++){
    await go(n);
    ck((await active().locator('.step.open').count())===0,'start with all steps concealed slide '+n);
-   if(n===6)ck(!await active().locator('.meter-reveal').isVisible(),'amperemeter solution hidden before own drawing');
+   if(n===6){ck(!await active().locator('.meter-reveal').isVisible(),'amperemeter figure hidden before own drawing');ck(!await active().locator('.meter-points').isVisible(),'amperemeter textual placement also hidden before own drawing');}
    if(n===2)ck(!(await values()).svg,'current bars hidden until prediction');
    if(n===5)ck(lesson.pages[4].body.includes('100 Ω'),'resistance context preserved');
    await steps();
-   if(n===6)ck(await active().locator('.meter-reveal').isVisible(),'amperemeter/voltmeter reveal follows own drawing');
+   if(n===6){ck(await active().locator('.meter-reveal').isVisible(),'amperemeter/voltmeter figure appears only after drawing');ck(await active().locator('.meter-points').isVisible(),'amperemeter/voltmeter textual answer appears after drawing');}
    const math=await active().locator('.series-equation math').count();
    ck(math===[0,0,9,7,8,0,3,0,0,4,16][n-1],'correct per-slide semantic MathML count '+n+': '+math);
    ck((await active().locator('.series-equation:not(:has(math))').count())===0,'every independent math row has native MathML slide '+n);
