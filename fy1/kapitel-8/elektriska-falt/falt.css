@@ -28,3 +28,15 @@
 @media(max-width:930px){.field-model .drawing svg{max-height:none}}
 @media(max-width:520px){.field-figure{padding:6px}.field-model .model-controls{grid-template-columns:1fr}.field-figure figcaption{font-size:.78rem}.field-model .model-result{font-size:.89rem}}
 @media(prefers-reduced-motion:reduce){.field-model svg{animation:none}}
+
+/* Review 38/41: one independent mathematical statement per semantic block. */
+.field-math-stack,.field-model-math{display:grid;gap:20px;max-width:100%;margin:14px 0}
+.field-equation,.field-model-equation{max-width:100%;min-width:0;overflow-x:auto;line-height:1.42;font-weight:400}
+.field-equation math,.field-model-equation math{font-size:clamp(1.06rem,1.52vw,1.38rem)}
+.field-model-math{gap:18px}
+.field-model .model-result .field-model-equation math{font-size:clamp(1.03rem,1.45vw,1.26rem)}
+.field-model .figcap{font-size:.83rem;color:#315b69}
+@media(max-width:520px){
+ .field-math-stack{gap:20px}
+ .field-equation math,.field-model .model-result .field-model-equation math{font-size:1.05rem}
+}
