@@ -28,7 +28,7 @@ const answer=(title,s)=>`<button data-reveal>${title}</button><div class="answer
 const plot=(point='right',dir='out')=>`<div class="plot" data-wire-plot data-direction="${dir}" data-point="${point}"><svg viewBox="0 0 520 370" role="img" aria-label="Tvärsnitt av ledare, ström ${dir==='out'?'ut ur':'in i'} bilden, markerade mätpunkter"></svg><p class="cap">B-pilar visar riktning. Storleken jämförs i undersökningarna.</p></div>`;
 const goals='<ol><li>Rita magnetfält och bestämma B:s riktning kring en lång rak ledare.</li><li>Förklara hur ström och avstånd påverkar B.</li><li>Beräkna B med rätt avstånd och enhet.</li></ol>';
 const rightHandGuide=`<div class="right-hand-guide">
-<p><b>Pröva med din högra hand:</b> greppa ledaren med böjda fingrar. Tummen följer <b>konventionell ström I</b>; fingrarna visar hur <b>B cirkulerar</b>. Titta sedan längs tummens riktning mot ledarens tvärsnitt.</p>
+<p><b>Pröva med din högra hand:</b> greppa ledaren med böjda fingrar. Tummen följer <b>konventionell ström I</b>; fingrarna visar hur <b>B cirkulerar</b>. Betrakta ledaren från den ände som tummen pekar mot. Då kommer strömmen mot dig (⊙).</p>
 <div class="hand-panels">
 <svg class="hand-grip" viewBox="0 0 240 190" role="img" aria-label="Schematisk höger hand griper om rak ledare: tummen pekar upp i strömmens riktning, böjda fingrar omsluter ledaren.">
 <rect width="240" height="190" rx="12" fill="#f8fcfc"/>
@@ -44,9 +44,9 @@ const rightHandGuide=`<div class="right-hand-guide">
 <text x="155" y="139" style="font-size:15px;fill:#07788e">Fingrar:</text><text x="155" y="157" style="font-size:15px;fill:#07788e">runt → B</text>
 <path d="M152 146L125 145" stroke="#087c90" stroke-width="2"/>
 </svg>
-<svg class="hand-cross" viewBox="0 0 240 190" role="img" aria-label="Betraktat längs tummen: ström ut ur bilden markeras med prick i cirkel; magnetfältet går moturs och är riktat uppåt i P till höger.">
+<svg class="hand-cross" viewBox="0 0 240 190" role="img" aria-label="Betraktat från tummens spets: ström ut ur bilden markeras med prick i cirkel; magnetfältet går moturs och är riktat uppåt i P till höger.">
 <rect width="240" height="190" rx="12" fill="#f8fcfc"/>
-<text x="12" y="21" style="font-size:15px;font-weight:700">2 · Se längs tummen</text>
+<text x="12" y="21" style="font-size:15px;font-weight:700">2 · Se från tummens spets</text>
 <circle cx="113" cy="105" r="63" stroke="#8ab7c2" stroke-width="2.5" fill="none"/>
 <path d="M176 105 A63 63 0 0 0 50 105" stroke="#077e91" stroke-width="4.5" fill="none" class="field-curl"/>
 <path d="M41 88L50 105L60 88" stroke="#077e91" stroke-width="4.5" fill="none"/>
