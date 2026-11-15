@@ -133,14 +133,6 @@ const almost=(a,b,eps=.04)=>Number.isFinite(Number(a))&&Math.abs(Number(a)-Numbe
    await page.screenshot({path:output+'/figure-pilot-model-'+v.n+'.png',fullPage:true});
   }
 
-  // Compact JPEGs sent to CI log for visual inspection, removed after review.
-  await page.setViewportSize({width:1280,height:800});
-  for(const [name,index,selector] of [['direction',3,'.slide.active .direction-layout'],['correction',10,'.slide.active .error-grid'],['paper',12,'.slide.active .grid']]){
-   await go(index);await page.locator('.slide.active [data-reveal]').first().click();
-   const jpg=await page.locator(selector).screenshot({type:'jpeg',quality:40});
-   const data=jpg.toString('base64');
-   for(let i=0;i<data.length;i+=12000)console.log('FIG_VISUAL_'+name+'_'+String(i/12000).padStart(3,'0')+':'+data.slice(i,i+12000));
-  }
   check(errors.length===0,'zero JS exceptions '+JSON.stringify(errors));
   if(fails.length)throw Error(fails.length+' FAILED:\\n'+fails.join('\\n'));
   console.log('FY2_FIGURE_PILOT_PASS '+JSON.stringify({checks,screenshots:6,errors:errors.length}));
