@@ -23,3 +23,16 @@
 .stage .layout .body-copy{min-width:0}
 @media(max-width:930px){.potential-figure svg{max-height:none}}
 @media(max-width:575px){.potential-figure{padding:7px}.potential-figure figcaption{font-size:.74rem}.potential-model .model-controls{grid-template-columns:1fr}.potential-model .model-controls .control:only-child{grid-column:span 1}.potential-math{font-size:1.06rem;padding:7px}.goal-card{padding:11px}.potential-model .drawing svg{max-height:none}}
+
+/* Revision 40/41: native MathML, one distinct equation per line. */
+.potential-math-steps,.potential-model-math{display:grid;gap:20px;max-width:100%;margin:13px 0}
+.potential-equation,.potential-model-equation{min-width:0;max-width:100%;overflow-x:auto;line-height:1.46}
+.potential-equation math,.potential-model-equation math{font-size:clamp(1.05rem,1.48vw,1.34rem)}
+.potential-model-math{gap:18px}
+.potential-model .model-result .potential-model-equation math{font-size:clamp(1.01rem,1.35vw,1.23rem)}
+.potential-model .model-result .potential-model-equation{font-weight:400}
+.potential-model .figcap{line-height:1.5}
+@media(max-width:575px){
+ .potential-math-steps{gap:20px}
+ .potential-equation math,.potential-model .model-result .potential-model-equation math{font-size:1.03rem}
+}
