@@ -6,8 +6,8 @@ for(const s of document.querySelectorAll('.slide')){
  for(const step of [...s.querySelectorAll(':scope > .step')])body.appendChild(step);
  const quiz=s.querySelector(':scope > .quiz');if(quiz)body.appendChild(quiz);
 }
-function syncStep(){const slide=document.querySelector('.slide.active'),control=document.querySelector('#step');if(slide&&control)control.hidden=!slide.querySelector('.step')}
-for(const id of ['next','prev','jump','reset','classmode','repeatmode']){
+function syncStep(){const slide=document.querySelector('.slide.active'),control=document.querySelector('#step');if(slide&&control)control.hidden=!slide.querySelector('.step:not(.open)')}
+for(const id of ['next','prev','jump','reset','classmode','repeatmode','step']){
  const el=document.getElementById(id);if(!el)continue;
  el.addEventListener(id==='jump'?'change':'click',syncStep);
 }

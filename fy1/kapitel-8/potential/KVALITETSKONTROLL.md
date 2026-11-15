@@ -56,3 +56,20 @@ Detta avser **källgranskning, kodgranskning, lokala Chromium-tester och visuell
 - Uppgift 1 har ett första steg och uppgift 2 saknar förhandsstöd. Ingen ny Socrative och inga ändrade bokuppgifter eller demonstrationer.
 - Fysikkontroll: 9,0 V över 1,0+2,0 Ω ger 3,0 A. V_C = +6,0 V om A = 0 V; referensbyte till C = 0 V ger V_B = +3,0 V men oförändrat U_BC.
 - Separat lokal interaktionsprototyp med motsvarande två uppgifter granskades i Chromium (300 kontroller sammanlagt för båda lektionerna), vid 320, 390, 768, 1280 och 1440 px. Detta verifierar **inte** live-publicerad Pages, Safari eller faktiskt elevlärande.
+
+## Systematisk fördjupningsgranskning 40/41 · Potential
+
+**Källstatus:** den åtkomliga webblektionen innehåller **14 webbilder**, och tidigare lektionsdokumentation anger original-`Fy1_Potential.pdf` med 16 sidor. Ingen direkt återfinnbar original-PDF kunde öppnas i projekt-/konversationsfiler för denna granskning, så originalets tryckta sidlayout är inte direkt verifierad. Bevara den verkliga kateder-/bänk-/golv-demonstrationen, **Socrative 905 `SOC-37397534`**, **bokens 861–870 s.313–314**, lässtöd **8.6 s.309–312** och **gröna rutorna**, skyddade **21 min bokarbete**, frivilligt papperstest och ursprungliga tre webbquiz. Ingen ny Socrative ska tillföras.
+
+**Fysikaliska kontrollpunkter (oberoende):**
+- Potential är referensberoende, medan `U_AB=V_A−V_B`, fält och kraft i oförändrad geometri är referensinvarianta. 12V−8V=+4V och (-3V)−(+2V)=−5V; elektronens F är motsatt E, dess `E_p=qV` kan skifta med nollnivån men **energiändringar** gör det inte.
+- Seriekrets: 12V och 2Ω+4Ω ger I=2A, nivåer A/B/C/D/A=0/12/8/0/0V eller vid C=0: −8/+4/0/−8/−8V. Fallet över resistorerna är −4/−8 V med strömmen, kontroll +12−4−8=0.
+- Två idealbatterier 10V och 6V i serie över 2Ω: rätt tecken för polorientering, netto-ems 4 eller 16 V och ström 2 eller 8 A i samma valda positiva riktning.
+- Avancerad frivillig förgrening: I₁=(10−V)/2, I₂=(8−V)/4 och I=V/4, Kirchhoffs första lag ger 2(10−V)+(8−V)=V ⇒ 28=4V ⇒ V=7V, I₁=1,5A, I₂=0,25A, I=1,75A. Exit +5−(−1)=+6V; vid nytt A=0 blir B=−6V, U_AB oförändrat.
+
+**Identifierade förbättringar:**
+- Modellen med de två batterierna bytte siffrorna **2 A → 8 A** när polen vändes, men visade alltid samma långa strömpil. Riktningspilen förklaras nu som **kvalitativ**; en ny helt fast, linjär **0–8A-mätstapel** med färgad SVG-längd `382·I/8` visar verklig modellström. Inget färgat mätvärde före elevens förutsägelse, nollnivå och polvändning återställs på vanligt sätt.
+- Potentialvandringen hade en opåskriven graf med horisontella nivåstreck och trappsteg som kunde förväxlas med en skiftande skala. Nu markeras den **fasta lodräta voltaxeln −8…+12 V** (inklusive 0/4/8), och grafen ges större höjd för att titel och höga/negativa potentialer inte ska överlappa. Ändrad referens ändrar varje ritat y-värde med exakt **8 V × 8,4 SVG-enheter/V**, inte potentialskillnaden.
+- Självständiga ekvationer separerade till semantiska MathML-rader, även i de **tre interaktiva modellernas dynamiska resultat**, i stället för ihoptryckta uttryck och två math-element i samma visningsrad på fördjupningen. Minst 16px faktisk vertikal luft och ingen horisontell klippning krävs på 390/1440/1920.
+
+**Verifikation före publicering:** ny riktad Chromium/Playwright på samtliga 14 elevbilder, dolda steg, referens- och teckenfall, originalquiz, det frivilliga papperssjälvtestet, faktiskt ritad voltaxis och batterimätarens bredder, matematikens geometri, klassrum/repetition/reset samt oförändrade tidigare sviter #36–39. Resultat markeras inte som passerade förrän Actions och skärmbilder faktiskt verifierats. Fysiskt Safari/iPad/Mac/OBS/AirServer, projektor, katederdemonstration och elevlärande ligger utanför automatiserad testmiljö.
