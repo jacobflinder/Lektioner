@@ -1,0 +1,109 @@
+'use strict';
+// Pilot audit: independent relationships plus ACTUAL rendered SVG geometry.
+// Run with Chromium + http.server on localhost:8123 (Fy2 browser QA workflow).
+const {chromium}=require('playwright');
+const fs=require('node:fs');
+const output='fy2-qa-screenshots';
+fs.mkdirSync(output,{recursive:true});
+const almost=(a,b,eps=.04)=>Number.isFinite(Number(a))&&Math.abs(Number(a)-Number(b))<=eps;
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:900}});
+ let checks=0;const fails=[],errors=[];
+ const check=(ok,msg)=>{checks++;if(!ok)fails.push(msg)};
+ page.on('pageerror',e=>errors.push(e.message));
+ const go=async n=>page.locator('#jump').selectOption(String(n));
+ const set=async(id,val)=>page.locator('#'+id).evaluate((e,v)=>{e.value=String(v);e.dispatchEvent(new Event('input',{bubbles:true}))},val);
+ const value=async sel=>Number(await page.locator(sel).getAttribute('width'));
+ const ring=async()=>Number(await page.locator('#model-svg circle[data-model-field-circle]').getAttribute('r'));
+ const bar=async()=>value('#model-strength [data-strength-fill]');
+ const pos=async()=>page.locator('#model-svg circle[fill="#c15f43"]').evaluate(e=>({x:+e.getAttribute('cx'),y:+e.getAttribute('cy')}));
+ const geom=async()=>page.locator('#model-strength [data-strength-fill]').evaluate(e=>{let r=e.getBoundingClientRect();return {w:r.width,x:r.x}});
+ try{
+  const resp=await page.goto('http://127.0.0.1:8123/fy2/kapitel-3/strom-ger-magnetfalt/',{waitUntil:'networkidle'});
+  check(resp.status()===200,'pilot HTTP 200');
+  check(await page.locator('.slide').count()===19,'18 main + optional unchanged');
+  // A physical right-hand guide is feedback, never given before a prediction.
+  await go(3);
+  check(await page.locator('.slide.active .right-hand-guide').count()===1,'physical grip guide exists');
+  check(!await page.locator('.slide.active .right-hand-guide').isVisible(),'right-hand guide hidden until learner thinks');
+  await page.locator('.slide.active [data-reveal]').click();
+  check(await page.locator('.slide.active .right-hand-guide').isVisible(),'right-hand guide revealed');
+  check((await page.locator('.slide.active .right-hand-guide').innerText()).includes('Betrakta ledaren från den ände som tummen pekar mot.'),'correct observer viewpoint explained in rendered feedback');
+  check(await page.locator('.slide.active svg.hand-grip').count()===1,'gripping hand illustration');
+  check(await page.locator('.slide.active svg.hand-cross').count()===1,'top view tied to thumb direction');
+  check(await page.locator('.slide.active svg .hand-b-at-p').getAttribute('d')==='M176 105L176 62','actual top view tangent upward in P for out current');
+  await page.screenshot({path:output+'/figure-pilot-hand-desktop.png',fullPage:true});
+  await go(9);
+  const strength=page.locator('#model-strength');
+  check(!await strength.isVisible(),'B strength visualization initially concealed');
+  check(almost(await ring(),48),'initial ring at 4 cm, exactly 12 SVG px/cm');
+  let p=await pos();check(almost(p.x,299)&&almost(p.y,185),'P lies on plotted initial radius');
+  await page.locator('#model-show').click();
+  check(await strength.isVisible(),'strength shown only by deliberate click');
+  check(almost(await bar(),90),'30 µT on fixed 0-120 scale is 90/360 units');
+  let g=await geom();check(g.w>0,'B bar actually rendered with positive width');
+  // Double current: same geometry, B and rendered bar double.
+  await set('i-slider',12);
+  check(almost(await bar(),180),'doubling I doubles actual drawn bar');
+  check(almost(await ring(),48),'changing I does not move fixed measurement point');
+  const twice=await geom();check(almost(twice.w/g.w,2,.06),'actual pixel bar width doubles');
+  // Double radius at fixed current: P travels out, B bar halves, direction unchanged.
+  await set('r-slider',8);
+  check(almost(await ring(),96),'doubling r doubles drawn field-circle radius');
+  p=await pos();check(almost(p.x,347)&&almost(p.y,185),'P moves by exact same physical radius');
+  check(almost(await bar(),90),'doubling r halves B and actual drawn bar');
+  const half=await geom();check(almost(half.w/twice.w,.5,.06),'actual pixel bar width halves');
+  // Reverse current direction without altering magnitude: one tangent vector reverses.
+  const up=await page.locator('#model-svg path[stroke="#c15f43"]').first().getAttribute('d');
+  await set('dir-select','in');
+  const down=await page.locator('#model-svg path[stroke="#c15f43"]').first().getAttribute('d');
+  check(up!==down&&up.includes('L347 149')&&down.includes('L347 221'),'reversing I changes the actual tangent direction');
+  check(almost(await bar(),90),'reversing I does not change B magnitude');
+  check((await page.locator('#model-result').innerText()).includes('nedåt'),'readout follows reversed direction');
+  // Both extremes, fixed invariant scale and consistent geometry.
+  await set('i-slider',1);await set('r-slider',12);
+  check(almost(await bar(),5),'I=1 A, r=12 cm => 1.6667 µT, rendered 5 units');
+  check(almost(await ring(),144),'maximum radius exactly 144 drawing units');
+  await set('i-slider',12);await set('r-slider',2);
+  check(almost(await bar(),360),'I=12 A, r=2 cm => 120 µT, rendered full scale');
+  check(almost(await ring(),24),'minimum radius exactly 24 drawing units');
+  await page.screenshot({path:output+'/figure-pilot-model-max-desktop.png',fullPage:true});
+  await page.locator('#model-reset').click();
+  check(!await strength.isVisible(),'model reset hides numerical B and chart');
+  check(almost(await ring(),48),'model reset restores 4 cm geometry');
+  // Independent slider pictures: current proportional, distance reciprocal.
+  await go(6);
+  await set('current-factor',2);
+  let paths=await page.locator('#current-comparison path[stroke="#077e8f"][stroke-width="6"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('d')));
+  check(paths.length===2&&paths[0]==='M190 215V167'&&paths[1]==='M455 215V119','I factor 2 renders exact 48:96 current arrows');
+  await set('current-factor',3);
+  paths=await page.locator('#current-comparison path[stroke="#077e8f"][stroke-width="6"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('d')));
+  check(paths[1]==='M455 215V71','I factor 3 renders exact 144 SVG units');
+  await go(8);
+  await set('distance-factor',2);
+  let d=await page.locator('#distance-comparison path[stroke="#087d90"][stroke-width="5"]').getAttribute('d');
+  check(d==='M390 185V125','2r moves P to 390 and B magnitude half (60 units)');
+  await set('distance-factor',3);
+  d=await page.locator('#distance-comparison path[stroke="#087d90"][stroke-width="5"]').getAttribute('d');
+  check(d==='M540 185V145','3r moves P to 540 and B magnitude third (40 units)');
+  // Layout at both 390px mobile and real projector size, with feedback visible.
+  for(const v of [{w:390,h:844,n:'mobile'},{w:1920,h:1080,n:'projector'}]){
+   await page.setViewportSize({width:v.w,height:v.h});
+   await go(3);await page.locator('.slide.active [data-reveal]').click();
+   let overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
+   check(overflow<=2,'hand-guide '+v.n+' has no horizontal overflow: '+overflow);
+   await page.screenshot({path:output+'/figure-pilot-hand-'+v.n+'.png',fullPage:true});
+   await go(9);await page.locator('#model-show').click();
+   overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
+   check(overflow<=2,'model '+v.n+' has no horizontal overflow: '+overflow);
+   let ge=await geom();check(ge.w>0,'B strength bar visually exists on '+v.n);
+   await page.screenshot({path:output+'/figure-pilot-model-'+v.n+'.png',fullPage:true});
+  }
+  check(errors.length===0,'zero JS exceptions '+JSON.stringify(errors));
+  if(fails.length)throw Error(fails.length+' FAILED:\\n'+fails.join('\\n'));
+  console.log('FY2_FIGURE_PILOT_PASS '+JSON.stringify({checks,screenshots:6,errors:errors.length}));
+ }catch(e){console.error('FY2_FIGURE_PILOT_FAIL '+(e.stack||e));process.exitCode=1;
+  await page.screenshot({path:output+'/figure-pilot-failure.png',fullPage:true}).catch(()=>{});
+ }finally{await browser.close()}
+})();
