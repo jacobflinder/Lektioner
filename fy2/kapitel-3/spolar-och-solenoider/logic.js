@@ -199,19 +199,31 @@ $("sol-reset").addEventListener("click",()=>{
 });
 function renderFlat(){
  const I=Number($("flat-i").value),N=Number($("flat-n").value),r=Number($("flat-r").value);
- const B=mu0*N*I/(2*(r/100))*1e6;
- const relFlat=(N/5)*(I/0.8)*(4/r);
+ const rMeters=r/100,NI=N*I,twor=2*rMeters,NIper2r=NI/twor;
+ const B=mu0*NIper2r*1e6,relFlat=(N/5)*(I/.8)*(4/r);
+ const prevSteps=$("flat-result").querySelector("details.calc-ins")?.open||false;
+ const prevFinal=$("flat-result").querySelector("details.calc-final")?.open||false;
  $("flat-i-value").textContent=swFmt(I,2)+" A";
  $("flat-n-value").textContent=String(N);
  $("flat-r-value").textContent=swFmt(r,1)+" cm";
  $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N,radiusCm:r,currentA:I,fieldMicroTesla:B});
+ const subSteps=[
+  '<msub><mi>μ</mi><mn>0</mn></msub><mo>≈</mo>'+sciMu,
+  '<mi>r</mi><mo>=</mo>'+num(r,1,'cm')+'<mo>=</mo>'+num(rMeters,3,'m'),
+  '<mi>N</mi><mi>I</mi><mo>=</mo>'+num(N,0)+'<mo>·</mo>'+num(I,2,'A'),
+  '<mi>N</mi><mi>I</mi><mo>=</mo>'+num(NI,2,'A'),
+  '<mn>2</mn><mi>r</mi><mo>=</mo><mn>2</mn><mo>·</mo>'+num(rMeters,3,'m'),
+  '<mn>2</mn><mi>r</mi><mo>=</mo>'+num(twor,3,'m'),
+  '<mfrac><mrow><mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac><mo>≈</mo>'+num(NIper2r,1,'A/m'),
+  '<mi>B</mi><mo>≈</mo><msub><mi>μ</mi><mn>0</mn></msub><mfrac><mrow><mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>'
+ ];
  $("flat-result").innerHTML=flatShown?
- calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',
- '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow><mrow><mn>2</mn><mo>·</mo>'+mult(r/100,'m',3)+'</mrow></mfrac>',
- '<mi>B</mi><mo>≈</mo>'+mult(B,'μT',1),
- 'Fältets riktning är '+(flatDir>0?'ut ur bilden':'in i bilden')+'. Relativt startfallet: '+swFmt(relFlat,2)+
- ' gånger så stort belopp. Detta gäller i centrum för idealiserat lika stora varv i luft.') :
+ calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',subSteps,
+ '<mi>B</mi><mo>≈</mo>'+num(B,1,'μT'),
+ 'I centrum pekar B '+(flatDir>0?'ut ur bilden':'in i bilden')+
+ '. Beloppet är '+swFmt(relFlat,2)+' gånger utgångsfallet. Formeln gäller täta lika stora varv i luft. Den separata blå mätskalan är linjär.') :
  "Förutsäg innan facit. Varje gång r ändras måste cm först omvandlas till meter.";
+ if(flatShown){$("flat-result").querySelector(".calc-ins").open=prevSteps;$("flat-result").querySelector(".calc-final").open=prevFinal}
  $("flat-show").textContent=flatShown?"Dölj beräkning och riktning":"Visa beräkning och riktning";
  syncPrediction("flat");
 }
