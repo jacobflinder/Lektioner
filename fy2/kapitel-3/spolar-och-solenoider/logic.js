@@ -11,9 +11,19 @@ function render(){
  $("reveal-btn").textContent=unshown?"Visa nästa steg":current<N-1?"Nästa bild":"Allt visat";
  $("reveal-btn").disabled=!unshown&&current===N-1;
 }
+function clearSlideFeedback(i){
+ const slide=slides[i];
+ slide.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
+ slide.dispatchEvent(new Event("lesson:reset"));
+ if(i===4){view="side";viewDir=1;viewShown=false;drawView()}
+ if(i===7){core=false;coreDir=1;drawCore()}
+ if(i===10){$("sol-reset").click()}
+ if(i===12){$("flat-reset").click()}
+}
 function go(i){
- current=Math.max(0,Math.min(N-1,i));
- if(!document.body.classList.contains("repeat"))slides[current].querySelectorAll(".answer.shown").forEach(n=>n.classList.remove("shown"));
+ const next=Math.max(0,Math.min(N-1,i));
+ if(next!==current&&!document.body.classList.contains("repeat"))clearSlideFeedback(next);
+ current=next;
  render();window.scrollTo(0,0);
 }
 function reveal(){
@@ -44,7 +54,9 @@ slides.forEach((s,i)=>{
 });
 $("jump").addEventListener("change",e=>go(Number(e.target.value)));
 function mode(repeat){
+ const previouslyRepeating=document.body.classList.contains("repeat");
  document.body.classList.toggle("repeat",repeat);
+ if(previouslyRepeating&&!repeat)clearSlideFeedback(current);
  $("class-btn").classList.toggle("selected",!repeat);
  $("repeat-btn").classList.toggle("selected",repeat);
  $("class-btn").setAttribute("aria-pressed",String(!repeat));

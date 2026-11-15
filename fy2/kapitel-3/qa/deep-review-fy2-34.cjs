@@ -135,6 +135,15 @@ try{
  ok((await page.locator('#flat-result .calc-final').innerText()).includes('in i bilden'),'reverse flat current flips B direction');
  ok(close((await actualWidth('#flat-b-bar')),2*flatBar,.03),'reverse current leaves magnitude unchanged');
  await page.locator('#flat-reset').click();ok(!await page.locator('#flat-b-bar').count(),'flat reset hides calibrated bar');
+ await go(10);await page.locator('#sol-show').click();ok(await page.locator('#sol-b-bar').count()===1,'classroom answer can be shown');
+ await go(11);await go(10);ok(await page.locator('#sol-b-bar').count()===0,'classroom return to solenoid hides previous numeric and visual answer');
+ await go(12);await page.locator('#flat-show').click();ok(await page.locator('#flat-b-bar').count()===1,'classroom flat answer can be shown');
+ await go(13);await go(12);ok(await page.locator('#flat-b-bar').count()===0,'classroom return to flat coil hides previous answer');
+ await go(4);await page.locator('#view-reveal').click();await go(5);await go(4);
+ ok((await page.locator('#view-caption').innerText()).includes('Förutsäg'),'classroom perspective revisit hides previous result');
+ await page.locator('#repeat-btn').click();await go(10);await page.locator('#sol-show').click();await go(11);await go(10);
+ ok(await page.locator('#sol-b-bar').count()===1,'repetition retains learner-visible result across navigation');
+ await page.locator('#class-btn').click();ok(await page.locator('#sol-b-bar').count()===0,'return to classroom clears repetition answer');
  await go(13);
  v=await active().innerText();ok(v.includes('63')&&v.includes('0,040'),'original 3 math stages flat coil retained');
  await go(14);
