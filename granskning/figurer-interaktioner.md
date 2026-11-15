@@ -1,20 +1,26 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
 > **Figur- och interaktionsgranskning: lektion 1/41 – Fysik 2, Ström ger magnetfält.**  
-> **Senast färdigställda lektion:** **1/41 · Fysik 2 · Ström ger magnetfält**. Figurgranskning **1/41**, 40 återstår. Separat matematikgranskning i [README.md](README.md) har 41/41 färdiga.  
+> **Senast färdigställda lektion:** Pilot **1/41 · Ström ger magnetfält** godkändes enligt **tidigare** granskningskrav, men har **återöppnats** efter nytt obligatoriskt krav på visuell begriplighet. Under de **nuvarande** kraven finns ännu ingen slutgodkänd lektion. Separat matematikgranskning i [README.md](README.md) har 41/41 färdiga.  
 > **Aktuell lektion:** 1/41 · Fysik 2 · Ström ger magnetfält · `fy2/kapitel-3/strom-ger-magnetfalt/`  
-> **Lektionsstatus:** **Klar**, publicerad och verifierad för pilot 1/41  
-> **Fortsättningsstatus:** **Inväntar användarens ”nästa”**; fortsätt inte automatiskt med lektion 2 i ny chatt  
+> **Lektionsstatus:** **Återöppnad / åtgärd krävs** – tidigare publicerade tester passerar, men nytt godkännandekrav för handbild och faktisk visuell begriplighet är ännu inte verifierat  
+> **Fortsättningsstatus:** **Pilot 1 ska slutföras mot de skärpta kriterierna**. Påbörja inte lektion 2 utan en ny slutgodkänd pilot och användarens uttryckliga ”nästa”.  
 > **Genomfört:** Egen visad-efter-försök-figur för högerhandsregeln; radieföljande cirkel genom P; korrekt fixerad B-skala 0–120 μT; lärarstöd; oberoende 42 Chromiumtester + 468 äldre pilotkontroller; faktiska skärmbilder inspekterade; Fy2 fullregression och Pages på main PASS  
-> **Återstår:** Inget obligatoriskt digitalt granskningssteg för pilot 1. Skolprojektorns fysiska visning, Safari på iPad och klassrumsdemonstrationer är externa manuella begränsningar, ej sådant som Chromebook/Chromium-test bevisar. 40 lektioner återstår, men startas inte utan ”nästa”.  
-> **Nästa handling:** **Stanna.** Vid användarens uttryckliga ”nästa”, läs AGENTS.md + denna logg och börja endast lektion **2/41, Fysik 2 – Elektriska fält**.  
+> **Återstår:** Kontrollera åtkomst till **användarens verkliga foto av höger hand runt en sladd**, bevara rättvänd hand och strömriktning, visa den böjda fingerriktningens koppling till magnetfält, göra en stegvis och rätt orienterad övergång till tvärsnittet samt skilja introduktionen från den dolda elevuppgiftslösningen. Inspektera faktisk storlek på desktop, mobil och projektor samt verifiera att bilden går att förstå **utan långa stödförklaringar**. Därefter tests/PR/Pages enligt AGENTS.md. Inga andra lektioner påbörjade.  
+> **Nästa handling:** **Fortsätt endast pilot 1/41:** säkra referensfotografiet och ersätt/komplettera den schematiska handen efter den nya visuella begriplighetsinstruktionen. Bevara innehåll och befintlig korrekt fysik. Godkänn inte före faktisk granskning, och gå inte vidare till lektion 2 förrän piloten godkänts och användaren sagt ”nästa”.  
 > **Nästa lektion i ordningen:** 2/41 · Fysik 2 · Elektriska fält, **startas först efter användarens ”nästa”**  
 > **Kodversion:** Kodbasens färdiga pilot i `main` commit `ae991bb321b55b357f59cbf826c81acfc7cc38df` genom squash-merge [PR #63](https://github.com/jacobflinder/Lektioner/pull/63) från `figurer-interaktioner-pilot-20261115`. Ingen parallell lektionskod ändrad.  
-> **Publicerad verifiering:** **Fy2 Chromium-workflow [43741322613](https://github.com/jacobflinder/Lektioner/actions/runs/43741322613) SUCCESS** och **Pages-deployment [43741322267](https://github.com/jacobflinder/Lektioner/actions/runs/43741322267) SUCCESS**, **båda på exakt kod-SHA `ae991bb321b55b357f59cbf826c81acfc7cc38df`**. Kontroll av filer på main PASS. Publicerad lektionslänk: https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/strom-ger-magnetfalt/.
+> **Historiskt genomförd verifiering (tidigare kriterier, inte nytt slutgodkännande):** **Fy2 Chromium-workflow [43741322613](https://github.com/jacobflinder/Lektioner/actions/runs/43741322613) SUCCESS** och **Pages-deployment [43741322267](https://github.com/jacobflinder/Lektioner/actions/runs/43741322267) SUCCESS**, **båda på exakt kod-SHA `ae991bb321b55b357f59cbf826c81acfc7cc38df`**. Kontroll av filer på main PASS. Publicerad lektionslänk: https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/strom-ger-magnetfalt/.
 
 ## Varaktiga granskningsinstruktioner
 
 Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md) och `AGENTS.md` vid varje ny chatt. Separera detta arbete från [matematikgranskningen](README.md). Varje lektion ska inventeras från behov, inte bara befintliga figurer. Prioritera fysikalisk riktighet och saknade förklaringssteg över kosmetik. Bevara fullständig matematisk lösning, Socrative enbart där det redan finns, bokuppgifter, läxor och demonstrationer. Låt eleverna förutsäga före återkoppling. Koppla figurer, formler och reglage till samma tillstånd. Verifiera faktiskt ritad geometri oberoende av programmets egna tal. Dokumentera både utförda och ej utförda kontroller. **Godkänn inte en lektion med enbart gröna knappar eller med kvarstående obligatorisk verifiering.**
+
+## Reviderat godkännandekrav 2026-11-15 – visuell begriplighet
+
+Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell begriplighet**, nu sparat i [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md). En rätt beräknad och korrekt etiketterad illustration räcker inte om eleven inte kan urskilja former, riktningar och relationer. Högerhandsregeln i pilot 1/41 måste utgå från användarens **riktvända originalfoto av höger hand runt en sladd**, visa `I` längs tummen och hur de böjda fingrarna visar `B` runt ledaren. Fotografi → betraktelseriktning → tvärsnitt → punktens tangent ska visas **stegvis**, med elevens svar dolt tills efter egen förutsägelse. Kontrollera och bedöm faktiskt upplevd tydlighet på realistisk bildstorlek, inklusive att förklaring och markeringar syns tillsammans. Den tidigare schematiska handen har inte slutgodkänts mot detta kriterium.
+
+**Statusändring:** Tidigare godkänt arbete enligt äldre kriterier behålls i historiken, men pilot **1/41 återöppnas** inför fortsatt visuell revidering. **Ingen ny lektionskod eller bild har ändrats i denna instruktionstilläggsuppdatering.** Det nya fotografibaserade stödet är ännu inte implementerat eller visuellt verifierat, och referensfotot måste först lokaliseras/verifieras. **Ingen tillåtelse att börja lektion 2** följer av detta krav.
 
 ## Fast granskningsregister
 
@@ -22,7 +28,7 @@ Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md
 
 | Nr | Kurs | Titel | Sökväg | Figur-/interaktionsstatus |
 |---:|---|---|---|---|
-| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Klar · main/Pages verifierade** |
+| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Återöppnad · visuellt foto-/begriplighetskrav kvar** |
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | Ej påbörjad |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | Ej påbörjad |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Ej påbörjad |
@@ -80,4 +86,4 @@ Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md
 
 **Öppna layoutanmärkningar (inte blockerande för denna pilots verifierade samband):** Kursens äldre generella `browser-smoke.cjs` rapporterar **68 varningar och 0 fel** över Fy2-biblioteket. För pilotlektionen vid 768 px bredd gäller tre av dessa vertikala skärmhöjdsanmärkningar: **bild 4 = 17 px**, **bild 7 = 94 px**, **bild 9 = 148 px** nedanför aktuell viewport. Elever kan scrolla på denna smalare vy; de faktiska kopplingarna mellan rätt matematik och renderad SVG har verifierats, och pilotens nya tester kontrollerar horisontellt överspill vid 390 px och 1920 px. Redovisa detta öppet och förbättra layouten separat vid framtida behov utan att dölja testvarningar. Ingen garanti lämnas om att all återkoppling alltid ryms vertikalt på små skärmar.
 
-**Status:** **Pilotlektion 1/41 klar, publicerad och verifierad.** Figurgranskningen väntar på användarens **”nästa”** före lektion 2/41. En ny chatt ger inte klartecken.
+**Status 2026-11-15 (efter nytt användarkrav):** **Pilotlektion 1/41 återöppnad.** Kod och tidigare verifiering är fortsatt historiskt dokumenterade men duger **inte** som slutgodkännande under det nya visuella begriplighetskravet. **Börja inte lektion 2.** Nästa arbete gäller pilotens högerhandsfoto och stegvisa spatiala koppling.
