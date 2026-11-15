@@ -100,6 +100,57 @@ const OUT='fy1-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
    check(div<=2,'no horizontal page overflow in revealed comparison '+v.name+': '+div);
    await shot(v.name+'-comparison');
   }
+  // SVG battery terminals: a white backing rectangle must never leave a
+  // visual gap between a lead and its long/short plate. Verify every diagram
+  // against the *actual rendered SVG elements*, not just HTML source strings.
+  const vertical=(x,from,longPlate,shortPlate,to)=>'M'+x+' '+from+'V'+longPlate+' M'+x+' '+shortPlate+'V'+to;
+  const horizontal=(a,y,longPlate,shortPlate,z)=>'M'+a+' '+y+'H'+longPlate+' M'+shortPlate+' '+y+'H'+z;
+  const expected=[
+   {page:1,paths:[vertical(88,140,177,198,230)]},
+   {page:3,paths:[vertical(91,144,181,202,234)]},
+   {page:4,paths:[vertical(92,138,175,196,228)]},
+   {page:5,paths:[vertical(92,138,175,196,228),vertical(95,102,116,136,154),vertical(95,322,334,352,372)]},
+   {page:6,paths:[vertical(98,149,186,207,239)]},
+   {page:7,paths:[horizontal(91,55,105,116,133),horizontal(163,55,177,188,205),horizontal(414,56,429,441,468),horizontal(414,110,429,441,468)]},
+   {page:11,paths:[vertical(90,143,180,201,233)]}
+  ];
+  for(const case_ of expected){
+   await go(case_.page);
+   const paths=await page.locator('#bild-'+case_.page+' .circuit-figure svg path[data-battery-contact]').evaluateAll(nodes=>nodes.map(e=>{const b=e.getBBox();return {d:e.getAttribute('d'),bbox:{x:b.x,y:b.y,width:b.width,height:b.height},stroke:e.getAttribute('stroke')}}));
+   check(paths.length===case_.paths.length,'every drawn battery has actual contact segments on slide '+case_.page);
+   for(const expectedD of case_.paths){
+     const p=paths.find(x=>x.d===expectedD);
+     check(!!p,'SVG lead ends reach both plate centers without bridging gap on slide '+case_.page+': '+expectedD);
+     check(p?.bbox.width>=0&&p?.bbox.height>=0,'battery contacts have rendered geometry on '+case_.page);
+     check(p?.stroke==='#315766','battery conductors match the circuit wire color on '+case_.page);
+   }
+  }
+  for(const n of [1,2,3,4,5,6,7,8,9,10,11]){
+   await go(n);
+   check(await page.locator('#bild-'+n+' .source-note').count()===0,'no irrelevant original filename footer in student slide '+n);
+  }
+  await go(1);
+  await shot('fixed-battery-plate-connections');
+  for(const mode of ['serie','parallell']){
+   await go(2);
+   await model.locator('button[data-mode="'+mode+'"]').click();
+   const path=await picture().locator('path[data-battery-contact]').getAttribute('d');
+   check(path===vertical(90,134,160,182,218),'model battery lead actually reaches both plates in '+mode);
+   await shot('fixed-dynamic-battery-'+mode);
+  }
+  // On real mobile and projector sizes both lead portions and both plates remain visible.
+  for(const v of [{name:'battery-mobile',w:390,h:844},{name:'battery-projector',w:1920,h:1080}]){
+   await page.setViewportSize({width:v.w,height:v.h});
+   await go(1);
+   const svg=page.locator('#bild-1 .circuit-figure svg');
+   const lead=svg.locator('path[data-battery-contact]'),long=svg.locator('line[stroke="#bb7148"]').first(),short=svg.locator('line[stroke="#bb7148"]').last();
+   const coords=await lead.evaluate(node=>{const root=node.ownerSVGElement,pt=root.createSVGPoint();return [177,198].map(y=>{pt.x=88;pt.y=y;return (()=>{const p=pt.matrixTransform(root.getScreenCTM());return {x:p.x,y:p.y}})()})});
+   const plates=await Promise.all([long,short].map(q=>q.boundingBox()));
+   check(coords.length===2&&plates.every(x=>x&&x.width>5),'both real battery plates visible on '+v.name);
+   check(Math.abs(coords[0].y-(plates[0].y+plates[0].height/2))<3&&Math.abs(coords[1].y-(plates[1].y+plates[1].height/2))<3,'rendered contacts end exactly on plate centerlines on '+v.name);
+   check((await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=2,'no new horizontal overflow on '+v.name);
+   await shot(v.name);
+  }
   check(errors.length===0,'zero JavaScript exceptions '+JSON.stringify(errors));
   console.log('FY1_41_FIGURE_PASS '+JSON.stringify({checks:passed,screenshots,errors:errors.length}));
  }catch(e){console.error('FY1_41_FIGURE_FAIL '+(e.stack||e));process.exitCode=1;await page.screenshot({path:OUT+'/figure-fy1-41-failed.png',fullPage:true}).catch(()=>{});}

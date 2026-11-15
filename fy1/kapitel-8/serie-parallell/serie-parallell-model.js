@@ -5,7 +5,7 @@
  const fmt=(x,n=2)=>Number(x).toLocaleString('sv-SE',{minimumFractionDigits:n,maximumFractionDigits:n});
  const T=(x,y,s,z=18,c='#264c59',a='middle')=>`<text x="${x}" y="${y}" font-family="system-ui" font-size="${z}" font-weight="650" fill="${c}" text-anchor="${a}">${s}</text>`;
  const arr=(x1,y1,x2,y2,c='#087d94')=>{const a=Math.atan2(y2-y1,x2-x1),d=11,w=5,ax=x2-d*Math.cos(a)+w*Math.sin(a),ay=y2-d*Math.sin(a)-w*Math.cos(a),bx=x2-d*Math.cos(a)-w*Math.sin(a),by=y2-d*Math.sin(a)+w*Math.cos(a);return `<path d="M${x1} ${y1} L${x2} ${y2} M${ax} ${ay} L${x2} ${y2} L${bx} ${by}" fill="none" stroke="${c}" stroke-width="3.7" stroke-linecap="round" stroke-linejoin="round"/>`};
- const B='<rect x="72" y="134" width="38" height="84" fill="#f8fcfd"/><path d="M67 160H115 M79 182H103" stroke="#bb754e" stroke-width="4" fill="none"/>'+T(52,149,'+',20,'#ba754f')+T(52,206,'−',22,'#ba754f');
+ const B='<rect x="72" y="134" width="38" height="84" fill="#f8fcfd"/><path data-battery-contact="vertical" d="M90 134V160 M90 182V218" stroke="#315766" stroke-width="3.4" fill="none"/><path d="M67 160H115 M79 182H103" stroke="#bb754e" stroke-width="4" fill="none"/>'+T(52,149,'+',20,'#ba754f')+T(52,206,'−',22,'#ba754f');
  const base=(content,desc)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 335" role="img" aria-label="${desc}"><title>${desc}</title><desc>Idealt batteri, ideala ledningar och två ohmska resistorer vid konstant temperatur.</desc>${content}</svg>`;
  const specs=[{key:'U',label:'Batterispänning U',unit:'V',min:1,max:24,step:1,value:12,dec:0},{key:'R1',label:'Resistans R₁',unit:'Ω',min:50,max:500,step:50,value:100,dec:0},{key:'R2',label:'Resistans R₂',unit:'Ω',min:50,max:500,step:50,value:200,dec:0}];
 
@@ -99,6 +99,9 @@
  }
  window.Fy1Models.attach=(name,root)=>name==='series'?series(root):previous(name,root);
  document.addEventListener('DOMContentLoaded',()=>{
+  // Filnamnet på lärarens källpresentation är inte elevinnehåll. Dölj 
+  // lokal källmetadata utan att ändra andra Fy1-lektioner eller bokhänvisningar.
+  document.querySelectorAll('.slide .source-note').forEach(el=>el.remove());
   // place each answer and worked solution close to its question/figure
   for(const i of [1,5,6,7]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),quiz=sec?.querySelector(':scope > .quiz');if(body&&quiz)body.appendChild(quiz)}
   for(const i of [3,4,5,6,7,10,11]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),label=sec?.querySelector(':scope > .steps-label'),steps=[...(sec?.querySelectorAll(':scope > .step')||[])];if(body&&label)body.append(label,...steps)}
