@@ -10,10 +10,15 @@ for(const sec of document.querySelectorAll('.slide')){
 const classButton=document.querySelector('#classmode');const repeatButton=document.querySelector('#repeatmode');
 // Avoid exposing previously revealed answers to a new group when switching back from repetition.
 classButton?.addEventListener('click',()=>{document.querySelector('.slide.active')?.dispatchEvent(new Event('lesson:reset'));fixStep();});
-function fixStep(){const s=document.querySelector('.slide.active');const step=document.querySelector('#step');if(!step||!s)return;step.hidden=!s.querySelector('.step');}
+function fixStep(){const s=document.querySelector('.slide.active');const step=document.querySelector('#step');if(!step||!s)return;step.hidden=!s.querySelector('.step:not(.open)');}
 const j=document.querySelector('#jump'),next=document.querySelector('#next'),prev=document.querySelector('#prev'),reset=document.querySelector('#reset');
-for(const el of [j,next,prev,reset,repeatButton,classButton])el?.addEventListener(el===j?'change':'click',fixStep);
+for(const el of [j,next,prev,reset,repeatButton,classButton,document.querySelector('#step')])el?.addEventListener(el===j?'change':'click',fixStep);
 fixStep();
+// Keep navigation clean when the teacher reveals steps by keyboard.
+document.addEventListener('keydown',e=>{
+ if((e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key===' ')&&!e.metaKey&&!e.ctrlKey&&!e.altKey)
+   queueMicrotask(fixStep);
+});
 document.addEventListener('keydown',e=>{
  if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey)return;
  if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft'&&e.key!==' ')return;

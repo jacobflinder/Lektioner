@@ -54,3 +54,13 @@ I avsnitt 8.4 används nu ett separat frivilligt självtest: två nya beräkning
 Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
 
 **Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.
+
+## Systematisk granskning 37/41 · Effekt
+
+**Källstatus:** befintlig webblektion omfattar 11 bilder och tidigare dokumentation namnger `Fy1_Effekt.pdf` med 13 sidor. Den PDF:en har inte varit tillgänglig för direkt inspektion här. Någon strikt PDF-för-PDF-verifiering görs därför inte; undervisningskärnan och webblektionens faktiskt åtkomliga innehåll har granskats och bevarats.
+
+- **Fysikkontroll:** E = Pt, P = E/t, P = UI, P = RI² och P = U²/R med konsekventa förutsättningar; 500 W × 10 s = 5 000 J; 1000 W × 10 s = 10 000 J; 500 W / 230 V ≈ 2,17 A; 1500 W + 1200 W = 2700 W, med grenströmmar ≈ 6,52 A respektive 5,22 A och summa ≈ 11,74 A. Vid ℰ = 6V, r = 1Ω, R = 5/2/3Ω fås (I,U) = (1,0 A,5,0 V)/(2,0 A,4,0 V)/(1,5 A,4,5 V). Inre värmeeffekt 1 respektive 4 W. Exit P = 6 W, E = 120 J vid 20 s.
+- **Viktig figurrättning:** batteriets tidigare spänningsstapel var alltid full, även vid ändrad ems. Nu absolut **fast 0–12 V-skala** i stället för missvisande 100% normalisering; orange rI och blå U är proportionella mot sina respektive voltvärden inom och mellan tillstånd. Energistaplar har fortsatt fast gemensam 0–45 kJ-skala.
+- **Mellanled:** ersätt matematik löpande text och hopslagna ekvationer med separata, semantiska MathML-rader och faktisk vertikal luft. Fråga först, därefter samband, omformning, SI och slutsvar. Tre enskilda flervals-/pappersuppgifter och befintliga originalövningar tas inte bort.
+- **Bevarande:** verklig doppvärmardemonstration 500 W, Socrative SOC-37285324, bokuppgifter 839–850 s.298–299, lässtöd s.294–297 med gröna rutor, 20 min bokarbete, säkringens uppgift och ett verklighetstroget kretsschema. Ingen 230 V-elevlaboration föreslås. Ingen ny obligatorisk aktivitet.
+- **Testning:** fördjupad Chromium/Playwright ska verifiera alla 11 sidor, dolda steg, lägen, elevfrågor, faktiska SVG-bredder mot 0–45kJ och 0–12V, effekt-/strömberäkningar, sidbredd, MathML och regresserande tidigare Fy1-36. Före grön körning och visuell QA får slutligt godkännande inte påstås.
