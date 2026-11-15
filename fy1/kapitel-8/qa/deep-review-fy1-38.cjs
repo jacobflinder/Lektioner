@@ -197,7 +197,7 @@ try{
  assert(near(1.602176634e-19*100,1.602176634e-17,1e-27),'independent kinetic energy 1.602e-17J');
  // 10-11 electrostatic cage geometry and justified limitations.
  await go(10);
- assert((await active().innerText()).includes('tomt hålrum'),'Faraday setup closed empty caveat');
+ assert(source.pages[9].body.includes('Ingen laddning finns i hålrummet')&&source.pages[9].body.includes('slutet ledande metallskal'),'Faraday setup explicitly requires closed conductor and empty cavity');
  assert((await active().innerText()).includes('Rita din förutsägelse'),'cage no answer before drawing');
  await go(11);assert((await active().innerText()).includes('elektrostatisk jämvikt'),'electrostatic condition explicit');
  assert((await active().innerText()).includes('noll i det tomma hålrummet'),'correct empty cavity conclusion');
@@ -224,9 +224,9 @@ try{
  assert(await page.locator('#fy1-traning-dialog input[type=text]').count()===0,'no text-input data collection');
  const p1=page.locator('.fy1-paper-task').first(),p2=page.locator('.fy1-paper-task').last();
  assert(await p1.locator('.fy1-partial-solution').count()===1&&await p2.locator('.fy1-partial-solution').count()===0,'fading support between paper tasks');
- await p1.locator('.fy1-paper-done').click();await p1.locator('input[value="1"]').check();await p1.locator('.fy1-paper-check').click();
+ await p1.locator('.fy1-paper-done').click();await p1.locator('input[value="0"]').check();await p1.locator('.fy1-paper-check').click();
  assert(await p1.locator('.fy1-paper-feedback').getAttribute('data-state')==='incorrect','negative charge misconception feedback');
- await p1.locator('input[value="0"]').check();await p1.locator('.fy1-paper-check').click();
+ await p1.locator('input[value="1"]').check();await p1.locator('.fy1-paper-check').click();
  assert(await p1.locator('.fy1-paper-feedback').getAttribute('data-state')==='correct','negative force direction understood');
  await page.locator('#fy1-traning-dialog .fy1-close').click();
  assert(!await page.locator('#fy1-traning-dialog').isVisible(),'practice closes without saving results');
