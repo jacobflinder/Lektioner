@@ -149,7 +149,10 @@ function updateModel(){
  // Absolute strength uses one invariant scale: 360 SVG units / 120 µT.
  // This stays fixed while I, r or the current direction changes.
  const strength=$("model-strength");
- strength.hidden=!modelShown;
+ // SVG does not reliably implement HTMLElement.hidden as an IDL property:
+ // update its actual hidden attribute so CSS [hidden] and the visible chart agree.
+ if(modelShown)strength.removeAttribute('hidden');
+ else strength.setAttribute('hidden','');
  if(modelShown){
   const width=3*microTesla;
   const ticks=[0,30,60,90,120].map(v=>'<line x1="'+(30+3*v)+'" y1="42" x2="'+(30+3*v)+'" y2="66" stroke="#607e89" stroke-width="1.4"/><text x="'+(30+3*v)+'" y="85" text-anchor="middle" style="font-size:13px">'+v+'</text>').join('');
