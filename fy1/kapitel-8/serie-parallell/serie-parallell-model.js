@@ -8,15 +8,44 @@
  const B='<rect x="72" y="134" width="38" height="84" fill="#f8fcfd"/><path d="M67 160H115 M79 182H103" stroke="#bb754e" stroke-width="4" fill="none"/>'+T(52,149,'+',20,'#ba754f')+T(52,206,'−',22,'#ba754f');
  const base=(content,desc)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 335" role="img" aria-label="${desc}"><title>${desc}</title><desc>Idealt batteri, ideala ledningar och två ohmska resistorer vid konstant temperatur.</desc>${content}</svg>`;
  const specs=[{key:'U',label:'Batterispänning U',unit:'V',min:1,max:24,step:1,value:12,dec:0},{key:'R1',label:'Resistans R₁',unit:'Ω',min:50,max:500,step:50,value:100,dec:0},{key:'R2',label:'Resistans R₂',unit:'Ω',min:50,max:500,step:50,value:200,dec:0}];
+
+ // Fixed-scale quantities are drawn only after a pupil has predicted and revealed
+ // the answer. Never resize the coordinate axes to fit each value: that would make
+ // two different currents appear the same length.
+ const msub=(v,sub)=>'<msub><mi>'+v+'</mi><mtext>'+sub+'</mtext></msub>';
+ const quantity=(x,unit,places)=>'<mrow><mn>'+fmt(x,places)+'</mn><mspace width="0.2em"/><mtext>'+unit+'</mtext></mrow>';
+ const mathline=(sym,num,unit,places)=>'<div class="series-model-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+sym+'<mo>=</mo>'+quantity(num,unit,places)+'</math></div>';
+ const plottingWidth=320,plottingX=142;
+ function fixedScaleChart(vals){
+  const tag=(s,x,y,size=18,color='#244e5f',anchor='middle')=>T(x,y,s,size,color,anchor);
+  const horizontal=(value,max,y,id,color)=>{
+   const w=(plottingWidth*value/max).toFixed(6);
+   return '<rect x="'+plottingX+'" y="'+(y-15)+'" width="'+plottingWidth+'" height="24" rx="4" fill="#e7f0f3" stroke="#c5dbe3"/>'+
+     '<rect data-quantity="'+id+'" x="'+plottingX+'" y="'+(y-15)+'" width="'+w+'" height="24" rx="3" fill="'+color+'"/>';
+  };
+  const row=(label,value,max,y,id,color,unit,places)=>tag(label,128,y,18,'#264e5c','end')+horizontal(value,max,y,id,color)+tag(fmt(value,places)+' '+unit,579,y,18,'#244e5f','end');
+  const tick=(x,y,label)=>tag(label,x,y,15,'#607b87');
+  let art=tag('Ström · fast skala 0–1,0 A',16,27,21,'#244e5f','start')+
+    tick(plottingX,48,'0')+tick(plottingX+160,48,'0,5 A')+tick(plottingX+320,48,'1,0 A')+
+    row('Batteri',vals.Itot,1,76,'Itot','#147f98','A',3)+row('Genom R₁',vals.I1,1,116,'I1','#147f98','A',3)+row('Genom R₂',vals.I2,1,156,'I2','#147f98','A',3)+
+    tag('Spänning · fast skala 0–24 V',16,208,21,'#244e5f','start')+
+    tick(plottingX,228,'0')+tick(plottingX+160,228,'12 V')+tick(plottingX+320,228,'24 V')+
+    row('Över R₁',vals.U1,24,256,'U1','#b66c49','V',2)+row('Över R₂',vals.U2,24,296,'U2','#b66c49','V',2)+
+    tag('Ersättningsresistans · fast 0–1 000 Ω',16,346,21,'#244e5f','start')+
+    tick(plottingX,368,'0')+tick(plottingX+160,368,'500 Ω')+tick(plottingX+320,368,'1 000 Ω')+
+    row('R ers',vals.eqR,1000,396,'Req','#6b69a6','Ω',2);
+  return '<svg role="img" aria-label="Fasta skalor: ström 0 till 1 ampere, spänning 0 till 24 volt och resistans 0 till 1000 ohm" viewBox="0 0 590 428"><title>Jämför verkliga värden på tre oförändrade skalor</title>'+art+'</svg>';
+ }
+
  function series(root){
   const state={mode:'serie',U:12,R1:100,R2:200};let revealed=false;root.classList.add('circuit-model');
-  root.innerHTML='<div class="switch-group" role="group" aria-label="Välj koppling"><span>Välj koppling</span><button type="button" data-mode="serie" aria-pressed="true">Serie</button><button type="button" data-mode="parallell" aria-pressed="false">Parallellt</button></div><div class="drawing"></div><div class="model-controls"></div><div class="model-note">Förutsäg batteriström och grenströmmar innan du visar resultatet.</div><div class="model-result" aria-live="polite"></div><div class="model-button"><button type="button" class="reveal-model primary">Visa resultat</button><button type="button" class="reset-model">Återställ förutsägelsen</button></div><div class="compare-strip">Jämför: en ensam 100 Ω-resistor vid 12 V ger 0,120 A.</div><p class="figcap"></p>';
+  root.innerHTML='<div class="switch-group" role="group" aria-label="Välj koppling"><span>Välj koppling</span><button type="button" data-mode="serie" aria-pressed="true">Serie</button><button type="button" data-mode="parallell" aria-pressed="false">Parallellt</button></div><div class="drawing"></div><div class="model-controls"></div><div class="model-note">Förutsäg batteriström och grenströmmar innan du visar resultatet.</div><div class="model-result" aria-live="polite"></div><div class="model-scales" aria-live="polite"></div><div class="model-button"><button type="button" class="reveal-model primary">Visa resultat</button><button type="button" class="reset-model">Återställ förutsägelsen</button></div><div class="compare-strip">Jämförelsen med en ensam R₁-resistor visas efter din förutsägelse.</div><p class="figcap"></p>';
   const ctrl=root.querySelector('.model-controls'),inputs={};
   for(const s of specs){const wrap=document.createElement('div');wrap.className='control';const label=document.createElement('label'),v=document.createElement('b'),input=document.createElement('input');
     input.id='s83-'+s.key;input.type='range';input.min=s.min;input.max=s.max;input.step=s.step;input.value=s.value;label.htmlFor=input.id;label.append(document.createTextNode(s.label+' '),v);wrap.append(label,input);ctrl.append(wrap);inputs[s.key]={input,v,s};input.addEventListener('input',()=>{state[s.key]=Number(input.value);render()});
   }
   root.querySelector('.switch-group').addEventListener('click',ev=>{const b=ev.target.closest('button[data-mode]');if(!b)return;state.mode=b.dataset.mode;render()});
-  const result=root.querySelector('.model-result'),picture=root.querySelector('.drawing'),reveal=root.querySelector('.reveal-model');
+  const result=root.querySelector('.model-result'),measure=root.querySelector('.model-scales'),comparison=root.querySelector('.compare-strip'),picture=root.querySelector('.drawing'),reveal=root.querySelector('.reveal-model');
   function render(){
     const serie=state.mode==='serie', {U,R1,R2}=state;
     const eqR=serie?R1+R2:R1*R2/(R1+R2),Itot=U/eqR,I1=serie?Itot:U/R1,I2=serie?Itot:U/R2,U1=serie?I1*R1:U,U2=serie?I2*R2:U;
@@ -32,7 +61,13 @@
     }
     art+=T(312,20,serie?'En strömväg':'Två parallella strömvägar',17,'#255e6f');
     picture.innerHTML=base(art,serie?'Seriekoppling med batteri till vänster och två horisontella resistorer med samma ström.':'Parallellkoppling med batteri till vänster och två vertikala resistorer mellan samma två noder.');
-    result.innerHTML=revealed?`<div><b>Rₑᵣₛ = ${fmt(eqR,2)} Ω</b> · <b>Batteriström: Iₜₒₜ = ${fmt(Itot,3)} A</b></div><div>R₁: I₁ = ${fmt(I1,3)} A och U₁ = ${fmt(U1,2)} V.</div><div>R₂: I₂ = ${fmt(I2,3)} A och U₂ = ${fmt(U2,2)} V.</div><div>${serie?'Serie: I₁ = I₂, medan U₁ + U₂ = U.':'Parallellt: U₁ = U₂ = U, medan I₁ + I₂ = I.'}</div>`:'<strong>Förutsäg först.</strong> Förklara din hypotes med antalet strömvägar. Visa sedan resultatet.';
+    result.innerHTML=revealed?'<div class="series-model-math">'+[
+   mathline(msub('R','ers'),eqR,'Ω',2),mathline(msub('I','tot'),Itot,'A',3),
+   mathline(msub('I','1'),I1,'A',3),mathline(msub('I','2'),I2,'A',3),
+   mathline(msub('U','1'),U1,'V',2),mathline(msub('U','2'),U2,'V',2)
+  ].join('')+'</div><p>'+(serie?'Serie: samma ström i båda resistorerna; spänningsfallen summeras.':'Parallellt: samma spänning över båda grenarna; deras strömmar summeras.')+'</p>':'<strong>Förutsäg först.</strong> Förklara din hypotes med antalet strömvägar. Visa sedan resultatet.';
+    measure.innerHTML=revealed?fixedScaleChart({eqR,Itot,I1,I2,U1,U2}):'';
+    comparison.textContent=revealed?'Vid samma U och enbart R₁ skulle batteriströmmen vara '+fmt(U/R1,3)+' A. Jämför med nuvarande '+fmt(Itot,3)+' A.':'Jämförelsen med en ensam R₁-resistor visas efter din förutsägelse.';
     reveal.textContent=revealed?'Dölj resultat':'Visa resultat';
     root.querySelector('.figcap').textContent=serie?'Seriekoppling: samma ström i alla resistorer. Ändrade värden syns samtidigt i figur och beräkning.':'Parallellkoppling: grenarna ligger mellan samma noder och har samma spänning. Diagram och beräkning bygger på samma tillstånd.';
   }
@@ -47,7 +82,7 @@
   for(const i of [1,5,6,7]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),quiz=sec?.querySelector(':scope > .quiz');if(body&&quiz)body.appendChild(quiz)}
   for(const i of [3,4,5,6,7,10,11]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),label=sec?.querySelector(':scope > .steps-label'),steps=[...(sec?.querySelectorAll(':scope > .step')||[])];if(body&&label)body.append(label,...steps)}
   const stepButton=document.getElementById('step'),stage=document.getElementById('stage');
-  function syncStep(){const slide=stage?.querySelector('.slide.active');if(stepButton)stepButton.hidden=!slide?.querySelector('.step')}
+  function syncStep(){const slide=stage?.querySelector('.slide.active');if(stepButton)stepButton.hidden=!slide?.querySelector('.step:not(.open)')}
   if(stage){new MutationObserver(syncStep).observe(stage,{subtree:true,attributes:true,attributeFilter:['class']});syncStep()}
   // Shared shell does not reset answer visibility when returning from repetition;
   // correct it only for this lesson, without touching other lectures.
