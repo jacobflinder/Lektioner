@@ -159,7 +159,7 @@ function updateModel(){
   '</div></details><p class="small">Riktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+
   '</b>. Den ritade pilen visar bara riktning; värdet är beräknat för lång rak ledare.</p></div>':
   '<p class="small">Förutsäg och räkna själv. Det numeriska B-värdet är dolt tills du visar det.</p>';
- if(modelShown&&wasOpen)$("model-result details").open=true;
+ if(modelShown&&wasOpen)$("model-result").querySelector("details").open=true;
  $("model-svg").innerHTML=wireSVG(dir,"right",true,12*r,microTesla);
  $("model-show").textContent=modelShown?"Dölj B och beräkning":"Visa B och beräkningssteg";
 }

@@ -13,10 +13,10 @@ fs.mkdirSync(outdir,{recursive:true});
  const go=async(i)=>{await page.locator('#jump').selectOption(String(i));ok(await active().count()===1,'only one active slide '+i);ok(Number(await page.locator('#jump').inputValue())===i,'jump state '+i)};
  const input=async(id,value)=>{await page.locator('#'+id).evaluate((el,x)=>{el.value=String(x);el.dispatchEvent(new Event('input',{bubbles:true}))},value)};
  const mathGeom=async(where,tag)=>{
-  const stats=await page.locator(where).evaluateAll(nodes=>nodes.map((n,i)=>({gap:i?n.getBoundingClientRect().top-nodes[i-1].getBoundingClientRect().bottom:null,available:n.clientWidth,scroll:n.scrollWidth,mathHeight:n.querySelector('math')?.getBoundingClientRect().height})));
+  const stats=await page.locator(where).evaluateAll(nodes=>nodes.map((n,i)=>({gap:i?n.getBoundingClientRect().top-nodes[i-1].getBoundingClientRect().bottom:null,available:n.clientWidth,scroll:n.scrollWidth,mathHeight:n.querySelector('math')?.getBoundingClientRect().height,mathWidth:n.querySelector('math')?.getBoundingClientRect().width})));
   ok(stats.length>=6,'full multi-line math '+tag+' '+stats.length);
   ok(stats.every(n=>n.gap===null||n.gap>=16),'independent MathML gap >=16px '+tag+JSON.stringify(stats));
-  ok(stats.every(n=>n.mathHeight>8&&n.mathHeight<115),'horizontal MathML layout '+tag+JSON.stringify(stats));
+  ok(stats.every(n=>n.mathHeight>8&&n.mathHeight<110&&n.mathWidth>70),'native horizontal MathML equations, not collapsed character stacks '+tag+JSON.stringify(stats));
   ok(stats.every(n=>n.scroll<=n.available+2),'no hidden horizontal equation scroll '+tag+JSON.stringify(stats));
  };
  page.on('pageerror',e=>errors.push('pageerror '+e.message));
