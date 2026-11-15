@@ -88,6 +88,7 @@ fs.mkdirSync(outdir,{recursive:true});
   await active().locator('[data-reveal]').click();ok((await active().innerText()).includes('omvänt proportionell'),'1/r not 1/r^2 explanation');
   await go(9);
   ok((await page.locator('#model-result').innerText()).includes('dolt'),'model numeric B concealed before own attempt');
+  ok(await page.locator('.slide.active .question').evaluate(q=>q.getBoundingClientRect().bottom<document.querySelector('#model-show').getBoundingClientRect().top),'self-calculation prompt appears BEFORE model answer button');
   ok(!(await page.locator('#model-result').innerText()).includes('30,0'),'no 30uT leaked');
   await page.locator('#model-show').click();
   ok((await page.locator('#model-result').innerText()).includes('30,0'),'model B independent baseline 6A 4cm = 30uT');
