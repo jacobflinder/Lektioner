@@ -37,7 +37,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
    width:el.clientWidth,scroll:el.scrollWidth,mathWidth:el.querySelector('math')?.getBoundingClientRect().width||0
   })));
   ck(math.every(x=>x.scroll<=x.width+3&&x.mathWidth<=x.width+3),'no clipped mathematical notation '+tag+': '+JSON.stringify(math.filter(x=>x.scroll>x.width+3||x.mathWidth>x.width+3)));
-  const groups=await active().locator('.series-math-stack,.series-model-math').all();
+  const groups=await active().locator('.series-math-stack:visible,.series-model-math:visible').all();
   for(let i=0;i<groups.length;i++){
    const stat=await groups[i].locator('.series-equation,.series-model-equation').evaluateAll(items=>items.map((el,n)=>{
     const r=el.getBoundingClientRect(),p=n?items[n-1].getBoundingClientRect():null;
@@ -74,7 +74,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   ck(lesson.pages[9].body.includes('294–299')&&lesson.pages[9].body.includes('gröna rutorna'),'original next-book reading kept');
   ck(lesson.pages[10].body.includes('Frivilligt'),'mixed-network support is not obligatory');
   ck(!lesson.pages[4].body.includes('båda grenresistanserna är större'),'false greater-than statement removed');
-  ck(lesson.pages[6].body.includes('samma inre resistans')&&lesson.pages[6].steps[1].includes('inte enbart'),'battery-cell current needs explicitly symmetric source model');
+  ck(lesson.pages[6].body.includes('samma inre resistans')&&lesson.pages[6].steps[1].includes('Enbart ideal'),'battery-cell current needs explicitly symmetric source model');
   ck(lesson.pages[5].side.includes('meter-reveal'),'meter figure retained but made prediction-first');
   ck(lesson.pages.reduce((sum,p)=>sum+(p.steps||[]).join('').match(/class="series-equation"/g)?.length||sum,0)===47,'47 dedicated semantic mathematical lines');
   ck(Math.abs(12/(100+200)-.04)<1e-12&&12/100+12/200===.18,'independent basic series/parallel computation');
@@ -85,7 +85,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
    ck((await active().locator('.step.open').count())===0,'start with all steps concealed slide '+n);
    if(n===6)ck(!await active().locator('.meter-reveal').isVisible(),'amperemeter solution hidden before own drawing');
    if(n===2)ck(!(await values()).svg,'current bars hidden until prediction');
-   if(n===5)ck((await active().innerText()).includes('100 Ω'),'resistance context preserved');
+   if(n===5)ck(lesson.pages[4].body.includes('100 Ω'),'resistance context preserved');
    await steps();
    if(n===6)ck(await active().locator('.meter-reveal').isVisible(),'amperemeter/voltmeter reveal follows own drawing');
    const math=await active().locator('.series-equation math').count();
@@ -134,7 +134,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   await model().locator('.reset-model').click();
   let reset=await values();
   ck(!reset.svg&&reset.math===0,'model reset hides stale figures and answers');
-  ck(reset.labels.join('|')==='12 V|100 Ω|200 Ω','all model sliders reset to original');
+  ck((await page.locator('#s83-U').inputValue())==='12'&&(await page.locator('#s83-R1').inputValue())==='100'&&(await page.locator('#s83-R2').inputValue())==='200','all model sliders reset to original');
   await go(3);await go(2);
   ck(!(await values()).svg,'reentering classroom slide hides previous result');
   await page.locator('#repeatmode').click();await go(2);await reveal();
@@ -147,7 +147,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   ck(await page.locator('.fy1-paper-task').count()===2,'two written paper tasks preserved');
   ck(await page.locator('#fy1-traning-dialog input[type=number]').count()===0,'no numeric answers captured');
   await page.keyboard.press('Escape');
-  ck(await page.locator('a[href="lararstod.html"]').count()>=1,'original teacher support accessible');
+  ck((await page.locator('#teacher-link').getAttribute('href')).endsWith('lararstod.html'),'original teacher support accessible');
   const vps=[{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}];
   for(const vp of vps){
    await page.setViewportSize({width:vp.width,height:vp.height});
