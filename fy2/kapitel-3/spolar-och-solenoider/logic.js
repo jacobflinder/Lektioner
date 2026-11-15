@@ -69,11 +69,15 @@ const swFmt=(x,n=1)=>Number(x).toLocaleString("sv-SE",{minimumFractionDigits:n,m
 
 const ml=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
 const mult=(n,unit,dec)=>'<mrow><mn>'+swFmt(n,dec)+'</mn><mtext> '+unit+'</mtext></mrow>';
-const calc=(law,sub,result,note)=>'<div class="calc-chain">'+
+const calc=(law,subSteps,result,note)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+ml(law)+'</div></div>'+
- '<details class="calc-ins"><summary>2 · Visa insättningen med enheter</summary><div class="math-sm">'+ml(sub)+'</div></details>'+
- '<div><span class="tag">3 · Resultat och fysikalisk tolkning</span><div class="math-sm">'+ml(result)+'</div><p class="small">'+note+'</p></div>'+
- '</div>';
+ '<details class="calc-ins"><summary>2 · Visa insättningar och enhetssteg</summary>'+
+ '<div class="calc-steps">'+subSteps.map(x=>'<div class="math-sm">'+ml(x)+'</div>').join('')+'</div>'+
+ '<details class="calc-final"><summary>3 · Visa slutsvar och tolkning</summary>'+
+ '<div class="math-sm">'+ml(result)+'</div><p class="small">'+note+'</p></details></details></div>';
+const unit=x=>'<mspace width="0.18em"/><mtext>'+x+'</mtext>';
+const num=(n,d=2,u='')=>'<mn>'+swFmt(n,d)+'</mn>'+(u?unit(u):'');
+const sciMu='<mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup>'+unit('T·m/A');
 const mu='<msub><mi>μ</mi><mn>0</mn></msub>';
 
 const coreHost=$("core-svg").parentElement;
@@ -159,20 +163,30 @@ function resetPrediction(kind){
 }
 function renderSol(){
  const I=Number($("sol-i").value),N=Number($("sol-n").value),L=Number($("sol-l").value);
- const mT=(mu0*N*I/L)*1e3;
+ const mT=mu0*N*I/L*1e3,turnDensity=N/L,arealAmp=turnDensity*I;
  const relSol=(N/300)*(I/0.8)*(0.30/L);
- // One immutable state per render supplies both formula and field drawing.
+ const prevSteps=$("sol-result").querySelector("details.calc-ins")?.open||false;
+ const prevFinal=$("sol-result").querySelector("details.calc-final")?.open||false;
  $("sol-i-value").textContent=swFmt(I,2)+" A";
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
  $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:12+Math.round((N-100)/42),lengthMeters:L,fieldMilliTesla:mT});
+ const subSteps=[
+  '<msub><mi>μ</mi><mn>0</mn></msub><mo>≈</mo>'+sciMu,
+  '<mi>n</mi><mo>=</mo><mfrac><mi>N</mi><mi>L</mi></mfrac>',
+  '<mi>n</mi><mo>=</mo><mfrac>'+num(N,0)+'<mrow>'+num(L,2,'m')+'</mrow></mfrac>',
+  '<mi>n</mi><mo>≈</mo>'+num(turnDensity,1,'m⁻¹'),
+  '<mi>n</mi><mi>I</mi><mo>≈</mo>'+num(turnDensity,1)+'<mo>·</mo>'+num(I,2,'A'),
+  '<mi>n</mi><mi>I</mi><mo>≈</mo>'+num(arealAmp,1,'A/m'),
+  '<mi>B</mi><mo>≈</mo><msub><mi>μ</mi><mn>0</mn></msub><mi>n</mi><mi>I</mi>'
+ ];
  $("sol-result").innerHTML=solShown?
- calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',
- '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
- '<mi>B</mi><mo>≈</mo>'+mult(mT,'mT',3),
- 'Luftsolenoid, idealiserat långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
- '. Jämfört med utgångsfallet är beloppet '+swFmt(relSol,2)+' gånger så stort. Vänd strömmen ⇒ vänd riktningen, inte beloppet.') :
+ calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',subSteps,
+ '<mi>B</mi><mo>≈</mo>'+num(mT,3,'mT'),
+ 'Idealiserad luftsolenoid långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
+ '. Beloppet är '+swFmt(relSol,2)+' gånger utgångsfallet. Den separata blå stapeln har linjär mätskala; fältpilarna är schematiska.') :
  "Förutsäg först belopp och riktning. Ändra en storhet i taget och visa sedan sambandet.";
+ if(solShown){$("sol-result").querySelector(".calc-ins").open=prevSteps;$("sol-result").querySelector(".calc-final").open=prevFinal}
  $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";
  syncPrediction("sol");
 }
