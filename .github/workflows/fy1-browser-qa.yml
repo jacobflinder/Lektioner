@@ -39,6 +39,7 @@ jobs:
           node fy1/kapitel-8/qa/deep-review-fy1-39.cjs
           node fy1/kapitel-8/qa/deep-review-fy1-40.cjs
           node fy1/kapitel-8/qa/deep-review-fy1-41.cjs
+          node fy1/kapitel-8/qa/figure-interaction-fy1-41.cjs
       - name: Upload QA screenshots and independent evidence
         if: always()
         uses: actions/upload-artifact@v4

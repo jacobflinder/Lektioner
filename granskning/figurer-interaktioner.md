@@ -1,5 +1,9 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
+> **Pågående ny granskning (tredje lektionen i följd): Fy1 – Serie- och parallellkoppling**, inventeringsrad **#28/41**, `fy1/kapitel-8/serie-parallell/`. Användaren valde denna uttryckligen för undervisning 2026-11-16. De två tidigare granskade lektionerna är **Fy2 Ström ger magnetfält** (#1) och **Ma4 Polynomdivision** (#23), 2/41 färdiga.  
+> **Status:** **Arbetsgrenens fullständiga Fy1-webbläsarverifiering godkänd**, faktisk visuell inspektion av mobil/dator/projektor gjord. **Main-merge och Pages-verifiering återstår**. Granskningen omfattar visuella kopplingar mellan nod/komponent, riktning, värden och formler samt faktiskt dolt facit, inte bara sifferkontroller.  
+> **Nästa handling:** Kontrollera aktuell main/PR och merge av den gröna grenen utan att skriva över parallell kod, därefter verifiera Fy1-QA + Pages på samma lektions-SHA. **Starta inte en fjärde lektion utan uttryckligt klartecken.**  
+
 > **Aktuell figurgranskning: användarvald andra lektion, Ma4 – Polynomdivision (#23 i den fasta 41-listan).**  
 > **Färdiggranskade enligt nya figurkraven:** **2 av 41: Fy2 Ström ger magnetfält (#1) och Ma4 Polynomdivision (#23)**. Användaren har uttryckligen godkänt kvalitetsnivån på Fy2-figurerna. Några Fy2-beräkningssteg har användaren valt att lämna för senare översyn, inte rättats här.  
 > **Granskade lektionsnummer:** #1 och #23, **båda klara enligt figurgranskningen**. **39 av 41** poster återstår. Numreringen är registerplatser, inte antalet genomförda i följd; #2–22 och övriga poster är fortfarande ogranskade.  
@@ -10,6 +14,20 @@
 > **Nästa handling:** **STANNA.** Rapportera resultatet från #23 i chatten, invänta användarens uttryckliga val eller ”nästa” för fortsatt arbete; börja inte med någon annan lektionspost automatiskt.  
 > **Kursordning:** Användaren valde uttryckligen polynomdivision som nästa efter Fy2-piloten, vilket åsidosätter den tidigare standardordningen för just detta steg. Registrets #23 är originalplatsen bland de 41 – inte påstående att 22 lektioner är klara.  
 > **Publicerad och slutverifierad lektion:** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polynomdivision/. [Main-QA](https://github.com/jacobflinder/Lektioner/actions/runs/43755465223) och [Pages](https://github.com/jacobflinder/Lektioner/actions/runs/43755465042) bekräftar kod-SHA `f74f32f6e878ac2ab93212fddb369713f20287ea`.
+
+## Aktivt arbete: 3:e granskade lektionen · Fy1 Serie- och parallellkoppling (#28 av 41 i inventeringen)
+
+**Användarvald prioritering (2026-11-15):** Nästa lektion är `fy1/kapitel-8/serie-parallell/` inför undervisning 2026-11-16. Detta är den **tredje lektionen som behandlas** i figurgranskningen, inte lektion #3 i inventeringsordningen. De två tidigare granskade lektionerna är Fy2 Ström ger magnetfält (#1, figurer accepterade med påpekade men uppskjutna räkneanmärkningar) och Ma4 Polynomdivision (#23). Användaren kan granska Polynomdivisionen med eleverna nästa dag; ändra inte den lektionen utan återkoppling.
+
+**Inventering:** 11 ursprungliga elevbilder, 7 statiska kretsscheman, 1 interaktiv serie-/parallellmodell, tre reglage U 1–24 V, R1 och R2 50–500 Ω, två kopplingstillstånd och fasta diagram 0–1,0 A, 0–24 V och 0–1000 Ω. Innehåller Socrative 903/SOC-37285032, uppgifter 829–838 (s. 281–293), prioritet 834–835 och fortsatt bokläsning om Effekt samt gröna rutor. Bevara fysisk instrumentkoppling, PhET, skyddad boktid, pappersarbete och all befintlig härledd matematik. Tidigare matematikgranskning i `granskning/README.md` och `serie-parallell/KVALITETSKONTROLL.md` hade full numerisk Chromium-QA – detta är ett nytt, separat krav på visuell begriplighet.
+
+**Identifierade figurbrister:** (1) Den interaktiva seriekretsen redovisade korrekta `U1`, `U2` i beräkningen men inte vid respektive ritad resistor; en elev måste växla blick mellan kretsskiss och formler. (2) Parallellkretsen saknade markerade **gemensamma övre och nedre noder**, och batteriets totalström syntes bara i texten/stapeln, inte vid den sammanförda ledningen. (3) Bild 5 visade för tidigt en ensam ersättningsresistor med strömvärde trots att elever skulle förutsäga varför den blev lägre än grenresistanserna; **jämförelsen med ursprungsgrenar och samma noder saknades**. Dessa är didaktiska luckor även om ursprungsformlerna är korrekta.
+
+**Åtgärder på `figurer-fy1-serie-parallell-20261115` (ännu ej publicerade):** Efter elevens förutsägelse markeras aktuellt seriekopplat spänningsfall direkt under respektive resistor och `U1+U2=U` i samma krets; uppdateras med reglagen. Efter avslöjande visas parallellkopplingens båda fysiskt skilda men elektriskt samma noder `A` och `B`, plus total- och grenströmmar på sina verkliga ledarpositioner. Pilar visas endast som riktningar, medan numeriska storlekar fortfarande jämförs på ursprungliga konstanta skalor. Bild 5 visar **ursprunglig parallellkrets utan numeriskt facit** före steg 1 och först efter eget försök en stor, tvådelad **original → ersättningskrets**, som bevarar samma 12 V och 0,180 A och redovisar 66,7 Ω. Ingen påhittad kopplingsväg/bypass skapas; bildtexter pekar ut antaganden om ideala ledare/ohmska resistorer.
+
+**Oberoende fysik-/SVG-testfall:** Serie 12 V, 100+200 Ω ska ge 0,040 A och spänningsfall 4,00 V respektive 8,00 V placerade direkt vid rätt resistor; U1+U2=12,00. Vid U=24 för samma motstånd: 8/16 V; vid R1=R2=100 Ω: 12/12 V. Parallellt U=24 och R1=R2=100 Ω ger 0,480 A totalt och 0,240 A i varje gren; två övre nodpunkter i ritade koordinater y=64 och två nedre y=275, utan extra kortslutningsledningar. Om R1 halveras till 50 Ω stiger enbart I1 till 0,480 A och totalen till 0,720 A. Mät och kontrollera fasta staplar direkt i faktiskt renderad SVG. Testa före/efter och reset på bild 5, samt mobil 390 px, laptop 1280 px och projektor 1920 px. Källmotorn `serie-parallell-model.js` beräknar från gemensamt tillstånd; ny QA `qa/figure-interaction-fy1-41.cjs` plus samtliga befintliga Fy1-regressioner.
+
+**Verifiering på arbetsgrenen:** [Fy1 Actions #43757625816](https://github.com/jacobflinder/Lektioner/actions/runs/43757625816) **SUCCESS** på sista lektionskod-SHA `af51574a22055158c358e4f72406504277faec3e`. Alla tidigare Fy1-sviter: 3 669 PASS och 453 skärmbilder. Ny riktad figurkontroll: **60/60 PASS, 11 skärmbilder, 0 JS-fel**. Tillsammans 3 729 digitala kontroller. Granskade faktiskt renderade Chromium-bilder av seriemodellens U1/U2, parallella noder/ström, bild 5 före/efter och mobil 390 px, laptop 1280 px och projektor 1920 px. Ersättningskretsen är läsbar och dess numeriska resultat doldes före elevens första försök. Återstående obligatoriska steg: PR/main-merge och Pages + full regression på publicerad lektions-SHA. Ändra inte nästa lektion. **Stanna efter denna lektion; börja inte nästa utan användarens uttryckliga val.**
 
 ## Varaktiga granskningsinstruktioner
 
@@ -54,7 +72,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 25 | Matematik 4 | Polynomekvationer av högre grad | `ma4/kapitel-4/hogre-grad/` | Ej påbörjad |
 | 26 | Fysik 1 | Coulombs lag | `fy1/kapitel-8/coulombs-lag/` | Ej påbörjad |
 | 27 | Fysik 1 | Elektriska kretsar | `fy1/kapitel-8/elektriska-kretsar/` | Ej påbörjad |
-| 28 | Fysik 1 | Serie- och parallellkoppling | `fy1/kapitel-8/serie-parallell/` | Ej påbörjad |
+| 28 | Fysik 1 | Serie- och parallellkoppling | `fy1/kapitel-8/serie-parallell/` | **Under figurgranskning – tredje användarvalda lektionen** |
 | 29 | Fysik 1 | Elektrisk effekt | `fy1/kapitel-8/effekt/` | Ej påbörjad |
 | 30 | Fysik 1 | Elektriska fält | `fy1/kapitel-8/elektriska-falt/` | Ej påbörjad |
 | 31 | Fysik 1 | Potential | `fy1/kapitel-8/potential/` | Ej påbörjad |

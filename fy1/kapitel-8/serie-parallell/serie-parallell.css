@@ -58,3 +58,13 @@
 /* Battery-cell prediction must precede both numeric and verbal answer. */
 #bild-7 .cell-answer{display:none}
 #bild-7:has(.step.open) .cell-answer{display:inline}
+
+/* A two-node parallel source and its single-resistor equivalent should be
+   understood as a before/after comparison, not an automatic answer leak. */
+#bild-5 .equivalence-visual .equivalence-after{display:none}
+#bild-5:has(.step.open) .equivalence-visual .equivalence-before{display:none}
+#bild-5:has(.step.open) .equivalence-visual .equivalence-after{display:block}
+#bild-5 .equivalence-visual .circuit-figure{max-width:100%;margin:0}
+#bild-5 .equivalence-visual svg{width:100%;height:auto;display:block}
+#bild-5 .equivalence-after svg{max-height:none}
+#bild-5 .equivalence-before figcaption,#bild-5 .equivalence-after figcaption{line-height:1.5}

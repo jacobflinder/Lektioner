@@ -54,10 +54,29 @@
     let art;
     if(serie){
       art=`<path d="M90 150V73H505V275H90V150" fill="none" stroke="#315766" stroke-width="3.4"/>${B}<rect x="209" y="60" width="77" height="27" fill="white" stroke="#315766" stroke-width="3"/><rect x="363" y="60" width="77" height="27" fill="white" stroke="#315766" stroke-width="3"/>${T(247,48,fmt(R1,0)+' Ω',19)}${T(402,48,fmt(R2,0)+' Ω',19)}${T(123,314,fmt(U,0)+' V',20,'#ba7049')}`;
-      if(revealed){art+=arr(130,73,184,73)+arr(294,73,339,73)+arr(444,73,485,73)+T(315,303,`I₁ = I₂ = ${fmt(Itot,3)} A`,19,'#087d94');}
+      if(revealed){
+        // Att se *var* spänningsfallen hör hemma hjälper eleverna att
+        // sammanföra den ritade kretsen med Ohms lag och energins bevarande.
+        art+=arr(130,73,184,73)+arr(294,73,339,73)+arr(444,73,485,73)
+          +T(247,120,`U₁ = ${fmt(U1,2)} V`,18,'#ad5f3c')
+          +T(402,120,`U₂ = ${fmt(U2,2)} V`,18,'#ad5f3c')
+          +T(314,175,`U₁ + U₂ = ${fmt(U,2)} V`,19,'#a45839')
+          +T(315,303,`I₁ = I₂ = ${fmt(Itot,3)} A`,19,'#087d94');
+      }
     }else{
       art=`<path d="M90 150V64H420V131 M420 211V275H90V150 M266 64V131 M266 211V275" fill="none" stroke="#315766" stroke-width="3.4"/>${B}<rect x="251" y="131" width="30" height="80" fill="white" stroke="#315766" stroke-width="3"/><rect x="405" y="131" width="30" height="80" fill="white" stroke="#315766" stroke-width="3"/>${T(315,185,fmt(R1,0)+' Ω',18)}${T(470,185,fmt(R2,0)+' Ω',18)}${T(123,314,fmt(U,0)+' V',20,'#ba7049')}`;
-      if(revealed){art+=arr(266,83,266,125)+arr(420,83,420,125)+T(266,251,`I₁ ${fmt(I1,3)} A`,17,'#087d94')+T(420,251,`I₂ ${fmt(I2,3)} A`,17,'#087d94');}
+      if(revealed){
+        // Två topanslutningar = en och samma nod A; motsvarande gäller B.
+        // Markeringarna är inte ytterligare ledningar och skapar inga shuntar.
+        art+='<path d="M266 64H420" stroke="#bc744e" stroke-width="5" fill="none" opacity=".75"/>'+
+          '<path d="M266 275H420" stroke="#308196" stroke-width="5" fill="none" opacity=".75"/>'+
+          [266,420].map(x=>'<circle data-node="A" cx="'+x+'" cy="64" r="6.2" fill="#bc744e"/><circle data-node="B" cx="'+x+'" cy="275" r="6.2" fill="#308196"/>').join('')+
+          T(505,66,'Nod A',18,'#ac5739')+T(505,276,'Nod B',18,'#22778a')+
+          arr(143,64,211,64)+T(177,112,`I = ${fmt(Itot,3)} A`,18,'#087d94')+
+          arr(266,83,266,125)+arr(420,83,420,125)+
+          T(266,251,`I₁ ${fmt(I1,3)} A`,17,'#087d94')+
+          T(420,251,`I₂ ${fmt(I2,3)} A`,17,'#087d94');
+      }
     }
     art+=T(312,20,serie?'En strömväg':'Två parallella strömvägar',17,'#255e6f');
     picture.innerHTML=base(art,serie?'Seriekoppling med batteri till vänster och två horisontella resistorer med samma ström.':'Parallellkoppling med batteri till vänster och två vertikala resistorer mellan samma två noder.');
@@ -69,7 +88,9 @@
     measure.innerHTML=revealed?fixedScaleChart({eqR,Itot,I1,I2,U1,U2}):'';
     comparison.textContent=revealed?'Vid samma U och enbart R₁ skulle batteriströmmen vara '+fmt(U/R1,3)+' A. Jämför med nuvarande '+fmt(Itot,3)+' A.':'Jämförelsen med en ensam R₁-resistor visas efter din förutsägelse.';
     reveal.textContent=revealed?'Dölj resultat':'Visa resultat';
-    root.querySelector('.figcap').textContent=serie?'Seriekoppling: samma ström i alla resistorer. Ändrade värden syns samtidigt i figur och beräkning.':'Parallellkoppling: grenarna ligger mellan samma noder och har samma spänning. Diagram och beräkning bygger på samma tillstånd.';
+    root.querySelector('.figcap').textContent=serie?
+      'Serie: samma ström i båda resistorerna; varje spänningsfall hör till en bestämd resistor. Summan av spänningsfallen är batterispänningen. Pilar visar riktning, inte strömmens storlek.' :
+      'Parallellt: båda grenarna ligger mellan samma noder A och B. Spänningen är densamma över grenarna och strömmarna summeras vid förgreningen. Pilar visar riktning, inte strömmens storlek.';
   }
   reveal.addEventListener('click',()=>{revealed=!revealed;render()});
   function reset(){revealed=false;Object.assign(state,{mode:'serie',U:12,R1:100,R2:200});for(const {input,s} of Object.values(inputs))input.value=state[s.key];render()}
