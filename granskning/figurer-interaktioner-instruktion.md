@@ -24,6 +24,18 @@ Kontrollera särskilt **högerhandsregler**: avsedd regel (strömskapad B, magne
 
 Granska pilar, orientering, tecken, fältlinjer, vinklar, avstånd, geometri, axlar, referenspunkter, skala, proportioner, enheter, etiketter, färger, kontrast, läsbarhet, överlappning och beskärning. Använd inte enbart färg för betydelser. En schematisk figur märks som sådan när viktigt, utan att motivera fysiskt fel. Exakt geometri måste konstrueras och oberoende kunna kontrolleras.
 
+## Visuell begriplighet – obligatoriskt godkännandekrav
+
+**Visuell begriplighet är ett godkännandekrav.** En illustration är inte godkänd enbart för att den finns och har korrekta etiketter. Eleven ska tydligt kunna urskilja de former, riktningar och relationer som förklaringen bygger på.
+
+För händer och rumsliga grepp ska verkliga referensbilder användas när en schematisk teckning blir svårtolkad. I pilotlektionen ska användarens foto av höger hand runt en sladd vara utgångspunkt. Bilden får inte spegelvändas. Markera konventionell strömriktning längs tummen och visa tydligt hur fingrarnas böjning motsvarar magnetfältets cirkulationsriktning.
+
+Kopplingen mellan fotografiet och ledarens tvärsnitt ska förklaras stegvis med tydlig betraktelseriktning. Visa handgreppet när regeln introduceras. Visa därefter tillämpningen i den aktuella punkten, utan att avslöja elevuppgiftens svar i förväg.
+
+Granska bilden i faktisk visningsstorlek. Hand, relevanta markeringar och tillhörande förklaring ska kunna ses tillsammans. Om bilden kräver långa förklaringar för att dess grundläggande form ska gå att tolka behöver den göras om.
+
+Detta krav måste bedömas **genom mänsklig visuell inspektion av renderad lektion**, vid faktisk projektor-/dator-/mobilstorlek och i de undervisningssteg där figuren används. Korrekt SVG-geometri, grön regression och begriplig etikettering kan styrka ämnesriktighet och teknik men **ersätter inte en prövning av om eleven intuitivt kan avläsa den form och relation som ska läras**. Dokumentera konkret vad som syns, vilket steg som visas och eventuella tolkningsproblem. Vid en uppdaterad referensbild ska dess orientering kontrolleras mot originalet, utan spegelvändning.
+
 ## Reglage är en matematisk/fysikalisk modell
 
 **Ett gemensamt tillstånd ska beskrivas av reglage, matematik, tal, text och bild.** För varje reglage dokumentera: ändrad storhet/enhet/intervall; konstanta storheter; rätt fysikaliskt samband; vad som ska ändras i bild och text; vad som ska förbli oförändrat; oberoende kontrollvärden. Kontrollera noll, min, max, olika mellanlägen och tecken-/riktningsbyte där de är fysiskt relevanta. Verifiera att **faktiskt renderade** pilar, kurvor, punkter, radier, vinklar och längder följer sambandet, inte bara att DOM-nummer/attribut ändras. Mät gärna också faktisk visad bredd och position i webbläsaren.
