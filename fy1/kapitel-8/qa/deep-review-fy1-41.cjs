@@ -69,6 +69,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   ck(lesson.pages.length===11&&await page.locator('.slide').count()===11,'original 11/11 slides intact');
   ck(lesson.pages.map(p=>(p.steps||[]).length).join(',')==='0,0,4,5,4,2,2,0,0,3,6','original step counts preserved');
   ck(lesson.pages[1].model==='series','original series/parallel interactive model');
+  ck(lesson.pages[0].body.includes('laddningens bevarande')&&lesson.pages[0].body.includes('energins bevarande')&&lesson.pages[0].body.includes('gemensamma noder'),'lesson separates conservation of charge, energy and common-node potentials');
   ck(lesson.pages[7].body.includes('SOC-37285032'),'Socrative 903 kept');
   ck(lesson.pages[8].body.includes('829–838')&&lesson.pages[8].body.includes('834')&&lesson.pages[8].body.includes('835')&&lesson.pages[8].body.includes('281–293'),'original book tasks and references kept');
   ck(lesson.pages[9].body.includes('294–299')&&lesson.pages[9].body.includes('gröna rutorna'),'original next-book reading kept');
