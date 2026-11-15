@@ -1,8 +1,8 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
 > **Pågående ny granskning (tredje lektionen i följd): Fy1 – Serie- och parallellkoppling**, inventeringsrad **#28/41**, `fy1/kapitel-8/serie-parallell/`. Användaren valde denna uttryckligen för undervisning 2026-11-16. De två tidigare granskade lektionerna är **Fy2 Ström ger magnetfält** (#1) och **Ma4 Polynomdivision** (#23), 2/41 färdiga.  
-> **Status:** Åtgärder på arbetsgrenen `figurer-fy1-serie-parallell-20261115`, **verifiering återstår**. Granskningen omfattar visuella kopplingar mellan nod/komponent, riktning, värden och formler samt faktiskt dolt facit, inte bara sifferkontroller.  
-> **Nästa handling:** Kör riktad Chromium-QA och hela Fy1-regressionen, inspektera skärmbilder vid rätt projektor-/mobilstorlek, rätta problem, därefter PR/main/Pages-verifiering. **Starta inte en fjärde lektion utan uttryckligt klartecken.**  
+> **Status:** **Arbetsgrenens fullständiga Fy1-webbläsarverifiering godkänd**, faktisk visuell inspektion av mobil/dator/projektor gjord. **Main-merge och Pages-verifiering återstår**. Granskningen omfattar visuella kopplingar mellan nod/komponent, riktning, värden och formler samt faktiskt dolt facit, inte bara sifferkontroller.  
+> **Nästa handling:** Kontrollera aktuell main/PR och merge av den gröna grenen utan att skriva över parallell kod, därefter verifiera Fy1-QA + Pages på samma lektions-SHA. **Starta inte en fjärde lektion utan uttryckligt klartecken.**  
 
 > **Aktuell figurgranskning: användarvald andra lektion, Ma4 – Polynomdivision (#23 i den fasta 41-listan).**  
 > **Färdiggranskade enligt nya figurkraven:** **2 av 41: Fy2 Ström ger magnetfält (#1) och Ma4 Polynomdivision (#23)**. Användaren har uttryckligen godkänt kvalitetsnivån på Fy2-figurerna. Några Fy2-beräkningssteg har användaren valt att lämna för senare översyn, inte rättats här.  
@@ -27,7 +27,7 @@
 
 **Oberoende fysik-/SVG-testfall:** Serie 12 V, 100+200 Ω ska ge 0,040 A och spänningsfall 4,00 V respektive 8,00 V placerade direkt vid rätt resistor; U1+U2=12,00. Vid U=24 för samma motstånd: 8/16 V; vid R1=R2=100 Ω: 12/12 V. Parallellt U=24 och R1=R2=100 Ω ger 0,480 A totalt och 0,240 A i varje gren; två övre nodpunkter i ritade koordinater y=64 och två nedre y=275, utan extra kortslutningsledningar. Om R1 halveras till 50 Ω stiger enbart I1 till 0,480 A och totalen till 0,720 A. Mät och kontrollera fasta staplar direkt i faktiskt renderad SVG. Testa före/efter och reset på bild 5, samt mobil 390 px, laptop 1280 px och projektor 1920 px. Källmotorn `serie-parallell-model.js` beräknar från gemensamt tillstånd; ny QA `qa/figure-interaction-fy1-41.cjs` plus samtliga befintliga Fy1-regressioner.
 
-**Nuvarande status:** **Åtgärder incheckade på separat arbetsgren, CI och faktisk skärmbildsgranskning återstår.** Rapporterad som ej godkänd/publicerad tills dessa passerat. **Stanna efter denna lektion; börja inte nästa utan användarens uttryckliga val.**
+**Verifiering på arbetsgrenen:** [Fy1 Actions #43757625816](https://github.com/jacobflinder/Lektioner/actions/runs/43757625816) **SUCCESS** på sista lektionskod-SHA `af51574a22055158c358e4f72406504277faec3e`. Alla tidigare Fy1-sviter: 3 669 PASS och 453 skärmbilder. Ny riktad figurkontroll: **60/60 PASS, 11 skärmbilder, 0 JS-fel**. Tillsammans 3 729 digitala kontroller. Granskade faktiskt renderade Chromium-bilder av seriemodellens U1/U2, parallella noder/ström, bild 5 före/efter och mobil 390 px, laptop 1280 px och projektor 1920 px. Ersättningskretsen är läsbar och dess numeriska resultat doldes före elevens första försök. Återstående obligatoriska steg: PR/main-merge och Pages + full regression på publicerad lektions-SHA. Ändra inte nästa lektion. **Stanna efter denna lektion; börja inte nästa utan användarens uttryckliga val.**
 
 ## Varaktiga granskningsinstruktioner
 
