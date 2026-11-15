@@ -144,10 +144,16 @@ const visualFeedback={
   a6: "<svg class=\"sign-line-figure\" viewBox=\"0 0 520 192\" role=\"img\" aria-label=\"Koefficienternas tallinje visar felaktigt steg minus 2 från minus 5 till minus 7 och korrekt steg plus 2 från minus 5 till minus 3.\">\n<rect x=\"0\" y=\"0\" width=\"520\" height=\"192\" rx=\"10\" fill=\"#f8fbfd\"/>\n<text x=\"17\" y=\"24\" font-size=\"17\" font-weight=\"750\" fill=\"#204456\">Vad händer med koefficienten −5?</text>\n<path d=\"M60 136H442\" stroke=\"#668596\" stroke-width=\"2.5\"/>\n<g font-size=\"15\" text-anchor=\"middle\" fill=\"#304b5a\">\n<path d=\"M65 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"65\" y=\"163\">-8</text><path d=\"M109 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"109\" y=\"163\">-7</text><path d=\"M153 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"153\" y=\"163\">-6</text><path d=\"M197 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"197\" y=\"163\">-5</text><path d=\"M241 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"241\" y=\"163\">-4</text><path d=\"M285 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"285\" y=\"163\">-3</text><path d=\"M329 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"329\" y=\"163\">-2</text><path d=\"M373 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"373\" y=\"163\">-1</text><path d=\"M417 130v12\" stroke=\"#688694\" stroke-width=\"2\"/><text x=\"417\" y=\"163\">0</text>\n</g>\n<circle cx=\"197\" cy=\"136\" r=\"6.5\" fill=\"#254e65\"/><text x=\"197\" y=\"187\" text-anchor=\"middle\" font-size=\"14\" fill=\"#254e65\">Start: −5</text>\n<path d=\"M197 68H109\" stroke=\"#bb5b48\" stroke-width=\"5\" fill=\"none\"/>\n<path d=\"M124 57L108 68L124 79\" stroke=\"#bb5b48\" stroke-width=\"5\" fill=\"none\"/>\n<text x=\"153\" y=\"54\" text-anchor=\"middle\" font-size=\"14\" fill=\"#873c2e\">Fel: −2 → −7</text>\n<path d=\"M197 100H285\" stroke=\"#137e6a\" stroke-width=\"5\" fill=\"none\"/>\n<path d=\"M270 89L286 100L270 111\" stroke=\"#137e6a\" stroke-width=\"5\" fill=\"none\"/>\n<text x=\"247\" y=\"90\" text-anchor=\"middle\" font-size=\"14\" fill=\"#0e6352\">Rätt: +2 → −3</text>\n</svg><p class=\"muted\">Tallinjen gäller koefficienterna. Eftersom vi subtraherar <b>−2x</b> flyttar vi koefficienten två steg åt höger, och <b>x</b> följer med.</p>",
   'zero-help': "<div class=\"degree-place-map\" role=\"img\" aria-label=\"Fyra gradkolumner med x kubik, noll x kvadrat, minus fyra x och plus tre. Den saknade x kvadrat-termen har koefficient noll.\"><div class=\"degree-cell\"><strong>Grad 3</strong><span>x³</span></div><div class=\"degree-cell degree-zero\"><strong>Grad 2</strong><span>0x²</span></div><div class=\"degree-cell\"><strong>Grad 1</strong><span>−4x</span></div><div class=\"degree-cell\"><strong>Grad 0</strong><span>+3</span></div></div>"
 };
+// Place the image DIRECTLY after the mathematical step it explains,
+// not after the entire worked solution where it would add split attention.
+const afterStep={a5:2,a6:0,'zero-help':0};
 for(const [id,markup] of Object.entries(visualFeedback)){
  const answer=document.getElementById(id);
  if(!answer)throw new Error('Visual feedback target missing: '+id);
- answer.insertAdjacentHTML('beforeend',markup);
+ const steps=answer.querySelectorAll('.ma4-step');
+ const preceding=steps[afterStep[id]];
+ if(!preceding)throw new Error('Math-step anchor missing for visual feedback: '+id);
+ preceding.insertAdjacentHTML('afterend',markup);
 }
 
 })();
