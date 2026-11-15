@@ -1,0 +1,106 @@
+'use strict';
+// Fy1 visual-meaning pilot: separate subject labels and *rendered* node/voltage
+// geometry from the numerical model; answer hiding and actual viewports.
+const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs');
+const OUT='fy1-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
+(async()=>{
+ const b=await chromium.launch({headless:true});
+ const page=await b.newPage({viewport:{width:1440,height:900}});
+ let passed=0,screenshots=0,errors=[];
+ const check=(ok,desc)=>{assert.ok(ok,desc);passed++};
+ page.on('pageerror',e=>errors.push(e.message));
+ const go=async n=>page.locator('#jump').selectOption(String(n-1));
+ const model=page.locator('#bild-2 .model-root');
+ const change=async (key,v)=>page.locator('#s83-'+key).evaluate((el,x)=>{el.value=String(x);el.dispatchEvent(new Event('input',{bubbles:true}));},v);
+ const show=async()=>model.locator('.reveal-model').click();
+ const picture=()=>model.locator('.drawing svg');
+ const texts=async()=>picture().locator('text').allTextContents();
+ const bar=async id=>Number(await model.locator('[data-quantity="'+id+'"]').getAttribute('width'));
+ const expectBar=async(id,val,max)=>check(Math.abs(await bar(id)-320*val/max)<.002,id+' SVG width matches physically fixed scale');
+ const shot=async name=>{await page.screenshot({path:OUT+'/figure-fy1-41-'+name+'.png',fullPage:true});screenshots++};
+ try{
+  const result=await page.goto('http://127.0.0.1:8123/fy1/kapitel-8/serie-parallell/',{waitUntil:'networkidle'});
+  check(result.status()===200,'Fy1 lesson loads on served origin');
+  check((await page.locator('.slide').count())===11,'11 existing lesson slides');
+  await go(2);
+  check(await picture().isVisible(),'series schematic visible before calculations');
+  check(!(await texts()).some(x=>/U₁|U₂|Nod A/.test(x)),'derived voltage/current labels not leaking before prediction');
+  check(await model.locator('.model-scales svg').count()===0,'numeric fixed scales hidden until answer');
+  await show();
+  let t=await texts();
+  check(t.some(x=>x.includes('U₁ = 4,00 V')),'series resistor R1 has actual U1=4V adjacent label');
+  check(t.some(x=>x.includes('U₂ = 8,00 V')),'series resistor R2 has actual U2=8V adjacent label');
+  check(t.some(x=>x.includes('U₁ + U₂ = 12,00 V')),'sum-of-drops physical explanation in circuit');
+  check(t.some(x=>x.includes('I₁ = I₂ = 0,040 A')),'series same-current annotation');
+  await expectBar('Itot',.04,1);await expectBar('U1',4,24);await expectBar('U2',8,24);await expectBar('Req',300,1000);
+  const coords=await picture().locator('text').evaluateAll(nodes=>nodes.filter(n=>/^U[₁₂] =/.test(n.textContent)).map(n=>({text:n.textContent,x:+n.getAttribute('x'),y:+n.getAttribute('y')})));
+  check(coords.length===2&&coords[0].x===247&&coords[1].x===402&&coords.every(n=>n.y===120),'series drop annotations physically below corresponding resistor centers');
+  await shot('series-12v');
+  await change('U',24);
+  t=await texts();
+  check(t.some(x=>x.includes('U₁ = 8,00 V'))&&t.some(x=>x.includes('U₂ = 16,00 V')),'double voltage updates both labels without stale values');
+  await expectBar('Itot',.08,1);
+  await change('R2',100);
+  t=await texts();
+  check(t.some(x=>x.includes('U₁ = 12,00 V'))&&t.some(x=>x.includes('U₂ = 12,00 V')),'equal resistors equal voltage drop');
+  await model.locator('button[data-mode="parallell"]').click();
+  t=await texts();
+  check(t.some(x=>x.includes('I = 0,480 A')),'total current at supply line correctly labelled for 24V/100Ω||100Ω');
+  check(t.some(x=>x.includes('I₁ 0,240 A'))&&t.some(x=>x.includes('I₂ 0,240 A')),'each branch current matches Ohm law at same 24V');
+  check(t.some(x=>x==='Nod A')&&t.some(x=>x==='Nod B'),'junction node names shown directly on diagram');
+  const nodes=await picture().locator('circle[data-node]').evaluateAll(all=>all.map(n=>({node:n.dataset.node,x:+n.getAttribute('cx'),y:+n.getAttribute('cy')})));
+  check(nodes.length===4&&nodes.filter(n=>n.node==='A').every(n=>n.y===64)&&nodes.filter(n=>n.node==='B').every(n=>n.y===275),'two identical potential points per upper and lower rail, real SVG coordinates');
+  check(new Set(nodes.filter(n=>n.node==='A').map(n=>n.x)).size===2,'separate branch junctions labelled as same A node');
+  await expectBar('I1',.24,1);await expectBar('I2',.24,1);await expectBar('Itot',.48,1);await expectBar('U1',24,24);await expectBar('U2',24,24);
+  await shot('parallel-equal');
+  await change('R1',50);
+  t=await texts();
+  check(t.some(x=>x.includes('I = 0,720 A')),'unequal branch totals add to 0.720A');
+  check(t.some(x=>x.includes('I₁ 0,480 A'))&&t.some(x=>x.includes('I₂ 0,240 A')),'half resistance doubles only first branch current');
+  await expectBar('I1',.48,1);await expectBar('I2',.24,1);await expectBar('Itot',.72,1);
+  await shot('parallel-unequal');
+  await model.locator('.reset-model').click();
+  check((await texts()).every(x=>!x.includes('Nod A')&&!x.includes('I = 0,720')),'reset removes revealed node/total labels');
+  check(await model.locator('.model-scales svg').count()===0,'reset removes fixed-scale answer');
+  check(await page.locator('#s83-U').inputValue()==='12'&&await page.locator('#s83-R1').inputValue()==='100'&&await page.locator('#s83-R2').inputValue()==='200','reset restores source values');
+  await go(5);
+  check(await page.locator('#bild-5 .equivalence-before').isVisible(),'before-answer comparison shows original parallel source');
+  check(!await page.locator('#bild-5 .equivalence-after').isVisible(),'equivalent resistance/circuit hidden while pupil predicts');
+  check(!(await page.locator('#bild-5 .equivalence-visual').innerText()).includes('66,7 Ω'),'no visible equivalent resistance before calculation');
+  await shot('equivalent-before');
+  await page.locator('#step').click();
+  check(await page.locator('#bild-5 .equivalence-after').isVisible(),'equivalent circuit revealed with numerical worked step');
+  check(!await page.locator('#bild-5 .equivalence-before').isVisible(),'before diagram replaced by explicit comparison');
+  check((await page.locator('#bild-5 .equivalence-after').innerText()).includes('66,7 Ω'),'calculated R equivalent labelled');
+  const shown=page.locator('#bild-5 .equivalence-after svg');
+  check(await shown.isVisible(),'real replacement SVG visible');
+  check(await shown.locator('circle').count()===4,'actual two-node parallel dots in comparison');
+  const labelSet=await shown.locator('text').allTextContents();
+  check(labelSet.includes('100 Ω')&&labelSet.includes('200 Ω')&&labelSet.includes('Rₑᵣₛ = 66,7 Ω'),'original two resistors plus equivalent single resistor distinguishable');
+  check(labelSet.includes('I = 0,180 A')&&labelSet.filter(x=>x==='12 V').length===2,'same total current and battery potential explicitly compared');
+  await shot('equivalent-after');
+  await page.locator('#reset').click();
+  check(!await page.locator('#bild-5 .equivalence-after').isVisible(),'step reset hides computed circuit again');
+  check(await page.locator('#bild-5 .equivalence-before').isVisible(),'step reset restores pre-calculation parallel');
+  // Full scale screenshots are visual evidence, not just DOM assertions.
+  for(const v of [{w:390,h:844,name:'mobile'},{w:1280,h:800,name:'laptop'},{w:1920,h:1080,name:'projector'}]){
+   await page.setViewportSize({width:v.w,height:v.h});
+   await go(2);
+   await show();
+   let rect=await picture().boundingBox();
+   check(rect?.width>195,'circuit actual rendered usable width '+v.name);
+   const o=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+   check(o<=2,'no horizontal page overflow in model '+v.name+': '+o);
+   await shot(v.name+'-model');
+   await go(5);await page.locator('#step').click();
+   rect=await shown.boundingBox();
+   check(rect?.width>190,'physical before/after comparison actual width '+v.name);
+   const div=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+   check(div<=2,'no horizontal page overflow in revealed comparison '+v.name+': '+div);
+   await shot(v.name+'-comparison');
+  }
+  check(errors.length===0,'zero JavaScript exceptions '+JSON.stringify(errors));
+  console.log('FY1_41_FIGURE_PASS '+JSON.stringify({checks:passed,screenshots,errors:errors.length}));
+ }catch(e){console.error('FY1_41_FIGURE_FAIL '+(e.stack||e));process.exitCode=1;await page.screenshot({path:OUT+'/figure-fy1-41-failed.png',fullPage:true}).catch(()=>{});}
+ finally{await b.close();}
+})();
