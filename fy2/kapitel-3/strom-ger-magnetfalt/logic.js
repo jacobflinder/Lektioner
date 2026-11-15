@@ -105,7 +105,10 @@ document.addEventListener("keydown",e=>{
 function wireSVG(dir,point,shown,radius=108,fieldAtPointUT=null){
  const cx=251,cy=185,sign=dir==="out"?-1:1;
  let s='<rect width="520" height="370" fill="#edf6f7" rx="14"/>';
- [46,108,151].forEach(r=>{s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';});
+ const modelGeometry=fieldAtPointUT!==null;
+ (modelGeometry?[radius]:[46,108,151]).forEach(r=>{
+  s+='<circle '+(modelGeometry?'data-model-field-circle="true" ':'')+'cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';
+ });
  function arrow(x,y,tx,ty,length,color){
   const endX=x+length*tx,endY=y+length*ty;
   return '<path d="M'+x+' '+y+' L'+endX+' '+endY+'" stroke="'+color+'" stroke-width="4"/>'+
@@ -116,7 +119,7 @@ function wireSVG(dir,point,shown,radius=108,fieldAtPointUT=null){
   s+='<circle cx="'+x+'" cy="'+y+'" r="5" fill="#c15f43"/><text x="'+(x+12)+'" y="'+(y+22)+'">'+label+'</text>';
   if(shown)s+=arrow(x,y,-Math.sin(theta)*sign,Math.cos(theta)*sign,36,'#c15f43');
  }
- if(shown)[46,108,151].forEach((r,k)=>{
+ if(shown&&!modelGeometry)[46,108,151].forEach((r,k)=>{
   const t=k*2.2+.6;
   s+=arrow(cx+r*Math.cos(t),cy+r*Math.sin(t),-Math.sin(t)*sign,Math.cos(t)*sign,25,'#0b8195');
  });
@@ -143,6 +146,20 @@ function updateModel(){
  const I=Number($("i-slider").value),r=Number($("r-slider").value),dir=$("dir-select").value;
  const wasOpen=$("model-result").querySelector("details")?.open||false;
  const microTesla=mu02pi*I/(r/100)*1e6;
+ // Absolute strength uses one invariant scale: 360 SVG units / 120 µT.
+ // This stays fixed while I, r or the current direction changes.
+ const strength=$("model-strength");
+ strength.hidden=!modelShown;
+ if(modelShown){
+  const width=3*microTesla;
+  const ticks=[0,30,60,90,120].map(v=>'<line x1="'+(30+3*v)+'" y1="42" x2="'+(30+3*v)+'" y2="66" stroke="#607e89" stroke-width="1.4"/><text x="'+(30+3*v)+'" y="85" text-anchor="middle" style="font-size:13px">'+v+'</text>').join('');
+  strength.innerHTML='<rect width="440" height="105" rx="12" fill="#edf6f7"/>'+
+   '<text x="30" y="22" style="font-size:15px;font-weight:700">B i P · fast skala (μT)</text>'+
+   '<rect x="30" y="42" width="360" height="16" rx="3" fill="#d2e3e8"/>'+
+   '<rect data-strength-fill="true" x="30" y="42" width="'+width+'" height="16" rx="3" fill="#0b8195"/>'+
+   ticks+'<text x="390" y="101" text-anchor="end" style="font-size:13px">0–120 μT</text>';
+  strength.setAttribute('aria-label','Magnetisk flödestäthet '+fmt(microTesla,1)+' mikrotesla på fast skala 0 till 120 mikrotesla');
+ }else strength.innerHTML='';
  $("i-value").textContent=fmt(I)+" A";$("r-value").textContent=fmt(r)+" cm";
  const mu='<msub><mi>μ</mi><mn>0</mn></msub>';
  const unit=(u)=>'<mspace width="0.18em"/><mtext>'+u+'</mtext>';
