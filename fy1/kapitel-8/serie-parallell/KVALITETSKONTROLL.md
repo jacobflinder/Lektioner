@@ -43,9 +43,9 @@ Datum: 2026-11-12. Originalkälla: `261116 8.3 Seriekoppling och parallellkoppli
 
 Ingen elevinloggning, inga formulär som skickar elevdata och ingen lokal lagring i den granskade lektionskoden.
 
-## Verifiering som återstår
+## Fysiska kontroller som återstår
 
-- Kontrollera att GitHub Pages har byggt och publicerat den aktuella versionen; en GitHub-commit räcker inte som live-verifiering.
+- GitHub Pages-byggnaden och main-QA är nu **SUCCESS** på samma granskade kod-SHA (exakt källa finns i avsnittet 15 november 2026 nedan).
 - Safari på iPhone/iPad, särskilt fullskärmskontrollen och MathML-renderingen.
 - Projektorsynlighet, styrning och återkopplingsrytm i verkligt klassrum.
 - Följ upp hur mycket eget bokarbete som faktiskt hinns med och om elevernas förklaringar förbättras.
@@ -61,7 +61,7 @@ I avsnitt 8.3 används nu ett separat frivilligt självtest: två nya beräkning
 
 Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
 
-**Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.
+**Verifiering vid denna äldre uppdatering den 12 november:** JavaScript-, data- och begränsad lokal webbläsarkontroll. **Den senare djupgranskningen den 15 november** har full Chromium-QA och verifierad main/Pages-publicering; för Safari, fysisk projektor och faktisk elevinlärning återstår separata fysiska kontroller.
 
 
 ## Systematisk djupgranskning 41/41 – 15 november 2026
@@ -73,7 +73,7 @@ Den tidigare avgränsade lokala 116-kontrollsgranskningen ovan ersätts **inte**
 - **Matematik:** 47 självständiga statiska semantiska MathML-rader, 6 dynamiska mätresultat, riktiga bråk/index/enheter och minst 16px uppmätt luft i faktiskt synligt facit; 11/11 webbilder och alla dolda steg. Kontrollräknat serieresistans, parallellgrenar, celler, exit och den frivilliga 60+(120∥240)Ω-uppgiften.
 - **Proportionella figurer:** De sex dynamiska måtten redovisas med *fasta, absoluta* SVG-skalor **0–1 A**, **0–24 V** och **0–1000 Ω**; beräknad stapelbredd är `320·värde/max` och växer/minskar i samma proportion som det fysikaliska värdet i hela reglageintervallet. Samma skalor i serie och parallell, inga vilseledande omnormaliseringar. Före förutsägelse är staplar och resultat dolda.
 - **Slutlig granskning:** [GitHub Actions #43735332160](https://github.com/jacobflinder/Lektioner/actions/runs/43735332160) **SUCCESS på exakt kod-PR-SHA**: Fy1_41 **1467 PASS, 75 skärmbilder** (390px mobil, 1440px dator, 1920px projektor; dolda och avslöjade tillstånd; 96 kombinationer av läge/U/R1/R2). Samma körning Fy1_36 **333 PASS**, #37 **422**, #38 **425**, #39 **418**, #40 **604**, sammanlagt **3669 PASS/453 skärmbilder**, 0 JS-fel och 0 externa anrop. Manuellt granskade Chromium-skärmbilder visade faktiska svarsläckor, som åtgärdades och testades igen.
-- **Main och publicering:** [main Fy1-QA #43735697709](https://github.com/jacobflinder/Lektioner/actions/runs/43735697709) **MAIN_CI_STATUS_PENDING** och [Pages #43735697246](https://github.com/jacobflinder/Lektioner/actions/runs/43735697246) **PAGES_STATUS_PENDING** för kod-SHA `7bc9924af71f9b9583a8620156e6aad742176039`.
+- **Main och publicering:** [main Fy1-QA #43735697709](https://github.com/jacobflinder/Lektioner/actions/runs/43735697709) **SUCCESS** och [Pages #43735697246](https://github.com/jacobflinder/Lektioner/actions/runs/43735697246) **SUCCESS** för kod-SHA `7bc9924af71f9b9583a8620156e6aad742176039`.
 - **Oförändrat:** den riktiga instrumentaktiviteten, PhET-labb som separat aktivitet, Socrative 903, 829–838 s.281–293, bokläsning till Effekt s.294–299 och de gröna rutorna, 70min-lektionsram, 21min bokarbete, frivilligt papperssjälvtest och skydd av elevdata.
 
 **Begränsningar:** De 11 webbilderna har djupgranskats och Chromium-fångsterna inspekterats. Original-PDF:en kunde inte öppnas på nytt för strikt sidjämförelse; faktisk fysisk projektor, Safari/iPhone/iPad, OBS/AirServer, elevresultat och fullständig WCAG-audit är inte kontrollerade. Godkänd kod betyder inte automatiskt bevisad undervisningseffekt.
