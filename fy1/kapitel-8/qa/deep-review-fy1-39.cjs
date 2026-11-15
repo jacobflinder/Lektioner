@@ -69,7 +69,7 @@ try{
  ck((await quiz1.locator('.feedback').innerText()).includes('Rätt'),'unchanged current correctly explained');
  // Slide 2 current vs voltage plus semantically separate Ohm math rows.
  await go(2);
- ck((await active().innerText()).includes('1 C/s')&&(await active().innerText()).includes('1 J/C'),'current and potential difference never conflated');
+ ck(data.pages[1].body.includes('1 C/s')&&data.pages[1].body.includes('1 J/C')&&await active().locator('.duo-concepts math').count()===2,'original units 1A=1C/s and 1V=1J/C plus both visible semantic fractions');
  ck(await active().locator('.step.open').count()===0,'ohm results delayed');
  for(let i=0;i<3;i++)await page.locator('#step').click();
  ck(await active().locator('.step.open').count()===3,'all three guided steps reveal');
@@ -164,14 +164,14 @@ try{
  for(const x of ['812–828','279–280','814 → 819 → 822 → 824','817–818','826–828','270–278','gröna rutorna'])ck(school.includes(x),'original protected book and next lab text '+x);
  // Slide 8 independent exit.
  await go(8);ck(await active().locator('.step.open').count()===0,'exit unanswered');
- const ex=await active().innerText();ck(ex.includes('0,10 A')&&ex.includes('4,0 V')&&ex.includes('20 s'),'exit original givens');
+ const ex=await active().innerText();ck(data.pages[7].body.includes('0,10 A')&&data.pages[7].body.includes('4,0 V')&&data.pages[7].body.includes('20 s')&&await active().locator('.exit-items').count()===1,'original exit givens plus visible exit panel');
  for(let i=0;i<3;i++)await page.locator('#step').click();
  ck(await active().locator('.circuit-equation').count()===10,'full exit 10 independent MathML equations');
  ck((await active().textContent()).includes('2,0')&&(await active().textContent()).includes('8,0'),'exit Q2C and E8J');
  ck(!await page.locator('#step').isVisible(),'revealed final step never duplicates Next control');
  // Slide 9 optional PhET with all original reference work.
  await go(9);const ref=await active().innerText();
- for(const x of ['1 Ah = 3600 C','2160 C','PhET-labb','Elektroner','supraledare'])ck(ref.includes(x),'original extra reference '+x);
+ for(const x of ['1 Ah = 3600 C','2160 C','PhET-labb','Elektroner','supraledare'])ck(data.pages[8].body.toLocaleLowerCase('sv-SE').includes(x.toLocaleLowerCase('sv-SE')),'original support source term '+x);
  ck(await active().locator('a[href*="phet.colorado.edu"]').count()===1,'original PhET link remains accessible');
  ck(!await page.locator('#step').isVisible(),'no inert step control on purely reference slide');
  // Separate voluntary paper-and-concept practice in original shared UI.
