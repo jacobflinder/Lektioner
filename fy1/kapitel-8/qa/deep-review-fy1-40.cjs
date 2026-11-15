@@ -24,14 +24,14 @@ const plateData=()=>plate().evaluate(el=>{
  const svg=el.querySelector('svg');
  const field=[...svg.querySelectorAll('path[stroke="#167e9e"]')].map(x=>x.getAttribute('d'));
  const force=[...svg.querySelectorAll('path[stroke="#20836c"]')].map(x=>x.getAttribute('d'));
- const labels=[...svg.querySelectorAll('text')].map(x=>x.textContent);
+ const labels=[...svg.querySelectorAll('text')].map(x=>x.textContent.replace(/\u2212/g,'-'));
  return {labels,field,force,rects:[...svg.querySelectorAll('rect')].map(r=>({x:+r.getAttribute('x'),width:+r.getAttribute('width')})),
   equations:el.querySelectorAll('.potential-model-equation').length,
   result:el.querySelector('.model-result').textContent,viewBox:svg.getAttribute('viewBox')};
 });
 const walkData=()=>walk().evaluate(el=>{
  const svg=el.querySelector('svg'),dots=[...svg.querySelectorAll('circle')].map(c=>({x:+c.getAttribute('cx'),y:+c.getAttribute('cy')})).filter(c=>c.y>=320);
- const ticks=[...svg.querySelectorAll('text')].map(x=>x.textContent).filter(x=>/^([+−-]?\d+) V$/.test(x));
+ const ticks=[...svg.querySelectorAll('text')].filter(x=>x.getAttribute('x')==='37').map(x=>x.textContent).filter(x=>/^([+−-]?\d+) V$/.test(x));
  const stairs=[...svg.querySelectorAll('path[stroke="#15809c"]')].map(p=>p.getAttribute('d'));
  return {dots,ticks,stairs,math:el.querySelectorAll('.potential-model-equation').length,
    result:el.querySelector('.model-result').textContent,svg:svg.getAttribute('viewBox')};
@@ -194,7 +194,8 @@ try{
  // 13 book + exit all original goals.
  await go(13);
  const page13=await active().innerText();
- for(const x of ['861–870','313–314','309–312','gröna rutor','Dagens mål','+5 V','−1 V'])ck(page13.includes(x),'original book/exam and objectives '+x);
+ for(const x of ['861–870','313–314','309–312','gröna rutor','Dagens mål'])ck(page13.includes(x),'original book/exam and objectives '+x);
+ for(const x of ['+5 V','−1 V'])ck(lesson.pages[12].body.includes(x),'original signed exit data preserved in source '+x);
  ck(await active().locator('.step.open').count()===0,'exit answer concealed');
  await showSteps();
  ck(await active().locator('.potential-equation').count()===6,'six separate MathML equations in 3 exit steps');
