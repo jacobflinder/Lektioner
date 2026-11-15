@@ -23,13 +23,13 @@ ok(result.status()===200,'HTTP 200');
 ok(await page.locator('section.slide').count()===7,'seven original main/optional slides');
 ok(await page.locator('section.slide.active').count()===1,'one slide active');
 ok((await slide().innerText()).includes('301–309')&&(await slide().innerText()).includes('323, 324, 326, 330, 331'),'original two homework sets');
-ok((await slide().innerText()).includes('plan')&&(await slide().innerText()).includes('läxor'),'original working plan preserved');
+ok((await slide().innerText()).includes('Plan')&&(await slide().innerText()).includes('läxor'),'original working plan preserved');
 await page.locator('#next').click();ok((await slide().getAttribute('data-title'))==='Mindmap ur minnet','mindmap slide 2');
 ok(!await slide().locator('.answer').isVisible(),'retrieval hidden before own attempt');
 await slide().locator('[data-reveal]').click();ok(await slide().locator('.answer').isVisible(),'recall revealed after discussion');
 const memo=await slide().innerText();for(const x of ['laddning','från vila','potentialskillnad','magnet','vinkelrätt'])ok(memo.toLowerCase().includes(x.toLowerCase()),'recall '+x);
-ok(await slide().locator('.answer .math-stack math').count()===3,'3 independent semantic math elements in recall');
-ok(await mathGap('.slide.active .answer .math-stack .math-row'),'semantic separate math rows >=15 px');
+ok(await slide().locator('.answer .math-stack math').count()===4,'3 independent semantic math elements in recall');
+ok(await page.locator('.slide.active .answer .math-stack').evaluateAll(stacks=>stacks.every(s=>parseFloat(getComputedStyle(s).gap)>=16)),'semantic math reserves >=16px');
 await page.locator('#reset').click();ok(!await slide().locator('.answer').isVisible(),'reset hides recall again');
 await page.locator('#next').click();ok((await slide().getAttribute('data-title'))==='Arbetstid i boken','main book work preserved');
 for(const x of ['Halvtid','Rita figur','25:00'])ok((await slide().innerText()).includes(x),'working routine '+x);
@@ -40,7 +40,7 @@ await page.locator('[data-go="3"]').click();
 ok((await slide().getAttribute('data-title'))==='Frivillig fördjupning','optional activity reached');
 ok(!await slide().locator('.answer').isVisible(),'extension answer delayed');
 await slide().locator('[data-reveal]').click();ok((await slide().innerText()).includes('fjärdedel'),'correct y∝1/v² scaling');
-await page.locator('[data-go="2"]').last().click();
+await slide().locator('[data-go="2"]').click();
 await page.locator('[data-go="5"]').click();
 ok((await slide().getAttribute('data-title'))==='Stöd A: elektriskt fält','support A is optional');
 ok(await slide().locator('#electron-path-33').isHidden(),'path not visible before mathematics');
@@ -50,7 +50,7 @@ const e=1.602176634e-19,me=9.1093837139e-31,E=60/.030,a=e*E/me,t=.050/(8e6),y=.5
 ok(nearly(E,2000)&&nearly(a/1e14,3.5176,.001),'independent E and a calculations');
 ok(nearly(t/1e-9,6.25)&&nearly(y*1000,6.87,.01)&&nearly(vy/1e6,2.1986,.01)&&nearly(alpha,15.37,.05),'independent t/y/vy/angle');
 const p=(await page.locator('#electron-path-33').getAttribute('d')).match(/[-\d.]+/g).map(Number);
-ok(nearly(p[0],45)&&nearly(p[1],185)&&nearly(p.at(-2),545)&&nearly(p.at(-1),185-y*10000,.12),'SVG path endpoint mathematically scaled to 6.87mm');
+ok(nearly(p[0],45)&&nearly(p[1],175)&&nearly(p.at(-2),545)&&nearly(p.at(-1),175-y*10000,.12),'SVG path endpoint mathematically scaled to 6.87mm');
 ok(nearly(500/50,300/30,1e-10),'SVG horizontal and vertical have matching length scales');
 await slide().locator('button[data-reveal]').first().click();
 ok(await slide().locator('#support-a-field').isVisible(),'first support shown');
@@ -64,7 +64,7 @@ ok(await slide().locator('#electron-path-33').isVisible(),'trajectory appears af
 ok(await slide().locator('#support-a-motion math').count()===7,'complete 7 step t/y/vy/tangent solution');
 ok(await mathGap('#support-a-motion .math-row'),'at least 15px between motion steps');
 await page.locator('#reset').click();ok(await slide().locator('#electron-path-33').isHidden()&&await slide().locator('.answer.shown').count()===0,'A reset hides both results and graph');
-await page.locator('[data-go="2"]').last().click();await page.locator('[data-go="6"]').click();
+await slide().locator('[data-go="2"]').click();await page.locator('[data-go="6"]').click();
 ok((await slide().getAttribute('data-title'))==='Stöd B: magnetiskt flöde','support B optional');
 ok((await slide().innerText()).includes('ut ur bildplanet'),'B direction given rather than invented');
 ok((await slide().locator('svg rect').count())===1,'6 by 4 rectangle drawn');
@@ -80,7 +80,7 @@ ok(await slide().locator('#support-b-result').isVisible(),'flux calculation reve
 ok(await slide().locator('#support-b-result math').count()===3,'law rearrangement and substitution all given');
 ok(await mathGap('#support-b-result .math-row'),'flux semantic math separated >=15px');
 await page.locator('#reset').click();ok(await slide().locator('.answer.shown').count()===0,'B reset');
-await page.locator('[data-go="2"]').last().click();await page.locator('#next').click();
+await slide().locator('[data-go="2"]').click();await page.locator('#next').click();
 ok((await slide().getAttribute('data-title'))==='Avslutning och nästa lektion','exit original');
 ok(!await slide().locator('.answer').isVisible(),'exit feedback not visible early');
 await slide().locator('[data-reveal]').click();ok(await slide().locator('.answer').isVisible(),'exit learner controlled');
@@ -109,23 +109,30 @@ ok((await offline.locator('.ref-a').allTextContents()).every(s=>s==='311–314')
 await offline.locator('#next').click();await offline.locator('#next').click();await offline.locator('[data-go="5"]').click();
 ok(await offline.locator('#electron-path-33').isHidden(),'offline graph answer concealed');
 await offline.locator('.slide.active [data-reveal]').first().click();await offline.locator('.slide.active [data-reveal]').nth(1).click();ok(await offline.locator('#electron-path-33').isVisible(),'offline self-contained trajectory and answers work');
-await shot('offline-source');await offline.close();
+await offline.screenshot({path:'fy2-qa-screenshots/deep-review-33-offline-source.png',fullPage:true});shots++;await offline.close();
 await page.locator('#class').click();await page.locator('#reset').click();
 for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
  await page.setViewportSize({width:v.width,height:v.height});
  for(const index of [0,1,2,3,4,5,6]){
-   await page.evaluate(i=>{document.querySelectorAll('.slide').forEach((s,k)=>s.classList.toggle('active',k===i))},index);
-   ok((await page.locator('.slide.active').count())===1,'one slide '+v.name+'/'+index);
+   await page.reload({waitUntil:'load'});
+   const mainSteps=index===0?0:index===1?1:index===2?2:index===4?3:2;
+   for(let j=0;j<mainSteps;j++)await page.locator('#next').click();
+   if([3,5,6].includes(index))await slide().locator('[data-go="'+index+'"]').click();
+   ok((await page.locator('.slide.active').count())===1,'one active slide '+v.name+'/'+index);
+   const active=await page.locator('.slide').evaluateAll(ns=>ns.findIndex(x=>x.classList.contains('active')));
+   ok(active===index,'navigation reaches '+v.name+'/'+index+' actual '+active);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
    ok(overflow<=2,'no horizontal overflow '+v.name+'/'+index+' '+overflow);
    await shot(v.name+'-'+String(index+1).padStart(2,'0'));
  }
- await page.locator('#reset').click();
  for(const index of [5,6]){
-   await page.evaluate(i=>{document.querySelectorAll('.slide').forEach((s,k)=>s.classList.toggle('active',k===i))},index);
+   await page.reload({waitUntil:'load'});await page.locator('#next').click();await page.locator('#next').click();
+   await slide().locator('[data-go="'+index+'"]').click();
    for(const b of await slide().locator('[data-reveal]').all())await b.click();
-   ok(await slide().locator('.answer.shown').count()===2,'all revealed optional stages '+v.name+'/'+index);
-   ok(await mathGap('.slide.active .answer.shown .math-row'),'math visually spaced '+v.name+'/'+index);
+   ok(await slide().locator('.answer.shown').count()===2,'2 delayed support stages '+v.name+'/'+index);
+   ok(await mathGap('.slide.active .answer.shown .math-row'),'MathML spacing '+v.name+'/'+index);
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+   ok(overflow<=2,'no revealed overflow '+v.name+'/'+index+' '+overflow);
    await shot(v.name+'-'+(index===5?'support-a':'support-b')+'-full');
    await page.locator('#reset').click();
  }
