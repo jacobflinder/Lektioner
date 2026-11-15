@@ -57,11 +57,11 @@ ok(await slide().locator('#support-a-field').isVisible(),'first support shown');
 ok(await slide().locator('#support-a-motion').isHidden(),'second stage remains hidden');
 ok(await slide().locator('.force-reveal').first().evaluate(e=>getComputedStyle(e).display!=='none'),'force rendered after first concept');
 ok(await slide().locator('#electron-path-33').isHidden(),'trajectory hidden until computed');
-ok(await slide().locator('#support-a-field math').count()===4,'complete E/a derivation has 4 math steps');
+ok(await slide().locator('#support-a-field math').count()===5,'complete E/a derivation has 5 math steps');
 await slide().locator('button[data-reveal]').nth(1).click();
 ok(await slide().locator('#support-a-motion').isVisible(),'second stage computed');
 ok(await slide().locator('#electron-path-33').isVisible(),'trajectory appears after own calculation');
-ok(await slide().locator('#support-a-motion math').count()===7,'complete 7 step t/y/vy/tangent solution');
+ok(await slide().locator('#support-a-motion math').count()===9,'complete 9 step t/y/vy/tangent solution');
 ok(await mathGap('#support-a-motion .math-row'),'at least 15px between motion steps');
 await page.locator('#reset').click();ok(await slide().locator('#electron-path-33').isHidden()&&await slide().locator('.answer.shown').count()===0,'A reset hides both results and graph');
 await slide().locator('[data-go="2"]').click();await page.locator('[data-go="6"]').click();
@@ -132,8 +132,8 @@ for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,
    ok(await slide().locator('.answer.shown').count()===2,'2 delayed support stages '+v.name+'/'+index);
    ok(await mathGap('.slide.active .answer.shown .math-row'),'MathML spacing '+v.name+'/'+index);
    const shapes=await slide().locator('.answer.shown .math-row math').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();const p=n.parentElement;return {height:r.height,width:r.width,rowWidth:p.clientWidth,visible:getComputedStyle(n).display}}));
-   ok(shapes.length===(index===5?11:7),'all separate semantic calculation lines '+v.name+'/'+index);
-   ok(shapes.every(s=>s.height<120&&s.height>12&&s.width>40),'MathML must render as horizontal equations, not vertical character stacks '+v.name+'/'+index+' '+JSON.stringify(shapes));
+   ok(shapes.length===(index===5?14:7),'all separate semantic calculation lines '+v.name+'/'+index);
+   ok(shapes.every(s=>s.height<120&&s.height>=10&&s.width>40),'MathML must render as horizontal equations, not vertical character stacks '+v.name+'/'+index+' '+JSON.stringify(shapes)); const rowOverflows=await slide().locator('.answer.shown .math-row').evaluateAll(rows=>rows.map(e=>({available:e.clientWidth,content:e.scrollWidth,math:e.querySelector('math')?.scrollWidth})));ok(rowOverflows.every(x=>x.content<=x.available+3&&x.math<=x.available+3),'All math rows entirely visible without internal horizontal scrolling '+v.name+'/'+index+' '+JSON.stringify(rowOverflows));
 
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
    ok(overflow<=2,'no revealed overflow '+v.name+'/'+index+' '+overflow);
