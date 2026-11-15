@@ -15,6 +15,7 @@ const set=async(id,x)=>page.locator('#'+id).evaluate((el,n)=>{el.value=String(n)
 const active=()=>page.locator('.slide.active');
 const go=async(i)=>{await page.locator('#jump').selectOption(String(i));ok(await active().count()===1,'only one active slide '+i);ok(await active().getAttribute('data-title')!==null,'slide has title '+i)};
 const actualWidth=async id=>Number(await page.locator(id).getAttribute('width'));
+const svgTextFits=async()=>active().locator('svg text').evaluateAll(ns=>ns.every(e=>{const s=e.ownerSVGElement,v=s?.viewBox?.baseVal;if(!v||!v.width)return true;const b=e.getBBox();return b.x>=v.x-8&&b.y>=v.y-8&&b.x+b.width<=v.x+v.width+8&&b.y+b.height<=v.y+v.height+8;}));
 const assertMath=async label=>{
  const d=await active().locator('.calc-chain .calc-steps .math-sm').evaluateAll(es=>{
   let prev=null,gaps=[],widths=[];
@@ -35,7 +36,7 @@ try{
  const titles=['Hur får vi en magnet av en tråd?','Båda bidragen pekar åt höger','Från strömvarv till elektromagnet','Åt vilket håll pekar fältet?','Samma strömvarv, två perspektiv','Fingrarna följer strömmen','Vad gör järnkärnan med fältet?','Vad ändras när järnkärnan sätts in?','Permeabilitet och magnetfält','Platt spole eller lång solenoid?','Hur starkt är fältet i mitten?','Hur stor ström behövs?','En platt spole med fem varv','Cirka 63 mikrotesla','Tillämpa och följ upp'];
  for(let i=0;i<15;i++)ok(await page.locator('.slide').nth(i).getAttribute('data-title')===titles[i],'original slide identity '+(i+1));
  ok(await page.locator('#class-btn[aria-pressed="true"]').count()===1,'classroom mode default');
- await go(0);let v=await active().innerText();ok(v.includes('över')&&v.includes('under')&&v.includes('P'),'two current directions start question');
+ await go(0);let v=await active().innerText();ok(v.includes('Två raka ledare')&&v.includes('P'),'two-conductor start question and point P');
  await go(1);ok((await active().locator('.two-wire-svg path[stroke="#0d7b91"]').count())===1,'two visibly rightward magnetic contribution arrows');
  await go(2);ok((await active().innerText()).includes('Rita')&&(await active().innerText()).includes('Beräkna'),'three goals preserved');
  await go(3);ok((await active().innerText()).includes('Egen pil först'),'student prediction before answer');
@@ -45,7 +46,7 @@ try{
  await page.locator('#view-reveal').click();ok((await page.locator('#view-caption').innerText()).includes('åt höger'),'side current gives B to right');
  await page.locator('#view-right').click();ok((await page.locator('#view-caption').innerText()).includes('ut ur'),'same field viewed from right points toward observer');
  await page.locator('#view-flip').click();ok((await page.locator('#view-caption').innerText()).includes('medurs'),'reversing conventional current changes end-view sense');
- ok((await page.locator('#view-holder').innerText()).includes('Förutsäg B'),'reversal conceals result');
+ ok((await page.locator('#view-caption').innerText()).includes('Förutsäg B')&&await page.locator('#view-holder svg text').filter({hasText:'?'}).count()===1,'reversal conceals B and restores question mark');
  await page.locator('#view-reveal').click();ok((await page.locator('#view-caption').innerText()).includes('in i'),'reversed B points into view');
  await page.locator('#view-reset').click();ok((await page.locator('#view-caption').innerText()).includes('övre tråddelen'),'restore original side view');
  await go(5);
@@ -108,7 +109,7 @@ try{
  ok((await page.locator('#sol-i').inputValue())==='0.8'&&(await page.locator('#sol-l').inputValue())==='0.3','reset returns solenoid presets');
  await go(11);
  ok(!await active().locator('.answer').isVisible(),'independent double-current problem concealed');
- await active().locator('[data-reveal]').click();ok((await active().innerText()).includes('1,6 A'),'double-current result verified');
+ await active().locator('[data-reveal]').click();const currentAnswer=await active().locator('.answer').textContent();ok(currentAnswer.includes('1,6')&&currentAnswer.includes('A'),'double-current result verified using rendered math text');
  await go(12);
  ok(!await page.locator('#flat-b-bar').count(),'flat B bar hidden until attempt');
  const f0=mu0*5*.8/(2*.04)*1e6;ok(close(f0,62.831853,.00001),'independent flat coil B=62.832uT');
@@ -170,6 +171,7 @@ try{
  ok(await offline.locator('#sol-b-bar').count()===1,'offline visual updates at same model inputs');
  await offline.screenshot({path:path.join(root,'deep-review-34-offline.png'),fullPage:true});screenshots++;
  ok(offErrors.length===0,'offline with zero exceptions '+offErrors.join('; '));await offline.close();
+ await page.locator('#setting-btn').click(); // Do not leave teacher settings expanded in real lesson screenshots.
  // End-to-end navigation and visually render every slide at three target sizes.
  for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
   await page.setViewportSize({width:vp.width,height:vp.height});
@@ -177,6 +179,7 @@ try{
    await go(i);
    const sc=await page.evaluate(()=>({body:document.documentElement.scrollWidth,window:innerWidth}));
    ok(sc.body<=sc.window+2,'no sideways overflow '+vp.name+'/'+(i+1)+' '+JSON.stringify(sc));
+   ok(await svgTextFits(),'all rendered SVG text fits its own viewBox '+vp.name+'/'+(i+1));
    await shot(vp.name+'-'+String(i+1).padStart(2,'0'));
   }
   for(const [idx,which] of [[9,'models'],[10,'sol'],[12,'flat'],[14,'exit']]){

@@ -165,8 +165,8 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
  '<text x="447" y="144" font-size="24" font-weight="800" fill="'+blue+'">'+B.toLocaleString('sv-SE',{maximumFractionDigits:1})+' μT</text>'+
  '<text x="447" y="179" font-size="16" fill="'+blue+'">'+(dir>0?'⊙ ut ur bilden':'⊗ in i bilden')+'</text>':
  '<text x="446" y="135" font-size="20" fill="#3e6070">Förutsäg B</text>')+
- '<text x="26" y="334" font-size="16" fill="#355d6d">'+n+' varv · radie '+rCm.toLocaleString('sv-SE',{maximumFractionDigits:1})+' cm · B finns genom hela öppningen</text>'+
- '<text x="26" y="355" font-size="14" fill="#536f79">Symboler: B:s normalkomponent nära lindningen (icke-linjär skala). Formeln gäller centrum.</text>'+
+ '<text x="26" y="332" font-size="17" fill="#355d6d">'+n+' varv · radie '+rCm.toLocaleString('sv-SE',{maximumFractionDigits:1})+' cm</text>'+
+ '<text x="26" y="354" font-size="14" fill="#536f79">Fältsymboler schematiska · B beräknas i centrum.</text>'+
  '</svg>';
 }
 function coilSingleLoop({dir=1,field=false}={}){
