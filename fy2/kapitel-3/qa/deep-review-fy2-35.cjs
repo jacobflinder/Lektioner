@@ -58,7 +58,7 @@ fs.mkdirSync(outdir,{recursive:true});
   ok(await four.getAttribute('data-direction')==='out'&&await four.getAttribute('data-shown')==='true','four outbound tangents after first response');
   await active().locator('[data-reveal]').nth(1).click();
   ok(await four.getAttribute('data-direction')==='in'&&await four.getAttribute('data-shown')==='false','current actually reverses but tangent answer waits');
-  ok((await four.locator('svg').innerText()).includes('⊗'),'inward-current symbol redrawn');
+  ok((await four.locator('svg').textContent()).includes('⊗'),'inward-current symbol redrawn');
   await active().locator('[data-reveal]').nth(2).click();
   ok(await four.getAttribute('data-direction')==='in'&&await four.getAttribute('data-shown')==='true','four reversed tangents actually drawn');
   const p=await four.locator('svg path[stroke="#c15f43"]').all();
