@@ -54,3 +54,7 @@
 /* Conceal the textual A/V answer alongside the circuit until a reveal step. */
 #bild-6 .meter-points{display:none}
 #bild-6:has(.step.open) .meter-points{display:grid}
+
+/* Battery-cell prediction must precede both numeric and verbal answer. */
+#bild-7 .cell-answer{display:none}
+#bild-7:has(.step.open) .cell-answer{display:inline}
