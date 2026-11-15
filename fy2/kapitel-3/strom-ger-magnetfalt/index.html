@@ -17,6 +17,13 @@ textarea{width:100%;min-height:88px;border:1px solid #a8c8d1;padding:12px;border
 @media(max-width:800px){:root{font-size:17px}.stage{border-radius:0}.grid,.two{grid-template-columns:1fr}.mode-info{border-radius:0}.foot button{padding:9px}.fig svg{max-height:360px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}@media print{header,.crumb,.mode-info,.editor,.foot,.review,.action{display:none!important}.slide{display:block!important;break-after:page}.stage{box-shadow:none;border:0}}
 
+.right-hand-guide{border:1px solid #c4dde4;background:#f7fbfc;border-radius:12px;padding:12px;margin-top:12px}
+.right-hand-guide p{margin:4px 0 10px}
+.hand-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.hand-panels svg{width:100%;height:auto;display:block;border:1px solid #d5e5e8;border-radius:10px}
+#model-strength{width:100%;max-width:440px;height:auto;display:block;margin:8px auto}
+@media(max-width:560px){.hand-panels{grid-template-columns:1fr}.right-hand-guide{padding:8px}}
+
 /* Projector: keep question, diagram and controls together. Mobile may scroll. */
 [hidden]{display:none!important}
 [data-reveal][aria-expanded="true"]{display:none}
