@@ -19,6 +19,7 @@ const calculation=(i,r,result)=>{
  row(currentRatio+'<mo>=</mo><mfrac><mrow>'+imath+sep('A')+'</mrow><mrow>'+rmath+sep('m')+'</mrow></mfrac>')+
  row(currentRatio+'<mo>≈</mo><mn>'+rt+'</mn>'+sep('A/m'))+
  row('<mi>B</mi><mo>=</mo>'+muPart+currentRatio)+
+ row('<mi>B</mi><mo>≈</mo><mn>2,0</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mo>·</mo><mn>'+rt+'</mn>'+sep('T'))+
  row('<mi>B</mi><mo>≈</mo><mn>'+sci+'</mn><mo>·</mo><msup><mn>10</mn><mn>−5</mn></msup>'+sep('T'))+
  row('<mi>B</mi><mo>≈</mo><mn>'+result+'</mn>'+sep('μT'))+'</div>';
 };

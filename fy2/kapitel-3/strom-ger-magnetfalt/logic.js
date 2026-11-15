@@ -157,6 +157,7 @@ function updateModel(){
   row('<mfrac>'+mu+'<mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mo>≈</mo><mn>2,0</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup>'+unit('T·m/A'))+
   row('<mfrac><mi>I</mi><mi>r</mi></mfrac><mo>=</mo><mfrac><mrow><mn>'+fm(I,1)+'</mn>'+unit('A')+'</mrow><mrow><mn>'+fm(r/100,3)+'</mn>'+unit('m')+'</mrow></mfrac>')+
   row('<mfrac><mi>I</mi><mi>r</mi></mfrac><mo>=</mo><mn>'+fm(ratio,2)+'</mn>'+unit('A/m'))+
+  row('<mi>B</mi><mo>≈</mo><mn>2,0</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mo>·</mo><mn>'+fm(ratio,2)+'</mn>'+unit('T'))+
   row('<mi>B</mi><mo>≈</mo><mn>'+scientific+'</mn><mo>·</mo><msup><mn>10</mn><mn>−5</mn></msup>'+unit('T'))+
   row('<mi>B</mi><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn>'+unit('μT'))+
   '</div></details><p class="small">Riktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+
