@@ -156,7 +156,7 @@ try{
  await go(6);ck((await active().innerText()).includes('0,018'),'original copper rho unchanged');
  ck(await active().locator('.step.open').count()===0,'worked copper example not leaked');
  for(let i=0;i<5;i++)await page.locator('#step').click();
- ck(await active().locator('.circuit-equation').count()===13,'thirteen properly separated r,A,rho,R,unit equations');
+ ck(await active().locator('.circuit-equation').count()===14,'fourteen properly separated r,A,rho,R,unit equations, including unrounded area');
  ck((await active().textContent()).includes('0,196')&&(await active().textContent()).includes('0,92'),'r0.25 area0.196 R0.92');
  ck(near(.018*10/(Math.PI*.25**2),.91673,.0001),'copper resistance independent numerical proof');
  // Slide 7 preserve protected NOKflex time, PhET lab next.
