@@ -67,7 +67,7 @@ fs.mkdirSync(outdir,{recursive:true});
   ok(pos&&Number(pos[3])>Number(pos[1]),'inward current: top A B points RIGHT');
   await page.locator('#reset-btn').click();
   ok(await four.getAttribute('data-direction')==='out'&&await four.getAttribute('data-shown')==='false','four-points full reset');
-  await go(5);ok((await active().innerText()).includes('fördubblas'),'prediction of I before controller');
+  await go(5);ok((await active().innerText()).includes('fördubblas'),'prediction of I before controller');ok(!await page.locator('#reveal-btn').isVisible()&&await page.locator('#next-btn').isVisible(),'no duplicated Next controls on a slide without feedback');
   await go(6);
   let d=await page.locator('#current-comparison path[stroke="#077e8f"]').all();
   const arrowLen=async()=>{let list=await page.locator('#current-comparison path[stroke="#077e8f"]').all();let value=await list[2].getAttribute('d');let m=value.match(/^M455 215V([\d.]+)/);return m?215-Number(m[1]):NaN};

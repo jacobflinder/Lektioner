@@ -20,8 +20,11 @@ function render(){
  $("jump").value=String(current);
  $("prev-btn").disabled=current===0;$("next-btn").disabled=current>=MAIN-1;
  const next=slides[current].querySelector(".answer:not(.shown)");
- $("reveal-btn").textContent=next?"Visa nästa steg":current<MAIN-1?"Nästa bild":"Allt visat";
- $("reveal-btn").disabled=!next&&current>=MAIN-1;
+ // Keep exactly one Next button; the reveal button only exists while there
+ // are unrevealed mathematical or conceptual steps.
+ $("reveal-btn").hidden=!next;
+ $("reveal-btn").textContent="Visa nästa steg";
+ $("reveal-btn").disabled=false;
 }
 function refreshDiagram(){
  const el=slides[current].querySelector("[data-wire-plot]");
