@@ -25,13 +25,28 @@ function render(){
 }
 function refreshDiagram(){
  const el=slides[current].querySelector("[data-wire-plot]");
- if(el){el.dataset.shown=String(!!slides[current].querySelector(".answer.shown"));drawDiagram(el);}
+ if(!el)return;
+ if(slides[current].dataset.key==="around"){
+  const stages=slides[current].querySelectorAll(".answer.shown").length;
+  // First response: outward current + 4 tangents. Second: reverse I but
+  // conceal reversed tangents until the student predicts. Third: show them.
+  el.dataset.direction=stages>=2?"in":"out";
+  el.dataset.shown=String(stages===1||stages===3);
+ }else el.dataset.shown=String(!!slides[current].querySelector(".answer.shown"));
+ drawDiagram(el);
+}
+function resetSlideState(i){
+ const slide=slides[i];
+ slide.querySelectorAll(".answer.shown").forEach(a=>a.classList.remove("shown"));
+ slide.querySelectorAll("details").forEach(d=>d.open=false);
+ slide.dispatchEvent(new Event("lesson:reset"));
+ const resets={model:"model-reset","current-test":"current-reset","distance-test":"distance-reset"};
+ const btn=resets[slide.dataset.key];if(btn)$(btn).click();
+ if(slide.dataset.key==="work")$("timer-reset").click();
 }
 function go(i){
  const n=Math.max(0,Math.min(OPTIONAL,i));
- if(!document.body.classList.contains("repeat")){
-  slides[n].querySelectorAll(".answer.shown").forEach(a=>a.classList.remove("shown"));
- }
+ if(n!==current&&!document.body.classList.contains("repeat"))resetSlideState(n);
  current=n;refreshDiagram();render();window.scrollTo(0,0);
 }
 function revealNext(){
@@ -47,7 +62,7 @@ $("reset-btn").addEventListener("click",()=>{
  slides[current].querySelectorAll(".answer.shown").forEach(a=>a.classList.remove("shown"));
  slides[current].querySelectorAll("textarea").forEach(a=>a.value="");
  slides[current].querySelectorAll('details').forEach(d=>d.open=false);
- const resets={model:'model-reset','current-test':'current-reset','distance-test':'distance-reset'};
+ const resets={model:'model-reset','current-test':'current-reset','distance-test':'distance-reset',work:'timer-reset'};
  const resetId=resets[slides[current].dataset.key];
  if(resetId)$(resetId).click();
  slides[current].dispatchEvent(new Event("lesson:reset"));
@@ -66,7 +81,9 @@ $("jump").addEventListener("change",e=>go(Number(e.target.value)));
 $("open-optional").addEventListener("click",()=>go(OPTIONAL));
 $("return-main").addEventListener("click",()=>go(MAIN-1));
 function setMode(repeat){
+ const exiting=document.body.classList.contains("repeat")&&!repeat;
  document.body.classList.toggle("repeat",repeat);
+ if(exiting)resetSlideState(current);
  $("class-btn").classList.toggle("selected",!repeat);$("repeat-btn").classList.toggle("selected",repeat);
  $("class-btn").setAttribute("aria-pressed",String(!repeat));
  $("repeat-btn").setAttribute("aria-pressed",String(repeat));
@@ -118,20 +135,39 @@ function drawDiagram(el){
  svg.innerHTML=wireSVG(el.dataset.direction||"out",el.dataset.point||"right",el.dataset.shown==="true");
 }
 document.querySelectorAll("[data-wire-plot]").forEach(drawDiagram);
+let modelShown=false;
 function updateModel(){
  const I=Number($("i-slider").value),r=Number($("r-slider").value),dir=$("dir-select").value;
- const wasOpen=$("model-result").querySelector("details")?.open;
+ const wasOpen=$("model-result").querySelector("details")?.open||false;
  const microTesla=mu02pi*I/(r/100)*1e6;
  $("i-value").textContent=fmt(I)+" A";$("r-value").textContent=fmt(r)+" cm";
- $("model-result").innerHTML='<div style="font-family:Cambria,Georgia,serif;font-size:1.22rem"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn><mtext> μT</mtext></math></div>'+
- '<details style="margin-top:8px;font-size:.84rem;font-weight:500"><summary>Visa insättningen med enheter</summary><div style="font-family:Cambria,Georgia,serif;font-size:1.12rem;overflow-x:auto"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+fmt(I,1)+'</mn><mtext> A</mtext></mrow><mrow><mn>'+fmt(r/100,3)+'</mn><mtext> m</mtext></mrow></mfrac></math></div></details>'+
- '<p style="font-family:system-ui;font-size:.86rem;margin:5px 0 0">Fältriktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+'</b>. Pilarna visar bara riktning. B:s storlek anges av talvärdet.</p>';
- if(wasOpen)$("model-result").querySelector("details").open=true;
+ const mu='<msub><mi>μ</mi><mn>0</mn></msub>';
+ const unit=(u)=>'<mspace width="0.18em"/><mtext>'+u+'</mtext>';
+ const row=m=>'<div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+m+'</math></div>';
+ const ratio=I/(r/100),Btesla=mu02pi*ratio;
+ const fm=(n,d=1)=>Number(n).toLocaleString("sv-SE",{minimumFractionDigits:d,maximumFractionDigits:d});
+ const scientific=(Btesla/1e-5).toLocaleString("sv-SE",{minimumFractionDigits:2,maximumFractionDigits:2});
+ $("model-result").innerHTML=modelShown?
+  '<div class="model-math">'+row('<mi>B</mi><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn>'+unit('μT'))+
+  '<details><summary>Visa fullständig insättning och kontroll av enheter</summary><div class="math-stack">'+
+  row('<mi>r</mi><mo>=</mo><mn>'+fmt(r,1)+'</mn>'+unit('cm')+'<mo>=</mo><mn>'+fm(r/100,3)+'</mn>'+unit('m'))+
+  row('<mfrac>'+mu+'<mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mo>≈</mo><mn>2,0</mn><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup>'+unit('T·m/A'))+
+  row('<mfrac><mi>I</mi><mi>r</mi></mfrac><mo>=</mo><mfrac><mrow><mn>'+fm(I,1)+'</mn>'+unit('A')+'</mrow><mrow><mn>'+fm(r/100,3)+'</mn>'+unit('m')+'</mrow></mfrac>')+
+  row('<mfrac><mi>I</mi><mi>r</mi></mfrac><mo>=</mo><mn>'+fm(ratio,2)+'</mn>'+unit('A/m'))+
+  row('<mi>B</mi><mo>≈</mo><mn>'+scientific+'</mn><mo>·</mo><msup><mn>10</mn><mn>−5</mn></msup>'+unit('T'))+
+  row('<mi>B</mi><mo>≈</mo><mn>'+fmt(microTesla,1)+'</mn>'+unit('μT'))+
+  '</div></details><p class="small">Riktning i P till höger: <b>'+(dir==="out"?"uppåt":"nedåt")+
+  '</b>. Den ritade pilen visar bara riktning; värdet är beräknat för lång rak ledare.</p></div>':
+  '<p class="small">Förutsäg och räkna själv. Det numeriska B-värdet är dolt tills du visar det.</p>';
+ if(modelShown&&wasOpen)$("model-result details").open=true;
  $("model-svg").innerHTML=wireSVG(dir,"right",true,12*r,microTesla);
+ $("model-show").textContent=modelShown?"Dölj B och beräkning":"Visa B och beräkningssteg";
 }
 ["i-slider","r-slider","dir-select"].forEach(id=>$(id).addEventListener("input",updateModel));
+$("model-show").addEventListener("click",()=>{modelShown=!modelShown;updateModel()});
 $("model-reset").addEventListener("click",()=>{
- $("i-slider").value=6;$("r-slider").value=4;$("dir-select").value="out";updateModel();
+ $("i-slider").value=6;$("r-slider").value=4;$("dir-select").value="out";
+ modelShown=false;updateModel();
 });
 function timerText(){
  const t=Math.max(0,Math.ceil(remaining));
