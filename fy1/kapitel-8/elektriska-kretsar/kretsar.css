@@ -62,3 +62,18 @@
 #bild-3 .body-copy>.quiz,#bild-4 .body-copy>.quiz,#bild-5 .body-copy>.quiz{margin-top:14px}
 #bild-3 .body-copy>.quiz button,#bild-4 .body-copy>.quiz button,#bild-5 .body-copy>.quiz button{font-size:.86rem}
 #bild-2 .body-copy .step,#bild-3 .body-copy .step,#bild-4 .body-copy .step,#bild-5 .body-copy .step,#bild-6 .body-copy .step{font-size:.94rem}
+/* Fy1 #39: each mathematical statement is an independent native MathML row. */
+.circuit-math-stack,.circuit-model-math{display:grid;gap:20px;max-width:100%;margin:12px 0}
+.circuit-equation,.circuit-model-math-row{max-width:100%;min-width:0;overflow-x:auto;line-height:1.43}
+.circuit-equation math,.circuit-model-math-row math{font-size:clamp(1.05rem,1.5vw,1.35rem)}
+.circuit-model-math{gap:18px}
+.kretsar-model .model-result{gap:12px}
+.kretsar-model .model-result .circuit-model-math-row math{font-size:clamp(1rem,1.5vw,1.24rem)}
+#bild-3 .kretsar-model .drawing svg{max-height:600px}
+#bild-5 .kretsar-model .drawing svg{max-height:500px}
+@media(max-width:575px){
+ .circuit-math-stack{gap:20px}
+ .circuit-equation math,.kretsar-model .model-result .circuit-model-math-row math{font-size:1.04rem}
+ #bild-3 .kretsar-model .drawing svg{max-height:none}
+ #bild-5 .kretsar-model .drawing svg{max-height:none}
+}

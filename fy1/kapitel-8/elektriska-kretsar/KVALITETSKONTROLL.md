@@ -34,7 +34,7 @@
 - Förgrening: 0,50 A = 0,20 A + 0,30 A ut; ingen laddningsansamling i stationärt tillstånd.
 - Tvärsnittet är A = π(d/2)²; R = ρl/A. Fall A 0,9167 Ω, B 1,8335 Ω, C 0,2292 Ω för lika ρ.
 - Gränsfall U=0, t=0, U=24 V/R=5 Ω/t=60 s, kort/lång tråd, tunn/tjock tråd, återställning.
-- Trådens längd och diameter visas på *olika skalor* och detta upplyses uttryckligen.
+- Trådens längd och diameter visas på *två skilda, men internt exakt linjära skalor* och detta upplyses uttryckligen.
 - Ideala ledningar, ideal spänningskälla och konstant resistivitet är pedagogiska modeller, inte allmängiltiga påståenden.
 
 ## Teknik och tester
@@ -67,3 +67,11 @@ I avsnitt 8.2 används nu ett separat frivilligt självtest: två nya beräkning
 Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
 
 **Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.
+
+## Fördjupad granskning av lektion #39/41 – elektriska kretsar
+
+- **Original:** 9 publicerade webbilder (äldre metadata namnger `261104 8.2 Elektriska kretsar.pdf` med nio originalsidor). PDF kunde inte nås för direkt visuell källjämförelse; granskningen avser alla 9 befintliga webbilder och dolda steg. Den fristående PhET-labben `261109 Kopplingslabb PhET.pdf` ändras inte. Bevara **Physics at School VI, försök 6**, samtliga bokuppgifter **812–828 s.279–280**, prioriteringen **814, 819, 822, 824**, lässtöd **s.270–278 gröna rutorna**, den riktiga separata PhET-länken och den skyddade **25 min boktid**. Ingen Socrative har funnits i originalet, ingen tillförs.
+- **Ett väsentligt diagramfel har rättats:** trådens bildlängd var tidigare `95+275·l/20`, diameterns tjocklek `7+13d`, ändytans radie `20+25d`. Dessa har additivt offset och **dubbelt l/d såg inte dubbelt långt/tjockt ut**. Nytt exakt `L_svg=18·l_m`, `thickness=30·d_mm`, `cross_radius=30·d_mm`. Den **ritade cirkelarean** blir därför verkligen **4 gånger större vid dubbelt d**, vilket överensstämmer med **R=ρl/A och R ∝ l/d²**. Separat absolut 0–12Ω-mätstapel med bredd `345·R/12` visar faktisk resistans och korrekta A/B/C-kvoter.
+- **Strömmodellens visuella amplitud:** De gamla kvalitativa strömpilarna hade samma längd oavsett U/R, och Q/E ändrade bara text. Nu förklaras strömpilar som **riktningssymboler**, samtidigt som tre helt fasta gemensamma mätstaplar **I:0–5 A (340·I/5)**, **Q:0–300 C (340·Q/300)** och **E:0–7000 J (340·E/7000)** är kvantitativa. Extremreglagena `U=24V,R=5Ω,t=60s` ger I=4,8A, Q=288C, E=6912J utan överstyrning eller förstörd proportion. Vid `U=0` är I,Q,E,N noll; vid `t=0` är I ändlig, men Q,E,N noll.
+- **Fullständigare matematik:** oberoende numeriskt `I=6,0V/30Ω=0,20A`, `Q=I·10s=2,0C`, `E=UQ=12J`, `N=Q/e≈1,25·10¹⁹≈1,2·10¹⁹`. Knutpunkt `0,50A=0,20A+0,30A`. Tråd `d=0,50mm`, `r=0,25mm`, `A≈0,196mm²`, `R≈0,917Ω≈0,92Ω`. För dubbelt l blir R×2, för dubbelt d blir A×4 och R/4. Exit `I=0,10A,U=4,0V,t=20s⇒Q=2,0C,E=8,0J`. Alla beräkningsled uppdelade i självständiga semantiska MathML-rader med mätta mellanrum ≥16px på 390/1440/1920px.
+- **QA före publicering:** systematisk riktad Chromium/Playwright för alla 9 bilder och alla dolda steg, fyra originalwebbfrågor, verkliga `<rect>`/`circle`-koordinater, absoluta linjära mätstaplar, SI- och numerikgränsfall, två frivilliga pappersövningar, klassrum/repetition, reset, screenshots vid mobil/dator/projektor, samt oförändrad tidigare regression. Safari på fysisk Mac/iPad, OBS/AirServer, riktig projektor och faktisk elevinlärning kan inte påstås testad.
