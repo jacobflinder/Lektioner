@@ -11,9 +11,19 @@ function render(){
  $("reveal-btn").textContent=unshown?"Visa nästa steg":current<N-1?"Nästa bild":"Allt visat";
  $("reveal-btn").disabled=!unshown&&current===N-1;
 }
+function clearSlideFeedback(i){
+ const slide=slides[i];
+ slide.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
+ slide.dispatchEvent(new Event("lesson:reset"));
+ if(i===4){view="side";viewDir=1;viewShown=false;drawView()}
+ if(i===7){core=false;coreDir=1;drawCore()}
+ if(i===10){$("sol-reset").click()}
+ if(i===12){$("flat-reset").click()}
+}
 function go(i){
- current=Math.max(0,Math.min(N-1,i));
- if(!document.body.classList.contains("repeat"))slides[current].querySelectorAll(".answer.shown").forEach(n=>n.classList.remove("shown"));
+ const next=Math.max(0,Math.min(N-1,i));
+ if(next!==current&&!document.body.classList.contains("repeat"))clearSlideFeedback(next);
+ current=next;
  render();window.scrollTo(0,0);
 }
 function reveal(){
@@ -44,7 +54,9 @@ slides.forEach((s,i)=>{
 });
 $("jump").addEventListener("change",e=>go(Number(e.target.value)));
 function mode(repeat){
+ const previouslyRepeating=document.body.classList.contains("repeat");
  document.body.classList.toggle("repeat",repeat);
+ if(previouslyRepeating&&!repeat)clearSlideFeedback(current);
  $("class-btn").classList.toggle("selected",!repeat);
  $("repeat-btn").classList.toggle("selected",repeat);
  $("class-btn").setAttribute("aria-pressed",String(!repeat));
@@ -69,11 +81,15 @@ const swFmt=(x,n=1)=>Number(x).toLocaleString("sv-SE",{minimumFractionDigits:n,m
 
 const ml=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
 const mult=(n,unit,dec)=>'<mrow><mn>'+swFmt(n,dec)+'</mn><mtext> '+unit+'</mtext></mrow>';
-const calc=(law,sub,result,note)=>'<div class="calc-chain">'+
+const calc=(law,subSteps,result,note)=>'<div class="calc-chain">'+
  '<div><span class="tag">1 · Samband</span><div class="math-sm">'+ml(law)+'</div></div>'+
- '<details class="calc-ins"><summary>2 · Visa insättningen med enheter</summary><div class="math-sm">'+ml(sub)+'</div></details>'+
- '<div><span class="tag">3 · Resultat och fysikalisk tolkning</span><div class="math-sm">'+ml(result)+'</div><p class="small">'+note+'</p></div>'+
- '</div>';
+ '<details class="calc-ins"><summary>2 · Visa insättningar och enhetssteg</summary>'+
+ '<div class="calc-steps">'+subSteps.map(x=>'<div class="math-sm">'+ml(x)+'</div>').join('')+'</div>'+
+ '<details class="calc-final"><summary>3 · Visa slutsvar och tolkning</summary>'+
+ '<div class="math-sm">'+ml(result)+'</div><p class="small">'+note+'</p></details></details></div>';
+const unit=x=>'<mspace width="0.18em"/><mtext>'+x+'</mtext>';
+const num=(n,d=2,u='')=>'<mn>'+swFmt(n,d)+'</mn>'+(u?unit(u):'');
+const sciMu='<mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup>'+unit('T·m/A');
 const mu='<msub><mi>μ</mi><mn>0</mn></msub>';
 
 const coreHost=$("core-svg").parentElement;
@@ -159,20 +175,30 @@ function resetPrediction(kind){
 }
 function renderSol(){
  const I=Number($("sol-i").value),N=Number($("sol-n").value),L=Number($("sol-l").value);
- const mT=(mu0*N*I/L)*1e3;
+ const mT=mu0*N*I/L*1e3,turnDensity=N/L,arealAmp=turnDensity*I;
  const relSol=(N/300)*(I/0.8)*(0.30/L);
- // One immutable state per render supplies both formula and field drawing.
+ const prevSteps=$("sol-result").querySelector("details.calc-ins")?.open||false;
+ const prevFinal=$("sol-result").querySelector("details.calc-final")?.open||false;
  $("sol-i-value").textContent=swFmt(I,2)+" A";
  $("sol-n-value").textContent=String(N);
  $("sol-l-value").textContent=swFmt(L,2)+" m";
- $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:12+Math.round((N-100)/42),lengthMeters:L,fieldMilliTesla:mT});
+ $("solenoid-visual").innerHTML=CoilArt.coilHelix({core:false,dir:solDir,field:solShown,turns:12+Math.round((N-100)/42),lengthMeters:L,fieldMilliTesla:mT,withMeter:true});
+ const subSteps=[
+  '<msub><mi>μ</mi><mn>0</mn></msub><mo>≈</mo>'+sciMu,
+  '<mi>n</mi><mo>=</mo><mfrac><mi>N</mi><mi>L</mi></mfrac>',
+  '<mi>n</mi><mo>=</mo><mfrac>'+num(N,0)+'<mrow>'+num(L,2,'m')+'</mrow></mfrac>',
+  '<mi>n</mi><mo>≈</mo>'+num(turnDensity,1,'m⁻¹'),
+  '<mi>n</mi><mi>I</mi><mo>≈</mo>'+num(turnDensity,1)+'<mo>·</mo>'+num(I,2,'A'),
+  '<mi>n</mi><mi>I</mi><mo>≈</mo>'+num(arealAmp,1,'A/m'),
+  '<mi>B</mi><mo>≈</mo><msub><mi>μ</mi><mn>0</mn></msub><mi>n</mi><mi>I</mi>'
+ ];
  $("sol-result").innerHTML=solShown?
- calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',
- '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow>'+mult(L,'m',2)+'</mfrac>',
- '<mi>B</mi><mo>≈</mo>'+mult(mT,'mT',3),
- 'Luftsolenoid, idealiserat långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
- '. Jämfört med utgångsfallet är beloppet '+swFmt(relSol,2)+' gånger så stort. Vänd strömmen ⇒ vänd riktningen, inte beloppet.') :
+ calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',subSteps,
+ '<mi>B</mi><mo>≈</mo>'+num(mT,3,'mT'),
+ 'Idealiserad luftsolenoid långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
+ '. Beloppet är '+swFmt(relSol,2)+' gånger utgångsfallet. Den separata blå stapeln har linjär mätskala; fältpilarna är schematiska.') :
  "Förutsäg först belopp och riktning. Ändra en storhet i taget och visa sedan sambandet.";
+ if(solShown){$("sol-result").querySelector(".calc-ins").open=prevSteps;$("sol-result").querySelector(".calc-final").open=prevFinal}
  $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";
  syncPrediction("sol");
 }
@@ -185,19 +211,31 @@ $("sol-reset").addEventListener("click",()=>{
 });
 function renderFlat(){
  const I=Number($("flat-i").value),N=Number($("flat-n").value),r=Number($("flat-r").value);
- const B=mu0*N*I/(2*(r/100))*1e6;
- const relFlat=(N/5)*(I/0.8)*(4/r);
+ const rMeters=r/100,NI=N*I,twor=2*rMeters,NIper2r=NI/twor;
+ const B=mu0*NIper2r*1e6,relFlat=(N/5)*(I/.8)*(4/r);
+ const prevSteps=$("flat-result").querySelector("details.calc-ins")?.open||false;
+ const prevFinal=$("flat-result").querySelector("details.calc-final")?.open||false;
  $("flat-i-value").textContent=swFmt(I,2)+" A";
  $("flat-n-value").textContent=String(N);
  $("flat-r-value").textContent=swFmt(r,1)+" cm";
  $("flat-visual").innerHTML=CoilArt.coilPlanar({dir:flatDir,field:flatShown,turns:N,radiusCm:r,currentA:I,fieldMicroTesla:B});
+ const subSteps=[
+  '<msub><mi>μ</mi><mn>0</mn></msub><mo>≈</mo>'+sciMu,
+  '<mi>r</mi><mo>=</mo>'+num(r,1,'cm')+'<mo>=</mo>'+num(rMeters,3,'m'),
+  '<mi>N</mi><mi>I</mi><mo>=</mo>'+num(N,0)+'<mo>·</mo>'+num(I,2,'A'),
+  '<mi>N</mi><mi>I</mi><mo>=</mo>'+num(NI,2,'A'),
+  '<mn>2</mn><mi>r</mi><mo>=</mo><mn>2</mn><mo>·</mo>'+num(rMeters,3,'m'),
+  '<mn>2</mn><mi>r</mi><mo>=</mo>'+num(twor,3,'m'),
+  '<mfrac><mrow><mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac><mo>≈</mo>'+num(NIper2r,1,'A/m'),
+  '<mi>B</mi><mo>≈</mo><msub><mi>μ</mi><mn>0</mn></msub><mfrac><mrow><mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>'
+ ];
  $("flat-result").innerHTML=flatShown?
- calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',
- '<mi>B</mi><mo>≈</mo><mfrac><mrow><mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msup><mtext> T m/A</mtext><mo>·</mo><mn>'+N+'</mn><mo>·</mo>'+mult(I,'A',2)+'</mrow><mrow><mn>2</mn><mo>·</mo>'+mult(r/100,'m',3)+'</mrow></mfrac>',
- '<mi>B</mi><mo>≈</mo>'+mult(B,'μT',1),
- 'Fältets riktning är '+(flatDir>0?'ut ur bilden':'in i bilden')+'. Relativt startfallet: '+swFmt(relFlat,2)+
- ' gånger så stort belopp. Detta gäller i centrum för idealiserat lika stora varv i luft.') :
+ calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mrow><mn>2</mn><mi>r</mi></mrow></mfrac>',subSteps,
+ '<mi>B</mi><mo>≈</mo>'+num(B,1,'μT'),
+ 'I centrum pekar B '+(flatDir>0?'ut ur bilden':'in i bilden')+
+ '. Beloppet är '+swFmt(relFlat,2)+' gånger utgångsfallet. Formeln gäller täta lika stora varv i luft. Den separata blå mätskalan är linjär.') :
  "Förutsäg innan facit. Varje gång r ändras måste cm först omvandlas till meter.";
+ if(flatShown){$("flat-result").querySelector(".calc-ins").open=prevSteps;$("flat-result").querySelector(".calc-final").open=prevFinal}
  $("flat-show").textContent=flatShown?"Dölj beräkning och riktning":"Visa beräkning och riktning";
  syncPrediction("flat");
 }
