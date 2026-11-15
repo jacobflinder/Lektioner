@@ -50,8 +50,8 @@ const e=1.602176634e-19,me=9.1093837139e-31,E=60/.030,a=e*E/me,t=.050/(8e6),y=.5
 ok(nearly(E,2000)&&nearly(a/1e14,3.5176,.001),'independent E and a calculations');
 ok(nearly(t/1e-9,6.25)&&nearly(y*1000,6.87,.01)&&nearly(vy/1e6,2.1986,.01)&&nearly(alpha,15.37,.05),'independent t/y/vy/angle');
 const p=(await page.locator('#electron-path-33').getAttribute('d')).match(/[-\d.]+/g).map(Number);
-ok(nearly(p[0],45)&&nearly(p[1],175)&&nearly(p.at(-2),545)&&nearly(p.at(-1),175-y*10000,.12),'SVG path endpoint mathematically scaled to 6.87mm');
-ok(nearly(500/50,300/30,1e-10),'SVG horizontal and vertical have matching length scales');
+ok(nearly(p[0],45)&&nearly(p[1],181)&&nearly(p.at(-2),545)&&nearly(p.at(-1),181-y*10000,.12),'SVG path endpoint mathematically scaled to 6.87mm');
+ok(nearly(500/50,300/30,1e-10),'SVG horizontal and vertical have matching length scales'); const plates=await slide().locator('.physics-figure svg rect').evaluateAll(a=>a.map(x=>({y:+x.getAttribute('y'),height:+x.getAttribute('height')})));ok(plates.length===2&&nearly(p[1],(plates[0].y+plates[0].height+plates[1].y)/2,1e-9),'Electron begins exactly midway between plate inner surfaces');
 await slide().locator('button[data-reveal]').first().click();
 ok(await slide().locator('#support-a-field').isVisible(),'first support shown');
 ok(await slide().locator('#support-a-motion').isHidden(),'second stage remains hidden');
