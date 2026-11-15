@@ -1,0 +1,149 @@
+'use strict';
+// Fysik 2 review 33/41: seven physical slides, delayed model answers,
+// independent numerical checks, coherent SVG scales, offline export and screenshots.
+const {chromium}=require('playwright'), fs=require('node:fs'),path=require('node:path');
+(async()=>{
+const browser=await chromium.launch({headless:true});
+const url='http://127.0.0.1:8123/fy2/kapitel-3/raknestuga/';
+const faults=[],javascript=[],foreign=[];let checks=0,shots=0;
+const ok=(v,s)=>{checks++;if(!v)faults.push(s)};
+const page=await browser.newPage({viewport:{width:1440,height:900},acceptDownloads:true});
+page.on('pageerror',e=>javascript.push(e.message));
+page.on('console',e=>{if(e.type()==='error')javascript.push(e.text())});
+page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:8123/')&&!r.url().startsWith('data:'))foreign.push(r.url())});
+const slide=()=>page.locator('.slide.active');
+const go=async n=>{await page.locator('[data-go="'+n+'"]').first().click()};
+const shot=async x=>{fs.mkdirSync('fy2-qa-screenshots',{recursive:true});await page.screenshot({path:'fy2-qa-screenshots/deep-review-33-'+x+'.png',fullPage:true});shots++};
+const mathGap=async where=>page.locator(where).evaluateAll(nodes=>{const groups=new Map();for(const e of nodes){const p=e.parentElement;if(!groups.has(p))groups.set(p,[]);groups.get(p).push(e)}return [...groups.values()].every(rows=>rows.every((e,i)=>i===0||e.getBoundingClientRect().top-rows[i-1].getBoundingClientRect().bottom>=15))});
+const vals=async where=>page.locator(where).allTextContents();
+const nearly=(a,b,t=.02)=>Math.abs(a-b)<t;
+try{
+const result=await page.goto(url,{waitUntil:'networkidle'});
+ok(result.status()===200,'HTTP 200');
+ok(await page.locator('section.slide').count()===7,'seven original main/optional slides');
+ok(await page.locator('section.slide.active').count()===1,'one slide active');
+ok((await slide().innerText()).includes('301–309')&&(await slide().innerText()).includes('323, 324, 326, 330, 331'),'original two homework sets');
+ok((await slide().innerText()).includes('Plan')&&(await slide().innerText()).includes('läxor'),'original working plan preserved');
+await page.locator('#next').click();ok((await slide().getAttribute('data-title'))==='Mindmap ur minnet','mindmap slide 2');
+ok(!await slide().locator('.answer').isVisible(),'retrieval hidden before own attempt');
+await slide().locator('[data-reveal]').click();ok(await slide().locator('.answer').isVisible(),'recall revealed after discussion');
+const memo=await slide().innerText();for(const x of ['laddning','från vila','potentialskillnad','magnet','vinkelrätt'])ok(memo.toLowerCase().includes(x.toLowerCase()),'recall '+x);
+ok(await slide().locator('.answer .math-stack math').count()===4,'3 independent semantic math elements in recall');
+ok(await page.locator('.slide.active .answer .math-stack').evaluateAll(stacks=>stacks.every(s=>parseFloat(getComputedStyle(s).gap)>=16)),'semantic math reserves >=16px');
+await page.locator('#reset').click();ok(!await slide().locator('.answer').isVisible(),'reset hides recall again');
+await page.locator('#next').click();ok((await slide().getAttribute('data-title'))==='Arbetstid i boken','main book work preserved');
+for(const x of ['Halvtid','Rita figur','25:00'])ok((await slide().innerText()).includes(x),'working routine '+x);
+await page.locator('#timer-start').click();ok((await page.locator('#timer-start').innerText())==='Pausa','timer runs');
+await page.locator('#reset').click();ok((await page.locator('#timer-start').innerText())==='Starta'&&(await page.locator('#timer').innerText())==='25:00','global reset restores work timer');
+await page.locator('[data-minutes="20"]').click();ok((await page.locator('#timer').innerText())==='20:00','20min preset');
+await page.locator('[data-go="3"]').click();
+ok((await slide().getAttribute('data-title'))==='Frivillig fördjupning','optional activity reached');
+ok(!await slide().locator('.answer').isVisible(),'extension answer delayed');
+await slide().locator('[data-reveal]').click();ok((await slide().innerText()).includes('fjärdedel'),'correct y∝1/v² scaling');
+await slide().locator('[data-go="2"]').click();
+await page.locator('[data-go="5"]').click();
+ok((await slide().getAttribute('data-title'))==='Stöd A: elektriskt fält','support A is optional');
+ok(await slide().locator('#electron-path-33').isHidden(),'path not visible before mathematics');
+ok(await slide().locator('.force-reveal').first().isHidden(),'force not spoiled before step 1');
+ok(await slide().locator('.answer.shown').count()===0,'both physics stages hidden');
+const e=1.602176634e-19,me=9.1093837139e-31,E=60/.030,a=e*E/me,t=.050/(8e6),y=.5*a*t*t,vy=a*t,alpha=Math.atan(vy/8e6)*180/Math.PI;
+ok(nearly(E,2000)&&nearly(a/1e14,3.5176,.001),'independent E and a calculations');
+ok(nearly(t/1e-9,6.25)&&nearly(y*1000,6.87,.01)&&nearly(vy/1e6,2.1986,.01)&&nearly(alpha,15.37,.05),'independent t/y/vy/angle');
+const p=(await page.locator('#electron-path-33').getAttribute('d')).match(/[-\d.]+/g).map(Number);
+ok(nearly(p[0],45)&&nearly(p[1],181)&&nearly(p.at(-2),545)&&nearly(p.at(-1),181-y*10000,.12),'SVG path endpoint mathematically scaled to 6.87mm');
+ok(nearly(500/50,300/30,1e-10),'SVG horizontal and vertical have matching length scales'); const plates=await slide().locator('.physics-figure svg rect').evaluateAll(a=>a.map(x=>({y:+x.getAttribute('y'),height:+x.getAttribute('height')})));ok(plates.length===2&&nearly(p[1],(plates[0].y+plates[0].height+plates[1].y)/2,1e-9),'Electron begins exactly midway between plate inner surfaces');
+await slide().locator('button[data-reveal]').first().click();
+ok(await slide().locator('#support-a-field').isVisible(),'first support shown');
+ok(await slide().locator('#support-a-motion').isHidden(),'second stage remains hidden');
+ok(await slide().locator('.force-reveal').first().evaluate(e=>getComputedStyle(e).display!=='none'),'force rendered after first concept');
+ok(await slide().locator('#electron-path-33').isHidden(),'trajectory hidden until computed');
+ok(await slide().locator('#support-a-field math').count()===5,'complete E/a derivation has 5 math steps');
+await slide().locator('button[data-reveal]').nth(1).click();
+ok(await slide().locator('#support-a-motion').isVisible(),'second stage computed');
+ok(await slide().locator('#electron-path-33').isVisible(),'trajectory appears after own calculation');
+ok(await slide().locator('#support-a-motion math').count()===9,'complete 9 step t/y/vy/tangent solution');
+ok(await mathGap('#support-a-motion .math-row'),'at least 15px between motion steps');
+await page.locator('#reset').click();ok(await slide().locator('#electron-path-33').isHidden()&&await slide().locator('.answer.shown').count()===0,'A reset hides both results and graph');
+await slide().locator('[data-go="2"]').click();await page.locator('[data-go="6"]').click();
+ok((await slide().getAttribute('data-title'))==='Stöd B: magnetiskt flöde','support B optional');
+ok((await slide().innerText()).includes('ut ur bildplanet'),'B direction given rather than invented');
+ok((await slide().locator('svg rect').count())===1,'6 by 4 rectangle drawn');
+const r=await slide().locator('svg rect').first().evaluate(e=>({w:+e.getAttribute('width'),h:+e.getAttribute('height')}));
+ok(nearly(r.w/r.h,6/4,1e-9),'SVG area has 6:4 side ratio');
+ok(await slide().locator('.answer.shown').count()===0,'both flux stages initially hidden');
+await slide().locator('[data-reveal]').first().click();
+ok(await slide().locator('#support-b-units').isVisible()&&await slide().locator('#support-b-result').isHidden(),'only units revealed');
+ok(await slide().locator('#support-b-units math').count()===4,'4 separate area/flux conversions');
+ok(nearly(.040*.060,.0024)&&nearly(.96e-3/.0024,.4),'independent area/B check');
+await slide().locator('[data-reveal]').nth(1).click();
+ok(await slide().locator('#support-b-result').isVisible(),'flux calculation revealed on second click');
+ok(await slide().locator('#support-b-result math').count()===3,'law rearrangement and substitution all given');
+ok(await mathGap('#support-b-result .math-row'),'flux semantic math separated >=15px');
+await page.locator('#reset').click();ok(await slide().locator('.answer.shown').count()===0,'B reset');
+await slide().locator('[data-go="2"]').click();await page.locator('#next').click();
+ok((await slide().getAttribute('data-title'))==='Avslutning och nästa lektion','exit original');
+ok(!await slide().locator('.answer').isVisible(),'exit feedback not visible early');
+await slide().locator('[data-reveal]').click();ok(await slide().locator('.answer').isVisible(),'exit learner controlled');
+await page.locator('#repeat').click();
+for(const q of ['electron','flux']){
+ const g=page.locator('[data-check="'+q+'"]'); await g.locator('[data-answer="wrong"]').first().click();
+ ok((await page.locator('#'+q+'-feedback').innerText()).length>80,'diagnostic wrong feedback '+q);
+ await g.locator('[data-answer="right"]').click();ok((await page.locator('#'+q+'-feedback').innerText()).includes('Rätt:'),'specific right feedback '+q);
+}
+await page.locator('#reset').click();for(const q of ['electron','flux'])ok((await page.locator('#'+q+'-feedback').innerText()).includes('Välj och motivera'),'reset diagnostic '+q);
+await page.locator('#class').click();ok(!await page.locator('#rep-checks').isVisible(),'quiz not in classroom');
+await page.locator('#settings').click();
+await page.locator('#set-a').fill('311–314');await page.locator('#set-b').fill('331–335');await page.locator('#set-next').fill('151–155');await page.locator('#apply').click();
+for(const [cls,expect] of [['ref-a','311–314'],['ref-b','331–335'],['ref-next','151–155']])ok((await vals('.'+cls)).every(s=>s===expect),'editor modifies '+cls);
+await page.locator('#repeat').click();await page.locator('[data-check="electron"] [data-answer="right"]').click();
+await page.locator('.only-repeat textarea').fill('PRIVAT TESTSVAR 33');
+await page.locator('#settings').click();
+const wait=page.waitForEvent('download');await page.locator('#download').click();const dl=await wait;
+const binary=fs.readFileSync(await dl.path(),'utf8');ok(!binary.includes('PRIVAT TESTSVAR 33'),'private response excluded from HTML export');
+ok(!binary.includes('Rätt:')||binary.includes('Rätt:')&&binary.includes('target.innerHTML'),'previous quiz feedback not prepopulated into offline source');
+const file=path.resolve('fy2-qa-screenshots','fy2-33-offline.html');fs.writeFileSync(file,binary);
+const offline=await browser.newPage();offline.on('pageerror',e=>javascript.push('offline: '+e.message));
+await offline.goto('file://'+file);
+ok(await offline.locator('.slide').count()===7,'offline has all 7 slides');
+ok((await offline.locator('.ref-a').allTextContents()).every(s=>s==='311–314'),'offline reference edits preserved');
+await offline.locator('#next').click();await offline.locator('#next').click();await offline.locator('[data-go="5"]').click();
+ok(await offline.locator('#electron-path-33').isHidden(),'offline graph answer concealed');
+await offline.locator('.slide.active [data-reveal]').first().click();await offline.locator('.slide.active [data-reveal]').nth(1).click();ok(await offline.locator('#electron-path-33').isVisible(),'offline self-contained trajectory and answers work');
+await offline.screenshot({path:'fy2-qa-screenshots/deep-review-33-offline-source.png',fullPage:true});shots++;await offline.close();
+await page.locator('#class').click();await page.locator('#reset').click();
+for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
+ await page.setViewportSize({width:v.width,height:v.height});
+ for(const index of [0,1,2,3,4,5,6]){
+   await page.reload({waitUntil:'load'});
+   const mainSteps=index===0?0:index===1?1:index===2?2:index===4?3:2;
+   for(let j=0;j<mainSteps;j++)await page.locator('#next').click();
+   if([3,5,6].includes(index))await slide().locator('[data-go="'+index+'"]').click();
+   ok((await page.locator('.slide.active').count())===1,'one active slide '+v.name+'/'+index);
+   const active=await page.locator('.slide').evaluateAll(ns=>ns.findIndex(x=>x.classList.contains('active')));
+   ok(active===index,'navigation reaches '+v.name+'/'+index+' actual '+active);
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+   ok(overflow<=2,'no horizontal overflow '+v.name+'/'+index+' '+overflow);
+   await shot(v.name+'-'+String(index+1).padStart(2,'0'));
+ }
+ for(const index of [5,6]){
+   await page.reload({waitUntil:'load'});await page.locator('#next').click();await page.locator('#next').click();
+   await slide().locator('[data-go="'+index+'"]').click();
+   for(const b of await slide().locator('[data-reveal]').all())await b.click();
+   ok(await slide().locator('.answer.shown').count()===2,'2 delayed support stages '+v.name+'/'+index);
+   ok(await mathGap('.slide.active .answer.shown .math-row'),'MathML spacing '+v.name+'/'+index);
+   const shapes=await slide().locator('.answer.shown .math-row math').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();const p=n.parentElement;return {height:r.height,width:r.width,rowWidth:p.clientWidth,visible:getComputedStyle(n).display}}));
+   ok(shapes.length===(index===5?14:7),'all separate semantic calculation lines '+v.name+'/'+index);
+   ok(shapes.every(s=>s.height<120&&s.height>=10&&s.width>40),'MathML must render as horizontal equations, not vertical character stacks '+v.name+'/'+index+' '+JSON.stringify(shapes)); const rowOverflows=await slide().locator('.answer.shown .math-row').evaluateAll(rows=>rows.map(e=>({available:e.clientWidth,content:e.scrollWidth,math:e.querySelector('math')?.scrollWidth})));ok(rowOverflows.every(x=>x.content<=x.available+3&&x.math<=x.available+3),'All math rows entirely visible without internal horizontal scrolling '+v.name+'/'+index+' '+JSON.stringify(rowOverflows));
+
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+   ok(overflow<=2,'no revealed overflow '+v.name+'/'+index+' '+overflow);
+   await shot(v.name+'-'+(index===5?'support-a':'support-b')+'-full');
+   await page.locator('#reset').click();
+ }
+}
+ok(javascript.length===0,'no browser JavaScript errors: '+javascript.join('; '));
+ok(foreign.length===0,'no external requests: '+foreign.join('; '));
+if(faults.length)throw Error(faults.length+' failures:\n'+faults.join('\n'));
+console.log('FY2_33_PASS '+JSON.stringify({checks,screenshots:shots,javascriptErrors:javascript.length,externalRequests:foreign.length}));
+}catch(e){console.error('FY2_33_FAILED '+(e.stack||e));process.exitCode=1;await shot('failure').catch(()=>{})}finally{await browser.close()}
+})();
