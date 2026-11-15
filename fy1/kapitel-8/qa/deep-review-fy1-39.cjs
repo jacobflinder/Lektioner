@@ -69,7 +69,7 @@ try{
  ck((await quiz1.locator('.feedback').innerText()).includes('Rätt'),'unchanged current correctly explained');
  // Slide 2 current vs voltage plus semantically separate Ohm math rows.
  await go(2);
- ck(data.pages[1].body.includes('1 C/s')&&data.pages[1].body.includes('1 J/C')&&await active().locator('.duo-concepts math').count()===2,'original units 1A=1C/s and 1V=1J/C plus both visible semantic fractions');
+ ck(data.pages[1].body.includes('1 C/s')&&data.pages[1].body.includes('1 J/C')&&((data.pages[1].body.match(/<math/g)||[]).length===2)&&await active().locator('.duo-concepts > div').count()===2,'original units and TWO semantically separate current/voltage concept panels preserved');
  ck(await active().locator('.step.open').count()===0,'ohm results delayed');
  for(let i=0;i<3;i++)await page.locator('#step').click();
  ck(await active().locator('.step.open').count()===3,'all three guided steps reveal');
