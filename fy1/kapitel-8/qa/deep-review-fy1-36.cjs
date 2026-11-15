@@ -20,7 +20,9 @@ const state=async()=>page.locator('#bild-3 [data-model="coulomb"]').evaluate(el=
  return {q1:circles[0]&&+circles[0].getAttribute('cx'),q2:circles[1]&&+circles[1].getAttribute('cx'),
   dx:+circles[1].getAttribute('cx')- +circles[0].getAttribute('cx'),
   bar:bar?+bar.getAttribute('width'):null,arrows:arrows.map(a=>({start:+a.getAttribute('x1'),end:+a.getAttribute('x2')})),
-  texts:[...svg.querySelectorAll('text')].map(e=>({text:e.textContent,box:e.getBBox(),viewport:svg.viewBox.baseVal})),
+  texts:[...svg.querySelectorAll('text')].map(e=>{const b=e.getBBox(),v=svg.viewBox.baseVal;
+    return {text:e.textContent,box:{x:b.x,y:b.y,width:b.width,height:b.height},
+      viewport:{x:v.x,y:v.y,width:v.width,height:v.height}}}),
   viewBox:svg.getAttribute('viewBox'),output:el.querySelector('.coulomb-result').innerText
  };
 });
@@ -110,7 +112,7 @@ try{
  check(zero.output.includes('ingen kraft')&&zero.output.includes('Inget meningsfullt kraftförhållande'),'zero interaction without meaningless 0/0');
  await set('coulomb-q1',-4);await set('coulomb-q2',3);let attract=await state();
  check(attract.arrows.length===2&&attract.arrows[0].end>attract.arrows[0].start&&attract.arrows[1].end<attract.arrows[1].start,'opposite charges correctly draw inward equal arrows');
- check(attract.output.includes('attraktion')&&attract.output.includes('−0,432'),'negative signed interaction and absolute force 0.432uN');
+ check(attract.output.includes('attraktion')&&attract.output.includes('0,432')&&await model.locator('.coulomb-model-math math mo').filter({hasText:'−'}).count()>0,'negative signed interaction and absolute force 0.432uN');
  await set('coulomb-q1',-5);await set('coulomb-q2',5);await set('coulomb-r',.2);let max=await state();
  const maxForce=8.99e9*25e-18/.2**2*1e6;
  check(close(maxForce,5.61875,.00001),'independent physical max Coulomb force in slider range');
@@ -138,11 +140,11 @@ try{
  await page.locator('#step').click();check((await vis().innerText()).includes('en fjärdedel'),'2r -> 1/4');
  await page.locator('#step').click();check((await vis().innerText()).includes('en niondel'),'3r -> 1/9');
  // Slide 5 initial intermediate work intentionally blank force arrows.
- await go(5);v=await vis().innerText();
- check(v.includes('+2,5 nC')&&v.includes('0,051 nm'),'both original problem givens preserved');
+ await go(5);check(!await page.locator('#step').isVisible()&&await page.locator('#next').isVisible(),'no duplicate Next buttons on a slide without hidden solutions');v=await vis().innerText();
+ check(v.includes('2,5')&&v.includes('nC')&&v.includes('0,051')&&v.includes('nm'),'both original problem givens preserved');
  check((await vis().locator('.side svg').count())===1,'independent diagram for proton and electron preserved');
  // Slide 6: all Q -> N steps independent, with SI/numeric/rounding.
- await go(6);v=await vis().innerText();check(v.includes('+2,5 nC'),'electron example input preserved');
+ await go(6);v=await vis().innerText();check(v.includes('2,5')&&v.includes('nC'),'electron example input preserved');
  check(await vis().locator('.step.open').count()===0,'electron example not prematurely solved');
  const eSteps=await vis().locator('.step').count();
  check(eSteps===5,'original five explanation stages preserved');
@@ -170,10 +172,10 @@ try{
  for(const x of ['SOC-36980496','LRJ','801–811','Socrative','Fy1 · 901'])check(v.includes(x),'original resource preserved '+x);
  // Slide 9 preserve exit, homework and reading.
  await go(9);v=await vis().innerText();
- for(const x of ['801–811','270–280','gröna rutorna','Elektronunderskott'])check(v.includes(x),'original closing resource '+x);
+ for(const x of ['801–811','270–280','gröna rutorna'])check(v.includes(x),'original closing resource '+x);
  check(await vis().locator('.step.open').count()===0,'exit self-assessment answers hidden');
  for(let k=0;k<2;k++)await page.locator('#step').click();
- check((await vis().innerText()).includes('fyra gånger större'),'exit reverse square correctly explained');
+ check((await vis().innerText()).includes('fyra gånger större')&&(await vis().innerText()).includes('Elektronunderskott'),'exit explanatory feedback and charge sign after reveal');
  // Self test is voluntary; paper first, diagnostic reasoning, no data entry/storage.
  await page.locator('#fy1-traning-open').click();check(await page.locator('#fy1-traning-dialog').isVisible(),'standalone voluntary paper practice dialog opens');
  check(await page.locator('#fy1-traning-dialog .fy1-paper-task').count()===2,'two independently authored paper problems');

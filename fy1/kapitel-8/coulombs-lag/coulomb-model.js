@@ -25,7 +25,7 @@
      const forceSigned=k*(s.q1*1e-9)*(s.q2*1e-9)/(s.r*s.r);
      const force=Math.abs(forceSigned)*1e6; const sign=Math.sign(s.q1*s.q2);
      const pr=sign===1?'repulsion':sign===-1?'attraktion':'ingen kraft';
-     const charge=(x,q,label)=>`<circle cx="${x}" cy="${y}" r="24" fill="${q>0?'#c06548':q<0?'#117e9c':'#657781'}"/><text x="${x}" y="${y+8}" text-anchor="middle" fill="white" font-size="27" font-weight="740">${q>0?'+':q<0?'−':'0'}</text>`;
+     const charge=(x,q,label)=>`<circle cx="${x}" cy="${y}" r="34" fill="${q>0?'#c06548':q<0?'#117e9c':'#657781'}"/><text x="${x}" y="${y+8}" text-anchor="middle" fill="white" font-size="38" font-weight="740">${q>0?'+':q<0?'−':'0'}</text>`;
      const arrow=(x,direction,lab)=>{
        const xend=x+direction*36;
        return `<line x1="${x}" y1="90" x2="${xend}" y2="90" stroke="#208469" stroke-width="5" stroke-linecap="round"/><path d="M${xend-direction*12} 79 L${xend} 90 L${xend-direction*12} 101" stroke="#208469" stroke-width="4" fill="none" stroke-linejoin="round"/><text x="${x+direction*18}" y="67" text-anchor="middle" fill="#176950" font-size="19" font-weight="760">${lab}</text>`;
@@ -89,6 +89,19 @@
    document.getElementById('classmode')?.addEventListener('click',()=>{
      const jump=document.getElementById('jump');
      if(jump&&window.Fy1Lesson)window.Fy1Lesson.show(Number(jump.value));
-   });
+   }); 
+   // This lesson has two built-in navigation buttons. Hide "Visa nästa steg"
+   // when no new answer is available so pupils never see two "Nästa bild"
+   // buttons. All core navigation remains handled by the common app.
+   const revealButton=document.getElementById('step');
+   const updateRevealButton=()=>{
+     const active=document.querySelector('.slide.active');
+     if(revealButton)revealButton.hidden=!active?.querySelector('.step:not(.open)');
+   };
+   for(const id of ['prev','next','step','reset','classmode','repeatmode'])
+     document.getElementById(id)?.addEventListener('click',updateRevealButton);
+   document.getElementById('jump')?.addEventListener('change',updateRevealButton);
+   updateRevealButton();
+
  });
 })();
