@@ -7,7 +7,7 @@ for(const s of document.querySelectorAll('.slide')){
  const quiz=s.querySelector(':scope > .quiz');if(quiz)body.append(quiz);
 }
 const step=document.querySelector('#step');
-function reflect(){const active=document.querySelector('.slide.active');if(!active||!step)return;step.hidden=!active.querySelector('.step')}
+function reflect(){const active=document.querySelector('.slide.active');if(!active||!step)return;step.hidden=!active.querySelector('.step:not(.open)')}
 for(const id of ['jump','prev','next'])document.querySelector('#'+id)?.addEventListener(id==='jump'?'change':'click',()=>{document.querySelector('.slide.active')?.dispatchEvent(new Event('lesson:reset'))},true);
 for(const id of ['jump','prev','next','step','reset','repeatmode','classmode'])document.querySelector('#'+id)?.addEventListener('click',reflect);
 document.querySelector('#jump')?.addEventListener('change',reflect);
