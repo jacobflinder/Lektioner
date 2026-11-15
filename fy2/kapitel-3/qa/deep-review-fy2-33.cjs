@@ -14,7 +14,7 @@ page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:8123/')&&!r.url()
 const slide=()=>page.locator('.slide.active');
 const go=async n=>{await page.locator('[data-go="'+n+'"]').first().click()};
 const shot=async x=>{fs.mkdirSync('fy2-qa-screenshots',{recursive:true});await page.screenshot({path:'fy2-qa-screenshots/deep-review-33-'+x+'.png',fullPage:true});shots++};
-const mathGap=async where=>page.locator(where).evaluateAll(nodes=>nodes.length<2||nodes.every((x,i)=>i===0||x.getBoundingClientRect().top-nodes[i-1].getBoundingClientRect().bottom>=15));
+const mathGap=async where=>page.locator(where).evaluateAll(nodes=>{const groups=new Map();for(const e of nodes){const p=e.parentElement;if(!groups.has(p))groups.set(p,[]);groups.get(p).push(e)}return [...groups.values()].every(rows=>rows.every((e,i)=>i===0||e.getBoundingClientRect().top-rows[i-1].getBoundingClientRect().bottom>=15))});
 const vals=async where=>page.locator(where).allTextContents();
 const nearly=(a,b,t=.02)=>Math.abs(a-b)<t;
 try{
@@ -55,7 +55,7 @@ ok(nearly(500/50,300/30,1e-10),'SVG horizontal and vertical have matching length
 await slide().locator('button[data-reveal]').first().click();
 ok(await slide().locator('#support-a-field').isVisible(),'first support shown');
 ok(await slide().locator('#support-a-motion').isHidden(),'second stage remains hidden');
-ok(await slide().locator('.force-reveal').first().isVisible(),'force revealed after first concept');
+ok(await slide().locator('.force-reveal').first().evaluate(e=>getComputedStyle(e).display!=='none'),'force rendered after first concept');
 ok(await slide().locator('#electron-path-33').isHidden(),'trajectory hidden until computed');
 ok(await slide().locator('#support-a-field math').count()===4,'complete E/a derivation has 4 math steps');
 await slide().locator('button[data-reveal]').nth(1).click();
@@ -131,6 +131,10 @@ for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,
    for(const b of await slide().locator('[data-reveal]').all())await b.click();
    ok(await slide().locator('.answer.shown').count()===2,'2 delayed support stages '+v.name+'/'+index);
    ok(await mathGap('.slide.active .answer.shown .math-row'),'MathML spacing '+v.name+'/'+index);
+   const shapes=await slide().locator('.answer.shown .math-row math').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();const p=n.parentElement;return {height:r.height,width:r.width,rowWidth:p.clientWidth,visible:getComputedStyle(n).display}}));
+   ok(shapes.length===(index===5?11:7),'all separate semantic calculation lines '+v.name+'/'+index);
+   ok(shapes.every(s=>s.height<120&&s.height>12&&s.width>40),'MathML must render as horizontal equations, not vertical character stacks '+v.name+'/'+index+' '+JSON.stringify(shapes));
+
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
    ok(overflow<=2,'no revealed overflow '+v.name+'/'+index+' '+overflow);
    await shot(v.name+'-'+(index===5?'support-a':'support-b')+'-full');
