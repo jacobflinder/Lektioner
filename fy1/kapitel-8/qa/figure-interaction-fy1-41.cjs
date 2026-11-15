@@ -86,6 +86,7 @@ const OUT='fy1-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
   for(const v of [{w:390,h:844,name:'mobile'},{w:1280,h:800,name:'laptop'},{w:1920,h:1080,name:'projector'}]){
    await page.setViewportSize({width:v.w,height:v.h});
    await go(2);
+   await model.locator('.reset-model').click();
    await show();
    let rect=await picture().boundingBox();
    check(rect?.width>195,'circuit actual rendered usable width '+v.name);
