@@ -116,7 +116,7 @@ const OUT='fy1-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
   ];
   for(const case_ of expected){
    await go(case_.page);
-   const paths=await page.locator('#bild-'+case_.page+' .circuit-figure svg path[data-battery-contact]').evaluateAll(nodes=>nodes.map(e=>({d:e.getAttribute('d'),bbox:e.getBBox(),stroke:e.getAttribute('stroke')})));
+   const paths=await page.locator('#bild-'+case_.page+' .circuit-figure svg path[data-battery-contact]').evaluateAll(nodes=>nodes.map(e=>{const b=e.getBBox();return {d:e.getAttribute('d'),bbox:{x:b.x,y:b.y,width:b.width,height:b.height},stroke:e.getAttribute('stroke')}}));
    check(paths.length===case_.paths.length,'every drawn battery has actual contact segments on slide '+case_.page);
    for(const expectedD of case_.paths){
      const p=paths.find(x=>x.d===expectedD);
@@ -144,7 +144,7 @@ const OUT='fy1-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
    await go(1);
    const svg=page.locator('#bild-1 .circuit-figure svg');
    const lead=svg.locator('path[data-battery-contact]'),long=svg.locator('line[stroke="#bb7148"]').first(),short=svg.locator('line[stroke="#bb7148"]').last();
-   const coords=await lead.evaluate(node=>{const root=node.ownerSVGElement,pt=root.createSVGPoint();return [177,198].map(y=>{pt.x=88;pt.y=y;return pt.matrixTransform(root.getScreenCTM())})});
+   const coords=await lead.evaluate(node=>{const root=node.ownerSVGElement,pt=root.createSVGPoint();return [177,198].map(y=>{pt.x=88;pt.y=y;return (()=>{const p=pt.matrixTransform(root.getScreenCTM());return {x:p.x,y:p.y}})()})});
    const plates=await Promise.all([long,short].map(q=>q.boundingBox()));
    check(coords.length===2&&plates.every(x=>x&&x.width>5),'both real battery plates visible on '+v.name);
    check(Math.abs(coords[0].y-(plates[0].y+plates[0].height/2))<3&&Math.abs(coords[1].y-(plates[1].y+plates[1].height/2))<3,'rendered contacts end exactly on plate centerlines on '+v.name);
