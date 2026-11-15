@@ -47,7 +47,7 @@ function plates(root){return build(root,[{id:'shift',label:'Gemensam referensfö
  '</div><p><b>E pekar höger</b> mot lägre potential; på en elektron verkar <b>F åt vänster</b>, mot högre potential. Elektronens energiändring ΔEₚ=qΔV blir också oberoende av referensnivån.</p>',
  caption:'Vänster platta är 100 V högre än höger oavsett referensval. Varken plattornas placering eller laddningarna ändras.'};
  });}
-function walk(root){return build(root,[{id:'ref',label:'Vald nollnivå',value:'A',options:[['A','A = 0 V'],['C','C = 0 V']]},{id:'step',label:'Potentialvandring',min:0,max:4,step:1,value:0,unit:'av 4'}],(s,shown)=>{
+function walk(root){return build(root,[{id:'ref',label:'Vald nollnivå',value:'A',options:[['A','A som nollnivå'],['C','C som nollnivå']]},{id:'step',label:'Potentialvandring',min:0,max:4,step:1,value:0,unit:'av 4'}],(s,shown)=>{
  const base=[0,12,8,0,0],shift=s.ref==='A'?0:8,vs=base.map(v=>v-shift),names=['A','B','C','D','A'];
  const nodes=[{name:'A',x:90,y:244},{name:'B',x:124,y:87},{name:'C',x:278,y:87},{name:'D',x:446,y:87}];
  let circuit=wire('M90 87H170 M234 87H327 M391 87H446V244H90V179 M90 149V87')+wire('M73 149H107 M80 179H100','#c26d43',4);
@@ -76,7 +76,7 @@ function walk(root){return build(root,[{id:'ref',label:'Vald nollnivå',value:'A
  result:now+stepMath+'<p><b>Referens:</b> '+s.ref+' = 0 V. Batteriet ger +12 V, resistorerna −4 V och −8 V. Strömmen är fortsatt 2 A.</p>'+(s.step<4?'<p>Förutsäg potentialen i nästa nod innan reglaget ökas.</p>':'<p>Åter i A: samma potential som före vandringen.</p>'),
  caption:'Den lodräta voltaxeln är FAST −8 till +12 V även när referensnivån byts, så varje nivåflytt ritas på samma skala. Bara hittills utforskade steg visas. Diagrammet markerar avläst potential och inte elektroners rörelse.'};
  });}
-function batteries(root){return build(root,[{id:'orientation',label:'6 V-batteriets orientering',value:'mot',options:[['mot','Motverkar 10 V'],['med','Samverkar med 10 V']]}],(s,shown)=>{
+function batteries(root){return build(root,[{id:'orientation',label:'6 V-batteriets orientering',value:'mot',options:[['mot','Motverkar'],['med','Samverkar']]}],(s,shown)=>{
  const oppose=s.orientation==='mot',I=oppose?2:8;
  let c=wire('M78 123H176 M204 123H334 M363 123H476V262H326 M250 262H78V123');
  c+=rect(250,248,76,28,'#26836b')+t(288,240,'2 Ω',18,'#25816b');

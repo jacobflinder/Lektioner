@@ -128,6 +128,8 @@ try{
  // 7: model circuit and fixed voltage coordinates.
  await go(7);const w=walk();
  ck(await w.locator('input[type=range]').count()===1&&await w.locator('select').count()===1,'walk current step and A/C reference controls retained');
+ ck((await w.locator('select option').allTextContents()).join('|')==='A som nollnivå|C som nollnivå','reference options explicitly worded without parsing units into broken native select');
+ ck(await w.locator('select option math').count()===0,'reference select option never contains inserted MathML markup');
  let v=await walkData();
  ck(v.dots.length===0&&v.math===0&&v.stairs.length===0,'plot values and numerical feedback initially hidden');
  ck(v.svg==='0 0 550 615','expanded plot viewBox matches axis');
@@ -171,6 +173,8 @@ try{
  ck((await active().innerText()).includes('fysisk kabel')&&(await active().innerText()).includes('kortsluten'),'reference and actual wire explicitly separated');
  // 11 batteries. Orientation changes actual polarity and CURRENT; arrow direction stays qualitative.
  await go(11);const b=battery();let b0=await batteryData();
+ ck((await b.locator('select option').allTextContents()).join('|')==='Motverkar|Samverkar','battery orientation labels short, unambiguous and display only once');
+ ck(await b.locator('select option math').count()===0,'battery select option never contains inserted MathML markup');
  ck(b0.bar===null&&b0.math===0,'battery current bar and answer hidden until model reveal');
  ck(b0.marks.join('|')==='0 A|2 A|4 A|6 A|8 A','battery current meter has fixed labelled 0–8A scale');
  ck(b0.svg==='0 0 550 455','meter fits enlarged SVG viewBox');
