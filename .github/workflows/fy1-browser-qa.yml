@@ -32,7 +32,9 @@ jobs:
           python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/fy1-http.log 2>&1 &
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy1/kapitel-8/ >/dev/null && break; sleep 1; done
       - name: Verify Coulomb lesson and other five Fy1 lessons
-        run: node fy1/kapitel-8/qa/deep-review-fy1-36.cjs
+        run: |
+          node fy1/kapitel-8/qa/deep-review-fy1-36.cjs
+          node fy1/kapitel-8/qa/deep-review-fy1-37.cjs
       - name: Upload QA screenshots and independent evidence
         if: always()
         uses: actions/upload-artifact@v4
