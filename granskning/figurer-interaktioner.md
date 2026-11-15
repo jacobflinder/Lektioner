@@ -78,4 +78,6 @@ Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md
 
 **Parallellt arbete:** Basens senaste main kontrollerades före squash-merge av PR #63. `practice.js`, Socrative, bokreferenser, läxa och annan kurskod har bevarats. Kod + nya webbläsartester + logg sammanfördes; CI och Pages verifierade med samma SHA. Ingen ny lektion påbörjad.
 
+**Öppna layoutanmärkningar (inte blockerande för denna pilots verifierade samband):** Kursens äldre generella `browser-smoke.cjs` rapporterar **68 varningar och 0 fel** över Fy2-biblioteket. För pilotlektionen vid 768 px bredd gäller tre av dessa vertikala skärmhöjdsanmärkningar: **bild 4 = 17 px**, **bild 7 = 94 px**, **bild 9 = 148 px** nedanför aktuell viewport. Elever kan scrolla på denna smalare vy; de faktiska kopplingarna mellan rätt matematik och renderad SVG har verifierats, och pilotens nya tester kontrollerar horisontellt överspill vid 390 px och 1920 px. Redovisa detta öppet och förbättra layouten separat vid framtida behov utan att dölja testvarningar. Ingen garanti lämnas om att all återkoppling alltid ryms vertikalt på små skärmar.
+
 **Status:** **Pilotlektion 1/41 klar, publicerad och verifierad.** Figurgranskningen väntar på användarens **”nästa”** före lektion 2/41. En ny chatt ger inte klartecken.
