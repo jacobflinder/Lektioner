@@ -74,7 +74,7 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
   ck(lesson.pages[9].body.includes('294–299')&&lesson.pages[9].body.includes('gröna rutorna'),'original next-book reading kept');
   ck(lesson.pages[10].body.includes('Frivilligt'),'mixed-network support is not obligatory');
   ck(!lesson.pages[4].body.includes('båda grenresistanserna är större'),'false greater-than statement removed');
-  ck(lesson.pages[6].body.includes('samma inre resistans')&&lesson.pages[6].steps[1].includes('Enbart ideal'),'battery-cell current needs explicitly symmetric source model');
+  ck(lesson.pages[6].body.includes('samma inre resistans och symmetriska anslutningar')&&lesson.pages[6].steps[1].includes('Enbart ideal'),'pupil prompt and worked answer both state sufficient symmetric source conditions');
   ck(lesson.pages[5].side.includes('meter-reveal'),'meter figure retained but made prediction-first');
   ck(lesson.pages.reduce((sum,p)=>sum+(p.steps||[]).join('').match(/class="series-equation"/g)?.length||sum,0)===47,'47 dedicated semantic mathematical lines');
   ck(Math.abs(12/(100+200)-.04)<1e-12&&12/100+12/200===.18,'independent basic series/parallel computation');
