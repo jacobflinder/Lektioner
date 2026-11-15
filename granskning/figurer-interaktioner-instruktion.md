@@ -24,6 +24,10 @@ Kontrollera särskilt **högerhandsregler**: avsedd regel (strömskapad B, magne
 
 Granska pilar, orientering, tecken, fältlinjer, vinklar, avstånd, geometri, axlar, referenspunkter, skala, proportioner, enheter, etiketter, färger, kontrast, läsbarhet, överlappning och beskärning. Använd inte enbart färg för betydelser. En schematisk figur märks som sådan när viktigt, utan att motivera fysiskt fel. Exakt geometri måste konstrueras och oberoende kunna kontrolleras.
 
+**Elektriska kopplingsscheman:** En ledning ska synligt nå **resistorns eller batteriets faktiska anslutning**. Vid en batterisymbol måste ledningarna ansluta till den **långa respektive korta plattan**, utan dolt glapp under en vit täckrektangel och utan att plattorna kopplas samman av ledning. Kontrollera varje kretsschema, inklusive dynamiska och efter-återkoppling-figurer, i **faktiskt renderad storlek**. Granska ledningsändpunkter och kretsens topologi oberoende av att symbolen, siffrorna eller färgerna verkar korrekta. Kopplingsvägar får inte råka kortslutas av dekorativa linjer.
+
+**Elevsynlig metadata:** En källpresentations filnamn eller intern sidnumrering (exempelvis ”Original: …pdf, s. 1”) är inte undervisningsinnehåll och ska inte visas i elevvyn. Bevara däremot relevanta **lärobokssidor, uppgiftsnummer, källreferenser med didaktiskt värde och lärarens dokumentation**.
+
 ## Visuell begriplighet – obligatoriskt godkännandekrav
 
 **Visuell begriplighet är ett godkännandekrav.** En illustration är inte godkänd enbart för att den finns och har korrekta etiketter. Eleven ska tydligt kunna urskilja de former, riktningar och relationer som förklaringen bygger på.
