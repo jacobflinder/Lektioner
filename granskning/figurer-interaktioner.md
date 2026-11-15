@@ -1,16 +1,16 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
 > **Figur- och interaktionsgranskning: lektion 1/41 – Fysik 2, Ström ger magnetfält.**  
-> **Senast färdigställda lektion:** Ingen i denna separata granskning. Den äldre **matematikgranskningen** i [README.md](README.md) har 41/41 färdiga men ersätter inte figurgranskningen.  
+> **Senast färdigställda lektion:** **1/41 · Fysik 2 · Ström ger magnetfält**. Figurgranskning **1/41**, 40 återstår. Separat matematikgranskning i [README.md](README.md) har 41/41 färdiga.  
 > **Aktuell lektion:** 1/41 · Fysik 2 · Ström ger magnetfält · `fy2/kapitel-3/strom-ger-magnetfalt/`  
-> **Lektionsstatus:** Verifieras, ej godkänd eller publicerad  
-> **Fortsättningsstatus:** Arbete pågår inom pilotlektion 1; ingen tillåtelse att påbörja lektion 2  
-> **Klart hittills:** Kodinventering, egen figur för högerhandsregeln, dynamisk cirkel genom P, fast skalenlig B-stapel, nytt Playwright-test och lärarstöd på arbetsgren  
-> **Återstår:** Slutlig CI efter korrigerat åskådarperspektiv, squash-merge enligt AGENTS.md, publicerad main/Pages-kontroll på motsvarande kodversion och slutrapport  
-> **Nästa handling:** Läs AGENTS.md och denna logg; kontrollera den aktuella grenens testresultat, granska skärmbilder, åtgärda tester och sammanslå endast när kraven uppfylls  
+> **Lektionsstatus:** **Klar**, publicerad och verifierad för pilot 1/41  
+> **Fortsättningsstatus:** **Inväntar användarens ”nästa”**; fortsätt inte automatiskt med lektion 2 i ny chatt  
+> **Genomfört:** Egen visad-efter-försök-figur för högerhandsregeln; radieföljande cirkel genom P; korrekt fixerad B-skala 0–120 μT; lärarstöd; oberoende 42 Chromiumtester + 468 äldre pilotkontroller; faktiska skärmbilder inspekterade; Fy2 fullregression och Pages på main PASS  
+> **Återstår:** Inget obligatoriskt digitalt granskningssteg för pilot 1. Skolprojektorns fysiska visning, Safari på iPad och klassrumsdemonstrationer är externa manuella begränsningar, ej sådant som Chromebook/Chromium-test bevisar. 40 lektioner återstår, men startas inte utan ”nästa”.  
+> **Nästa handling:** **Stanna.** Vid användarens uttryckliga ”nästa”, läs AGENTS.md + denna logg och börja endast lektion **2/41, Fysik 2 – Elektriska fält**.  
 > **Nästa lektion i ordningen:** 2/41 · Fysik 2 · Elektriska fält, **startas först efter användarens ”nästa”**  
-> **Kodversion:** Bas `main` = `85ff8ffa8e8b128f1ee7aa8a4411fcafc0b32f5f` vid start 2026-11-15. Arbetsgren `figurer-interaktioner-pilot-20261115`; ändringar ännu ej publicerade på main.  
-> **Publicerad verifiering:** Inte gjord för figurgranskningens ändringar. Gammal publicerad pilot ≠ den nya arbetsgrenen.
+> **Kodversion:** Kodbasens färdiga pilot i `main` commit `ae991bb321b55b357f59cbf826c81acfc7cc38df` genom squash-merge [PR #63](https://github.com/jacobflinder/Lektioner/pull/63) från `figurer-interaktioner-pilot-20261115`. Ingen parallell lektionskod ändrad.  
+> **Publicerad verifiering:** **Fy2 Chromium-workflow [43741322613](https://github.com/jacobflinder/Lektioner/actions/runs/43741322613) SUCCESS** och **Pages-deployment [43741322267](https://github.com/jacobflinder/Lektioner/actions/runs/43741322267) SUCCESS**, **båda på exakt kod-SHA `ae991bb321b55b357f59cbf826c81acfc7cc38df`**. Kontroll av filer på main PASS. Publicerad lektionslänk: https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/strom-ger-magnetfalt/.
 
 ## Varaktiga granskningsinstruktioner
 
@@ -22,7 +22,7 @@ Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md
 
 | Nr | Kurs | Titel | Sökväg | Figur-/interaktionsstatus |
 |---:|---|---|---|---|
-| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | Verifieras på arbetsgren |
+| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Klar · main/Pages verifierade** |
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | Ej påbörjad |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | Ej påbörjad |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Ej påbörjad |
@@ -74,8 +74,8 @@ Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md
 
 **Definierade oberoende kontrollfall:** `B = 2·10⁻⁷ I/r` i tesla (I i A, r i meter). Vid 6 A, 4 cm: `B=30 μT`, ritad stapel 90/360, P 48 SVG-enheter från centrum. Vid 12 A och 4 cm: `60 μT`, stapel 180/360, samma P. Vid 12 A och 8 cm: `30 μT`, stapel 90/360 och P 96 SVG-enheter från centrum. Strömvändning vänder tangenten upp↔ned i P till höger, inte B:s storlek. Gränsvärden 1 A/12 cm ger 1,667 μT och 5 SVG-enheter; 12 A/2 cm ger 120 μT och 360 SVG-enheter. Strömfaktor 2 och 3 ska ge pilar i förhållandet 1:2:3; avstånd 2r och 3r ger B₀/2 och B₀/3 samt dubbelt/tredubbelt P-avstånd.
 
-**Verifiering:** Kodändringarna och testfallen finns på arbetsgren och har genomgått webbläsarkontroll. Första CI-körningen upptäckte **sex verkliga synlighetsfel** eftersom ett `<svg>`-elements `hidden`-egenskap inte uppdaterade dess `hidden`-attribut; korrigerat till explicit `setAttribute/removeAttribute`. Nästa fulla Fy2-körning gav PASS för den tidigare pilotens **468 kontroller** samt nya **41 fysik- och SVG-kontroller**, inklusive faktisk pixelbredd, mobil och projektor ([Actions 43740002948](https://github.com/jacobflinder/Lektioner/actions/runs/43740002948)). En ytterligare körning för skärmbildsinspektion passerade ([Actions 43740394076](https://github.com/jacobflinder/Lektioner/actions/runs/43740394076)). **Faktiska renderade JPEG-bilder från Chromium inspekterades:** griphand/tvärsnitt (B uppåt i P) och B-modell (30 μT = 90/360 av fast skala, P på samma fältcirkel). Inspektionen upptäckte tvetydigt perspektivuttryck ”se längs tummen”; rättat till att betrakta ledaren från änden som tummen pekar mot (strömmen kommer då mot dig, `⊙`). Testet verifierar nu också detta elevsynliga begrepp. **Senaste korrigerade kodversionen behöver slutlig omkörning, main-merge och Pages-verifiering innan status kan bli klar.** Fysiska demonstrationsutfall, skolprojektor och Safari på iPad kan inte fastställas via Chromium.
+**Verifiering:** Kodändringarna och testfallen finns på arbetsgren och har genomgått webbläsarkontroll. Första CI-körningen upptäckte **sex verkliga synlighetsfel** eftersom ett `<svg>`-elements `hidden`-egenskap inte uppdaterade dess `hidden`-attribut; korrigerat till explicit `setAttribute/removeAttribute`. Nästa fulla Fy2-körning gav PASS för den tidigare pilotens **468 kontroller** samt nya **41 fysik- och SVG-kontroller**, inklusive faktisk pixelbredd, mobil och projektor ([Actions 43740002948](https://github.com/jacobflinder/Lektioner/actions/runs/43740002948)). En ytterligare körning för skärmbildsinspektion passerade ([Actions 43740394076](https://github.com/jacobflinder/Lektioner/actions/runs/43740394076)). **Faktiska renderade JPEG-bilder från Chromium inspekterades:** griphand/tvärsnitt (B uppåt i P) och B-modell (30 μT = 90/360 av fast skala, P på samma fältcirkel). Inspektionen upptäckte tvetydigt perspektivuttryck ”se längs tummen”; rättat till att betrakta ledaren från änden som tummen pekar mot (strömmen kommer då mot dig, `⊙`). Testet verifierar nu också detta elevsynliga begrepp. **Slutligt verifierat 2026-11-15:** [grenens slutkörning 43740957068](https://github.com/jacobflinder/Lektioner/actions/runs/43740957068) **PASS**, nya **42/42** kontroller inklusive korrekt betraktningsperspektiv; [main-Fy2 43741322613](https://github.com/jacobflinder/Lektioner/actions/runs/43741322613) **SUCCESS** och [Pages 43741322267](https://github.com/jacobflinder/Lektioner/actions/runs/43741322267) **SUCCESS** på kod-SHA `ae991bb321b55b357f59cbf826c81acfc7cc38df`. Skärmbilder av huvudsakliga visuella stöd inspekterade. Metodlärdom: verklig synlighet/pixelgeometri behövs utöver riktiga numeriska värden.** Fysiska demonstrationsutfall, skolprojektor och Safari på iPad kan inte fastställas via Chromium.
 
-**Parallellt arbete:** Förändringar görs från senaste kontrollerade main på egen arbetsgren. Ändra inte nästa lektion; `practice.js` och Socrative-/bokmaterial har inte modifierats. Följ `AGENTS.md`: testa på gren, sammanför ändringar med tillhörande test i en sammanhållen PR/commit, verifiera main och Pages på samma kodversion.
+**Parallellt arbete:** Basens senaste main kontrollerades före squash-merge av PR #63. `practice.js`, Socrative, bokreferenser, läxa och annan kurskod har bevarats. Kod + nya webbläsartester + logg sammanfördes; CI och Pages verifierade med samma SHA. Ingen ny lektion påbörjad.
 
-**Status:** Fortsätt pilot 1/41; **ej klar**. Nästa lektion i registret finns för planering, inte som starttillstånd.
+**Status:** **Pilotlektion 1/41 klar, publicerad och verifierad.** Figurgranskningen väntar på användarens **”nästa”** före lektion 2/41. En ny chatt ger inte klartecken.
