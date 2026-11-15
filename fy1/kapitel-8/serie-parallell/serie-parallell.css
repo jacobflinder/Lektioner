@@ -50,3 +50,7 @@
 #bild-6:has(.step.open) .meter-reveal{display:block}
 #bild-6:has(.step.open) .meter-predict{display:none}
 @media(max-width:600px){.series-equation,.series-model-equation{font-size:1.02rem}.circuit-model .model-scales{padding:4px}}
+
+/* Conceal the textual A/V answer alongside the circuit until a reveal step. */
+#bild-6 .meter-points{display:none}
+#bild-6:has(.step.open) .meter-points{display:grid}
