@@ -1,0 +1,42 @@
+name: Fy1 web lesson quality checks
+on:
+  push:
+    paths:
+      - "fy1/kapitel-8/**"
+      - "fy1/gemensamt/**"
+      - ".github/workflows/fy1-browser-qa.yml"
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  coulomb-and-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    permissions:
+      contents: read
+    steps:
+      - name: Settle closely spaced commits
+        run: sleep 20
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and Playwright
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Serve all Fy1 lessons locally
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/fy1-http.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy1/kapitel-8/ >/dev/null && break; sleep 1; done
+      - name: Verify Coulomb lesson and other five Fy1 lessons
+        run: node fy1/kapitel-8/qa/deep-review-fy1-36.cjs
+      - name: Upload QA screenshots and independent evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy1-browser-quality-evidence
+          path: fy1-qa-screenshots/
+          retention-days: 14

@@ -59,3 +59,11 @@ I avsnitt 8.1 används nu ett separat frivilligt självtest: två nya beräkning
 Originalets bokhänvisningar, verkliga demonstrationer, Socrative där sådan finns och den skyddade boktiden påverkas inte. Den digitala frågan bedömer ett **valt resonemang**, inte alla elevens mellanled. Ingen elevinloggning, numerisk svarslagring eller överföring införs.
 
 **Verifiering:** JavaScript-granskning, data-/sökvägskontroll och begränsad lokalt genomförd webbläsartestning; inga nya påståenden om faktiskt prövad GitHub Pages-visning eller elevresultat. Kontroll i Safari, på projektor och i klassrum återstår.
+
+## Fördjupad granskning av lektion 36/41
+
+- Originalets 9 webbilder, elektroskopdemonstration, Socrative Fy1 901 / SOC-36980496 (rum LRJ), bokuppgifter och läxa 801–811, grön-rute-läsning s. 270–280 samt frivilliga två papperssjälvtester bevaras.
+- Identifierad **geometrisk proportionsbrist** i laddningsmodellen: ursprungligt ritavstånd hade konstant offset och stämde inte proportionellt med r-reglaget. Korrigerad till exakt **420 SVG-enheter per meter** (inom hela reglageintervallet 0,2–1,5 m). Verkliga SVG-centra ska verifieras vid minst tre r-värden, samtidigt med oberoende kontroll av F∝1/r².
+- Laddningsvärdenas visuella placering åtskild för korta avstånd. Kraftstapeln behåller fast numeriskt intervall 0–6 µN och blir exakt linjärt proportionell mot |kQ₁Q₂/r²|. Kraftpilarna får **inte** tolkas som mätstaplar. Noll laddning ska ge noll kraft och inga kraftpilar.
+- Matematik: separata MathML-rader, minst 16 px faktisk distans mellan fristående uttryck; fullständig beräkning N≈1,56·10¹⁰→1,6·10¹⁰ elektroner och F≈−8,87·10⁻⁸→−8,9·10⁻⁸ N; fysisk kraftstorlek på vardera laddningen 8,9·10⁻⁸ N och riktad attraktion.
+- Nya riktade Chromiumtester och visuell jämförelse av 390 px mobil, dator och projektor krävs före godkännande. Safari på fysisk iPad/Mac, fysisk projektor och elevinlärning omfattas inte av de automatiserade proven. Original-PDF:n har inte varit tillgänglig för direkt källjämförelse i denna granskning.

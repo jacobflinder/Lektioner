@@ -55,3 +55,15 @@
 #bild-3 .coulomb-visual svg{max-height:265px}
 #bild-3 .model-root .model-result{font-size:.87rem}
 @media(max-width:575px){#bild-3 .model-controls{grid-template-columns:1fr}}
+/* 36/41: independent native MathML; never force <math> itself to display:block. */
+.fy1-36-math-steps{display:grid;gap:20px;margin:15px 0}
+.fy1-36-math-steps .mathrow{margin:0;min-width:0;max-width:100%;overflow-x:auto;line-height:1.45}
+.fy1-36-math-steps .mathrow math{font-size:clamp(1.05rem,1.55vw,1.42rem)}
+#bild-6 .body-copy>.step,#bild-7 .body-copy>.step{overflow-wrap:normal}
+#bild-7 .step>.mathrow + .mathrow{margin-top:20px}
+.coulomb-visual svg{overflow:hidden}
+/* Exact proportional centre-to-centre geometry. Native HTML labels remain readable. */
+@media(max-width:575px){.fy1-36-math-steps{gap:20px}.fy1-36-math-steps .mathrow math{font-size:1.05rem}}
+
+.coulomb-model-math{font-size:clamp(1.05rem,1.6vw,1.35rem);font-weight:400;max-width:100%;overflow-x:auto;margin:9px 0}
+.coulomb-model-math math{font-size:inherit}
