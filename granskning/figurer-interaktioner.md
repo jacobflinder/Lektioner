@@ -1,23 +1,16 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
-> **Figur- och interaktionsgranskning: lektion 1/41 – Fysik 2, Ström ger magnetfält.**  
-> **Senast färdigställda lektion:** Pilot **1/41 · Ström ger magnetfält** godkändes enligt **tidigare** granskningskrav, men har **återöppnats** efter nytt obligatoriskt krav på visuell begriplighet. Under de **nuvarande** kraven finns ännu ingen slutgodkänd lektion. Separat matematikgranskning i [README.md](README.md) har 41/41 färdiga.  
-> **Aktuell lektion:** 1/41 · Fysik 2 · Ström ger magnetfält · `fy2/kapitel-3/strom-ger-magnetfalt/`  
-> **Lektionsstatus:** **Tekniskt verifierad och publicerad – inväntar användarens visuella godkännande** av handgreppet och bilderna 11/13 enligt de skärpta kriterierna.  
-> **Fortsättningsstatus:** **Inväntar användarens synpunkter på pilot 1/41.** Ingen tillåtelse att börja lektion 2; feedback innebär fortsatt arbete med pilot 1.  
-> **Genomfört:** Egen visad-efter-försök-figur för högerhandsregeln; radieföljande cirkel genom P; korrekt fixerad B-skala 0–120 μT; lärarstöd; oberoende 42 Chromiumtester + 468 äldre pilotkontroller; faktiska skärmbilder inspekterade; Fy2 fullregression och Pages på main PASS  
-> **Återstår:** Användarens eget **visuella godkännande** av handgreppet och den stegvisa kopplingen till tvärsnittet. Bilden är en fotobaserad bearbetning av användarens referens, **inte en byteidentisk kopia av det uppladdade originalet**; detta ska inte förväxlas med att originalbilden återgivits oförändrad. Skolprojektorns faktiska visning och Safari/iPad är manuella begränsningar. Inga ytterligare digitala QA-fel är kända. Ingen annan lektion påbörjad.  
-> **Nästa handling:** Visa publicerad pilot för användaren; behandla varje kommentar som fortsatt arbete på **lektion 1/41**. Markera den klar enligt nytt krav först när användarens visuella synpunkter är hanterade och tekniska kontroller fortsätter att passera. Gå inte vidare till lektion 2 förrän användaren uttryckligen skriver ”nästa”.  
-> **Nästa lektion i ordningen:** 2/41 · Fysik 2 · Elektriska fält, **startas först efter användarens ”nästa”**  
-> **Kodversion:** Senaste publicerade pilotkod i `main`: commit `e017f0e1c0eaff5bf766676d35c181217bdb3e46`, squash-merge [PR #64](https://github.com/jacobflinder/Lektioner/pull/64) från `docs/visual-begriplighet-20261115`, efter tidigare [PR #63](https://github.com/jacobflinder/Lektioner/pull/63). Ingen annan lektionskod ändrad.  
-> **Publicerad verifiering av den nya pilotkoden:** [Fy2 webbläsarregression på main 43750441056](https://github.com/jacobflinder/Lektioner/actions/runs/43750441056) **SUCCESS** och [GitHub Pages 43750440733](https://github.com/jacobflinder/Lektioner/actions/runs/43750440733) **SUCCESS** på **samma kod-SHA `e017f0e1c0eaff5bf766676d35c181217bdb3e46`**. På grenen passerade [43750083480](https://github.com/jacobflinder/Lektioner/actions/runs/43750083480). Publicerad lektion: https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/strom-ger-magnetfalt/.
+> **Aktuell figurgranskning: användarvald andra lektion, Ma4 – Polynomdivision (#23 i den fasta 41-listan).**  
+> **Färdiggranskade enligt nya figurkraven:** **Fy2 Ström ger magnetfält (#1)** – användaren har uttryckligen godkänt figurernas kvalitetsnivå. Matematiksteg i Fy2 som användaren fann märkliga har uttryckligen lämnats för senare arbete, inte påståtts rättade.  
+> **Granskade lektionsnummer:** #1 och pågående #23. Det finns **39 ännu ej figurgranskade lektionsposter**, och inga mellanliggande lektioner markeras som färdiga.  
+> **Lektionsstatus:** **Polynomdivision – färdig kod och visuell QA på arbetsgren; publicering återstår.**  
+> **Genomfört:** Alla 11 originalbilder och 7 divisionsuppställningar bevarade; aktuella gradkolumner och metodsteg görs synliga och följer beräkningen; extra figurer placerade intill relevant MathML på bilderna 5, 6 och 8. **75 riktade Chromiumkontroller PASS, 14 riktade skärmbilder; hela Ma4-QA PASS** på kodcommit `f4869ae8c19a087fcbaa614b5e9f33db40590134`, [Actions 43754870975](https://github.com/jacobflinder/Lektioner/actions/runs/43754870975).  
+> **Visuell bedömning:** Skärmbilder av huvuduppställningen, elimineringen, koefficientkontrollen, teckenfelet, nollkolumnen och 390 px mobil samt projektor har inspekterats; mobilens metodfaser visas i 2×2 i stället för oläslig 1×4-rad.  
+> **Återstår:** Kontroll av senaste parallella `main`, squash-merge [PR #65](https://github.com/jacobflinder/Lektioner/pull/65) samt **Ma4-workflow och Pages på exakt publicerad kodversion**. Ingen sådan slutlig verifiering påstås ännu.  
+> **Nästa handling:** Färdigställ enbart Polynomdivision, dokumentera slutresultatet och **stanna**. Nästa lektionsval gör användaren uttryckligen; börja inte automatiskt med Fy2 Elektriska fält eller någon annan lektionspost.  
+> **Kursordning:** Användaren valde uttryckligen polynomdivision som nästa efter Fy2-piloten, vilket åsidosätter den tidigare standardordningen för just detta steg. Registrets #23 är originalplatsen bland de 41 – inte påstående att 22 lektioner är klara.  
+> **Publicerad lektion (före denna ändring):** https://jacobflinder.github.io/Lektioner/ma4/kapitel-4/polynomdivision/. Ny version ännu inte publicerad.
 
-> **Arbetsläge 2026-11-15:** **Granskning av vald nästa lektion: Ma4 – Polynomdivision (#23 i 41-registret; andra lektionen som behandlas i denna serie).** Användaren har uttryckligen valt denna URL som nästa, vilket åsidosätter den tidigare föreslagna kursordningen för just nästa steg. **Fy2-pilotens figurer har uttryckligen accepterats som kvalitetsnivå; användaren påpekade vissa märkliga beräkningssteg men bad att lämna dem tills vidare.** Detta är inte samma sak som att matematikstegen har nygranskats eller korrigerats.
->
-> **Nuvarande lektionsstatus:** Ma4 Polynomdivision **under verifiering på arbetsgrenen** `figurer-ma4-polynomdivision-20261115`. De nya figurerna och testerna är inte publicerade; GitHub Actions/Pages och faktisk visuell inspektion återstår.
->
-> **Nästa handling:** Verifiera faktisk gradkolumnsgeometri, stegvis avslöjande, koefficientmatris, tallinje, 0x²-placering och projektor/mobil. Granska skärmbilder. Korrigera eventuella fel och kör Ma4-regression innan PR/Pages. Rapportera och **stanna vid polynomdivision** tills användaren väljer en ny lektion.
->
 ## Varaktiga granskningsinstruktioner
 
 Läs [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md) och `AGENTS.md` vid varje ny chatt. Separera detta arbete från [matematikgranskningen](README.md). Varje lektion ska inventeras från behov, inte bara befintliga figurer. Prioritera fysikalisk riktighet och saknade förklaringssteg över kosmetik. Bevara fullständig matematisk lösning, Socrative enbart där det redan finns, bokuppgifter, läxor och demonstrationer. Låt eleverna förutsäga före återkoppling. Koppla figurer, formler och reglage till samma tillstånd. Verifiera faktiskt ritad geometri oberoende av programmets egna tal. Dokumentera både utförda och ej utförda kontroller. **Godkänn inte en lektion med enbart gröna knappar eller med kvarstående obligatorisk verifiering.**
@@ -34,7 +27,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 
 | Nr | Kurs | Titel | Sökväg | Figur-/interaktionsstatus |
 |---:|---|---|---|---|
-| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Publicerad och tekniskt verifierad; inväntar visuellt godkännande** |
+| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Figurer visuellt accepterade av användaren; Fy2-mellanled lämnade för senare** |
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | Ej påbörjad |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | Ej påbörjad |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Ej påbörjad |
@@ -56,7 +49,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 20 | Matematik 4 | Ekvationen zⁿ = a | `ma4/kapitel-4/ekvationen-zn-a/` | Ej påbörjad |
 | 21 | Matematik 4 | Eulers formel | `ma4/kapitel-4/eulers-formel/` | Ej påbörjad |
 | 22 | Matematik 4 | Andragradsekvationer i komplexa tal | `ma4/kapitel-4/andragradsekvationer/` | Ej påbörjad |
-| 23 | Matematik 4 | Polynomdivision | `ma4/kapitel-4/polynomdivision/` | **Pågående figurgranskning – användarvalt nästa steg** |
+| 23 | Matematik 4 | Polynomdivision | `ma4/kapitel-4/polynomdivision/` | **Ma4-figurgranskning och full CI PASS på gren; publicering återstår** |
 | 24 | Matematik 4 | Faktorsatsen | `ma4/kapitel-4/faktorsatsen/` | Ej påbörjad |
 | 25 | Matematik 4 | Polynomekvationer av högre grad | `ma4/kapitel-4/hogre-grad/` | Ej påbörjad |
 | 26 | Fysik 1 | Coulombs lag | `fy1/kapitel-8/coulombs-lag/` | Ej påbörjad |
@@ -110,5 +103,5 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 
 **Oberoende kontrollfall före publicering:** För `P=2x³+3x²−5x+6`, `D=x+2`, `Q=2x²−x−3`, `R=12` ska koefficientvektorerna vara `xQ=[2,-1,-3,0]`, `2Q=[0,4,-2,-6]`, `R=[0,0,0,12]`; summa `[2,3,-5,6]`. Efter första subtraktionen ska x³-kolumnen elimineras, nästa aktiva grad vara x², inte föregående x³. Vid dubbelnegation ska koefficienten −5 flyttas **+2** till −3, inte **−2** till −7. På bild 8 ska `x³+0x²−4x+3` återges med x²-positionen reserverad. Riktat Chromium-test `ma4/kapitel-4/qa/figure-interaction-polynomdivision.cjs` kontrollerar bland annat faktisk pixelcentrering av gradkolumner och att figur/facit hålls dolt till rätt steg.
 
-**Teststatus:** CI på arbetsgren initierad. **Ingen PASS-status eller publicering påstås förrän verifierad.** Ändra inte nästa lektion.
+**Slutligt QA på arbetsgren (2026-11-15):** Efter att matematikskriptet först hade skrivit över löpande HTML-figurer flyttades figurkopplingen till den genererade MathML-lösningen. Figurerna står nu **omedelbart efter sina relevanta matematikkedjor**, så att begripligheten inte beror på att eleven scrollar tillbaka. I egen faktisk Chromium-körning visar testet **75/75 riktade PASS**, **14 skärmbilder**, **0 JS-fel** samt full original-Ma4-regression i [Actions 43754870975](https://github.com/jacobflinder/Lektioner/actions/runs/43754870975), på kod-SHA `f4869ae8c19a087fcbaa614b5e9f33db40590134`. De ursprungliga 11 sidorna, 7 motorerna och alla facit behölls. Screenshot-granskning av 1280/1920 px och 390 px visar korrekt gradkolumnsjustering, läsbar 2×2-metod på mobil, koefficientvektorer, korrigerad dubbelnegation och 0x²-kolumn. **Uppföljning på publicerad `main` och Pages återstår.** Inga andra lektioner ändrade.
 
