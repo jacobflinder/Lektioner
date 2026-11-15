@@ -84,10 +84,12 @@ const close=(a,b,tol=.003)=>Number.isFinite(+a)&&Number.isFinite(+b)&&Math.abs(a
    await go(n);
    ck((await active().locator('.step.open').count())===0,'start with all steps concealed slide '+n);
    if(n===6){ck(!await active().locator('.meter-reveal').isVisible(),'amperemeter figure hidden before own drawing');ck(!await active().locator('.meter-points').isVisible(),'amperemeter textual placement also hidden before own drawing');}
+   if(n===7)ck(!await active().locator('.cell-answer').isVisible(),'cell-voltage answer hidden until prediction');
    if(n===2)ck(!(await values()).svg,'current bars hidden until prediction');
    if(n===5)ck(lesson.pages[4].body.includes('100 Ω'),'resistance context preserved');
    await steps();
    if(n===6){ck(await active().locator('.meter-reveal').isVisible(),'amperemeter/voltmeter figure appears only after drawing');ck(await active().locator('.meter-points').isVisible(),'amperemeter/voltmeter textual answer appears after drawing');}
+   if(n===7)ck(await active().locator('.cell-answer').isVisible(),'cell-voltage reasoning revealed after prediction');
    const math=await active().locator('.series-equation math').count();
    ck(math===[0,0,9,7,8,0,3,0,0,4,16][n-1],'correct per-slide semantic MathML count '+n+': '+math);
    ck((await active().locator('.series-equation:not(:has(math))').count())===0,'every independent math row has native MathML slide '+n);
