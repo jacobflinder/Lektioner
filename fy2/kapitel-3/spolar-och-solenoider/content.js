@@ -1,6 +1,6 @@
 (()=>{"use strict";
 const COIL_COLORS={copper:"#bb653e",light:"#ebad74",back:"#b0a0a0",blue:"#076f87",iron:"#9caeb8"};
-function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,lengthMeters=.30,fieldMilliTesla=1}={}){
+function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,lengthMeters=.30,fieldMilliTesla=1,withMeter=false}={}){
  const w=700,h=390,cy=160,ry=66,depth=17;
  // The visible axial length is proportional to the user-selected physical length.
  // Coil radius is deliberately exaggerated for readability, never presented to scale.
@@ -59,7 +59,7 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
    'l'+(ux*7+uy*4).toFixed(1)+' '+(uy*7-ux*4).toFixed(1)+'" stroke="#873a2c" stroke-width="3.5" fill="none"/>');
  }
  // Meter bar: independent linear quantity; the ordinary field arrows remain qualitative.
- const calibrated=field&&!core?
+ const calibrated=field&&!core&&withMeter?
   '<text x="24" y="310" font-size="16" fill="#184957">B inuti · 0–11 mT (linjär skala)</text>'+
   '<rect x="341" y="294" width="220" height="19" rx="4" fill="#d5e8ef"/>'+
   '<rect id="sol-b-bar" x="341" y="294" width="'+Math.min(220,Math.max(0,220*B/11)).toFixed(3)+'" height="19" rx="4" fill="#08758d" data-max-mt="11"/>'+

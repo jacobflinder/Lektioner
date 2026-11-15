@@ -57,7 +57,7 @@ try{
  const core0=await page.locator('#core-explanation').innerText();
  await page.locator('#core-insert').click();
  ok((await page.locator('#core-explanation').innerText()).includes('magnetisering'),'core effect not expressed as fake numerical multiplier');
- ok(await page.locator('#core-svg').count()===0,'dynamic drawing uses rebuilt svg in core host');
+ ok(await page.locator('#core-svg').count()===0,'dynamic drawing uses rebuilt svg in core host');ok(await page.locator('#sol-b-bar').count()===0,'qualitative iron-core model never invents a numeric B bar');
  ok(await page.locator('#core-insert.selected').count()===1,'core state button correct');
  await page.locator('#core-direction').click();
  ok((await page.locator('#core-explanation').innerText()).includes('magnetisering'),'reversed core retains physical explanation');
