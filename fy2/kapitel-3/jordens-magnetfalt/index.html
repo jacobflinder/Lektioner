@@ -185,7 +185,7 @@ function compass(Bh,Bcoil,show=true){
  const narrow=window.matchMedia('(max-width:550px)').matches,cx=narrow?190:320,cy=207,rawB=Math.hypot(Bh,Bcoil),undefinedHeading=rawB<1e-9,B=rawB||1,ux=Bcoil/B,uy=-Bh/B,scale=narrow?2.35:3,w=narrow?390:690;
  const rx=cx+Bcoil*scale,ry=cy-Bh*scale;
  let s=L(narrow?23:55,cy,w-(narrow?23:55),cy,'#b8ccd2',1)+L(cx,320,cx,48,'#b8ccd2',1)+
-   A(cx,cy,cx,cy-Bh*scale,'#087d96')+T(cx+12,cy-Bh*scale-12,'Bₕ','#087d96');
+   A(cx,cy,cx,cy-Bh*scale,'#087d96')+T(cx-92,cy-Bh*scale-13,'Bₕ','#087d96')+L(cx-55,cy-Bh*scale-18,cx-8,cy-Bh*scale-4,'#087d96',1.5);
  if(Bcoil)s+=A(cx,cy,cx+Bcoil*scale,cy,'#bd704b')+T(cx+Bcoil*scale/2,cy+28,'Bsp','#ad6544');
  if(show&&!undefinedHeading){
   s+=A(cx,cy,rx,ry,'#263e52',4);
@@ -194,7 +194,8 @@ function compass(Bh,Bcoil,show=true){
   s+='<path d="M'+cx+' '+cy+'L'+(north[0]+px)+' '+(north[1]+py)+'L'+(north[0]-px)+' '+(north[1]-py)+'Z" fill="#cf453b" stroke="#98372d"/>'+
    '<path d="M'+cx+' '+cy+'L'+(south[0]+px)+' '+(south[1]+py)+'L'+(south[0]-px)+' '+(south[1]-py)+'Z" fill="white" stroke="#264b59" stroke-width="2"/>'+
    '<circle cx="'+cx+'" cy="'+cy+'" r="5" fill="#285667"/>';
-  s+=T(Math.max(45,Math.min(narrow?300:585,rx+(Bcoil<0?-64:Bcoil<18?60:12))),Math.max(53,Math.min(317,ry-17)),'Bres','#263e52',18);
+  if(Math.abs(Bcoil)<1e-9)s+=T(cx+(narrow?34:66),54,'Bres = Bₕ','#263e52',18);
+  else s+=T(Math.max(45,Math.min(narrow?300:585,rx+(Bcoil<0?-64:Bcoil<18?60:12))),Math.max(53,Math.min(317,ry-17)),'Bres','#263e52',18);
   const alpha=Math.atan2(Bcoil,Bh);
   if(Math.abs(alpha)>1e-8){
    const ar=49,ex=cx+ar*Math.sin(alpha),ey=cy-ar*Math.cos(alpha);
