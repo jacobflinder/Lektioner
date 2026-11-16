@@ -67,7 +67,7 @@ function circleProof(){
  '<path d="M242 176H330" stroke="#577e8b" stroke-width="2.5" stroke-dasharray="7 6"/>'+T(283,162,'r','#315769',20)+
  '<circle cx="330" cy="176" r="12" fill="#fff" stroke="#bc6548" stroke-width="3"/>'+T(326,183,'+','#bc6548',18)+T(347,206,'P','#315769',19)+
  '<path d="M330 176V90m-10 14 10 -14 10 14" fill="none" stroke="#178568" stroke-width="5"/>'+T(345,100,'v','#178568',22)+
- '<g data-radius-force visibility="hidden" aria-hidden="true"><path d="M330 176H270m14 -10 -14 10 14 10" stroke="#bd6b44" stroke-width="5.5" fill="none"/>'+T(296,203,'F','#bd6b44',21)+'</g>'+
+ '<g data-radius-force visibility="hidden" aria-hidden="true"><path d="M330 176L270 176m14 -10 -14 10 14 10" stroke="#bd6b44" stroke-width="5.5" fill="none"/>'+T(296,203,'F','#bd6b44',21)+'</g>'+
  T(29,329,'× B in i bilden · positiv laddning','#315769',17),600,350,'Cirkelbana: positiv laddning i P, radie r från centrum till P, tangentiell v uppåt och kraft F mot centrum efter återkoppling.');
 }
 $('radius-figure').innerHTML=circleProof();
