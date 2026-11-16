@@ -125,7 +125,12 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
     test(!!m&&Number(m[0])===(b>0?1:0)&&close(Number(m[1]),320+49*Math.sin(alpha),.002)&&close(Number(m[2]),207-49*Math.cos(alpha),.002),'SVG arc is the actual signed alpha between magnetic north and resultant for '+b);
    }
    const lab=await page.locator('#earth-compass svg text').filter({hasText:'Bres'}).first().evaluate(e=>({x:Number(e.getAttribute('x')),y:Number(e.getAttribute('y'))}));
-   test(Math.abs(lab.x-(320+3*b))<90&&Math.abs(lab.y-(207-3*Bh))<30,'label Bres follows actual vector TIP '+b);
+   if(b===0){
+    const zerotext=await page.locator('#earth-compass svg').innerText();
+    test(zerotext.includes('Bres = Bₕ'),'when vectors coincide at zero coil, equality is written instead of overlapping labels');
+    const boxes=await page.locator('#earth-compass svg text').evaluateAll(es=>es.filter(e=>e.textContent==='Bₕ'||e.textContent==='Bres = Bₕ'||e.textContent==='α = 0°').map(e=>{const z=e.getBBox();return {label:e.textContent,x:z.x,y:z.y,right:z.x+z.width,bottom:z.y+z.height}}));
+    test(boxes.length===3&&boxes.every((p,i)=>boxes.slice(i+1).every(q=>p.right<=q.x||q.right<=p.x||p.bottom<=q.y||q.bottom<=p.y)),'no overlapping Bh, Bres=Bh and alpha=0 label bounding boxes');
+   }else test(Math.abs(lab.x-(320+3*b))<90&&Math.abs(lab.y-(207-3*Bh))<30,'label Bres follows actual vector TIP '+b);
    const resultant=vector(await line('#earth-compass svg path[stroke="#263e52"]'));
    test(resultant!==null&&close(resultant[2]-resultant[0],b*3,.09)&&close(resultant[3]-resultant[1],-Bh*3,.09),'black resultant SVG actual x/y '+b);
   }
