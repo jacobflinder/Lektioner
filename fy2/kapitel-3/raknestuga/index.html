@@ -1,6 +1,42 @@
 <!doctype html>
-<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Räknestuga · Fysik 2</title><style>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Räknestuga · Fysik 2</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2308738a%27/%3E%3Cpath d=%27M18 5 8 18h7l-1 9 10-13h-7z%27 fill=%27white%27/%3E%3C/svg%3E"><style>
 :root{font:18px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:#193c48;background:#eff5f6}*{box-sizing:border-box}body{margin:0}a{color:#086e84}header,.crumb,.bottom,.mode-info{max-width:1450px;margin:auto}header{padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-weight:850;font-size:.86rem;letter-spacing:.06em;color:#0b7084}.brand small{display:block;font-weight:500;letter-spacing:0;color:#5d7881}button,input,textarea{font:inherit}button{background:#fff;border:1px solid #bcd4da;border-radius:10px;color:#123d4a;padding:10px 15px;cursor:pointer}button.primary{background:#08738a;color:white;border-color:#08738a}button.selected{background:#dceff3;border-color:#0a7d91}button:disabled{opacity:.48;cursor:default}button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #e3a14c;outline-offset:2px}.controls{display:flex;gap:8px;flex-wrap:wrap}.crumb{padding:0 20px 9px;font-size:.77rem}.crumb span{margin:0 8px;color:#6b8790}.mode-info{background:#f9fcfd;border:1px solid #d0e3e7;border-left:5px solid #0c7890;padding:10px 18px;border-radius:10px;font-size:.85rem;margin-bottom:11px}.only-repeat{display:none}body.repeat .only-repeat{display:block}body.repeat .only-class{display:none}.stage{max-width:1440px;min-height:70vh;margin:auto;padding:clamp(24px,3vw,48px);background:white;border:1px solid #d7e6e9;border-radius:20px;box-shadow:0 8px 24px #173a4510}.slide{display:none}.slide.active{display:block}.tag{font-size:.74rem;color:#0a7889;font-weight:850;letter-spacing:.08em;text-transform:uppercase}h1{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.04em;line-height:1.15;margin:10px 0}h2{font-size:clamp(1.2rem,2.3vw,1.65rem);line-height:1.3;margin:11px 0}p{line-height:1.52}.sub{color:#56727c;margin:2px 0 22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#f0f7f8;border:1px solid #d2e4e8;border-radius:14px;padding:20px}.card strong.large{font-size:1.4rem;color:#087185}.question{background:#eff7f8;border-left:5px solid #79b4c2;padding:14px 18px;border-radius:8px;margin:14px 0}.answer{display:none;background:#e5f6ec;border-left:5px solid #1c826b;padding:15px;margin:12px 0;border-radius:9px}.answer.shown{display:block}.math{font-family:Cambria,"Cambria Math",Georgia,serif;font-size:clamp(1.25rem,2.5vw,1.8rem);line-height:1.6}.math math{font-size:1em}math[display="inline"]{font-size:1em;vertical-align:middle}.math math[display="block"]{font-size:1em;max-width:100%;overflow-x:auto;margin:.15em 0}.task{font-size:1.3rem;font-weight:800;color:#096d82}.small{color:#56707a;font-size:.84rem}.mind{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mind .card{min-height:150px}.mind .card p{font-size:.84rem}.mind .lines{border-bottom:1px solid #a8c5cc;min-height:32px}.timer{font-size:1.7rem;font-weight:850;font-variant-numeric:tabular-nums;margin-right:10px}.check{display:flex;align-items:flex-start;gap:9px;margin:12px 0}.check input{margin-top:5px;accent-color:#078299}.support{background:#fff6e4;border-left:4px solid #d3a05b;padding:13px 17px;margin:16px 0;border-radius:8px}.main-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:20px 0}.bottom{padding:11px 9px 30px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.bottom .controls{align-items:center}.editor{max-width:1440px;margin:0 auto 12px;background:white;padding:15px;border-radius:13px}.editor label{display:inline-block;margin:8px 12px}.editor input{padding:7px;width:210px;border-radius:8px;border:1px solid #b5ced5}textarea{display:block;width:100%;min-height:92px;border:1px solid #b5d0d6;border-radius:10px;padding:11px}.quiz{background:#f4fafb;padding:17px;border:1px solid #c4dce1;border-left:5px solid #178198;border-radius:13px;margin-top:22px}.quiz button{display:block;text-align:left;margin:7px 0;max-width:700px;width:100%}.quiz-status{padding:11px;background:#e8f4f6;border-radius:8px}.quiz-hint{padding:10px 12px;background:#fff;border:1px dashed #b4cad0;border-radius:9px}.math-stack{display:grid;gap:18px;min-width:0}.math-row{min-width:0;font-family:Cambria,"Cambria Math",Georgia,serif;font-size:clamp(1rem,1.85vw,1.35rem);overflow-x:auto;white-space:nowrap}.math-row math{max-width:none}.physics-figure{margin:16px 0;padding:12px;background:#fbfdfd;border:1px solid #c7dde3;border-radius:12px}.physics-figure svg{width:100%;max-width:650px;height:auto;display:block;margin:auto}.physics-figure figcaption{font-size:.79rem;color:#456873;margin-top:5px}.force-reveal,.trajectory-reveal{display:none}.slide:has(#support-a-field.shown) .force-reveal{display:inline}.slide:has(#support-a-motion.shown) .trajectory-reveal{display:inline}.stage .math-stack math{line-height:1.5}.optional{font-size:.88rem;color:#56717b}@media(max-width:780px){:root{font-size:17px}.stage{border-radius:0}.grid,.mind{grid-template-columns:1fr}.mode-info{border-radius:0}h1{font-size:2rem}}
+.answer > .grid > *, .support-layout > * { min-width: 0 }
+.support-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; align-items: start; margin-bottom: 16px }
+.support-layout .question { margin-top: 0 }
+.support-layout .physics-figure { margin: 0; position: sticky; top: 12px; grid-column: 2; grid-row: 1 / span 2 }
+.support-steps { display: grid; gap: 12px; grid-column: 1 }
+.support-steps .card { min-width: 0 }
+.support-steps h2 { margin-top: 0 }
+.field-reveal, .flux-result-reveal { display: none }
+.slide:has(#support-b-result.shown) .flux-result-reveal { display: inline }
+.slide:has(#support-a-field.shown, #support-a-motion.shown) .field-reveal { display: inline }
+.comparison { margin: 10px 0 }
+.comparison svg { display: block; width: 100%; max-width: 390px; margin: auto }
+.slide:has(.study-feedback.shown) .study-prompt { display: none }
+@media (min-width: 901px) {
+ .slide:has(.study-feedback.shown) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 16px;
+ }
+ .slide:not(.active):has(.study-feedback.shown) { display: none }
+ .slide:has(.study-feedback.shown) > * { grid-column: 1 / -1 }
+ .slide:has(.study-feedback.shown) > h1 { grid-column: 1; grid-row: 2 }
+ .slide:has(.study-feedback.shown) > button[data-close-label] { grid-column: 2; grid-row: 2 }
+}
+.comparison figcaption { font-size: .88rem; margin-top: 6px }
+.study-feedback p { margin: 6px 0 }
+.study-feedback .card { background: white }
+@media (max-width: 900px) {
+ .support-layout { grid-template-columns: minmax(0, 1fr) }
+ .support-layout .physics-figure { position: static; grid-row: auto; grid-column: auto }
+}
+@media (max-width: 500px) {
+ .stage { padding: 16px }
+ .support-steps .card, .support-steps .answer { padding-inline: 10px }
+}
 </style></head><body>
 <header><div class="brand">FYSIK 2 / RÄKNESTUGA<small>Elektriska fält + permanentmagneter</small></div><div class="controls"><button id="class" class="selected" aria-pressed="true">Klassrum</button><button id="repeat" aria-pressed="false">Repetition</button><button id="settings">Arbetsbild</button></div></header>
 <nav class="crumb"><a href="../../../index.html">Alla kurser</a><span>›</span><a href="../../index.html">Fysik, nivå 2</a><span>›</span><a href="../index.html">Elektromagnetism</a><span>›</span><b>Räknestuga</b></nav>
@@ -18,9 +54,59 @@
  <div class="card"><b>Magnetiskt material</b><p>Utanför en stavmagnet går fältet N → S. Ferromagnetiska domäner kan ge stark magnetisering och permanentmagnetens motstånd mot avmagnetisering beskrivs av koercivitet.</p></div>
  <div class="card"><b>Magnetiskt flöde</b><div class="math-stack"><div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math></div></div><p>Gäller för homogent magnetfält vinkelrätt mot ytan. B mäts i T, A i m², Φ i Wb. Dubblad area ger dubbelt flöde när B är oförändrat.</p></div>
  </div></div></section>
-<section class="slide" data-title="Arbetstid i boken"><div class="tag">03 · Cirka 50 min totalt</div><h1>Arbeta klart · en uppgift i taget</h1><p class="sub">Börja där du behöver arbetstiden mest. Arbeta lugnt enskilt eller i par.</p><div class="grid"><div><div class="card"><h2>1. Försök och visa din tanke</h2><p>Rita figur, välj samband och visa mellanleden. Om du fastnar: markera <b>exakt vilket steg</b>.</p><h2>2. Ta hjälp och pröva själv igen</h2><p>Fråga en kamrat eller läraren om just det steget. Fortsätt själv och förklara varför det fungerar.</p></div><div class="card"><h2>Innan du markerar klart</h2><label class="check"><input type="checkbox"> Jag har svarat på hela frågan.</label><label class="check"><input type="checkbox"> Enheter och riktningar stämmer.</label><label class="check"><input type="checkbox"> Svaret verkar rimligt.</label><label class="check"><input type="checkbox"> Jag kan förklara lösningen.</label><div class="question"><b>Halvtid:</b> Vad blev klart? Behöver du byta läxa eller be om hjälp?</div></div></div><div class="main-actions"><span class="timer" id="timer">25:00</span><button data-minutes="25">25 minuter</button><button data-minutes="20">20 minuter</button><button id="timer-start">Starta</button><button id="timer-reset">Återställ</button></div><div class="support"><b>Behöver du stöd?</b> <button data-go="5">Stöd A · elektriskt fält</button> <button data-go="6">Stöd B · magnetiskt flöde</button> <button data-go="3">Frivillig fördjupning</button></div></section>
-<section class="slide" data-title="Frivillig fördjupning" data-optional="true"><div class="tag">Frivilligt · endast när läxorna är kontrollerade</div><h1>Klar med båda? Pröva förståelsen</h1><div class="grid"><div class="card"><h2>1. Elektronens bana</h2><p>Elektronen kommer in vågrätt med övre plattan positiv och undre negativ. Vad händer med avböjningen när ingångsfarten fördubblas och allt annat är oförändrat?</p></div><div class="card"><h2>2. Hitta felet</h2><p>”Aluminium är omagnetiskt. Om ytan fördubblas i samma homogena fält fördubblas både B och Φ.”</p><p>Rätta båda delarna och motivera.</p></div></div><button data-reveal>Visa återkoppling</button><div class="answer">1. Avböjningen blir <b>en fjärdedel</b>, eftersom flygtiden halveras och <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>y</mi><mo>∝</mo><msup><mi>t</mi><mn>2</mn></msup></math>. Detta förutsätter att elektronen inte träffar plattan. 2. Aluminium är svagt paramagnetiskt, inte opåverkat. B är oförändrat medan Φ fördubblas när A fördubblas i samma homogena, vinkelräta fält.</div><div class="main-actions"><button data-go="2">Tillbaka till arbetstid</button><button data-go="4" class="primary">Till avslutningen</button></div></section>
-<section class="slide" data-title="Avslutning och nästa lektion"><div class="tag">04 · Utcheckning</div><h1>Vad har du blivit säkrare på?</h1><p class="sub">Välj en av två frågor och svara kort utan att titta på lösningen.</p><div class="question"><p><b>A.</b> Varför kan elektronens bana böjas när hastigheten i x-led är konstant?</p><p><b>B.</b> Två ytor ligger vinkelrätt mot samma homogena magnetfält. Vad avgör deras flöde?</p></div><p class="only-class small">Svara i anteckningarna och jämför vid behov med en kamrat.</p><div class="only-repeat"><textarea placeholder="Skriv din förklaring här. Svaren skickas inte." aria-label="Din förklaring"></textarea></div><button data-reveal>Visa återkoppling till målen</button><div class="answer"><p><b>A:</b> Den elektriska kraften ger acceleration i y-led, samtidigt som ingen kraft verkar i x-led; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><msub><mi>v</mi><mi>x</mi></msub></math> är därför konstant.</p><p><b>B:</b> När fältet är homogent och vinkelrätt mot ytan gäller <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>. Vid samma B ger större A större flöde.</p></div><div class="only-repeat quiz" id="rep-checks"><div class="tag">REPETITION · FRIVILLIG SJÄLVKONTROLL</div><h2>Pröva två samband utan att se facit</h2>
+<section class="slide" data-title="Arbetstid i boken"><div class="tag">03 · Cirka 50 min totalt</div><h1>Arbeta klart · en uppgift i taget</h1><p class="sub">Börja där du behöver arbetstiden mest. Arbeta lugnt enskilt eller i par.</p><div class="grid"><div class="card"><h2>1. Försök och visa din tanke</h2><p>Rita figur, välj samband och visa mellanleden. Om du fastnar: markera <b>exakt vilket steg</b>.</p><h2>2. Ta hjälp och pröva själv igen</h2><p>Fråga en kamrat eller läraren om just det steget. Fortsätt själv och förklara varför det fungerar.</p></div><div class="card"><h2>Innan du markerar klart</h2><label class="check"><input type="checkbox"> Jag har svarat på hela frågan.</label><label class="check"><input type="checkbox"> Enheter och riktningar stämmer.</label><label class="check"><input type="checkbox"> Svaret verkar rimligt.</label><label class="check"><input type="checkbox"> Jag kan förklara lösningen.</label><div class="question"><b>Halvtid:</b> Vad blev klart? Behöver du byta läxa eller be om hjälp?</div></div></div><div class="main-actions"><span class="timer" id="timer">25:00</span><button data-minutes="25">25 minuter</button><button data-minutes="20">20 minuter</button><button id="timer-start">Starta</button><button id="timer-reset">Återställ</button></div><div class="support"><b>Behöver du stöd?</b> <button data-go="5">Stöd A · elektriskt fält</button> <button data-go="6">Stöd B · magnetiskt flöde</button> <button data-go="3">Frivillig fördjupning</button></div></section>
+<section class="slide" data-title="Frivillig fördjupning" data-optional="true"><div class="tag">Frivilligt · endast när läxorna är kontrollerade</div><h1>Klar med båda? Pröva förståelsen</h1><div class="grid study-prompt"><div class="card"><h2>1. Elektronens bana</h2><p>Elektronen kommer in vågrätt med övre plattan positiv och undre negativ. Vad händer med avböjningen när ingångsfarten fördubblas och allt annat är oförändrat?</p></div><div class="card"><h2>2. Hitta felet</h2><p>”Aluminium är omagnetiskt. Om ytan fördubblas i samma homogena fält fördubblas både B och Φ.”</p><p>Rätta båda delarna och motivera.</p></div></div><button data-reveal data-close-label="Tillbaka till frågorna">Visa återkoppling</button><div class="answer study-feedback"><div class="grid">
+<div class="card"><h2>1. Dubbla ingångsfarten</h2><p>Flygtiden halveras. Eftersom <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>y</mi><mo>∝</mo><msup><mi>t</mi><mn>2</mn></msup></math> blir avböjningen <b>en fjärdedel</b> om elektronen går fri från plattorna. Figuren använder värdena från stöd A.</p><figure class="comparison">
+<svg viewBox="0 0 360 221" role="img" aria-label="Två elektronbanor från samma punkt. När ingångsfarten fördubblas minskar avböjningen från 6,87 till 1,72 millimeter.">
+  <path d="M30 5H310 M30 205H310" stroke="#7e9ea7" stroke-width="2" fill="none"/>
+  <text x="12" y="16" fill="#9a3838" font-size="17">+</text><text x="12" y="211" fill="#155975" font-size="17">−</text>
+  <path d="M30 105H310" stroke="#7e9ea7" stroke-dasharray="4 4"/>
+  <path data-original-trajectory d="M30 105 Q170 105 310 59.2" fill="none" stroke="#8b3154" stroke-width="3"/>
+  <path data-double-speed d="M30 105 Q170 105 310 93.55" fill="none" stroke="#0b7084" stroke-width="3"/>
+  <text x="157" y="53" fill="#8b3154" font-size="16">v₀ · 6,87 mm</text>
+  <path d="M254 100V119" stroke="#0b7084" stroke-width="1.5"/><text x="174" y="136" fill="#0b7084" font-size="16">2v₀ · 1,72 mm</text>
+</svg>
+<figcaption>Samma plattlängd, fält och skala. Mät avböjningen vid plattornas slut från den streckade linjen.</figcaption>
+</figure></div>
+<div class="card"><h2>2. Rättat resonemang</h2><p>Aluminium är svagt paramagnetiskt. När enbart arean fördubblas är <b>B oförändrat</b> och <b>Φ fördubblas</b>.</p><figure class="comparison">
+<svg viewBox="0 0 360 138" role="img" aria-label="En lika tät prickmatris över båda ytorna. Den dubbelt så stora ytan omsluter tolv prickar och den mindre sex.">
+  <defs><pattern id="flux-dots-extension" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="3" fill="#176888"/></pattern></defs>
+  <g data-flux-areas fill="#dceef3" stroke="#34677a" stroke-width="2">
+    <rect x="44" y="22" width="66" height="44"/><rect x="176" y="22" width="132" height="44"/>
+  </g>
+  <path d="M22 0H330V88H22Z" fill="url(#flux-dots-extension)"/>
+  <g fill="#193c48" font-size="17" text-anchor="middle">
+    <text x="77" y="111">A · Φ</text><text x="242" y="111">2A · 2Φ</text>
+    <text x="181" y="133">Samma B genom båda ytorna</text>
+  </g>
+</svg>
+<figcaption>Det homogena fältet går ut ur bildplanet. Den dubbla arean omsluter dubbelt så många prickar i figuren.</figcaption>
+</figure></div>
+</div></div><div class="main-actions"><button data-go="2">Tillbaka till arbetstid</button><button data-go="4" class="primary">Till avslutningen</button></div></section>
+<section class="slide" data-title="Avslutning och nästa lektion"><div class="tag">04 · Utcheckning</div><h1>Vad har du blivit säkrare på?</h1><div class="study-prompt"><p class="sub">Välj en av två frågor och svara kort utan att titta på lösningen.</p><div class="question"><p><b>A.</b> Varför kan elektronens bana böjas när hastigheten i x-led är konstant?</p><p><b>B.</b> Två ytor ligger vinkelrätt mot samma homogena magnetfält. Vad avgör deras flöde?</p></div><p class="only-class small">Svara i anteckningarna och jämför vid behov med en kamrat.</p><div class="only-repeat"><textarea placeholder="Skriv din förklaring här. Svaren skickas inte." aria-label="Din förklaring"></textarea></div></div><button data-reveal data-close-label="Tillbaka till frågorna">Visa återkoppling till målen</button><div class="answer study-feedback"><div class="grid"><div class="card"><p><b>A:</b> Den elektriska kraften ger acceleration i y-led, samtidigt som ingen kraft verkar i x-led; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><msub><mi>v</mi><mi>x</mi></msub></math> är därför konstant.</p><figure class="comparison">
+<svg viewBox="0 0 360 138" role="img" aria-label="Två punkter på den böjda banan med lika långa högerriktade hastighetskomponenter och en växande komponent uppåt.">
+<defs><marker id="exit-v-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#086e84"/></marker></defs>
+<path d="M24 113Q158 113 292 45" fill="none" stroke="#8b3154" stroke-width="3"/>
+<g stroke="#086e84" stroke-width="3" marker-end="url(#exit-v-arrow)">
+  <path d="M127 102.95H187"/><path d="M127 102.95V91.25"/>
+  <path d="M224 75.13H284"/><path d="M224 75.13V52.4"/>
+</g>
+<g fill="#193c48" font-size="17"><text x="149" y="126">vₓ</text><text x="246" y="96">vₓ</text><text x="101" y="93">vᵧ</text><text x="202" y="56">vᵧ</text></g>
+</svg><figcaption>De vågräta pilarna är lika långa. Den lodräta hastighetskomponenten växer längs banan.</figcaption>
+</figure></div><div class="card"><p><b>B:</b> När fältet är homogent och vinkelrätt mot ytan gäller <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>. Vid samma B ger större A större flöde.</p><figure class="comparison">
+<svg viewBox="0 0 360 138" role="img" aria-label="En lika tät prickmatris över båda ytorna. Den dubbelt så stora ytan omsluter tolv prickar och den mindre sex.">
+  <defs><pattern id="flux-dots-exit" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="3" fill="#176888"/></pattern></defs>
+  <g data-flux-areas fill="#dceef3" stroke="#34677a" stroke-width="2">
+    <rect x="44" y="22" width="66" height="44"/><rect x="176" y="22" width="132" height="44"/>
+  </g>
+  <path d="M22 0H330V88H22Z" fill="url(#flux-dots-exit)"/>
+  <g fill="#193c48" font-size="17" text-anchor="middle">
+    <text x="77" y="111">A · Φ</text><text x="242" y="111">2A · 2Φ</text>
+    <text x="181" y="133">Samma B genom båda ytorna</text>
+  </g>
+</svg>
+<figcaption>Det homogena fältet går ut ur bildplanet. Den dubbla arean omsluter dubbelt så många prickar i figuren.</figcaption>
+</figure></div></div></div><div class="only-repeat quiz" id="rep-checks"><div class="tag">REPETITION · FRIVILLIG SJÄLVKONTROLL</div><h2>Pröva två samband utan att se facit</h2>
 <div class="question"><b>A.</b> Övre plattan positiv, undre negativ. Hur accelererar en elektron?</div>
 <div class="controls" data-check="electron"><button data-answer="right" type="button">Uppåt</button><button data-answer="wrong" type="button">Nedåt</button><button data-answer="wrong" type="button">Ingen acceleration</button></div>
 <p class="small" id="electron-feedback" role="status" aria-live="polite">Välj och motivera för dig själv.</p>
@@ -30,22 +116,31 @@
 </div><div class="grid"><div class="card"><h2>Veckans två läxor</h2><label class="check"><input type="checkbox"> Läxa 1 – <span class="ref-a">301–309</span> – klar och kontrollerad.</label><label class="check"><input type="checkbox"> Läxa 2 – <span class="ref-b">323, 324, 326, 330, 331</span> – klar och kontrollerad.</label><p>Om något återstår: anteckna uppgift och svårighet, stäm av med läraren.</p></div><div class="card"><h2>Inför nästa innehållslektion</h2><p>Läs de gula rutorna, s. <b class="ref-next">148–151</b>: ström ger magnetfält och fältet kring en rak ledare.</p><p><a href="../strom-ger-magnetfalt/">Nästa lektion: Ström ger magnetfält</a></p></div></div></section>
 <section class="slide" data-title="Stöd A: elektriskt fält" data-optional="true">
 <div class="tag">Stöd A · välj när du behöver</div><h1>Rörelse i elektriskt fält</h1>
+<div class="support-layout">
 <div class="question">En elektron går in mitt mellan två plattor med <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><msub><mi>v</mi><mn>0</mn></msub><mo>=</mo><mn>8,0</mn><mo>·</mo><msup><mn>10</mn><mn>6</mn></msup><mtext> m/s</mtext></math>,
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>U</mi><mo>=</mo><mn>60</mn><mtext> V</mtext></math>,
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>d</mi><mo>=</mo><mn>0,030</mn><mtext> m</mtext></math> och
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mi>L</mi><mo>=</mo><mn>0,050</mn><mtext> m</mtext></math>.
-Övre plattan är positiv och undre negativ. Bestäm avböjningen och hastighetens vinkel vid utträdet. Rita och förutsäg riktningen innan du visar stöd.</div>
-<figure class="physics-figure"><svg viewBox="0 0 600 385" role="img" aria-label="Två plattor, övre positiv och undre negativ, fältet nedåt och en elektron som kommer in vågrätt i mitten. Elektronens bana och avböjning visas först efter beräkningen.">
+Övre plattan är positiv och undre negativ. Anta ett homogent fält mellan plattorna. Bestäm avböjningen och hastighetens vinkel vid utträdet. Rita och förutsäg riktningen innan du visar stöd.</div>
+<figure class="physics-figure"><svg viewBox="0 0 625 370" role="img" aria-label="Elektronen kommer in horisontellt mitt mellan den positiva övre och den negativa undre plattan. Fält-, kraft- och lösningspilar visas i återkopplingen.">
 <defs><marker id="e33-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6Z" fill="#126d86"/></marker><marker id="e33-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6Z" fill="#ad4c4c"/></marker></defs>
-<rect x="45" y="25" width="500" height="12" rx="4" fill="#b95555"/><rect x="45" y="325" width="500" height="12" rx="4" fill="#438ca4"/>
+<rect x="45" y="19" width="500" height="12" rx="3" fill="#b95555"/><rect x="45" y="331" width="500" height="12" rx="3" fill="#438ca4"/>
 <text x="50" y="18" fill="#9a3838" font-size="19">+ + + + + + +</text><text x="50" y="361" fill="#155975" font-size="19">− − − − − − −</text>
-<line x1="160" y1="90" x2="160" y2="140" stroke="#126d86" stroke-width="3" marker-end="url(#e33-arrow)"/><line x1="360" y1="90" x2="360" y2="140" stroke="#126d86" stroke-width="3" marker-end="url(#e33-arrow)"/><text x="175" y="126" font-size="18" fill="#126d86">E</text>
+<g class="field-reveal" stroke="#126d86" stroke-width="3"><line x1="175" y1="75" x2="175" y2="135" marker-end="url(#e33-arrow)"/><line x1="300" y1="75" x2="300" y2="135" marker-end="url(#e33-arrow)"/></g><text class="field-reveal" x="189" y="114" font-size="25" fill="#126d86">E</text>
 <circle cx="45" cy="181" r="7" fill="#164b5c"/><text x="6" y="186" font-size="17" fill="#164b5c">e⁻</text><line x1="53" y1="181" x2="116" y2="181" stroke="#126d86" stroke-width="4" marker-end="url(#e33-arrow)"/><text x="85" y="173" font-size="16">v₀</text>
-<path id="electron-path-33" class="trajectory-reveal" d="M45.0 181.00 L95.0 180.31 L145.0 178.25 L195.0 174.82 L245.0 170.01 L295.0 163.82 L345.0 156.27 L395.0 147.34 L445.0 137.03 L495.0 125.35 L545.0 112.30" fill="none" stroke="#b04f70" stroke-width="4"/><path class="trajectory-reveal" d="M545 112.3 L585 101.3" fill="none" stroke="#b04f70" stroke-dasharray="5 4"/>
-<line class="force-reveal" x1="125" y1="196" x2="125" y2="150" stroke="#ad4c4c" stroke-width="4" marker-end="url(#e33-red)"/><text class="force-reveal" x="138" y="163" fill="#ad4c4c" font-size="18">F</text>
-<text class="trajectory-reveal" x="414" y="89" fill="#a13e5c" font-size="17">y = 6,87 mm ↑</text></svg>
-<figcaption>Koordinatskalorna är lika: 50 mm i x-led ritas som 500 enheter, och plattavståndet 30 mm som 300 enheter. Lösningsbanan är dold tills du visat beräkningen.</figcaption></figure>
-<div class="grid">
+<path id="electron-path-33" class="trajectory-reveal" d="M45 181 Q295 181 545 112.30" fill="none" stroke="#8b3154" stroke-width="4"/>
+<g class="trajectory-reveal" font-size="23" fill="#8b3154">
+  <path id="exit-tangent" d="M545 112.3 L610 94.438" stroke="#126d86" stroke-width="3" marker-end="url(#e33-arrow)"/>
+  <path d="M495 181H610" stroke="#7e9ea7" stroke-dasharray="6 4"/>
+  <path d="M546 112.3H575 M546 181H575 M569 112.3V181" stroke="#8b3154" stroke-width="2" fill="none"/>
+  <text x="404" y="211">y = 6,87 mm</text>
+  <text x="494" y="72" fill="#126d86">v, 15,4°</text>
+  <circle cx="545" cy="112.3" r="5"/>
+</g>
+<line class="force-reveal" x1="45" y1="181" x2="45" y2="111" stroke="#ad4c4c" stroke-width="4" marker-end="url(#e33-red)"/>
+<text class="force-reveal" x="55" y="131" fill="#ad4c4c" font-size="25">F</text></svg>
+<figcaption>Samma längdskala i båda riktningarna. Fält och kraft visas med beräkningen av accelerationen. Banan, avböjningen och utgångshastigheten visas med rörelseberäkningen.</figcaption></figure>
+<div class="support-steps">
 <div class="card"><h2>Steg 1 · fält, kraft och acceleration</h2><p>Bestäm först fältets riktning, sedan elektronens acceleration. Använd laddningsbeloppet e när du beräknar accelerationens storlek.</p>
 <button data-reveal>Visa steg 1 efter eget försök</button><div class="answer" id="support-a-field"><p>Fältet pekar nedåt (+ till −). Elektronen är negativ, alltså är kraft och acceleration <b>uppåt</b>.</p>
 <div class="math-stack">
@@ -57,6 +152,7 @@
 </div></div></div>
 <div class="card"><h2>Steg 2 · tid, avböjning och vinkel</h2><p>Hur lång tid är elektronen i fältet? Räkna sedan rörelsen i y-led och jämför de två hastighetskomponenterna.</p>
 <button data-reveal>Visa steg 2 efter eget försök</button><div class="answer" id="support-a-motion">
+<p>I idealmodellen verkar kraften bara i y-led. Därför är vₓ = v₀ och vᵧ börjar på noll.</p>
 <div class="math-stack">
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>t</mi><mo>=</mo><mfrac><mrow><mi>L</mi></mrow><mrow><msub><mi>v</mi><mn>0</mn></msub></mrow></mfrac></math></div>
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>t</mi><mo>=</mo><mfrac><mrow><mn>0,050</mn><mspace width="0.18em"/><mtext>m</mtext></mrow><mrow><mn>8,0</mn><mo>·</mo><msup><mn>10</mn><mn>6</mn></msup><mspace width="0.18em"/><mtext>m/s</mtext></mrow></mfrac><mo>=</mo><mn>6,25</mn><mo>·</mo><msup><mn>10</mn><mn>−9</mn></msup><mspace width="0.18em"/><mtext>s</mtext></math></div>
@@ -67,17 +163,21 @@
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>v</mi><mi>y</mi></msub><mo>=</mo><msub><mi>a</mi><mi>y</mi></msub><mi>t</mi><mo>≈</mo><mn>2,20</mn><mo>·</mo><msup><mn>10</mn><mn>6</mn></msup><mspace width="0.18em"/><mtext>m/s</mtext></math></div>
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi mathvariant="normal">tan</mi><mspace width="0.2em"/><mi>α</mi><mo>=</mo><mfrac><mrow><msub><mi>v</mi><mi>y</mi></msub></mrow><mrow><msub><mi>v</mi><mi>x</mi></msub></mrow></mfrac><mo>≈</mo><mfrac><mrow><mn>2,20</mn></mrow><mrow><mn>8,0</mn></mrow></mfrac><mo>≈</mo><mn>0,275</mn></math></div>
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>α</mi><mo>≈</mo><mn>15,4</mn><mo>°</mo></math></div>
-</div><p><b>Kontroll:</b> 6,87 mm är mindre än halva plattavståndet 15 mm. Elektronen träffar alltså inte den övre plattan i idealmodellen.</p></div></div></div>
+</div><p><b>Kontroll:</b> 6,87 mm är mindre än halva plattavståndet 15 mm. Elektronen träffar alltså inte den övre plattan i idealmodellen.</p></div></div></div></div>
 <button data-go="2">Tillbaka till arbetet</button></section>
 <section class="slide" data-title="Stöd B: magnetiskt flöde" data-optional="true">
 <div class="tag">Stöd B · välj när du behöver</div><h1>Magnetiskt flöde och flödestäthet</h1>
+<div class="support-layout">
 <div class="question">Ett homogent magnetfält går <b>ut ur bildplanet</b> vinkelrätt genom en rektangulär yta som är 4,0 cm × 6,0 cm. Flödet är 0,96 mWb. Bestäm flödestätheten B och ange dess riktning. Börja med att omvandla till SI-enheter.</div>
-<figure class="physics-figure"><svg viewBox="0 0 500 260" role="img" aria-label="Rektangulär yta med 6,0 cm bredd och 4,0 cm höjd, homogent magnetfält ut ur bildplanet markerat med prickar. Fältets styrka avslöjas inte.">
-<rect x="150" y="55" width="180" height="120" fill="#e9f4f7" stroke="#34677a" stroke-width="3"/>
-<circle cx="168" cy="75" r="4.5" fill="#176888"/><circle cx="168" cy="115" r="4.5" fill="#176888"/><circle cx="168" cy="155" r="4.5" fill="#176888"/><circle cx="204" cy="75" r="4.5" fill="#176888"/><circle cx="204" cy="115" r="4.5" fill="#176888"/><circle cx="204" cy="155" r="4.5" fill="#176888"/><circle cx="240" cy="75" r="4.5" fill="#176888"/><circle cx="240" cy="115" r="4.5" fill="#176888"/><circle cx="240" cy="155" r="4.5" fill="#176888"/><circle cx="276" cy="75" r="4.5" fill="#176888"/><circle cx="276" cy="115" r="4.5" fill="#176888"/><circle cx="276" cy="155" r="4.5" fill="#176888"/><circle cx="312" cy="75" r="4.5" fill="#176888"/><circle cx="312" cy="115" r="4.5" fill="#176888"/><circle cx="312" cy="155" r="4.5" fill="#176888"/>
-<text x="199" y="205" font-size="19" fill="#193c48">6,0 cm</text><text x="65" y="121" font-size="19" fill="#193c48">4,0 cm</text>
-<text x="150" y="235" font-size="16" fill="#456873">Prickar = fält ut ur planet</text></svg><figcaption>Ritningen har sidförhållandet 6:4; prickarna visar fältets riktning, inte uppmätt flödestäthet.</figcaption></figure>
-<div class="grid">
+<figure class="physics-figure"><svg viewBox="0 0 500 280" role="img" aria-labelledby="support-b-figure-title">
+<title id="support-b-figure-title">Rektangulär yta 6,0 gånger 4,0 cm. Prickarna visar ett homogent magnetfält ut ur bildplanet.</title>
+<defs><pattern id="support-b-dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="14" cy="14" r="4" fill="#176888"/></pattern></defs>
+<rect x="140" y="56" width="168" height="112" fill="#dceef3" stroke="#34677a" stroke-width="3"/>
+<path d="M84 0H392V196H84Z" fill="url(#support-b-dots)"/>
+<text x="224" y="219" text-anchor="middle" font-size="23" fill="#193c48">6,0 cm</text><text x="15" y="119" font-size="23" fill="#193c48">4,0 cm</text>
+<text x="224" y="250" text-anchor="middle" font-size="20" fill="#456873">Fält ut ur bildplanet</text>
+<text id="support-b-field-value" class="flux-result-reveal" x="224" y="275" text-anchor="middle" font-size="22" fill="#193c48">B = 0,40 T</text></svg><figcaption>Ritningen har sidförhållandet 6:4; prickarna visar fältets riktning, inte uppmätt flödestäthet.</figcaption></figure>
+<div class="support-steps">
 <div class="card"><h2>Steg 1 · rätt area och flöde</h2><p>Ta två egna omvandlingssteg och bestäm arean. Omvandla också milliweber till weber.</p><button data-reveal>Visa omvandlingarna</button>
 <div class="answer" id="support-b-units"><div class="math-stack">
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>4,0</mn><mspace width="0.18em"/><mtext>cm</mtext><mo>=</mo><mn>0,040</mn><mspace width="0.18em"/><mtext>m</mtext></math></div>
@@ -90,7 +190,7 @@
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math></div>
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><mi>Φ</mi></mrow><mrow><mi>A</mi></mrow></mfrac></math></div>
 <div class="math-row"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><mn>0,00096</mn><mspace width="0.18em"/><mtext>Wb</mtext></mrow><mrow><mn>0,0024</mn><mspace width="0.18em"/><mtext>m²</mtext></mrow></mfrac><mo>=</mo><mn>0,40</mn><mspace width="0.18em"/><mtext>T</mtext></math></div>
-</div><p><b>Rimlighetskontroll:</b> 1 Wb/m² = 1 T, och fältets riktning är <b>ut ur sidan</b> enligt uppgiften. Flödet och arean är positiva belopp i detta vinkelräta fall.</p></div></div></div>
+</div><p><b>Rimlighetskontroll:</b> 1 Wb/m² = 1 T, och fältets riktning är <b>ut ur sidan</b> enligt uppgiften. Flödet och arean är positiva belopp i detta vinkelräta fall.</p></div></div></div></div>
 <button data-go="2">Tillbaka till arbetet</button></section>
 </main><footer class="bottom"><div class="controls"><button id="prev">← Föregående</button><b id="counter">1 / 4</b></div><div class="controls"><button id="reset">Återställ</button><button id="reveal" class="primary">Visa nästa steg</button><button id="next">Nästa bild →</button></div></footer>
 <script>
@@ -100,35 +200,54 @@ let current=0, seconds=1500,total=25*60,timerId=null,deadline=0;
 function render(){
 slides.forEach((el,i)=>el.classList.toggle("active",i===current));
 const pos=main.indexOf(current),optional=pos<0;
+for(const button of slides[current].querySelectorAll("[data-reveal]")){
+ const answer=button.nextElementSibling;
+ const shown=answer.classList.contains("shown");
+ button.setAttribute("aria-expanded",String(shown));
+ if(button.dataset.closeLabel){
+  button.dataset.openLabel??=button.textContent;
+  button.textContent=shown?button.dataset.closeLabel:button.dataset.openLabel;
+ }
+}
 $("counter").textContent=optional?"Stöd / fördjupning":(pos+1)+" / 4";
 $("prev").disabled=!optional&&pos===0;$("next").disabled=optional||pos===3;
 const hidden=slides[current].querySelector(".answer:not(.shown)");
 $("reveal").textContent=hidden?"Visa nästa steg":optional?"Tillbaka till arbete":pos===3?"Allt visat":"Nästa bild";
 $("reveal").disabled=!hidden&&!optional&&pos===3;
 }
-function go(index){current=index;render();window.scrollTo(0,0)}
+function clearFeedback(slide){
+ slide.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
+ slide.querySelectorAll("[data-check] button.selected").forEach(el=>el.classList.remove("selected"));
+ slide.querySelectorAll("#electron-feedback,#flux-feedback").forEach(el=>el.textContent="Välj och motivera för dig själv.");
+}
+function go(index){
+ clearFeedback(slides[current]);
+ current=index;
+ render();
+ window.scrollTo(0,0);
+}
+function previous(){
+ const pos=main.indexOf(current);
+ if(pos<0)go(2);
+ else if(pos>0)go(main[pos-1]);
+}
 function reveal(){const el=slides[current].querySelector(".answer:not(.shown)");if(el){el.classList.add("shown");render();}else if(main.includes(current)&&current!==4)go(main[main.indexOf(current)+1]);else if(!main.includes(current))go(2)}
 $("next").onclick=()=>{const i=main.indexOf(current);if(i>=0&&i<3)go(main[i+1])};
-$("prev").onclick=()=>{const i=main.indexOf(current);go(i<=0?2:main[i-1])};
+$("prev").onclick=previous;
 $("reveal").onclick=reveal;
 $("reset").onclick=()=>{
  const slide=slides[current];
  if(current===2){pause();seconds=total;clock()}
- slide.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
+ clearFeedback(slide);
  slide.querySelectorAll("textarea").forEach(el=>el.value="");
  slide.querySelectorAll('input[type="checkbox"]').forEach(el=>el.checked=false);
- slide.querySelectorAll("[data-check] button.selected").forEach(el=>el.classList.remove("selected"));
- for(const id of ["electron-feedback","flux-feedback"]){
-  const feedback=slide.querySelector("#"+id);
-  if(feedback)feedback.textContent="Välj och motivera för dig själv.";
- }
  render();
 };
 document.querySelectorAll("[data-reveal]").forEach(btn=>btn.onclick=()=>{const el=btn.nextElementSibling;if(el&&el.classList.contains("answer")){el.classList.toggle("shown");render()}});
 document.querySelectorAll("[data-go]").forEach(btn=>btn.onclick=()=>go(Number(btn.dataset.go)));
-function setMode(repeat){document.body.classList.toggle("repeat",repeat);$("class").classList.toggle("selected",!repeat);$("repeat").classList.toggle("selected",repeat);$("class").setAttribute("aria-pressed",String(!repeat));$("repeat").setAttribute("aria-pressed",String(repeat));}
+function setMode(repeat){if(document.body.classList.contains("repeat")!==repeat)clearFeedback(slides[current]);document.body.classList.toggle("repeat",repeat);$("class").classList.toggle("selected",!repeat);$("repeat").classList.toggle("selected",repeat);$("class").setAttribute("aria-pressed",String(!repeat));$("repeat").setAttribute("aria-pressed",String(repeat));render();}
 $("class").onclick=()=>setMode(false);$("repeat").onclick=()=>setMode(true);
-document.addEventListener("keydown",e=>{if(e.target.closest("button,input,textarea")||e.altKey||e.metaKey||e.ctrlKey)return;if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();reveal()}if(e.key==="ArrowLeft"){e.preventDefault();const i=main.indexOf(current);go(i<=0?2:main[i-1])}});
+document.addEventListener("keydown",e=>{if(e.target.closest("button,input,textarea")||e.altKey||e.metaKey||e.ctrlKey)return;if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();reveal()}if(e.key==="ArrowLeft"){e.preventDefault();previous()}});
 function clock(){const n=Math.max(0,Math.ceil(seconds));$("timer").textContent=String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0");}
 function pause(){if(timerId!==null){clearInterval(timerId);timerId=null}$("timer-start").textContent="Starta"}
 document.querySelectorAll("[data-minutes]").forEach(btn=>btn.onclick=()=>{pause();total=Number(btn.dataset.minutes)*60;seconds=total;clock()});
@@ -147,8 +266,8 @@ document.querySelectorAll("[data-check]").forEach(group=>{
   target.innerHTML=right?(group.dataset.check==="electron"?
    "Rätt: <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>E</mi></math> går från + till − (nedåt), men <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>q</mi><mo>&lt;</mo><mn>0</mn></math> ger <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>F</mi></math> och acceleration uppåt. <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><msub><mi>v</mi><mi>x</mi></msub></math> kan samtidigt vara konstant.":
    "Rätt: <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>. Samma <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>B</mi></math> och dubbel <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>A</mi></math> ger dubbelt magnetiskt flöde."):(group.dataset.check==="electron"?
-   (button.textContent==="Ingen acceleration"?"Det finns ett elektriskt fält, så en elektron påverkas av en kraft och accelererar. Fundera på laddningens tecken.":"Du har valt fältets riktning i stället för elektronens acceleration. En negativ laddning påverkas i motsatt riktning mot fältet.")+" <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>E</mi></math>.":
-   (button.textContent==="Halveras"?"När arean dubbleras i samma fält ökar, inte minskar, flödet.":"Det är flödestätheten som är oförändrad. Flödet beror också på arean.")+" <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>B</mi></math> och flödet genom den valda ytan, <math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi></math>.");
+   (button.textContent==="Ingen acceleration"?"Elektronen accelererar eftersom den påverkas av en elektrisk kraft. Vilken riktning får kraften när laddningen är negativ?":"Nedåt är fältets riktning. Elektronen är negativ, så kraften och accelerationen pekar uppåt."):
+   (button.textContent==="Halveras"?"När arean dubbleras i samma fält ökar flödet. Tänk på hur många fältprickar den större ytan omsluter.":"Flödestätheten är densamma över båda ytorna. Den större ytan omsluter ändå fler fältprickar."));
  }));
 });
 refs();clock();setMode(false);render();
