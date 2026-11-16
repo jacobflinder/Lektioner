@@ -30,15 +30,14 @@ header{padding:15px 22px;max-width:1480px;margin:auto;display:flex;gap:18px;alig
 #flux-result math[display="block"]{margin-block:13px}
 @media(max-width:540px){.stage h1{font-size:clamp(1.55rem,6.6vw,2rem);overflow-wrap:anywhere;hyphens:auto}.magnet-equation-steps{gap:16px}.magnet-equation-steps .math-sm{font-size:clamp(14px,4vw,19px)}.magnet-equation-steps .math{font-size:clamp(20px,5.5vw,27px)}}
 
-/* Fully revealed flux investigation: make genuine use of classroom projector width.
-   The three items are the field drawing, parameter controls and pupil feedback.
-   On tablet/mobile the original vertical reading order remains. */
+/* One coherent classroom comparison: field surfaces on the left,
+   controls, calculations and feedback directly beside them. */
 @media(min-width:1350px){
  section.slide[data-title="Flöde och flödestäthet"] > .grid{
-  grid-template-columns:minmax(0,1.02fr) minmax(0,1.06fr) minmax(0,1.04fr);
-  align-items:start;gap:16px
+  grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);
+  align-items:start;gap:20px
  }
- section.slide[data-title="Flöde och flödestäthet"] > .grid > div:first-child{display:contents}
+ section.slide[data-title="Flöde och flödestäthet"] > .grid > div:first-child{display:block}
  section.slide[data-title="Flöde och flödestäthet"] > .grid .figure{min-width:0}
  section.slide[data-title="Flöde och flödestäthet"] > .grid .panel{min-width:0}
  section.slide[data-title="Flöde och flödestäthet"] > .grid > div:last-child{min-width:0}
