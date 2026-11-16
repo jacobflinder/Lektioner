@@ -203,8 +203,9 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
     test(width.document<=width.window+2,'no page horizontal clipping '+vp.name+' '+n+' '+JSON.stringify(width));
     if([5,6,8,9].includes(n)){const rows=await bounds('.slide.active .magnet-equation-steps > div');test(rows.length>=2&&rows.every(x=>x.width>20&&x.height>10),'MathML visible '+vp.name+' '+n)}
     if(n===5&&vp.name==='projector'){
-     const positions=await page.locator('.slide.active .grid .figure,.slide.active .grid > div:first-child > .panel,.slide.active .grid > div:last-child').evaluateAll(nodes=>nodes.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width}}));
-     test(positions.length===3&&positions[0].x<positions[1].x&&positions[1].x<positions[2].x&&positions.every(p=>Math.abs(p.y-positions[0].y)<45),'three physically aligned projector content columns '+JSON.stringify(positions));
+     const positions=await page.locator('.slide.active .flux-grid > div').evaluateAll(nodes=>nodes.map(el=>{const r=el.getBoundingClientRect();return {role:el.className,x:r.x,y:r.y,width:r.width}}));
+     const fig=positions.find(p=>p.role==='flux-illustration'),controls=positions.find(p=>p.role==='flux-controls'),discussion=positions.find(p=>p.role==='flux-discussion');
+     test(positions.length===3&&fig&&controls&&discussion&&fig.x<controls.x&&controls.x<discussion.x&&positions.every(p=>Math.abs(p.y-fig.y)<45),'three physically aligned projector columns: drawing, calculation, discussion '+JSON.stringify(positions));
      const h=await page.evaluate(()=>document.documentElement.scrollHeight);
      test(h<=1200,'revealed flux slide fits within 1200px 1080p projector, observed '+h);
     }

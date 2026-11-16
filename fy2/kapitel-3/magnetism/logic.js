@@ -10,8 +10,16 @@ function syncCompassReveal(){
  $("magnet-svg").classList.toggle("compass-predicting",!revealed);
  $("compass-needle").setAttribute("aria-hidden",String(!revealed));
 }
+function syncCorrectionLayout(){
+ const answers=slides[7].querySelectorAll(".two .panel .answer");
+ const slot=$("s8-first-correction-slot");
+ if(slot&&answers.length>=2){
+   slot.hidden=!(answers[0].classList.contains("shown")&&!answers[1].classList.contains("shown"));
+ }
+}
 function render(){
  slides.forEach((s,i)=>s.classList.toggle("active",i===current));
+ syncCorrectionLayout();
  $("counter").textContent=(current+1)+" / "+slides.length;
  $("prev").disabled=current===0;$("next").disabled=current===slides.length-1;
  const more=slides[current].querySelector(".answer:not(.shown)");
@@ -39,7 +47,7 @@ function resetCurrent(){
 $("reset-slide").addEventListener("click",resetCurrent);
 document.querySelectorAll("[data-reveal]").forEach(button=>{
  button.addEventListener("click",()=>{
-  const next=button.nextElementSibling;
+  const next=button.dataset.target?$(button.dataset.target):button.nextElementSibling;
   if(next?.classList.contains("answer")){next.classList.toggle("shown");syncCompassReveal();render()}
  })
 });
@@ -84,6 +92,7 @@ $("flip-magnet").addEventListener("click",()=>{magnetFlipped=!magnetFlipped;draw
 const domainDirections=["↗","←","↓","↑","↙","→"];
 let domainStage=0;
 function drawDomains(){
+ $("domain-applied-field").hidden=domainStage!==1;
  const grid=$("domain-grid");
  grid.replaceChildren();
  const directions=domainStage===0?domainDirections:domainStage===1?Array(6).fill("→"):["→","→","↗","→","→","↙"];
@@ -120,6 +129,16 @@ let fluxShown=false;
 function updateFlux(){
  const B=Number($("field-strength").value),A=Number($("flux-area-slider").value);
  const phi=B*A*1e-4;
+ const phiReference=B*24*1e-4;
+ const figResults=$("flux-figure-results");
+ figResults.style.display=fluxShown?"":"none";
+ figResults.setAttribute("aria-hidden",String(!fluxShown));
+ $("flux-reference-value").textContent="Φ₀ = "+fmt(phiReference*1000,2)+" mWb";
+ $("flux-area-value").textContent="Φ = "+fmt(phi*1000,2)+" mWb";
+ $("flux-mobile-reference").textContent="Φ₀ = "+fmt(phiReference*1000,2)+" mWb";
+ $("flux-mobile-current").textContent="Φ = "+fmt(phi*1000,2)+" mWb";
+ $("flux-mobile-labels").hidden=!fluxShown;
+ $("flux-svg").setAttribute("aria-label","Samma homogena magnetfält "+fmt(B,2)+" tesla ut ur bilden. Fast referensyta 24 kvadratcentimeter och justerbar jämförelseyta "+fmt(A,0)+" kvadratcentimeter."+(fluxShown?" Flödena genom var sin yta är "+fmt(phiReference*1000,2)+" respektive "+fmt(phi*1000,2)+" milliweber.":" Beräknat flöde är dolt tills eleven visar sambandet."));
  $("field-value").textContent=fmt(B,2)+" T";
  $("area-value").textContent=fmt(A,0)+" cm²";
  $("flux-result").innerHTML=fluxShown?
