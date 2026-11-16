@@ -1,5 +1,6 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
+> **Uppföljande figurkorrigering, Fy2 Jordens magnetfält bild 4–5.** Granskning efter lärarfeedback: jordgloben benämner **Geografiskt N och Geografiskt S**; sex pilar följer nu faktiska tangenter på yttre dipolfältlinjer från geografiskt S mot geografiskt N, där de går in i jorden. Magnetisk sydpol i det geografiska nordområdet avser stavmagnetanalogin, inte exakt läge för en pol. Missvisning D visas mellan geografiskt N och **kompassnålens nordändes lokala riktning**, inte riktningen till en pol. Etikett ändrad till **Kompassriktning**, D flyttad från fältpilen. Test för fältpilar och begrepp tillagt, HTML-export synkad. **Samma post #7, ingen ökning av 9/41.** Ny QA/publicering verifieras på rätt SHA.\n\n
 > **Fy2 – Jordens magnetfält · registerpost #7 · 16 november 2026.** **9/41 genomgångna, 9/41 för närvarande tekniskt och didaktiskt godkända enligt dokumenterade kravversioner; av dessa 4 enligt v2.1.** Status **KLAR FÖR ANVÄNDARGRANSKNING**, **inte** lärargodkänd eller klassrumsprövad. Alla **15** elevbilder granskade enligt v2.1, relevanta figurer och matematik kontrollerade före/efter, verkliga Chromium-bilder från 390, 768, 1280, 1440 och 1920 px öppnade och visuellt kontrollerade. Rättningar i [PR #81](https://github.com/jacobflinder/Lektioner/pull/81), slutlig gren-QA [#43912057494](https://github.com/jacobflinder/Lektioner/actions/runs/43912057494): **625/625 riktade PASS, 85 skärmbilder, 0 JS-fel, 0 externa anrop**; hela Fy2-sviten PASS. 69 generella layoutvarningar i kursens smoke-test, men **inga registrerade på den här lektionen**. Publiceringens main/Pages-verifiering redovisas efter sammanslagning. **Inga fler lektioner utan nytt ”nästa”.**
 
 
@@ -243,7 +244,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Klar för användargranskning (v2.1) |
 | 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Klar för användargranskning (v2.1) |
 | 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | Klar för användargranskning (v2.1) |
-| 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Klar för användargranskning (v2.1) |
+| 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Klar för användargranskning (v2.1; poler och missvisning förtydligade) |
 | 8 | Fysik 2 | Induktion | `fy2/kapitel-3/induktion/` | Ej påbörjad |
 | 9 | Fysik 2 | Magnetisk kraft och jordens magnetfält – räknestuga | `fy2/kapitel-3/raknestuga-kraft-jordfalt/` | Ej påbörjad |
 | 10 | Fysik 2 | Demonstrationer – elektromagnetism | `fy2/kapitel-3/demonstrationer-elektromagnetism/` | Ej påbörjad |

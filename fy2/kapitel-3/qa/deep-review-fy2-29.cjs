@@ -60,11 +60,25 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   test(await globeCaption.count()===1,'real caption separated from dipole SVG');
   const globeBox=await globeSvg.boundingBox(),captionBox=await globeCaption.boundingBox();
   test(!!globeBox&&!!captionBox&&captionBox.y>=globeBox.y+globeBox.height-1,'geographic south label not overlapped by dipole caveat');
+
+  const earthNames=await sc().locator('svg text').allTextContents();
+  test(earthNames.includes('Geografiskt N')&&earthNames.includes('Geografiskt S'),'globally labelled geographic poles');
+  test((await sc().innerText()).includes('magnetisk sydpol'),'magnetic south pole in dipole analogy explained');
+  const fieldTips=await sc().locator('svg [data-earth-field-arrow]').evaluateAll(es=>es.map(e=>({d:e.getAttribute('d'),marker:e.getAttribute('marker-end')})));
+  test(fieldTips.length===6,'all six separate field lines show directional tangent arrows');
+  for(let k=0;k<6;k++){
+    const d=fieldTips[k]?.d||'',m=d.match(/^M([\\d.-]+) ([\\d.-]+)L([\\d.-]+) ([\\d.-]+)$/),v=m?[+m[3]-m[1],+m[4]-m[2]]:null;
+    test(!!v&&v[1]<0&&fieldTips[k].marker==='url(#earth-field-head)','arrow '+k+' points north along external field, not reversed');
+  }
   // 5: separate top and side diagrams, orientation and accessible figures.
   await go(5);test(await sc().locator('.earth-angle-comparison svg').count()===2,'two distinct plane figures');
   test((await sc().innerText()).includes('horisontalplanet')&&(await sc().innerText()).includes('vertikalplanet'),'declination vs inclination axes explicit');
   test(await sc().locator('svg[aria-label*="Horisontal vy"]').count()===1,'top-view illustrated declination');
   test(await sc().locator('svg[aria-label*="Vertikal vy"]').count()===1,'side-view illustrated inclination');
+
+  const compassLabels=await sc().locator('.earth-angle-comparison svg').first().locator('text').allTextContents();
+  test(compassLabels.includes('Geografiskt N')&&compassLabels.includes('Kompassriktning')&&!compassLabels.includes('Magnetiskt N'),'declination is angle to local compass direction not pole');
+  test((await sc().innerText()).includes('kompassnålens nordändes riktning'),'declination prose based on horizontal B direction');
   test(!await sc().locator('[data-quiz]').isVisible(),'optional quiz hidden from classroom projection');
   await page.locator('#repetition').click();
   const q5=sc().locator('[data-quiz]');test(await q5.isVisible(),'declination-vs-inclination quiz available in repetition');
