@@ -10,7 +10,7 @@ const close=(a,b,t=.05)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
  let checks=0,shots=0,errors=[];const failures=[];
  page.on('pageerror',e=>errors.push(e.message));
  const ok=(v,m)=>{checks++;if(!v)failures.push(m)};
- const go=async n=>page.locator('#jump').selectOption(String(n-1));
+ const go=async n=>{await page.locator('#index-btn').click();await page.locator('#index-list button').nth(n-1).click();};
  const reset=async()=>page.locator('#reset-slide').click();
  const step=async n=>{for(let i=0;i<n;i++)await page.locator('#reveal-next').click()};
  const set=async(id,v)=>page.locator(id).evaluate((el,x)=>{el.value=String(x);el.dispatchEvent(new Event('input',{bubbles:true}))},v);
