@@ -127,6 +127,9 @@ function updateFlux(){
  figResults.setAttribute("aria-hidden",String(!fluxShown));
  $("flux-reference-value").textContent="Φ₀ = "+fmt(phiReference*1000,2)+" mWb";
  $("flux-area-value").textContent="Φ = "+fmt(phi*1000,2)+" mWb";
+ $("flux-mobile-reference").textContent="Φ₀ = "+fmt(phiReference*1000,2)+" mWb";
+ $("flux-mobile-current").textContent="Φ = "+fmt(phi*1000,2)+" mWb";
+ $("flux-mobile-labels").hidden=!fluxShown;
  $("flux-svg").setAttribute("aria-label","Samma homogena magnetfält "+fmt(B,2)+" tesla ut ur bilden. Fast referensyta 24 kvadratcentimeter och justerbar jämförelseyta "+fmt(A,0)+" kvadratcentimeter."+(fluxShown?" Flödena genom var sin yta är "+fmt(phiReference*1000,2)+" respektive "+fmt(phi*1000,2)+" milliweber.":" Beräknat flöde är dolt tills eleven visar sambandet."));
  $("field-value").textContent=fmt(B,2)+" T";
  $("area-value").textContent=fmt(A,0)+" cm²";
