@@ -1,6 +1,6 @@
 # Kravspecifikation v2.0 – figur-, visualiserings- och interaktionsgranskning
 
-**Projekt:** 41 interaktiva webblektioner · \`jacobflinder/Lektioner\`  
+**Projekt:** 41 interaktiva webblektioner · `jacobflinder/Lektioner`  
 **Fastställd:** 16 november 2026  
 **Omfattning:** Fy2, Ma4, Fy1 och Matematik – fortsättning nivå 1c (tidigare Ma3c)  
 **Läge vid revision:** 3 av 41 lektioner granskade; 38 återstår. Den äldre matematikgranskningen 41/41 är ett separat arbete.
@@ -19,7 +19,7 @@ En figur SKA tillföra en tydlig förståelsevinst. Fler bilder, fler knappar oc
 
 ## 2. Arbetsordning, mandat och avgränsning
 
-- Läs \`AGENTS.md\`, denna instruktion, \`granskning/figurer-interaktioner.md\`, aktuell lektion, lärarstöd, dess relevanta tester och nödvändiga källfiler **innan** åtgärder.
+- Läs `AGENTS.md`, denna instruktion, `granskning/figurer-interaktioner.md`, aktuell lektion, lärarstöd, dess relevanta tester och nödvändiga källfiler **innan** åtgärder.
 - Registret har **41 fasta, unika lektionsposter**. Registreringsnummer och antal färdiggranskade är olika saker: exempelvis är Polynomdivision post #23 men var den andra faktiskt granskade lektionen.
 - Grundordningen är **Fy2 → Ma4 → Fy1 → Matematik – fortsättning nivå 1c** i kursens undervisningsordning. **Användarens uttryckligen valda lektion eller URL har alltid företräde.**
 - Granska och ändra **exakt en lektion i taget**. En direkt rättelse i redan granskad lektion räknas inte som en ny granskad lektion.
@@ -45,9 +45,9 @@ Skapa den figur som behövs; använd inte en generell dekorativ illustration som
 
 - Varje figurs storheter, koordinater, tecken, vinklar, enheter, riktningar, axlar, noder, skala och referenspunkter SKA överensstämma med fysik och matematik.
 - **Granska beräkningskedjan som eleven faktiskt ser**, även när en separat tidigare matematikgranskning har godkänt lektionen: givet → antagande/modell → relevant samband → insättning → mellanled → slutsats → rimlighetskontroll. Kontrollera konstiga hopp, missvisande omskrivningar, olämpliga avrundningar och om figuren visar något annat än mellanledet.
-- Matematiska steg SKA vara tillräckligt fullständiga för elever som behöver mer stöd; det är inte godkänt att en animation visar rätt svar men hoppar över den matematik de ska lära sig. Behåll korrekt MathML och separata uttryck med läsbart mellanrum; följ \`AGENTS.md\` för matematiktypografi.
+- Matematiska steg SKA vara tillräckligt fullständiga för elever som behöver mer stöd; det är inte godkänt att en animation visar rätt svar men hoppar över den matematik de ska lära sig. Behåll korrekt MathML och separata uttryck med läsbart mellanrum; följ `AGENTS.md` för matematiktypografi.
 - Om eleven ska bestämma en tangent, fältriktning eller spänningsfördelning SKA en efterföljande lösningsfigur visa **samma punkt, samma avstånd och den rätta riktningen**.
-- Påstådda likvärdigheter måste vara riktiga: till exempel \`P = D·Q + R\`, samma potential mellan parallellgrenarnas två gemensamma noder, eller att en ersättningsresistor ger samma totalström vid samma matningsspänning.
+- Påstådda likvärdigheter måste vara riktiga: till exempel `P = D·Q + R`, samma potential mellan parallellgrenarnas två gemensamma noder, eller att en ersättningsresistor ger samma totalström vid samma matningsspänning.
 - Alla nya bilder SKA kontrolleras mot oberoende räknefall, inte enbart mot den aktuella programmets egna värden.
 - Om läraren uttryckligen väljer att skjuta upp en avvikelse SKA den stå kvar som **öppen ämnesanmärkning**, inte döljas under ”helt perfekt”.
 
@@ -74,7 +74,7 @@ För högerhandsregeln kring en rak ledare SKA följande vara tydligt och fören
 
 - Riktig **höger hand** runt ledaren; **tummen längs konventionell strömriktning**.
 - Böjda fingrar visar magnetfältets cirkulationsriktning runt ledaren.
-- Betraktelse från rätt ände kopplas stegvis till ledarens tvärsnitt, \`⊙\` respektive \`⊗\` och fältets tangentriktning i en given punkt.
+- Betraktelse från rätt ände kopplas stegvis till ledarens tvärsnitt, `⊙` respektive `⊗` och fältets tangentriktning i en given punkt.
 - **Själva greppet visas när regeln introduceras**, innan eleven ska tillämpa den. **Elevuppgiftens specifika fältpil** och svar visas först efter eget försök.
 - Användarens foto av höger hand runt en sladd är referens för Fy2-piloten; dess orientering bevaras.
 
@@ -95,7 +95,7 @@ Inspektera inte bara SVG-värden; granska **synliga linjeändar och komponentfor
 
 ## 8. Visuella strukturer i matematik
 
-För polynomdivision och andra uppställningar SKA **termer med samma grad ligga i samma visuella kolumn**. Visa vilken kolumn som är aktuell utan att avslöja elevens nästa steg. En nollkoefficient, exempelvis \`0x²\`, SKA behålla sin gradplats.
+För polynomdivision och andra uppställningar SKA **termer med samma grad ligga i samma visuella kolumn**. Visa vilken kolumn som är aktuell utan att avslöja elevens nästa steg. En nollkoefficient, exempelvis `0x²`, SKA behålla sin gradplats.
 
 Låt elevens arbetsgång och lösningsfigur följa samma steg: **välj aktuell term → multiplicera korrekt → subtrahera hela produkten → kontrollera ny rest → fortsätt eller stanna**. Teckenfel ska vid återkoppling kunna visas i en korrigerad uppställning eller en relevant före–efter-figur, inte bara beskrivas i ord.
 
@@ -120,10 +120,10 @@ För varje reglage, växling, animation och knapp SKA en separat kontrollmatris 
 
 - Reglage, resultattext, formel, riktning, färgmarkering, graf, punkt, radie, nod och figur SKA beskriva **samma tillstånd**.
 - Testa min/max, relevanta mellanvärden, dubblering/halvering, noll när relevant, tecken- och riktningsbyte, mode-byte, upprepade snabba ändringar och reset.
-- Testa även **kombinationer** av reglage: \`B ∝ I/r\`, \`I = U/R\`, \`U = U₁ + U₂\` i serie, \`I = I₁ + I₂\` parallellt, \`P = D·Q + R\` vid polynomdivision.
+- Testa även **kombinationer** av reglage: `B ∝ I/r`, `I = U/R`, `U = U₁ + U₂` i serie, `I = I₁ + I₂` parallellt, `P = D·Q + R` vid polynomdivision.
 - **Mät faktiskt renderad SVG-geometri och visade pixlar.** Att texten visar rätt värde eller att ett SVG-attribut uppdateras räcker inte om elementet inte syns, ligger under något annat eller ritas på fel plats.
 - Om en pil avsiktligt endast anger **riktning** SKA det framgå och dess längd inte feltolkas som storlek. För storleksjämförelse används förklarad, konsekvent och helst fast skala; automatisk omskalning får inte dölja en förändring.
-- Kontrollera \`hidden\`, \`display\`, CSS, överlappning, lager och att dynamiskt återskapade DOM-delar fortfarande syns.
+- Kontrollera `hidden`, `display`, CSS, överlappning, lager och att dynamiskt återskapade DOM-delar fortfarande syns.
 
 Animationer SKA testas vid flera verkliga mellanlägen, inte enbart start och slut. Paus, stegning, återspelning och återställning testas när sådana funktioner finns.
 
@@ -154,7 +154,7 @@ Ta bort **intern elevirrelevant metadata** som ”Original: [presentationsfil].p
 
 **C. Mänsklig inspektion av riktiga renderingar:** Öppna och granska faktiska skärmbilder eller sidan i webbläsare vid mobil, dator och projektor. Titta **både på figurens fysik och på om eleven kan tolka den**. Bekräfta att figuren finns där den behövs, är rätt orienterad och visas vid rätt steg. Markera kvarvarande layoutvarningar uttryckligen; en generell grön testsvit får inte gömma dem.
 
-**D. Publicering och regression:** Gör alla relaterade ändringar med tillhörande tester på en separat gren, enligt \`AGENTS.md\`. Kontrollera senaste \`main\` och bevara parallellt arbete; aldrig force-push. Slå samman en sammanhållen, godkänd ändring. Verifiera **full kurs-QA och GitHub Pages på samma publicerade lektionskod-SHA**. Skilj tydligt på pågående, misslyckad och godkänd CI.
+**D. Publicering och regression:** Gör alla relaterade ändringar med tillhörande tester på en separat gren, enligt `AGENTS.md`. Kontrollera senaste `main` och bevara parallellt arbete; aldrig force-push. Slå samman en sammanhållen, godkänd ändring. Verifiera **full kurs-QA och GitHub Pages på samma publicerade lektionskod-SHA**. Skilj tydligt på pågående, misslyckad och godkänd CI.
 
 En ändring av enbart dokumentation behöver inte få alla kurslektioner nygranskade, men dokumentet och publiceringen måste verifieras. En ändring i lektionskod kräver alltid relevant regression.
 
@@ -177,7 +177,7 @@ Markera **ÅTGÄRD KRÄVS** om något av följande kvarstår:
 
 ## 15. Arbetsgång för exakt en lektion
 
-1. Läs senaste kod, \`AGENTS.md\`, denna specifikation och permanenta loggen.
+1. Läs senaste kod, `AGENTS.md`, denna specifikation och permanenta loggen.
 2. Fastställ lärandemål och gör en **bild-för-bild-inventering**, inklusive det som saknas.
 3. Skriv en konkret fellista, risken för elevens förståelse och vad som ska vara synligt **före/efter** återkoppling.
 4. Definiera förväntade ämnessamband, grafisk geometri och oberoende testfall.
@@ -186,20 +186,20 @@ Markera **ÅTGÄRD KRÄVS** om något av följande kvarstår:
 7. Granska den faktiska renderingen i alla föreskrivna storlekar; vid behov justera och testa igen.
 8. Kör riktad QA och full relevant kursregression på arbetsgrenen.
 9. Inspektera skärmbilderna och verifiera att resultaten **är begripliga**, inte bara programtekniskt riktiga.
-10. Publicera genom sammanhållen PR/commit, och verifiera \`main\`, hela QA-sviten och Pages på rätt SHA.
-11. Uppdatera \`granskning/figurer-interaktioner.md\` med före/efter, fynd, fix, testbevis, öppna begränsningar och slutstatus.
+10. Publicera genom sammanhållen PR/commit, och verifiera `main`, hela QA-sviten och Pages på rätt SHA.
+11. Uppdatera `granskning/figurer-interaktioner.md` med före/efter, fynd, fix, testbevis, öppna begränsningar och slutstatus.
 12. Redovisa **endast denna lektion** i chatten och **stanna** tills användaren väljer nästa.
 
 ## 16. Permanent register och rapportmall
 
-Loggen \`granskning/figurer-interaktioner.md\` SKA överst visa:
+Loggen `granskning/figurer-interaktioner.md` SKA överst visa:
 
 - **Genomfört antal av 41** och **senast behandlad lektions titel/registreringsnummer**, utan att blanda ihop dessa.
-- Aktuell status: \`ej påbörjad\`, \`analyseras\`, \`åtgärdas\`, \`verifieras\`, \`åtgärd krävs\`, \`klar\` eller \`blockerad\`.
+- Aktuell status: `ej påbörjad`, `analyseras`, `åtgärdas`, `verifieras`, `åtgärd krävs`, `klar` eller `blockerad`.
 - **Vad som saknades eller var fel**, hur elevförståelsen påverkades, vad som ändrades och vilka ursprungliga moment som bevarades.
 - **Vad som faktiskt är verifierat**: egna kontrollfall, kod/ämnescheck, Chromium-/pixelresultat, manuellt granskade bilder, tillstånd före/efter, skärmstorlekar, full regression, commit och Pages. Redovisa uttryckligen det som ännu inte testats.
 - **Öppna anmärkningar**, inklusive problem läraren uttryckligen skjutit upp; skilj visuellt godkännande från full ämnesgranskning.
-- **Nästa handling** och om användarens \`nästa\` inväntas. Ange föreslagen nästa post men påbörja den aldrig automatiskt.
+- **Nästa handling** och om användarens `nästa` inväntas. Ange föreslagen nästa post men påbörja den aldrig automatiskt.
 
 Avsluta rapporten med:
 
@@ -215,8 +215,8 @@ Avsluta rapporten med:
 
 **Fy2 – Ström ger magnetfält:** Rätt fysikord och ett ritat tvärsnitt räckte inte när handen var svårtolkad, greppet dök upp för sent eller lösningsfiguren uteblev. Rätt ordning: **visa greppet → låt eleven förutsäga → avslöja rätt fältpil**, med foto/hand, tvärsnitt och förklaring nära varandra. ”Hitta felet” kräver en korrigerad efterbild. En dold SVG kan ha rätt attribut och tal men ändå vara osynlig.
 
-**Ma4 – Polynomdivision:** Matematiskt korrekt uppställning räckte inte när gradkolumner och aktivt steg var otydliga. Lösningsfigurer måste ligga efter rätt MathML-steg **också efter** att dynamiska matematikskript byggt om DOM. Teckenfel och \`0x²\` kräver konkret visuell återkoppling, inte enbart text.
+**Ma4 – Polynomdivision:** Matematiskt korrekt uppställning räckte inte när gradkolumner och aktivt steg var otydliga. Lösningsfigurer måste ligga efter rätt MathML-steg **också efter** att dynamiska matematikskript byggt om DOM. Teckenfel och `0x²` kräver konkret visuell återkoppling, inte enbart text.
 
 **Fy1 – Serie- och parallellkoppling:** Korrekt beräkning räckte inte när spänningsfall och strömmar saknade synlig koppling till rätt resistor/nod, och när ersättningskretsens relation till originalet inte framgick. Ett tekniskt test kunde dessutom missa att vita batteribakgrunder dolde de faktiska ledningsanslutningarna. Därför granskas **topologi, verklig synlighet, varje förekomst och elevirrelevanta källfilnamn**.
 
-**Samlad slutsats:** **Förekomst ≠ begriplighet. Korrekt tal ≠ korrekt bild. Grön CI ≠ färdig lektion.** En lektion får status \`klar\` först när alla relevanta krav ovan är uppfyllda och publiceringen är verifierad.
+**Samlad slutsats:** **Förekomst ≠ begriplighet. Korrekt tal ≠ korrekt bild. Grön CI ≠ färdig lektion.** En lektion får status `klar` först när alla relevanta krav ovan är uppfyllda och publiceringen är verifierad.
