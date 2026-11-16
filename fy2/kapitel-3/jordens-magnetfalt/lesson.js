@@ -68,9 +68,11 @@ function coilSetup(){
  '<circle cx="525" cy="183" r="19" fill="white" stroke="#466a79" stroke-width="3"/>'+
  T(517,190,'?','#31596b',23)+
  '<path d="M368 310H659" stroke="#9ebdc4" stroke-width="2" stroke-dasharray="6 5"/>'+
- T(382,338,'Cirkelformad spole · nålen i centrum','#31596b',16)+'</g>';
- return S('<path d="M346 38V341" stroke="#c0d9df" stroke-width="2"/>'+top+side,690,360,
- 'Två vyer av spolen: uppifrån syns dess vertikala nord–syd-plan från kanten, från öster syns den cirkelformad med kompassen i centrum. Strömriktning och kompassens slutriktning är ännu inte givna.');
+ T(382,338,'Cirkelspole · kompass i centrum','#31596b',16)+'</g>';
+ return '<div class="earth-coil-pair">'+
+  S(top,345,360,'Uppifrån: den vertikala cirkelspolen sedd från kanten, i nord–syd-planet med kompassen i centrum.')+
+  S('<g transform="translate(-345 0)">'+side+'</g>',345,360,'Från öster: samma spole syns som en cirkel med en kompass i centrum. Inget slutläge visas.')+
+  '</div>';
 }
 $('earth-compass-predict').innerHTML=coilSetup();
 
@@ -98,17 +100,28 @@ $("earth-example-compass").innerHTML=compass(Bh,solB,true).html;
 /* Prediction-only plot: B_h is the UNKNOWN of this inverse problem.
    Do not leak B_h=18 μT by scaling an unlabelled arrow to that solution. */
 function compassWithUnknownBh(){
- const cx=320,cy=207;
- const base='<path d="M65 '+cy+'H625" stroke="#b6cdd4" stroke-width="2" fill="none"/>'+
+ const narrow=window.matchMedia('(max-width:550px)').matches;
+ const cx=narrow?190:320,cy=207,w=narrow?390:690;
+ const end=narrow?cx+110:465,cap=narrow?cx+53:420;
+ const base='<path d="M'+(narrow?25:65)+' '+cy+'H'+(w-65)+'" stroke="#b6cdd4" stroke-width="2" fill="none"/>'+
  '<path d="M'+cx+' 45V318" stroke="#91b9c4" stroke-width="2" fill="none" stroke-dasharray="7 7"/>'+
- A(cx,cy,465,cy,'#bd704b',5)+T(420,241,'Bsp = 18 μT','#a56546',20)+
- '<g data-unknown-Bh>'+T(339,122,'Bₕ = ?','#087d96',23)+'</g>'+
- T(32,44,'SETT UPPIFRÅN','#3d6475',17)+
- T(474,334,'Magnetiskt N ↑','#366271',17)+
- T(35,312,'Bₕ är okänt · pilar ej skalenliga','#476b79',17);
- return S(base,690,370,'Öppen kompassuppgift: spolfältet Bsp är känt 18 mikrotesla mot öster, magnetiskt norr är uppåt, men Bh har ännu inte bestämts. Ingen påhittad skalenlig Bh-pil, resultant eller kompassnål avslöjar svaret.');
+ A(cx,cy,end,cy,'#bd704b',5)+T(cap,241,'Bsp = 18 μT','#a56546',20)+
+ '<g data-unknown-Bh>'+T(cx+19,122,'Bₕ = ?','#087d96',23)+'</g>'+
+ T(24,44,'SETT UPPIFRÅN','#3d6475',17)+
+ T(narrow?178:474,334,'Magnetiskt N ↑','#366271',17)+
+ T(narrow?19:35,312,'Bₕ är okänt · pilar ej skalenliga','#476b79',narrow?15:17);
+ return S(base,w,370,'Öppen kompassuppgift: spolfältet Bsp är känt 18 mikrotesla mot öster, magnetiskt norr är uppåt, men Bh har ännu inte bestämts. Ingen skalenlig Bh-pil, resultant eller kompassnål avslöjar svaret.');
 }
 $("earth-example-reverse").innerHTML=compassWithUnknownBh();
 $("earth-example-reverse-answer").innerHTML=compass(18,18,true).html;
 resetComponents();resetCompass();
+/* Responsive diagrams re-render when the lesson changes between phone, tablet and projector. */
+window.addEventListener('resize',()=>{
+ drawComponents();drawCompass();
+ $("earth-triangle").innerHTML=compass(Bh,47.1,true).html;
+ $("earth-example-compass").innerHTML=compass(Bh,solB,true).html;
+ $("earth-example-reverse").innerHTML=compassWithUnknownBh();
+ $("earth-example-reverse-answer").innerHTML=compass(18,18,true).html;
+ $("earth-compass-predict").innerHTML=coilSetup();
+});
 })();
