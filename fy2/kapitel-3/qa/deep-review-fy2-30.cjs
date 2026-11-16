@@ -141,6 +141,8 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   check(await slide().locator('#radius-figure [data-radius-force]').getAttribute('visibility')==='visible','radius answer figure reveals F after own sketch');
   const ff=await vpath('#radius-figure [data-radius-force] path');check(ff?.dx<0&&near(ff.dy,0,.01),'rendered force vector points from P towards circle center');
   check(!await slide().locator('.answer').nth(1).isVisible(),'second equation not leaked');
+  const questionBeforeAnswer=await slide().locator('.question').first().evaluate(el=>!!(el.compareDocumentPosition(el.closest('.slide').querySelectorAll('button[data-reveal]')[2])&Node.DOCUMENT_POSITION_FOLLOWING));
+  check(questionBeforeAnswer,'predict doubled speed and B BEFORE final radius formula revealed');
   await step(1);check(await slide().locator('.answer').nth(1).isVisible(),'mv²/r=qvB shown only at second step');
   await step(1);
   check(await slide().locator('.answer').nth(2).isVisible(),'radius result revealed third');
@@ -166,7 +168,9 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()===0,'figure stays prediction-only while substitution visible');
   await slide().locator('button[data-reveal]').nth(1).click();
   check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()>=1,'proton reference force appears with second answer');
-  const pF=await vpath('#mag-proton svg path[stroke="#be6a42"]');check(pF?.dy<0,'proton geometric F upward');
+  const pF=await vpath('#mag-proton svg path[stroke="#be6a42"]');
+  const pv=await vpath('#mag-proton svg path[stroke="#20886d"]');
+  check(pF?.dy<0&&near(pF.dx,0,.01)&&pv?.dx>0&&near(pv.dy,0,.01),'SOLVED proton force upward and initial velocity exactly right at same point');
   check((await slide().locator('.answer').nth(1).innerText()).includes('9,6'),'proton F=9.6e-15 N');
   check(near(1.6e-19*3e5*.2,9.6e-15,1e-26),'independent proton force numeric');
   await reset();check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()===0,'proton force hidden again on reset');
@@ -177,7 +181,8 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   check(await slide().locator('.particle-equation-steps math').count()===4,'electron computation has 4 independent math lines');
   check((await slide().innerText()).includes('nedåt'),'electron force downward because q negative');
   const electronArrow=await vpath('#mag-electron-answer svg path[stroke="#be6a42"]');
-  check(electronArrow?.dy>0,'electron feedback contains same field and downward force arrow immediately beside mathematics');
+  const electronV=await vpath('#mag-electron-answer svg path[stroke="#20886d"]');
+  check(electronArrow?.dy>0&&near(electronArrow.dx,0,.01)&&electronV?.dx>0&&near(electronV.dy,0,.01),'SOLVED electron force exactly down and velocity exactly right at SAME initial point');
   check(near(1.6e-19*2e6*.04,1.28e-14,1e-25),'independent electron F numeric');
   const q12=slide().locator('[data-quiz]');check(!await q12.isVisible(),'electron self-test optional in classroom');
   await page.locator('#repetition').click();await q12.locator('[data-choice="1"]').click();check((await q12.locator('.feedback').innerText()).includes('Inte riktigt'),'wrong mass dependence diagnostic');

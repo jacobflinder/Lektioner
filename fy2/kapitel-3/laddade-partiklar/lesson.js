@@ -36,7 +36,7 @@ function attachAnswerFigure(containerId,answerIndex,renderer){
  root.addEventListener('lesson:reset',draw);
  draw();
 }
-attachAnswerFigure('mag-proton',1,show=>staticParticle(1,show));
+attachAnswerFigure('mag-proton',1,show=>particle(1,0,1,1,1,show));
 attachAnswerFigure('mag-conductor-answer',0,show=>conductor(1,show));
 
 /* A voluntary enrichment must not remain open after the lesson answer is hidden. */
@@ -74,5 +74,5 @@ $('radius-figure').innerHTML=circleProof();
 const rSlide=$('radius-figure').closest('.slide'),rAnswer=rSlide.querySelector('.answer'),rForce=$('radius-figure').querySelector('[data-radius-force]');
 function syncRadius(){const on=rAnswer.classList.contains('open');rForce.setAttribute('visibility',on?'visible':'hidden');rForce.setAttribute('aria-hidden',String(!on))}
 new MutationObserver(syncRadius).observe(rAnswer,{attributes:true,attributeFilter:['class']});rSlide.addEventListener('lesson:reset',syncRadius);syncRadius();
-$('mag-electron-answer').innerHTML=staticParticle(-1,true);
+$('mag-electron-answer').innerHTML=particle(-1,0,1,1,1,true);
 })();
