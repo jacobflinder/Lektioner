@@ -165,8 +165,26 @@ fs.mkdirSync('fy2-qa-screenshots',{recursive:true});
   test((await offline.locator('#counter').innerText()).trim()==='1 / 10','exported lesson starts on original slide 1');
   test(await offline.locator('section.slide').count()===10,'all ten PDF slides preserved in offline export');
   test(await offline.locator('#domain-grid span').count()===6,'six domain tiles regenerated exactly once in exported HTML');
-  test(await offline.locator('#flux-dots circle').count()===132,'66 two-circle B-field dots regenerated once offline');
-  test(await offline.locator('#example-dots circle').count()===30,'15 two-circle example dots regenerated once offline');
+  const offlineField=()=>offline.locator('#flux-dots circle').evaluateAll(ns=>ns.map(n=>({
+    x:n.getAttribute('cx'),y:n.getAttribute('cy'),r:n.getAttribute('r'),stroke:n.getAttribute('stroke'),opacity:n.getAttribute('opacity')
+  })));
+  const offlineDots=await offlineField();
+  test(offlineDots.length>40&&offlineDots.length<90&&offlineDots.every(d=>d.r==='3.7'&&d.stroke===null&&d.opacity===null),
+    'exported field regenerates one constant-sized solid dot per sampled field direction, no rings');
+  const offlineExample=await offline.locator('#example-dots circle').evaluateAll(ns=>ns.map(n=>({r:n.getAttribute('r'),stroke:n.getAttribute('stroke')})));
+  test(offlineExample.length===15&&offlineExample.every(d=>d.r==='4'&&d.stroke===null),
+    'exported calculation picture contains 15 unringed, single-dot B symbols');
+  const adjustOffline=async(id,value)=>offline.locator('#'+id).evaluate((e,v)=>{e.value=String(v);e.dispatchEvent(new Event('input',{bubbles:true}))},value);
+  await adjustOffline('field-strength',.8);
+  const intense=await offlineField();
+  test(intense.length>offlineDots.length*1.8,'offline export visibly increases dot COUNT, not symbol size, as B doubles');
+  test(intense.every(d=>d.r==='3.7'&&d.stroke===null&&d.opacity===null),
+    'offline field dots remain identical at higher B');
+  await adjustOffline('flux-area-slider',48);
+  test(JSON.stringify(await offlineField())===JSON.stringify(intense),
+    'offline export changes only surface when A doubles, leaving field density and positions unchanged');
+  await adjustOffline('field-strength',.4);
+  await adjustOffline('flux-area-slider',24);
   await offline.locator('#next').click();
   test((await offline.locator('#counter').innerText()).trim()==='2 / 10','offline slide navigation works');
   test(await offline.locator('#compass-needle[aria-hidden="true"]').count()===1,'offline prediction keeps compass orientation concealed');
