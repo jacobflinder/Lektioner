@@ -1,5 +1,7 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
+> **Fy2 Spolar och solenoider, post #5 · verifieras.** Samtliga 15 elevbilder är genomgångna lokalt enligt v2.1. **Genomgångna 7 av 41**, inklusive den lokalt genomgångna posten. **Publicerade och bedömda enligt respektive kravversion 6 av 41.** Slutstatus sätts efter kurs-QA och verifierad publicering.
+
 > **Fy2 Räknestuga, post #4 · klar för användargranskning.** Genomgångna **6 av 41**. För närvarande **6 av 41** uppfyller granskningskraven för respektive dokumenterad version. **1 av 41** är verifierad enligt v2.1. De fem tidigare posterna behåller sina historiska bedömningar enligt tidigare kravversioner. Lektionen är publicerad via [PR #73](https://github.com/jacobflinder/Lektioner/pull/73).
 
 > **Eftergranskningsrättelse av post #3 KLAR (2026-11-16):** magnetfältets prickar i Fy2 Permanentmagneter och flöde är **utan ringar**, och större B ger **fler lika stora prickar** över hela fältet. Ändrad A lämnar prickarna orörda och ändrar bara hur många som omsluts. Rättat även statiska figurer på bild 6, 8 och 10. **281/281 riktade kontroller**, 29 skärmbilder, 0 JavaScript-fel samt hela Fy2-regressionen **SUCCESS** på main och Pages för samma SHA. [PR #72](https://github.com/jacobflinder/Lektioner/pull/72) · kod-SHA `7bf9d7caf190c042b788c7f964164934fc0c1ba3`. **Fortfarande 5/41 färdiga**, ingen ny lektionsgranskning.
@@ -127,6 +129,30 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 - **Publicering verifierad:** [Fy2:s fulla webbläsarsvit på main](https://github.com/jacobflinder/Lektioner/actions/runs/43872271201) och [GitHub Pages](https://github.com/jacobflinder/Lektioner/actions/runs/43872271139) passerade på samma lektionskod `47b6d28f0e95a2630157c823c6ff96efdcdb9757`. Den [publicerade lektionsfilen](https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/raknestuga/) matchade den granskade filen byte för byte. Kursens smoke-test rapporterade 68 layoutvarningar och 0 fel. Vid 768 px behöver mindmap och arbetsbild rullas vertikalt. De kritiska återkopplingsfigurerna med bildtexter har verifierats i klassrumsstorlek.
 - **Nästa:** Föreslagen post #5, Spolar och solenoider. Inväntar användarens besked.
 
+## Figur- och interaktionsgranskning v2.1 – Fy2 Spolar och solenoider (post #5)
+
+| Elevbild | Underlag och åtgärd |
+|---|---|
+| 01 | Två ledartvärsnitt och referenspunkten P är startuppgiften. De ritade strömsymbolerna anges med text. |
+| 02 | De två bidragen pekar åt höger i P och adderas. Pilarna hör till återkopplingen. |
+| 03 | Lektionsmålen behandlas i text. Figurerna visas när de respektive situationerna introduceras. |
+| 04 | Ett helt strömvarv ersätter den återanvända tvåledarfiguren. Eleven förutsäger B i centrum före facit. |
+| 05 | Samma varv från sidan och från höger. Strömvändning byter strömsinne och döljer fältfacit tills nästa försök. |
+| 06 | Användarens foto visar högerhanden runt en verklig spole med pil för strömmen I längs fingrarna och pil för B åt vänster längs spolens axel. Vyn från sidan och vyn från höger visar samma strömfall som fotot. Bilden bäddas in vid HTML-exporten. PhET-länken finns kvar. |
+| 07 | Samma lindningsgeometri före och efter att mjukjärnskärnan sätts in. Eleverna får förutsäga ändringen innan den villkorade förklaringen visas. |
+| 07B | Den kvalitativa kärnmodellen har slutna schematiska fältlinjer med returriktning. Strömvändning vänder fält och poler. |
+| 08 | Permeabilitet, modellvillkor och mättnad läses tillsammans. Illustrationerna på föregående bild visar uppställningen. |
+| 09 | r och L markeras direkt i respektive geometri. Efter eget modellval kan båda formlerna ses med sina figurer. |
+| 10 | Lång luftsolenoid med fast linjär B-stapel. Figuren stannar bredvid beräkningen i bred vy. |
+| 10B | Återkopplingen visar pilar i förhållandet 1:2. Dubbelt B vid samma N och L kräver 1,60 A i stället för 0,80 A. |
+| 11 | Platt lindning vars geometri är oförändrad vid strömvändning. Fält visas med enkla prickar och kryss; högre B inom samma geometri lägger till lika stora symboler stegvis. Stapeln avser B i centrum. |
+| 12 | Radien visas från centrum mot lindningen intill de separata MathML-stegen. |
+| 13 | Utcheckningens återkopplingsbild visar halv pil åt motsatt håll. Bokuppgifter, läxa, läsning och Socrative bevaras. |
+
+- **Oberoende fysikkontroll:** För lång luftsolenoid ger μ₀NI/L ≈ 1,005 mT vid startvärdena och cirka 0,0419–10,053 mT i testade gränsfall. För platt luftspole ger μ₀NI/(2r) ≈ 62,8 μT vid startvärdena och cirka 1,26–628 μT i testade gränsfall. Testfallen täcker också dubblering/halvering, byte av riktning, återställning och visat/dolt facit. [OpenStax om strömvarv](https://openstax.org/books/university-physics-volume-2/pages/12-4-magnetic-field-of-a-current-loop) · [OpenStax om solenoider](https://openstax.org/books/university-physics-volume-2/pages/12-6-solenoids-and-toroids)
+- **Lokal verifiering:** 535 riktade kontroller, 97 skärmbilder, inga JavaScript-fel eller externa förfrågningar i lektionstestet. AI öppnade renderingar i 390×844, 768×1024, 1280×800 och 1920×1080. Hela Fy2-sviten passerade lokalt med Chromium. Lektionens riktade test kördes igen efter en sista justering av figurklippningen. Längre beräkningar kan kräva vertikal rullning. Uppföljning på fysisk projektor och i klassrum återstår.
+- **Publicering:** Väntar på kurs-QA och Pages för publicerad kodversion. Föreslagen nästa post är #6, Laddade partiklar i magnetiska fält.
+
 ## Fast granskningsregister
 
 **Inventerat: 41/41** unika publicerade lektionskataloger, Fysik 2 = 10, Matematik 4 = 15, Fysik 1 = 6, Matematik fortsättning nivå 1c = 10. Undervisningsordning hämtad från respektive kapitels index. Undantag: **Ström ger magnetfält**, normalt Fy2-lektion 04, ligger uttryckligen först som pilot och förekommer inte igen. Räknestugor och demonstrationspass följer det läge där de står i Fy2-indexet. Enhetscirkeln behandlas som förberedande Ma4-repetition eftersom den visas före 4.1 i indexet. `mato1c` betyder Ma3c/Gy25 fortsättning nivå 1c.
@@ -137,7 +163,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | **KLAR · 4:e granskade · 68 riktade v2 PASS + full Fy2-QA/Pages** |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | **KLAR · lärarrättelse av fältprickar publicerad · 281 riktade PASS + full Fy2-QA/Pages** |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Klar för användargranskning (v2.1) |
-| 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Ej påbörjad |
+| 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Verifieras lokalt, publicering återstår |
 | 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | Ej påbörjad |
 | 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Ej påbörjad |
 | 8 | Fysik 2 | Induktion | `fy2/kapitel-3/induktion/` | Ej påbörjad |
