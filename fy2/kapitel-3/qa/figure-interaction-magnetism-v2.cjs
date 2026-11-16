@@ -77,6 +77,25 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
    ok(Math.abs(rp/ref-A/24)<.005,'visible pixel widths actually track real relative areas '+B+'/'+A);
    ok((await page.locator('#flux-svg').getAttribute('aria-label')).includes(A+' kvadratcentimeter'),'dynamic figure announces current surface area '+A);
   }
+  // Rendered visual comprehension: numeric answers must NOT lie on top
+  // of the dotted field or escape their own white background cards.
+  await set('field-strength',.8);await set('flux-area-slider',50);
+  const legibility=await page.locator('#flux-svg').evaluate(svg=>{
+   const dots=[...svg.querySelectorAll('#flux-dots circle')];
+   const lastDotBottom=Math.max(...dots.map(x=>x.getBoundingClientRect().bottom));
+   return ['reference','current'].map((name,i)=>{
+    const card=svg.querySelector('[data-flux-label="'+name+'"]').getBoundingClientRect();
+    const value=svg.querySelector(i?'#flux-area-value':'#flux-reference-value').getBoundingClientRect();
+    return {name,gap:card.top-lastDotBottom,hasWhiteCard:card.width>100 && card.height>20,
+     inside:value.x>=card.x+3&&value.right<=card.right-3&&value.y>=card.y+3&&value.bottom<=card.bottom-3};
+   });
+  });
+  for(const item of legibility){
+   ok(item.hasWhiteCard,'computed flux has an opaque, legible numeric card '+item.name);
+   ok(item.gap>=8,'card is visibly clear of every B-field dot '+item.name+' gap '+item.gap);
+   ok(item.inside,'value fits fully inside white card in rendered pixels '+item.name);
+  }
+  await screenshot('05-legible-flux-labels');
   await set('field-strength',.4);await set('flux-area-slider',48);
   await screenshot('05-flux-48');
   await page.locator('#flux-show').click();
