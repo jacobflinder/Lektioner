@@ -55,7 +55,7 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   // 4: field lines go from geographic south to geographic north outside earth, dip down in Sweden.
   await go(4);test(await sc().locator('svg path[d^="M310 335"]').count()===6,'six physical dipole field paths preserved');
   for(const d of await sc().locator('svg path[d^="M310 335"]').evaluateAll(a=>a.map(x=>x.getAttribute('d'))))test(d.endsWith('310 50'),'northward outside-field line endpoint');
-  test((await sc().innerText()).includes('nedåt')&&(await sc().innerText()).includes('norra'),'geographic dip in Sweden stated');
+  test((await sc().innerText()).includes('nedåt')&&(await sc().innerText()).includes('geografiska nordområdet'),'dip in Sweden and geographic northern field-line entry stated');
   const globeCaption=sc().locator('.earth-globe-caption'),globeSvg=sc().locator('.diagram svg');
   test(await globeCaption.count()===1,'real caption separated from dipole SVG');
   const globeBox=await globeSvg.boundingBox(),captionBox=await globeCaption.boundingBox();
