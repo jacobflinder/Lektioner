@@ -34,6 +34,12 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
   ok(await page.locator('section.slide .review').count()===8,'anonymous repetition quizzes unchanged');
   // Compass arrows remain deliberately hidden until field explanation.
   await go(2);await reset();
+  const demo=page.locator('.slide.active .panel a[href*="physicsatschool"]');
+  ok(await demo.count()===1&&await demo.isVisible(),'Physics at School direct Magnet link visible inside slide 2 demonstration');
+  ok(await demo.getAttribute('href')==='https://www.vascak.cz/data/android/physicsatschool/templateimg.php?l=en&s=mag_magnet','demonstration navigates to exact original Magnet animation');
+  ok(await demo.getAttribute('target')==='_blank'&&(await demo.getAttribute('rel')).includes('noopener'),'demonstration opens separately and safely');
+  ok((await demo.getAttribute('aria-label')).includes('Magnet'),'link announces target clearly for keyboard and screen reader');
+  ok((await page.locator('.slide.active .panel').last().innerText()).includes('Gör samma förutsägelse'),'original demonstration timing remains');
   ok(await page.locator('#compass-needle').getAttribute('aria-hidden')==='true','compass needle initially hidden');
   await page.locator('.slide.active [data-reveal]').click();
   ok(await page.locator('#compass-needle').getAttribute('aria-hidden')==='false','compass north end visible after prediction');
