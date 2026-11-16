@@ -27,7 +27,11 @@ const close=(a,b,t=.05)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
   await go(4);await reset();
   ok((await page.locator('.slide.active svg text').allTextContents()).some(t=>t.includes('U = 250 V (exemplet)')),'static worked-example plate labels 250 V explicitly');
   await page.locator('#mode-rep').click();
-  ok(await page.locator('#s4-speed-scale').isVisible(),'proton-speed bar visible in repetition model');
+  ok(!await page.locator('#s4-speed-scale').isVisible(),'numerical proton-speed diagram remains hidden until learner completes 4 steps');
+  await step(3);
+  ok(!await page.locator('#s4-speed-scale').isVisible(),'step 3 still does not reveal final proton speed');
+  await step(1);
+  ok(await page.locator('#s4-speed-scale').isVisible(),'proton-speed bar becomes visible only after full worked answer');
   const speed=U=>Math.sqrt(2*1.602176634e-19*U/1.67262192595e-27);
   for(const U of [50,100,250,500]){
    await set('#s4-slider',U);
@@ -41,6 +45,8 @@ const close=(a,b,t=.05)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
   const label=(await page.locator('.slide.active svg text').allTextContents()).find(x=>x.includes('U = 250 V'));
   ok(label.includes('(exemplet)'),'worked formula not silently treated as slider formula');
   await img('04-model-500v');
+  await reset();
+  ok(!await page.locator('#s4-speed-scale').isVisible(),'reset hides numeric speed answer again');
   await page.locator('#mode-class').click();
   // The vectors at the actual exit point MUST use the same physical scale.
   await go(6);await reset();
@@ -56,6 +62,8 @@ const close=(a,b,t=.05)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
   ok(close(horizontal.y1,214-410*ym/.05,.005),'vector begins at actual calculated trajectory end');
   ok(close(vertical.x1,horizontal.x2,.005)&&close(net.y2,vertical.y2,.005),'triangle really connects component segments');
   ok(net.y2<net.y1&&horizontal.x2>horizontal.x1,'resultant points right and upwards');
+  const classroomSvg=await page.locator('#s6-svg').boundingBox();
+  ok(classroomSvg?.height>=270,'computed trajectory geometry legible at 1280x800: '+classroomSvg?.height+'px');
   await img('06-true-angle');
   // Corrected before/after diagram appears only when the students see the explanation.
   await go(7);await reset();
