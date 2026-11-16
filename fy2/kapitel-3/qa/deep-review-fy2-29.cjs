@@ -172,6 +172,9 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   await reset();test(!await page.locator('#earth-example-compass').isVisible(),'reset hides every intermediate answer and final figure');
   // 12: reversed problem has no pre-solved red needle, still shows vector scaffolding.
   await go(12);test(await page.locator('#earth-example-reverse svg path[fill="#cf453b"]').count()===0,'slide 12 prediction is not visually answered');
+  test(await page.locator('#earth-example-reverse svg [data-unknown-Bh]').count()===1,'the unknown horizontal component is actually UNKNOWN in question rendering');
+  test(await page.locator('#earth-example-reverse svg path[stroke="#263e52"]').count()===0,'no prematurely determined resultant vector leaks Bh=18');
+  test((await page.locator('#earth-example-reverse svg').textContent()).includes('Bₕ = ?'),'unknown shown as a question mark instead of solution-sized vector');
   test((await sc().innerText()).includes('18 μT')&&(await sc().innerText()).includes('45°')&&(await sc().innerText()).includes('60°'),'original reverse givens kept');
   test(!(await sc().innerText()).includes('36 μT'),'reverse conclusion not prematurely exposed');
   // 13: B_h from tan alpha, B from cos i; two staged answers and delayed figure.
