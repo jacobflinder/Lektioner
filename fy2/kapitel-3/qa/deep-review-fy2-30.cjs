@@ -259,7 +259,7 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   check(html.includes('omloppstid')&&html.includes('kraftpilen'),'teacher supports actual updates and optional extension');
   check(await page.locator('input[name="email"],input[name="student_name"]').count()===0,'no personal-response fields');
   // 57 full-page screenshots: 19 desktop, 19 mobile, 19 projector, with real revealed examples.
-  for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
+  for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'classroom-1280',width:1280,height:800},{name:'projector',width:1920,height:1080}]){
    await page.setViewportSize({width:v.width,height:v.height});
    for(let n=1;n<=19;n++){
     await go(n);await reset();
@@ -280,6 +280,13 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
     if(n===12)check((await vpath('#mag-electron-answer svg path[stroke="#be6a42"]'))?.dy>0,'electron solved figure visible '+v.name);
     if(n===10)check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()>=1,'revealed figure on '+v.name);
     if(n===15)check(await page.locator('#mag-conductor-answer svg path[stroke="#bd6544"]').count()>=1,'revealed conductor figure '+v.name);
+    if(v.name==='classroom-1280'){
+      const critical={1:'#coil-before svg',2:'#coil-feedback-before svg',6:'#particle-dynamic svg',9:'#radius-figure svg',10:'#mag-proton svg',12:'#mag-electron-answer svg'}[n];
+      if(critical){
+       const rect=await page.locator(critical).boundingBox();
+       check(!!rect&&rect.y>=0&&rect.y+rect.height<=800,'1280×800 critical explanation figure actually visible without scrolling on slide '+n+' '+JSON.stringify(rect));
+      }
+    }
     await png(v.name+'-'+String(n).padStart(2,'0'));
    }
   }
