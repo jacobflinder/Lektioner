@@ -108,7 +108,7 @@ function compassWithUnknownBh(){
  A(cx,cy,end,cy,'#bd704b',5)+T(cap,241,'Bsp = 18 μT','#a56546',20)+
  '<g data-unknown-Bh>'+T(cx+19,122,'Bₕ = ?','#087d96',23)+'</g>'+
  T(24,44,'SETT UPPIFRÅN','#3d6475',17)+
- T(narrow?178:474,334,'Magnetiskt N ↑','#366271',17)+
+ T(narrow?206:474,narrow?75:334,'Magnetiskt N ↑','#366271',narrow?16:17)+
  T(narrow?19:35,312,'Bₕ är okänt · pilar ej skalenliga','#476b79',narrow?15:17);
  return S(base,w,370,'Öppen kompassuppgift: spolfältet Bsp är känt 18 mikrotesla mot öster, magnetiskt norr är uppåt, men Bh har ännu inte bestämts. Ingen skalenlig Bh-pil, resultant eller kompassnål avslöjar svaret.');
 }
