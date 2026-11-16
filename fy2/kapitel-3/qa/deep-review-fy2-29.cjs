@@ -40,9 +40,14 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   test(await page.locator('#class[aria-pressed="true"]').count()===1,'classroom mode defaults');
   // 1 & 2: an aligned proton travels along B => magnetic force is exactly zero.
   await go(1);const start=(await sc().innerText());test(start.includes('proton')&&start.includes('parallellt'),'original proton challenge first');
+  test(await sc().locator('#earth-proton-question svg [data-proton]').count()===1,'proton is physically drawn before question');
+  test(await sc().locator('#earth-proton-question [data-zero-force]').count()===0,'no F=0 answer visible on prediction slide');
+  test(await sc().locator('#earth-proton-question svg path[stroke="#16836b"],#earth-proton-question svg path[stroke="#087b91"]').count()>=6,'two parallel nonzero vector arrows drawn for v and B');
   await go(2);const feedback=(await sc().innerText());
   test(feedback.includes('F=0')||feedback.includes('F = 0')||feedback.includes('noll'),'parallel charged particle force zero');
   test(feedback.includes('antiparallell')&&feedback.includes('positiv'),'source physics now explicitly distinguishes direction from force magnitude');
+  test(await sc().locator('#earth-proton-feedback [data-zero-force]').count()===1,'zero magnetic force shown as zero not as an arbitrary vector');
+  test(feedback.includes('kraften noll för båda tecknen'),'zero F also for negative charge when v parallel to B');
   test(close(1.602176634e-19*2e5*50e-6*Math.sin(0),0),'independently zero cross product at 0 degrees');
   test(close(1.602176634e-19*2e5*50e-6*Math.sin(Math.PI),0,1e-25),'independently zero cross product at 180 degrees');
   // 3: learning targets: three unrelated angles not confused.
@@ -51,6 +56,10 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   await go(4);test(await sc().locator('svg path[d^="M310 335"]').count()===6,'six physical dipole field paths preserved');
   for(const d of await sc().locator('svg path[d^="M310 335"]').evaluateAll(a=>a.map(x=>x.getAttribute('d'))))test(d.endsWith('310 50'),'northward outside-field line endpoint');
   test((await sc().innerText()).includes('nedåt')&&(await sc().innerText()).includes('norra'),'geographic dip in Sweden stated');
+  const globeCaption=sc().locator('.earth-globe-caption'),globeSvg=sc().locator('.diagram svg');
+  test(await globeCaption.count()===1,'real caption separated from dipole SVG');
+  const globeBox=await globeSvg.boundingBox(),captionBox=await globeCaption.boundingBox();
+  test(!!globeBox&&!!captionBox&&captionBox.y>=globeBox.y+globeBox.height-1,'geographic south label not overlapped by dipole caveat');
   // 5: separate top and side diagrams, orientation and accessible figures.
   await go(5);test(await sc().locator('.earth-angle-comparison svg').count()===2,'two distinct plane figures');
   test((await sc().innerText()).includes('horisontalplanet')&&(await sc().innerText()).includes('vertikalplanet'),'declination vs inclination axes explicit');
@@ -81,13 +90,22 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
    test(text.includes(sv(expectedV,1)),'B_v numerical '+B+'μT inclination '+i+' expected '+sv(expectedV,1));
    test(close(expectedH*expectedH+expectedV*expectedV,B*B,1e-8),'Pythagorean B components '+B+'/'+i);
    const arr=vector(await line('#earth-components svg path[stroke="#293c53"]'));
-   test(arr!==null&&close(arr[2]-arr[0],3*expectedH,.05)&&close(arr[3]-arr[1],3*expectedV,.05),'real SVG component sum vector '+B+'/'+i);
+   test(arr!==null&&close(arr[2]-arr[0],4.1*expectedH,.05)&&close(arr[3]-arr[1],4.1*expectedV,.05),'real SVG components plotted with fixed 4.1 px/μT scale '+B+'/'+i);
+   if(i===0||i===90){
+    const t=await page.locator('#earth-components svg').textContent();
+    test(t.includes(i===0?'Bᵥ = 0':'Bₕ = 0'),'special 0/90 degree component limit is explicitly labelled '+i);
+   }else{
+    test(await page.locator('#earth-components svg [data-inclination-arc]').count()===1,'i angle drawn on actual vector triangle '+B+'/'+i);
+   }
   }
   await reset();test((await page.locator('#earth-components-result').innerText()).includes('Förutsäg'),'decomposition reset hides calculation');
   // 7: real classroom coil experiment and correct right-hand rule.
   await go(7);test((await sc().innerText()).includes('cirkelformad')&&(await sc().innerText()).includes('högerhandsregeln'),'coil geometry and conventional-current grip rule');
   test((await sc().innerText()).includes('Genomför experimentet'),'physical classroom compass experiment preserved');
   test(await page.locator('#earth-compass-predict svg path[fill="#cf453b"]').count()===0,'prediction diagram conceals red compass needle');
+  test(await page.locator('#earth-compass-predict [data-actual-coil]').count()===1,'actual CIRCULAR winding shown from the coil axis');
+  test(await page.locator('#earth-compass-predict [data-coil-top-view]').count()===1,'north–south plane of vertical coil in top view');
+  test((await page.locator('#earth-compass-predict').textContent()).includes('Spolens vertikala plan'),'physical setup expressly connects sketch and demonstration');
   // 8: independent vector geometry, sign and 90 degree limit.
   await go(8);await reset();test(await page.locator('#earth-compass svg path[fill="#cf453b"]').count()===0,'red needle hidden until deliberate reveal');
   test(!(await page.locator('#earth-compass-result').innerText()).includes('67,7'),'numeric alpha hidden before question');
@@ -99,6 +117,20 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
    test((await page.locator('#earth-compass-result').innerText()).includes(sv(expected,1)),'signed angle '+b+'μT '+sv(expected,1)+' degrees');
    const head=await tip('#earth-compass svg path[fill="#cf453b"]'),len=Math.hypot(Bh,b);
    test(head!==null&&close(head.cx-320,68*b/len,.09)&&close(head.cy-207,-68*Bh/len,.09),'red north SVG tip aligned with vector sum '+b);
+   const arc=page.locator('#earth-compass svg [data-alpha-arc]');
+   test(await arc.count()===(b===0?0:1),'alpha arc only for nonzero signed deflection '+b);
+   if(b!==0){
+    const d=await arc.getAttribute('d'),m=d.split('A49 49 0 0 ')[1]?.split(' ');
+    const alpha=Math.atan2(b,Bh);
+    test(!!m&&Number(m[0])===(b>0?1:0)&&close(Number(m[1]),320+49*Math.sin(alpha),.002)&&close(Number(m[2]),207-49*Math.cos(alpha),.002),'SVG arc is the actual signed alpha between magnetic north and resultant for '+b);
+   }
+   const lab=await page.locator('#earth-compass svg text').filter({hasText:'Bres'}).first().evaluate(e=>({x:Number(e.getAttribute('x')),y:Number(e.getAttribute('y'))}));
+   if(b===0){
+    const zerotext=await page.locator('#earth-compass svg').textContent();
+    test(zerotext.includes('Bres = Bₕ'),'when vectors coincide at zero coil, equality is written instead of overlapping labels');
+    const boxes=await page.locator('#earth-compass svg text').evaluateAll(es=>es.filter(e=>e.textContent==='Bₕ'||e.textContent==='Bres = Bₕ'||e.textContent==='α = 0°').map(e=>{const z=e.getBBox();return {label:e.textContent,x:z.x,y:z.y,right:z.x+z.width,bottom:z.y+z.height}}));
+    test(boxes.length===3&&boxes.every((p,i)=>boxes.slice(i+1).every(q=>p.right<=q.x||q.right<=p.x||p.bottom<=q.y||q.bottom<=p.y)),'no overlapping Bh, Bres=Bh and alpha=0 label bounding boxes');
+   }else test(Math.abs(lab.x-(320+3*b))<90&&Math.abs(lab.y-(207-3*Bh))<30,'label Bres follows actual vector TIP '+b);
    const resultant=vector(await line('#earth-compass svg path[stroke="#263e52"]'));
    test(resultant!==null&&close(resultant[2]-resultant[0],b*3,.09)&&close(resultant[3]-resultant[1],-Bh*3,.09),'black resultant SVG actual x/y '+b);
   }
@@ -145,6 +177,9 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   await reset();test(!await page.locator('#earth-example-compass').isVisible(),'reset hides every intermediate answer and final figure');
   // 12: reversed problem has no pre-solved red needle, still shows vector scaffolding.
   await go(12);test(await page.locator('#earth-example-reverse svg path[fill="#cf453b"]').count()===0,'slide 12 prediction is not visually answered');
+  test(await page.locator('#earth-example-reverse svg [data-unknown-Bh]').count()===1,'the unknown horizontal component is actually UNKNOWN in question rendering');
+  test(await page.locator('#earth-example-reverse svg path[stroke="#263e52"]').count()===0,'no prematurely determined resultant vector leaks Bh=18');
+  test((await page.locator('#earth-example-reverse svg').textContent()).includes('Bₕ = ?'),'unknown shown as a question mark instead of solution-sized vector');
   test((await sc().innerText()).includes('18 μT')&&(await sc().innerText()).includes('45°')&&(await sc().innerText()).includes('60°'),'original reverse givens kept');
   test(!(await sc().innerText()).includes('36 μT'),'reverse conclusion not prematurely exposed');
   // 13: B_h from tan alpha, B from cos i; two staged answers and delayed figure.
@@ -183,7 +218,7 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   test(teacher.includes('högerhandsregeln')&&teacher.includes('0°'),'teacher support aligned to changed figures and boundary');
   test(!await page.locator('input[name="student_name"],input[name="email"]').count(),'no name/email fields');
   // Visually capture every slide with all relevant answer states in three viewports.
-  for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
+  for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'tablet',width:768,height:900},{name:'classroom-1280',width:1280,height:800},{name:'projector',width:1920,height:1080}]){
    await page.setViewportSize({width:v.width,height:v.height});
    for(let n=1;n<=15;n++){
     await go(n);await reset();
@@ -197,10 +232,41 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
     test(await sc().isVisible(),'slide renders '+v.name+' '+n);
     if(n===6){const count=await page.locator('.slide.active .earth-component-card').count();test(count===2,'separate horizontal/vertical component formula cards displayed '+v.name); const layout=await node('.slide.active .earth-component-card .math-sm math');test(layout.length>=4&&layout.some(r=>r.bottom>r.y),'readable native component MathML '+v.name);}
     if(n===11){const rect=await node('.slide.active .earth-solution-step .earth-math-stages math');test(rect.length>=2,'visible correct MathML algebra at '+v.name)}
-    if(n===8){const t=await tip('#earth-compass svg path[fill="#cf453b"]');test(!!t&&t.cx>320&&t.cy<207,'visible correct red north tip at '+v.name)}
+    if(n===8){const t=await tip('#earth-compass svg path[fill="#cf453b"]');test(!!t&&t.cx>(v.width<=550?190:320)&&t.cy<207,'visible correct red north tip at '+v.name)}
     if(v.name==='projector'&&[6,11,13].includes(n)){const h=await page.evaluate(()=>document.documentElement.scrollHeight);test(h<=1120,'worked example '+n+' projector height '+h+' px (1080px viewport)');}
+    if([1,2,4,6,7,8,9,11,13].includes(n)){
+     const figure=await sc().locator('svg').first().boundingBox();
+     test(!!figure&&figure.width>=120&&figure.height>=75,'core physical SVG visually sizeable '+v.name+' slide '+n);
+    }
+
+    if(v.width===390&&[1,2,6,7,8,12].includes(n)){
+     const expected= n===7?null:n<=2?'0 0 390 245':n===6?'0 0 390 340':'0 0 390 370';
+     const id={1:'#earth-proton-question',2:'#earth-proton-feedback',6:'#earth-components',7:'#earth-compass-predict',8:'#earth-compass',12:'#earth-example-reverse'}[n];
+     if(expected)test((await page.locator(id+' svg').first().getAttribute('viewBox'))===expected,'phone-specific full-resolution SVG '+n);
+     if(n===7){
+      test(await page.locator(id+' svg').count()===2,'orthographic coil views stack separately on phone');
+      const figures=await page.locator(id+' svg').evaluateAll(e=>e.map(x=>x.getBoundingClientRect().width));
+      test(figures.every(w=>w>=280),'each mobile coil projection uses actual reading width '+figures.join(','));
+     }
+     const textSize=await page.locator(id+' svg text').first().evaluate(e=>{const t=e.getScreenCTM();return parseFloat(getComputedStyle(e).fontSize)*Math.abs(t.a)});
+     test(textSize>=13,'mobile essential SVG text is visibly at least 13 CSS pixels slide '+n+' measured '+textSize);
+    }
     await screenshot(v.name+'-'+String(n).padStart(2,'0'));
    }
+  }
+  await page.setViewportSize({width:1440,height:900});
+  await go(6);
+  for(const inc of [0,1,45,89,90]){
+   await set('earth-i',inc);
+   const bounds=await page.locator('#earth-components svg text').evaluateAll(es=>es.filter(e=>['Bₕ','Bᵥ','B'].includes(e.textContent)).map(e=>{const r=e.getBBox();return {x:r.x,y:r.y,w:r.width,h:r.height}}));
+   test(bounds.every(t=>t.x>=0&&t.y>=0&&t.x+t.w<=690&&t.y+t.h<=340),'component labels within SVG bounds at i='+inc);
+   await screenshot('inclination-'+String(inc).padStart(2,'0'));
+  }
+  await go(8);
+  for(const b of [-75,-30,0,30,75]){
+   await set('earth-coil',b);
+   if((await page.locator('#earth-compass-show').innerText()).includes('Visa'))await page.locator('#earth-compass-show').click();
+   await screenshot('coil-'+(b<0?'neg':b>0?'pos':'zero')+'-'+Math.abs(b));
   }
   test(errors.length===0,'no JS exceptions or console errors '+errors.join('; '));
   test(outside.length===0,'no external unapproved requests '+outside.join('; '));

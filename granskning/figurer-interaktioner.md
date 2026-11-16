@@ -1,5 +1,8 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
+> **Fy2 – Jordens magnetfält · registerpost #7 · 16 november 2026.** **9/41 genomgångna, 9/41 för närvarande tekniskt och didaktiskt godkända enligt dokumenterade kravversioner; av dessa 4 enligt v2.1.** Status **KLAR FÖR ANVÄNDARGRANSKNING**, **inte** lärargodkänd eller klassrumsprövad. Alla **15** elevbilder granskade enligt v2.1, relevanta figurer och matematik kontrollerade före/efter, verkliga Chromium-bilder från 390, 768, 1280, 1440 och 1920 px öppnade och visuellt kontrollerade. Rättningar i [PR #81](https://github.com/jacobflinder/Lektioner/pull/81), slutlig gren-QA [#43912057494](https://github.com/jacobflinder/Lektioner/actions/runs/43912057494): **625/625 riktade PASS, 85 skärmbilder, 0 JS-fel, 0 externa anrop**; hela Fy2-sviten PASS. 69 generella layoutvarningar i kursens smoke-test, men **inga registrerade på den här lektionen**. Publiceringens main/Pages-verifiering redovisas efter sammanslagning. **Inga fler lektioner utan nytt ”nästa”.**
+
+
 > **Fy2 Laddade partiklar i magnetiska fält – registerpost #6, åttonde genomgångna lektionen · 16 november 2026.** **8/41 genomgångna, 8/41 för närvarande tekniskt och didaktiskt godkända enligt dokumenterad kravversion (3 enligt v2.1).** Status **KLAR FÖR ANVÄNDARGRANSKNING**, ej lärargodkänd eller klassrumsprövad. Riktade fysik-/figurfynd rättade i [PR #79](https://github.com/jacobflinder/Lektioner/pull/79): reell spole före/efter strömvändning, synkroniserad cirkel-/centripetalkraftsfigur, elektronens och protonens **rätt riktade kraftpilar i samma startpunkt som uppgiften**, förstärkning av homogen B via fler identiskt ritade prickar/kryss och förutsägelse **före** radieformelns slutsteg. Alla 19 bilder, bokuppgifter, demonstrationer, stegvis MathML, arbete på papper och offline-export är bevarade. [Branch-QA #43889904383](https://github.com/jacobflinder/Lektioner/actions/runs/43889904383): **570 riktade PASS, 61 skärmbilder**, 0 JS-fel och externa anrop. Visuellt granskade 390, 768, 1440 och 1920 px; den kompletterande 1280×800-verifieringen och godkända fullständiga Fy2-main-regressionen redovisas i avsnittet nedan. Ingen faktisk elevförståelse har uppmätts. **Nästa lektion startar först efter användarens uttryckliga ”nästa”.**
 
 
@@ -196,6 +199,38 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 
 **Nästa handling:** Stanna för användargranskning. Nästa föreslagna registerpost #7 **Fy2 Jordens magnetfält** inleds endast efter användarens uttryckliga ”nästa”.
 
+## Figur- och interaktionsgranskning v2.1 – Fy2 Jordens magnetfält (registerpost #7)
+
+**Lärandemål och innehåll:** Eleven skiljer jordfältets **inklination i** (vinkel i ett vertikalplan), **missvisning D** (horisontell skillnad mellan geografiskt och magnetiskt norr) och spolförsökets **kompassavvikelse α**. Eleven använder `Bₕ=B cos i`, `Bᵥ=B sin i` (i modellen positiv nedåt), `Bₛₚ=μ₀NI/(2r)` i centrum av idealiserad tunn cirkelspole och `tan α=Bₛₚ/Bₕ`. Samma symboler och koordinater får aldrig byta fysikalisk betydelse mellan bild och beräkning.
+
+| Bild | Granskning, konkret tidigare brist och v2.1-resultat |
+|---|---|
+| 01 | Före: frågan om proton parallell med B saknade illustrerad geometri. Efter: lika riktade v- och B-pilar samt markerad proton. **F=0 är inte synligt** före elevens förutsägelse; även på mobil ritas en egen läsbar SVG. |
+| 02 | Samma parallella pilar som i startuppgiften och först här **F=0**. Korrigerat missvisande påstående om att negativa laddningens kraft *byter riktning* även när den är exakt noll; båda tecken ger noll i parallellfallet. |
+| 03 | Målen om två geofysiska vinklar och mätningens kompassavvikelse bevarade. Ingen extra, dekorativ bild som konkurrerar med målen. |
+| 04 | Jordens fältlinjer bevarade och faktagranskade som schematisk dipol. Före låg modellreservationen över etiketten **Söder**; den står nu i en separat bildtext nedanför SVG. Skillnaden geografiskt/magnetiskt norr förklaras. |
+| 05 | Två tydligt skilda, oförändrade planillustrationer för D (uppifrån) respektive i (från sidan). Självtest och förväxlingsdiagnos behållna. |
+| 06 | Komponenten Bₕ åt höger och Bᵥ nedåt kombineras i samma punkt till B, med konsekvent längdskala och vid meningsfulla vinklar markerad inklinationsbåge i. Vid 0° och 90° visar figuren tydligt att en komponent är noll i stället för att två pilar/etiketter kolliderar. B=20–65 μT och i=0–90° testade med oberoende beräkningar, fasta SVG-ändpunkter, reset och avslöjade/dolda mellanled. Mobil använder egen geometri i stället för förminskad projektorbild. |
+| 07 | Före visades endast en kompassbaserad vektorbild utan att **den verkliga spolen** gick att känna igen. Nu finns två riktiga ortografiska vyer: vertikal cirkelspole i N–S-planet, sedd från kanten uppifrån och som cirkel från öster, med kompass i centrum. Strömriktning och slutlig nålvinkel påstås inte vara kända innan den fysiska demonstrationen; vardera vy får läsbar bredd på mobil. |
+| 08 | Interaktiv spolfältstyrka -75…+75 μT. Nålen, riktad resultant och α-bågen döljs före förutsägelse, och visas först på begäran. α beräknas och ritas från **magnetiskt norr** till resultantens faktiska riktning för både positivt och negativt Bₛₚ. Komponentpilar och etiketter följer fältet. För Bₛₚ=0 skrivs **Bres=Bₕ** utan överlapp och α=0°. |
+| 09 | Sambanden för tan α och det ideala cirkelspolfältet kvar; kompletterad illustrationsmodell med explicit kompassvinkel från samma punkt, resultatpil och magnetiskt norr. |
+| 10 | Elevens beräkningsfråga bevarad: B=42 μT, i=73°, 3 varv, d=12 cm, I=1,5 A. Ingen facitpil före elevens eget första steg. |
+| 11 | Varje beräkningsled och enhetsomvandling kvar: Bₕ≈12,3 μT, r=0,060 m, Bₛₚ≈47,1 μT, α≈75,4°. Facitnål/α-båge visas **först efter** de separata matematiska stegen. |
+| 12 | Före användes en dold nål men Bₕ ritades redan med facitets längd, trots att eleven ska **bestämma Bₕ**. Nu märks Bₕ som okänd utan skalenlig pil; endast kända 18 μT-spolfältet och magnetiskt norr visas. Mobil har egen läsbar figur. |
+| 13 | Omvänd mätuppgift löses stegvis: tan45° ger Bₕ=18 μT och cos60° ger B=36 μT. Figurens kompassnål kommer efter facit; ska stämma med 45° i östlig riktning. |
+| 14 | Kopplingen till laddade partiklars banor och jordens magnetfält, med P=F·v=0 först efter elevens förklaring, bevaras. Ingen påhittad rymd-/norrskensanimation ersätter fysiken. |
+| 15 | Bokens sidor **167–170**, uppgifter **351–357**, nästa **171–182**, elevens eget arbete och utcheckning mot målen bevarade. Återkoppling är dold före elevens egen formulering. |
+
+**Fysikaliskt verifierat:** Vektorgränserna i=0°,90°, flera inre vinklar, 7 signerade spolfält -75…+75 μT och deras nålgeometri, samt Bₕ≈12,2796 μT, Bₛₚ≈47,1239 μT, α≈75,3946°, den omvända mätuppgiftens 18/36 μT. Kompassmodellen hanterar ett helt nollställt resulterande horisontellt fält som **ingen entydig riktning**; magnetiskt norr skiljs från geografiskt norr. Kritisk matematisk HTML använder separata MathML-rader och de bevarade avslöjningsstegen.
+
+**Verifiering:** Alla 15 bilder och interaktionernas avslöjade/dolda lägen genomgångna. **625 riktade Chromiumkontroller PASS** och **85 screenshot-bevis** på [PR #81:s senaste commit, QA-körning #43912057494](https://github.com/jacobflinder/Lektioner/actions/runs/43912057494), inga JS-fel eller externa anrop, hela Fy2 regressionen PASS. Testerna kontrollerar SVG-fältvektorernas ändpunkter, nålspetsen, α-bågens riktning, frånvaron av tidigt facit, mobilens verkligt synliga symbolstorlek och horisontell klippning. AI öppnade de faktiskt genererade mobilbilderna och visuell översikt av samtliga 15 bilder samt 1280-bilder och Bₛₚ=0-läget efter sista QA. **Inga kvarvarande blockerande figurfel upptäcktes i de inspekterade vyerna.** 69 generella smoke-varningar gäller andra Fy2-vyer, inte aktuell lektion. **Fysisk projektor, Safari/iPad och faktisk elevförståelse i klassrummet är inte verifierade.**
+
+**Bevarade moment:** Fysisk spole–kompass-demonstration, samtliga bokhänvisningar och räkneuppgifter, givna exempelvärden, egna anteckningar/pappersräkning, anonym frivillig repetition, klassrumsläge, självtest, 15 bilder, lärarstöd, komplett fristående HTML och detaljerade matematiska steg. Ingen ny Socrative-aktivitet. 42 μT och 73° framställs fortsatt uttryckligen som **övningsvärden** och inte en skolmätning.
+
+**Arbetsprocessens lärdom:** Många små sekventiella ändringar triggade om hela Fy2-CI flera gånger och drog ut arbetet. I kommande lektioner samlas först grundläggande behov, fysik och mobilgeometri innan ändringar; manuella skärmbilder bedöms tidigt och bara verkliga blockerare utlöser ny iteration. **Grönt automatiskt test räcker inte för att lova perfektion eller uppmätt elevförståelse.**
+
+**Publiceringsverifiering:** PR #81 och kurs-QA ovan är grön på arbetsgrenen. Merge till `main` och Pages ska noteras med rätt SHA efter sammanslagning, och därefter stannar arbetet för lärarens granskning. Föreslagen nästa registerpost #8 är **Fy2 Induktion**, endast vid ett nytt uttryckligt ”nästa”.
+
 ## Fast granskningsregister
 
 **Inventerat: 41/41** unika publicerade lektionskataloger, Fysik 2 = 10, Matematik 4 = 15, Fysik 1 = 6, Matematik fortsättning nivå 1c = 10. Undervisningsordning hämtad från respektive kapitels index. Undantag: **Ström ger magnetfält**, normalt Fy2-lektion 04, ligger uttryckligen först som pilot och förekommer inte igen. Räknestugor och demonstrationspass följer det läge där de står i Fy2-indexet. Enhetscirkeln behandlas som förberedande Ma4-repetition eftersom den visas före 4.1 i indexet. `mato1c` betyder Ma3c/Gy25 fortsättning nivå 1c.
@@ -208,7 +243,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Klar för användargranskning (v2.1) |
 | 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Klar för användargranskning (v2.1) |
 | 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | Klar för användargranskning (v2.1) |
-| 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Ej påbörjad |
+| 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Klar för användargranskning (v2.1) |
 | 8 | Fysik 2 | Induktion | `fy2/kapitel-3/induktion/` | Ej påbörjad |
 | 9 | Fysik 2 | Magnetisk kraft och jordens magnetfält – räknestuga | `fy2/kapitel-3/raknestuga-kraft-jordfalt/` | Ej påbörjad |
 | 10 | Fysik 2 | Demonstrationer – elektromagnetism | `fy2/kapitel-3/demonstrationer-elektromagnetism/` | Ej påbörjad |
