@@ -85,6 +85,22 @@ header{padding:15px 22px;max-width:1480px;margin:auto;display:flex;gap:18px;alig
  .flux-mobile-data strong{font-size:clamp(14px,4.3vw,17px);font-variant-numeric:tabular-nums;color:#0a657b}
 }
 .correction-slot[hidden]{display:none!important}.correction-slot .magnet-correction{margin:0 0 13px}.slide[data-title="Utcheckning och nästa steg"] #s10-answer{margin:0 0 14px}
+
+/* The complete 6×4 unit-square correction must be in view at 1280×800,
+   without hiding or truncating the four independent MathML lines. */
+@media(min-width:1050px) and (max-height:900px){
+ section.slide[data-title="Hitta felet"] h1{font-size:clamp(34px,3.1vw,41px);line-height:1.13;margin:7px 0 4px}
+ section.slide[data-title="Hitta felet"] .subtitle{font-size:17px;line-height:1.34;margin:0 0 12px}
+ section.slide[data-title="Hitta felet"] .panel{padding:11px 13px;margin:5px 0}
+ section.slide[data-title="Hitta felet"] .panel p{margin:7px 0;line-height:1.34}
+ section.slide[data-title="Hitta felet"] .answer{padding:9px 12px;margin:6px 0}
+ section.slide[data-title="Hitta felet"] .magnet-correction{padding:5px;margin:6px 0}
+ section.slide[data-title="Hitta felet"] #s8-area-conversion-figure svg{max-height:148px}
+ section.slide[data-title="Hitta felet"] #s8-area-conversion-figure figcaption{line-height:1.27}
+}
+@media(max-width:600px){
+ .flux-mobile-data strong{font-size:clamp(13px,3.85vw,15px);white-space:nowrap}
+}
 </style></head>
 <body>
 <header><div class="brand">FYSIK 2 / MAGNETISM <small>Magnetfält · material · flöde och flödestäthet</small></div><div class="controls"><button id="class-mode" class="selected" aria-pressed="true">Klassrum</button><button id="repeat-mode" aria-pressed="false">Repetition</button><button id="settings-toggle">Arbetsbild</button></div></header>
