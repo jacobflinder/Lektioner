@@ -227,11 +227,24 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
     test(await sc().isVisible(),'slide renders '+v.name+' '+n);
     if(n===6){const count=await page.locator('.slide.active .earth-component-card').count();test(count===2,'separate horizontal/vertical component formula cards displayed '+v.name); const layout=await node('.slide.active .earth-component-card .math-sm math');test(layout.length>=4&&layout.some(r=>r.bottom>r.y),'readable native component MathML '+v.name);}
     if(n===11){const rect=await node('.slide.active .earth-solution-step .earth-math-stages math');test(rect.length>=2,'visible correct MathML algebra at '+v.name)}
-    if(n===8){const t=await tip('#earth-compass svg path[fill="#cf453b"]');test(!!t&&t.cx>320&&t.cy<207,'visible correct red north tip at '+v.name)}
+    if(n===8){const t=await tip('#earth-compass svg path[fill="#cf453b"]');test(!!t&&t.cx>(v.width<=550?190:320)&&t.cy<207,'visible correct red north tip at '+v.name)}
     if(v.name==='projector'&&[6,11,13].includes(n)){const h=await page.evaluate(()=>document.documentElement.scrollHeight);test(h<=1120,'worked example '+n+' projector height '+h+' px (1080px viewport)');}
     if([1,2,4,6,7,8,9,11,13].includes(n)){
      const figure=await sc().locator('svg').first().boundingBox();
      test(!!figure&&figure.width>=120&&figure.height>=75,'core physical SVG visually sizeable '+v.name+' slide '+n);
+    }
+
+    if(v.width===390&&[6,7,8,12].includes(n)){
+     const expected= n===7?null:n===6?'0 0 390 340':'0 0 390 370';
+     const id={6:'#earth-components',7:'#earth-compass-predict',8:'#earth-compass',12:'#earth-example-reverse'}[n];
+     if(expected)test((await page.locator(id+' svg').first().getAttribute('viewBox'))===expected,'phone-specific full-resolution SVG '+n);
+     if(n===7){
+      test(await page.locator(id+' svg').count()===2,'orthographic coil views stack separately on phone');
+      const figures=await page.locator(id+' svg').evaluateAll(e=>e.map(x=>x.getBoundingClientRect().width));
+      test(figures.every(w=>w>=280),'each mobile coil projection uses actual reading width '+figures.join(','));
+     }
+     const textSize=await page.locator(id+' svg text').first().evaluate(e=>{const t=e.getScreenCTM();return parseFloat(getComputedStyle(e).fontSize)*Math.abs(t.a)});
+     test(textSize>=13,'mobile essential SVG text is visibly at least 13 CSS pixels slide '+n+' measured '+textSize);
     }
     await screenshot(v.name+'-'+String(n).padStart(2,'0'));
    }
