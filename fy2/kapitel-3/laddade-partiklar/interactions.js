@@ -22,12 +22,15 @@ function chargeDiagram(){
  const fx=-Math.sin(theta),fy=-curvature*Math.cos(theta);
  const speedArrow=47*v,forceArrow=40*v*B;
  let symbols='';
- for(let col=0;col<11;col++)for(let row=0;row<6;row++){
-  const gx=55+col*58,gy=52+row*51;
-  const sz=(14+3*B),op=(.34+.40*B/1.5).toFixed(2);
-  if(bSign===1){
-   symbols+='<g opacity="'+op+'" stroke="'+palette.field+'" stroke-width="'+(1.5+B*.6).toFixed(2)+'"><path d="M'+(gx-sz/2)+' '+(gy-sz/2)+'l'+sz+' '+sz+'m0 -'+sz+'l-'+sz+' '+sz+'"/></g>';
-  }else symbols+='<circle cx="'+gx+'" cy="'+gy+'" r="'+(2.3+B*1.1).toFixed(1)+'" fill="'+palette.field+'" opacity="'+op+'"/>';
+ // Fixed positions, radii, opacity and stroke: stronger B adds equal-sized marks.
+ const density=Math.max(0,Math.min(1,(B-.7)/.8));
+ for(let col=0;col<14;col++)for(let row=0;row<8;row++){
+  const rank=((col*41+row*17)%127)/126;
+  if(rank>.2+.8*density)continue;
+  const gx=51+46*col,gy=43+37*row;
+  symbols+=bSign===1
+   ?'<path data-field-symbol="cross" data-field-x="'+gx+'" data-field-y="'+gy+'" d="M'+(gx-6)+' '+(gy-6)+'l12 12m0 -12l-12 12" fill="none" stroke="'+palette.field+'" stroke-width="1.9" opacity=".65"/>'
+   :'<circle data-field-symbol="dot" data-field-x="'+gx+'" data-field-y="'+gy+'" cx="'+gx+'" cy="'+gy+'" r="3.3" fill="'+palette.field+'" opacity=".65"/>';
  }
  let svg='<g>'+symbols+'</g><path d="'+route.join('')+'" fill="none" stroke="'+(q>0?'#bc6548':'#087f9b')+'" stroke-width="4" stroke-linecap="round"/>';
  svg+='<circle cx="'+sv(x)+'" cy="'+sv(y)+'" r="13" fill="#fff" stroke="'+(q>0?'#bc6548':'#087f9b')+'" stroke-width="3"/>';

@@ -36,7 +36,7 @@ function attachAnswerFigure(containerId,answerIndex,renderer){
  root.addEventListener('lesson:reset',draw);
  draw();
 }
-attachAnswerFigure('mag-proton',1,show=>staticParticle(1,show));
+attachAnswerFigure('mag-proton',1,show=>particle(1,0,1,1,1,show));
 attachAnswerFigure('mag-conductor-answer',0,show=>conductor(1,show));
 
 /* A voluntary enrichment must not remain open after the lesson answer is hidden. */
@@ -48,4 +48,31 @@ if(extension){
  answer.closest('.slide').addEventListener('lesson:reset',()=>{extension.open=false});
 }
 
+
+/* v2.1: Same physical winding; only B and I orientation are reversed. */
+function reversalCoil(dir){
+ const turns=Array.from({length:9},(_,i)=>'<ellipse data-coil-turn cx="'+(150+i*40)+'" cy="132" rx="15" ry="57" stroke="#b45f37" stroke-width="5" fill="none"/>').join('');
+ const a=dir>0?250:365,b=dir>0?365:250,t=dir>0?350:265;
+ const vector='<path data-coil-b d="M'+a+' 132L'+b+' 132M'+t+' 120L'+b+' 132L'+t+' 144" stroke="#087e96" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+ return S('<rect x="120" y="77" width="394" height="110" rx="24" fill="#e0edf1" stroke="#94b9c3" stroke-width="2"/>'+turns+vector+T(376,113,'B','#087e96',23)+T(160,241,'I '+(dir>0?'före':'efter vändning'),'#345b68',18),620,260,'Samma lindning med nio schematiska varv, B längs spolens axel '+(dir>0?'åt höger':'åt vänster'));
+}
+$('coil-before').innerHTML=reversalCoil(1);
+$('coil-feedback-before').innerHTML=reversalCoil(1);
+$('coil-feedback-after').innerHTML=reversalCoil(-1);
+/* v2.1: Tangent v and inward F are drawn at the SAME particle P. */
+function circleProof(){
+ let bg='';for(let a=0;a<9;a++)for(let b=0;b<4;b++){const xx=45+a*61,yy=50+b*60;bg+='<path d="M'+(xx-4)+' '+(yy-4)+'l8 8m0 -8l-8 8" stroke="#a1c0c8" stroke-width="1.5" fill="none"/>'}
+ return S(bg+'<circle cx="242" cy="176" r="88" fill="#f5fbfb" fill-opacity=".6" stroke="#587f8c" stroke-width="2.7"/>'+
+ '<circle cx="242" cy="176" r="5" fill="#315769"/>'+T(158,156,'centrum','#315769',17)+
+ '<path d="M242 176H330" stroke="#577e8b" stroke-width="2.5" stroke-dasharray="7 6"/>'+T(283,162,'r','#315769',20)+
+ '<circle cx="330" cy="176" r="12" fill="#fff" stroke="#bc6548" stroke-width="3"/>'+T(326,183,'+','#bc6548',18)+T(347,206,'P','#315769',19)+
+ '<path d="M330 176V90m-10 14 10 -14 10 14" fill="none" stroke="#178568" stroke-width="5"/>'+T(345,100,'v','#178568',22)+
+ '<g data-radius-force visibility="hidden" aria-hidden="true"><path d="M330 176L270 176m14 -10 -14 10 14 10" stroke="#bd6b44" stroke-width="5.5" fill="none"/>'+T(296,203,'F','#bd6b44',21)+'</g>'+
+ T(29,329,'× B in i bilden · positiv laddning','#315769',17),600,350,'Cirkelbana: positiv laddning i P, radie r från centrum till P, tangentiell v uppåt och kraft F mot centrum efter återkoppling.');
+}
+$('radius-figure').innerHTML=circleProof();
+const rSlide=$('radius-figure').closest('.slide'),rAnswer=rSlide.querySelector('.answer'),rForce=$('radius-figure').querySelector('[data-radius-force]');
+function syncRadius(){const on=rAnswer.classList.contains('open');rForce.setAttribute('visibility',on?'visible':'hidden');rForce.setAttribute('aria-hidden',String(!on))}
+new MutationObserver(syncRadius).observe(rAnswer,{attributes:true,attributeFilter:['class']});rSlide.addEventListener('lesson:reset',syncRadius);syncRadius();
+$('mag-electron-answer').innerHTML=particle(-1,0,1,1,1,true);
 })();
