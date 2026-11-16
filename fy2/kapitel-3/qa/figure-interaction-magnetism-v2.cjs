@@ -133,7 +133,7 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
     if(vp.width<=600&&description==='flux')ok((await page.locator(actualSelector).innerText()).includes('0,96 mWb'),'mobile shows a legible non-SVG flux value');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
     ok(overflow<=2,'no horizontal clipping '+vp.name+' '+description+' '+overflow);
-    if(vp.width>=1280&&['domains','flux','area-double','exit'].includes(description))ok(r.y+r.height<=vp.height+6,'explanation figure fits classroom viewport '+vp.name+' '+description+' bottom '+(r.y+r.height));
+    if(vp.width>=1280&&['domains','flux','area-double','area-conversion','exit'].includes(description))ok(r.y+r.height<=vp.height+6,'explanation figure fits classroom viewport '+vp.name+' '+description+' bottom '+(r.y+r.height));
     await screenshot(vp.name+'-'+description);
    }
   }
