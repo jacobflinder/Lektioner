@@ -17,7 +17,7 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
  };
  const reset=async()=>page.locator('#reset-slide').click();
  const clickReveal=async n=>{for(let i=0;i<n;i++)await page.locator('#next-reveal').click()};
- const set=async(id,value)=>page.locator(id).evaluate((node,v)=>{node.value=String(v);node.dispatchEvent(new Event('input',{bubbles:true}))},value);
+ const set=async(id,value)=>page.locator('#'+id).evaluate((node,v)=>{node.value=String(v);node.dispatchEvent(new Event('input',{bubbles:true}))},value);
  const screenshot=async label=>{await page.screenshot({path:path+'/fy2-magnetism-v2-'+label+'.png',fullPage:true});shots++};
  const box=async id=>page.locator(id).boundingBox();
  page.on('pageerror',err=>errors.push(err.message));
