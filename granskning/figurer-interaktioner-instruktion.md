@@ -1,9 +1,9 @@
-# Kravspecifikation v2.0 – figur-, visualiserings- och interaktionsgranskning
+# Kravspecifikation v2.1 – figur-, visualiserings- och interaktionsgranskning
 
 **Projekt:** 41 interaktiva webblektioner · `jacobflinder/Lektioner`  
 **Fastställd:** 16 november 2026  
 **Omfattning:** Fy2, Ma4, Fy1 och Matematik – fortsättning nivå 1c (tidigare Ma3c)  
-**Läge vid revision:** 3 av 41 lektioner granskade; 38 återstår. Den äldre matematikgranskningen 41/41 är ett separat arbete.
+**Historik:** v2.0 infördes när 3 av 41 lektioner hade figurgranskats. Vid v2.1-revisionen är 7 av 41 genomgångna. Den äldre matematikgranskningen 41/41 är ett separat arbete.
 
 Denna version ersätter den tidigare figurinstruktionen. Den bygger på konkreta erfarenheter från **Fy2 Ström ger magnetfält**, **Ma4 Polynomdivision** och **Fy1 Serie- och parallellkoppling**. Allt nedan gäller även för omgranskning av tidigare färdigställda lektioner när en ny brist upptäcks.
 
@@ -17,13 +17,15 @@ En figur SKA tillföra en tydlig förståelsevinst. Fler bilder, fler knappar oc
 
 **Godkännande kräver samtidigt:** korrekt ämnesinnehåll, begriplig figur, rätt placering/timing, korrekt interaktion, bevarade matematiska mellanled, faktisk visuell inspektion och verifierad publicering. Ett allvarligt fel i någon av dessa delar blockerar godkännande.
 
+**Tekniskt och didaktiskt godkännande bevisar inte faktisk elevförståelse.** Klassrumsprövning dokumenteras separat om den har utförts: kunde eleverna tolka figuren, motivera sambandet och tillämpa det i en ny situation? Elevobservationer kan återöppna en tidigare godkänd lektion. Klassrumsprövning är inte ett krav för första publiceringen.
+
 ## 2. Arbetsordning, mandat och avgränsning
 
 - Läs `AGENTS.md`, denna instruktion, `granskning/figurer-interaktioner.md`, aktuell lektion, lärarstöd, dess relevanta tester och nödvändiga källfiler **innan** åtgärder.
 - Registret har **41 fasta, unika lektionsposter**. Registreringsnummer och antal färdiggranskade är olika saker: exempelvis är Polynomdivision post #23 men var den andra faktiskt granskade lektionen.
 - Grundordningen är **Fy2 → Ma4 → Fy1 → Matematik – fortsättning nivå 1c** i kursens undervisningsordning. **Användarens uttryckligen valda lektion eller URL har alltid företräde.**
 - Granska och ändra **exakt en lektion i taget**. En direkt rättelse i redan granskad lektion räknas inte som en ny granskad lektion.
-- Stoppa efter färdig lektion. Nästa lektion påbörjas endast när användaren uttryckligen väljer den eller skriver **”nästa”**. Ett chattbyte är inte tillstånd att fortsätta.
+- Efter verifierad publicering får lektionen status **klar för användargranskning** och redovisas i chatten. **Stanna därefter.** Användarens uttryckliga **”nästa”** eller val av annan lektion tillåter fortsatt arbete; synpunkter på den aktuella lektionen hanteras före nästa. Ett chattbyte är inte tillstånd att fortsätta.
 - Berörs delade komponenter SKA deras effekter regressionstestas, utan att övriga lektioner börjar fullgranskas.
 - Ändra inte användarens uppskjutna frågor i smyg. Notera öppna anmärkningar och vilket delområde som är godkänt.
 
@@ -65,6 +67,8 @@ Granskaren SKA faktiskt se den renderade figuren i dess **avsedda undervisningss
 - En illustration som kräver långa verbala förklaringar för att ens känna igen dess grundform SKA göras om.
 
 **Viktigt:** En dator-/projektorvy där en kritisk förklaringsbild hamnar under skärmens synliga nederkant är en blockerande layoutbrist, även om innehållet kan scrollas fram. På mobil får naturlig vertikal scroll förekomma, men ett centralt samband ska inte splittras över flera onödigt separerade vyer.
+
+**Pressa aldrig in allt genom att minska text, matematik eller figurer till svårläst storlek.** Om ett förklaringssteg inte ryms ska layouten omarbetas eller innehållet delas i pedagogiskt sammanhängande steg. Bevara nödvändiga synliga referenser mellan stegen.
 
 ## 6. Rumsliga regler och verkliga referenser
 
@@ -121,7 +125,7 @@ För varje reglage, växling, animation och knapp SKA en separat kontrollmatris 
 **Ingångsvärde och enhet | vad som ändras | vad som ska vara konstant | formel/fysik | numeriskt facit | ritad geometri | visad återkoppling | reset.**
 
 - Reglage, resultattext, formel, riktning, färgmarkering, graf, punkt, radie, nod och figur SKA beskriva **samma tillstånd**.
-- Testa min/max, relevanta mellanvärden, dubblering/halvering, noll när relevant, tecken- och riktningsbyte, mode-byte, upprepade snabba ändringar och reset.
+- **Samtliga diskreta funktioner och pedagogiskt betydelsefulla tillstånd SKA kontrolleras.** Kontinuerliga reglage testas med motiverade gränsvärden, representativa mellanvärden och kombinationer som kan avslöja olika fel. Dokumentera testurvalet och vilka egenskaper som ska gälla över hela intervallet. Pröva dubblering/halvering, noll när relevant, tecken- och riktningsbyte, mode-byte, upprepade snabba ändringar och reset. Ingen uttömmande provning av oändligt många kontinuerliga kombinationer krävs.
 - Testa även **kombinationer** av reglage: `B ∝ I/r`, `I = U/R`, `U = U₁ + U₂` i serie, `I = I₁ + I₂` parallellt, `P = D·Q + R` vid polynomdivision.
 - **Mät faktiskt renderad SVG-geometri och visade pixlar.** Att texten visar rätt värde eller att ett SVG-attribut uppdateras räcker inte om elementet inte syns, ligger under något annat eller ritas på fel plats.
 - Om en pil avsiktligt endast anger **riktning** SKA det framgå och dess längd inte feltolkas som storlek. För storleksjämförelse används förklarad, konsekvent och helst fast skala; automatisk omskalning får inte dölja en förändring.
@@ -152,9 +156,9 @@ Ta bort **intern elevirrelevant metadata** som ”Original: [presentationsfil].p
 
 **A. Ämnes- och didaktikgranskning:** Läs hela elevflödet och identifiera förutsättningar, feluppfattningar, saknade figurer och missvisande beräkningssteg. Kontrollera att varje viktig relation har rätt visuellt stöd och att elevens tänkande föregår facit.
 
-**B. Oberoende teknisk testning:** Skriv förväntade värden, riktningar, placeringar och topologier **innan** koden ändras. Testa hela tillståndsmatrisen, rätt/ fel återkoppling, navigation/reset, numerik, SVG-ändpunkter, faktiska bildpixlar, icke synliga facit och JS-fel. Kör befintliga kursregressioner. Ändra inte meningsfulla tester bara för att få grönt.
+**B. Oberoende teknisk testning:** Skriv förväntade värden, riktningar, placeringar och topologier **innan** koden ändras. Kontrollera alla diskreta funktioner, pedagogiskt betydelsefulla tillstånd och dokumenterat representativt urval för kontinuerliga reglage. Pröva rätt/fel-återkoppling, navigation/reset, oberoende beräknade numeriska kontrollvärden, SVG-ändpunkter, faktiska bildpixlar, icke synliga facit och JS-fel. Kör befintliga kursregressioner. Ändra inte meningsfulla tester bara för att få grönt.
 
-**C. Mänsklig inspektion av riktiga renderingar:** Öppna och granska faktiska skärmbilder eller sidan i webbläsare vid mobil, dator och projektor. Titta **både på figurens fysik och på om eleven kan tolka den**. Bekräfta att figuren finns där den behövs, är rätt orienterad och visas vid rätt steg. Markera kvarvarande layoutvarningar uttryckligen; en generell grön testsvit får inte gömma dem.
+**C. Faktisk visuell inspektion av renderingar:** Öppna och bedöm faktiska skärmbilder eller sidan i webbläsare vid mobil, dator och projektor; det räcker inte att kontrollera att bildfiler har skapats. Bedöm **både figurens fysik och om den går att tolka**. Ange om inspektionen har utförts av AI, lärare eller båda. Lärarens godkännande får aldrig påstås utan uttrycklig återkoppling. Bekräfta att figuren finns där den behövs, är rätt orienterad och visas vid rätt steg. Markera kvarvarande layoutvarningar uttryckligen; en generell grön testsvit får inte gömma dem.
 
 **D. Publicering och regression:** Gör alla relaterade ändringar med tillhörande tester på en separat gren, enligt `AGENTS.md`. Kontrollera senaste `main` och bevara parallellt arbete; aldrig force-push. Slå samman en sammanhållen, godkänd ändring. Verifiera **full kurs-QA och GitHub Pages på samma publicerade lektionskod-SHA**. Skilj tydligt på pågående, misslyckad och godkänd CI.
 
@@ -184,28 +188,30 @@ Markera **ÅTGÄRD KRÄVS** om något av följande kvarstår:
 3. Skriv en konkret fellista, risken för elevens förståelse och vad som ska vara synligt **före/efter** återkoppling.
 4. Definiera förväntade ämnessamband, grafisk geometri och oberoende testfall.
 5. Ändra lektionskod och komplettera test/ lärarstöd **utan att radera matematiken**.
-6. Testa funktioner, reglage, möjliga kombinationer, reset, navigering och facitdöljning.
+6. Testa samtliga diskreta funktioner, ett dokumenterat urval av relevanta kontinuerliga värden och felavslöjande kombinationer, reset, navigering och facitdöljning.
 7. Granska den faktiska renderingen i alla föreskrivna storlekar; vid behov justera och testa igen.
 8. Kör riktad QA och full relevant kursregression på arbetsgrenen.
 9. Inspektera skärmbilderna och verifiera att resultaten **är begripliga**, inte bara programtekniskt riktiga.
 10. Publicera genom sammanhållen PR/commit, och verifiera `main`, hela QA-sviten och Pages på rätt SHA.
 11. Uppdatera `granskning/figurer-interaktioner.md` med före/efter, fynd, fix, testbevis, öppna begränsningar och slutstatus.
-12. Redovisa **endast denna lektion** i chatten och **stanna** tills användaren väljer nästa.
+12. Markera efter verifierad publicering **klar för användargranskning**, redovisa **endast denna lektion** i chatten och **stanna** tills användaren väljer nästa. Eventuell ny återkoppling på aktuell lektion hanteras först.
 
 ## 16. Permanent register och rapportmall
 
 Loggen `granskning/figurer-interaktioner.md` SKA överst visa:
 
-- **Genomfört antal av 41** och **senast behandlad lektions titel/registreringsnummer**, utan att blanda ihop dessa.
+- Redovisa separat **antal genomgångna av 41**, **antal för närvarande godkända av 41** och **senast behandlad lektions titel/registreringsnummer**, utan att blanda ihop dessa. Ange uttryckligen vilken kravversion varje lektion granskats mot.
 - Aktuell status: `ej påbörjad`, `analyseras`, `åtgärdas`, `verifieras`, `åtgärd krävs`, `klar` eller `blockerad`.
 - **Vad som saknades eller var fel**, hur elevförståelsen påverkades, vad som ändrades och vilka ursprungliga moment som bevarades.
 - **Vad som faktiskt är verifierat**: egna kontrollfall, kod/ämnescheck, Chromium-/pixelresultat, manuellt granskade bilder, tillstånd före/efter, skärmstorlekar, full regression, commit och Pages. Redovisa uttryckligen det som ännu inte testats.
 - **Öppna anmärkningar**, inklusive problem läraren uttryckligen skjutit upp; skilj visuellt godkännande från full ämnesgranskning.
 - **Nästa handling** och om användarens `nästa` inväntas. Ange föreslagen nästa post men påbörja den aldrig automatiskt.
 
+Om en **blockerande brist** upptäcks i en tidigare färdig lektion ändras dess aktuella status till **åtgärd krävs**. Behåll tidigare godkännande i historiken, men räkna inte lektionen bland för närvarande godkända förrän den återverifierats. Äldre godkännanden innebär aldrig automatiskt godkännande enligt v2.1.
+
 Avsluta rapporten med:
 
-> **Figur- och interaktionsgranskning: X/41 färdiga – [kurs, lektion, registerpost].**  
+> **Figur- och interaktionsgranskning: X/41 genomgångna; Y/41 för närvarande godkända – [kurs, lektion, registerpost], kravversion.**  
 > **Status:** …  
 > **Fynd och förändringar:** …  
 > **Verifierat:** …  
@@ -221,4 +227,4 @@ Avsluta rapporten med:
 
 **Fy1 – Serie- och parallellkoppling:** Korrekt beräkning räckte inte när spänningsfall och strömmar saknade synlig koppling till rätt resistor/nod, och när ersättningskretsens relation till originalet inte framgick. Ett tekniskt test kunde dessutom missa att vita batteribakgrunder dolde de faktiska ledningsanslutningarna. Därför granskas **topologi, verklig synlighet, varje förekomst och elevirrelevanta källfilnamn**.
 
-**Samlad slutsats:** **Förekomst ≠ begriplighet. Korrekt tal ≠ korrekt bild. Grön CI ≠ färdig lektion.** En lektion får status `klar` först när alla relevanta krav ovan är uppfyllda och publiceringen är verifierad.
+**Samlad slutsats:** **Förekomst ≠ begriplighet. Korrekt tal ≠ korrekt bild. Grön CI ≠ verifierat elevlärande.** När de tekniska och didaktiska kraven är uppfyllda och publiceringen verifierad får lektionen status `klar för användargranskning`; klassrumsprövning och lärarens uttryckliga återkoppling redovisas separat.
