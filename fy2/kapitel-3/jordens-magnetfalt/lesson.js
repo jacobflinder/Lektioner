@@ -95,7 +95,20 @@ $("earth-compass").closest(".slide").addEventListener("lesson:reset",resetCompas
 $("earth-triangle").innerHTML=compass(Bh,47.1,true).html;
 const solB=mu0*3*1.5/(2*.06)*1e6;
 $("earth-example-compass").innerHTML=compass(Bh,solB,true).html;
-$("earth-example-reverse").innerHTML=compass(18,18,false).html;
+/* Prediction-only plot: B_h is the UNKNOWN of this inverse problem.
+   Do not leak B_h=18 μT by scaling an unlabelled arrow to that solution. */
+function compassWithUnknownBh(){
+ const cx=320,cy=207;
+ const base='<path d="M65 '+cy+'H625" stroke="#b6cdd4" stroke-width="2" fill="none"/>'+
+ '<path d="M'+cx+' 45V318" stroke="#91b9c4" stroke-width="2" fill="none" stroke-dasharray="7 7"/>'+
+ A(cx,cy,465,cy,'#bd704b',5)+T(420,241,'Bsp = 18 μT','#a56546',20)+
+ '<g data-unknown-Bh>'+T(339,122,'Bₕ = ?','#087d96',23)+'</g>'+
+ T(32,44,'SETT UPPIFRÅN','#3d6475',17)+
+ T(474,334,'Magnetiskt N ↑','#366271',17)+
+ T(35,312,'Bₕ är okänt · pilar ej skalenliga','#476b79',17);
+ return S(base,690,370,'Öppen kompassuppgift: spolfältet Bsp är känt 18 mikrotesla mot öster, magnetiskt norr är uppåt, men Bh har ännu inte bestämts. Ingen påhittad skalenlig Bh-pil, resultant eller kompassnål avslöjar svaret.');
+}
+$("earth-example-reverse").innerHTML=compassWithUnknownBh();
 $("earth-example-reverse-answer").innerHTML=compass(18,18,true).html;
 resetComponents();resetCompass();
 })();
