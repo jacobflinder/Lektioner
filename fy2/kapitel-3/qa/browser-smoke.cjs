@@ -100,7 +100,17 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
   await page.locator('#flat-r').evaluate(el=>{el.value='8';el.dispatchEvent(new Event('input',{bubbles:true}))});
   const changed=await page.locator('#flat-visual svg').evaluate(el=>el.outerHTML);
   check(old!==changed,'Flat coil: radius change does not redraw');
-  check((changed.match(/<g opacity=/g)||[]).length>15,'Flat coil: insufficient distributed field markers');
+  const coverage=await page.locator('#flat-visual svg').evaluate(svg=>{
+   const center=svg.querySelector('circle[data-field-mark="center"]');
+   const inside=[...svg.querySelectorAll('circle[data-field-mark="inside"]')];
+   const cx=center.cx.baseVal.value,cy=center.cy.baseVal.value;
+   const offsets=inside.map(dot=>[dot.cx.baseVal.value-cx,dot.cy.baseVal.value-cy]);
+   return {total:svg.querySelectorAll('[data-field-mark]').length,inside:inside.length,
+    acrossOpening:offsets.some(([x,y])=>x<-45&&y<0)&&offsets.some(([x,y])=>x>45&&y>0)
+     &&offsets.some(([x,y])=>Math.hypot(x,y)<48),
+    plain:inside.every(dot=>!dot.hasAttribute('stroke')&&dot.r.baseVal.value===center.r.baseVal.value)};
+  });
+  check(coverage.total>15&&coverage.inside>=12&&coverage.acrossOpening&&coverage.plain,'Flat coil: plain field marks must span the opening');
   await page.close();
   // Verify that changing the investigated quantity updates both the visual
   // representation and the already revealed numeric explanation.

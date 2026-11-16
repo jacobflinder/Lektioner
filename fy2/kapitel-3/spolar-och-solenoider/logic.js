@@ -16,6 +16,7 @@ function clearSlideFeedback(i){
  slide.querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
  slide.dispatchEvent(new Event("lesson:reset"));
  if(i===4){view="side";viewDir=1;viewShown=false;drawView()}
+ if(i===5)slide.querySelector(".loop-comparison").open=false;
  if(i===7){core=false;coreDir=1;drawCore()}
  if(i===10){$("sol-reset").click()}
  if(i===12){$("flat-reset").click()}
@@ -35,12 +36,7 @@ $("prev-btn").addEventListener("click",()=>go(current-1));
 $("next-btn").addEventListener("click",()=>go(current+1));
 $("reveal-btn").addEventListener("click",reveal);
 $("reset-btn").addEventListener("click",()=>{
- slides[current].querySelectorAll(".answer.shown").forEach(el=>el.classList.remove("shown"));
- slides[current].dispatchEvent(new Event("lesson:reset"));
- if(current===4){view="side";viewDir=1;viewShown=false;drawView()}
- if(current===7){core=false;coreDir=1;drawCore()}
- if(current===10){$("sol-reset").click()}
- if(current===12){$("flat-reset").click()}
+ clearSlideFeedback(current);
  render();
 });
 document.querySelectorAll("[data-reveal]").forEach(b=>b.addEventListener("click",()=>{
@@ -93,25 +89,9 @@ const sciMu='<mn>4</mn><mi>π</mi><mo>·</mo><msup><mn>10</mn><mn>−7</mn></msu
 const mu='<msub><mi>μ</mi><mn>0</mn></msub>';
 
 const coreHost=$("core-svg").parentElement;
-function endViewLoop(sign,revealed){
- const cx=325,cy=174,R=108;
- const cur=sign>0?"moturs":"medurs";
- const B=sign>0?"ut mot dig":"in från dig";
- const arrow=sign>0?"M315 67L291 70L302 49":"M315 67L340 72L328 50";
- return '<svg viewBox="0 0 650 350" role="img" aria-label="Ett cirkulärt strömvarv sett från höger. Strömmen går '+cur+'.">'+
- '<rect width="650" height="350" rx="16" fill="#f0f7f8"/>'+
- '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" stroke="#8e402a" stroke-width="9" fill="none"/>'+
- '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" stroke="#eda36b" stroke-width="3" fill="none"/>'+
- '<path d="'+arrow+'" fill="none" stroke="#713021" stroke-width="5" stroke-linejoin="round"/>'+
- (revealed?(sign>0?'<circle cx="'+cx+'" cy="'+cy+'" r="24" fill="white" stroke="#07758a" stroke-width="3"/><circle cx="'+cx+'" cy="'+cy+'" r="7" fill="#07758a"/>':'<circle cx="'+cx+'" cy="'+cy+'" r="24" fill="white" stroke="#07758a" stroke-width="3"/><path d="M308 157L342 191M342 157L308 191" stroke="#07758a" stroke-width="5"/>'):
- '<text x="314" y="187" style="font-size:38px;fill:#163b49">?</text>')+
- '<text x="466" y="93" style="font-size:20px;fill:#183a45">I: '+cur+'</text>'+
- (revealed?'<text x="466" y="130" style="font-size:19px;fill:#08758a">B: '+B+'</text>':'')+
- '<text x="26" y="322" style="font-size:17px;fill:#54707b">Betraktaren står till höger om varvet och tittar åt vänster.</text></svg>';
-}
 function drawView(){
  $("view-holder").innerHTML=view==="side"?
-   CoilArt.coilSingleLoop({dir:viewDir,field:viewShown}):endViewLoop(viewDir,viewShown);
+   CoilArt.coilSingleLoop({dir:viewDir,field:viewShown}):CoilArt.endViewLoop(viewDir,viewShown);
  $("view-caption").textContent=!viewShown?
   (view==="side"?"Förutsäg B: övre tråddelen går "+(viewDir>0?"ut ur":"in i")+" bilden, undre går "+(viewDir>0?"in i":"ut ur")+" bilden.":"Förutsäg B: sett från höger går strömmen "+(viewDir>0?"moturs":"medurs")+"."):
   (view==="side"?"B pekar "+(viewDir>0?"åt höger":"åt vänster")+" längs varvets axel.":"B pekar "+(viewDir>0?"ut ur":"in i")+" bilden. Det är samma fält som i sidovyn.");
@@ -271,6 +251,17 @@ $("download-btn").addEventListener("click",async()=>{
    if(!html.includes(anchor))throw new Error(anchor);
    html=html.replace(anchor,'<script>'+src+'</'+'script>');
   }
+  const photoPath="./hogerhand-spole.webp";
+  const photo=await fetch(photoPath);
+  if(!photo.ok)throw new Error(photoPath);
+  const blob=await photo.blob();
+  const photoUrl=await new Promise((resolve,reject)=>{
+   const reader=new FileReader();
+   reader.onload=()=>resolve(reader.result);
+   reader.onerror=()=>reject(reader.error);
+   reader.readAsDataURL(blob);
+  });
+  html=html.replace(photoPath,photoUrl);
   const url=URL.createObjectURL(new Blob([html],{type:"text/html;charset=utf-8"})),a=document.createElement("a");
   a.href=url;a.download="Fy2_Spolar_och_solenoider.html";document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1500);
