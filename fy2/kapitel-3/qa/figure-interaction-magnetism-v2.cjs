@@ -60,6 +60,64 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
   await screenshot('04-domains');
   // Independent calculation of BA and B*A0, in the physically drawn areas.
   await go(5);await reset();
+  // Teacher-reviewed visual semantics. The symbol for field OUT of the page
+  // is a SINGLE, constant-size dot: no enclosing circles, variable opacity
+  // or expanding glyphs. Raising B adds symbols across the entire region;
+  // raising A instead encloses more of the SAME unmoving dots.
+  const fieldSnapshot=()=>page.locator('#flux-dots circle').evaluateAll(es=>es.map(e=>({
+    x:+e.getAttribute('cx'),y:+e.getAttribute('cy'),r:+e.getAttribute('r'),
+    fill:e.getAttribute('fill'),stroke:e.getAttribute('stroke'),opacity:e.getAttribute('opacity')
+  })));
+  const inside=(dots,x1,x2)=>dots.filter(d=>d.x>=x1&&d.x<=x2&&d.y>=100&&d.y<=218).length;
+  const reference=page.locator('#flux-reference'),surface=page.locator('#flux-area');
+  const rectGeometry=async selector=>page.locator(selector).evaluate(el=>({
+    x:+el.getAttribute('x'),y:+el.getAttribute('y'),width:+el.getAttribute('width'),height:+el.getAttribute('height')
+  }));
+  ok(await page.locator('#example-dots circle').count()===15,'worked 4×6 cm² example still contains fifteen visible field markers');
+  const exampleStyle=await page.locator('#example-dots circle').evaluateAll(es=>es.map(e=>({r:+e.getAttribute('r'),stroke:e.getAttribute('stroke'),fill:e.getAttribute('fill')})));
+  ok(exampleStyle.every(p=>p.r===4&&p.stroke===null&&p.fill==='#08788e'),'worked-example field markers are unringed and constant-size');
+  for(const [pattern,r] of [['#s8-points',3.3],['#s10-points',3]]){
+    const style=await page.locator(pattern+' circle').evaluateAll(es=>es.map(e=>({r:+e.getAttribute('r'),stroke:e.getAttribute('stroke'),fill:e.getAttribute('fill')})));
+    ok(style.length===1&&style[0].r===r&&style[0].stroke===null,'every correction/exit SVG pattern contains only one solid dot, no ring: '+pattern);
+  }
+  const initialField=await fieldSnapshot();
+  ok(initialField.length>=40&&initialField.length<90,'initial 0.40 T field has a clearly populated but not saturated symbol diagram');
+  let previousDots=[];
+  const fieldCounts=[];
+  for(let n=2;n<=16;n++){
+    const B=Number((n*.05).toFixed(2));
+    await set('field-strength',B);
+    const ds=await fieldSnapshot();
+    const coordSet=new Set(ds.map(d=>d.x+','+d.y));
+    ok(ds.length>previousDots.length,'increasing B adds visible field symbols at '+B+' T');
+    ok(ds.every(d=>d.r===3.7&&d.fill==='#08788e'&&d.stroke===null&&d.opacity===null),'field markers are simple identical dots independent of B='+B);
+    ok(previousDots.every(d=>coordSet.has(d.x+','+d.y)),'increasing B never moves or deletes existing symbols at '+B);
+    ok(inside(ds,70,190)===inside(ds,310,430),'two equal areas in same homogeneous field have identical field symbol counts at '+B);
+    ok(ds.every(d=>d.y>=40&&d.y<=256&&d.x>=60&&d.x<=566),'field marker remains inside labelled SVG field region at '+B);
+    ok((await page.locator('#flux-svg').getAttribute('aria-label')).includes('Fler prickar'),'accessible explanation distinguishes B-density from changing area at '+B);
+    fieldCounts.push({B,count:ds.length});
+    if([2,8,16].includes(n))await screenshot('05-B-'+String(B).replace('.','-')+'-solid-dot-density');
+    previousDots=ds;
+  }
+  for(const {B,count} of fieldCounts){
+    const expectedRelative=B/.8,relative=count/fieldCounts.at(-1).count;
+    ok(Math.abs(relative-expectedRelative)<.11,'illustrated dot density varies approximately in proportion to B, not glyph radius: '+B);
+  }
+  await set('field-strength',.4);await set('flux-area-slider',24);
+  const fixedB=await fieldSnapshot();
+  const sameArea=await rectGeometry('#flux-area');
+  const refArea=await rectGeometry('#flux-reference');
+  ok(sameArea.width===refArea.width&&sameArea.height===refArea.height,'starting comparison areas are genuinely equal at A=24cm²');
+  ok(inside(fixedB,70,190)===inside(fixedB,310,430),'equal-A surfaces enclose equal dot counts for the same B');
+  await set('flux-area-slider',48);
+  const enlargedA=await fieldSnapshot();
+  const largerArea=await rectGeometry('#flux-area');
+  ok(JSON.stringify(enlargedA)===JSON.stringify(fixedB),'changing ONLY area leaves every field marker in exactly the same place and appearance');
+  ok(Math.abs(largerArea.width/sameArea.width-2)<1e-6,'doubling A doubles the real surface width, not the field density');
+  ok(inside(enlargedA,310,550)>inside(fixedB,310,430),'larger area encloses additional pre-existing field symbols at the same B');
+  ok(inside(enlargedA,70,190)===inside(fixedB,70,190),'reference area field remains unchanged after changing only A');
+  await screenshot('05-fixed-field-expanded-A-solid-dots');
+  await reset();
   ok(!await page.locator('#flux-figure-results').isVisible(),'flux values are hidden before student asks for solution');
   ok(!await page.locator('#flux-mobile-labels').isVisible(),'mobile sized flux result also concealed before prediction');
   await set('field-strength',.8);await set('flux-area-slider',50);

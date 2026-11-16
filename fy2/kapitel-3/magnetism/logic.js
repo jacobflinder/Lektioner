@@ -115,16 +115,41 @@ $("domain-field").addEventListener("click",()=>{
  drawDomains();
 });
 $("domain-reset").addEventListener("click",()=>{domainStage=0;drawDomains()});
-function circle(group,x,y,r=8){
- const ns="http://www.w3.org/2000/svg";
- const c=document.createElementNS(ns,"circle"),p=document.createElementNS(ns,"circle");
- c.setAttribute("cx",x);c.setAttribute("cy",y);c.setAttribute("r",r);
- c.setAttribute("fill","#f9feff");c.setAttribute("stroke","#438b9c");c.setAttribute("stroke-width",1.5);
- p.setAttribute("cx",x);p.setAttribute("cy",y);p.setAttribute("r",2);p.setAttribute("fill","#08788e");
- group.append(c,p);
+// A magnetic field is not a collection of little rings. Each single, fixed-size
+// dot stands for field directed OUT of the page. Density is only a qualitative
+// field-strength convention; it is not a count of physical field lines.
+function fieldDot(group,x,y,r=3.7){
+ const dot=document.createElementNS("http://www.w3.org/2000/svg","circle");
+ dot.setAttribute("cx",x.toFixed(3));
+ dot.setAttribute("cy",y.toFixed(3));
+ dot.setAttribute("r",r);
+ dot.setAttribute("fill","#08788e");
+ dot.setAttribute("data-field-direction","out");
+ group.appendChild(dot);
 }
-for(let row=0;row<6;row++)for(let col=0;col<11;col++)circle($("flux-dots"),62+col*47,39+row*43,7);
-for(let row=0;row<3;row++)for(let col=0;col<5;col++)circle($("example-dots"),155+col*67,106+row*59,9);
+// A progressive low-discrepancy arrangement: higher B *adds* dots uniformly
+// without moving any of the dots already present. 240-unit periodic replicas
+// guarantee identical dot patterns through equal reference/comparison areas.
+function radicalInverse(index,base){
+ let inverse=0,factor=1/base;
+ while(index>0){inverse+=(index%base)*factor;index=Math.floor(index/base);factor/=base;}
+ return inverse;
+}
+let previousDotB=null;
+function drawFluxDots(B){
+ if(B===previousDotB)return;
+ previousDotB=B;
+ const group=$("flux-dots");group.replaceChildren();
+ const samplesPerTile=Math.round(70*B);
+ for(let i=1;i<=samplesPerTile;i++){
+  const localX=240*radicalInverse(i,2),y=40+216*radicalInverse(i,3);
+  for(let tile=0;tile<3;tile++){
+   const x=60+240*tile+localX;
+   if(x<=566)fieldDot(group,x,y);
+  }
+ }
+}
+for(let row=0;row<3;row++)for(let col=0;col<5;col++)fieldDot($("example-dots"),155+col*67,106+row*59,4);
 let fluxShown=false;
 function updateFlux(){
  const B=Number($("field-strength").value),A=Number($("flux-area-slider").value);
@@ -138,7 +163,7 @@ function updateFlux(){
  $("flux-mobile-reference").textContent="Φ₀ = "+fmt(phiReference*1000,2)+" mWb";
  $("flux-mobile-current").textContent="Φ = "+fmt(phi*1000,2)+" mWb";
  $("flux-mobile-labels").hidden=!fluxShown;
- $("flux-svg").setAttribute("aria-label","Samma homogena magnetfält "+fmt(B,2)+" tesla ut ur bilden. Fast referensyta 24 kvadratcentimeter och justerbar jämförelseyta "+fmt(A,0)+" kvadratcentimeter."+(fluxShown?" Flödena genom var sin yta är "+fmt(phiReference*1000,2)+" respektive "+fmt(phi*1000,2)+" milliweber.":" Beräknat flöde är dolt tills eleven visar sambandet."));
+ $("flux-svg").setAttribute("aria-label","Samma homogena magnetfält "+fmt(B,2)+" tesla ut ur bilden, med enbart små prickar. Fler prickar i hela fältet när B ökar; samma prickar när bara arean ändras. Fast referensyta 24 kvadratcentimeter och justerbar jämförelseyta "+fmt(A,0)+" kvadratcentimeter."+(fluxShown?" Flödena genom var sin yta är "+fmt(phiReference*1000,2)+" respektive "+fmt(phi*1000,2)+" milliweber.":" Beräknat flöde är dolt tills eleven visar sambandet."));
  $("field-value").textContent=fmt(B,2)+" T";
  $("area-value").textContent=fmt(A,0)+" cm²";
  $("flux-result").innerHTML=fluxShown?
@@ -153,11 +178,9 @@ function updateFlux(){
  $("flux-show").textContent=fluxShown?"Dölj beräkningen":"Visa sambandet och beräkningen";
  $("flux-area").setAttribute("width",120*A/24);
  $("flux-area").setAttribute("aria-label","Justerbar yta "+fmt(A,0)+" cm² i samma homogena B-fält som referensytan 24 cm²");
- const visibleScale=.62+.45*(B/.4);
- $("flux-dots").querySelectorAll("circle").forEach((c,i)=>{
-  c.setAttribute("r",(i%2?2:7)*visibleScale);
-  c.setAttribute("opacity",Math.min(.98,.38+.41*B/.4));
- });
+ // B sets the field-symbol density everywhere, never the dot radius/opacity.
+ // A only changes which existing dots are enclosed by the selected surface.
+ drawFluxDots(B);
 }
 for(const id of ["field-strength","flux-area-slider"])$(id).addEventListener("input",()=>{updateFlux()});
 $("flux-show").addEventListener("click",()=>{fluxShown=!fluxShown;updateFlux()});

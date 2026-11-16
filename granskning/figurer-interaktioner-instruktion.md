@@ -93,6 +93,8 @@ Varje kretsschema SKA vara **topologiskt och visuellt korrekt**:
 
 Inspektera inte bara SVG-värden; granska **synliga linjeändar och komponentformer i bildpunkter**. En vit bakgrundsrektangel som täcker ledningen är en verklig felritning även om bakomliggande matematiska samband är korrekta.
 
+**Magnetfältets prickar och kryss (konkret lärdom från Fy2 Permanentmagneter, bild 5):** När ut-/inriktade fält illustreras med prickar respektive kryss ska de i våra elevfigurer vara **tydliga enkla symboler, utan dekorativa ringar**. De är schematiska riktningar – inte fysiska partiklar. Om ett reglage ändrar den homogena magnetiska flödestätheten **B** ska **symboltätheten/antalet** ändras i hela fältet, inte storleken, linjetjockleken eller opaciteten hos befintliga symboler. Om bara den genomflödda **ytan A** ändras ska däremot prickarna/kryssen ligga **orörda med oförändrad fälttäthet**, medan fler eller färre hamnar inom ytans gräns. Styrka och flöde ska fortfarande beräknas oberoende genom `Φ = BA` för ett homogent fält vinkelrätt mot ytan. Två lika stora ytor i samma B-fält ska också få samma symbolmönster/täthet i en direkt jämförelse. **Automatiskt test:** kontrollera räknat antal och synlig densitet, oförändrad radie/opacitet, oförändrade koordinater när endast A ändras, samt figur och beräkning i samma återkoppling. Antal symboler är inte en exakt kalibrering av magnetfältets storlek.
+
 ## 8. Visuella strukturer i matematik
 
 För polynomdivision och andra uppställningar SKA **termer med samma grad ligga i samma visuella kolumn**. Visa vilken kolumn som är aktuell utan att avslöja elevens nästa steg. En nollkoefficient, exempelvis `0x²`, SKA behålla sin gradplats.
