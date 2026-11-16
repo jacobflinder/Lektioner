@@ -239,9 +239,9 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
      test(!!figure&&figure.width>=120&&figure.height>=75,'core physical SVG visually sizeable '+v.name+' slide '+n);
     }
 
-    if(v.width===390&&[6,7,8,12].includes(n)){
-     const expected= n===7?null:n===6?'0 0 390 340':'0 0 390 370';
-     const id={6:'#earth-components',7:'#earth-compass-predict',8:'#earth-compass',12:'#earth-example-reverse'}[n];
+    if(v.width===390&&[1,2,6,7,8,12].includes(n)){
+     const expected= n===7?null:n<=2?'0 0 390 245':n===6?'0 0 390 340':'0 0 390 370';
+     const id={1:'#earth-proton-question',2:'#earth-proton-feedback',6:'#earth-components',7:'#earth-compass-predict',8:'#earth-compass',12:'#earth-example-reverse'}[n];
      if(expected)test((await page.locator(id+' svg').first().getAttribute('viewBox'))===expected,'phone-specific full-resolution SVG '+n);
      if(n===7){
       test(await page.locator(id+' svg').count()===2,'orthographic coil views stack separately on phone');

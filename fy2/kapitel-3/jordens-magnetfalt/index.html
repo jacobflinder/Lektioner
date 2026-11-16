@@ -310,14 +310,17 @@ const Bh=42*Math.cos(73*Math.PI/180);
 
 /* Figure review v2.1: force zero follows from parallel v and B, no force direction invented. */
 function parallelProton(answer){
- const body='<path d="M106 130H546" stroke="#b9d4da" stroke-width="2" stroke-dasharray="7 7"/>'+
- '<circle data-proton cx="144" cy="208" r="22" fill="white" stroke="#bc674c" stroke-width="4"/>'+
- T(136,216,'+','#bc674c',27)+
- A(175,208,490,208,'#16836b',5)+T(510,215,'v','#16836b',25)+
- A(175,130,490,130,'#087b91',5)+T(510,137,'B','#087b91',25)+
- T(30,45,'PROTON · v OCH B ÄR PARALLELLA','#31596b',18)+
- (answer?'<g data-zero-force>'+T(260,294,'F = 0','#345a67',27)+'</g>':T(260,294,'Hur stor är F?','#345a67',21));
- return S(body,650,335,'Proton och parallella vektor-pilar för v och B, båda åt höger; pilarna ritas på olika höjder för läsbarhet. '+(answer?'Kraftens belopp är noll.':'Kraften ska förutsägas.'));
+ const narrow=window.matchMedia('(max-width:550px)').matches;
+ const w=narrow?390:650,h=narrow?245:335;
+ const px=narrow?80:144,vy=narrow?151:208,by=narrow?92:130,start=narrow?112:175,end=narrow?310:490;
+ const body='<path d="M'+(narrow?47:106)+' '+by+'H'+(narrow?346:546)+'" stroke="#b9d4da" stroke-width="2" stroke-dasharray="7 7"/>'+
+ '<circle data-proton cx="'+px+'" cy="'+vy+'" r="'+(narrow?19:22)+'" fill="white" stroke="#bc674c" stroke-width="4"/>'+
+ T(px-8,vy+8,'+','#bc674c',narrow?25:27)+
+ A(start,vy,end,vy,'#16836b',5)+T(end+15,vy+7,'v','#16836b',25)+
+ A(start,by,end,by,'#087b91',5)+T(end+15,by+7,'B','#087b91',25)+
+ T(narrow?20:30,narrow?34:45,narrow?'PROTON · v ∥ B':'PROTON · v OCH B ÄR PARALLELLA','#31596b',narrow?20:18)+
+ (answer?'<g data-zero-force>'+T(narrow?163:260,narrow?218:294,'F = 0','#345a67',27)+'</g>':T(narrow?122:260,narrow?218:294,'Hur stor är F?','#345a67',narrow?22:21));
+ return S(body,w,h,'Proton och två parallella vektorpilar för hastighet v och magnetfält B, båda åt höger. '+(answer?'Kraften är noll.':'Förutsäg magnetkraftens storlek.'));
 }
 $('earth-proton-question').innerHTML=parallelProton(false);
 $('earth-proton-feedback').innerHTML=parallelProton(true);
@@ -392,6 +395,8 @@ window.addEventListener('resize',()=>{
  $("earth-example-reverse").innerHTML=compassWithUnknownBh();
  $("earth-example-reverse-answer").innerHTML=compass(18,18,true).html;
  $("earth-compass-predict").innerHTML=coilSetup();
+ $("earth-proton-question").innerHTML=parallelProton(false);
+ $("earth-proton-feedback").innerHTML=parallelProton(true);
 });
 })();
 </script><script>
