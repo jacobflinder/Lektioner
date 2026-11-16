@@ -67,8 +67,14 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   const fieldTips=await sc().locator('svg [data-earth-field-arrow]').evaluateAll(es=>es.map(e=>({d:e.getAttribute('d'),marker:e.getAttribute('marker-end')})));
   test(fieldTips.length===6,'all six separate field lines show directional tangent arrows');
   for(let k=0;k<6;k++){
-    const d=fieldTips[k]?.d||'',m=d.match(/^M([\\d.-]+) ([\\d.-]+)L([\\d.-]+) ([\\d.-]+)$/),v=m?[+m[3]-m[1],+m[4]-m[2]]:null;
-    test(!!v&&v[1]<0&&fieldTips[k].marker==='url(#earth-field-head)','arrow '+k+' points north along external field, not reversed');
+    const d=fieldTips[k]?.d||'',m=d.match(/^M([0-9.-]+) ([0-9.-]+)L([0-9.-]+) ([0-9.-]+)$/),v=m?[+m[3]-m[1],+m[4]-m[2]]:null;
+    const curves=[[[310,335],[148,356],[107.5,63],[310,50]],[[310,335],[472,356],[512.5,63],[310,50]],[[310,335],[103.6,356],[52,63],[310,50]],[[310,335],[516.4,356],[568,63],[310,50]],[[310,335],[61.6,356],[-.5,63],[310,50]],[[310,335],[558.4,356],[620.5,63],[310,50]]];
+    const [P0,P1,P2,P3]=curves[k],t=[.44,.44,.52,.52,.61,.61][k],u=1-t;
+    const dx=3*u*u*(P1[0]-P0[0])+6*u*t*(P2[0]-P1[0])+3*t*t*(P3[0]-P2[0]);
+    const dy=3*u*u*(P1[1]-P0[1])+6*u*t*(P2[1]-P1[1])+3*t*t*(P3[1]-P2[1]);
+    const cross=v?Math.abs(dx*v[1]-dy*v[0])/(Math.hypot(dx,dy)*Math.hypot(...v)):Infinity;
+    test(!!v&&v[1]<0&&dx*v[0]+dy*v[1]>0&&cross<.001&&fieldTips[k].marker==='url(#earth-field-head)',
+      'field arrow '+k+' is in northward tangent direction of the correct SVG curve');
   }
   // 5: separate top and side diagrams, orientation and accessible figures.
   await go(5);test(await sc().locator('.earth-angle-comparison svg').count()===2,'two distinct plane figures');
