@@ -150,6 +150,11 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
     const r=await box(actualSelector);
     ok(r&&r.width>80&&r.height>12,'actual diagram visible in '+vp.name+' '+description);
     if(vp.width<=600&&description==='flux')ok((await page.locator(actualSelector).innerText()).includes('0,96 mWb'),'mobile shows a legible non-SVG flux value');
+    if(description==='flux'&&vp.width>=1280){
+      const drawing=await box('#flux-svg'),formula=await box('#flux-result');
+      ok(formula.x>=drawing.x+drawing.width-4,'full flux calculation occupies the free adjacent column '+vp.name);
+      ok(formula.y+formula.height<=vp.height+6,'complete flux MathML readable beside the field surfaces in classroom viewport '+vp.name+' bottom '+(formula.y+formula.height));
+    }
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
     ok(overflow<=2,'no horizontal clipping '+vp.name+' '+description+' '+overflow);
     if(vp.width>=1280&&['domains','flux','area-double','area-conversion','exit'].includes(description))ok(r.y+r.height<=vp.height+6,'explanation figure fits classroom viewport '+vp.name+' '+description+' bottom '+(r.y+r.height));
