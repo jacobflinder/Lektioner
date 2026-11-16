@@ -190,7 +190,7 @@ function compass(Bh,Bcoil,show=true){
   s+='<path d="M'+cx+' '+cy+'L'+(north[0]+px)+' '+(north[1]+py)+'L'+(north[0]-px)+' '+(north[1]-py)+'Z" fill="#cf453b" stroke="#98372d"/>'+
    '<path d="M'+cx+' '+cy+'L'+(south[0]+px)+' '+(south[1]+py)+'L'+(south[0]-px)+' '+(south[1]-py)+'Z" fill="white" stroke="#264b59" stroke-width="2"/>'+
    '<circle cx="'+cx+'" cy="'+cy+'" r="5" fill="#285667"/>';
-  s+=T(Math.max(45,Math.min(585,rx+(Bcoil<0?-64:12))),Math.max(53,Math.min(317,ry-17)),'Bres','#263e52',18);
+  s+=T(Math.max(45,Math.min(585,rx+(Bcoil<0?-64:Bcoil<18?60:12))),Math.max(53,Math.min(317,ry-17)),'Bres','#263e52',18);
   const alpha=Math.atan2(Bcoil,Bh);
   if(Math.abs(alpha)>1e-8){
    const ar=49,ex=cx+ar*Math.sin(alpha),ey=cy-ar*Math.cos(alpha);
@@ -206,7 +206,7 @@ function components(B,i){
  // Same physically meaningful SVG scale for all B and inclination settings.
  const scale=4.1,x=134,y=45,X=x+Bh*scale,Y=y+Bv*scale,nearH=Bh<1e-8,nearV=Bv<1e-8;
  let s='<path d="M'+x+' '+y+'H'+(x+290)+'" stroke="#a9c4cc" stroke-width="1.7" stroke-dasharray="6 6"/>'+
-  T(18,33,'VERTIKALT PLAN · NEDÅT ÄR POSITIVT','#50717a',17);
+  T(475,33,'VY FRÅN SIDAN','#50717a',17);
  if(!nearH)s+=A(x,y,X,y,'#0e8399',4)+T(Math.min(X+13,580),y-12,'Bₕ','#0c7b90',18);
  if(!nearV)s+=A(x,y,x,Y,'#b97250',4)+T(x-46,Math.min(Y,321),'Bᵥ','#b86b4c',18);
  s+=A(x,y,X,Y,'#293c53',5);
@@ -217,9 +217,9 @@ function components(B,i){
    s+='<path data-inclination-arc d="M'+(x+ar)+' '+y+'A'+ar+' '+ar+' 0 0 1 '+ex.toFixed(3)+' '+ey.toFixed(3)+'" stroke="#b58034" stroke-width="3" fill="none"/>'+
     T(x+64*Math.cos(r/2),y+64*Math.sin(r/2)+6,'i','#956a2c',21);
   }
-  s+=T(Math.min(X+13,592),Math.min(Y+3,321),'B','#253e50',21);
+  s+=T(Math.min(X+13,592),Math.min(Y+(i<=15?25:3),321),'B','#253e50',21);
  }else{
-  s+=T(Math.min(X+13,592),Math.min(Y+3,321),'B','#253e50',21);
+  s+=T(Math.min(X+13,592),Math.min(Y+(i<=15?25:3),321),'B','#253e50',21);
   s+=T(330,290,nearH?'Bₕ = 0 · B = Bᵥ nedåt':'Bᵥ = 0 · B = Bₕ horisontellt','#315769',17);
  }
  return {html:S(s,690,340,'Jordfältets vektorsumma i vertikalplanet med fast pilskala: Bₕ horisontellt åt höger, Bᵥ nedåt och hela B från samma punkt. Inklinationen i markerad där båda komponenter finns.'),Bh,Bv};
