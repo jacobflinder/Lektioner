@@ -10,8 +10,16 @@ function syncCompassReveal(){
  $("magnet-svg").classList.toggle("compass-predicting",!revealed);
  $("compass-needle").setAttribute("aria-hidden",String(!revealed));
 }
+function syncCorrectionLayout(){
+ const answers=slides[7].querySelectorAll(".two .panel .answer");
+ const slot=$("s8-first-correction-slot");
+ if(slot&&answers.length>=2){
+   slot.hidden=!(answers[0].classList.contains("shown")&&!answers[1].classList.contains("shown"));
+ }
+}
 function render(){
  slides.forEach((s,i)=>s.classList.toggle("active",i===current));
+ syncCorrectionLayout();
  $("counter").textContent=(current+1)+" / "+slides.length;
  $("prev").disabled=current===0;$("next").disabled=current===slides.length-1;
  const more=slides[current].querySelector(".answer:not(.shown)");
@@ -39,7 +47,7 @@ function resetCurrent(){
 $("reset-slide").addEventListener("click",resetCurrent);
 document.querySelectorAll("[data-reveal]").forEach(button=>{
  button.addEventListener("click",()=>{
-  const next=button.nextElementSibling;
+  const next=button.dataset.target?$(button.dataset.target):button.nextElementSibling;
   if(next?.classList.contains("answer")){next.classList.toggle("shown");syncCompassReveal();render()}
  })
 });
