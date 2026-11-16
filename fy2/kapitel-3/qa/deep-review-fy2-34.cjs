@@ -322,8 +322,9 @@ try{
  await shot('916-core-prediction',false);
  await go(7);
  await page.locator('#core-insert').click();
+ await page.evaluate(()=>window.scrollTo(0,0));
  const coreBounds=await Promise.all([active().locator('.fig').boundingBox(),comparison.boundingBox()]);
- ok(coreBounds.every(box=>box.y>=0&&box.y+box.height<=940),'illustration and comparison fit together in the reported 916×940 viewport');
+ ok(coreBounds.every(box=>box.y>=0&&box.y+box.height<=940),'illustration and comparison fit together in the reported 916×940 viewport '+JSON.stringify(coreBounds));
  await shot('916-core-iron',false);
  await page.locator('#core-remove').click();
  await shot('916-core-air',false);

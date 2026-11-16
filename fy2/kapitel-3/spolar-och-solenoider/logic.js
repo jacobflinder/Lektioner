@@ -110,9 +110,9 @@ function drawCore(){
  coreHost.innerHTML=CoilArt.coilHelix({core,dir:coreDir,field:true,withP:true});
  const direction=coreDir>0?"åt höger":"åt vänster";
  $("core-explanation").textContent=core
-  ?"Med mjukjärn: B i P pekar "+direction+" och blir starkare när kärnan magnetiseras."
+  ?"Mjukjärnet magnetiseras. B i P blir starkare och pekar "+direction+"."
   :coreCompared
-   ?"Med luft: B i P pekar "+direction+" och blir svagare när kärnan tas bort."
+   ?"Utan mjukjärn blir B i P svagare. Det pekar "+direction+"."
    :"Spolen har luft i mitten. Förutsäg vad som händer med B i P när du sätter in mjukjärnet.";
  $("core-comparison").hidden=!coreCompared;
  for(const [button,row,selected] of [["core-insert","core-iron-row",core],["core-remove","core-air-row",!core]]){
