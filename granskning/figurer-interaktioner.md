@@ -1,6 +1,6 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
-> **Fy2 Spolar och solenoider, post #5 · verifieras.** Samtliga 15 elevbilder är genomgångna lokalt enligt v2.1. **Genomgångna 7 av 41**, inklusive den lokalt genomgångna posten. **Publicerade och bedömda enligt respektive kravversion 6 av 41.** Slutstatus sätts efter kurs-QA och verifierad publicering.
+> **Fy2 Spolar och solenoider, post #5 · klar för användargranskning.** Genomgångna **7 av 41**. För närvarande **7 av 41** uppfyller granskningskraven för respektive dokumenterad version. **2 av 41** är verifierade enligt v2.1. Lektionen är publicerad via [PR #75](https://github.com/jacobflinder/Lektioner/pull/75).
 
 > **Fy2 Räknestuga, post #4 · klar för användargranskning.** Genomgångna **6 av 41**. För närvarande **6 av 41** uppfyller granskningskraven för respektive dokumenterad version. **1 av 41** är verifierad enligt v2.1. De fem tidigare posterna behåller sina historiska bedömningar enligt tidigare kravversioner. Lektionen är publicerad via [PR #73](https://github.com/jacobflinder/Lektioner/pull/73).
 
@@ -151,7 +151,8 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 
 - **Oberoende fysikkontroll:** För lång luftsolenoid ger μ₀NI/L ≈ 1,005 mT vid startvärdena och cirka 0,0419–10,053 mT i testade gränsfall. För platt luftspole ger μ₀NI/(2r) ≈ 62,8 μT vid startvärdena och cirka 1,26–628 μT i testade gränsfall. Testfallen täcker också dubblering/halvering, byte av riktning, återställning och visat/dolt facit. [OpenStax om strömvarv](https://openstax.org/books/university-physics-volume-2/pages/12-4-magnetic-field-of-a-current-loop) · [OpenStax om solenoider](https://openstax.org/books/university-physics-volume-2/pages/12-6-solenoids-and-toroids)
 - **Lokal verifiering:** 535 riktade kontroller, 97 skärmbilder, inga JavaScript-fel eller externa förfrågningar i lektionstestet. AI öppnade renderingar i 390×844, 768×1024, 1280×800 och 1920×1080. Hela Fy2-sviten passerade lokalt med Chromium. Lektionens riktade test kördes igen efter en sista justering av figurklippningen. Längre beräkningar kan kräva vertikal rullning. Uppföljning på fysisk projektor och i klassrum återstår.
-- **Publicering:** Väntar på kurs-QA och Pages för publicerad kodversion. Föreslagen nästa post är #6, Laddade partiklar i magnetiska fält.
+- **Publicering verifierad:** [Fy2:s webbläsarsvit på main](https://github.com/jacobflinder/Lektioner/actions/runs/43879302848) och [GitHub Pages](https://github.com/jacobflinder/Lektioner/actions/runs/43879301864) passerade för lektionskod `c09a52b50148eb02bb95e441095f9b3dfef99d76`. På main passerade alla 535 riktade kontroller. Det generella kursprovet rapporterade 65 layoutvarningar och 0 fel. Den [publicerade sidan](https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/spolar-och-solenoider/), figurskripten och högerhandsfotot matchar de granskade filerna byte för byte.
+- **Nästa:** Föreslagen post #6, Laddade partiklar i magnetiska fält. Inväntar användarens besked.
 
 ## Fast granskningsregister
 
@@ -163,7 +164,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | **KLAR · 4:e granskade · 68 riktade v2 PASS + full Fy2-QA/Pages** |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | **KLAR · lärarrättelse av fältprickar publicerad · 281 riktade PASS + full Fy2-QA/Pages** |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Klar för användargranskning (v2.1) |
-| 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Verifieras lokalt, publicering återstår |
+| 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Klar för användargranskning (v2.1) |
 | 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | Ej påbörjad |
 | 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Ej påbörjad |
 | 8 | Fysik 2 | Induktion | `fy2/kapitel-3/induktion/` | Ej påbörjad |
