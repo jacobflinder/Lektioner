@@ -1,6 +1,6 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
-> **Fy2 Räknestuga, post #4 · verifieras.** Alla sju elevbilder är genomgångna lokalt enligt kravspecifikation v2.1. Kod, test och lokal rapport väntar på publicering. **Genomgångna: 6 av 41** inklusive den lokalt genomgångna posten. **Tidigare publicerade och godkända enligt respektive kravversion: 5 av 41.** Ingen publicerad lektion har därmed nyregistrerats som godkänd enligt v2.1. Användargranskning av #4 följer efter verifierad publicering.
+> **Fy2 Räknestuga, post #4 · klar för användargranskning.** Genomgångna **6 av 41**. För närvarande **6 av 41** uppfyller granskningskraven för respektive dokumenterad version. **1 av 41** är verifierad enligt v2.1. De fem tidigare posterna behåller sina historiska bedömningar enligt tidigare kravversioner. Lektionen är publicerad via [PR #73](https://github.com/jacobflinder/Lektioner/pull/73).
 
 > **Eftergranskningsrättelse av post #3 KLAR (2026-11-16):** magnetfältets prickar i Fy2 Permanentmagneter och flöde är **utan ringar**, och större B ger **fler lika stora prickar** över hela fältet. Ändrad A lämnar prickarna orörda och ändrar bara hur många som omsluts. Rättat även statiska figurer på bild 6, 8 och 10. **281/281 riktade kontroller**, 29 skärmbilder, 0 JavaScript-fel samt hela Fy2-regressionen **SUCCESS** på main och Pages för samma SHA. [PR #72](https://github.com/jacobflinder/Lektioner/pull/72) · kod-SHA `7bf9d7caf190c042b788c7f964164934fc0c1ba3`. **Fortfarande 5/41 färdiga**, ingen ny lektionsgranskning.
 
@@ -124,7 +124,8 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 - **Bild 6, stöd A:** Plattor och vågrät infart syns först. Vid återkopplingen pekar E nedåt och kraften uppåt från elektronen. Utgångsvektorn tangerar banan vid plattornas slut. Oberoende beräkning ger E = 2,0 kV/m, aᵧ ≈ 3,52 · 10¹⁴ m/s², t = 6,25 ns, y ≈ 6,87 mm och vinkel ≈ 15,4°. Dubbla ingångsfarten ger y ≈ 1,72 mm.
 - **Bild 7, stöd B:** Prickarna fortsätter med samma täthet utanför rektangeln. SI-omvandling och beräkning visas separat. Oberoende kontroll ger 0,00096 Wb / 0,0024 m² = 0,40 T, vilket visas i figuren efter beräkningen.
 - **Lokal verifiering:** 235 riktade Playwright-kontroller, 57 skärmbilder, inga JavaScript-fel eller externa förfrågningar i lektionstestet. Kursens Playwright-svit passerade lokalt med Chromium 141. Kursregressionen kördes under den sista layoutjusteringen av arbetsbilden och lektionens riktade test kördes på nytt efter ändringen. AI öppnade och bedömde renderingar för mobil 390×844, smal skärm 768×1024, dator 1280×800 och projektorvy 1920×1080. Vertikal rullning förekommer för längre stöd och smala vyer. Fysisk projektor och klassrumsprövning återstår.
-- **Publicering:** Väntar på uppladdning till GitHub och kontroll av kurs-QA och Pages på publicerad kodversion. Föreslagen nästkommande post är #5, Spolar och solenoider. Den påbörjas efter användarens besked.
+- **Publicering verifierad:** [Fy2:s fulla webbläsarsvit på main](https://github.com/jacobflinder/Lektioner/actions/runs/43872271201) och [GitHub Pages](https://github.com/jacobflinder/Lektioner/actions/runs/43872271139) passerade på samma lektionskod `47b6d28f0e95a2630157c823c6ff96efdcdb9757`. Den [publicerade lektionsfilen](https://jacobflinder.github.io/Lektioner/fy2/kapitel-3/raknestuga/) matchade den granskade filen byte för byte. Kursens smoke-test rapporterade 68 layoutvarningar och 0 fel. Vid 768 px behöver mindmap och arbetsbild rullas vertikalt. De kritiska återkopplingsfigurerna med bildtexter har verifierats i klassrumsstorlek.
+- **Nästa:** Föreslagen post #5, Spolar och solenoider. Inväntar användarens besked.
 
 ## Fast granskningsregister
 
@@ -135,7 +136,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Figurer visuellt accepterade av användaren; Fy2-mellanled lämnade för senare** |
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | **KLAR · 4:e granskade · 68 riktade v2 PASS + full Fy2-QA/Pages** |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | **KLAR · lärarrättelse av fältprickar publicerad · 281 riktade PASS + full Fy2-QA/Pages** |
-| 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Verifieras lokalt, publicering återstår |
+| 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Klar för användargranskning (v2.1) |
 | 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Ej påbörjad |
 | 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | Ej påbörjad |
 | 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Ej påbörjad |
