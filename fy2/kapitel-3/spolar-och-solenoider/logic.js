@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 const $=id=>document.getElementById(id),slides=[...document.querySelectorAll(".slide")];
-const N=slides.length;let current=0,view="side",core=false;
+const N=slides.length;let current=0,view="side",core=false,coreCompared=false;
 function render(){
  slides.forEach((slide,i)=>slide.classList.toggle("active",i===current));
  $("counter").textContent=(current+1)+" / "+N;
@@ -17,7 +17,7 @@ function clearSlideFeedback(i){
  slide.dispatchEvent(new Event("lesson:reset"));
  if(i===4){view="side";viewDir=1;viewShown=false;drawView()}
  if(i===5)slide.querySelector(".loop-comparison").open=false;
- if(i===7){core=false;coreDir=1;drawCore()}
+ if(i===7){core=false;coreCompared=false;coreDir=1;drawCore()}
  if(i===10){$("sol-reset").click()}
  if(i===12){$("flat-reset").click()}
 }
@@ -108,13 +108,23 @@ $("view-reveal").addEventListener("click",()=>{viewShown=!viewShown;drawView()})
 $("view-reset").addEventListener("click",()=>{view="side";viewDir=1;viewShown=false;drawView()});
 function drawCore(){
  coreHost.innerHTML=CoilArt.coilHelix({core,dir:coreDir,field:true,withP:true});
- $("core-explanation").textContent=core?
- "Samma spole och ström, nu med mjukjärnskärna. Kärnans magnetisering kan öka B, men en exakt förstärkningsfaktor kan inte räknas ut utan materialdata och geometri.":
- "Luftspole. Spolens och strömmens värden är oförändrade. Förutsäg hur en mjukjärnskärna påverkar fältet i P.";
- $("core-insert").classList.toggle("selected",core);
- $("core-remove").classList.toggle("selected",!core);
+ const direction=coreDir>0?"åt höger":"åt vänster";
+ $("core-explanation").textContent=core
+  ?"Mjukjärnet magnetiseras. B i P blir starkare och pekar "+direction+"."
+  :coreCompared
+   ?"Utan mjukjärn blir B i P svagare. Det pekar "+direction+"."
+   :"Spolen har luft i mitten. Förutsäg vad som händer med B i P när du sätter in mjukjärnet.";
+ $("core-comparison").hidden=!coreCompared;
+ for(const [button,row,selected] of [["core-insert","core-iron-row",core],["core-remove","core-air-row",!core]]){
+  $(button).classList.toggle("selected",selected);
+  $(button).setAttribute("aria-pressed",String(selected));
+  $(row).setAttribute("aria-current",String(selected));
+ }
+ for(const arrow of $("core-comparison").querySelectorAll("[data-core-arrow]")){
+  arrow.setAttribute("transform","translate(64 13) scale("+coreDir+" 1)");
+ }
 }
-$("core-insert").addEventListener("click",()=>{core=true;drawCore()});
+$("core-insert").addEventListener("click",()=>{core=true;coreCompared=true;drawCore()});
 $("core-remove").addEventListener("click",()=>{core=false;drawCore()});
 $("core-direction").addEventListener("click",()=>{coreDir*=-1;drawCore()});
 
