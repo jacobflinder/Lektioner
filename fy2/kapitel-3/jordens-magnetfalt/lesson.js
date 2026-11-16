@@ -60,7 +60,7 @@ function coilSetup(){
  '<path d="M180 69V296" stroke="#efba88" stroke-width="3" stroke-linecap="round"/>'+
  '<path d="M70 179H305" stroke="#93b3bd" stroke-width="2.5" stroke-dasharray="8 6"/>'+
  '<circle cx="180" cy="179" r="32" fill="white" stroke="#466a79" stroke-width="3"/>'+
- T(172,187,'?','#31596b',27)+A(180,137,180,78,'#087d96',4)+T(193,92,'Bₕ','#087d96',21)+
+ T(172,187,'?','#31596b',27)+A(257,137,257,78,'#087d96',4)+T(268,92,'Bₕ','#087d96',21)+
  T(154,60,'N ↑','#31596b',17)+T(44,170,'V','#31596b',20)+T(279,170,'Ö','#31596b',20)+
  T(44,333,'Spolens vertikala plan: N–S','#31596b',16)+'</g>';
  const side='<g data-coil-side-view>'+T(371,40,'SETT FRÅN ÖSTER','#31596b',18)+
