@@ -63,21 +63,51 @@ try{
  await page.locator('#reset-btn').click();
  ok(await active().locator('.hand-photo').isVisible(),'reset returns to the photograph');
  await go(6);ok(!await active().locator('.answer').isVisible(),'iron-core explanation not spoiled before prediction');
+ const coreFill=svg=>svg.evaluate(el=>{
+  const core=el.querySelector('[data-iron-core]');
+  const opening=el.querySelector('ellipse[ry="66"]');
+  return core&&core.getBBox().height/opening.getBBox().height;
+ });
+ const staticCoils=active().locator('.comparison svg');
+ ok(await staticCoils.nth(0).locator('[data-iron-core]').count()===0,'air coil remains empty');
+ const staticFill=await coreFill(staticCoils.nth(1));
+ ok(staticFill>=.8&&staticFill<.95,'core fills most of the coil opening while preserving a clear gap');
  await active().locator('[data-reveal]').click();ok((await active().locator('.answer').innerText()).includes('material'),'conditional permeability explained');
  await go(7);
  const core0=await page.locator('#core-explanation').innerText();
+ const comparison=page.locator('#core-comparison'),coreDrawing=active().locator('.fig svg');
+ const fieldAtP=()=>coreDrawing.locator('[data-point-field]').evaluate(group=>{
+  const values=group.querySelectorAll('path')[1].getAttribute('d').match(/^M([\d.]+) [\d.]+H([\d.]+)/);
+  return {length:Number(values[2])-Number(values[1]),px:group.querySelector('circle').cx.baseVal.value,py:group.querySelector('circle').cy.baseVal.value};
+ });
+ const air=await fieldAtP();
+ const winding=await coreDrawing.locator('path[stroke="#bb653e"][stroke-width="6.6"]').getAttribute('d');
+ ok(await comparison.isHidden(),'comparison is hidden until the first insertion');
  const closedReturn=await active().locator('[data-return-path]').evaluateAll(paths=>paths.length===2&&paths.every(path=>{
   const a=path.getPointAtLength(0), b=path.getPointAtLength(path.getTotalLength());
   return Math.hypot(a.x-b.x,a.y-b.y)<.1;
  }));
  ok(closedReturn,'both schematic return paths are closed');
  await page.locator('#core-insert').click();
- ok((await page.locator('#core-explanation').innerText()).includes('magnetisering'),'core effect not expressed as fake numerical multiplier');
+ ok((await page.locator('#core-explanation').innerText()).includes('magnetiseras'),'the comparison explains the contribution from magnetized iron');
+ const iron=await fieldAtP();
+ ok(iron.length>air.length&&iron.px===air.px&&iron.py===air.py,'same point P and direction with a clearly stronger field');
+ ok(close(await coreFill(coreDrawing),staticFill,.002),'static and interactive drawing use the same near-full core');
+ ok(await coreDrawing.locator('path[stroke="#bb653e"][stroke-width="6.6"]').getAttribute('d')===winding,'inserting the core holds the winding geometry fixed');
+ ok(await comparison.isVisible()&&await page.locator('#core-iron-row[aria-current="true"]').count()===1,'both cases shown and the current iron state selected');
+ const comparisonArrows=()=>comparison.locator('[data-core-arrow]').evaluateAll(arrows=>arrows.map(arrow=>({dir:Math.sign(arrow.transform.baseVal.getItem(1).matrix.a),length:arrow.querySelector('path').getBBox().width})));
+ const forwardArrows=await comparisonArrows();
+ ok(forwardArrows.every(arrow=>arrow.dir===1)&&forwardArrows[1].length>forwardArrows[0].length,'visible arrows compare both fields on the same qualitative scale');
  ok(await page.locator('#core-svg').count()===0,'dynamic drawing uses rebuilt svg in core host');ok(await page.locator('#sol-b-bar').count()===0,'qualitative iron-core model never invents a numeric B bar');
  ok(await page.locator('#core-insert.selected').count()===1,'core state button correct');
  await page.locator('#core-direction').click();
- ok((await page.locator('#core-explanation').innerText()).includes('magnetisering'),'reversed core retains physical explanation');
- await page.locator('#core-remove').click();ok((await page.locator('#core-explanation').innerText())===core0,'core comparison can be restored');
+ const reversedIron=await fieldAtP(), reversedArrows=await comparisonArrows();
+ ok(reversedIron.length===-iron.length&&reversedArrows.every((arrow,i)=>arrow.dir===-1&&arrow.length===forwardArrows[i].length),'reversing current reverses both directions with the same relative strengths');
+ await page.locator('#core-remove').click();
+ const restoredAir=await fieldAtP();
+ ok(restoredAir.length===-air.length&&await comparison.isVisible()&&await page.locator('#core-air-row[aria-current="true"]').count()===1,'removing the core leaves a weaker field in the selected air case');
+ await page.locator('#reset-btn').click();
+ ok(await comparison.isHidden()&&(await page.locator('#core-explanation').innerText())===core0,'reset restores the initial prediction state');
  await go(8);ok((await active().innerText()).includes('mättnad'),'ferromagnetic limitations preserved');
  await go(9);
  ok(await active().locator('.answer').count()===2,'two distinct model formula explanations');
@@ -254,6 +284,10 @@ try{
    }
    if(i===7){
     await page.locator('#core-insert').click();
+    await shot(vp.name+'-core-iron',vp.width<1280);
+    await page.locator('#core-remove').click();
+    await shot(vp.name+'-core-air',vp.width<1280);
+    await page.locator('#core-insert').click();
     await page.locator('#core-direction').click();
     await shot(vp.name+'-core-reversed',vp.width<1280);
    }
@@ -283,7 +317,17 @@ try{
    await page.locator('#reset-btn').click();
   }
  }
- ok(exceptions.length===0,'no JS exceptions: '+exceptions.join('; '));
+ await page.setViewportSize({width:916,height:940});
+ await go(6);
+ await shot('916-core-prediction',false);
+ await go(7);
+ await page.locator('#core-insert').click();
+ const coreBounds=await Promise.all([active().locator('.fig').boundingBox(),comparison.boundingBox()]);
+ ok(coreBounds.every(box=>box.y>=0&&box.y+box.height<=940),'illustration and comparison fit together in the reported 916×940 viewport');
+ await shot('916-core-iron',false);
+ await page.locator('#core-remove').click();
+ await shot('916-core-air',false);
+  ok(exceptions.length===0,'no JS exceptions: '+exceptions.join('; '));
  ok(foreign.length===0,'no unexpected external requests: '+foreign.join('; '));
  if(failures.length)throw Error(failures.length+' CHECKS FAILED:\n'+failures.join('\n'));
  console.log('FY2_34_PASS '+JSON.stringify({checks,screenshots,javascriptErrors:exceptions.length,externalRequests:foreign.length}));
