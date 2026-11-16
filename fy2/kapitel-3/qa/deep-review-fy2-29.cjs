@@ -126,7 +126,7 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
    }
    const lab=await page.locator('#earth-compass svg text').filter({hasText:'Bres'}).first().evaluate(e=>({x:Number(e.getAttribute('x')),y:Number(e.getAttribute('y'))}));
    if(b===0){
-    const zerotext=await page.locator('#earth-compass svg').innerText();
+    const zerotext=await page.locator('#earth-compass svg').textContent();
     test(zerotext.includes('Bres = Bₕ'),'when vectors coincide at zero coil, equality is written instead of overlapping labels');
     const boxes=await page.locator('#earth-compass svg text').evaluateAll(es=>es.filter(e=>e.textContent==='Bₕ'||e.textContent==='Bres = Bₕ'||e.textContent==='α = 0°').map(e=>{const z=e.getBBox();return {label:e.textContent,x:z.x,y:z.y,right:z.x+z.width,bottom:z.y+z.height}}));
     test(boxes.length===3&&boxes.every((p,i)=>boxes.slice(i+1).every(q=>p.right<=q.x||q.right<=p.x||p.bottom<=q.y||q.bottom<=p.y)),'no overlapping Bh, Bres=Bh and alpha=0 label bounding boxes');
