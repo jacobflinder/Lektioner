@@ -66,7 +66,7 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
    ok(current.includes(value(B,A)),'variable drawn flux matches independently computed BA '+B+' T/'+A+' cm2');
    ok(reference.includes(value(B,24)),'fixed drawn reference flux matches B*A0 for '+B);
    const printed=(await page.locator('#flux-result math[display="block"]').nth(2).textContent());
-   ok(printed.includes(value(B,A)),'computed text agrees with drawn actual flux '+B+'/'+A);
+   ok(printed.replaceAll(' ','').includes(value(B,A).replaceAll(' ','')),'computed MathML agrees with drawn actual flux '+B+'/'+A);
    const width=Number(await page.locator('#flux-area').getAttribute('width'));
    ok(Math.abs(width/120-A/24)<1e-5,'true SVG area ratio matches A/A0 for '+B+'/'+A);
    const rp=await page.locator('#flux-area').evaluate(e=>e.getBoundingClientRect().width);
