@@ -1,6 +1,6 @@
 (()=>{
 "use strict";
-const {$}=window.Fy2Nav,{fmt,compass,components}=window.Fy2Physics;
+const {$}=window.Fy2Nav,{fmt,compass,components,S,A,T}=window.Fy2Physics;
 
 const math=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+x+'</math>';
 const inlineMath=x=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+x+'</math>';
@@ -38,7 +38,42 @@ function resetComponents(){componentsShown=false;$("earth-B").value=42;$("earth-
 $("earth-components-reset").onclick=resetComponents;
 $("earth-components").closest(".slide").addEventListener("lesson:reset",resetComponents);
 const Bh=42*Math.cos(73*Math.PI/180);
-$("earth-compass-predict").innerHTML=compass(Bh,30,false).html;
+
+/* Figure review v2.1: force zero follows from parallel v and B, no force direction invented. */
+function parallelProton(answer){
+ const body='<path d="M106 130H546" stroke="#b9d4da" stroke-width="2" stroke-dasharray="7 7"/>'+
+ '<circle data-proton cx="144" cy="208" r="22" fill="white" stroke="#bc674c" stroke-width="4"/>'+
+ T(136,216,'+','#bc674c',27)+
+ A(175,208,490,208,'#16836b',5)+T(510,215,'v','#16836b',25)+
+ A(175,130,490,130,'#087b91',5)+T(510,137,'B','#087b91',25)+
+ T(30,45,'PROTON · v OCH B ÄR PARALLELLA','#31596b',18)+
+ (answer?'<g data-zero-force>'+T(260,294,'F = 0','#345a67',27)+'</g>':T(260,294,'Hur stor är F?','#345a67',21));
+ return S(body,650,335,'Proton och parallella vektor-pilar för v och B, båda åt höger; pilarna ritas på olika höjder för läsbarhet. '+(answer?'Kraftens belopp är noll.':'Kraften ska förutsägas.'));
+}
+$('earth-proton-question').innerHTML=parallelProton(false);
+$('earth-proton-feedback').innerHTML=parallelProton(true);
+
+/* Orthographic real coil geometry, no invented current direction or final compass needle. */
+function coilSetup(){
+ const top='<g data-coil-top-view>'+T(18,40,'SETT UPPIFRÅN','#31596b',18)+
+ '<path d="M180 69V296" stroke="#b5734d" stroke-width="9" stroke-linecap="round"/>'+
+ '<path d="M180 69V296" stroke="#efba88" stroke-width="3" stroke-linecap="round"/>'+
+ '<path d="M70 179H305" stroke="#93b3bd" stroke-width="2.5" stroke-dasharray="8 6"/>'+
+ '<circle cx="180" cy="179" r="32" fill="white" stroke="#466a79" stroke-width="3"/>'+
+ T(172,187,'?','#31596b',27)+A(180,137,180,78,'#087d96',4)+T(193,92,'Bₕ','#087d96',21)+
+ T(154,60,'N ↑','#31596b',17)+T(44,170,'V','#31596b',20)+T(279,170,'Ö','#31596b',20)+
+ T(44,333,'Spolens vertikala plan: N–S','#31596b',16)+'</g>';
+ const side='<g data-coil-side-view>'+T(371,40,'SETT FRÅN ÖSTER','#31596b',18)+
+ '<circle data-actual-coil cx="525" cy="183" r="104" fill="none" stroke="#b5734d" stroke-width="9"/>'+
+ '<circle cx="525" cy="183" r="19" fill="white" stroke="#466a79" stroke-width="3"/>'+
+ T(517,190,'?','#31596b',23)+
+ '<path d="M368 310H659" stroke="#9ebdc4" stroke-width="2" stroke-dasharray="6 5"/>'+
+ T(382,338,'Cirkelformad spole · nålen i centrum','#31596b',16)+'</g>';
+ return S('<path d="M346 38V341" stroke="#c0d9df" stroke-width="2"/>'+top+side,690,360,
+ 'Två vyer av spolen: uppifrån syns dess vertikala nord–syd-plan från kanten, från öster syns den cirkelformad med kompassen i centrum. Strömriktning och kompassens slutriktning är ännu inte givna.');
+}
+$('earth-compass-predict').innerHTML=coilSetup();
+
 function drawCompass(){
  const b=Number($("earth-coil").value),v=compass(Bh,b,compassShown);
  $("earth-compass").innerHTML=v.html;
