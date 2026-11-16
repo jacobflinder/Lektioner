@@ -43,7 +43,7 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
   ok((await page.locator('#domain-grid span').allTextContents()).length===6,'six domain tiles preserved');
   await page.locator('#domain-field').click();
   ok(await page.locator('#domain-applied-field').isVisible(),'applied field visually labeled B arrow');
-  const field=await page.locator('#domain-applied-field svg path').getAttribute('d');
+  const field=await page.locator('#domain-applied-field > svg > path').getAttribute('d');
   ok(field.includes('H115'),'field arrow points right as model says');
   ok(new Set(await page.locator('#domain-grid span').allTextContents()).size===1,'moments align with applied external field');
   await page.locator('#domain-field').click();
