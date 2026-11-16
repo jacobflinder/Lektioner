@@ -1,5 +1,7 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
+> **Pågående v2.0: Fjärde lektionen som granskas – Fy2 Elektriska fält (#2 i registret).** De tre tidigare granskade ligger kvar som historiskt färdiga. Slutgodkänn inte nuvarande lektion före riktade och fulla Fy2-tester, faktiskt visuellt granskade bilder samt verifierad publicering på samma kod-SHA. **Nästa lektion påbörjas inte automatiskt.**
+
 > **Kravspecifikation uppgraderad till v2.0 den 16 november 2026.** Se [figurer-interaktioner-instruktion.md](figurer-interaktioner-instruktion.md). De tre granskade lektionerna – Fy2 Ström ger magnetfält, Ma4 Polynomdivision och Fy1 Serie- och parallellkoppling – gav tre huvudlärdomar: **en figur måste faktiskt finnas och vara begriplig när eleven behöver den; figur, mellanled, reglage och återkoppling måste visa samma sak; riktiga synliga skärmbilder och topologi måste granskas även när testerna är gröna**. Kraven skärps på saknade figurer, återkopplingsbilder, förklaringsnära MathML, kopplingsledningar till komponenter, perspektiv/handgrepp, visningsstorlek, facitdöljning, matematisk kedja och teknisk publiceringsverifiering. Detta är **en instruktionändring, inte en fjärde lektionsgranskning**. Äldre godkännanden är historiska: de påstår **inte automatiskt** att alla tre lektionerna har omgranskats fullt enligt v2.0. Öppna anmärkningar kvarstår tills de uttryckligen återupptas.
 
 > **Figur- och interaktionsgranskning: 3 av 41 färdiga.** **Senast färdiggranskad:** Fysik 1 – **Serie- och parallellkoppling**, #28 i det fasta 41-postsregistret (tredje genomförda lektionen). De tidigare två är Fy2 Ström ger magnetfält (#1) och Ma4 Polynomdivision (#23). **38 lektioner återstår**.
@@ -56,6 +58,20 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 
 **Statusändring:** Tidigare godkänt arbete enligt äldre kriterier behålls i historiken, men pilot **1/41 återöppnas** inför fortsatt visuell revidering. **Ingen ny lektionskod eller bild har ändrats i denna instruktionstilläggsuppdatering.** Det nya fotografibaserade stödet är ännu inte implementerat eller visuellt verifierat, och referensfotot måste först lokaliseras/verifieras. **Ingen tillåtelse att börja lektion 2** följer av detta krav.
 
+## Aktiv figurgranskning v2.0 – Fjärde lektionen: Fysik 2 Elektriska fält (#2 i 41-registret)
+
+**Start 2026-11-16, arbetsgren:** `figurer-fy2-elektriska-falt-v2-20261116`. Föregående tre färdiga är Fy2 Ström ger magnetfält (#1), Ma4 Polynomdivision (#23), Fy1 Serie- och parallellkoppling (#28). Detta är granskning **4 av 41** i utförd ordning och nummer **#2** i registerordningen. Användaren skrev uttryckligen ”Nästa”; v2.0 används för första gången fullt ut. Detta arbete ska inte räknas som färdigt förrän nödvändiga test/visuell granskning och Pages passerar.
+
+**Bild-för-bild-behov:** Bild 1 har en faktisk fördröjd E-/F-figur; 2 har radialfält och principskiss med PhET; 3 har laddningsväxel och teckenstyrd kraftpil; 4 energiekvation och protonfigur med repetionsreglage; 5 parabel och långsam animation; 6 full matematisk lösning, parabel, valbart U och v₀ och kollisionsmodell; 7 eget arbete/Socrative + felaktigt påstående utan jämförelsebild; 8 aktiv elevmindmap där nytt färdigt bildfacit inte behövs; 9 målåterkoppling utan konkret lösningsfigur. Inga nya figurer på bild 8 eftersom eleverna ska själva skapa mindmapen.
+
+**Upptäckta brister och motivering:** (1) Bild 4:s statiska protonfigur sade `U=250 V` men repetionsreglaget kunde väljas till 50–500 V utan en egen synlig fartrepresentation. Visad resultattext ändrades medan bilden förblev 250 V: en v2.0-avvikelse mellan reglage och figur. (2) Bild 6:s tidigare vektorpilar var ungefär lika långa trots att `vᵧ/vₓ≈0,275`. Det gjorde den beräknade vinkeln ≈15,4° svår att förstå visuellt. (3) Bild 7:s ”Hitta felet” gav enbart text och formel om `y∝1/v₀²`, utan korrigerad jämförelse av den ursprungliga och dubbla farten. (4) Bild 9:s utcheckning förklarade E, F, a och vₓ men hade ingen efterföljande lösningsfigur. Bild 5:s animation och bild 6:s kollisionsmodell hade redan ämnesmässigt relevanta banor; v2-granskningen ska verifiera även mellanlägen, reset, plattträff och faktisk synlighet.
+
+**Åtgärder på arbetsgren:** Bild 4 märker den oförändrade 250 V-figuren som just det genomräknade exemplet; repetitionsreglagets aktuella U får en **separat, icke-omskalad SVG-stapel** för protonfarten 0–320 000 m/s som följer `v=√(2eU/mₚ)`. Bild 6:s utgångshastighet visas i en **äkta vektortriangel på samma skala** med `vᵧ/vₓ` och ursprung i den beräknade banans slutpunkt. Bild 7 visar först efter egen förutsägelse ett korrekt grönt/streckat orange **före–efter-diagram** i samma koordinatskala, med `v₀` mot `2v₀`, `y` mot `y/4`. Bild 9 visar efter återkoppling en verklig figur med E nedåt, elektronens kraft/acceleration uppåt, konstant horisontell fart och uppåtböjd bana. Nytt lärarstöd beskriver sekvensen. Källans PhET, Socrative `SOC-37286742`, lärobokens `301–309`, läsning och samtliga matematiska steg är bevarade.
+
+**Oberoende kontrollfall:** Protonfarten `v(U) = √(2eU/mₚ)`; på SVG-baren `bredd=360·v/320000` oberoende av U. Elektronmodellen `E=U/d`, `a=eU/(mₑd)`, `t=L/v₀`, `y=a t²/2`, `vᵧ=at`, `tan α = vᵧ/vₓ`; plattträff då `y≥d/2` (halvt avstånd då partikeln startar mitt i gapet). Standardvärden U=60 V, d=0,030 m, L=0,050 m, v₀=8,0·10⁶ m/s ger y≈6,87 mm, α≈15,4°. Vid 2v₀ (U konstant) är t halverad och y≈1,72 mm; den ritade avböjningen ska vara **exakt en fjärdedel** med samma skala. Vektortriangelns ritade kvot SKA vara `vᵧ/vₓ≈0,275` och starta på faktisk parabeländpunkt. Inga nya svar före elevens egen förutsägelse.
+
+**Verifieringsläge:** Arbetsgrenen har kodförändringar och ett nytt riktat Playwright-test `fy2/kapitel-3/qa/figure-interaction-elektriska-falt-v2.cjs`, tillagt i Fy2:s hela CI-workflow. **Status ännu ej klar – inväntar CI, faktisk bildgranskning (390, 768, 1280, 1920 px), main/Pages och loggkomplettering.** Ändra inga andra lektioner.
+
 ## Fast granskningsregister
 
 **Inventerat: 41/41** unika publicerade lektionskataloger, Fysik 2 = 10, Matematik 4 = 15, Fysik 1 = 6, Matematik fortsättning nivå 1c = 10. Undervisningsordning hämtad från respektive kapitels index. Undantag: **Ström ger magnetfält**, normalt Fy2-lektion 04, ligger uttryckligen först som pilot och förekommer inte igen. Räknestugor och demonstrationspass följer det läge där de står i Fy2-indexet. Enhetscirkeln behandlas som förberedande Ma4-repetition eftersom den visas före 4.1 i indexet. `mato1c` betyder Ma3c/Gy25 fortsättning nivå 1c.
@@ -63,7 +79,7 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 | Nr | Kurs | Titel | Sökväg | Figur-/interaktionsstatus |
 |---:|---|---|---|---|
 | 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Figurer visuellt accepterade av användaren; Fy2-mellanled lämnade för senare** |
-| 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | Ej påbörjad |
+| 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | **Under granskning v2.0 – fjärde behandlade lektionen** |
 | 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | Ej påbörjad |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Ej påbörjad |
 | 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Ej påbörjad |
