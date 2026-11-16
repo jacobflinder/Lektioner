@@ -34,8 +34,13 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   check(await page.locator('#class[aria-pressed="true"]').count()===1,'classroom mode initially active');
   // Slides 1-4. A three-finger RHR from original PDF is required.
   await go(1);check((await slide().innerText()).includes('Strömmen vänds')||(await slide().innerText()).includes('strömmen vänds'),'original coil field reversal prompt');
-  check(await slide().locator('svg path[d^="M130 170H455"]').count()===1,'schematic initial B arrow to right');
+  check(await slide().locator('#coil-before svg [data-coil-turn]').count()===9,'schematic coil really visible in the initial situation');
+  const initialB=await vpath('#coil-before svg [data-coil-b]');check(initialB?.dx>0&&initialB.dy===0,'B right in the pictured coil');
   await go(2);check((await slide().innerText()).includes('styrkan är densamma'),'coil B reverses direction not strength at unchanged setup');
+  const before=await vpath('#coil-feedback-before [data-coil-b]'),after=await vpath('#coil-feedback-after [data-coil-b]');
+  check(before?.dx>0&&after?.dx<0&&near(Math.abs(before.dx),Math.abs(after.dx),.01),'same magnitude opposite axial B field on reversal');
+  const windings=await Promise.all(['#coil-feedback-before','#coil-feedback-after'].map(t=>page.locator(t+' [data-coil-turn]').evaluateAll(es=>es.map(e=>[e.cx.baseVal.value,e.cy.baseVal.value,e.rx.baseVal.value,e.ry.baseVal.value]))));
+  check(JSON.stringify(windings[0])===JSON.stringify(windings[1])&&windings[0].length===9,'winding unchanged in the two diagrams');
   await go(3);for(const t of ['positiva och negativa','farten är konstant','partikel och en ledare'])check((await slide().innerText()).includes(t),'original goal '+t);
   await go(4);const hand=slide().locator('img[src*="hogerhandsregeln.svg"]');
   check(await hand.count()===1,'original 3-finger hand image retained');
@@ -84,6 +89,22 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
     check(txt.includes(swe(v*B,2)),'displayed force tracks v*B '+v+'/'+B);
    }
   }
+  await page.locator('#particle-positive').click();
+  if((await page.locator('#particle-flip').getAttribute('aria-pressed'))==='true')await page.locator('#particle-flip').click();
+  const marks=()=>page.locator('#particle-dynamic [data-field-symbol]').evaluateAll(es=>es.map(e=>({x:e.getAttribute('data-field-x'),y:e.getAttribute('data-field-y'),type:e.getAttribute('data-field-symbol'),op:e.getAttribute('opacity'),sw:e.getAttribute('stroke-width'),r:e.getAttribute('r'),box:e.getBBox().width})));
+  let previous=[],previousCount=0,snapshot=[];
+  for(const b of [.7,.8,.9,1,1.1,1.2,1.3,1.4,1.5]){
+   await set('particle-B',b);const now=await marks();
+   check(now.length>previousCount,'higher B adds field marks across fixed field '+b);
+   check(now.every(z=>z.type==='cross'&&z.op==='.65'&&z.sw==='1.9'&&near(z.box,12,.01)),'all cross glyph dimensions and opacity fixed '+b);
+   check(previous.every(z=>now.some(n=>n.x===z.x&&n.y===z.y)),'previous B symbols stay at identical locations '+b);
+   if(b===1)snapshot=now;
+   previous=now;previousCount=now.length;
+  }
+  await set('particle-B',1);await page.locator('#particle-flip').click();
+  const dots=await marks();
+  check(dots.length===snapshot.length&&dots.every(z=>z.type==='dot'&&z.r==='3.3'&&z.op==='.65'),'flip preserves B magnitude and gives uniform dots');
+  check(dots.every(z=>snapshot.some(n=>z.x===n.x&&z.y===n.y)),'B reversal preserves all glyph positions');
   await page.locator('#particle-restart').click();
   check((await page.locator('#particle-time-value').innerText()).includes('0 %'),'restart sets zero time');
   await page.locator('#particle-play').click();
@@ -112,9 +133,13 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   await page.locator('#class').click();
   // Slide 9: step-by-step radius derivation and optional period/frequency math.
   await go(9);await reset();
+  check(await slide().locator('#radius-figure circle[cx="330"][cy="176"]').count()===1,'radius geometry preserves same point P');
+  check(await slide().locator('#radius-figure [data-radius-force]').getAttribute('visibility')==='hidden','center-directed answer vector not visible before student sketch');
   check(await slide().locator('.answer').count()===3,'three distinct algebraic reveals');
   check(!await slide().locator('.answer').first().isVisible(),'centripetal answer concealed');
-  await step(1);check((await slide().locator('.answer').first().innerText()).includes('Rita'),'first force equation and compass center draw');
+  await step(1);check((await slide().locator('.answer').first().innerText()).includes('centrum'),'first force equation and centerward answer');
+  check(await slide().locator('#radius-figure [data-radius-force]').getAttribute('visibility')==='visible','radius answer figure reveals F after own sketch');
+  const ff=await vpath('#radius-figure [data-radius-force] path');check(ff?.dx<0&&near(ff.dy,0,.01),'rendered force vector points from P towards circle center');
   check(!await slide().locator('.answer').nth(1).isVisible(),'second equation not leaked');
   await step(1);check(await slide().locator('.answer').nth(1).isVisible(),'mv²/r=qvB shown only at second step');
   await step(1);
@@ -130,7 +155,8 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   const R=mass*v/(muq*B),omega=muq*B/mass,T=2*Math.PI*mass/(muq*B);
   check(near(R*omega,v,1e-5),'independent v=rω');
   check(near(T*omega,2*Math.PI,1e-10),'independent cyclotron period');
-  await reset();check(!await slide().locator('.answer').nth(2).isVisible(),'radius solutions hidden again on reset');check(!await optional.evaluate(el=>el.open),'optional extension closes on reset');
+  await reset();check(!await slide().locator('.answer').nth(2).isVisible(),'radius solutions hidden again on reset');
+  check(await slide().locator('#radius-figure [data-radius-force]').getAttribute('visibility')==='hidden','reset also hides the inward F arrow');check(!await optional.evaluate(el=>el.open),'optional extension closes on reset');
   // Slide 10: early SVG force disclosure fixed; law->substitution->answer order.
   await go(10);await reset();
   check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()===0,'no premature proton force vector');
@@ -150,6 +176,8 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   await go(12);
   check(await slide().locator('.particle-equation-steps math').count()===4,'electron computation has 4 independent math lines');
   check((await slide().innerText()).includes('nedåt'),'electron force downward because q negative');
+  const electronArrow=await vpath('#mag-electron-answer svg path[stroke="#be6a42"]');
+  check(electronArrow?.dy>0,'electron feedback contains same field and downward force arrow immediately beside mathematics');
   check(near(1.6e-19*2e6*.04,1.28e-14,1e-25),'independent electron F numeric');
   const q12=slide().locator('[data-quiz]');check(!await q12.isVisible(),'electron self-test optional in classroom');
   await page.locator('#repetition').click();await q12.locator('[data-choice="1"]').click();check((await q12.locator('.feedback').innerText()).includes('Inte riktigt'),'wrong mass dependence diagnostic');
@@ -243,10 +271,19 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
      const eq=slide().locator('.particle-equation-steps:visible').first();const gap=await eq.locator(':scope > div').evaluateAll(a=>a.map(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom}}));
      if(gap.length>1)check(gap.slice(1).every((r,j)=>r.top-gap[j].bottom>=15),'independent maths separated >=15px '+v.name+' slide '+n);
     }
+    if(n===9)check(await page.locator('#radius-figure [data-radius-force]').getAttribute('visibility')==='visible','radius solution and figure visible '+v.name);
+    if(n===12)check((await vpath('#mag-electron-answer svg path[stroke="#be6a42"]'))?.dy>0,'electron solved figure visible '+v.name);
     if(n===10)check(await page.locator('#mag-proton svg path[stroke="#be6a42"]').count()>=1,'revealed figure on '+v.name);
     if(n===15)check(await page.locator('#mag-conductor-answer svg path[stroke="#bd6544"]').count()>=1,'revealed conductor figure '+v.name);
     await png(v.name+'-'+String(n).padStart(2,'0'));
    }
+  }
+  await page.setViewportSize({width:768,height:900});
+  for(const n of [1,2,9,12]){
+   await go(n);await reset();if(n===9)await step(1);
+   const widths=await page.evaluate(()=>({inner:innerWidth,scroll:document.documentElement.scrollWidth}));
+   check(widths.scroll<=widths.inner+2,'768px no horizontal page overflow slide '+n);
+   await png('narrow-768-'+n);
   }
   check(errors.length===0,'no console or JS errors '+errors.join('; '));
   check(foreign.length===0,'no third party network requests '+foreign.join('; '));
