@@ -105,7 +105,7 @@ const sv=(v,n=1)=>Number(v).toLocaleString('sv-SE',{minimumFractionDigits:n,maxi
   test(await page.locator('#earth-compass-predict svg path[fill="#cf453b"]').count()===0,'prediction diagram conceals red compass needle');
   test(await page.locator('#earth-compass-predict [data-actual-coil]').count()===1,'actual CIRCULAR winding shown from the coil axis');
   test(await page.locator('#earth-compass-predict [data-coil-top-view]').count()===1,'north–south plane of vertical coil in top view');
-  test((await page.locator('#earth-compass-predict svg').textContent()).includes('Spolens vertikala plan'),'physical setup expressly connects sketch and demonstration');
+  test((await page.locator('#earth-compass-predict').textContent()).includes('Spolens vertikala plan'),'physical setup expressly connects sketch and demonstration');
   // 8: independent vector geometry, sign and 90 degree limit.
   await go(8);await reset();test(await page.locator('#earth-compass svg path[fill="#cf453b"]').count()===0,'red needle hidden until deliberate reveal');
   test(!(await page.locator('#earth-compass-result').innerText()).includes('67,7'),'numeric alpha hidden before question');
