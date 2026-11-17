@@ -79,8 +79,8 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
        return {graphRight:graph.right,graphTop:graph.top,graphBottom:graph.bottom,
         resultLeft:result.left,resultTop:result.top,resultBottom:result.bottom};
       });
-      ck(visible.graphRight<visible.resultLeft&&visible.graphTop<visible.resultTop&&
-         visible.resultTop<visible.graphBottom&&visible.resultBottom<=size.height,
+      ck(visible.graphRight<visible.resultLeft&&visible.graphTop>=0&&visible.graphBottom<=size.height&&
+         visible.resultTop>=0&&visible.resultBottom<=size.height,
          'Figur och alla fyra matematikled i samma 1280/1920-klassrumsvy: '+JSON.stringify(visible));
      }
      const rect=await label('#moivre-rect');
