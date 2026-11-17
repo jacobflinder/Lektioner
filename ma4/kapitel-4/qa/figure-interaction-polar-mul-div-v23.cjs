@@ -63,6 +63,15 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   ok(!!parsed,'SVG angle arc exists');ok(+parsed[5]===0&&+parsed[6]===(mode==='mul'?0:1),'correct arc direction');
   if(mode==='div'){ok(await page.locator('#pd-zoom').isVisible(),'inset shown');near((await vec('#pd-zoom-plane','#bc633a')).v,-30,'inset direction')}
   else ok(await page.locator('#pd-zoom').isHidden(),'inset hidden for product');
+  if(width>=1000){
+   const frame=await page.evaluate(mode=>{
+    const fig=(mode==='div'?document.getElementById('pd-zoom'):document.getElementById('pd-plane')).getBoundingClientRect();
+    const answer=document.getElementById('pd-answer').getBoundingClientRect();
+    return {top:Math.min(fig.top,answer.top),bottom:Math.max(fig.bottom,answer.bottom),windowHeight:innerHeight};
+   },mode);
+   ok(frame.top>=10&&frame.bottom<=frame.windowHeight-10,'relevant figure AND complete feedback in one actual classroom viewport '+mode+' '+JSON.stringify(frame));
+   await page.screenshot({path:path.join(dir,'visible-classroom-'+mode+'-'+width+'.png'),fullPage:false});shots++;
+  }
   await shot('plot-'+mode+'-final');
   await page.locator('#pd-back').click();ok(await page.locator('#pd-answer').isHidden(),'back hides answer');
   await page.locator('#pd-reset').click();ok(await page.locator('#pd-intermediate').isHidden(),'reset hides intermediate');
