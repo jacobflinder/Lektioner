@@ -44,7 +44,7 @@ fs.mkdirSync(out,{recursive:true});
   const recap=work.locator('details.v23-demo-recap');
   assert.equal(await recap.count(),1,'one selective recap belongs to work panel');checks++;
   assert.equal(await recap.evaluate(el=>el.open),false,'recap is initially hidden');checks++;
-  assert.equal(await recap.locator('details.v23-demo-topic').count(),3,'exactly three covered demo-specific formula topics');checks++;
+  assert.equal(await recap.locator('details.v23-demo-topic').count(),4,'three formula topics and one qualitative Lenz relationship');checks++;
   assert((await recap.locator('summary').first().innerText()).includes('faktiskt gjort'),'recap must not claim all demos happened');checks++;
   await recap.locator('summary').first().click();
   assert.equal(await recap.evaluate(el=>el.open),true,'recap disclosure opens');checks++;
@@ -65,6 +65,16 @@ fs.mkdirSync(out,{recursive:true});
     await item.locator('summary').click();
     assert.equal(await item.evaluate(el=>el.open),false,'formula hides again '+i);checks++;
   }
+  // Ring and conductive tube: a separate qualitative Lenz explanation without an invented voltage formula.
+  const ring=items.nth(3);
+  assert.equal(await ring.evaluate(el=>el.open),false,'ring topic stays hidden until chosen');checks++;
+  await ring.locator('summary').click();
+  const ringText=await ring.innerText();
+  assert(ringText.includes('flödesändringen')&&ringText.includes('virvelströmmar'),
+    'separate induced-current and energy-transfer explanation for ring and tube');checks++;
+  assert.equal(await ring.locator('math').count(),0,'ring/tube recap must not invent new computed U(t)');checks++;
+  await ring.locator('summary').click();
+  assert.equal(await ring.evaluate(el=>el.open),false,'ring topic can be hidden');checks++;
   // All other formulas remain hidden as the student chooses only a conducted demonstration.
   for(const width of [390,768,1280,1920]){
     await page.setViewportSize({width,height:width===390?844:width===768?900:width===1280?800:1080});
