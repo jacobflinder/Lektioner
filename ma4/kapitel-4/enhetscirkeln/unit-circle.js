@@ -76,6 +76,7 @@ function chooseTab(name){
  $('learn-prompt').hidden=name!=='study';
  $('practice-guide').hidden=name==='study'||name==='foundation';
  $('practice-focus-wrap').hidden=name!=='train';
+ const recap=$('v23-recap');recap.open=false;recap.hidden=name!=='train';
  if(name==='foundation')return;
  if(name==='study')renderStudy();
  else{
