@@ -28,8 +28,10 @@ function analyseSource(rel,src,lesson){
    const math=start>=0&&end>m.index?s.slice(start,end+7):'';
    const earlier=s.slice(Math.max(0,m.index-100),m.index);
    const electronMass=earlier.endsWith('<msub><mi>m</mi>')||earlier.endsWith('<msub><mi>F</mi>');
+   const dynamicCount=lesson==='fy1/elektriska-kretsar' && rel.endsWith('/kretsar-models.js') &&
+      earlier.endsWith("mathrow('<mi>N</mi><mo>=</mo><mfrac><mi>Q</mi>");
    const elementaryCounting=exceptions.has(lesson)&&
-      (math.includes('<mi>N</mi>')||math.includes('<mi>e</mi><mo>=</mo>'));
+      (math.includes('<mi>N</mi>')||math.includes('<mi>e</mi><mo>=</mo>')||dynamicCount);
    verify(electronMass||elementaryCounting,
       rel+' unexpected <mi>e</mi> at '+m.index+' (not an electron-mass subscript or elementary-charge count)');
    elementarySymbols++;
