@@ -170,6 +170,16 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
    test(Math.sign(movement.x2-movement.x1)===delta,'actual SVG magnet motion correct '+pole+','+motion);
    test(movement.y1===274&&movement.y2===274,
     'separate magnet motion indication lies below the winding '+pole+','+motion);
+   const labels=await page.locator('#demo-induction').evaluate(svg=>{
+    const txt=[...svg.querySelectorAll('text')].find(t=>t.textContent==='B inducerat i spolen');
+    const line=svg.querySelector('line.motion-vector');
+    const bounds=txt?.getBBox();
+    return {left:bounds?.x,right:bounds?.x+bounds?.width,bottom:bounds?.y+bounds?.height,
+      motionRight:Math.max(+line.getAttribute('x1'),+line.getAttribute('x2'))};
+   });
+   test(labels.left>labels.motionRight+5&&labels.right<690&&labels.bottom<340,
+    'induced-field label truly separated from movement arrow and inside SVG '+pole+','+motion);
+
   }
   const msg=await page.locator('#demo-induction-text').innerText();
   test(msg.includes(motion==='still'?'U = 0':'voltmeterns plus/minus'),'avoid invented measured polarity '+pole+','+motion);

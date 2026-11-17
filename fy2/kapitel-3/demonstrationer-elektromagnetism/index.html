@@ -289,7 +289,7 @@ function drawInduction(){
   // The induced B VECTOR belongs INSIDE the same winding, not below it.
   g+=arrow(induced>0?425:575,226,induced>0?575:425,226,
            '#c17443',5,'induced-vector')+
-     text(499,290,'B inducerat i spolen','#ae6a3d',18,'middle');
+     text(573,290,'B inducerat i spolen','#ae6a3d',16,'middle');
  }else g+=text(264,286,'Stilla inne i spolen · U = 0','#23896e',19,'middle');
  g+=text(40,35,'SCHEMATISKA LÄGEN – INTE MÄTNING','#59747f',16)+
     text(512,36,'Spolens axel →','#846b55',17,'middle');
@@ -340,7 +340,7 @@ function drawPipe(){
  }else{
   g+='<rect data-pipe-body="ordinary" x="324" y="127" width="49" height="92" rx="7" fill="#9baeb7" stroke="#496875" stroke-width="2"/>'+
    text(348,160,'Icke','#fff',14,'middle')+
-   text(348,183,'magnet','#fff',12,'middle');
+   text(348,183,'magnet','#fff',10,'middle');
  }
  g+=arrow(222,112,222,217,'#24896f',4,'pipe-speed')+text(174,116,'v ↓','#16836e',20)+
  arrow(515,127,515,238,'#a34f45',4,'pipe-gravity')+text(530,237,'mg ↓','#a34f45',19)+
