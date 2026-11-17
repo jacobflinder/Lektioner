@@ -1,4 +1,21 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Polär form · Matematik – fortsättning, nivå 2</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> skriv ditt eget svar före återkopplingen. Inga elevdata samlas in.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med originalets startfråga. Eleverna har redan sett absolutbelopp och koordinater. Be dem först skissa och uppskatta riktningen. Låt dem sedan beräkna avståndet för hand och välja innan de får alternativspecifik återkoppling. Introducera mål efter startfrågan och låt figuren byggas i nästa bild."><div class="eyebrow">01 · Startfråga och mål</div><h2>Polär form – samma tal, nya koordinater</h2><p class="lead">4.2 Komplexa tal i polär form · Polär form</p><p class="muted">Behöver du fräscha upp exakta vinklar? <a href="../enhetscirkeln/">Träna enhetscirkeln: grader, radianer och koordinater</a> (frivilligt repetitionsstöd).</p>
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Polär form · Matematik – fortsättning, nivå 2</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"><style>
+/* V2.3: endast Polär form. Metodstöd är dolt vid bokarbetets start. */
+.polar-method-recap{margin:18px 0 0;padding:12px 17px;border:2px solid #bdd7e4;border-radius:14px;background:#f5fafc}
+.polar-method-recap summary{cursor:pointer;padding:7px 2px;font-weight:750;line-height:1.45}
+.polar-method-recap summary:focus-visible{outline:3px solid #166d97;outline-offset:4px}
+.polar-method-recap>p{margin:12px 0;line-height:1.5}
+.polar-method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.polar-method-card{min-width:0;padding:12px 14px;border:1px solid #d1e3ee;border-radius:10px;background:white}
+.polar-method-card h3{font-size:1rem;margin:0 0 8px;line-height:1.35}
+.polar-method-card p{margin:9px 0;line-height:1.5}
+.polar-method-card .math{display:block;max-width:100%;overflow-x:auto;white-space:nowrap}
+.polar-method-card .polar-method-maths{display:grid;row-gap:16px;margin:12px 0}
+.polar-method-card .polar-method-maths>.math{margin:0}
+.polar-method-card p:last-child{margin-bottom:0}
+.polar-method-card ol{margin:6px 0 0;padding-left:22px}
+.polar-method-card li{margin:5px 0}
+@media(max-width:740px){.polar-method-grid{grid-template-columns:minmax(0,1fr)}}
+</style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> skriv ditt eget svar före återkopplingen. Inga elevdata samlas in.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med originalets startfråga. Eleverna har redan sett absolutbelopp och koordinater. Be dem först skissa och uppskatta riktningen. Låt dem sedan beräkna avståndet för hand och välja innan de får alternativspecifik återkoppling. Introducera mål efter startfrågan och låt figuren byggas i nästa bild."><div class="eyebrow">01 · Startfråga och mål</div><h2>Polär form – samma tal, nya koordinater</h2><p class="lead">4.2 Komplexa tal i polär form · Polär form</p><p class="muted">Behöver du fräscha upp exakta vinklar? <a href="../enhetscirkeln/">Träna enhetscirkeln: grader, radianer och koordinater</a> (frivilligt repetitionsstöd).</p>
 <div class="task"><strong>Enskilt → par</strong><p class="math math-big">z = 3 + 4i</p><p>Du känner redan punktens koordinater (3, 4). Kan du i stället beskriva samma tal med <strong>avstånd från origo</strong> och <strong>riktning</strong>?</p></div>
 <div class="panel decision-check" data-decision><strong>Vad är absolutbeloppet för z = 3 + 4i?</strong><p class="muted">Skissa först och beräkna på papper. Välj sedan och motivera ditt svar.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="7 är summan 3 + 4. Absolutbeloppet är ett avstånd, så du behöver Pythagoras sats – inte koordinatsumman.">A · r = 7</button>
 <button type="button" class="choice" data-answer="1" data-correct="true" data-feedback="Rätt. r = √(3² + 4²) = √25 = 5. Punkten ligger i första kvadranten. Bestäm argumentet med talplanet och trigonometrin.">B · r = 5</button>
@@ -40,7 +57,23 @@
 <div id="independent-ans" class="answer hidden"><div class="math-working"><p class="math">r = √((−2)² + (−2)²) = 2√2</p><p class="math">v = 225°</p><p class="math">z = 2√2(cos 225° + i sin 225°)</p><p class="math">= 2√2(−√2/2 − i√2/2) = −2 − 2i</p></div><p>Båda koordinaterna är negativa eftersom punkten ligger i tredje kvadranten.</p></div></section>
 <section id="nok" class="slide" data-teacher="Bokens uppgifter 4201–4216 är hämtade från original-PDF:en. Minst tre av fem nivåer, utan förhandsval. Eleven får ändra nivå under arbetet."><div class="eyebrow">07 · Eget arbete · NOKflex</div><h2>Jobba i NOKflex</h2>
 <div class="panel"><p class="lead">NOKflex → 4.2 Komplexa tal i polär form → Polär form</p><p class="math math-big"><strong>Uppgifter 4201–4216</strong></p><p><strong>Välj minst tre av fem nivåer.</strong> Anpassa nivåerna efter hur svårt det känns och byt om du behöver. Inget digitalt förhandsval.</p></div>
-<div class="task"><strong>När du räknar</strong>Rita först gärna punkten. Bestäm avstånd och argument, skriv alla matematiska mellanled och kontrollera genom att gå tillbaka till koordinaterna. Använd NOKflex återkoppling och markera en uppgift du vill diskutera.</div></section>
+<div class="task"><strong>När du räknar</strong>Rita först gärna punkten. Bestäm avstånd och argument, skriv alla matematiska mellanled och kontrollera genom att gå tillbaka till koordinaterna. Använd NOKflex återkoppling och markera en uppgift du vill diskutera.</div><details class="polar-method-recap" id="polar-method-recap">
+<summary>Visa dagens samband – försök minnas först</summary>
+<p>Använd stödet när du behöver det. Det innehåller metoder från genomgången, inte svaren till bokuppgifterna.</p>
+<div class="polar-method-grid">
+<section class="polar-method-card"><h3>1. Avståndet från origo</h3>
+<p class="math">z = a + bi</p><p class="math">r = |z| = √(a² + b²)</p>
+<p>Punkten har koordinaterna (a; b). <strong>r</strong> är avståndet till origo – samma som positionsvektorns längd. Det är aldrig negativt.</p></section>
+<section class="polar-method-card"><h3>2. Riktningen – argumentet</h3>
+<p class="math">0° ≤ v < 360°</p>
+<p><strong>v</strong> mäts moturs från positiva realaxeln. Rita punkten och använd tecknen på a och b för att välja kvadrant. Referensvinkeln är ett hjälpmedel, inte hela argumentet.</p><p>På imaginära axeln läser du riktningen direkt. För z = 0 är argumentet <strong>inte definierat</strong>.</p></section>
+<section class="polar-method-card"><h3>3. Två koordinatsystem</h3>
+<div class="polar-method-maths"><p class="math">a = r cos v</p><p class="math">b = r sin v</p><p class="math">z = r(cos v + i sin v)</p></div>
+<p>Samma komplexa tal beskrivs av (a; b) eller av (r; v). Vid tillbakaomvandling ger cosinus realdelen och sinus imaginärdelen.</p></section>
+<section class="polar-method-card"><h3>4. En arbetsgång som du kan kontrollera</h3>
+<ol><li>Rita punkten från a och b.</li><li>Bestäm r med Pythagoras.</li><li>Bestäm v från punkten och dess riktning; använd vid behov referensvinkel och kvadrantkontroll.</li><li>Skriv polär form och kontrollera att a och b blir rätt igen.</li></ol></section>
+</div>
+</details></section>
 <section id="optional" class="slide" data-teacher="Fördjupningen blockerar inte utcheckningen." data-optional="true"><div class="eyebrow">08 · Frivillig extraaktivitet</div><h2>Samma tal – flera argument</h2><p class="opt-tag">Frivilligt efter bokarbetet</p><div class="task"><strong>Undersök</strong>Kan argumenten 135°, 495° och −225° beskriva samma komplexa tal? Motivera.</div><button class="reveal" data-reveal="optional-ans">Visa återkoppling</button><div class="answer hidden" id="optional-ans"><p>Ja. 495° = 135° + 360° och −225° = 135° − 360°. De beskriver samma riktning.</p></div><button type="button" class="secondary" data-go="exit">Gå till utcheckningen</button></section>
 <section id="exit" class="slide" data-teacher="Eleverna visar både rektangulär→polär och polär→rektangulär form för att pröva hela dagens mål. Avsluta här, utan att introducera nästa moment."><div class="eyebrow">09 · Individuell utcheckning</div><h2>Kan du byta koordinater åt båda hållen?</h2><div class="task"><strong>4 minuter själv – visa mellanled</strong><p><strong>1.</strong> Skriv <span class="math">z = −√3 + i</span> på polär form med argument mellan 0° och 360°.</p><p><strong>2.</strong> Skriv <span class="math">w = 2(cos 240° + i sin 240°)</span> i rektangulär form.</p></div>
 <button type="button" class="reveal" data-reveal="exit-ans">Visa återkoppling</button>
@@ -110,6 +143,16 @@ document.querySelectorAll('[data-point]').forEach(el=>el.addEventListener('click
 next.addEventListener('click',()=>{stage=Math.min(3,stage+1);draw()});
 back.addEventListener('click',()=>{stage=Math.max(0,stage-1);draw()});
 document.getElementById('polar-reset').addEventListener('click',()=>{stage=0;draw()});
+
+// Stäng det elevstyrda metodstödet vid lektionsbyte. Inga värden sparas.
+const polarMethodRecap=document.getElementById('polar-method-recap');
+for(const id of ['prev','next','mode'])document.getElementById(id).addEventListener('click',()=>{polarMethodRecap.open=false});
+document.getElementById('jump').addEventListener('change',()=>{polarMethodRecap.open=false});
+document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>{polarMethodRecap.open=false}));
+document.addEventListener('keydown',event=>{
+ if((event.key==='ArrowLeft'||event.key==='ArrowRight')&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.target.closest('button,input,textarea,select,[contenteditable]'))polarMethodRecap.open=false;
+});
+
 draw();
 })();
 </script></body></html>
