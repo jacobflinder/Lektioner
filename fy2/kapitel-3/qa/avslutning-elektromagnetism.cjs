@@ -7,6 +7,9 @@ const titles=['Start och mål','Generatorn','Rotera slingan','Sinusspänning','E
 const page=await browser.newPage({viewport:{width,height:width===390?844:width===768?1024:800}});const jsErrors=[];page.on('pageerror',e=>jsErrors.push(e.message));
 const r=await page.goto(base+'avslutning-elektromagnetism/',{waitUntil:'networkidle'});
 assert.equal(r.status(),200);assert.equal(await page.locator('.slide').count(),10);
+assert.equal(await page.locator('a[href="https://youtu.be/V5xYYGuwOTU"]').count(),1,'Mindmap reference preserved');
+assert.equal(await page.locator('a[href="https://youtu.be/p_aOdFYQMyw"]').count(),1,'Next lesson original film preserved');
+assert.ok((await page.locator('.slide').last().innerText()).includes('401–409'),'Next chapter original task range preserved');
 for(let i=0;i<10;i++){
 assert.equal(await page.locator('.slide.active').count(),1);
 assert.equal(await page.locator('.slide.active').getAttribute('data-title'),titles[i]);
