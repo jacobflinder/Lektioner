@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elektromagnetism – kapitlets avslutning · Fysik 2</title>
+<style>
+:root{color-scheme:light;--ink:#16343e;--muted:#45636e;--paper:#fff;--bg:#edf4f5;--accent:#087a84;--blue:#1765aa;--gold:#936000;--green:#11765c;--line:#cde0e3;font:19px/1.48 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer}
+.topbar{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;padding:12px clamp(16px,3vw,42px);background:#153740;color:white}
+.topbar a{color:#dcf9fb}.topbar strong{font-size:.92rem}.buttons{display:flex;gap:8px;flex-wrap:wrap}
+button{border:1px solid #a4c2c7;border-radius:10px;padding:9px 15px;background:#fff;color:#17414c;font-weight:650}
+button:hover{background:#e0f5f3}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e1ab37;outline-offset:3px}
+button[aria-pressed=true],button.primary{background:#0b6d79;color:white;border-color:#0b6d79}
+.topbar button{font-size:.82rem}.shell{max-width:1280px;margin:0 auto;padding:clamp(13px,2.2vw,25px)}
+.slide{display:none}.slide.active{display:block}
+.kicker{text-transform:uppercase;letter-spacing:.09em;color:#087883;font-size:.76rem;font-weight:800}
+h1{font-size:clamp(2rem,4.1vw,3.55rem);line-height:1.09;letter-spacing:-.038em;margin:11px 0 12px}h2{font-size:clamp(1.35rem,2.3vw,1.9rem);line-height:1.2;margin:8px 0 14px}
+h3{font-size:1.09rem;margin:4px 0 9px}
+p{margin:.5em 0 1em}.lead{font-size:1.12rem;max-width:850px;color:#385a66}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:clamp(17px,2.3vw,29px);min-width:0}
+.panel + .panel{margin-top:0}.question{border-left:5px solid #cc913d;background:#fff8e9;border-radius:6px;padding:12px 16px;margin:15px 0;font-weight:680}
+.note{color:var(--muted);font-size:.89rem}.instructions{color:#315a64;font-weight:630}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{background:#e8f5f5;padding:7px 11px;border-radius:9px;font-size:.84rem}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.control{margin:14px 0}.control label{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:.9rem}
+input[type=range]{width:100%;accent-color:#0a7584}
+.diagram{background:#f7fbfd;border:1px solid #c9dee5;border-radius:12px;padding:8px;min-width:0}
+svg{display:block;width:100%;height:auto;max-height:360px;overflow:visible}
+.readout{border:1px solid #b8d9d8;background:#eaf7f6;border-radius:11px;padding:12px 15px;font-weight:700;margin:12px 0}
+.math{display:block;overflow-x:auto;max-width:100%;padding:8px 2px;margin:12px 0 17px}
+.math math{font-size:clamp(1.13rem,1.65vw,1.48rem)}
+math[display=inline]{font-size:1.02em}
+.givens{display:grid;gap:16px;margin:12px 0}.givens .math{margin:0}
+.reveal{margin:10px 0}.answer{display:none;border:1px solid #b9d9ca;background:#f1fbf5;border-radius:11px;padding:16px;margin:11px 0}.answer.visible{display:block}
+.answer p:last-child{margin-bottom:0}
+.step{display:none}.step.visible{display:block}
+.quiz-result{min-height:1.6em;font-weight:750;color:#176253}
+.quiz-result.error{color:#8b4a26}
+.book-work{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.book-work article{background:#f0f7f8;border-radius:11px;padding:16px}
+details.teacher{display:none;background:#fff;border:2px dashed #d6ae5e;border-radius:14px;padding:16px;margin:18px 0}
+body.teacher-on details.teacher{display:block}
+details summary{cursor:pointer;font-weight:750}
+.progress{color:var(--muted);font-weight:700;font-size:.9rem}
+.footer-nav{display:flex;justify-content:space-between;gap:10px;align-items:center;position:sticky;bottom:0;border-top:1px solid #bfd5d9;background:#eef4f5ef;backdrop-filter:blur(10px);padding:13px clamp(14px,2vw,24px)}
+.footer-nav button{min-width:115px}.footer-nav button:disabled{opacity:.4;cursor:default}
+.tag{font-weight:800;color:#285a64;font-size:.8rem}
+ul,ol{padding-left:1.25em}li+li{margin-top:6px}
+@media(max-width:800px){.layout,.book-work{grid-template-columns:1fr}.shell{padding:12px}.topbar{gap:8px}h1{font-size:2rem}.panel{padding:17px}.footer-nav button{min-width:80px}.diagram svg{max-height:none}}
+@media(max-width:420px){:root{font-size:17px}.topbar{padding:10px 12px}.shell{padding:10px}.footer-nav{padding:9px 11px}.controls button{flex:1 1 auto}.panel{padding:14px}.math math{font-size:1.12rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media print{.topbar,.footer-nav,button,details.teacher{display:none!important}.slide{display:block!important;break-after:page}.answer{display:block!important}body{background:#fff}}
+</style></head>
+<body>
+<header class="topbar"><a href="../">← Elektromagnetism</a><strong>Fysik 2 · Kapitel 3 · Avslutning</strong>
+<div class="buttons"><button id="mode" type="button" aria-pressed="false">Repetitionsläge: av</button><button id="teacher" type="button" aria-pressed="false">Lärarstöd</button></div></header>
+<main class="shell" id="lesson">
+<section class="slide active" data-title="Start och mål">
+<span class="kicker">01 · Fråga före svar</span><h1>Elektromagnetism – sätt ihop helheten</h1>
+<p class="lead">Sista lektionen i kapitlet. Det viktiga är inte att minnas flest formler, utan att välja rätt fysikalisk modell, förklara vad som händer och kunna räkna.</p>
+<div class="layout"><div class="panel"><h2>Efter lektionen ska du kunna …</h2><ol><li>Avgöra när du ska använda elektriska fält, magnetisk kraft eller induktion.</li><li>Motivera riktningar och förändringar med en figur och ett samband.</li><li>Genomföra och kontrollera en beräkning på egen hand.</li></ol>
+<div class="question">En magnet hålls först stilla vid en spole. Sedan förs den snabbt in i spolen. När får vi inducerad spänning? Varför?</div>
+<p class="instructions">Skriv själv → jämför i par → motivera innan ni visar svaret.</p>
+<button type="button" class="reveal" data-reveal="start">Visa återkoppling</button><div id="start" class="answer"><p>Spänning uppstår när <b>det magnetiska flödet genom spolen förändras</b>. En stillastående magnet i en orörlig spole ger ingen varaktig inducerad spänning om flödet är konstant.</p></div></div>
+<div class="panel"><h2>Så arbetar vi</h2><div class="chips"><span class="chip">Förutsäg på papper</span><span class="chip">Pröva modellen</span><span class="chip">Förklara för en kamrat</span><span class="chip">Bokarbete i lugn och ro</span><span class="chip">Egen utcheckning</span></div>
+<p>Du behöver penna och papper eller skrivyta på iPad. Webbsidan visar inte automatiskt facit i klassrumsläget.</p><p class="note">Planerat som ett valbart 70-minuterspass. Läraren kan korta fördjupningen och ge längre sammanhängande boktid.</p></div></div>
+<details class="teacher"><summary>Lärarens startbeslut</summary><p>Samla två olika förklaringar, särskilt ”det finns ett magnetfält” kontra ”flödet förändras”. Visa först när alla hunnit tänka. Koppla till den faktiska magnet-i-spole-demonstrationen om den genomförts.</p><p>Referens från tidigare undervisning: <a href="https://youtu.be/f3bAO0YYrQ8" target="_blank" rel="noopener noreferrer">YouTube-film</a>. Dess exakta innehåll/transkription är ännu inte verifierat och ska inte tillskrivas denna nya sida.</p></details>
+</section>
+
+<section class="slide" data-title="Välj modellen">
+<span class="kicker">02 · Begrepp och modellval</span><h1>Vilken modell förklarar situationen?</h1>
+<div class="layout"><div class="panel"><h2>Tre situationer</h2>
+<p><b>A.</b> En proton släpps från vila mellan två laddade plattor.</p>
+<p><b>B.</b> En proton rör sig åt höger genom ett magnetfält in i sidan.</p>
+<p><b>C.</b> Magnetfältet genom en stillastående spole ökar.</p>
+<div class="question">Välj vilken situation som framför allt visar magnetisk kraft på en <em>rörlig</em> laddning.</div>
+<div class="controls" data-quiz="model"><button type="button" data-choice="A">A</button><button type="button" data-choice="B">B</button><button type="button" data-choice="C">C</button></div><p class="quiz-result" id="model-result" aria-live="polite"></p>
+<button type="button" class="reveal" data-reveal="models">Visa modellerna efter diskussion</button>
+<div id="models" class="answer">
+<p><b>A:</b> elektrisk kraft även från vila.</p>
+<div class="math"><math display="block"><mi>F</mi><mo>=</mo><mi>q</mi><mi>E</mi></math></div>
+<p><b>B:</b> magnetisk kraft vinkelrät mot hastighet och fält när hastigheten är vinkelrät mot fältet.</p>
+<div class="math"><math display="block"><mi>F</mi><mo>=</mo><mi>q</mi><mi>v</mi><mi>B</mi></math></div>
+<p><b>C:</b> induktion genom förändrat flöde.</p>
+<div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div>
+<p class="note">I skalära kraftformler betecknar q den positiva laddningsstorleken; laddningstecknet används separat när kraftens riktning bestäms. I Faradays lag gäller tecknet för en definierad spolorientering.</p></div></div>
+<div class="panel"><h2>Varför är det lätt att blanda ihop?</h2>
+<p>Alla situationer handlar om laddningar och fält, men du måste först identifiera <b>vilken storhet som orsakar vilken verkan</b>.</p>
+<div class="question">Kan ett magnetfält ge kraft på en laddning som står stilla? Skiljer sig ditt svar om fältet är elektriskt?</div>
+<p class="instructions">Motivera med både ord och villkor i formeln.</p><button class="reveal" type="button" data-reveal="modelwhy">Visa kort förklaring</button>
+<div id="modelwhy" class="answer"><p>För ett stillastående laddat föremål är den magnetiska Lorentzkraften noll: hastigheten är noll. Ett elektriskt fält kan däremot utöva kraft även från vila. Ett tidsvarierande magnetfält kan dessutom skapa ett inducerat elektriskt fält – skilj situationerna åt.</p></div></div></div>
+</section>
+
+<section class="slide" data-title="Ström och magnetfält">
+<span class="kicker">03 · Undersök sambandet</span><h1>Strömmen skapar ett magnetfält</h1>
+<div class="layout"><div class="panel"><h2>Förutsäg först</h2><div class="question">Vad händer med fältets storlek om strömmen fördubblas och avståndet till ledaren också fördubblas?</div><p class="instructions">Rita fältets riktning sedd längs ledaren och skriv ditt svar.</p>
+<div class="control"><label for="current">Strömstyrka <output id="current-v">4,0 A</output></label><input id="current" type="range" min="-8" max="8" value="4" step="1"></div>
+<div class="control"><label for="radius">Avstånd från ledaren <output id="radius-v">2,0 cm</output></label><input id="radius" type="range" min="1" max="8" value="2" step="0.5"></div>
+<div class="diagram"><svg id="wire-svg" viewBox="0 0 640 320" role="img" aria-label="Ledare sedd i tvärsnitt med koncentriska cirklar endast för magnetfältets riktning och separat numeriskt fältvärde"></svg></div>
+<p class="note">Cirklarna visar endast fältlinjernas riktning, inte ett kalibrerat mått på fältstyrkan. Den numeriska beräkningen visar hur styrkan beror på avståndet.</p></div>
+<div class="panel"><h2>Matematik och återkoppling</h2><p>För en lång rak ledare, i luft eller vakuum:</p>
+<div class="math"><math display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac></math></div>
+<p class="note">I sambandet beräknas B som positiv styrka med strömstyrkans belopp. Strömriktningen avgör fältets riktning.</p>
+<div class="readout" id="wire-result" aria-live="polite">40 μT</div>
+<button type="button" class="reveal" data-reveal="wire-answer">Visa resonemanget</button><div id="wire-answer" class="answer">
+<div class="math"><math display="block"><mfrac><msub><mi>B</mi><mn>2</mn></msub><msub><mi>B</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>2</mn></msub><mo>/</mo><msub><mi>r</mi><mn>2</mn></msub></mrow><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>/</mo><msub><mi>r</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>2</mn></mfrac><mo>=</mo><mn>1</mn></math></div><p>Fältets storlek är oförändrad. Prova sedan att <em>bara</em> fördubbla avståndet. Vad händer?</p></div>
+<button type="button" id="wire-reset">Återställ modellen</button>
+<details class="teacher"><summary>Vad ska läraren titta efter?</summary><p>Högerhandsregeln: tumme längs konventionell ström, fingrar runt ledaren. När I=0 finns inget fält från ledaren. Påminn om att cirklar inte kodar belopp genom sin täthet här. Be eleven ange r från ledaren, inte från cirkelns ytterkant.</p></details></div></div>
+</section>
+
+<section class="slide" data-title="Magnetisk kraft">
+<span class="kicker">04 · Förutsäg riktning</span><h1>Magnetisk kraft – vilket håll?</h1>
+<div class="layout"><div class="panel"><p>Partikeln rör sig åt höger. Magnetfältet är vinkelrätt mot skärmen. Pröva <b>positiv</b> och <b>negativ</b> laddning med samma hastighet.</p>
+<div class="question">Förutsäg först kraftens riktning. Vad ändras när enbart laddningstecknet byts?</div>
+<div class="controls"><button type="button" data-q="1" aria-pressed="true">Positiv laddning</button><button type="button" data-q="-1" aria-pressed="false">Negativ laddning</button></div>
+<div class="controls"><button type="button" data-b="-1" aria-pressed="true">B in i sidan ×</button><button type="button" data-b="1" aria-pressed="false">B ut ur sidan •</button></div>
+<div class="diagram"><svg id="force-svg" viewBox="0 0 640 310" role="img" aria-label="Partikel med hastighet åt höger, homogent magnetfält vinkelrätt mot sidan och kraftpil dold före återkoppling"></svg></div><button type="button" id="force-show">Visa kraften efter förutsägelsen</button><button type="button" id="force-reset">Återställ</button><p class="readout" id="force-result" aria-live="polite">Kraften är dold tills ni prövat er förutsägelse.</p>
+</div><div class="panel"><h2>Modell och rimlighet</h2><div class="math"><math display="block"><mover><mi>F</mi><mo>→</mo></mover><mo>=</mo><mi>q</mi><mo>(</mo><mover><mi>v</mi><mo>→</mo></mover><mo>×</mo><mover><mi>B</mi><mo>→</mo></mover><mo>)</mo></math></div>
+<p>q är här en <b>tecknad laddning</b>. F är alltid vinkelrät mot hastigheten i ett rent magnetfält.</p>
+<div class="question">Kan magnetfältet ensamt öka partikelns fart? Förklara.</div><button type="button" data-reveal="force-why" class="reveal">Visa förklaring</button><div id="force-why" class="answer"><p>Nej. Magnetisk kraft är vinkelrät mot den momentana hastigheten och utför då inget arbete. Farten kan vara konstant medan hastighetens <em>riktning</em> ändras.</p><div class="math"><math display="block"><mi>r</mi><mo>=</mo><mfrac><mrow><mi>m</mi><mi>v</mi></mrow><mrow><mi>q</mi><mi>B</mi></mrow></mfrac></math></div><p class="note">Vid cirkelrörelse vinkelrätt mot homogent B; här är q den positiva laddningsstorleken, inte dess tecken.</p></div></div></div>
+</section>
+
+<section class="slide" data-title="Induktion">
+<span class="kicker">05 · Kontrollerat experiment i modellen</span><h1>Induktion kräver flödesändring</h1>
+<div class="layout"><div class="panel"><p>En stillastående spole med <b>100 varv</b> har ytan <b>0,010 m²</b>. Ett homogent magnetfält vinkelrätt genom varje varv ändras linjärt från 0,20 T.</p>
+<div class="question">Förutsäg: Vad händer med spänningens storlek om samma flödesändring tar dubbelt så lång tid?</div>
+<div class="control"><label for="field-end">Slutvärde för B <output id="field-end-v">0,60 T</output></label><input id="field-end" type="range" min="0" max="0.8" step=".1" value=".6"></div>
+<div class="control"><label for="duration">Tid för förändringen <output id="duration-v">0,20 s</output></label><input id="duration" type="range" min="0.1" max="0.6" step=".1" value=".2"></div>
+<div class="diagram"><svg id="ind-svg" viewBox="0 0 720 370" role="img" aria-label="Övre diagrammet visar ett linjärt varierande magnetfält och undre diagrammet ett motsvarande konstant inducerat spänningsvärde under tidsintervallet"></svg></div>
+<p class="note">Idealiserad modell: fältet ändras linjärt och är konstant före/efter förändringen. Kurvorna är inte mätdata.</p></div>
+<div class="panel"><h2>Samordna graf och matematik</h2>
+<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mi mathvariant="normal">cos</mi><mi>α</mi></math></div>
+<div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div>
+<p class="note">Ytnormalen är vald i B:s riktning. Tecknet avser en bestämd orientering för spolen och spänningsmätningen.</p>
+<button type="button" id="ind-show">Visa beräkningen efter egen förutsägelse</button>
+<div class="answer" id="ind-answer"><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mi>A</mi><mo>·</mo><mo>Δ</mo><mi>B</mi></math></div>
+<div class="readout" id="ind-result" aria-live="polite">Beräkning</div><p>Om flödesförändringen är densamma men tiden dubbleras, halveras den inducerade spänningens storlek.</p></div>
+<button type="button" id="ind-reset">Återställ modellen</button>
+<details class="teacher"><summary>Viktigt vid visningen</summary><p>Låt eleverna först beskriva lutningen i B(t), inte läsa av ett facit. Den horisontella U-linjen representerar konstant inducerad spänning under den linjära förändringen, inte spänning när B är konstant. Tillbaka till noll efter tidsintervallet. Pröva också ΔB = 0.</p></details>
+</div></div>
+</section>
+
+<section class="slide" data-title="Räkna hela kedjan">
+<span class="kicker">06 · Genomarbetat exempel</span><h1>Kan du själv välja nästa led?</h1>
+<div class="layout"><div class="panel"><h2>Uppgift</h2><p>100 varv, 0,010 m² per varv. Ett fält vinkelrätt mot spolytan ökar från 0,20 T till 0,60 T på 0,20 s.</p>
+<div class="question">Beräkna den inducerade spänningen för vald positiv orientering. Gör först egen lösning på papper.</div>
+<button type="button" id="next-step">Visa nästa lösningssteg (ett i taget)</button><button type="button" id="restart-steps">Börja om</button>
+<div id="steps">
+<div class="step"><h3>1. Vad är givet och vad är sökt?</h3>
+<div class="givens"><div class="math"><math display="block"><mi>N</mi><mo>=</mo><mn>100</mn></math></div><div class="math"><math display="block"><mi>A</mi><mo>=</mo><mn>0,010</mn><mspace width=".2em"/><msup><mtext>m</mtext><mn>2</mn></msup></math></div><div class="math"><math display="block"><mo>Δ</mo><mi>B</mi><mo>=</mo><mn>0,60</mn><mo>−</mo><mn>0,20</mn><mo>=</mo><mn>0,40</mn><mspace width=".2em"/><mtext>T</mtext></math></div><div class="math"><math display="block"><mo>Δ</mo><mi>t</mi><mo>=</mo><mn>0,20</mn><mspace width=".2em"/><mtext>s</mtext></math></div></div></div>
+<div class="step"><h3>2. Flödesändringen genom ett varv</h3><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mi>A</mi><mo>·</mo><mo>Δ</mo><mi>B</mi></math></div><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0,010</mn><mo>·</mo><mn>0,40</mn><mo>=</mo><mn>0,0040</mn><mspace width=".2em"/><mtext>Wb</mtext></math></div></div>
+<div class="step"><h3>3. Induktionslagen</h3><div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div><div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mn>100</mn><mo>·</mo><mfrac><mn>0,0040</mn><mn>0,20</mn></mfrac><mspace width=".2em"/><mtext>V</mtext></math></div></div>
+<div class="step"><h3>4. Svar och kontroll</h3><div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mn>2,0</mn><mspace width=".2em"/><mtext>V</mtext></math></div><p>Spänningens <b>storlek</b> är 2,0 V. Ett byte av spolorientering byter tecknet i det tecknade uttrycket. Halverad tid skulle ge dubbla storleken.</p></div>
+</div></div>
+<div class="panel"><h2>Var är det avgörande beslutet?</h2><p>Du ska kunna säga <b>varför</b> den totala flödesändringen inte är samma sak som fältstyrkan B och varför både antal varv och tid spelar roll.</p>
+<div class="question">Vad går fel om du sätter in B = 0,60 T direkt i induktionslagen?</div><p class="instructions">Jämför med en kamrat innan hela lösningen visas.</p><details class="teacher"><summary>Lärarstöd – fördelning av stöd</summary><p>Stanna efter steg 1. Låt eleverna formulera steg 2, fortsätt med steg 3 bara om det behövs. Visa hela lösningen efteråt som spårbar sammanfattning. Vid tidsbrist: hoppa över den frivilliga fördjupningen, inte den egna utcheckningen.</p></details></div></div>
+</section>
+
+<section class="slide" data-title="Hitta felet">
+<span class="kicker">07 · Elevönskemål: hitta felet</span><h1>Hitta det viktigaste felet</h1>
+<div class="layout"><div class="panel"><h2>En elevs lösning</h2>
+<p>En magnet ligger stilla i en spole. Eleven skriver:</p>
+<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mo>≠</mo><mn>0</mn></math></div>
+<p><b>”Eftersom flödet inte är noll uppstår en inducerad spänning.”</b></p>
+<div class="question">Vilket påstående rättar felet?</div>
+<div class="controls" data-quiz="error"><button type="button" data-choice="A">A · Spänningen kräver en ändring i flödet</button><button type="button" data-choice="B">B · Spänning uppstår bara om spolen rör sig</button><button type="button" data-choice="C">C · Flöde och spänning är samma storhet</button></div><p class="quiz-result" id="error-result" aria-live="polite"></p>
+<button type="button" data-reveal="error-answer" class="reveal">Visa motiveringen efter parjämförelse</button>
+<div class="answer" id="error-answer"><p><b>A är korrekt.</b> Ett konstant flöde, även när det är skilt från noll, ger ingen inducerad spänning i en stillastående spole.</p><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0</mn><mo>⇒</mo><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mn>0</mn></math></div><p>Det är ändringen som avgör. B kan ändras utan spolrörelse och ge spänning; en spole kan också röra sig så att flödet ändras.</p></div></div>
+<div class="panel"><h2>Grupputmaning (valbar)</h2><p>En grupp får tre fall och ska enas om en <b>förklaring</b>, inte bara ett svar.</p><ol><li>Starkt konstant B genom en stilla spole.</li><li>Svagt B som snabbt ökar genom en stilla spole.</li><li>Konstant B medan spolens area som ligger i fältet minskar.</li></ol>
+<div class="question">Vilka fall kan ge inducerad spänning? Behöver du känna till B:s storlek för att avgöra det?</div><button type="button" data-reveal="challenge" class="reveal">Visa gemensam återkoppling</button><div class="answer" id="challenge"><p>Fall 2 och 3 kan ge inducerad spänning genom ändrat flöde. Fall 1 ger ingen inducerad spänning i den idealiserade stillastående spolen. Vid fall 3 beror svaret på att den genomflödda arean verkligen ändras.</p></div></div></div>
+</section>
+
+<section class="slide" data-title="Bokarbete">
+<span class="kicker">08 · Självständigt arbete</span><h1>Nu använder du fysiken själv</h1>
+<div class="panel"><h2>20 minuter sammanhängande arbete</h2><p>Läs relevant teori eller lös uppgifter från kapitlet. Använd gärna tre olika typer: begrepp, riktning och beräkning. Läraren väljer exakt vilka som ska vara klara och skriver dem på tavlan och i Fysikens Flöde.</p>
+<div class="book-work">
+<article><h3>Elektriska fält</h3><p>Bokuppgifter <b>301–309</b>. Välj vid behov rörelse mellan plattor eller energiresonemang.</p></article>
+<article><h3>Ström och magnetfält</h3><p>Bokuppgifter <b>325–334</b> och <b>335–342</b>. Träna fältriktning eller storlek.</p></article>
+<article><h3>Magnetisk kraft och jordfält</h3><p>Bokuppgifter <b>343–350</b> och <b>351–357</b>. Rita först riktningar.</p></article>
+<article><h3>Induktion</h3><p>Bokuppgifter <b>358–366</b>. Skilj flöde och flödesförändring.</p></article>
+</div><p class="note">Uppgiftsintervallen är redan använda i tidigare Fy2-lektioner i biblioteket; detta är en repetitionsbank, inte fyra nya obligatoriska läxor.</p>
+</div>
+<div class="panel"><h2>Om du behöver stöd</h2><p>1. Skissa situationen och markera riktningar.</p><p>2. Skriv vilken storhet som söks och varför du valt en viss formel.</p><p>3. Sätt in enheter och kontrollera rimlighet.</p>
+<details><summary>Valfri fördjupning</summary><p>Kan ett magnetfält utföra arbete på en laddad partikel samtidigt som en magnet inducerar ström i en ledare? Förklara hur kraft, rörelse, energikällan och elektriska fält skiljer sig i situationerna.</p></details>
+<details class="teacher"><summary>Planerad arbetsro</summary><p>Elevernas önskemål gäller bland annat tyst teori efter genomgången och tydliga läxor. Ge en sammanhängande period utan nytt facitspel; skriv exakta valda uppgifter på tavlan och publicera i Flödet. Ingen automatisk ny Socrative när den inte finns i originalmaterialet.</p></details>
+</div>
+</section>
+
+<section class="slide" data-title="Egen utcheckning">
+<span class="kicker">09 · Utan facit och utan hjälp</span><h1>Kan du lösa en ny situation?</h1>
+<div class="layout"><div class="panel"><h2>Individuell utcheckning</h2>
+<p>En spole med 200 varv har tvärsnittsarean 0,0050 m². Ett homogent fält vinkelrätt mot spolytan ökar från 0,10 T till 0,30 T på 0,50 s.</p>
+<div class="question">Beräkna den inducerade spänningens <b>storlek</b>. Ange sambandet, minst ett mellanled och varför tecknet inte efterfrågas.</div>
+<label for="exit-value">Ditt numeriska svar i volt</label><div class="controls"><input id="exit-value" inputmode="decimal" type="text" placeholder="t.ex. 0,40" aria-label="Svar i volt"><button type="button" id="exit-check" class="primary">Kontrollera svaret</button></div>
+<p class="quiz-result" id="exit-feedback" aria-live="polite"></p>
+<button type="button" data-reveal="exit-solution" class="reveal">Visa full lösning efter eget försök</button>
+<div class="answer" id="exit-solution"><div class="math"><math display="block"><mo>Δ</mo><mi>B</mi><mo>=</mo><mn>0,30</mn><mo>−</mo><mn>0,10</mn><mo>=</mo><mn>0,20</mn><mspace width=".2em"/><mtext>T</mtext></math></div>
+<div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0,0050</mn><mo>·</mo><mn>0,20</mn><mo>=</mo><mn>0,0010</mn><mspace width=".2em"/><mtext>Wb</mtext></math></div>
+<div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mfrac><mn>0,0010</mn><mn>0,50</mn></mfrac><mo>=</mo><mo>−</mo><mn>0,40</mn><mspace width=".2em"/><mtext>V</mtext></math></div>
+<p>Spänningens <b>storlek</b> är 0,40 V. Tecknet gäller först när orienteringen för spolen/voltmetern definierats. Att ange 0,40 V som storlek är därför rätt.</p></div>
+</div>
+<div class="panel"><h2>Återkoppla till målen</h2><p>Förklara kort – med <b>egna ord</b> – vad som avgör vilken formel du väljer, vad som ändras i situationen och hur du kontrollerar resultatet.</p>
+<div class="question">En magnet rör sig mycket fortare genom en spole. Är det alltid korrekt att spänningen blir exakt dubbelt så stor?</div>
+<button type="button" data-reveal="exit-thinking" class="reveal">Visa förklaring</button>
+<div class="answer" id="exit-thinking"><p>Nej, inte utan fler antaganden. Spänningen beror på flödets förändring per tid. För att kunna säga ”dubbelt” måste flödesförloppet och hastighetsändringen vara specificerade. Om samma flödesändring sker under halva tiden blir <em>medelspänningens storlek</em> dubbelt så stor.</p></div>
+</div></div>
+</section>
+
+<section class="slide" data-title="Avslutning och sammanfattning">
+<span class="kicker">10 · Målen tillbaka på skärmen</span><h1>Vad tar du med dig?</h1>
+<div class="layout"><div class="panel"><h2>Tre beslut</h2>
+<ol><li><b>Vad är orsaken?</b> Elektriskt fält, ström eller förändrat magnetiskt flöde?</li><li><b>Vilken riktning?</b> Rita pil och pröva tecken eller högerhandsregel.</li><li><b>Vilket samband?</b> Förklara varför det passar innan du räknar.</li></ol>
+<p><b>Efter lektionen ska du kunna:</b> välja modell, motivera med figur och samband, samt beräkna och kontrollera självständigt.</p>
+<div class="question">En ny magnet används i samma spole. Vilka mätningar skulle du behöva för att kunna beräkna inducerad medelspänning?</div>
+</div><div class="panel"><h2>Fortsatt arbete</h2><p><b>Att göra klart:</b> de bokuppgifter som läraren markerat i föregående bild.</p><p><b>Att repetera:</b> de avsnitt där din individuella utcheckning visar att du behöver mer träning.</p>
+<p><b>Klurig funderare:</b> Var kommer energin ifrån när du känner att det blir trögare att föra en magnet genom en kortsluten spole?</p>
+<p class="note">Denna funderare är skild från dagens utcheckning. Den finns för vidare tänkande, inte som ny obligatorisk kursdel.</p>
+<details class="teacher"><summary>Lärarens avslutning och uppföljning</summary><p>Anteckna anonymt: vilket metodval klarade de självständigt? Vilken felsyn återkom? Anpassa nästa repetition. Bekräfta läxans uppgiftsnummer och deadline på tavlan och i Fysikens Flöde.</p></details></div></div>
+</section>
+</main>
+<nav class="footer-nav" aria-label="Lektionsnavigering"><button type="button" id="prev">← Föregående</button><span class="progress" id="progress">1 / 10 · Start och mål</span><button type="button" class="primary" id="next">Nästa →</button></nav>
+<script>
+(function(){
+'use strict';
+var slides=Array.from(document.querySelectorAll('.slide'));var index=0;var classMode=true;var teacher=false;
+function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(el,i){el.classList.toggle('active',i===index)});document.getElementById('prev').disabled=index===0;document.getElementById('next').disabled=index===slides.length-1;document.getElementById('progress').textContent=(index+1)+' / '+slides.length+' · '+slides[index].dataset.title;window.scrollTo(0,0)}
+document.getElementById('prev').addEventListener('click',function(){show(index-1)});
+document.getElementById('next').addEventListener('click',function(){show(index+1)});
+document.getElementById('mode').addEventListener('click',function(){classMode=!classMode;this.textContent='Repetitionsläge: '+(classMode?'av':'på');this.setAttribute('aria-pressed',String(!classMode))});
+document.getElementById('teacher').addEventListener('click',function(){teacher=!teacher;document.body.classList.toggle('teacher-on',teacher);this.setAttribute('aria-pressed',String(teacher))});
+document.querySelectorAll('[data-reveal]').forEach(function(b){b.addEventListener('click',function(){var panel=document.getElementById(b.dataset.reveal);var visible=panel.classList.toggle('visible');b.textContent=visible?'Dölj återkoppling':'Visa återkoppling efter eget försök'})});
+document.querySelectorAll('[data-quiz]').forEach(function(group){group.querySelectorAll('[data-choice]').forEach(function(b){b.addEventListener('click',function(){group.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});var name=group.dataset.quiz;var result=document.getElementById(name+'-result');var right=name==='model'?'B':'A';if(classMode){result.textContent='Ditt val är markerat. Motivera först i par och öppna sedan återkopplingen.';result.classList.remove('error')}else{var ok=b.dataset.choice===right;result.textContent=ok?(name==='model'?'Rätt: en rörlig laddning i B-fält får magnetisk kraft.':'Rätt: förändrat flöde orsakar induktion.'):(name==='model'?'Pröva igen: var är hastigheten avgörande?':'Pröva igen: vad säger induktionslagen om ändringen i flödet?');result.classList.toggle('error',!ok)}})})});
+function dec(v,d){return Number(v).toFixed(d).replace('.',',')}
+var I=document.getElementById('current'),radius=document.getElementById('radius');
+function renderWire(){var current=+I.value,r=+radius.value, B=(2e-7*Math.abs(current)/(r/100))*1e6;document.getElementById('current-v').textContent=dec(current,0)+' A';document.getElementById('radius-v').textContent=dec(r,1)+' cm';document.getElementById('wire-result').textContent=dec(B,1)+' μT · '+(current>0?'ström ut ur sidan':current<0?'ström in i sidan':'ingen ström, B = 0');
+var c=320, cy=156, direction=Math.sign(current);var s='<rect width="640" height="320" fill="#f7fbfd"/><text x="24" y="31" font-size="18" font-weight="700" fill="#1c4858">Vy längs ledaren · schematisk riktning</text>';
+[58,97,136].forEach(function(rad){if(!direction)return;s+='<circle cx="'+c+'" cy="'+cy+'" r="'+rad+'" fill="none" stroke="#1c7c93" stroke-width="2"/>';s+='<path d="M '+(c+rad)+' '+(cy+(direction>0?14:-14))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+'" stroke="#14577a" stroke-width="4" stroke-linecap="round"/>';s+='<path d="M '+(c+rad-7)+' '+(cy+(direction>0?-4:4))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+' L '+(c+rad+7)+' '+(cy+(direction>0?-4:4))+'" fill="none" stroke="#14577a" stroke-width="3"/>'});
+s+='<circle cx="'+c+'" cy="'+cy+'" r="28" fill="#fff" stroke="#334d60" stroke-width="3"/><text x="'+(c-13)+'" y="'+(cy+9)+'" font-size="32" font-weight="700" fill="#3b5363">'+(direction>0?'⊙':direction<0?'⊗':'0')+'</text><text x="24" y="291" font-size="17" fill="#395760">B(r) beräknas – cirkelavståndet här anger inte B</text>';document.getElementById('wire-svg').innerHTML=s}
+I.addEventListener('input',renderWire);radius.addEventListener('input',renderWire);document.getElementById('wire-reset').onclick=function(){I.value=4;radius.value=2;document.getElementById('wire-answer').classList.remove('visible');renderWire()};
+var q=1,bfield=-1,forceVisible=false;
+function renderForce(){var direction=-q*bfield;var svg='<rect width="640" height="310" fill="#f7fbfd"/>';
+for(var y=45;y<280;y+=54)for(var x=44;x<615;x+=54)svg+='<text x="'+x+'" y="'+y+'" fill="#5892a3" font-size="18">'+(bfield<0?'×':'•')+'</text>';
+svg+='<circle cx="315" cy="146" r="24" fill="'+(q>0?'#efcc8b':'#c6dfef')+'" stroke="#314d59" stroke-width="2"/><text x="307" y="155" font-size="26">'+(q>0?'+':'−')+'</text>';
+svg+='<path d="M 345 146 H 495" stroke="#237b59" stroke-width="5"/><path d="M 495 146 L 481 138 L 481 154 Z" fill="#237b59"/><text x="460" y="130" font-size="19" fill="#237b59">v</text>';
+if(forceVisible){var y2=146-(direction*107);svg+='<path d="M 315 146 L 315 '+y2+'" stroke="#bc6c27" stroke-width="5"/><path d="M 315 '+y2+' L 306 '+(y2+direction*14)+' L 324 '+(y2+direction*14)+' Z" fill="#bc6c27"/><text x="326" y="'+(y2+8)+'" font-size="20" fill="#9e531b">F</text>'}
+svg+='<text x="24" y="297" font-size="16" fill="#395760">× = in i sidan · • = ut ur sidan</text>';document.getElementById('force-svg').innerHTML=svg;document.getElementById('force-result').textContent=forceVisible?('Kraften pekar '+(direction>0?'uppåt':'nedåt')+'. Byt q eller B och jämför.'):'Kraften är dold tills ni prövat er förutsägelse.'}
+document.querySelectorAll('[data-q]').forEach(function(x){x.onclick=function(){q=+x.dataset.q;document.querySelectorAll('[data-q]').forEach(function(z){z.setAttribute('aria-pressed',String(z===x))});renderForce()}});
+document.querySelectorAll('[data-b]').forEach(function(x){x.onclick=function(){bfield=+x.dataset.b;document.querySelectorAll('[data-b]').forEach(function(z){z.setAttribute('aria-pressed',String(z===x))});renderForce()}});
+document.getElementById('force-show').onclick=function(){forceVisible=true;renderForce()};
+document.getElementById('force-reset').onclick=function(){forceVisible=false;renderForce()};
+var finalB=document.getElementById('field-end'),duration=document.getElementById('duration'),indVisible=false;
+function renderInd(){var end=+finalB.value,dt=+duration.value,delta=end-.2, U=-100*.01*delta/dt;document.getElementById('field-end-v').textContent=dec(end,2)+' T';document.getElementById('duration-v').textContent=dec(dt,2)+' s';document.getElementById('ind-result').textContent='Flödesändring = '+dec(delta*.01,4)+' Wb per varv. Inducerad spänning = '+dec(U,2)+' V (tecknad). Storlek = '+dec(Math.abs(U),2)+' V.';
+var x1=85,x2=450,x3=650, scale=350/dt;var yy=function(v){return 146-105*v/.8};var k='<rect width="720" height="370" fill="#f7fbfd"/><text x="28" y="25" font-size="19" font-weight="700" fill="#204b61">Magnetfält B(t), idealiserad ramp</text><path d="M 70 45 V 151 H 665" fill="none" stroke="#667e88" stroke-width="2"/><text x="35" y="51" font-size="17">B</text><text x="655" y="173" font-size="17">t</text>';
+k+='<path d="M 85 '+yy(.2)+' H '+x1+' L '+x2+' '+yy(end)+' H '+x3+'" fill="none" stroke="#11799c" stroke-width="5"/>';
+k+='<text x="20" y="'+(yy(.2)+5)+'" font-size="15">0,20</text><text x="468" y="'+(yy(end)-11)+'" font-size="16">'+dec(end,2)+' T</text>';
+var pulseY=265+Math.min(62,Math.max(-62,U/6*60));k+='<text x="28" y="205" font-size="19" font-weight="700">Inducerad spänning under rampen</text><path d="M 70 265 H 665 M 70 220 V 335" stroke="#667e88" stroke-width="2"/><text x="30" y="240" font-size="17">U</text>';
+k+='<path d="M 85 265 H '+x1+' V '+pulseY+' H '+x2+' V 265 H '+x3+'" fill="none" stroke="#ba722b" stroke-width="5"/><text x="456" y="249" font-size="16">'+dec(U,2)+' V</text><text x="83" y="352" font-size="16">före</text><text x="245" y="352" font-size="16">under Δt = '+dec(dt,2)+' s</text><text x="560" y="352" font-size="16">efter</text>';
+document.getElementById('ind-svg').innerHTML=k;if(indVisible)document.getElementById('ind-answer').classList.add('visible')}
+finalB.addEventListener('input',renderInd);duration.addEventListener('input',renderInd);document.getElementById('ind-show').onclick=function(){indVisible=true;renderInd()};
+document.getElementById('ind-reset').onclick=function(){finalB.value=.6;duration.value=.2;indVisible=false;document.getElementById('ind-answer').classList.remove('visible');renderInd()};
+var currentStep=0,steps=Array.from(document.querySelectorAll('#steps .step'));
+function stepView(){steps.forEach(function(s,i){s.classList.toggle('visible',i<currentStep)});document.getElementById('next-step').disabled=currentStep===steps.length}
+document.getElementById('next-step').onclick=function(){currentStep=Math.min(steps.length,currentStep+1);stepView()};
+document.getElementById('restart-steps').onclick=function(){currentStep=0;stepView()};
+document.getElementById('exit-check').onclick=function(){var raw=document.getElementById('exit-value').value.trim().replace(',','.').replace(/\s/g,'');var v=Number(raw),el=document.getElementById('exit-feedback');if(!raw||!Number.isFinite(v)){el.textContent='Skriv ett numeriskt svar först. Visa också dina mellanled på papper.';el.classList.add('error');return}var ok=Math.abs(v-.4)<.011;el.textContent=ok?'Rätt numerisk storlek. Kontrollera också att du motiverat sambandet och enheterna.':'Kontrollera särskilt flödesändringen per varv och antalet varv. Jämför sedan med din skiss.';el.classList.toggle('error',!ok)};
+show(0);renderWire();renderForce();renderInd();stepView();
+})();
+</script></body></html>

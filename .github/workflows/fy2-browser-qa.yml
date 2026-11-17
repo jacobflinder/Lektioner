@@ -49,6 +49,7 @@ jobs:
           node fy2/kapitel-3/qa/deep-review-fy2-34.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-35.cjs
           node fy2/kapitel-3/qa/figure-interaction-pilot-strom.cjs
+          node fy2/kapitel-3/qa/avslutning-elektromagnetism.cjs
       - name: Upload screenshots and QA summary
         if: always()
         uses: actions/upload-artifact@v4
