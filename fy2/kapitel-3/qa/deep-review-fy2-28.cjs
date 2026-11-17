@@ -317,11 +317,16 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
     if(vp.width===1280){
      check(box.y>=0&&box.y+box.height<=800,'main explanation SVG above classroom viewport fold '+n+' '+JSON.stringify(box));
      const result=page.locator(n===6?'#rod-result':'#flux-angle-result');
-     await result.scrollIntoViewIfNeeded();
+     // To compare diagram and mathematics, scroll to the actual calculation,
+     // NOT merely until the top of the entire results panel becomes visible.
+     await page.evaluate(()=>window.scrollTo(0,Math.max(0,document.documentElement.scrollHeight-innerHeight)));
      const figure=await page.locator(id+' svg').boundingBox();
      const equation=await result.locator('.calc-chain math').first().boundingBox();
-     check(!!figure&&!!equation&&figure.y<equation.y+equation.height&&figure.y+figure.height>equation.y,
-       'sticky diagram remains visible together with current calculation after scrolling '+n);
+     check(!!figure&&!!equation&&equation.y>=0&&equation.y+equation.height<=800&&
+       figure.y<equation.y+equation.height&&figure.y+figure.height>equation.y,
+       'sticky diagram genuinely co-visible with first mathematical equation after scrolling '+n+
+       ' figure='+JSON.stringify(figure)+' equation='+JSON.stringify(equation));
+     await snap('v21-class-1280-with-math-'+n);
      await page.evaluate(()=>window.scrollTo(0,0));
     }
     if(n===6){
