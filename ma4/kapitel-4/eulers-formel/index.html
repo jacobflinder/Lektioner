@@ -29,7 +29,30 @@ nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-
 .ma4-step .ma4-equation + .ma4-equation{margin-top:16px}
 .ma4-final .ma4-equation + .ma4-equation{margin-top:16px}
 .series-powers{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:16px;white-space:normal}
+.euler-math-inline{display:inline-block;vertical-align:middle;max-width:100%}.euler-math-inline math{font-size:1em}
+.choice math,.feedback math{font-size:1.1em}.quiz .choice{line-height:1.5;min-height:48px}.quiz .feedback{line-height:1.6}
+.euler-practice-support{background:#f3f9f5;border:1px solid #b5d8c8;border-radius:14px;margin:18px 0;padding:18px}
+.euler-practice-support h3{color:#105c49;margin:0 0 6px}.euler-practice-support > p{margin:0 0 14px;line-height:1.5}
+.euler-method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.euler-method{border:1px solid #79b6a0;background:white;border-radius:10px;padding:12px;min-width:0}
+.euler-method summary{cursor:pointer;font-weight:700;line-height:1.4;color:#124d3e}.euler-method summary:focus-visible{outline:3px solid #df941b;outline-offset:3px}
+.euler-method-body{padding-top:12px}.euler-method-body p{font-size:.91rem;line-height:1.5;margin:8px 0 0}
+.euler-formula{overflow-x:auto;max-width:100%;padding:10px 5px;background:#f3f9f5;border-radius:6px;text-align:center}
+.euler-formula math{font-size:clamp(1.04rem,1.75vw,1.38rem)}
+.euler-actual-plane{width:100%;max-width:340px;height:auto;display:block;margin:auto}
+.euler-negative-layout{display:grid;gap:16px}.euler-negative-question .quiz{max-width:none}
+.euler-negative-layout #negative{margin:0}.euler-negative-layout #negative .grid{grid-template-columns:minmax(0,1fr)}
+.euler-negative-question > button[data-show="negative"]{margin-top:12px}
+.euler-identity-compare{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:18px;align-items:start}
+.euler-identity-figure{background:#f5f9fc;border:1px solid #d2e0e9;border-radius:11px;margin:0;padding:12px}
+.euler-identity-figure figcaption{font-size:.91rem;font-weight:700;color:#24546f}
+.euler-identity-figure svg{display:block;width:100%;height:auto;max-height:235px}
+.euler-identity-figure p{font-size:.88rem;margin:4px 0 0;line-height:1.45}
+.euler-live-title,.euler-live-values{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.euler-live-values{margin-top:4px}.euler-live-values .euler-math-inline{white-space:nowrap}
 @media(max-width:650px){.series-eq math{font-size:clamp(1rem,3.9vw,1.35rem)}}
+@media(max-width:740px){.euler-method-grid,.euler-identity-compare{grid-template-columns:minmax(0,1fr)}.euler-practice-support{padding:14px}.euler-formula math{font-size:1.08rem}}
+@media(min-width:960px){.euler-negative-layout{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}.euler-negative-layout #negative .grid{display:block}.euler-negative-layout #negative .grid > div:last-child{margin-top:12px}}
 </style></head><body>
 <header><a href="../">← Kapitel 4 · Komplexa tal</a><strong>Matematik – fortsättning, nivå 2 · 4.3 Potenser och komplexa tal</strong><div class="actions" style="margin:0"><button id="teacher-toggle" class="alt" type="button" aria-expanded="false">Visa lärarstöd</button><button id="mode" type="button" aria-pressed="false" aria-label="Växla till klassrumsläge">Klassrumsläge</button></div></header>
 <aside class="class-only teacher-note" aria-label="Lärarstöd"><strong>Klassrumsläge · gemensamt tänkande</strong><p id="teacher-step">Låt eleverna tänka själva innan du visar lösningen. Använd diskussionen för att välja nästa steg.</p><p class="muted">Höger/vänster pil byter steg. Dölj lösningen igen innan du går tillbaka till en uppgift.</p></aside>
@@ -115,10 +138,10 @@ nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-
 <div class="panel"><strong>Dagens tre mål</strong><ol><li>Jag förstår sambandet mellan polär form och exponentialform och kan tolka belopp och argument.</li><li>Jag kan omvandla med Eulers formel även för negativa argument.</li><li>Jag kan multiplicera komplexa tal i exponentialform och förklara Eulers identitet.</li></ol></div>
 <div class="panel"><strong>Snabb självbedömning</strong><label><input type="checkbox"> Jag kan göra detta utan facit.</label><p><label><input type="checkbox"> Jag behöver öva något av stegen igen.</label></p><p class="muted">Kryssen skickas inte in eller sparas.</p></div>
 </div></div></section></div></main><nav><label for="jump" class="sr">Välj lektionssteg</label><select id="jump" aria-label="Hoppa till lektionssteg"></select><button class="alt" id="prev" type="button">← Föregående</button><span class="progress" id="counter" aria-live="polite">1 / 10</span><button id="next" type="button">Nästa →</button></nav>
-<script src="../assets/math-presentation.js"></script><script src="./math-polish.js"></script><script>
+<script src="../assets/math-presentation.js"></script><script src="./math-polish.js"></script><script src="./figure-interaction-v23.js"></script><script>
 (()=>{'use strict';
 const slides=Array.from(document.querySelectorAll('.slide'));let index=0;const teacherPrompts=["Presentera målen; fråga vad eleverna redan vet.","Enskilt 45 sekunder, sedan par och gemensam motivering.","Alla väljer tecken innan återkopplingen visas.","Be eleverna namnge realdel, imaginärdel, belopp och argument vid samma punkt. Om sambandet mellan dessa saknas, stanna här – lägg inte till mer notation ännu.","Låt eleverna själva beräkna produktens belopp och argument. Visa sedan exponentiallagens kompakta mönster som motivation, inte som bevis för Eulers formel.","Visa först Eulers formel och låt eleverna förklara varför de två skrivsätten beskriver samma tal.","Låt eleverna sedan lösa produkten med exponentiallagen före facit.","Skriv gärna ett led för hand. Låt varje elev formulera nästa led innan du klickar vidare. Den som fastnar får först trigonometritabell eller stöd för enhetscirkeln, inte hela svaret.","Låt eleverna rita före enhetscirkeln visas.","Låt eleverna förutsäga e^(iπ) och förklara Eulers identitet med cos π och sin π.","Skydda självständig övningstid: NOKflex 4329–4338, minst tre av fem nivåer; nivåvalet anpassas under arbetet. Prioritera arbetsro framför frivilliga extrabilder.","Frivillig felanalys efter NOKflex. Svaret är konstruerat: vi känner inte elevens avsikt.","Valfri utmaning för elever som är klara med grunduppgifterna.","Visa serien stegvis. Låt eleverna förutsäga vilka termer som är reella och imaginära före varje klick. Kan hoppas över.","Exit utan gemensam ledtråd. Observera anonymt: (1) korrekt belopp, argument och tecken, (2) korrekt multiplikation av belopp/vinklar, (3) förklarad identitet. Vanligt fel avgör nästa korta repetitionsfråga. Självskattning ensam är inte belägg."];const jump=document.getElementById('jump');slides.forEach((slide,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=slide.querySelector('.eyebrow')?.textContent||'Steg '+(i+1);jump.appendChild(o)});jump.addEventListener('change',()=>show(Number(jump.value)));
-function show(n){index=Math.max(0,Math.min(n,slides.length-1));slides.forEach((slide,i)=>{slide.classList.toggle('active',i===index);slide.setAttribute('aria-hidden',String(i!==index))});
+function show(n){const target=Math.max(0,Math.min(n,slides.length-1));if(target!==index)window.EulerV23.resetSlide(slides[index]);index=target;slides.forEach((slide,i)=>{slide.classList.toggle('active',i===index);slide.setAttribute('aria-hidden',String(i!==index))});
 const mainCount=slides.filter(slide=>slide.dataset.optional!=='true').length;
 const mainIndex=slides.slice(0,index+1).filter(slide=>slide.dataset.optional!=='true').length;
 document.getElementById('counter').textContent=slides[index].dataset.optional==='true'?'Frivillig aktivitet':mainIndex+' / '+mainCount;
@@ -130,7 +153,7 @@ function lessonNext(){let n=index+1;while(n<slides.length-1&&slides[n].dataset.o
 function lessonPrevious(){let n=index-1;while(n>0&&slides[n].dataset.optional==='true')n--;show(n)}
 document.getElementById('prev').addEventListener('click',lessonPrevious);document.getElementById('next').addEventListener('click',lessonNext);
 document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||['INPUT','BUTTON','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight')lessonNext();if(e.key==='ArrowLeft')lessonPrevious()});
-document.getElementById('mode').addEventListener('click',e=>{let active=document.body.classList.toggle('projector');document.querySelector('.teacher-note').classList.remove('open');document.getElementById('teacher-toggle').setAttribute('aria-expanded','false');document.getElementById('teacher-toggle').textContent='Visa lärarstöd';e.currentTarget.textContent=active?'Repetitionsläge':'Klassrumsläge';e.currentTarget.setAttribute('aria-label',active?'Växla till repetitionsläge':'Växla till klassrumsläge');e.currentTarget.setAttribute('aria-pressed',String(active))});document.getElementById('teacher-toggle').addEventListener('click',e=>{const open=document.querySelector('.teacher-note').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',String(open));e.currentTarget.textContent=open?'Dölj lärarstöd':'Visa lärarstöd'});
+document.getElementById('mode').addEventListener('click',e=>{window.EulerV23.resetSlide(slides[index]);let active=document.body.classList.toggle('projector');document.querySelector('.teacher-note').classList.remove('open');document.getElementById('teacher-toggle').setAttribute('aria-expanded','false');document.getElementById('teacher-toggle').textContent='Visa lärarstöd';e.currentTarget.textContent=active?'Repetitionsläge':'Klassrumsläge';e.currentTarget.setAttribute('aria-label',active?'Växla till repetitionsläge':'Växla till klassrumsläge');e.currentTarget.setAttribute('aria-pressed',String(active))});document.getElementById('teacher-toggle').addEventListener('click',e=>{const open=document.querySelector('.teacher-note').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',String(open));e.currentTarget.textContent=open?'Dölj lärarstöd':'Visa lärarstöd'});
 document.querySelectorAll('[data-show]').forEach(b=>{b.dataset.initialText=b.textContent;b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.show);const hidden=el.classList.toggle('hidden');b.setAttribute('aria-expanded',String(!hidden));b.textContent=hidden?b.dataset.initialText:'Dölj: '+b.dataset.initialText})});
 const firstEulerStep=document.querySelector('[data-show="final1"]');
 const identityReveal=document.querySelector('[data-show="final2"]');
@@ -189,7 +212,17 @@ document.getElementById('worked-reset').onclick=()=>{conversionStep=0;renderConv
 renderConversion();
 
 const range=document.getElementById('angle');
-function updateCircle(){const d=Number(range.value),r=d*Math.PI/180,x=210+150*Math.cos(r),y=195-150*Math.sin(r);for(const [id,attrs] of [['rr',{x2:x,y2:y}],['cx',{x2:x}],['sy',{x1:x,x2:x,y2:y}],['pt',{cx:x,cy:y}]]){const el=document.getElementById(id);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,String(v)))}document.getElementById('angletext').textContent=d+'°';const clean=x=>Math.abs(x)<1e-10?0:x;document.getElementById('values').textContent='cos v ≈ '+clean(Math.cos(r)).toFixed(3)+'  ·  sin v ≈ '+clean(Math.sin(r)).toFixed(3)}
+function updateCircle(){
+ const degrees=Number(range.value),radians=degrees*Math.PI/180;
+ const x=210+150*Math.cos(radians),y=195-150*Math.sin(radians);
+ for(const [id,attrs] of [['rr',{x2:x,y2:y}],['cx',{x2:x}],['sy',{x1:x,x2:x,y2:y}],['pt',{cx:x,cy:y}]]){
+  const el=document.getElementById(id);
+  Object.entries(attrs).forEach(([key,value])=>el.setAttribute(key,String(value)));
+ }
+ document.getElementById('angletext').textContent=degrees+'°';
+ const clean=value=>Math.abs(value)<1e-10?0:value;
+ document.getElementById('values').innerHTML=window.EulerV23.angleValues(degrees,clean(Math.cos(radians)),clean(Math.sin(radians)));
+}
 let seriesStep=0;const seriesFrames=Array.from(document.querySelectorAll('[data-series-step]'));function renderSeries(){seriesFrames.forEach((f,i)=>f.classList.toggle('hidden',i!==seriesStep));document.getElementById('series-count').textContent='Steg '+seriesStep+' av 4';document.getElementById('series-next').disabled=seriesStep===4;}document.getElementById('series-next').addEventListener('click',()=>{seriesStep=Math.min(4,seriesStep+1);renderSeries()});document.getElementById('series-reset').addEventListener('click',()=>{seriesStep=0;renderSeries()});renderSeries();
 document.getElementById('euler-open-quadrant').addEventListener('click',()=>show(slides.findIndex(x=>x.id==='euler-quadrant-help')));
 document.getElementById('euler-open-notation').addEventListener('click',()=>show(slides.findIndex(x=>x.id==='euler-notation-help')));
