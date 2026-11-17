@@ -32,7 +32,7 @@ function arc(graph,from,to,rUnits){
 }
 function render(){
  const visible=Math.min(stage,3);
- const vectors=angles.slice(0,visible).map((angle,k)=>({x:2*Math.cos(angle),y:2*Math.sin(angle),label:'z'+(k+1),color:['blue','teal','orange'][k],dx:12,dy:-12}));
+ const vectors=angles.slice(0,visible).map((angle,k)=>({x:2*Math.cos(angle),y:2*Math.sin(angle),label:'z'+['₁','₂','₃'][k],color:['blue','teal','orange'][k],dx:[26,-34,12][k],dy:[-19,-16,-12][k]}));
  const g=Ma4Plane.plot(svg,{minX:-3.2,maxX:3.2,minY:-3.2,maxY:3.2,alt:'Komplext talplan med cirkelradie 2. '+visible+' av 3 rötter syns. '+(stage===4?'Vid k=3 sammanfaller den nya vinkeln med den första roten; ingen fjärde rot finns.':'Rötterna byggs upp en i taget.'),circles:[{cx:0,cy:0,r:2,color:'#87adbd'}],vectors});
  if(stage>=2)arc(g,angles[0],angles[1],.75);
  if(stage>=3)arc(g,angles[1],angles[2],.97);
@@ -42,20 +42,20 @@ function render(){
  }
  const explanations=[
   '',
-  'k = 0 ger roten z₁ på vinkeln 30°. Rötterna ligger på cirkeln med radie 2.',
-  'k = 1 ger z₂ på vinkeln 150°. Steget från z₁ är 120° moturs.',
-  'k = 2 ger z₃ på vinkeln 270°. Ytterligare 120° moturs, fortfarande på samma cirkel.',
-  'k = 3 ger vinkeln 390° = 30° + 360°. Den streckade ringen markerar z₁ igen: ingen fjärde rot.'
+  'Den första roten pekar 30° från positiva realaxeln. Alla rötter ligger på samma cirkel.',
+  'Den andra roten pekar 150° från positiva realaxeln. Vinkelsteget är 120° moturs.',
+  'Den tredje roten pekar 270° från positiva realaxeln. Ännu ett steg på 120° moturs.',
+  'Den streckade ringen visar att den fjärde vinkeln träffar första roten igen, efter ett helt varv.'
  ];
  const prompts=[
-  'Rita k = 0: var ligger vinkeln 30° på cirkeln med radie 2?',
-  'Förutsäg k = 1: hur ser 150° ut i andra kvadranten?',
-  'Förutsäg k = 2: vilken punkt motsvarar 270°?',
-  'Nu syns tre rötter. Vad händer när k = 3 ger vinkeln 390°? Rita innan klicket.',
-  'Förklara för en kamrat varför k och k + 3 alltid ger samma rot.'
+  'Rita den första roten. Var ligger 30° på cirkeln med radie 2?',
+  'Förutsäg den andra roten. Vilken punkt i andra kvadranten motsvarar 150°?',
+  'Förutsäg den tredje roten. Vilken punkt motsvarar 270°?',
+  'Nu syns tre rötter. Vad gör ett ytterligare vinkelsteg? Rita innan du kontrollerar.',
+  'Förklara varför ett ytterligare helt varv inte kan ge en ny rot.'
  ];
  const questions=['','k = 0 ⇒ v = '+formula[0],'k = 1 ⇒ v = '+formula[1],'k = 2 ⇒ v = '+formula[2],'k = 3 ⇒ v = '+formula[3]];
- document.getElementById('roots-counter').textContent=stage===4?'3 av 3 olika rötter. k = 3 upprepar z₁.':visible+' av 3 olika rötter visade';
+ document.getElementById('roots-counter').textContent=stage===4?'3 av 3 olika rötter. Nästa heltal upprepar den första.':visible+' av 3 olika rötter visade';
  document.getElementById('roots-prompt').textContent=prompts[stage];
  const angleRow=document.getElementById('roots-angle');angleRow.classList.toggle('hidden',stage===0);if(stage>0)Ma4Math.setFormula(angleRow,questions[stage],'block');
  k3Box.classList.toggle('hidden',stage!==3);
@@ -82,4 +82,4 @@ document.getElementById('roots-back').addEventListener('click',()=>{stage=Math.m
 document.getElementById('roots-reset').addEventListener('click',()=>{stage=0;clearK3Decision();render()});
 render();
 })();
-</script></body></html>
+</script><script src="./roots-v23.js"></script></body></html>

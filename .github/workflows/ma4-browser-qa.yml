@@ -62,6 +62,7 @@ jobs:
           node ma4/kapitel-4/qa/deep-review-ma4-07.cjs
           node ma4/kapitel-4/qa/figure-interaction-de-moivre-v23.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-08.cjs
+          node ma4/kapitel-4/qa/figure-interaction-roots-zn-a-v23.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-09.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-10.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-11.cjs
