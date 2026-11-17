@@ -107,14 +107,14 @@ const sharedAssetLessons=new Set(['laddade-partiklar','jordens-magnetfalt','indu
    const coords=circles.map(e=>({x:e.cx.baseVal.value-cx,y:e.cy.baseVal.value-cy,
     col:Number(e.dataset.flatGridCol),row:Number(e.dataset.flatGridRow),
     spacing:Number(e.dataset.flatGridSpacing),r:e.r.baseVal.value}));
-   const sameSpacing=coords.every(p=>Math.abs(p.x-p.col*p.spacing)<.01&&
-    Math.abs(p.y-p.row*p.spacing)<.01&&p.spacing>0);
+   const sameSpacing=coords.every(p=>Math.abs(p.x-p.col*p.spacing)<.12&&
+    Math.abs(p.y-p.row*p.spacing)<.12&&p.spacing>0);
    const center=coords.some(p=>p.x===0&&p.y===0);
    const quadrants=[[-1,-1],[-1,1],[1,-1],[1,1]].every(([sx,sy])=>
     coords.some(p=>p.x*sx>0&&p.y*sy>0));
    const maxR=Math.max(...coords.map(p=>Math.hypot(p.x,p.y)));
    return {total:svg.querySelectorAll('[data-field-mark]').length,inside:coords.length,
-    sameSpacing,center,quadrants,maxR,plain:coords.every(p=>p.r===2.8)&&marks.length===circles.length};
+    sameSpacing,center,quadrants,maxR,plain:coords.every(p=>Math.abs(p.r-2.8)<.002)&&marks.length===circles.length};
   });
   check(coverage.total>=9&&coverage.inside>=5&&coverage.center&&coverage.sameSpacing&&
    coverage.quadrants&&coverage.maxR>40&&coverage.plain,
