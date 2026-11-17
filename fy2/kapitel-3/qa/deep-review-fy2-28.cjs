@@ -101,7 +101,7 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   await goto(7);
   const eql=await page.locator('.slide.active .ind-proof math').allTextContents();
   check(eql.length===4,'four independent equations for forces and equilibrium');
-  check(eql.some(e=>e.includes('evB'))&&eql.some(e=>e.includes('eE')),'signed electron force magnitudes use positive charge e');
+  check(eql.some(e=>e.includes('|q|vB'))&&eql.some(e=>e.includes('|q|E')),'electron force magnitudes use |q|, not elementary charge as generic notation');
   check((await slide().innerText()).includes('motriktade'),'clarify forces are opposite, not equal vectors');
   // 8 question and 9 worked solution unit checks.
   await goto(8);check((await slide().innerText()).includes('20 cm')&&(await slide().innerText()).includes('3,0 m/s'),'rod question givens preserved');
