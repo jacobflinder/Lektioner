@@ -1,4 +1,18 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplicera och dividera med i</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök före återkopplingen. Alla interaktioner är lokala.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med den tidigare kända regeln i²=−1. Eleverna räknar själva, skissar och jämför i par innan du visar återkoppling och mål. Knyt beräkningen till geometrin utan att ge förklaringen för tidigt.">
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplicera och dividera med i</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"><style>
+/* v2.3 – lokalt, elevstyrt metodstöd för i-rotationer */
+.i-method-recap{margin:18px 0;border:2px solid #bad5e3;border-radius:13px;background:#f6fafc;padding:12px 17px}
+.i-method-recap summary{cursor:pointer;font-weight:760;line-height:1.45;padding:7px 2px}
+.i-method-recap summary:focus-visible{outline:3px solid #166d96;outline-offset:4px}
+.i-method-recap>p{line-height:1.5;margin:12px 0}
+.i-method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.i-method-card{min-width:0;border:1px solid #d1e4ed;border-radius:10px;background:#fff;padding:13px}
+.i-method-card h3{font-size:1rem;margin:0 0 9px;line-height:1.4}
+.i-method-card p{line-height:1.5;margin:9px 0}
+.i-method-card .math{display:block;max-width:100%;overflow-x:auto;white-space:nowrap}
+.i-method-card .i-formulas{display:grid;row-gap:16px;margin:13px 0}
+.i-method-card .i-formulas>.math{margin:0}
+@media(max-width:730px){.i-method-grid{grid-template-columns:minmax(0,1fr)}}
+</style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök före återkopplingen. Alla interaktioner är lokala.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med den tidigare kända regeln i²=−1. Eleverna räknar själva, skissar och jämför i par innan du visar återkoppling och mål. Knyt beräkningen till geometrin utan att ge förklaringen för tidigt.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Multiplicera och dividera med i</h2><p class="lead">4.2 Komplexa tal i polär form · Samma längd, en rotation på 90°</p>
 <div class="task"><strong>Enskilt → par · skriv först</strong><p class="math math-big">z = 2 + i</p><p>Beräkna <span class="math">iz</span> med <span class="math">i² = −1</span>. Rita z och iz i samma talplan. Vad förändras? Vad är oförändrat?</p></div>
 <button class="reveal" type="button" data-reveal="startans">Visa och förklara</button><div class="answer hidden" id="startans">
@@ -54,7 +68,23 @@
 <div class="panel"><p class="lead">NOKflex → 4.2 Komplexa tal i polär form → Multiplicera och dividera med i</p>
 <p class="math math-big"><strong>Uppgifter 4232–4240</strong></p>
 <p><strong>Välj minst tre av fem nivåer.</strong> Börja där svårighetsgraden passar och ändra nivå under arbetets gång. Inga förhandsval behövs.</p></div>
-<div class="task"><strong>Så arbetar du</strong>Räkna först algebraiskt, kontrollera med rotationen i talplanet och visa varför absolutbeloppet inte ändras. Markera en uppgift som du vill diskutera.</div></section>
+<div class="task"><strong>Så arbetar du</strong>Räkna först algebraiskt, kontrollera med rotationen i talplanet och visa varför absolutbeloppet inte ändras. Markera en uppgift som du vill diskutera.</div><details class="i-method-recap" id="i-method-recap">
+<summary>Visa samband från genomgången – pröva själv först</summary>
+<p>Öppna när du behöver stöd, stäng sedan gärna igen. Här finns inga facit till NOKflex-uppgifterna.</p>
+<div class="i-method-grid">
+<section class="i-method-card"><h3>Multiplicera med i</h3>
+<div class="i-formulas"><p class="math">i² = −1</p><p class="math">iz = −b + ai</p></div>
+<p>För <span class="math">z = a + bi</span> blir koordinaterna <strong>(−b; a)</strong>: ett kvarts varv, <strong>90° moturs</strong>, runt origo.</p></section>
+<section class="i-method-card"><h3>Dividera med i</h3>
+<div class="i-formulas"><p class="math">1/i = −i</p><p class="math">z/i = b − ai</p></div>
+<p>För <span class="math">z = a + bi</span> blir koordinaterna <strong>(b; −a)</strong>: ett kvarts varv, <strong>90° medurs</strong>, runt origo.</p></section>
+<section class="i-method-card"><h3>Längden bevaras</h3>
+<p class="math">|z| = √(a² + b²)</p>
+<p>Efter båda rotationerna är kvadratsumman fortfarande <span class="math">a² + b²</span>. Punkterna ligger alltså lika långt från origo. För <span class="math">z = 0</span> är argumentet inte definierat.</p></section>
+<section class="i-method-card"><h3>Skilj från konjugering</h3>
+<p class="math">z̄ = a − bi</p>
+<p>Konjugatet speglar punkten i realaxeln. Det är <strong>inte generellt samma operation</strong> som att multiplicera eller dividera med i. Kontrollera med både algebra och ett ritat talplan.</p></section>
+</div></details></section>
 <section id="exit" class="slide" data-teacher="Utcheckningen testar två beräkningar, rotationsriktning och oförändrat absolutbelopp. Låt eleverna skriva själva innan facit. Målen återkopplas direkt på sista bilden utan nytt innehåll.">
 <div class="eyebrow">07 · Individuell utcheckning</div><h2>Förklara båda rotationerna</h2><div class="task"><strong>4 minuter själv – visa mellanled</strong><p class="math math-big">z = 1 − 2i</p>
 <p>1. Beräkna iz och z/i och ange båda punkternas koordinater.</p>
@@ -131,6 +161,14 @@ next.addEventListener('click',()=>{stage=Math.min(3,stage+1);render()});
 back.addEventListener('click',()=>{stage=Math.max(0,stage-1);render()});
 document.getElementById('rot-reset').addEventListener('click',()=>{stage=0;render()});
 document.querySelectorAll('[data-rot]').forEach(button=>button.addEventListener('click',()=>{[a,b]=button.dataset.rot.split(',').map(Number);stage=0;render()}));
+
+const iRecap=document.getElementById('i-method-recap');
+for(const id of ['prev','next','mode'])document.getElementById(id).addEventListener('click',()=>{iRecap.open=false});
+document.getElementById('jump').addEventListener('change',()=>{iRecap.open=false});
+document.addEventListener('keydown',e=>{
+ if(['ArrowLeft','ArrowRight'].includes(e.key)&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.target.closest('button,input,textarea,select,[contenteditable]'))iRecap.open=false;
+});
+
 render();
 })();
 </script></body></html>
