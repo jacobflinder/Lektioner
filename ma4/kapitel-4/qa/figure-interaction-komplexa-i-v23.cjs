@@ -120,6 +120,10 @@ const power=(v,n)=>{let s=z(1,0);for(let j=0;j<n;j++)s=multiply(s,v);return s};
       }));
       const documentWidth=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));
       ok(documentWidth.scroll<=width+4,'cycle no horizontal overflow '+width);
+      if(width===390){
+        const arrow=await page.locator('.i-cycle-cell').first().evaluate(el=>getComputedStyle(el,'::after').content);
+        ok(arrow.includes('↓')&&arrow.includes('i'),'mobile explicitly shows each ×i multiplication with visible downward arrows');
+      }
       ok(items.every(z=>z.w>100&&z.h>55),'four labels have useful size at '+width);
       ok(items.every((p,i)=>items.every((q,j)=>i===j||
         p.x+p.w<=q.x+1||q.x+q.w<=p.x+1||p.y+p.h<=q.y+1||q.y+q.h<=p.y+1)),
