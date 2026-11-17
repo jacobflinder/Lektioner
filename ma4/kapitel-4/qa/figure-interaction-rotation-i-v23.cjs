@@ -78,6 +78,28 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  ok(await page.locator('#trapans .ma4-final math').count()===3,'conjugate and two rotations distinct in answer');
  const vals=await page.locator('#trapans .ma4-final math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')).join(' / '));
  ok(vals.includes('1 − 2i')&&vals.includes('−2 + i')&&vals.includes('2 − i'),'correct three distinct values');
+ const fig=page.locator('#trap-plane');
+ ok(await fig.count()===1&&await fig.isVisible(),'visible comparison diagram appears only with full feedback');
+ const drawn=await fig.evaluate(svg=>{
+  const get=col=>[...svg.querySelectorAll('g[clip-path] line')].filter(e=>e.getAttribute('stroke')===col).map(e=>[+e.getAttribute('x1'),+e.getAttribute('y1'),+e.getAttribute('x2'),+e.getAttribute('y2')]);
+  const c=[...svg.querySelectorAll('g[clip-path] circle')].find(e=>e.getAttribute('stroke')==='#9cb6c4');
+  return{z:get('#19739f')[0],conjugate:get('#7860b5').find(a=>a[0]!==a[2]||a[1]!==a[3]),iz:get('#0a8176')[0],division:get('#bc633a')[0],purple:get('#7860b5'),radius:c&&{cx:+c.getAttribute('cx'),cy:+c.getAttribute('cy'),r:+c.getAttribute('r')}};
+ });
+ ok([drawn.z,drawn.conjugate,drawn.iz,drawn.division].every(Boolean),'all four geometrical vectors drawn');
+ const org=drawn.z;
+ ok([drawn.conjugate,drawn.iz,drawn.division].every(v=>near(v[0],org[0])&&near(v[1],org[1])),'four vectors from same origin');
+ const xy=v=>[v[2]-v[0],v[1]-v[3]],zxy=xy(org),conj=xy(drawn.conjugate),iVec=xy(drawn.iz),dVec=xy(drawn.division);
+ ok(near(conj[0],zxy[0])&&near(conj[1],-zxy[1]),'conjugate really reflected in real axis');
+ ok(near(iVec[0],-zxy[1])&&near(iVec[1],zxy[0]),'i multiplication visibly +90°');
+ ok(near(dVec[0],zxy[1])&&near(dVec[1],-zxy[0]),'division visibly -90°');
+ const lengths=[org,drawn.conjugate,drawn.iz,drawn.division].map(v=>Math.hypot(v[2]-v[0],v[3]-v[1]));
+ ok(lengths.every(l=>near(l,lengths[0]))&&drawn.radius&&near(drawn.radius.r,lengths[0]),'four points on exact common radius circle');
+ ok(drawn.purple.length===2,'one purple vector and one dashed reflection segment');
+ const reflection=drawn.purple.find(v=>!near(v[0],org[0])||!near(v[1],org[1]));
+ ok(reflection&&near(reflection[0],reflection[2])&&near(reflection[1],org[3])&&near(reflection[3],drawn.conjugate[3]),'dashed line connects conjugate endpoints vertically');
+ await page.screenshot({path:path.join(out,'trap-geometry-'+width+'.png'),fullPage:true});shots++;
+ await page.locator('[data-reveal="trapans"]').click();ok(await page.locator('#trapans').isHidden(),'geometry hides together with original algebra');
+
  await page.screenshot({path:path.join(out,'trap-after-'+width+'.png'),fullPage:true});shots++;
  await go(4);ok(await page.locator('#practiceans').isHidden(),'own try still hidden');
  await go(5);

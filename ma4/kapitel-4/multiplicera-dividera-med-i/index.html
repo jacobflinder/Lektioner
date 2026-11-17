@@ -1,6 +1,17 @@
 <!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplicera och dividera med i</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"><style>
 /* v2.3 – lokalt, elevstyrt metodstöd för i-rotationer */
 .i-method-recap{margin:18px 0;border:2px solid #bad5e3;border-radius:13px;background:#f6fafc;padding:12px 17px}
+.trap-model-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:16px;align-items:start}
+.trap-model-layout>.ma4-worked,.trap-model-figure{min-width:0}
+.trap-model-figure{margin:0;padding:12px 13px;background:#f4fafc;border:1px solid #bad4e0;border-radius:12px}
+.trap-model-figure h3{font-size:1rem;margin:0 0 9px;line-height:1.4}
+.trap-model-figure svg{width:100%;height:auto;display:block}
+.trap-model-figure figcaption{font-size:.9rem;line-height:1.5;margin-top:8px;color:#325465}
+.trap-model-figure .trap-key{display:flex;flex-wrap:wrap;gap:5px 10px;list-style:none;padding:0;margin:9px 0 0;font-size:.85rem}
+.trap-model-figure .trap-key li{display:flex;align-items:center;gap:5px}
+.trap-model-figure .trap-swatch{height:11px;width:11px;display:inline-block;border-radius:50%;background:var(--c)}
+@media(max-width:1040px){.trap-model-layout{grid-template-columns:minmax(0,1fr)}.trap-model-figure svg{max-height:310px}}
+
 .i-method-recap summary{cursor:pointer;font-weight:760;line-height:1.45;padding:7px 2px}
 .i-method-recap summary:focus-visible{outline:3px solid #166d96;outline-offset:4px}
 .i-method-recap>p{line-height:1.5;margin:12px 0}
@@ -161,6 +172,27 @@ next.addEventListener('click',()=>{stage=Math.min(3,stage+1);render()});
 back.addEventListener('click',()=>{stage=Math.max(0,stage-1);render()});
 document.getElementById('rot-reset').addEventListener('click',()=>{stage=0;render()});
 document.querySelectorAll('[data-rot]').forEach(button=>button.addEventListener('click',()=>{[a,b]=button.dataset.rot.split(',').map(Number);stage=0;render()}));
+
+
+// Ett synligt geometriskt motexempel först i återkopplingen, inte före elevens försök.
+// Facitets ursprungliga fullständiga algebrasteg bevaras, med diagrammet intill.
+const trapAnswer=document.getElementById('trapans'),trapWorked=trapAnswer.querySelector('.ma4-worked');
+const trapLayout=document.createElement('div');trapLayout.className='trap-model-layout';
+const trapFigure=document.createElement('figure');trapFigure.className='trap-model-figure';
+trapFigure.innerHTML='<h3>Efter – spegling och två olika rotationer</h3><svg id="trap-plane" class="plot" role="img" aria-label="z=(1,2), konjugatet=(1,−2), iz=(−2,1) och z/i=(2,−1), alla lika långt från origo; speglingen längs den lodräta linjen x=1"></svg><figcaption>Den streckade lodräta sträckan förbinder z och konjugatet: <strong>spegling i realaxeln</strong>. De två övriga pilarna visar rotationerna <strong>+90°</strong> och <strong>−90°</strong>. Alla fyra punkter ligger på samma radiecirkel.</figcaption><ul class="trap-key"><li><span class="trap-swatch" style="--c:#19739f"></span>z</li><li><span class="trap-swatch" style="--c:#7860b5"></span>konjugat</li><li><span class="trap-swatch" style="--c:#0a8176"></span>iz</li><li><span class="trap-swatch" style="--c:#bc633a"></span>z/i</li></ul>';
+trapWorked.replaceWith(trapLayout);trapLayout.append(trapFigure,trapWorked);
+Ma4Plane.plot('trap-plane',{minX:-4,maxX:4,minY:-3.5,maxY:3.5,alt:'Spegling i realaxeln för z=(1,2) till konjugatet (1,−2), motursrotation till (−2,1) och medursrotation till (2,−1). Alla har samma avstånd till origo.',
+ vectors:[
+  {x:1,y:2,label:'z',color:'blue',dx:10,dy:-14},
+  {x:1,y:-2,label:'z̄',color:'purple',dx:10,dy:22},
+  {x:-2,y:1,label:'iz',color:'teal',dx:-26,dy:-12},
+  {x:2,y:-1,label:'z/i',color:'orange',dx:12,dy:18}
+ ],
+ circles:[{cx:0,cy:0,r:Math.sqrt(5),color:'#9cb6c4',dashed:true,width:2}],
+ segments:[{x1:1,y1:2,x2:1,y2:-2,color:'#7860b5',dashed:true,width:2}]});
+document.querySelector('[data-reveal="trapans"]').addEventListener('click',()=>{
+ if(!trapAnswer.classList.contains('hidden')&&window.innerWidth>=1200)trapAnswer.scrollIntoView({behavior:'auto',block:'start'});
+});
 
 const iRecap=document.getElementById('i-method-recap');
 for(const id of ['prev','next','mode'])document.getElementById(id).addEventListener('click',()=>{iRecap.open=false});
