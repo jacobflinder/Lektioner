@@ -55,7 +55,7 @@ function render(){
   'Förklara varför ett ytterligare helt varv inte kan ge en ny rot.'
  ];
  const questions=['','k = 0 ⇒ v = '+formula[0],'k = 1 ⇒ v = '+formula[1],'k = 2 ⇒ v = '+formula[2],'k = 3 ⇒ v = '+formula[3]];
- document.getElementById('roots-counter').textContent=stage===4?'3 av 3 olika rötter. Nästa heltal upprepar den första.':visible+' av 3 olika rötter visade';
+ document.getElementById('roots-counter').textContent=stage===4?'3 av 3 olika rötter. Nästa heltal upprepar z₁.':visible+' av 3 olika rötter visade';
  document.getElementById('roots-prompt').textContent=prompts[stage];
  const angleRow=document.getElementById('roots-angle');angleRow.classList.toggle('hidden',stage===0);if(stage>0)Ma4Math.setFormula(angleRow,questions[stage],'block');
  k3Box.classList.toggle('hidden',stage!==3);
