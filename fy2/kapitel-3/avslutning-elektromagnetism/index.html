@@ -88,11 +88,12 @@ input[type=text]{min-width:0;max-width:185px;border:1px solid #9ebbc5;border-rad
 <div class="layout"><div class="panel"><h2>Tvärsnitt av en roterande slinga</h2>
 <div class="question">När är flödet som störst? När är spänningens storlek som störst? Är det samma läge?</div>
 <div class="slider"><label for="angle">Vinkel mellan ytnormal och B <output id="angle-value">90°</output></label><input id="angle" type="range" min="0" max="360" step="15" value="90"></div>
-<div class="slider"><label for="rot-f">Rotationsfrekvens (ideal modell) <output id="rot-f-value">2,0 Hz</output></label><input id="rot-f" type="range" min="1" max="5" step="1" value="2"></div>
+
 <div class="diagram"><svg id="coil-svg" viewBox="0 0 640 300" role="img" aria-label="Ytnormal mot magnetfält i en roterande spoles tvärsnitt, med markerad vinkel och slingans tvärsnitt"></svg></div>
 <button id="coil-show" type="button">Visa flöde och inducerad spänning</button>
 <button id="coil-reset" type="button">Återställ</button>
 </div><div class="panel"><h2>Fysikalisk modell</h2>
+<div class="slider"><label for="rot-f">Rotationsfrekvens (ideal modell) <output id="rot-f-value">2,0 Hz</output></label><input id="rot-f" type="range" min="1" max="5" step="1" value="2"></div>
 <p>Välj positiv ytnormal så att flödet är positivt vid 0°. I denna modell hålls följande konstant:</p>
 <div class="givens"><div class="math"><math display="block"><mi>N</mi><mo>=</mo><mn>100</mn></math></div>
 <div class="math"><math display="block"><mi>B</mi><mo>=</mo><mn>0,20</mn><mspace width=".2em"/><mtext>T</mtext></math></div>
@@ -109,9 +110,10 @@ input[type=text]{min-width:0;max-width:185px;border:1px solid #9ebbc5;border-rad
 <div class="layout"><div class="panel"><h2>Ändra en variabel åt gången</h2>
 <div class="question">Om frekvensen fördubblas: vad händer med periodtiden och antalet svängningar under en sekund?</div>
 <div class="slider"><label for="freq">Frekvens <output id="freq-value">2 Hz</output></label><input id="freq" type="range" min="1" max="5" step="1" value="2"></div>
-<div class="slider"><label for="peak">Spänningens toppvärde <output id="peak-value">80 V</output></label><input id="peak" type="range" min="20" max="160" step="20" value="80"></div>
+
 <div class="diagram"><svg id="wave-svg" viewBox="0 0 660 300" role="img" aria-label="Spänningen som exakt sinusfunktion under en sekund, med rätt antal perioder och markerad amplitud"></svg></div>
 </div><div class="panel"><h2>Vinkelfrekvens och period</h2>
+<div class="slider"><label for="peak">Spänningens toppvärde <output id="peak-value">80 V</output></label><input id="peak" type="range" min="20" max="160" step="20" value="80"></div>
 <div class="math"><math display="block"><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mover accent="true"><mi>u</mi><mo>^</mo></mover><mspace width=".2em"/><mi mathvariant="normal">sin</mi><mo>(</mo><mi>ω</mi><mi>t</mi><mo>)</mo></math></div>
 <div class="math"><math display="block"><mi>ω</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>f</mi></math></div>
 <div class="math"><math display="block"><mi>f</mi><mo>=</mo><mfrac><mn>1</mn><mi>T</mi></mfrac></math></div>
@@ -125,9 +127,10 @@ input[type=text]{min-width:0;max-width:185px;border:1px solid #9ebbc5;border-rad
 <div class="layout"><div class="panel"><h2>Förutsäg – pröva</h2><div class="question">En sinusformad spänning har medelvärdet noll. Betyder det att den inte kan värma en resistor?</div>
 <p>En resistor omvandlar elektrisk energi till värme under <b>både positiva och negativa halvperioder</b>.</p>
 <div class="slider"><label for="rms-peak">Toppvärde <output id="rms-peak-value">100 V</output></label><input id="rms-peak" type="range" min="40" max="240" step="20" value="100"></div>
-<div class="slider"><label for="rms-r">Resistans <output id="rms-r-value">100 Ω</output></label><input id="rms-r" type="range" min="50" max="250" step="50" value="100"></div>
+
 <div class="diagram"><svg id="rms-svg" viewBox="0 0 660 330" role="img" aria-label="Övre kurvan är sinusformad spänning runt noll, undre kurvan är positiv momentan effekt med korrekt medelvärde"></svg></div>
 </div><div class="panel"><h2>Hitta likströmmen med samma medeleffekt</h2>
+<div class="slider"><label for="rms-r">Resistans <output id="rms-r-value">100 Ω</output></label><input id="rms-r" type="range" min="50" max="250" step="50" value="100"></div>
 <p>För en ren resistor gäller:</p>
 <div class="math"><math display="block"><mi>p</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mfrac><mrow><msup><mi>u</mi><mn>2</mn></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mi>R</mi></mfrac></math></div>
 <div class="math"><math display="block"><msub><mi>P</mi><mtext>medel</mtext></msub><mo>=</mo><mfrac><msup><mover accent="true"><mi>u</mi><mo>^</mo></mover><mn>2</mn></msup><mrow><mn>2</mn><mi>R</mi></mrow></mfrac></math></div>
