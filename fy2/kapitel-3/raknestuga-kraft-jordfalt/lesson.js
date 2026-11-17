@@ -11,6 +11,11 @@ function update(){
  document.getElementById('earth-vector-h').setAttribute('d',`M${x0} ${y0}L${x.toFixed(2)} ${y0}`);
  document.getElementById('earth-vector-v').setAttribute('d',`M${x.toFixed(2)} ${y0}L${x.toFixed(2)} ${y.toFixed(2)}`);
  label.textContent=i+'°';
+ const hLabel=document.getElementById('earth-vector-h-label'),vLabel=document.getElementById('earth-vector-v-label');
+ if(hLabel)hLabel.textContent=i===90?'Bₕ = 0':i===0?'Bₕ = B':'Bₕ →';
+ if(vLabel)vLabel.textContent=i===0?'Bᵥ = 0':i===90?'Bᵥ = B':'Bᵥ ↓';
+ document.getElementById('earth-vector-h').setAttribute('marker-end',i===90?'none':'url(#earth-h-tip)');
+ document.getElementById('earth-vector-v').setAttribute('marker-end',i===0?'none':'url(#earth-v-tip)');
  readout.textContent='Bₕ = '+fmt(B*Math.cos(rad))+' μT; Bᵥ = '+fmt(B*Math.sin(rad))+' μT';
  svg.setAttribute('aria-label','Inklination '+i+' grader. Horisontell B-komponent '+fmt(B*Math.cos(rad))+' mikrotesla; vertikal nedåtriktad komponent '+fmt(B*Math.sin(rad))+' mikrotesla.');
 }
