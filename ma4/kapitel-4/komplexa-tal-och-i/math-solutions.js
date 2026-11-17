@@ -57,5 +57,13 @@ if(cycleHolder){
    '<figcaption class="i-cycle-caption">Multiplicera med i för varje nytt steg. Nästa steg är i⁴ = 1: samma fyra värden börjar om.</figcaption>'+
   '</figure>');
 }
+// Unlike a working answer, the optional recap does not persist when returning
+// from another slide: each independent work session begins with retrieval.
+const methodRecap=document.getElementById('i-method-recap');
+if(methodRecap){
+ document.querySelectorAll('#prev,#next,#jump,[data-go]').forEach(control=>{
+  control.addEventListener(control.tagName==='SELECT'?'change':'click',()=>{methodRecap.open=false});
+ });
+}
 typesetStatic();
 })();
