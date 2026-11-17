@@ -101,7 +101,8 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   await goto(7);
   const eql=await page.locator('.slide.active .ind-proof math').allTextContents();
   check(eql.length===4,'four independent equations for forces and equilibrium');
-  check(eql.some(e=>e.includes('evB'))&&eql.some(e=>e.includes('eE')),'signed electron force magnitudes use positive charge e');
+  const magnitudeTokens=await page.locator('.slide.active .ind-proof math').evaluateAll(maths=>maths.map(el=>({vars:[...el.querySelectorAll('mi')].map(e=>e.textContent.trim()),bars:[...el.querySelectorAll('mo')].filter(e=>e.textContent.trim()==='|').length})));
+  check(magnitudeTokens.length===4&&magnitudeTokens[0].vars.includes('q')&&magnitudeTokens[0].vars.includes('v')&&magnitudeTokens[0].vars.includes('B')&&magnitudeTokens[0].bars>=2&&magnitudeTokens[1].vars.includes('q')&&magnitudeTokens[1].vars.includes('E')&&magnitudeTokens[1].bars>=2,'electron force magnitudes use q with explicit magnitude in both independent force equations');
   check((await slide().innerText()).includes('motriktade'),'clarify forces are opposite, not equal vectors');
   // 8 question and 9 worked solution unit checks.
   await goto(8);check((await slide().innerText()).includes('20 cm')&&(await slide().innerText()).includes('3,0 m/s'),'rod question givens preserved');

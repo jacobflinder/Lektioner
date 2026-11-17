@@ -87,7 +87,7 @@ const close=(a,b,tol=1e-5)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   test(eqs.length===4,'energy solution four separate mathematical lines');
   test(await page.locator('.slide.active .complete-steps math mfrac').count()===3,'actual MathML numerator and denominator in each divided equation');
   test(await page.locator('.slide.active .complete-steps math msqrt').count()===1,'positive square root is mathematically structured');
-  for(const fragment of ['eU=mpv22','2eU=mpv2','v2=2eUmp','v=2eUmp']){
+  for(const fragment of ['|q|U=mpv22','2|q|U=mpv2','v2=2|q|Ump','v=2|q|Ump']){
    test(eqs.some(x=>x.includes(fragment)),'energy intermediate '+fragment);
   }
   test((await page.locator('.slide.active').innerText()).includes('positiva roten'),'speed is nonnegative');
@@ -169,7 +169,7 @@ const close=(a,b,tol=1e-5)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   const energy=await page.locator('.slide.active .concept').nth(2).innerText();
   test(energy.includes('ΔV')&&energy.includes('potential'),'sign convention explicitly stated');
   const energyMath=await page.locator('.slide.active .concept').nth(2).locator('math').evaluateAll(a=>a.map(e=>e.textContent.replace(/\s+/g,'')));
-  test(energyMath.length===2&&energyMath[0].includes('−qΔV')&&energyMath[1].includes('eU'),'general minus-q-deltaV distinct from favorable-proton case');
+  test(energyMath.length===2&&energyMath[0].includes('−qΔV')&&energyMath[1].includes('|q|U'),'general minus-q-deltaV distinct from favorable-proton case');
   const motion=await page.locator('.slide.active .concept').nth(3).locator('math');
   test(await motion.count()===2,'independent x and y mathematical expressions');
   const boxes=await motion.evaluateAll(a=>a.map(e=>({top:e.getBoundingClientRect().top,bottom:e.getBoundingClientRect().bottom})));
