@@ -131,6 +131,18 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   const force=await slide().locator('.answer.open .force-result').getAttribute('d');
   const p=path(force);ok(!!p&&p.dx===0&&p.dy>0,'actual feedback SVG force points downward');
   ok(p&&near(p.x,95)&&near(p.y,94),'force SVG arrow begins at electron CENTER (95,94)');
+  const layerOrder=await slide().locator('.answer.open .electron-svg').evaluate(svg=>{
+   const all=[...svg.children],force=svg.querySelector('.force-result'),
+         charge=svg.querySelector('circle[cx="95"][cy="94"]'),minus=svg.querySelector('text[fill="#146e86"]');
+   return {force:all.indexOf(force),charge:all.indexOf(charge),minus:all.indexOf(minus)};
+  });
+  ok(layerOrder.force>=0&&layerOrder.force<layerOrder.charge&&layerOrder.charge<layerOrder.minus,
+    'real DOM paint order: force begins at center but stays BEHIND charge circle and minus sign');
+  const forceLabel=await slide().locator('.answer.open .electron-svg text[fill="#a34b2d"]').evaluate(e=>({
+   x:+e.getAttribute('x'),y:+e.getAttribute('y'),outline:e.getAttribute('paint-order')
+  }));
+  ok(forceLabel.x<95&&forceLabel.y>94&&forceLabel.outline==='stroke',
+   'F label placed to LEFT of arrow clear of right-side field crosses');
   const afterField=await getField('.answer.open');
   ok(afterField.length===field0.length&&afterField.every((p,i)=>p.outer===field0[i].outer),
     'field crossings do not move, fade, or change when only F answer is shown');
@@ -264,7 +276,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
    for(let n=1;n<=4;n++){
     await go(n);await reset();
     if(n===2)await step(1);
-    if(n===4)await step(1);
+    if(n===4){await shot(v.name+'-04-before-feedback');await step(1);}
     const screen=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}));
     ok(screen.scroll<=screen.viewport+2,'no horizontal page overflow '+v.name+'/'+n+' '+JSON.stringify(screen));
     if(v.name==='projector'&&[2,4].includes(n))ok(screen.height<=1180,'projector current-feedback lesson '+n+' vertically compact: '+screen.height+' px');
