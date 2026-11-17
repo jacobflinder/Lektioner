@@ -33,7 +33,7 @@ if(w>=1200){
  const calc=await page.locator('#k-modans').boundingBox(),diagram=await page.locator('#k-mod-visual').boundingBox();
  ok(calc.y>=-3&&calc.y+calc.height<=h-12,'Entire worked solution visible in single live '+w+'×'+h+' viewport');
  ok(diagram.y>=-3&&diagram.y+diagram.height<=h-12,'Entire necessary diagram visible in same live '+w+'×'+h+' viewport');
- ok(Math.abs(calc.y-diagram.y)<10,'Diagram and its mathematical explanation are adjacent after reveal');
+ ok(calc.x+calc.width<=diagram.x+10&&Math.min(calc.y+calc.height,diagram.y+diagram.height)-Math.max(calc.y,diagram.y)>=Math.min(calc.height,diagram.height)*0.25,'Diagram and calculation occupy adjacent columns with substantial vertical overlap');
 }
 const figure=await page.locator('#k-mod-plane').evaluate(svg=>[...svg.querySelectorAll('line[stroke="#e39c3a"]')].map(e=>[+e.getAttribute('x1'),+e.getAttribute('y1'),+e.getAttribute('x2'),+e.getAttribute('y2')]));
 ok(figure.length===2,'Pythagoras has two visible axis-aligned legs');
