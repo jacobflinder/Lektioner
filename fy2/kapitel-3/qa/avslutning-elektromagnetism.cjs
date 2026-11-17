@@ -22,6 +22,7 @@ await page.locator('#prev').click();assert.match(await page.locator('.slide.acti
 assert.equal(await page.locator('#quizAns').isVisible(),false);
 await page.locator('#quiz button[data-v="b"]').click();assert.match(await page.locator('#quizReply').innerText(),/markerat/i);
 await page.locator('#rep').click();await page.locator('#quiz button[data-v="b"]').click();assert.match(await page.locator('#quizReply').innerText(),/Rätt/);
+await page.locator('.slide.active details.optional summary').click();
 await page.locator('button[data-reveal="wrongAns"]').click();assert.equal(await page.locator('#wrongAns').isVisible(),true);
 await page.locator('#prev').click();
 assert.equal(await page.locator('.slide.active').getAttribute('data-title'),'Kapitelmindmap och tillämpning');
