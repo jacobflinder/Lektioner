@@ -155,7 +155,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
    assert.equal(await deriv.locator('[data-seq-item]:not(.hidden)').count(),i,'03 exakt ett nytt härledningssteg');
   }
   await formulas('#formula .math-givens',2);
-  for(const e of ['z² = z · z','= r²(cos(2v) + i sin(2v))','z³ = z² · z','= r³(cos(3v) + i sin(3v))',
+  for(const e of ['z² = z · z','z² = r²(cos(2v) + i sin(2v))','z³ = z² · z','z³ = r³(cos(3v) + i sin(3v))',
    '|z²| = r · r = r²','v₂ = v + v = 2v','|z³| = r² · r = r³','v₃ = 2v + v = 3v',
    'zⁿ = rⁿ(cos(nv) + i sin(nv))','z⁰ = 1','z⁻¹ = (cos(v) − i sin(v))/r']){
    await has('#formula math[aria-label="'+e+'"]','03 härledning '+e);
@@ -268,9 +268,21 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
     await formulas('#moivre-length',2);
     await formulas('#moivre-answer .math-givens',4);
    }
-   if(i===2)await formulas('#formula .math-givens',2);
-   if(i===3)await formulas('#worked [data-seq-item]:nth-child(1) .math-givens',2);
-   if(i===5)await formulas('#radians [data-seq-item]:nth-child(1) .math-givens',2);
+   if(i===2){
+    assert.equal(await page.locator('#formula [data-seq-item]:not(.hidden)').count(),0,'03 navigation återställer facit');
+    for(let k=0;k<4;k++)await page.locator('#formula [data-seq-next]').click();
+    await formulas('#formula .math-givens',2);
+   }
+   if(i===3){
+    assert.equal(await page.locator('#worked [data-seq-item]:not(.hidden)').count(),0,'04 navigation återställer facit');
+    await page.locator('#worked [data-seq-next]').click();
+    await formulas('#worked [data-seq-item]:nth-child(1) .math-givens',2);
+   }
+   if(i===5){
+    assert.equal(await page.locator('#radians [data-seq-item]:not(.hidden)').count(),0,'06 navigation återställer facit');
+    await page.locator('#radians [data-seq-next]').click();
+    await formulas('#radians [data-seq-item]:nth-child(1) .math-givens',2);
+   }
    if(i===6)await formulas('#mistakes .task .math-givens',2);
    if(i===9)await formulas('#exit .task .math-givens',2);
    const dim=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
