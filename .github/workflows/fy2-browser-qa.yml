@@ -32,6 +32,7 @@ jobs:
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy2/kapitel-3/ >/dev/null && break; sleep 1; done
       - name: Verify all lesson slides and interactivity
         run: |
+          node fy2/kapitel-3/qa/v23-11-review.cjs
           node fy2/kapitel-3/qa/figure-interaction-magnetism-v2.cjs
           node fy2/kapitel-3/qa/figure-interaction-elektriska-falt-v2.cjs
           node fy2/kapitel-3/qa/browser-smoke.cjs
@@ -46,7 +47,6 @@ jobs:
           node fy2/kapitel-3/qa/deep-review-fy2-34.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-35.cjs
           node fy2/kapitel-3/qa/figure-interaction-pilot-strom.cjs
-          node fy2/kapitel-3/qa/v23-11-review.cjs
       - name: Upload screenshots and QA summary
         if: always()
         uses: actions/upload-artifact@v4
