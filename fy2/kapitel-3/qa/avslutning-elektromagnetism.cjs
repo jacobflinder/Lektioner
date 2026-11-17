@@ -23,14 +23,14 @@ await page.locator('#exit-value').fill('0,40');await page.locator('#exit-check')
 await page.locator('#prev').click();await page.locator('#prev').click();await page.locator('#prev').click();await page.locator('#prev').click();
 assert.equal(await page.locator('.slide.active').getAttribute('data-title'),'Induktion');
 await page.locator('#ind-show').click();assert.match(await page.locator('#ind-result').innerText(),/2,00 V/);
-await page.locator('#duration').fill('0.4');assert.match(await page.locator('#ind-result').innerText(),/1,00 V/);
-await page.locator('#field-end').fill('0.2');assert.match(await page.locator('#ind-result').innerText(),/0,00 V/);
+await page.locator('#duration').evaluate(el=>{el.value='0.4';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#ind-result').innerText(),/1,00 V/);
+await page.locator('#field-end').evaluate(el=>{el.value='0.2';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#ind-result').innerText(),/0,00 V/);
 await page.locator('#ind-reset').click();assert.equal(await page.locator('#ind-answer').isVisible(),false);
 await page.locator('#prev').click();await page.locator('#force-show').click();assert.match(await page.locator('#force-result').innerText(),/uppåt/);
 await page.locator('[data-q="-1"]').click();assert.match(await page.locator('#force-result').innerText(),/nedåt/);
 await page.locator('#prev').click();assert.match(await page.locator('#wire-result').innerText(),/40,0 μT/);
-await page.locator('#radius').fill('4');assert.match(await page.locator('#wire-result').innerText(),/20,0 μT/);
-await page.locator('#current').fill('0');assert.match(await page.locator('#wire-result').innerText(),/B = 0/);
+await page.locator('#radius').evaluate(el=>{el.value='4';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#wire-result').innerText(),/20,0 μT/);
+await page.locator('#current').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#wire-result').innerText(),/B = 0/);
 assert.equal(errors.length,0,errors.join('; '));
 console.log('PASS closing electromagnetism: '+width+'px, 10 slides, three models and exit ticket');
 await page.close();
