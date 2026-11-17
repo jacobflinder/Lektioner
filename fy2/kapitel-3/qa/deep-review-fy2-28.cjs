@@ -62,6 +62,33 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   check((await page.locator('#rod-result').innerText()).includes('Förutsäg'),'reset restores hidden result');
   const independentRod=.4*.2*3;
   check(near(independentRod,.24),'independent rod voltage numerical value');
+
+  // Independent physical figure audit: higher B adds uniformly drawn FIELD marks,
+  // not darker glyphs; all previously visible marks retain coordinates.
+  let previousRod=[],lastRod=-1;
+  for(const B of [0,.1,.2,.4,.6,.8]){
+   await set('rod-B',B);
+   const marks=await page.locator('#ind-rod-dynamic [data-rod-field-symbol]').evaluateAll(es=>es.map(e=>({
+    cell:e.getAttribute('data-cell'),x:e.getAttribute('data-x'),y:e.getAttribute('data-y'),
+    opacity:e.getAttribute('opacity'),size:getComputedStyle(e.querySelector('text')).fontSize})));
+   check(marks.length===Math.round(60*B/.8),'B changes actual cross glyph count '+B);
+   check(marks.every(m=>m.opacity==='.67'&&m.size==='20px'),'all field glyphs keep constant opacity and dimensions '+B);
+   check(previousRod.every(m=>marks.some(n=>n.cell===m.cell&&n.x===m.x&&n.y===m.y)),'increasing B preserves every previously visible glyph '+B);
+   check(marks.length>lastRod,'field symbol density increases monotonically '+B);
+   previousRod=marks;lastRod=marks.length;
+  }
+  await set('rod-B',0);await page.locator('#rod-start').click();
+  check((await page.locator('#charge-pct').innerText()).includes('0 %'),'no charge separation can build up at B=0 even on Start');
+  check(await page.locator('#ind-rod-dynamic path[stroke="#ba6643"]').count()===0,'no spurious magnetic force at B=0');
+  await set('rod-B',.4);await page.locator('#rod-start').click();
+  const rodF=await page.locator('#ind-rod-dynamic path[stroke="#ba6643"]').first().getAttribute('d');
+  const vf=rodF?.match(/^M([0-9.]+) ([0-9.]+)L([0-9.]+) ([0-9.]+)$/);
+  check(!!vf&&Number(vf[4])>Number(vf[2]),'electron magnetic-force arrow actually DOWN when rod moves right');
+  await page.locator('#rod-reverse').click();
+  const rodFRev=await page.locator('#ind-rod-dynamic path[stroke="#ba6643"]').first().getAttribute('d');
+  const vr=rodFRev?.match(/^M([0-9.]+) ([0-9.]+)L([0-9.]+) ([0-9.]+)$/);
+  check(!!vr&&Number(vr[4])<Number(vr[2]),'electron magnetic-force arrow flips UP with reversed motion');
+  await page.locator('#rod-reset').click();
   // 7: Forces must be equal magnitudes, opposite directions and separately stepped.
   await goto(7);
   const eql=await page.locator('.slide.active .ind-proof math').allTextContents();
@@ -91,6 +118,49 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
    const normal=await page.locator('#ind-flux-angle svg').count();check(normal===1,'actual normal SVG persists angle '+ang);
   }
   await page.locator('#flux-angle-reset').click();check((await page.locator('#flux-angle-result').innerText()).includes('Förutsäg'),'flux reset conceals result');
+
+  // V2.1 actual SVG figure geometry: A is visible as a SQUARE, B as unscaled arrows,
+  // theta as an actual angle between normal and field axis, all independent.
+  await goto(12);await reset();
+  let oldMarks=[],lastMarks=-1;
+  for(const B of [0,.05,.2,.4,.6,.8]){
+   await set('flux-B',B);
+   const glyphs=await page.locator('#ind-flux-angle [data-flux-field-symbol]').evaluateAll(es=>es.map(e=>({
+    id:e.getAttribute('data-cell'),x:e.getAttribute('data-x'),y:e.getAttribute('data-y'),opacity:e.getAttribute('opacity'),
+    first:e.querySelector('path').getAttribute('d')})));
+   check(glyphs.length===Math.round(12*B/.8),'physical flux B changes number of FIXED vector arrows '+B);
+   check(glyphs.every(x=>x.opacity==='.7'),'uniform field arrow opacity is fixed '+B);
+   check(oldMarks.every(v=>glyphs.some(x=>x.id===v.id&&x.x===v.x&&x.y===v.y&&x.first===v.first)),'B increases without shifting existing arrow positions '+B);
+   check(glyphs.length>=lastMarks,'B field symbol density nondecreasing '+B);
+   lastMarks=glyphs.length;oldMarks=glyphs;
+  }
+  await set('flux-B',.4);
+  for(const area of [.02,.04,.08,.12,.16]){
+   await set('flux-A',area);
+   const patch=await page.locator('#ind-flux-angle [data-area-patch]').evaluate(e=>({w:+e.getAttribute('width'),h:+e.getAttribute('height')}));
+   const expect=83*Math.sqrt(area/.08);
+   check(near(patch.w,expect,.001)&&near(patch.h,expect,.001),'drawn SQ AREA scales proportional to chosen A, not fixed '+area);
+   check((await page.locator('#ind-flux-angle [data-flux-field-symbol]').count())===6,'area slider does not change B field density '+area);
+  }
+  await set('flux-A',.08);
+  for(const angle of [0,45,90,135,180]){
+   await set('flux-theta',angle);
+   const svg=page.locator('#ind-flux-angle svg');
+   const d=await svg.locator('[data-flux-surface]').getAttribute('d');
+   const m=d?.match(/^M([0-9.-]+) ([0-9.-]+)L([0-9.-]+) ([0-9.-]+)$/);
+   const len=m?Math.hypot(Number(m[3])-Number(m[1]),Number(m[4])-Number(m[2])):NaN;
+   check(near(len,224,.005),'surface section preserves fixed physical A across rotations '+angle);
+   const normal=await svg.locator('path[stroke="#263e56"]').first().getAttribute('d');
+   const f=normal?.match(/^M([0-9.-]+) ([0-9.-]+)L([0-9.-]+) ([0-9.-]+)$/);
+   const ex=216+106*Math.cos(angle*Math.PI/180),ey=178-106*Math.sin(angle*Math.PI/180);
+   check(!!f&&near(Number(f[3]),ex,.03)&&near(Number(f[4]),ey,.03),'surface normal points at correct actual geometry for θ '+angle);
+   check(await svg.locator('[data-theta-arc]').count()===1,'angle θ marked between field reference and actual normal '+angle);
+  }
+  await set('flux-B',0);
+  check(await page.locator('#ind-flux-angle [data-flux-field-symbol]').count()===0,'B=0 shows no real magnetic field arrows');
+  check(await page.locator('#ind-flux-angle [data-b-reference]').count()===1,'B=0 uses a visibly dashed reference direction only');
+  await page.locator('#flux-angle-reset').click();
+  check((await page.locator('#flux-angle-result').innerText()).includes('Förutsäg'),'reset also hides newly illustrated angle solution');
   // 13: prediction before loop state 14, keep closed moving loop and orientation.
   await goto(13);check((await slide().innerText()).includes('före, under och efter'),'loop temporal prediction preserved');
   await goto(14);await reset();
@@ -219,6 +289,34 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
     if(i===23){const row=await page.locator('#ind-tangent-result .ind-tangent-derivation math').first().locator('mi').evaluateAll(a=>a.map(e=>({x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y})));check(row.length>=3&&Math.abs(row[0].y-row[1].y)<8,'tangent derivatives readable at '+vp.name);}
     check(await page.locator('.slide.active').isVisible(),'slide visible '+vp.name+' '+i);
     await snap(vp.name+'-'+String(i).padStart(2,'0'));
+   }
+  }
+
+  // Response at every specified viewing class: SVG physical text and figures
+  // must be real size, not simply an off-screen DOM node.
+  for(const vp of [{name:'mobile-390',width:390,height:844},{name:'small-768',width:768,height:900},{name:'class-1280',width:1280,height:800},{name:'projector-1920',width:1920,height:1080}]){
+   await page.setViewportSize({width:vp.width,height:vp.height});
+   for(const n of [6,12]){
+    await goto(n);await reset();
+    if(n===6){await set('rod-B',.8);await page.locator('#rod-start').click();await page.locator('#rod-show').click();}
+    if(n===12){await set('flux-B',.8);await set('flux-A',.16);await set('flux-theta',135);await page.locator('#flux-angle-show').click();}
+    const id=n===6?'#ind-rod-dynamic':'#ind-flux-angle';
+    const box=await page.locator(id+' svg').boundingBox();
+    check(!!box&&box.width>=Math.min(vp.width-40,280)&&box.height>=140,'core SVG has readable pixel area '+vp.name+' slide '+n);
+    if(vp.width===390){
+     const view=await page.locator(id+' svg').getAttribute('viewBox');
+     check(view===(n===6?'0 0 390 390':'0 0 390 360'),'mobile has OWN drawing rather than shrinking desktop SVG '+n);
+     const font=await page.locator(id+' svg text').first().evaluate(e=>{
+      const m=e.getScreenCTM();return parseFloat(getComputedStyle(e).fontSize)*Math.sqrt(m.a*m.a+m.b*m.b);
+     });
+     check(font>=13,'real on-screen diagram label font at least 13px '+n+' got '+font);
+    }
+    if(vp.width===1280){
+     check(box.y>=0&&box.y+box.height<=800,'main explanation SVG above classroom viewport fold '+n+' '+JSON.stringify(box));
+    }
+    const widths=await page.evaluate(()=>[innerWidth,document.documentElement.scrollWidth]);
+    check(widths[1]<=widths[0]+2,'no horizontal overflow for enriched figure '+vp.name+' slide '+n);
+    await snap('v21-'+vp.name+'-'+n);
    }
   }
   check(errors.length===0,'no Javascript or console errors: '+errors.join('; '));
