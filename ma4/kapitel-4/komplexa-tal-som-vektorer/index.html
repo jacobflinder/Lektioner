@@ -1,4 +1,18 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Komplexa tal som vektorer</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.1</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök innan du visar lösningen. Skriv gärna på papper eller i egna anteckningar.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Starta med samma u och z som original-PDF:en. Eleverna ritar och räknar enskilt, diskuterar i par, väljer ett alternativ och får motiverande återkoppling innan målen visas. Kontrollera att de skiljer mellan punktens läge och positionsvektorns längd.">
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Komplexa tal som vektorer</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"><style>
+/* Lektionsspecifik v2.3-sammanfattning: inga ändringar av gemensam kursstil. */
+.v23-vectors-recap{margin:18px 0 0;border:2px solid #bad2e0;border-radius:13px;background:#f6fafc;padding:12px 17px}
+.v23-vectors-recap summary{cursor:pointer;font-weight:750;padding:7px 2px;line-height:1.45}
+.v23-vectors-recap summary:focus-visible{outline:3px solid #176b96;outline-offset:4px}
+.v23-vectors-recap>p{margin:12px 0}
+.v23-vector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.v23-vector-card{min-width:0;background:#fff;border:1px solid #d4e3eb;border-radius:10px;padding:13px}
+.v23-vector-card h3{font-size:1rem;margin:0 0 9px}
+.v23-vector-card p{margin:8px 0;line-height:1.5}
+.v23-vector-card .math{max-width:100%;overflow-x:auto;white-space:nowrap;display:block}
+.v23-vector-card .v23-math-pair{display:grid;row-gap:16px;margin:14px 0}
+.v23-vector-card .v23-math-pair>.math{margin:0}
+@media(max-width:680px){.v23-vector-grid{grid-template-columns:minmax(0,1fr)}}
+</style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.1</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök innan du visar lösningen. Skriv gärna på papper eller i egna anteckningar.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Starta med samma u och z som original-PDF:en. Eleverna ritar och räknar enskilt, diskuterar i par, väljer ett alternativ och får motiverande återkoppling innan målen visas. Kontrollera att de skiljer mellan punktens läge och positionsvektorns längd.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Komplexa tal som vektorer</h2><p class="lead">4.1 Aritmetik med komplexa tal · Punkt, vektor, addition och subtraktion</p>
 <div class="task"><strong>Enskilt 45 sekunder → par 30 sekunder</strong><div class="math-givens" role="group" aria-label="Separata givna matematiska uttryck"><p class="math math-big">u = 3 + i</p><p class="math math-big">z = 1 + 4i</p></div><p>Markera punkterna u och z i talplanet. Förutsäg slutpunkten för summan u + z om talen tolkas som positionsvektorer.</p></div>
 <div class="panel decision-check" data-decision><strong>Vilken punkt är slutpunkten för u + z?</strong><p class="muted">Räkna först själv eller rita för hand. Diskutera med en kamrat, välj sedan.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="(2, −3) får du vid u − z, inte vid addition. Addera båda koordinaterna var för sig.">A · (2, −3)</button>
@@ -55,7 +69,20 @@
 <p class="lead">NOKflex → 4.1 Aritmetik med komplexa tal → Komplexa tal som vektorer</p>
 <p class="math math-big"><strong>Uppgifter 4146–4160</strong></p>
 <p><strong>Välj minst tre av fem nivåer.</strong> Börja där det passar dig och justera nivåvalet efter hur svårt arbetet känns. Du behöver inte välja i förväg.</p></div>
-<div class="task"><strong>Så arbetar du</strong>Rita i talplanet när en figur hjälper. Visa uträkningar och skriv korrekta randvillkor. Kontrollera i NOKflex och markera en uppgift du vill diskutera.</div></section>
+<div class="task"><strong>Så arbetar du</strong>Rita i talplanet när en figur hjälper. Visa uträkningar och skriv korrekta randvillkor. Kontrollera i NOKflex och markera en uppgift du vill diskutera.</div>
+<details id="v-method-recap" class="v23-vectors-recap">
+<summary>Visa samband från genomgången – försök minnas först</summary>
+<p>Stöd när du fastnar, inte facit till dagens uppgifter. Stäng gärna igen och fortsätt räkna på papper.</p>
+<div class="v23-vector-grid">
+<section class="v23-vector-card"><h3>Punkt och positionsvektor</h3>
+<p class="math">w = a + bi</p><p>Punkten har koordinaterna <strong>(a; b)</strong>. Positionsvektorn går från origo till punkten. Punkten har ett läge; vektorn har riktning och längd.</p></section>
+<section class="v23-vector-card"><h3>Addera och subtrahera koordinatvis</h3>
+<div class="v23-math-pair"><p class="math">(a + bi) + (c + di)</p><p class="math">= (a + c) + (b + d)i</p></div>
+<p>Vid subtraktion: byt tecken på <strong>båda</strong> koordinaterna i den andra vektorn. Rita gärna den motsatta vektorn först.</p></section>
+<section class="v23-vector-card"><h3>Avstånd från origo</h3><p class="math">|w| = √(a² + b²)</p><p>Detta är punktens avstånd från origo och positionsvektorns längd. Använd Pythagoras med koordinaternas katetlängder, även när en koordinat är negativ.</p></section>
+<section class="v23-vector-card"><h3>Valfri geometrisk tillämpning</h3><p class="math">|w − w₀| = r</p><p>Detta ger cirkelns rand: centrum <span class="math">w₀</span>, radie <span class="math">r</span> där <span class="math">r > 0</span>. En strikt olikhet betyder att randpunkterna <strong>inte</strong> ingår; en likhet omfattar randen.</p></section>
+</div>
+</details></section>
 <section id="exit" class="slide" data-teacher="Individuell utcheckning: fråga 1 testar kärnmålet. Frågorna 2–3 om geometriska villkor är separat fördjupad utcheckning för dem som gjort tillämpningsdelen. Visa inte facit förrän alla försökt. Ingen framåtblick med nytt innehåll.">
 <div class="eyebrow">08 · Individuell utcheckning</div><h2>Visa vad du kan</h2>
 <div class="task"><strong>4 minuter själv – visa minst ett mellanled</strong>
@@ -138,6 +165,15 @@ function drawRegion(){
 }
 document.querySelectorAll('[data-region]').forEach(b=>b.addEventListener('click',()=>{regionType=b.dataset.region;regionRevealed=false;drawRegion()}));
 regionShow.addEventListener('click',()=>{regionRevealed=!regionRevealed;drawRegion()});
+
+const v23recap=document.getElementById('v-method-recap');
+for(const id of ['prev','next','mode'])document.getElementById(id).addEventListener('click',()=>{v23recap.open=false});
+document.getElementById('jump').addEventListener('change',()=>{v23recap.open=false});
+document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>{v23recap.open=false}));
+document.addEventListener('keydown',event=>{
+ if((event.key==='ArrowLeft'||event.key==='ArrowRight')&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.target.closest('button,input,textarea,select,[contenteditable]'))v23recap.open=false;
+});
+
 drawVector();drawCircle();drawRegion();
 })();
 </script></body></html>
