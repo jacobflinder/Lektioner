@@ -186,7 +186,7 @@ function renderSol(){
  calc('<mi>B</mi><mo>≈</mo><mfrac><mrow>'+mu+'<mi>N</mi><mi>I</mi></mrow><mi>L</mi></mfrac>',subSteps,
  '<mi>B</mi><mo>≈</mo>'+num(mT,3,'mT'),
  'Idealiserad luftsolenoid långt från ändarna. Inuti pekar B '+(solDir>0?'åt höger (N till höger)':'åt vänster (N till vänster)')+
- '. Beloppet är '+swFmt(relSol,2)+' gånger utgångsfallet. Den separata blå stapeln har linjär mätskala; fältpilarna är schematiska.') :
+ '. Beloppet är '+swFmt(relSol,2)+' gånger utgångsfallet. Den separata blå stapeln har linjär mätskala; fältlinjerna inne i spolen ligger parallellt och jämnt, med mindre avstånd när B ökar.') :
  "Förutsäg först belopp och riktning. Ändra en storhet i taget och visa sedan sambandet.";
  if(solShown){$("sol-result").querySelector(".calc-ins").open=prevSteps;$("sol-result").querySelector(".calc-final").open=prevFinal}
  $("sol-show").textContent=solShown?"Dölj beräkning och fält":"Visa beräkning och fält";

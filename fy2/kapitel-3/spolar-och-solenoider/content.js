@@ -26,14 +26,18 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
    'L'+(head-u*5).toFixed(2)+' '+(y+4).toFixed(2)+'" fill="none" stroke="'+blue+'" stroke-width="'+sw.toFixed(2)+'"/></g>';
  }
  if(field){
-  // Cover the cross-section inside the entire winding, not just two rows.
-  const cols=span<195?2:span<325?3:span<450?4:5,rows=[-.70,-.36,0,.36,.70];
-  const len=9+25*scale,opacity=.35+.58*scale,sw=1.5+2.6*scale;
+  // Homogeneous interior B: PARALLEL field lines, equally spaced for
+  // each strength. Stronger field changes the number and all y-coordinates.
+  // Arrow glyphs have fixed length, opacity and stroke; the meter bar is linear.
+  const lines=Math.max(1,Math.round(1+7*scale)),lineHeight=ry*1.68;
   inside.push('<rect x="'+x0.toFixed(1)+'" y="'+(cy-ry*.90).toFixed(1)+'" width="'+span.toFixed(1)+
-   '" height="'+(ry*1.8).toFixed(1)+'" rx="22" fill="'+blue+'" fill-opacity="'+(.035+.115*scale).toFixed(3)+'"/>');
-  for(let j=0;j<cols;j++)for(const y of rows){
-   const x=x0+span*(j+.5)/cols;
-   inside.push(arrow(x,cy+y*ry,dir,len,opacity,sw));
+   '" height="'+(ry*1.8).toFixed(1)+'" rx="22" fill="'+blue+'" fill-opacity=".055"/>');
+  for(let j=0;j<lines;j++){
+   const y=+(cy-lineHeight/2+(j+.5)*lineHeight/lines).toFixed(3);
+   inside.push('<path data-sol-field-line data-line-index="'+j+'" data-b-dir="'+dir+
+    '" d="M'+(x0+8).toFixed(2)+' '+y+'H'+(x1-8).toFixed(2)+
+    '" stroke="'+blue+'" stroke-width="2.3" stroke-opacity=".77" fill="none"/>');
+   inside.push('<g data-sol-field-arrow data-line-index="'+j+'">'+arrow((x0+x1)/2,y,dir,20,.85,2.3)+'</g>');
   }
   for(const side of [-1,1]){
    const innerY=cy+side*ry*.35,outerY=cy+side*(ry+49);
@@ -45,7 +49,7 @@ function coilHelix({core=false,dir=1,field=true,turns=8,withP=false,small=false,
     'H'+from+'C'+near+' '+outerY+' '+near+' '+innerY+' '+from+' '+innerY+'Z';
    returnLines.push('<path data-return-path d="'+d+'" stroke="'+blue+
     '" stroke-opacity=".55" stroke-width="2.3" fill="none"/>');
-   returnLines.push(arrow(w/2,outerY,-dir,14+.45*len,.8,2));
+   returnLines.push(arrow(w/2,outerY,-dir,19,.8,2));
   }
  }
  const poleLabels=field?'<text x="'+(x0-15).toFixed(1)+'" y="44" fill="'+blue+'" font-size="23" font-weight="750">'+(dir>0?'S':'N')+
@@ -121,24 +125,19 @@ function coilPlanar({dir=1,field=true,turns=5,radiusCm=4,currentA=.8,fieldMicroT
    :'<path data-field-mark="'+location+'" d="M'+(x-2.7).toFixed(1)+' '+(y-2.7).toFixed(1)+'l5.4 5.4m0 -5.4l-5.4 5.4" fill="none" stroke="'+blue+'" stroke-width="2.4"/>';
  }
  let fieldMarks='';
- if(field){
+ if(field&&B>0){
   const disk=rInner-4;
   fieldMarks=fieldMark(cx,cy,dir,'center');
-  // Fixed tiers keep the whole opening legible at modest B. More marks are
-  // added as B increases, without changing the appearance of a symbol.
-  const rings=disk<26
-   ?[[.68,4,0,0],[.68,4,120,Math.PI/4]]
-   :[[.76,8,0,0],[.38,4,0,Math.PI/4],[.56,6,45,Math.PI/6],[.82,8,90,Math.PI/8],[.68,8,180,Math.PI/16],[.92,8,350,0]];
-  const points=[[cx,cy]];
-  for(const [radius,count,threshold,offset] of rings){
-   if(B<threshold)continue;
-   for(let j=0;j<count;j++){
-    const angle=j*2*Math.PI/count+offset;
-    const x=cx+disk*radius*Math.cos(angle),y=cy+disk*radius*Math.sin(angle);
-    if(points.some(([px,py])=>Math.hypot(x-px,y-py)<6.3))continue;
-    fieldMarks+=fieldMark(x,y,dir,'inside');
-    points.push([x,y]);
-   }
+  // A regular square lattice clipped by the physical disk. Changing B
+  // changes its step everywhere, rather than filling arbitrary fixed rings.
+  const gridStep=Math.max(10,11*Math.sqrt(650/Math.max(B,1)));
+  const maxIndex=Math.ceil(disk/gridStep);
+  fieldMarks='';
+  for(let row=-maxIndex;row<=maxIndex;row++)for(let col=-maxIndex;col<=maxIndex;col++){
+   const dx=col*gridStep,dy=row*gridStep;
+   if(dx*dx+dy*dy>disk*disk+1e-8)continue;
+   fieldMarks+=fieldMark(cx+dx,cy+dy,dir,'inside').replace(' data-field-mark="inside"',
+    ' data-field-mark="inside" data-flat-grid-col="'+col+'" data-flat-grid-row="'+row+'" data-flat-grid-spacing="'+gridStep.toFixed(3)+'"');
   }
   for(const angle of [.34*Math.PI,.74*Math.PI,1.26*Math.PI,1.66*Math.PI]){
    const x=cx+(outer+19)*Math.cos(angle),y=cy+(outer+19)*Math.sin(angle);

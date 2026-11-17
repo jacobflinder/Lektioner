@@ -1,11 +1,11 @@
-# Kravspecifikation v2.1 – figur-, visualiserings- och interaktionsgranskning
+# Kravspecifikation v2.2 – figur-, visualiserings- och interaktionsgranskning
 
 **Projekt:** 41 interaktiva webblektioner · `jacobflinder/Lektioner`  
-**Fastställd:** 16 november 2026  
+**Fastställd:** 17 november 2026  
 **Omfattning:** Fy2, Ma4, Fy1 och Matematik – fortsättning nivå 1c (tidigare Ma3c)  
-**Historik:** v2.0 infördes när 3 av 41 lektioner hade figurgranskats. Vid v2.1-revisionen är 7 av 41 genomgångna. Den äldre matematikgranskningen 41/41 är ett separat arbete.
+**Historik:** v2.0 infördes när 3 av 41 lektioner hade figurgranskats. Vid v2.1-revisionen var 7 av 41 genomgångna; v2.2 införs efter 10 genomgångna och 5 återöppnade magnetismlektioner. Den äldre matematikgranskningen 41/41 är ett separat arbete.
 
-Denna version ersätter den tidigare figurinstruktionen. Den bygger på konkreta erfarenheter från **Fy2 Ström ger magnetfält**, **Ma4 Polynomdivision** och **Fy1 Serie- och parallellkoppling**. Allt nedan gäller även för omgranskning av tidigare färdigställda lektioner när en ny brist upptäcks.
+Denna version ersätter v2.1 av figurinstruktionen. Fysikprinciperna för homogena och inhomogena magnetfält samt skillnaden mellan ändrat B och ändrad area A är förtydligade. Den bygger på konkreta erfarenheter från **Fy2 Ström ger magnetfält**, **Ma4 Polynomdivision** och **Fy1 Serie- och parallellkoppling**. Allt nedan gäller även för omgranskning av tidigare färdigställda lektioner när en ny brist upptäcks.
 
 **SKA** = obligatoriskt godkännandekrav. **BÖR** = stark rekommendation med motivering om den inte följs. En lektion blir inte godkänd genom antal utförda ändringar, antal tester eller att alla automatiska tester är gröna: **eleven måste faktiskt kunna se, tolka och använda den förklarande representationen**.
 
@@ -97,8 +97,26 @@ Varje kretsschema SKA vara **topologiskt och visuellt korrekt**:
 
 Inspektera inte bara SVG-värden; granska **synliga linjeändar och komponentformer i bildpunkter**. En vit bakgrundsrektangel som täcker ledningen är en verklig felritning även om bakomliggande matematiska samband är korrekta.
 
-**Magnetfältets prickar och kryss (konkret lärdom från Fy2 Permanentmagneter, bild 5):** När ut-/inriktade fält illustreras med prickar respektive kryss ska de i våra elevfigurer vara **tydliga enkla symboler, utan dekorativa ringar**. De är schematiska riktningar – inte fysiska partiklar. Om ett reglage ändrar den homogena magnetiska flödestätheten **B** ska **symboltätheten/antalet** ändras i hela fältet, inte storleken, linjetjockleken eller opaciteten hos befintliga symboler. Om bara den genomflödda **ytan A** ändras ska däremot prickarna/kryssen ligga **orörda med oförändrad fälttäthet**, medan fler eller färre hamnar inom ytans gräns. Styrka och flöde ska fortfarande beräknas oberoende genom `Φ = BA` för ett homogent fält vinkelrätt mot ytan. Två lika stora ytor i samma B-fält ska också få samma symbolmönster/täthet i en direkt jämförelse. **Automatiskt test:** kontrollera räknat antal och synlig densitet, oförändrad radie/opacitet, oförändrade koordinater när endast A ändras, samt figur och beräkning i samma återkoppling. Antal symboler är inte en exakt kalibrering av magnetfältets storlek.
+### 7A. Magnetiska fältlinjer, prickar/kryss och fältvektorer (v2.2 – blockerande)
 
+**SKA: Håll isär tre representationer.** En fältlinje är en tänkt kurva vars tangent visar \\(\\vec B\\): tätheten i enhetlig tvärsnittsyta representerar storleken av \\(B\\). Prick \\(\\odot\\) betyder ut ur planet och kryss \\(\\otimes\\) in i planet; i sådana snittbilder används symbolerna som **fältlinjegenomskärningar** och deras antal per area illustrerar B. En ensam B-vektor får visa sin storlek genom längd i en angiven skala och behöver inte samtidigt en täthetsmodell. De olika sätten får inte ge motstridig storleksinformation.
+
+- **Homogent B i bildplanet:** fältlinjer är raka, parallella, har samma riktning och **lika avstånd över hela fältregionen**. Högre B = mindre jämnt avstånd och fler linjer över samma tvärsnitt; lägre B = större jämnt avstånd och färre. Vid B=0 inga fältlinjer. En linjes tjocklek eller opacitet ska inte ensam användas som mått på B.
+- **Homogent B in i eller ut ur bildplanet:** prickar/kryss SKA ritas som enkla, likstora symboler utan dekorativa ringar, i ett **jämnt rutnät eller annan geometriskt likformig täckning** i hela det aktuella fältområdet. För en kvadratisk 2D-fördelning gäller kvalitativt \\(n/A\\propto B\\) och typiskt symbolavstånd \\(d\\propto1/\\sqrt{B}\\). På grund av att antalet symboler är heltal blir övergångar diskreta, men **ingen vald B-nivå** får skapa slumpmässiga eller tydligt isolerade luckor som liknar inhomogenitet.
+- **Ändra B:** uppdatera **både antal och inbördes avstånd** genom ny jämn fördelning över samma fältregion. Symbolernas **gamla koordinater SKA INTE hållas låsta**; att behålla dem och selektivt tända fler mellan dem är inte en godkänd genväg om det förstör jämnheten. Symbolernas storlek/linjetjocklek/opacitet ska vara oförändrade. Utökade/signerade värden ska behålla rätt prick/kryss-riktning.
+- **Ändra bara arean A (eller en ytas position):** det externa B-fältet är oförändrat och **fältets ALLA symbolkoordinater, riktningar och täthet SKA förbli exakt oförändrade**. Endast ytans geometri ändras och därmed antalet **genomskurna** symboler och det beräknade flödet. För ett homogent fält gäller \\(\\Phi=BA\\cos\\theta\\). När endast θ ändras behålls B-mönstret och antalet fältlinjegenomskärningar i en verkligt roterad 3D-yta hanteras som en projektion — inte som ändring av själva B.
+- **Inhomogent B:** fältlinjerna är tangentiella till det lokala \\(\\vec B\\), ska aldrig korsa varandra och ska vara **tätare där fältet är starkare** och glesare där det är svagare. I ett tvärsnitt kring en lång rak strömförande ledare är fältlinjerna koncentriska cirklar och \\(B(r)\\propto1/r\\). Om cirkelavstånden används för att illustrera styrkan SKA **radiala mellanrummet öka med avståndet r**, inte minska. Alternativt kan bilden tydligt vara schematisk enbart för fältriktning, men då SKA en separat B(r)-jämförelse visa avtagandet.
+- **Fysikalisk integritet:** alla grafiska fältlinjer och punkter är en **schematisk representation, inte objekt eller kalibrerad mätning**. Fältets riktning, ström, kraft, partikelbana, flux och numeriska uttryck får inte förvanskas av den ritade tätheten.
+
+**Obligatorisk oberoende testmatris (ersätter v2.1-krav som låste symbolernas position när B ökade):**
+
+1. Pröva \\(B=0\\) där det går, lägsta positiva värde, minst tre mellanvärden och maxvärdet samt eventuellt teckenbyte; räkna symboler och mät koordinaterna som faktiskt renderats.
+2. Vid varje homogent fälttillstånd: kontrollera lika horisontella/vertikala grannavstånd (eller ett tydligt dokumenterat regelbundet likformigt mönster), fast teckenstorlek och opacitet, inga oavsiktliga inhomogena luckor. När B ökar ska tätheten vara monotont icke-avtagande med B över **samma bildarea**; kontrollera rimlig proportionalitet med hänsyn till avrundning.
+3. Vid ett **rent A-byte** (min, mellan, max) på samma B: gör en **fullständig före/efter-jämförelse av alla B-symbolers koordinater**, inte bara antalet. Testa även θ separat så att det inte förändrar det externa fältet. Jämför genomflödda ytor och det numeriska flödet.
+4. För inhomogena fält: kontrollera lokala fältlinjers tangent, strömriktning och hur avstånden följer den kända fältstyrkan; för rak ledare kontrollera **ökande radiala avstånd**, \\(B(r_1)>B(r_2)\\) när \\(r_1<r_2\\).
+5. Kontrollera figurernas **faktiska pixlar** på 390, 768, 1280 och 1920 px, före/efter samt med aktuell formel intill. Enbart grön DOM-teststatus eller en textetikett räcker inte. För tidigare godkända men bristfälliga lektioner: status **åtgärd krävs** tills ny fysik-, renderings- och publiceringsverifiering är klar.
+
+**Historik för fem riktade återgranskningar, inte fem nya lektioner:** Fy2 #1 Ström ger magnetfält, #3 Permanentmagneter, #5 Spolar och solenoider, #6 Laddade partiklar, #8 Induktion. Rättningsordning: #8 → #6 → #3 → #5 → #1. Behåll samtliga ursprungliga uppgifter, demonstrationer, stegvis matematik, lärarstöd och relevanta tester.
 ## 8. Visuella strukturer i matematik
 
 För polynomdivision och andra uppställningar SKA **termer med samma grad ligga i samma visuella kolumn**. Visa vilken kolumn som är aktuell utan att avslöja elevens nästa steg. En nollkoefficient, exempelvis `0x²`, SKA behålla sin gradplats.
@@ -207,7 +225,7 @@ Loggen `granskning/figurer-interaktioner.md` SKA överst visa:
 - **Öppna anmärkningar**, inklusive problem läraren uttryckligen skjutit upp; skilj visuellt godkännande från full ämnesgranskning.
 - **Nästa handling** och om användarens `nästa` inväntas. Ange föreslagen nästa post men påbörja den aldrig automatiskt.
 
-Om en **blockerande brist** upptäcks i en tidigare färdig lektion ändras dess aktuella status till **åtgärd krävs**. Behåll tidigare godkännande i historiken, men räkna inte lektionen bland för närvarande godkända förrän den återverifierats. Äldre godkännanden innebär aldrig automatiskt godkännande enligt v2.1.
+Om en **blockerande brist** upptäcks i en tidigare färdig lektion ändras dess aktuella status till **åtgärd krävs**. Behåll tidigare godkännande i historiken, men räkna inte lektionen bland för närvarande godkända förrän den återverifierats. Äldre godkännanden innebär aldrig automatiskt godkännande enligt v2.2.
 
 Avsluta rapporten med:
 

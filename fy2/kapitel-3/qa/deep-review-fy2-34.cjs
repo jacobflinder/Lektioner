@@ -155,6 +155,25 @@ try{
  await page.locator('#sol-flip').click();
  ok((await page.locator('#sol-result .calc-final').innerText()).includes('vänster'),'reversed conventional current changes B direction, not strength');
  const flipBar=await actualWidth('#sol-b-bar');ok(close(flipBar,2*bar0,.02),'reversing current does not alter field magnitude');
+ // v2.2: for SAME solenoid geometry, higher B increases number of
+ // PARALLEL interior lines and decreases their EQUAL separation.
+ await set('sol-n',300);await set('sol-l',.3);
+ let previousLines=0,oldGap=Infinity;
+ for(const I of [.2,.4,.8,1.2]){
+  await set('sol-i',I);
+  const lines=await page.locator('#solenoid-visual [data-sol-field-line]').evaluateAll(es=>es.map(e=>({
+   y:+e.getAttribute('d').match(/M[-0-9.]+ ([-0-9.]+)H/)[1],
+   stroke:e.getAttribute('stroke-width'),opacity:e.getAttribute('stroke-opacity'),dir:e.getAttribute('data-b-dir')
+  })));
+  const B=4*Math.PI*1e-7*300*I/.3*1e3,scale=B/(B+1.15),expected=Math.max(1,Math.round(1+7*scale));
+  ok(lines.length===expected,'solenoid has correct discrete number of parallel B-lines I='+I);
+  ok(lines.every(l=>l.stroke==='2.3'&&l.opacity==='.77'&&l.dir==='-1'),'B-line appearance and reversed-current direction fixed I='+I);
+  const ys=lines.map(l=>l.y).sort((a,b)=>a-b),ds=ys.slice(1).map((y,i)=>y-ys[i]);
+  ok(ds.every(d=>close(d,66*1.68/expected,.002)),'all adjacent homogeneous solenoid line gaps equal I='+I);
+  const gap=66*1.68/expected;
+  ok(expected>=previousLines&&gap<=oldGap,'solenoid density nondecreasing as B rises I='+I);
+  previousLines=expected;oldGap=gap;
+ }
  await page.locator('#sol-reset').click();ok(!await page.locator('#sol-b-bar').count(),'reset hides field and numeric B');
  ok((await page.locator('#sol-i').inputValue())==='0.8'&&(await page.locator('#sol-l').inputValue())==='0.3','reset returns solenoid presets');
  await go(11);
@@ -173,6 +192,29 @@ try{
  const readMarks=()=>page.locator('#flat-visual [data-field-mark]').evaluateAll(marks=>marks.map(
   e=>({spot:e.dataset.fieldMark,type:e.localName,radius:e.getAttribute('r')})));
  const fieldBase=await readMarks();
+ // v2.2: a regular clipped two-dimensional lattice, not irregular fixed rings.
+ const geometry=()=>page.locator('#flat-visual [data-field-mark="inside"]').evaluateAll(es=>es.map(e=>({
+  x:Number(e.dataset.flatGridCol),y:Number(e.dataset.flatGridRow),
+  spacing:Number(e.dataset.flatGridSpacing),type:e.localName,
+  cx:e.localName==='circle'?Number(e.getAttribute('cx')):null,
+  cy:e.localName==='circle'?Number(e.getAttribute('cy')):null
+ })));
+ const firstGrid=await geometry();
+ ok(firstGrid.length>=5&&firstGrid.every(m=>m.type==='circle'&&m.spacing>0),'center field has regular unencircled dot lattice');
+ let lastGridSpacing=Infinity,lastGridCount=0;
+ for(const I of [.4,.8,1.6]){
+  await set('flat-i',I);
+  const grid=await geometry(),B=4*Math.PI*1e-7*5*I/(2*.04)*1e6,spacing=Math.max(10,11*Math.sqrt(650/B));
+  ok(grid.every(m=>close(m.spacing,spacing,.004)),'true planar B controls all lattice steps I='+I);
+  ok(grid.length>=lastGridCount&&spacing<=lastGridSpacing,'higher B shrinks lattice spacing and increases count I='+I);
+  ok(grid.every(m=>m.type==='circle'&&m.cx!==null&&m.cy!==null),'all planar B directions unchanged when I magnitude changes');
+  const mid=grid.filter(p=>p.y===0).sort((a,b)=>a.x-b.x);
+  ok(mid.slice(1).every((p,i)=>close(p.cx-mid[i].cx,spacing,.12)),
+    'planar center row has equal nearest-neighbour gaps I='+I);
+  lastGridSpacing=spacing;lastGridCount=grid.length;
+ }
+ await set('flat-i',.8);
+
  ok(fieldBase.every(mark=>mark.spot==='outside'?mark.type==='path':mark.type==='circle'&&mark.radius==='2.8'),'plain interior dots and exterior crosses with no field rings');
  ok(close(flatBar,f0*130/650,.01),'flat B linear bar scaled to true B');
  await page.locator('#flat-result .calc-ins>summary').click();

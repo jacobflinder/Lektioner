@@ -63,19 +63,27 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   const independentRod=.4*.2*3;
   check(near(independentRod,.24),'independent rod voltage numerical value');
 
-  // Independent physical figure audit: higher B adds uniformly drawn FIELD marks,
-  // not darker glyphs; all previously visible marks retain coordinates.
-  let previousRod=[],lastRod=-1;
+  // v2.2: B selects a completely redistributed, regular homogeneous lattice.
+  let previousCount=-1,lastGap=Infinity;
   for(const B of [0,.1,.2,.4,.6,.8]){
    await set('rod-B',B);
-   const marks=await page.locator('#ind-rod-dynamic [data-rod-field-symbol]').evaluateAll(es=>es.map(e=>({
-    cell:e.getAttribute('data-cell'),x:e.getAttribute('data-x'),y:e.getAttribute('data-y'),
-    opacity:e.getAttribute('opacity'),size:getComputedStyle(e.querySelector('text')).fontSize})));
-   check(marks.length===Math.round(60*B/.8),'B changes actual cross glyph count '+B);
-   check(marks.every(m=>m.opacity==='.67'&&m.size==='20px'),'all field glyphs keep constant opacity and dimensions '+B);
-   check(previousRod.every(m=>marks.some(n=>n.cell===m.cell&&n.x===m.x&&n.y===m.y)),'increasing B preserves every previously visible glyph '+B);
-   check(marks.length>lastRod,'field symbol density increases monotonically '+B);
-   previousRod=marks;lastRod=marks.length;
+   const glyphs=await page.locator('#ind-rod-dynamic [data-rod-field-symbol]').evaluateAll(es=>es.map(e=>({
+    col:Number(e.getAttribute('data-col')),row:Number(e.getAttribute('data-row')),
+    x:Number(e.getAttribute('data-x')),y:Number(e.getAttribute('data-y')),
+    op:e.getAttribute('opacity'),font:getComputedStyle(e.querySelector('text')).fontSize
+   })));
+   const f=Math.sqrt(B/.8),nx=B===0?0:Math.max(1,Math.round(12*f)),ny=B===0?0:Math.max(1,Math.round(6*f));
+   check(glyphs.length===nx*ny,'B controls complete grid count '+B);
+   check(glyphs.every(g=>g.op==='.67'&&g.font==='20px'),'uniform cross appearance '+B);
+   const xs=[...new Set(glyphs.map(g=>g.x))].sort((a,b)=>a-b),ys=[...new Set(glyphs.map(g=>g.y))].sort((a,b)=>a-b);
+   const dx=xs.slice(1).map((v,i)=>v-xs[i]),dy=ys.slice(1).map((v,i)=>v-ys[i]);
+   check(xs.length===nx&&ys.length===ny,'no holes or missing rows '+B);
+   check(dx.every(v=>near(v,540/nx,.002))&&dy.every(v=>near(v,258/ny,.002)),
+     'uniform nearest-neighbour spacing in both directions '+B);
+   if(dx.length&&dy.length)check(Math.abs(dx[0]/dy[0]-1)<.15,'approximate square cell spacing '+B);
+   const gap=nx*ny?Math.sqrt(540*258/(nx*ny)):Infinity;
+   check(glyphs.length>previousCount&&gap<=lastGap,'higher B increases density and reduces gap '+B);
+   previousCount=glyphs.length;lastGap=gap;
   }
   await set('rod-B',0);await page.locator('#rod-start').click();
   check((await page.locator('#charge-pct').innerText()).includes('0 %'),'no charge separation can build up at B=0 even on Start');
@@ -119,28 +127,39 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
   }
   await page.locator('#flux-angle-reset').click();check((await page.locator('#flux-angle-result').innerText()).includes('Förutsäg'),'flux reset conceals result');
 
-  // V2.1 actual SVG figure geometry: A is visible as a SQUARE, B as unscaled arrows,
-  // theta as an actual angle between normal and field axis, all independent.
-  await goto(12);await reset();
-  let oldMarks=[],lastMarks=-1;
+  // v2.2: measured equal distance between complete parallel B-lines.
+  await goto(12);await reset();let oldN=-1,oldD=Infinity;
   for(const B of [0,.05,.2,.4,.6,.8]){
    await set('flux-B',B);
-   const glyphs=await page.locator('#ind-flux-angle [data-flux-field-symbol]').evaluateAll(es=>es.map(e=>({
-    id:e.getAttribute('data-cell'),x:e.getAttribute('data-x'),y:e.getAttribute('data-y'),opacity:e.getAttribute('opacity'),
-    first:e.querySelector('path').getAttribute('d')})));
-   check(glyphs.length===Math.round(12*B/.8),'physical flux B changes number of FIXED vector arrows '+B);
-   check(glyphs.every(x=>x.opacity==='.7'),'uniform field arrow opacity is fixed '+B);
-   check(oldMarks.every(v=>glyphs.some(x=>x.id===v.id&&x.x===v.x&&x.y===v.y&&x.first===v.first)),'B increases without shifting existing arrow positions '+B);
-   check(glyphs.length>=lastMarks,'B field symbol density nondecreasing '+B);
-   lastMarks=glyphs.length;oldMarks=glyphs;
+   const marks=await page.locator('#ind-flux-angle [data-flux-field-symbol]').evaluateAll(es=>es.map(e=>({
+    y:Number(e.getAttribute('data-y')),x:Number(e.getAttribute('data-x')),
+    opacity:e.getAttribute('opacity'),d:e.querySelector('path').getAttribute('d')
+   })));
+   const n=B===0?0:Math.max(1,Math.round(8*B/.8));
+   check(marks.length===n,'B alters complete parallel-line count '+B);
+   const y=marks.map(x=>x.y).sort((a,b)=>a-b);
+   check(marks.every(x=>x.opacity==='.7'&&x.x===24),'fixed appearance, no drift '+B);
+   check(y.slice(1).every((v,i)=>near(v-y[i],216/n,.002)),'equal spacing between EVERY neighbouring field line '+B);
+   check(marks.every(m=>/^M24(?:\\.0+)? [0-9.]+L337(?:\\.0+)? [0-9.]+/.test(m.d)),
+     'field direction always parallel and toward the right '+B);
+   const gap=n?216/n:Infinity;
+   check(marks.length>=oldN&&gap<=oldD,'higher B means more lines and smaller spacing '+B);
+   oldN=marks.length;oldD=gap;
   }
   await set('flux-B',.4);
+  const before=await page.locator('#ind-flux-angle [data-flux-field-symbol]').evaluateAll(es=>es.map(e=>e.outerHTML));
   for(const area of [.02,.04,.08,.12,.16]){
    await set('flux-A',area);
    const patch=await page.locator('#ind-flux-angle [data-area-patch]').evaluate(e=>({w:+e.getAttribute('width'),h:+e.getAttribute('height')}));
-   const expect=83*Math.sqrt(area/.08);
-   check(near(patch.w,expect,.001)&&near(patch.h,expect,.001),'drawn SQ AREA scales proportional to chosen A, not fixed '+area);
-   check((await page.locator('#ind-flux-angle [data-flux-field-symbol]').count())===6,'area slider does not change B field density '+area);
+   const expected=83*Math.sqrt(area/.08);
+   check(near(patch.w,expected,.001)&&near(patch.h,expected,.001),'area graphic proportional to actual A '+area);
+   const now=await page.locator('#ind-flux-angle [data-flux-field-symbol]').evaluateAll(es=>es.map(e=>e.outerHTML));
+   check(JSON.stringify(now)===JSON.stringify(before),'ALL B-line coordinates unchanged when ONLY A changes '+area);
+  }
+  for(const ang of [0,45,90,135,180]){
+   await set('flux-theta',ang);
+   const now=await page.locator('#ind-flux-angle [data-flux-field-symbol]').evaluateAll(es=>es.map(e=>e.outerHTML));
+   check(JSON.stringify(now)===JSON.stringify(before),'ALL B-line coordinates unchanged when ONLY θ changes '+ang);
   }
   await set('flux-A',.08);
   for(const angle of [0,45,90,135,180]){

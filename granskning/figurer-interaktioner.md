@@ -1,5 +1,8 @@
 # Figur- och interaktionsgranskning – 41 webblektioner
 
+> **Systematisk v2.2-omgranskning – 17 november 2026.** **10/41 tidigare genomgångna, för närvarande 5/41 godkända och 5/41 återöppnade som ÅTGÄRD KRÄVS.** Användaren har upptäckt ett återkommande fysik-/didaktikfel i hur homogena magnetfält ritas. Samma lektioner räknas inte om som nya. Kravspecifikation v2.2 gäller nu: vid ändrat B omfördelas fältlinjer eller fältlinjegenomskärningar till **regelbundna, fysikaliskt rimliga avstånd och antal**; vid ändrad A utan ändrat B ligger alla B-symboler kvar. För raka ledaren ska cirkelavstånden i en styrkerepresentation öka utåt. Fem berörda lektioner: **#8 Induktion, #6 Laddade partiklar, #3 Permanentmagneter, #5 Spolar och solenoider, #1 Ström ger magnetfält**. Tidigare godkännanden bevaras historiskt, men ingen av de fem är nu godkänd enligt den skärpta regeln. **Ingen av dessa får återmarkeras godkänd förrän fysik, skärmbilder, uppdaterade verkliga browser-tester och Pages är verifierade.**
+
+
 > **Fy2 – Induktion · registerpost #8 · 17 november 2026.** **10/41 genomgångna och 10/41 för närvarande tekniskt/didaktiskt godkända enligt dokumenterade kravversioner; 5 enligt v2.1.** Status **KLAR FÖR ANVÄNDARGRANSKNING**, **inte lärargodkänd eller klassrumsprövad**. **24 av 24 elevbilder** granskade. Särskilt rättade figurbrister på bild 06 och 12 i [PR #83](https://github.com/jacobflinder/Lektioner/pull/83), med korrekta oföränderliga B-symboler, synlig area A och orientering θ och mobil/klassrumsanpassning. [Fy2-QA i main #44023750075](https://github.com/jacobflinder/Lektioner/actions/runs/44023750075) **SUCCESS: 555/555 riktade kontroller, 65 skärmbilder, 0 JS-fel, 0 externa anrop**, övriga Fy2-tester PASS; [Pages #44023749148](https://github.com/jacobflinder/Lektioner/actions/runs/44023749148) **SUCCESS** på kod-SHA `b7213027b2b1da10bda16370905f8e181ce7c88a`. Verkliga skärmbilder granskade för 390, 768, 1280, 1440 och 1920 px, särskilt viktiga före-/eftertillstånd på bild 06/12. **69 generella smoke-varningar avser andra Fy2-vyer, inga registrerade för Induktion.** Ingen inlärningseffekt har mätts. Nästa post påbörjas endast vid uttryckligt ”nästa”.
 
 
@@ -281,14 +284,14 @@ Användaren har infört ett **obligatoriskt kvalitetskrav på faktisk visuell be
 
 | Nr | Kurs | Titel | Sökväg | Figur-/interaktionsstatus |
 |---:|---|---|---|---|
-| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **Figurer visuellt accepterade av användaren; Fy2-mellanled lämnade för senare** |
+| 1 | Fysik 2 | Ström ger magnetfält | `fy2/kapitel-3/strom-ger-magnetfalt/` | **ÅTGÄRD KRÄVS (v2.2) – fälttäthet/fältlinjer, historiskt godkännande kvar i loggen** |
 | 2 | Fysik 2 | Elektriska fält | `fy2/kapitel-3/elektriska-falt/` | **KLAR · 4:e granskade · 68 riktade v2 PASS + full Fy2-QA/Pages** |
-| 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | **KLAR · lärarrättelse av fältprickar publicerad · 281 riktade PASS + full Fy2-QA/Pages** |
+| 3 | Fysik 2 | Permanentmagneter, material och flöde | `fy2/kapitel-3/magnetism/` | **ÅTGÄRD KRÄVS (v2.2) – fälttäthet/fältlinjer, historiskt godkännande kvar i loggen** |
 | 4 | Fysik 2 | Räknestuga | `fy2/kapitel-3/raknestuga/` | Klar för användargranskning (v2.1) |
-| 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | Klar för användargranskning (v2.1) |
-| 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | Klar för användargranskning (v2.1) |
+| 5 | Fysik 2 | Spolar och solenoider | `fy2/kapitel-3/spolar-och-solenoider/` | **ÅTGÄRD KRÄVS (v2.2) – fälttäthet/fältlinjer, historiskt godkännande kvar i loggen** |
+| 6 | Fysik 2 | Laddade partiklar i magnetiska fält | `fy2/kapitel-3/laddade-partiklar/` | **ÅTGÄRD KRÄVS (v2.2) – fälttäthet/fältlinjer, historiskt godkännande kvar i loggen** |
 | 7 | Fysik 2 | Jordens magnetfält | `fy2/kapitel-3/jordens-magnetfalt/` | Klar för användargranskning (v2.1; poler och missvisning förtydligade) |
-| 8 | Fysik 2 | Induktion | `fy2/kapitel-3/induktion/` | Klar för användargranskning (v2.1) |
+| 8 | Fysik 2 | Induktion | `fy2/kapitel-3/induktion/` | **ÅTGÄRD KRÄVS (v2.2) – fälttäthet/fältlinjer, historiskt godkännande kvar i loggen** |
 | 9 | Fysik 2 | Magnetisk kraft och jordens magnetfält – räknestuga | `fy2/kapitel-3/raknestuga-kraft-jordfalt/` | Ej påbörjad |
 | 10 | Fysik 2 | Demonstrationer – elektromagnetism | `fy2/kapitel-3/demonstrationer-elektromagnetism/` | Ej påbörjad |
 | 11 | Matematik 4 | Enhetscirkeln – repetition | `ma4/kapitel-4/enhetscirkeln/` | Ej påbörjad |

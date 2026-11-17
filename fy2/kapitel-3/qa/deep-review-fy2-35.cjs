@@ -44,6 +44,14 @@ fs.mkdirSync(outdir,{recursive:true});
   await go(3);
   const fig=active().locator('[data-wire-plot]');
   ok(await fig.getAttribute('data-direction')==='out','outward current default');
+  // v2.2: B(r) ~ 1/r requires LOWER radial line density further from wire.
+  const radii=await fig.locator('svg circle[data-schematic-field-circle]').evaluateAll(es=>es.map(e=>Number(e.getAttribute('r'))).sort((a,b)=>a-b));
+  ok(JSON.stringify(radii)===JSON.stringify([68,108,162]),'three schematic circles pass through expected increasing radii');
+  const gap1=radii[1]-radii[0],gap2=radii[2]-radii[1];
+  ok(gap2>gap1&&gap1>0,'radial gaps increase outward where field becomes weaker');
+  const B1=2e-7*1/(radii[0]/100),B2=2e-7*1/(radii[2]/100);
+  ok(B1>B2&&B1/B2>2,'independent field strength at smaller radius is larger by I/r');
+  ok((await fig.locator('.cap').textContent()).includes('glesare längre ut'),'field-geometry caption explicitly explains weaker B further from wire');
   ok(await fig.getAttribute('data-shown')!=='true','predicted tangent concealed');
   await active().locator('[data-reveal]').click();
   ok(await fig.getAttribute('data-shown')==='true','tangent visible after feedback');
