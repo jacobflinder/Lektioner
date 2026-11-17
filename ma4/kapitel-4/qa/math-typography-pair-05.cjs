@@ -52,7 +52,10 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      await page.locator('#k3-decision [data-decision-submit]').click();
      assert.ok(await page.locator('#roots-next').isEnabled(),'Sista steget upplåst efter elevval');
      await page.locator('#roots-next').click();
-     assert.ok((await page.locator('#roots-counter').innerText()).includes('upprepar z₁'),'k=3 ger ingen fjärde rot');
+     const state=await page.locator('#roots-counter').innerText();
+     assert.ok(state.includes('3 av 3')&&state.includes('upprepar'),'k=3 ger ingen fjärde unik rot');
+     assert.equal(await page.locator('#roots-plane g line[stroke="#19739f"], #roots-plane g line[stroke="#0a8176"], #roots-plane g line[stroke="#bc633a"]').count(),3,
+       'Det ska alltjämt finnas exakt tre olika ritade rotpilar efter k=3');
      assert.ok((await page.locator('#roots-angle math').getAttribute('aria-label')).includes('390°'),'k=3 visar 390° först efter kontroll');
      await page.screenshot({path:OUT+'/ma4-roots-geometry-math.png',fullPage:true});
      await page.selectOption('#jump','5');
