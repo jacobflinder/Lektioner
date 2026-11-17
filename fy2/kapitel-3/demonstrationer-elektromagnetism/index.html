@@ -61,11 +61,24 @@ svg text{font-family:system-ui,sans-serif;fill:#284c5a}svg .bfield{stroke:#08768
 const $=id=>document.getElementById(id.startsWith('#')?id.slice(1):id),slides=[...document.querySelectorAll('.slide')];let current=0,repeat=false,showTeacher=false;
 function render(){slides.forEach((s,i)=>s.classList.toggle('active',i===current));$('#counter').textContent=(current+1)+' / '+slides.length;$('#jump').value=String(current);$('#prev').disabled=current===0;$('#next').disabled=current===slides.length-1;const a=slides[current].querySelector('.answer:not(.open)');$('#step').textContent=a?'Visa nästa steg':current===slides.length-1?'Slut':'Nästa bild';$('#step').disabled=!a&&current===slides.length-1;}
 function go(n){current=Math.max(0,Math.min(slides.length-1,n));if(!repeat)slides[current].querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));render();window.scrollTo(0,0)}
-function reveal(){const a=slides[current].querySelector('.answer:not(.open)');if(a){a.classList.add('open');render()}else if(current<slides.length-1)go(current+1)}
+function focusForceModel(a){
+ if(!a?.classList.contains('open')||slides[current].dataset.title!=='Ledare och folie')return;
+ if(!window.matchMedia('(min-width:1120px) and (max-height:900px)').matches)return;
+ const diagram=a.querySelector('.demo-panel>.diagram'),proof=a.querySelector('#force-magnitude-explanation');
+ if(!diagram||!proof)return;
+ const f=diagram.getBoundingClientRect(),p=proof.getBoundingClientRect();
+ if(f.top>window.innerHeight*.55){
+   // After reveal, keep the explanatory diagram AND mathematics visible in one 1280x800 projector view.
+   const visible=Math.max(f.height,p.height);
+   const desired=Math.max(42,Math.min(290,window.innerHeight-visible-20));
+   window.scrollTo({top:Math.max(0,window.scrollY+f.top-desired),behavior:'instant'});
+ }
+}
+function reveal(){const a=slides[current].querySelector('.answer:not(.open)');if(a){a.classList.add('open');render();focusForceModel(a)}else if(current<slides.length-1)go(current+1)}
 $('#prev').onclick=()=>go(current-1);$('#next').onclick=()=>go(current+1);$('#step').onclick=reveal;
 $('#reset').onclick=()=>{slides[current].querySelectorAll('.answer.open').forEach(x=>x.classList.remove('open'));slides[current].dispatchEvent(new Event('lesson:reset'));render()};
 slides.forEach((s,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=(i+1)+'. '+s.dataset.title;$('#jump').appendChild(o)});$('#jump').onchange=e=>go(+e.target.value);
-document.querySelectorAll('[data-reveal]').forEach(btn=>btn.onclick=()=>{btn.nextElementSibling?.classList.toggle('open');render()});
+document.querySelectorAll('[data-reveal]').forEach(btn=>btn.onclick=()=>{const a=btn.nextElementSibling;a?.classList.toggle('open');render();focusForceModel(a)});
 function mode(r){repeat=r;document.body.classList.toggle('repeat',r);$('#class').classList.toggle('selected',!r);$('#repetition').classList.toggle('selected',r);$('#class').setAttribute('aria-pressed',String(!r));$('#repetition').setAttribute('aria-pressed',String(r));document.dispatchEvent(new Event('fy2:mode'))}$('#class').onclick=()=>mode(false);$('#repetition').onclick=()=>mode(true);
 $('#teacher').onclick=()=>{showTeacher=!showTeacher;document.body.classList.toggle('show-teacher',showTeacher);$('#teacher').setAttribute('aria-pressed',String(showTeacher))};
 $('#fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen().catch(()=>{}):document.documentElement.requestFullscreen().catch(()=>{});
