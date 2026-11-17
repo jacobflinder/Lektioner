@@ -99,15 +99,15 @@ ul,ol{padding-left:1.25em}li+li{margin-top:6px}
 <p>För en lång rak ledare i luft eller vakuum:</p>
 <div class="math"><math display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac></math></div>
 <p class="note">Här är I den positiva strömstyrkan. Strömriktningen avgör riktningen, medan B beräknas som en positiv storlek.</p>
-<div class="readout" id="wire-result" aria-live="polite">40 μT</div>
+
 <button type="button" class="reveal" data-reveal="wire-answer">Visa resonemanget</button>
 <div id="wire-answer" class="answer"><div class="math"><math display="block"><mfrac><msub><mi>B</mi><mn>2</mn></msub><msub><mi>B</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>2</mn></msub><mo>/</mo><msub><mi>r</mi><mn>2</mn></msub></mrow><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>/</mo><msub><mi>r</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>2</mn></mfrac><mo>=</mo><mn>1</mn></math></div><p>Fältet är oförändrat när både ström och avstånd fördubblas.</p></div>
 <button type="button" id="wire-reset">Återställ modellen</button>
-</div><div class="panel"><h2>Rita och pröva</h2>
+</div><div class="panel"><h2>Rita och pröva</h2><p class="tag" id="wire-result" aria-live="polite" style="margin:0 0 5px;font-size:1rem">40 μT</p>
 <div class="control"><label for="current">Ström: tecken anger riktning <output id="current-v">4,0 A</output></label><input id="current" type="range" min="-8" max="8" value="4" step="1"></div>
 <div class="control"><label for="radius">Avstånd från ledaren <output id="radius-v">2,0 cm</output></label><input id="radius" type="range" min="1" max="8" value="2" step="0.5"></div>
 <div class="diagram"><svg id="wire-svg" viewBox="0 0 640 320" role="img" aria-label="Ledare sedd i tvärsnitt, hela magnetfältets riktning synlig och cirklarna är en riktningsmodell"></svg></div>
-<p class="note">Cirklarna visar riktningen, inte den lokala fältstyrkan. Jämför i stället talvärdet till vänster när r ändras.</p>
+
 </div></div>
 <details class="teacher"><summary>Lärarens observationspunkt</summary><p>Högerhandsregeln: tumme längs konventionell ström, fingrar runt ledaren. När strömmen är noll är ledarens eget fält noll. Begär en skiss innan eleven ser modellen.</p></details>
 </section>
@@ -139,7 +139,7 @@ ul,ol{padding-left:1.25em}li+li{margin-top:6px}
 <div class="question">Vad händer med spänningens storlek om samma flödesändring tar dubbelt så lång tid?</div>
 <div class="control"><label for="field-end">Slutvärde för B <output id="field-end-v">0,60 T</output></label><input id="field-end" type="range" min="0" max="0.8" step=".1" value=".6"></div>
 <div class="control"><label for="duration">Tid för förändringen <output id="duration-v">0,20 s</output></label><input id="duration" type="range" min="0.1" max="0.6" step=".1" value=".2"></div>
-<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mi mathvariant="normal">cos</mi><mi>α</mi></math></div>
+<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width=".20em"/><mi mathvariant="normal">cos</mi><mi>α</mi></math></div>
 <div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div>
 </div><div class="panel"><h2>Graf och återkoppling</h2>
 <div class="diagram"><svg id="ind-svg" viewBox="0 0 720 370" role="img" aria-label="Fullständig graf över B som ändras linjärt och motsvarande inducerad spänning före, under och efter förändringen"></svg></div>
@@ -245,8 +245,8 @@ document.querySelectorAll('[data-quiz]').forEach(function(group){group.querySele
 function dec(v,d){return Number(v).toFixed(d).replace('.',',')}
 var I=document.getElementById('current'),radius=document.getElementById('radius');
 function renderWire(){var current=+I.value,r=+radius.value, B=(2e-7*Math.abs(current)/(r/100))*1e6;document.getElementById('current-v').textContent=dec(current,0)+' A';document.getElementById('radius-v').textContent=dec(r,1)+' cm';document.getElementById('wire-result').textContent=dec(B,1)+' μT · '+(current>0?'ström ut ur sidan':current<0?'ström in i sidan':'ingen ström, B = 0');
-var c=320, cy=156, direction=Math.sign(current);var s='<rect width="640" height="320" fill="#f7fbfd"/><text x="24" y="31" font-size="18" font-weight="700" fill="#1c4858">Vy längs ledaren · schematisk riktning</text>';
-[58,97,136].forEach(function(rad){if(!direction)return;s+='<circle cx="'+c+'" cy="'+cy+'" r="'+rad+'" fill="none" stroke="#1c7c93" stroke-width="2"/>';s+='<path d="M '+(c+rad)+' '+(cy+(direction>0?14:-14))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+'" stroke="#14577a" stroke-width="4" stroke-linecap="round"/>';s+='<path d="M '+(c+rad-7)+' '+(cy+(direction>0?-4:4))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+' L '+(c+rad+7)+' '+(cy+(direction>0?-4:4))+'" fill="none" stroke="#14577a" stroke-width="3"/>'});
+var c=320, cy=162, direction=Math.sign(current);var s='<rect width="640" height="320" fill="#f7fbfd"/><text x="24" y="31" font-size="18" font-weight="700" fill="#1c4858">Vy längs ledaren · schematisk riktning</text>';
+[44,72,100].forEach(function(rad){if(!direction)return;s+='<circle cx="'+c+'" cy="'+cy+'" r="'+rad+'" fill="none" stroke="#1c7c93" stroke-width="2"/>';s+='<path d="M '+(c+rad)+' '+(cy+(direction>0?14:-14))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+'" stroke="#14577a" stroke-width="4" stroke-linecap="round"/>';s+='<path d="M '+(c+rad-7)+' '+(cy+(direction>0?-4:4))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+' L '+(c+rad+7)+' '+(cy+(direction>0?-4:4))+'" fill="none" stroke="#14577a" stroke-width="3"/>'});
 s+='<circle cx="'+c+'" cy="'+cy+'" r="28" fill="#fff" stroke="#334d60" stroke-width="3"/><text x="'+(c-13)+'" y="'+(cy+9)+'" font-size="32" font-weight="700" fill="#3b5363">'+(direction>0?'⊙':direction<0?'⊗':'0')+'</text><text x="24" y="291" font-size="17" fill="#395760">B(r) beräknas – cirkelavståndet här anger inte B</text>';document.getElementById('wire-svg').innerHTML=s}
 I.addEventListener('input',renderWire);radius.addEventListener('input',renderWire);document.getElementById('wire-reset').onclick=function(){I.value=4;radius.value=2;document.getElementById('wire-answer').classList.remove('visible');renderWire()};
 var q=1,bfield=-1,forceVisible=false;
