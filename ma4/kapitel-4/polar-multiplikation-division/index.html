@@ -1,4 +1,15 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplikation och division i polär form</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> försök innan du klickar fram återkoppling. Inga elevdata samlas in.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Original-PDF:en börjar med z=4+3i. Ge en minut enskilt och en minut tillsammans. Eleverna beräknar r och v och kontrollerar kvadranten; lyft fram att multiplikation av komplexa tal snart blir enklare med dessa två mått.">
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplikation och division i polär form</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"><style>
+.pd-method-recap{margin:18px 0;border:2px solid #b7d4e3;border-radius:13px;background:#f6fafc;padding:13px 17px}
+.pd-method-recap summary{cursor:pointer;font-weight:760;line-height:1.45;padding:7px 2px}
+.pd-method-recap summary:focus-visible{outline:3px solid #166d96;outline-offset:4px}
+.pd-method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:13px 0}
+.pd-method-card{min-width:0;padding:12px 14px;background:white;border:1px solid #cddfe8;border-radius:10px}
+.pd-method-card h3{font-size:1rem;line-height:1.35;margin:0 0 8px;color:#214f68}
+.pd-method-card .math-givens{margin:8px 0 12px;row-gap:17px}
+.pd-method-card .math{font-size:clamp(1.16rem,1.8vw,1.38rem)}
+@media(max-width:800px){.pd-method-grid{grid-template-columns:1fr}.pd-method-recap{padding:10px 12px}}
+@media(max-width:520px){#pd-plane text,#pd-zoom-plane text{font-size:25px!important}#pd-result>p.math:nth-child(3) math{font-size:1.08rem}}
+</style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> försök innan du klickar fram återkoppling. Inga elevdata samlas in.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Original-PDF:en börjar med z=4+3i. Ge en minut enskilt och en minut tillsammans. Eleverna beräknar r och v och kontrollerar kvadranten; lyft fram att multiplikation av komplexa tal snart blir enklare med dessa två mått.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Multiplikation och division i polär form</h2><p class="lead">4.2 Komplexa tal i polär form · Multiplikation förändrar längd och riktning</p>
 <div class="task"><strong>Tänk själv 1 minut → skriv tillsammans 1 minut</strong><p class="math math-big">z = 4 + 3i</p><p>Skriv talet i polär form. Hur stort är absolutbeloppet? Vilken riktning har talet? Skissa först.</p></div>
 <button type="button" class="reveal" data-reveal="startans">Visa och förklara</button>
@@ -67,7 +78,16 @@
 <div class="panel"><p class="lead">NOKflex → 4.2 Komplexa tal i polär form → Multiplikation och division i polär form</p>
 <p class="math math-big"><strong>Uppgifter 4217–4231</strong></p>
 <p><strong>Välj minst tre av fem nivåer.</strong> Ändra nivå om det är för lätt eller svårt. Du behöver inte välja nivåer i förväg.</p></div>
-<div class="task"><strong>Arbeta med bokens uppgifter</strong>Visa beräkningarna av absolutbelopp och argument, skriv det komplexa svaret i rätt form och kontrollera längd och riktning. Markera en uppgift du vill diskutera.</div></section>
+<div class="task"><strong>Arbeta med bokens uppgifter</strong>Visa beräkningarna av absolutbelopp och argument, skriv det komplexa svaret i rätt form och kontrollera längd och riktning. Markera en uppgift du vill diskutera.</div>
+<details class="pd-method-recap" id="pd-method-recap">
+<summary>Behöver du stöd? Visa eller dölj dagens metodsteg</summary>
+<p>Försök gärna minnas först. Öppna bara det stöd du behöver; det innehåller inte svaren på dagens uppgifter.</p>
+<div class="pd-method-grid">
+<section class="pd-method-card"><h3>1 · Multiplikation</h3><div class="math-givens" role="group" aria-label="Produktens längd och argument"><p class="math">r = r₁r₂</p><p class="math">v = v₁ + v₂</p></div><p>Multiplicera längderna och addera vinklarna. För två tal som inte är noll gäller argumentregeln upp till hela varv.</p></section>
+<section class="pd-method-card"><h3>2 · Division</h3><div class="math-givens" role="group" aria-label="Kvotens längd, argument och villkor"><p class="math">r = r₁/r₂</p><p class="math">v = v₁ − v₂</p><p class="math">z₂ ≠ 0</p></div><p>Dividera längderna och subtrahera vinklarna. Nämnaren får inte vara noll.</p></section>
+<section class="pd-method-card"><h3>3 · Tolkning i talplanet</h3><div class="math-givens" role="group" aria-label="Det andra talets absolutbelopp och argument"><p class="math">r₂ = |z₂|</p><p class="math">v₂ = arg(z₂)</p></div><p>Vid multiplikation skalar det andra talets längd och dess vinkel roterar. Division gör förändringen omvänt. Om produkten är noll har den inget bestämt argument.</p></section>
+<section class="pd-method-card"><h3>4 · Kontrollera resultatet</h3><div class="math-givens" role="group" aria-label="Kontroll av kvoten och polära komponenter"><p class="math">(z₁/z₂)z₂ = z₁</p><p class="math">a = r · cos v</p><p class="math">b = r · sin v</p></div><p>Multiplicera tillbaka för att kontrollera kvoten eller kontrollera läget med realdel och imaginärdel. Kontrollera kvadranten.</p></section>
+</div></details></section>
 <section id="exit" class="slide" data-teacher="Avsluta utan framåtblick. Eleverna visar båda operationerna på samma två tal. Kort individuellt arbete ger bättre underlag än att bara testa division. Visa facit först när alla prövat.">
 <div class="eyebrow">07 · Individuell utcheckning</div><h2>Vad händer med längd och riktning?</h2>
 <div class="task"><strong>4 minuter själv · visa mellanled</strong><div class="math-givens" role="group" aria-label="Utcheckningens två givna komplexa tal"><p class="math">z₁ = 3(cos 20° + i sin 20°)</p><p class="math">z₂ = 2(cos 80° + i sin 80°)</p></div>
@@ -139,17 +159,37 @@ function draw(){
  if(step===2){
   showMathRows(document.getElementById('pd-result'),multiplication?
    ['r = 2 · 3 = 6','v = 30° + 60° = 90°','z₁z₂ = 6(cos 90° + i sin 90°)','= 6i']:
-   ['r = 2/3','v = 30° − 60° = −30°','z₁/z₂ = (2/3)(cos v + i sin v)']);
+   ['r = 2/3','v = 30° − 60° = −30°','z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))','= √3/3 − (1/3)i']);
   document.getElementById('pd-explain').textContent=multiplication?
    'Först skalar z₂ längden 2 till 6. Sedan roterar den vektorn 60° moturs, från 30° till 90°.' :
-   'Divisionen skalar först längden 2 till 2/3, sedan roteras vektorn 60° medurs, från 30° till −30° (330°). Sätt in v = −30° i uttrycket ovan.';
+   'Divisionen skalar först längden 2 till 2/3 och roterar sedan 60° medurs, från 30° till −30° (330°). Figuren och den färdiga polära formen visar samma resultat.';
  }
  document.querySelectorAll('[data-operation]').forEach(button=>{const selected=button.dataset.operation===op;button.setAttribute('aria-pressed',String(selected));button.classList.toggle('secondary',!selected)});
 }
 document.querySelectorAll('[data-operation]').forEach(button=>button.addEventListener('click',()=>{op=button.dataset.operation;step=0;draw()}));
-document.getElementById('pd-next').addEventListener('click',()=>{step=Math.min(2,step+1);draw()});
+function focusCompletedModel(){
+ if(step!==2 || window.innerWidth<1000)return;
+ const figure=op==='div'?document.getElementById('pd-zoom'):svg;
+ const answer=document.getElementById('pd-answer');
+ const a=figure.getBoundingClientRect(),b=answer.getBoundingClientRect();
+ const top=Math.min(a.top,b.top),bottom=Math.max(a.bottom,b.bottom);
+ const padding=18;
+ if(bottom-top<=window.innerHeight-2*padding){
+  if(top<padding||bottom>window.innerHeight-padding)window.scrollBy({top:top-padding,behavior:'auto'});
+ }else{
+  // På mycket låga skärmar prioriteras facit intill den aktuella figuren.
+  answer.scrollIntoView({behavior:'auto',block:'start'});
+ }
+}
+document.getElementById('pd-next').addEventListener('click',()=>{step=Math.min(2,step+1);draw();focusCompletedModel()});
 document.getElementById('pd-back').addEventListener('click',()=>{step=Math.max(0,step-1);draw()});
 document.getElementById('pd-reset').addEventListener('click',()=>{step=0;draw()});
+const method=document.getElementById('pd-method-recap');
+for(const id of ['prev','next','mode'])document.getElementById(id).addEventListener('click',()=>{method.open=false});
+document.getElementById('jump').addEventListener('change',()=>{method.open=false});
+document.addEventListener('keydown',e=>{
+ if(['ArrowLeft','ArrowRight'].includes(e.key)&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.target.closest('button,input,textarea,select,[contenteditable]'))method.open=false;
+});
 draw();
 })();
 </script></body></html>

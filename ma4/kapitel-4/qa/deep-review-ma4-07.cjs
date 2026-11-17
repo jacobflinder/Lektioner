@@ -170,7 +170,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    assert.ok(await page.locator('#pd-intermediate').isHidden(),'04 mellanled flyttat till slutsvaret');
    assert.ok(await page.locator('#pd-answer').isVisible(),'04 svar visas efter rotation');
    await geom('#bc633a',op==='mul'?6:2/3,op==='mul'?90:-30);
-   await spacing('#pd-result',op==='mul'?4:3);
+   await spacing('#pd-result',4);
    if(op==='mul'){
     assert.equal(await page.locator('#pd-plane path[stroke="#9b631c"]').count(),1,'04 vinkelbåge i huvudfiguren');
     const collision=await page.locator('#pd-plane').evaluate(svg=>{
@@ -202,7 +202,11 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
     assert.equal(await page.locator('#pd-plane text').filter({hasText:'kvot'}).count(),0,'04 inga trängande kvotetiketter i huvudfiguren');
    }
    if(op==='mul')await one('#pd-result math[aria-label="= 6i"]','04 korrekt produkt');
-   else await one('#pd-result math[aria-label="v = 30° − 60° = −30°"]','04 korrekt kvotvinkel');
+   else{
+     await one('#pd-result math[aria-label="v = 30° − 60° = −30°"]','04 korrekt kvotvinkel');
+     await one('#pd-result math[aria-label="z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))"]','04 fullständigt insatt argument och polär form');
+     await one('#pd-result math[aria-label="= √3/3 − (1/3)i"]','04 självständigt kontrollerad rektangulär form');
+    }
    await shot('04-'+op+'-desktop');
    await page.locator('#pd-back').click();
    assert.ok(await page.locator('#pd-answer').isHidden(),'04 tillbaka döljer slutresultat');
@@ -263,7 +267,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
     await page.locator('[data-operation="div"]').click();
     await page.locator('#pd-next').click();
     await page.locator('#pd-next').click();
-    await spacing('#pd-result',3);
+    await spacing('#pd-result',4);
    }
    const dim=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:innerWidth}));
    assert.ok(dim.scroll<=dim.client+4,'Mobilbild '+(i+1)+' får inte sidscroll: '+JSON.stringify(dim));
