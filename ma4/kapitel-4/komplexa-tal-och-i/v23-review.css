@@ -15,6 +15,7 @@
 .v23-recap-item .math math{white-space:nowrap;max-width:none}
 @media(max-width:720px){.v23-recap-grid{grid-template-columns:minmax(0,1fr)}.v23-method-recap{padding:12px}.v23-recap-item{padding:11px}.v23-recap-item .math{font-size:1.18rem}}
 /* The i-power pattern is shown only after students reveal the voluntary activity. */
+.i-cycle-figure{margin:14px 0;max-width:100%;min-width:0}
 .i-cycle{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:stretch;margin:14px 0;padding:4px 0}
 .i-cycle-cell{position:relative;min-width:0;border:1.5px solid #aecfdc;border-radius:12px;padding:10px 9px;background:#f5fafe;text-align:center}
 .i-cycle-cell:not(:last-child)::after{content:"× i →";position:absolute;top:40%;right:-24px;z-index:1;color:#315e77;background:#fff;padding:1px 3px;border-radius:4px;font-size:.8rem;font-weight:760}
