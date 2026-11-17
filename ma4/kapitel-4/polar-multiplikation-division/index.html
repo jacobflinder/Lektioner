@@ -85,7 +85,7 @@
 <section class="pd-method-card"><h3>1 · Multiplikation</h3><div class="math-givens" role="group" aria-label="Produktens längd och argument"><p class="math">r = r₁r₂</p><p class="math">v = v₁ + v₂</p></div><p>Multiplicera längderna och addera vinklarna. För två tal som inte är noll gäller argumentregeln upp till hela varv.</p></section>
 <section class="pd-method-card"><h3>2 · Division</h3><div class="math-givens" role="group" aria-label="Kvotens längd, argument och villkor"><p class="math">r = r₁/r₂</p><p class="math">v = v₁ − v₂</p><p class="math">z₂ ≠ 0</p></div><p>Dividera längderna och subtrahera vinklarna. Nämnaren får inte vara noll.</p></section>
 <section class="pd-method-card"><h3>3 · Tolkning i talplanet</h3><div class="math-givens" role="group" aria-label="Det andra talets absolutbelopp och argument"><p class="math">r₂ = |z₂|</p><p class="math">v₂ = arg(z₂)</p></div><p>Vid multiplikation skalar det andra talets längd och dess vinkel roterar. Division gör förändringen omvänt. Om produkten är noll har den inget bestämt argument.</p></section>
-<section class="pd-method-card"><h3>4 · Kontrollera resultatet</h3><div class="math-givens" role="group" aria-label="Kontroll av kvoten och polära komponenter"><p class="math">(z₁/z₂)z₂ = z₁</p><p class="math">a = r cos v</p><p class="math">b = r sin v</p></div><p>Multiplicera tillbaka för att kontrollera kvoten eller kontrollera läget med realdel och imaginärdel. Kontrollera kvadranten.</p></section>
+<section class="pd-method-card"><h3>4 · Kontrollera resultatet</h3><div class="math-givens" role="group" aria-label="Kontroll av kvoten och polära komponenter"><p class="math">(z₁/z₂)z₂ = z₁</p><p class="math">a = r · cos v</p><p class="math">b = r · sin v</p></div><p>Multiplicera tillbaka för att kontrollera kvoten eller kontrollera läget med realdel och imaginärdel. Kontrollera kvadranten.</p></section>
 </div></details></section>
 <section id="exit" class="slide" data-teacher="Avsluta utan framåtblick. Eleverna visar båda operationerna på samma två tal. Kort individuellt arbete ger bättre underlag än att bara testa division. Visa facit först när alla prövat.">
 <div class="eyebrow">07 · Individuell utcheckning</div><h2>Vad händer med längd och riktning?</h2>
@@ -166,7 +166,21 @@ function draw(){
  document.querySelectorAll('[data-operation]').forEach(button=>{const selected=button.dataset.operation===op;button.setAttribute('aria-pressed',String(selected));button.classList.toggle('secondary',!selected)});
 }
 document.querySelectorAll('[data-operation]').forEach(button=>button.addEventListener('click',()=>{op=button.dataset.operation;step=0;draw()}));
-document.getElementById('pd-next').addEventListener('click',()=>{step=Math.min(2,step+1);draw()});
+function focusCompletedModel(){
+ if(step!==2 || window.innerWidth<1000)return;
+ const figure=op==='div'?document.getElementById('pd-zoom'):svg;
+ const answer=document.getElementById('pd-answer');
+ const a=figure.getBoundingClientRect(),b=answer.getBoundingClientRect();
+ const top=Math.min(a.top,b.top),bottom=Math.max(a.bottom,b.bottom);
+ const padding=18;
+ if(bottom-top<=window.innerHeight-2*padding){
+  if(top<padding||bottom>window.innerHeight-padding)window.scrollBy({top:top-padding,behavior:'auto'});
+ }else{
+  // På mycket låga skärmar prioriteras facit intill den aktuella figuren.
+  answer.scrollIntoView({behavior:'auto',block:'start'});
+ }
+}
+document.getElementById('pd-next').addEventListener('click',()=>{step=Math.min(2,step+1);draw();focusCompletedModel()});
 document.getElementById('pd-back').addEventListener('click',()=>{step=Math.max(0,step-1);draw()});
 document.getElementById('pd-reset').addEventListener('click',()=>{step=0;draw()});
 const method=document.getElementById('pd-method-recap');
