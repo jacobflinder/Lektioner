@@ -22,24 +22,26 @@ for(const id of ["ind-rod-answer","ind-rod-result"])$(id).innerHTML=fieldOnRod(t
 let rodShown=false;
 function renderRod(){
  const p=Number($("charge-progress").value)/100,B=Number($("rod-B").value),v=Number($("rod-v").value),L=Number($("rod-L").value)/100;
- const eff=v===0?0:p,Ueq=B*L*v,U=Ueq*eff,number=Math.floor(eff*4+.05);
+ if(v===0||B===0)$("charge-progress").value=0;
+ const eff=(v===0||B===0)?0:Number($("charge-progress").value)/100,Ueq=B*L*v,number=Math.floor(eff*4+.05);
  // The same physical state controls rod geometry, field appearance, speed arrow,
  // magnetic force, charge separation and the calculation. The progression
  // control is illustrative, not a clock or a calibrated transient model.
- const h=100+160*(L-.10)/.30,top=194-h/2,bottom=194+h/2;
+ const narrow=window.matchMedia('(max-width:600px)').matches,cy=narrow?195:194;
+ const h=(narrow?120:100)+(narrow?125:160)*(L-.10)/.30,top=cy-h/2,bottom=cy+h/2;
  const direction=Math.sign(v)||1;
- const fMag=Math.min(110,53*Math.abs(v)*B/(3*.40)),fElectric=fMag*eff;
+ const fMag=Math.min(narrow?72:110,(narrow?49:53)*Math.abs(v)*B/(3*.40)),fElectric=fMag*eff;
  let symbols="";
  for(let i=0;i<number;i++){
-  symbols+=T(265,top+23+i*19,v<0?"−":"+","#bc5742",19);
-  symbols+=T(265,bottom-13-i*19,v<0?"+":"−","#0f7992",19);
+  symbols+=T(narrow?156:265,top+23+i*19,v<0?"−":"+","#bc5742",19);
+  symbols+=T(narrow?156:265,bottom-13-i*19,v<0?"+":"−","#0f7992",19);
  }
- if(eff>0)symbols+=A(318,194,318,194-direction*fElectric,"#127a93",3)+T(330,186-direction*fElectric,"Fₑ","#0d7b97",17);
- if(v!==0)symbols+=A(231,194,231,194+direction*fMag,"#ba6643",3)+T(180,202+direction*fMag,"Fₘ","#b36543",17);
+ if(eff>0&&fMag>0)symbols+=A(narrow?218:318,cy,narrow?218:318,cy-direction*fElectric,"#127a93",3)+T(narrow?230:330,cy-8-direction*fElectric,"Fₑ","#0d7b97",narrow?19:17);
+ if(v!==0&&B>0)symbols+=A(narrow?111:231,cy,narrow?111:231,cy+direction*fMag,"#ba6643",3)+T(narrow?60:180,cy+8+direction*fMag,"Fₘ","#b36543",narrow?19:17);
  let base=fieldOnRod(false,v>0,L,B,Math.abs(v));
- if(v<0)base=base.replace(/<text[^>]*>v = 0<\/text>/,'').replace('</svg>',A(440,194,350,194,'#218a73')+T(450,190,'v åt vänster','#218a73',18)+'</svg>');
+ if(v<0)base=base.replace(/<text[^>]*>v = 0<\/text>/,'').replace('</svg>',A(narrow?327:440,cy,narrow?251:350,cy,'#218a73')+T(narrow?257:450,cy-12,'v åt vänster','#218a73',narrow?18:18)+'</svg>');
  $("ind-rod-dynamic").innerHTML=base.replace("</svg>",symbols+"</svg>");
- $("charge-pct").textContent=fmt(p*100,0)+" %";
+ $("charge-pct").textContent=fmt(eff*100,0)+" %";
  $("rod-B-value").textContent=fmt(B,2)+" T";
  $("rod-v-value").textContent=fmt(v,1)+" m/s";
  $("rod-L-value").textContent=fmt(L*100,0)+" cm";
@@ -152,6 +154,11 @@ function resetTangent(){tangentShown=false;$("ind-tangent-time").value=.5;render
 $("ind-tangent-reset").onclick=resetTangent;
 $("ind-tangent-graph").closest(".slide").addEventListener("lesson:reset",resetTangent);
 resetRod();resetAngle();resetLoop();resetGraph();resetTangent();
+window.addEventListener("resize",()=>{
+ for(const id of ["ind-rod-start","ind-rod-example"])$(id).innerHTML=fieldOnRod(false);
+ for(const id of ["ind-rod-answer","ind-rod-result"])$(id).innerHTML=fieldOnRod(true);
+ renderRod();renderAngle();
+});
 
 // Additions use only in-memory state. No student data is sent or persisted.
 let playFrame=0,lastFrame=0,playTime=0;
