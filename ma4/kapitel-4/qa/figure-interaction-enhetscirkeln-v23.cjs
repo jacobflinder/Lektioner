@@ -83,13 +83,13 @@ function check(v,message){assert.ok(v,message);checks++}
       const visible=eq.every(m=>{const r=m.getBoundingClientRect();return r.width>20&&r.height>12&&getComputedStyle(m).display!=='none'});
       const panel=root.getBoundingClientRect(),input=document.querySelector('#q-answer').getBoundingClientRect();
       return {width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
-        panel:{x:panel.left,right:panel.right},inputTop:input.top,eqVisible:visible,
+        panel:{x:panel.left,right:panel.right},input:{width:input.width,height:input.height},eqVisible:visible,
         eqInside:eq.every(m=>{const b=m.getBoundingClientRect();return b.right<=panel.right+2&&b.left>=panel.left-2})};
     });
     check(render.scrollWidth<=width+4,'no viewport horizontal overflow '+width+': '+JSON.stringify(render));
     check(render.eqVisible&&render.eqInside,'visible contained MathML at '+width);
     check(render.panel.x>=-2&&render.panel.right<=width+2,'recap fits screen '+width);
-    check(render.inputTop>=render.panel.x /* non-blank asserted separately */,'quiz input still laid out '+width);
+    check(render.input.width>100&&render.input.height>20,'quiz input still has usable dimensions '+width);
     await page.screenshot({path:path.join(EVIDENCE,'recap-open-'+width+'.png'),fullPage:true});
     images++;
   }
