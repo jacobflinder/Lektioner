@@ -57,11 +57,20 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   for(let i=1;i<rows.length;i++)ok(rows[i].t-rows[i-1].b>=15,'16px vertical spacing');
   const expected=mode==='mul'?'z₁z₂ = 6(cos 90° + i sin 90°)':'z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))';
   ok(rows.some(r=>r.label===expected),'complete specific answer '+mode);
+  const formulaView=await page.locator('#pd-result > p.math:nth-child(3)').evaluate(e=>({scroll:e.scrollWidth,width:e.clientWidth}));
+  ok(formulaView.scroll<=formulaView.width+2,'completed polar formula visible without internal clipping '+mode+' '+width+' '+JSON.stringify(formulaView));
   const arcSel=mode==='mul'?'#pd-plane':'#pd-zoom-plane';
   const arc=await page.locator(arcSel+' path[stroke="#9b631c"]').first().getAttribute('d');
   const parsed=arc&&arc.match(/^M ([\d.eE+-]+) ([\d.eE+-]+) A ([\d.eE+-]+) ([\d.eE+-]+) 0 ([01]) ([01]) ([\d.eE+-]+) ([\d.eE+-]+)$/);
   ok(!!parsed,'SVG angle arc exists');ok(+parsed[5]===0&&+parsed[6]===(mode==='mul'?0:1),'correct arc direction');
-  if(mode==='div'){ok(await page.locator('#pd-zoom').isVisible(),'inset shown');near((await vec('#pd-zoom-plane','#bc633a')).v,-30,'inset direction')}
+  if(mode==='div'){
+   ok(await page.locator('#pd-zoom').isVisible(),'inset shown');
+   near((await vec('#pd-zoom-plane','#bc633a')).v,-30,'inset direction');
+   if(width===390){
+    const labelSize=await page.locator('#pd-zoom-plane text').filter({hasText:'kvot'}).first().evaluate(e=>e.getBoundingClientRect().height);
+    ok(labelSize>=9,'mobile inset label actually legible '+labelSize+'px');
+   }
+  }
   else ok(await page.locator('#pd-zoom').isHidden(),'inset hidden for product');
   if(width>=1000){
    const frame=await page.evaluate(mode=>{
