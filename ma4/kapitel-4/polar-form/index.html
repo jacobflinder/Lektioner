@@ -15,13 +15,20 @@
 .polar-method-card ol{margin:6px 0 0;padding-left:22px}
 .polar-method-card li{margin:5px 0}
 @media(max-width:740px){.polar-method-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Polär form: matematiska uttryck i frågor och respons är MathML. */
+#intro .decision-check .choice .math{font-size:1.05em;line-height:1.2}
+#intro .polar-start-equations{display:grid;row-gap:16px;justify-items:start;margin:14px 0}
+#intro .polar-start-equations>.math{margin:0;min-width:0;max-width:100%;overflow-x:auto}
+#intro .feedback p{margin:8px 0;line-height:1.5;font-weight:500}
+#intro .feedback>strong{display:block;line-height:1.5}
 </style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> skriv ditt eget svar före återkopplingen. Inga elevdata samlas in.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med originalets startfråga. Eleverna har redan sett absolutbelopp och koordinater. Be dem först skissa och uppskatta riktningen. Låt dem sedan beräkna avståndet för hand och välja innan de får alternativspecifik återkoppling. Introducera mål efter startfrågan och låt figuren byggas i nästa bild."><div class="eyebrow">01 · Startfråga och mål</div><h2>Polär form – samma tal, nya koordinater</h2><p class="lead">4.2 Komplexa tal i polär form · Polär form</p><p class="muted">Behöver du fräscha upp exakta vinklar? <a href="../enhetscirkeln/">Träna enhetscirkeln: grader, radianer och koordinater</a> (frivilligt repetitionsstöd).</p>
-<div class="task"><strong>Enskilt → par</strong><p class="math math-big">z = 3 + 4i</p><p>Du känner redan punktens koordinater (3, 4). Kan du i stället beskriva samma tal med <strong>avstånd från origo</strong> och <strong>riktning</strong>?</p></div>
-<div class="panel decision-check" data-decision><strong>Vad är absolutbeloppet för z = 3 + 4i?</strong><p class="muted">Skissa först och beräkna på papper. Välj sedan och motivera ditt svar.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="7 är summan 3 + 4. Absolutbeloppet är ett avstånd, så du behöver Pythagoras sats – inte koordinatsumman.">A · r = 7</button>
-<button type="button" class="choice" data-answer="1" data-correct="true" data-feedback="Rätt. r = √(3² + 4²) = √25 = 5. Punkten ligger i första kvadranten. Bestäm argumentet med talplanet och trigonometrin.">B · r = 5</button>
-<button type="button" class="choice" data-answer="2" data-correct="false" data-feedback="Du har lagt ihop koordinaterna inne i roten. Pythagoras kräver kvadrater: √(3² + 4²), inte √(3 + 4).">C · r = √7</button></div><button type="button" class="secondary" data-decision-submit disabled>Kontrollera mitt val</button><p class="feedback hidden" role="status" aria-live="polite"></p></div>
+<div class="task"><strong>Enskilt → par</strong><p class="math math-big">z = 3 + 4i</p><p>Du känner redan punktens koordinater <span class="math">(3; 4)</span>. Kan du i stället beskriva samma tal med <strong>avstånd från origo</strong> och <strong>riktning</strong>?</p></div>
+<div class="panel decision-check" data-decision><strong>Vad är absolutbeloppet för <span class="math">z = 3 + 4i</span>?</strong><p class="muted">Skissa först och beräkna på papper. Välj sedan och motivera ditt svar.</p><div class="decision-options"><button type="button" class="choice" data-answer="0" data-correct="false" data-feedback="7 är summan 3 + 4. Absolutbeloppet är ett avstånd, så du behöver Pythagoras sats – inte koordinatsumman.">A · <span class="math">r = 7</span></button>
+<button type="button" class="choice" data-answer="1" data-correct="true" data-feedback="Rätt. r = √(3² + 4²) = √25 = 5. Punkten ligger i första kvadranten. Bestäm argumentet med talplanet och trigonometrin.">B · <span class="math">r = 5</span></button>
+<button type="button" class="choice" data-answer="2" data-correct="false" data-feedback="Du har lagt ihop koordinaterna inne i roten. Pythagoras kräver kvadrater: √(3² + 4²), inte √(3 + 4).">C · <span class="math">r = √7</span></button></div><button type="button" class="secondary" data-decision-submit disabled>Kontrollera mitt val</button><div class="feedback hidden" role="status" aria-live="polite"></div></div>
 <button type="button" class="reveal" data-reveal="polar-goals">Visa målen efter startfrågan</button><div class="panel hidden" id="polar-goals"><strong>Efter lektionen ska du kunna</strong><p>Beskriva ett komplext tal med <strong>absolutbelopp r</strong> och <strong>argument v</strong>, byta mellan <span class="math">a + bi</span> och <span class="math">r(cos v + i sin v)</span> samt kontrollera tecken och riktning. Kvadrantkontrollen hjälper dig bestämma rätt argument.</p></div></section>
-<section id="representation" class="slide" data-teacher="Koordinatbyte är huvudidén. Varje valt tal börjar med bara punkten markerad: först visar du koordinatkomponenter, därefter avståndet och till sist argumentet. Eleven gör förutsägelser före klick. Pröva särskilt en punkt i andra och tredje kvadranten, sedan en punkt på imaginära axeln och origo."><div class="eyebrow">02 · Undersök · två representationer</div><h2>Byt från (a, b) till (r, v)</h2>
+<section id="representation" class="slide" data-teacher="Koordinatbyte är huvudidén. Varje valt tal börjar med bara punkten markerad: först visar du koordinatkomponenter, därefter avståndet och till sist argumentet. Eleven gör förutsägelser före klick. Pröva särskilt en punkt i andra och tredje kvadranten, sedan en punkt på imaginära axeln och origo."><div class="eyebrow">02 · Undersök · två representationer</div><h2>Byt från <span class="math">(a; b)</span> till <span class="math">(r; v)</span></h2>
 <div class="two"><div><div class="plot-box"><svg class="plot" id="polar-plane" viewBox="0 0 680 430" role="img" aria-label="Likskaligt komplext talplan. Punkten, dess koordinatkomponenter, avståndet och vinkeln kan visas steg för steg."></svg></div>
 <div class="flex"><button type="button" data-point="3,4" aria-pressed="true">3 + 4i</button><button type="button" data-point="-3,3" aria-pressed="false" class="secondary">−3 + 3i</button><button type="button" data-point="-1,-1" aria-pressed="false" class="secondary">−1 − i</button><button type="button" data-point="2,-2" aria-pressed="false" class="secondary">2 − 2i</button><button type="button" data-point="0,3" aria-pressed="false" class="secondary">3i</button><button type="button" data-point="0,0" aria-pressed="false" class="secondary">0</button></div>
 <p class="muted">En längdenhet är lika lång på båda axlarna. Varje nytt val återställer visningen så att du kan förutsäga igen.</p></div>
@@ -143,6 +150,31 @@ document.querySelectorAll('[data-point]').forEach(el=>el.addEventListener('click
 next.addEventListener('click',()=>{stage=Math.min(3,stage+1);draw()});
 back.addEventListener('click',()=>{stage=Math.max(0,stage-1);draw()});
 document.getElementById('polar-reset').addEventListener('click',()=>{stage=0;draw()});
+
+// Formatera elevens feedback som matematik efter det ordinarie rättningsklicket.
+// Den gemensamma beslutskontrollen behåller ansvar för val, knappar och status.
+const polarStarter=document.querySelector('#intro [data-decision]');
+const polarStarterFeedback=polarStarter.querySelector('.feedback');
+const starterResponses={
+ '0':{lead:'Inte riktigt. Du har adderat koordinaterna i stället för att beräkna ett avstånd.',lines:['3 + 4 = 7'],tail:'Använd Pythagoras sats för avståndet från origo.'},
+ '1':{lead:'Rätt. Absolutbeloppet är punktens avstånd från origo.',lines:['r = √(3² + 4²)','= √(9 + 16)','= √25','= 5'],tail:'Nästa steg är att bestämma riktningen, alltså argumentet, med talplanet och trigonometrin.'},
+ '2':{lead:'Inte riktigt. Roten ur koordinaternas summa ger inte avståndet.',lines:['√(3 + 4) = √7','r = √(3² + 4²)'],tail:'Pythagoras sats använder summan av koordinaternas kvadrater.'}
+};
+polarStarter.querySelector('[data-decision-submit]').addEventListener('click',()=>{
+ const option=polarStarter.querySelector('button[data-answer][aria-pressed="true"]');
+ if(!option)return;
+ const response=starterResponses[option.dataset.answer];
+ if(!response)return;
+ polarStarterFeedback.replaceChildren();
+ const lead=document.createElement('strong');lead.textContent=response.lead;polarStarterFeedback.append(lead);
+ const maths=document.createElement('div');maths.className='polar-start-equations';maths.setAttribute('role','group');maths.setAttribute('aria-label','Matematiska mellanled');
+ for(const formula of response.lines){
+  const line=document.createElement('p');line.className='math';
+  Ma4Math.setFormula(line,formula,'block');maths.append(line);
+ }
+ polarStarterFeedback.append(maths);
+ const tail=document.createElement('p');tail.textContent=response.tail;polarStarterFeedback.append(tail);
+});
 
 // Stäng det elevstyrda metodstödet vid lektionsbyte. Inga värden sparas.
 const polarMethodRecap=document.getElementById('polar-method-recap');
