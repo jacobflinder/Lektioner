@@ -42,6 +42,23 @@ insertSolutions({
   step('6 · Multiplicera tillbaka',['(1 − i)(−1/2 + (3/2)i)','= −1/2 + (3/2)i + (1/2)i − (3/2)i²','= −1/2 + 2i − (3/2)(−1)','= −1/2 + 3/2 + 2i','= 1 + 2i'],'Kontrollen ger den ursprungliga täljaren. Produkten av en nämnare och dess konjugat är alltid reell och positiv när nämnaren inte är noll.')
  )
 });
+
+// Efter matematiken byggts: den korrekta 2×2-modellen hör till det dolda facit.
+const errorAnswer=document.getElementById('d-error');
+if(errorAnswer){
+ const worked=errorAnswer.querySelector('.ma4-worked');
+ const layout=document.createElement('div');layout.className='d-error-layout';
+ const figure=document.createElement('div');figure.className='d-visual-products';
+ figure.innerHTML="<h3>Efter – alla fyra produkter</h3>
+<table class=\"d-products\" aria-label=\"Två gånger två produkter, med de två saknade korsprodukterna markerade\">
+<caption class=\"muted\">Rad från första parentesen, kolumn från andra</caption>
+<thead><tr><th scope=\"col\">×</th><th scope=\"col\"><span class=\"math\">3</span></th><th scope=\"col\"><span class=\"math\">−2i</span></th></tr></thead>
+<tbody><tr><th scope=\"row\"><span class=\"math\">2</span></th><td><span class=\"math\">6</span></td><td class=\"d-cross\"><span class=\"math\">−4i</span><span class=\"d-cross-note\">Saknades</span></td></tr>
+<tr><th scope=\"row\"><span class=\"math\">i</span></th><td class=\"d-cross\"><span class=\"math\">+3i</span><span class=\"d-cross-note\">Saknades</span></td><td><span class=\"math\">−2i²</span></td></tr></tbody></table>
+<p>De fyra rutorna är fyra termer. <strong>Båda markerade korsprodukterna måste vara med</strong> innan termerna förenklas. Resultatet är <strong>8 − i</strong>.</p>";
+ worked.replaceWith(layout);layout.append(worked,figure);
+}
+
 function flatten(node){
  if(node.nodeType===Node.TEXT_NODE)return node.textContent;
  if(node.nodeType!==Node.ELEMENT_NODE)return '';
