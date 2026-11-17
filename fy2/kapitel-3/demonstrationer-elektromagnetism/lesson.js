@@ -91,25 +91,44 @@ function drawInduction(){
  const sign=magnet.pole==='N'?1:-1,changing=magnet.motion!=='still';
  const delta=magnet.motion==='in'?1:magnet.motion==='out'?-1:0;
  const induced=changing?-sign*delta:0;
- let g='<rect x="438" y="76" width="47" height="209" rx="18" fill="none" stroke="#bd8050" stroke-width="13"/>'+
- '<rect x="486" y="76" width="47" height="209" rx="18" fill="none" stroke="#bd8050" stroke-width="8"/>'+
- line(490,90,490,270,'#c89569',2)+
- '<rect x="123" y="129" width="132" height="89" rx="9" fill="#f8fbfc" stroke="#41626b" stroke-width="2"/>'+
- '<rect x="'+(magnet.pole==='N'?191:123)+'" y="129" width="64" height="89" rx="7" fill="#cd4e44"/>'+
- text(158,181,magnet.pole==='N'?'S':'N',magnet.pole==='N'?'#2e5264':'#fff',25,'middle')+
- text(222,181,magnet.pole==='N'?'N':'S',magnet.pole==='N'?'#fff':'#2e5264',25,'middle');
- g+=arrow(sign>0?265:395,173,sign>0?395:265,173,'#07849d',4,'magnet-vector')+
- text(316,149,'B från magnet','#13758c',17,'middle');
+ // Three different SCHEMATIC positions, never measured distances.
+ // Completely inside while still; partly in the winding while moving.
+ const magnetX=magnet.motion==='still'?452:magnet.motion==='in'?325:365;
+ const mw=106,my=148,mh=63,coilLeft=383,coilRight=615;
+ let g='<rect data-coil-region x="'+coilLeft+'" y="102" width="'+(coilRight-coilLeft)+
+   '" height="152" rx="17" fill="#e3f3f6" fill-opacity=".6" stroke="none"/>';
+ // Draw magnet first; overlay coil turns to show passage through winding.
+ g+='<rect data-magnet-body x="'+magnetX+'" y="'+my+'" width="'+mw+'" height="'+mh+
+    '" rx="8" fill="#f7fbfd" stroke="#41626b" stroke-width="2.3"/>'+
+    '<rect data-magnet-pole x="'+(magnet.pole==='N'?magnetX+mw/2:magnetX)+
+    '" y="'+my+'" width="'+mw/2+'" height="'+mh+'" rx="7" fill="#cd4e44"/>'+
+    text(magnetX+mw/4,my+40,magnet.pole==='N'?'S':'N',
+      magnet.pole==='N'?'#315567':'#fff',24,'middle')+
+    text(magnetX+mw*3/4,my+40,magnet.pole==='N'?'N':'S',
+      magnet.pole==='N'?'#fff':'#315567',24,'middle');
+ for(const x of [401,446,491,536,581]){
+  g+='<ellipse data-coil-turn cx="'+x+'" cy="178" rx="17" ry="76" fill="none" stroke="#bb8051" stroke-width="6" stroke-opacity=".87"/>';
+ }
+ g+=arrow(sign>0?425:575,77,sign>0?575:425,77,'#07849d',4,'magnet-vector')+
+    text(497,58,'B från magneten','#13758c',18,'middle');
  if(changing){
-  g+=arrow(magnet.motion==='in'?210:265,254,magnet.motion==='in'?315:160,254,'#25896e',4,'motion-vector');
-  g+=text(275,285,magnet.motion==='in'?'rörelse →':'← rörelse','#198469',18,'middle');
-  g+=arrow(induced>0?415:560,208,induced>0?560:415,208,'#c17443',5,'induced-vector')+
-  text(550,243,'Bind','#b06d46',19);
- }else g+=text(260,274,'Magneten stilla','#23896e',19);
- g+=text(447,50,'SPOLE','#846b55',19)+text(40,35,'SCHEMATISKT – INTE MÄTNING','#59747f',16);
- renderSvg('demo-induction',g,{motion:magnet.motion,pole:magnet.pole,induced,fluxChange:delta*sign});
+  const into=magnet.motion==='in';
+  g+=arrow(into?magnetX+10:magnetX+mw-10,274,
+           into?magnetX+mw-10:magnetX+10,274,'#25896e',4,'motion-vector');
+  g+=text(250,313,into?'Magnet förs in →':'← Magnet dras ut','#198469',18,'middle');
+  // The induced B VECTOR belongs INSIDE the same winding, not below it.
+  g+=arrow(induced>0?425:575,226,induced>0?575:425,226,
+           '#c17443',5,'induced-vector')+
+     text(573,290,'B inducerat i spolen','#ae6a3d',16,'middle');
+ }else g+=text(264,286,'Stilla inne i spolen · U = 0','#23896e',19,'middle');
+ g+=text(40,35,'SCHEMATISKA LÄGEN – INTE MÄTNING','#59747f',16)+
+    text(512,36,'Spolens axel →','#846b55',17,'middle');
+ renderSvg('demo-induction',g,{
+  motion:magnet.motion,pole:magnet.pole,induced,fluxChange:delta*sign,
+  magnetX,magnetRight:magnetX+mw,coilLeft,coilRight
+ });
  let message;
- if(!changing)message='Magneten hålls stilla och flödet ändras inte: inducerad spänning U = 0, även om ett magnetfält kan finnas.';
+ if(!changing)message='Magneten står helt inne i spolen. Flödet är konstant: ingen inducerad spänning (U = 0) även om magnetfältet finns.';
  else message='Magneten '+(magnet.motion==='in'?'förs in: |Φ| ökar':'dras ut: |Φ| minskar')+
  ', B från magneten pekar '+(sign>0?'åt höger':'åt vänster')+
  ', medan det inducerade fältet pekar '+(induced>0?'åt höger':'åt vänster')+
@@ -129,7 +148,7 @@ function drawRing(){
  text(228,62,'B yttre ↑','#0c7890',20)+text(259,253,'ledande ring','#9e6c49',20);
  if(delta!==0){
   g+=arrow(404,induced>0?214:96,404,induced>0?96:214,'#bd6b3e',5,'induced-ring-field')+
-  text(515,induced>0?115:229,'Bind '+(induced>0?'↑':'↓'),'#ad6942',19);
+  text(505,induced>0?115:229,'B inducerat '+(induced>0?'↑':'↓'),'#ad6942',18);
  }else g+=text(400,95,'Ingen inducerad ström','#ad6942',17);
  g+=text(34,35,'B_yttre väljs uppåt i skissen','#55737e',17);
  renderSvg('demo-ring',g,{action:ring.action,induced});
@@ -143,13 +162,15 @@ function drawPipe(){
  let g='<rect x="281" y="44" width="132" height="236" rx="18" fill="#e3f1f4" stroke="#a1bec9" stroke-width="13"/>'+
  '<rect x="297" y="55" width="100" height="215" rx="6" fill="#f8fcfd" stroke="#e0edef" stroke-width="3"/>';
  if(magnet){
-  g+='<rect x="324" y="127" width="49" height="92" rx="7" fill="#f4fbfc" stroke="#466471" stroke-width="2"/>'+
+  g+='<rect data-pipe-body="magnet" x="324" y="127" width="49" height="92" rx="7" fill="#f4fbfc" stroke="#466471" stroke-width="2"/>'+
   '<rect x="324" y="127" width="49" height="46" rx="6" fill="#d34840"/>'+
   text(348,155,'N','#fff',21,'middle')+text(348,198,'S','#2b5263',21,'middle');
-  for(const y of [97,238])g+='<ellipse cx="348" cy="'+y+'" rx="80" ry="22" fill="none" stroke="#b6784d" stroke-width="3" stroke-dasharray="9 6"/>';
-  g+=arrow(463,188,463,98,'#bf7341',5,'pipe-drag')+text(477,101,'F_broms ↑','#b46c3e',19);
+  for(const y of [97,238])g+='<ellipse data-eddy-loop cx="348" cy="'+y+'" rx="61" ry="16" fill="none" stroke="#b6784d" stroke-width="3" stroke-dasharray="9 6"/>';
+  g+=arrow(463,188,463,98,'#bf7341',5,'pipe-drag')+text(477,101,'Bromskraft ↑','#b46c3e',19);
  }else{
-  g+=circle(348,167,34,'#9baeb7','#496875',2)+text(348,176,'•','#fff',20,'middle');
+  g+='<rect data-pipe-body="ordinary" x="324" y="127" width="49" height="92" rx="7" fill="#9baeb7" stroke="#496875" stroke-width="2"/>'+
+   text(348,160,'Icke','#fff',14,'middle')+
+   text(348,183,'magnet','#fff',10,'middle');
  }
  g+=arrow(222,112,222,217,'#24896f',4,'pipe-speed')+text(174,116,'v ↓','#16836e',20)+
  arrow(515,127,515,238,'#a34f45',4,'pipe-gravity')+text(530,237,'mg ↓','#a34f45',19)+

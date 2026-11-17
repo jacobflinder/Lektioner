@@ -129,20 +129,65 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  for(const pole of ['N','S'])for(const motion of ['still','in','out']){
   await press('data-mag-pole',pole);await press('data-mag-motion',motion);
   const s=pole==='N'?1:-1,delta=motion==='in'?1:motion==='out'?-1:0,ind=delta===0?0:-s*delta;
+  const magnetGeo=await page.locator('#demo-induction').evaluate(svg=>{
+   const mag=svg.querySelector('rect[data-magnet-body]'),region=svg.querySelector('rect[data-coil-region]');
+   return {x:+mag.getAttribute('x'),w:+mag.getAttribute('width'),
+    y:+mag.getAttribute('y'),h:+mag.getAttribute('height'),
+    coilX:+region.getAttribute('x'),coilW:+region.getAttribute('width'),
+    turns:[...svg.querySelectorAll('ellipse[data-coil-turn]')].map(e=>+e.getAttribute('cx')),
+    poleX:+svg.querySelector('rect[data-magnet-pole]').getAttribute('x')};
+  });
+  const x={still:452,in:325,out:365}[motion];
+  test(magnetGeo.x===x&&magnetGeo.w===106&&magnetGeo.y===148&&magnetGeo.h===63,
+   'actual magnet body changes position with selected motion '+pole+','+motion);
+  test(magnetGeo.turns.join(',')==='401,446,491,536,581',
+   'all five physical coil windings retain identical position '+pole+','+motion);
+  test((motion==='still'&&magnetGeo.x>magnetGeo.coilX&&
+       magnetGeo.x+magnetGeo.w<magnetGeo.coilX+magnetGeo.coilW)||
+       (motion!=='still'&&magnetGeo.x<magnetGeo.coilX&&
+       magnetGeo.x+magnetGeo.w>magnetGeo.coilX),
+   'still magnet completely within coil; moving magnet partly entering/leaving '+pole+','+motion);
+  test(magnetGeo.poleX===x+(pole==='N'?53:0),
+   'physical bar magnet red N hemisphere follows actual pole choice '+pole+','+motion);
+  const magneticB=await vector('#demo-induction line.magnet-vector');
+  test(Math.sign(magneticB.x2-magneticB.x1)===s,
+   'actual SVG B through coil points correctly for facing N or S '+pole+','+motion);
+
   test(await state('#demo-induction','induced')===ind,'induced field opposes FLUX CHANGE '+pole+','+motion);
   test(await state('#demo-induction','flux-change')===s*delta,'flux change signed with facing pole '+pole+','+motion);
   const rendered=await page.locator('#demo-induction line.induced-vector').count();
   test(rendered===(ind===0?0:1),'no induced field for stationary magnet '+pole+','+motion);
+  if(motion==='still')test(await page.locator('#demo-induction line.motion-vector').count()===0,
+   'no imaginary motion arrow for stationary magnet '+pole);
   if(ind!==0){
    const arrow=await vector('#demo-induction line.induced-vector');
    test(Math.sign(arrow.x2-arrow.x1)===ind,'SVG Lenz direction correct '+pole+','+motion);
+   const inducedArrow=await vector('#demo-induction line.induced-vector');
+   test(inducedArrow.y1===226&&inducedArrow.y2===226&&
+    inducedArrow.y1>102&&inducedArrow.y1<254,
+    'induced field drawn THROUGH the winding, not visually outside it '+pole+','+motion);
    const movement=await vector('#demo-induction line.motion-vector');
    test(Math.sign(movement.x2-movement.x1)===delta,'actual SVG magnet motion correct '+pole+','+motion);
+   test(movement.y1===274&&movement.y2===274,
+    'separate magnet motion indication lies below the winding '+pole+','+motion);
+   const labels=await page.locator('#demo-induction').evaluate(svg=>{
+    const txt=[...svg.querySelectorAll('text')].find(t=>t.textContent==='B inducerat i spolen');
+    const line=svg.querySelector('line.motion-vector');
+    const bounds=txt?.getBBox();
+    return {left:bounds?.x,right:bounds?.x+bounds?.width,bottom:bounds?.y+bounds?.height,
+      motionRight:Math.max(+line.getAttribute('x1'),+line.getAttribute('x2'))};
+   });
+   test(labels.left>labels.motionRight+5&&labels.right<690&&labels.bottom<340,
+    'induced-field label truly separated from movement arrow and inside SVG '+pole+','+motion);
+
   }
   const msg=await page.locator('#demo-induction-text').innerText();
   test(msg.includes(motion==='still'?'U = 0':'voltmeterns plus/minus'),'avoid invented measured polarity '+pole+','+motion);
  }
- await press('data-mag-pole','N');await press('data-mag-motion','in');await snap('desktop-04');
+ await press('data-mag-pole','N');await press('data-mag-motion','still');await snap('desktop-04-still-inside');
+ await press('data-mag-motion','in');await snap('desktop-04-entering');
+ await press('data-mag-motion','out');await snap('desktop-04-withdrawing');
+ await press('data-mag-pole','S');await press('data-mag-motion','in');await snap('desktop-04-S-entering');
  // 5: Lenz for transients, eddy current braking vector upward.
  await go(5);
  const fifth=await page.locator('.slide.active').innerText();
@@ -163,7 +208,7 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   test((await page.locator('#demo-ring-text').innerText()).includes(sign<0?'NEDÅT':sign>0?'UPPÅT':'konstant'),'ring explanation physically consistent');
   if(sign){
    const nonOverlapping=await page.locator('#demo-ring svg, #demo-ring').last().evaluate(el=>{
-    const ls=[...el.querySelectorAll('text')],a=ls.find(t=>t.textContent.includes('ledande ring')),b=ls.find(t=>t.textContent.includes('Bind'));
+    const ls=[...el.querySelectorAll('text')],a=ls.find(t=>t.textContent.includes('ledande ring')),b=ls.find(t=>t.textContent.includes('B inducerat'));
     if(!a||!b)return false;
     const u=a.getBBox(),v=b.getBBox();
     return u.x+u.width<v.x||v.x+v.width<u.x||u.y+u.height<v.y||v.y+v.height<u.y;
@@ -174,11 +219,31 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
  for(const body of ['magnet','ordinary']){
   await press('data-pipe-body',body);
   test(await state('#demo-pipe','magnetic-drag')===(body==='magnet'?1:0),'eddy drag requires moving magnet '+body);
+  const actualBody=await page.locator('#demo-pipe rect[data-pipe-body]').evaluateAll(es=>
+   es.map(e=>({x:+e.getAttribute('x'),y:+e.getAttribute('y'),
+    w:+e.getAttribute('width'),h:+e.getAttribute('height')})));
+  if(body==='ordinary'){
+   const pieces=await page.locator('#demo-pipe text').evaluateAll(es=>
+    es.filter(e=>['Icke','magnet'].includes(e.textContent)).map(e=>{
+     const b=e.getBBox();return {value:e.textContent,x:b.x,right:b.x+b.width,y:b.y,bottom:b.y+b.height}
+    }));
+   test(pieces.length===2&&pieces.every(x=>x.x>=324&&x.right<=373&&x.y>=127&&x.bottom<=219),
+    'both lines of nonmagnetic control label fit INSIDE comparison object');
+  }
+  test(JSON.stringify(actualBody)===JSON.stringify([{x:324,y:127,w:49,h:92}]),
+   'magnet and nonmagnetic comparison objects have same visible size and location '+body);
+  const eddyLoops=await page.locator('#demo-pipe ellipse[data-eddy-loop]').evaluateAll(es=>
+   es.map(e=>({cx:+e.getAttribute('cx'),rx:+e.getAttribute('rx')})));
+  test(eddyLoops.length===(body==='magnet'?2:0),
+   'eddy-current schematic appears only for moving magnet '+body);
+  test(eddyLoops.every(e=>e.cx-e.rx>=281&&e.cx+e.rx<=413),
+   'eddy-current rings stay INSIDE physical tube outer wall bounds '+body);
   const drag=await page.locator('#demo-pipe line.pipe-drag').count();
   test(drag===(body==='magnet'?1:0),'SVG magnetic braking exists only for magnet '+body);
   if(drag){const v=await vector('#demo-pipe line.pipe-drag');test(v.y2<v.y1,'magnetic drag up on falling magnet')}
   const grav=await vector('#demo-pipe line.pipe-gravity');test(grav.y2>grav.y1,'gravity downward regardless of material '+body);
  }
+ await press('data-pipe-body','ordinary');await snap('desktop-05-control');
  await press('data-ring-action','increase');await press('data-pipe-body','magnet');
  await snap('desktop-05');
  // 6: original exit explicitly no invented curve, only conceptual
@@ -232,6 +297,18 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   if(i===2){test(await page.locator('#demo-force line.force-vector').count()===1,'mobile force arrows rendered');test(await page.locator('#force-magnitude-explanation').isVisible(),'mobile complete force formula is visible after reveal')}
   if(i===3){test(await page.locator('#demo-compass path.needle-north').count()===1,'mobile red compass end rendered')}
   await snap('mobile-'+String(i).padStart(2,'0'));
+ }
+ // Actual classroom/tablet diagrams, both before and after pupil feedback.
+ for(const v of [{name:'tablet',width:768,height:1024},{name:'classroom',width:1280,height:800}]){
+  await page.setViewportSize({width:v.width,height:v.height});
+  await go(4);await page.locator('.slide.active button[data-reveal]').last().click();
+  await press('data-mag-pole','N');await press('data-mag-motion','in');
+  const sz=await width();
+  test(sz.scroll<=sz.viewport+2,'no side clipping at '+v.name+' on induction');
+  await snap(v.name+'-04-entering');
+  await press('data-mag-motion','still');await snap(v.name+'-04-still');
+  await go(5);await page.locator('.slide.active button[data-reveal]').last().click();
+  await snap(v.name+'-05-ring-pipe');
  }
  // Projector mode includes scientific vector diagrams; teacher support.
  await page.setViewportSize({width:1920,height:1080});
