@@ -22,15 +22,16 @@ function chargeDiagram(){
  const fx=-Math.sin(theta),fy=-curvature*Math.cos(theta);
  const speedArrow=47*v,forceArrow=40*v*B;
  let symbols='';
- // Fixed positions, radii, opacity and stroke: stronger B adds equal-sized marks.
- const density=Math.max(0,Math.min(1,(B-.7)/.8));
- for(let col=0;col<14;col++)for(let row=0;row<8;row++){
-  const rank=((col*41+row*17)%127)/126;
-  if(rank>.2+.8*density)continue;
-  const gx=51+46*col,gy=43+37*row;
+ // One homogeneous regular lattice PER B state. Equal gap within every state;
+ // old glyph coordinates must be allowed to move when B changes.
+ const factor=Math.sqrt(B/1.5);
+ const cols=Math.max(1,Math.round(14*factor)),rows=Math.max(1,Math.round(7*factor));
+ for(let col=0;col<cols;col++)for(let row=0;row<rows;row++){
+  const gx=+(28+(col+.5)*644/cols).toFixed(3),gy=+(30+(row+.5)*301/rows).toFixed(3);
+  const meta=' data-field-col="'+col+'" data-field-row="'+row+'"';
   symbols+=bSign===1
-   ?'<path data-field-symbol="cross" data-field-x="'+gx+'" data-field-y="'+gy+'" d="M'+(gx-6)+' '+(gy-6)+'l12 12m0 -12l-12 12" fill="none" stroke="'+palette.field+'" stroke-width="1.9" opacity=".65"/>'
-   :'<circle data-field-symbol="dot" data-field-x="'+gx+'" data-field-y="'+gy+'" cx="'+gx+'" cy="'+gy+'" r="3.3" fill="'+palette.field+'" opacity=".65"/>';
+   ?'<path data-field-symbol="cross"'+meta+' data-field-x="'+gx+'" data-field-y="'+gy+'" d="M'+(gx-6)+' '+(gy-6)+'l12 12m0 -12l-12 12" fill="none" stroke="'+palette.field+'" stroke-width="1.9" opacity=".65"/>'
+   :'<circle data-field-symbol="dot"'+meta+' data-field-x="'+gx+'" data-field-y="'+gy+'" cx="'+gx+'" cy="'+gy+'" r="3.3" fill="'+palette.field+'" opacity=".65"/>';
  }
  let svg='<g>'+symbols+'</g><path d="'+route.join('')+'" fill="none" stroke="'+(q>0?'#bc6548':'#087f9b')+'" stroke-width="4" stroke-linecap="round"/>';
  svg+='<circle cx="'+sv(x)+'" cy="'+sv(y)+'" r="13" fill="#fff" stroke="'+(q>0?'#bc6548':'#087f9b')+'" stroke-width="3"/>';

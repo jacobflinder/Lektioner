@@ -91,20 +91,38 @@ const swe=(n,k=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:k,max
   }
   await page.locator('#particle-positive').click();
   if((await page.locator('#particle-flip').getAttribute('aria-pressed'))==='true')await page.locator('#particle-flip').click();
-  const marks=()=>page.locator('#particle-dynamic [data-field-symbol]').evaluateAll(es=>es.map(e=>({x:e.getAttribute('data-field-x'),y:e.getAttribute('data-field-y'),type:e.getAttribute('data-field-symbol'),op:e.getAttribute('opacity'),sw:e.getAttribute('stroke-width'),r:e.getAttribute('r'),box:e.getBBox().width})));
-  let previous=[],previousCount=0,snapshot=[];
-  for(const b of [.7,.8,.9,1,1.1,1.2,1.3,1.4,1.5]){
-   await set('particle-B',b);const now=await marks();
-   check(now.length>previousCount,'higher B adds field marks across fixed field '+b);
-   check(now.every(z=>z.type==='cross'&&z.op==='.65'&&z.sw==='1.9'&&near(z.box,12,.01)),'all cross glyph dimensions and opacity fixed '+b);
-   check(previous.every(z=>now.some(n=>n.x===z.x&&n.y===z.y)),'previous B symbols stay at identical locations '+b);
-   if(b===1)snapshot=now;
-   previous=now;previousCount=now.length;
+  const marks=()=>page.locator('#particle-dynamic [data-field-symbol]').evaluateAll(es=>es.map(e=>({
+   x:Number(e.getAttribute('data-field-x')),y:Number(e.getAttribute('data-field-y')),
+   col:Number(e.getAttribute('data-field-col')),row:Number(e.getAttribute('data-field-row')),
+   type:e.getAttribute('data-field-symbol'),op:e.getAttribute('opacity'),
+   sw:e.getAttribute('stroke-width'),r:e.getAttribute('r'),box:e.getBBox().width
+  })));
+  let previousCount=0,previousSpacing=Infinity,snapshot=[];
+  for(const B of [.7,.8,.9,1,1.1,1.2,1.3,1.4,1.5]){
+   await set('particle-B',B);const now=await marks();
+   const root=Math.sqrt(B/1.5),nx=Math.round(14*root),ny=Math.round(7*root);
+   check(now.length===nx*ny,'homogeneous field has complete grid with no local holes '+B);
+   check(now.every(m=>m.type==='cross'&&m.op==='.65'&&m.sw==='1.9'&&near(m.box,12,.01)),
+     'every cross same size, darkness, direction '+B);
+   const xs=[...new Set(now.map(m=>m.x))].sort((a,b)=>a-b),ys=[...new Set(now.map(m=>m.y))].sort((a,b)=>a-b);
+   check(xs.length===nx&&ys.length===ny,'complete rectangular symbol lattice '+B);
+   const dx=xs.slice(1).map((x,i)=>x-xs[i]),dy=ys.slice(1).map((y,i)=>y-ys[i]);
+   check(dx.every(x=>near(x,644/nx,.002))&&dy.every(y=>near(y,301/ny,.002)),
+     'equal field-symbol separation over whole homogeneous area '+B);
+   if(dx.length&&dy.length)check(Math.abs(dx[0]/dy[0]-1)<.18,'nearly square grid cells '+B);
+   const spacing=Math.sqrt(644*301/(nx*ny));
+   check(now.length>=previousCount&&spacing<=previousSpacing,'higher B => higher uniform density '+B);
+   check(Math.abs(now.length/98-B/1.5)<.15,'discrete area density reasonably proportional to B '+B);
+   if(B===1)snapshot=now;
+   previousCount=now.length;previousSpacing=spacing;
   }
-  await set('particle-B',1);await page.locator('#particle-flip').click();
+  await set('particle-B',1);
+  await page.locator('#particle-flip').click();
   const dots=await marks();
-  check(dots.length===snapshot.length&&dots.every(z=>z.type==='dot'&&z.r==='3.3'&&z.op==='.65'),'flip preserves B magnitude and gives uniform dots');
-  check(dots.every(z=>snapshot.some(n=>z.x===n.x&&z.y===n.y)),'B reversal preserves all glyph positions');
+  check(dots.length===snapshot.length&&dots.every(m=>m.type==='dot'&&m.op==='.65'&&m.r==='3.3'),
+   'reversing B changes cross to equal-sized dots with same magnitude');
+  check(dots.every(m=>snapshot.some(k=>near(m.x,k.x)&&near(m.y,k.y))),
+   'only B direction reversal leaves all lattice coordinates unchanged');
   await page.locator('#particle-restart').click();
   check((await page.locator('#particle-time-value').innerText()).includes('0 %'),'restart sets zero time');
   await page.locator('#particle-play').click();
