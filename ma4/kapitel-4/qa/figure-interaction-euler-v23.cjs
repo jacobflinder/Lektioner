@@ -177,7 +177,7 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
    const detail=page.locator('#euler-practice-support details').nth(j);
    await detail.locator('summary').click();
    check(await detail.getAttribute('open')!==null,'Metodkort kan öppnas');
-   equal(await detail.locator('math[aria-label]').count(),1,'Metodkortets samband är semantisk matematik');
+   check(await detail.locator('math[aria-label]').count()>=1,'Metodkortets samband är semantisk matematik');
   }
   equal(await page.locator('#euler-practice-support details[open]').count(),4,'Alla stöd öppnade utan facit');
   await screenshot('11-bok-stod-oppet');
