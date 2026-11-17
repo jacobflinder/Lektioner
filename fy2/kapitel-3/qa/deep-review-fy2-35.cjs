@@ -51,7 +51,7 @@ fs.mkdirSync(outdir,{recursive:true});
   ok(gap2>gap1&&gap1>0,'radial gaps increase outward where field becomes weaker');
   const B1=2e-7*1/(radii[0]/100),B2=2e-7*1/(radii[2]/100);
   ok(B1>B2&&B1/B2>2,'independent field strength at smaller radius is larger by I/r');
-  ok((await fig.innerText()).includes('glesare längre ut'),'learner caption explains physical nonuniformity');
+  ok((await fig.locator('.cap').textContent()).includes('glesare längre ut'),'field-geometry caption explicitly explains weaker B further from wire');
   ok(await fig.getAttribute('data-shown')!=='true','predicted tangent concealed');
   await active().locator('[data-reveal]').click();
   ok(await fig.getAttribute('data-shown')==='true','tangent visible after feedback');
