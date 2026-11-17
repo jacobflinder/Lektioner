@@ -36,7 +36,15 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  await start.locator('[data-answer="0"]').click();ok(await start.locator('.feedback').isHidden(),'no early quiz reveal');
  await start.locator('[data-decision-submit]').click();ok((await start.locator('.feedback').innerText()).includes('Pythagoras'),'incorrect answer gets reason');
  await start.locator('[data-answer="1"]').click();await start.locator('[data-decision-submit]').click();
- ok((await start.locator('.feedback').innerText()).includes('√25 = 5'),'correct answer shows Pythagoras');
+ const correctSteps=await start.locator('.feedback .polar-start-equations math').evaluateAll(es=>es.map(el=>el.getAttribute('aria-label')));
+ ok(JSON.stringify(correctSteps)===JSON.stringify(['r = √(3² + 4²)','= √(9 + 16)','= √25','= 5']),'correct answer has fully typeset Pythagoras chain');
+ ok(await start.locator('strong .math math').count()===1,'question contains semantic MathML');
+ ok(await start.locator('button[data-answer] .math math').count()===3,'all multiple-choice answers have semantic MathML');
+ ok(await page.locator('#intro .task math[aria-label="(3; 4)"]').count()===1,'coordinates use unambiguous Swedish separator');
+ const stepGaps=await start.locator('.polar-start-equations>p').evaluateAll(es=>{
+  const b=es.map(x=>x.getBoundingClientRect());return b.slice(1).map((x,i)=>x.top-b[i].bottom);
+ });
+ ok(stepGaps.length===3&&stepGaps.every(x=>x>=15),'independent mathematics lines separated by at least 16px');
  await go(1);ok(await page.locator('#polar-rule').isHidden(),'rule initially concealed');
  const svg=page.locator('#polar-plane');
  const state=()=>svg.evaluate(el=>{

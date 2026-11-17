@@ -64,7 +64,7 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   await start.locator('[data-answer="1"]').click();
   assert.ok(await start.locator('.feedback').isHidden(),'01 bytt svar döljer tidigare facit');
   await start.locator('[data-decision-submit]').click();
-  assert.ok((await start.locator('.feedback').innerText()).includes('√25 = 5'),'01 beräkning med mellanled');
+  assert.deepEqual(await start.locator('.feedback math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label'))),['r = √(3² + 4²)','= √(9 + 16)','= √25','= 5'],'01 semantisk MathML med fullständiga mellanled');
   await page.locator('[data-reveal="polar-goals"]').click();
   assert.ok(await page.locator('#polar-goals').isVisible(),'01 målen kommer efter startfrågan');
   await shot('01-desktop');
