@@ -19,8 +19,8 @@ assert.equal(await page.locator('.slide.active').getAttribute('data-title'),'Rot
 await page.locator('#coil-show').click();assert.match(await page.locator('#coil-readout').innerText(),/spänning/);
 const change=async(id,value)=>page.locator(id).evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))},value);
 await change('#angle','0');assert.match(await page.locator('#coil-readout').innerText(),/u = 0,00 V/);
-await change('#angle','90');assert.match(await page.locator('#coil-readout').innerText(),/25,13 V/);
-await change('#rot-f','4');assert.match(await page.locator('#coil-readout').innerText(),/50,27 V/);
+await change('#angle','90');assert.match(await page.locator('#coil-readout').innerText(),/2,51 V/);
+await change('#rot-f','4');assert.match(await page.locator('#coil-readout').innerText(),/5,03 V/);
 await page.locator('#coil-reset').click();assert.match(await page.locator('#coil-readout').innerText(),/dold/);
 await page.locator('#next').click();await change('#freq','5');assert.match(await page.locator('#wave-readout').innerText(),/5 hela perioder/);
 await page.locator('#next').click();await page.locator('#rms-show').click();assert.match(await page.locator('#rms-readout').innerText(),/70,7 V/);
