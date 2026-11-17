@@ -42,5 +42,28 @@ insertSolutions({
  answer(['(1 + i)² = 2i'])
 )
 });
+// Visual reminder of the four-step repetition, inside the existing optional
+// reveal only. It never appears before the learner's own prediction.
+const cycleHolder=document.querySelector('#i-extraans .ma4-step');
+if(cycleHolder){
+ cycleHolder.insertAdjacentHTML('afterend',
+  '<figure class="i-cycle-figure" id="i-cycle-figure">'+
+   '<div class="i-cycle" role="img" aria-label="Fyra steg: gånger i ger 1 till i, i till minus 1, minus 1 till minus i, minus i till 1 igen.">'+
+    '<div class="i-cycle-cell"><small>i⁰</small><strong>1</strong></div>'+
+    '<div class="i-cycle-cell"><small>i¹</small><strong>i</strong></div>'+
+    '<div class="i-cycle-cell"><small>i²</small><strong>−1</strong></div>'+
+    '<div class="i-cycle-cell"><small>i³</small><strong>−i</strong></div>'+
+   '</div>'+
+   '<figcaption class="i-cycle-caption">Multiplicera med i för varje nytt steg. Nästa steg är i⁴ = 1: samma fyra värden börjar om.</figcaption>'+
+  '</figure>');
+}
+// Unlike a working answer, the optional recap does not persist when returning
+// from another slide: each independent work session begins with retrieval.
+const methodRecap=document.getElementById('i-method-recap');
+if(methodRecap){
+ document.querySelectorAll('#prev,#next,#jump,[data-go]').forEach(control=>{
+  control.addEventListener(control.tagName==='SELECT'?'change':'click',()=>{methodRecap.open=false});
+ });
+}
 typesetStatic();
 })();
