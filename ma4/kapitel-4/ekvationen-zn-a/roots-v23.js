@@ -145,7 +145,17 @@ const css=document.createElement('style');css.textContent=`
 @media(min-width:1100px){#roots-plot #k3-decision{padding:12px 14px;margin:8px 0}
 #roots-plot #k3-decision .decision-options{grid-template-columns:repeat(3,minmax(0,1fr))}
 #roots-plot #k3-decision .choice{padding:9px 10px;font-size:.91rem}
-#roots-plot #k3-decision .choice math{font-size:1.1rem}}
+#roots-plot #k3-decision .choice math{font-size:1.1rem}
+#roots-plot.k3-question-active .two > div:last-child > .task{padding:9px 13px;margin:4px 0 7px}
+#roots-plot.k3-question-active #roots-angle-group{margin:3px 0}
+#roots-plot.k3-question-active #roots-angle-group .math{font-size:1.27rem;margin:2px 0}
+#roots-plot.k3-question-active #roots-feedback{padding:6px 10px;margin:3px 0;font-size:.86rem;line-height:1.28}
+#roots-plot.k3-question-active #k3-decision{padding:8px 10px;margin:5px 0}
+#roots-plot.k3-question-active #k3-decision>p.muted{display:none}
+#roots-plot.k3-question-active #k3-decision .roots-quiz-prompt{font-size:1.23rem;padding:3px;margin:3px 0}
+#roots-plot.k3-question-active #k3-decision .decision-options{margin:5px 0;gap:5px}
+#roots-plot.k3-question-active #k3-decision .choice{padding:6px 8px;font-size:.87rem;line-height:1.19}
+#roots-plot.k3-question-active #k3-decision [data-decision-submit]{padding:7px 13px;margin:2px 0 0}}
 @media(max-width:760px){.roots-support-list,.roots-validation-pair{grid-template-columns:1fr}}
 @media(max-width:520px){#roots-plane text,.roots-check-figure svg text{font-size:24px!important}
 .roots-method-support{padding:12px}.roots-choice-text{font-size:.94rem}.decision-check .choice math{font-size:1.15rem}}

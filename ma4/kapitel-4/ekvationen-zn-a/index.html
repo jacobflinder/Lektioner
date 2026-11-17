@@ -59,6 +59,7 @@ function render(){
  document.getElementById('roots-prompt').textContent=prompts[stage];
  const angleRow=document.getElementById('roots-angle');angleRow.classList.toggle('hidden',stage===0);if(stage>0)Ma4Math.setFormula(angleRow,questions[stage],'block');
  k3Box.classList.toggle('hidden',stage!==3);
+ document.getElementById('roots-plot').classList.toggle('k3-question-active',stage===3);
  const feedback=document.getElementById('roots-feedback');feedback.classList.toggle('hidden',stage===0);
  document.getElementById('roots-explanation').textContent=explanations[stage];
  document.getElementById('roots-back').disabled=stage===0;
