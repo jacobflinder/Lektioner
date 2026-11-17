@@ -106,8 +106,8 @@ function wireSVG(dir,point,shown,radius=108,fieldAtPointUT=null){
  const cx=251,cy=185,sign=dir==="out"?-1:1;
  let s='<rect width="520" height="370" fill="#edf6f7" rx="14"/>';
  const modelGeometry=fieldAtPointUT!==null;
- (modelGeometry?[radius]:[46,108,151]).forEach(r=>{
-  s+='<circle '+(modelGeometry?'data-model-field-circle="true" ':'')+'cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';
+ (modelGeometry?[radius]:[68,108,162]).forEach(r=>{
+  s+='<circle '+(modelGeometry?'data-model-field-circle="true" ':'data-schematic-field-circle="true" ')+'cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#a4c2c9" stroke-width="2" fill="none"/>';
  });
  function arrow(x,y,tx,ty,length,color){
   const endX=x+length*tx,endY=y+length*ty;
@@ -119,7 +119,7 @@ function wireSVG(dir,point,shown,radius=108,fieldAtPointUT=null){
   s+='<circle cx="'+x+'" cy="'+y+'" r="5" fill="#c15f43"/><text x="'+(x+12)+'" y="'+(y+22)+'">'+label+'</text>';
   if(shown)s+=arrow(x,y,-Math.sin(theta)*sign,Math.cos(theta)*sign,36,'#c15f43');
  }
- if(shown&&!modelGeometry)[46,108,151].forEach((r,k)=>{
+ if(shown&&!modelGeometry)[68,108,162].forEach((r,k)=>{
   const t=k*2.2+.6;
   s+=arrow(cx+r*Math.cos(t),cy+r*Math.sin(t),-Math.sin(t)*sign,Math.cos(t)*sign,25,'#0b8195');
  });
