@@ -24,7 +24,7 @@ assert.equal(await bok.locator('math').count(),5,'five semantic MathML formulas'
 assert.match(await bok.locator('summary').innerText(),/Visa lektionssammanfattningen/);
 await bok.locator('summary').click();
 assert.equal(await bok.evaluate(e=>e.open),true,'summary revealed');
-assert.match(await bok.locator('summary').innerText(),/Dölj lektionssammanfattningen/);
+await page.waitForFunction(()=>document.getElementById('bok-sammanfattning-rubrik').textContent.includes('Dölj lektionssammanfattningen'));
 assert.match(await bok.innerText(),/Induktion|Sinusformad växelspänning/);
 assert.doesNotMatch(await bok.innerText(),/325 V|230 V|120 V/,'no worked-example answer leak');
 await bok.scrollIntoViewIfNeeded();
@@ -32,7 +32,7 @@ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=inner
 await page.screenshot({path:path.join(dest,'fy2-ac-'+width+'-bok-sammanfattning.png')});
 await bok.locator('summary').click();
 assert.equal(await bok.evaluate(e=>e.open),false,'summary hidden again');
-assert.match(await bok.locator('summary').innerText(),/Visa lektionssammanfattningen/);
+await page.waitForFunction(()=>document.getElementById('bok-sammanfattning-rubrik').textContent.includes('Visa lektionssammanfattningen'));
 await page.locator('#prev').click();assert.match(await page.locator('.slide.active').innerText(),/SOC-38259952/);
 assert.equal(await page.locator('#quizAns').isVisible(),false);
 await page.locator('#quiz button[data-v="b"]').click();assert.match(await page.locator('#quizReply').innerText(),/markerat/i);
