@@ -1,0 +1,24 @@
+/* v2.3 – local to Komplexa tal och den imaginära enheten i.
+ * The shared course CSS is deliberately untouched. */
+.v23-method-recap{margin:15px 0 18px;border:1.5px solid #b8d9d9;border-radius:12px;background:#f4faf9;padding:13px 16px;max-width:100%}
+.v23-method-recap>summary{font-weight:760;color:#125e5b;cursor:pointer;line-height:1.45}
+.v23-method-recap>summary:focus-visible{outline:3px solid #e3aa34;outline-offset:4px;border-radius:4px}
+.v23-recap-guidance{font-size:.91rem;color:#426779;margin:11px 0 12px}
+.v23-recap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.v23-recap-item{min-width:0;padding:12px 14px;background:#fff;border:1px solid #cddfe5;border-radius:10px}
+.v23-recap-item h3{font-size:1.03rem;margin:0 0 8px;color:#1e536b}
+.v23-recap-item p:not(.math){font-size:.9rem;line-height:1.5;margin:8px 0 0}
+.v23-recap-item>.math{max-width:100%;font-size:1.28rem;margin:9px 0}
+.v23-math-separate{display:grid;row-gap:16px;margin:12px 0}
+.v23-math-separate>.math{margin:0;min-width:0}
+.v23-recap-item .math[data-math-presentation=true]{overflow-x:auto;overflow-y:hidden}
+.v23-recap-item .math math{white-space:nowrap;max-width:none}
+@media(max-width:720px){.v23-recap-grid{grid-template-columns:minmax(0,1fr)}.v23-method-recap{padding:12px}.v23-recap-item{padding:11px}.v23-recap-item .math{font-size:1.18rem}}
+/* The i-power pattern is shown only after students reveal the voluntary activity. */
+.i-cycle{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:stretch;margin:14px 0;padding:4px 0}
+.i-cycle-cell{position:relative;min-width:0;border:1.5px solid #aecfdc;border-radius:12px;padding:10px 9px;background:#f5fafe;text-align:center}
+.i-cycle-cell:not(:last-child)::after{content:"× i →";position:absolute;top:40%;right:-24px;z-index:1;color:#315e77;background:#fff;padding:1px 3px;border-radius:4px;font-size:.8rem;font-weight:760}
+.i-cycle-cell strong{display:block;color:#123d57;font-size:1.42rem;line-height:1.3}
+.i-cycle-cell small{display:block;color:#466679;font-size:.84rem}
+.i-cycle-caption{font-size:.9rem;color:#3d6273;margin:5px 0 13px}
+@media(max-width:650px){.i-cycle{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.i-cycle-cell:not(:last-child)::after{display:none}.i-cycle-caption{font-size:.88rem}}
