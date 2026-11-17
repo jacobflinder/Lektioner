@@ -83,7 +83,7 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  const drawn=await fig.evaluate(svg=>{
   const get=col=>[...svg.querySelectorAll('g[clip-path] line')].filter(e=>e.getAttribute('stroke')===col).map(e=>[+e.getAttribute('x1'),+e.getAttribute('y1'),+e.getAttribute('x2'),+e.getAttribute('y2')]);
   const c=[...svg.querySelectorAll('g[clip-path] circle')].find(e=>e.getAttribute('stroke')==='#9cb6c4');
-  return{z:get('#19739f')[0],conjugate:get('#7860b5').find(a=>a[0]!==a[2]||a[1]!==a[3]),iz:get('#0a8176')[0],division:get('#bc633a')[0],purple:get('#7860b5'),radius:c&&{cx:+c.getAttribute('cx'),cy:+c.getAttribute('cy'),r:+c.getAttribute('r')}};
+  return{z:get('#19739f')[0],conjugate:get('#7860b5')[1],iz:get('#0a8176')[0],division:get('#bc633a')[0],purple:get('#7860b5'),radius:c&&{cx:+c.getAttribute('cx'),cy:+c.getAttribute('cy'),r:+c.getAttribute('r')}};
  });
  ok([drawn.z,drawn.conjugate,drawn.iz,drawn.division].every(Boolean),'all four geometrical vectors drawn');
  const org=drawn.z;
