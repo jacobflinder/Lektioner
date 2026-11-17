@@ -55,12 +55,13 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   vectorCheck(g.iz,g.z,1);
   const t=Math.atan2(p.b,p.a),ar1=parseArc(g.ccw[0]);
   ok(ar1[4]===0&&ar1[5]===0,'counterclockwise SVG sweep '+p.id);
-  ok(near(ar1[6],ar1[0]-ar1[2]+ar1[2]*Math.cos(t+Math.PI/2))&&near(ar1[7],ar1[1]-ar1[2]*Math.sin(t+Math.PI/2)+ar1[2]*Math.sin(t)),'actual counterclockwise arc endpoint '+p.id);
+  ok(near(ar1[6],ar1[0]-ar1[2]*Math.cos(t)+ar1[2]*Math.cos(t+Math.PI/2))&&near(ar1[7],ar1[1]+ar1[2]*Math.sin(t)-ar1[2]*Math.sin(t+Math.PI/2)),'actual counterclockwise arc endpoint '+p.id);
   ok(await page.locator('#rot-div').isHidden(),'division withheld at multiplication stage');
   await page.locator('#rot-next').click();g=await geometry();
   ok(g.di.length===1&&g.cw.length===1,'second rotation appears '+p.id);
   vectorCheck(g.di,g.z,-1);
   const ar2=parseArc(g.cw[0]);ok(ar2[4]===0&&ar2[5]===1,'clockwise SVG sweep '+p.id);
+  ok(near(ar2[6],ar2[0]-ar2[2]*Math.cos(t)+ar2[2]*Math.cos(t-Math.PI/2))&&near(ar2[7],ar2[1]+ar2[2]*Math.sin(t)-ar2[2]*Math.sin(t-Math.PI/2)),'actual clockwise arc endpoint '+p.id);
   ok(await page.locator('#rot-length').isHidden(),'circle still withheld');
   await page.locator('#rot-next').click();g=await geometry();
   ok(!!g.circle,'shared-radius circle at stage 3');
