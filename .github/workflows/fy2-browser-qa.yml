@@ -37,6 +37,7 @@ jobs:
           node fy2/kapitel-3/qa/figure-interaction-magnetism-v2.cjs
           node fy2/kapitel-3/qa/figure-interaction-elektriska-falt-v2.cjs
           node fy2/kapitel-3/qa/browser-smoke.cjs
+          node fy2/kapitel-3/qa/figure-v23-demonstrationer.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-26.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-27.cjs
           node fy2/kapitel-3/qa/deep-review-fy2-28.cjs
