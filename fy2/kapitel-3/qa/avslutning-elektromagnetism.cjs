@@ -15,6 +15,11 @@ for(let i=0;i<10;i++){
 assert.equal(await page.locator('.slide.active').count(),1);
 assert.equal(await page.locator('.slide.active').getAttribute('data-title'),['Start och mål','Välj modellen','Ström och magnetfält','Magnetisk kraft','Induktion','Räkna hela kedjan','Hitta felet','Bokarbete','Egen utcheckning','Avslutning och sammanfattning'][i]);
 assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+5),true,'overflow '+width+' slide '+i);
+if(width>=1280 && [2,3,4].includes(i)){
+const name=['#wire-svg','#force-svg','#ind-svg'][i-2];
+const bounds=await page.evaluate(selector=>{const r=document.querySelector(selector).getBoundingClientRect();const nav=document.querySelector('.footer-nav').getBoundingClientRect();return {bottom:r.bottom,limit:nav.top};},name);
+assert.ok(bounds.bottom<bounds.limit-8,'Critical figure clipped at '+width+'px slide '+(i+1)+': '+JSON.stringify(bounds));
+}
 await page.screenshot({path:path.join(dir,'fy2-final-'+width+'-'+String(i+1).padStart(2,'0')+'.png')});
 if(i<9)await page.locator('#next').click();
 }
