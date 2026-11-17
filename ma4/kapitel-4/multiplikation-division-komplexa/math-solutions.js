@@ -49,13 +49,7 @@ if(errorAnswer){
  const worked=errorAnswer.querySelector('.ma4-worked');
  const layout=document.createElement('div');layout.className='d-error-layout';
  const figure=document.createElement('div');figure.className='d-visual-products';
- figure.innerHTML="<h3>Efter – alla fyra produkter</h3>
-<table class=\"d-products\" aria-label=\"Två gånger två produkter, med de två saknade korsprodukterna markerade\">
-<caption class=\"muted\">Rad från första parentesen, kolumn från andra</caption>
-<thead><tr><th scope=\"col\">×</th><th scope=\"col\"><span class=\"math\">3</span></th><th scope=\"col\"><span class=\"math\">−2i</span></th></tr></thead>
-<tbody><tr><th scope=\"row\"><span class=\"math\">2</span></th><td><span class=\"math\">6</span></td><td class=\"d-cross\"><span class=\"math\">−4i</span><span class=\"d-cross-note\">Saknades</span></td></tr>
-<tr><th scope=\"row\"><span class=\"math\">i</span></th><td class=\"d-cross\"><span class=\"math\">+3i</span><span class=\"d-cross-note\">Saknades</span></td><td><span class=\"math\">−2i²</span></td></tr></tbody></table>
-<p>De fyra rutorna är fyra termer. <strong>Båda markerade korsprodukterna måste vara med</strong> innan termerna förenklas. Resultatet är <strong>8 − i</strong>.</p>";
+ figure.innerHTML="<h3>Efter – alla fyra produkter</h3>\n<table class=\"d-products\" aria-label=\"Två gånger två produkter, med de två saknade korsprodukterna markerade\">\n<caption class=\"muted\">Rad från första parentesen, kolumn från andra</caption>\n<thead><tr><th scope=\"col\">×</th><th scope=\"col\"><span class=\"math\">3</span></th><th scope=\"col\"><span class=\"math\">−2i</span></th></tr></thead>\n<tbody><tr><th scope=\"row\"><span class=\"math\">2</span></th><td><span class=\"math\">6</span></td><td class=\"d-cross\"><span class=\"math\">−4i</span><span class=\"d-cross-note\">Saknades</span></td></tr>\n<tr><th scope=\"row\"><span class=\"math\">i</span></th><td class=\"d-cross\"><span class=\"math\">+3i</span><span class=\"d-cross-note\">Saknades</span></td><td><span class=\"math\">−2i²</span></td></tr></tbody></table>\n<p>De fyra rutorna är fyra termer. <strong>Båda markerade korsprodukterna måste vara med</strong> innan termerna förenklas. Resultatet är <strong>8 − i</strong>.</p>";
  worked.replaceWith(layout);layout.append(worked,figure);
 }
 
