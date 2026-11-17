@@ -72,6 +72,17 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
      await page.locator('#moivre-next').click();
      ck(await page.locator('#moivre-answer').isVisible(),'Facit efter andra steget');
      ck((await page.locator('#moivre-answer .math-givens math').count())===4,'Fyra separata matematikled');
+     if(size.width>=1280&&radius==='1.4142135623730951'&&n===3){
+      const visible=await page.evaluate(()=>{
+       const graph=document.getElementById('moivre-plane').getBoundingClientRect();
+       const result=document.getElementById('moivre-rect').getBoundingClientRect();
+       return {graphRight:graph.right,graphTop:graph.top,graphBottom:graph.bottom,
+        resultLeft:result.left,resultTop:result.top,resultBottom:result.bottom};
+      });
+      ck(visible.graphRight<visible.resultLeft&&visible.graphTop<visible.resultTop&&
+         visible.resultTop<visible.graphBottom&&visible.resultBottom<=size.height,
+         'Figur och alla fyra matematikled i samma 1280/1920-klassrumsvy: '+JSON.stringify(visible));
+     }
      const rect=await label('#moivre-rect');
      ck(typeof rect==='string'&&rect.startsWith('= '),'Exakt rektangulärt uttryck renderat');
      const chosen=small?'#moivre-zoom':'#moivre-plane';
@@ -123,6 +134,8 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
    const afterLength=await after.evaluate(e=>Math.hypot(+e.getAttribute('x2')-e.getAttribute('x1'),+e.getAttribute('y2')-e.getAttribute('y1')));
    close(beforeLength,6*36.4);close(afterLength,8*36.4);checks+=2;
    close(afterLength/beforeLength,4/3);checks++;
+   const labelHeight=await page.locator('#moivre-error-before text').filter({hasText:'z³ (fel)'}).evaluate(e=>e.getBoundingClientRect().height);
+   ck(labelHeight>=10,'Felanalysens punktetikett måste vara faktiskt läsbar: '+labelHeight);
    ck(await page.locator('#moivre-error-correction').isHidden(),'Rättad figur avslöjas inte före elevens svar');
    await save('07-fel-fore');
    await page.locator('[data-reveal="errorans"]').click();
