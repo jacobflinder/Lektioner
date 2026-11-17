@@ -75,7 +75,7 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok(gaps.length>=4&&gaps.every(w=>w>1),'trigonometric multiplication visually separated from cos/sin operators');
   ok(isGap(earthRows,15),'Bh and Bv physically separated by >= 15px');
   const memo=await slide().innerText();
-  ok(memo.includes('laddningsbeloppet')&&memo.includes('elektron')&&memo.includes('kraft'),'force magnitude explicitly positive, sign direction separate');
+  ok(memo.includes('tecknade laddningen')&&memo.includes('positiva belopp')&&memo.includes('elektron'),'signed q and positive |q| explicitly distinct for electron');
   ok(memo.includes('horisontalplan')&&memo.includes('vertikalt plan'),'angle-plane explanations remain distinct');
   await reset();ok(!await slide().locator('.answer').isVisible(),'retrieval reset hides mathematics again');
   // Slide 3: preserve book time over added new lecture
