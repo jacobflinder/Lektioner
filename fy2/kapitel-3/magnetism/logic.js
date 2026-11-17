@@ -127,26 +127,24 @@ function fieldDot(group,x,y,r=3.7){
  dot.setAttribute("data-field-direction","out");
  group.appendChild(dot);
 }
-// A progressive low-discrepancy arrangement: higher B *adds* dots uniformly
-// without moving any of the dots already present. 240-unit periodic replicas
-// guarantee identical dot patterns through equal reference/comparison areas.
-function radicalInverse(index,base){
- let inverse=0,factor=1/base;
- while(index>0){inverse+=(index%base)*factor;index=Math.floor(index/base);factor/=base;}
- return inverse;
-}
+// Homogeneous field through the plane: evenly spaced simple dots over the
+// entire fixed background. When B changes, recompute BOTH number and spacing.
+// The 240-unit repeating tile ensures equal areas 240 units apart are identical.
 let previousDotB=null;
 function drawFluxDots(B){
  if(B===previousDotB)return;
  previousDotB=B;
  const group=$("flux-dots");group.replaceChildren();
- const samplesPerTile=Math.round(70*B);
- for(let i=1;i<=samplesPerTile;i++){
-  const localX=240*radicalInverse(i,2),y=40+216*radicalInverse(i,3);
-  for(let tile=0;tile<3;tile++){
-   const x=60+240*tile+localX;
-   if(x<=566)fieldDot(group,x,y);
-  }
+ const factor=Math.sqrt(Math.max(0,B)/.8);
+ const nx=B<=0?0:Math.max(1,Math.round(8*factor)),ny=B<=0?0:Math.max(1,Math.round(7*factor));
+ for(let tile=0;tile<3;tile++)for(let col=0;col<nx;col++)for(let row=0;row<ny;row++){
+  const x=60+240*tile+(col+.5)*240/nx,y=40+(row+.5)*216/ny;
+  if(x>566)continue;
+  fieldDot(group,x,y);
+  const dot=group.lastElementChild;
+  dot.setAttribute("data-field-tile",tile);
+  dot.setAttribute("data-field-col",col);
+  dot.setAttribute("data-field-row",row);
  }
 }
 for(let row=0;row<3;row++)for(let col=0;col<5;col++)fieldDot($("example-dots"),155+col*67,106+row*59,4);

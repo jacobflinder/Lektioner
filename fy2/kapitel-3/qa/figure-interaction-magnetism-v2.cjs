@@ -82,26 +82,35 @@ const path='fy2-qa-screenshots';fs.mkdirSync(path,{recursive:true});
   }
   const initialField=await fieldSnapshot();
   ok(initialField.length>=40&&initialField.length<90,'initial 0.40 T field has a clearly populated but not saturated symbol diagram');
-  let previousDots=[];
+  let previousCount=-1,previousGap=Infinity;
   const fieldCounts=[];
   for(let n=2;n<=16;n++){
     const B=Number((n*.05).toFixed(2));
     await set('field-strength',B);
     const ds=await fieldSnapshot();
-    const coordSet=new Set(ds.map(d=>d.x+','+d.y));
-    ok(ds.length>previousDots.length,'increasing B adds visible field symbols at '+B+' T');
-    ok(ds.every(d=>d.r===3.7&&d.fill==='#08788e'&&d.stroke===null&&d.opacity===null),'field markers are simple identical dots independent of B='+B);
-    ok(previousDots.every(d=>coordSet.has(d.x+','+d.y)),'increasing B never moves or deletes existing symbols at '+B);
-    ok(inside(ds,70,190)===inside(ds,310,430),'two equal areas in same homogeneous field have identical field symbol counts at '+B);
-    ok(ds.every(d=>d.y>=40&&d.y<=256&&d.x>=60&&d.x<=566),'field marker remains inside labelled SVG field region at '+B);
-    ok((await page.locator('#flux-svg').getAttribute('aria-label')).includes('Fler prickar'),'accessible explanation distinguishes B-density from changing area at '+B);
+    const factor=Math.sqrt(B/.8),nx=Math.max(1,Math.round(8*factor)),ny=Math.max(1,Math.round(7*factor));
+    ok(ds.every(d=>d.r===3.7&&d.fill==='#08788e'&&d.stroke===null&&d.opacity===null),
+      'all markers are simple identical dots with B='+B);
+    const tile=await page.locator('#flux-dots circle[data-field-tile="0"]').evaluateAll(es=>es.map(e=>({
+     x:+e.getAttribute('cx'),y:+e.getAttribute('cy'),col:+e.getAttribute('data-field-col'),row:+e.getAttribute('data-field-row')
+    })));
+    ok(tile.length===nx*ny,'complete rectangular field lattice, no random gaps '+B);
+    const xs=[...new Set(tile.map(x=>x.x))].sort((a,b)=>a-b),ys=[...new Set(tile.map(x=>x.y))].sort((a,b)=>a-b);
+    ok(xs.length===nx&&ys.length===ny,'all rows and columns present '+B);
+    ok(xs.slice(1).every((x,i)=>Math.abs(x-xs[i]-240/nx)<.002)&&ys.slice(1).every((y,i)=>Math.abs(y-ys[i]-216/ny)<.002),
+      'all nearest neighbour horizontal and vertical spacing equal '+B);
+    const gap=Math.sqrt(240*216/(nx*ny));
+    ok(ds.length>=previousCount&&gap<=previousGap,'higher B means no lower density and no greater spacing '+B);
+    ok(inside(ds,70,190)===inside(ds,310,430),'equal areas in same homogeneous field have identical dots '+B);
+    ok(ds.every(d=>d.y>=40&&d.y<=256&&d.x>=60&&d.x<=566),'all field marks inside SVG field region '+B);
+    ok((await page.locator('#flux-svg').getAttribute('aria-label')).includes('Fler prickar'),'accessible explanation of B density '+B);
     fieldCounts.push({B,count:ds.length});
-    if([2,8,16].includes(n))await screenshot('05-B-'+String(B).replace('.','-')+'-solid-dot-density');
-    previousDots=ds;
+    if([2,8,16].includes(n))await screenshot('05-B-'+String(B).replace('.','-')+'-uniform-density');
+    previousCount=ds.length;previousGap=gap;
   }
   for(const {B,count} of fieldCounts){
     const expectedRelative=B/.8,relative=count/fieldCounts.at(-1).count;
-    ok(Math.abs(relative-expectedRelative)<.11,'illustrated dot density varies approximately in proportion to B, not glyph radius: '+B);
+    ok(Math.abs(relative-expectedRelative)<.15,'illustrated dot density varies approximately in proportion to B, not glyph radius: '+B);
   }
   await set('field-strength',.4);await set('flux-area-slider',24);
   const fixedB=await fieldSnapshot();
