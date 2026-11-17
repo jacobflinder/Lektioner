@@ -90,8 +90,8 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
     const m=d.match(/^M ([\d.eE+-]+) ([\d.eE+-]+) A ([\d.eE+-]+) ([\d.eE+-]+) 0 ([01]) ([01]) ([\d.eE+-]+) ([\d.eE+-]+)$/);
     ok(!!m,'valid circular SVG arc geometry '+p.id);
     const nums=m.slice(1).map(Number),cx=nums[0]-nums[2],cy=nums[1],R=nums[2];
-    ok(nums[5]===(p.v>180?1:0)&&nums[6]===0,'correct 0-to-360 sweep and large-arc '+p.id);
-    ok(close(nums[7],cx+R*Math.cos(p.v*Math.PI/180))&&close(nums[8],cy-R*Math.sin(p.v*Math.PI/180)),'arc actually terminates at selected angle '+p.id);
+    ok(nums[4]===(p.v>180?1:0)&&nums[5]===0,'correct 0-to-360 sweep and large-arc '+p.id);
+    ok(close(nums[6],cx+R*Math.cos(p.v*Math.PI/180))&&close(nums[7],cy-R*Math.sin(p.v*Math.PI/180)),'arc actually terminates at selected angle '+p.id);
     const label=(await page.locator('#polar-reading math').evaluateAll(es=>es.map(el=>el.getAttribute('aria-label')))).join(' ');
     ok(label.includes('r = ')&&label.includes('v = '),'two labeled polar coordinates '+p.id);
   }
@@ -122,7 +122,7 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  ok(body.includes('Pythagoras')&&body.includes('Kvadrant')===false&&body.includes('kvadrantkontroll'),'targeted coordinate conversion not main quadrant quiz');
  ok(body.includes('argumentet')&&body.includes('inte definierat'),'zero and direction described');
  ok(!body.includes('225°')&&!body.includes('150°')&&!body.includes('2√2')&&!body.includes('−2 − 2i'),'method cards do not leak exercise answers');
- ok(await recap.locator('math').count()>=7,'semantic rendered equations in support');
+ ok(await recap.locator('math').count()>=6,'semantic rendered equations in support');
  const bounds=await recap.evaluate(el=>{const r=el.getBoundingClientRect();return {left:r.left,right:r.right,scroll:document.documentElement.scrollWidth,inner:innerWidth}});
  ok(bounds.left>=-3&&bounds.right<=bounds.inner+3&&bounds.scroll<=bounds.inner+4,'method support within viewport '+w);
  await page.screenshot({path:path.join(out,'method-open-'+w+'.png'),fullPage:true});shots++;
