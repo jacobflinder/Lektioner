@@ -29,6 +29,12 @@ await page.locator('#k-show-conj').click();ok(await page.locator('#k-plane circl
 await go(2);ok(await page.locator('#k-modans').isHidden()&&await page.locator('#k-mod-visual').isHidden(),'both answers initially hidden');
 await page.locator('[data-reveal="k-modans"]').click();
 ok(await page.locator('#k-modans').isVisible()&&await page.locator('#k-mod-visual').isVisible(),'diagram accompanies feedback');
+if(w>=1200){
+ const calc=await page.locator('#k-modans').boundingBox(),diagram=await page.locator('#k-mod-visual').boundingBox();
+ ok(calc.y>=-3&&calc.y+calc.height<=h-12,'Entire worked solution visible in single live '+w+'×'+h+' viewport');
+ ok(diagram.y>=-3&&diagram.y+diagram.height<=h-12,'Entire necessary diagram visible in same live '+w+'×'+h+' viewport');
+ ok(Math.abs(calc.y-diagram.y)<10,'Diagram and its mathematical explanation are adjacent after reveal');
+}
 const figure=await page.locator('#k-mod-plane').evaluate(svg=>[...svg.querySelectorAll('line[stroke="#e39c3a"]')].map(e=>[+e.getAttribute('x1'),+e.getAttribute('y1'),+e.getAttribute('x2'),+e.getAttribute('y2')]));
 ok(figure.length===2,'Pythagoras has two visible axis-aligned legs');
 const a=figure[0],b=figure[1];ok(Math.abs(a[1]-a[3])<.01&&Math.abs(b[0]-b[2])<.01,'true orthogonal legs');

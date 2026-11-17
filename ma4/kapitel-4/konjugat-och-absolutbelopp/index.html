@@ -78,7 +78,7 @@ for(const [x,y,label] of [[-1.7,.75,'3'],[-3.7,2.2,'4']]){const t=document.creat
 const square=document.createElementNS(ns,'path');
 square.setAttribute('d','M '+X(-2.55)+' '+Y(0)+' L '+X(-2.55)+' '+Y(.45)+' L '+X(-3)+' '+Y(.45));square.setAttribute('fill','none');square.setAttribute('stroke','#8c632f');square.setAttribute('stroke-width','2.5');svg.append(square);
 const button=document.querySelector('[data-reveal="k-modans"]'),answer=document.getElementById('k-modans'),visual=document.getElementById('k-mod-visual');
-button.addEventListener('click',()=>visual.classList.toggle('hidden',answer.classList.contains('hidden')));
+button.addEventListener('click',()=>{const opening=!answer.classList.contains('hidden');visual.classList.toggle('hidden',!opening);if(opening&&window.innerWidth>=1200){answer.closest('.k-mod-response').scrollIntoView({behavior:'auto',block:'start'})}});
 const recap=document.getElementById('k-method-recap');
 for(const id of ['prev','next','mode'])document.getElementById(id).addEventListener('click',()=>recap.open=false);
 document.getElementById('jump').addEventListener('change',()=>recap.open=false);
