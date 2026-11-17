@@ -113,12 +113,13 @@ function drawInduction(){
     text(497,58,'B från magneten','#13758c',18,'middle');
  if(changing){
   const into=magnet.motion==='in';
-  g+=arrow(into?magnetX+10:magnetX+mw-10,241,
-           into?magnetX+mw-10:magnetX+10,241,'#25896e',4,'motion-vector');
-  g+=text(250,280,into?'Magnet förs in →':'← Magnet dras ut','#198469',18,'middle');
-  g+=arrow(induced>0?425:575,291,induced>0?575:425,291,
+  g+=arrow(into?magnetX+10:magnetX+mw-10,274,
+           into?magnetX+mw-10:magnetX+10,274,'#25896e',4,'motion-vector');
+  g+=text(250,313,into?'Magnet förs in →':'← Magnet dras ut','#198469',18,'middle');
+  // The induced B VECTOR belongs INSIDE the same winding, not below it.
+  g+=arrow(induced>0?425:575,226,induced>0?575:425,226,
            '#c17443',5,'induced-vector')+
-     text(499,324,'B inducerat','#ae6a3d',19,'middle');
+     text(499,290,'B inducerat i spolen','#ae6a3d',18,'middle');
  }else g+=text(264,286,'Stilla inne i spolen · U = 0','#23896e',19,'middle');
  g+=text(40,35,'SCHEMATISKA LÄGEN – INTE MÄTNING','#59747f',16)+
     text(512,36,'Spolens axel →','#846b55',17,'middle');
@@ -168,7 +169,8 @@ function drawPipe(){
   g+=arrow(463,188,463,98,'#bf7341',5,'pipe-drag')+text(477,101,'Bromskraft ↑','#b46c3e',19);
  }else{
   g+='<rect data-pipe-body="ordinary" x="324" y="127" width="49" height="92" rx="7" fill="#9baeb7" stroke="#496875" stroke-width="2"/>'+
-   text(348,170,'ej magnet','#fff',12,'middle');
+   text(348,160,'Icke','#fff',14,'middle')+
+   text(348,183,'magnet','#fff',12,'middle');
  }
  g+=arrow(222,112,222,217,'#24896f',4,'pipe-speed')+text(174,116,'v ↓','#16836e',20)+
  arrow(515,127,515,238,'#a34f45',4,'pipe-gravity')+text(530,237,'mg ↓','#a34f45',19)+

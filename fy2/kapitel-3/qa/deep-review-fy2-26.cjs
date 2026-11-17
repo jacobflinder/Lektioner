@@ -162,8 +162,14 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   if(ind!==0){
    const arrow=await vector('#demo-induction line.induced-vector');
    test(Math.sign(arrow.x2-arrow.x1)===ind,'SVG Lenz direction correct '+pole+','+motion);
+   const inducedArrow=await vector('#demo-induction line.induced-vector');
+   test(inducedArrow.y1===226&&inducedArrow.y2===226&&
+    inducedArrow.y1>102&&inducedArrow.y1<254,
+    'induced field drawn THROUGH the winding, not visually outside it '+pole+','+motion);
    const movement=await vector('#demo-induction line.motion-vector');
    test(Math.sign(movement.x2-movement.x1)===delta,'actual SVG magnet motion correct '+pole+','+motion);
+   test(movement.y1===274&&movement.y2===274,
+    'separate magnet motion indication lies below the winding '+pole+','+motion);
   }
   const msg=await page.locator('#demo-induction-text').innerText();
   test(msg.includes(motion==='still'?'U = 0':'voltmeterns plus/minus'),'avoid invented measured polarity '+pole+','+motion);
@@ -206,6 +212,14 @@ const almost=(a,b,tol=1e-6)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
   const actualBody=await page.locator('#demo-pipe rect[data-pipe-body]').evaluateAll(es=>
    es.map(e=>({x:+e.getAttribute('x'),y:+e.getAttribute('y'),
     w:+e.getAttribute('width'),h:+e.getAttribute('height')})));
+  if(body==='ordinary'){
+   const pieces=await page.locator('#demo-pipe text').evaluateAll(es=>
+    es.filter(e=>['Icke','magnet'].includes(e.textContent)).map(e=>{
+     const b=e.getBBox();return {value:e.textContent,x:b.x,right:b.x+b.width,y:b.y,bottom:b.y+b.height}
+    }));
+   test(pieces.length===2&&pieces.every(x=>x.x>=324&&x.right<=373&&x.y>=127&&x.bottom<=219),
+    'both lines of nonmagnetic control label fit INSIDE comparison object');
+  }
   test(JSON.stringify(actualBody)===JSON.stringify([{x:324,y:127,w:49,h:92}]),
    'magnet and nonmagnetic comparison objects have same visible size and location '+body);
   const eddyLoops=await page.locator('#demo-pipe ellipse[data-eddy-loop]').evaluateAll(es=>
