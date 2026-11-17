@@ -16,6 +16,25 @@ fs.mkdirSync(out,{recursive:true});
   const response=await page.goto('http://127.0.0.1:8123/fy2/kapitel-3/demonstrationer-elektromagnetism/',{waitUntil:'domcontentloaded'});
   assert(response&&response.ok(),'demo lesson must load');checks++;
   assert.equal(await page.locator('.slide').count(),6,'original six demo slides preserved');checks++;
+  // The projector view must place the explanatory force diagram beside the formula.
+  await page.selectOption('#jump','1');
+  await page.locator('.slide.active button[data-reveal]').first().click();
+  for(const width of [1280,1920]){
+    await page.setViewportSize({width,height:width===1280?800:1080});
+    const p=await page.evaluate(()=>{
+      const slide=document.querySelector('.slide.active');
+      const fig=slide.querySelector('.answer .demo-panel>.diagram').getBoundingClientRect();
+      const proof=slide.querySelector('#force-magnitude-explanation').getBoundingClientRect();
+      return {fig:{left:fig.left,right:fig.right,top:fig.top,width:fig.width},
+        proof:{left:proof.left,right:proof.right,top:proof.top,width:proof.width},
+        scroll:document.documentElement.scrollWidth,inner:window.innerWidth};
+    });
+    assert(p.proof.left>=p.fig.right-10 && Math.abs(p.proof.top-p.fig.top)<48,
+      'force model and explanatory formula must be adjacent at '+width+': '+JSON.stringify(p));checks++;
+    assert(p.scroll<=p.inner+5,'no figure/math horizontal overflow at '+width);checks++;
+    await page.screenshot({path:path.join(out,'force-and-formula-'+width+'.png'),fullPage:true});images++;
+  }
+  await page.setViewportSize({width:1280,height:800});
   await page.selectOption('#jump','5');
   const work=page.locator('.slide.active');
   const txt=await work.innerText();
