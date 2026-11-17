@@ -301,6 +301,9 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
     if(n===6){await set('rod-B',.8);await page.locator('#rod-start').click();await page.locator('#rod-show').click();}
     if(n===12){await set('flux-B',.8);await set('flux-A',.16);await set('flux-theta',135);await page.locator('#flux-angle-show').click();}
     const id=n===6?'#ind-rod-dynamic':'#ind-flux-angle';
+    // A viewport check must begin at the top of the requested slide; a prior
+    // full-page mobile scroll can otherwise make an intact SVG have negative Y.
+    await page.evaluate(()=>window.scrollTo(0,0));
     const box=await page.locator(id+' svg').boundingBox();
     check(!!box&&box.width>=Math.min(vp.width-40,280)&&box.height>=140,'core SVG has readable pixel area '+vp.name+' slide '+n);
     if(vp.width===390){
@@ -313,6 +316,19 @@ const val=x=>Number(String(x).replace(/\s/g,'').replace('−','-').replace(',','
     }
     if(vp.width===1280){
      check(box.y>=0&&box.y+box.height<=800,'main explanation SVG above classroom viewport fold '+n+' '+JSON.stringify(box));
+     const result=page.locator(n===6?'#rod-result':'#flux-angle-result');
+     await result.scrollIntoViewIfNeeded();
+     const figure=await page.locator(id+' svg').boundingBox();
+     const equation=await result.locator('.calc-chain math').first().boundingBox();
+     check(!!figure&&!!equation&&figure.y<equation.y+equation.height&&figure.y+figure.height>equation.y,
+       'sticky diagram remains visible together with current calculation after scrolling '+n);
+     await page.evaluate(()=>window.scrollTo(0,0));
+    }
+    if(n===6){
+      const labels=await page.locator('#ind-rod-dynamic svg text').evaluateAll(es=>es.filter(e=>e.textContent.startsWith('B =')||e.textContent.startsWith('L =')).map(e=>{
+       const box=e.getBBox();return {label:e.textContent,x:box.x,right:box.x+box.width,w:e.ownerSVGElement.viewBox.baseVal.width};
+      }));
+      check(labels.length===2&&labels.every(e=>e.x>=0&&e.right<=e.w),'magnetic-field and L labels fit in actual SVG width '+vp.name+' '+JSON.stringify(labels));
     }
     const widths=await page.evaluate(()=>[innerWidth,document.documentElement.scrollWidth]);
     check(widths[1]<=widths[0]+2,'no horizontal overflow for enriched figure '+vp.name+' slide '+n);
