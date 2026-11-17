@@ -22,4 +22,4 @@
 .i-cycle-cell strong{display:block;color:#123d57;font-size:1.42rem;line-height:1.3}
 .i-cycle-cell small{display:block;color:#466679;font-size:.84rem}
 .i-cycle-caption{font-size:.9rem;color:#3d6273;margin:5px 0 13px}
-@media(max-width:650px){.i-cycle{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.i-cycle-cell:not(:last-child)::after{display:none}.i-cycle-caption{font-size:.88rem}}
+@media(max-width:650px){.i-cycle{grid-template-columns:minmax(0,1fr);gap:27px;max-width:285px;margin:12px auto}.i-cycle-cell:not(:last-child)::after{display:block;content:"↓ × i";top:auto;bottom:-27px;left:50%;right:auto;transform:translateX(-50%);font-size:.86rem;white-space:nowrap}.i-cycle-caption{font-size:.88rem}}
