@@ -4,6 +4,7 @@
 .k-mod-visual{margin:0;padding:16px;border:1px solid #c7dce8;border-radius:14px;background:#f5fafc}
 .k-mod-visual svg{display:block;width:100%;height:auto;max-height:320px}
 .k-mod-visual .muted{margin:6px 0 0;line-height:1.45}
+.k-mod-visual .plot text.k-leg-label{font:700 19px system-ui;fill:#775225;stroke:#f5fafc;stroke-width:3;paint-order:stroke fill}
 .v23-k-recap{margin:20px 0 4px;border:2px solid #bdd4e1;border-radius:14px;background:#f6fafc;padding:12px 18px}
 .v23-k-recap summary{cursor:pointer;font-weight:750;line-height:1.5;padding:7px 2px}
 .v23-k-recap summary:focus-visible{outline:3px solid #156d96;outline-offset:4px}
@@ -73,7 +74,7 @@ segments:[{x1:0,y1:0,x2:-3,y2:0,color:'#e39c3a',width:4},{x1:-3,y1:0,x2:-3,y2:4,
 vectors:[{x:-3,y:4,label:'z',color:'blue',dx:-24,dy:-12},{x:-3,y:-4,label:'z̄',color:'orange',dx:-24,dy:24}],
 points:[{x:-3,y:4,color:'blue'},{x:-3,y:-4,color:'orange'}]});
 const ns='http://www.w3.org/2000/svg',X=result.X,Y=result.Y;
-for(const [x,y,label] of [[-1.75,-.4,'3'],[-3.7,2.2,'4']]){const t=document.createElementNS(ns,'text');t.setAttribute('x',X(x));t.setAttribute('y',Y(y));t.setAttribute('font-size','17');t.setAttribute('font-weight','700');t.setAttribute('fill','#775225');t.textContent=label;svg.append(t)}
+for(const [x,y,label] of [[-1.7,.75,'3'],[-3.7,2.2,'4']]){const t=document.createElementNS(ns,'text');t.setAttribute('x',X(x));t.setAttribute('y',Y(y));t.setAttribute('class','k-leg-label');t.setAttribute('font-size','19');t.setAttribute('font-weight','700');t.setAttribute('fill','#775225');t.textContent=label;svg.append(t)}
 const square=document.createElementNS(ns,'path');
 square.setAttribute('d','M '+X(-2.55)+' '+Y(0)+' L '+X(-2.55)+' '+Y(.45)+' L '+X(-3)+' '+Y(.45));square.setAttribute('fill','none');square.setAttribute('stroke','#8c632f');square.setAttribute('stroke-width','2.5');svg.append(square);
 const button=document.querySelector('[data-reveal="k-modans"]'),answer=document.getElementById('k-modans'),visual=document.getElementById('k-mod-visual');

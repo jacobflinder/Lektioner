@@ -33,6 +33,11 @@ const figure=await page.locator('#k-mod-plane').evaluate(svg=>[...svg.querySelec
 ok(figure.length===2,'Pythagoras has two visible axis-aligned legs');
 const a=figure[0],b=figure[1];ok(Math.abs(a[1]-a[3])<.01&&Math.abs(b[0]-b[2])<.01,'true orthogonal legs');
 ok(Math.abs(Math.hypot(a[2]-a[0],a[3]-a[1])/Math.hypot(b[2]-b[0],b[3]-b[1])-3/4)<.001,'exact 3-to-4 ratio');
+const labels=page.locator('#k-mod-plane text.k-leg-label');
+ok(await labels.count()===2,'both 3/4 side labels in graphic');
+const label3=await labels.first().boundingBox();
+const axisY=await page.locator('#k-mod-plane line[stroke="#526e7e"]').evaluateAll(es=>{const e=es.find(x=>x.getAttribute('y1')===x.getAttribute('y2'));return e?e.getBoundingClientRect().top:null});
+ok(axisY!==null&&label3.y+label3.height<axisY-2,'length 3 stays visibly above axis and cannot collide with −2 tick');
 await page.screenshot({path:path.join(out,'modulus-revealed-'+w+'.png'),fullPage:true});shots++;
 await page.locator('[data-reveal="k-modans"]').click();ok(await page.locator('#k-mod-visual').isHidden(),'diagram closes with mathematical answer');
 await go(3);const seq=page.locator('#k-product [data-sequence]');
