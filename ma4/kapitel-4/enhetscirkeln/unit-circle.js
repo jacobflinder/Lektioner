@@ -76,6 +76,7 @@ function chooseTab(name){
  $('learn-prompt').hidden=name!=='study';
  $('practice-guide').hidden=name==='study'||name==='foundation';
  $('practice-focus-wrap').hidden=name!=='train';
+ const recap=$('v23-recap');recap.open=false;recap.hidden=name!=='train';
  if(name==='foundation')return;
  if(name==='study')renderStudy();
  else{
@@ -245,6 +246,8 @@ function hint(q){
  return 'Till höger är cos positiv, till vänster negativ; ovanför axeln är sin positiv, nedanför negativ.';
 }
 function startSession(session){
+ // Every new practice round starts with the recap collapsed: retrieval first, help on demand.
+ $('v23-recap').open=false;
  mode=session;queue=makeQuestions(session,focus);cursor=0;firstTry=0;answeredBase=0;misses=0;
  $('result').hidden=true;$('quiz-area').hidden=false;
  setText('round-type',session==='challenge'?'Snabbkoll · 6 frågor':'Övningsrunda · 12 frågor');
