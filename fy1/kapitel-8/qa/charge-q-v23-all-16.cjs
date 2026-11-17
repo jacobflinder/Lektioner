@@ -83,7 +83,7 @@ function analyseSource(rel,src,lesson){
        if(id==='fy1/elektriska-falt'){
          await page.selectOption('#jump','8');
          await page.locator('#step').click();
-         const first=await page.locator('.slide.active .step.open math').first().innerText();
+         const first=await page.locator('.slide.active .step.open math').first().textContent();
          verify(first.includes('q')&&first.includes('U'),'Fy1 actual revealed work uses q and U');
          for(const width of [390,1280]){
            await page.setViewportSize({width,height:width===390?844:800});
