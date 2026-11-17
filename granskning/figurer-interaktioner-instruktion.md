@@ -1,11 +1,11 @@
-# Kravspecifikation v2.2 – figur-, visualiserings- och interaktionsgranskning
+# Kravspecifikation v2.3 – figur-, visualiserings- och interaktionsgranskning
 
 **Projekt:** 41 interaktiva webblektioner · `jacobflinder/Lektioner`  
 **Fastställd:** 17 november 2026  
 **Omfattning:** Fy2, Ma4, Fy1 och Matematik – fortsättning nivå 1c (tidigare Ma3c)  
-**Historik:** v2.0 infördes när 3 av 41 lektioner hade figurgranskats. Vid v2.1-revisionen var 7 av 41 genomgångna; v2.2 införs efter 10 genomgångna och 5 återöppnade magnetismlektioner. Den äldre matematikgranskningen 41/41 är ett separat arbete.
+**Historik:** v2.0 infördes när 3 av 41 lektioner hade figurgranskats; v2.1 efter 7; v2.2 efter 10 och riktad magnetfältseftergranskning av fem lektioner. **v2.3 beslutas 17 november 2026 efter 11/41 figurgranskade lektioner**, för att införa en systematisk laddningsnotationskontroll i Fy1/Fy2 och en lektionsspecifik sammanfattning i arbetsvyn i alla 41 lektioner. Den äldre matematikgranskningen 41/41 är ett separat arbete.
 
-Denna version ersätter v2.1 av figurinstruktionen. Fysikprinciperna för homogena och inhomogena magnetfält samt skillnaden mellan ändrat B och ändrad area A är förtydligade. Den bygger på konkreta erfarenheter från **Fy2 Ström ger magnetfält**, **Ma4 Polynomdivision** och **Fy1 Serie- och parallellkoppling**. Allt nedan gäller även för omgranskning av tidigare färdigställda lektioner när en ny brist upptäcks.
+Denna version ersätter v2.2 av figurinstruktionen. Fysikprinciperna för homogena och inhomogena magnetfält samt skillnaden mellan ändrat B och ändrad area A är förtydligade. Den bygger på konkreta erfarenheter från **Fy2 Ström ger magnetfält**, **Ma4 Polynomdivision** och **Fy1 Serie- och parallellkoppling**. Allt nedan gäller även för omgranskning av tidigare färdigställda lektioner när en ny brist upptäcks.
 
 **SKA** = obligatoriskt godkännandekrav. **BÖR** = stark rekommendation med motivering om den inte följs. En lektion blir inte godkänd genom antal utförda ändringar, antal tester eller att alla automatiska tester är gröna: **eleven måste faktiskt kunna se, tolka och använda den förklarande representationen**.
 
@@ -24,7 +24,8 @@ En figur SKA tillföra en tydlig förståelsevinst. Fler bilder, fler knappar oc
 - Läs `AGENTS.md`, denna instruktion, `granskning/figurer-interaktioner.md`, aktuell lektion, lärarstöd, dess relevanta tester och nödvändiga källfiler **innan** åtgärder.
 - Registret har **41 fasta, unika lektionsposter**. Registreringsnummer och antal färdiggranskade är olika saker: exempelvis är Polynomdivision post #23 men var den andra faktiskt granskade lektionen.
 - Grundordningen är **Fy2 → Ma4 → Fy1 → Matematik – fortsättning nivå 1c** i kursens undervisningsordning. **Användarens uttryckligen valda lektion eller URL har alltid företräde.**
-- Granska och ändra **exakt en lektion i taget**. En direkt rättelse i redan granskad lektion räknas inte som en ny granskad lektion.
+- Granska och ändra **exakt en lektion i taget**, med riktade tvärkursinventeringar som uttryckligen godkänts av användaren. En direkt rättelse i redan granskad lektion räknas inte som en ny granskad lektion.
+- **Övergång till v2.3 – uttryckligt uppdrag 17 november:** inventera laddningsnotation i **alla 16 Fy1/Fy2-lektioner** och rätta verifierade beteckningsfel; återgranska sedan **de 11 redan figurgranskade lektionerna** enligt v2.3 och inför korrekt sammanfattning i arbetsvyn innan **någon av de återstående 30** går vidare till ordinarie figurgranskning. För varje lektionsändring gäller separat QA, publiceringsverifiering och loggad status. En gemensam ämnesinventering är inte en ny fullständig figurgranskning. Lärarens uttryckliga uppdrag medger arbete genom dessa två förberedande etapper; ordinarie nya lektioner kräver efteråt ett nytt beslut.
 - Efter verifierad publicering får lektionen status **klar för användargranskning** och redovisas i chatten. **Stanna därefter.** Användarens uttryckliga **”nästa”** eller val av annan lektion tillåter fortsatt arbete; synpunkter på den aktuella lektionen hanteras före nästa. Ett chattbyte är inte tillstånd att fortsätta.
 - Berörs delade komponenter SKA deras effekter regressionstestas, utan att övriga lektioner börjar fullgranskas.
 - Ändra inte användarens uppskjutna frågor i smyg. Notera öppna anmärkningar och vilket delområde som är godkänt.
@@ -117,6 +118,31 @@ Inspektera inte bara SVG-värden; granska **synliga linjeändar och komponentfor
 5. Kontrollera figurernas **faktiska pixlar** på 390, 768, 1280 och 1920 px, före/efter samt med aktuell formel intill. Enbart grön DOM-teststatus eller en textetikett räcker inte. För tidigare godkända men bristfälliga lektioner: status **åtgärd krävs** tills ny fysik-, renderings- och publiceringsverifiering är klar.
 
 **Historik för fem riktade återgranskningar, inte fem nya lektioner:** Fy2 #1 Ström ger magnetfält, #3 Permanentmagneter, #5 Spolar och solenoider, #6 Laddade partiklar, #8 Induktion. Rättningsordning: #8 → #6 → #3 → #5 → #1. Behåll samtliga ursprungliga uppgifter, demonstrationer, stegvis matematik, lärarstöd och relevanta tester.
+## 7B. Konsekvent notation för elektrisk laddning (v2.3 – blockerande)
+
+**Omfattning:** Samtliga **16 fysiklektioner**, Fy1 6/6 och Fy2 10/10, oavsett om de tidigare har figurgranskats. Inventera **hela den elevsynliga lektionen**, inklusive formler, MathML/LaTeX, löptext, figurer, axlar, reglage, svar, förklaringar, dolda lösningar, självtest, lärarstöd och offline-/exportversioner. Åtgärda enbart verifierade fel; inga blinda sök-och-ersätt-operationer.
+
+- **SKA:** `q` (eventuellt `q₁`, `q₂`, `q_e`, `q_p`) betecknar en **godtycklig enskild laddning eller en viss partikels laddning**. `Q` får användas konsekvent för total/nettoladdning när den distinktionen hjälper. Laddningens tecken ska framgå där det påverkar fysiken.
+- **SKA:** `e = 1,602 176 634 · 10⁻¹⁹ C` är **elementarladdningens positiva belopp**, inte en allmän variabel för laddning. Elektronens laddning `q_e = −e`, protonens `q_p = +e`. Sambandet `q = ne` används bara med tydligt definierat **tecknat heltal** `n`; för ett positivt antal elektroner `N` gäller exempelvis `Q = −Ne`. Antalet partiklar är inte samma sak som laddningen.
+- **SKA:** vektor- och teckensamband uttrycks ämneskorrekt, exempelvis \(\vec F_\mathrm E=q\vec E\) och \(\vec F_\mathrm B=q(\vec v\times\vec B)\). Ett uttryck för **kraftens belopp** får inte ge negativt belopp för elektron; använd exempelvis \(F=|q|vB\sin\theta\) där det är didaktiskt nödvändigt och förklara varför, alternativt skilj konsekvent på vektorriktning och positiv storlek.
+- **SKA:** skilj på `e` som elementarladdning och andra legitima betydelser, exempelvis matematikens Eulertal `e`, energi `E`, elektrisk fältstyrka `E`, ems, exponenter och HTML-identifierare. Ändra inte sådana uttryck mekaniskt.
+- **SKA:** samma laddningsbeteckning används i elevfråga, figur, formel, facit, reglage och förklaring. Om boken har annan notation får denna förklaras uttryckligt i stället för att man osynligt byter symbol mellan leden.
+
+**Verifiering:** dokumentera varje hittad laddningsförekomst med fil/bild, roll (godtycklig laddning/elementarladdning/annat), beslut och eventuell korrigering. Lägg riktade regressionstester för såväl positiva som negativa partiklar, tecken, beräkningar och vyer. Kontrollera synlig HTML, dynamisk MathML/SVG, dolda facit och offline-export efter korrigering. Ett felaktigt `e` i betydelsen generell laddning blockerar v2.3-godkännande.
+
+## 7C. Lektionsspecifik sammanfattning i arbetsvyn (v2.3 – blockerande)
+
+**Omfattning:** samtliga **41** lektioner. Den vy/sektion där eleverna får instruktioner för **eget bokarbete eller motsvarande självständigt arbete** SKA ha en kort, tydlig och ämnesspecifik sammanfattning av **centrala formler, samband, begreppsskillnader eller metodsteg som redan behandlats i den aktuella lektionen**. Om lektionen saknar ett separat bokarbetskort integreras sammanfattningen vid motsvarande övergång till självständigt arbete, inte som en ny orelaterad slide.
+
+- **SKA:** ingen ny lära, ingen allmän formelbank och inga lösningsfacit; välj typiskt 2–5 verkligt relevanta samband eller färre när det räcker. Ändra inte befintliga uppgiftsnummer, sidor, läxor, demos eller Socrative.
+- **SKA:** återge notation, villkor, enheter, tecken och begrepp konsekvent med genomgången. Ge en *kort* symbolförklaring där en elev annars riskerar att feltolka uttrycket. Ett samband ska vara fysikaliskt/matematiskt sant även för gräns- och specialfall, eller tydligt märkt med sina antaganden.
+- **SKA:** formel/metod och dess korta beteckning kan läsas vid sidan av **vad eleven ska arbeta med**, i befintlig arbetsvy, med tydlig hierarki och semantisk matematiktypografi. Ingen oläslig minitext, överlappning eller onödigt scrollavstånd på 390/768/1280/1920 px.
+- **SKA:** eleven får **visa/dölja** stödet med en tydlig, tangentbords- och touchanvändbar kontroll som har begriplig status, utan inloggning, sparade persondata eller nätverksanrop. Uppmuntra gärna eleven att först försöka minnas sambandet och sedan visa stödet vid behov; gör inte återkallning till en spärr som hindrar elever som behöver hjälp.
+- **SKA:** när *valet av formel eller metod* är själva det som testas i en fråga får sammanfattningen inte läcka uppgiftens lösningsstrategi eller facit i förtid. Placera då valet/återkallningen före stödet, eller gör en ämnesdidaktiskt motiverad avgränsning. Stödet får aldrig skriva över den fördröjda återkopplingslogiken.
+- **SKA:** kontrollera att sammanfattningen stämmer mot **just denna lektions genomgång och originalinnehåll**, inte mot närliggande lektioner eller en kursmall. För Ma4/Ma3c kan ett begrepp eller ett stegvis förfarande vara mer användbart än ännu en formel.
+
+**Verifiering:** för varje lektion dokumenteras (1) lärandemål och redan introducerade samband, (2) vilka som valdes/bortvaldes med motivering, (3) var arbetsvyn ligger, (4) stödets före-/efter-/dölj-/reset-tillstånd, (5) inga facitläckor, (6) faktiskt läsbara mobil-, dator- och projektorvyer, och (7) bevarade bokuppgifter/demonstrationer/läxor. Bygg stabila regressionstester som kontrollerar både innehåll och verklig användbarhet. Saknad eller missvisande sammanfattning blockerar **nytt v2.3-godkännande**, men upphäver inte historieskrivning om tidigare godkända versioner.
+
 ## 8. Visuella strukturer i matematik
 
 För polynomdivision och andra uppställningar SKA **termer med samma grad ligga i samma visuella kolumn**. Visa vilken kolumn som är aktuell utan att avslöja elevens nästa steg. En nollkoefficient, exempelvis `0x²`, SKA behålla sin gradplats.
@@ -195,6 +221,8 @@ Markera **ÅTGÄRD KRÄVS** om något av följande kvarstår:
 - Lösningsbilden skrivs över av en senare renderare, försvinner vid omstart eller visar ett äldre tillstånd.
 - Figuren kräver oacceptabel scrollning eller beskärs i dator-/projektorvyn.
 - Originaluppgifter, Socrative eller demonstrationer försvinner utan uttryckligt godkännande.
+- Laddning betecknas felaktigt med (e) som generell variabel, eller ett tecknat partikelvärde ger falsk riktning/storlek i fysikvyn.
+- Arbetsvyn saknar lektionens relevanta sammanfattning, visar missvisande samband eller läcker elevens problemlösning innan eget försök.
 - Obligatoriska testfall saknas, riktiga skärmbilder är ogranskade, tester fallerar eller publicerad kod inte har verifierats.
 
 **Mindre dokumenterade begränsningar** (till exempel normal vertikal mobilscroll, ej tillgång till fysisk skolprojektor, avgränsade Safari-test) kan redovisas separat; de får inte beskrivas som utförda eller godkända tester.
@@ -202,11 +230,11 @@ Markera **ÅTGÄRD KRÄVS** om något av följande kvarstår:
 ## 15. Arbetsgång för exakt en lektion
 
 1. Läs senaste kod, `AGENTS.md`, denna specifikation och permanenta loggen.
-2. Fastställ lärandemål och gör en **bild-för-bild-inventering**, inklusive det som saknas.
+2. Fastställ lärandemål och gör en **bild-för-bild-inventering**, inklusive det som saknas; kontrollera förekomsten och behovet av lektionsspecifik sammanfattning i arbetsvyn samt laddningsnotation i Fy1/Fy2.
 3. Skriv en konkret fellista, risken för elevens förståelse och vad som ska vara synligt **före/efter** återkoppling.
 4. Definiera förväntade ämnessamband, grafisk geometri och oberoende testfall.
 5. Ändra lektionskod och komplettera test/ lärarstöd **utan att radera matematiken**.
-6. Testa samtliga diskreta funktioner, ett dokumenterat urval av relevanta kontinuerliga värden och felavslöjande kombinationer, reset, navigering och facitdöljning.
+6. Testa samtliga diskreta funktioner, ett dokumenterat urval av relevanta kontinuerliga värden och felavslöjande kombinationer, reset, navigering och facitdöljning. Testa även sammanfattningens visning/döljning och att beteckningar blir rätt i synliga/dolda/offline-former.
 7. Granska den faktiska renderingen i alla föreskrivna storlekar; vid behov justera och testa igen.
 8. Kör riktad QA och full relevant kursregression på arbetsgrenen.
 9. Inspektera skärmbilderna och verifiera att resultaten **är begripliga**, inte bara programtekniskt riktiga.
@@ -218,14 +246,14 @@ Markera **ÅTGÄRD KRÄVS** om något av följande kvarstår:
 
 Loggen `granskning/figurer-interaktioner.md` SKA överst visa:
 
-- Redovisa separat **antal genomgångna av 41**, **antal för närvarande godkända av 41** och **senast behandlad lektions titel/registreringsnummer**, utan att blanda ihop dessa. Ange uttryckligen vilken kravversion varje lektion granskats mot.
+- Redovisa separat **antal genomgångna av 41**, **antal för närvarande godkända av 41**, **antal av de 11 tidigare granskade som omverifierats enligt v2.3** och **senast behandlad lektions titel/registreringsnummer**, utan att blanda ihop dessa. Ange uttryckligen vilken kravversion varje lektion granskats mot.
 - Aktuell status: `ej påbörjad`, `analyseras`, `åtgärdas`, `verifieras`, `åtgärd krävs`, `klar` eller `blockerad`.
 - **Vad som saknades eller var fel**, hur elevförståelsen påverkades, vad som ändrades och vilka ursprungliga moment som bevarades.
 - **Vad som faktiskt är verifierat**: egna kontrollfall, kod/ämnescheck, Chromium-/pixelresultat, manuellt granskade bilder, tillstånd före/efter, skärmstorlekar, full regression, commit och Pages. Redovisa uttryckligen det som ännu inte testats.
 - **Öppna anmärkningar**, inklusive problem läraren uttryckligen skjutit upp; skilj visuellt godkännande från full ämnesgranskning.
 - **Nästa handling** och om användarens `nästa` inväntas. Ange föreslagen nästa post men påbörja den aldrig automatiskt.
 
-Om en **blockerande brist** upptäcks i en tidigare färdig lektion ändras dess aktuella status till **åtgärd krävs**. Behåll tidigare godkännande i historiken, men räkna inte lektionen bland för närvarande godkända förrän den återverifierats. Äldre godkännanden innebär aldrig automatiskt godkännande enligt v2.2.
+Om en **blockerande brist** upptäcks i en tidigare färdig lektion ändras dess aktuella status till **åtgärd krävs**. Behåll tidigare godkännande i historiken, men räkna inte lektionen bland för närvarande godkända förrän den återverifierats. Äldre godkännanden innebär aldrig automatiskt godkännande enligt v2.3.
 
 Avsluta rapporten med:
 
