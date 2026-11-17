@@ -43,6 +43,31 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok((await slide().innerText()).includes('2 minuter')&&(await slide().innerText()).includes('3 minuter'),'own recall before pair comparison');
   await slide().locator('button[data-reveal]').click();
   ok(await slide().locator('.answer').isVisible(),'four conceptual formula cards revealed');
+  // v2.2 independently inspect rendered cross-product geometry in both
+  // component planes instead of accepting answer text without a figure.
+  ok(await slide().locator('.recall-check-svg').count()===2,'two actual diagrams for student field-triangle sketches');
+  const endpoints=async(sel)=>slide().locator(sel).evaluate(el=>{
+   const a=el.getPointAtLength(0),b=el.getPointAtLength(el.getTotalLength());
+   return {x0:a.x,y0:a.y,x1:b.x,y1:b.y,dx:b.x-a.x,dy:b.y-a.y};
+  });
+  const sideH=await endpoints('[data-recall-plane="vertical"] [data-recall-bh]'),
+   sideV=await endpoints('[data-recall-plane="vertical"] [data-recall-bv]'),
+   sideB=await endpoints('[data-recall-plane="vertical"] [data-recall-b]');
+  ok(near(sideH.dy,0)&&sideH.dx>0&&near(sideV.dx,0)&&sideV.dy>0,
+    'inclination feedback Bh horizontal, Bv vertically down');
+  ok(near(sideH.x1,sideV.x0)&&near(sideH.y1,sideV.y0)&&
+   near(sideB.x0,sideH.x0)&&near(sideB.y0,sideH.y0)&&
+   near(sideB.x1,sideV.x1)&&near(sideB.y1,sideV.y1),
+   'inclination triangle is physically closed with shared vector endpoints');
+  const topH=await endpoints('[data-recall-plane="horizontal"] [data-recall-bh]'),
+   topSp=await endpoints('[data-recall-plane="horizontal"] [data-recall-bsp]'),
+   topB=await endpoints('[data-recall-plane="horizontal"] [data-recall-result]');
+  ok(near(topH.dx,0)&&topH.dy<0&&topSp.dx>0&&near(topSp.dy,0),
+    'compass plane: horizontal Earth B north, coil field east, perpendicular');
+  ok(near(topH.x0,topSp.x0)&&near(topH.y0,topSp.y0)&&
+    near(topB.dx,topH.dx+topSp.dx)&&near(topB.dy,topH.dy+topSp.dy),
+    'compass resultant is exactly the drawn Bh + Bsp vector sum');
+
   ok(await slide().locator('.recall-item').count()===4,'particle, conductor, earth, horizontal compass separate');
   for(const num of [0,1,2,3])ok((await slide().locator('.recall-item').nth(num).locator('math').count())===([1,1,2,1][num]),'own MathML block count category '+num);
   const earthRows=await rect('.slide.active .two-equations>.math-sm');
@@ -70,6 +95,27 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok(await slide().locator('.answer.open').count()===0,'exit initially all hidden');
   ok(await slide().locator('.electron-question svg').count()===1,'student figure e right, B in with F missing');
   ok(await slide().locator('.electron-question svg .force-result').count()===0,'no force arrow leak in question SVG');
+  // v2.2: homogeneous B crosses must cover BOTH sides of the electron.
+  const getField=async(selector)=>slide().locator(selector+' [data-b-cross]').evaluateAll(es=>es.map(e=>({
+   x:Number(e.dataset.bX),y:Number(e.dataset.bY),row:Number(e.dataset.bRow),col:Number(e.dataset.bCol),
+   dir:e.dataset.bCross,width:e.getBBox().width,height:e.getBBox().height,
+   opacity:e.getAttribute('stroke-opacity'),stroke:e.getAttribute('stroke'),outer:e.outerHTML
+  })));
+  const field0=await getField('.electron-question');
+  ok(field0.length===15,'homogeneous field has all 15 crossings in a regular 5×3 grid');
+  const gx=[...new Set(field0.map(p=>p.x))].sort((a,b)=>a-b),
+        gy=[...new Set(field0.map(p=>p.y))].sort((a,b)=>a-b);
+  ok(gx.length===5&&gy.length===3&&
+     gx.slice(1).every((x,i)=>near(x-gx[i],84))&&
+     gy.slice(1).every((y,i)=>near(y-gy[i],47)),
+     'uniform horizontal and vertical nearest-neighbour field crossing gaps');
+  ok(field0.every(p=>p.dir==='into'&&near(p.width,12,.1)&&near(p.height,12,.1)&&
+      p.opacity==='.62'&&p.stroke==='#39809a'),
+     'all uniform B-crosses retain constant size, style, direction and no rings');
+  ok(field0.some(p=>p.x<95&&p.y<94)&&field0.some(p=>p.x>95&&p.y>94),
+     'electron genuinely INSIDE field, with marks spanning both sides, not left of field');
+  ok(field0.every(p=>p.x>5&&p.x<440&&p.y>35&&p.y<178),'all marks within actual diagram');
+
   ok((await slide().locator('.electron-question svg').getAttribute('aria-label')).includes('Kraftens riktning är dold tills du visar svaret'),'accessibility: no force direction spoiled');
   ok(await slide().locator('.physics-givens math').count()===2,'B=40uT and i=60 degrees independently rendered');
   const givens=await rect('.slide.active .physics-givens>.math-sm');
@@ -84,6 +130,25 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   ok(await slide().locator('.answer').nth(1).isVisible()===false,'do not show earth concepts early');
   const force=await slide().locator('.answer.open .force-result').getAttribute('d');
   const p=path(force);ok(!!p&&p.dx===0&&p.dy>0,'actual feedback SVG force points downward');
+  ok(p&&near(p.x,95)&&near(p.y,94),'force SVG arrow begins at electron CENTER (95,94)');
+  const layerOrder=await slide().locator('.answer.open .electron-svg').evaluate(svg=>{
+   const all=[...svg.children],force=svg.querySelector('.force-result'),
+         charge=svg.querySelector('circle[cx="95"][cy="94"]'),minus=svg.querySelector('text[fill="#146e86"]');
+   return {force:all.indexOf(force),charge:all.indexOf(charge),minus:all.indexOf(minus)};
+  });
+  ok(layerOrder.force>=0&&layerOrder.force<layerOrder.charge&&layerOrder.charge<layerOrder.minus,
+    'real DOM paint order: force begins at center but stays BEHIND charge circle and minus sign');
+  const forceLabel=await slide().locator('.answer.open .electron-svg text[fill="#a34b2d"]').evaluate(e=>({
+   x:+e.getAttribute('x'),y:+e.getAttribute('y'),outline:e.getAttribute('paint-order')
+  }));
+  ok(forceLabel.x<95&&forceLabel.y>94&&forceLabel.outline==='stroke',
+   'F label placed to LEFT of arrow clear of right-side field crosses');
+  const afterField=await getField('.answer.open');
+  ok(afterField.length===field0.length&&afterField.every((p,i)=>p.outer===field0[i].outer),
+    'field crossings do not move, fade, or change when only F answer is shown');
+  const downTip=await slide().locator('.answer.open .electron-svg polygon[fill="#b65c39"]').getAttribute('points');
+  ok(downTip.startsWith('95,174'),'actual force arrowhead terminates downward');
+
   ok(await slide().locator('.answer').first().locator('.physics-steps math').count()===2,'general qvBsinθ then perpendicular qvB in separate MathML');
   ok((await slide().locator('.answer').first().innerText()).includes('Högerhanden')||(await slide().locator('.answer').first().innerText()).includes('högerhandsregeln'),'right-hand rule and electron charge reversal explained');
   await step(1);
@@ -113,6 +178,18 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
    const ar=await page.locator('#earth-readout').innerText();
    ok(ar.includes(fy2(actualH))&&ar.includes(fy2(actualV)),'rendered independent Bh/Bv numerical values angle '+angleDeg);
    const bvec=path(await dvec('earth-vector-b')),hvec=path(await dvec('earth-vector-h')),vvec=path(await dvec('earth-vector-v'));
+   const labelH=await page.locator('#earth-vector-h-label').textContent(),
+         labelV=await page.locator('#earth-vector-v-label').textContent();
+   const markerH=await page.locator('#earth-vector-h').getAttribute('marker-end'),
+         markerV=await page.locator('#earth-vector-v').getAttribute('marker-end');
+   ok(labelH===(angleDeg===90?'Bₕ = 0':angleDeg===0?'Bₕ = B':'Bₕ →'),
+      'inclination zero horizontal component clearly labeled '+angleDeg);
+   ok(labelV===(angleDeg===0?'Bᵥ = 0':angleDeg===90?'Bᵥ = B':'Bᵥ ↓'),
+      'inclination zero vertical component clearly labeled '+angleDeg);
+   ok((angleDeg===90?markerH==='none':markerH==='url(#earth-h-tip)')&&
+     (angleDeg===0?markerV==='none':markerV==='url(#earth-v-tip)'),
+     'zero-magnitude vectors have no misleading arrowheads '+angleDeg);
+
    ok(!!bvec&&!!hvec&&!!vvec,'all THREE actual SVG vectors angle '+angleDeg);
    ok(near(bvec.dx,172*Math.cos(angleDeg*Math.PI/180),.02)&&near(bvec.dy,172*Math.sin(angleDeg*Math.PI/180),.02),'actual B vector geometry '+angleDeg);
    ok(near(hvec.dy,0,.01)&&near(hvec.dx,bvec.dx,.02),'actual Bh projection geometry '+angleDeg);
@@ -122,6 +199,9 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   await reset();
   ok(!await ext.evaluate(x=>x.open),'optional inquiry closes on reset');
   ok((await page.locator('#earth-angle').inputValue())==='60','optional returns to original 60°');
+  ok((await page.locator('#earth-vector-h-label').textContent())==='Bₕ →'&&
+     (await page.locator('#earth-vector-v-label').textContent())==='Bᵥ ↓',
+     'reset restores readable nonzero vector directions');
   ok(await slide().locator('.answer.open').count()===0,'ALL three solutions hidden after reset');
   // independent homework refs editable everywhere
   await page.locator('#settings').click();ok(await page.locator('#editor').isVisible(),'lesson settings visible');
@@ -165,6 +245,9 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   const localFile=dlPath+'.html';fs.copyFileSync(dlPath,localFile);
   await offline.goto('file://'+localFile,{waitUntil:'load'});
   ok(await offline.locator('#slides>section.slide').count()===4,'all 4 already-rendered lesson slides retained when opened offline');
+  ok(await offline.locator('.recall-check-svg').count()===2,'standalone lesson retains both correct field triangles');
+  ok(await offline.locator('.electron-question [data-b-cross]').count()===15,
+    'standalone lesson retains complete homogeneous B around electron');
   for(const [k,v] of edits){
    const refs=await offline.locator('[data-ref="'+k+'"]').allTextContents();
    ok(refs.length&&refs.every(x=>x===v),'offline standalone preserves edited '+k+' book references');
@@ -188,12 +271,12 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
   for(const part of ['343–350','351–357','171–182','elektron','bokhänvisningar'])ok(supText.includes(part),'teacher retained original material '+part);
   ok(await page.locator('input[type=email],textarea').count()===0,'no collection of identifiable pupil answers');
   // 4 × desktop/mobile/projector, then all feedback and voluntary interaction shown in supplemental views.
-  for(const v of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
+  for(const v of [{name:'mobile',width:390,height:844},{name:'tablet',width:768,height:900},{name:'classroom',width:1280,height:800},{name:'desktop',width:1440,height:900},{name:'projector',width:1920,height:1080}]){
    await page.setViewportSize({width:v.width,height:v.height});
    for(let n=1;n<=4;n++){
     await go(n);await reset();
     if(n===2)await step(1);
-    if(n===4)await step(1);
+    if(n===4){await shot(v.name+'-04-before-feedback');await step(1);}
     const screen=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}));
     ok(screen.scroll<=screen.viewport+2,'no horizontal page overflow '+v.name+'/'+n+' '+JSON.stringify(screen));
     if(v.name==='projector'&&[2,4].includes(n))ok(screen.height<=1180,'projector current-feedback lesson '+n+' vertically compact: '+screen.height+' px');
@@ -206,8 +289,8 @@ const fy2=(n,d=1)=>Number(n).toLocaleString('sv-SE',{minimumFractionDigits:d,max
    }
    await go(4);await reset();await step(3);
    const mathRows=await rect('.slide.active .answer.open:visible .physics-steps > div');
-   ok(mathRows.length===(v.name==='mobile'?5:3)&&mathRows.every(r=>r.width>30&&r.height>10),'active-stage mathematical statements actually legible '+v.name);
-   if(v.name!=='mobile'){
+   ok(mathRows.length===(v.width<=850?5:3)&&mathRows.every(r=>r.width>30&&r.height>10),'active-stage mathematical statements actually legible '+v.name);
+   if(v.width>850){
     ok(!(await slide().locator('.answer.open').first().isVisible()),'projector/desktop previous feedback is visually superseded rather than stacked');
     ok(await slide().locator('.answer.open').nth(2).isVisible(),'projector/desktop latest feedback retains complete math');
    }
