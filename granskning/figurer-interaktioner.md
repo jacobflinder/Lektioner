@@ -5,14 +5,14 @@
 > | Historisk registerpost | Arbetsvyns valda samband (v2.3, under test) | Notationsanmärkning |
 > | --- | --- | --- |
 > | Fy2 #1 Ström ger magnetfält | B kring rak ledare, B ∝ I/r | Ingen generell laddningsformel |
-> | Fy2 #2 Elektriska fält | F_y=qE_y, E=U/d, avböjning | Elektron/proton: laddning q, belopp |q| |
+> | Fy2 #2 Elektriska fält | F_y=qE_y, E=U/d, avböjning | Elektron/proton: laddning q, belopp \|q\| |
 > | Fy2 #3 Permanentmagneter och flöde | Φ=BAcosθ, Φ=BA, B=Φ/A | Ingen generell laddningsformel |
-> | Fy2 #4 Räknestuga | F_y=qE_y, kinetisk energi, magnetiskt flöde | eU/eE ersatta med |q| i beloppsberäkningar |
+> | Fy2 #4 Räknestuga | F_y=qE_y, kinetisk energi, magnetiskt flöde | eU/eE ersatta med \|q\| i beloppsberäkningar |
 > | Fy2 #5 Spolar och solenoider | B för lång solenoid och cirkulär spole | Ingen generell laddningsformel |
-> | Fy2 #6 Laddade partiklar | Magnetkraftens belopp, banradie, ledarkraft | q är tecknad, |q| används för belopp |
+> | Fy2 #6 Laddade partiklar | Magnetkraftens belopp, banradie, ledarkraft | q är tecknad, \|q\| används för belopp |
 > | Fy2 #7 Jordens magnetfält | Bh, Bv, tan α | Ingen generell laddningsformel |
-> | Fy2 #8 Induktion | Φ, Faraday–Lenz, rörelsespänning | e ersatt av |q| i kraftbeloppshärledning |
-> | Fy2 #9 Räknestuga kraft och jordfält | Magnetkraft, Bh, tan α | F-belopeckning använder |q| |
+> | Fy2 #8 Induktion | Φ, Faraday–Lenz, rörelsespänning | e ersatt av \|q\| i kraftbeloppshärledning |
+> | Fy2 #9 Räknestuga kraft och jordfält | Magnetkraft, Bh, tan α | Kraftens belopp använder \|q\| |
 > | Ma4 #23 Polynomdivision | P=D·Q+R, restens grad, exakt delbarhet | Ej relevant |
 > | Fy1 #28 Serie- och parallellkoppling | Ohms lag, spänningssumma, strömsumma, ersättningsresistans | Ej relevant |
 >
