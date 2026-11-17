@@ -69,6 +69,31 @@ function check(v,message){assert.ok(v,message);checks++}
   check(await recap.evaluate(n=>n.open),'native detail opens from keyboard');
   const formulas=recap.locator('.v23-recap-item math');
   check(await formulas.count()===2,'two relevant semantic MathML formulas, plus two methods');
+  // A green DOM or visible-box test is insufficient: inspect actual MathML glyph baselines.
+  const mathLayout=await formulas.evaluateAll(eqs=>{
+    const first=[...eqs[0].querySelectorAll('mi')].filter(el=>['P','cos','sin'].includes(el.textContent.trim()));
+    const rects=first.map(el=>el.getBoundingClientRect());
+    const row=eqs[1].firstElementChild;
+    const second=[...row.children].map(el=>el.getBoundingClientRect());
+    return {
+      firstCount:first.length,
+      firstLeft:rects.map(r=>r.left),
+      firstTop:rects.map(r=>r.top),
+      firstWidth:rects.map(r=>r.width),
+      secondCount:second.length,
+      secondLeft:second.map(r=>r.left),
+      secondBottom:second.map(r=>r.bottom),
+      display:getComputedStyle(eqs[0]).display
+    };
+  });
+  check(mathLayout.firstCount===3&&mathLayout.firstWidth.every(w=>w>3),'P, cos and sin are rendered text glyphs');
+  check(Math.max(...mathLayout.firstTop)-Math.min(...mathLayout.firstTop)<12,
+    'P, cos and sin are in the SAME mathematical row, not vertically stacked: '+JSON.stringify(mathLayout));
+  check(mathLayout.firstLeft.every((x,i,a)=>i===0||x>a[i-1]+6),
+    'coordinate formula flows left-to-right without overlap: '+JSON.stringify(mathLayout));
+  check(mathLayout.secondCount===3&&mathLayout.secondLeft[0]<mathLayout.secondLeft[1]&&mathLayout.secondLeft[1]<mathLayout.secondLeft[2],
+    'radian conversion formula displays as one continuous equation: '+JSON.stringify(mathLayout));
+
   check(await recap.locator('.v23-recap-item').count()===4,'all four prior-lesson relationships/methods included');
   const combined=await recap.textContent();
   check(combined.includes('Cosinus är x-koordinaten')&&combined.includes('radianer')&&combined.includes('Referensvinkel'),'selected summary matches this lesson');
