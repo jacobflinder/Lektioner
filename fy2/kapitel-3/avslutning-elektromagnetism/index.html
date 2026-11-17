@@ -25,6 +25,7 @@ p{margin:.5em 0 1em}.lead{font-size:1.12rem;max-width:850px;color:#385a66}
 input[type=range]{width:100%;accent-color:#0a7584}
 .diagram{background:#f7fbfd;border:1px solid #c9dee5;border-radius:12px;padding:8px;min-width:0}
 svg{display:block;width:100%;height:auto;max-height:360px;overflow:visible}
+#wire-svg,#ind-svg{max-width:500px;margin:0 auto}#force-svg{max-width:470px;margin:0 auto}
 .readout{border:1px solid #b8d9d8;background:#eaf7f6;border-radius:11px;padding:12px 15px;font-weight:700;margin:12px 0}
 .math{display:block;overflow-x:auto;max-width:100%;padding:8px 2px;margin:12px 0 17px}
 .math math{font-size:clamp(1.13rem,1.65vw,1.48rem)}
@@ -92,51 +93,63 @@ ul,ol{padding-left:1.25em}li+li{margin-top:6px}
 
 <section class="slide" data-title="Ström och magnetfält">
 <span class="kicker">03 · Undersök sambandet</span><h1>Strömmen skapar ett magnetfält</h1>
-<div class="layout"><div class="panel"><h2>Förutsäg först</h2><div class="question">Vad händer med fältets storlek om strömmen fördubblas och avståndet till ledaren också fördubblas?</div><p class="instructions">Rita fältets riktning sedd längs ledaren och skriv ditt svar.</p>
-<div class="control"><label for="current">Strömstyrka <output id="current-v">4,0 A</output></label><input id="current" type="range" min="-8" max="8" value="4" step="1"></div>
-<div class="control"><label for="radius">Avstånd från ledaren <output id="radius-v">2,0 cm</output></label><input id="radius" type="range" min="1" max="8" value="2" step="0.5"></div>
-<div class="diagram"><svg id="wire-svg" viewBox="0 0 640 320" role="img" aria-label="Ledare sedd i tvärsnitt med koncentriska cirklar endast för magnetfältets riktning och separat numeriskt fältvärde"></svg></div>
-<p class="note">Cirklarna visar endast fältlinjernas riktning, inte ett kalibrerat mått på fältstyrkan. Den numeriska beräkningen visar hur styrkan beror på avståndet.</p></div>
-<div class="panel"><h2>Matematik och återkoppling</h2><p>För en lång rak ledare, i luft eller vakuum:</p>
+<div class="layout"><div class="panel"><h2>Förutsäg och förklara</h2>
+<div class="question">Vad händer med fältets storlek om strömmen fördubblas och avståndet till ledaren också fördubblas?</div>
+<p class="instructions">Skriv svaret själv och förklara för en kamrat innan ni prövar.</p>
+<p>För en lång rak ledare i luft eller vakuum:</p>
 <div class="math"><math display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac></math></div>
-<p class="note">I sambandet beräknas B som positiv styrka med strömstyrkans belopp. Strömriktningen avgör fältets riktning.</p>
+<p class="note">Här är I den positiva strömstyrkan. Strömriktningen avgör riktningen, medan B beräknas som en positiv storlek.</p>
 <div class="readout" id="wire-result" aria-live="polite">40 μT</div>
-<button type="button" class="reveal" data-reveal="wire-answer">Visa resonemanget</button><div id="wire-answer" class="answer">
-<div class="math"><math display="block"><mfrac><msub><mi>B</mi><mn>2</mn></msub><msub><mi>B</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>2</mn></msub><mo>/</mo><msub><mi>r</mi><mn>2</mn></msub></mrow><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>/</mo><msub><mi>r</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>2</mn></mfrac><mo>=</mo><mn>1</mn></math></div><p>Fältets storlek är oförändrad. Prova sedan att <em>bara</em> fördubbla avståndet. Vad händer?</p></div>
+<button type="button" class="reveal" data-reveal="wire-answer">Visa resonemanget</button>
+<div id="wire-answer" class="answer"><div class="math"><math display="block"><mfrac><msub><mi>B</mi><mn>2</mn></msub><msub><mi>B</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>2</mn></msub><mo>/</mo><msub><mi>r</mi><mn>2</mn></msub></mrow><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>/</mo><msub><mi>r</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>2</mn></mfrac><mo>=</mo><mn>1</mn></math></div><p>Fältet är oförändrat när både ström och avstånd fördubblas.</p></div>
 <button type="button" id="wire-reset">Återställ modellen</button>
-<details class="teacher"><summary>Vad ska läraren titta efter?</summary><p>Högerhandsregeln: tumme längs konventionell ström, fingrar runt ledaren. När I=0 finns inget fält från ledaren. Påminn om att cirklar inte kodar belopp genom sin täthet här. Be eleven ange r från ledaren, inte från cirkelns ytterkant.</p></details></div></div>
+</div><div class="panel"><h2>Rita och pröva</h2>
+<div class="control"><label for="current">Ström: tecken anger riktning <output id="current-v">4,0 A</output></label><input id="current" type="range" min="-8" max="8" value="4" step="1"></div>
+<div class="control"><label for="radius">Avstånd från ledaren <output id="radius-v">2,0 cm</output></label><input id="radius" type="range" min="1" max="8" value="2" step="0.5"></div>
+<div class="diagram"><svg id="wire-svg" viewBox="0 0 640 320" role="img" aria-label="Ledare sedd i tvärsnitt, hela magnetfältets riktning synlig och cirklarna är en riktningsmodell"></svg></div>
+<p class="note">Cirklarna visar riktningen, inte den lokala fältstyrkan. Jämför i stället talvärdet till vänster när r ändras.</p>
+</div></div>
+<details class="teacher"><summary>Lärarens observationspunkt</summary><p>Högerhandsregeln: tumme längs konventionell ström, fingrar runt ledaren. När strömmen är noll är ledarens eget fält noll. Begär en skiss innan eleven ser modellen.</p></details>
 </section>
 
 <section class="slide" data-title="Magnetisk kraft">
 <span class="kicker">04 · Förutsäg riktning</span><h1>Magnetisk kraft – vilket håll?</h1>
-<div class="layout"><div class="panel"><p>Partikeln rör sig åt höger. Magnetfältet är vinkelrätt mot skärmen. Pröva <b>positiv</b> och <b>negativ</b> laddning med samma hastighet.</p>
-<div class="question">Förutsäg först kraftens riktning. Vad ändras när enbart laddningstecknet byts?</div>
+<div class="layout"><div class="panel"><h2>Förutsäg och motivera</h2>
+<p>En partikel rör sig åt höger. Magnetfältet är vinkelrätt mot skärmen. Förutsäg vad som ändras när <b>bara laddningstecknet</b> byts.</p>
+<div class="question">Åt vilket håll pekar kraften på en positiv respektive negativ laddning?</div>
+<div class="math"><math display="block"><mover><mi>F</mi><mo>→</mo></mover><mo>=</mo><mi>q</mi><mo>(</mo><mover><mi>v</mi><mo>→</mo></mover><mo>×</mo><mover><mi>B</mi><mo>→</mo></mover><mo>)</mo></math></div>
+<p class="note">q är tecknad laddning i detta vektorsamband. Kraften är vinkelrät mot den momentana hastigheten.</p>
+<div class="question">Kan ett rent magnetfält ensamt öka partikelns fart? Varför?</div>
+<button type="button" data-reveal="force-why" class="reveal">Visa förklaring</button>
+<div id="force-why" class="answer"><p>Nej. Kraften är vinkelrät mot hastigheten och utför då inget arbete. Riktningen kan ändras fast farten är konstant.</p>
+<div class="math"><math display="block"><mi>r</mi><mo>=</mo><mfrac><mrow><mi>m</mi><mi>v</mi></mrow><mrow><mi>q</mi><mi>B</mi></mrow></mfrac></math></div><p class="note">För cirkelbana vinkelrätt mot homogent fält; q är här positiv laddningsstorlek.</p></div>
+</div><div class="panel"><h2>Pröva din kraftpil</h2>
 <div class="controls"><button type="button" data-q="1" aria-pressed="true">Positiv laddning</button><button type="button" data-q="-1" aria-pressed="false">Negativ laddning</button></div>
 <div class="controls"><button type="button" data-b="-1" aria-pressed="true">B in i sidan ×</button><button type="button" data-b="1" aria-pressed="false">B ut ur sidan •</button></div>
-<div class="diagram"><svg id="force-svg" viewBox="0 0 640 310" role="img" aria-label="Partikel med hastighet åt höger, homogent magnetfält vinkelrätt mot sidan och kraftpil dold före återkoppling"></svg></div><button type="button" id="force-show">Visa kraften efter förutsägelsen</button><button type="button" id="force-reset">Återställ</button><p class="readout" id="force-result" aria-live="polite">Kraften är dold tills ni prövat er förutsägelse.</p>
-</div><div class="panel"><h2>Modell och rimlighet</h2><div class="math"><math display="block"><mover><mi>F</mi><mo>→</mo></mover><mo>=</mo><mi>q</mi><mo>(</mo><mover><mi>v</mi><mo>→</mo></mover><mo>×</mo><mover><mi>B</mi><mo>→</mo></mover><mo>)</mo></math></div>
-<p>q är här en <b>tecknad laddning</b>. F är alltid vinkelrät mot hastigheten i ett rent magnetfält.</p>
-<div class="question">Kan magnetfältet ensamt öka partikelns fart? Förklara.</div><button type="button" data-reveal="force-why" class="reveal">Visa förklaring</button><div id="force-why" class="answer"><p>Nej. Magnetisk kraft är vinkelrät mot den momentana hastigheten och utför då inget arbete. Farten kan vara konstant medan hastighetens <em>riktning</em> ändras.</p><div class="math"><math display="block"><mi>r</mi><mo>=</mo><mfrac><mrow><mi>m</mi><mi>v</mi></mrow><mrow><mi>q</mi><mi>B</mi></mrow></mfrac></math></div><p class="note">Vid cirkelrörelse vinkelrätt mot homogent B; här är q den positiva laddningsstorleken, inte dess tecken.</p></div></div></div>
+<div class="diagram"><svg id="force-svg" viewBox="0 0 640 310" role="img" aria-label="Partikel med hastighet åt höger, homogent magnetfält vinkelrätt mot sidan och elevstyrd kraftpil"></svg></div>
+<div class="controls"><button type="button" id="force-show">Visa kraften</button><button type="button" id="force-reset">Återställ</button></div>
+<div class="readout" id="force-result" aria-live="polite">Kraften är dold tills ni prövat er förutsägelse.</div>
+</div></div>
 </section>
 
 <section class="slide" data-title="Induktion">
-<span class="kicker">05 · Kontrollerat experiment i modellen</span><h1>Induktion kräver flödesändring</h1>
-<div class="layout"><div class="panel"><p>En stillastående spole med <b>100 varv</b> har ytan <b>0,010 m²</b>. Ett homogent magnetfält vinkelrätt genom varje varv ändras linjärt från 0,20 T.</p>
-<div class="question">Förutsäg: Vad händer med spänningens storlek om samma flödesändring tar dubbelt så lång tid?</div>
+<span class="kicker">05 · Kontrollerat experiment</span><h1>Induktion kräver flödesändring</h1>
+<div class="layout"><div class="panel"><h2>Förutsäg och pröva</h2>
+<p>En stillastående spole har <b>100 varv</b> och arean <b>0,010 m²</b> per varv. Ett homogent magnetfält vinkelrätt mot spolen ändras linjärt från <b>0,20 T</b>.</p>
+<div class="question">Vad händer med spänningens storlek om samma flödesändring tar dubbelt så lång tid?</div>
 <div class="control"><label for="field-end">Slutvärde för B <output id="field-end-v">0,60 T</output></label><input id="field-end" type="range" min="0" max="0.8" step=".1" value=".6"></div>
 <div class="control"><label for="duration">Tid för förändringen <output id="duration-v">0,20 s</output></label><input id="duration" type="range" min="0.1" max="0.6" step=".1" value=".2"></div>
-<div class="diagram"><svg id="ind-svg" viewBox="0 0 720 370" role="img" aria-label="Övre diagrammet visar ett linjärt varierande magnetfält och undre diagrammet ett motsvarande konstant inducerat spänningsvärde under tidsintervallet"></svg></div>
-<p class="note">Idealiserad modell: fältet ändras linjärt och är konstant före/efter förändringen. Kurvorna är inte mätdata.</p></div>
-<div class="panel"><h2>Samordna graf och matematik</h2>
 <div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mi mathvariant="normal">cos</mi><mi>α</mi></math></div>
 <div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div>
-<p class="note">Ytnormalen är vald i B:s riktning. Tecknet avser en bestämd orientering för spolen och spänningsmätningen.</p>
-<button type="button" id="ind-show">Visa beräkningen efter egen förutsägelse</button>
+</div><div class="panel"><h2>Graf och återkoppling</h2>
+<div class="diagram"><svg id="ind-svg" viewBox="0 0 720 370" role="img" aria-label="Fullständig graf över B som ändras linjärt och motsvarande inducerad spänning före, under och efter förändringen"></svg></div>
+<p class="note">Idealiserad modell, inte mätdata. Ytnormalen är vald längs B; spänningstecknet beror på spolens orientering.</p>
+<button type="button" id="ind-show">Visa beräkningen efter förutsägelsen</button>
 <div class="answer" id="ind-answer"><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mi>A</mi><mo>·</mo><mo>Δ</mo><mi>B</mi></math></div>
-<div class="readout" id="ind-result" aria-live="polite">Beräkning</div><p>Om flödesförändringen är densamma men tiden dubbleras, halveras den inducerade spänningens storlek.</p></div>
+<div class="readout" id="ind-result" aria-live="polite">Beräkning</div></div>
 <button type="button" id="ind-reset">Återställ modellen</button>
-<details class="teacher"><summary>Viktigt vid visningen</summary><p>Låt eleverna först beskriva lutningen i B(t), inte läsa av ett facit. Den horisontella U-linjen representerar konstant inducerad spänning under den linjära förändringen, inte spänning när B är konstant. Tillbaka till noll efter tidsintervallet. Pröva också ΔB = 0.</p></details>
 </div></div>
+<details class="teacher"><summary>Lärarstöd för grafen</summary><p>Låt alla beskriva lutningen i B(t) innan induktionslagen visas. Ökad tidslängd ger mindre lutning och mindre inducerad spänning för samma ΔB. Testa också ΔB = 0. Kurvan blir noll igen efter förändringen.</p></details>
 </section>
 
 <section class="slide" data-title="Räkna hela kedjan">
