@@ -1,281 +1,262 @@
 <!doctype html>
-<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elektromagnetism – kapitlets avslutning · Fysik 2</title>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Växelström och effektivvärde · Fysik 2</title>
 <style>
-:root{color-scheme:light;--ink:#16343e;--muted:#45636e;--paper:#fff;--bg:#edf4f5;--accent:#087a84;--blue:#1765aa;--gold:#936000;--green:#11765c;--line:#cde0e3;font:19px/1.48 system-ui,-apple-system,"Segoe UI",sans-serif}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer}
-.topbar{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;padding:12px clamp(16px,3vw,42px);background:#153740;color:white}
-.topbar a{color:#dcf9fb}.topbar strong{font-size:.92rem}.buttons{display:flex;gap:8px;flex-wrap:wrap}
-button{border:1px solid #a4c2c7;border-radius:10px;padding:9px 15px;background:#fff;color:#17414c;font-weight:650}
-button:hover{background:#e0f5f3}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e1ab37;outline-offset:3px}
-button[aria-pressed=true],button.primary{background:#0b6d79;color:white;border-color:#0b6d79}
-.topbar button{font-size:.82rem}.shell{max-width:1280px;margin:0 auto;padding:clamp(13px,2.2vw,25px)}
+:root{color-scheme:light;--bg:#edf4f6;--ink:#163641;--sub:#45616c;--edge:#c7dce2;--accent:#08748a;--amber:#b57d2f;--green:#176953;font:19px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid #a8c4cf;border-radius:10px;padding:9px 13px;color:#174657;background:white;font-weight:670}
+button:hover{background:#e0f3f4}button[aria-pressed=true],button.primary{background:#096e81;color:white;border-color:#096e81}
+button:focus-visible,input:focus-visible{outline:3px solid #e4ab3e;outline-offset:2px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#173d4c;color:#fff;padding:11px clamp(12px,2.5vw,35px)}
+.top a{color:#d6f2ff}.top strong{font-size:.86rem}
+.top button{font-size:.77rem}.tools{display:flex;gap:8px;flex-wrap:wrap}
+main{max-width:1280px;margin:auto;padding:clamp(11px,2vw,24px)}
 .slide{display:none}.slide.active{display:block}
-.kicker{text-transform:uppercase;letter-spacing:.09em;color:#087883;font-size:.76rem;font-weight:800}
-h1{font-size:clamp(2rem,4.1vw,3.55rem);line-height:1.09;letter-spacing:-.038em;margin:11px 0 12px}h2{font-size:clamp(1.35rem,2.3vw,1.9rem);line-height:1.2;margin:8px 0 14px}
-h3{font-size:1.09rem;margin:4px 0 9px}
-p{margin:.5em 0 1em}.lead{font-size:1.12rem;max-width:850px;color:#385a66}
+.kicker{color:#087b84;text-transform:uppercase;letter-spacing:.1em;font-weight:820;font-size:.77rem}
+h1{font-size:clamp(2rem,3.3vw,3.1rem);letter-spacing:-.04em;line-height:1.07;margin:8px 0 13px}
+h2{font-size:clamp(1.3rem,2vw,1.85rem);line-height:1.2;margin:7px 0 14px}
+h3{font-size:1.07rem;margin:5px 0 9px}
+p{margin:.43em 0 .83em}.lead{font-size:1.08rem;color:#45616c}
 .layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:clamp(17px,2.3vw,29px);min-width:0}
-.panel + .panel{margin-top:0}.question{border-left:5px solid #cc913d;background:#fff8e9;border-radius:6px;padding:12px 16px;margin:15px 0;font-weight:680}
-.note{color:var(--muted);font-size:.89rem}.instructions{color:#315a64;font-weight:630}
-.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{background:#e8f5f5;padding:7px 11px;border-radius:9px;font-size:.84rem}
-.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
-.control{margin:14px 0}.control label{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:.9rem}
-input[type=range]{width:100%;accent-color:#0a7584}
-.diagram{background:#f7fbfd;border:1px solid #c9dee5;border-radius:12px;padding:8px;min-width:0}
-svg{display:block;width:100%;height:auto;max-height:360px;overflow:visible}
-#wire-svg{max-width:430px;margin:0 auto}#ind-svg{max-width:500px;margin:0 auto}#force-svg{max-width:470px;margin:0 auto}
-@media(min-width:1500px){h1{font-size:3rem}.panel{padding:20px}}
-.readout{border:1px solid #b8d9d8;background:#eaf7f6;border-radius:11px;padding:12px 15px;font-weight:700;margin:12px 0}
-.math{display:block;overflow-x:auto;max-width:100%;padding:8px 2px;margin:12px 0 17px}
-.math math{font-size:clamp(1.13rem,1.65vw,1.48rem)}
-math[display=inline]{font-size:1.02em}
-.givens{display:grid;gap:16px;margin:12px 0}.givens .math{margin:0}
-.reveal{margin:10px 0}.answer{display:none;border:1px solid #b9d9ca;background:#f1fbf5;border-radius:11px;padding:16px;margin:11px 0}.answer.visible{display:block}
-.answer p:last-child{margin-bottom:0}
-.step{display:none}.step.visible{display:block}
-.quiz-result{min-height:1.6em;font-weight:750;color:#176253}
-.quiz-result.error{color:#8b4a26}
-.book-work{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.book-work article{background:#f0f7f8;border-radius:11px;padding:16px}
-details.teacher{display:none;background:#fff;border:2px dashed #d6ae5e;border-radius:14px;padding:16px;margin:18px 0}
-body.teacher-on details.teacher{display:block}
-details summary{cursor:pointer;font-weight:750}
-.progress{color:var(--muted);font-weight:700;font-size:.9rem}
-.footer-nav{display:flex;justify-content:space-between;gap:10px;align-items:center;position:sticky;bottom:0;border-top:1px solid #bfd5d9;background:#eef4f5ef;backdrop-filter:blur(10px);padding:13px clamp(14px,2vw,24px)}
-.footer-nav button{min-width:115px}.footer-nav button:disabled{opacity:.4;cursor:default}
-.tag{font-weight:800;color:#285a64;font-size:.8rem}
-ul,ol{padding-left:1.25em}li+li{margin-top:6px}
-@media(max-width:800px){.layout,.book-work{grid-template-columns:1fr}.shell{padding:12px}.topbar{gap:8px}h1{font-size:2rem}.panel{padding:17px}.footer-nav button{min-width:80px}.diagram svg{max-height:none}}
-@media(max-width:420px){:root{font-size:17px}.topbar{padding:10px 12px}.shell{padding:10px}.footer-nav{padding:9px 11px}.controls button{flex:1 1 auto}.panel{padding:14px}.math math{font-size:1.12rem}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-@media print{.topbar,.footer-nav,button,details.teacher{display:none!important}.slide{display:block!important;break-after:page}.answer{display:block!important}body{background:#fff}}
-</style></head>
-<body>
-<header class="topbar"><a href="../">← Elektromagnetism</a><strong>Fysik 2 · Kapitel 3 · Avslutning</strong>
-<div class="buttons"><button id="mode" type="button" aria-pressed="false">Repetitionsläge: av</button><button id="teacher" type="button" aria-pressed="false">Lärarstöd</button></div></header>
-<main class="shell" id="lesson">
+.panel{background:white;border:1px solid var(--edge);border-radius:16px;padding:clamp(15px,1.8vw,23px);min-width:0}
+.question{border-left:5px solid #c89547;border-radius:7px;padding:12px 15px;background:#fff7e8;margin:12px 0;font-weight:680}
+.note{color:var(--sub);font-size:.86rem}.instruction{color:#195b66;font-weight:710}
+.controls{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.slider{margin:9px 0}.slider label{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:.88rem}.slider input{display:block;width:100%;accent-color:#096e81}
+svg{display:block;width:100%;height:auto;max-height:290px;overflow:visible}
+.diagram{border:1px solid #c6dde5;background:#f8fcfd;border-radius:12px;padding:7px;min-width:0}
+.math{display:block;max-width:100%;overflow-x:auto;margin:11px 0 16px;padding:4px 0}
+.math math{font-size:clamp(1.12rem,1.8vw,1.45rem)}
+math[display=inline]{font-size:1em}
+.givens{display:grid;gap:16px}
+.givens .math{margin:0}
+.readout{background:#e8f5f5;border:1px solid #b7d5d9;border-radius:10px;padding:10px 13px;font-weight:750;margin:10px 0}
+.answer{display:none;background:#f1fbf5;border:1px solid #b4d9c6;border-radius:10px;padding:13px;margin-top:10px}
+.answer.visible{display:block}.answer .math:last-child{margin-bottom:0}
+.stage{display:none}.stage.visible{display:block}
+.results{font-weight:700;min-height:1.55em;color:#126d58}.results.bad{color:#9a4d29}
+.num{font-variant-numeric:tabular-nums}.mini{background:#edf6f7;border-radius:10px;padding:10px 13px;margin:10px 0}
+.row{display:flex;gap:11px;align-items:center;flex-wrap:wrap}.row > *{min-width:0}
+.nextbar{position:sticky;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:14px;background:#edf4f6ee;backdrop-filter:blur(10px);padding:12px 20px;border-top:1px solid #c4d8df}
+.nextbar button{min-width:105px}.nextbar button:disabled{opacity:.45;cursor:default}.counter{font-weight:720;color:#45616c;font-size:.9rem;text-align:center}
+details.teacher{display:none;border:2px dashed #c9a66b;border-radius:12px;padding:14px;background:white;margin:14px 0}body.teacher-on details.teacher{display:block}
+details summary{cursor:pointer;font-weight:720}details[open] summary{margin-bottom:8px}
+section.plain{background:white;border-radius:12px;padding:16px;border:1px solid #d1e1e3}
+ul,ol{padding-left:1.2em}li+li{margin-top:5px}
+.gridtasks{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gridtasks div{background:#f0f7f8;padding:12px 15px;border-radius:10px}
+input[type=text]{min-width:0;max-width:185px;border:1px solid #9ebbc5;border-radius:9px;padding:9px}
+@media(max-width:780px){.layout,.gridtasks{grid-template-columns:1fr}main{padding:10px}.panel{padding:16px}h1{font-size:2.15rem}.nextbar{padding:9px 12px}.nextbar button{min-width:78px}.top{padding:10px 12px}}
+@media(max-width:420px){:root{font-size:17px}.panel{padding:13px}h1{font-size:2rem}.math math{font-size:1.11rem}}
+@media(min-width:1500px){h1{font-size:2.75rem}.panel{padding:19px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{.top,.nextbar,button,details.teacher{display:none!important}.slide,.answer,.stage{display:block!important}.slide{break-after:page}body{background:white}}
+</style></head><body>
+<header class="top"><a href="../">← Elektromagnetism</a><strong>Fysik 2 · Kapitel 3 · Avslutande innehållslektion</strong>
+<div class="tools"><button id="mode" type="button" aria-pressed="false">Repetitionsläge: av</button><button id="teacher" type="button" aria-pressed="false">Lärarstöd</button></div></header>
+<main>
 <section class="slide active" data-title="Start och mål">
-<span class="kicker">01 · Fråga före svar</span><h1>Elektromagnetism – sätt ihop helheten</h1>
-<p class="lead">Sista lektionen i kapitlet. Det viktiga är inte att minnas flest formler, utan att välja rätt fysikalisk modell, förklara vad som händer och kunna räkna.</p>
-<div class="layout"><div class="panel"><h2>Efter lektionen ska du kunna …</h2><ol><li>Avgöra när du ska använda elektriska fält, magnetisk kraft eller induktion.</li><li>Motivera riktningar och förändringar med en figur och ett samband.</li><li>Genomföra och kontrollera en beräkning på egen hand.</li></ol>
-<div class="question">En magnet hålls först stilla vid en spole. Sedan förs den snabbt in i spolen. När får vi inducerad spänning? Varför?</div>
-<p class="instructions">Skriv själv → jämför i par → motivera innan ni visar svaret.</p>
-<button type="button" class="reveal" data-reveal="start">Visa återkoppling</button><div id="start" class="answer"><p>Spänning uppstår när <b>det magnetiska flödet genom spolen förändras</b>. En stillastående magnet i en orörlig spole ger ingen varaktig inducerad spänning om flödet är konstant.</p></div></div>
-<div class="panel"><h2>Så arbetar vi</h2><div class="chips"><span class="chip">Förutsäg på papper</span><span class="chip">Pröva modellen</span><span class="chip">Förklara för en kamrat</span><span class="chip">Bokarbete i lugn och ro</span><span class="chip">Egen utcheckning</span></div>
-<p>Du behöver penna och papper eller skrivyta på iPad. Webbsidan visar inte automatiskt facit i klassrumsläget.</p><p class="note">Planerat som ett valbart 70-minuterspass. Läraren kan korta fördjupningen och ge längre sammanhängande boktid.</p></div></div>
-<details class="teacher"><summary>Lärarens startbeslut</summary><p>Samla två olika förklaringar, särskilt ”det finns ett magnetfält” kontra ”flödet förändras”. Visa först när alla hunnit tänka. Koppla till den faktiska magnet-i-spole-demonstrationen om den genomförts.</p><p>Referens från tidigare undervisning: <a href="https://youtu.be/f3bAO0YYrQ8" target="_blank" rel="noopener noreferrer">YouTube-film</a>. Dess exakta innehåll/transkription är ännu inte verifierat och ska inte tillskrivas denna nya sida.</p></details>
+<span class="kicker">01 · Återkalla – förutsäg</span><h1>Växelström och effektivvärde</h1>
+<div class="layout"><div class="panel"><h2>Från induktion till eluttag</h2>
+<div class="question">En slinga roterar med konstant hastighet i ett magnetfält. Blir den inducerade spänningen konstant, eller växlar den tecken? Förklara.</div>
+<p class="instruction">Enskilt på papper → par → klassens förklaringar innan svaret visas.</p>
+<button data-reveal="start" type="button">Visa återkoppling</button><div id="start" class="answer"><p>Den orienterade flödesändringen växlar tecken under varje varv. Därför växlar även den inducerade spänningen tecken. Vid jämn rotation och en ideal slinga i homogent fält blir spänningen sinusformad.</p></div>
+</div><div class="panel"><h2>Efter lektionen ska du kunna …</h2>
+<ol><li>Förklara hur en roterande slinga ger växelspänning.</li><li>Tolka toppvärde, period, frekvens och effektivvärde i en sinuskurva.</li><li>Beräkna frekvens och effektivvärde samt motivera metodvalet.</li></ol>
+<p class="note">Kapitlets avslutande innehåll. Vi använder fysikmodellerna i webben och räknar själva på papper. Bokens uppgifter 373–379 hör till arbetsdelen.</p></div></div>
+<details class="teacher"><summary>Lärarstöd</summary><p>Förkunskap: Faradays induktionslag, magnetiskt flöde, sin/cos och cirkelrörelse. Återkoppla på både förutsägelse och förklaring. Klassen har efterfrågat undersökningar, hitta felet, varierad Socrative, lugn arbetsfas och tydlig läxa.</p><p><b>Källgräns:</b> en äldre uppladdad undervisningsvideo om växelström och effektivvärde samt lärobok s. 188–197 har granskats. Det går ännu inte att säkert fastställa att <a href="https://youtu.be/f3bAO0YYrQ8" target="_blank" rel="noopener noreferrer">den nya YouTube-länken</a> är samma klipp.</p></details>
 </section>
 
-<section class="slide" data-title="Välj modellen">
-<span class="kicker">02 · Begrepp och modellval</span><h1>Vilken modell förklarar situationen?</h1>
-<div class="layout"><div class="panel"><h2>Tre situationer</h2>
-<p><b>A.</b> En proton släpps från vila mellan två laddade plattor.</p>
-<p><b>B.</b> En proton rör sig åt höger genom ett magnetfält in i sidan.</p>
-<p><b>C.</b> Magnetfältet genom en stillastående spole ökar.</p>
-<div class="question">Välj vilken situation som framför allt visar magnetisk kraft på en <em>rörlig</em> laddning.</div>
-<div class="controls" data-quiz="model"><button type="button" data-choice="A">A</button><button type="button" data-choice="B">B</button><button type="button" data-choice="C">C</button></div><p class="quiz-result" id="model-result" aria-live="polite"></p>
-<button type="button" class="reveal" data-reveal="models">Visa modellerna efter diskussion</button>
-<div id="models" class="answer">
-<p><b>A:</b> elektrisk kraft även från vila.</p>
-<div class="math"><math display="block"><mi>F</mi><mo>=</mo><mi>q</mi><mi>E</mi></math></div>
-<p><b>B:</b> magnetisk kraft vinkelrät mot hastighet och fält när hastigheten är vinkelrät mot fältet.</p>
-<div class="math"><math display="block"><mi>F</mi><mo>=</mo><mi>q</mi><mi>v</mi><mi>B</mi></math></div>
-<p><b>C:</b> induktion genom förändrat flöde.</p>
-<div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div>
-<p class="note">I skalära kraftformler betecknar q den positiva laddningsstorleken; laddningstecknet används separat när kraftens riktning bestäms. I Faradays lag gäller tecknet för en definierad spolorientering.</p></div></div>
-<div class="panel"><h2>Varför är det lätt att blanda ihop?</h2>
-<p>Alla situationer handlar om laddningar och fält, men du måste först identifiera <b>vilken storhet som orsakar vilken verkan</b>.</p>
-<div class="question">Kan ett magnetfält ge kraft på en laddning som står stilla? Skiljer sig ditt svar om fältet är elektriskt?</div>
-<p class="instructions">Motivera med både ord och villkor i formeln.</p><button class="reveal" type="button" data-reveal="modelwhy">Visa kort förklaring</button>
-<div id="modelwhy" class="answer"><p>För ett stillastående laddat föremål är den magnetiska Lorentzkraften noll: hastigheten är noll. Ett elektriskt fält kan däremot utöva kraft även från vila. Ett tidsvarierande magnetfält kan dessutom skapa ett inducerat elektriskt fält – skilj situationerna åt.</p></div></div></div>
+<section class="slide" data-title="Generatorn">
+<span class="kicker">02 · Verklig tillämpning</span><h1>Generatorn: rörelse blir elektrisk energi</h1>
+<div class="layout"><div class="panel"><h2>Förutsäg före demonstrationen</h2>
+<div class="question">Vad händer med en generators spänning om hjulet snurrar snabbare? Vad händer om vi slutar snurra?</div>
+<p>En generator ändrar det magnetiska flödet genom slingans varv och ger därför inducerad spänning. Energin kommer från mekaniskt arbete på generatorn.</p>
+<p class="instruction">Skriv en förutsägelse. Pröva sedan i en demonstration – jämför med observationen.</p>
+<p><a href="https://phet.colorado.edu/en/simulations/legacy/generator" target="_blank" rel="noopener noreferrer">PhET: Generator (ursprunglig lektionsdemo)</a></p>
+<p><a href="https://www.walter-fendt.de/html5/phen/generator_en.htm" target="_blank" rel="noopener noreferrer">Walter Fendt: Generator</a></p>
+<p class="note">Verkliga klassrumsförsök är förstahandsval. Länkarna kan användas som kompletterande simuleringar om de fungerar på aktuell enhet.</p>
+</div><div class="panel"><h2>Det som behöver förklaras</h2>
+<ol><li>Vad ändras i flödet när slingan roterar?</li><li>Varför blir det två spänningstecken under ett helt varv?</li><li>Vad händer med den inducerade spänningens storlek vid snabbare rotation, om övriga storheter är lika?</li></ol>
+<button data-reveal="generator-answer" type="button">Visa fysiken efter observationen</button>
+<div id="generator-answer" class="answer"><div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width=".2em"/><mi mathvariant="normal">cos</mi><mi>θ</mi></math></div>
+<div class="math"><math display="block"><mi>u</mi><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mi>d</mi><mi>Φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></math></div>
+<p>För en slinga som roterar med jämn vinkelhastighet kan vi skriva en sinusformad spänning. Snabbare rotation ger både högre frekvens och större toppvärde i den idealiserade modellen.</p></div></div></div>
 </section>
 
-<section class="slide" data-title="Ström och magnetfält">
-<span class="kicker">03 · Undersök sambandet</span><h1>Strömmen skapar ett magnetfält</h1>
-<div class="layout"><div class="panel"><h2>Förutsäg och förklara</h2>
-<div class="question">Vad händer med fältets storlek om strömmen fördubblas och avståndet till ledaren också fördubblas?</div>
-<p class="instructions">Skriv svaret själv och förklara för en kamrat innan ni prövar.</p>
-<p>För en lång rak ledare i luft eller vakuum:</p>
-<div class="math"><math display="block"><mi>B</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><mi>I</mi></mrow><mrow><mn>2</mn><mi>π</mi><mi>r</mi></mrow></mfrac></math></div>
-<p class="note">Här är I den positiva strömstyrkan. Strömriktningen avgör riktningen, medan B beräknas som en positiv storlek.</p>
-
-<button type="button" class="reveal" data-reveal="wire-answer">Visa resonemanget</button>
-<div id="wire-answer" class="answer"><div class="math"><math display="block"><mfrac><msub><mi>B</mi><mn>2</mn></msub><msub><mi>B</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>2</mn></msub><mo>/</mo><msub><mi>r</mi><mn>2</mn></msub></mrow><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>/</mo><msub><mi>r</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>2</mn></mfrac><mo>=</mo><mn>1</mn></math></div><p>Fältet är oförändrat när både ström och avstånd fördubblas.</p></div>
-<button type="button" id="wire-reset">Återställ modellen</button>
-</div><div class="panel"><h2>Rita och pröva</h2><p class="tag" id="wire-result" aria-live="polite" style="margin:0 0 5px;font-size:1rem">40 μT</p>
-<div class="control"><label for="current">Ström: tecken anger riktning <output id="current-v">4,0 A</output></label><input id="current" type="range" min="-8" max="8" value="4" step="1"></div>
-<div class="control"><label for="radius">Avstånd från ledaren <output id="radius-v">2,0 cm</output></label><input id="radius" type="range" min="1" max="8" value="2" step="0.5"></div>
-<div class="diagram"><svg id="wire-svg" viewBox="0 0 640 320" role="img" aria-label="Ledare sedd i tvärsnitt, hela magnetfältets riktning synlig och cirklarna är en riktningsmodell"></svg></div>
-
-</div></div>
-<details class="teacher"><summary>Lärarens observationspunkt</summary><p>Högerhandsregeln: tumme längs konventionell ström, fingrar runt ledaren. När strömmen är noll är ledarens eget fält noll. Begär en skiss innan eleven ser modellen.</p></details>
-</section>
-
-<section class="slide" data-title="Magnetisk kraft">
-<span class="kicker">04 · Förutsäg riktning</span><h1>Magnetisk kraft – vilket håll?</h1>
-<div class="layout"><div class="panel"><h2>Förutsäg och motivera</h2>
-<p>En partikel rör sig åt höger. Magnetfältet är vinkelrätt mot skärmen. Förutsäg vad som ändras när <b>bara laddningstecknet</b> byts.</p>
-<div class="question">Åt vilket håll pekar kraften på en positiv respektive negativ laddning?</div>
-<div class="math"><math display="block"><mover><mi>F</mi><mo>→</mo></mover><mo>=</mo><mi>q</mi><mo>(</mo><mover><mi>v</mi><mo>→</mo></mover><mo>×</mo><mover><mi>B</mi><mo>→</mo></mover><mo>)</mo></math></div>
-<p class="note">q är tecknad laddning i detta vektorsamband. Kraften är vinkelrät mot den momentana hastigheten.</p>
-<div class="question">Kan ett rent magnetfält ensamt öka partikelns fart? Varför?</div>
-<button type="button" data-reveal="force-why" class="reveal">Visa förklaring</button>
-<div id="force-why" class="answer"><p>Nej. Kraften är vinkelrät mot hastigheten och utför då inget arbete. Riktningen kan ändras fast farten är konstant.</p>
-<div class="math"><math display="block"><mi>r</mi><mo>=</mo><mfrac><mrow><mi>m</mi><mi>v</mi></mrow><mrow><mi>q</mi><mi>B</mi></mrow></mfrac></math></div><p class="note">För cirkelbana vinkelrätt mot homogent fält; q är här positiv laddningsstorlek.</p></div>
-</div><div class="panel"><h2>Pröva din kraftpil</h2>
-<div class="controls"><button type="button" data-q="1" aria-pressed="true">Positiv laddning</button><button type="button" data-q="-1" aria-pressed="false">Negativ laddning</button></div>
-<div class="controls"><button type="button" data-b="-1" aria-pressed="true">B in i sidan ×</button><button type="button" data-b="1" aria-pressed="false">B ut ur sidan •</button></div>
-<div class="diagram"><svg id="force-svg" viewBox="0 0 640 310" role="img" aria-label="Partikel med hastighet åt höger, homogent magnetfält vinkelrätt mot sidan och elevstyrd kraftpil"></svg></div>
-<div class="controls"><button type="button" id="force-show">Visa kraften</button><button type="button" id="force-reset">Återställ</button></div>
-<div class="readout" id="force-result" aria-live="polite">Kraften är dold tills ni prövat er förutsägelse.</div>
+<section class="slide" data-title="Rotera slingan">
+<span class="kicker">03 · Klickbar geometrisk modell</span><h1>Vrid slingan – förutsäg spänningens tecken</h1>
+<div class="layout"><div class="panel"><h2>Tvärsnitt av en roterande slinga</h2>
+<div class="question">När är flödet som störst? När är spänningens storlek som störst? Är det samma läge?</div>
+<div class="slider"><label for="angle">Vinkel mellan ytnormal och B <output id="angle-value">90°</output></label><input id="angle" type="range" min="0" max="360" step="15" value="90"></div>
+<div class="slider"><label for="rot-f">Rotationsfrekvens (ideal modell) <output id="rot-f-value">2,0 Hz</output></label><input id="rot-f" type="range" min="1" max="5" step="1" value="2"></div>
+<div class="diagram"><svg id="coil-svg" viewBox="0 0 640 300" role="img" aria-label="Ytnormal mot magnetfält i en roterande spoles tvärsnitt, med markerad vinkel och slingans tvärsnitt"></svg></div>
+<button id="coil-show" type="button">Visa flöde och inducerad spänning</button>
+<button id="coil-reset" type="button">Återställ</button>
+</div><div class="panel"><h2>Fysikalisk modell</h2>
+<p>Välj positiv ytnormal så att flödet är positivt vid 0°. I denna modell hålls följande konstant:</p>
+<div class="givens"><div class="math"><math display="block"><mi>N</mi><mo>=</mo><mn>100</mn></math></div>
+<div class="math"><math display="block"><mi>B</mi><mo>=</mo><mn>0,20</mn><mspace width=".2em"/><mtext>T</mtext></math></div>
+<div class="math"><math display="block"><mi>A</mi><mo>=</mo><mn>0,010</mn><mspace width=".2em"/><msup><mtext>m</mtext><mn>2</mn></msup></math></div></div>
+<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width=".2em"/><mi mathvariant="normal">cos</mi><mi>θ</mi></math></div>
+<div class="math"><math display="block"><mi>u</mi><mo>=</mo><mi>N</mi><mi>B</mi><mi>A</mi><mi>ω</mi><mspace width=".2em"/><mi mathvariant="normal">sin</mi><mi>θ</mi></math></div>
+<p class="note">Sista formeln gäller i modellen för konstant rotationshastighet där θ=ωt och vald spänningsorientering. Vinkelns aktuella läge används för att visa den momentana spänningen.</p>
+<div id="coil-readout" class="readout" aria-live="polite">Beräkning dold före elevens förutsägelse.</div>
 </div></div>
 </section>
 
-<section class="slide" data-title="Induktion">
-<span class="kicker">05 · Kontrollerat experiment</span><h1>Induktion kräver flödesändring</h1>
-<div class="layout"><div class="panel"><h2>Förutsäg och pröva</h2>
-<p>En stillastående spole har <b>100 varv</b> och arean <b>0,010 m²</b> per varv. Ett homogent magnetfält vinkelrätt mot spolen ändras linjärt från <b>0,20 T</b>.</p>
-<div class="question">Vad händer med spänningens storlek om samma flödesändring tar dubbelt så lång tid?</div>
-<div class="control"><label for="field-end">Slutvärde för B <output id="field-end-v">0,60 T</output></label><input id="field-end" type="range" min="0" max="0.8" step=".1" value=".6"></div>
-<div class="control"><label for="duration">Tid för förändringen <output id="duration-v">0,20 s</output></label><input id="duration" type="range" min="0.1" max="0.6" step=".1" value=".2"></div>
-<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mspace width=".20em"/><mi mathvariant="normal">cos</mi><mi>α</mi></math></div>
-<div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div>
-</div><div class="panel"><h2>Graf och återkoppling</h2>
-<div class="diagram"><svg id="ind-svg" viewBox="0 0 720 370" role="img" aria-label="Fullständig graf över B som ändras linjärt och motsvarande inducerad spänning före, under och efter förändringen"></svg></div>
-<p class="note">Idealiserad modell, inte mätdata. Ytnormalen är vald längs B; spänningstecknet beror på spolens orientering.</p>
-<button type="button" id="ind-show">Visa beräkningen efter förutsägelsen</button>
-<div class="answer" id="ind-answer"><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mi>A</mi><mo>·</mo><mo>Δ</mo><mi>B</mi></math></div>
-<div class="readout" id="ind-result" aria-live="polite">Beräkning</div></div>
-<button type="button" id="ind-reset">Återställ modellen</button>
-</div></div>
-<details class="teacher"><summary>Lärarstöd för grafen</summary><p>Låt alla beskriva lutningen i B(t) innan induktionslagen visas. Ökad tidslängd ger mindre lutning och mindre inducerad spänning för samma ΔB. Testa också ΔB = 0. Kurvan blir noll igen efter förändringen.</p></details>
+<section class="slide" data-title="Sinusspänning">
+<span class="kicker">04 · Graf och ekvation</span><h1>Hur ser växelspänningen ut över tiden?</h1>
+<div class="layout"><div class="panel"><h2>Ändra en variabel åt gången</h2>
+<div class="question">Om frekvensen fördubblas: vad händer med periodtiden och antalet svängningar under en sekund?</div>
+<div class="slider"><label for="freq">Frekvens <output id="freq-value">2 Hz</output></label><input id="freq" type="range" min="1" max="5" step="1" value="2"></div>
+<div class="slider"><label for="peak">Spänningens toppvärde <output id="peak-value">80 V</output></label><input id="peak" type="range" min="20" max="160" step="20" value="80"></div>
+<div class="diagram"><svg id="wave-svg" viewBox="0 0 660 300" role="img" aria-label="Spänningen som exakt sinusfunktion under en sekund, med rätt antal perioder och markerad amplitud"></svg></div>
+</div><div class="panel"><h2>Vinkelfrekvens och period</h2>
+<div class="math"><math display="block"><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mover accent="true"><mi>u</mi><mo>^</mo></mover><mspace width=".2em"/><mi mathvariant="normal">sin</mi><mo>(</mo><mi>ω</mi><mi>t</mi><mo>)</mo></math></div>
+<div class="math"><math display="block"><mi>ω</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>f</mi></math></div>
+<div class="math"><math display="block"><mi>f</mi><mo>=</mo><mfrac><mn>1</mn><mi>T</mi></mfrac></math></div>
+<p class="note">Här är toppvärdet den största momentana spänningens storlek. Vinkelfrekvens ω mäts i rad/s. Period T mäts i s, frekvens f i Hz.</p>
+<div id="wave-readout" class="readout" aria-live="polite"></div>
+<button type="button" data-reveal="wave-reveal">Visa återkopplingen</button><div id="wave-reveal" class="answer"><p>Fördubblad frekvens ger dubbelt så många perioder under samma tid och halverad periodtid. Att ändra toppvärdet ändrar amplituden men inte perioden.</p></div></div></div>
 </section>
 
-<section class="slide" data-title="Räkna hela kedjan">
-<span class="kicker">06 · Genomarbetat exempel</span><h1>Kan du själv välja nästa led?</h1>
-<div class="layout"><div class="panel"><h2>Uppgift</h2><p>100 varv, 0,010 m² per varv. Ett fält vinkelrätt mot spolytan ökar från 0,20 T till 0,60 T på 0,20 s.</p>
-<div class="question">Beräkna den inducerade spänningen för vald positiv orientering. Gör först egen lösning på papper.</div>
-<button type="button" id="next-step">Visa nästa lösningssteg (ett i taget)</button><button type="button" id="restart-steps">Börja om</button>
-<div id="steps">
-<div class="step"><h3>1. Vad är givet och vad är sökt?</h3>
-<div class="givens"><div class="math"><math display="block"><mi>N</mi><mo>=</mo><mn>100</mn></math></div><div class="math"><math display="block"><mi>A</mi><mo>=</mo><mn>0,010</mn><mspace width=".2em"/><msup><mtext>m</mtext><mn>2</mn></msup></math></div><div class="math"><math display="block"><mo>Δ</mo><mi>B</mi><mo>=</mo><mn>0,60</mn><mo>−</mo><mn>0,20</mn><mo>=</mo><mn>0,40</mn><mspace width=".2em"/><mtext>T</mtext></math></div><div class="math"><math display="block"><mo>Δ</mo><mi>t</mi><mo>=</mo><mn>0,20</mn><mspace width=".2em"/><mtext>s</mtext></math></div></div></div>
-<div class="step"><h3>2. Flödesändringen genom ett varv</h3><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mi>A</mi><mo>·</mo><mo>Δ</mo><mi>B</mi></math></div><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0,010</mn><mo>·</mo><mn>0,40</mn><mo>=</mo><mn>0,0040</mn><mspace width=".2em"/><mtext>Wb</mtext></math></div></div>
-<div class="step"><h3>3. Induktionslagen</h3><div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mi>N</mi><mfrac><mrow><mo>Δ</mo><mi>Φ</mi></mrow><mrow><mo>Δ</mo><mi>t</mi></mrow></mfrac></math></div><div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mn>100</mn><mo>·</mo><mfrac><mn>0,0040</mn><mn>0,20</mn></mfrac><mspace width=".2em"/><mtext>V</mtext></math></div></div>
-<div class="step"><h3>4. Svar och kontroll</h3><div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mn>2,0</mn><mspace width=".2em"/><mtext>V</mtext></math></div><p>Spänningens <b>storlek</b> är 2,0 V. Ett byte av spolorientering byter tecknet i det tecknade uttrycket. Halverad tid skulle ge dubbla storleken.</p></div>
+<section class="slide" data-title="Effektivvärde">
+<span class="kicker">05 · Varför räcker inte medelspänningen?</span><h1>Effektivvärdet handlar om effekt</h1>
+<div class="layout"><div class="panel"><h2>Förutsäg – pröva</h2><div class="question">En sinusformad spänning har medelvärdet noll. Betyder det att den inte kan värma en resistor?</div>
+<p>En resistor omvandlar elektrisk energi till värme under <b>både positiva och negativa halvperioder</b>.</p>
+<div class="slider"><label for="rms-peak">Toppvärde <output id="rms-peak-value">100 V</output></label><input id="rms-peak" type="range" min="40" max="240" step="20" value="100"></div>
+<div class="slider"><label for="rms-r">Resistans <output id="rms-r-value">100 Ω</output></label><input id="rms-r" type="range" min="50" max="250" step="50" value="100"></div>
+<div class="diagram"><svg id="rms-svg" viewBox="0 0 660 330" role="img" aria-label="Övre kurvan är sinusformad spänning runt noll, undre kurvan är positiv momentan effekt med korrekt medelvärde"></svg></div>
+</div><div class="panel"><h2>Hitta likströmmen med samma medeleffekt</h2>
+<p>För en ren resistor gäller:</p>
+<div class="math"><math display="block"><mi>p</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mfrac><mrow><msup><mi>u</mi><mn>2</mn></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mi>R</mi></mfrac></math></div>
+<div class="math"><math display="block"><msub><mi>P</mi><mtext>medel</mtext></msub><mo>=</mo><mfrac><msup><mover accent="true"><mi>u</mi><mo>^</mo></mover><mn>2</mn></msup><mrow><mn>2</mn><mi>R</mi></mrow></mfrac></math></div>
+<button type="button" id="rms-show">Visa effektivvärdet</button><button type="button" id="rms-reset">Återställ</button>
+<div class="answer" id="rms-answer"><div class="math"><math display="block"><msub><mi>U</mi><mtext>eff</mtext></msub><mo>=</mo><mfrac><mover accent="true"><mi>u</mi><mo>^</mo></mover><msqrt><mn>2</mn></msqrt></mfrac></math></div>
+<div class="math"><math display="block"><msub><mi>I</mi><mtext>eff</mtext></msub><mo>=</mo><mfrac><mover accent="true"><mi>i</mi><mo>^</mo></mover><msqrt><mn>2</mn></msqrt></mfrac></math></div>
+<div class="readout" id="rms-readout" aria-live="polite"></div><p>Effektivvärdet är det likspänningsvärde som skulle utveckla samma <b>medeleffekt</b> i samma resistor. Sambandet med √2 gäller sinusformad spänning eller ström, inte valfri vågform.</p></div>
 </div></div>
-<div class="panel"><h2>Var är det avgörande beslutet?</h2><p>Du ska kunna säga <b>varför</b> den totala flödesändringen inte är samma sak som fältstyrkan B och varför både antal varv och tid spelar roll.</p>
-<div class="question">Vad går fel om du sätter in B = 0,60 T direkt i induktionslagen?</div><p class="instructions">Jämför med en kamrat innan hela lösningen visas.</p><details class="teacher"><summary>Lärarstöd – fördelning av stöd</summary><p>Stanna efter steg 1. Låt eleverna formulera steg 2, fortsätt med steg 3 bara om det behövs. Visa hela lösningen efteråt som spårbar sammanfattning. Vid tidsbrist: hoppa över den frivilliga fördjupningen, inte den egna utcheckningen.</p></details></div></div>
+</section>
+
+<section class="slide" data-title="Genomarbetat exempel">
+<span class="kicker">06 · Eleverna tar nästa steg</span><h1>Från funktion till mätvärde</h1>
+<div class="layout"><div class="panel"><h2>Exempel från boken (s. 191)</h2><p>Växelspänningen från ett eluttag beskrivs i ett idealiserat exempel av:</p>
+<div class="math"><math display="block"><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>325</mn><mspace width=".2em"/><mi mathvariant="normal">sin</mi><mo>(</mo><mn>100</mn><mi>π</mi><mi>t</mi><mo>)</mo></math></div>
+<div class="question">Bestäm toppvärde, frekvens och effektivvärde. Lös varje del på papper innan du visar nästa steg.</div>
+<div class="controls"><button id="worked-next" type="button">Visa nästa steg</button><button id="worked-reset" type="button">Börja om</button></div>
+<div id="worked-steps">
+<div class="stage"><h3>1 · Avläs det givna</h3><div class="givens"><div class="math"><math display="block"><mover accent="true"><mi>u</mi><mo>^</mo></mover><mo>=</mo><mn>325</mn><mspace width=".2em"/><mtext>V</mtext></math></div><div class="math"><math display="block"><mi>ω</mi><mo>=</mo><mn>100</mn><mi>π</mi><mspace width=".2em"/><mtext>rad/s</mtext></math></div></div></div>
+<div class="stage"><h3>2 · Beräkna frekvensen</h3><div class="math"><math display="block"><mi>f</mi><mo>=</mo><mfrac><mi>ω</mi><mrow><mn>2</mn><mi>π</mi></mrow></mfrac></math></div><div class="math"><math display="block"><mi>f</mi><mo>=</mo><mfrac><mrow><mn>100</mn><mi>π</mi></mrow><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mo>=</mo><mn>50</mn><mspace width=".2em"/><mtext>Hz</mtext></math></div></div>
+<div class="stage"><h3>3 · Beräkna effektivvärdet</h3><div class="math"><math display="block"><msub><mi>U</mi><mtext>eff</mtext></msub><mo>=</mo><mfrac><mover accent="true"><mi>u</mi><mo>^</mo></mover><msqrt><mn>2</mn></msqrt></mfrac></math></div><div class="math"><math display="block"><msub><mi>U</mi><mtext>eff</mtext></msub><mo>=</mo><mfrac><mn>325</mn><msqrt><mn>2</mn></msqrt></mfrac><mspace width=".2em"/><mtext>V</mtext><mo>≈</mo><mn>230</mn><mspace width=".2em"/><mtext>V</mtext></math></div></div>
+<div class="stage"><h3>4 · Tolka svaret</h3><p>Frekvensen 50 Hz betyder 50 hela perioder per sekund. Toppvärdet är 325 V men samma medeleffekt i en resistor uppnås med ungefär 230 V likspänning.</p></div></div>
+</div><div class="panel"><h2>Förklara metoden</h2>
+<div class="question">Varför är 325 V inte det värde en vanlig voltmeter normalt visar för sinusformad nätspänning?</div>
+<p class="instruction">Enskilt → par → dela motivering. Efter lösningen: gör en närliggande variant utan hjälp.</p>
+<div class="mini"><h3>Egen kort variant</h3>
+<div class="math"><math display="block"><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>120</mn><mspace width=".2em"/><mi mathvariant="normal">sin</mi><mo>(</mo><mn>40</mn><mi>π</mi><mi>t</mi><mo>)</mo></math></div>
+<p>Bestäm själv f och effektivvärdet. Förklara innan du öppnar facit.</p><button data-reveal="variant" type="button">Visa återkoppling</button>
+<div id="variant" class="answer"><div class="math"><math display="block"><mi>f</mi><mo>=</mo><mfrac><mrow><mn>40</mn><mi>π</mi></mrow><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mo>=</mo><mn>20</mn><mspace width=".2em"/><mtext>Hz</mtext></math></div><div class="math"><math display="block"><msub><mi>U</mi><mtext>eff</mtext></msub><mo>=</mo><mfrac><mn>120</mn><msqrt><mn>2</mn></msqrt></mfrac><mo>≈</mo><mn>84,9</mn><mspace width=".2em"/><mtext>V</mtext></math></div></div></div></div></div>
 </section>
 
 <section class="slide" data-title="Hitta felet">
-<span class="kicker">07 · Elevönskemål: hitta felet</span><h1>Hitta det viktigaste felet</h1>
-<div class="layout"><div class="panel"><h2>En elevs lösning</h2>
-<p>En magnet ligger stilla i en spole. Eleven skriver:</p>
-<div class="math"><math display="block"><mi>Φ</mi><mo>=</mo><mi>B</mi><mi>A</mi><mo>≠</mo><mn>0</mn></math></div>
-<p><b>”Eftersom flödet inte är noll uppstår en inducerad spänning.”</b></p>
-<div class="question">Vilket påstående rättar felet?</div>
-<div class="controls" data-quiz="error"><button type="button" data-choice="A">A · Spänningen kräver en ändring i flödet</button><button type="button" data-choice="B">B · Spänning uppstår bara om spolen rör sig</button><button type="button" data-choice="C">C · Flöde och spänning är samma storhet</button></div><p class="quiz-result" id="error-result" aria-live="polite"></p>
-<button type="button" data-reveal="error-answer" class="reveal">Visa motiveringen efter parjämförelse</button>
-<div class="answer" id="error-answer"><p><b>A är korrekt.</b> Ett konstant flöde, även när det är skilt från noll, ger ingen inducerad spänning i en stillastående spole.</p><div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0</mn><mo>⇒</mo><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mn>0</mn></math></div><p>Det är ändringen som avgör. B kan ändras utan spolrörelse och ge spänning; en spole kan också röra sig så att flödet ändras.</p></div></div>
-<div class="panel"><h2>Grupputmaning (valbar)</h2><p>En grupp får tre fall och ska enas om en <b>förklaring</b>, inte bara ett svar.</p><ol><li>Starkt konstant B genom en stilla spole.</li><li>Svagt B som snabbt ökar genom en stilla spole.</li><li>Konstant B medan spolens area som ligger i fältet minskar.</li></ol>
-<div class="question">Vilka fall kan ge inducerad spänning? Behöver du känna till B:s storlek för att avgöra det?</div><button type="button" data-reveal="challenge" class="reveal">Visa gemensam återkoppling</button><div class="answer" id="challenge"><p>Fall 2 och 3 kan ge inducerad spänning genom ändrat flöde. Fall 1 ger ingen inducerad spänning i den idealiserade stillastående spolen. Vid fall 3 beror svaret på att den genomflödda arean verkligen ändras.</p></div></div></div>
+<span class="kicker">07 · Elevönskemål: hitta felet</span><h1>Medelvärde är inte effektivvärde</h1>
+<div class="layout"><div class="panel"><h2>En elev resonerar</h2>
+<p>”Växelspänningen är lika mycket positiv som negativ. Medelvärdet är noll, alltså är också effektivvärdet noll och lampan kan inte lysa.”</p>
+<div class="question">Vilket svar avslöjar missuppfattningen?</div>
+<div class="controls" data-quiz="error"><button data-choice="A" type="button">A · Effekt beror på spänningens kvadrat</button><button data-choice="B" type="button">B · Negativ spänning ger negativ uppvärmning</button><button data-choice="C" type="button">C · Effektivvärde är samma som medelspänning</button></div>
+<p class="results" id="error-result" aria-live="polite"></p>
+<button data-reveal="error-explain" type="button">Visa full rättning</button>
+<div id="error-explain" class="answer"><p><b>A är rätt.</b> I en resistor blir den momentana effekten positiv även under negativa halvperioden.</p>
+<div class="math"><math display="block"><mi>p</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mfrac><mrow><msup><mi>u</mi><mn>2</mn></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mi>R</mi></mfrac><mo>≥</mo><mn>0</mn></math></div>
+<p>Medelvärdet av spänningen kan vara noll medan medeleffekten är positiv. Läs av den undre grafen på föregående bild.</p></div>
+</div><div class="panel"><h2>Minutävling (valbar)</h2>
+<p>Varje par får avgöra om följande påståenden är sanna eller falska. Poäng ges för <b>motivering</b>, inte snabbast svar.</p>
+<ol><li>Om periodtiden halveras, fördubblas frekvensen.</li><li>Om toppspänningen fördubblas över samma resistor, blir medeleffekten dubbelt så stor.</li><li>Effektivvärdet för en sinusspänning är toppvärdet dividerat med √2.</li></ol>
+<button data-reveal="challenge" type="button">Visa återkoppling</button><div id="challenge" class="answer"><p>1 sant. 2 falskt: effekten fyrdubblas eftersom den är proportionell mot spänningen i kvadrat. 3 sant – gäller sinusformad spänning.</p></div></div></div>
 </section>
 
-<section class="slide" data-title="Bokarbete">
-<span class="kicker">08 · Självständigt arbete</span><h1>Nu använder du fysiken själv</h1>
-<div class="panel"><h2>20 minuter sammanhängande arbete</h2><p>Läs relevant teori eller lös uppgifter från kapitlet. Använd gärna tre olika typer: begrepp, riktning och beräkning. Läraren väljer exakt vilka som ska vara klara och skriver dem på tavlan och i Fysikens Flöde.</p>
-<div class="book-work">
-<article><h3>Elektriska fält</h3><p>Bokuppgifter <b>301–309</b>. Välj vid behov rörelse mellan plattor eller energiresonemang.</p></article>
-<article><h3>Ström och magnetfält</h3><p>Bokuppgifter <b>325–334</b> och <b>335–342</b>. Träna fältriktning eller storlek.</p></article>
-<article><h3>Magnetisk kraft och jordfält</h3><p>Bokuppgifter <b>343–350</b> och <b>351–357</b>. Rita först riktningar.</p></article>
-<article><h3>Induktion</h3><p>Bokuppgifter <b>358–366</b>. Skilj flöde och flödesförändring.</p></article>
-</div><p class="note">Uppgiftsintervallen är redan använda i tidigare Fy2-lektioner i biblioteket; detta är en repetitionsbank, inte fyra nya obligatoriska läxor.</p>
-</div>
-<div class="panel"><h2>Om du behöver stöd</h2><p>1. Skissa situationen och markera riktningar.</p><p>2. Skriv vilken storhet som söks och varför du valt en viss formel.</p><p>3. Sätt in enheter och kontrollera rimlighet.</p>
-<details><summary>Valfri fördjupning</summary><p>Kan ett magnetfält utföra arbete på en laddad partikel samtidigt som en magnet inducerar ström i en ledare? Förklara hur kraft, rörelse, energikällan och elektriska fält skiljer sig i situationerna.</p></details>
-<details class="teacher"><summary>Planerad arbetsro</summary><p>Elevernas önskemål gäller bland annat tyst teori efter genomgången och tydliga läxor. Ge en sammanhängande period utan nytt facitspel; skriv exakta valda uppgifter på tavlan och publicera i Flödet. Ingen automatisk ny Socrative när den inte finns i originalmaterialet.</p></details>
-</div>
-</section>
-
-<section class="slide" data-title="Egen utcheckning">
-<span class="kicker">09 · Utan facit och utan hjälp</span><h1>Kan du lösa en ny situation?</h1>
-<div class="layout"><div class="panel"><h2>Individuell utcheckning</h2>
-<p>En spole med 200 varv har tvärsnittsarean 0,0050 m². Ett homogent fält vinkelrätt mot spolytan ökar från 0,10 T till 0,30 T på 0,50 s.</p>
-<div class="question">Beräkna den inducerade spänningens <b>storlek</b>. Ange sambandet, minst ett mellanled och varför tecknet inte efterfrågas.</div>
-<label for="exit-value">Ditt numeriska svar i volt</label><div class="controls"><input id="exit-value" inputmode="decimal" type="text" placeholder="t.ex. 0,40" aria-label="Svar i volt"><button type="button" id="exit-check" class="primary">Kontrollera svaret</button></div>
-<p class="quiz-result" id="exit-feedback" aria-live="polite"></p>
-<button type="button" data-reveal="exit-solution" class="reveal">Visa full lösning efter eget försök</button>
-<div class="answer" id="exit-solution"><div class="math"><math display="block"><mo>Δ</mo><mi>B</mi><mo>=</mo><mn>0,30</mn><mo>−</mo><mn>0,10</mn><mo>=</mo><mn>0,20</mn><mspace width=".2em"/><mtext>T</mtext></math></div>
-<div class="math"><math display="block"><mo>Δ</mo><mi>Φ</mi><mo>=</mo><mn>0,0050</mn><mo>·</mo><mn>0,20</mn><mo>=</mo><mn>0,0010</mn><mspace width=".2em"/><mtext>Wb</mtext></math></div>
-<div class="math"><math display="block"><msub><mi>U</mi><mtext>ind</mtext></msub><mo>=</mo><mo>−</mo><mn>200</mn><mo>·</mo><mfrac><mn>0,0010</mn><mn>0,50</mn></mfrac><mo>=</mo><mo>−</mo><mn>0,40</mn><mspace width=".2em"/><mtext>V</mtext></math></div>
-<p>Spänningens <b>storlek</b> är 0,40 V. Tecknet gäller först när orienteringen för spolen/voltmetern definierats. Att ange 0,40 V som storlek är därför rätt.</p></div>
-</div>
-<div class="panel"><h2>Återkoppla till målen</h2><p>Förklara kort – med <b>egna ord</b> – vad som avgör vilken formel du väljer, vad som ändras i situationen och hur du kontrollerar resultatet.</p>
-<div class="question">En magnet rör sig mycket fortare genom en spole. Är det alltid korrekt att spänningen blir exakt dubbelt så stor?</div>
-<button type="button" data-reveal="exit-thinking" class="reveal">Visa förklaring</button>
-<div class="answer" id="exit-thinking"><p>Nej, inte utan fler antaganden. Spänningen beror på flödets förändring per tid. För att kunna säga ”dubbelt” måste flödesförloppet och hastighetsändringen vara specificerade. Om samma flödesändring sker under halva tiden blir <em>medelspänningens storlek</em> dubbelt så stor.</p></div>
+<section class="slide" data-title="Socrative och bokarbete">
+<span class="kicker">08 · Färdighet och självständighet</span><h1>Nu använder du matematiken och fysiken själv</h1>
+<div class="layout"><div class="panel"><h2>Diagnos, om originalaktiviteten används</h2><p><b>Socrative:</b> Fy2 308 · Växelström 1 (ursprunglig aktivitet, SOC-38259952). Först individuellt, sedan jämför ni motiveringar.</p>
+<p class="note">Socrative här är med eftersom det finns i användarens tidigare videolektion. Det är ingen ny digital insamling på denna webbsida.</p>
+<h2>Lugn bokperiod</h2><p>Arbeta med <b>uppgifter 373–379 på s. 191</b>. Börja med rätt teori, fortsätt med svängningsdata, förklaring och effektvärde.</p>
+<p class="instruction">20 minuter sammanhängande arbete om lektionsupplägget tillåter. Fråga läraren vid behov.</p></div>
+<div class="panel"><h2>Välj rätt utmaning</h2><div class="gridtasks"><div><h3>Förklara</h3><p>373 och 377–379: generator, kurvor och varför växelström används.</p></div><div><h3>Beräkna</h3><p>374–376 och 378: toppvärde, effektivvärde, period, frekvens och sinusfunktion.</p></div></div>
+<p>Rita enhetliga grafer och visa mellanled. Uppgift 378 innehåller en graf som ska läsas i boken, inte en påhittad kopia på webben.</p>
+<p class="note"><b>Läxa:</b> de uppgifter som läraren anger ur 373–379, med deadline tydliggjord i Teams.</p>
+<details class="teacher"><summary>Lärarstöd – originalets arbetsordning</summary><p>Originalmaterialet innehåller PhET-generator, mindmap, Socrative Fy2 308 och bokens 373–379. Dessa har bevarats som genomförandealternativ här. Räkning med papper sker individuellt och läraren avgör vilka aktiviteter som hinns med.</p></details>
 </div></div>
 </section>
 
-<section class="slide" data-title="Avslutning och sammanfattning">
-<span class="kicker">10 · Målen tillbaka på skärmen</span><h1>Vad tar du med dig?</h1>
-<div class="layout"><div class="panel"><h2>Tre beslut</h2>
-<ol><li><b>Vad är orsaken?</b> Elektriskt fält, ström eller förändrat magnetiskt flöde?</li><li><b>Vilken riktning?</b> Rita pil och pröva tecken eller högerhandsregel.</li><li><b>Vilket samband?</b> Förklara varför det passar innan du räknar.</li></ol>
-<p><b>Efter lektionen ska du kunna:</b> välja modell, motivera med figur och samband, samt beräkna och kontrollera självständigt.</p>
-<div class="question">En ny magnet används i samma spole. Vilka mätningar skulle du behöva för att kunna beräkna inducerad medelspänning?</div>
-</div><div class="panel"><h2>Fortsatt arbete</h2><p><b>Att göra klart:</b> de bokuppgifter som läraren markerat i föregående bild.</p><p><b>Att repetera:</b> de avsnitt där din individuella utcheckning visar att du behöver mer träning.</p>
-<p><b>Klurig funderare:</b> Var kommer energin ifrån när du känner att det blir trögare att föra en magnet genom en kortsluten spole?</p>
-<p class="note">Denna funderare är skild från dagens utcheckning. Den finns för vidare tänkande, inte som ny obligatorisk kursdel.</p>
-<details class="teacher"><summary>Lärarens avslutning och uppföljning</summary><p>Anteckna anonymt: vilket metodval klarade de självständigt? Vilken felsyn återkom? Anpassa nästa repetition. Bekräfta läxans uppgiftsnummer och deadline på tavlan och i Fysikens Flöde.</p></details></div></div>
+<section class="slide" data-title="Individuell utcheckning">
+<span class="kicker">09 · Utan uppenbart facit</span><h1>Visa vad du själv kan</h1>
+<div class="layout"><div class="panel"><h2>Ny uppgift</h2><p>En sinusformad växelspänning ges av funktionen:</p>
+<div class="math"><math display="block"><mi>u</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>240</mn><mspace width=".2em"/><mi mathvariant="normal">sin</mi><mo>(</mo><mn>120</mn><mi>π</mi><mi>t</mi><mo>)</mo></math></div>
+<div class="question">Bestäm frekvens och effektivvärde. Skriv en rad som förklarar varför effektivvärdet inte är lika med medelspänningen.</div>
+<div class="row"><label for="exit-f">f (Hz)</label><input id="exit-f" type="text" inputmode="decimal" placeholder="..."></div>
+<div class="row"><label for="exit-u">Ueff (V)</label><input id="exit-u" type="text" inputmode="decimal" placeholder="..."></div>
+<div class="controls"><button id="exit-check" class="primary" type="button">Kontrollera talvärden</button><button data-reveal="exit-answer" type="button">Visa lösningen efter eget försök</button></div>
+<p class="results" id="exit-result" aria-live="polite"></p>
+<div id="exit-answer" class="answer"><div class="math"><math display="block"><mi>ω</mi><mo>=</mo><mn>120</mn><mi>π</mi><mspace width=".2em"/><mtext>rad/s</mtext></math></div><div class="math"><math display="block"><mi>f</mi><mo>=</mo><mfrac><mrow><mn>120</mn><mi>π</mi></mrow><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mo>=</mo><mn>60</mn><mspace width=".2em"/><mtext>Hz</mtext></math></div>
+<div class="math"><math display="block"><msub><mi>U</mi><mtext>eff</mtext></msub><mo>=</mo><mfrac><mn>240</mn><msqrt><mn>2</mn></msqrt></mfrac><mo>≈</mo><mn>170</mn><mspace width=".2em"/><mtext>V</mtext></math></div>
+<p>Medelvärdet av själva spänningen är noll; effektivvärdet beskriver vilken likspänning som utvecklar samma medeleffekt i samma resistor.</p></div>
+</div><div class="panel"><h2>Återkoppla till lektionsmålen</h2><ol><li>Varför växlar generatorns spänning tecken?</li><li>Hur ser du toppvärde, period och frekvens i en graf?</li><li>Varför divideras toppvärdet med √2 just för en sinusformad spänning?</li></ol>
+<p class="instruction">Det viktiga är din egen motivering, inte enbart två rätta tal.</p></div></div>
+</section>
+
+<section class="slide" data-title="Avslut och fördjupning">
+<span class="kicker">10 · Vad knyter ihop kapitlet?</span><h1>Från magnetfält till växelström</h1>
+<div class="layout"><div class="panel"><h2>Sammanfatta från minnet</h2><p><b>Induktion:</b> flödesändring ger inducerad spänning.</p><p><b>Generator:</b> en roterande slinga ger växlande flöde och därmed växelspänning.</p><p><b>Effektivvärde:</b> den likspänning som ger samma medeleffekt i samma resistor som den sinusformade växelspänningen.</p>
+<div class="question">Vilket huvudmål från startbilden kan du nu själv visa utan hjälp? Vilket behöver du repetera?</div>
+<p><b>Att göra klart:</b> anvisade uppgifter ur 373–379. <b>Nästa ämne:</b> elektromagnetiska vågor, i originalmaterialet hänvisat till s. 217–222.</p></div>
+<div class="panel"><h2>Valbar bokfördjupning efter kärnlektionen</h2><details><summary>Transformatorn – s. 193–195</summary><p>Två spolar kopplas via ett varierande magnetiskt flöde i en gemensam järnkärna.</p>
+<div class="math"><math display="block"><mfrac><msub><mi>U</mi><mn>2</mn></msub><msub><mi>U</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><msub><mi>N</mi><mn>2</mn></msub><msub><mi>N</mi><mn>1</mn></msub></mfrac></math></div>
+<p>För en ideal transformator utan förluster är även tillförd och avgiven effekt lika. En transformator med dubbelt så många sekundärvarv ger dubbla spänningen – men inte dubbla effekten.</p>
+<div class="question">En transformator har 100 varv i primärspolen, 200 i sekundärspolen och 12 V på primären. Bestäm sekundärspänningen.</div>
+<button data-reveal="trans-answer" type="button">Visa svar</button><div id="trans-answer" class="answer"><div class="math"><math display="block"><msub><mi>U</mi><mn>2</mn></msub><mo>=</mo><mn>12</mn><mo>·</mo><mfrac><mn>200</mn><mn>100</mn></mfrac><mo>=</mo><mn>24</mn><mspace width=".2em"/><mtext>V</mtext></math></div></div></details>
+<details><summary>Virvelströmmar och induktionsspis – s. 196–197</summary><p>Ett tidsvarierande magnetfält kan driva virvelströmmar i en ledare, som värms av resistiva förluster. Magnetens rörelse kan bromsas genom Lenz lag. Detta är fördjupning, inte ett krav för dagens utcheckning.</p></details>
+<details class="teacher"><summary>Lärarens efterreflektion</summary><p>Anonymt: vilka kunde hitta f och Ueff självständigt? Blandade de ihop topp-, medel- och effektivvärde? Repetera bara den särskilda svårigheten. Bokanknytning: s. 188–191 kärnstoff, s. 192–197 möjlig fördjupning.</p></details></div></div>
 </section>
 </main>
-<nav class="footer-nav" aria-label="Lektionsnavigering"><button type="button" id="prev">← Föregående</button><span class="progress" id="progress">1 / 10 · Start och mål</span><button type="button" class="primary" id="next">Nästa →</button></nav>
+<nav class="nextbar" aria-label="Lektionsnavigering"><button type="button" id="prev">← Föregående</button><span class="counter" id="counter">1 / 10</span><button id="next" class="primary" type="button">Nästa →</button></nav>
 <script>
-(function(){
-'use strict';
-var slides=Array.from(document.querySelectorAll('.slide'));var index=0;var classMode=true;var teacher=false;
-function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(el,i){el.classList.toggle('active',i===index)});document.getElementById('prev').disabled=index===0;document.getElementById('next').disabled=index===slides.length-1;document.getElementById('progress').textContent=(index+1)+' / '+slides.length+' · '+slides[index].dataset.title;window.scrollTo(0,0)}
-document.getElementById('prev').addEventListener('click',function(){show(index-1)});
-document.getElementById('next').addEventListener('click',function(){show(index+1)});
-document.getElementById('mode').addEventListener('click',function(){classMode=!classMode;this.textContent='Repetitionsläge: '+(classMode?'av':'på');this.setAttribute('aria-pressed',String(!classMode))});
-document.getElementById('teacher').addEventListener('click',function(){teacher=!teacher;document.body.classList.toggle('teacher-on',teacher);this.setAttribute('aria-pressed',String(teacher))});
-document.querySelectorAll('[data-reveal]').forEach(function(b){b.addEventListener('click',function(){var panel=document.getElementById(b.dataset.reveal);var visible=panel.classList.toggle('visible');b.textContent=visible?'Dölj återkoppling':'Visa återkoppling efter eget försök'})});
-document.querySelectorAll('[data-quiz]').forEach(function(group){group.querySelectorAll('[data-choice]').forEach(function(b){b.addEventListener('click',function(){group.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});var name=group.dataset.quiz;var result=document.getElementById(name+'-result');var right=name==='model'?'B':'A';if(classMode){result.textContent='Ditt val är markerat. Motivera först i par och öppna sedan återkopplingen.';result.classList.remove('error')}else{var ok=b.dataset.choice===right;result.textContent=ok?(name==='model'?'Rätt: en rörlig laddning i B-fält får magnetisk kraft.':'Rätt: förändrat flöde orsakar induktion.'):(name==='model'?'Pröva igen: var är hastigheten avgörande?':'Pröva igen: vad säger induktionslagen om ändringen i flödet?');result.classList.toggle('error',!ok)}})})});
-function dec(v,d){return Number(v).toFixed(d).replace('.',',')}
-var I=document.getElementById('current'),radius=document.getElementById('radius');
-function renderWire(){var current=+I.value,r=+radius.value, B=(2e-7*Math.abs(current)/(r/100))*1e6;document.getElementById('current-v').textContent=dec(current,0)+' A';document.getElementById('radius-v').textContent=dec(r,1)+' cm';document.getElementById('wire-result').textContent=dec(B,1)+' μT · '+(current>0?'ström ut ur sidan':current<0?'ström in i sidan':'ingen ström, B = 0');
-var c=320, cy=162, direction=Math.sign(current);var s='<rect width="640" height="320" fill="#f7fbfd"/><text x="24" y="31" font-size="18" font-weight="700" fill="#1c4858">Vy längs ledaren · schematisk riktning</text>';
-[44,72,100].forEach(function(rad){if(!direction)return;s+='<circle cx="'+c+'" cy="'+cy+'" r="'+rad+'" fill="none" stroke="#1c7c93" stroke-width="2"/>';s+='<path d="M '+(c+rad)+' '+(cy+(direction>0?14:-14))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+'" stroke="#14577a" stroke-width="4" stroke-linecap="round"/>';s+='<path d="M '+(c+rad-7)+' '+(cy+(direction>0?-4:4))+' L '+(c+rad)+' '+(cy+(direction>0?-14:14))+' L '+(c+rad+7)+' '+(cy+(direction>0?-4:4))+'" fill="none" stroke="#14577a" stroke-width="3"/>'});
-s+='<circle cx="'+c+'" cy="'+cy+'" r="28" fill="#fff" stroke="#334d60" stroke-width="3"/><text x="'+(c-13)+'" y="'+(cy+9)+'" font-size="32" font-weight="700" fill="#3b5363">'+(direction>0?'⊙':direction<0?'⊗':'0')+'</text><text x="24" y="291" font-size="17" fill="#395760">B(r) beräknas – cirkelavståndet här anger inte B</text>';document.getElementById('wire-svg').innerHTML=s}
-I.addEventListener('input',renderWire);radius.addEventListener('input',renderWire);document.getElementById('wire-reset').onclick=function(){I.value=4;radius.value=2;document.getElementById('wire-answer').classList.remove('visible');renderWire()};
-var q=1,bfield=-1,forceVisible=false;
-function renderForce(){var direction=-q*bfield;var svg='<rect width="640" height="310" fill="#f7fbfd"/>';
-for(var y=45;y<280;y+=54)for(var x=44;x<615;x+=54)svg+='<text x="'+x+'" y="'+y+'" fill="#5892a3" font-size="18">'+(bfield<0?'×':'•')+'</text>';
-svg+='<circle cx="315" cy="146" r="24" fill="'+(q>0?'#efcc8b':'#c6dfef')+'" stroke="#314d59" stroke-width="2"/><text x="307" y="155" font-size="26">'+(q>0?'+':'−')+'</text>';
-svg+='<path d="M 345 146 H 495" stroke="#237b59" stroke-width="5"/><path d="M 495 146 L 481 138 L 481 154 Z" fill="#237b59"/><text x="460" y="130" font-size="19" fill="#237b59">v</text>';
-if(forceVisible){var y2=146-(direction*107);svg+='<path d="M 315 146 L 315 '+y2+'" stroke="#bc6c27" stroke-width="5"/><path d="M 315 '+y2+' L 306 '+(y2+direction*14)+' L 324 '+(y2+direction*14)+' Z" fill="#bc6c27"/><text x="326" y="'+(y2+8)+'" font-size="20" fill="#9e531b">F</text>'}
-svg+='<text x="24" y="297" font-size="16" fill="#395760">× = in i sidan · • = ut ur sidan</text>';document.getElementById('force-svg').innerHTML=svg;document.getElementById('force-result').textContent=forceVisible?('Kraften pekar '+(direction>0?'uppåt':'nedåt')+'. Byt q eller B och jämför.'):'Kraften är dold tills ni prövat er förutsägelse.'}
-document.querySelectorAll('[data-q]').forEach(function(x){x.onclick=function(){q=+x.dataset.q;document.querySelectorAll('[data-q]').forEach(function(z){z.setAttribute('aria-pressed',String(z===x))});renderForce()}});
-document.querySelectorAll('[data-b]').forEach(function(x){x.onclick=function(){bfield=+x.dataset.b;document.querySelectorAll('[data-b]').forEach(function(z){z.setAttribute('aria-pressed',String(z===x))});renderForce()}});
-document.getElementById('force-show').onclick=function(){forceVisible=true;renderForce()};
-document.getElementById('force-reset').onclick=function(){forceVisible=false;renderForce()};
-var finalB=document.getElementById('field-end'),duration=document.getElementById('duration'),indVisible=false;
-function renderInd(){var end=+finalB.value,dt=+duration.value,delta=end-.2, U=-100*.01*delta/dt;document.getElementById('field-end-v').textContent=dec(end,2)+' T';document.getElementById('duration-v').textContent=dec(dt,2)+' s';document.getElementById('ind-result').textContent='Flödesändring = '+dec(delta*.01,4)+' Wb per varv. Inducerad spänning = '+dec(U,2)+' V (tecknad). Storlek = '+dec(Math.abs(U),2)+' V.';
-var x1=85,x2=85+Math.round(dt/.6*460),x3=660;var yy=function(v){return 146-105*v/.8};var k='<rect width="720" height="370" fill="#f7fbfd"/><text x="28" y="25" font-size="19" font-weight="700" fill="#204b61">Magnetfält B(t), idealiserad ramp</text><path d="M 70 45 V 151 H 665" fill="none" stroke="#667e88" stroke-width="2"/><text x="35" y="51" font-size="17">B</text><text x="655" y="173" font-size="17">t</text>';
-k+='<path d="M 85 '+yy(.2)+' H '+x1+' L '+x2+' '+yy(end)+' H '+x3+'" fill="none" stroke="#11799c" stroke-width="5"/>';
-k+='<text x="20" y="'+(yy(.2)+5)+'" font-size="15">0,20</text><text x="468" y="'+(yy(end)-11)+'" font-size="16">'+dec(end,2)+' T</text>';
-var pulseY=265-Math.min(62,Math.max(-62,U/6*60));k+='<text x="28" y="205" font-size="19" font-weight="700">Inducerad spänning under rampen</text><path d="M 70 265 H 665 M 70 220 V 335" stroke="#667e88" stroke-width="2"/><text x="30" y="240" font-size="17">U</text>';
-k+='<path d="M 85 265 H '+x1+' V '+pulseY+' H '+x2+' V 265 H '+x3+'" fill="none" stroke="#ba722b" stroke-width="5"/><text x="456" y="249" font-size="16">'+dec(U,2)+' V</text><text x="83" y="352" font-size="16">före</text><text x="245" y="352" font-size="16">under Δt = '+dec(dt,2)+' s</text><text x="560" y="352" font-size="16">efter</text>';
-document.getElementById('ind-svg').innerHTML=k;if(indVisible)document.getElementById('ind-answer').classList.add('visible')}
-finalB.addEventListener('input',renderInd);duration.addEventListener('input',renderInd);document.getElementById('ind-show').onclick=function(){indVisible=true;renderInd()};
-document.getElementById('ind-reset').onclick=function(){finalB.value=.6;duration.value=.2;indVisible=false;document.getElementById('ind-answer').classList.remove('visible');renderInd()};
-var currentStep=0,steps=Array.from(document.querySelectorAll('#steps .step'));
-function stepView(){steps.forEach(function(s,i){s.classList.toggle('visible',i<currentStep)});document.getElementById('next-step').disabled=currentStep===steps.length}
-document.getElementById('next-step').onclick=function(){currentStep=Math.min(steps.length,currentStep+1);stepView()};
-document.getElementById('restart-steps').onclick=function(){currentStep=0;stepView()};
-document.getElementById('exit-check').onclick=function(){var raw=document.getElementById('exit-value').value.trim().replace(',','.').replace(/\s/g,'');var v=Number(raw),el=document.getElementById('exit-feedback');if(!raw||!Number.isFinite(v)){el.textContent='Skriv ett numeriskt svar först. Visa också dina mellanled på papper.';el.classList.add('error');return}var ok=Math.abs(v-.4)<.011;el.textContent=ok?'Rätt numerisk storlek. Kontrollera också att du motiverat sambandet och enheterna.':'Kontrollera särskilt flödesändringen per varv och antalet varv. Jämför sedan med din skiss.';el.classList.toggle('error',!ok)};
-show(0);renderWire();renderForce();renderInd();stepView();
+(function(){'use strict';
+const slides=[...document.querySelectorAll('.slide')];let index=0,classMode=true;
+function show(i){index=Math.max(0,Math.min(i,slides.length-1));slides.forEach((s,j)=>s.classList.toggle('active',j===index));document.getElementById('counter').textContent=(index+1)+' / '+slides.length+' · '+slides[index].dataset.title;document.getElementById('prev').disabled=index===0;document.getElementById('next').disabled=index===slides.length-1;window.scrollTo(0,0)}
+document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);
+document.getElementById('mode').onclick=function(){classMode=!classMode;this.textContent='Repetitionsläge: '+(classMode?'av':'på');this.setAttribute('aria-pressed',String(!classMode))};
+document.getElementById('teacher').onclick=function(){const on=!document.body.classList.contains('teacher-on');document.body.classList.toggle('teacher-on',on);this.setAttribute('aria-pressed',String(on))};
+document.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=function(){const x=document.getElementById(b.dataset.reveal);const open=x.classList.toggle('visible');this.textContent=open?'Dölj återkopplingen':'Visa återkoppling efter eget försök'});
+document.querySelectorAll('[data-quiz]').forEach(group=>group.querySelectorAll('[data-choice]').forEach(b=>b.onclick=function(){group.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));const target=document.getElementById(group.dataset.quiz+'-result');if(classMode){target.textContent='Du har markerat ett svar. Motivera först och öppna sedan rättningen.';target.classList.remove('bad')}else{const ok=b.dataset.choice==='A';target.textContent=ok?'Rätt. Resistorns effekt beror på spänningen i kvadrat.':'Försök igen: kan resistorn värmas under den negativa halvperioden?';target.classList.toggle('bad',!ok)}}));
+const fmt=(v,n=1)=>Number(v).toFixed(n).replace('.',',');
+const coilAngle=document.getElementById('angle'),rotF=document.getElementById('rot-f');let coilShown=false;
+function renderCoil(){const deg=+coilAngle.value,f=+rotF.value,ang=deg*Math.PI/180;document.getElementById('angle-value').textContent=deg+'°';document.getElementById('rot-f-value').textContent=fmt(f)+' Hz';
+const centerX=305,cy=158,nx=centerX+100*Math.cos(ang),ny=cy-100*Math.sin(ang),tx=70*Math.sin(ang),ty=70*Math.cos(ang);let x='<rect width="640" height="300" fill="#f8fcfd"/><text x="19" y="29" font-size="19" font-weight="700" fill="#214b5d">Schematisk 2D-vy · B åt höger</text>';
+x+='<path d="M 72 '+cy+' H 555" stroke="#73a6b2" stroke-width="4"/><path d="M 555 '+cy+' l -15 -8 v 16 z" fill="#73a6b2"/><text x="533" y="145" font-size="20" fill="#195d6b">B</text>';
+x+='<line x1="'+(centerX-tx)+'" y1="'+(cy-ty)+'" x2="'+(centerX+tx)+'" y2="'+(cy+ty)+'" stroke="#ba7434" stroke-width="8" stroke-linecap="round"/>';
+x+='<circle cx="'+centerX+'" cy="'+cy+'" r="7" fill="#334e5b"/><path d="M '+centerX+' '+cy+' L '+nx+' '+ny+'" stroke="#237b59" stroke-width="5"/><path d="M '+nx+' '+ny+' l -13 '+(Math.sin(ang)>0?5:-5)+' l 7 '+(Math.sin(ang)>0?12:-12)+' z" fill="#237b59"/><text x="'+(nx+8)+'" y="'+(ny-5)+'" font-size="20" font-weight="700" fill="#237b59">n</text>';
+x+='<text x="20" y="276" font-size="18" fill="#385963">θ = '+deg+'° · orange = slingans tvärsnitt · grön = ytnormal</text>';document.getElementById('coil-svg').innerHTML=x;
+const flux=.2*.01*Math.cos(ang),u=100*.2*.01*2*Math.PI*f*Math.sin(ang);
+document.getElementById('coil-readout').textContent=coilShown?('Flöde per varv Φ = '+fmt(flux*1000,2)+' mWb · momentanspänning u = '+fmt(u,2)+' V'):'Beräkning dold före elevens förutsägelse.'}
+coilAngle.oninput=renderCoil;rotF.oninput=renderCoil;document.getElementById('coil-show').onclick=()=>{coilShown=true;renderCoil()};document.getElementById('coil-reset').onclick=()=>{coilShown=false;coilAngle.value=90;rotF.value=2;renderCoil()};
+const fSlider=document.getElementById('freq'),peakSlider=document.getElementById('peak');
+function path(points){return points.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+' '+p[1].toFixed(2)).join(' ')}
+function renderWave(){const f=+fSlider.value,amp=+peakSlider.value;document.getElementById('freq-value').textContent=f+' Hz';document.getElementById('peak-value').textContent=amp+' V';const xx=t=>70+t*555, yy=v=>153-v*100;const pts=[];for(let k=0;k<=480;k++){const t=k/480;pts.push([xx(t),yy(Math.sin(2*Math.PI*f*t))])}
+let svg='<rect width="660" height="300" fill="#f8fcfd"/><path d="M70 48 V252 M70 153 H640" stroke="#6e8a98" stroke-width="2"/>';
+for(let j=0;j<=10;j++){const x=xx(j/10);svg+='<line x1="'+x+'" x2="'+x+'" y1="148" y2="158" stroke="#9fb2b7"/>'}
+svg+='<path d="'+path(pts)+'" fill="none" stroke="#157c9d" stroke-width="4"/>';
+svg+='<text x="15" y="62" font-size="17">u</text><text x="612" y="181" font-size="16">t (s)</text><text x="80" y="42" font-size="17">'+amp+' V</text><text x="15" y="260" font-size="16">−'+amp+'</text><text x="70" y="282" font-size="15">0</text><text x="335" y="282" font-size="15">0,5</text><text x="602" y="282" font-size="15">1,0</text>';document.getElementById('wave-svg').innerHTML=svg;
+document.getElementById('wave-readout').textContent='Period T = '+fmt(1/f,3)+' s · Vinkelfrekvens ω = '+fmt(2*Math.PI*f,2)+' rad/s · '+f+' hela perioder på 1 s.'}
+fSlider.oninput=renderWave;peakSlider.oninput=renderWave;
+const rmsPeak=document.getElementById('rms-peak'),rmsR=document.getElementById('rms-r');let rmsShown=false;
+function renderRms(){const v=+rmsPeak.value,R=+rmsR.value,U=v/Math.sqrt(2),P=v*v/(2*R);document.getElementById('rms-peak-value').textContent=v+' V';document.getElementById('rms-r-value').textContent=R+' Ω';
+let svg='<rect width="660" height="330" fill="#f8fcfd"/><text x="12" y="24" font-size="19" font-weight="700" fill="#214b5d">Spänning u(t)</text><path d="M65 45 V140 H630" stroke="#7e9ba7" stroke-width="2"/>';
+const top=[],bot=[];for(let k=0;k<=300;k++){const t=k/300,s=Math.sin(2*Math.PI*t);top.push([65+550*t,94-42*s]);bot.push([65+550*t,280-60*s*s])}
+svg+='<path d="'+path(top)+'" fill="none" stroke="#167f9d" stroke-width="4"/><text x="12" y="180" font-size="18" font-weight="700">Effekt p(t) i resistorn</text><path d="M65 196 V283 H630" stroke="#7e9ba7" stroke-width="2"/><path d="'+path(bot)+'" fill="none" stroke="#bd7329" stroke-width="4"/>';
+svg+='<path d="M65 250 H615" fill="none" stroke="#197d5b" stroke-width="3" stroke-dasharray="8 6"/><text x="390" y="245" font-size="16" fill="#136e50">medeleffekt</text><text x="607" y="311" font-size="16">t/T</text><text x="65" y="309" font-size="16">0</text><text x="323" y="309" font-size="16">0,5</text>';document.getElementById('rms-svg').innerHTML=svg;document.getElementById('rms-readout').textContent='Ueff = '+fmt(U,1)+' V · medeleffekt = '+fmt(P,2)+' W';if(rmsShown)document.getElementById('rms-answer').classList.add('visible')}
+rmsPeak.oninput=renderRms;rmsR.oninput=renderRms;document.getElementById('rms-show').onclick=()=>{rmsShown=true;renderRms()};document.getElementById('rms-reset').onclick=()=>{rmsPeak.value=100;rmsR.value=100;rmsShown=false;document.getElementById('rms-answer').classList.remove('visible');renderRms()};
+let worked=0,stages=[...document.querySelectorAll('#worked-steps .stage')];function renderWorked(){stages.forEach((s,i)=>s.classList.toggle('visible',i<worked));document.getElementById('worked-next').disabled=worked>=stages.length}document.getElementById('worked-next').onclick=()=>{worked=Math.min(worked+1,stages.length);renderWorked()};document.getElementById('worked-reset').onclick=()=>{worked=0;renderWorked()};
+document.getElementById('exit-check').onclick=function(){const a=document.getElementById('exit-f').value.trim().replace(',','.'),b=document.getElementById('exit-u').value.trim().replace(',','.');const out=document.getElementById('exit-result');if(!a||!b||!Number.isFinite(+a)||!Number.isFinite(+b)){out.textContent='Ange två talvärden. Visa även din beräkning och förklaring på papper.';out.classList.add('bad');return}const correct=Math.abs(+a-60)<.51&&Math.abs(+b-240/Math.sqrt(2))<1.5;out.textContent=correct?'Båda talvärdena stämmer. Kontrollera även din motivering till varför effektivvärde används.':'Kontrollera f = ω/(2π) och Ueff = toppvärdet/√2 innan du visar facit.';out.classList.toggle('bad',!correct)};
+show(0);renderCoil();renderWave();renderRms();renderWorked();
 })();
 </script></body></html>
