@@ -99,6 +99,6 @@ fs.mkdirSync(out,{recursive:true});
   for(const term of ['v23-demo-recap','Visa samband från försök vi faktiskt gjort','Uttrycket är tecknat']){
      assert(bundled.includes(term)&&source.includes(term),'source/offline HTML sync '+term);checks++;
   }
-  console.log('FY2_DEMO_V23_PASS '+JSON.stringify({checks,images,originalSlides:6,recapTopics:3,breakpoints:4}));
+  console.log('FY2_DEMO_V23_PASS '+JSON.stringify({checks,images,originalSlides:6,recapTopics:4,breakpoints:4}));
  }finally{await browser.close()}
 })().catch(err=>{console.error('FY2_DEMO_V23_FAILED '+(err.stack||err));process.exitCode=1});
