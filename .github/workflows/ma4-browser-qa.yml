@@ -33,6 +33,7 @@ jobs:
       - name: Check every Ma4 lesson on desktop and mobile
         run: |
           node ma4/kapitel-4/qa/figure-interaction-euler-v23.cjs
+          node ma4/kapitel-4/qa/figure-interaction-quadratic-v23.cjs
           node ma4/kapitel-4/qa/figure-interaction-roots-zn-a-v23.cjs
           node ma4/kapitel-4/qa/figure-interaction-rotation-i-v23.cjs
           node ma4/kapitel-4/qa/figure-interaction-polar-form-v23.cjs
