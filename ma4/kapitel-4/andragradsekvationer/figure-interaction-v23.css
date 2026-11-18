@@ -25,4 +25,12 @@
 .quadratic-method-list math{max-width:100%;overflow-x:auto;font-size:1.25rem}
 .inline-math math{display:inline-block;font-size:1.1em;vertical-align:middle;margin:0 2px}
 .feedback:has(math),.sc-feedback:has(math),.sc-hint:has(math){font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+/* Talplan och första kontrollled måste synas samtidigt på 1280×800. */
+.slide:has(#quadratic-plane) .task{padding:10px 14px;margin:0 0 9px}
+.slide:has(#quadratic-plane) .task p{line-height:1.35;margin:5px 0}
+.slide:has(#quadratic-plane) #squareReveal,
+.slide:has(#quadratic-plane) #squareBack,
+.slide:has(#quadratic-plane) #squareReset{font-size:.9rem;padding:9px 11px;min-height:44px;margin:0 3px 6px 0}
+.slide:has(#quadratic-plane) #squareText{margin-top:7px;padding:9px 12px}
+.slide:has(#quadratic-plane) #squareText .worked-step{padding:9px 13px}
 @media(max-width:650px){.quadratic-comparison{grid-template-columns:minmax(0,1fr)}.quadratic-plane-card svg{max-height:205px}}
