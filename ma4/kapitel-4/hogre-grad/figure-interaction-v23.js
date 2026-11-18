@@ -9,6 +9,35 @@
  const recap=document.getElementById('h-higher-recap');
  if(!lesson||!decision||!mathFeedback||!figure||!svg||!recap)throw Error('Ma4 v2.3: ett obligatoriskt metod- eller figurfält saknas');
 
+ // Lektionsmotorn skriver sekvensfrågorna med textContent. Denna lokala
+ // komplettering matematiktypsätter just uttrycken utan att ändra frågorna.
+ const expressions=/(i² = −1|p\(i\) = 0|p\(1\) = 0|z² \+ 1|z − 1|z³|z²)/g;
+ function formatPrompt(box){
+  const prompt=box.querySelector('[data-seq-prompt]');
+  if(!prompt)return;
+  const source=prompt.textContent;
+  expressions.lastIndex=0;
+  if(!expressions.test(source))return;
+  expressions.lastIndex=0;
+  const parts=[];let cursor=0,match;
+  while((match=expressions.exec(source))){
+   if(match.index>cursor)parts.push(document.createTextNode(source.slice(cursor,match.index)));
+   const inline=document.createElement('span');
+   inline.className='math v23-inline-prompt';
+   inline.dataset.mathPresentation='true';
+   inline.innerHTML=window.Ma4Math.typeFormula(match[0],'inline');
+   parts.push(inline);cursor=match.index+match[0].length;
+  }
+  if(cursor<source.length)parts.push(document.createTextNode(source.slice(cursor)));
+  prompt.replaceChildren(...parts);
+ }
+ document.querySelectorAll('#h-kand [data-sequence],#h-konjugat [data-sequence],#h-kvot [data-sequence]').forEach(box=>{
+  formatPrompt(box);
+  box.addEventListener('click',event=>{
+   if(event.target.closest('[data-seq-next],[data-seq-back],[data-seq-reset]'))formatPrompt(box);
+  });
+ });
+
  function syncFigure(){
   const visible=lesson.querySelectorAll('.v23-conjugate-sequence [data-seq-item]:not(.hidden)').length>0;
   figure.classList.toggle('is-revealed',visible);

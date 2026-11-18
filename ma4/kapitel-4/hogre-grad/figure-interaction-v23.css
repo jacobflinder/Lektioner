@@ -45,6 +45,8 @@
 .v23-conjugate-feedback .v23-feedback-steps { display: grid; gap: 16px; }
 .v23-conjugate-feedback .v23-feedback-steps > p { margin: 0; }
 .v23-conjugate-feedback math { max-width: 100%; }
+.v23-inline-prompt { font-size: inherit; display: inline; white-space: nowrap; }
+.v23-inline-prompt math { font-size: inherit; }
 .v23-higher-recap {
   margin: 14px 0;
   padding: 14px 17px;

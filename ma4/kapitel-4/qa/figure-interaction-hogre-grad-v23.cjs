@@ -21,7 +21,10 @@ for(const [name,coeff,roots] of [
  ['utcheckning',[1,2,9,18],[[-2,0],[0,3],[0,-3]]]
 ]){
  eq(coeff.length-1,roots.length,name+': antal komplexa rötter = graden');
- roots.forEach(([re,im])=>eq(horner(coeff,{re,im}),{re:0,im:0},name+': oberoende Horner-värde'));
+ roots.forEach(([re,im])=>{
+  const value=horner(coeff,{re,im});
+  ok(Math.abs(value.re)<1e-12&&Math.abs(value.im)<1e-12,name+': oberoende Horner-värde');
+ });
 }
 eq((1-1)**2*(1+2),0,'dubbelrot 1');
 ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
@@ -68,6 +71,7 @@ ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
    await go(2);
    const seq=page.locator('#h-kand [data-sequence]');
    eq(await seq.locator('[data-seq-item]:visible').count(),0,width+': ingen divisionslösning före eget försök');
+   eq(await seq.locator('[data-seq-prompt] math[aria-label="p(1) = 0"]').count(),1,width+': första förutsägelsefrågans matematik är MathML');
    for(let i=0;i<4;i++)await seq.locator('[data-seq-next]').click();
    eq(await seq.locator('[data-seq-item]:visible').count(),4,width+': stegvis polynomdivision');
    ok(await page.locator('#h-kand .longdiv-demo math[aria-label="+ 0z"]').count()===1,width+': nollkoefficienten kvar i gradkolumnen');
@@ -104,6 +108,7 @@ ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
    ok((await math('[data-feedback-case="1"]').first().getAttribute('aria-label')).includes('z² + 1'),width+': MathML aria-label begriplig');
    await shot('05-ratt-feedback');
    await page.locator('#h-konjugat [data-seq-next]').click();
+   eq(await page.locator('#h-konjugat [data-seq-prompt] math[aria-label="i² = −1"]').count(),1,width+': nästa fråga har matematiskt skriven identitet');
    ok(await page.locator('.v23-conjugate-figure').evaluate(e=>e.classList.contains('is-revealed')),width+': −i syns först efter steg 1');
    const drawn=await page.locator('#h-conjugate-plane .v23-conj-answer').evaluate(g=>{
     const p=g.querySelector('circle');const r=p.getBoundingClientRect();return {display:getComputedStyle(g).display,width:r.width,height:r.height};
