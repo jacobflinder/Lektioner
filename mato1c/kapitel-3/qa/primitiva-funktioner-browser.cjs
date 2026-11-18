@@ -1,0 +1,124 @@
+/* Ma3c 3.3: browser quality gate for the original primitive-functions lesson. */
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const base='http://127.0.0.1:8123';
+const url=base+'/mato1c/kapitel-3/primitiva-funktioner/';
+const evidence='mato1c-qa-screenshots';
+fs.mkdirSync(evidence,{recursive:true});
+
+(async()=>{
+ const browser=await chromium.launch({headless:true,...(process.env.MA3C_CHROMIUM_PATH?{executablePath:process.env.MA3C_CHROMIUM_PATH}:{})});
+ const page=await browser.newPage({viewport:{width:1440,height:900}});
+ const errors=[],external=[];let checks=0;
+ page.on('pageerror',error=>errors.push(error.message));
+ page.on('request',r=>{if(!r.url().startsWith(base))external.push(r.url())});
+ const ok=(condition,label)=>{assert.ok(condition,label);checks++};
+ const go=async n=>{await page.selectOption('#jump',String(n-1));ok(await page.locator('.slide.active').count()===1,'Ett aktivt steg '+n)};
+ try{
+  await page.goto(base+'/mato1c/kapitel-3/',{waitUntil:'networkidle'});
+  ok(await page.locator('a[href="primitiva-funktioner/"]').count()===1,'Länk från befintligt kapitelindex');
+  await page.goto(url,{waitUntil:'networkidle'});
+  ok(await page.locator('.slide').count()===14,'14 fullständiga lektionssteg');
+  ok(await page.locator('.slide.active').count()===1,'Startfrågan synlig');
+  ok(!await page.locator('#start-answer').isVisible(),'Startfacit fördröjt');
+  await page.screenshot({path:evidence+'/lesson11-start-desktop.png',fullPage:true});
+  ok(await page.locator('math[aria-label="A(x)=2x³−3x"]').count()===1,'Startformeln semantisk MathML');
+  await page.locator('[data-reveal="start-answer"]').click();
+  ok(await page.locator('#start-answer').isVisible(),'Startfacit visas efter elevförsök');
+  await page.locator('#mode').click();
+  ok(await page.locator('body.classroom').count()===1,'Klassrumsläge');
+  await page.locator('#teacher-toggle').click();
+  ok(await page.locator('.teacher.open').isVisible(),'Lärarstöd');
+  ok((await page.locator('.route-guide').textContent()).includes('minst 20 min'),'Lärarväg med prioriterat eget bokarbete');
+  await page.locator('#mode').click();
+  ok(await page.locator('body.classroom').count()===0,'Repetitionsläge');
+  await go(3);
+  ok(await page.locator('#meaning math[aria-label="F′(x)=f(x)"]').count()===1,'Korrekt definition F primitiv till f');
+  ok(!await page.locator('#meaning-answer').isVisible(),'Begreppsfacit fördröjt');
+  await go(4);
+  ok(await page.locator('#family-graph [data-main-curve]').count()===1,'Ursprunglig F-kurva');
+  ok(await page.locator('#derivative-graph [data-main-curve]').count()===1,'Derivatans oföränderliga graf');
+  const derivativeBefore=await page.locator('#derivative-graph [data-main-curve]').getAttribute('d');
+  const familyBefore=await page.locator('#family-graph [data-main-curve]').getAttribute('d');
+  await page.locator('#graph-c').evaluate(el=>{el.value='3';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  ok((await page.locator('#graph-c-out').innerText())==='C = +3','Reglagets dynamiska C-värde');
+  ok(await page.locator('#family-graph [data-main-curve]').getAttribute('d')!==familyBefore,'F-grafen flyttas med C');
+  ok(await page.locator('#derivative-graph [data-main-curve]').getAttribute('d')===derivativeBefore,'Derivatan ändras aldrig med C');
+  await page.locator('#graph-c').evaluate(el=>{el.value='-3';el.dispatchEvent(new Event('input',{bubbles:true}))});
+  ok((await page.locator('#graph-c-out').innerText())==='C = −3','Negativt C med korrekt minustecken');
+  ok(!await page.locator('#graph-answer').isVisible(),'Grafslutsatsen från början dold');
+  await page.locator('[data-reveal="graph-answer"]').click();
+  ok(await page.locator('#graph-answer math[aria-label="F′(x)=2x−2"]').count()===1,'Grafens exakta derivata');
+  await page.screenshot({path:evidence+'/lesson11-graph-desktop.png',fullPage:true});
+  await go(5);
+  ok(await page.locator('#power math[aria-label="F(x)=(1/(n+1))x^{n+1}+C"] msup').count()===1,'Generell potensregel med verklig exponent');
+  ok(!await page.locator('#power-answer').isVisible(),'Potensfacit fördröjt');
+  await page.locator('#next').click();
+  ok(await page.locator('#exponential').isVisible(),'Vanlig nästa hoppar över valbar fördjupning');
+  await go(6);
+  ok(await page.locator('#fractional math[aria-label="1/√x=x^{−1/2}"] msup').count()===1,'Bruten negativ exponent, semantisk MathML');
+  await go(7);
+  ok(await page.locator('#exponential math[aria-label="F(x)=(1/k)e^{kx}+C"] msup').count()===1,'Exponentialregel med exponent kx');
+  const derivativeBrackets=await page.locator('#exponential math[aria-label="(e^{3x})′=3e^{3x}"]').textContent();
+  ok(!derivativeBrackets.includes('()'),'Inga extra parenteser före exponentialbasen i derivataexemplet');
+  await page.locator('[data-reveal="exponential-answer"]').click();
+  ok(await page.locator('#exponential-answer math[aria-label="F′(x)=7e^{−x}"]').count()===1,'Teckenkontroll för negativ exponent');
+  await go(8);
+  ok(await page.locator('#combined [data-seq-item]:visible').count()===0,'Stegvis facit initialt dolt');
+  for(let i=0;i<5;i++)await page.locator('#combined [data-seq-next]').click();
+  ok(await page.locator('#combined [data-seq-item]:visible').count()===5,'Alla fem beräkningssteg visas separat');
+  ok(await page.locator('#combined math[aria-label="F′(x)=6x²−8x+5+4e^{−2x}"]').count()===1,'Blandad derivatakontroll');
+  await page.screenshot({path:evidence+'/lesson11-combined-desktop.png',fullPage:true});
+  await go(9);
+  await page.locator('#trap button[data-correct="false"]').first().click();
+  ok((await page.locator('#trap .feedback').innerText()).includes('Derivera'),'Felval leder till konkret stöd');
+  await page.locator('#trap button[data-correct="true"]').click();
+  ok(await page.locator('#trap .feedback.ok').count()===1,'Rätt val ger återkoppling');
+  await go(10);
+  ok(!await page.locator('#practice-answer').isVisible(),'Självständigt facit inte synligt');
+  await page.locator('[data-reveal="practice-hint"]').click();
+  ok(await page.locator('#practice-hint').isVisible(),'Ledtråd efter eget val');
+  await page.locator('[data-reveal="practice-answer"]').click();
+  ok(await page.locator('#practice-answer math[aria-label="F(x)=2x⁵−3x³−2e^{−x}+C"]').count()===1,'Övningslösning komplett med C');
+  await go(11);
+  const book=await page.locator('#book').innerText();
+  for(const token of ['s. 179–180','s. 180–181','3301–3303','3304','3305','3306','3307','3308','3309','3310','3311','3312','3313','3314','3315','3316','3317','minst 20 minuter','minst två nivåer'])ok(book.includes(token),'Bokhänvisning '+token);
+  await page.locator('#next').click();
+  ok(await page.locator('#exit').isVisible(),'Ordinarie lektion hoppar över parameterfördjupning');
+  await go(12);
+  ok(await page.locator('#parameter math[aria-label="G(a)=xa²+3a+C"]').count()===1,'Fördjupning i variabelval');
+  await go(13);
+  ok(await page.locator('#exit math[aria-label="f(x)=8x³+3e^{−x}"]').count()===1,'Självständig exit med originaluppgift');
+  await go(14);
+  ok(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,'Exit-facit dolt från början');
+  for(let i=0;i<3;i++)await page.locator('#exit-answer [data-seq-next]').click();
+  ok(await page.locator('#exit-answer math[aria-label="F(x)=2x⁴−3e^{−x}+C"]').count()===1,'Rätt exit-svar');
+  ok(await page.locator('#exit-answer math[aria-label="F′(x)=8x³+3e^{−x}"]').count()===1,'Exit-kontroll genom derivering');
+  await page.screenshot({path:evidence+'/lesson11-exit-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  for(let i=1;i<=14;i++){
+   await go(i);
+   ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Inget horisontellt mobilöverspill steg '+i);
+  }
+  for(const step of [1,4,5,7,8,11,13,14]){
+   await go(step);
+   await page.screenshot({path:evidence+'/lesson11-step-'+step+'-mobile.png',fullPage:true});
+  }
+  await go(14);
+  const verticalGaps=await page.locator('#exit-answer .formulas').evaluateAll(groups=>groups.map(group=>{
+   const lines=[...group.querySelectorAll(':scope > .formula')];
+   return lines.length<2?1000:lines[1].getBoundingClientRect().top-lines[0].getBoundingClientRect().bottom;
+  }));
+  ok(verticalGaps.every(gap=>gap>=15),'Minst 16 px mellan skilda ekvationer även i mobil');
+  await page.locator('#ink-toggle').click();
+  ok(await page.locator('#inkpanel').isVisible(),'Lokal skrivyta tillgänglig');
+  ok(errors.length===0,'Inga JS-fel: '+errors.join(' | '));
+  ok(external.length===0,'Inga externa anrop: '+external.join(' | '));
+  console.log(JSON.stringify({result:'PASS',checks,errors,external,screenshots:12},null,2));
+ }catch(error){
+  console.error('Ma3c 3.3 BROWSER QA FAILED:',error.stack||error);
+  await page.screenshot({path:evidence+'/lesson11-FAIL.png',fullPage:true}).catch(()=>{});
+  process.exitCode=1;
+ }finally{await browser.close()}
+})();

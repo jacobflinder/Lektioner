@@ -52,6 +52,7 @@ jobs:
           node mato1c/kapitel-3/qa/blandade-problem-browser.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-23.cjs
           node mato1c/kapitel-3/qa/deriverbarhet-browser.cjs
+          node mato1c/kapitel-3/qa/primitiva-funktioner-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-deep-browser.cjs
       - name: Upload browser evidence
