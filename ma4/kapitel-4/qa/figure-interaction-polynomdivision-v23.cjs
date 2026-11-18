@@ -54,8 +54,8 @@ for(const [name,c] of Object.entries(CASES)){
   check(await slides.count()===11,'all eleven original slides');
   check(await page.locator('[data-division]').count()===7,'seven original interactive engines');
   check(await page.locator('script[src="./figure-interaction-v23.js"]').count()===1,'new lesson-scoped enhancements');
-  check((await page.locator('body').innerText()).includes('NOKflex')&&
-    (await page.locator('body').innerText()).includes('4421–4430'),'original book list retained');
+  const originalWork=await page.locator('.slide').nth(8).textContent();
+  check(originalWork.includes('NOKflex')&&originalWork.includes('4421–4430'),'original book list retained in slide 9');
 
   // The four math operations must remain causally tied to the right
   // grade column and use MathML in both questions and explanations.
@@ -134,7 +134,7 @@ for(const [name,c] of Object.entries(CASES)){
   await go(8);
   const recap=page.locator('.slide.active .v23-summary');
   check(await recap.count()===1,'NOKflex contains its own reminder');
-  check(!await recap.getAttribute('open'),'closed without leaking strategy');
+  check(await recap.getAttribute('open')===null,'closed without leaking strategy');
   check(await recap.locator('summary').count()===1,'native keyboard/touch disclosure');
   await recap.locator('summary').focus();await page.keyboard.press('Enter');
   check(await recap.getAttribute('open')!==null,'keyboard Enter expands reminder');
