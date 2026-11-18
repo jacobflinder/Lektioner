@@ -74,8 +74,8 @@
           T(505,66,'Nod A',18,'#ac5739')+T(505,276,'Nod B',18,'#22778a')+
           arr(143,64,211,64)+T(177,112,`I = ${fmt(Itot,3)} A`,18,'#087d94')+
           arr(266,83,266,125)+arr(420,83,420,125)+
-          T(266,251,`I₁ ${fmt(I1,3)} A`,17,'#087d94')+
-          T(420,251,`I₂ ${fmt(I2,3)} A`,17,'#087d94');
+          T(285,251,`I₁ ${fmt(I1,3)} A`,17,'#087d94','start')+
+          T(439,251,`I₂ ${fmt(I2,3)} A`,17,'#087d94','start');
       }
     }
     art+=T(312,20,serie?'En strömväg':'Två parallella strömvägar',17,'#255e6f');
@@ -102,6 +102,16 @@
   // Filnamnet på lärarens källpresentation är inte elevinnehåll. Dölj 
   // lokal källmetadata utan att ändra andra Fy1-lektioner eller bokhänvisningar.
   document.querySelectorAll('.slide .source-note').forEach(el=>el.remove());
+  // In the mixed-circuit drawing, the original labels were centred directly
+  // on the vertical conductors. Move each label into clear space beside its
+  // own resistor so the component and its numerical value remain legible.
+  const mixedFigure=document.querySelector('#bild-11 .circuit-figure svg');
+  if(mixedFigure){
+    for(const [value,x] of [['120 Ω',390],['240 Ω',515]]){
+      const label=[...mixedFigure.querySelectorAll('text')].find(el=>el.textContent.trim()===value);
+      if(label){label.setAttribute('x',String(x));label.setAttribute('y','185')}
+    }
+  }
   // place each answer and worked solution close to its question/figure
   for(const i of [1,5,6,7]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),quiz=sec?.querySelector(':scope > .quiz');if(body&&quiz)body.appendChild(quiz)}
   for(const i of [3,4,5,6,7,10,11]){const sec=document.getElementById('bild-'+i),body=sec?.querySelector('.body-copy'),label=sec?.querySelector(':scope > .steps-label'),steps=[...(sec?.querySelectorAll(':scope > .step')||[])];if(body&&label)body.append(label,...steps)}
@@ -113,6 +123,17 @@
   document.getElementById('classmode')?.addEventListener('click',()=>{
     for(const sec of document.querySelectorAll('.slide'))sec.dispatchEvent(new Event('lesson:reset'));
   });
+  // The voluntary recap is a native <details> in the bookwork slide. Unlike
+  // model answers, native details remain open unless we close them explicitly.
+  // A pupil returning to bookwork must see the recall-first state again.
+  const closeRecap=()=>document.querySelectorAll('.slide details.v23-summary[open]').forEach(el=>{el.open=false});
+  let previousSlide=stage?.querySelector('.slide.active')?.id;
+  if(stage){new MutationObserver(()=>{
+    const current=stage.querySelector('.slide.active')?.id;
+    if(current!==previousSlide){closeRecap();previousSlide=current}
+  }).observe(stage,{subtree:true,attributes:true,attributeFilter:['class']})}
+  for(const id of ['reset','classmode','repeatmode'])document.getElementById(id)?.addEventListener('click',closeRecap);
+  for(const sec of document.querySelectorAll('.slide'))sec.addEventListener('lesson:reset',closeRecap);
   // Preserve slide arrow keys after button clicks while not stealing slider or select keys.
   document.addEventListener('keydown',ev=>{
     if(ev.altKey||ev.metaKey||ev.ctrlKey||ev.shiftKey||!['ArrowLeft','ArrowRight'].includes(ev.key))return;

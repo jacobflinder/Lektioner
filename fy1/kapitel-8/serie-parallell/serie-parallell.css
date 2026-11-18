@@ -38,7 +38,7 @@
 
 /* Deep review #41: all independent equations are distinct native MathML rows. */
 .series-math-stack,.series-model-math{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;margin:12px 0}
-.series-equation,.series-model-equation{min-width:0;max-width:100%;font-size:clamp(1.02rem,1.55vw,1.35rem);line-height:1.45;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.series-equation,.series-model-equation{min-width:0;max-width:100%;font-size:clamp(1.02rem,1.55vw,1.35rem);line-height:1.9;overflow-x:auto;overflow-y:auto;padding:8px 0}
 .series-equation math,.series-model-equation math{max-width:100%;font-family:'STIX Two Math','Cambria Math',serif}
 .worked .series-math-stack{margin-top:9px;margin-bottom:11px}
 .circuit-model .model-scales{margin:12px 0 7px;background:#f5f9fb;border:1px solid #d4e7eb;border-radius:10px;padding:8px}
@@ -49,7 +49,7 @@
 #bild-6 .meter-reveal{display:none}
 #bild-6:has(.step.open) .meter-reveal{display:block}
 #bild-6:has(.step.open) .meter-predict{display:none}
-@media(max-width:600px){.series-equation,.series-model-equation{font-size:1.02rem}.circuit-model .model-scales{padding:4px}}
+@media(max-width:600px){.series-equation,.series-model-equation{font-size:1rem}.circuit-model .model-scales{padding:4px}}
 
 /* Conceal the textual A/V answer alongside the circuit until a reveal step. */
 #bild-6 .meter-points{display:none}
@@ -68,3 +68,22 @@
 #bild-5 .equivalence-visual svg{width:100%;height:auto;display:block}
 #bild-5 .equivalence-after svg{max-height:none}
 #bild-5 .equivalence-before figcaption,#bild-5 .equivalence-after figcaption{line-height:1.5}
+
+/* v2.3: the optional recap belongs beside the actual bookwork. Each relation
+   needs its own legible equation and explanation, not a squeezed inline run. */
+#bild-9 .v23-summary>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
+#bild-9 .v23-summary>div>p{display:block;text-align:center;margin:0!important;padding:12px 14px;border:1px solid #d1e2e8;border-radius:10px;background:#fff;min-width:0;line-height:1.45!important}
+#bild-9 .v23-summary>div>p>strong{display:block;text-align:left;color:#14596c;font-size:1.04rem;margin-bottom:10px}
+/* Native MathML must stay inline within an ordinary block. Making <math> a
+   flex/grid item or CSS display:block destroys its horizontal math layout. */
+#bild-9 .v23-summary>div>p>math{font-size:clamp(1.18rem,1.65vw,1.38rem);line-height:1.45;max-width:100%;vertical-align:middle}
+#bild-9 .v23-summary>div>p>span{display:block;text-align:left;font-size:.96rem;line-height:1.48;color:#345969;margin-top:10px}
+@media(max-width:720px){#bild-9 .v23-summary>div{grid-template-columns:minmax(0,1fr)}#bild-9 .v23-summary>div>p{padding:11px 12px}}
+
+/* Long, stepwise calculations should not make the circuit vanish while its
+   current/voltage relationships are being explained on a classroom screen. */
+@media(min-width:1200px){
+ #bild-3 .layout>.side,#bild-4 .layout>.side,#bild-5 .layout>.side,#bild-11 .layout>.side{
+  position:sticky;top:16px;align-self:start
+ }
+}
