@@ -64,7 +64,11 @@
 #bild-2 .body-copy .step,#bild-3 .body-copy .step,#bild-4 .body-copy .step,#bild-5 .body-copy .step,#bild-6 .body-copy .step{font-size:.94rem}
 /* Fy1 #39: each mathematical statement is an independent native MathML row. */
 .circuit-math-stack,.circuit-model-math{display:grid;gap:20px;max-width:100%;margin:12px 0}
-.circuit-equation,.circuit-model-math-row{max-width:100%;min-width:0;overflow-x:auto;line-height:1.43}
+/* Native MathML fractions extend beyond a 1.43 line box. With overflow-x:auto
+   the browser also enables vertical scrolling, drawing tiny up/down arrows
+   beside every formula even on classroom/projector screens. Give the formulas
+   enough actual line height while retaining horizontal scroll for narrow rows. */
+.circuit-equation,.circuit-model-math-row{max-width:100%;min-width:0;overflow-x:auto;line-height:1.9}
 .circuit-equation math,.circuit-model-math-row math{font-size:clamp(1.05rem,1.5vw,1.35rem)}
 .circuit-model-math{gap:18px}
 .kretsar-model .model-result{gap:12px}
@@ -91,7 +95,9 @@ body[data-fy1-lesson="elektriska-kretsar"] .source-note{display:none}
 .circuit-recap-grid section{min-width:0;background:#fff;border:1px solid #d5e5e8;border-radius:9px;padding:12px 14px}
 .circuit-recap-grid h3{font-size:1rem;color:#205566;margin:0 0 9px}
 .circuit-recap-grid p{font-size:.91rem;color:#4a6671;margin:9px 0 0;line-height:1.45}
-.circuit-recap-grid math{font-size:1.1rem;max-width:100%;overflow-x:auto;margin:0 0 16px}
+/* These short formulae fit their cards; scrolling the MathML element itself
+   would create vertical arrow controls in Chromium, obscuring the notation. */
+.circuit-recap-grid math{font-size:1.1rem;max-width:100%;margin:0 0 16px}
 .circuit-recap-grid math:last-of-type{margin-bottom:3px}
 @media(max-width:1050px){.circuit-recap-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:575px){.circuit-recap-grid{grid-template-columns:1fr;padding:8px 10px 12px}.circuit-method-recap summary{padding:13px}}
