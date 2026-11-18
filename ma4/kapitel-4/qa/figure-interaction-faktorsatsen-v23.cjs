@@ -64,6 +64,10 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
     await go(i);
     const measures=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
     check(measures.scroll<=measures.width+3,name+' slide '+(i+1)+' no horizontal overflow');
+    if(w>=1280&&[1,4,5,7].includes(i)){
+     const tickHeights=await page.locator('.slide.active .plot text').evaluateAll(es=>es.filter(e=>/^-?\d+$/.test(e.textContent.trim())).map(e=>e.getBoundingClientRect().height));
+     check(tickHeights.length>=4&&tickHeights.every(h=>h>=12),name+' slide '+(i+1)+' visible graph tick labels on classroom/projector');
+    }
     if(w===390&&[1,4,5,7].includes(i)){
      const glyphs=await page.locator('.slide.active .plot text').evaluateAll(es=>es.filter(e=>/^-?\d+$/.test(e.textContent.trim())).map(e=>({height:e.getBoundingClientRect().height,label:e.textContent.trim()})));
      check(glyphs.length>=4&&glyphs.every(x=>x.height>=10),name+' slide '+(i+1)+' plotted tick labels must be visibly legible: '+JSON.stringify(glyphs));
