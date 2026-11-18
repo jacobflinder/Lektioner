@@ -35,6 +35,7 @@ jobs:
         run: |
           node fy1/kapitel-8/qa/charge-q-v23-all-16.cjs
           node fy1/kapitel-8/qa/deep-review-fy1-36.cjs
+          node fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs
           node fy1/kapitel-8/qa/deep-review-fy1-37.cjs
           node fy1/kapitel-8/qa/deep-review-fy1-38.cjs
           node fy1/kapitel-8/qa/deep-review-fy1-39.cjs

@@ -21,7 +21,7 @@ const state=async()=>page.locator('#bild-3 [data-model="coulomb"]').evaluate(el=
   dx:+circles[1].getAttribute('cx')- +circles[0].getAttribute('cx'),
   bar:bar?+bar.getAttribute('width'):null,arrows:arrows.map(a=>({start:+a.getAttribute('x1'),end:+a.getAttribute('x2')})),
   texts:[...svg.querySelectorAll('text')].map(e=>{const b=e.getBBox(),v=svg.viewBox.baseVal;
-    return {text:e.textContent,box:{x:b.x,y:b.y,width:b.width,height:b.height},
+    return {text:e.textContent,x:+e.getAttribute('x'),y:+e.getAttribute('y'),box:{x:b.x,y:b.y,width:b.width,height:b.height},
       viewport:{x:v.x,y:v.y,width:v.width,height:v.height}}}),
   viewBox:svg.getAttribute('viewBox'),output:el.querySelector('.coulomb-result').innerText
  };
@@ -92,8 +92,10 @@ try{
  await set('coulomb-r',.5);
  // No overlapping charge-value labels at the shortest distance even though circles approach.
  await set('coulomb-r',.2);st=await state();
- const labels=st.texts.filter(x=>x.text.startsWith('Q₁ =')||x.text.startsWith('Q₂ ='));
- check(labels.length===2&&labels[0].box.x+labels[0].box.width<labels[1].box.x,'charge labels do not overlap at minimum r');
+ const labels=st.texts.filter(x=>x.text.startsWith('q₁ =')||x.text.startsWith('q₂ ='));
+ check(labels.length===2&&labels[0].box.y+labels[0].box.height<labels[1].box.y,'charge labels occupy separate non-overlapping rows at minimum r');
+ check(labels[0]?.x===st.q1&&labels[1]?.x===st.q2,'labels sit directly under their respective charge centers at minimum r');
+ check(labels[0]?.box.y+labels[0]?.box.height<labels[1]?.box.y,'staggered labels cannot collide at shortest separation');
  await set('coulomb-r',.5);
  await model.locator('.reveal-model').click();st=await state();
  const baseForce=8.99e9*2e-9*3e-9/.5**2*1e6,baseBar=550*baseForce/6;
@@ -112,7 +114,10 @@ try{
  check(zero.output.includes('ingen kraft')&&zero.output.includes('Inget meningsfullt kraftförhållande'),'zero interaction without meaningless 0/0');
  await set('coulomb-q1',-4);await set('coulomb-q2',3);let attract=await state();
  check(attract.arrows.length===2&&attract.arrows[0].end>attract.arrows[0].start&&attract.arrows[1].end<attract.arrows[1].start,'opposite charges correctly draw inward equal arrows');
- check(attract.output.includes('attraktion')&&attract.output.includes('0,432')&&await model.locator('.coulomb-model-math math mo').filter({hasText:'−'}).count()>0,'negative signed interaction and absolute force 0.432uN');
+ check(attract.output.includes('attraktion')&&attract.output.includes('0,432')&&
+   await model.locator('.coulomb-model-math math mo').filter({hasText:'|'}).count()===2&&
+   await model.locator('.coulomb-model-math math mo').filter({hasText:'−'}).count()===0,
+   'opposite signed charges attract, while absolute Coulomb force is positive 0.432uN');
  await set('coulomb-q1',-5);await set('coulomb-q2',5);await set('coulomb-r',.2);let max=await state();
  const maxForce=8.99e9*25e-18/.2**2*1e6;
  check(close(maxForce,5.61875,.00001),'independent physical max Coulomb force in slider range');
@@ -132,10 +137,11 @@ try{
  await page.locator('#reset').click();
  await q3.locator('button[data-choice="1"]').click();await q3.locator('.feedback-toggle').click();
  check((await q3.locator('.feedback').innerText()).includes('Rätt'),'inverse-square answer F0/4');
- // Slide 4 source formula and signed interaction convention.
+ // Slide 4: positive force magnitude, charges' signs determine direction.
  await go(4);let v=await vis().innerText();
- check(v.includes('Coulombs lag')===false||v.includes('Positivt'),'separate physical interaction convention present');
- check(v.includes('repulsion')&&v.includes('attraktion')&&v.includes('x-komponent'),'signed interaction not confused with x force component');
+ check(v.includes('repulsion')&&v.includes('attraktion')&&v.includes('negativt kraftbelopp'),'physical directions distinct from nonnegative force magnitude');
+ check(await vis().locator('.body-copy>.mathrow math msub mi').allTextContents().then(x=>x.join('')==='qq'),'individual point charges are q1 and q2');
+ check(await vis().locator('.body-copy>.mathrow math mo').filter({hasText:'|'}).count()===2,'Coulomb magnitude formula explicitly takes |q1q2|');
  check(await vis().locator('.step.open').count()===0,'inverse square answer concealed first');
  await page.locator('#step').click();check((await vis().innerText()).includes('en fjärdedel'),'2r -> 1/4');
  await page.locator('#step').click();check((await vis().innerText()).includes('en niondel'),'3r -> 1/9');
@@ -166,10 +172,25 @@ try{
  const sf=8.99e9*(1.602e-19)**2/(5.1e-11)**2;
  check(close(sf,8.869e-8,3e-11),'independent attractive interaction magnitude ~8.9e−8N');
  check(v.includes('0,051 nm')&&(await vis().innerText()).includes('8,87'),'original measurement, new unrounded intermediate shown');
- check((await vis().innerText()).includes('Attraktion'),'force convention correctly interpreted');
+ check((await vis().innerText()).includes('Attraktion'),'opposite charges attractive, not negative force magnitude');
+ check(await vis().locator('.fy1-36-math-steps math msub > mi').allTextContents().then(x=>x.every(s=>s==='q')),'single particle charges consistently use q not Q');
+ check(await vis().locator('.fy1-36-math-steps math mo').filter({hasText:'|'}).count()===6,'negative charge product converted to three explicit magnitudes in the calculation');
+ const finalForce=await vis().locator('.step').last().locator('math').evaluateAll(items=>items.map(m=>({leading:[...m.children].slice(0,4).map(x=>x.textContent).join(''),text:m.textContent})));
+ check(finalForce.length===2&&finalForce.every(x=>x.leading.startsWith('F≈8')),'final force magnitude is positive; negative exponents remain valid');
  // Slide 8 preserve all original classroom resources.
  await go(8);v=await vis().innerText();
  for(const x of ['SOC-36980496','LRJ','801–811','Socrative','Fy1 · 901'])check(v.includes(x),'original resource preserved '+x);
+ const recap=vis().locator('#coulomb-method-recap');
+ check(await recap.count()===1,'lesson-specific method reminder next to original book work');
+ check(!(await recap.evaluate(el=>el.open)),'method reminder starts closed');
+ await recap.locator('summary').focus();await page.keyboard.press('Enter');
+ check(await recap.evaluate(el=>el.open),'keyboard opens voluntary method support');
+ check(await recap.locator('section').count()===4,'four specific reminders, no book solutions');
+ check(await recap.locator('math').count()===2,'semantic math in both magnitude and electron count');
+ check((await recap.innerText()).includes('q₁ och q₂')&&(await recap.innerText()).includes('Q är föremålets totala'),'point charges q distinct from total Q');
+ await go(9);await go(8);check(!(await recap.evaluate(el=>el.open)),'navigation resets method support closed');
+ await recap.locator('summary').click();await page.locator('#reset').click();
+ check(!(await recap.evaluate(el=>el.open)),'slide reset also closes method support');
  // Slide 9 preserve exit, homework and reading.
  await go(9);v=await vis().innerText();
  for(const x of ['801–811','270–280','gröna rutorna'])check(v.includes(x),'original closing resource '+x);
@@ -203,7 +224,7 @@ try{
  await page.locator('#classmode').click();
  check(await page.locator('body.repeat').count()===0&&(await state()).bar===null,'classroom mode hides any previous dynamic model answer');
  // Desktop, 390px smartphone, 1920 projector. Each view inspected from generated artifacts.
- for(const vp of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'projector',width:1920,height:1080}]){
+ for(const vp of [{name:'desktop',width:1280,height:800},{name:'mobile',width:390,height:844},{name:'tablet',width:768,height:900},{name:'projector',width:1920,height:1080}]){
   await page.setViewportSize({width:vp.width,height:vp.height});
   for(let i=1;i<=9;i++){
    await go(i);
