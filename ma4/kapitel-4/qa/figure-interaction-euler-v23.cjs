@@ -118,6 +118,7 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   await screenshot('05-motiv');
   await go(5);
   check(await page.locator('.slide.active .choice math[aria-label]').count()>0,'Exponentialnotation synlig i svar');
+  check(await page.locator('.slide.active p.muted math[aria-label]').count()>=2,'Specialfallet z=0 och argument uttrycks semantiskt');
   await quiz(0,0,1);await reveal('same');await screenshot('06-formel-efter');
   await go(6);await reveal('multiply');
   check(await page.locator('#multiply .ma4-equation math').count()>=8,'Fullständiga multiplikationsled');
@@ -134,6 +135,7 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   await quiz(0,0,2);
   await screenshot('09-negativt-fore-figur');
   await reveal('negative');
+  check(await page.locator('#negative ol li math[aria-label]').count()>=3,'Negativ vinkel och trigonometriska värden semantiskt formaterade');
   const graph=await page.locator('.euler-actual-plane').evaluate(svg=>{
    const circles=[...svg.querySelectorAll('circle')].map(x=>({cx:+x.getAttribute('cx'),cy:+x.getAttribute('cy'),r:+x.getAttribute('r')}));
    return {circles,aria:svg.getAttribute('aria-label')};
