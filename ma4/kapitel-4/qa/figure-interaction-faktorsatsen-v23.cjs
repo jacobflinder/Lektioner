@@ -64,6 +64,8 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
     await go(i);
     const measures=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
     check(measures.scroll<=measures.width+3,name+' slide '+(i+1)+' no horizontal overflow');
+    await shot(name+'-'+(i+1)+'-start');
+    if(i===5){await page.locator('[data-reveal="newk"]').click();check(await page.locator('#graf-k').isVisible(),name+' slide 6: inspect ticks only after optional graph has been revealed')}
     if(w>=1280&&[1,4,5,7].includes(i)){
      const tickHeights=await page.locator('.slide.active .plot text').evaluateAll(es=>es.filter(e=>/^-?\d+$/.test(e.textContent.trim())).map(e=>e.getBoundingClientRect().height));
      check(tickHeights.length>=4&&tickHeights.every(h=>h>=12),name+' slide '+(i+1)+' visible graph tick labels on classroom/projector');
@@ -72,7 +74,6 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
      const glyphs=await page.locator('.slide.active .plot text').evaluateAll(es=>es.filter(e=>/^-?\d+$/.test(e.textContent.trim())).map(e=>({height:e.getBoundingClientRect().height,label:e.textContent.trim()})));
      check(glyphs.length>=4&&glyphs.every(x=>x.height>=10),name+' slide '+(i+1)+' plotted tick labels must be visibly legible: '+JSON.stringify(glyphs));
     }
-    await shot(name+'-'+(i+1)+'-start');
    }
    await go(3);await quiz.locator('button[data-correct="true"]').click();await page.locator('[data-reveal="rest3"]').click();
    check(await quiz.locator('.feedback math').count()===3,name+' semantic quiz feedback');await shot(name+'-rest-feedback');
