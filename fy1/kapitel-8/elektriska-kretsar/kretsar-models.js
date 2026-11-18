@@ -66,9 +66,10 @@
   {key:'t',label:'Tid t',unit:'s',min:0,max:60,step:5,value:10,decimals:0}
  ],(s,shown)=>{
   const I=s.U/s.R, Q=I*s.t, E=s.U*Q, N=Q/e;
-  const circuit=`<path d="M94 143V68H494V253H94V143" fill="none" stroke="#315667" stroke-width="3.5"/>
+  // Both leads terminate at the actual plates. No hidden wire crosses the cell.
+  const circuit=`<path data-circuit-wire="main" d="M94 168V68H494V253H94V191" fill="none" stroke="#315667" stroke-width="3.5"/>
    <rect x="245" y="54" width="90" height="29" fill="white" stroke="#315667" stroke-width="3"/>
-   <rect x="76" y="154" width="36" height="65" fill="white"/><path d="M73 168H115 M83 191H105" stroke="#c47a53" stroke-width="4"/>
+   <path data-battery-plates="168,191" d="M73 168H115 M83 191H105" stroke="#c47a53" stroke-width="4"/>
    ${txt(275,43,`${fmt(s.R,0)} Ω`,20)}${txt(64,155,'+',22,'#c47a53')}${txt(64,228,'−',22,'#c47a53')}
    ${txt(122,288,`${fmt(s.U,0)} V`,20,'#b66a43')}${txt(204,41,'A',18,'#137f95')}${txt(396,41,'B',18,'#137f95')}`;
   const arrows=(shown&&I>0?arrow(148,68,218,68)+arrow(365,68,439,68):'');
@@ -130,6 +131,68 @@
  window.Fy1Models.attach=(name,root)=>name==='current'?current(root):name==='wire'?wire(root):previous(name,root);
  // Class-mode always hides previously revealed solutions of the currently selected page.
  document.addEventListener('DOMContentLoaded',()=>{
+   // The three static circuit drawings used a white mask over a continuous
+   // wire, visibly disconnecting the battery. Draw only the physically connected
+   // path from the long plate, through the components, to the short plate.
+   const circuits=[
+     {slide:1,path:'M90 168V75H470V260H90V189',plates:[168,189]},
+     {slide:2,path:'M90 164V70H460V248H90V185',plates:[164,185]},
+     {slide:9,path:'M90 184V92H458V285H90V205',plates:[184,205]},
+   ];
+   for(const c of circuits){
+     const svg=document.querySelector(`#bild-${c.slide} .phys-figure svg`);
+     if(!svg)continue;
+     const conductor=svg.querySelector('path[stroke="#315464"]');
+     if(conductor){conductor.setAttribute('d',c.path);conductor.dataset.circuitWire='main'}
+     svg.querySelector('rect[x="72"][width="36"][fill="#fff"]')?.remove();
+     const plates=[...svg.querySelectorAll('line[stroke="#bf7450"]')];
+     plates.forEach((plate,i)=>plate.dataset.batteryPlate=i===0?'long':'short');
+   }
+
+   // A direction question needs an actual *answer arrow* after the pupil has
+   // reasoned through Kirchhoff's law, not just the sentence "0,30 A ut".
+   const branch=document.querySelector('#bild-4');
+   const junctionSvg=branch?.querySelector('.phys-figure svg');
+   if(junctionSvg){
+     const ns='http://www.w3.org/2000/svg';
+     const finished=document.createElementNS(ns,'g');
+     finished.innerHTML=arrow(320,204.07,389,240.87);
+     const outgoing=finished.firstElementChild;
+     outgoing.dataset.lowerCurrentArrow='outgoing';
+     outgoing.style.display='none';
+     junctionSvg.appendChild(outgoing);
+     const unknown=[...junctionSvg.querySelectorAll('text')].find(t=>t.textContent.trim()==='I = ?');
+     const syncJunction=()=>{
+       const revealed=Boolean(branch.querySelector('.step[data-step="2"].open'));
+       outgoing.style.display=revealed?'':'none';
+       outgoing.setAttribute('aria-hidden',String(!revealed));
+       if(unknown)unknown.textContent=revealed?'0,30 A ut':'I = ?';
+     };
+     new MutationObserver(syncJunction).observe(branch,{subtree:true,attributes:true,attributeFilter:['class']});
+     branch.addEventListener('lesson:reset',()=>queueMicrotask(syncJunction));
+     syncJunction();
+   }
+
+   // v2.3: optional lesson-specific recap *in* the independent bookwork view.
+   // The student first encounters the actual tasks and may choose when to open.
+   const work=document.querySelector('#bild-7 .book-priority');
+   let recap=null;
+   if(work){
+     recap=document.createElement('details');recap.id='circuit-method-recap';
+     recap.className='circuit-method-recap';
+     const formula=inner=>`<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">${inner}</math>`;
+     recap.innerHTML=`<summary>Metodstöd vid behov · visa/dölj lektionens samband</summary>
+       <p class="circuit-recap-instruction">Försök minnas själv först. Öppna när du behöver en ledtråd – utan facit till bokens uppgifter.</p>
+       <div class="circuit-recap-grid">
+         <section><h3>Ohms lag</h3>${formula('<mi>I</mi><mo>=</mo><mfrac><mi>U</mi><mi>R</mi></mfrac>')}<p>För en ohmsk resistor med <i>R</i> större än noll och oförändrad temperatur.</p></section>
+         <section><h3>Laddning och energi</h3>${formula('<mi>Q</mi><mo>=</mo><mi>I</mi><mi>t</mi>')}${formula('<mi>E</mi><mo>=</mo><mi>U</mi><mi>Q</mi>')}<p><i>Q</i> = passerad laddningsmängd (C), <i>E</i> = överförd energi (J).</p></section>
+         <section><h3>Förgrening</h3>${formula('<msub><mi>I</mi><mtext>in</mtext></msub><mo>=</mo><msub><mi>I</mi><mn>1</mn></msub><mo>+</mo><msub><mi>I</mi><mn>2</mn></msub>')}<p>Den inkommande strömmen är summan av utgående strömmar.</p></section>
+         <section><h3>Trådresistans</h3>${formula('<mi>A</mi><mo>=</mo><mi>π</mi><msup><mrow><mo>(</mo><mfrac><mi>d</mi><mn>2</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup>')}${formula('<mi>R</mi><mo>=</mo><mfrac><mrow><mi>ρ</mi><mi>l</mi></mrow><mi>A</mi></mfrac>')}<p><i>d</i> = diameter; <i>ρ</i> = materialets resistivitet. Håll enheterna konsekventa.</p></section>
+         <section><h3>Elektronantal</h3>${mathrow('<mi>N</mi><mo>=</mo><mfrac><mi>Q</mi><mi>e</mi></mfrac>')}<p>Vid elektrontransport: <i>Q</i> är passerad laddningsmängds belopp och <i>e</i> elementarladdningens positiva belopp.</p></section>
+       </div>`;
+     work.insertAdjacentElement('afterend',recap);
+     document.getElementById('bild-7')?.addEventListener('lesson:reset',()=>{recap.open=false});
+   }
    // Keep questions and revealed solution steps close to the appropriate diagram.
    for(const number of [1,3,4,5]){
      const slide=document.getElementById('bild-'+number);
@@ -145,7 +208,7 @@
    }
    // Prevent duplicate "Nästa bild" controls on a page without solution steps.
    const stage=document.getElementById('stage'),stepButton=document.getElementById('step');
-   const syncSteps=()=>{const active=stage?.querySelector('.slide.active');if(stepButton)stepButton.hidden=!active?.querySelector('.step:not(.open)')};
+   const syncSteps=()=>{const active=stage?.querySelector('.slide.active');if(stepButton)stepButton.hidden=!active?.querySelector('.step:not(.open)');if(recap&&!document.getElementById('bild-7')?.classList.contains('active'))recap.open=false};
    if(stage){new MutationObserver(syncSteps).observe(stage,{subtree:true,attributes:true,attributeFilter:['class']});syncSteps()}
    // Keep teacher arrow navigation usable after clicking the bottom navigation buttons.
    document.addEventListener('keydown',ev=>{
