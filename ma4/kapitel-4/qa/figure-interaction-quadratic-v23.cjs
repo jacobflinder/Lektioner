@@ -49,11 +49,13 @@ async function run(){
    await visit(page,3);
    const cards=page.locator('.slide.active .quadratic-plane-card');equal(await cards.count(),2,'Två begreppsfigurer');
    for(const card of [cards.nth(0),cards.nth(1)]){
-    equal(await svgPoint(card,'z'),{x:207,y:83},'Samma ursprungspunkt z');
+    equal(await svgPoint(card,'z'),{x:207,y:74},'Samma ursprungspunkt z');
     ok(await card.locator('svg[role="img"][aria-label]').count()===1,'Beskriven SVG');
    }
-   equal(await svgPoint(cards.nth(0),'conjugate'),{x:207,y:159},'Konjugat: samma realdel, bytt imaginärdel');
-   equal(await svgPoint(cards.nth(1),'opposite'),{x:93,y:159},'Motsatt: båda tecken ändras');
+   equal(await svgPoint(cards.nth(0),'conjugate'),{x:207,y:150},'Konjugat: samma realdel, bytt imaginärdel');
+   equal(await svgPoint(cards.nth(1),'opposite'),{x:93,y:150},'Motsatt: båda tecken ändras');
+   const concept=await svgPoint(cards.nth(0),'z');
+   equal([(concept.x-150)/3,(112-concept.y)/2],[19,19],'Begreppsfiguren: verkligt likskalig x-/y-axel');
    await click(page,'[data-quiz="q4"] button:nth-child(1)');
    ok(await page.locator('[data-quiz="q4"] .feedback math[aria-label="2i"]').count()>=1,'Dynamisk felåterkoppling semantisk');
    ok(await page.locator('[data-quiz="q4"] .feedback math[aria-label="−2i"]').count()>=1,'Konjugatet i MathML');
