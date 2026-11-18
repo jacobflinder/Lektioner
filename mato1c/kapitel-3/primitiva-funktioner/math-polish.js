@@ -17,7 +17,7 @@ const innerPiece=s=>{
  return inner(s.slice(0,s.length-opens.length))+[...opens].map(()=>'<mo>(</mo>').join('');
 };
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-function semantic(source){
+function semantic(source,display='block'){
  const pattern=/([a-zA-Z])\^\{([^{}]+)\}/g;
  let out='',last=0,match;
  while((match=pattern.exec(source))!==null){
@@ -26,10 +26,15 @@ function semantic(source){
   last=pattern.lastIndex;
  }
  out+=innerPiece(source.slice(last));
- return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="'+escape(source)+'"><mrow>'+out+'</mrow></math>';
+ return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="'+(display==='inline'?'inline':'block')+'" aria-label="'+escape(source)+'"><mrow>'+out+'</mrow></math>';
 }
 for(const el of document.querySelectorAll('[data-formula]')){
  el.innerHTML=semantic(el.dataset.formula);
  el.dataset.mathPresentation='true';
 }
+for(const el of document.querySelectorAll('[data-formula-inline]')){
+ el.innerHTML=semantic(el.dataset.formulaInline,'inline');
+ el.dataset.mathPresentation='true';
+}
+window.Ma3cPrimitiveMath=Object.freeze({semantic});
 })();

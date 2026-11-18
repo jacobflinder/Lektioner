@@ -14,25 +14,37 @@
 .formula.emphasis{background:#e7f6ef;border-color:#087d70;font-weight:680}
 .formula.error{background:#fff1e8;border-color:#b66e2c}
 .formula.small{font-size:clamp(1.04rem,1.9vw,1.32rem)}
+.inline-math math{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.12em}
+.choice .inline-math math{font-size:1.15em}
+.feedback .formula{margin:10px 0 0;background:transparent;padding:6px 0 0;border:0;font-size:1.2rem;line-height:1.5}
 .explain-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .explain-card{border-radius:12px;background:#f0f6fa;border:1px solid #cddfe8;padding:16px;min-width:0}
 .explain-card h3{color:#095f77}
 .statement{background:#e7f5ef;border-left:5px solid #098377;border-radius:10px;padding:15px 19px;margin:16px 0}
 .contrast{background:#fff6e8;border-left:5px solid #ad8129;border-radius:10px;padding:15px 19px;margin:16px 0}
-.graph-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:12px 0}
+.graph-workbench{display:grid;grid-template-columns:minmax(280px,.75fr) minmax(0,1.25fr);gap:17px;align-items:start;margin:10px 0}
 .graph-frame{margin:0;border-radius:12px;border:1px solid #bed5e0;background:#f8fbfd;padding:12px;min-width:0}
 .graph-frame h3{font-size:1rem;margin:0 0 8px;color:#315c73}
 .graph-frame svg{display:block;width:100%;height:auto}
 .graph-frame figcaption{font-size:.83rem;color:#486879;margin-top:8px}
-.graph-slider{border:1px solid #b9d9d6;background:#eff8f5;padding:15px 17px;border-radius:12px;margin:14px 0}
+.graph-slider{border:1px solid #b9d9d6;background:#eff8f5;padding:12px 15px;border-radius:12px;margin:12px 0}
 .graph-slider label{display:block;font-weight:750}
 .graph-slider input{display:block;width:100%;max-width:650px;accent-color:#087d70;min-height:38px}
 .graph-slider output{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.23rem;color:#066e64}
 .legend{display:flex;align-items:center;flex-wrap:wrap;gap:17px;font-size:.86rem;color:#3c5b6c}
 .legend span{display:inline-flex;align-items:center;gap:7px}
 .legend i{display:inline-block;width:24px;border-top:4px solid #116a9c}
-.legend .blue{border-color:#116a9c}.legend .teal{border-color:#087d70}
+.legend .blue{border-color:#116a9c}.legend .teal{border-color:#087d70}.legend .dashed{border-color:#899eb0;border-top-style:dashed}
 .support{border:1px dashed #aac6d3;border-radius:10px;padding:12px 15px;margin:12px 0;background:#f9fcfd}
+.book-methods{border:1px solid #b9d9d6;background:#eff8f5;border-radius:12px;margin:15px 0;padding:13px 16px}
+.book-methods summary{font-size:1.04rem;cursor:pointer;color:#075e57}
+.book-methods summary:focus-visible{outline:3px solid #e7a62e;outline-offset:4px;border-radius:4px}
+.book-methods[open] summary{margin-bottom:13px}
+.book-methods .method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.book-methods .method-item{background:#fff;border:1px solid #d3e5e2;border-radius:9px;padding:10px 12px;min-width:0}
+.book-methods .method-item>strong{display:block;color:#155e57}
+.book-methods .method-item .formula{font-size:clamp(1.02rem,1.6vw,1.25rem);margin:8px 0;padding:7px 9px}
+.book-methods .method-item p:last-child{margin-bottom:0}
 .book-note{font-size:1.04rem;font-weight:650;color:#425f72}
 .booklevels{align-items:stretch}
 .booklevel .number{font-size:1.16rem;line-height:1.55;overflow-wrap:anywhere}
@@ -42,8 +54,9 @@
 .sequence .steps{gap:16px}
 .sequence .seq-item{padding:15px 18px}
 .choice{min-height:53px}
-@media(max-width:800px){.graph-grid,.explain-grid{grid-template-columns:1fr}}
-@media(max-width:720px){.formula{font-size:1.12rem;padding:9px 11px}.formula.small{font-size:1.03rem}.graph-frame{padding:8px}.formulas{gap:16px}.explain-card{padding:12px}}
+@media(max-width:1000px){.graph-workbench{display:block}.explain-grid{grid-template-columns:1fr}}
+@media(min-width:700px) and (max-width:1000px){#graph .graph-instructions{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}#graph .graph-instructions>.formula{grid-column:1/-1}#graph .graph-instructions>.task,#graph .graph-instructions>.graph-slider{margin:4px 0}}
+@media(max-width:720px){.formula{font-size:1.12rem;padding:9px 11px}.formula.small{font-size:1.03rem}.graph-frame{padding:8px}.formulas{gap:16px}.explain-card{padding:12px}.book-methods .method-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -62,7 +75,7 @@
     <p><strong>Riktmärke ca 70 minuter:</strong> start och mål 7 min, graf och begrepp 12 min, metoder och gemensam återkoppling 15 min, eget försök 7 min, sammanhängande arbete i boken <strong>minst 20 min</strong>, utcheckning 5–7 min. Använd tiderna flexibelt.</p>
     <p><strong>Viktig princip för bokarbetet:</strong> Minst två av tre nivåer innebär <strong>alla uppgifter och deluppgifter på varje vald nivå</strong> – aldrig enbart ett urval från två nivåer. De 20 minuterna är ett sammanhängande arbetspass, inte en tidsgräns för när alla valda uppgifter ska vara färdiga. Planera fortsatt arbete vid behov.</p>
     <p><strong>Beslut utifrån elevsvar:</strong> Om eleverna tror att det bara finns en primitiv funktion, dra reglaget C. Om de glömmer konstanten, jämför två parallellförskjutna kurvor. Om de missar faktorn framför e, derivera deras svar och jämför. Om någon blandar f och F, peka på pilen ”derivera F → f”. Om grundreglerna sitter, gå vidare till bokarbetet.</p>
-    <p><strong>Nästa lektions återkallning:</strong> Be eleven utan stöd bestämma alla primitiva funktioner till 6x+2e<sup>2x</sup> och kontrollera genom derivering.</p>
+    <p><strong>Nästa lektions återkallning:</strong> Be eleven utan stöd bestämma alla primitiva funktioner till <span class="inline-math" data-formula-inline="6x+2e^{2x}"></span> och kontrollera genom derivering.</p>
   </details>
 </aside>
 <div class="repetition"><strong>Repetitionsläge:</strong> Tänk och räkna själv innan du öppnar återkopplingen. Du kan använda skrivytan. Inga elevsvar samlas in eller lagras.</div>
@@ -115,26 +128,28 @@
       <p class="formula" data-formula="F(x)=3x²−4x+C">F(x) = 3x² − 4x + C</p>
     </div>
   </div>
-  <div class="task"><strong>Kontrollfråga:</strong> Är 3x² − 4x + 100 också en primitiv funktion? Och 3x² − 4x − 8? Förklara.</div>
+  <div class="task"><strong>Kontrollfråga:</strong> Är <span class="inline-math" data-formula-inline="3x²−4x+100"></span> också en primitiv funktion? Och <span class="inline-math" data-formula-inline="3x²−4x−8"></span>? Förklara.</div>
   <button type="button" class="reveal" data-reveal="meaning-answer">Visa förklaring</button>
-  <div class="answer hidden" id="meaning-answer"><p><strong>Ja, båda.</strong> Derivatan av en konstant är 0. Därför är <strong>alla</strong> primitiva funktioner i det här fallet den gemensamma formen F(x) = 3x² − 4x + C där C är ett godtyckligt reellt tal.</p></div>
+  <div class="answer hidden" id="meaning-answer"><p><strong>Ja, båda.</strong> Derivatan av en konstant är 0. Därför får vi <strong>alla</strong> primitiva funktioner i den gemensamma formen</p><p class="formula" data-formula="F(x)=3x²−4x+C"></p><p>där C är ett godtyckligt reellt tal.</p></div>
 </section>
 
-<section class="slide" id="graph" data-teacher="Låt alla rita en grov skiss av F för C=0 och förutsäga förskjutningen vid C=2. Visa först därefter reglaget. De två diagrammen har samma x- och y-skala. Fråga: hur påverkas varje tangentlutning av förskjutningen? Högergrafen är f=F′.">
+<section class="slide" id="graph" data-teacher="Låt alla rita en grov skiss av F för C=0 och förutsäga förskjutningen vid C=2. Visa först därefter reglaget. De tre kurvorna använder samma koordinatsystem och skala: vald F är blå, C=0 streckad och derivatan f=F′ grön. Fråga: hur påverkas varje tangentlutning av förskjutningen?">
   <div class="eyebrow">04 · Undersök en hel familj grafer</div>
   <h2>Vad gör konstanten C med grafen?</h2>
-  <p class="formula" data-formula="F(x)=x²−2x+C">F(x) = x² − 2x + C</p>
-  <div class="task"><strong>Förutsäg innan du drar:</strong> Om C ändras från 0 till 2, flyttas grafen åt sidan, uppåt eller blir den brantare? Vad händer med derivatan?</div>
-  <div class="graph-slider">
-    <label for="graph-c">Flytta konstanten C när du har bestämt dig</label>
-    <input type="range" id="graph-c" min="-3" max="3" step="1" value="0" aria-describedby="graph-c-out">
-    <output for="graph-c" id="graph-c-out">C = 0</output>
+  <div class="graph-workbench">
+    <div class="graph-instructions">
+      <p class="formula" data-formula="F(x)=x²−2x+C">F(x) = x² − 2x + C</p>
+      <div class="task"><strong>Förutsäg innan du drar:</strong> Om C ändras från 0 till 2, flyttas grafen åt sidan, uppåt eller blir den brantare? Vad händer med derivatan?</div>
+      <div class="graph-slider">
+        <label for="graph-c">Flytta konstanten C när du har bestämt dig</label>
+        <input type="range" id="graph-c" min="-3" max="3" step="1" value="0" aria-describedby="graph-c-out">
+        <output for="graph-c" id="graph-c-out" aria-live="polite"><span class="inline-math" data-formula-inline="C=0"></span></output>
+      </div>
+    </div>
+    <figure class="graph-frame"><h3>F och f i samma koordinatsystem</h3><svg id="family-graph" viewBox="0 0 630 380" role="img" aria-label="Blå graf för F(x)=x²−2x+C, streckad referens vid C=0 och grön graf för derivatan f(x)=2x−2 som förblir oförändrad."></svg>
+      <figcaption class="legend"><span><i class="blue"></i> F med valt C</span><span><i class="dashed"></i> F vid C=0</span><span><i class="teal"></i> f = F′ (oförändrad)</span></figcaption>
+    </figure>
   </div>
-  <div class="graph-grid">
-    <figure class="graph-frame"><h3>F · funktionen som flyttas</h3><svg id="family-graph" viewBox="0 0 630 380" role="img" aria-label="Graf för F(x)=x²−2x+C. Justera C med reglaget."></svg><figcaption>Blå: vald F-graf. Streckad: F när C=0.</figcaption></figure>
-    <figure class="graph-frame"><h3>f · derivatan, alltid densamma</h3><svg id="derivative-graph" viewBox="0 0 630 380" role="img" aria-label="Graf för derivatan f(x)=2x−2 som inte ändras när C ändras."></svg><figcaption>Grön: f(x)=2x−2 för varje valt C.</figcaption></figure>
-  </div>
-  <div class="legend"><span><i class="blue"></i> F med valt C</span><span><i class="teal"></i> f = F′</span></div>
   <button type="button" class="reveal" data-reveal="graph-answer">Visa slutsatsen när du har undersökt</button>
   <div class="answer hidden" id="graph-answer"><p>Konstanten C ger en <strong>lodrät förskjutning</strong>. Grafens form och lutning vid varje x-värde är oförändrade. Därför har hela familjen samma derivata:</p><p class="formula emphasis" data-formula="F′(x)=2x−2">F′(x) = 2x − 2</p></div>
 </section>
@@ -165,9 +180,9 @@
   <h2>Negativa och brutna exponenter fungerar också</h2>
   <p>Vi kan skriva om rötter och bråk som potenser innan vi använder regeln.</p>
   <p class="formula" data-formula="1/√x=x^{−1/2}">1/√x = x⁻¹ᐟ²</p>
-  <div class="task"><strong>Undersök för x &gt; 0:</strong> Vilken funktion har derivatan 3/√x? Hur kan du kontrollera ditt svar?</div>
+  <div class="task"><strong>Undersök för <span class="inline-math" data-formula-inline="x>0"></span>:</strong> Vilken funktion har derivatan <span class="inline-math" data-formula-inline="3/√x"></span>? Hur kan du kontrollera ditt svar?</div>
   <button type="button" class="reveal" data-reveal="fractional-answer">Visa en lösning</button>
-  <div class="answer hidden" id="fractional-answer"><p>Eftersom 3/√x = 3x<sup>−1/2</sup> ökar vi exponenten till 1/2 och delar med 1/2:</p>
+  <div class="answer hidden" id="fractional-answer"><p>Vi skriver först om derivatan som en potens:</p><p class="formula small" data-formula="3/√x=3x^{−1/2}"></p><p>Öka sedan exponenten till 1/2 och dela med 1/2:</p>
     <div class="formulas"><p class="formula" data-formula="F(x)=6√x+C">F(x) = 6√x + C</p><p class="formula" data-formula="F′(x)=3/√x">F′(x) = 3/√x</p></div>
   </div>
   <div class="contrast"><strong>Undantag:</strong> Regeln på förra sidan fungerar inte när exponenten är −1, eftersom den nya exponenten blir 0 och vi inte får dividera med 0.</div>
@@ -201,11 +216,11 @@
   <div class="sequence" data-sequence>
     <div class="nextprompt" aria-live="polite" data-seq-prompt></div>
     <div class="steps">
-      <div class="seq-item hidden" data-seq-item data-question="Vad blir en primitiv funktion till −8x?"><strong>1 · Första termen</strong><p class="formula" data-formula="6x²→2x³">6x² → 2x³</p></div>
-      <div class="seq-item hidden" data-seq-item data-question="Hur hanterar vi konstanten 5?"><strong>2 · Den linjära termen</strong><p class="formula" data-formula="−8x→−4x²">−8x → −4x²</p></div>
-      <div class="seq-item hidden" data-seq-item data-question="Vilken faktor behövs när vi går bakåt från 4e^(−2x)?"><strong>3 · Konstanten 5</strong><p class="formula" data-formula="5→5x">5 → 5x</p></div>
-      <div class="seq-item hidden" data-seq-item data-question="Vad måste alltid läggas till? Och hur kontrollerar vi?"><strong>4 · Exponentialtermen</strong><p class="formula" data-formula="4e^{−2x}→−2e^{−2x}">4e^(−2x) → −2e^(−2x)</p></div>
-      <div class="seq-item hidden" data-seq-item data-question="Stämmer derivatan term för term?"><strong>5 · Samla och kontrollera</strong>
+      <div class="seq-item hidden" data-seq-item data-question="Vad blir en primitiv funktion till den första termen?"><strong>1 · Första termen</strong><p class="formula" data-formula="6x²→2x³">6x² → 2x³</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Vad blir en primitiv funktion till den linjära termen?"><strong>2 · Den linjära termen</strong><p class="formula" data-formula="−8x→−4x²">−8x → −4x²</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Hur hanterar vi konstanttermen?"><strong>3 · Konstanten 5</strong><p class="formula" data-formula="5→5x">5 → 5x</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Vilken faktor måste vi kompensera för i exponentialtermen?"><strong>4 · Exponentialtermen</strong><p class="formula" data-formula="4e^{−2x}→−2e^{−2x}">4e^(−2x) → −2e^(−2x)</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Vad måste läggas till och hur kontrollerar vi hela uttrycket?"><strong>5 · Samla och kontrollera</strong>
         <div class="formulas">
           <p class="formula emphasis" data-formula="F(x)=2x³−4x²+5x−2e^{−2x}+C">F(x) = 2x³ − 4x² + 5x − 2e^(−2x) + C</p>
           <p class="formula" data-formula="F′(x)=6x²−8x+5+4e^{−2x}">F′(x) = 6x² − 8x + 5 + 4e^(−2x)</p>
@@ -221,10 +236,10 @@
   <h2>Vilket svar håller vid kontroll?</h2>
   <p class="formula" data-formula="f(x)=9e^{3x}">f(x) = 9e^(3x)</p>
   <p>Du söker <strong>alla</strong> primitiva funktioner. Vilket uttryck ger exakt den givna derivatan?</p>
-  <div class="panel" data-quiz data-correct-text="Ja. Derivera: 3 · 3e^(3x) = 9e^(3x), och C försvinner." data-wrong-text="Derivera ditt förslag: vilken faktor får du framför e^(3x)? Pröva igen.">
-    <button class="choice" type="button" data-correct="false">A · F(x) = 9e<sup>3x</sup> + C</button>
-    <button class="choice" type="button" data-correct="true">B · F(x) = 3e<sup>3x</sup> + C</button>
-    <button class="choice" type="button" data-correct="false">C · F(x) = 27e<sup>3x</sup> + C</button>
+  <div class="panel" data-quiz data-correct-text="Rätt. Derivera och kontrollera att C försvinner." data-wrong-text="Derivera ditt förslag och kontrollera faktorn framför exponentialtermen.">
+    <button class="choice" type="button" data-correct="false" data-distractor="too-large"><strong>A · </strong><span class="inline-math" data-formula-inline="F(x)=9e^{3x}+C"></span></button>
+    <button class="choice" type="button" data-correct="true"><strong>B · </strong><span class="inline-math" data-formula-inline="F(x)=3e^{3x}+C"></span></button>
+    <button class="choice" type="button" data-correct="false" data-distractor="much-too-large"><strong>C · </strong><span class="inline-math" data-formula-inline="F(x)=27e^{3x}+C"></span></button>
     <p class="feedback" aria-live="polite">Välj efter att du tänkt själv.</p>
   </div>
   <div class="contrast">Tre kontrollfrågor: Har jag <strong>delat med exponentens x-koefficient</strong>? Har jag <strong>+ C</strong>? Får jag tillbaka rätt funktion när jag deriverar?</div>
@@ -256,7 +271,16 @@
     <div class="booklevel"><h3>Nivå 2</h3><p class="number">3312 · 3313 · 3314</p><p>Resonera om olika primitiva funktioner, grafer och mer sammansatta uttryck.</p></div>
     <div class="booklevel"><h3>Nivå 3</h3><p class="number">3315 · 3316 · 3317</p><p>Fördjupa förklaringar, samband och vilken variabel du integrerar med avseende på.</p></div>
   </div>
-  <div class="panel tight"><strong>När du fastnar:</strong><p>1. Derivera ett tänkbart svar för att kontrollera.</p><p>2. Prova att dela upp en summa term för term.</p><p>3. Kom ihåg att ”alla” svar kräver <strong>+ C</strong>.</p></div>
+  <details class="book-methods" id="book-methods">
+    <summary>Visa lektionens metodstöd (frivilligt) – försök gärna minnas först</summary>
+    <div class="method-grid">
+      <div class="method-item"><strong>Vad söker vi?</strong><p class="formula" data-formula="F′(x)=f(x)"></p><p>En primitiv funktion blir den givna funktionen när vi deriverar.</p></div>
+      <div class="method-item"><strong>Alla möjliga svar</strong><p class="formula" data-formula="F(x)+C"></p><p>En konstant försvinner vid derivering. Ange därför alltid konstanten när alla primitiva funktioner efterfrågas.</p></div>
+      <div class="method-item"><strong>Potenser</strong><p class="formula" data-formula="xⁿ→(1/(n+1))x^{n+1}"></p><p>Öka exponenten och dela med den nya exponenten; villkor: <span class="inline-math" data-formula-inline="n≠−1"></span>.</p></div>
+      <div class="method-item"><strong>Exponentialfunktioner</strong><p class="formula" data-formula="e^{kx}→(1/k)e^{kx}"></p><p>Dela med koefficienten framför x i exponenten; villkor: <span class="inline-math" data-formula-inline="k≠0"></span>.</p></div>
+    </div>
+    <p class="small-print">Räkna en term i taget och kontrollera ditt svar genom att derivera tillbaka. Kortet innehåller inga bokfacit.</p>
+  </details>
   <button type="button" class="secondary" data-go="parameter">Valbart stöd inför nivå 3: vilken variabel är konstant?</button>
   <p class="small-print">Uppgiftslydelserna finns i boken. Webbsidan återger inte bokens uppgifter eller facit.</p>
 </section>
@@ -291,9 +315,9 @@
   <div class="sequence" data-sequence>
     <div class="nextprompt" aria-live="polite" data-seq-prompt></div>
     <div class="steps">
-      <div class="seq-item hidden" data-seq-item data-question="Varför kan vi lägga till ett valfritt C?"><strong>1 · Bestäm alla primitiva funktioner</strong><p class="formula emphasis" data-formula="F(x)=2x⁴−3e^{−x}+C">F(x) = 2x⁴ − 3e^(−x) + C</p></div>
-      <div class="seq-item hidden" data-seq-item data-question="Vad blir derivatan av varje term?"><strong>2 · Förklara C</strong><p>Varje konstant har derivatan 0. Därför kan den läggas till utan att den givna derivatan ändras.</p></div>
-      <div class="seq-item hidden" data-seq-item data-question="Vilken regel behöver du öva vidare på?"><strong>3 · Derivera tillbaka</strong><p class="formula" data-formula="F′(x)=8x³+3e^{−x}">F′(x) = 8x³ + 3e^(−x)</p><p>Derivatan stämmer. Alla tre delar är kontrollerade.</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Vilket uttryck beskriver alla primitiva funktioner?"><strong>1 · Bestäm alla primitiva funktioner</strong><p class="formula emphasis" data-formula="F(x)=2x⁴−3e^{−x}+C">F(x) = 2x⁴ − 3e^(−x) + C</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Varför kan vi lägga till en godtycklig konstant?"><strong>2 · Förklara C</strong><p>Varje konstant har derivatan 0. Därför kan den läggas till utan att den givna derivatan ändras.</p></div>
+      <div class="seq-item hidden" data-seq-item data-question="Vad blir derivatan om vi kontrollerar vårt uttryck term för term?"><strong>3 · Derivera tillbaka</strong><p class="formula" data-formula="F′(x)=8x³+3e^{−x}">F′(x) = 8x³ + 3e^(−x)</p><p>Derivatan stämmer. Alla tre delar är kontrollerade.</p></div>
     </div>
     <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div>
   </div>
