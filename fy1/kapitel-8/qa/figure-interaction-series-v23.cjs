@@ -89,6 +89,13 @@ fs.mkdirSync(OUT,{recursive:true});
     'two common rails and four actual parallel-node points');
    check(r.svgTexts.some(s=>s.includes('Nod A'))&&r.svgTexts.some(s=>s.includes('Nod B')),
     'named node points visible with parallel labels');
+   const branchLabels=await model.locator('.drawing svg text').evaluateAll(nodes=>nodes
+    .filter(el=>/^I[₁₂] /.test(el.textContent)).map(el=>{
+     const bb=el.getBBox();return {name:el.textContent,left:bb.x,right:bb.x+bb.width};
+    }));
+   const a=branchLabels.find(l=>l.name.startsWith('I₁')),b=branchLabels.find(l=>l.name.startsWith('I₂'));
+   check(branchLabels.length===2&&a.left>275&&a.right<420&&b.left>430&&b.right<590,
+    'parallel branch-current annotations clear of their vertical conductors '+JSON.stringify(branchLabels));
   }
  };
  page.on('pageerror',e=>errors.push(e.message));
@@ -114,6 +121,15 @@ fs.mkdirSync(OUT,{recursive:true});
   check(near(14/(60+120*240/(120+240)),.1)&&near(8/120+8/240,.1),
    'independent mixed-circuit values 60+(120||240) ohm');
   check(near(6/300+6/300,.04)&&near(6/.04,150),'independent final exit values');
+  await go(11);
+  const mixedLabels=await page.locator('#bild-11 .circuit-figure svg text').evaluateAll(nodes=>nodes
+   .filter(el=>['120 Ω','240 Ω'].includes(el.textContent.trim())).map(el=>({name:el.textContent.trim(),bbox:(()=>{
+    const b=el.getBBox();return {left:b.x,right:b.x+b.width,top:b.y,bottom:b.y+b.height}
+   })()})));
+  const label120=mixedLabels.find(l=>l.name==='120 Ω'),label240=mixedLabels.find(l=>l.name==='240 Ω');
+  check(mixedLabels.length===2&&label120.bbox.left>345&&label120.bbox.right<436
+   &&label240.bbox.left>464&&label240.bbox.right<590,
+   'mixed-circuit resistance labels stand clear of vertical conductors and their resistor outlines '+JSON.stringify(mixedLabels));
 
   // Before/reveal states: do not leak the meter placement, cell voltage or
   // equivalent circuit before the pupil has first drawn/predicted.
