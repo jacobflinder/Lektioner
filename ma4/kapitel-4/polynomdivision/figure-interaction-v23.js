@@ -7,7 +7,7 @@
  const M=window.Ma4Math;
  if(!M)throw Error('Lektionens lokala MathML-stöd saknas');
  const style=document.createElement('style');
- style.textContent='.poly-inline-math math{font-size:1.06em;vertical-align:middle}.poly-recap-step{margin:11px 0 4px;line-height:1.5}.division-focus strong .poly-inline-math math{font-size:1em}.division-layout .question,.division-layout .explanation{overflow-wrap:break-word}';
+ style.textContent='.poly-inline-math math{font-size:1.06em;vertical-align:middle}.poly-recap-step{margin:11px 0 4px;line-height:1.5}.division-focus strong .poly-inline-math math{font-size:1em}.division-layout .question,.division-layout .explanation{overflow-wrap:break-word}.sign-line-figure{max-width:500px}';
  document.head.append(style);
 
  function inline(formula){
@@ -65,6 +65,28 @@
  if(stopRule)parts(stopRule,['Divisionen är färdig när ',['R = 0'],' eller när restens grad är lägre än divisorns grad.']);
  const stopProbe=[...slides[4].querySelectorAll('details p')].find(p=>p.textContent.startsWith('Vid division med'));
  if(stopProbe)parts(stopProbe,['Vid division med ',['x + 2'],' återstår ',['3x + 1'],'. Är vi klara? Vilken kvotterm kan ta bort ',['3x'],'? Vad ändras om det återstår ',['12'],'?']);
+ // Ursprungsskalan 520 px krympte till ungefär 8 px figurtext på mobil.
+ // Visa samma riktiga koefficientsteg i en kompakt, tydligt märkbar tallinje.
+ const sign=slides[5].querySelector('svg.sign-line-figure');
+ if(sign){
+  sign.setAttribute('viewBox','0 0 360 184');
+  sign.innerHTML=`<rect width="360" height="184" rx="12" fill="#f8fbfd"/>
+   <text x="13" y="26" font-size="18" font-weight="750" fill="#204456">Utgå från koefficienten −5</text>
+   <path d="M43 140H327" stroke="#607f91" stroke-width="2.5"/>
+   <g fill="#29485b" text-anchor="middle" font-size="16">
+    <path d="M80 134v12 M130 134v12 M180 134v12 M230 134v12 M280 134v12" stroke="#607f91" stroke-width="2"/>
+    <text x="80" y="164">−7</text><text x="130" y="164">−6</text>
+    <text x="180" y="164">−5</text><text x="230" y="164">−4</text><text x="280" y="164">−3</text>
+   </g>
+   <circle cx="180" cy="140" r="6" fill="#204456"/>
+   <path d="M180 70H80" stroke="#bb5b48" stroke-width="5" fill="none"/>
+   <path d="M94 60L79 70L94 80" stroke="#bb5b48" stroke-width="5" fill="none"/>
+   <text x="75" y="57" font-size="16" text-anchor="middle" fill="#873c2e">Fel: −2</text>
+   <path d="M180 104H280" stroke="#137e6a" stroke-width="5" fill="none"/>
+   <path d="M266 94L281 104L266 114" stroke="#137e6a" stroke-width="5" fill="none"/>
+   <text x="282" y="91" font-size="16" text-anchor="middle" fill="#0e6352">Rätt: +2</text>
+   <text x="180" y="179" font-size="13" text-anchor="middle" fill="#29485b">Start: −5</text>`;
+ }
  for(const b of document.querySelectorAll('.slide button[data-reveal]')){
   b.dataset.originalLabel=b.textContent;
  }

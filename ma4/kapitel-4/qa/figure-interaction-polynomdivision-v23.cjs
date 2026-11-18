@@ -124,7 +124,10 @@ for(const [name,c] of Object.entries(CASES)){
   await go(5);await reveal('a6');
   const svg=page.locator('#a6 svg.sign-line-figure');
   check(await svg.isVisible(),'corrected feedback figure visible after reveal');
+  check(await svg.getAttribute('viewBox')==='0 0 360 184','legible mobile-adapted number-line coordinate space');
   check(await svg.locator('path[stroke="#137e6a"]').count()===2,'correct sign arrow has line + arrowhead');
+  check(await svg.locator('path[stroke="#bb5b48"]').first().getAttribute('d')==='M180 70H80','wrong step really goes 2 units left');
+  check(await svg.locator('path[stroke="#137e6a"]').first().getAttribute('d')==='M180 104H280','correct step really goes 2 units right');
   const descr=await svg.getAttribute('aria-label');
   check(descr.includes('minus 7')&&descr.includes('minus 3'),'both before/after endpoints explained');
   await go(7);await reveal('zero-help');
@@ -144,7 +147,7 @@ for(const [name,c] of Object.entries(CASES)){
   check(await recap.locator('math').count()>=3,'three correct MathML relations in summary');
   check(await recap.locator('p').count()===4,'four short lesson-relevant reminders');
   const recapText=await recap.innerText();
-  check(recapText.includes('Välj kvotterm')&&recapText.includes('När resten inte är noll'),'method and zero remainder clarified');
+  check(recapText.includes('Välj kvotterm')&&recapText.toLowerCase().includes('när resten inte är noll'),'method and zero remainder clarified');
   check(!recapText.includes('2x² − x − 3'),'no exercise answer leaked in summary');
   await go(10);await go(8);
   check(await recap.getAttribute('open')===null,'summary closes on slide change');
