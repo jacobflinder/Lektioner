@@ -77,7 +77,7 @@ try{
  const model=page.locator('#bild-3 [data-model="coulomb"]');
  check(await model.locator('input[type="range"]').count()===3,'three original parameter controls');
  let st=await state();
- check(st.viewBox==='0 0 920 410','full accurate geometry viewBox without fake scaling');
+ check(st.viewBox==='0 0 920 470','full accurately scaled desktop geometry with legible labels');
  check(close(st.dx,210),'0.50m maps to 210 SVG px');
  check(st.bar===null&&st.arrows.length===0,'no force magnitude, no force direction before student attempts');
  check(st.output.includes('Förutsäg först'),'facit delayed at default');
@@ -246,7 +246,8 @@ try{
   }
   // Validate dynamic labels at all distances in each actual rendered viewport.
   await go(3);await set('coulomb-r',1.5);await model.locator('.reveal-model').click();
-  const last=await state();check(close(last.dx,630),'distance still physically proportional at '+vp.name);
+  const last=await state();check(close(last.dx,vp.width<=575?330:630),
+   'distance still physically proportional in '+vp.name+' viewport-specific scale');
   const size=await model.locator('.coulomb-visual svg').evaluate(el=>({w:el.getBoundingClientRect().width,h:el.getBoundingClientRect().height}));
   check(size.w<=vp.width&&size.w>100&&size.h>50,'diagram scales without viewport overflow '+vp.name+JSON.stringify(size));
   await shot(vp.name+'-max-distance');
