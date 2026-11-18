@@ -227,6 +227,26 @@ const sizes=[
      await jump(3);
      await page.locator('#bild-3 .reveal-model').click();
      await focusShot(page.locator('#bild-3 .kretsar-model .drawing'),`${name}-03-current-shown`);
+     // The numerical explanation and the actual circuit must be visible at
+     // the same time on the intended desktop/projector screen. Merely having
+     // the math below the figure on a scrollable page fails requirement 5.
+     if(width.width>=1280){
+       const together=await page.locator('#bild-3 .kretsar-model').evaluate(root=>{
+         const draw=root.querySelector('.drawing').getBoundingClientRect();
+         const explanation=root.querySelector('.model-result').getBoundingClientRect();
+         return {draw:{left:draw.left,right:draw.right,top:draw.top,bottom:draw.bottom},
+           math:{left:explanation.left,top:explanation.top,bottom:explanation.bottom},
+           viewport:innerHeight,
+           rows:root.querySelectorAll('.model-result .circuit-model-math-row math').length};
+       });
+       verify(together.rows===8&&together.math.left>together.draw.right-5,
+         `eight calculations beside—not below—the live circuit @${width.width}: ${JSON.stringify(together)}`);
+       verify(Math.abs(together.math.top-together.draw.top)<35,
+         `diagram and calculations begin on the same visual line @${width.width}`);
+       verify(together.draw.top>=-2&&together.draw.bottom<=together.viewport+2&&
+         together.math.top>=-2&&together.math.bottom<=together.viewport+2,
+         `diagram and complete math simultaneously in actual ${width.width}×${width.height} viewport: ${JSON.stringify(together)}`);
+     }
      await focusShot(page.locator('#bild-3 .kretsar-model .model-result'),`${name}-03-math-shown`);
      verify((await circuitModel()).bars.length===3,'three visible actual relative bars @'+width.width);
      await jump(5);
