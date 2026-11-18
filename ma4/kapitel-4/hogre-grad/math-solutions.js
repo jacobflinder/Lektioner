@@ -46,10 +46,10 @@ insertSolutions({
  'h-oddans':solution(
   step('1 · Konjugatregeln',['z = a + bi','z̄ = a − bi'],
    'Här är a och b reella och b ≠ 0. För reella koefficienter förekommer varje icke-reell rot tillsammans med sitt konjugat, med samma multiplicitet.'),
-  step('2 · Räkna bidragen',[
-    '2m',
-    'n = 2m + 1'
-  ],'Icke-reella rotpar bidrar alltid med ett jämnt antal. Ett udda totalt antal kan inte bestå enbart av sådana par.'),
+  step('2 · Pröva om alla rötter skulle kunna vara icke-reella',[
+    'n = 2m',
+    'n = 2k + 1'
+  ],'Om alla rötter vore icke-reella skulle deras konjugatpar ge ett jämnt antal n = 2m. Men graden är udda, n = 2k + 1. Det motsäger antagandet.'),
   step('Slutsats',[],'Minst en rot till ett reellt polynom av udda grad måste vara reell.')
  ),
  'h-exit-1':solution(
