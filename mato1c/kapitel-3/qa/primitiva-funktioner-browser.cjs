@@ -60,6 +60,8 @@ fs.mkdirSync(evidence,{recursive:true});
   ok(await page.locator('#fractional math[aria-label="1/√x=x^{−1/2}"] msup').count()===1,'Bruten negativ exponent, semantisk MathML');
   await go(7);
   ok(await page.locator('#exponential math[aria-label="F(x)=(1/k)e^{kx}+C"] msup').count()===1,'Exponentialregel med exponent kx');
+  const derivativeBrackets=await page.locator('#exponential math[aria-label="(e^{3x})′=3e^{3x}"]').textContent();
+  ok(!derivativeBrackets.includes('()'),'Inga extra parenteser före exponentialbasen i derivataexemplet');
   await page.locator('[data-reveal="exponential-answer"]').click();
   ok(await page.locator('#exponential-answer math[aria-label="F′(x)=7e^{−x}"]').count()===1,'Teckenkontroll för negativ exponent');
   await go(8);
