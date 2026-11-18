@@ -30,8 +30,10 @@ function analyseSource(rel,src,lesson){
    const electronMass=earlier.endsWith('<msub><mi>m</mi>')||earlier.endsWith('<msub><mi>F</mi>');
    const dynamicCount=lesson==='fy1/elektriska-kretsar' && rel.endsWith('/kretsar-models.js') &&
       earlier.endsWith("mathrow('<mi>N</mi><mo>=</mo><mfrac><mi>Q</mi>");
+   const dynamicCoulombCount=lesson==='fy1/coulombs-lag' && rel.endsWith('/coulomb-model.js') &&
+      earlier.endsWith("mathBlock('<mi>N</mi><mo>=</mo><mfrac><mrow><mo>|</mo><mi>Q</mi><mo>|</mo></mrow>");
    const elementaryCounting=exceptions.has(lesson)&&
-      (math.includes('<mi>N</mi>')||math.includes('<mi>e</mi><mo>=</mo>')||dynamicCount);
+      (math.includes('<mi>N</mi>')||math.includes('<mi>e</mi><mo>=</mo>')||dynamicCount||dynamicCoulombCount);
    verify(electronMass||elementaryCounting,
       rel+' unexpected <mi>e</mi> at '+m.index+' (not an electron-mass subscript or elementary-charge count)');
    elementarySymbols++;
