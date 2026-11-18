@@ -95,3 +95,35 @@ body[data-fy1-lesson="elektriska-kretsar"] .source-note{display:none}
 .circuit-recap-grid math:last-of-type{margin-bottom:3px}
 @media(max-width:1050px){.circuit-recap-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:575px){.circuit-recap-grid{grid-template-columns:1fr;padding:8px 10px 12px}.circuit-method-recap summary{padding:13px}}
+
+/* Follow-up on slide 3: the earlier two-column page placed the eight core
+   calculations below a tall circuit model. Give the investigation its own full
+   width block, with the connected circuit, scales and equations simultaneously
+   visible when that block is in the classroom/projector viewport. */
+#bild-3 .layout{display:block}
+#bild-3 .side{margin-top:16px}
+#bild-3 .kretsar-model{
+ display:grid;
+ grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+ grid-template-areas:
+   "diagram calculations"
+   "sliders calculations"
+   "hint calculations"
+   "buttons calculations"
+   "caption caption";
+ gap:7px 22px;
+ align-items:start;
+}
+#bild-3 .kretsar-model .drawing{grid-area:diagram;min-width:0}
+#bild-3 .kretsar-model .drawing svg{max-height:540px}
+#bild-3 .kretsar-model .model-controls{grid-area:sliders;margin:0}
+#bild-3 .kretsar-model .model-hint{grid-area:hint;margin:0}
+#bild-3 .kretsar-model .model-result{grid-area:calculations;min-width:0}
+#bild-3 .kretsar-model .model-button{grid-area:buttons;margin:0}
+#bild-3 .kretsar-model .figcap{grid-area:caption}
+@media(max-width:930px){
+ #bild-3 .kretsar-model{display:block}
+ #bild-3 .kretsar-model .model-controls{margin:12px 0}
+ #bild-3 .kretsar-model .model-hint{margin:6px 0 9px}
+ #bild-3 .kretsar-model .model-button{margin-top:10px}
+}
