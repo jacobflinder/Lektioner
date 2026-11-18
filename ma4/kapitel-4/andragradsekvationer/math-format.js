@@ -279,7 +279,7 @@ Object.assign(html,{
   prose('Flera metoder är möjliga. Förklara varför en viss form gör just den metoden enkel.')
  ),
  r10:worked(
-  step('Roten är korrekt – kontrollera den',eq('(3 − 3i)² = 9 − 18i + 9i²'),eq('= 9 − 18i − 9 = −18i')),
+  step('Roten är korrekt – kontrollera den',eq('(3 − 3i)²'),eq('= 9 − 18i + 9i²'),eq('= 9 − 18i − 9'),eq('= −18i')),
   step('Hitta den saknade roten',eq('(−z)² = z²'),eq('−(3 − 3i) = −3 + 3i'),eq('(−3 + 3i)² = −18i')),
   result('z₁ = 3 − 3i','z₂ = −3 + 3i'),
   prose('Båda rötterna behövs. Ingen slutsats om elevens tanke kan dras av en enda skriven rot.')
