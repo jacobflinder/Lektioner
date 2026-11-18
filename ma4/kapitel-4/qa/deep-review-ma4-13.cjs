@@ -153,9 +153,9 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   assert.equal(await active().getAttribute('id'),'f-extra','Frivillig aktivitet är nåbar');
   await go(6);await shot('07-desktop');
   // 08: beräkning, ingen falsk regel att nollställen måste korsa axeln
-  await go(7);await circleNear('#graf-dubbel circle.mark',x2(2,-2.2,3.3),y2(0,-5,20));
+  await go(7);assert.equal(await page.locator('#graf-dubbel circle.mark').count(),0,'Nollställesmarkeringar ska vara dolda före elevens försök');await reveal('dubbel-answer');await circleNear('#graf-dubbel circle.mark',x2(2,-2.2,3.3),y2(0,-5,20));
   await circleNear('#graf-dubbel circle.mark',x2(-1,-2.2,3.3),y2(0,-5,20));
-  await reveal('dubbel-answer');await label('#dubbel-answer','F(2) = (2 − 2)²(2 + 1)');
+  await label('#dubbel-answer','F(2) = (2 − 2)²(2 + 1)');
   assert.ok((await page.locator('#dubbel-answer').innerText()).includes('dubbelrot'));
   await workedGap();await shot('08-desktop');
   await page.locator('[data-go="f-exit"]').click();assert.equal(await active().getAttribute('id'),'f-exit');
@@ -184,7 +184,7 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
    await workedGap();
    const cut=await active().locator('.ma4-equation:visible, p.math[data-math-presentation="true"]:visible').evaluateAll(es=>es.filter(e=>e.scrollWidth>e.clientWidth+3).map(e=>({scroll:e.scrollWidth,client:e.clientWidth,formula:e.querySelector('math')?.getAttribute('aria-label')})));
    if(cut.length)over.push({slide:i+1,cut});
-   if(i===4)await matrix('#f-graf2 .math-givens > .math',4);
+   if(i===4){for(let j=0;j<4;j++)await page.locator('#f-graf2 [data-seq-next]').click();await matrix('#f-graf2 .math-givens > .math',4)}
    await shot('mobil-'+String(i+1).padStart(2,'0'));
   }
   assert.deepEqual(over,[],'Ekvationer/facit måste rymmas utan intern scroll: '+JSON.stringify(over));

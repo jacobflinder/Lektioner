@@ -45,6 +45,7 @@ jobs:
           node ma4/kapitel-4/qa/figure-interaction-enhetscirkeln-v23.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-15.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-14.cjs
+          node ma4/kapitel-4/qa/figure-interaction-faktorsatsen-v23.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-13.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-12.cjs
           node ma4/kapitel-4/qa/figure-interaction-polynomdivision.cjs
