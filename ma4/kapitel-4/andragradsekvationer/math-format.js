@@ -215,9 +215,9 @@ Object.assign(html,{
  ),
  square3:worked(
   step('Kvadreringen av belopp och argument',eq('(2√2)² = 4·2 = 8'),eq('2·π/4 = π/2'),eq('2·5π/4 = 5π/2 = π/2 + 2π')),
-  step('Kontrollera den första roten',eq('(2 + 2i)² = 2² + 2·2·2i + (2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
-  step('Kontrollera den andra roten',eq('(−2 − 2i)² = (−2)² + 2·(−2)·(−2i) + (−2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
-  step('Jämför med konjugatet',eq('(2 − 2i)² = 4 − 8i + 4i²'),eq('= 4 − 8i − 4 = −8i'),prose('Konjugatet är alltså inte den andra roten till z² = 8i.'))
+  step('Kontrollera den första roten',eq('(2 + 2i)²'),eq('2² = 4'),eq('2·2·2i = 8i'),eq('(2i)² = −4'),eq('= 4 + 8i − 4 = 8i')),
+  step('Kontrollera den andra roten',eq('(−2 − 2i)²'),eq('(−2)² = 4'),eq('2·(−2)·(−2i) = 8i'),eq('(−2i)² = −4'),eq('= 4 + 8i − 4 = 8i')),
+  step('Jämför med konjugatet',eq('(2 − 2i)²'),eq('= 4 − 8i + 4i²'),eq('= 4 − 8i − 4 = −8i'),prose('Konjugatet är alltså inte den andra roten till z² = 8i.'))
  ),
  variant:worked(
   step('1 · Identifiera p och q',eq('z² − 4iz + 5 = 0'),eq('p = −4i'),eq('q = 5')),
@@ -279,7 +279,7 @@ Object.assign(html,{
   prose('Flera metoder är möjliga. Förklara varför en viss form gör just den metoden enkel.')
  ),
  r10:worked(
-  step('Roten är korrekt – kontrollera den',eq('(3 − 3i)² = 9 − 18i + 9i²'),eq('= 9 − 18i − 9 = −18i')),
+  step('Roten är korrekt – kontrollera den',eq('(3 − 3i)²'),eq('= 9 − 18i + 9i²'),eq('= 9 − 18i − 9'),eq('= −18i')),
   step('Hitta den saknade roten',eq('(−z)² = z²'),eq('−(3 − 3i) = −3 + 3i'),eq('(−3 + 3i)² = −18i')),
   result('z₁ = 3 − 3i','z₂ = −3 + 3i'),
   prose('Båda rötterna behövs. Ingen slutsats om elevens tanke kan dras av en enda skriven rot.')

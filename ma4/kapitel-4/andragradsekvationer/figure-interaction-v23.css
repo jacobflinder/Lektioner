@@ -1,0 +1,36 @@
+/* Granskning v2.3: grafer som avläses genom läge, form och text, inte bara färg. */
+.quadratic-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0 20px}
+.quadratic-plane-card{min-width:0;background:#fff;border:1px solid #cbdce7;border-radius:12px;padding:11px 12px}
+.quadratic-plane-card h3{margin:0 0 3px;font-size:1.02rem;color:#163c5a}
+.quadratic-plane-card p{margin:5px 0 0;font-size:.93rem}
+.quadratic-plane-card svg{width:100%;max-height:235px;display:block}
+.quadratic-plane-card .axis{stroke:#668299;stroke-width:1.5}
+.quadratic-plane-card .guide{stroke:#8aa2b5;stroke-width:1;stroke-dasharray:4 5}
+.quadratic-plane-card .original{fill:#185f9b}
+.quadratic-plane-card .conjugate{fill:#bd405d}
+.quadratic-plane-card .opposite{fill:#087b70}
+.quadratic-plane-card .point-name{font:13px system-ui,sans-serif;fill:#193047}
+.quadratic-plane-card .axis-name{font:12px system-ui,sans-serif;fill:#415f74}
+.quadratic-plane-card .vector-original{stroke:#185f9b;stroke-width:2.5}
+.quadratic-plane-card .vector-conjugate{stroke:#bd405d;stroke-width:2.5}
+.quadratic-plane-card .vector-opposite{stroke:#087b70;stroke-width:2.5}
+.quadratic-plane-card .focus{font-weight:700;color:#16435c}
+.quadratic-method-details{border:1px solid #a8cbdb;border-radius:12px;padding:0 16px;margin:16px 0;background:#f3f8fb}
+.quadratic-method-details>summary{padding:13px 0;color:#164d6f}
+.quadratic-method-list{display:grid;gap:12px;padding:0 0 16px}
+.quadratic-method-list>div{padding:10px 13px;background:#fff;border:1px solid #d1e3ee;border-radius:9px}
+.quadratic-method-list h4{margin:0 0 5px;font-size:.95rem}
+.quadratic-method-list p{margin:4px 0}
+.quadratic-method-list p.math + p.math{margin-top:16px}
+.quadratic-method-list math{max-width:100%;overflow-x:auto;font-size:1.25rem}
+.inline-math math{display:inline-block;font-size:1.1em;vertical-align:middle;margin:0 2px}
+.feedback:has(math),.sc-feedback:has(math),.sc-hint:has(math){font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+/* Talplan och första kontrollled måste synas samtidigt på 1280×800. */
+.slide:has(#quadratic-plane) .task{padding:10px 14px;margin:0 0 9px}
+.slide:has(#quadratic-plane) .task p{line-height:1.35;margin:5px 0}
+.slide:has(#quadratic-plane) #squareReveal,
+.slide:has(#quadratic-plane) #squareBack,
+.slide:has(#quadratic-plane) #squareReset{font-size:.9rem;padding:9px 11px;min-height:44px;margin:0 3px 6px 0}
+.slide:has(#quadratic-plane) #squareText{margin-top:7px;padding:9px 12px}
+.slide:has(#quadratic-plane) #squareText .worked-step{padding:9px 13px}
+@media(max-width:650px){.quadratic-comparison{grid-template-columns:minmax(0,1fr)}.quadratic-plane-card svg{max-height:205px}}
