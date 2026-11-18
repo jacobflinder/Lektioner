@@ -46,7 +46,10 @@ for(const [name,c] of Object.entries(CASES)){
  const reveal=async id=>{await hidden(id);await page.locator(`button[data-reveal="${id}"]`).click();check(await page.locator('#'+id).isVisible(),id+': reveal worked')};
  const math=async (parent,formula)=>{
   const a=await parent.locator('math').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('aria-label')));
-  check(a.includes(formula),`semantic MathML expression ${formula}: ${JSON.stringify(a)}`);
+  // Den autentiska formelsträngen kan ha valfri blankstegning runt
+  // operatorer; testet mäter matematiska tokens och faktisk MathML.
+  const normalize=s=>s.replace(/\s+/g,'');
+  check(a.some(label=>normalize(label)===normalize(formula)),`semantic MathML expression ${formula}: ${JSON.stringify(a)}`);
  };
  try{
   const response=await page.goto(BASE,{waitUntil:'networkidle'});
