@@ -68,7 +68,7 @@
    the browser also enables vertical scrolling, drawing tiny up/down arrows
    beside every formula even on classroom/projector screens. Give the formulas
    enough actual line height while retaining horizontal scroll for narrow rows. */
-.circuit-equation,.circuit-model-math-row{max-width:100%;min-width:0;overflow-x:auto;line-height:1.9}
+.circuit-equation,.circuit-model-math-row{max-width:100%;min-width:0;overflow-x:auto;line-height:1.9;padding-block:8px}
 .circuit-equation math,.circuit-model-math-row math{font-size:clamp(1.05rem,1.5vw,1.35rem)}
 .circuit-model-math{gap:18px}
 .kretsar-model .model-result{gap:12px}
