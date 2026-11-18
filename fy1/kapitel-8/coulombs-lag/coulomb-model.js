@@ -115,7 +115,7 @@
        :`<text x="${canvasWidth/2}" y="370" font-size="${figureFont}" text-anchor="middle" fill="#486973">${compact?'Vad händer vid dubbelt avstånd?':'Hur ändras kraften om avståndet fördubblas?'}</text>`;
      const markup=`<svg viewBox="0 0 ${canvasWidth} 470" data-geometry-scale="${geometryScale}" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Två laddningar och deras avstånd${revealed?'; riktningen och kraftens storlek är avslöjade':''}">
        <title>Laddningarna q₁ och q₂</title><desc>Mittpunktsavståndet är proportionellt mot r på alla skärmar. Båda laddningsetiketterna ligger under sin egen punktladdning på skilda rader. Kraftpilarna är alltid lika långa och används enbart för riktning. Efter Visa resultat får stapeln en fast kraftskala från 0 till 6 mikronewton.</desc>
-       <text x="${canvasWidth/2}" y="35" font-size="${figureFont}" text-anchor="middle" font-weight="750" fill="#234d5d">Punktladdningar i en idealiserad modell</text>
+       <text x="${canvasWidth/2}" y="35" font-size="${figureFont}" text-anchor="middle" font-weight="750" fill="#234d5d">${compact?'Två punktladdningar':'Punktladdningar i en idealiserad modell'}</text>
        <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="#93b1bb" stroke-width="2" stroke-dasharray="5 6"/>
        ${charge(x1,s.q1)}${charge(x2,s.q2)}${arrows}
        <text x="${x1}" y="288" text-anchor="middle" font-size="${figureFont}" fill="#315967">q₁ = ${num(s.q1,0)} nC</text>

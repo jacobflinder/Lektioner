@@ -132,11 +132,14 @@ const check=(ok,desc)=>{assert.ok(ok,desc);n++};
      check(bounds&&bounds.width>150&&bounds.width<=v.width,v.name+' actual model readable bounds');
      const geometry=await model.locator('.coulomb-visual svg').evaluate(svg=>{
        const circles=[...svg.querySelectorAll('circle')],label=[...svg.querySelectorAll('text')].find(x=>x.textContent.startsWith('q₁ ='));
+       const heading=svg.querySelector('text[font-weight="750"]'),headBox=heading.getBBox(),view=svg.viewBox.baseVal;
        return {scale:+svg.dataset.geometryScale,dx:+circles[1].getAttribute('cx')- +circles[0].getAttribute('cx'),
-         labelPixels:+label.getAttribute('font-size')*svg.getBoundingClientRect().width/svg.viewBox.baseVal.width};
+         labelPixels:+label.getAttribute('font-size')*svg.getBoundingClientRect().width/svg.viewBox.baseVal.width,
+         headingFits:headBox.x>=view.x&&headBox.x+headBox.width<=view.x+view.width};
      });
      check(geometry.scale===(v.width<=575?220:420)&&almost(geometry.dx,.2*geometry.scale),v.name+' proportional layout-specific geometry');
      check(geometry.labelPixels>=12,v.name+' rendered SVG charge labels are at least 12 CSS pixels');
+     check(geometry.headingFits,v.name+' figure title stays entirely inside the actual SVG viewport');
      await screenshot(v.name+'-charge-short-revealed');
      await set('r',1.5);await screenshot(v.name+'-charge-far-revealed');
      await go(8);await recap.locator('summary').click();
