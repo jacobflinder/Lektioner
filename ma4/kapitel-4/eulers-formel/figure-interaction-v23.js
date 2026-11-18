@@ -60,6 +60,8 @@ setChoices(8,[
  {label:'B · '+minus3,feedback:'Denna punkt ligger på negativa realaxeln och motsvarar ett halvt varv. '+negativeQuarter+' är bara ett kvarts varv medurs.'},
  {label:'C · '+minus3i,feedback:'Rätt. Vinkeln '+negativeQuarter+' pekar nedåt; beloppet 3 ger '+minus3i+'.'}
 ]);
+const coreCaveat=slides[5].querySelector('p.muted');
+if(coreCaveat)coreCaveat.innerHTML='För '+value(row(mi('z'),mo('≠'),mn(0)),'z skilt från noll')+' gäller '+value(row(r,mo('='),mo('|'),mi('z'),mo('|'),mo('>'),mn(0)),'r lika med beloppet av z som är positivt')+'. Argument kan skilja med helt antal varv ('+value(row(mn(2),π),'två pi')+'). Talet 0 har inget bestämt argument.';
 
 // Rekapitulera de metoder som redan behandlats, men lämna NOKflex-uppgifter olösta.
 const work=slides[10];
@@ -94,6 +96,11 @@ oldNegativeSvg.outerHTML=`<svg class="euler-actual-plane" viewBox="0 0 340 300" 
  </svg>`;
 const caption=negative.querySelector('svg + p');
 if(caption)caption.innerHTML='Streckad cirkel: belopp 1. Yttre cirkel och orange pil: belopp 3. Varje skalstreck är en enhet; slutpunkten är '+value(row(mo('('),mn(0),mo(';'),mo('−'),mn(3),mo(')')),'koordinaten noll semikolon minus tre')+'.';
+const negativeSteps=negative.querySelectorAll('ol li');
+if(negativeSteps.length===4){
+ negativeSteps[1].innerHTML='Argumentet '+negativeQuarter+' betyder 90° <strong>medurs</strong>. Vi hamnar på negativa imaginära axeln.';
+ negativeSteps[2].innerHTML='Enhetscirkeln ger '+value(row(trig('cos',minusPiOver2),mo('='),mn(0)),'cosinus minus pi genom två är noll')+' och '+value(row(trig('sin',minusPiOver2),mo('='),mo('−'),mn(1)),'sinus minus pi genom två är minus ett')+'.';
+}
 const negativeSlide=slides[8];
 const negativeTask=negativeSlide.querySelector('.task');
 const negativeQuiz=negativeSlide.querySelector('.quiz');
