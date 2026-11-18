@@ -60,7 +60,7 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   // 05: stödspåret ger både 2*3 och full addition av radianbråk.
   await go(4);await reveal('need1');await findMath('#need1','v = π/6 + 2π/6 = 3π/6 = π/2');await pic('05-desktop');
   // 06: Euler gör ett giltigt skrivformsbyte, vinkel i radianer och r>0.
-  await go(5);await quiz(0,0,1);await reveal('same');assert.ok((await page.locator('.slide.active').innerText()).includes('z ≠ 0'));await pic('06-desktop');
+  await go(5);await quiz(0,0,1);await reveal('same');await findMath('.slide.active p.muted','z skilt från noll');await pic('06-desktop');
   // 07: ingen facitläcka, helt mellanled, två separata givna tal.
   await go(6);assert.ok(await page.locator('#multiply').isHidden());assert.equal(await page.locator('.slide.active > .math-givens > .math').count(),2);
   await gap('.slide.active > .math-givens > .math');await reveal('multiply');
