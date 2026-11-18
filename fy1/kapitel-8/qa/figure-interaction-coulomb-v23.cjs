@@ -133,13 +133,18 @@ const check=(ok,desc)=>{assert.ok(ok,desc);n++};
      const geometry=await model.locator('.coulomb-visual svg').evaluate(svg=>{
        const circles=[...svg.querySelectorAll('circle')],label=[...svg.querySelectorAll('text')].find(x=>x.textContent.startsWith('q₁ ='));
        const heading=svg.querySelector('text[font-weight="750"]'),headBox=heading.getBBox(),view=svg.viewBox.baseVal;
+       const forceLabels=[...svg.querySelectorAll('text')].filter(x=>/^F[₁₂]$/.test(x.textContent)).map(x=>x.getBBox());
+       const forceLines=[...svg.querySelectorAll('line[stroke="#208469"]')];
        return {scale:+svg.dataset.geometryScale,dx:+circles[1].getAttribute('cx')- +circles[0].getAttribute('cx'),
          labelPixels:+label.getAttribute('font-size')*svg.getBoundingClientRect().width/svg.viewBox.baseVal.width,
-         headingFits:headBox.x>=view.x&&headBox.x+headBox.width<=view.x+view.width};
+         headingFits:headBox.x>=view.x&&headBox.x+headBox.width<=view.x+view.width,
+         arrowsSeparate:forceLabels.length===2&&forceLabels[0].x+forceLabels[0].width<forceLabels[1].x&&
+           forceLines.length===2&& +forceLines[0].getAttribute('x2')< +forceLines[1].getAttribute('x2')};
      });
      check(geometry.scale===(v.width<=575?220:420)&&almost(geometry.dx,.2*geometry.scale),v.name+' proportional layout-specific geometry');
      check(geometry.labelPixels>=12,v.name+' rendered SVG charge labels are at least 12 CSS pixels');
      check(geometry.headingFits,v.name+' figure title stays entirely inside the actual SVG viewport');
+     check(geometry.arrowsSeparate,v.name+' two attractive force labels and arrowheads stay distinct at minimum distance');
      await screenshot(v.name+'-charge-short-revealed');
      await set('r',1.5);await screenshot(v.name+'-charge-far-revealed');
      await go(8);await recap.locator('summary').click();

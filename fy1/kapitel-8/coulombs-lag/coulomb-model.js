@@ -87,7 +87,7 @@
      const x1=compact?65:145,x2=x1+geometryScale*s.r,y=150;
      // Both viewports preserve proportional centre spacing, unlike a CSS-scaled
      // 920-unit drawing that leaves its labels microscopic on 390 px phones.
-     const circleRadius=compact?19:34,chargeFont=compact?27:38,arrowLength=compact?21:36;
+     const circleRadius=compact?19:34,chargeFont=compact?27:38,arrowLength=compact?14:36;
      const figureFont=compact?22:27,scaleFont=compact?22:26;
      const barStart=compact?50:170,barWidth=compact?360:550,barMid=barStart+barWidth/2,barEnd=barStart+barWidth;
      const forceSigned=k*(s.q1*1e-9)*(s.q2*1e-9)/(s.r*s.r);
@@ -96,7 +96,8 @@
      const charge=(x,q)=>`<circle cx="${x}" cy="${y}" r="${circleRadius}" fill="${q>0?'#c06548':q<0?'#117e9c':'#657781'}"/><text x="${x}" y="${y+8}" text-anchor="middle" fill="white" font-size="${chargeFont}" font-weight="740">${q>0?'+':q<0?'−':'0'}</text>`;
      const arrow=(x,direction,lab)=>{
        const xend=x+direction*arrowLength;
-       return `<line x1="${x}" y1="90" x2="${xend}" y2="90" stroke="#208469" stroke-width="5" stroke-linecap="round"/><path d="M${xend-direction*12} 79 L${xend} 90 L${xend-direction*12} 101" stroke="#208469" stroke-width="4" fill="none" stroke-linejoin="round"/><text x="${x+direction*18}" y="64" text-anchor="middle" fill="#176950" font-size="${scaleFont}" font-weight="760">${lab}</text>`;
+       const head=compact?7:12,labX=compact?x:x+direction*18;
+       return `<line x1="${x}" y1="90" x2="${xend}" y2="90" stroke="#208469" stroke-width="5" stroke-linecap="round"/><path d="M${xend-direction*head} 79 L${xend} 90 L${xend-direction*head} 101" stroke="#208469" stroke-width="4" fill="none" stroke-linejoin="round"/><text x="${labX}" y="64" text-anchor="middle" fill="#176950" font-size="${scaleFont}" font-weight="760">${lab}</text>`;
      };
      let arrows='';
      if(revealed&&sign!==0){
