@@ -215,11 +215,12 @@ fs.mkdirSync(OUT,{recursive:true});
       const strong=el.querySelector('strong'),math=el.querySelector('math'),explain=el.querySelector('span');
       const a=strong?.getBoundingClientRect(),b=math?.getBoundingClientRect(),c=explain?.getBoundingClientRect();
       return {font:parseFloat(getComputedStyle(math).fontSize),display:getComputedStyle(math).display,
-       width:math.scrollWidth,client:math.clientWidth,height:math.scrollHeight,boxHeight:math.clientHeight,
+       width:b.width,height:b.height,scrollWidth:math.scrollWidth,client:math.clientWidth,
        gap1:b.top-a.bottom,gap2:c.top-b.bottom,cardWidth:el.clientWidth};
      }));
-     check(cards.length===4&&cards.every(c=>c.font>=18&&c.display==='block'&&c.gap1>=5&&c.gap2>=5
-      &&c.width<=c.client+2&&c.height<=c.boxHeight+1),'readable distinct recap formulas/cards '+name+' '+JSON.stringify(cards));
+     check(cards.length===4&&cards.every(c=>c.font>=18&&c.display==='inline'&&c.gap1>=5&&c.gap2>=5
+      &&c.width>=75&&c.width<=c.cardWidth-18&&c.height<=78),
+      'horizontal readable native MathML in distinct recap cards '+name+' '+JSON.stringify(cards));
      check(await recap.evaluate(el=>getComputedStyle(el.querySelector(':scope > div')).gridTemplateColumns.split(' ').length)===(width<=720?1:2),
       'recap responsive grid columns '+name);
      await shot(name+'-09-recap-open');

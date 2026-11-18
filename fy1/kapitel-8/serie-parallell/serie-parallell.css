@@ -49,7 +49,7 @@
 #bild-6 .meter-reveal{display:none}
 #bild-6:has(.step.open) .meter-reveal{display:block}
 #bild-6:has(.step.open) .meter-predict{display:none}
-@media(max-width:600px){.series-equation,.series-model-equation{font-size:1.02rem}.circuit-model .model-scales{padding:4px}}
+@media(max-width:600px){.series-equation,.series-model-equation{font-size:1rem}.circuit-model .model-scales{padding:4px}}
 
 /* Conceal the textual A/V answer alongside the circuit until a reveal step. */
 #bild-6 .meter-points{display:none}
@@ -72,10 +72,12 @@
 /* v2.3: the optional recap belongs beside the actual bookwork. Each relation
    needs its own legible equation and explanation, not a squeezed inline run. */
 #bild-9 .v23-summary>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
-#bild-9 .v23-summary>div>p{display:flex;flex-direction:column;gap:6px;margin:0!important;padding:12px 14px;border:1px solid #d1e2e8;border-radius:10px;background:#fff;min-width:0;line-height:1.45!important}
-#bild-9 .v23-summary>div>p>strong{color:#14596c;font-size:1.04rem}
-#bild-9 .v23-summary>div>p>math{display:block;font-size:clamp(1.18rem,1.65vw,1.38rem);line-height:1.9;align-self:center;max-width:100%;padding:8px 0;overflow:visible}
-#bild-9 .v23-summary>div>p>span{font-size:.96rem;line-height:1.48;color:#345969}
+#bild-9 .v23-summary>div>p{display:block;text-align:center;margin:0!important;padding:12px 14px;border:1px solid #d1e2e8;border-radius:10px;background:#fff;min-width:0;line-height:1.45!important}
+#bild-9 .v23-summary>div>p>strong{display:block;text-align:left;color:#14596c;font-size:1.04rem;margin-bottom:10px}
+/* Native MathML must stay inline within an ordinary block. Making <math> a
+   flex/grid item or CSS display:block destroys its horizontal math layout. */
+#bild-9 .v23-summary>div>p>math{font-size:clamp(1.18rem,1.65vw,1.38rem);line-height:1.45;max-width:100%;vertical-align:middle}
+#bild-9 .v23-summary>div>p>span{display:block;text-align:left;font-size:.96rem;line-height:1.48;color:#345969;margin-top:10px}
 @media(max-width:720px){#bild-9 .v23-summary>div{grid-template-columns:minmax(0,1fr)}#bild-9 .v23-summary>div>p{padding:11px 12px}}
 
 /* Long, stepwise calculations should not make the circuit vanish while its
