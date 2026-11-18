@@ -113,6 +113,17 @@
   document.getElementById('classmode')?.addEventListener('click',()=>{
     for(const sec of document.querySelectorAll('.slide'))sec.dispatchEvent(new Event('lesson:reset'));
   });
+  // The voluntary recap is a native <details> in the bookwork slide. Unlike
+  // model answers, native details remain open unless we close them explicitly.
+  // A pupil returning to bookwork must see the recall-first state again.
+  const closeRecap=()=>document.querySelectorAll('.slide details.v23-summary[open]').forEach(el=>{el.open=false});
+  let previousSlide=stage?.querySelector('.slide.active')?.id;
+  if(stage){new MutationObserver(()=>{
+    const current=stage.querySelector('.slide.active')?.id;
+    if(current!==previousSlide){closeRecap();previousSlide=current}
+  }).observe(stage,{subtree:true,attributes:true,attributeFilter:['class']})}
+  for(const id of ['reset','classmode','repeatmode'])document.getElementById(id)?.addEventListener('click',closeRecap);
+  for(const sec of document.querySelectorAll('.slide'))sec.addEventListener('lesson:reset',closeRecap);
   // Preserve slide arrow keys after button clicks while not stealing slider or select keys.
   document.addEventListener('keydown',ev=>{
     if(ev.altKey||ev.metaKey||ev.ctrlKey||ev.shiftKey||!['ArrowLeft','ArrowRight'].includes(ev.key))return;
