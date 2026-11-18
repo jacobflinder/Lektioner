@@ -21,6 +21,7 @@
 .quadratic-method-list>div{padding:10px 13px;background:#fff;border:1px solid #d1e3ee;border-radius:9px}
 .quadratic-method-list h4{margin:0 0 5px;font-size:.95rem}
 .quadratic-method-list p{margin:4px 0}
+.quadratic-method-list p.math + p.math{margin-top:16px}
 .quadratic-method-list math{max-width:100%;overflow-x:auto;font-size:1.25rem}
 .inline-math math{display:inline-block;font-size:1.1em;vertical-align:middle;margin:0 2px}
 .feedback:has(math),.sc-feedback:has(math),.sc-hint:has(math){font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
