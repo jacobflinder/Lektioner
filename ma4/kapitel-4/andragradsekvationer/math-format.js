@@ -215,9 +215,9 @@ Object.assign(html,{
  ),
  square3:worked(
   step('Kvadreringen av belopp och argument',eq('(2√2)² = 4·2 = 8'),eq('2·π/4 = π/2'),eq('2·5π/4 = 5π/2 = π/2 + 2π')),
-  step('Kontrollera den första roten',eq('(2 + 2i)² = 2² + 2·2·2i + (2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
-  step('Kontrollera den andra roten',eq('(−2 − 2i)² = (−2)² + 2·(−2)·(−2i) + (−2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
-  step('Jämför med konjugatet',eq('(2 − 2i)² = 4 − 8i + 4i²'),eq('= 4 − 8i − 4 = −8i'),prose('Konjugatet är alltså inte den andra roten till z² = 8i.'))
+  step('Kontrollera den första roten',eq('(2 + 2i)²'),eq('= 2² + 2·2·2i + (2i)²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
+  step('Kontrollera den andra roten',eq('(−2 − 2i)²'),eq('= (−2)² + 2·(−2)·(−2i)'),eq('+ (−2i)² = 4i²'),eq('= 4 + 8i + 4i²'),eq('= 4 + 8i − 4 = 8i')),
+  step('Jämför med konjugatet',eq('(2 − 2i)²'),eq('= 4 − 8i + 4i²'),eq('= 4 − 8i − 4 = −8i'),prose('Konjugatet är alltså inte den andra roten till z² = 8i.'))
  ),
  variant:worked(
   step('1 · Identifiera p och q',eq('z² − 4iz + 5 = 0'),eq('p = −4i'),eq('q = 5')),
