@@ -97,7 +97,7 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await shot('03-desktop');
   // 04: motsatt och konjugat är inte samma sak
   await go(3);const q4=page.locator('[data-quiz="q4"]');await q4.locator('button').nth(0).click();
-  assert.ok((await q4.locator('.feedback').innerText()).includes('−2i'));
+  assert.ok(await q4.locator('.feedback math[aria-label="−2i"]').count()>0,'Det motsatta/konjugerade talet är en semantisk MathML-formel');
   await q4.locator('button').nth(2).click();assert.ok((await q4.locator('.feedback').innerText()).includes('Rätt'));
   await shot('04-desktop');
   // 05: lämplig stödtrappa utan facitläcka och separat notation
