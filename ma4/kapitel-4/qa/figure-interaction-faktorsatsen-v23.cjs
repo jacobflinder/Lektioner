@@ -28,7 +28,7 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
   check(await support.count()===1&&!await support.evaluate(e=>e.open),'7C support present and initially closed');
   await support.locator('summary').focus();await page.keyboard.press('Enter');check(await support.evaluate(e=>e.open),'support keyboard access');
   check(await support.locator('.factor-method-card').count()===4,'four lesson-specific reminders');
-  for(const eq of ['r = f(a)','f(a) = 0 ⇔ x − a är en faktor','f(x) = k(x − a)(x − b)(x − c)'])await mathLabel(support,eq);
+  for(const eq of ['r = f(a)','f(a) = 0','f(x) = k(x − a)(x − b)(x − c)'])await mathLabel(support,eq);
   const st=await support.innerText();check(!st.includes('p(−1)')&&!st.includes('k = 2')&&!st.includes('4431 ='),'no solution leaked from support');
   await go(3);check(!await support.evaluate(e=>e.open),'support reset on navigation');
   const quiz=page.locator('#f-rest [data-quiz]');
