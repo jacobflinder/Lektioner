@@ -59,6 +59,7 @@
 .v23-higher-recap-body { display: grid; gap: 10px; }
 .v23-higher-recap-body > p { margin: 0; line-height: 1.65; }
 .v23-higher-recap-body .math { display: inline-block; vertical-align: middle; margin: 0 3px; }
+.v23-higher-recap-body .v23-keep-together { white-space: nowrap; }
 .v23-higher-recap-body math { max-width: 100%; }
 @media(max-width: 1010px) {
   .v23-conjugate-grid { grid-template-columns: minmax(0, 1fr); }

@@ -131,6 +131,7 @@ ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
    await shot('08-stangt');
    await recap.locator('summary').click();
    ok(await recap.evaluate(e=>e.open),width+': metodstödet kan öppnas');
+   eq(await recap.locator('.v23-keep-together > .math').count(),1,width+': punkt binds till konjugatuttrycket i smal vy');
    eq(await recap.locator('.v23-higher-recap-body > p').count(),4,width+': fyra lektionsspecifika metodpunkter');
    ok(await math('#h-higher-recap').count()>=8,width+': semantisk matematik i metodstödet');
    for(const forbidden of ['z = ±3i','z₁ = −2','z = −1 ± 2i']){
