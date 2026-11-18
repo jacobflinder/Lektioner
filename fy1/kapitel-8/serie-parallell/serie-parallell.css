@@ -77,3 +77,11 @@
 #bild-9 .v23-summary>div>p>math{display:block;font-size:clamp(1.18rem,1.65vw,1.38rem);line-height:1.9;align-self:center;max-width:100%;padding:8px 0;overflow:visible}
 #bild-9 .v23-summary>div>p>span{font-size:.96rem;line-height:1.48;color:#345969}
 @media(max-width:720px){#bild-9 .v23-summary>div{grid-template-columns:minmax(0,1fr)}#bild-9 .v23-summary>div>p{padding:11px 12px}}
+
+/* Long, stepwise calculations should not make the circuit vanish while its
+   current/voltage relationships are being explained on a classroom screen. */
+@media(min-width:1200px){
+ #bild-3 .layout>.side,#bild-4 .layout>.side,#bild-5 .layout>.side,#bild-11 .layout>.side{
+  position:sticky;top:16px;align-self:start
+ }
+}

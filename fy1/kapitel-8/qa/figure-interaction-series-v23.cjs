@@ -229,6 +229,19 @@ fs.mkdirSync(OUT,{recursive:true});
     await checkViewport(name+'/'+n+'/final');
     await shot(name+'-'+String(n).padStart(2,'0')+'-final');
     if([2,3,4,5,6,7,11].includes(n))await shot(name+'-'+String(n).padStart(2,'0')+'-viewport',false);
+    if(width>=1200&&[3,4,5,11].includes(n)){
+     const side=page.locator('#bild-'+n+' .layout>.side');
+     check(await side.evaluate(el=>getComputedStyle(el).position)==='sticky',
+      'classroom-sized schematic stays sticky beside worked steps '+name+'/'+n);
+     await page.evaluate(i=>{
+      const last=[...document.querySelectorAll('#bild-'+i+' .step.open')].at(-1);
+      if(last)scrollTo(0,last.getBoundingClientRect().top+scrollY-100);
+     },n);
+     const rr=await side.boundingBox();
+     check(rr&&rr.y>=10&&rr.y+rr.height<=height+2,
+      'critical circuit figure remains in viewport for late math '+name+'/'+n+': '+JSON.stringify(rr));
+     await shot(name+'-'+String(n).padStart(2,'0')+'-figure-with-late-math',false);
+    }
    }
   }
   check(errors.length===0,'no browser JavaScript exceptions '+JSON.stringify(errors));
