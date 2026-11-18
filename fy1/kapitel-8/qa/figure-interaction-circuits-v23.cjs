@@ -112,10 +112,10 @@ const sizes=[
 
    const outgoing=active().locator('[data-lower-current-arrow="outgoing"]');
    verify(await outgoing.count()===1&&!(await outgoing.isVisible()),'junction correct lower arrow hidden before calculation');
-   verify((await active().locator('.phys-figure svg').innerText()).includes('I = ?'),'unknown outgoing current remains a question at first');
+   verify((await active().locator('.phys-figure svg').textContent()).includes('I = ?'),'unknown outgoing current remains a question at first');
    for(let s=0;s<3;s++)await page.locator('#step').click();
    verify(await outgoing.isVisible(),'lower branch arrow appears after three explanation steps');
-   verify((await active().locator('.phys-figure svg').innerText()).includes('0,30 A ut'),'answer arrow annotated with outgoing value');
+   verify((await active().locator('.phys-figure svg').textContent()).includes('0,30 A ut'),'answer arrow annotated with outgoing value');
    const directed=await outgoing.evaluate(el=>(el.getAttribute('d').match(/-?\d+(?:\.\d+)?/g)||[]).map(Number));
    verify(directed[2]>directed[0]&&directed[3]>directed[1],'arrow points from junction into lower outgoing branch');
    await page.locator('#reset').click();
