@@ -79,6 +79,12 @@ async function run(){
    ok(await page.locator('#squareText math[aria-label="= 4 − 8i − 4 = −8i"]').count()===1,'Konjugat ger annan kvadrat');
    const clipped=await page.locator('#squareText .worked-equation').evaluateAll(rows=>rows.filter(row=>row.scrollWidth>row.clientWidth+3).map(row=>row.querySelector('math')?.getAttribute('aria-label')));
    equal(clipped,[],'Uträkningen ska inte vara internt beskuren '+size.name);
+   if(size.width>=1280){
+    const figure=await page.locator('#quadratic-plane').boundingBox();
+    const formula=await page.locator('#squareText .worked-equation math').first().boundingBox();
+    ok(figure.y<size.height-80&&figure.y+figure.height>formula.y-150,'Figur och beräkning ligger i samma läsbara del');
+    ok(formula.y<size.height-20,'Första matematikkontrollen synlig i '+size.width+'×'+size.height+' utan skroll');
+   }
    await photo(page,size.name+'-06-alla-roetter');
    await click(page,'#squareBack');ok(await page.locator('#squareTarget').isHidden(),'Steg bakåt döljer facit');
    await click(page,'#squareReset');for(const id of ['rootA','rootB','squareTarget','squareText'])ok(await page.locator('#'+id).isHidden(),'Återställning döljer '+id);
@@ -106,6 +112,7 @@ async function run(){
    ok(await details.evaluate(x=>x.open),'Metodstöd tangentbordsöppning');
    equal(await details.locator('.quadratic-method-list>div').count(),4,'Fyra lektionsspecifika metodkort');
    ok(await details.locator('math[aria-label]').count()>=4,'Metoderna har MathML');
+   ok((await details.innerText()).includes('dubbelrot'),'Nollfallet skiljs från två olika kvadratrötter');
    await photo(page,size.name+'-12-metodstod');
    await visit(page,10);await visit(page,11);
    ok(!(await details.evaluate(x=>x.open)),'Stödet återställt vid navigering');
