@@ -33,14 +33,21 @@ jobs:
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy1/kapitel-8/ >/dev/null && break; sleep 1; done
       - name: Verify Coulomb lesson and other five Fy1 lessons
         run: |
-          node fy1/kapitel-8/qa/charge-q-v23-all-16.cjs
-          node fy1/kapitel-8/qa/deep-review-fy1-36.cjs
-          node fy1/kapitel-8/qa/deep-review-fy1-37.cjs
-          node fy1/kapitel-8/qa/deep-review-fy1-38.cjs
-          node fy1/kapitel-8/qa/deep-review-fy1-39.cjs
-          node fy1/kapitel-8/qa/deep-review-fy1-40.cjs
-          node fy1/kapitel-8/qa/deep-review-fy1-41.cjs
-          node fy1/kapitel-8/qa/figure-interaction-fy1-41.cjs
+          failed=0
+          for script in \
+            fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
+            fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
+            fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
+            fy1/kapitel-8/qa/deep-review-fy1-37.cjs \
+            fy1/kapitel-8/qa/deep-review-fy1-38.cjs \
+            fy1/kapitel-8/qa/deep-review-fy1-39.cjs \
+            fy1/kapitel-8/qa/deep-review-fy1-40.cjs \
+            fy1/kapitel-8/qa/deep-review-fy1-41.cjs \
+            fy1/kapitel-8/qa/figure-interaction-fy1-41.cjs
+          do
+            node "$script" || failed=1
+          done
+          exit "$failed"
       - name: Upload QA screenshots and independent evidence
         if: always()
         uses: actions/upload-artifact@v4
