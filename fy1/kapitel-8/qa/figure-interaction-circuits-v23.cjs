@@ -71,6 +71,19 @@ const sizes=[
      bar:bar?+bar.getAttribute('width'):null,
      result:root.querySelector('.model-result').innerText};
  });
+ // A fraction can extend below its CSS line box. Together with overflow-x:auto
+ // this creates real vertical micro-scrollbars (up/down arrows) beside every
+ // MathML equation. Check rendered dimensions, not just the presence of <math>.
+ const assertNoVerticalFormulaScroll=async(selector,context)=>{
+   const rows=await page.locator(selector).evaluateAll(elements=>elements
+     .filter(el=>el.getBoundingClientRect().height>0)
+     .map((el,i)=>({i,clientH:el.clientHeight,scrollH:el.scrollHeight,
+       clientW:el.clientWidth,scrollW:el.scrollWidth})));
+   verify(rows.length>0,`visible mathematical rows present in ${context}`);
+   for(const row of rows.filter(r=>r.scrollW<=r.clientW+1))
+     verify(row.scrollH<=row.clientH+1,
+       `no vertical scrollbar/arrow beside ${context} formula ${row.i}: ${JSON.stringify(row)}`);
+ };
  try{
    const response=await page.goto(URL,{waitUntil:'networkidle'});
    verify(response.ok(),'public lesson responds successfully');
@@ -226,6 +239,7 @@ const sizes=[
      await focusShot(active().locator('.phys-figure svg'),`${name}-04-junction-solution`);
      await jump(3);
      await page.locator('#bild-3 .reveal-model').click();
+     await assertNoVerticalFormulaScroll('#bild-3 .circuit-model-math-row',`slide 3 @${width.width}`);
      await focusShot(page.locator('#bild-3 .kretsar-model .drawing'),`${name}-03-current-shown`);
      // The numerical explanation and the actual circuit must be visible at
      // the same time on the intended desktop/projector screen. Merely having
@@ -253,10 +267,19 @@ const sizes=[
      await page.locator('#bild-5 .reveal-model').click();
      await focusShot(page.locator('#bild-5 .kretsar-model .drawing'),`${name}-05-wire-shown`);
      await focusShot(page.locator('#bild-5 .kretsar-model .model-result'),`${name}-05-math-shown`);
+     await jump(6);
+     for(let step=0;step<lesson.pages[5].steps.length;step++)await page.locator('#step').click();
+     await assertNoVerticalFormulaScroll('#bild-6 .circuit-equation',`slide 6 @${width.width}`);
+     await focusShot(active().locator('.step.open').last(),`${name}-06-math-shown`);
      await jump(7);
      await recap.locator('summary').click();
      await focusShot(recap,`${name}-07-method-open`);
      verify(await recap.evaluate(e=>e.open),'optional method truly open and visible @'+width.width);
+     const recapMathOverflow=await recap.locator('math').evaluateAll(elements=>elements.map(el=>({
+       x:getComputedStyle(el).overflowX,y:getComputedStyle(el).overflowY
+     })));
+     verify(recapMathOverflow.every(style=>!['scroll','auto'].includes(style.y)),
+       `summary MathML has no vertical scrollbar arrows @${width.width}: ${JSON.stringify(recapMathOverflow)}`);
      const textSize=await recap.locator('.circuit-recap-grid p').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize));
      verify(textSize>=14,'summary text stays readable @'+width.width);
      await recap.locator('summary').click();
