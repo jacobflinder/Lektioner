@@ -175,8 +175,9 @@ try{
  check((await vis().innerText()).includes('Attraktion'),'opposite charges attractive, not negative force magnitude');
  check(await vis().locator('.fy1-36-math-steps math msub > mi').allTextContents().then(x=>x.every(s=>s==='q')),'single particle charges consistently use q not Q');
  check(await vis().locator('.fy1-36-math-steps math mo').filter({hasText:'|'}).count()===6,'negative charge product converted to three explicit magnitudes in the calculation');
- const finalForce=await vis().locator('.step').last().locator('math').evaluateAll(items=>items.map(m=>({leading:[...m.children].slice(0,4).map(x=>x.textContent).join(''),text:m.textContent})));
- check(finalForce.length===2&&finalForce.every(x=>x.leading.startsWith('F≈8')),'final force magnitude is positive; negative exponents remain valid');
+ const finalForce=await vis().locator('.step').last().locator('math[display="block"]').evaluateAll(items=>items.map(m=>m.textContent.replace(/\s/g,'')));
+ check(finalForce.length===2&&finalForce.every(x=>/^F≈8[,.]/.test(x)&&!/^F≈−/.test(x)),
+   'final force magnitude is positive; negative exponents remain valid: '+JSON.stringify(finalForce));
  // Slide 8 preserve all original classroom resources.
  await go(8);v=await vis().innerText();
  for(const x of ['SOC-36980496','LRJ','801–811','Socrative','Fy1 · 901'])check(v.includes(x),'original resource preserved '+x);
@@ -186,7 +187,10 @@ try{
  await recap.locator('summary').focus();await page.keyboard.press('Enter');
  check(await recap.evaluate(el=>el.open),'keyboard opens voluntary method support');
  check(await recap.locator('section').count()===4,'four specific reminders, no book solutions');
- check(await recap.locator('math').count()===2,'semantic math in both magnitude and electron count');
+ // The shared typography pass legitimately adds inline MathML in the explanatory
+ // sentences; count only the two authored display equations.
+ const recapMath=await recap.locator('math[display="block"]').evaluateAll(items=>items.map(m=>m.textContent));
+ check(recapMath.length===2,'semantic display math in both magnitude and electron count: '+JSON.stringify(recapMath));
  check((await recap.innerText()).includes('q₁ och q₂')&&(await recap.innerText()).includes('Q är föremålets totala'),'point charges q distinct from total Q');
  await go(9);await go(8);check(!(await recap.evaluate(el=>el.open)),'navigation resets method support closed');
  await recap.locator('summary').click();await page.locator('#reset').click();

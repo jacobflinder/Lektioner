@@ -58,8 +58,9 @@ const check=(ok,desc)=>{assert.ok(ok,desc);n++};
    const mathRows=active().locator('.fy1-36-math-steps math');
    check(await mathRows.locator('msub > mi').allTextContents().then(x=>x.every(v=>v==='q')),'signed individual charges use q in each formula');
    check(await mathRows.locator('mo').filter({hasText:'|'}).count()===6,'product -> magnitude -> final signed handling is explicit');
-   const finals=await active().locator('.step').last().locator('math').evaluateAll(all=>all.map(m=>({start:[...m.children].slice(0,4).map(x=>x.textContent).join(''),text:m.textContent})));
-   check(finals.length===2&&finals.every(x=>x.start.startsWith('F≈8')),'no negative scalar force result in final answer');
+   const finals=await active().locator('.step').last().locator('math[display="block"]').evaluateAll(all=>all.map(m=>m.textContent.replace(/\s/g,'')));
+   check(finals.length===2&&finals.every(x=>/^F≈8[,.]/.test(x)&&!/^F≈−/.test(x)),
+      'no negative scalar force result in final answer: '+JSON.stringify(finals));
    check(almost(K*1.602**2*1e-38/(5.1e-11)**2,8.87e-8,1e-10),'independent proton-electron result');
    await go(3);
    check(await model.locator('input[type=range]').count()===3,'all three original controls intact');
@@ -108,7 +109,7 @@ const check=(ok,desc)=>{assert.ok(ok,desc);n++};
    check(await recap.count()===1&&!(await recap.evaluate(d=>d.open)),'optional support is directly inside book work, initially closed');
    await recap.locator('summary').focus();await p.keyboard.press('Enter');
    check(await recap.evaluate(d=>d.open),'optional aid accessible via keyboard');
-   check(await recap.locator('section').count()===4&&await recap.locator('math').count()===2,'four lesson-specific references, two semantic formulas');
+   check(await recap.locator('section').count()===4&&await recap.locator('math[display="block"]').count()===2,'four lesson-specific references, two semantic display formulas');
    const recapText=await recap.innerText();
    check(!/2,5\s*nC|0,051\s*nm|SOC-36980496|rätt svar|8,9\s*·\s*10/.test(recapText),'aid does not leak problem-specific numerical solutions');
    await p.locator('#reset').click();check(!(await recap.evaluate(d=>d.open)),'reset collapses helper');
@@ -129,6 +130,13 @@ const check=(ok,desc)=>{assert.ok(ok,desc);n++};
      await go(3);await set('q1',-5);await set('q2',5);await set('r',.2);await model.locator('.reveal-model').click();
      const bounds=await model.locator('.coulomb-visual svg').boundingBox();
      check(bounds&&bounds.width>150&&bounds.width<=v.width,v.name+' actual model readable bounds');
+     const geometry=await model.locator('.coulomb-visual svg').evaluate(svg=>{
+       const circles=[...svg.querySelectorAll('circle')],label=[...svg.querySelectorAll('text')].find(x=>x.textContent.startsWith('q₁ ='));
+       return {scale:+svg.dataset.geometryScale,dx:+circles[1].getAttribute('cx')- +circles[0].getAttribute('cx'),
+         labelPixels:+label.getAttribute('font-size')*svg.getBoundingClientRect().width/svg.viewBox.baseVal.width};
+     });
+     check(geometry.scale===(v.width<=575?220:420)&&almost(geometry.dx,.2*geometry.scale),v.name+' proportional layout-specific geometry');
+     check(geometry.labelPixels>=12,v.name+' rendered SVG charge labels are at least 12 CSS pixels');
      await screenshot(v.name+'-charge-short-revealed');
      await set('r',1.5);await screenshot(v.name+'-charge-far-revealed');
      await go(8);await recap.locator('summary').click();
