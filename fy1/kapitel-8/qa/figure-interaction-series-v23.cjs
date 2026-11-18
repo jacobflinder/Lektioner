@@ -214,12 +214,15 @@ fs.mkdirSync(OUT,{recursive:true});
      const cards=await recap.locator(':scope > div > p').evaluateAll(nodes=>nodes.map(el=>{
       const strong=el.querySelector('strong'),math=el.querySelector('math'),explain=el.querySelector('span');
       const a=strong?.getBoundingClientRect(),b=math?.getBoundingClientRect(),c=explain?.getBoundingClientRect();
+      const pieces=[...math.children].map(child=>child.getBoundingClientRect());
       return {font:parseFloat(getComputedStyle(math).fontSize),display:getComputedStyle(math).display,
        width:b.width,height:b.height,scrollWidth:math.scrollWidth,client:math.clientWidth,
-       gap1:b.top-a.bottom,gap2:c.top-b.bottom,cardWidth:el.clientWidth};
+       gap1:b.top-a.bottom,gap2:c.top-b.bottom,cardWidth:el.clientWidth,
+       horizontal:pieces.every((r,i)=>i===0||r.left>pieces[i-1].left+2)};
      }));
-     check(cards.length===4&&cards.every(c=>c.font>=18&&c.display==='inline'&&c.gap1>=5&&c.gap2>=5
-      &&c.width>=75&&c.width<=c.cardWidth-18&&c.height<=78),
+     check(cards.length===4&&cards.every(c=>c.font>=18&&c.display==='math'&&c.horizontal
+      &&c.gap1>=5&&c.gap2>=5&&c.width>=30&&c.width<=c.cardWidth-18&&c.height<=78)
+      &&cards[1].width>=90&&cards[2].width>=70&&cards[3].width>=85,
       'horizontal readable native MathML in distinct recap cards '+name+' '+JSON.stringify(cards));
      check(await recap.evaluate(el=>getComputedStyle(el.querySelector(':scope > div')).gridTemplateColumns.split(' ').length)===(width<=720?1:2),
       'recap responsive grid columns '+name);
