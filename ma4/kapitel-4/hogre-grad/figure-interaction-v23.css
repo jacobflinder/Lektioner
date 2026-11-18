@@ -1,0 +1,79 @@
+/* Lokal v2.3-granskning: föregående matematikinnehåll och lektionsbilder består. */
+.v23-conjugate-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(330px, .82fr);
+  column-gap: 18px;
+  align-items: start;
+}
+.v23-conjugate-grid > .decision-check { grid-column: 1; grid-row: 1; margin-top: 0; min-width: 0; }
+.v23-conjugate-grid > .v23-conjugate-figure {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  position: sticky;
+  top: 14px;
+  padding: 17px;
+  min-width: 0;
+}
+.v23-conjugate-grid > .v23-conjugate-sequence { grid-column: 1; grid-row: 2; min-width: 0; }
+.v23-conjugate-figure > strong { color: #214f68; }
+.v23-conjugate-figure > p { font-size: .92rem; }
+.v23-conjugate-figure .plot { max-height: 320px; }
+.v23-conjugate-figure .plot text {
+  font: 21px/1.2 system-ui, sans-serif;
+  fill: #234d64;
+  stroke: #f8fbfd;
+  stroke-width: 3px;
+  paint-order: stroke;
+}
+.v23-conjugate-figure .plot .mark { fill: #da8e32; stroke: white; stroke-width: 2.5px; }
+.v23-conjugate-figure .v23-conj-answer { display: none; }
+.v23-conjugate-figure.is-revealed .v23-conj-answer { display: inline; }
+.v23-conjugate-figure .v23-conj-explanation { margin-top: 7px; color: #26556a; }
+.v23-conjugate-feedback {
+  margin-top: 12px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #bfd8e4;
+  border-radius: 9px;
+}
+.v23-conjugate-feedback .math {
+  display: block;
+  margin: 9px 0;
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+}
+.v23-conjugate-feedback .v23-feedback-steps { display: grid; gap: 16px; }
+.v23-conjugate-feedback .v23-feedback-steps > p { margin: 0; }
+.v23-conjugate-feedback math { max-width: 100%; }
+.v23-inline-prompt { font-size: inherit; display: inline; white-space: nowrap; }
+.v23-inline-prompt math { font-size: inherit; }
+.v23-higher-recap {
+  margin: 14px 0;
+  padding: 14px 17px;
+  background: #f4f9fb;
+  border: 1px solid #bfd8df;
+  border-radius: 12px;
+}
+.v23-higher-recap > summary { cursor: pointer; font-weight: 750; color: #13566c; }
+.v23-higher-recap[open] > summary { margin-bottom: 10px; }
+.v23-higher-recap-body { display: grid; gap: 10px; }
+.v23-higher-recap-body > p { margin: 0; line-height: 1.65; }
+.v23-higher-recap-body .math { display: inline-block; vertical-align: middle; margin: 0 3px; }
+.v23-higher-recap-body .v23-keep-together { white-space: nowrap; }
+.v23-higher-recap-body math { max-width: 100%; }
+@media(max-width: 1010px) {
+  .v23-conjugate-grid { grid-template-columns: minmax(0, 1fr); }
+  .v23-conjugate-grid > .decision-check,
+  .v23-conjugate-grid > .v23-conjugate-figure,
+  .v23-conjugate-grid > .v23-conjugate-sequence {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .v23-conjugate-grid > .v23-conjugate-figure { position: static; max-width: 560px; width: 100%; }
+}
+@media(max-width: 720px) {
+  .v23-conjugate-figure .plot text { font-size: 24px; }
+  .v23-higher-recap { padding: 13px 12px; }
+  .v23-higher-recap-body .math { display: inline; }
+  .v23-conjugate-feedback .math { font-size: 1.08rem; }
+}
