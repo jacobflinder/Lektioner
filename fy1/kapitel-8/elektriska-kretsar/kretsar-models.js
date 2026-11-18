@@ -149,6 +149,30 @@
      plates.forEach((plate,i)=>plate.dataset.batteryPlate=i===0?'long':'short');
    }
 
+   // A direction question needs an actual *answer arrow* after the pupil has
+   // reasoned through Kirchhoff's law, not just the sentence "0,30 A ut".
+   const branch=document.querySelector('#bild-4');
+   const junctionSvg=branch?.querySelector('.phys-figure svg');
+   if(junctionSvg){
+     const ns='http://www.w3.org/2000/svg';
+     const finished=document.createElementNS(ns,'g');
+     finished.innerHTML=arrow(320,204.07,389,240.87);
+     const outgoing=finished.firstElementChild;
+     outgoing.dataset.lowerCurrentArrow='outgoing';
+     outgoing.style.display='none';
+     junctionSvg.appendChild(outgoing);
+     const unknown=[...junctionSvg.querySelectorAll('text')].find(t=>t.textContent.trim()==='I = ?');
+     const syncJunction=()=>{
+       const revealed=Boolean(branch.querySelector('.step[data-step="2"].open'));
+       outgoing.style.display=revealed?'':'none';
+       outgoing.setAttribute('aria-hidden',String(!revealed));
+       if(unknown)unknown.textContent=revealed?'0,30 A ut':'I = ?';
+     };
+     new MutationObserver(syncJunction).observe(branch,{subtree:true,attributes:true,attributeFilter:['class']});
+     branch.addEventListener('lesson:reset',()=>queueMicrotask(syncJunction));
+     syncJunction();
+   }
+
    // v2.3: optional lesson-specific recap *in* the independent bookwork view.
    // The student first encounters the actual tasks and may choose when to open.
    const work=document.querySelector('#bild-7 .book-priority');
@@ -164,7 +188,7 @@
          <section><h3>Laddning och energi</h3>${formula('<mi>Q</mi><mo>=</mo><mi>I</mi><mi>t</mi>')}${formula('<mi>E</mi><mo>=</mo><mi>U</mi><mi>Q</mi>')}<p><i>Q</i> = passerad laddningsmängd (C), <i>E</i> = överförd energi (J).</p></section>
          <section><h3>Förgrening</h3>${formula('<msub><mi>I</mi><mtext>in</mtext></msub><mo>=</mo><msub><mi>I</mi><mn>1</mn></msub><mo>+</mo><msub><mi>I</mi><mn>2</mn></msub>')}<p>Den inkommande strömmen är summan av utgående strömmar.</p></section>
          <section><h3>Trådresistans</h3>${formula('<mi>A</mi><mo>=</mo><mi>π</mi><msup><mrow><mo>(</mo><mfrac><mi>d</mi><mn>2</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup>')}${formula('<mi>R</mi><mo>=</mo><mfrac><mrow><mi>ρ</mi><mi>l</mi></mrow><mi>A</mi></mfrac>')}<p><i>d</i> = diameter; <i>ρ</i> = materialets resistivitet. Håll enheterna konsekventa.</p></section>
-         <section><h3>Elektronantal</h3>${formula('<mi>N</mi><mo>=</mo><mfrac><mi>Q</mi><mi>e</mi></mfrac>')}<p>Vid elektrontransport: <i>Q</i> är passerad laddningsmängds belopp och <i>e</i> elementarladdningens positiva belopp.</p></section>
+         <section><h3>Elektronantal</h3>${mathrow('<mi>N</mi><mo>=</mo><mfrac><mi>Q</mi><mi>e</mi></mfrac>')}<p>Vid elektrontransport: <i>Q</i> är passerad laddningsmängds belopp och <i>e</i> elementarladdningens positiva belopp.</p></section>
        </div>`;
      work.insertAdjacentElement('afterend',recap);
      document.getElementById('bild-7')?.addEventListener('lesson:reset',()=>{recap.open=false});

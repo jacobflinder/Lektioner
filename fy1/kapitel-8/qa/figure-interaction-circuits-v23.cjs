@@ -60,7 +60,7 @@ const sizes=[
    const result=root.querySelector('.model-result');
    return {start:[start.x,start.y],end:[end.x,end.y],plates,bars,
      show:root.querySelector('.reveal-model').textContent,result:result.textContent,
-     math:result.querySelectorAll('math').length,
+     math:result.querySelectorAll('.circuit-model-math-row math').length,
      whiteBatteryMasks:svg.querySelectorAll('rect[x="76"][width="36"][fill="white"]').length};
  });
  const wireModel=async()=>page.locator('#bild-5 [data-model="wire"]').evaluate(root=>{
@@ -109,6 +109,17 @@ const sizes=[
    verify(await active().locator('.phys-figure circle[cx="258"][cy="171"]').count()===1,'junction physically marked as one node');
    const node=lesson.pages[3].steps.map(x=>x.replace(/<[^>]+>/g,' ')).join(' ');
    verify(node.includes('0,30')||node.includes('0.30'),'junction conservation answer Iout=0.3 A');
+
+   const outgoing=active().locator('[data-lower-current-arrow="outgoing"]');
+   verify(await outgoing.count()===1&&!(await outgoing.isVisible()),'junction correct lower arrow hidden before calculation');
+   verify((await active().locator('.phys-figure svg').innerText()).includes('I = ?'),'unknown outgoing current remains a question at first');
+   for(let s=0;s<3;s++)await page.locator('#step').click();
+   verify(await outgoing.isVisible(),'lower branch arrow appears after three explanation steps');
+   verify((await active().locator('.phys-figure svg').innerText()).includes('0,30 A ut'),'answer arrow annotated with outgoing value');
+   const directed=await outgoing.evaluate(el=>(el.getAttribute('d').match(/-?\d+(?:\.\d+)?/g)||[]).map(Number));
+   verify(directed[2]>directed[0]&&directed[3]>directed[1],'arrow points from junction into lower outgoing branch');
+   await page.locator('#reset').click();
+   verify(!(await outgoing.isVisible()),'reset hides previously revealed junction arrow');
 
    await jump(3);
    let cur=await circuitModel();
@@ -209,6 +220,10 @@ const sizes=[
          `actual pixel wire-to-short-plate join ${index} @${width.width}`);
        await focusShot(active().locator('.phys-figure svg'),`${name}-${String(index).padStart(2,'0')}-battery-visible`);
      }
+     await jump(4);
+     for(let s=0;s<3;s++)await page.locator('#step').click();
+     verify(await outgoing.isVisible(),'junction outgoing answer physically visible @'+width.width);
+     await focusShot(active().locator('.phys-figure svg'),`${name}-04-junction-solution`);
      await jump(3);
      await page.locator('#bild-3 .reveal-model').click();
      await focusShot(page.locator('#bild-3 .kretsar-model .drawing'),`${name}-03-current-shown`);
