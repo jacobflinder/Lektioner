@@ -108,10 +108,10 @@ quizBoxes.forEach(box=>box.querySelectorAll('button[data-correct]').forEach(choi
  choice.addEventListener('click',()=>{
   const feedback=box.querySelector('.feedback');
   if(choice.dataset.correct==='true'){
-   feedback.innerHTML='<span>Rätt! Derivera och kontrollera att konstanten försvinner:</span><div class="formula small">'+math('F′(x)=3·3e^{3x}=9e^{3x}')+'</div>';
+   feedback.innerHTML='<span>Rätt! Derivera och kontrollera att konstanten försvinner:</span><span class="formula small">'+math('F′(x)=3·3e^{3x}=9e^{3x}')+'</span>';
   }else{
    const factor=choice.dataset.distractor==='too-large'?'27':'81';
-   feedback.innerHTML='<span>Derivera ditt förslag. Då får du:</span><div class="formula small">'+math('F′(x)='+factor+'e^{3x}')+'</div><span>Det är inte den givna derivatan. Vilken faktor behöver du dela med? Försök igen.</span>';
+   feedback.innerHTML='<span>Derivera ditt förslag. Då får du:</span><span class="formula small">'+math('F′(x)='+factor+'e^{3x}')+'</span><span>Det är inte den givna derivatan. Vilken faktor behöver du dela med? Försök igen.</span>';
   }
  });
 }));
