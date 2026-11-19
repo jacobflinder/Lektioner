@@ -112,6 +112,12 @@
  .responsive-sign .tall-sign tbody td::before{
    content:attr(data-label);font-size:.88rem;font-weight:750;color:#315c70}
 }
+
+/* On a projected desktop layout the interactive graph must fill its allocated
+   explanatory column; sticky positioning may not collapse its intrinsic width. */
+#explore .two>.graph-board{width:100%;min-width:0;max-width:680px}
+#explore .graph-board svg{width:100%;min-width:0}
+#extrema-book-support .sign-pattern math mo{margin-inline:.25em}
 </style>
 </head>
 <body>
@@ -288,9 +294,9 @@
  <summary>Visa frivilligt metodstöd – försök först själv</summary>
  <div class="support-grid">
   <div class="support-card"><p class="math">f′(a)=0</p><p><strong>Stationär punkt:</strong> tangenten är horisontell. Det räcker inte för att bestämma punkttyp.</p></div>
-  <div class="support-card"><p class="math">+ 0 −</p><p><strong>Lokalt maximum:</strong> funktionen stiger före punkten och sjunker efter.</p>
-   <p class="math">− 0 +</p><p><strong>Lokalt minimum:</strong> sjunker före och stiger efter.</p></div>
-  <div class="support-card"><p class="math">+ 0 +</p><p class="math">− 0 −</p><p><strong>Ingen extrempunkt:</strong> inget teckenbyte. Kontrollera dessutom böjningsbyte innan du säger terrasspunkt.</p></div>
+  <div class="support-card"><p class="math sign-pattern">+ 0 −</p><p><strong>Lokalt maximum:</strong> funktionen stiger före punkten och sjunker efter.</p>
+   <p class="math sign-pattern">− 0 +</p><p><strong>Lokalt minimum:</strong> sjunker före och stiger efter.</p></div>
+  <div class="support-card"><p class="math sign-pattern">+ 0 +</p><p class="math sign-pattern">− 0 −</p><p><strong>Ingen extrempunkt:</strong> inget teckenbyte. Kontrollera dessutom böjningsbyte innan du säger terrasspunkt.</p></div>
   <div class="support-card"><p class="math">(a;f(a))</p><p><strong>Koordinater:</strong> bestäm först x-värdet med derivatan, beräkna sedan y-värdet med ursprungsfunktionen.</p></div>
  </div>
 </details>
