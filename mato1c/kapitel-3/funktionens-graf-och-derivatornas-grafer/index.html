@@ -61,6 +61,11 @@
  overflow:visible;white-space:normal;max-width:100%;min-width:0;
  padding-top:9px;padding-bottom:9px;line-height:1.65;
 }
+/* The shared lesson.css uses a higher-specificity p.math-work selector
+   with overflow-y:hidden; override it so MathML glyph ink can never be cut. */
+.slide :is(.answer,.seq-item,.panel,.math-chain) p.math-work{
+ overflow:visible;white-space:normal;
+}
 .slide .math-work math{max-width:none;font-size:clamp(1.1rem,2vw,1.35rem)}
 .slide .solution-math-group{row-gap:16px!important}
 .slide .readout output{overflow-wrap:normal;min-width:0}
