@@ -57,6 +57,22 @@
   content:attr(data-interval);font-weight:750;font-size:.92rem;color:#244f63}
  #signs .two>div:nth-child(2)>table.sign-table select{width:100%;min-width:0;max-width:100%}
 }
+/* Preserve the explanatory plot next to its calculation instead of
+   stretching the SVG's border into a tall empty column on classroom screens. */
+@media(min-width:1100px){
+ #tangent .two>.plot-box,#signs .two>.plot-box{
+  align-self:start;position:sticky;top:16px;
+ }
+}
+/* A semantic table caption must occupy the width of the mobile card list,
+   not collapse to a narrow one-word column. */
+@media(max-width:720px){
+ #sign-solution table.sign-table caption{
+  display:block;width:100%;min-width:100%;max-width:100%;
+  text-align:left;white-space:normal;line-height:1.4;
+  padding:3px 0 9px;
+ }
+}
 </style>
 </head>
 <body>
