@@ -149,7 +149,7 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
    await page.locator('#check-own').click();ok(await page.locator('#own-feedback math').count()>=2,'correct own feedback has MathML');
    await reveal('own-answer');
    if(page.viewportSize().width===390){
-    const lines=await page.locator('#own-answer .clean-table th:first-child').evaluate(th=>{
+    const lines=await page.locator('#own-answer .clean-table thead th:first-child').evaluate(th=>{
      const range=document.createRange();range.selectNodeContents(th);return range.getClientRects().length;
     });
     eq(lines,1,'mobile sign-table header Intervall fits on one line');
