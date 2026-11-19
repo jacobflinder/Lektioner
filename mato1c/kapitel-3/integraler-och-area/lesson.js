@@ -103,7 +103,9 @@ function updateLinear(){
 }
 function showArea(){
  areaShown=true;const b=+$('linear-b').value;
- $('area-feedback').innerHTML='Rektangel: '+semantic('2·'+b+'='+2*b,'inline')+' och triangel: '+semantic('('+b+'·'+b+')/2='+sv(b*b/2,1),'inline')+'. Total area: <strong>'+sv(linearArea(b),1)+' areaenheter</strong>.';
+ const upper='('+b+'²/2+2·'+b+')',lower='−(0²/2+2·0)';
+ $('area-feedback').innerHTML='Geometriskt: rektangel '+semantic('2·'+b+'='+2*b,'inline')+' och triangel '+semantic('('+b+'·'+b+')/2='+sv(b*b/2,1),'inline')+'. <strong>'+sv(linearArea(b),1)+' areaenheter.</strong>'+
+ '<div class="formula calculation-row"><span class="inline-math">'+semantic('F('+b+')−F(0)','inline')+'</span><span class="inline-math">'+semantic('='+upper,'inline')+'</span><span class="inline-math">'+semantic(lower,'inline')+'</span><span class="inline-math">'+semantic('='+sv(linearArea(b),1),'inline')+'</span></div><span>Fundamentalsatsen ger samma exakta värde.</span>';
  $('area-check').textContent='Uppdatera kontrollen';
 }
 $('linear-b').addEventListener('input',updateLinear);
@@ -111,27 +113,27 @@ $('area-check').addEventListener('click',showArea);
 drawLinear($('overview-plot'),3,true);
 updateLinear();
 
-const rectF=x=>1+x*x/4;
-const rectX=x=>76+119*x,rectY=y=>324-47*y;
+const rectF=x=>x+2;
+const rectX=x=>76+148*x,rectY=y=>324-48*y;
 const rectN=()=>2**(+$('rect-n').value);
 const sampleOffset=method=>method==='right'?1:method==='middle'?.5:0;
 function rectangleSum(n,method){
- const w=4/n; let sum=0;for(let i=0;i<n;i++)sum+=rectF((i+sampleOffset(method))*w)*w;
+ const w=3/n; let sum=0;for(let i=0;i<n;i++)sum+=rectF((i+sampleOffset(method))*w)*w;
  return sum;
 }
 function drawRectangles(n,method){
  const g=$('rect-plot');g.replaceChildren();const x=rectX,y=rectY;
  const rectangles=svg(g,'g',{'data-rectangle-group':'true'});
- const dx=4/n;
+ const dx=3/n;
  for(let i=0;i<n;i++){
   const a=i*dx,z=(i+1)*dx,h=rectF(a+sampleOffset(method)*dx);
   svg(rectangles,'rect',{x:x(a),y:y(h),width:x(z)-x(a),height:y(0)-y(h),fill:'#bfe6da',stroke:'#258777','stroke-width':Math.max(.45,1.35-n*.016),'data-rect-index':i,'data-sample-x':a+sampleOffset(method)*dx,'data-math-width':dx,'data-math-height':h});
  }
- axis(g,{x,y,xMax:4,yMin:0,yMax:6,ytick:1});
- const points=[];for(let i=0;i<=360;i++){const z=4*i/360;points.push((i?'L':'M')+x(z).toFixed(3)+','+y(rectF(z)).toFixed(3))}
+ axis(g,{x,y,xMax:3,yMin:0,yMax:6,ytick:1});
+ const points=[];for(let i=0;i<=360;i++){const z=3*i/360;points.push((i?'L':'M')+x(z).toFixed(3)+','+y(rectF(z)).toFixed(3))}
  svg(g,'path',{d:points.join(' '),fill:'none',stroke:'#126b9e','stroke-width':4,'stroke-linecap':'round','data-curve':'true'});
- txt(g,x(2.45),y(5.5),'y=1+x²/4',20,{'font-weight':700});
- g.setAttribute('aria-label',n+' '+(method==='left'?'vänster':method==='right'?'höger':'mittpunkts')+'rektanglar på 0 till 4 under f(x)=1+x²/4. Summa '+sv(rectangleSum(n,method),3)+'. Skalorna ändras inte.');
+ txt(g,x(1.8),y(5.65),'y=x+2',20,{'font-weight':700});
+ g.setAttribute('aria-label',n+' '+(method==='left'?'vänster':method==='right'?'höger':'mittpunkts')+'rektanglar på 0 till 3 under f(x)=x+2. Summa '+sv(rectangleSum(n,method),3)+', jämfört med exakt area 10,5. Skalorna ändras inte.');
 }
 function updateRectangles(){
  const n=rectN(),method=$('rect-method').value;
@@ -179,6 +181,7 @@ function drawSigned(){
 drawSigned();
 
 const slides=[...document.querySelectorAll('.slide')];
+document.querySelectorAll('[data-jump-to]').forEach(b=>b.addEventListener('click',()=>{const i=slides.findIndex(s=>s.id===b.dataset.jumpTo);if(i>=0){$('jump').value=String(i);$('jump').dispatchEvent(new Event('change',{bubbles:true}))}}));
 document.querySelectorAll('[data-reveal]').forEach(b=>b.dataset.initialLabel=b.textContent);
 function resetSlide(slide){
  slide.querySelectorAll('[data-reveal]').forEach(b=>{const a=$(b.dataset.reveal);if(a)a.classList.add('hidden');b.textContent=b.dataset.initialLabel;b.setAttribute('aria-expanded','false')});
