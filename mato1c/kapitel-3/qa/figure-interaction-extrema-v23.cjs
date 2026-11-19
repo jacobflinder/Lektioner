@@ -110,6 +110,15 @@ const close=(a,b,t=.01)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
      ok(await page.locator('#model-feedback math').count()===3,'correct classification shows real MathML '+w);
      await page.selectOption('#model-type','max');ok((await page.locator('#model-feedback').innerText()).trim()==='','changed model answer clears old feedback '+w);
     }
+    if(i===4&&w===390){
+     const cards=await page.locator('#example .tall-sign tbody tr').evaluateAll(trs=>trs.map(tr=>{
+      const td=[...tr.querySelectorAll('td')],r=tr.getBoundingClientRect();
+      return {width:r.width,layout:getComputedStyle(tr).display,labels:td.map(el=>el.dataset.label),
+        cells:td.map(el=>el.getBoundingClientRect().width)};
+     }));
+     ok(cards.length===5&&cards.every(c=>c.layout==='grid'&&c.width>215&&c.labels.every(Boolean)&&c.cells.every(v=>v>80)),
+      'mobile sign chart uses five genuinely readable derivative/function cards '+JSON.stringify(cards));
+    }
     if(i===4){
      await page.locator('#example [data-seq-reset]').click();
      for(let n=0;n<5;n++)await page.locator('#example [data-seq-next]').click();
