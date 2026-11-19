@@ -45,6 +45,8 @@ try{
  await ok(await page.locator('#graph-f path').count()>0 && await page.locator('#graph-g path').count()>0,'Synkroniserade tangentgrafer');
  await page.locator('#set-two').click();
  await ok((await page.locator('#slope-x-value').innerText()).includes('2,00'),'Reglaget kan ställas till 2');
+ await ok(await page.locator('#explore-readouts').isHidden(),'Nytt x-värde kräver ny förutsägelse innan lutningarna visas');
+ await page.locator('[data-reveal="explore-readouts"]').click();
  await ok((await page.locator('#readout-f').innerText()).includes('4,00'),'f′(2)=4');
  await ok((await page.locator('#readout-g').innerText()).includes('2,00'),'g′(2)=2 fortfarande');
  await page.locator('#explore [data-correct="false"]').first().click();
