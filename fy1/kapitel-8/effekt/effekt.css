@@ -21,6 +21,8 @@
 .effect-model .model-note{font-size:.83rem;line-height:1.42;color:#4a6874;margin:8px 0}
 .effect-model .scale-key{font-size:.81rem;color:#536d79;margin:7px 0}
 .body-copy>.quiz{margin-top:15px}
+.effect-quiz-equation{margin:12px 0 6px;padding:4px 0}
+.effect-quiz-equation[hidden]{display:none}
 .body-copy>.steps-label{margin-top:19px;font-size:.87rem}
 .body-copy>.step{line-height:1.48;font-size:.96rem;padding:10px 12px}
 .body-copy>.step .mathrow{font-size:1.12rem}
@@ -29,17 +31,28 @@
 .book-main h2{font-size:1.24rem;margin:0 0 12px}.book-main p{margin:9px 0}
 .stage .page-title{letter-spacing:-.04em}
 .end-controls{position:relative}
-@media(min-width:1180px){.stage{padding:clamp(24px,3vw,42px)}.layout{grid-template-columns:1.05fr .95fr}}
+@media(min-width:1180px){.stage{padding:clamp(24px,3vw,42px)}.layout{grid-template-columns:1.05fr .95fr}.slide.active .layout>.side:has(.effect-figure){align-self:start;position:sticky;top:20px}}
+@media(min-width:1180px){#bild-6 .page-title{font-size:clamp(2rem,3.2vw,2.55rem)}}
 @media(max-width:930px){.effect-model .model-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.effect-figure svg{max-height:none}}
 @media(max-width:540px){.effect-model .model-controls{grid-template-columns:1fr}.effect-figure{padding:6px}.body-copy{font-size:1rem}.body-copy>.step{font-size:.91rem}.equation{font-size:1.07rem}.goallocal{padding:10px 12px}.effect-model .model-result{font-size:.91rem}}
 /* Review 37/41: real MathML elements rather than equations in prose. */
 .effect-math-stack,.effect-model-math{display:grid;gap:20px;max-width:100%;margin:14px 0}
-.effect-equation,.effect-model-equation{min-width:0;max-width:100%;overflow-x:auto;line-height:1.45}
+.effect-equation,.effect-model-equation{min-width:0;max-width:100%;overflow-x:auto;overflow-y:auto;line-height:1.9;padding:8px 0}
 .effect-equation math,.effect-model-equation math{font-size:clamp(1.05rem,1.55vw,1.4rem)}
 .effect-model-math{gap:18px;font-weight:400}
 .effect-model .model-result .effect-model-equation{overflow-x:auto}
 .effect-model .model-result .effect-model-equation math{font-size:clamp(1.03rem,1.45vw,1.25rem)}
 .effect-model svg{overflow:hidden}
+.v23-summary{margin-top:17px;padding:11px 12px;border:1px solid #b4d4c1;border-radius:11px;background:#fff}
+.v23-summary>summary{cursor:pointer;font-weight:720;color:#17634b;line-height:1.5}
+.v23-summary[open]>summary{margin-bottom:14px}
+.effect-recap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.effect-recap-grid>article{display:flex;flex-direction:column;align-items:flex-start;min-width:0;margin:0;padding:13px 14px;border:1px solid #d3e5db;border-radius:9px;background:#f6fbf8}
+.effect-recap-grid strong{line-height:1.4;font-size:.94rem;color:#254c40}
+.effect-recap-formula{width:100%;min-width:0;max-width:100%;overflow-x:auto;margin:12px 0}
+.effect-recap-formula math{display:math;font-size:clamp(1.15rem,1.5vw,1.4rem)}
+.effect-recap-grid span{color:#405c51;font-size:.9rem;line-height:1.5}
+@media(max-width:720px){.effect-recap-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:540px){
  .effect-math-stack{gap:20px}
  .effect-equation math,.effect-model .model-result .effect-model-equation math{font-size:1.05rem}
