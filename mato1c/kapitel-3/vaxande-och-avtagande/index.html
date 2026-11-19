@@ -19,6 +19,60 @@
 .slide .sign-table th{white-space:normal}
 .slide .sign-table td{overflow-wrap:normal}
 @media(max-width:720px){.slide .math math[display="block"]{font-size:1rem}}
+/* Optional, initially closed support lives alongside independent bookwork. */
+#book-support{border:1px solid #b5d1df;background:#f2f8fa;border-radius:12px;margin:20px 0;overflow:hidden}
+#book-support>summary{cursor:pointer;padding:14px 18px;font-weight:750;color:#17435e}
+#book-support[open]>summary{border-bottom:1px solid #c5dce6}
+#book-support .support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;padding:14px}
+#book-support .support-card{background:#fff;border:1px solid #d5e4ec;border-radius:10px;padding:12px 14px;min-width:0}
+#book-support .support-card .math{margin:4px 0 10px}
+#book-support .support-card p:last-child{margin-bottom:0}
+#book-support .support-card math{max-width:100%;font-size:1.16rem}
+#book-support .support-card .math math[display="block"]{font-size:1.16rem}
+/* Mobile: keep both the graph and every sign-table column inside the stage.
+   On narrow screens present genuine interval cards, not illegibly small 6-column tables. */
+@media(max-width:720px){
+ .slide .two{grid-template-columns:minmax(0,1fr)}
+ .slide .two>*{min-width:0}
+ .slide .plot-box,.slide .plot-box svg{min-width:0;max-width:100%}
+ #signs .two>div:nth-child(2)>table.sign-table,
+ #sign-solution table.sign-table{display:block;width:100%;border:0;font-size:1rem}
+ #signs .two>div:nth-child(2)>table.sign-table thead,
+ #sign-solution table.sign-table thead{display:none}
+ #signs .two>div:nth-child(2)>table.sign-table tbody,
+ #sign-solution table.sign-table tbody{display:block}
+ #signs .two>div:nth-child(2)>table.sign-table tbody tr,
+ #sign-solution table.sign-table tbody tr{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+ #signs .two>div:nth-child(2)>table.sign-table th,
+ #sign-solution table.sign-table th{
+  display:block;grid-column:1/-1;text-align:left;border:0;padding:2px 4px}
+ #signs .two>div:nth-child(2)>table.sign-table td,
+ #sign-solution table.sign-table td{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:7px;border:1px solid #c6dce6;border-radius:8px;
+  padding:9px 11px;min-width:0;min-height:64px;background:#fff}
+ #signs .two>div:nth-child(2)>table.sign-table td::before,
+ #sign-solution table.sign-table td::before{
+  content:attr(data-interval);font-weight:750;font-size:.92rem;color:#244f63}
+ #signs .two>div:nth-child(2)>table.sign-table select{width:100%;min-width:0;max-width:100%}
+}
+/* Preserve the explanatory plot next to its calculation instead of
+   stretching the SVG's border into a tall empty column on classroom screens. */
+@media(min-width:1100px){
+ #tangent .two>.plot-box,#signs .two>.plot-box{
+  align-self:start;position:sticky;top:16px;
+ }
+}
+/* A semantic table caption must occupy the width of the mobile card list,
+   not collapse to a narrow one-word column. */
+@media(max-width:720px){
+ #sign-solution table.sign-table caption{
+  display:block;width:100%;min-width:100%;max-width:100%;
+  text-align:left;white-space:normal;line-height:1.4;
+  padding:3px 0 9px;
+ }
+}
 </style>
 </head>
 <body>
@@ -206,6 +260,15 @@
     <div class="task"><strong>Arbeta med minst två av tre nivåer.</strong> Börja där du behöver tänka. Fortsätt sedan med en andra nivå. Visa beräkningar, teckentabell och en slutsats med intervall.</div>
     <p>Försök själv. Diskutera vid behov. Kontrollera och förstå eventuella fel. Fastnat? Fråga: <em>”Hur avgör jag tecknet här?”</em></p>
     <p class="muted">Prioritera sammanhängande eget arbete. Den digitala grafen ersätter inte uppgifterna i boken.</p>
+    <details id="book-support" class="book-support">
+      <summary>Visa frivilligt metodstöd – försök minnas först</summary>
+      <div class="support-grid">
+        <div class="support-card"><p class="math">f′(x)&gt;0</p><p><strong>Växande:</strong> grafen stiger när x ökar på intervallet.</p></div>
+        <div class="support-card"><p class="math">f′(x)&lt;0</p><p><strong>Avtagande:</strong> grafen sjunker när x ökar på intervallet.</p></div>
+        <div class="support-card"><p class="math">f′(a)=0</p><p><strong>Horisontell tangent:</strong> en stationär punkt är inte automatiskt ett extremvärde.</p></div>
+        <div class="support-card"><p class="math">f′(x)=0</p><p><strong>Metod:</strong> hitta kritiska värden, testa derivatans tecken i varje intervall och avsluta med en teckentabell.</p></div>
+      </div>
+    </details>
   </section>
 
   <section class="slide" id="exit" data-teacher="Gör utcheckningen individuellt och utan interaktiv modell. Samla gärna en anonym klassnivåobservation av vilka som kan tecknet och hur de motiverar. Visa återkoppling först när svaren har formulerats. Målen återkommer i högerspalten.">
@@ -255,7 +318,7 @@
   <div><button id="prev" class="secondary" type="button">← Föregående</button><button id="next" type="button">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
   <div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div>
 </div>
-<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Webblektion med original-PDF:en 2026-11-03 som innehållsunderlag. Alla elevinteraktioner fungerar lokalt utan inloggning eller datainsamling.</footer>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Interaktiv webblektion utan inloggning eller insamling av elevsvar.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
 <script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>

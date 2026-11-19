@@ -6,6 +6,7 @@ const M=window.Ma4Math;if(!M)throw Error('Ma3c24: local MathML engine missing');
 const $=q=>document.querySelector(q);
 const esc=x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const math=x=>'<p class="math">'+esc(x)+'</p>';
+const inlineMath=x=>'<span class="math">'+esc(x)+'</span>';
 const group=items=>'<div class="solution-math-group">'+items.map(math).join('')+'</div>';
 const worked=(id,index,content)=>{
  const items=[...document.querySelectorAll('#'+id+' [data-seq-item]')];
@@ -38,11 +39,18 @@ sign.innerHTML='<strong>Derivatans tecken och grafens beteende:</strong>'+
  '<thead><tr><th scope="col">x</th><th scope="col">x&lt;−1</th><th scope="col">−1</th><th scope="col">−1&lt;x&lt;1</th><th scope="col">1</th><th scope="col">x&gt;1</th></tr></thead>'+
  '<tbody><tr><th scope="row">f′(x)</th><td class="pos">+</td><td>0</td><td class="neg">−</td><td>0</td><td class="pos">+</td></tr>'+
  '<tr><th scope="row">f(x)</th><td>↗</td><td>max</td><td>↘</td><td>min</td><td>↗</td></tr></tbody></table>'+
- '<p>Teckenväxlingen (+ till −) vid x=−1 ger en <strong>maximipunkt</strong>. (− till +) vid x=1 ger en <strong>minimipunkt</strong>.</p>'+
+ '<p>Teckenväxlingen (+ till −) vid '+inlineMath('x=−1')+' ger en <strong>maximipunkt</strong>. (− till +) vid '+inlineMath('x=1')+' ger en <strong>minimipunkt</strong>.</p>'+
  '<p>Om vi vill hitta koordinaterna måste vi sätta in i <em>funktionen</em>, inte i derivatan:</p>'+
  group(['f(−1)=1,5','f(1)=−0,5'])+
  '<p>På hela reella tallinjen är det lokala extrempunkter – kubikfunktionen har inget största eller minsta funktionsvärde globalt.</p>'+
- '<p>Vi delar upp x-axeln efter <strong>derivatans nollställen</strong>, inte efter de x där f(x)=0.</p>';
+ '<p>Vi delar upp x-axeln efter <strong>derivatans nollställen</strong>, inte efter de x där '+inlineMath('f(x)=0')+'.</p>';
+// Mobile sign charts have real, independently labelled interval cells.
+const intervals=['x<−1','x=−1','−1<x<1','x=1','x>1'];
+const inputCells=[...document.querySelectorAll('#signs .two>div:nth-child(2)>table.sign-table tbody td')];
+const answerCells=[...document.querySelectorAll('#sign-solution table.sign-table tbody tr td')];
+if(inputCells.length!==5||answerCells.length!==10)throw Error('Ma3c growing: malformed sign-table structure');
+inputCells.forEach((el,i)=>el.dataset.interval=intervals[i]);
+answerCells.forEach((el,i)=>el.dataset.interval=intervals[i%5]);
 // 05: every necessary algebraic step visible and separate. Last result only last click.
 worked('example',0,'<strong>1 · Derivera</strong>'+
  group(['f(x)=6x−x²','(6x)′=6','(−x²)′=−2x','f′(x)=6−2x']));
@@ -60,10 +68,10 @@ worked('example',3,'<strong>4 · Gör teckentabellen</strong>'+
  '<tr><th scope="row">f(x)</th><td>↗</td><td>max</td><td>↘</td></tr></table>'+
  '<p>Derivatan ändrar tecken från positiv till negativ vid x=3.</p>');
 worked('example',4,'<strong>5 · Svara och kontrollera maximumets höjd</strong>'+
- '<p>Funktionen är <strong>växande</strong> på x≤3 och <strong>avtagande</strong> på x≥3. Den gemensamma ändpunkten ingår, även om derivatan där är 0.</p>'+
+ '<p>Funktionen är <strong>växande</strong> på '+inlineMath('x≤3')+' och <strong>avtagande</strong> på '+inlineMath('x≥3')+'. Den gemensamma ändpunkten ingår, även om derivatan där är 0.</p>'+
  '<p>För att hitta maximipunktens y-koordinat sätts x=3 i <strong>f</strong>:</p>'+
  group(['f(3)=6·3−3²','f(3)=18−9','f(3)=9'])+
- '<p>Maximipunkten är <strong>(3, 9)</strong>. Derivatans tecken är positivt före 3 och negativt efter 3, alltså är detta också funktionens globala maximum på hela reella tallinjen.</p>');
+ '<p>Maximipunkten är '+inlineMath('(3; 9)')+'. Derivatans tecken är positivt före 3 och negativt efter 3, alltså är detta också funktionens globala maximum på hela reella tallinjen.</p>');
 // 06: independent paper exercise receives an answer, not another long presentation.
 // Preserve originally scripted quiz inputs, feedback and on-demand hint.
 const own=$('#own-solution');
@@ -75,10 +83,10 @@ own.innerHTML='<strong>Härledning från elevens egen beräkning:</strong>'+
  '<tr><th scope="row">x</th><td>x&lt;2</td><td>2</td><td>x&gt;2</td></tr>'+
  '<tr><th scope="row">f′(x)</th><td class="neg">−</td><td>0</td><td class="pos">+</td></tr>'+
  '<tr><th scope="row">f(x)</th><td>↘</td><td>min</td><td>↗</td></tr></table>'+
- '<p><strong>Avtagande</strong> när x≤2 och <strong>växande</strong> när x≥2. Nollstället x=2 kan ingå i båda slutna monotoniintervallen.</p>'+
+ '<p><strong>Avtagande</strong> när '+inlineMath('x≤2')+' och <strong>växande</strong> när '+inlineMath('x≥2')+'. Nollstället '+inlineMath('x=2')+' kan ingå i båda slutna monotoniintervallen.</p>'+
  '<p>Beräkna funktionens höjd i minimipunkten:</p>'+
  group(['f(2)=3·2²−12·2','f(2)=12−24','f(2)=−12'])+
- '<p>Det finns ett <strong>globalt minimum i (2, −12)</strong>, eftersom derivatan är negativ före 2 och positiv efter 2. Extra: skissa själv en graf som överensstämmer med detta.</p>';
+ '<p>Det finns ett <strong>globalt minimum</strong> i '+inlineMath('(2; −12)')+', eftersom derivatan är negativ före 2 och positiv efter 2. Extra: skissa själv en graf som överensstämmer med detta.</p>';
 // 07: stationary point is not equivalent to a maximum or minimum.
 const opt=$('#exception .math-big');
 opt.outerHTML='<div class="math-givens">'+['g(x)=x³','g′(x)=3x²','g′(0)=0'].map(math).join('')+'</div>';
@@ -89,7 +97,7 @@ except.innerHTML='<p>Derivatan är <strong>positiv för varje x utom x=0</strong
  '<tr><th scope="row">x</th><td>x&lt;0</td><td>0</td><td>x&gt;0</td></tr>'+
  '<tr><th scope="row">g′(x)</th><td class="pos">+</td><td>0</td><td class="pos">+</td></tr>'+
  '<tr><th scope="row">g(x)</th><td>↗</td><td>horisontell tangent</td><td>↗</td></tr></table>'+
- '<p>Grafen är fortsatt växande och har <strong>ingen maximipunkt eller minimipunkt</strong> vid x=0. Punkten (0,0) är en <strong>terrasspunkt</strong>: en stationär inflexionspunkt med horisontell tangent.</p>';
+ '<p>Grafen är fortsatt växande och har <strong>ingen maximipunkt eller minimipunkt</strong> vid '+inlineMath('x=0')+'. Punkten '+inlineMath('(0; 0)')+' är en <strong>terrasspunkt</strong>: en stationär inflexionspunkt med horisontell tangent.</p>';
 // 09: preserve individual exit (no automatic chart), fully worked answer after user chooses.
 const exit=$('#exit-answer');
 exit.innerHTML='<p>Bestäm först derivatans nollställe:</p>'+
@@ -100,11 +108,11 @@ exit.innerHTML='<p>Bestäm först derivatans nollställe:</p>'+
  '<tr><th scope="row">x</th><td>x&lt;2</td><td>2</td><td>x&gt;2</td></tr>'+
  '<tr><th scope="row">f′(x)</th><td class="pos">+</td><td>0</td><td class="neg">−</td></tr>'+
  '<tr><th scope="row">f(x)</th><td>↗</td><td>max</td><td>↘</td></tr></table>'+
- '<p>Funktionen <strong>växer för x≤2</strong> och <strong>avtar för x≥2</strong>. Därför har den en <strong>maximipunkt med x-koordinaten 2</strong>.</p>'+
+ '<p>Funktionen växer för '+inlineMath('x≤2')+' och avtar för '+inlineMath('x≥2')+'. Därför har den en <strong>maximipunkt med x-koordinaten 2</strong>.</p>'+
  '<p>Vi vet bara derivatan, inte ett funktionsvärde. Därför kan y-koordinaten <strong>inte bestämmas</strong>. Ett eventuellt tillagt konstantled ändrar höjden men inte derivatan.</p>'+
  '<p><strong>Extra:</strong> Ett nollställe till derivatan ger inte automatiskt en topp eller dal. För funktionen g nedan gäller:</p>'+
  group(['g(x)=x³','g′(x)=3x²','g′(0)=0'])+
- '<p>Derivatans tecken är positivt på båda sidor om 0, så (0,0) är en terrasspunkt utan extremvärde.</p>';
+ '<p>Derivatans tecken är positivt på båda sidor om 0, så '+inlineMath('(0; 0)')+' är en terrasspunkt utan extremvärde.</p>';
 // 10: separate maths from explanatory prose in the three summary statements.
 const summary=$('#summary .panel');
 summary.innerHTML='<div class="math-result-panel">'+math('f′(x)>0')+
@@ -118,7 +126,7 @@ summary.innerHTML='<div class="math-result-panel">'+math('f′(x)>0')+
 // Exercise IDs and labels are deliberately left as normal text.
 let blocks=0,inline=0;
 for(const el of document.querySelectorAll('.slide .math')){
- if(el.querySelector('math')||el.closest('#book'))continue;
+ if(el.querySelector('math')||(el.closest('#book')&&!el.closest('#book-support')))continue;
  const raw=el.textContent.trim().replace(/\s+/g,' ');
  if(!raw)continue;
  const isInline=el.matches('span');
@@ -126,5 +134,21 @@ for(const el of document.querySelectorAll('.slide .math')){
  if(isInline)inline++;else blocks++;
 }
 if(blocks<55||inline<15)throw Error('Ma3c24: insufficient MathML '+blocks+'/'+inline);
+// The bookwork scaffold is voluntary and closes when leaving the slide or
+// switching presentation mode. It never replaces the original assignments.
+const book=document.getElementById('book');
+const support=document.getElementById('book-support');
+if(!book||!support)throw Error('Ma3c growing: optional book support missing');
+const supportLabel=support.querySelector('summary');
+const syncSupport=()=>{supportLabel.textContent=support.open?
+  'Dölj frivilligt metodstöd':'Visa frivilligt metodstöd – försök minnas först';};
+support.addEventListener('toggle',syncSupport);
+new MutationObserver(()=>{
+ if(!book.classList.contains('active')&&support.open)support.open=false;
+}).observe(book,{attributes:true,attributeFilter:['class']});
+document.getElementById('mode').addEventListener('click',()=>{
+ if(support.open)support.open=false;
+});
+syncSupport();
 document.documentElement.dataset.growingMath='ready';
 })();

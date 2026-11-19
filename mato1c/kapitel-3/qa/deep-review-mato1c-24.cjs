@@ -48,7 +48,8 @@ await page.goto(url,{waitUntil:'networkidle'});
 ok(await page.locator('.slide').count()===10,'exact ten lesson slides');
 ok(await page.evaluate(()=>document.documentElement.dataset.growingMath)==='ready','semantic MathML initialization '+errors.join('; '));
 ok(await page.locator('.slide math').count()>=60,'at least 60 semantic local MathML expressions');
-ok(await page.locator('#book math').count()===0,'book numbers not converted into false arithmetic');
+ok(await page.locator('#book-support math').count()===4,'four real bookwork formulas rendered semantically');
+ok(await page.locator('#book .booklevel math').count()===0,'book exercise numbers remain ordinary text');
 ok(await page.locator('.slide .math-givens').count()>=1,'givens separated');
 ok(await page.locator('.slide .solution-math-group').count()>=7,'multi-step algebra groups separated');
 ok(await page.locator('.slide :is(.math-givens,.solution-math-group) .math math').count()>=40,'working formulas have semantic MathML');
@@ -141,7 +142,7 @@ if(i<5)ok(!(await ex.innerText()).includes('Maximipunkten är'),'maximum answer 
 for(const v of ['f(x)=6x−x²','(6x)′=6','(−x²)′=−2x','f′(x)=6−2x',
 '6−2x=0','−2x=−6','x=3','f′(1)=6−2·1','f′(1)=4>0',
 'f′(4)=6−2·4','f′(4)=−2<0','f(3)=6·3−3²','f(3)=18−9','f(3)=9'])await has('#example',v);
-ok((await ex.innerText()).includes('Maximipunkten är (3, 9)'),'correct coordinate and global interpretation');
+ok((await ex.innerText()).includes('Maximipunkten är')&&(await lab('#example')).includes('(3; 9)'),'correct semantically typed extrema coordinate and global interpretation');
 await gap('#example');await ex.locator('[data-seq-back]').click();
 ok(await ex.locator('[data-seq-item]:visible').count()===4,'back step restores active student question');
 await ex.locator('[data-seq-next]').click();await shot('desktop-05');
@@ -164,7 +165,7 @@ ok((await page.locator('#own-feedback').textContent()).startsWith('Rätt'),'corr
 await reveal('own-hint');ok((await page.locator('#own-hint').innerText()).includes('Pröva ett x'),'support preserved');
 await reveal('own-solution');
 for(const v of ['f′(x)=6x−12','6x−12=0','6x=12','x=2','f′(0)=−12<0','f′(3)=6>0','f(2)=12−24','f(2)=−12'])await has('#own-solution',v);
-ok((await page.locator('#own-solution').innerText()).includes('(2, −12)'),'global quadratic min coordinates');
+ok((await lab('#own-solution')).includes('(2; −12)'),'semantic global quadratic minimum coordinates');
 await gap('#own');await shot('desktop-06');
 await page.locator('#next').click();ok(await page.locator('#book').isVisible(),'core path skips optional counterexample');
 await go(6);await page.locator('[data-go="exception"]').click();ok(await page.locator('#exception').isVisible(),'user can choose optional counterexample');
