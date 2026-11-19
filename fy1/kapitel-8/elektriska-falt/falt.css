@@ -40,3 +40,22 @@
  .field-math-stack{gap:20px}
  .field-equation math,.field-model .model-result .field-model-equation math{font-size:1.05rem}
 }
+
+/* v2.3: hidden-until-requested semantic quiz mathematics and bookwork recap. */
+.field-quiz-equation{margin:16px 0 0;padding:10px 12px;border-left:3px solid #65a397;background:#f3faf7}
+.field-quiz-equation[hidden]{display:none}
+.field-book-time{margin-top:15px;font-size:.94rem;line-height:1.55}
+.field-v23-summary{margin-top:17px;padding:11px 12px;border:1px solid #b4d4c1;border-radius:11px;background:#fff}
+.field-v23-summary>summary{cursor:pointer;font-weight:720;color:#17634b;line-height:1.5}
+.field-v23-summary[open]>summary{margin-bottom:14px}
+.field-recap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field-recap-grid>article{display:flex;flex-direction:column;align-items:flex-start;min-width:0;margin:0;padding:13px 14px;border:1px solid #d3e5db;border-radius:9px;background:#f6fbf8}
+.field-recap-grid strong{line-height:1.4;font-size:.94rem;color:#254c40}
+.field-recap-math{width:100%;max-width:100%;overflow-x:auto;margin:11px 0}
+.field-recap-math math{font-size:clamp(1.05rem,1.48vw,1.24rem)}
+.field-recap-grid span{color:#405c51;font-size:.9rem;line-height:1.5}
+/* Native MathML paints descenders/fraction bars several pixels below its
+   reported line box in Chromium. Reserve real vertical space so the
+   overflow-x:auto equation wrapper never clips its final glyph pixels. */
+.field-equation,.field-model-equation,.field-recap-math{padding-block:3px 9px}
+@media(max-width:720px){.field-recap-grid{grid-template-columns:minmax(0,1fr)}}
