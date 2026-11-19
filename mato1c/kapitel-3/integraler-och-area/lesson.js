@@ -79,8 +79,9 @@ updateLinear();
 const rectF=x=>1+x*x/4;
 const rectX=x=>76+119*x,rectY=y=>324-47*y;
 const rectN=()=>2**(+$('rect-n').value);
+const sampleOffset=method=>method==='right'?1:method==='middle'?.5:0;
 function rectangleSum(n,method){
- const w=4/n; let sum=0;for(let i=0;i<n;i++)sum+=rectF((i+(method==='right'?1:0))*w)*w;
+ const w=4/n; let sum=0;for(let i=0;i<n;i++)sum+=rectF((i+sampleOffset(method))*w)*w;
  return sum;
 }
 function drawRectangles(n,method){
@@ -88,14 +89,14 @@ function drawRectangles(n,method){
  const rectangles=svg(g,'g',{'data-rectangle-group':'true'});
  const dx=4/n;
  for(let i=0;i<n;i++){
-  const a=i*dx,z=(i+1)*dx,h=rectF(method==='right'?z:a);
-  svg(rectangles,'rect',{x:x(a),y:y(h),width:x(z)-x(a),height:y(0)-y(h),fill:'#bfe6da',stroke:'#258777','stroke-width':Math.max(.45,1.35-n*.016),'data-rect-index':i,'data-sample-x':method==='right'?z:a,'data-math-width':dx,'data-math-height':h});
+  const a=i*dx,z=(i+1)*dx,h=rectF(a+sampleOffset(method)*dx);
+  svg(rectangles,'rect',{x:x(a),y:y(h),width:x(z)-x(a),height:y(0)-y(h),fill:'#bfe6da',stroke:'#258777','stroke-width':Math.max(.45,1.35-n*.016),'data-rect-index':i,'data-sample-x':a+sampleOffset(method)*dx,'data-math-width':dx,'data-math-height':h});
  }
  axis(g,{x,y,xMax:4,yMin:0,yMax:6,ytick:1});
  const points=[];for(let i=0;i<=360;i++){const z=4*i/360;points.push((i?'L':'M')+x(z).toFixed(3)+','+y(rectF(z)).toFixed(3))}
  svg(g,'path',{d:points.join(' '),fill:'none',stroke:'#126b9e','stroke-width':4,'stroke-linecap':'round','data-curve':'true'});
  txt(g,x(2.45),y(5.5),'y=1+x²/4',20,{'font-weight':700});
- g.setAttribute('aria-label',n+' '+(method==='left'?'vänster':'höger')+'rektanglar på 0 till 4 under f(x)=1+x²/4. Summa '+sv(rectangleSum(n,method),3)+'. Skalorna ändras inte.');
+ g.setAttribute('aria-label',n+' '+(method==='left'?'vänster':method==='right'?'höger':'mittpunkts')+'rektanglar på 0 till 4 under f(x)=1+x²/4. Summa '+sv(rectangleSum(n,method),3)+'. Skalorna ändras inte.');
 }
 function updateRectangles(){
  const n=rectN(),method=$('rect-method').value;

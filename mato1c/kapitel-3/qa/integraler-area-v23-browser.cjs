@@ -74,7 +74,7 @@ try{
   await go(8);
   for(const n of [2,4,8,16,32]){
    await set('rect-n',Math.log2(n));
-   for(const method of ['left','right']){
+   for(const method of ['left','right','middle']){
     await page.selectOption('#rect-method',method);
     const data=await page.locator('#rect-plot [data-rect-index]').evaluateAll(els=>els.map(e=>({
      x:+e.getAttribute('x'),y:+e.getAttribute('y'),width:+e.getAttribute('width'),
@@ -83,7 +83,7 @@ try{
     yes(data.length===n,label+' exact '+n+' rectangles '+method);
     let sum=0;
     for(let i=0;i<n;i++){
-     const s=(i+(method==='right'?1:0))*4/n,h=1+s*s/4;
+     const s=(i+(method==='right'?1:method==='middle'?.5:0))*4/n,h=1+s*s/4;
      near(data[i].x,76+119*i*4/n,label+' rectangle x n='+n+' i='+i);
      near(data[i].width,119*4/n,label+' rectangle width n='+n+' i='+i);
      near(data[i].height,47*h,label+' rectangle height n='+n+' i='+i);
@@ -96,7 +96,8 @@ try{
   }
   await set('rect-n',1);await page.selectOption('#rect-method','left');await shot(label+'-rect-n2');
   if(width<=768){const geom=await page.evaluate(()=>{const input=document.querySelector('#rect-lab #rect-method').closest('.control-box').getBoundingClientRect(),fig=document.querySelector('#rect-lab .plot-card').getBoundingClientRect();return {gap:fig.top-input.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' rectangle graph follows inputs, gap '+geom.gap);if(width===390)yes(geom.top<=height-105,label+' rectangle graph begins within mobile viewport')}
-  await set('rect-n',5);await page.selectOption('#rect-method','right');await shot(label+'-rect-n32');
+  await set('rect-n',5);await page.selectOption('#rect-method','middle');await shot(label+'-rect-n32-middle');
+  await page.selectOption('#rect-method','right');await shot(label+'-rect-n32-right');
   await go(9);await go(8);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
   yes(await page.locator('#rect-method').inputValue()==='left',label+' rectangle method resets');
   await go(9);

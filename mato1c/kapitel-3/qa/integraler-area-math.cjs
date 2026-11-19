@@ -18,10 +18,11 @@ for(const b of [1,2,3,4])near(2*b+b*b/2,(b*(2+(2+b)))/2,'Linear area b='+b);
 const q=x=>1+x*x/4;
 const exact=28/3;
 for(const n of [2,4,8,16,32]){
- let left=0,right=0;
- for(let i=0;i<n;i++){let width=4/n;left+=q(i*width)*width;right+=q((i+1)*width)*width}
+ let left=0,right=0,middle=0;
+ for(let i=0;i<n;i++){let width=4/n;left+=q(i*width)*width;right+=q((i+1)*width)*width;middle+=q((i+.5)*width)*width}
  yes(left<exact,'Left rectangles underestimate n='+n);
  yes(right>exact,'Right rectangles overestimate n='+n);
+ yes(middle<exact&&middle>left,'Midpoint closer than left but underestimates for convex function n='+n);
  if(n>2)near(right-left,16/n,'Left-right gap follows endpoint difference n='+n,1e-8);
 }
 for(const tau of [1,2,3,4,5]){

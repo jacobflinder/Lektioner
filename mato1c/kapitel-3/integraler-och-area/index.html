@@ -56,6 +56,7 @@
 @media(max-width:650px){
  body:has(.slide.active .plot-card) .repetition{display:none}
  .geo-layout{display:flex;flex-direction:column;gap:9px}
+ #rect-lab .lab-controls>.formula{order:6}
  .plot-card svg text{font-size:24px}
  .plot-card svg{max-height:none}
 }
@@ -143,15 +144,15 @@
 <div class="insight">Att rektangelsummor närmar sig ett gemensamt värde är idén bakom integralen. Vi ska undersöka detta – inte bara memorera symbolen.</div>
 </section>
 
-<section class="slide" id="rect-lab" data-teacher="Labb 2. Håll axlarnas skala och exakt graf fixerade när antalet rektanglar ändras. Kör vänster/höger för samma n och jämför utan att avslöja gränsvärdet först.">
+<section class="slide" id="rect-lab" data-teacher="Labb 2. Håll axlarnas skala fixerade när antalet rektanglar ändras. Jämför vänster, höger och mittpunkt för samma n – bokens metod använder mittpunkter. Avslöja inte gränsvärdet först.">
 <div class="eyebrow">08 · Laboration 2 · Rektangelsummor</div><h2>Fler rektanglar – mindre fel?</h2>
 <p class="smalltext">Exempelfunktionen är ny och växer i hela intervallet.</p>
 <div class="lab-grid"><div class="lab-controls">
 <p class="formula" data-formula="f(x)=1+x²/4"></p>
 <p class="formula compact" data-integral="0|4|1+x²/4|x"></p>
-<div class="question">Förutsäg först: underskattar vänsterrektanglarna arean? Jämför med högerrektanglar.</div>
+<div class="question">Förutsäg först: underskattar vänsterrektanglarna arean? Jämför med högerkant och mittpunkt.</div>
 <div class="control-box"><label for="rect-n">Antal lika breda rektanglar</label><input id="rect-n" type="range" min="1" max="5" step="1" value="2"><output id="rect-n-out"></output></div>
-<div class="control-box"><label for="rect-method">Höjden hämtas från</label><select id="rect-method"><option value="left">Vänsterkanten</option><option value="right">Högerkanten</option></select></div>
+<div class="control-box"><label for="rect-method">Höjden hämtas från</label><select id="rect-method"><option value="left">Vänsterkanten</option><option value="right">Högerkanten</option><option value="middle">Mittpunkten</option></select></div>
 <div class="graph-summary"><strong>Rektangelsumman</strong><div id="rect-sum" class="formula compact" aria-live="polite"></div><p class="smalltext">Närmevärde, inte automatiskt exakt area.</p></div>
 </div><figure class="plot-card"><svg id="rect-plot" viewBox="0 0 620 360" role="img" aria-label="En stigande kvadratisk kurva med justerbara vänster- eller högerrektanglar och fast koordinatskala."></svg><figcaption class="key"><span><i></i> Rektanglar</span><span><i class="line"></i> Verklig graf</span></figcaption></figure></div>
 </section>
