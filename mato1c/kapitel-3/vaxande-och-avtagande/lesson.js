@@ -70,25 +70,34 @@ function renderTangent(){
 draw('start-graph');draw('sign-graph');renderTangent();
 $('tangent-x').addEventListener('input',renderTangent);
 $('tangent-zero').addEventListener('click',()=>{$('tangent-x').value='0';renderTangent()});
+// Status text stays safe text, while actual equations use the local MathML
+// renderer also after interactive answers change. No raw user input is injected.
+function explain(out,kind,message,formulas=[]){
+ out.className='feedback '+kind;out.textContent=message;
+ for(const expr of formulas){
+  const p=document.createElement('p');p.className='math';p.style.margin='8px 0 2px';
+  out.append(p);window.Ma4Math.setFormula(p,expr,'block');
+ }
+}
 const signs=[{id:'sign-left',correct:'+',why:'Till vänster om x = −1 stiger grafen när x ökar. Där är derivatan positiv.'},
  {id:'sign-middle',correct:'-',why:'Mellan x = −1 och x = 1 sjunker grafen när x ökar. Där är derivatan negativ.'},
  {id:'sign-right',correct:'+',why:'Till höger om x = 1 stiger grafen när x ökar. Där är derivatan positiv.'}];
 $('check-signs').addEventListener('click',()=>{
  const out=$('sign-feedback');
  const empty=signs.find(s=>!$(s.id).value);
- if(empty){out.className='feedback no';out.textContent='Fyll i alla tre intervall innan du kontrollerar.';return}
+ if(empty){explain(out,'no','Fyll i alla tre intervall innan du kontrollerar.');return}
  const wrong=signs.find(s=>$(s.id).value!==s.correct);
- if(wrong){out.className='feedback no';out.textContent=wrong.why+' Ändra tecknet och pröva igen.';$('sign-solution').classList.add('hidden');draw('sign-graph');return}
- out.className='feedback ok';out.textContent='Rätt: +, 0, −, 0, +. Förklara nu varför grafens nollställen inte används som gränser.';
+ if(wrong){explain(out,'no',wrong.why+' Ändra tecknet och pröva igen.',[wrong.correct==='+'?'f′(x)>0':'f′(x)<0']);$('sign-solution').classList.add('hidden');draw('sign-graph');return}
+ explain(out,'ok','Rätt: +, 0, −, 0, +. Förklara nu varför grafens nollställen inte används som gränser.');
  $('sign-solution').classList.remove('hidden');draw('sign-graph',{colored:true});
 });
 $('check-own').addEventListener('click',()=>{
  const raw=$('own-zero').value.trim().replace(',','.').replace('−','-');
  const n=raw?Number(raw):NaN, a=$('own-left').value,b=$('own-right').value,out=$('own-feedback');
- if(!Number.isFinite(n)){out.className='feedback no';out.textContent='Ange först x-värdet där derivatan är noll.';return}
- if(Math.abs(n-2)>1e-8){out.className='feedback no';out.textContent='Kontrollera ekvationen f′(x) = 6x − 12 = 0. Vilket x löser den?';return}
- if(!a||!b){out.className='feedback no';out.textContent='Nollstället stämmer. Testa nu ett x-värde på vardera sidan.';return}
- if(a!=='-'||b!=='+'){out.className='feedback no';out.textContent='Nollstället stämmer. Pröva f′(0) och f′(3) och jämför deras tecken.';return}
- out.className='feedback ok';out.textContent='Rätt: x = 2 och tecknen −, 0, +. Visa i din egen lösning varför det betyder avtagande före 2 och växande efter 2.';
+ if(!Number.isFinite(n)){explain(out,'no','Ange först x-värdet där derivatan är noll.');return}
+ if(Math.abs(n-2)>1e-8){explain(out,'no','Kontrollera ekvationen för derivatans nollställe. Vilket x löser den?',['6x−12=0']);return}
+ if(!a||!b){explain(out,'no','Nollstället stämmer. Testa nu ett x-värde på vardera sidan.',['x=2']);return}
+ if(a!=='-'||b!=='+'){explain(out,'no','Nollstället stämmer. Pröva derivatan i två testpunkter och jämför deras tecken.',['f′(0)','f′(3)']);return}
+ explain(out,'ok','Rätt: tecknen är −, 0, +. Visa i din egen lösning varför det betyder avtagande före 2 och växande efter 2.',['x=2']);
 });
 })();
