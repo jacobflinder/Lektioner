@@ -10,7 +10,7 @@
 .graph-panel{min-width:0;border:1px solid #cfdee6;border-radius:14px;background:#f8fbfd;padding:14px}
 .graph-panel h3{margin:3px 0 10px;color:#154c62}
 .graph-panel svg{display:block;width:100%;height:auto;max-height:325px}
-.graph-readout{margin:10px 0;border-radius:10px;background:#e8f3f4;padding:10px 12px;font-weight:750;font-variant-numeric:tabular-nums}
+.graph-readout{display:inline-block;max-width:100%;margin:4px 0;border-radius:10px;background:#e8f3f4;padding:10px 12px;font-weight:750;font-variant-numeric:tabular-nums}
 .tangent-controls{padding:12px 15px;border:1px solid #c9dbe4;border-radius:12px;background:#f4f8fa}
 .tangent-controls label{display:block;font-weight:750}
 .tangent-controls input[type=range]{width:100%;max-width:660px;accent-color:#087d70;min-height:32px}
@@ -38,15 +38,27 @@
 .note-warning{border-left:4px solid #be8a31;background:#fff7e8;padding:12px 16px;border-radius:8px}
 /* Fristående matematiska uttryck i eget MathML-block med mätbar 16px-luft. */
 .lesson-math-stack{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;justify-items:start;margin:12px 0 16px;max-width:100%}
-.lesson-math-stack>p.math-fresh{display:block;margin:0!important;min-width:0;max-width:100%;overflow-x:auto;white-space:nowrap}
+.lesson-math-stack>p.math-fresh{display:block;margin:0!important;min-width:0;max-width:100%}
 .slide :is(.answer,.seq-item) .solution-math-group{row-gap:16px}
 .lesson-labeled-equation{min-width:0}
 .lesson-labeled-equation>strong{display:block;font-size:.88rem;color:#2b6175}
 .lesson-labeled-equation>p.solution-equation{margin:4px 0 0!important}
-.slide [data-math-presentation="true"] math{font-size:1em;max-width:none;white-space:nowrap}
-.slide p.math-fresh[data-math-presentation="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;white-space:nowrap}
+.slide [data-math-presentation="true"] math{font-size:1em;max-width:none}
+.slide p.math-fresh[data-math-presentation="true"]{overflow:visible;max-width:100%}
 .slide span.math-fresh[data-math-presentation="true"] math{vertical-align:-.08em}
+.slide .math-inline-answer math{display:inline-block;vertical-align:-.12em}
+.book-support{margin:18px 0 0;border:1px solid #a4c8cc;border-radius:14px;background:#f7fbfc;padding:15px 17px}
+.book-support>summary{cursor:pointer;font-weight:800;color:#14586a;line-height:1.5}
+.book-support summary:focus-visible{outline:3px solid #087d70;outline-offset:4px}
+.support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 0}
+.support-card{min-width:0;padding:13px 15px;border-radius:12px;background:#fff;border:1px solid #ccdde5}
+.support-card h3{font-size:1rem;margin:0 0 8px}
+.support-card p{margin:8px 0}
+.support-card .math-fresh{font-size:1.18rem;line-height:1.5}
+.support-card .lesson-math-stack{margin:10px 0 0}
 @media(max-width:780px){.graph-compare,.chains,.compare-derivatives,.check-inputs,.book-tracks,.step-grid{grid-template-columns:1fr}.graph-panel svg{max-height:265px}.math-fresh{overflow-wrap:anywhere}}
+@media(max-width:780px){.support-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.graph-panel svg text{font-size:24px}}
 </style>
 </head>
 <body>
@@ -208,6 +220,14 @@
 <div class="book-track"><h3>Nivå 2 + 3</h3>
 <p><strong>3130–3131:</strong> förenkla och undersök</p><p><strong>3132:</strong> bestäm konstanten k</p><p><strong>3133:</strong> upptäck ett mönster</p></div>
 </div>
+<details class="book-support" id="book-support"><summary>Visa frivillig metodsammanfattning</summary>
+<p>Försök gärna minnas reglerna först. Öppna stödet när du behöver det och fortsätt sedan med dina egna beräkningar i boken.</p>
+<div class="support-grid">
+<div class="support-card"><h3>1 · Två deriveringar</h3><p>Andraderivatan är derivatan av förstaderivatan.</p><div class="lesson-math-stack"><p class="math-fresh">f(x) = x³</p><p class="math-fresh">f′(x) = 3x²</p><p class="math-fresh">f″(x) = 6x</p></div></div>
+<div class="support-card"><h3>2 · Polynom och konstanter</h3><p>Derivera term för term. En konstant försvinner.</p><div class="lesson-math-stack"><p class="math-fresh">(−5x²)′ = −10x</p><p class="math-fresh">(3)′ = 0</p></div></div>
+<div class="support-card"><h3>3 · Exponentialfunktionen</h3><p>Vid varje derivering följer faktorn från exponentens inre funktion med.</p><div class="lesson-math-stack"><p class="math-fresh">g(x) = 4e<sup>2x</sup></p><p class="math-fresh">g′(x) = 8e<sup>2x</sup></p></div></div>
+<div class="support-card"><h3>4 · Vad efterfrågas?</h3><p>Skilj på att hitta ett uttryck, beräkna ett värde och lösa en ekvation.</p><div class="lesson-math-stack"><p class="math-fresh">f″(x)</p><p class="math-fresh">f″(a)</p><p class="math-fresh">f″(x) = 0</p></div></div>
+</div></details>
 <div class="task"><strong>Försök själv, kontrollera och förstå dina fel.</strong> Mer träning: <strong>3128–3129</strong>. Det viktigaste är att du kan förklara hur du deriverat – inte bara att du fått samma svar som facit.</div>
 <div class="notice"><strong>Läxa:</strong> Gör klart ditt valda spår före nästa lektion.</div>
 </section>

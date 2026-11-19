@@ -40,6 +40,7 @@ jobs:
           node mato1c/kapitel-3/qa/figure-interaction-extrema-v23.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-16.cjs
           node mato1c/kapitel-3/qa/andraderivatan-browser.cjs
+          node mato1c/kapitel-3/qa/figure-interaction-second-derivative-v23.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-17.cjs
           node mato1c/kapitel-3/qa/andraderivatans-roll-browser.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-18.cjs
