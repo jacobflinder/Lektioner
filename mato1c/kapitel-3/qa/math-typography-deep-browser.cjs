@@ -47,6 +47,18 @@ fs.mkdirSync(dir,{recursive:true});
    const lines=[],overflow=[],denseProse=[];
    for(let i=0;i<numSlides;i++){
     await page.selectOption('#jump',String(i));
+    // The audited graph lesson restores an unopened state whenever the pupil
+    // navigates. Open every answer and step again for a genuine full scan.
+    if(lesson===3){
+     for(const b of await page.locator('.slide.active [data-reveal]').all()){
+      const id=await b.getAttribute('data-reveal');
+      if(await page.locator('#'+id).isHidden())await b.click();
+     }
+     for(const seq of await page.locator('.slide.active [data-sequence]').all()){
+      const n=await seq.locator('[data-seq-item]').count();
+      for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();
+     }
+    }
     const scan=await page.evaluate(()=>{
      const sel='.slide.active :is(.answer,[data-seq-item]) :is(p.math,p.mathline,p.math-display,p.math-work,p.math-fresh,p.eq,p.formula-line,p.solution-equation)';
      const rows=[...document.querySelectorAll(sel)].filter(el=>getComputedStyle(el).display!=='none').map(el=>{
@@ -72,15 +84,21 @@ fs.mkdirSync(dir,{recursive:true});
     assert.ok(row.font.includes('Cambria Math'),'L'+(lesson+1)+': matematisk stil saknas: '+row.text);
     assert.ok(row.display==='block','L'+(lesson+1)+': ekvationen står inte i eget block: '+row.text);
     assert.ok(row.size>=16.5,'L'+(lesson+1)+': för liten ekvation '+row.size+'px: '+row.text);
-    // Andraderivatan has been visually audited under v2.3. The entire
+    // Andraderivatan and its graph lesson have been visually audited v2.3. The entire
     // MathML expression must fit instead of requiring a legacy scroller.
-    if(lesson===2){
-     assert.ok(row.overflow==='visible'||row.overflow==='auto','L3: matematiska tecken får inte döljas: '+row.text);
-     assert.ok(row.scroll<=row.client+4,'L3: hela matematiken måste rymmas utan intern rullning: '+row.text);
+    if(lesson===2||lesson===3){
+     assert.equal(row.overflow,'visible','L'+(lesson+1)+': matematiska tecken får inte döljas: '+row.text);
+     assert.ok(row.scroll<=row.client+4,'L'+(lesson+1)+': hela matematiken måste rymmas utan intern rullning: '+row.text);
     }else assert.ok(row.overflow==='auto','L'+(lesson+1)+': äldre bred formel måste kunna rullas: '+row.text);
    }
    allEquations+=lines.length;
    await page.selectOption('#jump',String(mostDense.slide));
+   if(lesson===3){
+    for(const seq of await page.locator('.slide.active [data-sequence]').all()){
+     const n=await seq.locator('[data-seq-item]').count();
+     for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();
+    }
+   }
    await page.screenshot({path:dir+'/lesson'+(lesson+1)+'-allsteps-mobile.png',fullPage:true});
    await page.setViewportSize({width:1440,height:900});
    await page.screenshot({path:dir+'/lesson'+(lesson+1)+'-allsteps-desktop.png',fullPage:true});

@@ -9,7 +9,8 @@
 .plot-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
 .plot-card{min-width:0;border:1px solid #c9dce6;background:#f7fafc;border-radius:14px;padding:14px}
 .plot-card svg,.plot-single svg{width:100%;height:auto;display:block}
-.plot-card h3{color:#145265}.plot-readout{font-weight:750;font-size:1.05rem;color:#214d5d;padding:8px 10px;background:#e8f3f3;border-radius:9px;margin-top:9px}
+.plot-card h3{color:#145265}.plot-readout{display:inline-block;font-weight:750;font-size:1.05rem;color:#214d5d;padding:8px 10px;background:#e8f3f3;border-radius:9px;margin-top:9px;max-width:100%}
+.plot-readout math{font-size:1em}
 .plot-single{min-width:0;max-width:760px;margin:12px auto;padding:12px;border:1px solid #c9dce6;background:#f7fafc;border-radius:14px}
 .control-deck{border:1px solid #b9d4dd;background:#f0f7f8;padding:14px 17px;border-radius:13px}
 .control-deck label{font-weight:750;display:block;margin:4px 0}
@@ -40,18 +41,27 @@
 .assertion{padding:15px;border:1px solid #cbdfe6;background:#f7fafc;border-radius:12px}
 /* En ekvation per semantiskt matematikblock, med mätbar luft. */
 .lesson-math-stack{display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;justify-items:start;min-width:0;max-width:100%;margin:12px 0 17px}
-.lesson-math-stack > p.math-display{display:block;width:100%;min-width:0;max-width:100%;margin:0!important;white-space:nowrap;overflow-x:auto}
+.lesson-math-stack > p.math-display{display:block;width:100%;min-width:0;max-width:100%;margin:0!important;white-space:nowrap;overflow:visible}
 .slide :is(.answer,.seq-item) .solution-math-group{row-gap:16px}
 .lesson-labeled-equation{min-width:0;max-width:100%}
 .lesson-labeled-equation>strong{display:block;font:.82rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:#295d70;margin-bottom:5px}
 .lesson-labeled-equation>p.math-display{margin:0}
 .slide .math-display[data-math-presentation="true"] math{font-size:1em;max-width:none;white-space:nowrap}
-.slide :is(p.math-display,span.math-display)[data-math-presentation="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.slide :is(p.math-display,span.math-display)[data-math-presentation="true"]{overflow:visible;max-width:100%}
 .slide .inline-math[data-math-presentation="true"] math{vertical-align:-.12em;max-width:none;white-space:nowrap}
+.slide .quiz-inline-math math,.slide .own-feedback-math math{display:inline-block;vertical-align:-.12em;font-size:1em}
+.book-method-support{margin:17px 0;border:1px solid #a4c8cc;border-radius:14px;background:#f7fbfc;padding:15px 17px}
+.book-method-support>summary{cursor:pointer;font-weight:800;color:#14586a;line-height:1.5}
+.book-method-support summary:focus-visible{outline:3px solid #087d70;outline-offset:4px}
+.support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px}
+.support-card{min-width:0;background:white;border:1px solid #c9dce6;border-radius:12px;padding:13px 15px}
+.support-card h3{font-size:1rem;margin:0 0 9px}.support-card p{margin:7px 0;line-height:1.5}
+.support-card .lesson-math-stack{margin:10px 0 2px}
+.support-card .math-display{font-size:1.13rem}
 .lesson-sign-table caption{font-size:.9rem;font-weight:700;text-align:left;color:#28566f;padding-bottom:7px}
 .lesson-sign-table thead th:first-child,.lesson-sign-table tbody th{width:25%;overflow-wrap:normal}
 .lesson-sign-table td{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.16rem;font-weight:700}
-@media(max-width:790px){.plot-pair,.discussion-grid,.book-steps{grid-template-columns:1fr}.plot-card svg{max-height:270px}.test-table th,.test-table td{padding:7px 3px;font-size:.84rem}.control-row{align-items:stretch;flex-direction:column}.control-row>*{max-width:100%}}
+@media(max-width:790px){.plot-pair,.discussion-grid,.book-steps,.support-grid{grid-template-columns:1fr}.plot-card svg{max-height:270px}.plot-card svg text{font-size:23px!important}.plot-single svg text{font-size:28px!important}.test-table th,.test-table td{padding:7px 3px;font-size:.84rem}.control-row{align-items:stretch;flex-direction:column}.control-row>*{max-width:100%}}
 </style>
 </head>
 <body>
@@ -264,6 +274,14 @@
 <div class="book-step"><b>Nivå 3</b><strong>3142 och 3143</strong><p>Fördjupa resonemang och motiveringar.</p></div>
 </div>
 <div class="task"><strong>Välj en start:</strong> Behöver du stöd? Gör 3136 och 3137, sedan 3140 a. Är du säker? Börja med 3140 och 3141 och gå vidare till 3142–3143. Försök själv → kontrollera → förklara och rätta.</div>
+<details id="graph-method-support" class="book-method-support"><summary>Visa frivillig metodsammanfattning</summary>
+<p>Försök först minnas skillnaderna. Öppna stödet när du behöver det och fortsätt sedan med dina egna beräkningar i boken. Här finns inga facit till bokuppgifterna.</p>
+<div class="support-grid">
+<div class="support-card"><h3>1 · Testa stationär punkt</h3><p>Kontrollera först att derivatan är noll vid det undersökta x-värdet <em>a</em>. Andraderivatan ger sedan ett lokalt besked.</p><div class="lesson-math-stack"><p class="math-display">f′(a) = 0</p><p class="math-display">f″(a) &gt; 0</p><p class="math-display">f″(a) &lt; 0</p><p class="math-display">f″(a) = 0</p></div><p>Positivt ger minimum, negativt maximum. Noll ger inget besked.</p></div>
+<div class="support-card"><h3>2 · När testet inte avgör</h3><p>Undersök förstaderivatans tecken på var sida om det stationära x-värdet.</p><div class="lesson-math-stack"><p class="math-display">f′(x) &gt; 0</p><p class="math-display">f′(x) &lt; 0</p></div><p>Positivt: funktionen växer. Negativt: den avtar. Ett teckenbyte avgör om det finns ett extremum.</p></div>
+<div class="support-card"><h3>3 · Kurvans böjning</h3><p>Andraderivatans tecken beskriver om tangentlutningen ökar eller minskar.</p><div class="lesson-math-stack"><p class="math-display">f″(x) &gt; 0</p><p class="math-display">f″(x) &lt; 0</p></div><p>En inflexionspunkt kräver byte i krökning, inte bara att andraderivatan är noll.</p></div>
+<div class="support-card"><h3>4 · Håll isär värdena</h3><p>Samma x-värde kan användas till olika frågor. Sätt in i rätt funktion.</p><div class="lesson-math-stack"><p class="math-display">f(a)</p><p class="math-display">f′(a)</p></div><p>Det första är punktens höjd, det andra tangentens lutning. En punkts typ är inte dess y-koordinat.</p></div>
+</div></details>
 <div class="teacher-pause"><strong>Arbetsro:</strong> Avsätt gärna cirka 20 minuter lugnt eget arbete; tiden kan anpassas efter lektionen. Webbmodellerna är inget substitut för räkning i boken.</div>
 <button type="button" class="secondary" data-go="control">Valbar extra kunskapskontroll innan utcheckningen</button>
 </section>

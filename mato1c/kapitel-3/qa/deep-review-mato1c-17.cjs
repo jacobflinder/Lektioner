@@ -202,7 +202,18 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   // Mobile screenshot of all 12 sections with revealed answers and completed interactions.
   await page.setViewportSize({width:390,height:844});
   for(let i=1;i<=12;i++){
-   await go(i);await dimensions('mobil bild '+i);
+   await go(i);
+   // v2.3 intentionally re-hides earlier answers and step lists on slide change;
+   // reopen explicitly to inspect complete mathematical ink at mobile width.
+   for(const button of await page.locator('.slide.active [data-reveal]').all()){
+    const id=await button.getAttribute('data-reveal');
+    if(await page.locator('#'+id).isHidden())await button.click();
+   }
+   for(const sequence of await page.locator('.slide.active [data-sequence]').all()){
+    const n=await sequence.locator('[data-seq-item]').count();
+    for(let step=0;step<n;step++)await sequence.locator('[data-seq-next]').click();
+   }
+   await dimensions('mobil bild '+i);
    if(i===5)await gap('#example [data-seq-item]:nth-child(2) .solution-math-group > p.math-display');
    if(i===6)await gap('#own-answer .lesson-math-stack:first-child > p.math-display');
    if(i===7)await gap('#zero-test .plot-card:first-child .lesson-math-stack > p.math-display');
