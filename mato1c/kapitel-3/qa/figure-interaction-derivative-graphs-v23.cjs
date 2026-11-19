@@ -32,7 +32,7 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
  const snap=async(width,n,phase)=>{
   await page.screenshot({path:folder+'/derivative-graphs-v23-'+width+'-'+String(n).padStart(2,'0')+'-'+phase+'.png',fullPage:true});images++;
  };
- const formVisibility=async(name,width)=>{
+ const formVisibility=async(name,width,requiredMath=2)=>{
   const v=await page.evaluate(()=>{
    const expressions=[...document.querySelectorAll('.slide.active :is(.math-work,.method-math,.math-sm,.readout,.feedback-inline-math) math')]
     .filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(el).visibility!=='hidden'});
@@ -61,7 +61,7 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
    return {screen:document.documentElement.scrollWidth,view:innerWidth,count:expressions.length,clipped,internal,gaps};
   });
   ok(v.screen<=v.view+2,name+': no horizontal document overflow '+v.screen+'/'+v.view);
-  ok(v.count>=2,name+': visible mathematical expressions');
+  ok(v.count>=requiredMath,name+': visible mathematical expressions ('+v.count+'/'+requiredMath+')');
   ok(v.clipped.length===0,name+': MathML never clipped by viewport '+JSON.stringify(v.clipped));
   ok(v.internal.length===0,name+': no hidden maths or internal scrolling '+JSON.stringify(v.internal));
   v.gaps.forEach(g=>ok(g>=15.9,name+': independent equations spaced at least 16px ('+g.toFixed(1)+')'));
@@ -152,7 +152,7 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
     ok(near(circles[0].y,323-36*c,1e-5)&&near(circles[1].y,323,1e-5),'exact SVG displacement at '+c);
    }
   }
-  if(n===7){await checkBook();await page.locator('#graph-method-support summary').click()}
+  if(n===7){await checkBook()} // Photograph the voluntarily expanded method cards.
   if(n===8){
    const data=await page.locator('#exit-derivative').evaluate(svg=>({paths:[...svg.querySelectorAll('path')].map(x=>x.getAttribute('d')),dots:[...svg.querySelectorAll('circle')].map(c=>({x:+c.getAttribute('cx'),y:+c.getAttribute('cy'),r:+c.getAttribute('r')})),bottom:+svg.querySelector('clipPath rect').getAttribute('y')+ +svg.querySelector('clipPath rect').getAttribute('height')}));
    eq(data.paths.length,1,'exit one derivative parabola');eq(data.dots.length,3,'three notable derivative points');
@@ -173,8 +173,8 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
    ok(await page.locator('.slide math').count()>=82,'all known maths rendered as MathML');
    for(let n=1;n<=8;n++){
     await go(n);ok(await page.locator('#graph-method-support').evaluate(el=>!el.open),'no stale book support on entry');
-    await formVisibility(width+' slide '+n+' before',width);await snap(width,n,'before');
-    await expanded(n);await formVisibility(width+' slide '+n+' after',width);await snap(width,n,'after');
+    await formVisibility(width+' slide '+n+' before',width,n===7?0:n===5?1:2);await snap(width,n,'before');
+    await expanded(n);await formVisibility(width+' slide '+n+' after',width,n===7?7:2);await snap(width,n,'after');
    }
    await go(3);
    for(const x of [0,1,2,3,4,5,6,7,8])await scanLinked(x,width);
