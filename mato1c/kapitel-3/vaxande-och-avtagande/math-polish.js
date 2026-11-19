@@ -43,6 +43,13 @@ sign.innerHTML='<strong>Derivatans tecken och grafens beteende:</strong>'+
  group(['f(−1)=1,5','f(1)=−0,5'])+
  '<p>På hela reella tallinjen är det lokala extrempunkter – kubikfunktionen har inget största eller minsta funktionsvärde globalt.</p>'+
  '<p>Vi delar upp x-axeln efter <strong>derivatans nollställen</strong>, inte efter de x där f(x)=0.</p>';
+// Mobile sign charts have real, independently labelled interval cells.
+const intervals=['x<−1','x=−1','−1<x<1','x=1','x>1'];
+const inputCells=[...document.querySelectorAll('#signs .two>div:nth-child(2)>table.sign-table tbody td')];
+const answerCells=[...document.querySelectorAll('#sign-solution table.sign-table tbody tr td')];
+if(inputCells.length!==5||answerCells.length!==10)throw Error('Ma3c growing: malformed sign-table structure');
+inputCells.forEach((el,i)=>el.dataset.interval=intervals[i]);
+answerCells.forEach((el,i)=>el.dataset.interval=intervals[i%5]);
 // 05: every necessary algebraic step visible and separate. Last result only last click.
 worked('example',0,'<strong>1 · Derivera</strong>'+
  group(['f(x)=6x−x²','(6x)′=6','(−x²)′=−2x','f′(x)=6−2x']));
