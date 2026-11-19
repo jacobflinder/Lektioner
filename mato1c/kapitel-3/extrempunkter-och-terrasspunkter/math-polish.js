@@ -124,7 +124,7 @@ summary.innerHTML='<div class="math-result-panel">'+group(['f′(a)=0','(a,f(a))
 // accessible source expression as aria-label in MathML.
 let blocks=0,inlines=0;
 for(const el of document.querySelectorAll('.slide :is(p.math,p.solution-equation,span.math-inline)')){
- if(el.querySelector('math')||el.closest('#book'))continue;
+ if(el.querySelector('math')||(el.closest('#book')&&!el.closest('#extrema-book-support')))continue;
  const raw=el.textContent.trim().replace(/\s+/g,' ');
  if(!raw)continue;
  const isInline=el.matches('span');
@@ -132,5 +132,46 @@ for(const el of document.querySelectorAll('.slide :is(p.math,p.solution-equation
  if(isInline)inlines++;else blocks++;
 }
 if(blocks<55||inlines<15)throw Error('Ma3c25 MathML coverage insufficient '+blocks+'/'+inlines);
+// Bookwork aid: on-demand, semantically typed, and closed on navigation.
+const book=document.getElementById('book'),support=document.getElementById('extrema-book-support');
+if(!book||!support)throw Error('Ma3c34 missing book aid');
+const supportSummary=support.querySelector('summary');
+const updateSummary=()=>{supportSummary.textContent=support.open?'Dölj frivilligt metodstöd':'Visa frivilligt metodstöd – försök först själv'};
+support.addEventListener('toggle',updateSummary);
+new MutationObserver(()=>{
+ if(!book.classList.contains('active')&&support.open)support.open=false;
+}).observe(book,{attributes:true,attributeFilter:['class']});
+document.getElementById('mode').addEventListener('click',()=>{if(support.open)support.open=false});
+updateSummary();
+// On a new attempt, obsolete right/wrong feedback must disappear.
+for(const id of ['own-max-x','own-max-y','own-min-x','own-min-y']){
+ document.getElementById(id).addEventListener('input',()=>{
+  const box=document.getElementById('own-feedback');box.replaceChildren();box.className='feedback';
+ });
+}
+// Maths in dynamic feedback must actually render, not live as plain words.
+document.getElementById('check-own').addEventListener('click',()=>{
+ const box=document.getElementById('own-feedback');
+ if(box.classList.contains('ok')){
+  for(const formula of ['(1;2)','(−1;−2)']){
+   const p=document.createElement('p');p.className='math';p.style.margin='6px 0';
+   box.append(p);M.setFormula(p,formula,'block');
+  }
+ }
+});
+const terraceQuiz=document.querySelector('#terrace [data-quiz]');
+if(terraceQuiz){
+ for(const button of terraceQuiz.querySelectorAll('button[data-correct]')){
+  button.addEventListener('click',()=>{
+   const box=terraceQuiz.querySelector('.feedback');
+   if(button.dataset.correct==='true'){
+    for(const formula of ['f′(−1)=3>0','f′(0)=0','f′(1)=3>0']){
+     const p=document.createElement('p');p.className='math';p.style.margin='5px 0';
+     box.append(p);M.setFormula(p,formula,'block');
+    }
+   }
+  });
+ }
+}
 document.documentElement.dataset.extremaMath='ready';
 })();
