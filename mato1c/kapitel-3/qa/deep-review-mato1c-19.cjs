@@ -27,7 +27,7 @@ const eq=(a,b,t=1e-7)=>Math.abs(a-b)<t;
  try{
  await page.goto(url,{waitUntil:'networkidle'});
  ok(await page.locator('.slide').count()===9,'9 slides');
- ok(await page.evaluate(()=>document.documentElement.dataset.globalExtremaMath)==='ready','local MathML');
+ ok(await page.evaluate(()=>document.documentElement.dataset.globalExtremaMath)==='v23-ready','local v2.3 MathML');
  ok(await page.locator('.slide math').count()>70,'semantic MathML count');
  for(const x of [-2,-1,0,1,2,3,4,4.5,5]){
   const eps=1e-5;ok(eq((f(x+eps)-f(x-eps))/(2*eps),df(x),1e-6),'independent derivative '+x);
@@ -76,7 +76,8 @@ const eq=(a,b,t=1e-7)=>Math.abs(a-b)<t;
  for(const t of ['f(b)=f(0)','b³−4,5b²+5=5','b³−4,5b²=0','b²(b−4,5)=0','b=0','b=4,5'])ok((await labels('#range-algebra')).includes(t),'tie proof '+t);
  await gaps('#range-algebra');
  await reveal('bound-45');await page.locator('[data-bound="4.5"]').click();await page.locator('#range-check').click();
- ok((await page.locator('#range-feedback').textContent()).includes('x = 0 och x = 4,50'),'double maximum');
+ const maxima=await labels('#range-feedback');
+ ok(maxima.includes('5,00')&&maxima.includes('x = 0')&&maxima.includes('x = 4,50'),'double maximum');
  await snap('desktop-04');
  await go(5);
  const seq=page.locator('#example [data-sequence]');

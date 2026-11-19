@@ -32,6 +32,7 @@ jobs:
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/mato1c/kapitel-3/ >/dev/null && break; sleep 1; done
       - name: Verify navigation, interactivity, responsivity and screenshots
         run: |
+          node mato1c/kapitel-3/qa/figure-interaction-global-extrema-v23.cjs
           node mato1c/kapitel-3/qa/browser-smoke.cjs
           node mato1c/kapitel-3/qa/deep-review-mato1c-24.cjs
           node mato1c/kapitel-3/qa/figure-interaction-growing-v23.cjs
