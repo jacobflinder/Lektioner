@@ -21,6 +21,8 @@
 .effect-model .model-note{font-size:.83rem;line-height:1.42;color:#4a6874;margin:8px 0}
 .effect-model .scale-key{font-size:.81rem;color:#536d79;margin:7px 0}
 .body-copy>.quiz{margin-top:15px}
+.effect-quiz-equation{margin:12px 0 6px;padding:4px 0}
+.effect-quiz-equation[hidden]{display:none}
 .body-copy>.steps-label{margin-top:19px;font-size:.87rem}
 .body-copy>.step{line-height:1.48;font-size:.96rem;padding:10px 12px}
 .body-copy>.step .mathrow{font-size:1.12rem}

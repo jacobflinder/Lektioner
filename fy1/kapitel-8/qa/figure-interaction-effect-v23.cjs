@@ -152,18 +152,27 @@ fs.mkdirSync(OUT,{recursive:true});
   // The two original self-check questions are not a new Socrative.
   await go(4);
   const q=page.locator('#bild-4 .quiz');
+  check(!await q.locator('.effect-quiz-equation').isVisible(),
+   'diagnostic MathML formula hidden in classroom mode before response');
   await q.locator('[data-choice="0"]').click();
   check(!await q.locator('.wrong').count(),'classroom choice never exposes correctness immediately');
   await q.locator('.feedback-toggle').click();
   check(await q.locator('.wrong').count()===1&&await q.locator('.good').count()===1,
    'explicit teacher reveal identifies chosen wrong answer and correct alternative');
+  check(await q.locator('.effect-quiz-equation math').isVisible(),
+   'revealed feedback includes a genuine mathematical expression');
   await page.locator('#reset').click();
   check(await q.locator('.selected').count()===0,'quiz reset clears pupil choice');
+  check(!await q.locator('.effect-quiz-equation').isVisible(),'reset hides diagnostic formula');
   await page.locator('#repeatmode').click();
   await q.locator('[data-choice="1"]').click();
   check(await q.locator('.good').count()===1,'repetition gives immediate diagnostic feedback');
+  check(await q.locator('.effect-quiz-equation math').isVisible(),
+   'repetition also shows the semantic formula immediately');
   await page.locator('#classmode').click();
   check(await q.locator('.good').count()===0,'return to class conceals diagnostic answer');
+  check(!await q.locator('.effect-quiz-equation').isVisible(),
+   'return to classroom conceals formula feedback');
 
   // Recap is optional, on the same bookwork screen, with native horizontal MathML.
   await go(11);
@@ -200,6 +209,13 @@ fs.mkdirSync(OUT,{recursive:true});
     }
     if(n===3)await power().locator('.reveal-model').click();
     if(n===8)await battery().locator('.reveal-model').click();
+    if(n===4||n===6){
+     const quiz=slide().locator('.quiz');
+     await quiz.locator('[data-choice="0"]').click();
+     await quiz.locator('.feedback-toggle').click();
+     check(await quiz.locator('.effect-quiz-equation math').isVisible(),
+      'semantic diagnostic feedback visibly revealed '+name+'/'+n);
+    }
     if(n===11){
      check(!await recap.evaluate(el=>el.open),'recap closed by default in '+name);
      await recap.locator('summary').click();

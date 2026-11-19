@@ -7,6 +7,21 @@ for(const sec of document.querySelectorAll('.slide')){
  for(const el of [...sec.querySelectorAll(':scope > .step')])body.append(el);
  const quiz=sec.querySelector(':scope > .quiz');if(quiz)body.append(quiz);
 }
+// The ordinary quiz engine retains its diagnostic text, while the actual
+// formula in revealed feedback is also expressed as native, readable MathML.
+for(const [n,expression] of [
+ [4,'<mi>P</mi><mo>=</mo><mi>R</mi><msup><mrow><mo>(</mo><mn>2</mn><mi>I</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>4</mn><mi>R</mi><msup><mi>I</mi><mn>2</mn></msup>'],
+ [6,'<msub><mi>I</mi><mtext>tot</mtext></msub><mo>=</mo><mfrac><mrow><mn>1 500</mn><mo>+</mo><mn>1 200</mn></mrow><mn>230</mn></mfrac><mspace width="0.15em"/><mtext>A</mtext><mo>≈</mo><mn>11,7</mn><mspace width="0.15em"/><mtext>A</mtext>']
+]){
+ const sec=document.querySelector('#bild-'+n),quiz=sec?.querySelector('.quiz');
+ if(!quiz)continue;
+ const shown=document.createElement('div');shown.className='effect-equation effect-quiz-equation';shown.hidden=true;
+ shown.innerHTML='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+expression+'</math>';
+ quiz.querySelector('.feedback').after(shown);
+ const sync=()=>{shown.hidden=quiz.querySelector('.feedback-toggle').textContent!=='Dölj återkoppling'};
+ for(const btn of quiz.querySelectorAll('[data-choice],.feedback-toggle'))btn.addEventListener('click',sync);
+ sec.addEventListener('lesson:reset',()=>{shown.hidden=true});
+}
 // Voluntary recall inside the original bookwork view. It deliberately contains
 // only relationships and their conditions, never answers to textbook exercises.
 const book=document.querySelector('#bild-11 .book-main');
