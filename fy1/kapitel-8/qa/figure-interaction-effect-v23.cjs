@@ -45,8 +45,8 @@ fs.mkdirSync(OUT,{recursive:true});
    x:b?+b.getAttribute('x'):null,equations:root.querySelectorAll('.effect-model-equation math').length,
    labels:[...svg.querySelectorAll('text')].map(el=>el.textContent),
    svgLabel:svg.getAttribute('aria-label'),result:root.querySelector('.model-result').innerText,
-   volmeter:!!svg.querySelector('circle[cx="293"][cy="168"][r="33"]'),
-   branch:[...svg.querySelectorAll('path')].some(p=>p.getAttribute('d')?.includes('M201 214V168H260 M326 168H390V214'))};
+   volmeter:!!svg.querySelector('circle[cx="293"][cy="162"][r="30"]'),
+   branch:[...svg.querySelectorAll('path')].some(p=>p.getAttribute('d')?.includes('M201 214V162H263 M323 162H390V214'))};
  });
  // Independent actual-pixel check of the diagram reported by the user.
  // The voltmeter must not hide R=5,0Ω or R=3,0Ω; the label must belong
@@ -103,6 +103,27 @@ fs.mkdirSync(OUT,{recursive:true});
    plates.width>=12,topPlate:top,bottomPlate:bottom,maskCount:masks,wire:wire.getAttribute('d')};
  });
  const validContact=v=>v.top&&v.bottom&&v.noShunt&&v.noMask&&v.visible;
+ // Validate visible spacing in the actual 230 V branch circuit and the
+ // dynamic voltmeter: not just correct text values and schematic topology.
+ const labelGeometry=async()=>page.locator('#bild-6 .effect-figure svg').evaluate(svg=>{
+  const texts=[...svg.querySelectorAll('text')];
+  const first=texts.find(t=>t.textContent==='1 500 W');
+  const second=texts.find(t=>t.textContent==='1 200 W');
+  const r1=svg.querySelector('rect[x="220"][y="96"]');
+  const r2=svg.querySelector('rect[x="349"][y="96"]');
+  if(!first||!second||!r1||!r2)return {leftGap:-1,rightGap:-1,near:false};
+  const a=first.getBoundingClientRect(),b=second.getBoundingClientRect();
+  const c=r1.getBoundingClientRect(),d=r2.getBoundingClientRect();
+  return {leftGap:c.left-a.right,rightGap:b.left-d.right,
+   near:a.top<c.bottom&&a.bottom>c.top&&b.top<d.bottom&&b.bottom>d.top};
+ });
+ const voltmeterSpacing=async()=>battery().evaluate(root=>{
+  const svg=root.querySelector('.drawing svg');
+  const circle=svg.querySelector('circle[cx="293"][cy="162"][r="30"]');
+  const rect=svg.querySelector('rect[x="257"][y="201"]');
+  if(!circle||!rect)return -1;
+  return rect.getBoundingClientRect().top-circle.getBoundingClientRect().bottom;
+ });
  const mathGeometry=async tag=>{
   const rows=await slide().locator('.effect-equation:visible,.effect-model-equation:visible').evaluateAll(nodes=>nodes.map(el=>{
    const m=el.querySelector('math'),mr=m?.getBoundingClientRect();
@@ -266,6 +287,15 @@ fs.mkdirSync(OUT,{recursive:true});
       circuit.voltGap>=18&&circuit.resistorGap>=4&&circuit.labelWidth>=35&&circuit.voltVisible,
       'no real pixel overlap among voltmeter, R label and resistor '+name+'/'+n+' '+JSON.stringify(circuit));
      check(circuit.branch,'original correct parallel voltmeter topology preserved '+name+'/'+n);
+    }
+    if(n===6){
+     const spacing=await labelGeometry();
+     check(spacing.leftGap>=5&&spacing.rightGap>=5&&spacing.near,
+      '230V branch watt labels do not overlap wires or resistor symbols '+name+'/'+JSON.stringify(spacing));
+    }
+    if(n===8){
+     const gap=await voltmeterSpacing();
+     check(gap>=4,'dynamic voltmeter must visibly clear R, not touch it '+name+'/'+gap);
     }
     if(n===6&&width>=1200){
      const title=await slide().locator('.page-title').evaluate(el=>({
