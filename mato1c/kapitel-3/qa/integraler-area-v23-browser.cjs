@@ -7,7 +7,7 @@ fs.mkdirSync(out,{recursive:true});
 const url='http://127.0.0.1:8123/mato1c/kapitel-3/integraler-och-area/';
 const viewports=[[390,844],[768,900],[1280,800],[1920,1080]];
 (async()=>{
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true,...(process.env.MA3C_CHROMIUM_PATH?{executablePath:process.env.MA3C_CHROMIUM_PATH}:{})});
 const page=await browser.newPage();
 let checks=0,images=0;
 const errors=[],externals=[];
@@ -106,6 +106,21 @@ try{
   await go(9);await go(8);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
   yes(await page.locator('#rect-method').inputValue()==='left',label+' rectangle method resets');
   await go(9);
+  const theorem=page.locator('#bridge [data-seq-item]');
+  yes(await theorem.filter({visible:true}).count()===0,label+' theorem waits for independent thinking');
+  for(let i=1;i<=4;i++){await page.locator('#bridge [data-seq-next]').click();yes(await theorem.filter({visible:true}).count()===i,label+' theorem revealed in step '+i)}
+  const theoremMath=page.locator('#bridge [data-integral-rule] math');
+  yes(await theoremMath.count()===3,label+' all three integral equalities are MathML');
+  for(const el of await theoremMath.all()){
+   const val=await el.evaluate(e=>({a:e.getAttribute('aria-label'),eq:e.querySelectorAll('mo').length,integral:e.querySelector('msubsup')!==null}));
+   yes(val.a.includes(' = ')&&val.integral,label+' theorem displayed as full equality '+val.a);
+  }
+  yes((await page.locator('#bridge [data-integral-rule="0|3|x+2|x|10,5"] math').getAttribute('aria-label')).endsWith('10,5'),label+' theorem result exactly 10.5');
+  const clipped=await page.locator('#bridge .formula.theorem').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({text:el.textContent,over:el.scrollWidth-el.clientWidth})));
+  yes(clipped.length===0,label+' complete theorem equations visible without horizontal scrolling: '+JSON.stringify(clipped));
+  await shot(label+'-fundamentalsatsen');
+  await go(10);await go(9);yes(await theorem.filter({visible:true}).count()===0,label+' theorem resets after navigation');
+  await go(10);
   for(const t of [1,2,3,4,5]){
    await set('speed-switch',t);
    const rects=await page.locator('#speed-plot [data-speed-rect]').evaluateAll(els=>els.map(e=>({points:e.getAttribute('points'),duration:+e.dataset.duration,speed:+e.dataset.speed})));
@@ -123,13 +138,11 @@ try{
   await set('speed-switch',5);await shot(label+'-speed');
   if(width<=768){const geom=await page.evaluate(()=>{const slider=document.querySelector('#velocity .control-box').getBoundingClientRect(),fig=document.querySelector('#velocity .plot-card').getBoundingClientRect();return {gap:fig.top-slider.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' speed graph follows slider, gap '+geom.gap);if(width===390)yes(geom.top<=height-130,label+' speed graph enters mobile viewport')}
   await page.locator('#speed-switch').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#speed-switch').inputValue()==='4',label+' speed keyboard');
-  await go(10);await go(9);yes(await page.locator('#speed-switch').inputValue()==='3',label+' speed reset after navigation');
-  await go(10);await shot(label+'-signed');
+  await go(11);await go(10);yes(await page.locator('#speed-switch').inputValue()==='3',label+' speed reset after navigation');
+  await go(11);await shot(label+'-signed');
   const signed=await page.locator('#signed-plot [data-signed]').count();yes(signed===2,label+' two signed regions');
   yes(!await page.locator('#signed-answer').isVisible(),label+' sign solution hidden initially');
   await page.locator('[data-reveal="signed-answer"]').click();yes(await page.locator('#signed-answer math').count()===4,label+' four signed calculations');await shot(label+'-signed-answer');
-  await go(11);yes(!await page.locator('#bridge-answer').isVisible(),label+' theorem held back');
-  await page.locator('[data-reveal="bridge-answer"]').click();yes(await page.locator('#bridge-answer math').count()===4,label+' theorem and cancellation visible');await shot(label+'-bridge');
   await go(12);yes((await page.locator('#quiz .feedback').innerText()).includes('Välj'),label+' quiz feedback hidden initially');
   await page.locator('#quiz button[data-test-value="6"]').click();
   yes((await page.locator('#quiz .feedback').innerText()).includes('rektangeln'),label+' wrong answer targeted');
