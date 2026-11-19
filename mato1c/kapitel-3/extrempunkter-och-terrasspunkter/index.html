@@ -54,6 +54,16 @@
 .slide .math-result-panel{margin:13px 0}
 .slide .math-result-panel p{margin:5px 0}
 @media(max-width:720px){.slide .math math[display="block"],.slide .solution-equation math[display="block"]{font-size:1rem}}
+
+/* v2.3: four optional mathematics cards, readable without shrinking formulas. */
+#extrema-book-support{border:1px solid #b6cedb;border-radius:12px;margin:20px 0;background:#f1f8fa;overflow:hidden}
+#extrema-book-support>summary{padding:14px 18px;font-weight:750;cursor:pointer;color:#17435e}
+#extrema-book-support[open]>summary{border-bottom:1px solid #cbdee7}
+#extrema-book-support .support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;padding:14px}
+#extrema-book-support .support-card{border:1px solid #d1e3eb;border-radius:9px;background:white;padding:12px 15px;min-width:0}
+#extrema-book-support .support-card .math{margin:4px 0 10px}
+#extrema-book-support .support-card math[display="block"]{font-size:1.15rem;max-width:100%}
+@media(min-width:1100px){#explore .two>.graph-board{align-self:start;position:sticky;top:15px}}
 </style>
 </head>
 <body>
@@ -226,6 +236,16 @@
 <div class="panel"><strong>Mer träning vid behov:</strong> 3116 eller 3121. Fortsätt med fler uppgifter om du behöver.</div>
 <div class="task"><strong>Arbeta ordentligt med boken</strong>Försök själv. Diskutera vid behov. Kontrollera och förstå dina fel. Fortsätt med ett spår som utmanar dig på minst två nivåer.</div>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart ditt valda spår ovan.</div>
+<details id="extrema-book-support">
+ <summary>Visa frivilligt metodstöd – försök först själv</summary>
+ <div class="support-grid">
+  <div class="support-card"><p class="math">f′(a)=0</p><p><strong>Stationär punkt:</strong> tangenten är horisontell. Det räcker inte för att bestämma punkttyp.</p></div>
+  <div class="support-card"><p class="math">+ 0 −</p><p><strong>Lokalt maximum:</strong> funktionen stiger före punkten och sjunker efter.</p>
+   <p class="math">− 0 +</p><p><strong>Lokalt minimum:</strong> sjunker före och stiger efter.</p></div>
+  <div class="support-card"><p class="math">+ 0 +</p><p class="math">− 0 −</p><p><strong>Ingen extrempunkt:</strong> inget teckenbyte. Kontrollera dessutom böjningsbyte innan du säger terrasspunkt.</p></div>
+  <div class="support-card"><p class="math">(a;f(a))</p><p><strong>Koordinater:</strong> bestäm först x-värdet med derivatan, beräkna sedan y-värdet med ursprungsfunktionen.</p></div>
+ </div>
+</details>
 </section>
 
 <section class="slide" id="exit" data-teacher="PDF s. 6; individuell utcheckning, ingen interaktiv graf. Eleverna måste skilja f′(a)=0 från f(a) och bevisa klassificeringen genom tecken före/efter. Vänta med facit tills de skrivit. Se om svaren verkligen visar dagens mål.">
@@ -269,7 +289,7 @@
 <div><button id="prev" type="button" class="secondary">← Föregående</button><button id="next" type="button">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
 <div><label for="jump">Gå till</label><select id="jump" aria-label="Välj avsnitt i lektionen"></select></div>
 </div>
-<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Källa: den tidigare lektionen 2026-11-05. Webbens modeller är egna beräknade figurer. Inga elevsvar samlas in.</footer>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Matematiskt beräknade figurer och elevinteraktioner utan inloggning eller lagring av elevsvar.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
 <script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
