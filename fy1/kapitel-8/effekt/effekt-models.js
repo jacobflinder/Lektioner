@@ -28,7 +28,7 @@ inner+=tx(bx+2,y+63,f(e,0)+' J',17,'#204e61','start');}
 else{inner+=tx(bx+bw/2,y+26,'?',22,'#7d98a5');}
 }
 const axis=291;inner+=`<path d="M${bx} ${axis} H${bx+bw}" stroke="#577684" stroke-width="2"/>`;
-for(let i=0;i<=3;i++){const x=bx+i*bw/3;inner+=`<path d="M${x} ${axis-5}v10" stroke="#577684" stroke-width="2"/>`+tx(x,axis+25,i*15+' kJ',12);}
+for(let i=0;i<=3;i++){const x=bx+i*bw/3;inner+=`<path d="M${x} ${axis-5}v10" stroke="#577684" stroke-width="2"/>`+tx(x,axis+25,i*15+' kJ',16);}
 return {svg:svg(550,335,inner,'Två energistaplar med en fast linjär skala från 0 till 45 kilojoule, samma skala för båda effekter'),result:`<b>Energi efter ${f(s.time,0)} s</b><div class="effect-model-math">${mLine('<msub><mi>E</mi><mn>1</mn></msub><mo>=</mo><mn>'+f(s.p1,0)+'</mn>'+mUnit('W')+'<mo>·</mo><mn>'+f(s.time,0)+'</mn>'+mUnit('s'))}
 ${mLine('<msub><mi>E</mi><mn>1</mn></msub><mo>=</mo><mn>'+f(e1,0)+'</mn>'+mUnit('J'))}
 ${mLine('<msub><mi>E</mi><mn>2</mn></msub><mo>=</mo><mn>'+f(s.p2,0)+'</mn>'+mUnit('W')+'<mo>·</mo><mn>'+f(s.time,0)+'</mn>'+mUnit('s'))}
@@ -59,7 +59,7 @@ if(shown){
 }
 for(let tick=0;tick<=12;tick+=3){
  const x=left+tick*scale;
- a+=`<line x1="${x}" y1="343" x2="${x}" y2="352" stroke="#527481" stroke-width="1.7"/>`+tx(x,376,tick+' V',13,'#416778');
+ a+=`<line x1="${x}" y1="343" x2="${x}" y2="352" stroke="#527481" stroke-width="1.7"/>`+tx(x,376,tick+' V',17,'#416778');
 }
 return {svg:svg(550,440,a,'Seriekrets med elektromotorisk spänning och inre samt yttre resistans. Voltmeter i parallell över yttre resistans. Under schemat syns två spänningsandelar som summerar till ems.'),result:`<b>Beräknat för samma seriekrets</b><div class="effect-model-math">
 ${mLine('<mi>I</mi><mo>=</mo><mfrac><mi>ℰ</mi><mrow><mi>r</mi><mo>+</mo><mi>R</mi></mrow></mfrac>')}
