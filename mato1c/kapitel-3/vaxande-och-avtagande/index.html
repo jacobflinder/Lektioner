@@ -29,6 +29,34 @@
 #book-support .support-card p:last-child{margin-bottom:0}
 #book-support .support-card math{max-width:100%;font-size:1.16rem}
 #book-support .support-card .math math[display="block"]{font-size:1.16rem}
+/* Mobile: keep both the graph and every sign-table column inside the stage.
+   On narrow screens present genuine interval cards, not illegibly small 6-column tables. */
+@media(max-width:720px){
+ .slide .two{grid-template-columns:minmax(0,1fr)}
+ .slide .two>*{min-width:0}
+ .slide .plot-box,.slide .plot-box svg{min-width:0;max-width:100%}
+ #signs .two>div:nth-child(2)>table.sign-table,
+ #sign-solution table.sign-table{display:block;width:100%;border:0;font-size:1rem}
+ #signs .two>div:nth-child(2)>table.sign-table thead,
+ #sign-solution table.sign-table thead{display:none}
+ #signs .two>div:nth-child(2)>table.sign-table tbody,
+ #sign-solution table.sign-table tbody{display:block}
+ #signs .two>div:nth-child(2)>table.sign-table tbody tr,
+ #sign-solution table.sign-table tbody tr{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+ #signs .two>div:nth-child(2)>table.sign-table th,
+ #sign-solution table.sign-table th{
+  display:block;grid-column:1/-1;text-align:left;border:0;padding:2px 4px}
+ #signs .two>div:nth-child(2)>table.sign-table td,
+ #sign-solution table.sign-table td{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:7px;border:1px solid #c6dce6;border-radius:8px;
+  padding:9px 11px;min-width:0;min-height:64px;background:#fff}
+ #signs .two>div:nth-child(2)>table.sign-table td::before,
+ #sign-solution table.sign-table td::before{
+  content:attr(data-interval);font-weight:750;font-size:.92rem;color:#244f63}
+ #signs .two>div:nth-child(2)>table.sign-table select{width:100%;min-width:0;max-width:100%}
+}
 </style>
 </head>
 <body>
