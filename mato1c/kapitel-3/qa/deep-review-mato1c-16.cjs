@@ -123,10 +123,10 @@ assert.ok(d(f,-1)<0&&d(x=>2*x,-1)>0&&!almost(d(f,-1),0),'Avtagande trots positiv
   await go(4);
   const form=page.locator('#own-formula'),zero=page.locator('#own-at-zero'),root=page.locator('#own-root');
   await form.fill('3x²−12x');await zero.fill('-12');await root.fill('2');await page.locator('#check-own').click();
-  assert.ok((await page.locator('#own-feedback').innerText()).includes('h′(x)'));
+  assert.equal(await page.locator('#own-feedback math[aria-label="h′(x)"]').count(),1,'Första derivatan ska namnges i semantisk matematik vid fel');
   await form.fill('6x');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).includes('konstanttermen'));
-  await form.fill('6x−12');await zero.fill('12');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).includes('6 · 0 − 12'));
-  await zero.fill('-12');await root.fill('3');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).includes('6x − 12 = 0'));
+  await form.fill('6x−12');await zero.fill('12');await page.locator('#check-own').click();assert.equal(await page.locator('#own-feedback math[aria-label="6 · 0 − 12"]').count(),1,'Felaktigt insatt värde ger synligt matematiskt steg');
+  await zero.fill('-12');await root.fill('3');await page.locator('#check-own').click();assert.equal(await page.locator('#own-feedback math[aria-label="6x − 12 = 0"]').count(),1,'Felaktigt nollställe får fullständig ekvation');
   await root.fill('2');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'));
   await shown('own-hint');await shot('05-eget-desktop');
   // 6. Inga hoppade steg i ekvationen; rötter är inte extrempunkter per automatik.
@@ -155,10 +155,12 @@ assert.ok(d(f,-1)<0&&d(x=>2*x,-1)>0&&!almost(d(f,-1),0),'Avtagande trots positiv
   await page.setViewportSize({width:390,height:844});
   for(let i=0;i<8;i++){
    await go(i);await inspect('bild '+(i+1));
-   if(i===0)await gap('#start-answer .solution-math-group > .lesson-labeled-equation');
-   if(i===3)await gap('#examples .sequence:nth-child(2) .lesson-math-stack > p.math-fresh');
-   if(i===5)await gap('#feedback-answer .number-card:nth-child(3) .lesson-math-stack > p.math-fresh');
-   if(i===7)await gap('#exit-answer .solution-math-group > p.math-fresh');
+   // Navigation deliberately closes feedback and rolls sequences back to zero.
+   // Reopen it before measuring the visible mobile mathematics.
+   if(i===0){await shown('start-answer');await gap('#start-answer .solution-math-group > .lesson-labeled-equation')}
+   if(i===3){for(let k=0;k<3;k++)await page.locator('#examples .sequence:nth-child(2) [data-seq-next]').click();await gap('#examples .sequence:nth-child(2) .lesson-math-stack > p.math-fresh')}
+   if(i===5){await shown('feedback-answer');await gap('#feedback-answer .number-card:nth-child(3) .lesson-math-stack > p.math-fresh')}
+   if(i===7){await shown('exit-answer');await gap('#exit-answer .solution-math-group > p.math-fresh')}
    await shot('mobil-'+String(i+1).padStart(2,'0'));
   }
   assert.deepEqual(errors,[],'Inga JS, nätverks- eller externa persondataanrop');

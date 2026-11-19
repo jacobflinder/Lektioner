@@ -47,17 +47,23 @@ const formulaSelector=':is(p.math, p.mathline, p.math-display, p.math-work, p.ma
    assert.ok(selected,'Lektion '+(n+1)+': hitta en öppnad lösning med matematik');
    checks++;
    let math=page.locator('.slide.active [data-seq-item]:visible '+formulaSelector).first();
-   let metrics=await math.evaluate(el=>{const c=getComputedStyle(el);return {font:c.fontFamily,size:parseFloat(c.fontSize),display:c.display,overflow:c.overflowX,width:el.clientWidth,text:el.textContent.trim()}});
+   let metrics=await math.evaluate(el=>{const c=getComputedStyle(el);return {font:c.fontFamily,size:parseFloat(c.fontSize),display:c.display,overflow:c.overflowX,width:el.clientWidth,scroll:el.scrollWidth,text:el.textContent.trim()}});
    assert.ok(metrics.font.includes('Cambria Math'),'Lektion '+(n+1)+': gemensamt matematiktypsnitt');
    assert.ok(metrics.size>=18,'Lektion '+(n+1)+': läsbar ekvationsstorlek');
    assert.ok(metrics.display==='block','Lektion '+(n+1)+': separat ekvationsrad');
-   assert.ok(metrics.overflow==='auto','Lektion '+(n+1)+': egna formler får intern horisontell scroll');
+   // Lesson 35 has undergone v2.3 visual inspection: its short MathML rows
+   // fit outright and must never be clipped by the legacy internal scroller.
+   if(n===2){
+    assert.equal(metrics.overflow,'visible','Lektion 3: matematik får inte beskäras av intern scroll');
+    assert.ok(metrics.scroll<=metrics.width+3,'Lektion 3: hela matematikraden ryms i datorvy');
+   }else assert.ok(metrics.overflow==='auto','Lektion '+(n+1)+': äldre formler behåller intern horisontell scroll');
    checks+=4;
    await page.screenshot({path:folder+'/lesson'+(n+1)+'-math-desktop.png',fullPage:true});
    await page.setViewportSize({width:390,height:844});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Lektion '+(n+1)+': ingen sidledes mobilscroll efter visad lösning');
    metrics=await math.evaluate(el=>({size:parseFloat(getComputedStyle(el).fontSize),client:el.clientWidth,scroll:el.scrollWidth}));
    assert.ok(metrics.size>=16.5,'Lektion '+(n+1)+': mobil matematikstorlek');
+   if(n===2)assert.ok(metrics.scroll<=metrics.client+3,'Lektion 3: hela matematikraden ryms i mobilvy utan intern scroll');
    checks+=2;
    await page.screenshot({path:folder+'/lesson'+(n+1)+'-math-mobile.png',fullPage:true});
    assert.deepEqual(errors,[],'Lektion '+(n+1)+': inga JS-fel');

@@ -72,7 +72,12 @@ fs.mkdirSync(dir,{recursive:true});
     assert.ok(row.font.includes('Cambria Math'),'L'+(lesson+1)+': matematisk stil saknas: '+row.text);
     assert.ok(row.display==='block','L'+(lesson+1)+': ekvationen står inte i eget block: '+row.text);
     assert.ok(row.size>=16.5,'L'+(lesson+1)+': för liten ekvation '+row.size+'px: '+row.text);
-    assert.ok(row.overflow==='auto','L'+(lesson+1)+': bred formel måste kunna rullas: '+row.text);
+    // Andraderivatan has been visually audited under v2.3. The entire
+    // MathML expression must fit instead of requiring a legacy scroller.
+    if(lesson===2){
+     assert.ok(row.overflow==='visible'||row.overflow==='auto','L3: matematiska tecken får inte döljas: '+row.text);
+     assert.ok(row.scroll<=row.client+4,'L3: hela matematiken måste rymmas utan intern rullning: '+row.text);
+    }else assert.ok(row.overflow==='auto','L'+(lesson+1)+': äldre bred formel måste kunna rullas: '+row.text);
    }
    allEquations+=lines.length;
    await page.selectOption('#jump',String(mostDense.slide));

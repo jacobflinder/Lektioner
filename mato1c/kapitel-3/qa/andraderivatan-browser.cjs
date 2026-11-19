@@ -45,6 +45,8 @@ try{
  await ok(await page.locator('#graph-f path').count()>0 && await page.locator('#graph-g path').count()>0,'Synkroniserade tangentgrafer');
  await page.locator('#set-two').click();
  await ok((await page.locator('#slope-x-value').innerText()).includes('2,00'),'Reglaget kan ställas till 2');
+ await ok(await page.locator('#explore-readouts').isHidden(),'Nytt x-värde kräver ny förutsägelse innan lutningarna visas');
+ await page.locator('[data-reveal="explore-readouts"]').click();
  await ok((await page.locator('#readout-f').innerText()).includes('4,00'),'f′(2)=4');
  await ok((await page.locator('#readout-g').innerText()).includes('2,00'),'g′(2)=2 fortfarande');
  await page.locator('#explore [data-correct="false"]').first().click();
@@ -72,7 +74,7 @@ try{
  await page.locator('#own-at-zero').fill('-12');
  await page.locator('#own-root').fill('2');
  await page.locator('#check-own').click();
- await ok((await page.locator('#own-feedback').innerText()).includes('h′(x)'),'Förväxlad första-/andraderivata får riktad återkoppling');
+ await ok(await page.locator('#own-feedback math[aria-label="h′(x)"]').count()===1,'Förväxlad första-/andraderivata får riktad semantisk återkoppling');
  await page.locator('#own-formula').fill('6x−12');
  await page.locator('#own-formula').fill('6x');
  await page.locator('#check-own').click();
@@ -80,11 +82,11 @@ try{
  await page.locator('#own-formula').fill('6x−12');
  await page.locator('#own-at-zero').fill('12');
  await page.locator('#check-own').click();
- await ok((await page.locator('#own-feedback').innerText()).includes('6 · 0 − 12'),'Fel värde får riktad återkoppling');
+ await ok(await page.locator('#own-feedback math[aria-label="6 · 0 − 12"]').count()===1,'Fel värde får synligt matematiskt insättningsled');
  await page.locator('#own-at-zero').fill('−12');
  await page.locator('#own-root').fill('3');
  await page.locator('#check-own').click();
- await ok((await page.locator('#own-feedback').innerText()).includes('6x − 12 = 0'),'Fel nollställe får riktad återkoppling');
+ await ok(await page.locator('#own-feedback math[aria-label="6x − 12 = 0"]').count()===1,'Fel nollställe får synlig ekvation');
  await page.locator('#own-root').fill('2');
  await page.locator('#check-own').click();
  await ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Alla svar korrekta');

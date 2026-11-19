@@ -24,7 +24,50 @@
    others++;
   }
  }
- if(exponentials!==5)throw Error('Förväntade fem exponentialrader, fick '+exponentials);
+ if(exponentials!==7)throw Error('Förväntade sju exponentialrader inklusive arbetsstöd, fick '+exponentials);
  if(others<35)throw Error('För få semantiska uttryck: '+others);
+ // Den gemensamma quizmotorn ger textåterkoppling; här får just denna lektions
+ // elevsynliga svar, val och återkoppling semantiska uttryck, även efter byte av svar.
+ const quiz=document.querySelector('#explore [data-quiz]');
+ const feedback=quiz.querySelector('.feedback');
+ function part(text,formula=false){
+  if(!formula)return document.createTextNode(text);
+  const span=document.createElement('span');span.className='math-inline-answer';
+  M.setFormula(span,text,'inline');return span;
+ }
+ for(const button of quiz.querySelectorAll('button[data-correct]')){
+  const formula=button.textContent.trim();
+  if(/^[fg]′/.test(formula))M.setFormula(button,formula,'inline');
+  button.addEventListener('click',()=>{
+   if(button.dataset.correct==='true')feedback.replaceChildren(
+    part('Rätt. För parabeln ändras '),part('f′(x) = 2x',true),
+    part(' när x ändras. För den räta linjen är '),part('g′(x) = 2',true),part(' konstant.'));
+   else feedback.replaceChildren(
+    part('Jämför lutningarna vid '),part('x = 0,5',true),part(' och '),part('x = 2',true),
+    part('. Vilket uttryck ändras med x: '),part('2x',true),part(' eller '),part('2',true),part('?'));
+  });
+ }
+ // Ny sida eller växling mellan klassrum och eget arbete ska inte lämna gamla
+ // facit, quizsvar eller ett öppet metodstöd på skärmen.
+ const reveals=[...document.querySelectorAll('.slide [data-reveal]')]
+  .map(button=>({button,label:button.textContent,target:document.getElementById(button.dataset.reveal)}));
+ function resetLearningState(){
+  document.getElementById('book-support').open=false;
+  for(const {button,label,target} of reveals){
+   target.classList.add('hidden');button.setAttribute('aria-expanded','false');button.textContent=label;
+  }
+  for(const seq of document.querySelectorAll('.slide [data-sequence]'))seq.querySelector('[data-seq-reset]').click();
+  for(const choice of quiz.querySelectorAll('button[data-correct]')){
+   choice.classList.remove('correct','wrong');choice.setAttribute('aria-pressed','false');
+  }
+  feedback.replaceChildren();feedback.className='feedback';
+  const own=document.getElementById('own-feedback');own.replaceChildren();own.className='feedback';
+ }
+ const stage=document.getElementById('stage');let current=document.querySelector('.slide.active')?.id;
+ new MutationObserver(()=>{
+  const active=document.querySelector('.slide.active')?.id;
+  if(active!==current){current=active;resetLearningState()}
+ }).observe(stage,{subtree:true,attributes:true,attributeFilter:['class']});
+ document.getElementById('mode').addEventListener('click',resetLearningState);
  document.documentElement.dataset.andraderivatanMathMl='ready';
 })();

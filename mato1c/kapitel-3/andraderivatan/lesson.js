@@ -3,6 +3,7 @@
    Inga elevsvar skickas eller lagras. */
 (()=>{'use strict';
 const ns='http://www.w3.org/2000/svg',$=id=>document.getElementById(id);
+const math=window.Ma4Math;
 const fmt=(x,n=2)=>(Math.abs(x)<1e-9?0:x).toFixed(n).replace('.',',').replace('-','−');
 const models={f:{value:x=>x*x,derivative:x=>2*x,second:x=>2,label:'f(x) = x²',color:'#0c8b83'},
               g:{value:x=>2*x,derivative:x=>2,second:x=>0,label:'g(x) = 2x',color:'#2271a2'}};
@@ -50,10 +51,12 @@ function draw(id,key,tangentX=null){
 draw('start-f','f');draw('start-g','g');
 function update(){
  const x=Number($('slope-x').value);
+ // Varje ny position kräver en ny förutsägelse innan siffervärdena visas.
+ if(!$('explore-readouts').classList.contains('hidden'))document.querySelector('[data-reveal="explore-readouts"]').click();
  draw('graph-f','f',x);draw('graph-g','g',x);
- $('slope-x-value').textContent='x = '+fmt(x);
- $('readout-f').textContent='f′('+fmt(x)+') = '+fmt(models.f.derivative(x));
- $('readout-g').textContent='g′('+fmt(x)+') = '+fmt(models.g.derivative(x));
+ math.setFormula($('slope-x-value'),'x = '+fmt(x),'inline');
+ math.setFormula($('readout-f'),'f′('+fmt(x)+') = '+fmt(models.f.derivative(x)),'inline');
+ math.setFormula($('readout-g'),'g′('+fmt(x)+') = '+fmt(models.g.derivative(x)),'inline');
 }
 $('slope-x').addEventListener('input',update);
 for(const [id,x] of [['set-half',.5],['set-two',2]]){
@@ -63,6 +66,25 @@ function numericValue(id){
  const raw=$(id).value.trim().replace(/\s/g,'').replace(/[−–]/g,'-').replace(',','.');
  if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw))return NaN;
  return Number(raw);
+}
+// Presentera matematiska uttryck som riktiga MathML-objekt även i dynamisk feedback.
+const feedbackMath=[
+ 'h″(x) = 6x − 12','h″(x)=6x−12','h″(0)=−12','h″(x) = 0','h″(x)=0',
+ '6x − 12 = 0','6 · 0 − 12','−12+6x','h″(0)','h″(x)','h′(x)',
+ '−12x','3x²','6x²','6x','x = 0','x=2','ax+b'
+].sort((a,b)=>b.length-a.length);
+function feedback(out,description,correct){
+ out.className='feedback '+(correct?'ok':'no');
+ const nodes=[];let cursor=0;
+ while(cursor<description.length){
+  let offset=description.length,found='';
+  for(const token of feedbackMath){const at=description.indexOf(token,cursor);if(at>=0&&(at<offset||(at===offset&&token.length>found.length))){offset=at;found=token}}
+  if(!found){nodes.push(document.createTextNode(description.slice(cursor)));break}
+  if(offset>cursor)nodes.push(document.createTextNode(description.slice(cursor,offset)));
+  const span=document.createElement('span');span.className='math-inline-answer';
+  math.setFormula(span,found,'inline');nodes.push(span);cursor=offset+found.length;
+ }
+ out.replaceChildren(...nodes);
 }
 $('check-own').addEventListener('click',()=>{
  const out=$('own-feedback'),formula=$('own-formula').value.trim().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/[×·]/g,'*'),a=numericValue('own-at-zero'),b=numericValue('own-root');
@@ -79,8 +101,11 @@ $('check-own').addEventListener('click',()=>{
  else if(Math.abs(a+12)>1e-9)wrong='Sätt x = 0 i h″(x) = 6x − 12. Vad blir 6 · 0 − 12?';
  else if(!Number.isFinite(b))wrong='Ange x-värdet som löser ekvationen h″(x) = 0.';
  else if(Math.abs(b-2)>1e-9)wrong='Lös 6x − 12 = 0. Skilj ekvationens lösning från andraderivatans värde vid 0.';
- if(wrong){out.className='feedback no';out.textContent=wrong}
- else{out.className='feedback ok';out.textContent='Rätt: h″(x)=6x−12, h″(0)=−12 och h″(x)=0 när x=2. Visa nu h′(x) på papper och förklara skillnaden mellan uttryck, värde och nollställe.'}
+ if(wrong)feedback(out,wrong,false);
+ else feedback(out,'Rätt: h″(x)=6x−12, h″(0)=−12 och h″(x)=0 när x=2. Visa nu h′(x) på papper och förklara skillnaden mellan uttryck, värde och nollställe.',true);
+});
+for(const id of ['own-formula','own-at-zero','own-root'])$(id).addEventListener('input',()=>{
+ $('own-feedback').replaceChildren();$('own-feedback').className='feedback';
 });
 update();
 })();
