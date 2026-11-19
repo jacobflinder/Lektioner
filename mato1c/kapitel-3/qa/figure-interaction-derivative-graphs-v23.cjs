@@ -38,8 +38,21 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
     .filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(el).visibility!=='hidden'});
    const clipped=expressions.filter(el=>{const r=el.getBoundingClientRect();return r.left<-2||r.right>innerWidth+2}).map(el=>el.getAttribute('aria-label'));
    const wrappers=[...document.querySelectorAll('.slide.active .math-work')].filter(el=>el.getClientRects().length);
+   // scrollWidth may exceed clientWidth even when the overflow is *visible*:
+   // that is not an internal scrollbar or clipped mathematical ink. Inspect
+   // the effective overflow mode and actual clipping ancestors instead.
    const internal=wrappers.filter(el=>{
-    const c=getComputedStyle(el);return c.overflowX!=='visible'||c.overflowY!=='visible'||el.scrollWidth>el.clientWidth+4;
+    const c=getComputedStyle(el);
+    if(c.overflowX!=='visible'||c.overflowY!=='visible')return true;
+    return [...el.querySelectorAll('math')].some(math=>{
+     const m=math.getBoundingClientRect();
+     for(let p=math.parentElement;p&&p!==document.body;p=p.parentElement){
+      const pc=getComputedStyle(p),r=p.getBoundingClientRect();
+      if(/hidden|clip|auto|scroll/.test(pc.overflowX)&& (m.left<r.left-2||m.right>r.right+2))return true;
+      if(/hidden|clip|auto|scroll/.test(pc.overflowY)&& (m.top<r.top-2||m.bottom>r.bottom+2))return true;
+     }
+     return false;
+    });
    }).map(el=>el.textContent.slice(0,90));
    const gaps=[...document.querySelectorAll('.slide.active .solution-math-group')].flatMap(g=>{
     const rows=[...g.children].filter(el=>el.matches('.math-work')&&el.getClientRects().length);
