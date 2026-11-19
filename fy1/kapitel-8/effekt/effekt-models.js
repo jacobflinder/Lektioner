@@ -43,7 +43,7 @@ a+='<path d="M63 117h38M72 145h20" stroke="#c67543" stroke-width="4"/>'+tx(44,10
 a+='<rect x="261" y="47" width="79" height="26" fill="white" stroke="#c67543" stroke-width="3"/>' + tx(299,38,'r = '+f(s.r,1)+' Ω',15);
 a+='<rect x="257" y="201" width="83" height="26" fill="white" stroke="#19778f" stroke-width="3"/>' + tx(298,252,'R = '+f(s.R,1)+' Ω',15);a+=tx(117,256,'ℰ = '+f(s.emf,0)+' V',16);
 // Voltmeter branch across terminals in parallel with outer resistor; voltmeter circle breaks the branch, no short-circuiting wire.
-a+='<path d="M201 214V168H260 M326 168H390V214" stroke="#397080" stroke-width="2.5" fill="none"/><circle cx="293" cy="168" r="33" fill="white" stroke="#397080" stroke-width="2.5"/>'+tx(293,176,'V',24);
+a+='<path d="M201 214V162H263 M323 162H390V214" stroke="#397080" stroke-width="2.5" fill="none"/><circle cx="293" cy="162" r="30" fill="white" stroke="#397080" stroke-width="2.5"/>'+tx(293,170,'V',24);
 a+=tx(449,181,'U',17,'#19778f');
 const left=80,total=392,bary=297,maxEmf=12,scale=total/maxEmf;
 a+=`<rect x="${left}" y="${bary}" width="${total}" height="42" fill="#dce9ed" rx="5"/>`;
