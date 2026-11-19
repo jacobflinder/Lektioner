@@ -11,12 +11,12 @@ for(const sec of document.querySelectorAll('.slide')){
  sec.querySelector('.source-note .text:first-child')?.remove();
 }
 // The battery circuit occurs on three slides. Previously the voltmeter's
-// circle and the label R=5,0 Ω shared the same pixels (mobile included).
+// circle and the R=5,0 Ω / R=3,0 Ω labels shared pixels (mobile included).
 // Place the resistance label *under* its own resistor, leaving both circuit
 // topology and the voltmeter's genuine parallel connection untouched.
 for(const n of [7,9,10]){
  const svg=document.querySelector('#bild-'+n+' .effect-figure svg');
- const resistance=[...(svg?.querySelectorAll('text')||[])].find(x=>x.textContent.trim()==='R = 5,0 Ω');
+ const resistance=[...(svg?.querySelectorAll('text')||[])].find(x=>/^R = [35],0 Ω$/.test(x.textContent.trim()));
  if(resistance)resistance.setAttribute('y','279');
 }
 // The ordinary quiz engine retains its diagnostic text, while the actual

@@ -49,11 +49,11 @@ fs.mkdirSync(OUT,{recursive:true});
    branch:[...svg.querySelectorAll('path')].some(p=>p.getAttribute('d')?.includes('M201 214V168H260 M326 168H390V214'))};
  });
  // Independent actual-pixel check of the diagram reported by the user.
- // The voltmeter's circle must not hide R=5,0Ω, and the label must belong
+ // The voltmeter must not hide R=5,0Ω or R=3,0Ω; the label must belong
  // clearly to the lower resistor, at mobile, tablet, desktop and projector.
  const readStaticCircuit=async n=>page.locator('#bild-'+n+' .effect-figure svg').evaluate(svg=>{
   const texts=[...svg.querySelectorAll('text')];
-  const resistorLabel=texts.find(el=>el.textContent.trim()==='R = 5,0 Ω');
+  const resistorLabel=texts.find(el=>/^R = [35],0 Ω$/.test(el.textContent.trim()));
   const voltmeter=svg.querySelector('circle[cx="302"][cy="188"]');
   const resistor=svg.querySelector('rect[x="266"][y="226"]');
   const b=el=>el?.getBoundingClientRect();
