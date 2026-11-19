@@ -36,3 +36,19 @@
  .potential-math-steps{gap:20px}
  .potential-equation math,.potential-model .model-result .potential-model-equation math{font-size:1.03rem}
 }
+
+/* V2.3: actual visible quiz maths and optional lesson-specific recall aid. */
+.potential-feedback-math{display:grid;gap:18px;margin:12px 0 4px;max-width:100%}
+.potential-feedback-equation{display:block;min-width:0;max-width:100%;padding:6px 0;overflow-x:auto;line-height:1.5}
+.potential-feedback-math math{font-size:clamp(1.04rem,1.42vw,1.28rem)}
+.potential-v23-summary{margin:20px 0 4px;border:1px solid #bad9df;border-radius:12px;background:#f5fafb;padding:12px 15px}
+.potential-v23-summary summary{cursor:pointer;font-weight:750;color:#146b81;padding:4px 1px;line-height:1.45}
+.potential-v23-summary summary:focus-visible{outline:3px solid #147a99;outline-offset:4px;border-radius:3px}
+.potential-v23-summary>p{margin:14px 2px 12px;line-height:1.48}
+.potential-v23-recap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.potential-v23-recap-grid article{min-width:0;border:1px solid #d0e5e9;border-radius:10px;background:white;padding:13px 12px}
+.potential-v23-recap-grid article>b{display:block;color:#19566a;line-height:1.4}
+.potential-v23-recap-equation{margin:12px 0 9px;min-height:37px;padding:6px 0;overflow-x:auto;line-height:1.5}
+.potential-v23-recap-equation math{font-size:clamp(1.07rem,1.38vw,1.25rem)}
+.potential-v23-recap-grid article p{margin:0;color:#435d66;line-height:1.5}
+@media(max-width:575px){.potential-v23-summary{padding:10px}.potential-v23-recap-grid{grid-template-columns:1fr}.potential-feedback-math math{font-size:1.04rem}}
