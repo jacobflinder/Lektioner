@@ -9,6 +9,9 @@
 @media(max-width:720px){
  .slide .ma4-equation math{font-size:clamp(1rem,3.4vw,1.24rem)}
  .slide .ma4-final math{font-size:clamp(1.03rem,3.6vw,1.3rem)}
+ /* Klassrumslägets större matematik måste också anpassas på små skärmar. */
+ body.classroom .slide .ma4-equation math{font-size:clamp(1rem,3.4vw,1.24rem)}
+ body.classroom .slide .ma4-final math{font-size:clamp(1.03rem,3.6vw,1.3rem)}
  .slide .ma4-step,.slide .ma4-final{padding-inline:8px}
  .slide .answer[data-math-presentation="true"]{padding-inline:6px}
  .slide .sequence .seq-item{padding-inline:10px}
