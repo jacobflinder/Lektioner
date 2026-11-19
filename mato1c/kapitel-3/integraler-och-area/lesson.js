@@ -53,7 +53,7 @@ function drawLinear(svgEl,b,overview=false){
  line(svgEl,x(b),y(0),x(b),y(f(b)),'#a35c3a',2.5,{'stroke-dasharray':'6 5','data-limit':'true'});
  svg(svgEl,'circle',{cx:x(b),cy:y(f(b)),r:6,fill:'#126b9e',stroke:'#fff','stroke-width':2,'data-endpoint':'true'});
  txt(svgEl,x(b),y(0)+46,'b='+b,18,{'text-anchor':'middle',fill:'#985024','font-weight':700});
- txt(svgEl,overview?x(3.7):x(3.2),y(overview?6.2:6), 'y=x+2',20,{'font-weight':700});
+ txt(svgEl,overview?x(3.55):x(3.1),y(overview?6.6:6.4),'y=x+2',20,{'font-weight':700,'data-curve-label':'true'});
  svgEl.setAttribute('aria-label','Graf y=x+2 i en fast skala. Den färgade arean från x=0 till x='+b+' är en rektangel med bas '+b+' höjd 2 och en triangel med bas '+b+' höjd '+b+'.');
 }
 const linearArea=b=>2*b+b*b/2;

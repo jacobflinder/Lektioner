@@ -48,6 +48,11 @@ try{
   near(rect[2][1],315-39*2,label+' overview height');
   let tri=coords(await page.locator('#overview-plot [data-area-triangle]').getAttribute('points'));
   near(tri[2][1],315-39*5,label+' overview triangle top');
+  for(const [selector,overview] of [['#overview-plot',true],['#linear-plot',false]]){
+   const pos=await page.locator(selector+' [data-curve-label]').evaluate(el=>({x:+el.getAttribute('x'),y:+el.getAttribute('y')}));
+   const mathX=(pos.x-80)/98, curveY=315-39*(mathX+2);
+   yes(pos.y+24<=curveY,label+' function label has 24 SVG units clearance above curve in '+selector);
+  }
   await go(5);
   for(const b of [1,2,3,4]){
    await set('linear-b',b);
