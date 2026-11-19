@@ -97,13 +97,20 @@ const close=(a,b,t=.0051)=>Math.abs(a-b)<=t;
      ok(await page.locator('#sign-feedback math').count()>=1,'wrong sign has semantic MathML '+label);
      await page.selectOption('#sign-left','+');await page.locator('#check-signs').click();
      ok(await page.locator('#sign-solution').isVisible(),'sign table shown after correct trial '+label);
+     await page.selectOption('#sign-left','-');
+     ok(!await page.locator('#sign-solution').isVisible(),'new sign choice closes previous answer '+label);
+     ok((await page.locator('#sign-feedback').innerText()).trim()==='','new sign choice clears stale feedback '+label);
+     await page.selectOption('#sign-left','+');await page.locator('#check-signs').click();
     }
-    if(i===5){for(let n=0;n<5;n++)await page.locator('#example [data-seq-next]').click();
+    if(i===5){await page.locator('#example [data-seq-reset]').click();for(let n=0;n<5;n++)await page.locator('#example [data-seq-next]').click();
      ok(await page.locator('#example [data-seq-item]:visible').count()===5,'five mathematical steps visible '+label);}
     if(i===6){await page.locator('#own-zero').fill('4');await page.locator('#check-own').click();
      ok(await page.locator('#own-feedback math').count()>=1,'wrong critical point is native MathML '+label);
      await page.locator('#own-zero').fill('2');await page.selectOption('#own-left','-');await page.selectOption('#own-right','+');
      await page.locator('#check-own').click();ok(await page.locator('#own-feedback math').count()>=1,'correct numeric feedback MathML '+label);
+     await page.locator('#own-zero').fill('3');
+     ok((await page.locator('#own-feedback').innerText()).trim()==='','new own answer clears stale correct label '+label);
+     await page.locator('#own-zero').fill('2');await page.locator('#check-own').click();
      await reveal('own-solution');}
     if(i===7)await reveal('exception-solution');
     if(i===8){
