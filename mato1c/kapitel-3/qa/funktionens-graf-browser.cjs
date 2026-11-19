@@ -57,7 +57,8 @@ fs.mkdirSync(out,{recursive:true});
   await page.selectOption('#class-4','min');
   await page.selectOption('#class-6','max');
   await page.locator('#check-classes').click();
-  await ok((await page.locator('#class-feedback').textContent()).includes('f′ positiv'),'Specifik felåterkoppling om inflexion');
+  await ok((await mathLabels('#class-feedback')).includes('f′')&&
+   (await page.locator('#class-feedback').textContent()).includes('positiv'),'Specifik semantisk felåterkoppling om inflexion');
   await page.selectOption('#class-4','infl');
   await page.locator('#check-classes').click();
   await ok((await page.locator('#class-feedback').textContent()).startsWith('Rätt'),'Alla tre punkttyper verifierade');
@@ -92,7 +93,8 @@ fs.mkdirSync(out,{recursive:true});
   await page.selectOption('#own-shape','down');
   await page.locator('#own-second').fill('2');
   await page.locator('#check-own').click();
-  await ok((await page.locator('#own-feedback').textContent()).includes('negativ för x<2'),'Fel form får förklaring');
+  await ok((await mathLabels('#own-feedback')).includes('x<2')&&
+   (await page.locator('#own-feedback').textContent()).includes('negativ för'),'Fel form får semantisk teckenförklaring');
   await page.selectOption('#own-shape','up');
   await page.locator('#own-second').fill('−2');
   await page.locator('#check-own').click();
