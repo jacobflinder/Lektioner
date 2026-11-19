@@ -118,7 +118,7 @@ summary.innerHTML='<div class="math-result-panel">'+math('f′(x)>0')+
 // Exercise IDs and labels are deliberately left as normal text.
 let blocks=0,inline=0;
 for(const el of document.querySelectorAll('.slide .math')){
- if(el.querySelector('math')||el.closest('#book'))continue;
+ if(el.querySelector('math')||(el.closest('#book')&&!el.closest('#book-support')))continue;
  const raw=el.textContent.trim().replace(/\s+/g,' ');
  if(!raw)continue;
  const isInline=el.matches('span');
@@ -126,5 +126,21 @@ for(const el of document.querySelectorAll('.slide .math')){
  if(isInline)inline++;else blocks++;
 }
 if(blocks<55||inline<15)throw Error('Ma3c24: insufficient MathML '+blocks+'/'+inline);
+// The bookwork scaffold is voluntary and closes when leaving the slide or
+// switching presentation mode. It never replaces the original assignments.
+const book=document.getElementById('book');
+const support=document.getElementById('book-support');
+if(!book||!support)throw Error('Ma3c growing: optional book support missing');
+const supportLabel=support.querySelector('summary');
+const syncSupport=()=>{supportLabel.textContent=support.open?
+  'Dölj frivilligt metodstöd':'Visa frivilligt metodstöd – försök minnas först';};
+support.addEventListener('toggle',syncSupport);
+new MutationObserver(()=>{
+ if(!book.classList.contains('active')&&support.open)support.open=false;
+}).observe(book,{attributes:true,attributeFilter:['class']});
+document.getElementById('mode').addEventListener('click',()=>{
+ if(support.open)support.open=false;
+});
+syncSupport();
 document.documentElement.dataset.growingMath='ready';
 })();
