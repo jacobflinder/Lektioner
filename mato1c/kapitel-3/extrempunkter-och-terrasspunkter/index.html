@@ -54,6 +54,70 @@
 .slide .math-result-panel{margin:13px 0}
 .slide .math-result-panel p{margin:5px 0}
 @media(max-width:720px){.slide .math math[display="block"],.slide .solution-equation math[display="block"]{font-size:1rem}}
+
+/* v2.3: four optional mathematics cards, readable without shrinking formulas. */
+#extrema-book-support{border:1px solid #b6cedb;border-radius:12px;margin:20px 0;background:#f1f8fa;overflow:hidden}
+#extrema-book-support>summary{padding:14px 18px;font-weight:750;cursor:pointer;color:#17435e}
+#extrema-book-support[open]>summary{border-bottom:1px solid #cbdee7}
+#extrema-book-support .support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;padding:14px}
+#extrema-book-support .support-card{border:1px solid #d1e3eb;border-radius:9px;background:white;padding:12px 15px;min-width:0}
+#extrema-book-support .support-card .math{margin:4px 0 10px}
+#extrema-book-support .support-card math[display="block"]{font-size:1.15rem;max-width:100%}
+@media(min-width:1100px){#explore .two>.graph-board{align-self:start;position:sticky;top:15px}}
+
+/* Mobile concept matrix: four accessible full-width cards rather than
+   five miniature columns and illegible mid-word line breaks. */
+@media(max-width:720px){
+ #goal .points-table,#goal .points-table tbody{display:block;width:100%;max-width:100%}
+ #goal .points-table thead{display:none}
+ #goal .points-table tbody tr{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+  margin:0 0 12px;padding:12px;border:1px solid #bdd4df;border-radius:10px;
+  background:#f5fafd}
+ #goal .points-table tbody th{
+  display:block;grid-column:1/-1;background:transparent;border:0;text-align:left;
+  padding:3px 2px 7px;font-size:1rem;overflow-wrap:normal}
+ #goal .points-table tbody td{
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  border:1px solid #c9dee7;border-radius:8px;background:#fff;
+  min-width:0;padding:10px 12px;font-size:1rem;min-height:66px;
+  overflow-wrap:normal;line-height:1.5}
+ #goal .points-table tbody td::before{
+  content:attr(data-meaning);color:#31566a;font-size:.85rem;font-weight:750;
+  margin-bottom:3px}
+}
+
+/* v2.3: mobile sign matrix as labelled interval cards; never force a hidden
+   3-column table to exceed its parent by a few pixels. */
+@media(max-width:720px){
+ .responsive-sign,.responsive-sign .tall-sign,.responsive-sign .tall-sign tbody{
+   display:block!important;width:100%;min-width:0;max-width:100%;border:0}
+ .responsive-sign .tall-sign{table-layout:auto!important}
+ .responsive-sign .tall-sign thead{display:none}
+ .responsive-sign .tall-sign caption{
+   display:block;width:100%;max-width:100%;padding:3px 0 9px;
+   text-align:left;white-space:normal;line-height:1.45}
+ .responsive-sign .tall-sign tbody tr{
+   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+   gap:8px;padding:10px;margin:0 0 10px;
+   border:1px solid #c9dbe4;border-radius:9px;background:#f5f9fc}
+ .responsive-sign .tall-sign tbody th{
+   display:block;grid-column:1/-1;padding:4px 3px 8px;
+   background:transparent;border:0;text-align:left;font-size:1rem}
+ .responsive-sign .tall-sign tbody td{
+   display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+   gap:5px;border:1px solid #c9dfe8;border-radius:8px;background:#fff;
+   min-width:0;padding:10px 12px;font-size:1rem;min-height:65px;
+   overflow-wrap:normal}
+ .responsive-sign .tall-sign tbody td::before{
+   content:attr(data-label);font-size:.88rem;font-weight:750;color:#315c70}
+}
+
+/* On a projected desktop layout the interactive graph must fill its allocated
+   explanatory column; sticky positioning may not collapse its intrinsic width. */
+#explore .two>.graph-board{width:100%;min-width:0;max-width:680px}
+#explore .graph-board svg{width:100%;min-width:0}
+#extrema-book-support .sign-pattern math mo{margin-inline:.25em}
 </style>
 </head>
 <body>
@@ -226,6 +290,16 @@
 <div class="panel"><strong>Mer träning vid behov:</strong> 3116 eller 3121. Fortsätt med fler uppgifter om du behöver.</div>
 <div class="task"><strong>Arbeta ordentligt med boken</strong>Försök själv. Diskutera vid behov. Kontrollera och förstå dina fel. Fortsätt med ett spår som utmanar dig på minst två nivåer.</div>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart ditt valda spår ovan.</div>
+<details id="extrema-book-support">
+ <summary>Visa frivilligt metodstöd – försök först själv</summary>
+ <div class="support-grid">
+  <div class="support-card"><p class="math">f′(a)=0</p><p><strong>Stationär punkt:</strong> tangenten är horisontell. Det räcker inte för att bestämma punkttyp.</p></div>
+  <div class="support-card"><p class="math sign-pattern">+ 0 −</p><p><strong>Lokalt maximum:</strong> funktionen stiger före punkten och sjunker efter.</p>
+   <p class="math sign-pattern">− 0 +</p><p><strong>Lokalt minimum:</strong> sjunker före och stiger efter.</p></div>
+  <div class="support-card"><p class="math sign-pattern">+ 0 +</p><p class="math sign-pattern">− 0 −</p><p><strong>Ingen extrempunkt:</strong> inget teckenbyte. Kontrollera dessutom böjningsbyte innan du säger terrasspunkt.</p></div>
+  <div class="support-card"><p class="math">(a;f(a))</p><p><strong>Koordinater:</strong> bestäm först x-värdet med derivatan, beräkna sedan y-värdet med ursprungsfunktionen.</p></div>
+ </div>
+</details>
 </section>
 
 <section class="slide" id="exit" data-teacher="PDF s. 6; individuell utcheckning, ingen interaktiv graf. Eleverna måste skilja f′(a)=0 från f(a) och bevisa klassificeringen genom tecken före/efter. Vänta med facit tills de skrivit. Se om svaren verkligen visar dagens mål.">
@@ -269,7 +343,7 @@
 <div><button id="prev" type="button" class="secondary">← Föregående</button><button id="next" type="button">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div>
 <div><label for="jump">Gå till</label><select id="jump" aria-label="Välj avsnitt i lektionen"></select></div>
 </div>
-<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Källa: den tidigare lektionen 2026-11-05. Webbens modeller är egna beräknade figurer. Inga elevsvar samlas in.</footer>
+<footer>Matematik – fortsättning, nivå 1c · Gy25 · 3.1 · Matematiskt beräknade figurer och elevinteraktioner utan inloggning eller lagring av elevsvar.</footer>
 </main>
 <script src="../assets/lesson-core.js"></script>
 <script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>

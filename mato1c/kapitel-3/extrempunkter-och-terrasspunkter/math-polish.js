@@ -19,7 +19,7 @@ const table=(head,values,dirs,labels)=>{
   '<tr><th scope="row">funktionen</th>'+labels.map(x=>'<td>'+x+'</td>').join('')+'</tr></tbody></table>';
  const tall='<table class="sign-table tall-sign"><caption>'+head+'</caption>'+
   '<thead><tr><th scope="col">Intervall eller punkt</th><th scope="col">derivatan</th><th scope="col">funktionen</th></tr></thead>'+
-  '<tbody>'+values.map((x,i)=>'<tr><th scope="row">'+x+'</th><td>'+dirs[i]+'</td><td>'+labels[i]+'</td></tr>').join('')+'</tbody></table>';
+  '<tbody>'+values.map((x,i)=>'<tr><th scope="row">'+x+'</th><td data-label="Derivatan">'+dirs[i]+'</td><td data-label="Funktionen">'+labels[i]+'</td></tr>').join('')+'</tbody></table>';
  return '<div class="responsive-sign">'+wide+tall+'</div>';
 };
 // 1. Graph cards: real mathematical names with math-inline, all three
@@ -31,6 +31,16 @@ for(let i=0;i<3;i++)cards[i].innerHTML=cardNames[i][0]+' · <span class="math-in
 const startAnswer=$('#start-answer');
 startAnswer.innerHTML='<p><strong>A · minimipunkt:</strong> grafen går från att sjunka till att stiga. <strong>B · maximipunkt:</strong> från att stiga till att sjunka. <strong>C · terrasspunkt:</strong> fortsätter att stiga genom en horisontell tangent.</p>'+
  '<p>Alla tre är stationära vid x=0, men bara A och B är extrempunkter. I C byter grafen också <strong>böjningsriktning</strong>. Den egenskapen kan vi inte avgöra från enbart samma derivatatecken på båda sidor om noll.</p>';
+// Mobile compares each stationary-point type in a labelled card, keeping
+// all three derivative sign positions and the graph response legible.
+const matrixRows=[...document.querySelectorAll('#goal .points-table tbody tr')];
+if(matrixRows.length!==4)throw Error('Ma3c34 missing stationary matrix rows');
+for(const tr of matrixRows){
+ const cells=[...tr.querySelectorAll('td')];
+ if(cells.length!==4)throw Error('Ma3c34 malformed stationary matrix row');
+ ['Derivatan före','Derivatan i punkten','Derivatan efter','Grafens förändring']
+  .forEach((label,i)=>{cells[i].dataset.meaning=label});
+}
 // 2. Book-faithful goal / exceptional cases; preserve two independent
 // recall controls and the explicitly separate stationarity vs value concept.
 $('#goal h2').textContent='Tecknen visar extrempunkten – böjningen visar terrassen';
@@ -124,7 +134,7 @@ summary.innerHTML='<div class="math-result-panel">'+group(['f′(a)=0','(a,f(a))
 // accessible source expression as aria-label in MathML.
 let blocks=0,inlines=0;
 for(const el of document.querySelectorAll('.slide :is(p.math,p.solution-equation,span.math-inline)')){
- if(el.querySelector('math')||el.closest('#book'))continue;
+ if(el.querySelector('math')||(el.closest('#book')&&!el.closest('#extrema-book-support')))continue;
  const raw=el.textContent.trim().replace(/\s+/g,' ');
  if(!raw)continue;
  const isInline=el.matches('span');
@@ -132,5 +142,46 @@ for(const el of document.querySelectorAll('.slide :is(p.math,p.solution-equation
  if(isInline)inlines++;else blocks++;
 }
 if(blocks<55||inlines<15)throw Error('Ma3c25 MathML coverage insufficient '+blocks+'/'+inlines);
+// Bookwork aid: on-demand, semantically typed, and closed on navigation.
+const book=document.getElementById('book'),support=document.getElementById('extrema-book-support');
+if(!book||!support)throw Error('Ma3c34 missing book aid');
+const supportSummary=support.querySelector('summary');
+const updateSummary=()=>{supportSummary.textContent=support.open?'Dölj frivilligt metodstöd':'Visa frivilligt metodstöd – försök först själv'};
+support.addEventListener('toggle',updateSummary);
+new MutationObserver(()=>{
+ if(!book.classList.contains('active')&&support.open)support.open=false;
+}).observe(book,{attributes:true,attributeFilter:['class']});
+document.getElementById('mode').addEventListener('click',()=>{if(support.open)support.open=false});
+updateSummary();
+// On a new attempt, obsolete right/wrong feedback must disappear.
+for(const id of ['own-max-x','own-max-y','own-min-x','own-min-y']){
+ document.getElementById(id).addEventListener('input',()=>{
+  const box=document.getElementById('own-feedback');box.replaceChildren();box.className='feedback';
+ });
+}
+// Maths in dynamic feedback must actually render, not live as plain words.
+document.getElementById('check-own').addEventListener('click',()=>{
+ const box=document.getElementById('own-feedback');
+ if(box.classList.contains('ok')){
+  for(const formula of ['(1;2)','(−1;−2)']){
+   const p=document.createElement('p');p.className='math';p.style.margin='6px 0';
+   box.append(p);M.setFormula(p,formula,'block');
+  }
+ }
+});
+const terraceQuiz=document.querySelector('#terrace [data-quiz]');
+if(terraceQuiz){
+ for(const button of terraceQuiz.querySelectorAll('button[data-correct]')){
+  button.addEventListener('click',()=>{
+   const box=terraceQuiz.querySelector('.feedback');
+   if(button.dataset.correct==='true'){
+    for(const formula of ['f′(−1)=3>0','f′(0)=0','f′(1)=3>0']){
+     const p=document.createElement('p');p.className='math';p.style.margin='5px 0';
+     box.append(p);M.setFormula(p,formula,'block');
+    }
+   }
+  });
+ }
+}
 document.documentElement.dataset.extremaMath='ready';
 })();

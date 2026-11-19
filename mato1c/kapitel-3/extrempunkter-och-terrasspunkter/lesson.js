@@ -59,7 +59,9 @@ const choose=(key)=>{
  current=key;
  for(const b of document.querySelectorAll('[data-model]'))b.setAttribute('aria-pressed',String(b.dataset.model===key));
  $('model-type').value='';
- const fb=$('model-feedback');fb.textContent='';fb.className='feedback';
+ const fb=$('model-feedback');fb.replaceChildren();fb.className='feedback';
+ const readout=$('graph-readout');
+ if(!readout.classList.contains('hidden'))document.querySelector('[data-reveal="graph-readout"]').click();
  render();
 };
 const render=()=>{
@@ -69,18 +71,33 @@ const render=()=>{
  const slopeLabel=slope>1e-8?'positiv: grafen stiger här':slope<-1e-8?'negativ: grafen sjunker här':'noll: tangenten är horisontell';
  $('graph-x-out').textContent=fmt(x);
  $('graph-readout').replaceChildren();
- const p=document.createElement('strong');p.textContent=model.name+'′('+fmt(x)+') = '+fmt(slope);
- const desc=document.createElement('p');desc.textContent='Lutningen är '+slopeLabel+'. '+model.name+'('+fmt(x)+') = '+fmt(model.f(x))+'.';
- $('graph-readout').append(p,desc);
+ const p=document.createElement('p');p.className='math';p.style.margin='4px 0';
+ window.Ma4Math.setFormula(p,model.name+'′('+fmt(x)+')='+fmt(slope),'block');
+ const desc=document.createElement('p');desc.textContent='Lutningen är '+slopeLabel+'.';
+ const val=document.createElement('p');val.className='math';val.style.margin='4px 0';
+ window.Ma4Math.setFormula(val,model.name+'('+fmt(x)+')='+fmt(model.f(x)),'block');
+ $('graph-readout').append(p,desc,val);
 };
 for(const b of document.querySelectorAll('[data-model]'))b.addEventListener('click',()=>choose(b.dataset.model));
 $('graph-x').addEventListener('input',render);
 for(const [id,v] of [['go-left',-1],['go-zero',0],['go-right',1]])$(id).addEventListener('click',()=>{$('graph-x').value=String(v);render()});
+$('model-type').addEventListener('change',()=>{
+ const fb=$('model-feedback');fb.replaceChildren();fb.className='feedback';
+});
 $('check-model').addEventListener('click',()=>{
  const selected=$('model-type').value,model=models[current],box=$('model-feedback');
  if(!selected){box.className='feedback no';box.textContent='Välj en punkttyp och motivera med derivatans tecken före och efter noll.';return}
- if(selected===model.type){box.className='feedback ok';box.textContent='Rätt: '+model.description+'. Tecknen är '+model.signs+'. '+model.why}
- else {box.className='feedback no';box.textContent='Undersök tecknet för x = −1 och x = 1. '+model.why+' Pröva igen.'}
+ if(selected===model.type){
+  box.className='feedback ok';box.textContent='Rätt: '+model.description+'. '+model.why;
+  for(const point of [-1,0,1]){
+   const p=document.createElement('p');p.className='math';p.style.margin='5px 0';
+   window.Ma4Math.setFormula(p,model.name+'′('+fmt(point,0)+')='+fmt(model.d(point),0),'block');
+   box.append(p);
+  }
+ }else{
+  box.className='feedback no';
+  box.textContent='Pröva igen. Undersök själv derivatans tecken vid x = −1 och x = 1. Vilken riktning har grafen på var sida om noll?';
+ }
 });
 // Fria koordinatsvar: först en komplett papperslösning, sedan lokal diagnostisk kontroll.
 // Parenteser behövs inte, för varje koordinat har ett eget fält.

@@ -45,8 +45,8 @@ const actual=async(key,x)=>{
  ok(eq(pixSlope,slope),'SVG computed tangent slope equals independent derivative '+key+'/'+x);
  const marker=await page.locator('#interactive-graph g[clip-path] circle').last().evaluate(el=>[+el.getAttribute('cx'),+el.getAttribute('cy')]);
  ok(eq(marker[0],X(x))&&eq(marker[1],Y(fy)),'SVG touching point belongs to actual curve '+key+'/'+x);
- const text=await page.locator('#graph-readout').innerText();
- const [slopeText,yText]=text.match(/=\s*([−\-\d,]+)/g)?.map(a=>Number(a.split('=')[1].trim().replace('−','-').replace(',','.')))||[];
+ const semantic=await page.locator('#graph-readout math').evaluateAll(ms=>ms.map(m=>m.getAttribute('aria-label')||''));
+ const [slopeText,yText]=semantic.map(a=>Number(a.split('=').at(-1).trim().replace('−','-').replace(',','.')));
  ok(eq(slopeText,slope,.0051),'displayed derivative from same model '+key+'/'+x+' '+slopeText);
  ok(eq(yText,fy,.0051),'displayed function value from same model '+key+'/'+x+' '+yText);
  const marker0=await page.locator('#interactive-graph g[clip-path] circle').first().evaluate(el=>[+el.getAttribute('cx'),+el.getAttribute('cy')]);
@@ -58,7 +58,8 @@ ok(await page.locator('.slide').count()===9,'all nine slides exist');
 ok(await page.evaluate(()=>document.documentElement.dataset.extremaMath)==='ready','local MathML ready '+errors.join('; '));
 ok(await page.locator('.slide math').count()>=75,'semantic MathML coverage');
 ok(await page.locator('.slide .solution-math-group').count()>=9,'separate mathematical blocks');
-ok(await page.locator('#book math').count()===0,'exercise IDs remain literal not math');
+ok(await page.locator('#extrema-book-support math').count()===6,'six semantic aid formulas');
+ok(await page.locator('#book .book-track math').count()===0,'exercise IDs remain literal not math');
 ok(errors.length===0,'no page startup exception');
 // Independently verify three graph models and their derivative signs;
 // compare derivative formulas against numerical symmetric differences.
@@ -116,6 +117,8 @@ ok(!await page.locator('#graph-readout').isVisible(),'slider numbers hidden befo
 await reveal('graph-readout');
 for(const key of ['a','b','c']){
  await page.locator('[data-model="'+key+'"]').click();
+ ok(!await page.locator('#graph-readout').isVisible(),'new model hides prior numbers until next attempt '+key);
+ await reveal('graph-readout');
  ok((await page.locator('[data-model="'+key+'"]').getAttribute('aria-pressed'))==='true','selected mode correct '+key);
  ok((await page.locator('#model-type').inputValue())==='','changing graph clears old student answer '+key);
  for(const x of [-1.6,-1,-.5,0,.5,1,1.6])await actual(key,x);
@@ -195,7 +198,7 @@ for(const v of ['s. 145–148','s. 148','minst två','Nivå 1 + 2','3113','3114'
  '3119','Nivå 2 + 3','3118–3119','3120','3122','3123','3116 eller 3121','Läxa till nästa lektion'])
  ok(book.includes(v),'protected NOKflex original '+v);
 ok((await page.locator('.route-guide').innerText()).includes('20 min'),'20min continuous book time preserved');
-ok(await page.locator('#book math').count()===0,'no exercise numbers parsed as formulas');
+ok(await page.locator('#book .book-track math').count()===0,'no exercise numbers parsed as formulas');
 await shot('desktop-07');
 // 8: exit distinguishes stationary fprime from true heights and bend.
 await go(8);
