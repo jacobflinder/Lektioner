@@ -45,8 +45,8 @@ const actual=async(key,x)=>{
  ok(eq(pixSlope,slope),'SVG computed tangent slope equals independent derivative '+key+'/'+x);
  const marker=await page.locator('#interactive-graph g[clip-path] circle').last().evaluate(el=>[+el.getAttribute('cx'),+el.getAttribute('cy')]);
  ok(eq(marker[0],X(x))&&eq(marker[1],Y(fy)),'SVG touching point belongs to actual curve '+key+'/'+x);
- const text=await page.locator('#graph-readout').innerText();
- const [slopeText,yText]=text.match(/=\s*([−\-\d,]+)/g)?.map(a=>Number(a.split('=')[1].trim().replace('−','-').replace(',','.')))||[];
+ const semantic=await page.locator('#graph-readout math').evaluateAll(ms=>ms.map(m=>m.getAttribute('aria-label')||''));
+ const [slopeText,yText]=semantic.map(a=>Number(a.split('=').at(-1).trim().replace('−','-').replace(',','.')));
  ok(eq(slopeText,slope,.0051),'displayed derivative from same model '+key+'/'+x+' '+slopeText);
  ok(eq(yText,fy,.0051),'displayed function value from same model '+key+'/'+x+' '+yText);
  const marker0=await page.locator('#interactive-graph g[clip-path] circle').first().evaluate(el=>[+el.getAttribute('cx'),+el.getAttribute('cy')]);
