@@ -144,6 +144,17 @@ const models={f:{f:x=>x*x,d:x=>2*x},g:{f:x=>-x*x,d:x=>-2*x},c:{f:x=>x*x*x-3*x+2,
      await reveal('inflect-readouts');ok(await page.locator('#inflect-readouts math').count()===3,'three live function/derivatives MathML');
      await reveal('inflect-answer');
      ok(await page.locator('#inflect-graph circle[fill="#a34374"]').count()===1,'inflection marker appears after reveal');
+     const clearLabel=await page.locator('#inflect-graph').evaluate(svg=>{
+      const text=[...svg.querySelectorAll('text')].find(t=>t.textContent==='f″ > 0');
+      if(!text)return {ok:false,reason:'curvature label missing'};
+      const b=text.getBBox();let overlap=false;
+      for(let px=b.x;px<=b.x+b.width;px+=2){
+       const x=(px-365)/117,y=333-58*(x*x*x-3*x+2);
+       if(y>=b.y-8&&y<=b.y+b.height+8)overlap=true;
+      }
+      return {ok:!overlap,bbox:{x:b.x,y:b.y,width:b.width,height:b.height}};
+     });
+     ok(clearLabel.ok,'right curvature label must not overlap actual cubic '+width+' '+JSON.stringify(clearLabel));
      await page.locator('#inflect-zero').click();
      ok(await page.locator('#inflect-answer').isHidden(),'changed tangent hides old curvature conclusion');
      ok(await page.locator('#inflect-graph circle[fill="#a34374"]').count()===0,'marker reset with changed prediction');

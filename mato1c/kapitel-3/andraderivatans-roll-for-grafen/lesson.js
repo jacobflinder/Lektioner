@@ -68,7 +68,7 @@ function inflect(){
  add(s,'text',{x:X(0)+10,y:54,'font-size':16,fill:'#4d6979'},'y');
  if(showCurvature){
  add(s,'text',{x:111,y:75,'font-size':17,fill:'#b66a2d','font-weight':700},'f″ < 0');
- add(s,'text',{x:556,y:75,'font-size':17,fill:'#087f75','font-weight':700},'f″ > 0');
+ add(s,'text',{x:480,y:75,'font-size':17,fill:'#087f75','font-weight':700},'f″ > 0');
  }
  mathReadout('inflect-x-out','x = '+fmt(at),'inline');
  mathReadout('inflect-y','f('+fmt(at)+') = '+fmt(val));
