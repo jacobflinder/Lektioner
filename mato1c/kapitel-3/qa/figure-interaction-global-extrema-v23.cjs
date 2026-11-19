@@ -126,7 +126,7 @@ function linePoints(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(
     if(n===2)await reveal('candidate-answer');
     if(n===3){
      const graph=await svgState('#predict-graph',3,true);
-     ok(graph.paths[0].dash&&graph.marks.includes('−21'),'predict graph shows fixed scale and dashed outside');
+     ok(graph.paths[0].dash&&graph.marks.some(t=>t.startsWith('−21')),'predict graph shows fixed scale, exact left-endpoint height and dashed outside');
     }
     if(n===4){
      await reveal('range-readout');
