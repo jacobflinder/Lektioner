@@ -38,6 +38,27 @@
 .note-figure{font-size:.85rem;color:#4d697c}
 @media(max-width:950px){.lab-grid{grid-template-columns:1fr}.lab-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lab-controls>.formula,.lab-controls>.question{grid-column:1/-1}.plot-card svg{max-height:430px}}
 @media(max-width:650px){.lab-controls{display:block}.lab-controls>*{margin:9px 0}.lab-grid{display:flex;flex-direction:column;gap:8px}.plot-card{width:100%;padding:6px}.plot-card svg{max-height:none}.method-grid,.compare,#geometric .formulas{grid-template-columns:1fr}.formula{font-size:clamp(1.1rem,4.6vw,1.3rem);padding:7px 10px}.formula.compact{font-size:1.08rem}.stage{padding:16px}.booklevel .number{font-size:1.2rem}}
+.geo-layout{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:16px;align-items:start;margin-top:12px}
+#geometric .geo-layout .formulas{grid-template-columns:1fr;gap:12px;margin:12px 0}
+.geo-layout .plot-card{width:100%;margin:0}
+@media(max-width:950px){
+ .geo-layout{grid-template-columns:1fr}
+ .lab-grid{display:flex;flex-direction:column;gap:10px}
+ .lab-controls{display:contents!important}
+ .lab-controls>*{margin:0!important}
+ .lab-controls>.formula{order:0}
+ .lab-controls>.question{order:1}
+ .lab-controls>.control-box{order:2}
+ .lab-grid>.plot-card{order:3}
+ .lab-controls>.graph-summary{order:4}
+ .lab-controls>div:not(.formula):not(.question):not(.control-box):not(.graph-summary){order:5}
+}
+@media(max-width:650px){
+ body:has(.slide.active .plot-card) .repetition{display:none}
+ .geo-layout{display:flex;flex-direction:column;gap:9px}
+ .plot-card svg text{font-size:24px}
+ .plot-card svg{max-height:none}
+}
 </style>
 </head><body>
 <header><a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.3</strong>
@@ -85,10 +106,11 @@
 
 <section class="slide" id="geometric" data-teacher="Vår egen graf f(x)=x+2 och intervallet 0 till 3. Låt klassen beräkna den geometriska arean som rektangel plus triangel; ingen primitiv funktion behövs ännu.">
 <div class="eyebrow">04 · Från graf till geometri</div><h2>En area kan delas upp</h2>
+<div class="geo-layout"><div class="geo-copy">
 <p>Vi studerar en egen funktion mellan två gränser:</p>
 <div class="formulas"><p class="formula" data-formula="f(x)=x+2"></p><p class="formula" data-integral="0|3|x+2|x"></p></div>
 <div class="question">Förutsäg: vilka två geometriska former bygger området? Vilka mått behöver du?</div>
-<figure class="plot-card"><svg id="overview-plot" viewBox="0 0 620 360" role="img" aria-label="Grafen y=x+2 över x från 0 till 3, och området under grafen färgat och uppdelat i rektangel och triangel."></svg><figcaption>Graf, integrationsgränser och area ska gå att läsa samtidigt.</figcaption></figure>
+</div><figure class="plot-card"><svg id="overview-plot" viewBox="0 0 620 360" role="img" aria-label="Grafen y=x+2 över x från 0 till 3, och området under grafen färgat och uppdelat i rektangel och triangel."></svg><figcaption>Graf, integrationsgränser och area ska gå att läsa samtidigt.</figcaption></figure></div>
 </section>
 
 <section class="slide" id="linear-lab" data-teacher="Labb 1. Innan varje nytt b-läge: låt eleverna förutsäga om arean ökar och förklara hur bredd och höjd ändras. Visa delytorna efter förutsägelse.">
