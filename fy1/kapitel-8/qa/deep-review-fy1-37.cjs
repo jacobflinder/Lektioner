@@ -89,7 +89,8 @@ try{
  check(await slide().locator('.step.open').count()===0,'power formula derivations initially concealed');
  for(let i=0;i<5;i++)await page.locator('#step').click();
  check(await slide().locator('.step.open').count()===5,'five original derivation stages');
- check(await slide().locator('.effect-equation').count()===14,'14 separate MathML statements for P derivation');
+ check(await slide().locator('.effect-equation:not(.effect-quiz-equation)').count()===14,
+  '14 original separate MathML statements for P derivation, plus optional quiz feedback');
  check((await slide().innerText()).includes('Ohms lag'),'Ohms law valid resistor premise retained');
  check(!await page.locator('#step').isVisible()&&await page.locator('#next').isVisible(),'no duplicated Next after all steps revealed');
  const quiz4=slide().locator('.quiz');
@@ -109,7 +110,8 @@ try{
  check(['1 500 W','1 200 W','230 V','10 A'].every(v=>source.pages[5].body.includes(v))&&await slide().locator('.question').count()===1,'all real-world load inputs and visible student question');
  check(content.includes('Gör inga elevförsök'),'actual electrical safety disclaimer kept');
  for(let i=0;i<3;i++)await page.locator('#step').click();
- check(await slide().locator('.effect-equation').count()===8,'eight semantic equations, including individual branch currents');
+ check(await slide().locator('.effect-equation:not(.effect-quiz-equation)').count()===8,
+  'eight original semantic equations, including individual branch currents, plus optional quiz feedback');
  const calc=await slide().locator('.effect-math-stack').allTextContents();
  check(calc.some(x=>x.includes('6,52'))&&calc.some(x=>x.includes('5,22'))&&calc.some(x=>x.includes('11,7')),'branch currents 1500/230, 1200/230, sum 11.7A');
  check(approx(1500/230+1200/230,2700/230,1e-12),'independent branch-current identity');

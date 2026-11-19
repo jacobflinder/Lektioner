@@ -36,7 +36,7 @@
 @media(max-width:540px){.effect-model .model-controls{grid-template-columns:1fr}.effect-figure{padding:6px}.body-copy{font-size:1rem}.body-copy>.step{font-size:.91rem}.equation{font-size:1.07rem}.goallocal{padding:10px 12px}.effect-model .model-result{font-size:.91rem}}
 /* Review 37/41: real MathML elements rather than equations in prose. */
 .effect-math-stack,.effect-model-math{display:grid;gap:20px;max-width:100%;margin:14px 0}
-.effect-equation,.effect-model-equation{min-width:0;max-width:100%;overflow-x:auto;line-height:1.45}
+.effect-equation,.effect-model-equation{min-width:0;max-width:100%;overflow-x:auto;overflow-y:auto;line-height:1.9;padding:8px 0}
 .effect-equation math,.effect-model-equation math{font-size:clamp(1.05rem,1.55vw,1.4rem)}
 .effect-model-math{gap:18px;font-weight:400}
 .effect-model .model-result .effect-model-equation{overflow-x:auto}
