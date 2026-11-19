@@ -45,8 +45,8 @@ fs.mkdirSync(OUT,{recursive:true});
    x:b?+b.getAttribute('x'):null,equations:root.querySelectorAll('.effect-model-equation math').length,
    labels:[...svg.querySelectorAll('text')].map(el=>el.textContent),
    svgLabel:svg.getAttribute('aria-label'),result:root.querySelector('.model-result').innerText,
-   volmeter:!!svg.querySelector('circle[cx="293"][cy="168"][r="33"]'),
-   branch:[...svg.querySelectorAll('path')].some(p=>p.getAttribute('d')?.includes('M201 214V168H260 M326 168H390V214'))};
+   volmeter:!!svg.querySelector('circle[cx="293"][cy="162"][r="30"]'),
+   branch:[...svg.querySelectorAll('path')].some(p=>p.getAttribute('d')?.includes('M201 214V162H263 M323 162H390V214'))};
  });
  // Independent actual-pixel check of the diagram reported by the user.
  // The voltmeter must not hide R=5,0Ω or R=3,0Ω; the label must belong
@@ -65,6 +65,64 @@ fs.mkdirSync(OUT,{recursive:true});
    labelWidth:l?.width||0,voltVisible:v?.width>10,
    branch:!!svg.querySelector('path[d="M215 239 V188 H274 M330 188 H395 V239"]'),
    sourceTag:svg.closest('.slide')?.querySelector('.source-note')?.innerText||''};
+ });
+ // Junction geometry audit: a lead must meet the centre of each battery
+ // plate, with neither a hidden mask nor a vertical short between terminals.
+ const batteryContact=async n=>page.locator(n===8?
+  '#bild-8 .model-root .drawing svg':'#bild-'+n+' .effect-figure svg').evaluate(svg=>{
+  const paths=[...svg.querySelectorAll('path')];
+  const plate=paths.find(p=>['#bd6a46','#c67543'].includes(p.getAttribute('stroke'))&&
+   /h[0-9]/.test(p.getAttribute('d')||''));
+  const wire=paths.find(p=>['#355969','#335b6a'].includes(p.getAttribute('stroke')));
+  const m=plate?.getAttribute('d')?.match(/M\s*([0-9.]+)\s+([0-9.]+)\s*h\s*([0-9.]+)\s*M\s*([0-9.]+)\s+([0-9.]+)\s*h\s*([0-9.]+)/);
+  if(!m||!wire)return {top:false,bottom:false,noShunt:false,noMask:false,visible:false,error:'missing plate or wire'};
+  const top={x:+m[1]+(+m[3])/2,y:+m[2]},bottom={x:+m[4]+(+m[6])/2,y:+m[5]};
+  const tokens=(wire.getAttribute('d')||'').match(/[MHV]|-?[0-9]+(?:\.[0-9]+)?/g)||[];
+  let x=0,y=0;const segments=[];
+  for(let k=0;k<tokens.length;){
+   const cmd=tokens[k++],a=x,b=y;
+   if(cmd==='M'){x=+tokens[k++];y=+tokens[k++];}
+   else if(cmd==='H'){x=+tokens[k++];segments.push({ax:a,ay:b,bx:x,by:y});}
+   else if(cmd==='V'){y=+tokens[k++];segments.push({ax:a,ay:b,bx:x,by:y});}
+   else return {top:false,bottom:false,noShunt:false,noMask:false,visible:false,error:'unexpected wire command '+cmd};
+  }
+  const eps=0.05;
+  const up=segments.some(q=>Math.abs(q.ax-top.x)<eps&&Math.abs(q.bx-top.x)<eps&&
+   Math.abs(Math.max(q.ay,q.by)-top.y)<eps&&Math.min(q.ay,q.by)<top.y-12);
+  const down=segments.some(q=>Math.abs(q.ax-bottom.x)<eps&&Math.abs(q.bx-bottom.x)<eps&&
+   Math.abs(Math.min(q.ay,q.by)-bottom.y)<eps&&Math.max(q.ay,q.by)>bottom.y+12);
+  const noShunt=!segments.some(q=>Math.abs(q.ax-top.x)<eps&&Math.abs(q.bx-top.x)<eps&&
+   Math.min(q.ay,q.by)<top.y+3&&Math.max(q.ay,q.by)>bottom.y-3);
+  const masks=[...svg.querySelectorAll('rect')].filter(rect=>{
+   const a=+rect.getAttribute('x'),b=+rect.getAttribute('y');
+   const w=+rect.getAttribute('width'),h=+rect.getAttribute('height');
+   return a<=top.x&&a+w>=top.x&&b<=top.y+3&&b+h>=bottom.y-3;
+  }).length;
+  const bounds=svg.getBoundingClientRect(),plates=plate.getBoundingClientRect();
+  return {top:up,bottom:down,noShunt,noMask:masks===0,visible:bounds.width>=100&&
+   plates.width>=12,topPlate:top,bottomPlate:bottom,maskCount:masks,wire:wire.getAttribute('d')};
+ });
+ const validContact=v=>v.top&&v.bottom&&v.noShunt&&v.noMask&&v.visible;
+ // Validate visible spacing in the actual 230 V branch circuit and the
+ // dynamic voltmeter: not just correct text values and schematic topology.
+ const labelGeometry=async()=>page.locator('#bild-6 .effect-figure svg').evaluate(svg=>{
+  const texts=[...svg.querySelectorAll('text')];
+  const first=texts.find(t=>t.textContent==='1 500 W');
+  const second=texts.find(t=>t.textContent==='1 200 W');
+  const r1=svg.querySelector('rect[x="220"][y="96"]');
+  const r2=svg.querySelector('rect[x="349"][y="96"]');
+  if(!first||!second||!r1||!r2)return {leftGap:-1,rightGap:-1,near:false};
+  const a=first.getBoundingClientRect(),b=second.getBoundingClientRect();
+  const c=r1.getBoundingClientRect(),d=r2.getBoundingClientRect();
+  return {leftGap:c.left-a.right,rightGap:b.left-d.right,
+   near:a.top<c.bottom&&a.bottom>c.top&&b.top<d.bottom&&b.bottom>d.top};
+ });
+ const voltmeterSpacing=async()=>battery().evaluate(root=>{
+  const svg=root.querySelector('.drawing svg');
+  const circle=svg.querySelector('circle[cx="293"][cy="162"][r="30"]');
+  const rect=svg.querySelector('rect[x="257"][y="201"]');
+  if(!circle||!rect)return -1;
+  return rect.getBoundingClientRect().top-circle.getBoundingClientRect().bottom;
  });
  const mathGeometry=async tag=>{
   const rows=await slide().locator('.effect-equation:visible,.effect-model-equation:visible').evaluateAll(nodes=>nodes.map(el=>{
@@ -219,12 +277,25 @@ fs.mkdirSync(OUT,{recursive:true});
     await go(n);await viewport(name+'/'+n+'/before');
     check(!(await slide().locator('.source-note').innerText()).includes('Original:'),
      'internal PDF attribution absent from visible student slide '+name+'/'+n);
+    if([4,6,7,8,9,10].includes(n)){
+     const junction=await batteryContact(n);
+     check(validContact(junction),'both battery leads touch battery plates with no mask or short '+name+'/'+n+' '+JSON.stringify(junction));
+    }
     if([7,9,10].includes(n)){
      const circuit=await readStaticCircuit(n);
      check(circuit.labelY===279&&circuit.voltOverlap<.5&&circuit.resistorOverlap<.5&&
       circuit.voltGap>=18&&circuit.resistorGap>=4&&circuit.labelWidth>=35&&circuit.voltVisible,
       'no real pixel overlap among voltmeter, R label and resistor '+name+'/'+n+' '+JSON.stringify(circuit));
      check(circuit.branch,'original correct parallel voltmeter topology preserved '+name+'/'+n);
+    }
+    if(n===6){
+     const spacing=await labelGeometry();
+     check(spacing.leftGap>=5&&spacing.rightGap>=5&&spacing.near,
+      '230V branch watt labels do not overlap wires or resistor symbols '+name+'/'+JSON.stringify(spacing));
+    }
+    if(n===8){
+     const gap=await voltmeterSpacing();
+     check(gap>=4,'dynamic voltmeter must visibly clear R, not touch it '+name+'/'+gap);
     }
     if(n===6&&width>=1200){
      const title=await slide().locator('.page-title').evaluate(el=>({
