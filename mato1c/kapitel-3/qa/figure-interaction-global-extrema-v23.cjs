@@ -53,7 +53,8 @@ function linePoints(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(
   });
   const label=width+'/'+n+'/'+phase;
   ok(measured.document<=measured.width+2,label+' no horizontal document overflow '+JSON.stringify(measured));
-  ok(measured.maths>=1,label+' actual visible MathML');
+  // Själva bokarbetskortet visar avsiktligt ingen formel innan metodstödet öppnats.
+  ok(measured.maths>=(n===7&&phase==='before'?0:1),label+' actual visible MathML where a formula is intended');
   equal(measured.outOfView.length,0,label+' no equation outside viewport '+JSON.stringify(measured.outOfView));
   equal(measured.clipped.length,0,label+' no clipped mathematical ink '+JSON.stringify(measured.clipped));
   equal(measured.scrollers.length,0,label+' no mathematics in hidden internal scroller '+JSON.stringify(measured.scrollers));
