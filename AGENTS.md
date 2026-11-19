@@ -1,5 +1,13 @@
 # Publishing lesson changes
 
+## The teacher's mathematical norm is binding (all lessons)
+
+- **The teacher's original lesson is the authority for mathematical content, notation, worked-solution order and calculation method.** The task is to improve how pupils learn *that* lesson, never to replace its mathematics with another convention or introduce a new topic because a generic teaching model recommends it. Read the original PDF/film/transcript and create a source-to-web content checklist before writing. Correct demonstrable mathematical errors transparently; do not silently substitute a different method.
+- Keep every mathematical idea, explanation and relevant example type from the original, adapting numerical examples and book exercise numbers when the user asks not to copy the textbook. Preserve the teacher's way of evaluating integrals, including the bracket notation, `F(b)-F(a)` and the complete substitution chain. Add visualizations, questions and feedback to clarify that method, not to displace it.
+- **Do not add signed/negative-area integrals, extra rules, exceptions or other mathematical content** unless the teacher includes them in the original lesson or explicitly requests them. Previously added extras that do not pass this test must be removed when that lesson is revised. Retain explicitly requested labs and Socrative activities.
+- **Length cap:** aim for **8–10 main slides** per lesson and **about 10–13 slides in total including clearly optional extras**, whenever pedagogically and mathematically feasible. Do not use the cap to omit a necessary original calculation or a complete book assignment. When an exception is truly necessary, explain why before extending the lesson.
+- Distinguish the main teaching path from optional enrichment; optional content must never interrupt access to Socrative, book work, homework and exit feedback. Confirm explicitly that the final lesson follows the source before declaring it ready.
+
 - Prepare and test a complete logical change before publishing to main.
 - Commit lesson changes and their corresponding browser tests together in one atomic commit. Do not publish intermediate single-file versions to main.
 - Run the relevant browser QA commands from .github/workflows before publishing. If local execution is unavailable, use a working branch and validate it before merging to main.
