@@ -110,6 +110,11 @@ const close=(a,b,t=.01)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
      ok(await page.locator('#model-feedback math').count()===3,'correct classification shows real MathML '+w);
      await page.selectOption('#model-type','max');ok((await page.locator('#model-feedback').innerText()).trim()==='','changed model answer clears old feedback '+w);
     }
+    if(i===4){
+     await page.locator('#example [data-seq-reset]').click();
+     for(let n=0;n<5;n++)await page.locator('#example [data-seq-next]').click();
+     ok(await page.locator('#example [data-seq-item]:visible').count()===5,'five complete algebra steps '+w);
+    }
     if(i===4&&w===390){
      const cards=await page.locator('#example .tall-sign tbody tr').evaluateAll(trs=>trs.map(tr=>{
       const td=[...tr.querySelectorAll('td')],r=tr.getBoundingClientRect();
@@ -118,11 +123,6 @@ const close=(a,b,t=.01)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
      }));
      ok(cards.length===5&&cards.every(c=>c.layout==='grid'&&c.width>215&&c.labels.every(Boolean)&&c.cells.every(v=>v>80)),
       'mobile sign chart uses five genuinely readable derivative/function cards '+JSON.stringify(cards));
-    }
-    if(i===4){
-     await page.locator('#example [data-seq-reset]').click();
-     for(let n=0;n<5;n++)await page.locator('#example [data-seq-next]').click();
-     ok(await page.locator('#example [data-seq-item]:visible').count()===5,'five complete algebra steps '+w);
     }
     if(i===5){await page.locator('#terrace [data-correct="false"]').first().click();ok(await page.locator('#terrace .feedback math').count()===0,'wrong terrace choice no leaked MathML');
      await page.locator('#terrace [data-correct="true"]').click();
