@@ -4,6 +4,10 @@ on:
     paths:
       - "ma4/**"
       - ".github/workflows/ma4-browser-qa.yml"
+  pull_request:
+    paths:
+      - "ma4/**"
+      - ".github/workflows/ma4-browser-qa.yml"
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -48,6 +52,7 @@ jobs:
           node ma4/kapitel-4/qa/figure-interaction-hogre-grad-v23.cjs
           node ma4/kapitel-4/qa/figure-interaction-faktorsatsen-v23.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-13.cjs
+          node ma4/kapitel-4/qa/faktorsatsen-visibility-regression.cjs
           node ma4/kapitel-4/qa/deep-review-ma4-12.cjs
           node ma4/kapitel-4/qa/figure-interaction-polynomdivision.cjs
           node ma4/kapitel-4/qa/browser-smoke.cjs
