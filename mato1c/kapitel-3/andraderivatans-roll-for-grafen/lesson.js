@@ -2,7 +2,8 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const fmt=(v,d=2)=>(Math.abs(v)<1e-10?0:v).toFixed(d).replace('.',',').replace('-','−');
-function mathReadout(id,formula){if(!window.Ma4Math)throw Error('MathML-stöd saknas för dynamisk figur');window.Ma4Math.setFormula($(id),formula,'block')}
+function mathReadout(id,formula,display='block'){if(!window.Ma4Math)throw Error('MathML-stöd saknas för dynamisk figur');window.Ma4Math.setFormula($(id),formula,display)}
+function hideRevealed(id){const target=$(id);if(target&&!target.classList.contains('hidden'))document.querySelector('[data-reveal="'+id+'"]').click()}
 const M={
  f:{name:'f',f:x=>x*x,d:x=>2*x,dd:x=>2,color:'#12877f'},
  g:{name:'g',f:x=>-x*x,d:x=>-2*x,dd:x=>-2,color:'#2275a3'},
@@ -36,12 +37,12 @@ function ordinary(id,m,at=null){
 function compare(){
  const at=Number($('compare-x').value);
  ordinary('compare-f',M.f,at);ordinary('compare-g',M.g,at);
- $('compare-x-out').textContent='x = '+fmt(at);
- $('compare-f-readout').textContent='f′('+fmt(at)+') = '+fmt(M.f.d(at));
- $('compare-g-readout').textContent='g′('+fmt(at)+') = '+fmt(M.g.d(at));
+ mathReadout('compare-x-out','x = '+fmt(at),'inline');
+ mathReadout('compare-f-readout','f′('+fmt(at)+') = '+fmt(M.f.d(at)),'inline');
+ mathReadout('compare-g-readout','g′('+fmt(at)+') = '+fmt(M.g.d(at)),'inline');
 }
-$('compare-x').addEventListener('input',compare);
-$('compare-reset').addEventListener('click',()=>{$('compare-x').value='0';compare()});
+$('compare-x').addEventListener('input',()=>{hideRevealed('compare-readouts');compare()});
+$('compare-reset').addEventListener('click',()=>{$('compare-x').value='0';hideRevealed('compare-readouts');compare()});
 ordinary('zero-p',M.p);ordinary('zero-q',M.q);compare();
 let showCurvature=false;
 function inflect(){
@@ -67,20 +68,30 @@ function inflect(){
  add(s,'text',{x:X(0)+10,y:54,'font-size':16,fill:'#4d6979'},'y');
  if(showCurvature){
  add(s,'text',{x:111,y:75,'font-size':17,fill:'#b66a2d','font-weight':700},'f″ < 0');
- add(s,'text',{x:556,y:75,'font-size':17,fill:'#087f75','font-weight':700},'f″ > 0');
+ add(s,'text',{x:480,y:75,'font-size':17,fill:'#087f75','font-weight':700},'f″ > 0');
  }
- $('inflect-x-out').textContent='x = '+fmt(at);
+ mathReadout('inflect-x-out','x = '+fmt(at),'inline');
  mathReadout('inflect-y','f('+fmt(at)+') = '+fmt(val));
  mathReadout('inflect-slope','f′('+fmt(at)+') = '+fmt(sl));
  mathReadout('inflect-second','f″('+fmt(at)+') = '+fmt(m.dd(at)));
 }
-$('inflect-x').addEventListener('input',inflect);
-$('inflect-zero').addEventListener('click',()=>{$('inflect-x').value='0';inflect()});inflect();
+$('inflect-x').addEventListener('input',()=>{hideRevealed('inflect-readouts');hideRevealed('inflect-answer');inflect()});
+$('inflect-zero').addEventListener('click',()=>{$('inflect-x').value='0';hideRevealed('inflect-readouts');hideRevealed('inflect-answer');inflect()});inflect();
 document.querySelector('[data-reveal="inflect-answer"]').addEventListener('click',()=>{
  showCurvature=!$('inflect-answer').classList.contains('hidden');
  inflect();
 });
 function numeric(id){const raw=$(id).value.trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(',','.');return/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)?Number(raw):NaN}
+const feedbackMath=['h(2)=2²−4·2+7','h″(2)=2>0','h″(x)=2>0','h′(x)=2x−4','h′(x)=0','h′(2)=0','h(2)=3','h(2)','2x−4=0','x=2'];
+function semanticFeedback(el,raw){
+ el.replaceChildren();let cursor=0;
+ while(cursor<raw.length){
+  let index=Infinity,token='';for(const t of feedbackMath){const i=raw.indexOf(t,cursor);if(i>=0&&(i<index||(i===index&&t.length>token.length))){index=i;token=t}}
+  if(!token){el.append(document.createTextNode(raw.slice(cursor)));break}
+  if(index>cursor)el.append(document.createTextNode(raw.slice(cursor,index)));
+  const span=document.createElement('span');span.className='own-feedback-math';window.Ma4Math.setFormula(span,token,'inline');el.append(span);cursor=index+token.length;
+ }
+}
 $('own-check').addEventListener('click',()=>{
  const x=numeric('own-x'),y=numeric('own-y'),kind=$('own-kind').value,out=$('own-feedback');let msg='';
  if(!Number.isFinite(x))msg='Ange x-värdet där h′(x)=0. Lös först 2x−4=0.';
@@ -90,6 +101,7 @@ $('own-check').addEventListener('click',()=>{
  else if(!Number.isFinite(y))msg='Punkttypen är rätt. Beräkna y-värdet med h(2), inte med h′(2).';
  else if(Math.abs(y-3)>1e-9)msg='Beräkna h(2)=2²−4·2+7. Derivatans nollställe ger inte y-koordinaten.';
  out.className='feedback '+(msg?'no':'ok');
- out.textContent=msg||'Rätt: h′(2)=0, h″(2)=2>0 och h(2)=3. Minimipunkt (2, 3). Visa även din lösning på papper.';
+ semanticFeedback(out,msg||'Rätt: h′(2)=0, h″(2)=2>0 och h(2)=3. Minimipunkt (2, 3). Visa även din lösning på papper.');
 });
+for(const id of ['own-x','own-y','own-kind'])for(const event of ['input','change'])$(id).addEventListener(event,()=>{const out=$('own-feedback');out.replaceChildren();out.className='feedback'});
 })();

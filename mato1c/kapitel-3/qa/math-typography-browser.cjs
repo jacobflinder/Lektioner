@@ -51,11 +51,11 @@ const formulaSelector=':is(p.math, p.mathline, p.math-display, p.math-work, p.ma
    assert.ok(metrics.font.includes('Cambria Math'),'Lektion '+(n+1)+': gemensamt matematiktypsnitt');
    assert.ok(metrics.size>=18,'Lektion '+(n+1)+': läsbar ekvationsstorlek');
    assert.ok(metrics.display==='block','Lektion '+(n+1)+': separat ekvationsrad');
-   // Lesson 35 has undergone v2.3 visual inspection: its short MathML rows
+   // Lessons 35–36 have undergone v2.3 visual inspection: their MathML rows
    // fit outright and must never be clipped by the legacy internal scroller.
-   if(n===2){
-    assert.equal(metrics.overflow,'visible','Lektion 3: matematik får inte beskäras av intern scroll');
-    assert.ok(metrics.scroll<=metrics.width+3,'Lektion 3: hela matematikraden ryms i datorvy');
+   if(n===2||n===3){
+    assert.equal(metrics.overflow,'visible','Lektion '+(n+1)+': matematik får inte beskäras av intern scroll');
+    assert.ok(metrics.scroll<=metrics.width+3,'Lektion '+(n+1)+': hela matematikraden ryms i datorvy');
    }else assert.ok(metrics.overflow==='auto','Lektion '+(n+1)+': äldre formler behåller intern horisontell scroll');
    checks+=4;
    await page.screenshot({path:folder+'/lesson'+(n+1)+'-math-desktop.png',fullPage:true});
@@ -63,7 +63,7 @@ const formulaSelector=':is(p.math, p.mathline, p.math-display, p.math-work, p.ma
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Lektion '+(n+1)+': ingen sidledes mobilscroll efter visad lösning');
    metrics=await math.evaluate(el=>({size:parseFloat(getComputedStyle(el).fontSize),client:el.clientWidth,scroll:el.scrollWidth}));
    assert.ok(metrics.size>=16.5,'Lektion '+(n+1)+': mobil matematikstorlek');
-   if(n===2)assert.ok(metrics.scroll<=metrics.client+3,'Lektion 3: hela matematikraden ryms i mobilvy utan intern scroll');
+   if(n===2||n===3)assert.ok(metrics.scroll<=metrics.client+3,'Lektion '+(n+1)+': hela matematikraden ryms i mobilvy utan intern scroll');
    checks+=2;
    await page.screenshot({path:folder+'/lesson'+(n+1)+'-math-mobile.png',fullPage:true});
    assert.deepEqual(errors,[],'Lektion '+(n+1)+': inga JS-fel');

@@ -125,9 +125,9 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   // 6 self-solution on paper and diagnostics for wrong point kind/height.
   await go(6);ok(await page.locator('#own-answer').isHidden(),'Elevfacit dolt');
   await page.locator('#own-x').fill('2');await page.locator('#own-y').fill('3');await page.selectOption('#own-kind','max');await page.locator('#own-check').click();
-  ok((await page.locator('#own-feedback').innerText()).includes('h″(x)=2'),'Fel klassificering får diagnos');
+  ok(await page.locator('#own-feedback math[aria-label="h″(x)=2>0"]').count()===1,'Fel klassificering får korrekt matematisk diagnos');
   await page.selectOption('#own-kind','min');await page.locator('#own-y').fill('0');await page.locator('#own-check').click();
-  ok((await page.locator('#own-feedback').innerText()).includes('h(2)'),'Fel höjd får diagnos');
+  ok(await page.locator('#own-feedback math[aria-label="h(2)=2²−4·2+7"]').count()===1,'Fel höjd får korrekt funktionsvärdesdiagnos');
   await page.locator('#own-y').fill('3');await page.locator('#own-check').click();
   ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'),'Eget korrekt svar');
   await shown('own-hint');await shown('own-answer');
@@ -140,7 +140,7 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   await go(7);
   for(const id of ['zero-p','zero-q'])ok(await page.locator('#'+id+' path').count()===1,'Graf för kontrastexempel '+id);
   ok(await page.locator('#zero-answer').isHidden(),'Kontrastfacit dolt');
-  await page.locator('#zero-test [data-correct="false"]').first().click();ok((await page.locator('#zero-test .feedback').innerText()).includes('−4'),'Felkoncept diagnostiseras');
+  await page.locator('#zero-test [data-correct="false"]').first().click();ok(await page.locator('#zero-test .feedback math[aria-label="q′(−1)=−4"]').count()===1,'Felkoncept diagnostiseras med exakt negativt derivatavärde');
   await page.locator('#zero-test [data-correct="true"]').click();ok((await page.locator('#zero-test .feedback').innerText()).includes('minimum'),'Skillnad minimum/terrass');
   await shown('zero-answer');
   for(const v of ['p′(x) = 3x²','q′(x) = 4x³','p′(−1) = 3','q′(−1) = −4'])await math('#zero-answer',v);
@@ -172,7 +172,7 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   for(const v of ['f″(x) = 6x','6x = 0','x = 0','f″(−1) = −6 < 0','f″(1) = 6 > 0','f(0) = 2'])await math('#inflect-algebra',v);
   await gap('#inflect-algebra [data-seq-item]:nth-child(2) .lesson-math-stack > p.math-display');
   await page.locator('#inflect-algebra [data-correct="true"]').click();
-  ok((await page.locator('#inflect-algebra .feedback').innerText()).includes('12x²'),'x⁴ ger ingen inflexion');
+  ok(await page.locator('#inflect-algebra .feedback math[aria-label="q″(x)=12x²"]').count()===1,'x⁴ ger ingen inflexion: andra derivatan visas exakt');
   await shot('09-inflexionsbevis-desktop');
   // 10 exact original book tracks and follow-up without new tasks.
   await go(10);const book=await page.locator('#book').innerText();
@@ -202,7 +202,18 @@ assert.ok(close(models.r[1](3),0)&&models.r[2](3)<0&&close(models.r[0](3),5),'Ex
   // Mobile screenshot of all 12 sections with revealed answers and completed interactions.
   await page.setViewportSize({width:390,height:844});
   for(let i=1;i<=12;i++){
-   await go(i);await dimensions('mobil bild '+i);
+   await go(i);
+   // v2.3 intentionally re-hides earlier answers and step lists on slide change;
+   // reopen explicitly to inspect complete mathematical ink at mobile width.
+   for(const button of await page.locator('.slide.active [data-reveal]').all()){
+    const id=await button.getAttribute('data-reveal');
+    if(await page.locator('#'+id).isHidden())await button.click();
+   }
+   for(const sequence of await page.locator('.slide.active [data-sequence]').all()){
+    const n=await sequence.locator('[data-seq-item]').count();
+    for(let step=0;step<n;step++)await sequence.locator('[data-seq-next]').click();
+   }
+   await dimensions('mobil bild '+i);
    if(i===5)await gap('#example [data-seq-item]:nth-child(2) .solution-math-group > p.math-display');
    if(i===6)await gap('#own-answer .lesson-math-stack:first-child > p.math-display');
    if(i===7)await gap('#zero-test .plot-card:first-child .lesson-math-stack > p.math-display');
