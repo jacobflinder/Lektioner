@@ -168,18 +168,6 @@ function updateSpeed(){
 }
 $('speed-switch').addEventListener('input',updateSpeed);updateSpeed();
 
-function drawSigned(){
- const g=$('signed-plot');g.replaceChildren();const x=t=>80+107*t,y=v=>180-45*v;
- poly(g,[[x(0),y(0)],[x(2),y(0)],[x(0),y(-2)]],'#f5d5b9',{stroke:'#bf8051','stroke-width':1.6,'data-signed':'negative'});
- poly(g,[[x(2),y(0)],[x(4),y(0)],[x(4),y(2)]],'#bfe6d8',{stroke:'#087d70','stroke-width':1.6,'data-signed':'positive'});
- axis(g,{x,y,xMax:4,yMin:-2,yMax:3,ytick:1});
- line(g,x(0),y(-2),x(4),y(2),'#126b9e',4,{'data-signed-curve':'true'});
- txt(g,x(.7),y(-1.2),'−',28,{'font-weight':800,fill:'#a6572b'});
- txt(g,x(3.3),y(1.15),'+',26,{'font-weight':800,fill:'#086e5b'});
- txt(g,x(2.45),y(2.1),'y=x−2',19,{'font-weight':700});
-}
-drawSigned();
-
 const slides=[...document.querySelectorAll('.slide')];
 document.querySelectorAll('[data-jump-to]').forEach(b=>b.addEventListener('click',()=>{const i=slides.findIndex(s=>s.id===b.dataset.jumpTo);if(i>=0){$('jump').value=String(i);$('jump').dispatchEvent(new Event('change',{bubbles:true}))}}));
 document.querySelectorAll('[data-reveal]').forEach(b=>b.dataset.initialLabel=b.textContent);
