@@ -36,7 +36,7 @@ fs.mkdirSync(out,{recursive:true});
    await go(1);check(!await page.locator('#start-answer').isVisible(),label+' initial solution hidden');
    await shot(label+'-start');
    await page.locator('[data-reveal="start-answer"]').click();
-   check(await page.locator('#start-answer math').count()===2,label+' two MathML start checks');
+   check(await page.locator('#start-answer .formulas > .formula math[display="block"]').count()===2,label+' two MathML start calculations');
    await go(2);await go(1);check(!await page.locator('#start-answer').isVisible(),label+' reset opening');
 
    await go(3);
