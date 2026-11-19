@@ -123,6 +123,19 @@ const close=(a,b,t=.0051)=>Math.abs(a-b)<=t;
      for(const formula of ['f′(x)>0','f′(x)<0','f′(a)=0','f′(x)=0'])ok(texts.includes(formula),'correct support MathML '+formula+'/'+label);
     }
     if(i===9)await reveal('exit-answer');
+    if(i===4&&width===390){
+     const cap=await page.locator('#sign-solution table.sign-table').evaluate(table=>{
+      const t=table.getBoundingClientRect(),c=table.querySelector('caption').getBoundingClientRect();
+      return {table:t.width,caption:c.width};
+     });
+     ok(cap.caption>=cap.table*.75,'mobile sign-table caption readable across card width '+JSON.stringify(cap));
+    }
+    if((i===3||i===4)&&width>=1280){
+     const dims=await page.locator('#'+(i===3?'tangent':'signs')+' .two>.plot-box').evaluate(el=>{
+      return {frame:el.getBoundingClientRect().height,svg:el.querySelector('svg').getBoundingClientRect().height};
+     });
+     ok(dims.frame<=dims.svg+45,'explanatory plot does not stretch into blank column '+label+'/'+i+' '+JSON.stringify(dims));
+    }
     await layout(label+'/slide'+i+'/revealed');await shot(width,i,'revealed');
     if(i===8){await go(9);await go(8);ok(!await page.locator('#book-support').evaluate(d=>d.open),'book support closes on navigation '+label);
      await page.locator('#book-support summary').click();await page.locator('#mode').click();
