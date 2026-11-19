@@ -20,6 +20,17 @@ function integralMath(a,b,expr,variable='x',rhs=null){
  const label='∫_'+a+'^'+b+' '+expr+' d'+variable+(rhs===null?'':' = '+rhs);
  return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="'+escape(label)+'"><mrow><msubsup><mo largeop="true" movablelimits="false">∫</mo>'+fractionBound(a)+fractionBound(b)+'</msubsup><mrow>'+m[1]+'</mrow><mspace width="0.20em"/><mi mathvariant="normal">d</mi><mi>'+escape(variable)+'</mi>'+right+'</mrow></math>';
 }
+/* Hakparentesen hör till metoden: [F(x)]_a^b betyder F(b)−F(a).
+   Varje helt matematiskt deluttryck får ett eget MathML-träd; flex kan bryta
+   själva ekvationen mellan delarna på en smal skärm utan att kapa bråken. */
+function evaluationMath(a,b,primitive){
+ const match=semantic(primitive,'inline').match(/<mrow>([\s\S]*)<\/mrow><\/math>$/);
+ if(!match)throw Error('Kunde inte sätta hakparentesen: '+primitive);
+ const square='<msubsup><mrow><mo fence="true" stretchy="true">[</mo><mrow>'+match[1]+'</mrow><mo fence="true" stretchy="true">]</mo></mrow>'+fractionBound(a)+fractionBound(b)+'</msubsup>';
+ return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" aria-label="['+escape(primitive)+']_'+escape(a)+'^'+escape(b)+'"><mrow>'+square+'</mrow></math>';
+}
+function mathSegment(html){return '<span class="math-segment">'+html+'</span>'}
+function equalSegment(html){return '<span class="math-segment"><span class="math-equals" aria-hidden="true">=</span>'+html+'</span>'}
 document.querySelectorAll('[data-formula]').forEach(el=>{if(el.innerHTML.includes('<mo>Δ</mo>'))el.innerHTML=el.innerHTML.replaceAll('<mo>Δ</mo>','<mi>Δ</mi>')});
 document.querySelectorAll('[data-integral]').forEach(el=>{
  const [a,b,expr,v]=el.dataset.integral.split('|');
@@ -29,6 +40,18 @@ document.querySelectorAll('[data-integral]').forEach(el=>{
 document.querySelectorAll('[data-integral-rule]').forEach(el=>{
  const [a,b,expr,v,rhs]=el.dataset.integralRule.split('|');
  el.innerHTML=integralMath(a,b,expr,v,rhs);
+ el.dataset.mathPresentation='true';
+});
+document.querySelectorAll('[data-integral-evaluation]').forEach(el=>{
+ const [a,b,expr,v,primitive]=el.dataset.integralEvaluation.split('|');
+ el.innerHTML=mathSegment(integralMath(a,b,expr,v).replace('display="block"','display="inline"'))+equalSegment(evaluationMath(a,b,primitive));
+ el.classList.add('math-parts');el.setAttribute('aria-label','Integralen från '+a+' till '+b+' av '+expr+' dx är lika med ['+primitive+'] med gränserna '+a+' och '+b);
+ el.dataset.mathPresentation='true';
+});
+document.querySelectorAll('[data-evaluation-rule]').forEach(el=>{
+ const [a,b,primitive,result]=el.dataset.evaluationRule.split('|');
+ el.innerHTML=mathSegment(evaluationMath(a,b,primitive))+equalSegment(semantic(result,'inline'));
+ el.classList.add('math-parts');el.setAttribute('aria-label','['+primitive+'] från '+a+' till '+b+' är lika med '+result);
  el.dataset.mathPresentation='true';
 });
 function svg(svgEl,tag,attrs={},value){

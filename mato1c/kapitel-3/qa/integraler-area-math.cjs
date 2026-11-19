@@ -8,20 +8,27 @@ let checks=0;
 const yes=(x,s)=>{assert.ok(x,s);checks++}, near=(a,b,s,t=1e-9)=>yes(Math.abs(a-b)<=t,s+' actual '+a+' expected '+b);
 yes((html.match(/<section class="slide(?: active)?"/g)||[]).length===16,'16 lesson stages');
 const p=(id)=>html.indexOf('<section class="slide" id="'+id+'"');
-yes(p('rect-lab')<p('bridge')&&p('bridge')<p('velocity')&&p('velocity')<p('signed'),'Fundamental theorem follows rectangle sums and precedes applications');
+yes(p('notation')<p('bridge')&&p('bridge')<p('geometric')&&p('geometric')<p('rect-lab'),'Original teaching order: integral notation, fundamental theorem, geometric verification, rectangle approximation');
 yes(html.includes('Vad betyder en bestämd integral?'),'Notation does not equate all integrals to geometric area');
 yes(html.includes('Integralkalkylens fundamentalsats')&&html.includes('kontinuerlig'),'Theorem has heading and continuous-function hypothesis');
+yes(html.includes('fundamentalsatsen och hakparentes'),'Exit summary names both fundamental theorem and evaluation bracket');
+yes(/id="ftc-summary"[\s\S]*?data-integral-evaluation="a\|b\|f\(x\)\|x\|F\(x\)"[\s\S]*?data-evaluation-rule="a\|b\|F\(x\)\|F\(b\)−F\(a\)"/.test(html),'Final visible summary contains complete integral-to-bracket-to-F(b)-F(a) theorem');
+yes(html.includes('Sätt in båda gränserna i samma beräkning'),'Worked example shows whole difference');
+yes(!html.includes('data-formula="F(3)=')&&!html.includes('data-formula="F(0)='),'No isolated F(3) and F(0) calculations in worked integral');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 yes(new Set(ids).size===ids.length,'All ids unique');
 for(const word of ['Integraler och area','SOC-36677379','Socrative','minst 20 minuter','alla uppgifter och samtliga deluppgifter','184–188','3334','3335','3336','3337','3338','3339','3340','3341','3342','3343','3344','3345','3346','3347','book-methods','rect-plot','speed-plot','signed-plot','rect-method','data-sequence'])yes(html.includes(word),'Preserved required '+word);
 for(const old of ['SOC-36677299','3401–3415','Uppgiftstexterna finns i boken','Webbsidan återger inte','Metodstödet innehåller inga facit'])yes(!html.includes(old),'No obsolete phrase '+old);
 yes(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon/.test(js),'No network or student tracking');
 yes((html.match(/data-integral=/g)||[]).length>=6,'At least six proper integral expressions');
-yes((html.match(/data-integral-rule=/g)||[]).length===3,'Fundamental theorem shown as three correct integral equalities');
-yes(js.includes("document.querySelectorAll('[data-integral-rule]')"),'Theorem MathML renderer exists');
+yes((html.match(/data-integral-evaluation=/g)||[]).length>=4,'Theorem, example, exit and method summary include integral equals bracket');
+yes((html.match(/data-evaluation-rule=/g)||[]).length>=4,'Theorem, example, exit and method summary include bracket equals F(b) minus F(a)');
+yes(js.includes("document.querySelectorAll('[data-integral-evaluation]')")&&js.includes("document.querySelectorAll('[data-evaluation-rule]')"),'MathML evaluation-bracket renderers exist');
 const F=x=>x*x/2+2*x;
 near(F(3)-F(0),10.5,'Fundamental theorem agrees with previous geometric area');
 near(F(4)-F(0),16,'Fundamental theorem agrees with area lab at b=4');
+const G=x=>x*x/2+x;
+near(G(4)-G(0),12,'Exit evaluates G(4)-G(0) without separate component calculations');
 for(const [a,b,f,exact] of [[0,3,x=>x+2,10.5],[0,4,x=>x+1,12]]){const rectangle=f(a)*(b-a),triangle=(f(b)-f(a))*(b-a)/2;near(rectangle+triangle,exact,'geometric exact area');}
 for(const b of [1,2,3,4])near(2*b+b*b/2,(b*(2+(2+b)))/2,'Linear area b='+b);
 const q=x=>1+x*x/4;
@@ -48,15 +55,27 @@ vm.runInContext(fs.readFileSync('mato1c/kapitel-3/primitiva-funktioner/math-poli
 for(const match of html.matchAll(/data-formula(?:-inline)?="([^"]+)"/g)){
  const s=ctx.window.Ma3cPrimitiveMath.semantic(match[1]);
  yes(s.includes('<math')&&s.includes('</math>')&&s.includes('aria-label='),'Semantic formula '+match[1]);
+ yes(!s.includes('<mfrac><mrow></mrow>'),'No empty numerator in semantic fraction '+match[1]);
+ if(match[1].includes('²/2'))yes(s.includes('<mfrac><mrow><msup>'),'Squared numerator sits INSIDE fraction, not beside it: '+match[1]);
 }
 for(const match of html.matchAll(/data-integral="([^"]+)"/g)){
  const parts=match[1].split('|');yes(parts.length===4,'Integral requires 4 fields');
  yes(parts[2]!=='','Integrand nonempty');
 }
-for(const match of html.matchAll(/data-integral-rule="([^"]+)"/g)){
- const parts=match[1].split('|');yes(parts.length===5,'Theorem integral equality needs five fields');
- yes(parts[2]!==''&&parts[4]!=='','Theorem integral has both integrand and right-hand side');
+for(const match of html.matchAll(/data-integral-evaluation="([^"]+)"/g)){
+ const parts=match[1].split('|');yes(parts.length===5,'Integral evaluation requires integrand and primitive');
+ yes(parts[2]!==''&&parts[4]!=='','Integral evaluation has both sides');
  const math=ctx.window.Ma3cPrimitiveMath.semantic(parts[4]);
- yes(math.includes('<math')&&math.includes('</math>'),'Semantic right-hand side '+parts[4]);
+ yes(math.includes('<math')&&math.includes('</math>'),'Semantic primitive '+parts[4]);
+ yes(!math.includes('<mfrac><mrow></mrow>'),'Integral primitive fraction has nonempty numerator '+parts[4]);
+ if(parts[4].includes('²/2'))yes(math.includes('<mfrac><mrow><msup>'),'Integral primitive fraction has x² as numerator '+parts[4]);
+}
+for(const match of html.matchAll(/data-evaluation-rule="([^"]+)"/g)){
+ const parts=match[1].split('|');yes(parts.length===4,'Evaluation bracket requires bounds, primitive and difference');
+ yes(parts[3].includes('−'),'Evaluation is always a difference, not separate function values');
+ const math=ctx.window.Ma3cPrimitiveMath.semantic(parts[2]);
+ yes(math.includes('<math')&&math.includes('</math>'),'Semantic evaluation expression '+parts[2]);
+ yes(!math.includes('<mfrac><mrow></mrow>'),'Hakparentes fraction has no empty numerator '+parts[2]);
+ if(parts[2].includes('²/2'))yes(math.includes('<mfrac><mrow><msup>'),'Hakparentes fraction has squared numerator '+parts[2]);
 }
 console.log(JSON.stringify({result:'PASS',checks,lesson:'Integraler och area'}));

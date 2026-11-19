@@ -26,6 +26,11 @@
 .smalltext{font-size:.88rem;color:#446577}.numbered{margin:10px 0;padding-left:24px}.numbered li{margin:9px 0}
 .formula .integral-operator{font-size:1.2em}
 .formula.theorem{font-size:clamp(1.08rem,2.2vw,1.5rem)}
+.formula.math-parts,.formula.calculation-row{display:flex;flex-wrap:wrap;align-items:center;column-gap:12px;row-gap:4px;white-space:normal;overflow-x:visible}
+.formula .math-segment,.formula.calculation-row .inline-math{display:inline-flex;align-items:center;max-width:100%;white-space:nowrap}
+.formula .math-segment math,.formula.calculation-row .inline-math math{font-size:1em}
+.math-equals{margin-right:8px;font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.12em}
+.formula.calculation-row .inline-math{font-size:1em}
 .seq-item .formula{margin-top:9px}.sequence .steps{gap:15px}.sequence .seq-item{padding:12px 16px}
 .quiz button.choice{min-height:53px}.quiz button.choice math{font-size:1.12em}.feedback .formula{margin:8px 0;border:0;background:#fff;font-weight:500}
 .book-methods{padding:13px 16px;border:1px solid #a8d2c8;background:#e8f5f2;border-radius:10px;margin:15px 0}.book-methods summary:focus-visible{outline:3px solid #e7a62e;outline-offset:3px}.book-methods[open] summary{margin-bottom:11px}
@@ -68,9 +73,9 @@
 <main>
 <aside class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p>
 <details><summary>Undervisningsväg och kognitivt fokus</summary>
-<p><strong>Kärnväg:</strong> enskild start → mål → integralnotation → geometriskt exempel → laborationer om gränser och rektanglar → integralkalkylens fundamentalsats med samma area → hastighet och sträcka → villkor för area → egen prövning → original-Socrative → bokarbete → individuell utcheckning.</p>
+<p><strong>Kärnväg:</strong> enskild start → mål → integralnotation → återkalla primitiva funktioner → fundamentalsatsen med hakparentes och hela beräkningskedjan → kontroll med geometrisk area → laborationer om gränser och rektanglar → hastighet och sträcka → teckenvillkor → Socrative → bokarbete → individuell utcheckning med samma metod.</p>
 <p><strong>Viktiga missuppfattningar:</strong> förväxling av höjd med area, omkastade gränser, att dx är en gräns, att hastighetens graf ger samma enhet som hastigheten, och att integral alltid är positiv geometrisk area. Stanna efter elevförsök, inte efter antal klick.</p>
-<p><strong>Avgränsning:</strong> nya boken s. 184–188 handlar främst om area och integralens innebörd. Visa först varför integralen beskriver en summa, därefter hur fundamentalsatsen gör samma värde möjligt att beräkna exakt. Självständig metodträning med primitiva funktioner fördjupas nästa lektion.</p>
+<p><strong>Från originalgenomgången:</strong> återkalla F′ = f och varför C tar ut sig. Presentera den fullständiga satsen med hakparentes [F(x)] från a till b och skillnaden F(b)−F(a). Visa sedan med ett eget exempel hela kedjan: hitta F, skriv hakparentes, sätt in BÅDA gränserna i samma uttryck, förenkla, jämför geometriskt. Nästa lektion ger ytterligare självständig metodträning.</p>
 <p><strong>Socrative:</strong> den gamla lektionens befintliga aktivitet 321, SOC-36677379, används oförändrad och följs upp i helklass utan namn. Bokens gamla uppgiftsnummer ska inte visas.</p>
 </details></aside>
 <div class="repetition"><strong>Repetitionsläge:</strong> försök räkna på papper innan du öppnar återkopplingen. Sidan skickar inte dina svar vidare.</div>
@@ -89,11 +94,11 @@
 <section class="slide" id="goals" data-teacher="Efter starten: läs målen kort. Peka på att de både ska tolka, skriva och beräkna med areor, samt förstå varför fler rektanglar hjälper.">
 <div class="eyebrow">02 · Dagens mål · Läroboken s. 184–188</div><h2>Integraler och area</h2>
 <p class="lead">Efter lektionen ska du kunna:</p>
-<ol class="numbered"><li>tolka <strong>en integral som en area</strong> när grafen ligger på eller ovanför x-axeln,</li><li>ange <strong>integrationsgränser, integrand och variabel</strong>,</li><li>beräkna areor geometriskt och <strong>uppskatta area med rektanglar</strong>,</li><li>förklara sambandet mellan <strong>integralen och en primitiv funktion</strong> i fundamentalsatsen,</li><li>förklara varför arean under en <strong>hastighet–tid-graf</strong> kan ge sträckan.</li></ol>
-<div class="insight">Vi börjar med vad integralen betyder. Sedan ser vi hur den kan beräknas med en primitiv funktion. Nästa lektion tränar vi metoden vidare.</div>
+<ol class="numbered"><li>tolka <strong>en bestämd integral</strong> och dess gränser,</li><li>använda <strong>integralkalkylens fundamentalsats</strong> med hakparentes och beräkna F(b)−F(a),</li><li>kontrollera ett integralvärde <strong>geometriskt</strong> och uppskatta det med rektanglar,</li><li>tolka area under en <strong>hastighet–tid-graf</strong> och avgöra när integralvärdet motsvarar geometrisk area.</li></ol>
+<div class="insight">Vi knyter ihop förra lektionens primitiva funktioner med den nya integralnotationen: samma integral kan beräknas med fundamentalsatsen och kontrolleras med geometri.</div>
 </section>
 
-<section class="slide" id="notation" data-teacher="Börja med att låta eleverna identifiera de fyra delarna av symbolen innan benämningarna visas. Betona att integraltecknet står för en summa av små bidrag, och att integralen bara är geometrisk area när funktionen är icke-negativ. Fundamentalsatsen kommer efter rektangellaborationen.">
+<section class="slide" id="notation" data-teacher="Börja med att låta eleverna identifiera de fyra delarna av symbolen innan benämningarna visas. Integralens innebörd är summan av små bidrag; när f är icke-negativ är värdet geometrisk area. Direkt efter detta knyter nästa steg an till gårdagens primitiva funktioner och visar metoden i originalgenomgången.">
 <div class="eyebrow">03 · Ett nytt matematiskt språk</div><h2>Vad betyder en bestämd integral?</h2>
 <div class="formula emphasis" data-integral="0|3|x+2|x"></div>
 <div class="question">Titta på uttrycket. Vilket tal är start? Vilket är slut? Vad visar höjden på varje tänkt smal rektangel?</div>
@@ -106,8 +111,22 @@
 </div><p>Vi tänker oss många smala rektanglar: höjd gånger liten bredd, summerat över intervallet. När rektanglarna blir allt smalare närmar sig summan integralens värde.</p><p><strong>Viktigt:</strong> integralen är lika med den geometriska arean när funktionen är icke-negativ på intervallet. Annars ger delarna under x-axeln negativa bidrag.</p></div>
 </section>
 
-<section class="slide" id="geometric" data-teacher="Vår egen graf f(x)=x+2 och intervallet 0 till 3. Låt klassen beräkna den geometriska arean som rektangel plus triangel; ingen primitiv funktion behövs ännu.">
-<div class="eyebrow">04 · Från graf till geometri</div><h2>En area kan delas upp</h2>
+<section class="slide" id="bridge" data-teacher="Utgå från ORIGINALGENOMGÅNGEN: återkalla F′=f och konstanten C. Visa hela integralkalkylens fundamentalsats, inklusive hakparentesen, innan ni räknar. Be eleverna själva förutsäga nästa rad. Skriv F(3)−F(0) och sätt sedan in båda gränserna i ETT uttryck. Beräkna inte F(3) och F(0) separat. Nästa steg kontrollerar samma integral geometriskt.">
+<div class="eyebrow">04 · Från primitiv funktion till integral</div><h2>Integralkalkylens fundamentalsats</h2>
+<p>Från förra lektionen vet du hur man hittar en <strong>primitiv funktion</strong>. Nu använder vi den för att beräkna ett integralvärde exakt.</p>
+<div class="question">Tänk själv: för <span class="inline-math" data-formula-inline="f(x)=x+2"></span>, vilken funktion <span class="inline-math" data-formula-inline="F(x)"></span> har derivatan <span class="inline-math" data-formula-inline="F′(x)=f(x)"></span>?</div>
+<div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Derivera ditt förslag och kontrollera att du får x+2."><strong>1 · Hitta en primitiv funktion</strong><p class="formula" data-formula="F(x)=x²/2+2x"></p><p>Kontrollera genom att derivera. Alla primitiva funktioner skiljer sig bara med en konstant <span class="inline-math" data-formula-inline="C"></span>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur läser du hakparentesen från a till b? Varför blir resultatet F(b)−F(a)?"><strong>2 · Fundamentalsatsen – med hakparentes</strong><p>Om <span class="inline-math" data-formula-inline="f(x)"></span> är kontinuerlig och <span class="inline-math" data-formula-inline="F′(x)=f(x)"></span> gäller på intervallet, så får vi:</p><div class="formula emphasis theorem" data-integral-evaluation="a|b|f(x)|x|F(x)"></div><div class="formula theorem" data-evaluation-rule="a|b|F(x)|F(b)−F(a)"></div><p><strong>Hakparentesen betyder:</strong> sätt in övre gränsen och subtrahera värdet vid undre gränsen. Varför behövs inget <span class="inline-math" data-formula-inline="+C"></span>?</p><div class="formula calculation-row"><span class="inline-math" data-formula-inline="(F(b)+C)−(F(a)+C)"></span><span class="inline-math" data-formula-inline="=F(b)−F(a)"></span></div><p>Samma konstant finns i båda funktionsvärdena och tar ut sig.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken primitiv funktion ska stå i hakparentesen, och vilka gränser ska stå till höger om den?"><strong>3 · Skriv hela integralen med hakparentes</strong><div class="formula emphasis theorem" data-integral-evaluation="0|3|x+2|x|x²/2+2x"></div><div class="formula theorem" data-evaluation-rule="0|3|x²/2+2x|F(3)−F(0)"></div><p>Vi tar alltså <strong>hela uttrycket vid 3 minus hela uttrycket vid 0</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Sätt in 3 respektive 0 i hela uttrycket, men förenkla inte någon del i förväg."><strong>4 · Sätt in båda gränserna i samma beräkning</strong><div class="formula calculation-row"><span class="inline-math" data-formula-inline="=(3²/2+2·3)"></span><span class="inline-math" data-formula-inline="−(0²/2+2·0)"></span></div><div class="formula calculation-row"><span class="inline-math" data-formula-inline="=(9/2+6)"></span><span class="inline-math" data-formula-inline="−(0+0)"></span></div><p>Parenteserna visar exakt vilka termer som hör till <span class="inline-math" data-formula-inline="F(3)"></span> och <span class="inline-math" data-formula-inline="F(0)"></span>. Det fungerar också när båda värdena innehåller flera termer.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Förenkla hela differensen. Hur skulle du kunna kontrollera svaret utan att använda primitiva funktioner?"><strong>5 · Förenkla och kontrollera</strong><p class="formula emphasis" data-formula="=10,5"></p><p>Eftersom grafen är positiv på intervallet är värdet också en <strong>geometrisk area: 10,5 areaenheter</strong>.</p><p class="formula" data-formula="A=6+4,5=10,5"></p><p>Vi ska undersöka samma svar i figuren på nästa steg.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
+<div class="insight">Metoden att minnas: <strong>primitiv funktion → hakparentes med gränser → F(b)−F(a) → sätt in båda värdena → förenkla</strong>.</div>
+</section>
+
+<section class="slide" id="geometric" data-teacher="Nu jämför eleverna originalgenomgångens metod med en geometrisk kontroll: samma f(x)=x+2 och intervallet 0 till 3. Förutsäg rektangel + triangel, och återknyt till integralvärdet 10,5.">
+<div class="eyebrow">05 · Från algebra till geometri</div><h2>En area kan delas upp</h2>
 <div class="geo-layout"><div class="geo-copy">
 <p>Vi studerar en egen funktion mellan två gränser:</p>
 <div class="formulas"><p class="formula" data-formula="f(x)=x+2"></p><p class="formula" data-integral="0|3|x+2|x"></p></div>
@@ -116,7 +135,7 @@
 </section>
 
 <section class="slide" id="linear-lab" data-teacher="Labb 1. Innan varje nytt b-läge: låt eleverna förutsäga om arean ökar och förklara hur bredd och höjd ändras. Visa delytorna efter förutsägelse.">
-<div class="eyebrow">05 · Laboration 1 · Flytta integrationsgränsen</div><h2>Vad händer när intervallet växer?</h2>
+<div class="eyebrow">06 · Laboration 1 · Flytta integrationsgränsen</div><h2>Vad händer när intervallet växer?</h2>
 <div class="lab-grid"><div class="lab-controls">
 <p class="formula" data-formula="f(x)=x+2"></p>
 <div class="question">Förutsäg först: hur förändras arean om den övre gränsen flyttas från 3 till 4?</div>
@@ -127,7 +146,7 @@
 </section>
 
 <section class="slide" id="worked" data-teacher="Fråga före VARJE steg. Alla beräkningsrader ska förbli egna block, inga färdiga svar förrän sista steget. Använd samma gränser som den statiska grafen.">
-<div class="eyebrow">06 · Genomräknat exempel · Egen geometri</div><h2>Beräkna arean geometriskt</h2>
+<div class="eyebrow">07 · Geometrisk kontroll av fundamentalsatsen</div><h2>Beräkna samma area geometriskt</h2>
 <p>Utgå från <span class="inline-math" data-formula-inline="f(x)=x+2"></span> på intervallet <span class="inline-math" data-formula-inline="0≤x≤3"></span>.</p>
 <div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
 <div class="seq-item hidden" data-seq-item data-question="Vilka mått har rektangeln?"><strong>1 · Rektangel</strong><p class="formula" data-formula="A₁=3·2=6"></p><p>Basen är 3 och höjden vid start är 2.</p></div>
@@ -138,7 +157,7 @@
 </section>
 
 <section class="slide" id="sums" data-teacher="Visa varför rektanglar ger närmevärden för böjd graf. Fråga om vänsterrektanglar över/underskattar när grafen växer, innan reglaget.">
-<div class="eyebrow">07 · Varför fungerar integralbegreppet?</div><h2>Små rektanglar blir en allt bättre modell</h2>
+<div class="eyebrow">08 · Varför fungerar integralbegreppet?</div><h2>Små rektanglar blir en allt bättre modell</h2>
 <p>För en böjd graf kan området vara svårt att dela upp i välbekanta former. Dela i stället intervallet i <strong>lika breda rektanglar</strong>.</p>
 <div class="formulas"><p class="formula" data-formula="bredd=(b−a)/n"></p><p class="formula" data-formula="A₁≈f(x₁)·Δx"></p><p class="formula" data-formula="A≈A₁+A₂+…"></p></div>
 <div class="question">Tänk: om funktionen växer, kommer rektanglar som tar höjden i <strong>vänsterkanten</strong> att över- eller underskatta arean? Vad händer med felet när rektanglarna blir smalare?</div>
@@ -146,7 +165,7 @@
 </section>
 
 <section class="slide" id="rect-lab" data-teacher="Labb 2. Håll axlarnas skala fixerade när antalet rektanglar ändras. Jämför vänster, höger och mittpunkt för samma n – bokens metod använder mittpunkter. Avslöja inte gränsvärdet först.">
-<div class="eyebrow">08 · Laboration 2 · Rektangelsummor</div><h2>Fler rektanglar – mindre fel?</h2>
+<div class="eyebrow">09 · Laboration 2 · Rektangelsummor</div><h2>Fler rektanglar – mindre fel?</h2>
 <p class="smalltext">Exempelfunktionen är ny och växer i hela intervallet.</p>
 <div class="lab-grid"><div class="lab-controls">
 <p class="formula" data-formula="f(x)=1+x²/4"></p>
@@ -156,19 +175,6 @@
 <div class="control-box"><label for="rect-method">Höjden hämtas från</label><select id="rect-method"><option value="left">Vänsterkanten</option><option value="right">Högerkanten</option><option value="middle">Mittpunkten</option></select></div>
 <div class="graph-summary"><strong>Rektangelsumman</strong><div id="rect-sum" class="formula compact" aria-live="polite"></div><p class="smalltext">Närmevärde, inte automatiskt exakt area.</p></div>
 </div><figure class="plot-card"><svg id="rect-plot" viewBox="0 0 620 360" role="img" aria-label="En stigande kvadratisk kurva med justerbara vänster- eller högerrektanglar och fast koordinatskala."></svg><figcaption class="key"><span><i></i> Rektanglar</span><span><i class="line"></i> Verklig graf</span></figcaption></figure></div>
-</section>
-
-<section class="slide" id="bridge" data-teacher="Steg 9 kommer EFTER att eleverna har sett rektangelsummorna närma sig integralens värde. Låt dem hitta en primitiv funktion själva innan satsen visas. Jämför därefter uttryckligen 10,5 med geometrin på steg 6. Fundamentalsatsen beräknar integralen; den är inte definitionen av summan. Nästa lektion ger systematisk metodträning.">
-<div class="eyebrow">09 · Sambandet med förra lektionen</div><h2>Integralkalkylens fundamentalsats</h2>
-<p>Rektangelsummorna visar <strong>vad integralen betyder</strong>. Men vi känner redan en metod som kan ge värdet <strong>exakt</strong>: primitiva funktioner.</p>
-<div class="question">Tänk själv på papper: vi vet att <span class="inline-math" data-formula-inline="f(x)=x+2"></span>. Vilken funktion <span class="inline-math" data-formula-inline="F(x)"></span> har derivatan <span class="inline-math" data-formula-inline="F′(x)=f(x)"></span>?</div>
-<div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Derivera ditt förslag: får du tillbaka x+2?"><strong>1 · Välj en primitiv funktion</strong><p class="formula" data-formula="F(x)=x^{2}/2+2x"></p><p>Kontroll: derivatan blir <span class="inline-math" data-formula-inline="F′(x)=x+2"></span>. En möjlig konstant behöver vi inte välja nu.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vad händer om vi tar den primitiva funktionens värde vid den övre gränsen minus vid den undre?"><strong>2 · Satsen ger ett exakt värde</strong><p>Om <span class="inline-math" data-formula-inline="f(x)"></span> är kontinuerlig och <span class="inline-math" data-formula-inline="F′(x)=f(x)"></span> på intervallet, så gäller:</p><p class="formula emphasis theorem" data-integral-rule="a|b|f(x)|x|F(b)−F(a)"></p><p><strong>Integralkalkylens fundamentalsats.</strong> Vi använder den för att <strong>beräkna</strong> integralen, inte för att definiera vad den betyder.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Sätt in 3 och 0 i din primitiva funktion. Vilken skillnad får du?"><strong>3 · Beräkna samma integral som förut</strong><p class="formula theorem" data-integral-rule="0|3|x+2|x|F(3)−F(0)"></p><p class="formula" data-formula="F(3)=9/2+6=10,5"></p><p class="formula" data-formula="F(0)=0"></p><p class="formula emphasis theorem" data-integral-rule="0|3|x+2|x|10,5"></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Jämför med geometrin i steg 6. Varför spelar konstanten C ingen roll?"><strong>4 · Samma resultat – två metoder</strong><p class="formula" data-formula="A=6+4,5=10,5"></p><p>Geometrin och fundamentalsatsen ger <strong>samma värde</strong>. Om vi hade valt <span class="inline-math" data-formula-inline="F(x)+C"></span> skulle konstanten ta ut sig i skillnaden mellan gränserna.</p></div>
-</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
-<div class="insight">Kom ihåg: <strong>integralen</strong> beskriver summan med tecken. <strong>Fundamentalsatsen</strong> kopplar summan till primitiva funktioner. Nästa lektion tränar vi fler beräkningar.</div>
 </section>
 
 <section class="slide" id="velocity" data-teacher="Labb 3: visa en tydlig, egen hastighetsmodell i två tidsintervall. Fysikanknytning från original och bok. Testa enheten (m/s)·s=m, och kontrollera färgblockens gränser utan glapp.">
@@ -218,29 +224,30 @@
 </div>
 <details class="book-methods" id="book-methods"><summary>Visa lektionens metodstöd (frivilligt) – försök minnas först</summary>
 <div class="method-grid">
-<div class="method-card"><strong>1 · Läs gränserna</strong><p class="formula compact" data-integral="a|b|f(x)|x"></p><p>Var börjar och slutar området?</p></div>
-<div class="method-card"><strong>2 · Läs grafen</strong><p>Höjd = funktionsvärde. Bredd = skillnaden mellan x-värdena.</p></div>
-<div class="method-card"><strong>3 · Dela i figurer</strong><p><strong>Rektangel</strong></p><p class="formula compact" data-formula="A=b·h"></p><p><strong>Triangel</strong></p><p class="formula compact" data-formula="A=(b·h)/2"></p></div>
-<div class="method-card"><strong>4 · Kontrollera tolkningen</strong><p>Är grafen icke-negativ? Rimligt värde? Rätt enhet? Kan rektanglar ge ett närmevärde?</p></div>
+<div class="method-card"><strong>1 · Läs integralen och hitta F</strong><p class="formula compact" data-integral="a|b|f(x)|x"></p><p class="formula compact" data-formula="F′(x)=f(x)"></p><p>Identifiera gränserna. Bestäm en primitiv funktion.</p></div>
+<div class="method-card"><strong>2 · Skriv hakparentesen</strong><div class="formula compact theorem" data-integral-evaluation="a|b|f(x)|x|F(x)"></div><p>Integrera och skriv den primitiva funktionen med samma integrationsgränser.</p></div>
+<div class="method-card"><strong>3 · Sätt in övre minus undre</strong><div class="formula compact theorem" data-evaluation-rule="a|b|F(x)|F(b)−F(a)"></div><p>Sätt in <strong>båda</strong> värdena i en sammanhängande beräkning. Behåll parenteser och förenkla sedan. Konstanten C tar ut sig.</p></div>
+<div class="method-card"><strong>4 · Kontrollera ditt svar</strong><p>När grafen ligger på eller över x-axeln är integralvärdet en geometrisk area.</p><p>Kontrollera med rektangel, triangel eller rektangelsummor. Annars behöver du ta hänsyn till tecknet.</p></div>
 </div></details>
 </section>
 
-<section class="slide" id="exit" data-teacher="Individuellt utan facit: eleven ska formulera en integral, dela upp geometriskt och tolka enheten. När svaret är skrivet går ni vidare till återkoppling.">
+<section class="slide" id="exit" data-teacher="Individuellt utan facit: eleven ska visa hela räknesättet från originalgenomgången (integral → primitiv funktion → hakparentes → G(4)−G(0) med båda insättningarna → förenkling), och kontrollera med geometri. När svaret är skrivet går ni vidare till återkoppling.">
 <div class="eyebrow">15 · Individuell utcheckning</div><h2>Visa att du kan – utan ledtråd</h2>
 <p>En ny funktion är <span class="inline-math" data-formula-inline="g(x)=x+1"></span>. Bestäm arean mellan grafen, x-axeln och linjerna <span class="inline-math" data-formula-inline="x=0"></span> och <span class="inline-math" data-formula-inline="x=4"></span>.</p>
-<div class="task"><strong>Lämna tre delar på papper:</strong><ol class="numbered"><li>Rita en skiss och markera området.</li><li>Skriv rätt integral med gränser och dx.</li><li>Beräkna arean som rektangel + triangel och ange areaenheter.</li></ol></div>
+<div class="task"><strong>Lämna fyra delar på papper:</strong><ol class="numbered"><li>Rita en skiss, markera området och skriv rätt integral.</li><li>Hitta en primitiv funktion <span class="inline-math" data-formula-inline="G(x)"></span> och skriv hakparentesen med gränserna.</li><li>Beräkna med <span class="inline-math" data-formula-inline="G(4)−G(0)"></span>: visa <strong>båda insättningarna i samma uttryck</strong> och förenkla.</li><li>Kontrollera arean geometriskt med rektangel och triangel.</li></ol></div>
 <p class="smalltext">Nästa sida innehåller återkoppling. Försök först själv.</p>
 </section>
 
-<section class="slide" id="exit-answer" data-teacher="Återkoppla direkt till de fyra målen. Låt eleven själv hitta om felet gäller gränser, skiss, geometri eller enhet. Nästa lektion fördjupar integralberäkning med primitiv funktion.">
+<section class="slide" id="exit-answer" data-teacher="Återkoppla direkt till målen. Är hakparentesen med? Har eleven använt G(4)−G(0) med båda insättningarna i samma rad, och fått rimlig geometrisk kontroll? Nästa lektion fördjupar integralberäkningarna.">
 <div class="eyebrow">16 · Återkoppla till målen</div><h2>Kontrollera hela ditt resonemang</h2>
 <div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Vilka gränser och vilken integrand hör till området?"><strong>1 · Översätt till integral</strong><p class="formula" data-integral="0|4|x+1|x"></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vad blir rektangelns bas och höjd?"><strong>2 · Rektangelns area</strong><p class="formula" data-formula="A₁=4·1=4"></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Hur stor blir triangeln ovanför rektangeln?"><strong>3 · Triangelns area</strong><p class="formula" data-formula="A₂=(4·4)/2=8"></p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilken area får du tillsammans och varför är det en area?"><strong>4 · Slutsats</strong><p class="formula emphasis" data-formula="A=4+8=12"></p><p><strong>12 areaenheter.</strong> Funktionen är positiv på intervallet, så integralen motsvarar just denna geometriska area.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka gränser och vilken integrand hör till området? Vilken primitiv funktion kan du välja?"><strong>1 · Integral och primitiv funktion</strong><p class="formula" data-integral="0|4|x+1|x"></p><p class="formula" data-formula="G(x)=x²/2+x"></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur skriver du hakparentesen med den primitiva funktionen? Vad betyder gränserna?"><strong>2 · Hakparentes och fundamentalsats</strong><div class="formula theorem" data-integral-evaluation="0|4|x+1|x|x²/2+x"></div><div class="formula theorem" data-evaluation-rule="0|4|x²/2+x|G(4)−G(0)"></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Sätt in 4 och 0 utan att beräkna G(4) och G(0) på separata rader."><strong>3 · Sätt in båda gränserna och förenkla</strong><div class="formula calculation-row"><span class="inline-math" data-formula-inline="=(4²/2+4)"></span><span class="inline-math" data-formula-inline="−(0²/2+0)"></span></div><div class="formula calculation-row"><span class="inline-math" data-formula-inline="=(8+4)"></span><span class="inline-math" data-formula-inline="−(0+0)"></span></div><p class="formula emphasis" data-formula="=12"></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur kontrollerar du integralvärdet med rektangel och triangel?"><strong>4 · Geometrisk kontroll och slutsats</strong><p class="formula" data-formula="A₁=4·1=4"></p><p class="formula" data-formula="A₂=(4·4)/2=8"></p><p class="formula emphasis" data-formula="A=4+8=12"></p><p><strong>12 areaenheter.</strong> Grafen ligger över x-axeln, så den geometriska arean är lika med integralvärdet.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
-<div class="insight">Målcheck: tolka area · skriva integral · beräkna/uppskatta · förstå area under v–t-graf. Nästa lektion: <strong>integralberäkning med primitiv funktion</strong>.</div>
+<div class="task" id="ftc-summary"><strong>Sammanfattning · Integralkalkylens fundamentalsats</strong><p>Om <span class="inline-math" data-formula-inline="F′(x)=f(x)"></span> och <span class="inline-math" data-formula-inline="f(x)"></span> är kontinuerlig på intervallet, gäller:</p><div class="formula emphasis theorem" data-integral-evaluation="a|b|f(x)|x|F(x)"></div><div class="formula theorem" data-evaluation-rule="a|b|F(x)|F(b)−F(a)"></div><p><strong>Metod:</strong> hitta en primitiv funktion, skriv hakparentesen, sätt in övre minus undre i <strong>ett sammanhängande uttryck</strong> och förenkla.</p></div>
+<div class="insight"><strong>Målcheck:</strong> tolka integral och gränser · använda <strong>fundamentalsatsen och hakparentes</strong> · beräkna <strong>G(b)−G(a)</strong> i en sammanhängande lösning · kontrollera geometriskt · tolka area under v–t-graf. Nästa lektion: mer integralberäkning med primitiva funktioner.</div>
 </section>
 </div>
 <div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex"><button id="ink-undo" class="secondary" type="button">Ångra</button><button id="ink-eraser" class="secondary" type="button" aria-pressed="false">Sudd</button><button id="ink-clear" class="secondary" type="button">Rensa</button><button id="ink-max" class="secondary" type="button">Förstora</button></div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
