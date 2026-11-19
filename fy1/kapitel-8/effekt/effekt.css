@@ -32,6 +32,7 @@
 .stage .page-title{letter-spacing:-.04em}
 .end-controls{position:relative}
 @media(min-width:1180px){.stage{padding:clamp(24px,3vw,42px)}.layout{grid-template-columns:1.05fr .95fr}.slide.active .layout>.side:has(.effect-figure){align-self:start;position:sticky;top:20px}}
+@media(min-width:1180px){#bild-6 .page-title{font-size:clamp(2rem,3.2vw,2.55rem)}}
 @media(max-width:930px){.effect-model .model-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.effect-figure svg{max-height:none}}
 @media(max-width:540px){.effect-model .model-controls{grid-template-columns:1fr}.effect-figure{padding:6px}.body-copy{font-size:1rem}.body-copy>.step{font-size:.91rem}.equation{font-size:1.07rem}.goallocal{padding:10px 12px}.effect-model .model-result{font-size:.91rem}}
 /* Review 37/41: real MathML elements rather than equations in prose. */

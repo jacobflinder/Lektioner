@@ -199,6 +199,13 @@ fs.mkdirSync(OUT,{recursive:true});
    await page.setViewportSize({width,height});
    for(let n=1;n<=11;n++){
     await go(n);await viewport(name+'/'+n+'/before');
+    if(n===6&&width>=1200){
+     const title=await slide().locator('.page-title').evaluate(el=>({
+      height:el.getBoundingClientRect().height,lineHeight:parseFloat(getComputedStyle(el).lineHeight)
+     }));
+     check(title.height<=title.lineHeight*1.2,
+      'question mark in the 10A headline not orphaned on its own projector line '+name+' '+JSON.stringify(title));
+    }
     await shot(name+'-'+String(n).padStart(2,'0')+'-before');
     const steps=await slide().locator('.step').count();
     if(steps){
