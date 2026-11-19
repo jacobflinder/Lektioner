@@ -7,12 +7,21 @@ const html=fs.readFileSync(base+'index.html','utf8'),js=fs.readFileSync(base+'le
 let checks=0;
 const yes=(x,s)=>{assert.ok(x,s);checks++}, near=(a,b,s,t=1e-9)=>yes(Math.abs(a-b)<=t,s+' actual '+a+' expected '+b);
 yes((html.match(/<section class="slide(?: active)?"/g)||[]).length===16,'16 lesson stages');
+const p=(id)=>html.indexOf('<section class="slide" id="'+id+'"');
+yes(p('rect-lab')<p('bridge')&&p('bridge')<p('velocity')&&p('velocity')<p('signed'),'Fundamental theorem follows rectangle sums and precedes applications');
+yes(html.includes('Vad betyder en bestämd integral?'),'Notation does not equate all integrals to geometric area');
+yes(html.includes('Integralkalkylens fundamentalsats')&&html.includes('kontinuerlig'),'Theorem has heading and continuous-function hypothesis');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 yes(new Set(ids).size===ids.length,'All ids unique');
 for(const word of ['Integraler och area','SOC-36677379','Socrative','minst 20 minuter','alla uppgifter och samtliga deluppgifter','184–188','3334','3335','3336','3337','3338','3339','3340','3341','3342','3343','3344','3345','3346','3347','book-methods','rect-plot','speed-plot','signed-plot','rect-method','data-sequence'])yes(html.includes(word),'Preserved required '+word);
 for(const old of ['SOC-36677299','3401–3415','Uppgiftstexterna finns i boken','Webbsidan återger inte','Metodstödet innehåller inga facit'])yes(!html.includes(old),'No obsolete phrase '+old);
 yes(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon/.test(js),'No network or student tracking');
 yes((html.match(/data-integral=/g)||[]).length>=6,'At least six proper integral expressions');
+yes((html.match(/data-integral-rule=/g)||[]).length===3,'Fundamental theorem shown as three correct integral equalities');
+yes(js.includes("document.querySelectorAll('[data-integral-rule]')"),'Theorem MathML renderer exists');
+const F=x=>x*x/2+2*x;
+near(F(3)-F(0),10.5,'Fundamental theorem agrees with previous geometric area');
+near(F(4)-F(0),16,'Fundamental theorem agrees with area lab at b=4');
 for(const [a,b,f,exact] of [[0,3,x=>x+2,10.5],[0,4,x=>x+1,12]]){const rectangle=f(a)*(b-a),triangle=(f(b)-f(a))*(b-a)/2;near(rectangle+triangle,exact,'geometric exact area');}
 for(const b of [1,2,3,4])near(2*b+b*b/2,(b*(2+(2+b)))/2,'Linear area b='+b);
 const q=x=>1+x*x/4;
@@ -43,5 +52,11 @@ for(const match of html.matchAll(/data-formula(?:-inline)?="([^"]+)"/g)){
 for(const match of html.matchAll(/data-integral="([^"]+)"/g)){
  const parts=match[1].split('|');yes(parts.length===4,'Integral requires 4 fields');
  yes(parts[2]!=='','Integrand nonempty');
+}
+for(const match of html.matchAll(/data-integral-rule="([^"]+)"/g)){
+ const parts=match[1].split('|');yes(parts.length===5,'Theorem integral equality needs five fields');
+ yes(parts[2]!==''&&parts[4]!=='','Theorem integral has both integrand and right-hand side');
+ const math=ctx.window.Ma3cPrimitiveMath.semantic(parts[4]);
+ yes(math.includes('<math')&&math.includes('</math>'),'Semantic right-hand side '+parts[4]);
 }
 console.log(JSON.stringify({result:'PASS',checks,lesson:'Integraler och area'}));

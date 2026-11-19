@@ -8,15 +8,27 @@ const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replace
 const sv=(number,places=2)=>Number(number.toFixed(places)).toString().replace('.',',');
 const close=(a,b,tol=1e-8)=>Math.abs(a-b)<=tol;
 function fractionBound(value){return /^-?\d+(?:\.\d+)?$/.test(String(value))?'<mn>'+escape(value)+'</mn>':'<mi>'+escape(value)+'</mi>'}
-function integralMath(a,b,expr,variable='x'){
+function integralMath(a,b,expr,variable='x',rhs=null){
  const whole=semantic(expr,'inline'),m=whole.match(/<mrow>([\s\S]*)<\/mrow><\/math>$/);
  if(!m)throw Error('Integralens integrand gick inte att sätta: '+expr);
- return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="'+escape('∫_'+a+'^'+b+' '+expr+' d'+variable)+'"><mrow><msubsup><mo largeop="true" movablelimits="false">∫</mo>'+fractionBound(a)+fractionBound(b)+'</msubsup><mrow>'+m[1]+'</mrow><mspace width="0.20em"/><mi mathvariant="normal">d</mi><mi>'+escape(variable)+'</mi></mrow></math>';
+ let right='';
+ if(rhs!==null){
+  const match=semantic(rhs,'inline').match(/<mrow>([\s\S]*)<\/mrow><\/math>$/);
+  if(!match)throw Error('Integralens högerled gick inte att sätta: '+rhs);
+  right='<mo>=</mo><mrow>'+match[1]+'</mrow>';
+ }
+ const label='∫_'+a+'^'+b+' '+expr+' d'+variable+(rhs===null?'':' = '+rhs);
+ return '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="'+escape(label)+'"><mrow><msubsup><mo largeop="true" movablelimits="false">∫</mo>'+fractionBound(a)+fractionBound(b)+'</msubsup><mrow>'+m[1]+'</mrow><mspace width="0.20em"/><mi mathvariant="normal">d</mi><mi>'+escape(variable)+'</mi>'+right+'</mrow></math>';
 }
 document.querySelectorAll('[data-formula]').forEach(el=>{if(el.innerHTML.includes('<mo>Δ</mo>'))el.innerHTML=el.innerHTML.replaceAll('<mo>Δ</mo>','<mi>Δ</mi>')});
 document.querySelectorAll('[data-integral]').forEach(el=>{
  const [a,b,expr,v]=el.dataset.integral.split('|');
  el.innerHTML=integralMath(a,b,expr,v);
+ el.dataset.mathPresentation='true';
+});
+document.querySelectorAll('[data-integral-rule]').forEach(el=>{
+ const [a,b,expr,v,rhs]=el.dataset.integralRule.split('|');
+ el.innerHTML=integralMath(a,b,expr,v,rhs);
  el.dataset.mathPresentation='true';
 });
 function svg(svgEl,tag,attrs={},value){
