@@ -123,10 +123,10 @@ assert.ok(d(f,-1)<0&&d(x=>2*x,-1)>0&&!almost(d(f,-1),0),'Avtagande trots positiv
   await go(4);
   const form=page.locator('#own-formula'),zero=page.locator('#own-at-zero'),root=page.locator('#own-root');
   await form.fill('3x²−12x');await zero.fill('-12');await root.fill('2');await page.locator('#check-own').click();
-  assert.ok((await page.locator('#own-feedback').innerText()).includes('h′(x)'));
+  assert.equal(await page.locator('#own-feedback math[aria-label="h′(x)"]').count(),1,'Första derivatan ska namnges i semantisk matematik vid fel');
   await form.fill('6x');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).includes('konstanttermen'));
-  await form.fill('6x−12');await zero.fill('12');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).includes('6 · 0 − 12'));
-  await zero.fill('-12');await root.fill('3');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).includes('6x − 12 = 0'));
+  await form.fill('6x−12');await zero.fill('12');await page.locator('#check-own').click();assert.equal(await page.locator('#own-feedback math[aria-label="6 · 0 − 12"]').count(),1,'Felaktigt insatt värde ger synligt matematiskt steg');
+  await zero.fill('-12');await root.fill('3');await page.locator('#check-own').click();assert.equal(await page.locator('#own-feedback math[aria-label="6x − 12 = 0"]').count(),1,'Felaktigt nollställe får fullständig ekvation');
   await root.fill('2');await page.locator('#check-own').click();assert.ok((await page.locator('#own-feedback').innerText()).startsWith('Rätt'));
   await shown('own-hint');await shot('05-eget-desktop');
   // 6. Inga hoppade steg i ekvationen; rötter är inte extrempunkter per automatik.
