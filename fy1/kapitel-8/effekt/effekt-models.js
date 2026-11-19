@@ -38,8 +38,8 @@ function internal(root){return build(root,[
 {id:'r',label:'Inre resistans r',min:0.5,max:3,step:0.5,value:1,unit:'Ω',digits:1},
 {id:'R',label:'Yttre resistans R',min:1,max:10,step:0.5,value:5,unit:'Ω',digits:1}],(s,shown)=>{
 const I=s.emf/(s.r+s.R),inside=I*s.r,U=I*s.R,pin=s.r*I*I;
-let a='<path d="M82 112V60H464V214H82V152" fill="none" stroke="#335b6a" stroke-width="3"/>';
-a+='<rect x="72" y="105" width="20" height="56" fill="#eef8fc"/><path d="M63 117h38M72 145h20" stroke="#c67543" stroke-width="4"/>'+tx(44,109,'+',19,'#c67543')+tx(44,166,'−',19,'#c67543');
+let a='<path d="M82 117V60H464V214H82V145" fill="none" stroke="#335b6a" stroke-width="3"/>';
+a+='<path d="M63 117h38M72 145h20" stroke="#c67543" stroke-width="4"/>'+tx(44,109,'+',19,'#c67543')+tx(44,166,'−',19,'#c67543');
 a+='<rect x="261" y="47" width="79" height="26" fill="white" stroke="#c67543" stroke-width="3"/>' + tx(299,38,'r = '+f(s.r,1)+' Ω',15);
 a+='<rect x="257" y="201" width="83" height="26" fill="white" stroke="#19778f" stroke-width="3"/>' + tx(298,252,'R = '+f(s.R,1)+' Ω',15);a+=tx(117,256,'ℰ = '+f(s.emf,0)+' V',16);
 // Voltmeter branch across terminals in parallel with outer resistor; voltmeter circle breaks the branch, no short-circuiting wire.
