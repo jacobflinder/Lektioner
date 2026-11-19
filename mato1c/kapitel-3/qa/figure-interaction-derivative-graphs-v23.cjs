@@ -67,6 +67,10 @@ function points(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>(
   v.gaps.forEach(g=>ok(g>=15.9,name+': independent equations spaced at least 16px ('+g.toFixed(1)+')'));
  };
  const scanLinked=async(x,width)=>{
+  if(width===390){
+   ok(!await page.locator('#linked-plot .panel-name').first().isVisible(),'mobile SVG name labels do not collide with y-axis numerals');
+   ok((await page.locator('#linked .graph-legend').first().textContent()).includes('f″'),'mobile colour legend still identifies all curves');
+  }
   await page.locator('#linked-x').evaluate((el,x)=>{el.value=String(x);el.dispatchEvent(new Event('input',{bubbles:true}))},x);
   ok(!await page.locator('#linked-readouts').isVisible(),'new x hides old revealed values '+x);
   await reveal('linked-readouts');

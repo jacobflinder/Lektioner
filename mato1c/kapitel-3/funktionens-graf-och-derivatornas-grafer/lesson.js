@@ -52,7 +52,7 @@ function renderLinked(){
   create(grp,'path',{d:curve(item.fn,0,8,X,item.Y),fill:'none',stroke:item.stroke,'stroke-width':'3.3','stroke-linecap':'round','stroke-linejoin':'round'});
   create(grp,'line',{x1:X(x),y1:item.top,x2:X(x),y2:item.bottom,stroke:'#40566d','stroke-width':'1.6','stroke-dasharray':'5 4'});
   create(grp,'circle',{cx:X(x),cy:item.Y(item.fn(x)),r:'6.3',stroke:'#fff','stroke-width':'2.4',fill:item.stroke});
-  create(plot,'text',{x:14,y:item.top+22,'font-size':'24','font-weight':'700',fill:item.stroke},item.label);
+  create(plot,'text',{x:14,y:item.top+22,'font-size':'24','font-weight':'700',fill:item.stroke,class:'panel-name'},item.label);
  }
  for(const xTick of [0,2,4,6,8])create(plot,'text',{x:X(xTick),y:584,'text-anchor':'middle','font-size':21,fill:'#456474'},xTick);
  create(plot,'text',{x:736,y:584,'font-size':21,fill:'#456474'},'x');

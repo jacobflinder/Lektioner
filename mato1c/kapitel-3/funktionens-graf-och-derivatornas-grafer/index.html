@@ -91,8 +91,12 @@
  .method-cards{grid-template-columns:1fr}
  .slide .math-work math{font-size:1.05rem}
  .slide :is(#interpret-table,#exit-answer) .clean-table{display:none}
+ #own-answer .clean-table{font-size:.94rem}
+ #own-answer .clean-table .math-sm math{font-size:1em}
  .interval-cards{display:grid}
  #linked-plot text{font-size:27px}
+ /* The colour legend remains visible; remove the plot-name/y-tick collision. */
+ #linked-plot .panel-name{display:none}
  #exit-derivative text,#parallel-graph text,#shift-graph text{font-size:23px}
 }
 </style></head>
@@ -160,7 +164,7 @@
 
 <section class="slide" id="linked" data-teacher="Källa: original-PDF s.2. Det finns inga funktionsformler för den visade trion i originalet. Här används en EXAKT algebraisk modell vald för att efterlikna nollställena 2,6 och inflexionen 4. Börja med att peka vid x=2,4,6 och be eleverna förutsäga lutningens tecken före slider. Flytta sedan markören med samma x genom alla tre kurvor. Resonemang minst lika viktigt som klicken.">
 <div class="eyebrow">03 · Undersök samma x i tre grafer</div>
-<h2>En punkt på f – en höjd på f′ – en lutning hos f′</h2>
+<h2>Tre grafer vid samma x: f, f′ och f″</h2>
 <div class="task"><strong>Förutsäg innan du flyttar markören:</strong> Vid vilka x är <span class="math-sm">f′(x)=0</span>? Var är <span class="math-sm">f′(x)</span> störst? Vad betyder det för <span class="math-sm">f</span>?</div>
 <div class="interaction-controls linked-deck">
 <label for="linked-x">Undersök ett x-värde – markören flyttas i alla tre grafer</label>
