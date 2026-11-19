@@ -10,7 +10,7 @@
 .formula{display:block;min-width:0;margin:10px 0;padding:9px 13px;border-left:3px solid #aacbd8;background:#f7fafc;border-radius:8px;font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.15rem,2.25vw,1.5rem);line-height:1.6;overflow-x:auto;overflow-y:hidden}
 .formula math[display="block"]{font-size:1em;max-width:100%}.formula.emphasis{background:#e5f6ed;border-color:#087d70}.formula.small{font-size:clamp(1.03rem,1.75vw,1.25rem)}
 .inline-math math{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.12em}
-.formulas{display:grid;gap:15px;margin:15px 0}.formulas>.formula{margin:0}
+.formulas{display:grid;gap:16px;margin:15px 0}.formulas>.formula{margin:0}
 .statement{background:#e7f5ef;border-left:5px solid #087d70;border-radius:10px;padding:14px 18px;margin:14px 0}
 .contrast{background:#fff6e8;border-left:5px solid #ac7b22;border-radius:10px;padding:14px 18px;margin:14px 0}
 .explain-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.explain-card{background:#f0f6fa;border:1px solid #cddfe8;border-radius:12px;padding:14px;min-width:0}
@@ -98,7 +98,7 @@
   <h2>Få grafen att träffa villkorspunkten</h2>
   <div class="lab-layout"><div class="lab-controls">
     <p class="formula" data-formula="F(x)=x²+2x+C"></p>
-    <div class="lab-prompt"><strong>Förutsäg innan du drar:</strong> Vilket C gör att grafen går genom <span class="inline-math" data-formula-inline="P=(1,6)"></span>? Skriv din beräkning.</div>
+    <div class="lab-prompt"><strong>Förutsäg innan du drar:</strong> Vilket C gör att grafen går genom <span class="inline-math" data-formula-inline="P=(1, 6)"></span>? Skriv din beräkning.</div>
     <div class="lab-slider"><label for="lab-c">Flytta grafen med konstanten C</label><input type="range" id="lab-c" min="-3" max="7" step="1" value="0"><output id="lab-c-out" for="lab-c" aria-live="polite"></output></div>
     <div class="lab-readout"><strong>Grafens höjd vid x=1</strong><p id="lab-f-one" aria-live="polite"></p><span>Pricken visar önskad höjd 6.</span></div>
   </div><figure class="lab-plot"><h3>En familj – samma form och lutningar</h3><svg id="family-plot" viewBox="0 0 620 360" role="img" aria-label="En blå parabel med styrbar konstant C, grå streckad referens för C lika med noll och en orange fast villkorspunkt vid x lika med 1 och y lika med 6."></svg><figcaption class="legend"><span><i></i> Vald F</span><span><i class="dashed"></i> F med C = 0</span><span><i class="point"></i> Villkorspunkt (1, 6)</span></figcaption></figure></div>
