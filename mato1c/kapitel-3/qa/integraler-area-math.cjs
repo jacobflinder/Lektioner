@@ -54,6 +54,8 @@ vm.runInContext(fs.readFileSync('mato1c/kapitel-3/primitiva-funktioner/math-poli
 for(const match of html.matchAll(/data-formula(?:-inline)?="([^"]+)"/g)){
  const s=ctx.window.Ma3cPrimitiveMath.semantic(match[1]);
  yes(s.includes('<math')&&s.includes('</math>')&&s.includes('aria-label='),'Semantic formula '+match[1]);
+ yes(!s.includes('<mfrac><mrow></mrow>'),'No empty numerator in semantic fraction '+match[1]);
+ if(match[1].includes('²/2'))yes(s.includes('<mfrac><mrow><msup>'),'Squared numerator sits INSIDE fraction, not beside it: '+match[1]);
 }
 for(const match of html.matchAll(/data-integral="([^"]+)"/g)){
  const parts=match[1].split('|');yes(parts.length===4,'Integral requires 4 fields');
@@ -64,11 +66,15 @@ for(const match of html.matchAll(/data-integral-evaluation="([^"]+)"/g)){
  yes(parts[2]!==''&&parts[4]!=='','Integral evaluation has both sides');
  const math=ctx.window.Ma3cPrimitiveMath.semantic(parts[4]);
  yes(math.includes('<math')&&math.includes('</math>'),'Semantic primitive '+parts[4]);
+ yes(!math.includes('<mfrac><mrow></mrow>'),'Integral primitive fraction has nonempty numerator '+parts[4]);
+ if(parts[4].includes('²/2'))yes(math.includes('<mfrac><mrow><msup>'),'Integral primitive fraction has x² as numerator '+parts[4]);
 }
 for(const match of html.matchAll(/data-evaluation-rule="([^"]+)"/g)){
  const parts=match[1].split('|');yes(parts.length===4,'Evaluation bracket requires bounds, primitive and difference');
  yes(parts[3].includes('−'),'Evaluation is always a difference, not separate function values');
  const math=ctx.window.Ma3cPrimitiveMath.semantic(parts[2]);
  yes(math.includes('<math')&&math.includes('</math>'),'Semantic evaluation expression '+parts[2]);
+ yes(!math.includes('<mfrac><mrow></mrow>'),'Hakparentes fraction has no empty numerator '+parts[2]);
+ if(parts[2].includes('²/2'))yes(math.includes('<mfrac><mrow><msup>'),'Hakparentes fraction has squared numerator '+parts[2]);
 }
 console.log(JSON.stringify({result:'PASS',checks,lesson:'Integraler och area'}));

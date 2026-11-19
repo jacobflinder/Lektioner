@@ -45,9 +45,13 @@ try{
   for(let i=1;i<=5;i++){await page.locator('#bridge [data-seq-next]').click();yes(await theorem.filter({visible:true}).count()===i,label+' theorem revealed in step '+i)}
   yes(await page.locator('#bridge [data-integral-evaluation] math msubsup').count()===4,label+' theorem and worked integral each have integral and bracket limits');
   yes(await page.locator('#bridge [data-evaluation-rule] math msubsup').count()===2,label+' bracket evaluation has both limits');
-  yes((await page.locator('#bridge [data-evaluation-rule="0|3|x^{2}/2+2x|F(3)−F(0)"]').getAttribute('aria-label')).includes('F(3)−F(0)'),label+' true F(3)-F(0) chain rather than isolated values');
-  yes(await page.locator('#bridge [data-formula-inline="=(3^{2}/2+2·3)"] math').count()===1,label+' actual upper-bound substitution present');
-  yes(await page.locator('#bridge [data-formula-inline="−(0^{2}/2+2·0)"] math').count()===1,label+' actual lower-bound subtraction present');
+  yes(await page.locator('#bridge [data-evaluation-rule] math msubsup > mrow > mo[fence="true"]').count()===4,label+' upper and lower bound bracket characters are visible in MathML');
+  yes(await page.locator('#bridge [data-formula="F(x)=x²/2+2x"] math mfrac > mrow > msup').count()===1,label+' primitive x² is the numerator of its fraction');
+  yes((await page.locator('#bridge [data-evaluation-rule="0|3|x²/2+2x|F(3)−F(0)"]').getAttribute('aria-label')).includes('F(3)−F(0)'),label+' true F(3)-F(0) chain rather than isolated values');
+  yes(await page.locator('#bridge [data-formula-inline="=(3²/2+2·3)"] math').count()===1,label+' actual upper-bound substitution present');
+  yes(await page.locator('#bridge [data-formula-inline="=(3²/2+2·3)"] math mfrac > mrow > msup').count()===1,label+' upper-bound 3² is inside the fraction numerator');
+  yes(await page.locator('#bridge [data-formula-inline="−(0²/2+2·0)"] math').count()===1,label+' actual lower-bound subtraction present');
+  yes(await page.locator('#bridge [data-formula-inline="−(0²/2+2·0)"] math mfrac > mrow > msup').count()===1,label+' lower-bound 0² is inside the fraction numerator');
   yes(await page.locator('#bridge math[aria-label="=10,5"]').count()===1,label+' final result after complete calculation');
   const clipped=await page.locator('#bridge .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({text:el.textContent,over:el.scrollWidth-el.clientWidth})));
   yes(clipped.length===0,label+' entire bracket and substitution visible without horizontal scrolling: '+JSON.stringify(clipped));
@@ -169,7 +173,7 @@ try{
   for(let i=1;i<=4;i++){await page.locator('#exit-answer [data-seq-next]').click();yes(await exit.filter({visible:true}).count()===i,label+' exit step '+i)}
   yes(await page.locator('#exit-answer [data-integral-evaluation] math msubsup').count()===2,label+' exit contains proper integral and evaluation bracket');
   yes((await page.locator('#exit-answer [data-evaluation-rule]').getAttribute('aria-label')).includes('G(4)−G(0)'),label+' exit teaches G(4)−G(0)');
-  yes(await page.locator('#exit-answer [data-formula-inline="−(0^{2}/2+0)"] math').count()===1,label+' exit subtracts full lower expression');
+  yes(await page.locator('#exit-answer [data-formula-inline="−(0²/2+0)"] math').count()===1,label+' exit subtracts full lower expression');
   const exitOverflow=await page.locator('#exit-answer .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({width:el.clientWidth,scroll:el.scrollWidth,text:el.textContent})));
   yes(exitOverflow.length===0,label+' complete exit evaluation visible: '+JSON.stringify(exitOverflow));
   yes(await page.locator('#exit-answer math[aria-label="A=4+8=12"]').count()===1,label+' exact exit area');await shot(label+'-exit-solution');
