@@ -82,6 +82,19 @@ function explain(out,kind,message,formulas=[]){
 const signs=[{id:'sign-left',correct:'+',why:'Till vänster om x = −1 stiger grafen när x ökar. Där är derivatan positiv.'},
  {id:'sign-middle',correct:'-',why:'Mellan x = −1 och x = 1 sjunker grafen när x ökar. Där är derivatan negativ.'},
  {id:'sign-right',correct:'+',why:'Till höger om x = 1 stiger grafen när x ökar. Där är derivatan positiv.'}];
+// A changed answer starts a new attempt: do not leave obsolete 'Rätt'
+// feedback or a revealed sign table on screen.
+for(const {id} of signs){
+ $(id).addEventListener('change',()=>{
+  const out=$('sign-feedback');out.className='feedback';out.replaceChildren();
+  $('sign-solution').classList.add('hidden');draw('sign-graph');
+ });
+}
+for(const id of ['own-zero','own-left','own-right']){
+ $(id).addEventListener(id==='own-zero'?'input':'change',()=>{
+  const out=$('own-feedback');out.className='feedback';out.replaceChildren();
+ });
+}
 $('check-signs').addEventListener('click',()=>{
  const out=$('sign-feedback');
  const empty=signs.find(s=>!$(s.id).value);
