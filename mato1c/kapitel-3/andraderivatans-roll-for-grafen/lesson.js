@@ -86,7 +86,7 @@ const feedbackMath=['h(2)=2²−4·2+7','h″(2)=2>0','h″(x)=2>0','h′(x)=2x�
 function semanticFeedback(el,raw){
  el.replaceChildren();let cursor=0;
  while(cursor<raw.length){
-  let index=Infinity,token='';for(const t of feedbackMath){const i=raw.indexOf(t,cursor);if(i<index||(i===index&&t.length>token.length)){index=i;token=t}}
+  let index=Infinity,token='';for(const t of feedbackMath){const i=raw.indexOf(t,cursor);if(i>=0&&(i<index||(i===index&&t.length>token.length))){index=i;token=t}}
   if(!token){el.append(document.createTextNode(raw.slice(cursor)));break}
   if(index>cursor)el.append(document.createTextNode(raw.slice(cursor,index)));
   const span=document.createElement('span');span.className='own-feedback-math';window.Ma4Math.setFormula(span,token,'inline');el.append(span);cursor=index+token.length;

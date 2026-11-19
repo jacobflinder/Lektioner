@@ -99,6 +99,7 @@ const models={f:{f:x=>x*x,d:x=>2*x},g:{f:x=>-x*x,d:x=>-2*x},c:{f:x=>x*x*x-3*x+2,
   ok((await page.locator('#exit').innerText()).includes('3138 och 3141 a–b'),'precise homework preserved');
   ok(await page.locator('.slide [data-quiz] strong math').count()>=5,'math in quiz prompts is semantic');
   ok(await page.locator('#compare button.choice math').count()>=3,'math in choices semantic');
+  ok(await page.locator('#compare button.choice math[aria-label="f″ > 0"]').count()===1,'choice preserves correct formula rather than substituting an unrelated token');
   for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
    await page.setViewportSize({width,height});
    if(width===1920&&!await page.locator('body.classroom').count())await page.locator('#mode').click();
@@ -116,6 +117,7 @@ const models={f:{f:x=>x*x,d:x=>2*x},g:{f:x=>-x*x,d:x=>-2*x},c:{f:x=>x*x*x-3*x+2,
      await page.locator('#compare [data-correct="false"]').first().click();
      await page.locator('#compare [data-correct="true"]').click();
      ok(await page.locator('#compare .feedback math').count()>=4,'feedback has semantic equations');
+     ok(await page.locator('#compare .feedback math[aria-label="g″=−2<0"]').count()===1,'exact negative second derivative retained in feedback');
      await reveal('compare-answer');
     }
     if(n===4){await page.locator('#criterion [data-correct="false"]').first().click();ok(await page.locator('#criterion .feedback math').count()>=2,'mistake diagnosed in MathML');}
@@ -132,6 +134,7 @@ const models={f:{f:x=>x*x,d:x=>2*x},g:{f:x=>-x*x,d:x=>-2*x},c:{f:x=>x*x*x-3*x+2,
      await page.selectOption('#own-kind','min');
      ok((await page.locator('#own-feedback').innerText()).trim()==='','updated answer removes stale feedback');
      await page.locator('#own-check').click();ok(await page.locator('#own-feedback math').count()>=3,'correct own answer MathML');
+     ok(await page.locator('#own-feedback math[aria-label="h(2)=3"]').count()===1,'own feedback shows correct point height');
      await reveal('own-hint');await reveal('own-answer');
     }
     if(n===7){await page.locator('#zero-test [data-correct="false"]').first().click();ok(await page.locator('#zero-test .feedback math').count()>=4,'independent sign values MathML');await reveal('zero-answer');}

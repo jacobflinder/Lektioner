@@ -34,7 +34,7 @@ function replaceTextFormulas(root){
   const fragment=document.createDocumentFragment();
   while(pos<source.length){
    let at=Infinity,token='';
-   for(const formula of formulas){const i=source.indexOf(formula,pos);if(i<at||(i===at&&formula.length>token.length)){at=i;token=formula}}
+   for(const formula of formulas){const i=source.indexOf(formula,pos);if(i>=0&&(i<at||(i===at&&formula.length>token.length))){at=i;token=formula}}
    if(!token){fragment.append(document.createTextNode(source.slice(pos)));break}
    if(at>pos)fragment.append(document.createTextNode(source.slice(pos,at)));
    const span=document.createElement('span');span.className='quiz-inline-math';
