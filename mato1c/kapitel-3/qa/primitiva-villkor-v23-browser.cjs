@@ -72,9 +72,14 @@ fs.mkdirSync(out,{recursive:true});
    check(await page.locator('#lab-c').inputValue()==='4',label+' lab slider accessible by keyboard');
    await setSlider('lab-c',3);
    await shot(label+'-lab-one-match');
-   const labBounds=await page.locator('#lab-one .lab-plot').evaluate(el=>{const r=el.getBoundingClientRect();return {bottom:r.bottom,width:r.width}});
+   const labBounds=await page.locator('#lab-one .lab-plot').evaluate(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom,width:r.width}});
    check(labBounds.width>=Math.min(275,width*.72),label+' graph remains legible');
    if(width>=1280)check(labBounds.bottom<=height-5,label+' entire essential graph visible in projector/classroom view: bottom '+labBounds.bottom);
+   if(width===390){
+    const sliderBottom=await page.locator('#lab-one .lab-slider').evaluate(el=>el.getBoundingClientRect().bottom);
+    check(labBounds.top<=height-140,label+' lab 1 curve begins next to the mobile slider, top '+labBounds.top);
+    check(labBounds.top-sliderBottom>=0&&labBounds.top-sliderBottom<=30,label+' lab 1 slider and graph are adjacent on mobile');
+   }
    await page.locator('[data-reveal="lab-one-answer"]').click();
    check(await page.locator('#lab-one-answer math[aria-label="C=3"]').count()===1,label+' reveal mathematical conclusion');
    await go(6);await go(5);
@@ -92,6 +97,12 @@ fs.mkdirSync(out,{recursive:true});
     check(await mathLabel('#lab-c-derived','C='+b+'−3='+(c<0?'−'+Math.abs(c):c))===1,label+' algebra C=b−3 when b='+b);
    }
    await setSlider('lab-b',10);await shot(label+'-lab-two-high');
+   if(width===390){
+    const plotTop=await page.locator('#lab-two .lab-plot').evaluate(el=>el.getBoundingClientRect().top);
+    const sliderBottom=await page.locator('#lab-two .lab-slider').evaluate(el=>el.getBoundingClientRect().bottom);
+    check(plotTop<=height-140,label+' lab 2 curve begins next to the mobile slider, top '+plotTop);
+    check(plotTop-sliderBottom>=0&&plotTop-sliderBottom<=30,label+' lab 2 slider and graph are adjacent on mobile');
+   }
    await go(7);await go(6);check(await page.locator('#lab-b').inputValue()==='6',label+' lab two reset on return');
 
    await go(7);

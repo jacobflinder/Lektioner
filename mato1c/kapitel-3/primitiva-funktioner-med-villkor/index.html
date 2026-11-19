@@ -30,7 +30,19 @@
 .method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.method-item{min-width:0;background:#fff;border:1px solid #d0e2df;border-radius:9px;padding:10px 12px}.method-item strong{color:#135f58}.method-item .formula{font-size:clamp(1.01rem,1.55vw,1.22rem);padding:7px 9px}.method-item p:last-child{margin-bottom:0}
 .small-print{font-size:.87rem;color:#4d6a7b}.route-guide p{margin:10px 0}.teacher-route{font-weight:650}
 @media(max-width:1000px){.lab-layout{display:block}.lab-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lab-controls>.formula,.lab-controls>.lab-prompt{grid-column:1/-1}.mindmap{grid-template-columns:1fr}.explain-grid{grid-template-columns:1fr}}
-@media(max-width:650px){.lab-controls{display:block}.lab-controls>*{margin:10px 0}.formula{font-size:1.12rem}.formula.small{font-size:1.04rem}.method-grid{grid-template-columns:1fr}.lab-plot{padding:7px}.socrative-card{padding:13px}}
+@media(max-width:650px){
+ .lab-controls{display:block}.lab-controls>*{margin:10px 0}.formula{font-size:1.12rem}.formula.small{font-size:1.04rem}.method-grid{grid-template-columns:1fr}.lab-plot{padding:7px}.socrative-card{padding:13px}
+ /* Keep the slider and its changing graph in the same mobile view.
+    The repeated global reminder remains available on every other slide. */
+ body:has(.slide.active .lab-layout) .repetition{display:none}
+ .slide.active .lab-layout{display:flex;flex-direction:column;gap:10px}
+ .slide.active .lab-controls{display:contents}
+ .slide.active .lab-controls>.formula{order:0;margin:0}
+ .slide.active .lab-controls>.lab-prompt{order:1;margin:0}
+ .slide.active .lab-controls>.lab-slider{order:2;margin:0}
+ .slide.active .lab-plot{order:3;width:100%;margin:0}
+ .slide.active .lab-controls>.lab-readout{order:4;margin:0}
+}
 </style>
 </head>
 <body>
