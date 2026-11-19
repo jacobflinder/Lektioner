@@ -29,21 +29,23 @@ function pathFor(a,b){
 }
 function drawGraph(id,rightBound,labels=true){
  const svg=$(id);svg.replaceChildren();
+ const narrow=window.innerWidth<=740;
+ const tickSize=narrow?36:17,axisSize=narrow?32:18;
  const defs=el(svg,'defs');
  const clip=el(defs,'clipPath',{id:'clip-'+id});el(clip,'rect',{x:plotX0,y:plotY0,width:plotX1-plotX0,height:plotY1-plotY0});
  const grid=el(svg,'g',{'clip-path':'url(#clip-'+id+')'});
  for(const x of [-2,-1,0,1,2,3,4,5]){
   el(grid,'line',{x1:X(x),y1:plotY0,x2:X(x),y2:plotY1,stroke:'#e0ebf0','stroke-width':1});
-  el(svg,'text',{x:X(x),y:301,'text-anchor':'middle',fill:'#4f6a79','font-size':17},String(x).replace('-','−'));
+  el(svg,'text',{x:X(x),y:narrow?329:301,'text-anchor':'middle',fill:'#365e71','font-size':tickSize,class:'graph-x-tick'},String(x).replace('-','−'));
  }
  for(const y of [-20,-10,0,10,20]){
   el(grid,'line',{x1:plotX0,y1:Y(y),x2:plotX1,y2:Y(y),stroke:'#e0ebf0','stroke-width':1});
-  el(svg,'text',{x:X(0)-16,y:Y(y)+5,'text-anchor':'end',fill:'#4f6a79','font-size':17},String(y).replace('-','−'));
+  el(svg,'text',{x:X(0)-16,y:Y(y)+(narrow?11:5),'text-anchor':'end',fill:'#365e71','font-size':tickSize,class:'graph-y-tick'},String(y).replace('-','−'));
  }
  el(grid,'line',{x1:plotX0,y1:Y(0),x2:plotX1,y2:Y(0),stroke:'#637d8e','stroke-width':2});
  el(grid,'line',{x1:X(0),y1:plotY0,x2:X(0),y2:plotY1,stroke:'#637d8e','stroke-width':2});
- el(svg,'text',{x:875,y:Y(0)-8,fill:'#496b7b','font-size':18},'x');
- el(svg,'text',{x:X(0)+12,y:53,fill:'#496b7b','font-size':18},'y');
+ el(svg,'text',{x:875,y:Y(0)-8,fill:'#345e74','font-size':axisSize},'x');
+ el(svg,'text',{x:X(0)+12,y:53,fill:'#345e74','font-size':axisSize},'y');
  if(rightBound<5){
   el(grid,'path',{d:pathFor(rightBound,5),stroke:'#a3b5bf','stroke-width':4,fill:'none','stroke-dasharray':'11 8','stroke-linejoin':'round','stroke-linecap':'round'});
  }
@@ -54,12 +56,12 @@ function drawGraph(id,rightBound,labels=true){
  for(const [x,color] of points){
   if(x>rightBound+1e-9||seen.some(p=>Math.abs(p-x)<1e-8))continue;
   seen.push(x);
-  el(grid,'circle',{cx:X(x),cy:Y(f(x)),r:x===rightBound?8.5:7,fill:color,stroke:'#fff','stroke-width':2.5});
+  el(grid,'circle',{cx:X(x),cy:Y(f(x)),r:narrow?(x===rightBound?15:12):(x===rightBound?8.5:7),fill:color,stroke:'#fff','stroke-width':narrow?4:2.5});
   // När b nästan sammanfaller med x=3 får höjdetiketterna inte täcka varandra.
   // Det rörliga värdet återges då i den separata MathML-avläsningen.
   if(labels&&!(x===rightBound&&rightBound>3&&rightBound<3.55)){
    const label=fmt(f(x),1);
-   el(svg,'text',{x:X(x)+9,y:Y(f(x))-14,'font-size':18,fill:color,'font-weight':'800'},label);
+   el(svg,'text',{x:X(x)+(narrow?13:9),y:Y(f(x))-(narrow?21:14),'font-size':narrow?33:18,fill:color,'font-weight':'800'},label);
   }
  }
 }
@@ -105,6 +107,12 @@ $('range-check').addEventListener('click',()=>{
  out.append('.');
 });
 updateRange();
+// Byt etikettstorlek vid responsiv layout utan att ändra kurvans skala eller
+// elevens värden. SVG-etiketter ska gå att läsa även vid 390 pixlars bredd.
+window.addEventListener('resize',()=>{
+ drawGraph('predict-graph',3,true);
+ drawGraph('range-graph',Number($('right-bound').value),!$('range-readout').classList.contains('hidden'));
+});
 
 function parseNumber(id){
  const raw=$(id).value.trim().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(',','.');

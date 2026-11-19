@@ -77,7 +77,7 @@ const evidence='mato1c-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
   await seq.locator('[data-seq-next]').click();
   await ok(await seq.locator('[data-seq-item]:visible').count()===2,'Stationära punkter öppna före klassificering');
   await ok(!await seq.locator('[data-seq-item]').nth(2).isVisible(),'Andraderivatans facit dolt före eget försök');
-  await ok((await seq.locator('[data-seq-prompt]').innerText()).includes('f″(0)'),'Eleven förutsäger andraderivatans värden');
+  await ok((await labels('#example [data-seq-prompt]')).includes('f″(0)'),'Eleven förutsäger andraderivatans värden i semantisk MathML');
   await seq.locator('[data-seq-next]').click();
   const second=(await seq.locator('[data-seq-item]').nth(2).textContent())+' '+(await labels('#example [data-seq-item]:nth-child(3)'));
   const secondCompact=second.replace(/\s+/g,'');

@@ -66,6 +66,7 @@ function linePoints(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(
    dots:[...svg.querySelectorAll('g[clip-path] circle')].map(e=>({x:Number(e.getAttribute('cx')),y:Number(e.getAttribute('cy'))})),
    clip:svg.querySelector('clipPath rect')?.getAttribute('width'),
    marks:[...svg.querySelectorAll('text')].map(e=>e.textContent),
+   tickHeights:[...svg.querySelectorAll('text.graph-x-tick,text.graph-y-tick')].map(e=>e.getBoundingClientRect().height),
    svgRect:(()=>{const r=svg.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,height:r.height}})(),
   }));
   equal(state.paths.length,b===5?1:2,selector+' included/dashed curve count at '+b);
@@ -85,6 +86,7 @@ function linePoints(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(
   }
   ok(state.svgRect.right<=page.viewportSize().width+1&&state.svgRect.left>=-1,'whole graph within screen width');
   if(expectLabels){ok(state.marks.includes('−20')&&state.marks.includes('20'),'unchanged numerical y-scale');}
+  ok(state.tickHeights.length===13&&state.tickHeights.every(h=>h>=10),'legible numerical axes at '+page.viewportSize().width+'px, '+state.tickHeights.map(n=>n.toFixed(1)).join('/'));
   return state;
  };
  try{
