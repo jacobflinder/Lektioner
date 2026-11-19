@@ -54,4 +54,8 @@
 .field-recap-math{width:100%;max-width:100%;overflow-x:auto;margin:11px 0}
 .field-recap-math math{font-size:clamp(1.05rem,1.48vw,1.24rem)}
 .field-recap-grid span{color:#405c51;font-size:.9rem;line-height:1.5}
+/* Native MathML paints descenders/fraction bars several pixels below its
+   reported line box in Chromium. Reserve real vertical space so the
+   overflow-x:auto equation wrapper never clips its final glyph pixels. */
+.field-equation,.field-model-equation,.field-recap-math{padding-block:3px 9px}
 @media(max-width:720px){.field-recap-grid{grid-template-columns:minmax(0,1fr)}}

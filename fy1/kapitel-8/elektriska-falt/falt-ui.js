@@ -38,15 +38,15 @@ if(book){
  recap.innerHTML=`<summary>Frivilligt formelstöd · visa eller dölj</summary>
  <div class="field-recap-grid">
   <article><strong>Riktad elektrisk kraft</strong><div class="field-recap-math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>F</mi><mi>x</mi></msub><mo>=</mo><mi>q</mi><msub><mi>E</mi><mi>x</mi></msub></math></div><span>Tecknet på q avgör om kraften går med eller mot fältet.</span></article>
-  <article><strong>Superposition i en riktning</strong><div class="field-recap-math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mtext>tot,x</mtext></msub><mo>=</mo><msub><mi>E</mi><mn>1x</mn></msub><mo>+</mo><msub><mi>E</mi><mn>2x</mn></msub></math></div><span>Addera bidragen med tecken när riktning är vald.</span></article>
+  <article><strong>Superposition i en riktning</strong><div class="field-recap-math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mtext>tot,x</mtext></msub><mo>=</mo><msub><mi>E</mi><mrow><mn>1</mn><mi>x</mi></mrow></msub><mo>+</mo><msub><mi>E</mi><mrow><mn>2</mn><mi>x</mi></mrow></msub></math></div><span>Addera bidragen med tecken när riktning är vald.</span></article>
   <article><strong>Homogent plattfält</strong><div class="field-recap-math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>|</mo><mi>E</mi><mo>|</mo><mo>=</mo><mfrac><mi>U</mi><mi>d</mi></mfrac></math></div><span>Fältet pekar från plus till minus långt från kanterna.</span></article>
   <article><strong>Partikelns acceleration</strong><div class="field-recap-math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>a</mi><mi>x</mi></msub><mo>=</mo><mfrac><msub><mi>F</mi><mi>x</mi></msub><mi>m</mi></mfrac></math></div><span>I ett homogent fält är accelerationen konstant så länge partikeln färdas fritt.</span></article>
   <article><strong>Energi från en accelererande spänning</strong><div class="field-recap-math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Δ</mi><mi>K</mi><mo>=</mo><mo>|</mo><mi>q</mi><mo>|</mo><mi>U</mi></math></div><span>Gäller över hela accelererande potentialskillnaden; U är beloppet.</span></article>
  </div>`;
- // The exit prompt appears before this closed support, so formula recall is
- // requested before a pupil can choose to open the formula list.
- const exit=book.parentElement.querySelector('.question');
- if(exit)exit.after(recap);else book.after(recap);
+ // Put the closed support after *both* the free-response exit and its quiz.
+ // Otherwise even the voluntary help could reveal the method before the
+ // diagnostic choice is made.
+ book.parentElement.append(recap);
  const close=()=>{recap.open=false};
  document.querySelector('#bild-14').addEventListener('lesson:reset',close);
  for(const id of ['next','prev','jump','reset','repeatmode','classmode'])

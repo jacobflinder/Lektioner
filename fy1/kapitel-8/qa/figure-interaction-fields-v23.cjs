@@ -177,6 +177,8 @@ const K=8.9875517923e9,CHARGE=1.602176634e-19,MASS=9.1093837139e-31;
       'exit recall is positioned before optional support '+view.name);
      const order=await recap.evaluate(el=>el.compareDocumentPosition(el.parentElement.querySelector('.question')));
      check((order&2)!==0,'exit question precedes support in DOM '+view.name);
+     const orderQuiz=await recap.evaluate(el=>el.compareDocumentPosition(el.parentElement.querySelector('.quiz')));
+     check((orderQuiz&2)!==0,'formula-choice quiz precedes support so method cannot leak '+view.name);
      await recap.locator('summary').click();
      check(await formula.count()===5&&(await formula.first().isVisible()),'five correct semantic recaps opened '+view.name);
      await viewport(view.name+'/recap open');
