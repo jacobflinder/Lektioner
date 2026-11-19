@@ -98,6 +98,16 @@ const close=(a,b,t=.01)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
      }
      await reveal('recall-signs');await reveal('recall-signs-answer')
     }
+    if(i===3&&w>=1280){
+     const graphic=await page.locator('#explore').evaluate(section=>{
+      const g=section.querySelector('.graph-board').getBoundingClientRect();
+      const grid=section.querySelector('.two').getBoundingClientRect();
+      const svg=section.querySelector('#interactive-graph').getBoundingClientRect();
+      return {board:g.width,svg:svg.width,container:grid.width};
+     });
+     ok(graphic.board>=graphic.container*.37&&graphic.svg>=graphic.container*.37,
+      'classroom graph must visibly fill its allocated explanatory column '+w+'/'+JSON.stringify(graphic));
+    }
     if(i===3){
      for(const key of ['a','b','c'])for(const x of [-1,0,1]){
       await modelGeometry(key,x,w+'/'+i+'/'+key+'/'+x);
