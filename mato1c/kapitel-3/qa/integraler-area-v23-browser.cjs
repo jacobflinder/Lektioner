@@ -40,6 +40,7 @@ try{
   await go(3);await shot(label+'-notation');
   await page.locator('[data-reveal="notation-answer"]').click();yes(await page.locator('#notation-answer').isVisible(),label+' notation reveal');
   await go(4);await shot(label+'-geometric');
+  if(width>=1280){const fig=await page.locator('#geometric .plot-card').evaluate(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom}});yes(fig.bottom<=height-8,label+' whole geometry diagram fits projector: bottom '+fig.bottom)}
   let overview=await page.locator('#overview-plot [data-area-rectangle]').getAttribute('points');
   let rect=coords(overview);
   near(rect[0][0],80,label+' overview left');
@@ -59,6 +60,7 @@ try{
    yes(await page.locator('#linear-integral math[aria-label]').count()===1,label+' dynamic bounds b='+b);
   }
   await set('linear-b',4);await shot(label+'-linear-b4');
+  if(width<=768){const geom=await page.evaluate(()=>{const slider=document.querySelector('#linear-lab .control-box').getBoundingClientRect(),fig=document.querySelector('#linear-lab .plot-card').getBoundingClientRect();return {gap:fig.top-slider.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' linear graph follows slider, gap '+geom.gap);if(width===390)yes(geom.top<=height-130,label+' linear graph enters mobile viewport')}
   yes(!(await page.locator('#area-feedback').innerText()).includes('areaenheter'),label+' no result revealed before click');
   await page.locator('#area-check').click();yes((await page.locator('#area-feedback').innerText()).includes('16 areaenheter'),label+' area b4 is 16');await shot(label+'-linear-feedback');
   await page.locator('#linear-b').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#linear-b').inputValue()==='3',label+' keyboard slider');
@@ -93,6 +95,7 @@ try{
    }
   }
   await set('rect-n',1);await page.selectOption('#rect-method','left');await shot(label+'-rect-n2');
+  if(width<=768){const geom=await page.evaluate(()=>{const input=document.querySelector('#rect-lab #rect-method').closest('.control-box').getBoundingClientRect(),fig=document.querySelector('#rect-lab .plot-card').getBoundingClientRect();return {gap:fig.top-input.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' rectangle graph follows inputs, gap '+geom.gap);if(width===390)yes(geom.top<=height-105,label+' rectangle graph begins within mobile viewport')}
   await set('rect-n',5);await page.selectOption('#rect-method','right');await shot(label+'-rect-n32');
   await go(9);await go(8);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
   yes(await page.locator('#rect-method').inputValue()==='left',label+' rectangle method resets');
@@ -112,6 +115,7 @@ try{
    yes(readout.endsWith('='+String(12+2*t)),label+' speed distance '+t+': '+readout);
   }
   await set('speed-switch',5);await shot(label+'-speed');
+  if(width<=768){const geom=await page.evaluate(()=>{const slider=document.querySelector('#velocity .control-box').getBoundingClientRect(),fig=document.querySelector('#velocity .plot-card').getBoundingClientRect();return {gap:fig.top-slider.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' speed graph follows slider, gap '+geom.gap);if(width===390)yes(geom.top<=height-130,label+' speed graph enters mobile viewport')}
   await page.locator('#speed-switch').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#speed-switch').inputValue()==='4',label+' speed keyboard');
   await go(10);await go(9);yes(await page.locator('#speed-switch').inputValue()==='3',label+' speed reset after navigation');
   await go(10);await shot(label+'-signed');
