@@ -48,6 +48,24 @@ fs.mkdirSync(OUT,{recursive:true});
    volmeter:!!svg.querySelector('circle[cx="293"][cy="168"][r="33"]'),
    branch:[...svg.querySelectorAll('path')].some(p=>p.getAttribute('d')?.includes('M201 214V168H260 M326 168H390V214'))};
  });
+ // Independent actual-pixel check of the diagram reported by the user.
+ // The voltmeter must not hide R=5,0Ω or R=3,0Ω; the label must belong
+ // clearly to the lower resistor, at mobile, tablet, desktop and projector.
+ const readStaticCircuit=async n=>page.locator('#bild-'+n+' .effect-figure svg').evaluate(svg=>{
+  const texts=[...svg.querySelectorAll('text')];
+  const resistorLabel=texts.find(el=>/^R = [35],0 Ω$/.test(el.textContent.trim()));
+  const voltmeter=svg.querySelector('circle[cx="302"][cy="188"]');
+  const resistor=svg.querySelector('rect[x="266"][y="226"]');
+  const b=el=>el?.getBoundingClientRect();
+  const overlap=(a,c)=>a&&c?Math.max(0,Math.min(a.right,c.right)-Math.max(a.left,c.left))*
+   Math.max(0,Math.min(a.bottom,c.bottom)-Math.max(a.top,c.top)):Infinity;
+  const l=b(resistorLabel),v=b(voltmeter),r=b(resistor);
+  return {labelY:+resistorLabel?.getAttribute('y'),voltOverlap:overlap(l,v),resistorOverlap:overlap(l,r),
+   resistorGap:l&&r?l.top-r.bottom:-1,voltGap:l&&v?l.top-v.bottom:-1,
+   labelWidth:l?.width||0,voltVisible:v?.width>10,
+   branch:!!svg.querySelector('path[d="M215 239 V188 H274 M330 188 H395 V239"]'),
+   sourceTag:svg.closest('.slide')?.querySelector('.source-note')?.innerText||''};
+ });
  const mathGeometry=async tag=>{
   const rows=await slide().locator('.effect-equation:visible,.effect-model-equation:visible').evaluateAll(nodes=>nodes.map(el=>{
    const m=el.querySelector('math'),mr=m?.getBoundingClientRect();
@@ -199,6 +217,15 @@ fs.mkdirSync(OUT,{recursive:true});
    await page.setViewportSize({width,height});
    for(let n=1;n<=11;n++){
     await go(n);await viewport(name+'/'+n+'/before');
+    check(!(await slide().locator('.source-note').innerText()).includes('Original:'),
+     'internal PDF attribution absent from visible student slide '+name+'/'+n);
+    if([7,9,10].includes(n)){
+     const circuit=await readStaticCircuit(n);
+     check(circuit.labelY===279&&circuit.voltOverlap<.5&&circuit.resistorOverlap<.5&&
+      circuit.voltGap>=18&&circuit.resistorGap>=4&&circuit.labelWidth>=35&&circuit.voltVisible,
+      'no real pixel overlap among voltmeter, R label and resistor '+name+'/'+n+' '+JSON.stringify(circuit));
+     check(circuit.branch,'original correct parallel voltmeter topology preserved '+name+'/'+n);
+    }
     if(n===6&&width>=1200){
      const title=await slide().locator('.page-title').evaluate(el=>({
       height:el.getBoundingClientRect().height,lineHeight:parseFloat(getComputedStyle(el).lineHeight)

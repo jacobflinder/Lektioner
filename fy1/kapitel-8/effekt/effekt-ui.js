@@ -6,6 +6,18 @@ for(const sec of document.querySelectorAll('.slide')){
  const label=sec.querySelector(':scope > .steps-label');if(label)body.append(label);
  for(const el of [...sec.querySelectorAll(':scope > .step')])body.append(el);
  const quiz=sec.querySelector(':scope > .quiz');if(quiz)body.append(quiz);
+ // Technical PDF filenames and page numbers belong to teacher documentation,
+ // not to the projected student view. Keep the meaningful pedagogical tag.
+ sec.querySelector('.source-note .text:first-child')?.remove();
+}
+// The battery circuit occurs on three slides. Previously the voltmeter's
+// circle and the R=5,0 Ω / R=3,0 Ω labels shared pixels (mobile included).
+// Place the resistance label *under* its own resistor, leaving both circuit
+// topology and the voltmeter's genuine parallel connection untouched.
+for(const n of [7,9,10]){
+ const svg=document.querySelector('#bild-'+n+' .effect-figure svg');
+ const resistance=[...(svg?.querySelectorAll('text')||[])].find(x=>/^R = [35],0 Ω$/.test(x.textContent.trim()));
+ if(resistance)resistance.setAttribute('y','279');
 }
 // The ordinary quiz engine retains its diagnostic text, while the actual
 // formula in revealed feedback is also expressed as native, readable MathML.
