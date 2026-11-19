@@ -57,7 +57,41 @@ Detta avser **källgranskning, kodgranskning, lokala Chromium-tester och visuell
 - Fysikkontroll: 9,0 V över 1,0+2,0 Ω ger 3,0 A. V_C = +6,0 V om A = 0 V; referensbyte till C = 0 V ger V_B = +3,0 V men oförändrat U_BC.
 - Separat lokal interaktionsprototyp med motsvarande två uppgifter granskades i Chromium (300 kontroller sammanlagt för båda lektionerna), vid 320, 390, 768, 1280 och 1440 px. Detta verifierar **inte** live-publicerad Pages, Safari eller faktiskt elevlärande.
 
-## Systematisk fördjupningsgranskning 40/41 · Potential
+## Ordinarie figur- och interaktionsgranskning – register #31, arbetsordning 32/41, v2.3 (19 november 2026)
+
+**Källmaterial och tidigare analys:** Denna revision bygger på den faktiska elevsidan med 14 bilder, lärarstödet, de tidigare 604+ modell-/formel-/figurkontrollerna och källinventeringen ovan. Den ursprungliga `Fy1_Potential.pdf` har inte varit tillgänglig för en ny visuell sida-mot-sida-jämförelse. Tidigare slutsatser behålls som historik, men är inte en ersättning för en ny visuell kontroll enligt v2.3.
+
+### Bild-för-bild-behov, representationsform och elevens egen aktivitet
+
+| Webb-bild | Kunskapsbehov/figur | Före och efter eget försök |
+|---|---|---|
+| 1 | Två mätta punktnivåer A=12 V och B=8 V; riktad differens och begreppsskillnad | Punktskissen finns initialt; U_AB framträder i tre separata MathML-steg |
+| 2 | Skillnaden mellan nivå och nivåskillnad måste upplevas fysiskt | Verklig kateder–bänk–golv-demonstration behålls, inte utbytt mot virtuell figur; 4 och 8 V först i återkoppling |
+| 3 | Voltmeterprobernas riktning, −3 och +2 V | Voltmeterfiguren, egen teckenförutsägelse, fulla åtta ursprungliga uträkningar och separat quiz med semantisk MathML för val och feedback |
+| 4 | Fältpilar för +100/0 V, F för elektron i motsatt riktning | Plattskissen och tecknad q-energi, inte enbart ord |
+| 5 | Justerbar referens utan ändrat E/F | Plattmodellen visar först förutsägelse, sedan fyra E-pilar och en elektron-kraftpil vid −100…+100 V referensskifte |
+| 6 | Två jämförda nollnivåer +100/0 och 0/−100 | Fältriktning och skillnad förklaras i MathML utan att rita en ny fysisk koppling |
+| 7 | Kretsvandring +12−4−8=0 och potentialernas utveckling | Stegvis graf med synlig fast voltaxel −8…+12 och vald nollnivå A/C; endast undersökta punkter avslöjas |
+| 8 | Tecken för varje spänningsuppgång och resistorfall | 13 separata matematiska rader, samma kretsvärden 12 V, 2/4 Ω och 2 A |
+| 9 | U_BC ändras inte när C blir noll | Den givna slingan och potentialtabellen följs av eget val och MathML-förklarad rätt/fel-återkoppling |
+| 10 | Negativ potential och fysisk jordledning är skilda saker | Skissen visar jämförelse med vald referens, inte en tillagd kortslutande tråd |
+| 11 | Motverkande/samverkande 10 och 6 V-källor | Verklig polorientering, fördröjt svar, 2 eller 8 A på samma fasta 0–8 A-skala; den gröna strömpilen är avsiktligt kvalitativ |
+| 12 | Originalets Socrative 905 och enskilt/par/ompröva | Ingen ny skärmmodell behövs här och ingen påhittad ny Socrative införs |
+| 13 | Bokarbete 861–870 och individuell exit med +5/−1 V | Arbetsuppgifter och exit står kvar; tre fördröjda MathML-steg och originalquiz. Frivillig, stängd femsambandssammanfattning finns efter exit och quiz i samma arbetsvy, inte som ny sida eller läckande facit |
+| 14 | Frivillig tvåkällors Kirchhoff-koppling | Fysikaliskt helt tregrensschema, 16 beräkningsrader och självvald fördjupning; ingen ny obligatorisk elevuppgift |
+
+### Rättade obligatoriska brister
+
+1. `Original: Fy1_Potential.pdf, s. X` var teknisk källmetadata som appen skrev ut för elever på alla 14 bilder. Endast denna första metadataetikett tas nu bort från elevvyn; sidkoppling och relevanta undervisningstaggar finns kvar i data och granskningslogg.
+2. Inget valfritt lektionsspecifikt formelstöd fanns i arbetsvyn. Ett inbyggt `<details>`-stöd efter exit/quiz innehåller **fem redan behandlade** samband: U_AB=V_A−V_B, Ohms lag U=RI för ohmsk resistor, ΣΔV=0, gemensamt referensbyte V'_i=V_i−V_ref och ΔE_p=qΔV. Tecken, antagande och q-laddning förklaras kort. Allt är dolt tills eleven själv öppnar, öppnas med tangentbord/touch och stängs vid reset, bildbyte och lägesbyte. Ingen boklösning har tillförts; 21 minuters skyddat bokarbete och uppgifternas nummer/sidor är oförändrade.
+3. De tre originalquizens **renderade** frågor, svarsalternativ och återkoppling innehöll uttryck som vanlig Unicode-text. Nu visas semantisk native MathML i elevens faktiska val och i två åtskilda uträkningar först efter lärarens facitklick eller omedelbart i repetitionsläge. Ursprungliga tre svarnycklar, elevens förutsägelse och klassrummets fördröjning har behållits.
+4. Vid faktisk AI-granskning av det första bildpaketet syntes ett gammalt uttryck `ΔEₚ=qΔV` som vanlig text i plattmodellens dynamiska svar trots dess tre korrekt satta matematikrader. Den synliga raden har fått **inline-MathML med tecknad laddning q**. Samma bildgranskning visade att ett nytt quizmellanled skrevs som `−1 V − +5 V`; det har fått tydliga parenteser kring den andra positiva potentialen. Båda förbättringarna testas i nästkommande fulla körning.
+
+### Verifikationskrav för denna revision
+
+Ny oberoende `qa/figure-interaction-potential-v23.cjs` kontrollerar alla 14 bildvyer vid 390×844, 768×900, 1280×800 och 1920×1080: synlig grafik och SVG-text, faktiskt ritade MathML-pixlar/mellanrum, horisontell sidpassning och frånvaro av PDF-raden. Dessutom provas teckenreferens −100/0/+100, A/C-nollnivå och nodprickarnas faktiska y-koordinater, 2/8 A-strömbar, tre quiz före fel/rätt/nytt val/reset/repetition, stöd öppet/dolt/reset/navigation/mode samt oförändrade originaluppgifter. Äldre `deep-review-fy1-40.cjs` och samtliga andra Fy1-regressioner körs **utan att meningsfulla testkrav sänks**. Riktiga skärmbilder för varje tillstånd ska öppnas och bedömas innan någon slutstatus eller publiceringskvalitet kan anges.
+
+## Historik: systematisk fördjupningsgranskning 40/41 · Potential
 
 **Källstatus:** den åtkomliga webblektionen innehåller **14 webbilder**, och tidigare lektionsdokumentation anger original-`Fy1_Potential.pdf` med 16 sidor. Ingen direkt återfinnbar original-PDF kunde öppnas i projekt-/konversationsfiler för denna granskning, så originalets tryckta sidlayout är inte direkt verifierad. Bevara den verkliga kateder-/bänk-/golv-demonstrationen, **Socrative 905 `SOC-37397534`**, **bokens 861–870 s.313–314**, lässtöd **8.6 s.309–312** och **gröna rutorna**, skyddade **21 min bokarbete**, frivilligt papperstest och ursprungliga tre webbquiz. Ingen ny Socrative ska tillföras.
 
