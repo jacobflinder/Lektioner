@@ -7,6 +7,7 @@ const mNum=(v,d=0)=>'<mn>'+fmt(v,d)+'</mn>';
 const mU=(unit)=>'<mspace width="0.18em"/><mtext>'+unit+'</mtext>';
 const mSub=(a,b)=>'<msub><mi>'+a+'</mi><mtext>'+b+'</mtext></msub>';
 const mRow=(expr)=>'<div class="potential-model-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+expr+'</math></div>';
+const mInline=(expr)=>'<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">'+expr+'</math>';
 const mFrac=(a,b)=>'<mfrac><mrow>'+a+'</mrow><mrow>'+b+'</mrow></mfrac>';
 const t=(x,y,v,size=16,color='#244e5e',anchor='middle')=>`<text x="${x}" y="${y}" fill="${color}" font-family="system-ui" font-size="${size}" font-weight="650" text-anchor="${anchor}">${h(v)}</text>`;
 const wire=(d,color='#244e5e',w=3,dash='')=>`<path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
@@ -44,7 +45,7 @@ function plates(root){return build(root,[{id:'shift',label:'Gemensam referensfö
  mRow('<mi>U</mi><mo>=</mo>'+mSub('V','vänster')+'<mo>−</mo>'+mSub('V','höger'))+
  mRow('<mi>U</mi><mo>=</mo><mo>(</mo>'+mNum(left)+mU('V')+'<mo>)</mo><mo>−</mo><mo>(</mo>'+mNum(right)+mU('V')+'<mo>)</mo>')+
  mRow('<mi>U</mi><mo>=</mo>'+mNum(100)+mU('V'))+
- '</div><p><b>E pekar höger</b> mot lägre potential; på en elektron verkar <b>F åt vänster</b>, mot högre potential. Elektronens energiändring ΔEₚ=qΔV blir också oberoende av referensnivån.</p>',
+ '</div><p><b>E pekar höger</b> mot lägre potential; på en elektron verkar <b>F åt vänster</b>, mot högre potential. Elektronens energiändring '+mInline('<mi>Δ</mi><msub><mi>E</mi><mtext>p</mtext></msub><mo>=</mo><mi>q</mi><mi>Δ</mi><mi>V</mi>')+' är också oberoende av referensnivån.</p>',
  caption:'Vänster platta är 100 V högre än höger oavsett referensval. Varken plattornas placering eller laddningarna ändras.'};
  });}
 function walk(root){return build(root,[{id:'ref',label:'Vald nollnivå',value:'A',options:[['A','A som nollnivå'],['C','C som nollnivå']]},{id:'step',label:'Potentialvandring',min:0,max:4,step:1,value:0,unit:'av 4'}],(s,shown)=>{

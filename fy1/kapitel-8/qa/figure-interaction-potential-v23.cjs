@@ -35,7 +35,7 @@ const OUT='fy1-qa-screenshots/potential-v23';fs.mkdirSync(OUT,{recursive:true});
    const rect=el=>{const b=el.getBoundingClientRect();return{w:b.width,h:b.height,left:b.left,right:b.right,top:b.top,bottom:b.bottom}};
    const candidates=[...s.querySelectorAll('svg')].filter(el=>el.getClientRects().length);
    const texts=candidates.flatMap(svg=>[...svg.querySelectorAll('text')].filter(el=>el.getClientRects().length));
-   const equations=[...s.querySelectorAll('.potential-equation math,.potential-model-equation math,.potential-feedback-math math,.potential-v23-recap-equation math')].filter(el=>el.getClientRects().length);
+   const equations=[...s.querySelectorAll('.potential-equation math,.potential-model-equation math,.potential-model .model-result p math,.potential-feedback-math math,.potential-v23-recap-equation math')].filter(el=>el.getClientRects().length);
    const groups=[...s.querySelectorAll('.potential-math-steps,.potential-model-math,.potential-feedback-math')].filter(el=>el.getClientRects().length);
    const gaps=groups.flatMap(g=>{const rows=[...g.children].filter(el=>el.getClientRects().length);return rows.slice(1).map((el,i)=>rect(el).top-rect(rows[i]).bottom)});
    const math=equations.map(el=>{const b=rect(el),parent=el.parentElement;
@@ -109,9 +109,11 @@ const OUT='fy1-qa-screenshots/potential-v23';fs.mkdirSync(OUT,{recursive:true});
   // addition to all 604+ existing dedicated deep-review checks in CI.
   await go(5);ck(await plate().locator('.model-result .potential-model-equation').count()===0,'plate force/field initially concealed');
   await plate().locator('.reveal-model').click();
+  ck(await plate().locator('.model-result p math').count()===1,
+   'dynamic electron-energy law uses inline semantic MathML and signed q');
   for(const shift of [-100,0,100]){
    await change('shift',shift);
-   const x=await plate().locator('svg').evaluate(svg=>({texts:[...svg.querySelectorAll('text')].map(e=>e.textContent),
+   const x=await plate().locator('svg').evaluate(svg=>({texts:[...svg.querySelectorAll('text')].map(e=>e.textContent.replace(/\u2212/g,'-')),
     arrows:[...svg.querySelectorAll('path[stroke="#167e9e"]')].map(e=>e.getAttribute('d'))}));
    ck(x.texts.includes((100+shift)+' V')&&x.texts.includes(shift+' V')&&x.arrows.length===4,
     'reference shift '+shift+' never flips or scales electric field');

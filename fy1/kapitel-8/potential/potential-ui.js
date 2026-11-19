@@ -35,7 +35,7 @@ const examples={
   prompt:`A ligger på ${M(plus(5))} och B på ${M(minus(1))}. Välj sedan ${M(`${V('A')}<mo>=</mo>${num(0)}`)}. Vad blir ${M(V('B'))}?`,
   choices:[minus(6),plus(6),num(0)],
   explanation:'B ligger sex volt lägre än A. Att lägga A på noll är en gemensam förskjutning, inte en ny koppling.',
-  lines:[`${V('B')}<mo>′</mo><mo>=</mo>${minus(1)}<mo>−</mo>${plus(5)}<mo>=</mo>${minus(6)}`,
+  lines:[`${V('B')}<mo>′</mo><mo>=</mo>${minus(1)}<mo>−</mo><mo>(</mo>${plus(5)}<mo>)</mo><mo>=</mo>${minus(6)}`,
    `${U('AB')}<mo>=</mo>${plus(5)}<mo>−</mo><mo>(</mo>${minus(1)}<mo>)</mo><mo>=</mo>${plus(6)}`]
  }
 };
