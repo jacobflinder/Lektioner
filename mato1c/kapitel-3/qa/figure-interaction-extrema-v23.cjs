@@ -86,7 +86,18 @@ const close=(a,b,t=.01)=>Number.isFinite(a)&&Math.abs(a-b)<=t;
    for(let i=1;i<=9;i++){
     await go(i);await layout(w+'/'+i+'/before');await shot(w,i,'before');
     if(i===1)await reveal('start-answer');
-    if(i===2){await reveal('recall-signs');await reveal('recall-signs-answer')}
+    if(i===2){
+     if(w===390){
+      const cards=await page.locator('#goal .points-table tbody tr').evaluateAll(trs=>trs.map(tr=>{
+       const t=tr.getBoundingClientRect();const td=tr.querySelector('td');
+       return {width:t.width,cellWidth:td?.getBoundingClientRect().width,grid:getComputedStyle(tr).display,
+        labelled:[...tr.querySelectorAll('td')].every(el=>Boolean(el.dataset.meaning))};
+      }));
+      ok(cards.length===4&&cards.every(c=>c.grid==='grid'&&c.width>235&&c.cellWidth>85&&c.labelled),
+       'four legible mobile extremum cards with each derivative sign labelled '+JSON.stringify(cards));
+     }
+     await reveal('recall-signs');await reveal('recall-signs-answer')
+    }
     if(i===3){
      for(const key of ['a','b','c'])for(const x of [-1,0,1]){
       await modelGeometry(key,x,w+'/'+i+'/'+key+'/'+x);
