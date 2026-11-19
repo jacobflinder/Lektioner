@@ -74,10 +74,12 @@ const hpp=x=>2*x-4;
   test(pos.every(p=>near(p.x,110+76*x,1e-5)),'same x coordinate across SVG panels');
   test(near(pos[0].y,192-34*f(x),1e-4)&&near(pos[1].y,317-27*fp(x),1e-4)&&near(pos[2].y,494-27*fpp(x),1e-4),'marker y-values have correct graph scales '+x);
  }
- for(const [id,v,fragment] of [['class-2','max','x = 2'],['class-4','min','f′ positiv'],['class-6','min','x = 6']]){
+ for(const [id,v,formula,prose] of [['class-2','max','x = 2','minimum'],['class-4','min','x = 4','inflexion'],['class-6','min','x = 6','maximum']]){
   await page.selectOption('#class-2','min');await page.selectOption('#class-4','infl');await page.selectOption('#class-6','max');
   await page.selectOption('#'+id,v);await page.locator('#check-classes').click();
-  test((await page.locator('#class-feedback').textContent()).includes(fragment),'diagnostic wrong-answer feedback '+id);
+  const labels=await page.locator('#class-feedback math').evaluateAll(ms=>ms.map(m=>m.getAttribute('aria-label')));
+  const explanation=await page.locator('#class-feedback').textContent();
+  test(labels.includes(formula)&&explanation.includes(prose),'semantic diagnostic wrong-answer feedback '+id);
  }
  await page.selectOption('#class-2','min');await page.selectOption('#class-4','infl');await page.selectOption('#class-6','max');await page.locator('#check-classes').click();
  test((await page.locator('#class-feedback').textContent()).startsWith('Rätt'),'all three correctly classified');
@@ -114,7 +116,8 @@ const hpp=x=>2*x-4;
  await go(6);test(!await page.locator('#own-answer').isVisible(),'own answer hidden');
  test(!await page.locator('#own-original-steps').isVisible(),'scaffold optional and hidden');
  await page.locator('#own-root').fill('2');await page.selectOption('#own-shape','down');await page.locator('#own-second').fill('2');await page.locator('#check-own').click();
- test((await page.locator('#own-feedback').textContent()).includes('negativ för x<2'),'downward misconception corrected');
+ test((await page.locator('#own-feedback').textContent()).includes('negativ för')&&
+  (await page.locator('#own-feedback math').evaluateAll(ms=>ms.map(m=>m.getAttribute('aria-label')))).includes('x<2'),'downward misconception corrected with semantic signs');
  await page.selectOption('#own-shape','up');await page.locator('#own-second').fill('−2');await page.locator('#check-own').click();
  test((await page.locator('#own-feedback').textContent()).includes('konstanten −4'),'second derivative feedback');
  await page.locator('#own-second').fill('2');await page.locator('#check-own').click();

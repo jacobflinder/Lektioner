@@ -4,6 +4,8 @@
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const fmt=(v,places=2)=>(Math.abs(v)<1e-10?0:v).toFixed(places).replace('.',',').replace('-','−');
 const showMath=(id,formula,display='inline')=>{if(!window.Ma4Math)throw Error('MathML support is missing');window.Ma4Math.setFormula($(id),formula,display)};
+function hideAnswer(id){const el=$(id);if(el&&!el.classList.contains('hidden'))document.querySelector('[data-reveal="'+id+'"]').click()}
+function updateFeedback(out,message,correct){out.className='feedback '+(correct?'ok':'no');out.textContent=message;window.ThreeGraphsMath?.typeset(out)}
 const f=x=>-(x*x*x)/12+x*x-3*x+3.5;
 const d1=x=>-(x*x)/4+2*x-3;
 const d2=x=>2-x/2;
@@ -32,22 +34,25 @@ function graphAxes(group,{X,Y,left,right,yTicks,top,bottom,zeroHorizontal=true})
 const plot=$('linked-plot');
 function renderLinked(){
  const x=Number($('linked-x').value),X=v=>110+76*v;
+ const mobile=window.innerWidth<=680;
  const panels=[
-  {key:'f',fn:f,Y:v=>192-34*v,top:34,bottom:202,ticks:[0,1,2,3,4],stroke:'#0f847c',label:'f(x)'},
-  {key:'d1',fn:d1,Y:v=>317-27*v,top:238,bottom:414,ticks:[-3,-2,-1,0,1],stroke:'#bf5557',label:'f′(x)'},
-  {key:'d2',fn:d2,Y:v=>494-27*v,top:426,bottom:563,ticks:[-2,-1,0,1,2],stroke:'#a47a1c',label:'f″(x)'}
+  {key:'f',fn:f,Y:v=>192-34*v,top:34,bottom:202,ticks:mobile?[0,2,4]:[0,1,2,3,4],stroke:'#0f847c',label:'f(x)'},
+  {key:'d1',fn:d1,Y:v=>317-27*v,top:238,bottom:414,ticks:mobile?[-3,-1,1]:[-3,-2,-1,0,1],stroke:'#bf5557',label:'f′(x)'},
+  {key:'d2',fn:d2,Y:v=>494-27*v,top:426,bottom:563,ticks:mobile?[-2,0,2]:[-2,-1,0,1,2],stroke:'#a47a1c',label:'f″(x)'}
  ];
  plot.replaceChildren();
  const defs=create(plot,'defs');
  for(const item of panels){
-  const id='clip-linked-'+item.key,clip=create(defs,'clipPath',{id});create(clip,'rect',{x:107,y:item.top,width:612,height:item.bottom-item.top});
+  const id='clip-linked-'+item.key,clip=create(defs,'clipPath',{id});
+  // Även skalans vänstra tal hör till grafen; den tidigare klippytan dolde dem.
+  create(clip,'rect',{x:64,y:item.top,width:655,height:item.bottom-item.top});
   create(plot,'rect',{x:105,y:item.top,width:614,height:item.bottom-item.top,fill:'#f9fcfe',stroke:'#dbe6ec','stroke-width':'1',rx:'6'});
   const grp=create(plot,'g',{'clip-path':'url(#'+id+')'});
   graphAxes(grp,{X,Y:item.Y,left:0,right:8,yTicks:item.ticks,top:item.top,bottom:item.bottom});
   create(grp,'path',{d:curve(item.fn,0,8,X,item.Y),fill:'none',stroke:item.stroke,'stroke-width':'3.3','stroke-linecap':'round','stroke-linejoin':'round'});
   create(grp,'line',{x1:X(x),y1:item.top,x2:X(x),y2:item.bottom,stroke:'#40566d','stroke-width':'1.6','stroke-dasharray':'5 4'});
   create(grp,'circle',{cx:X(x),cy:item.Y(item.fn(x)),r:'6.3',stroke:'#fff','stroke-width':'2.4',fill:item.stroke});
-  create(plot,'text',{x:14,y:item.top+22,'font-size':'24','font-weight':'700',fill:item.stroke},item.label);
+  create(plot,'text',{x:14,y:item.top+22,'font-size':'24','font-weight':'700',fill:item.stroke,class:'panel-name'},item.label);
  }
  for(const xTick of [0,2,4,6,8])create(plot,'text',{x:X(xTick),y:584,'text-anchor':'middle','font-size':21,fill:'#456474'},xTick);
  create(plot,'text',{x:736,y:584,'font-size':21,fill:'#456474'},'x');
@@ -57,20 +62,20 @@ function renderLinked(){
  showMath('val-d2','f″(x) = '+fmt(d2(x)));
  for(const btn of document.querySelectorAll('[data-focus-x]'))btn.setAttribute('aria-pressed',String(Number(btn.dataset.focusX)===x));
 }
-$('linked-x').addEventListener('input',renderLinked);
-for(const b of document.querySelectorAll('[data-focus-x]'))b.addEventListener('click',()=>{$('linked-x').value=b.dataset.focusX;renderLinked()});
+$('linked-x').addEventListener('input',()=>{hideAnswer('linked-readouts');renderLinked()});
+for(const b of document.querySelectorAll('[data-focus-x]'))b.addEventListener('click',()=>{$('linked-x').value=b.dataset.focusX;hideAnswer('linked-readouts');renderLinked()});
+window.addEventListener('resize',renderLinked);
 $('check-classes').addEventListener('click',()=>{
  const actual=[['class-2','min'],['class-4','infl'],['class-6','max']];
  const missing=actual.find(([id])=>!$(id).value),wrong=actual.find(([id,truth])=>$(id).value&&$(id).value!==truth),out=$('class-feedback');
- if(missing){out.className='feedback no';out.textContent='Välj punkttyp vid alla tre x-värden först. Motivera med lutning och teckenbyte.';return}
- if(wrong){out.className='feedback no';
-  out.textContent=wrong[0]==='class-2'?'Vid x = 2 ändrar f′ tecken från minus till plus: grafen vänder uppåt och har ett minimum.':
+ if(missing){updateFeedback(out,'Välj punkttyp vid alla tre x-värden först. Motivera med lutning och teckenbyte.',false);return}
+ if(wrong){
+  const message=wrong[0]==='class-2'?'Vid x = 2 ändrar f′ tecken från minus till plus: grafen vänder uppåt och har ett minimum.':
    wrong[0]==='class-4'?'Vid x = 4 är f′ positiv (inte noll). f″ byter däremot tecken: inflexion med icke-horisontell tangent.':
    'Vid x = 6 ändrar f′ tecken från plus till minus: grafen vänder nedåt och har ett maximum.';
-  return;
+  updateFeedback(out,message,false);return;
  }
- out.className='feedback ok';
- out.textContent='Rätt: x=2 minimum (f′: − till +), x=4 inflexion (f″ byter tecken men f′=1), x=6 maximum (f′: + till −).';
+ updateFeedback(out,'Rätt: x=2 minimum (f′: − till +), x=4 inflexion (f″ byter tecken men f′=1), x=6 maximum (f′: + till −).',true);
 });
 renderLinked();
 
@@ -139,7 +144,8 @@ $('check-own').addEventListener('click',()=>{
  else if(shape!=='up')reason='f′(x) är negativ för x<2 och positiv för x>2. Funktionen sjunker och stiger sedan: en uppåtvänd parabel.';
  else if(!Number.isFinite(second))reason='Du har rätt x och form. Derivera f′(x)=2x−4 en gång till och skriv värdet för f″.';
  else if(Math.abs(second-2)>1e-8)reason='Andraderivatan är derivatan av 2x−4. Derivatan av konstanten −4 är noll.';
- out.className='feedback '+(reason?'no':'ok');
- out.textContent=reason||'Rätt: f′ har nollställe 2, tecken − 0 + och f″=2. Välj nu själv två funktioner som skiljer sig endast med en konstant och visa deras derivator.';
+ updateFeedback(out,reason||'Rätt: f′ har nollställe 2, tecken − 0 + och f″=2. Välj nu själv två funktioner som skiljer sig endast med en konstant och visa deras derivator.',!reason);
 });
+for(const id of ['class-2','class-4','class-6'])$(id).addEventListener('change',()=>{const out=$('class-feedback');out.replaceChildren();out.className='feedback'});
+for(const id of ['own-root','own-shape','own-second'])for(const event of ['input','change'])$(id).addEventListener(event,()=>{const out=$('own-feedback');out.replaceChildren();out.className='feedback'});
 })();

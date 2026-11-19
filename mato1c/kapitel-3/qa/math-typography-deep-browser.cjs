@@ -49,7 +49,7 @@ fs.mkdirSync(dir,{recursive:true});
     await page.selectOption('#jump',String(i));
     // The audited graph lesson restores an unopened state whenever the pupil
     // navigates. Open every answer and step again for a genuine full scan.
-    if(lesson===3){
+    if(lesson===3||lesson===4){
      for(const b of await page.locator('.slide.active [data-reveal]').all()){
       const id=await b.getAttribute('data-reveal');
       if(await page.locator('#'+id).isHidden())await b.click();
@@ -87,8 +87,8 @@ fs.mkdirSync(dir,{recursive:true});
     // The two v2.3 lessons must actually fit. Lesson 35 still has older
     // solution-equation wrappers with overflow:auto; those are acceptable only
     // if the entire MathML is already visible without using their scrollbar.
-    if(lesson===2||lesson===3){
-     if(lesson===3||row.className.includes('math-fresh'))
+    if(lesson===2||lesson===3||lesson===4){
+     if(lesson===3||lesson===4||row.className.includes('math-fresh'))
       assert.equal(row.overflow,'visible','L'+(lesson+1)+': matematiska tecken får inte döljas: '+row.text);
      else assert.ok(row.overflow==='auto'||row.overflow==='visible','L'+(lesson+1)+': fel matematikoverflow: '+row.text);
      assert.ok(row.scroll<=row.client+4,'L'+(lesson+1)+': hela matematiken måste rymmas utan intern rullning: '+row.text);
@@ -96,7 +96,7 @@ fs.mkdirSync(dir,{recursive:true});
    }
    allEquations+=lines.length;
    await page.selectOption('#jump',String(mostDense.slide));
-   if(lesson===3){
+   if(lesson===3||lesson===4){
     for(const seq of await page.locator('.slide.active [data-sequence]').all()){
      const n=await seq.locator('[data-seq-item]').count();
      for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();

@@ -10,7 +10,7 @@
 .slide .math-work{max-width:100%;white-space:normal;overflow-wrap:normal}
 .slide .math-work math{font-size:clamp(1.02rem,2vw,1.35rem);max-width:100%}
 .slide .math-sm math{font-size:1em}
-.slide .readouts math{font-size:clamp(.84rem,1.3vw,1.06rem)}
+.slide .readouts math{font-size:clamp(1rem,1.55vw,1.15rem)}
 .slide .answer .math-work + .math-work,.slide .panel .math-work + .math-work{margin-top:16px}
 .slide .clean-table .math-sm math{font-size:.92em}
 @media(max-width:680px){.slide .math-work math{font-size:1rem}.slide .clean-table{font-size:.74rem}.slide .clean-table td,.slide .clean-table th{padding:6px 2px}}
@@ -56,6 +56,50 @@
 .slope-readout{font-size:.91rem;color:#305b6f;margin:8px 0}
 @media(max-width:930px){.graph-grid,.graph-compare{grid-template-columns:1fr}}
 @media(max-width:680px){.quiz-selects,.check-grid,.book-levels,.readouts{grid-template-columns:1fr}.graph-board{padding:7px}.readout{padding:8px}}
+/* v2.3: matematiken ska synas utan inre scrollning eller avklippta glypher. */
+.slide .math-work,.slide :is(.answer,.panel,.seq-item) .math-work{
+ overflow:visible;white-space:normal;max-width:100%;min-width:0;
+ padding-top:9px;padding-bottom:9px;line-height:1.65;
+}
+/* The shared lesson.css uses a higher-specificity p.math-work selector
+   with overflow-y:hidden; override it so MathML glyph ink can never be cut. */
+.slide :is(.answer,.seq-item,.panel,.math-chain) p.math-work{
+ overflow:visible;white-space:normal;
+}
+.slide .math-work math{max-width:none;font-size:clamp(1.1rem,2vw,1.35rem)}
+.slide .solution-math-group{row-gap:16px!important}
+.slide .readout output{overflow-wrap:normal;min-width:0}
+.slide .readout math{display:inline-block;max-width:100%;vertical-align:middle}
+.linked-deck{margin:15px 0 0}
+.linked-deck .graph-btns{margin-bottom:3px}
+.book-method-support{margin:16px 0;border:1px solid #a8cbd2;border-radius:12px;background:#f7fbfc;padding:14px 16px}
+.book-method-support summary{cursor:pointer;font-weight:800;color:#135b68;line-height:1.5}
+.book-method-support summary:focus-visible{outline:3px solid #087d70;outline-offset:4px}
+.method-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:16px 0 3px}
+.method-card{min-width:0;padding:13px 15px;border:1px solid #cbdfe7;border-radius:10px;background:white}
+.method-card h3{font-size:1rem;margin:0 0 9px}
+.method-card p{margin:10px 0}
+.method-card .method-math{display:block;margin:13px 0;font-family:"Cambria Math",Georgia,serif}
+.method-card .method-math math{font-size:1.12rem;max-width:none}
+.interval-cards{display:none;gap:9px;margin:12px 0 16px}
+.interval-card{min-width:0;padding:10px 13px;background:#fff;border:1px solid #bcd3dd;border-radius:9px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center}
+.interval-card strong{font-size:1rem;color:#214f64}
+.interval-card .interval-status{font-size:1rem;font-weight:800;color:#0b665f;text-align:right}
+.interval-card .interval-note{grid-column:1/-1;margin:0;font-size:.96rem;line-height:1.45}
+.quiz-inline-math math,.feedback-inline-math math{font-size:1em;display:inline-block;vertical-align:-.12em}
+@media(max-width:680px){
+ .method-cards{grid-template-columns:1fr}
+ .slide .math-work math{font-size:1.05rem}
+ .slide :is(#interpret-table,#exit-answer) .clean-table{display:none}
+ #own-answer .clean-table{font-size:.94rem}
+ #own-answer .clean-table .math-sm math{font-size:1em}
+ #own-answer .clean-table th:first-child{font-size:.84rem;white-space:nowrap}
+ .interval-cards{display:grid}
+ #linked-plot text{font-size:27px}
+ /* The colour legend remains visible; remove the plot-name/y-tick collision. */
+ #linked-plot .panel-name{display:none}
+ #exit-derivative text,#parallel-graph text,#shift-graph text{font-size:23px}
+}
 </style></head>
 <body>
 <header>
@@ -121,18 +165,10 @@
 
 <section class="slide" id="linked" data-teacher="Källa: original-PDF s.2. Det finns inga funktionsformler för den visade trion i originalet. Här används en EXAKT algebraisk modell vald för att efterlikna nollställena 2,6 och inflexionen 4. Börja med att peka vid x=2,4,6 och be eleverna förutsäga lutningens tecken före slider. Flytta sedan markören med samma x genom alla tre kurvor. Resonemang minst lika viktigt som klicken.">
 <div class="eyebrow">03 · Undersök samma x i tre grafer</div>
-<h2>En punkt på f – en höjd på f′ – en lutning hos f′</h2>
+<h2>Tre grafer vid samma x: f, f′ och f″</h2>
 <div class="task"><strong>Förutsäg innan du flyttar markören:</strong> Vid vilka x är <span class="math-sm">f′(x)=0</span>? Var är <span class="math-sm">f′(x)</span> störst? Vad betyder det för <span class="math-sm">f</span>?</div>
-<div class="graph-grid">
-<div>
-<div class="graph-board">
-<div class="graph-header"><strong>En gemensam x-markör</strong><span class="graph-legend">Grön: f · Röd: f′ · Ockra: f″</span></div>
-<svg id="linked-plot" viewBox="0 0 780 595" role="img" aria-label="Tre vertikalt arrangerade grafer f, f prim och f dubbelprim med samma flyttbara x-markör. f har minimipunkt vid x 2, maximipunkt vid x 6; f prim har nollställen 2 och 6, maximum 4; f dubbelprim byter tecken vid x 4."></svg>
-</div>
-</div>
-<div>
-<div class="interaction-controls">
-<label for="linked-x">Undersök ett x-värde</label>
+<div class="interaction-controls linked-deck">
+<label for="linked-x">Undersök ett x-värde – markören flyttas i alla tre grafer</label>
 <input type="range" id="linked-x" min="0" max="8" step="0.25" value="2" aria-describedby="linked-x-value">
 <div class="graph-btns" role="group" aria-label="Välj särskilt x-värde">
 <button type="button" class="secondary" data-focus-x="2">x = 2</button>
@@ -141,6 +177,14 @@
 </div>
 <output id="linked-x-value" for="linked-x">x = 2,00</output>
 </div>
+<div class="graph-grid">
+<div>
+<div class="graph-board">
+<div class="graph-header"><strong>En gemensam x-markör</strong><span class="graph-legend">Grön: f · Röd: f′ · Ockra: f″</span></div>
+<svg id="linked-plot" viewBox="0 0 780 595" role="img" aria-label="Tre vertikalt arrangerade grafer f, f prim och f dubbelprim med samma flyttbara x-markör. f har minimipunkt vid x 2, maximipunkt vid x 6; f prim har nollställen 2 och 6, maximum 4; f dubbelprim byter tecken vid x 4."></svg>
+</div>
+</div>
+<div>
 <button type="button" class="secondary" data-reveal="linked-readouts">Visa de tre grafvärdena efter din förutsägelse</button>
 <div class="readouts hidden" id="linked-readouts" aria-live="polite">
 <div class="readout"><span>Höjd på f</span><output id="val-f">f = 0,83</output></div>
@@ -171,9 +215,21 @@
 <p><strong>Teckentabell för förstaderivatan:</strong> växande, avtagande och extrempunkter.</p>
 <table class="clean-table" aria-label="Förstaderivatans tecken på intervallen omkring 2 och 6"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;2</th><th class="math-sm">x=2</th><th class="math-sm">2&lt;x&lt;6</th><th class="math-sm">x=6</th><th class="math-sm">x&gt;6</th></tr></thead>
 <tbody><tr><th class="math-sm">f′(x)</th><td>−</td><td>0</td><td>+</td><td>0</td><td>−</td></tr><tr><th>Förändring</th><td>Avtar</td><td><abbr title="Minimipunkt">min</abbr></td><td>Växer</td><td><abbr title="Maximipunkt">max</abbr></td><td>Avtar</td></tr></tbody></table>
+<div class="interval-cards" aria-label="Förstaderivatans fem intervall, mobil återgivning av teckentabellen">
+<div class="interval-card"><strong><span class="math-sm">x&lt;2</span></strong><span class="interval-status">f′ negativ</span><p class="interval-note">f avtar.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x=2</span></strong><span class="interval-status">f′ = 0</span><p class="interval-note">Teckenbyte − till +: minimipunkt.</p></div>
+<div class="interval-card"><strong><span class="math-sm">2&lt;x&lt;6</span></strong><span class="interval-status">f′ positiv</span><p class="interval-note">f växer.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x=6</span></strong><span class="interval-status">f′ = 0</span><p class="interval-note">Teckenbyte + till −: maximipunkt.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x&gt;6</span></strong><span class="interval-status">f′ negativ</span><p class="interval-note">f avtar.</p></div>
+</div>
 <p><strong>Teckentabell för andraderivatan:</strong> hur lutningen f′ förändras.</p>
 <table class="clean-table" aria-label="Andraderivatans tecken på intervallen omkring 4"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;4</th><th class="math-sm">x=4</th><th class="math-sm">x&gt;4</th></tr></thead>
 <tbody><tr><th class="math-sm">f″(x)</th><td>+</td><td>0</td><td>−</td></tr><tr><th>Lutningen f′</th><td>Ökar</td><td>Störst</td><td>Minskar</td></tr></tbody></table>
+<div class="interval-cards" aria-label="Andraderivatans tre intervall, mobil återgivning av teckentabellen">
+<div class="interval-card"><strong><span class="math-sm">x&lt;4</span></strong><span class="interval-status">f″ positiv</span><p class="interval-note">Lutningen f′ ökar.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x=4</span></strong><span class="interval-status">f″ = 0</span><p class="interval-note">f′ är som störst, men inte noll.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x&gt;4</span></strong><span class="interval-status">f″ negativ</span><p class="interval-note">Lutningen f′ minskar.</p></div>
+</div>
 <p>Vid <span class="math-sm">x=2</span> byter f′ minus till plus; vid <span class="math-sm">x=6</span> plus till minus. Vid <span class="math-sm">x=4</span> byter i stället f″ tecken samtidigt som <span class="math-sm">f′(4)=1</span>.</p>
 <p>För x mellan 2 och 6 är <span class="math-sm">f′(x)&gt;0</span>: funktionen växer. Före 2 och efter 6 avtar den.</p>
 </div>
@@ -272,6 +328,14 @@
 <div><strong>Nivå 3</strong><b>3153–3154</b><p>Tolka derivatans graf. Skilj extremum från terrass. Kombinera två teckenvillkor.</p></div>
 </div>
 <div class="task"><strong>Börja med 20 minuter lugnt eget arbete.</strong> Försök själv. Kontrollera. Rätta och förklara dina fel. Därefter: jämför en lösning med en kamrat och fortsätt på nästa nivå.</div>
+<details id="graph-method-support" class="book-method-support">
+<summary>Visa frivillig metodsammanfattning – försök minnas först</summary>
+<div class="method-cards">
+<div class="method-card"><h3>1 · Läs förstaderivatans tecken</h3><p>Den anger om funktionsgrafen växer eller avtar.</p><span class="method-math">f′(x)&gt;0</span><p>f växer.</p><span class="method-math">f′(x)&lt;0</span><p>f avtar.</p></div>
+<div class="method-card"><h3>2 · Avgör punkttyp</h3><p>Vid ett stationärt x-värde: kontrollera teckenbytet.</p><span class="method-math">f′(a)=0</span><p>− till + ger minimum; + till − ger maximum.</p></div>
+<div class="method-card"><h3>3 · Tolka andraderivatan</h3><p>Den berättar hur tangentens lutning ändras.</p><span class="method-math">f″(x)&gt;0</span><p>f′ ökar.</p><span class="method-math">f″(x)&lt;0</span><p>f′ minskar. Ett teckenbyte kan visa inflexion.</p></div>
+<div class="method-card"><h3>4 · Samma derivata, olika höjd</h3><p>Att addera en konstant ändrar inte lutningen.</p><span class="method-math">g(x)=f(x)+C</span><span class="method-math">g′(x)=f′(x)</span><p>Detta gäller alla x där f är deriverbar.</p></div>
+</div></details>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3149 och 3150</strong>. Redan klar? Gör <strong>3153</strong>. Skriv motiveringar – inte bara svar.</div>
 </section>
 
@@ -301,6 +365,13 @@
 <p class="math-work">h′(x)=(x−1)(x−3)</p><p class="math-work">h′(1)=0</p><p class="math-work">h′(3)=0</p>
 <table class="clean-table" aria-label="Tecken hos h prim"><thead><tr><th>Intervall</th><th class="math-sm">x&lt;1</th><th class="math-sm">x=1</th><th class="math-sm">1&lt;x&lt;3</th><th class="math-sm">x=3</th><th class="math-sm">x&gt;3</th></tr></thead>
 <tbody><tr><th class="math-sm">h′(x)</th><td>+</td><td>0</td><td>−</td><td>0</td><td>+</td></tr></tbody></table>
+<div class="interval-cards" aria-label="h-derivatans fem teckenintervall, mobil återgivning av tabellen">
+<div class="interval-card"><strong><span class="math-sm">x&lt;1</span></strong><span class="interval-status">h′ positiv</span><p class="interval-note">h växer.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x=1</span></strong><span class="interval-status">h′ = 0</span><p class="interval-note">Teckenbyte + till −: lokalt maximum.</p></div>
+<div class="interval-card"><strong><span class="math-sm">1&lt;x&lt;3</span></strong><span class="interval-status">h′ negativ</span><p class="interval-note">h avtar.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x=3</span></strong><span class="interval-status">h′ = 0</span><p class="interval-note">Teckenbyte − till +: lokalt minimum.</p></div>
+<div class="interval-card"><strong><span class="math-sm">x&gt;3</span></strong><span class="interval-status">h′ positiv</span><p class="interval-note">h växer.</p></div>
+</div>
 </div>
 <p class="solution-explanation">h växer på de yttre intervallen och avtar mellan 1 och 3.</p>
 <strong>2 · Klassificera de stationära punkterna</strong>
