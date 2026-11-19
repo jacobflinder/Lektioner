@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="sv"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#122d44">
+<title>Integraler och area · Matematik – fortsättning nivå 1c</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+:root{--axis:#526c7c;--ink:#15344b;--area:#d3f0e6;--teal:#087d70;--gold:#eeb35a;--curve:#126b9e}
+.formula{display:block;max-width:100%;margin:12px 0;padding:10px 15px;border-left:4px solid #a7c8d8;border-radius:8px;background:#f5fafc;overflow-x:auto;overflow-y:hidden;font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.24rem,2.35vw,1.65rem);line-height:1.75;white-space:nowrap}
+.formula math{font-size:1em;max-width:100%}.formula.emphasis{background:#e8f5ef;border-color:#087d70}.formula.compact{font-size:clamp(1.12rem,2vw,1.42rem)}
+.inline-math math{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.12em}
+.formulas{display:grid;gap:16px;margin:18px 0}.formulas>.formula{margin:0}.math-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.question{background:#e7f6ef;border-left:5px solid #087d70;border-radius:10px;padding:13px 16px;margin:12px 0;font-weight:600}
+.insight{background:#fff6e7;border-left:5px solid #bd7b23;border-radius:10px;padding:13px 16px;margin:12px 0}
+.lab-grid{display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);gap:15px;align-items:start;margin-top:9px}
+.lab-controls{display:grid;gap:11px;min-width:0}.lab-controls>*{margin:0}.lab-controls .formula{margin:0}
+.control-box{padding:12px 14px;background:#eaf6f2;border:1px solid #b5d9d0;border-radius:10px}.control-box label{display:block;font-weight:750}.control-box input[type=range]{width:100%;accent-color:#087d70;min-height:31px}.control-box select{padding:7px;border:1px solid #9ebdca;border-radius:7px;font:inherit;background:#fff;width:100%;max-width:100%;color:#17334b}
+.control-box output{display:block;font-weight:750;font-size:1.12rem;color:#145f60;min-height:28px}
+.plot-card{background:#fafcfe;border:1px solid #c0d7e5;border-radius:12px;padding:10px;min-width:0;margin:0}
+.plot-card svg{width:100%;height:auto;display:block;max-height:335px;overflow:visible}
+.plot-card figcaption{color:#3e6071;font-size:.85rem;line-height:1.4;margin:6px 0 0}
+.key{display:flex;gap:9px 18px;flex-wrap:wrap;font-size:.83rem;color:#3e6071;margin-top:6px}
+.key i{display:inline-block;width:19px;height:10px;margin-right:5px;background:#cdeee1;border:1px solid #087d70}
+.key .line{background:transparent;border-top:3px solid #126b9e;border-bottom:0;border-left:0;border-right:0;height:1px}
+.key .gold{background:#f9dfaa;border-color:#ba7c26}
+.smalltext{font-size:.88rem;color:#446577}.numbered{margin:10px 0;padding-left:24px}.numbered li{margin:9px 0}
+.formula .integral-operator{font-size:1.2em}
+.seq-item .formula{margin-top:9px}.sequence .steps{gap:15px}.sequence .seq-item{padding:12px 16px}
+.quiz button.choice{min-height:53px}.quiz button.choice math{font-size:1.12em}.feedback .formula{margin:8px 0;border:0;background:#fff;font-weight:500}
+.book-methods{padding:13px 16px;border:1px solid #a8d2c8;background:#e8f5f2;border-radius:10px;margin:15px 0}.book-methods summary:focus-visible{outline:3px solid #e7a62e;outline-offset:3px}.book-methods[open] summary{margin-bottom:11px}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.method-card{min-width:0;padding:11px 12px;background:#fff;border:1px solid #c5d9d3;border-radius:9px}.method-card .formula{font-size:1.12rem;margin:7px 0;padding:7px 10px}.method-card p{margin:5px 0}
+.booklevels .number{font-size:clamp(1.12rem,2.0vw,1.35rem);line-height:1.6;overflow-wrap:anywhere}
+.socrative-card{background:#e9f4fc;border:1px solid #b5d5e9;border-radius:12px;padding:16px}
+.socrative-code{display:inline-block;background:#fff;color:#175d85;font-weight:800;font-size:1.2rem;letter-spacing:.04em;padding:5px 11px;border-radius:6px;border:1px solid #bbd4e4}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.compare>div{background:#f0f6fa;border:1px solid #d4e2eb;padding:13px 15px;border-radius:11px}
+#geometric .formulas{grid-template-columns:repeat(2,minmax(0,1fr))}#geometric .plot-card{max-width:860px;margin:0 auto}
+.graph-summary{background:#fff;border:1px solid #c7dbe4;border-radius:10px;padding:10px 13px;font-size:1rem}.graph-summary .formula{font-size:1.15rem;padding:5px;margin:5px 0}
+.note-figure{font-size:.85rem;color:#4d697c}
+@media(max-width:950px){.lab-grid{grid-template-columns:1fr}.lab-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lab-controls>.formula,.lab-controls>.question{grid-column:1/-1}.plot-card svg{max-height:430px}}
+@media(max-width:650px){.lab-controls{display:block}.lab-controls>*{margin:9px 0}.lab-grid{display:flex;flex-direction:column;gap:8px}.plot-card{width:100%;padding:6px}.plot-card svg{max-height:none}.method-grid,.compare,#geometric .formulas{grid-template-columns:1fr}.formula{font-size:clamp(1.1rem,4.6vw,1.3rem);padding:7px 10px}.formula.compact{font-size:1.08rem}.stage{padding:16px}.booklevel .number{font-size:1.2rem}}
+.geo-layout{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:16px;align-items:start;margin-top:12px}
+#geometric .geo-layout .formulas{grid-template-columns:1fr;gap:12px;margin:12px 0}
+.geo-layout .plot-card{width:100%;margin:0}
+@media(max-width:950px){
+ .geo-layout{grid-template-columns:1fr}
+ .lab-grid{display:flex;flex-direction:column;gap:10px}
+ .lab-controls{display:contents!important}
+ .lab-controls>*{margin:0!important}
+ .lab-controls>.formula{order:0}
+ .lab-controls>.question{order:1}
+ .lab-controls>.control-box{order:2}
+ .lab-grid>.plot-card{order:3}
+ .lab-controls>.graph-summary{order:4}
+ .lab-controls>div:not(.formula):not(.question):not(.control-box):not(.graph-summary){order:5}
+}
+@media(max-width:650px){
+ body:has(.slide.active .plot-card) .repetition{display:none}
+ .geo-layout{display:flex;flex-direction:column;gap:9px}
+ #rect-lab .lab-controls>.formula{order:6}
+ .plot-card svg text{font-size:24px}
+ .plot-card svg{max-height:none}
+}
+</style>
+</head><body>
+<header><a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.3</strong>
+<div class="head-actions"><button id="ink-toggle" type="button" class="secondary" aria-expanded="false">Visa skrivyta</button><button id="teacher-toggle" type="button" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" type="button" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header>
+<main>
+<aside class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p>
+<details><summary>Undervisningsväg och kognitivt fokus</summary>
+<p><strong>Kärnväg:</strong> enskild start → mål → integralnotation → geometriskt exempel → laborationer om gränser och rektanglar → hastighet och sträcka → villkor för area → koppling till primitiv funktion → egen prövning → original-Socrative → bokarbete → individuell utcheckning.</p>
+<p><strong>Viktiga missuppfattningar:</strong> förväxling av höjd med area, omkastade gränser, att dx är en gräns, att hastighetens graf ger samma enhet som hastigheten, och att integral alltid är positiv geometrisk area. Stanna efter elevförsök, inte efter antal klick.</p>
+<p><strong>Avgränsning:</strong> nya boken s. 184–188 handlar främst om area och integralens innebörd; integralberäkning med primitiv funktion fördjupas nästa lektion. Den gamla genomgångens koppling till fundamentalsatsen finns bevarad som en kort förhandsblick.</p>
+<p><strong>Socrative:</strong> den gamla lektionens befintliga aktivitet 321, SOC-36677379, används oförändrad och följs upp i helklass utan namn. Bokens gamla uppgiftsnummer ska inte visas.</p>
+</details></aside>
+<div class="repetition"><strong>Repetitionsläge:</strong> försök räkna på papper innan du öppnar återkopplingen. Sidan skickar inte dina svar vidare.</div>
+<div class="stage" id="stage">
+
+<section class="slide active" id="start" data-teacher="Låt alla räkna på papper i 40–60 sekunder. Visa inte svaret förrän enskilt tänkande och eventuell pardiskussion har skett. Fråga: vilken enhet får rektangeln?">
+<div class="eyebrow">01 · Återkalla sambandet från fysiken</div><h1>Vad berättar arean under en graf?</h1>
+<p class="lead">En vagn rör sig med konstant hastighet under sex sekunder.</p>
+<p class="formula" data-formula="v(t)=10"></p>
+<p>Hastigheten mäts i m/s och tiden i sekunder.</p>
+<div class="question">Räkna själv: hur långt kommer vagnen på 6 s? Hur skulle du visa beräkningen som en area under en hastighetsgraf?</div>
+<button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling efter eget försök</button>
+<div class="answer hidden" id="start-answer"><div class="formulas"><p class="formula" data-formula="s=v·t"></p><p class="formula" data-formula="s=10·6=60"></p></div><p><strong>60 m.</strong> Arean under en v–t-graf är en rektangel med basen 6 s och höjden 10 m/s. Produkten har enheten meter.</p></div>
+</section>
+
+<section class="slide" id="goals" data-teacher="Efter starten: läs målen kort. Peka på att de både ska tolka, skriva och beräkna med areor, samt förstå varför fler rektanglar hjälper.">
+<div class="eyebrow">02 · Dagens mål · Läroboken s. 184–188</div><h2>Integraler och area</h2>
+<p class="lead">Efter lektionen ska du kunna:</p>
+<ol class="numbered"><li>tolka <strong>en integral som en area</strong> när grafen ligger på eller ovanför x-axeln,</li><li>ange <strong>integrationsgränser, integrand och variabel</strong>,</li><li>beräkna areor geometriskt och <strong>uppskatta area med rektanglar</strong>,</li><li>förklara varför arean under en <strong>hastighet–tid-graf</strong> kan ge sträckan.</li></ol>
+<div class="insight">Först förstår vi vad en integral representerar. Nästa steg är att använda primitiva funktioner för att beräkna integraler mer systematiskt.</div>
+</section>
+
+<section class="slide" id="notation" data-teacher="Börja med att låta eleverna identifiera de fyra delarna av symbolen innan benämningarna visas. Skriv uttrycket stort. Betona att x är en integrationsvariabel och inte en enhet.">
+<div class="eyebrow">03 · Ett nytt matematiskt språk</div><h2>Hur skriver man arean?</h2>
+<div class="formula emphasis" data-integral="0|3|x+2|x"></div>
+<div class="question">Titta på uttrycket. Vilket tal är start? Vilket är slut? Vad visar höjden på varje tänkt smal rektangel?</div>
+<button type="button" class="reveal" data-reveal="notation-answer">Visa de fyra delarna</button>
+<div class="answer hidden" id="notation-answer"><div class="compare">
+<div><strong>0 och 3</strong><p>Undre respektive övre <strong>integrationsgräns</strong>.</p></div>
+<div><strong>x + 2</strong><p><strong>Integranden</strong>: funktionen som beskriver grafens höjd.</p></div>
+<div><strong>dx</strong><p>Talar om att vi integrerar med avseende på <strong>x</strong>.</p></div>
+<div><strong>∫</strong><p>Integralens summatecken: vi samlar många små bidrag.</p></div>
+</div><p>När funktionen är icke-negativ mellan gränserna motsvarar integralen arean under grafen.</p></div>
+</section>
+
+<section class="slide" id="geometric" data-teacher="Vår egen graf f(x)=x+2 och intervallet 0 till 3. Låt klassen beräkna den geometriska arean som rektangel plus triangel; ingen primitiv funktion behövs ännu.">
+<div class="eyebrow">04 · Från graf till geometri</div><h2>En area kan delas upp</h2>
+<div class="geo-layout"><div class="geo-copy">
+<p>Vi studerar en egen funktion mellan två gränser:</p>
+<div class="formulas"><p class="formula" data-formula="f(x)=x+2"></p><p class="formula" data-integral="0|3|x+2|x"></p></div>
+<div class="question">Förutsäg: vilka två geometriska former bygger området? Vilka mått behöver du?</div>
+</div><figure class="plot-card"><svg id="overview-plot" viewBox="0 0 620 360" role="img" aria-label="Grafen y=x+2 över x från 0 till 3, och området under grafen färgat och uppdelat i rektangel och triangel."></svg><figcaption>Graf, integrationsgränser och area ska gå att läsa samtidigt.</figcaption></figure></div>
+</section>
+
+<section class="slide" id="linear-lab" data-teacher="Labb 1. Innan varje nytt b-läge: låt eleverna förutsäga om arean ökar och förklara hur bredd och höjd ändras. Visa delytorna efter förutsägelse.">
+<div class="eyebrow">05 · Laboration 1 · Flytta integrationsgränsen</div><h2>Vad händer när intervallet växer?</h2>
+<div class="lab-grid"><div class="lab-controls">
+<p class="formula" data-formula="f(x)=x+2"></p>
+<div class="question">Förutsäg först: hur förändras arean om den övre gränsen flyttas från 3 till 4?</div>
+<div class="control-box"><label for="linear-b">Övre integrationsgräns b</label><input id="linear-b" type="range" min="1" max="4" step="1" value="3"><output id="linear-b-out"></output></div>
+<div class="graph-summary"><strong>Aktuell integral</strong><div id="linear-integral" class="formula compact"></div><p id="linear-height"></p></div>
+<div><button id="area-check" type="button" class="secondary">Kontrollera arean</button><p class="smalltext" id="area-feedback" aria-live="polite"></p></div>
+</div><figure class="plot-card"><svg id="linear-plot" viewBox="0 0 620 360" role="img" aria-label="En blå linjär graf, avgränsning b, samt exakt färgad rektangel och triangel."></svg><figcaption class="key"><span><i></i> Rektangel</span><span><i class="gold"></i> Triangel</span><span><i class="line"></i> Funktionsgraf</span></figcaption></figure></div>
+</section>
+
+<section class="slide" id="worked" data-teacher="Fråga före VARJE steg. Alla beräkningsrader ska förbli egna block, inga färdiga svar förrän sista steget. Använd samma gränser som den statiska grafen.">
+<div class="eyebrow">06 · Genomräknat exempel · Egen geometri</div><h2>Bestäm arean på två sätt</h2>
+<p>Utgå från <span class="inline-math" data-formula-inline="f(x)=x+2"></span> på intervallet <span class="inline-math" data-formula-inline="0≤x≤3"></span>.</p>
+<div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilka mått har rektangeln?"><strong>1 · Rektangel</strong><p class="formula" data-formula="A₁=3·2=6"></p><p>Basen är 3 och höjden vid start är 2.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur hög är triangeln ovanför rektangeln?"><strong>2 · Triangel</strong><p class="formula" data-formula="A₂=(3·3)/2=4,5"></p><p>Grafens höjd ökar från 2 till 5, alltså med 3.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilket värde har hela arean? Vilken enhet används om koordinataxlarna saknar enheter?"><strong>3 · Lägg ihop delarna</strong><p class="formula emphasis" data-formula="A=6+4,5=10,5"></p><p>Den geometriska arean är <strong>10,5 areaenheter</strong>.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur skriver du samma område med integralnotation?"><strong>4 · Skriv integralen</strong><p class="formula emphasis" data-integral="0|3|x+2|x"></p><p>Detta är en annan beskrivning av samma area, 10,5 areaenheter.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
+</section>
+
+<section class="slide" id="sums" data-teacher="Visa varför rektanglar ger närmevärden för böjd graf. Fråga om vänsterrektanglar över/underskattar när grafen växer, innan reglaget.">
+<div class="eyebrow">07 · Varför fungerar integralbegreppet?</div><h2>Små rektanglar blir en allt bättre modell</h2>
+<p>För en böjd graf kan området vara svårt att dela upp i välbekanta former. Dela i stället intervallet i <strong>lika breda rektanglar</strong>.</p>
+<div class="formulas"><p class="formula" data-formula="bredd=(b−a)/n"></p><p class="formula" data-formula="A₁≈f(x₁)·Δx"></p><p class="formula" data-formula="A≈A₁+A₂+…"></p></div>
+<div class="question">Tänk: om funktionen växer, kommer rektanglar som tar höjden i <strong>vänsterkanten</strong> att över- eller underskatta arean? Vad händer med felet när rektanglarna blir smalare?</div>
+<div class="insight">Att rektangelsummor närmar sig ett gemensamt värde är idén bakom integralen. Vi ska undersöka detta – inte bara memorera symbolen.</div>
+</section>
+
+<section class="slide" id="rect-lab" data-teacher="Labb 2. Håll axlarnas skala fixerade när antalet rektanglar ändras. Jämför vänster, höger och mittpunkt för samma n – bokens metod använder mittpunkter. Avslöja inte gränsvärdet först.">
+<div class="eyebrow">08 · Laboration 2 · Rektangelsummor</div><h2>Fler rektanglar – mindre fel?</h2>
+<p class="smalltext">Exempelfunktionen är ny och växer i hela intervallet.</p>
+<div class="lab-grid"><div class="lab-controls">
+<p class="formula" data-formula="f(x)=1+x²/4"></p>
+<p class="formula compact" data-integral="0|4|1+x²/4|x"></p>
+<div class="question">Förutsäg först: underskattar vänsterrektanglarna arean? Jämför med högerkant och mittpunkt.</div>
+<div class="control-box"><label for="rect-n">Antal lika breda rektanglar</label><input id="rect-n" type="range" min="1" max="5" step="1" value="2"><output id="rect-n-out"></output></div>
+<div class="control-box"><label for="rect-method">Höjden hämtas från</label><select id="rect-method"><option value="left">Vänsterkanten</option><option value="right">Högerkanten</option><option value="middle">Mittpunkten</option></select></div>
+<div class="graph-summary"><strong>Rektangelsumman</strong><div id="rect-sum" class="formula compact" aria-live="polite"></div><p class="smalltext">Närmevärde, inte automatiskt exakt area.</p></div>
+</div><figure class="plot-card"><svg id="rect-plot" viewBox="0 0 620 360" role="img" aria-label="En stigande kvadratisk kurva med justerbara vänster- eller högerrektanglar och fast koordinatskala."></svg><figcaption class="key"><span><i></i> Rektanglar</span><span><i class="line"></i> Verklig graf</span></figcaption></figure></div>
+</section>
+
+<section class="slide" id="velocity" data-teacher="Labb 3: visa en tydlig, egen hastighetsmodell i två tidsintervall. Fysikanknytning från original och bok. Testa enheten (m/s)·s=m, och kontrollera färgblockens gränser utan glapp.">
+<div class="eyebrow">09 · Laboration 3 · Hastighet och sträcka</div><h2>Varför ger arean en sträcka?</h2>
+<p>En förenklad rörelsemodell: hastigheten är först 4 m/s och sedan 2 m/s. Hela färden varar 6 s.</p>
+<div class="lab-grid"><div class="lab-controls">
+<div class="question">Förutsäg: om den högre hastigheten gäller längre tid, vad händer med sträckan?</div>
+<div class="control-box"><label for="speed-switch">Tidpunkt då hastigheten ändras</label><input type="range" id="speed-switch" min="1" max="5" step="1" value="3"><output id="speed-switch-out"></output></div>
+<div class="graph-summary"><strong>Två rektangelareor</strong><p id="speed-first"></p><p id="speed-second"></p><div id="speed-total" class="formula compact emphasis" aria-live="polite"></div><p class="smalltext">Enhetskontroll: (m/s) · s = m.</p></div>
+</div><figure class="plot-card"><svg id="speed-plot" viewBox="0 0 620 360" role="img" aria-label="Hastighet mot tid, med två exakt sammanhängande färgade rektanglar och en flyttbar växlingspunkt."></svg><figcaption class="key"><span><i></i> 4 m/s</span><span><i class="gold"></i> 2 m/s</span></figcaption></figure></div>
+</section>
+
+<section class="slide" id="signed" data-teacher="Skilj integralens tecken från den geometriska arean. Boken formulerar ett villkor: f(x) ska vara icke-negativ på intervallet för att integralen ska vara just geometrisk area. Det negativa motexemplet är en kort begreppskontroll.">
+<div class="eyebrow">10 · Tänk på ett viktigt villkor</div><h2>Är integral alltid lika med geometrisk area?</h2>
+<p>När grafen ligger <strong>på eller över x-axeln</strong> ger integralen arean under grafen. Om grafen går under x-axeln räknas den delen med <strong>negativt tecken</strong>.</p>
+<div class="question">Förutsäg för <span class="inline-math" data-formula-inline="f(x)=x−2"></span> från 0 till 4: är den geometriska arean noll, eller är det integralen som kan bli noll?</div>
+<figure class="plot-card"><svg id="signed-plot" viewBox="0 0 620 320" role="img" aria-label="Linjen y=x minus 2 korsar x-axeln vid x=2. Triangeln under x-axeln är negativ och triangeln över är positiv."></svg><figcaption>Två lika stora trianglar ligger på var sin sida om x-axeln.</figcaption></figure>
+<button type="button" class="reveal" data-reveal="signed-answer">Visa förklaringen</button>
+<div class="answer hidden" id="signed-answer"><div class="formulas"><p class="formula" data-formula="Negativt bidrag=−2"></p><p class="formula" data-formula="Positivt bidrag=+2"></p><p class="formula emphasis" data-formula="Integralen=−2+2=0"></p><p class="formula" data-formula="Geometrisk area=2+2=4"></p></div><p>Vi ska alltså inte kalla varje integral en positiv area utan att kontrollera grafens tecken.</p></div>
+</section>
+
+<section class="slide" id="bridge" data-teacher="Originalgenomgångens fundamentalsats bevaras här som förhandsblick. Visa först efter elevernas egna areaberäkning och koppla till att C försvinner. Formell integralberäkning med primitiv funktion kommer i nästa bokavsnitt.">
+<div class="eyebrow">11 · Från förra lektionen till nästa</div><h2>Varför blir primitiva funktioner användbara?</h2>
+<p>Vi har hittat samma area genom geometri. Nästa lektion lär vi oss en effektiv beräkningsmetod med primitiva funktioner.</p>
+<div class="question">Föreställ dig att <span class="inline-math" data-formula-inline="F′(x)=f(x)"></span>. Hur skulle funktionsvärdena i två punkter kunna hjälpa?</div>
+<button type="button" class="reveal" data-reveal="bridge-answer">Visa sambandet som förhandsblick</button>
+<div class="answer hidden" id="bridge-answer"><p class="formula emphasis" data-integral="a|b|f(x)|x"></p><p class="formula" data-formula="I=F(b)−F(a)"></p><p class="formula" data-formula="F(b)+C−F(a)−C"></p><p class="formula" data-formula="F(b)−F(a)"></p><p>Det kallas <strong>integralkalkylens fundamentalsats</strong>. Konstanten försvinner eftersom samma C subtraheras. Nästa lektion övar vi beräkningarna systematiskt.</p></div>
+</section>
+
+<section class="slide" id="quiz" data-teacher="Kort kontroll utan att eleverna behöver framträda. Låt var och en välja och motivera på papper före klick. Felalternativen har åtskild återkoppling.">
+<div class="eyebrow">12 · Kontrollera förståelsen själv</div><h2>Vad är arean under linjen?</h2>
+<p>Beräkna arean under <span class="inline-math" data-formula-inline="f(x)=x+2"></span> mellan <span class="inline-math" data-formula-inline="x=0"></span> och <span class="inline-math" data-formula-inline="x=3"></span>. Svara med areaenheter.</p>
+<div class="quiz" data-quiz><div class="compare">
+<div><button class="choice" type="button" data-correct="false" data-test-value="6">A · <span data-formula-inline="6"></span> areaenheter</button></div>
+<div><button class="choice" type="button" data-correct="true" data-test-value="10.5">B · <span data-formula-inline="10,5"></span> areaenheter</button></div>
+<div><button class="choice" type="button" data-correct="false" data-test-value="15">C · <span data-formula-inline="15"></span> areaenheter</button></div>
+</div><div class="feedback" aria-live="polite">Välj ett alternativ efter din egen beräkning.</div></div>
+</section>
+
+<section class="slide" id="socrative" data-teacher="Bevara exakt originalets Socrative: 321. Ma3c, Primitiv funktion och integral, SOC-36677379. Startas i lärarens befintliga miljö. Tänk enskilt, jämför i par och följ upp vanliga resonemang utan elevnamn. Ingen ny aktivitet skapas.">
+<div class="eyebrow">13 · Socrative · Ursprunglig aktivitet</div><h2>Pröva begreppen i Socrative</h2>
+<div class="socrative-card"><strong>321 · Ma3c – Primitiv funktion och integral</strong><p class="socrative-code">SOC-36677379</p><p>Gå till lärarens Socrative-rum och genomför aktiviteten som startas där.</p></div>
+<div class="question">Arbetssätt: svara först enskilt, jämför sedan ett resonemang med en kamrat. Förklara särskilt skillnaden mellan en grafhöjd och en area.</div>
+</section>
+
+<section class="slide" id="book" data-teacher="Den nya boken. Använd inga uppgiftsnummer från föregående läromedel. Läroboken s.184–188. Genomräknat exempel 3334–3335. Tre nivåer: 3336–3342; 3343–3346; 3347. Minst TVÅ KOMPLETTA nivåer, inklusive alla deluppgifter. 20 min eget sammanhängande bokarbete är ett arbetsblock och aldrig en stoppregel.">
+<div class="eyebrow">14 · Sammanhängande bokarbete</div><h2>Boken, s. 184–188</h2>
+<div class="question"><strong>Välj minst två av de tre nivåerna.</strong> Gör <strong>alla uppgifter och samtliga deluppgifter</strong> på varje nivå du väljer.</div>
+<p class="lead">Arbeta enskilt i <strong>minst 20 minuter i ett sammanhängande pass</strong>. Fortsätt vid behov tills dina valda nivåer är färdiga.</p>
+<p><strong>Teori och exempel:</strong> s. 184–185. <strong>Genomräknade uppgifter:</strong> 3334–3335, s. 186. <strong>Uppgifter:</strong> s. 186–188.</p>
+<div class="booklevels">
+<div class="booklevel"><h3>Nivå 1</h3><p class="number">3336 · 3337 · 3338 · 3339 · 3340 · 3341 · 3342</p><p>Integrationsgränser, att tolka områden och beräkna grundläggande areor.</p></div>
+<div class="booklevel"><h3>Nivå 2</h3><p class="number">3343 · 3344 · 3345 · 3346</p><p>Modeller, sammansatta areor och tolkning i nya sammanhang.</p></div>
+<div class="booklevel"><h3>Nivå 3</h3><p class="number">3347</p><p>Resonera utifrån en styckvis graf och integrationsvillkor.</p></div>
+</div>
+<details class="book-methods" id="book-methods"><summary>Visa lektionens metodstöd (frivilligt) – försök minnas först</summary>
+<div class="method-grid">
+<div class="method-card"><strong>1 · Läs gränserna</strong><p class="formula compact" data-integral="a|b|f(x)|x"></p><p>Var börjar och slutar området?</p></div>
+<div class="method-card"><strong>2 · Läs grafen</strong><p>Höjd = funktionsvärde. Bredd = skillnaden mellan x-värdena.</p></div>
+<div class="method-card"><strong>3 · Dela i figurer</strong><p><strong>Rektangel</strong></p><p class="formula compact" data-formula="A=b·h"></p><p><strong>Triangel</strong></p><p class="formula compact" data-formula="A=(b·h)/2"></p></div>
+<div class="method-card"><strong>4 · Kontrollera tolkningen</strong><p>Är grafen icke-negativ? Rimligt värde? Rätt enhet? Kan rektanglar ge ett närmevärde?</p></div>
+</div></details>
+</section>
+
+<section class="slide" id="exit" data-teacher="Individuellt utan facit: eleven ska formulera en integral, dela upp geometriskt och tolka enheten. När svaret är skrivet går ni vidare till återkoppling.">
+<div class="eyebrow">15 · Individuell utcheckning</div><h2>Visa att du kan – utan ledtråd</h2>
+<p>En ny funktion är <span class="inline-math" data-formula-inline="g(x)=x+1"></span>. Bestäm arean mellan grafen, x-axeln och linjerna <span class="inline-math" data-formula-inline="x=0"></span> och <span class="inline-math" data-formula-inline="x=4"></span>.</p>
+<div class="task"><strong>Lämna tre delar på papper:</strong><ol class="numbered"><li>Rita en skiss och markera området.</li><li>Skriv rätt integral med gränser och dx.</li><li>Beräkna arean som rektangel + triangel och ange areaenheter.</li></ol></div>
+<p class="smalltext">Nästa sida innehåller återkoppling. Försök först själv.</p>
+</section>
+
+<section class="slide" id="exit-answer" data-teacher="Återkoppla direkt till de fyra målen. Låt eleven själv hitta om felet gäller gränser, skiss, geometri eller enhet. Nästa lektion fördjupar integralberäkning med primitiv funktion.">
+<div class="eyebrow">16 · Återkoppla till målen</div><h2>Kontrollera hela ditt resonemang</h2>
+<div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
+<div class="seq-item hidden" data-seq-item data-question="Vilka gränser och vilken integrand hör till området?"><strong>1 · Översätt till integral</strong><p class="formula" data-integral="0|4|x+1|x"></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad blir rektangelns bas och höjd?"><strong>2 · Rektangelns area</strong><p class="formula" data-formula="A₁=4·1=4"></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Hur stor blir triangeln ovanför rektangeln?"><strong>3 · Triangelns area</strong><p class="formula" data-formula="A₂=(4·4)/2=8"></p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken area får du tillsammans och varför är det en area?"><strong>4 · Slutsats</strong><p class="formula emphasis" data-formula="A=4+8=12"></p><p><strong>12 areaenheter.</strong> Funktionen är positiv på intervallet, så integralen motsvarar just denna geometriska area.</p></div>
+</div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Föregående steg</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
+<div class="insight">Målcheck: tolka area · skriva integral · beräkna/uppskatta · förstå area under v–t-graf. Nästa lektion: <strong>integralberäkning med primitiv funktion</strong>.</div>
+</section>
+</div>
+<div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex"><button id="ink-undo" class="secondary" type="button">Ångra</button><button id="ink-eraser" class="secondary" type="button" aria-pressed="false">Sudd</button><button id="ink-clear" class="secondary" type="button">Rensa</button><button id="ink-max" class="secondary" type="button">Förstora</button></div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
+<div class="controls"><div><button id="prev" class="secondary" type="button">← Föregående</button><button id="next" type="button">Nästa →</button><span class="pill" id="progress" aria-live="polite"></span></div><div><label for="jump">Gå till</label><select id="jump" aria-label="Välj lektionens avsnitt"></select></div></div>
+<footer>Matematik – fortsättning, nivå 1c · 3.3 Integraler och area · Läroboken s. 184–188.</footer>
+</main>
+<script src="../assets/lesson-core.js"></script>
+<script src="../../../ma4/kapitel-4/assets/math-presentation.js"></script>
+<script src="../primitiva-funktioner/math-polish.js"></script>
+<script src="lesson.js"></script>
+</body></html>
