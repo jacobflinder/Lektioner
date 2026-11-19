@@ -12,6 +12,7 @@ yes(p('notation')<p('bridge')&&p('bridge')<p('geometric')&&p('geometric')<p('rec
 yes(html.includes('Vad betyder en bestämd integral?'),'Notation does not equate all integrals to geometric area');
 yes(html.includes('Integralkalkylens fundamentalsats')&&html.includes('kontinuerlig'),'Theorem has heading and continuous-function hypothesis');
 yes(html.includes('fundamentalsatsen och hakparentes'),'Exit summary names both fundamental theorem and evaluation bracket');
+yes(/id="ftc-summary"[\s\S]*?data-integral-evaluation="a\|b\|f\(x\)\|x\|F\(x\)"[\s\S]*?data-evaluation-rule="a\|b\|F\(x\)\|F\(b\)−F\(a\)"/.test(html),'Final visible summary contains complete integral-to-bracket-to-F(b)-F(a) theorem');
 yes(html.includes('Sätt in båda gränserna i samma beräkning'),'Worked example shows whole difference');
 yes(!html.includes('data-formula="F(3)=')&&!html.includes('data-formula="F(0)='),'No isolated F(3) and F(0) calculations in worked integral');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);

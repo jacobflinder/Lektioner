@@ -171,8 +171,10 @@ try{
   await go(15);await shot(label+'-exit');await go(16);
   let exit=page.locator('#exit-answer [data-seq-item]');yes(await exit.filter({visible:true}).count()===0,label+' exit hidden');
   for(let i=1;i<=4;i++){await page.locator('#exit-answer [data-seq-next]').click();yes(await exit.filter({visible:true}).count()===i,label+' exit step '+i)}
-  yes(await page.locator('#exit-answer [data-integral-evaluation] math msubsup').count()===2,label+' exit contains proper integral and evaluation bracket');
-  yes((await page.locator('#exit-answer [data-evaluation-rule]').getAttribute('aria-label')).includes('G(4)−G(0)'),label+' exit teaches G(4)−G(0)');
+  yes(await page.locator('#exit-answer .seq-item [data-integral-evaluation] math msubsup').count()===2,label+' exit contains proper integral and evaluation bracket');
+  yes((await page.locator('#exit-answer .seq-item [data-evaluation-rule]').getAttribute('aria-label')).includes('G(4)−G(0)'),label+' exit teaches G(4)−G(0)');
+  yes(await page.locator('#ftc-summary [data-integral-evaluation] math msubsup').count()===2,label+' final summary states integral equals evaluated primitive bracket');
+  yes(await page.locator('#ftc-summary [data-evaluation-rule] math msubsup').count()===1,label+' final summary completes bracket equals F(b)-F(a)');
   yes(await page.locator('#exit-answer [data-formula-inline="−(0²/2+0)"] math').count()===1,label+' exit subtracts full lower expression');
   const exitOverflow=await page.locator('#exit-answer .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({width:el.clientWidth,scroll:el.scrollWidth,text:el.textContent})));
   yes(exitOverflow.length===0,label+' complete exit evaluation visible: '+JSON.stringify(exitOverflow));
