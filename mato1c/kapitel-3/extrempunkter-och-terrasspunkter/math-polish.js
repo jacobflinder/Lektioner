@@ -31,6 +31,16 @@ for(let i=0;i<3;i++)cards[i].innerHTML=cardNames[i][0]+' · <span class="math-in
 const startAnswer=$('#start-answer');
 startAnswer.innerHTML='<p><strong>A · minimipunkt:</strong> grafen går från att sjunka till att stiga. <strong>B · maximipunkt:</strong> från att stiga till att sjunka. <strong>C · terrasspunkt:</strong> fortsätter att stiga genom en horisontell tangent.</p>'+
  '<p>Alla tre är stationära vid x=0, men bara A och B är extrempunkter. I C byter grafen också <strong>böjningsriktning</strong>. Den egenskapen kan vi inte avgöra från enbart samma derivatatecken på båda sidor om noll.</p>';
+// Mobile compares each stationary-point type in a labelled card, keeping
+// all three derivative sign positions and the graph response legible.
+const matrixRows=[...document.querySelectorAll('#goal .points-table tbody tr')];
+if(matrixRows.length!==4)throw Error('Ma3c34 missing stationary matrix rows');
+for(const tr of matrixRows){
+ const cells=[...tr.querySelectorAll('td')];
+ if(cells.length!==4)throw Error('Ma3c34 malformed stationary matrix row');
+ ['Derivatan före','Derivatan i punkten','Derivatan efter','Grafens förändring']
+  .forEach((label,i)=>{cells[i].dataset.meaning=label});
+}
 // 2. Book-faithful goal / exceptional cases; preserve two independent
 // recall controls and the explicitly separate stationarity vs value concept.
 $('#goal h2').textContent='Tecknen visar extrempunkten – böjningen visar terrassen';
