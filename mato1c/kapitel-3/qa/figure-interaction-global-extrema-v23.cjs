@@ -149,8 +149,11 @@ function linePoints(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(
      ok((await aria('#range-feedback')).includes('x = 4,50'),'tie shortcut feedback semantically typeset');
      ok((await aria('#range-algebra')).includes('b²(b−4,5)=0'),'tie calculation preserved');
      if(width>=1280){
-      const r=await page.locator('#range-graph').boundingBox();
-      ok(r&&r.bottom<=height+12,'critical interactive graph fully in first '+width+'x'+height+' viewport');
+      const r=await page.locator('#range-graph').evaluate(el=>{
+       const rect=el.getBoundingClientRect();
+       return {pageBottom:rect.bottom+window.scrollY,viewportBottom:rect.bottom,scrollY:window.scrollY};
+      });
+      ok(r.pageBottom<=height+12,'critical interactive graph fully in first '+width+'x'+height+' viewport '+JSON.stringify(r));
      }
     }
     if(n===5){
