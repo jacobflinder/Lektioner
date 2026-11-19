@@ -86,6 +86,32 @@
   content:attr(data-meaning);color:#31566a;font-size:.85rem;font-weight:750;
   margin-bottom:3px}
 }
+
+/* v2.3: mobile sign matrix as labelled interval cards; never force a hidden
+   3-column table to exceed its parent by a few pixels. */
+@media(max-width:720px){
+ .responsive-sign,.responsive-sign .tall-sign,.responsive-sign .tall-sign tbody{
+   display:block!important;width:100%;min-width:0;max-width:100%;border:0}
+ .responsive-sign .tall-sign{table-layout:auto!important}
+ .responsive-sign .tall-sign thead{display:none}
+ .responsive-sign .tall-sign caption{
+   display:block;width:100%;max-width:100%;padding:3px 0 9px;
+   text-align:left;white-space:normal;line-height:1.45}
+ .responsive-sign .tall-sign tbody tr{
+   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+   gap:8px;padding:10px;margin:0 0 10px;
+   border:1px solid #c9dbe4;border-radius:9px;background:#f5f9fc}
+ .responsive-sign .tall-sign tbody th{
+   display:block;grid-column:1/-1;padding:4px 3px 8px;
+   background:transparent;border:0;text-align:left;font-size:1rem}
+ .responsive-sign .tall-sign tbody td{
+   display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+   gap:5px;border:1px solid #c9dfe8;border-radius:8px;background:#fff;
+   min-width:0;padding:10px 12px;font-size:1rem;min-height:65px;
+   overflow-wrap:normal}
+ .responsive-sign .tall-sign tbody td::before{
+   content:attr(data-label);font-size:.88rem;font-weight:750;color:#315c70}
+}
 </style>
 </head>
 <body>
