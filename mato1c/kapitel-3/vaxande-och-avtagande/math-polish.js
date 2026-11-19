@@ -86,7 +86,7 @@ own.innerHTML='<strong>Härledning från elevens egen beräkning:</strong>'+
  '<p><strong>Avtagande</strong> när '+inlineMath('x≤2')+' och <strong>växande</strong> när '+inlineMath('x≥2')+'. Nollstället '+inlineMath('x=2')+' kan ingå i båda slutna monotoniintervallen.</p>'+
  '<p>Beräkna funktionens höjd i minimipunkten:</p>'+
  group(['f(2)=3·2²−12·2','f(2)=12−24','f(2)=−12'])+
- '<p>Det finns ett <strong>globalt minimum</strong> i '+inlineMath('(2; −12)')+',' eftersom derivatan är negativ före 2 och positiv efter 2. Extra: skissa själv en graf som överensstämmer med detta.</p>';
+ '<p>Det finns ett <strong>globalt minimum</strong> i '+inlineMath('(2; −12)')+', eftersom derivatan är negativ före 2 och positiv efter 2. Extra: skissa själv en graf som överensstämmer med detta.</p>';
 // 07: stationary point is not equivalent to a maximum or minimum.
 const opt=$('#exception .math-big');
 opt.outerHTML='<div class="math-givens">'+['g(x)=x³','g′(x)=3x²','g′(0)=0'].map(math).join('')+'</div>';
