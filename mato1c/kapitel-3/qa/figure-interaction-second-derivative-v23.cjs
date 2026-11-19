@@ -44,8 +44,12 @@ const ids = ['start','goal','explore','examples','own','feedback','book','exit']
     if(!visible(e))continue;
     const r=e.getBoundingClientRect();
     const within=r.left>=sr.left-3&&r.right<=sr.right+3;
-    const cutX=e.scrollWidth>e.clientWidth+4;
-    const cutY=e.scrollHeight>e.clientHeight+4;
+    // Chromium counts MathML glyph ink below the content box even with
+    // overflow: visible; this is not clipping. Only actual clipping/scrolling
+    // containers can cut away that extra ink.
+    const css=getComputedStyle(e),canClipX=/^(hidden|clip|auto|scroll)$/.test(css.overflowX),canClipY=/^(hidden|clip|auto|scroll)$/.test(css.overflowY);
+    const cutX=canClipX&&e.scrollWidth>e.clientWidth+4;
+    const cutY=canClipY&&e.scrollHeight>e.clientHeight+4;
     if(!within||cutX||cutY)fail.push({tag:e.tagName,id:e.id||'',class:String(e.className||'').slice(0,50),
       left:Math.round(r.left),right:Math.round(r.right),stageRight:Math.round(sr.right),
       scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight});
