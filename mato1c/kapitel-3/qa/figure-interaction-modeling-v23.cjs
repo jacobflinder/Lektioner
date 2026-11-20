@@ -124,7 +124,7 @@ const slides=['start','goal','box-explore','box-solution','rectangle-start',
     if(n===3){
      for(const x of [3,6,10,14]){
       await page.locator('#box-x').evaluate((el,v)=>{el.value=String(v);el.dispatchEvent(new Event('input',{bubbles:true}))},x);
-      await svgPoint('#box-volume',x,x=>75+35.5*x,y=>400-.075*y);
+      await svgPoint('#box-volume',x,v=>75+35.5*v,v=>400-.075*box(v));
       const values=await page.locator('#box-bottom').innerText();
       ok(values.includes((50-2*x).toFixed(2).replace('.',','))&&values.includes((30-2*x).toFixed(2).replace('.',',')),'physically correct cut '+x);
      }
@@ -132,7 +132,7 @@ const slides=['start','goal','box-explore','box-solution','rectangle-start',
     if(n===6){
      for(const x of [.5,1,1.5]){
       await page.locator('#rectangle-x').evaluate((el,v)=>{el.value=String(v);el.dispatchEvent(new Event('input',{bubbles:true}))},x);
-      await svgPoint('#rectangle-area',x,x=>77+304*x,y=>406-78*y);
+      await svgPoint('#rectangle-area',x,v=>77+304*v,v=>406-78*area(v));
       const rect=await page.locator('#rectangle-live rect').last().evaluate(el=>({x:+el.getAttribute('x'),width:+el.getAttribute('width'),y:+el.getAttribute('y')}));
       ok(near(rect.x,325-148*x)&&near(rect.width,296*x)&&near(rect.y,408-105*(3-x*x)),'symmetric rectangle −x to +x '+x);
      }
