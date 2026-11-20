@@ -15,17 +15,22 @@ const goalCheck=html.match(/id="goal-check"[\s\S]*?<ol class="numbered">([\s\S]*
 yes((goalCheck.match(/<li>/g)||[]).length===3,'Exactly three matching final self-check goals');
 for(const phrase of ['Tolka integralen','Använda fundamentalsatsen','Kontrollera geometriskt'])yes(goalCheck.includes(phrase),'Final check assesses '+phrase);
 const p=(id)=>html.indexOf('<section class="slide" id="'+id+'"');
-yes(p('geometric')<p('rect-lab')&&p('rect-lab')<p('notation')&&p('notation')<p('recap')&&p('recap')<p('bridge')&&p('bridge')<p('practice')&&p('practice')<p('socrative')&&p('socrative')<p('book')&&p('book')<p('exit'),'Teacher norm: geometric 10.5, rectangles, notation, condition-based primitive, fundamentalsatsen, independent algebra, Socrative, book and exit');
+yes(p('geometric')<p('rect-lab')&&p('rect-lab')<p('notation')&&p('notation')<p('recap')&&p('recap')<p('ftc')&&p('ftc')<p('bridge')&&p('bridge')<p('practice')&&p('practice')<p('work')&&p('work')<p('exit'),'Teacher norm: geometric 10.5, rectangles, notation, conditional primitive, visible theorem BEFORE algebraic example, independent work, merged Socrative and book, exit');
 yes(html.includes('Hur skriver vi samma area med en integral?'),'Integral notation follows the concrete area and rectangles');
 yes(html.includes('Skriv själv integralen på papper')&&html.includes('data-reveal="notation-answer"'),'Pupils set up an integral from area before seeing the answer');
 yes(html.includes('En krökt graf y=f(x)')&&html.includes('x=a och x=b'),'Original general curved region and four boundaries restored');
 yes(html.includes('F(0)=5')&&html.includes('F(x)=3x²+e^x+C')&&html.includes('C=4')&&html.includes('F(x)=3x²+e^x+4'),'Original conditional-primitive calculation type restored with new example');
 yes(html.includes('Integralkalkylens fundamentalsats')&&html.includes('kontinuerlig'),'Theorem has heading and continuous-function hypothesis');
+const theoremSlide=html.match(/<section class="slide" id="ftc"[\s\S]*?<\/section>/)?.[0]||'';
+yes(theoremSlide.includes('data-fundamental-theorem="a|b|f(x)|x|F(x)|F(b)−F(a)"'),'The entire integral = bracket = F(b)-F(a) theorem is on its own slide');
+yes(!theoremSlide.includes('data-seq-item')&&!theoremSlide.includes('hidden'),'The fundamental theorem is visible BEFORE any worked example or reveal');
+yes(p('ftc')<p('bridge')&&!html.includes('hakparentes'),'No verbal label for the notation; mathematical brackets alone express it');
+yes((html.match(/<section class="slide" id="work"/g)||[]).length===1&&!html.includes('id="socrative"')&&!html.includes('id="book"'),'Socrative and book are merged on a single slide');
 yes(html.includes('Målcheck – tre saker att kunna själv'),'Final goal check is aligned with three initial goals');
-yes(/id="ftc-summary"[\s\S]*?data-integral-evaluation="a\|b\|f\(x\)\|x\|F\(x\)"[\s\S]*?data-evaluation-rule="a\|b\|F\(x\)\|F\(b\)−F\(a\)"/.test(html),'Final visible summary contains complete integral-to-bracket-to-F(b)-F(a) theorem');
+yes(/id="ftc-summary"[\s\S]*?data-fundamental-theorem="a\|b\|f\(x\)\|x\|F\(x\)\|F\(b\)−F\(a\)"/.test(html),'Final summary contains complete integral-to-bracket-to-F(b)-F(a) theorem');
 yes(html.includes('Sätt in båda gränserna i samma beräkning'),'Worked example shows whole difference');
 for(const m of ['=9/2+6−0','=4,5+6','=12−2','=12−0'])yes(html.includes(m),'All essential arithmetic simplification steps retained '+m);
-yes(html.includes('data-integral-evaluation="1|3|2x+1|x|x²+x"')&&html.includes('data-evaluation-rule="1|3|x²+x|F(3)−F(1)"'),'New independent task uses theorem and bracket all the way through');
+yes(html.includes('data-fundamental-theorem="1|3|2x+1|x|x²+x|F(3)−F(1)"'),'New independent task uses theorem and bracket all the way through');
 yes(!html.includes('data-formula="F(3)=')&&!html.includes('data-formula="F(0)='),'No isolated F(3) and F(0) calculations in worked integral');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 yes(new Set(ids).size===ids.length,'All ids unique');
@@ -34,9 +39,10 @@ yes(!html.includes('signed-plot')&&!html.includes('signed-extra')&&!html.include
 for(const old of ['SOC-36677299','3401–3415','Uppgiftstexterna finns i boken','Webbsidan återger inte','Metodstödet innehåller inga facit'])yes(!html.includes(old),'No obsolete phrase '+old);
 yes(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon/.test(js),'No network or student tracking');
 yes((html.match(/data-integral=/g)||[]).length>=4,'At least four proper integral expressions');
-yes((html.match(/data-integral-evaluation=/g)||[]).length>=4,'Theorem, example, exit and method summary include integral equals bracket');
-yes((html.match(/data-evaluation-rule=/g)||[]).length>=4,'Theorem, example, exit and method summary include bracket equals F(b) minus F(a)');
-yes(js.includes("document.querySelectorAll('[data-integral-evaluation]')")&&js.includes("document.querySelectorAll('[data-evaluation-rule]')"),'MathML evaluation-bracket renderers exist');
+yes((html.match(/data-integral-evaluation=/g)||[]).length>=1,'Book support includes integral equals bracket');
+yes((html.match(/data-evaluation-rule=/g)||[]).length>=1,'Book support includes bracket equals F(b) minus F(a)');
+yes((html.match(/data-fundamental-theorem=/g)||[]).length===5,'Visible theorem, worked example, independent task, exit, final summary all show the complete equality');
+yes(js.includes("document.querySelectorAll('[data-fundamental-theorem]')"),'MathML complete-fundamental-theorem renderer exists');
 const F=x=>x*x/2+2*x;
 near(F(3)-F(0),10.5,'Fundamental theorem agrees with previous geometric area');
 near(F(4)-F(0),16,'Fundamental theorem agrees with area lab at b=4');
@@ -92,5 +98,13 @@ for(const match of html.matchAll(/data-evaluation-rule="([^"]+)"/g)){
  yes(math.includes('<math')&&math.includes('</math>'),'Semantic evaluation expression '+parts[2]);
  yes(!math.includes('<mfrac><mrow></mrow>'),'Hakparentes fraction has no empty numerator '+parts[2]);
  if(parts[2].includes('²/2'))yes(math.includes('<mfrac><mrow><msup>'),'Hakparentes fraction has squared numerator '+parts[2]);
+}
+for(const match of html.matchAll(/data-fundamental-theorem="([^"]+)"/g)){
+ const parts=match[1].split('|');yes(parts.length===6,'Full theorem has lower, upper, integrand, variable, primitive and difference');
+ const [a,b,expr,v,primitive,result]=parts;
+ yes(a!==''&&b!==''&&expr!==''&&v!==''&&primitive!==''&&result.includes('−'),'Full theorem is mathematically complete');
+ const math=ctx.window.Ma3cPrimitiveMath.semantic(primitive);
+ yes(math.includes('<math')&&math.includes('</math>'),'Full theorem primitive is semantic MathML');
+ if(primitive.includes('²/2'))yes(math.includes('<mfrac><mrow><msup>'),'Full theorem keeps squared term inside numerator');
 }
 console.log(JSON.stringify({result:'PASS',checks,lesson:'Integraler och area'}));

@@ -54,6 +54,15 @@ document.querySelectorAll('[data-evaluation-rule]').forEach(el=>{
  el.classList.add('math-parts');el.setAttribute('aria-label','['+primitive+'] från '+a+' till '+b+' är lika med '+result);
  el.dataset.mathPresentation='true';
 });
+/* The complete fundamental theorem is one continuous calculation.
+   Each semantic segment may wrap as a unit on mobile without splitting a fraction. */
+document.querySelectorAll('[data-fundamental-theorem]').forEach(el=>{
+ const [a,b,expr,v,primitive,result]=el.dataset.fundamentalTheorem.split('|');
+ el.innerHTML=mathSegment(integralMath(a,b,expr,v).replace('display="block"','display="inline"'))+
+  equalSegment(evaluationMath(a,b,primitive))+equalSegment(semantic(result,'inline'));
+ el.setAttribute('aria-label','Integralen från '+a+' till '+b+' av '+expr+' d'+v+' är lika med ['+primitive+'] från '+a+' till '+b+', vilket är '+result);
+ el.dataset.mathPresentation='true';
+});
 function svg(svgEl,tag,attrs={},value){
  const el=document.createElementNS(NS,tag);
  for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));
