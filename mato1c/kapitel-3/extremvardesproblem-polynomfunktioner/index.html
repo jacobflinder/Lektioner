@@ -117,9 +117,13 @@
 <p class="lead"><strong>Efter lektionen ska du kunna tolka en polynommodell, välja rimliga x-värden och använda derivatan för att bestämma och motivera ett extremvärde. Du ska svara i situationen med rätt enhet.</strong></p>
 <div class="metric-grid">
 <div class="metric"><span>1 · Tolka situationen</span><strong>Vad är x?</strong><small>Vad mäts? Vilka värden får x ha?</small></div>
-<div class="metric"><span>2 · Motivera matematiskt</span><strong>Derivera</strong><small>Stationära punkter, gränser och tecken</small></div>
+<div class="metric"><span>2 · Motivera matematiskt</span><strong>Derivera</strong><small>Stationära punkter, teckentest eller andraderivatatest</small></div>
 <div class="metric"><span>3 · Svara begripligt</span><strong>Enhet + innebörd</strong><small>När, hur mycket, vid vilken produktion?</small></div>
 </div>
+<div class="panel"><strong>Två självständiga sätt att klassificera en stationär punkt</strong>
+<p>Efter att ha löst <span class="mathsmall">f′(x)=0</span> kan du antingen undersöka tecknen på <span class="mathsmall">f′</span> på var sida eller använda <strong>andraderivatatestet</strong>:</p>
+<div class="solution-math-group"><p class="mathline">f″(a)&lt;0 ⇒ lokalt maximum</p><p class="mathline">f″(a)&gt;0 ⇒ lokalt minimum</p><p class="mathline">f″(a)=0 ⇒ inget besked</p></div>
+<p>Testet gäller vid en stationär punkt där andraderivatan finns. <strong>Inget besked</strong> betyder att du måste undersöka vidare, till exempel med teckentest. Ingen av metoderna ersätter kontroll av tillåtna x-värden och ändpunkter när man söker ett <em>globalt</em> extremvärde.</p></div>
 <div class="notice"><strong>Tre vanliga fallgropar:</strong> förväxla x med funktionsvärdet; acceptera otillåtna x; glömma att modellen kan använda <em>tusental</em> och inte kronor eller enheter direkt.</div>
 <button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning från lektion 6 (1 minut)</button>
 <div class="panel hidden" id="prior-recall">
@@ -154,7 +158,11 @@
 <p class="mathline">K′(2)=3(2−1)(2−5)=−9&lt;0</p>
 <p class="mathline">K′(6)=3(6−1)(6−5)=15&gt;0</p></div>
 <p><strong>K växer för 0≤x&lt;1, avtar för 1&lt;x&lt;5 och växer när x&gt;5.</strong>
-Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte bevisat vilket värde som är lägst för hela den tillåtna produktionen.</p></div>
+Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5.</p>
+<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Du kan i stället klassificera samma stationära punkter med andraderivatan, utan att göra teckentestet ovan:</p>
+<div class="solution-math-group"><p class="mathline">K″(x)=6x−18</p><p class="mathline">K″(1)=6·1−18=−12&lt;0</p><p class="mathline">K″(5)=6·5−18=12&gt;0</p></div>
+<p>Alltså <strong>lokalt maximum vid x=1</strong> och <strong>lokalt minimum vid x=5</strong>. Båda metoderna leder till samma klassificering.</p></div>
+<p>Vi har ännu inte bevisat vilket värde som är lägst för hela den tillåtna produktionen. Andraderivatatestet ensamt avgör inte ett globalt minimum.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilken gränspunkt måste vi jämföra med x=5?"><strong>4 · Jämför med x=0</strong><p>Den nedre gränsen x=0 måste också kontrolleras. Sätt in alla kandidater i ursprungsfunktionen:</p>
 <div class="solution-math-group">
 <p class="mathline">K(0)=0³−9·0²+15·0+50</p><p class="mathline">K(0)=50</p>
@@ -244,7 +252,9 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 <div class="seq-item hidden" data-seq-item data-question="Hur ser tecknen för I′ ut före och efter x=100?"><strong>3 · Visa att det är ett maximum</strong><p>Vi kontrollerar derivatans tecken på var sida om den stationära punkten:</p>
 <div class="solution-math-group"><p class="mathline">I′(50)=1000−10·50=500&gt;0</p>
 <p class="mathline">I′(150)=1000−10·150=−500&lt;0</p></div>
-<p>Derivatan är positiv för 0≤x&lt;100 och negativ för 100&lt;x≤200. Intäkten ökar och minskar sedan. Alltså maximum vid x=100; ändpunkterna jämförs också.</p></div>
+<p>Derivatan är positiv för 0≤x&lt;100 och negativ för 100&lt;x≤200. Intäkten ökar och minskar sedan.</p>
+<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Utan att göra teckentestet kan du i stället pröva andraderivatan i den stationära punkten:</p><div class="solution-math-group"><p class="mathline">I″(x)=−10</p><p class="mathline">I″(100)=−10&lt;0</p></div><p>Det visar ett <strong>lokalt maximum</strong> vid 100 kr. För att fastställa största intäkten på hela intervallet jämför vi även ändpunkterna i nästa steg.</p></div>
+<p>Alltså maximum vid x=100 på det givna intervallet, när även gränsvärdena har jämförts.</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur stor är intäkten vid x=100 och vad gäller vid ändpunkterna?"><strong>4 · Jämför intäkter</strong>
 <div class="solution-math-group"><p class="mathline">I(100)=1000·100−5·100²</p>
 <p class="mathline">I(100)=100000−50000</p><p class="mathline">I(100)=50000</p></div>
@@ -266,7 +276,7 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 <div class="situation">
 <p><strong>t</strong> är tiden i sekunder efter avfyrningen.</p><p><strong>h(t)</strong> är höjden över havet i meter. Modellen gäller från avfyrningen tills raketen når havsytan.</p>
 </div>
-<div class="task"><strong>Lös utan färdig arbetsgång på papper:</strong> När når raketen sin högsta höjd, och hur högt är det? Visa varför det är modellens maximum och ange vilka tider som faktiskt är möjliga. Svara med båda enheterna.<p>Gör först ett eget försök. Jämför sedan i par: betyder era två svar samma sak?</p></div>
+<div class="task"><strong>Lös utan färdig arbetsgång på papper:</strong> När når raketen sin högsta höjd, och hur högt är det? Visa varför det är modellens maximum <strong>med teckentest eller andraderivatatest</strong>, och ange vilka tider som faktiskt är möjliga. Svara med båda enheterna.<p>Gör först ett eget försök. Jämför sedan i par: betyder era två svar samma sak?</p></div>
 <button type="button" class="secondary" data-reveal="rocket-original-steps">Visa originalets stegvisa uppgift om du fastnar</button>
 <div class="panel hidden" id="rocket-original-steps"><ol class="spaced"><li>Bestäm när raketen når sin högsta höjd.</li><li>Motivera att det verkligen är ett maximum.</li><li>Beräkna hur högt raketen når och svara med enheter.</li><li>Vilka tider är rimliga enligt modellen?</li></ol></div>
 <div class="panel">
@@ -280,12 +290,13 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 <p id="rocket-feedback" class="feedback" role="status" aria-live="polite"></p>
 </div>
 <button type="button" class="secondary" data-reveal="rocket-hint">Stöd om du fastnar</button>
-<div id="rocket-hint" class="panel hidden"><p>Derivera <span class="mathsmall">h′(t)=10−10t</span>. Lös h′(t)=0 och avgör tecken före och efter. Sätt sedan in tiden i h(t). Kontrollera när h(t)=0 och välj en rimlig tid efter avfyrningen.</p></div>
+<div id="rocket-hint" class="panel hidden"><p>Derivera <span class="mathsmall">h′(t)=10−10t</span> och lös h′(t)=0. Välj sedan <em>en</em> metod: kontrollera tecknet på h′ före och efter punkten, eller beräkna h″ i punkten. Sätt in tiden i h(t). Kontrollera när h(t)=0 och välj en rimlig tid efter avfyrningen.</p></div>
 <button type="button" class="reveal" data-reveal="rocket-answer">Visa den genomarbetade lösningen</button>
 <div id="rocket-answer" class="answer hidden">
 <p class="solution-explanation"><strong>1 · Derivera och bestäm tidpunkten</strong></p>
 <div class="solution-math-group"><p class="mathline">h′(t)=10−10t</p><p class="mathline">10−10t=0</p><p class="mathline">−10t=−10</p><p class="mathline">t=1</p></div>
 <p>h′ är positiv före t=1 och negativ efter t=1. Därför får raketen ett maximum vid t=1.</p>
+<div class="panel"><strong>Alternativ motivering · andraderivatatestet</strong><p>Du kan nå samma slutsats direkt från andraderivatan, utan teckentest:</p><div class="solution-math-group"><p class="mathline">h″(t)=−10</p><p class="mathline">h″(1)=−10&lt;0</p></div><p>Eftersom h′(1)=0 och h″(1)&lt;0 är t=1 en <strong>lokal maximipunkt</strong>. För att visa att höjden är störst under hela flygningen kontrollerar vi även tiden och ändpunkterna.</p></div>
 <p class="solution-explanation"><strong>2 · Beräkna högsta höjden</strong></p>
 <div class="solution-math-group"><p class="mathline">h(1)=40+10·1−5·1²</p><p class="mathline">h(1)=40+10−5</p><p class="mathline">h(1)=45</p></div>
 <p class="solution-explanation"><strong>3 · Bestäm när modellen slutar gälla</strong>. Vid havsytan gäller:</p>
@@ -320,7 +331,7 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 <div class="method-cards">
 <div class="method-card"><h3>1 · Tolka storheterna</h3><p>Definiera variabel, modellens enhet och vilka x-värden som är rimliga. Antal produkter måste vara heltal, även när derivatan används som hjälp.</p></div>
 <div class="method-card"><h3>2 · Stationära kandidater</h3><p>Lös derivatans nollställen och behåll bara tillåtna kandidater.</p><p class="mathline">f′(x)=0</p><p>Kontrollera även relevanta ändpunkter och eventuella heltal nära ett optimum.</p></div>
-<div class="method-card"><h3>3 · Motivera extremvärdet</h3><p>Undersök om derivatan går från positiv till negativ eller tvärtom. Jämför <em>funktionsvärden</em>, inte bara x-värden.</p><div class="math-givens"><p class="mathline">f′(x)&gt;0</p><p class="mathline">f′(x)&lt;0</p></div><p>Första uttrycket betyder växande, andra avtagande.</p></div>
+<div class="method-card"><h3>3 · Motivera extremvärdet – välj metod</h3><p><strong>Teckentest:</strong> positiv derivata betyder växande och negativ derivata avtagande.</p><div class="math-givens"><p class="mathline">f′(x)&gt;0</p><p class="mathline">f′(x)&lt;0</p></div><p><strong>Andraderivatatest:</strong> vid f′(a)=0 ger f″(a)&lt;0 lokalt maximum och f″(a)&gt;0 lokalt minimum. Vid f″(a)=0 behövs annan undersökning.</p><p>Oavsett metod: jämför tillåtna <em>funktionsvärden</em> och ändpunkter.</p></div>
 <div class="method-card"><h3>4 · Avsluta i situationen</h3><p>Skilj på pris, antal, intäkt, tid och höjd. Om funktionen anges i tusentals kronor måste svaret översättas till kronor.</p><p><strong>Svar:</strong> vad optimeras, vid vilket tillåtet värde och med vilken enhet?</p></div>
 </div></details>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3205 och 3209</strong>. Redan klar? Gör <strong>3212</strong>.</div>
@@ -339,7 +350,7 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 <ol class="spaced">
 <li>Vilken produktion ger störst vinst?</li>
 <li>Hur stor blir vinsten?</li>
-<li>Visa varför ditt svar ger det största värdet.</li>
+<li>Visa varför ditt svar ger det största värdet. Använd teckentest <strong>eller andraderivatatest</strong> och jämför sedan ändpunkterna.</li>
 </ol>
 <p><strong>Svara med antal enheter och kronor per dag.</strong></p></div>
 <div class="panel"><strong>Dagens mål</strong><p>Tolka modellen och tillåtna x. Bestäm och motivera extremvärde. Svara med rätt enheter.</p></div>
@@ -355,7 +366,8 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 <div class="seq-item hidden" data-seq-item data-question="Derivera V(x). Vilket x-värde gör derivatan noll?"><strong>1 · Derivera och lös</strong><div class="solution-math-group"><p class="mathline">V′(x)=−2x+6</p><p class="mathline">−2x+6=0</p><p class="mathline">−2x=−6</p><p class="mathline">x=3</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Hur vet vi att x=3 ger ett maximum i det tillåtna intervallet?"><strong>2 · Motivera maximum</strong><div class="solution-math-group">
 <p class="mathline">V′(2)=−2·2+6=2&gt;0</p><p class="mathline">V′(4)=−2·4+6=−2&lt;0</p></div>
-<p>V′ är positiv för 0≤x&lt;3 och negativ för 3&lt;x≤6. Vinsten ökar fram till x=3 och avtar sedan. Det ger maximum inom intervallet; vi jämför även ändpunkterna.</p></div>
+<p>V′ är positiv för 0≤x&lt;3 och negativ för 3&lt;x≤6. Vinsten ökar fram till x=3 och avtar sedan.</p>
+<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Det går också att klassificera punkten utan teckentest:</p><div class="solution-math-group"><p class="mathline">V″(x)=−2</p><p class="mathline">V″(3)=−2&lt;0</p></div><p>Alltså <strong>lokalt maximum</strong> vid x=3 eftersom V′(3)=0. Ändpunkterna måste ändå jämföras för att visa största värdet på hela intervallet.</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Vilka vinster får vi vid x=3 och vid gränserna 0 och 6?"><strong>3 · Jämför värden</strong><div class="solution-math-group">
 <p class="mathline">V(3)=−3²+6·3−5</p><p class="mathline">V(3)=−9+18−5</p><p class="mathline">V(3)=4</p>
 <p class="mathline">V(0)=−0²+6·0−5</p><p class="mathline">V(0)=−5</p>
