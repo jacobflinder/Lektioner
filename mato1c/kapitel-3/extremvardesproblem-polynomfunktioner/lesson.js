@@ -25,11 +25,11 @@ function draw(x){
  const g=add(svg,'g',{'clip-path':'url(#revenue-clip)'});
  for(const p of compact?[0,50,100,150,200]:[0,25,50,75,100,125,150,175,200]){
   add(g,'line',{x1:X(p),y1:56,x2:X(p),y2:432,stroke:'#e1ebf0','stroke-width':1});
-  add(svg,'text',{x:X(p),y:453,'text-anchor':'middle',fill:'#496778','font-size':compact?28:15},p);
+  add(svg,'text',{x:X(p),y:453,'text-anchor':'middle',fill:'#496778','font-size':compact?32:23},p);
  }
  for(const v of [0,10000,20000,30000,40000,50000]){
   add(g,'line',{x1:X(0)-4,y1:Y(v),x2:X(200)+8,y2:Y(v),stroke:'#e1ebf0','stroke-width':1});
-  add(svg,'text',{x:X(0)-9,y:Y(v)+7,'text-anchor':'end',fill:'#496778','font-size':compact?28:16},v===0?'0':String(v/1000)+' 000');
+  add(svg,'text',{x:X(0)-9,y:Y(v)+7,'text-anchor':'end',fill:'#496778','font-size':compact?32:21},v===0?'0':String(v/1000)+' 000');
  }
  add(g,'line',{x1:X(0)-4,y1:Y(0),x2:X(200)+8,y2:Y(0),stroke:'#60798b','stroke-width':2});
  add(g,'line',{x1:X(0),y1:55,x2:X(0),y2:435,stroke:'#60798b','stroke-width':2});
@@ -38,8 +38,8 @@ function draw(x){
  add(g,'line',{x1:X(x),y1:Y(pRev),x2:X(x),y2:Y(0),stroke:'#a4603b','stroke-width':2,'stroke-dasharray':'6 5'});
  add(g,'line',{x1:X(0),y1:Y(pRev),x2:X(x),y2:Y(pRev),stroke:'#a4603b','stroke-width':2,'stroke-dasharray':'6 5'});
  add(g,'circle',{cx:X(x),cy:Y(pRev),r:8,stroke:'#fff','stroke-width':3,fill:'#b55158'});
- add(svg,'text',{x:390,y:480,'text-anchor':'middle',fill:'#33566e','font-size':compact?27:18,'font-weight':'700'},'Biljettpris x (kr)');
- add(svg,'text',{x:23,y:46,fill:'#33566e','font-size':compact?27:17,'font-weight':'700'},'Intäkt I(x) (kr)');
+ add(svg,'text',{x:390,y:475,'text-anchor':'middle',fill:'#33566e','font-size':compact?30:25,'font-weight':'700'},'Biljettpris x (kr)');
+ add(svg,'text',{x:23,y:46,fill:'#33566e','font-size':compact?30:25,'font-weight':'700'},'Intäkt I(x) (kr)');
  $('ticket-price-output').textContent='x = '+x+' kr';
  $('tickets-sold').textContent=fkr(tickets(x))+' st';
  $('ticket-revenue').textContent=fkr(pRev)+' kr';
@@ -55,17 +55,33 @@ for(const b of document.querySelectorAll('[data-price]')){
 }
 $('ticket-check').addEventListener('click',()=>{
  const x=Number($('ticket-price').value),out=$('ticket-feedback');
- if(x===100){out.className='feedback ok';out.textContent='Rätt: priset 100 kr ger 500 sålda biljetter och 50 000 kr i intäkt. Motivera nu med I′(x)=1000−10x.';}
+ let message,formula='';
+ if(x===100){message='Rätt: priset 100 kr ger 500 sålda biljetter och 50 000 kr i intäkt. Motivera nu med derivatan:';formula='I′(x)=1000−10x';}
  else{out.className='feedback no';
-  out.textContent=(x===0||x===200)
+  message=(x===0||x===200)
    ?'Priset '+x+' kr ger 0 kr i intäkt. Ett extremt lågt eller högt pris kan alltså ge noll. Leta efter en högre intäkt mellan 0 och 200 kr.'
    :x<100
-   ?'Vid '+x+' kr är I′(x) positiv, så en liten prishöjning ökar intäkten. Jämför några högre priser innan du bestämmer optimum.'
-   :'Vid '+x+' kr är I′(x) negativ, så en liten prissänkning ökar intäkten. Jämför några lägre priser innan du bestämmer optimum.';
+   ?'Vid '+x+' kr är derivatan positiv, så en liten prishöjning ökar intäkten. Jämför några högre priser innan du bestämmer optimum.'
+   :'Vid '+x+' kr är derivatan negativ, så en liten prissänkning ökar intäkten. Jämför några lägre priser innan du bestämmer optimum.';
+  formula=(x===0||x===200)?'I('+x+')=0':'I′('+x+')='+(1000-10*x);
  }
+ out.className='feedback '+(x===100?'ok':'no');
+ out.replaceChildren(document.createTextNode(message));
+ const math=document.createElement('p');math.className='mathline';
+ window.Ma4Math.setFormula(math,formula,'block');out.append(math);
 });
 draw(50);
 window.addEventListener('resize',()=>draw(Number($('ticket-price').value)));
+
+// The optional recap is a native keyboard-accessible disclosure. Like the
+// preceding v2.3 lesson, start with it closed after navigation/mode changes.
+const methodSupport=$('extrema-model-method-support');
+let activeSlide=document.querySelector('.slide.active')?.id;
+new MutationObserver(()=>{
+ const now=document.querySelector('.slide.active')?.id;
+ if(now!==activeSlide){activeSlide=now;methodSupport.open=false}
+}).observe($('stage'),{subtree:true,attributes:true,attributeFilter:['class']});
+$('mode').addEventListener('click',()=>{methodSupport.open=false});
 
 function parseNumber(id){
  const raw=$(id).value.trim().replace(/\s/g,'').replace(/[−–]/g,'-').replace(',','.');

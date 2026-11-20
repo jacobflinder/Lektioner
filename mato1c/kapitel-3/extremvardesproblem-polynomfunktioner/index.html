@@ -6,12 +6,12 @@
 <title>Extremvärdesproblem med polynomfunktioner · Matematik – fortsättning, nivå 1c</title>
 <link rel="stylesheet" href="../assets/lesson.css">
 <style>
-/* Ma3c 20: each independent equation is one local MathML block. */
+/* Ma3c 20, v2.3: all independent equations and axes remain fully visible. */
 .slide .math-givens{display:grid;gap:16px;margin:14px 0}
 .slide .math-givens>.mathline{margin:0!important}
 .slide .solution-math-group{display:grid!important;gap:16px!important}
 .slide .solution-math-group>.mathline{margin:0!important}
-.slide .mathline{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .mathline{max-width:100%;white-space:normal!important;overflow-wrap:normal;overflow-x:visible!important;overflow-y:visible!important}
 .slide .mathline math[display="block"]{font-size:clamp(1rem,2vw,1.32rem);max-width:100%}
 .slide .mathsmall math{font-size:1em}
 .slide :is(.answer,.seq-item) .mathline+.mathline{margin-top:16px}
@@ -57,8 +57,16 @@
 .book-grid b{display:block;font-size:1.16rem;margin-top:7px}
 .figure-label{font-weight:750;color:#165a71}
 .muted-note{color:#536e7d;font-size:.88rem}
+.book-method-support{margin:16px 0;border:1px solid #a8cbd2;border-radius:12px;background:#f7fbfc;padding:14px 16px}
+.book-method-support summary{font-weight:800;color:#125b69;cursor:pointer;line-height:1.5}
+.book-method-support summary:focus-visible{outline:3px solid #087d70;outline-offset:4px}
+.method-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 2px}
+.method-card{min-width:0;background:#fff;border:1px solid #cbdfe7;border-radius:10px;padding:13px 15px}
+.method-card h3{font-size:1rem;margin:0 0 8px}
+.method-card p{margin:8px 0}
+.method-card .mathline{font-size:1.12rem;line-height:1.5}
 @media(max-width:920px){.graph-layout{grid-template-columns:1fr}}
-@media(max-width:690px){.metric-grid,.input-grid,.book-grid{grid-template-columns:1fr}.graph-frame{padding:6px}.compare-table td,.compare-table th{padding:6px 3px;font-size:.88rem}}
+@media(max-width:690px){.metric-grid,.input-grid,.book-grid,.method-cards{grid-template-columns:1fr}.graph-frame{padding:6px}.compare-table td,.compare-table th{padding:6px 3px;font-size:.88rem}}
 </style>
 </head>
 <body>
@@ -306,6 +314,15 @@ Alltså lokalt maximum vid x=1 och lokalt minimum vid x=5. Det är ännu inte be
 </div>
 <div class="task"><strong>20 minuter lugnt eget arbete.</strong> Försök själv. Kontrollera. Rätta och förstå dina fel. Fortsätt sedan, diskutera vid behov.</div>
 <div class="panel"><p><strong>Välj start:</strong> börja med <strong>3203, 3205 och 3209</strong>. Är du redan säker? Börja med <strong>3208–3210</strong> och fortsätt sedan på nivå 3.</p></div>
+<details class="book-method-support" id="extrema-model-method-support">
+<summary>Frivilligt metodstöd till bokarbetet – fyra samband (utan uppgiftsfacit)</summary>
+<p>Välj själv metod först. Öppna endast om du behöver påminna dig om det vi redan har gått igenom.</p>
+<div class="method-cards">
+<div class="method-card"><h3>1 · Tolka storheterna</h3><p>Definiera variabel, modellens enhet och vilka x-värden som är rimliga. Antal produkter måste vara heltal, även när derivatan används som hjälp.</p></div>
+<div class="method-card"><h3>2 · Stationära kandidater</h3><p>Lös derivatans nollställen och behåll bara tillåtna kandidater.</p><p class="mathline">f′(x)=0</p><p>Kontrollera även relevanta ändpunkter och eventuella heltal nära ett optimum.</p></div>
+<div class="method-card"><h3>3 · Motivera extremvärdet</h3><p>Undersök om derivatan går från positiv till negativ eller tvärtom. Jämför <em>funktionsvärden</em>, inte bara x-värden.</p><div class="math-givens"><p class="mathline">f′(x)&gt;0</p><p class="mathline">f′(x)&lt;0</p></div><p>Första uttrycket betyder växande, andra avtagande.</p></div>
+<div class="method-card"><h3>4 · Avsluta i situationen</h3><p>Skilj på pris, antal, intäkt, tid och höjd. Om funktionen anges i tusentals kronor måste svaret översättas till kronor.</p><p><strong>Svar:</strong> vad optimeras, vid vilket tillåtet värde och med vilken enhet?</p></div>
+</div></details>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3205 och 3209</strong>. Redan klar? Gör <strong>3212</strong>.</div>
 </section>
 
