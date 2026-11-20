@@ -150,8 +150,8 @@ for(const [a,b,key] of [[1,1,'hörn'],[2,1,'hopp'],[2,0,'deriverbar'],[1,0,'Olik
  await page.locator('#stitch-a').evaluate((e,x)=>{e.value=x;e.dispatchEvent(new Event('input',{bubbles:true}))},a);
  await page.locator('#stitch-b').evaluate((e,x)=>{e.value=x;e.dispatchEvent(new Event('input',{bubbles:true}))},b);
  ok((await page.locator('#stitch-status').innerText()).includes(key),'correct stitch feedback '+key);
- await coords('stitch-graph',0,391,385-69*(a+b));
- await coords('stitch-graph',1,391,385-69*2);
+ await coords('stitch-graph',0,391,385-65*(a+b));
+ await coords('stitch-graph',1,391,385-65*2);
 }
 await shot('desktop-08');
 // Slide 9: full continuity + derivative proof, optional counterexample.

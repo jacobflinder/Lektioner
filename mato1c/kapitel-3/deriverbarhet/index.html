@@ -8,13 +8,13 @@
 .slide .math-givens>.mathline,.slide .solution-math-group>.mathline,
 .slide .math-case>.mathline{margin:0!important}
 .slide .math-case{display:grid;gap:16px}
-.slide .mathline,.slide .formula-line{max-width:100%;white-space:normal;overflow-wrap:normal;line-height:1.5}
-.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:clamp(1rem,2vw,1.30rem);max-width:100%}
-.slide .mathsmall math{font-size:1em}
+.slide .mathline,.slide .formula-line{max-width:100%;white-space:normal;overflow-wrap:normal;line-height:1.5;overflow-x:visible!important;overflow-y:visible!important}
+.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:clamp(1.15rem,2vw,1.30rem);max-width:100%}
+.slide .mathsmall math{font-size:1.45em}
 .slide .mathline+.mathline,.slide .formula-line+.formula-line{margin-top:16px}
 .slide .eq-box math{max-width:100%}
 .slide .math-mathml-note{color:#315d75;font-weight:680;margin-top:9px}
-@media(max-width:720px){.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:1rem}}
+@media(max-width:720px){.slide .mathline math[display="block"],.slide .formula-line math[display="block"]{font-size:1.125rem}}
 .mathline{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:clamp(1.17rem,2.5vw,1.75rem);line-height:1.6}
 .mathsmall{font-family:"Cambria Math","STIX Two Math",Georgia,serif;font-size:1.14em}
 .mathline sup,.mathsmall sup{font-size:.72em}
@@ -62,6 +62,7 @@
 .corrective select{width:100%;background:white;color:#153c56;border:2px solid #abc5d2;border-radius:9px;padding:9px;font:inherit}
 .corrective label{display:block;font-weight:740}
 @media(max-width:930px){.stitch-panel{grid-template-columns:1fr}}
+@media(max-width:930px){.eq-grid,.graph-grid,.two{grid-template-columns:1fr}.graph-three{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.graph-three,.graph-grid,.eq-grid,.book-grid,.metric-grid,.corrective,.two,.stitch-data{grid-template-columns:1fr}.graph-frame{padding:6px}.formula-line{font-size:1.08rem}}
 </style></head>
 <body><header><a href="../">← Kapitel 3</a><strong>Matematik – fortsättning, nivå 1c · 3.2</strong><div class="head-actions">
@@ -72,7 +73,7 @@
 <main>
 <div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Eleverna förutsäger innan reglagen flyttas. Låt dem skriva enskilt och jämföra i par. Formeln för ensidiga differenskvoter följer originalets h→0⁺-skrivsätt; inga kvoter beräknas genom att sätta h=0.</small>
 <details class="route-guide"><summary><strong>Kärnväg, tidsprioritering och beslut utifrån elevsvar</strong></summary>
-<p><strong>Kärnväg:</strong> tre startgrafer och mål (1–2), förutsäg sekantlutningar och matematiskt gränsvärde (3 och 5), hoppproblem med återkoppling (6–7), egen skarv med villkor och facit (8–9), minst 20 min sammanhängande bokarbete (10), individuell utcheckning och separat återkoppling (11–12). Den styrbara dubbelgrafen med sekantlinjer (4) är **valbar** och nås från steg 3 – visa den om eleverna behöver se varför lika små avstånd kan ge olika lutningar.</p>
+<p><strong>Kärnväg:</strong> tre startgrafer och mål (1–2), förutsäg sekantlutningar med två synliga originalgrafer (3), undersök de styrbara sekantlinjerna med tänkepauser (4), visa de båda gränsvärdena och slutgraferna (5), hoppproblem med återkoppling (6–7), egen skarv med villkor och facit (8–9), minst 20 min sammanhängande bokarbete (10), individuell utcheckning och separat återkoppling (11–12). Animationen är en del av originalet; korta diskussionen om tiden blir knapp, inte de avgörande matematikkedjorna.</p>
 <p><strong>Tidsriktmärke vid cirka 70 minuter:</strong> start och mål 6–8 min, ensidiga gränslutningar 7–10 min, hoppproblem 7–9 min, egen skarv och återkoppling 9–12 min, bokarbete minst 20 min, utcheckning 5–7 min. Komprimera gemensamma delar vid behov, inte det egna arbetet.</p>
 <p><strong>Beslutsregler:</strong> Om eleverna säger att alla kontinuerliga funktioner är deriverbara, öppna sekantjämförelsen av hörnet. Om de använder (2,1) som funktionsvärde i hoppkvoten, peka på öppen kontra fylld punkt. Om två grenlutningar stämmer men eleven glömmer kontinuiteten, låt dem undersöka en skarv med hopp och beräkna den verkliga ensidiga kvoten. Om två villkor formuleras självständigt, gå vidare till boken.</p>
 <p><strong>Fördröjd återkallning:</strong> Nästa lektion, utan bild: undersök p(x)=|x−2| vid x=2. Den är kontinuerlig men vänsterderivatans gränsvärde är −1 och högerderivatans är +1. Motivera med bokens ensidiga differenskvoter, inte bara grafens utseende.</p></details></div>
@@ -83,6 +84,8 @@
 <div class="eyebrow">01 · Start · tre grafer</div>
 <h1>Finns det en bestämd lutning i punkten?</h1>
 <p class="lead">Starta med en gissning. Motivera kort och jämför i par.</p>
+<div class="insight"><strong>Efter lektionen ska du kunna:</strong>
+<ul><li>Avgöra deriverbarhet genom lutningar från vänster och höger.</li><li>Skilja kontinuitet från deriverbarhet.</li><li>Bestämma villkor för en mjuk övergång mellan två funktionsdelar.</li></ul></div>
 <div class="graph-three">
 <figure class="graph-frame"><strong>A · Undersök x=1</strong><svg id="start-a" viewBox="0 0 460 350" role="img" aria-label="Mjuk parabel med lägsta punkt vid x ett och höjden två"></svg><figcaption>Hur möts kurvorna när vi närmar oss punkten?</figcaption></figure>
 <figure class="graph-frame"><strong>B · Undersök x=1</strong><svg id="start-b" viewBox="0 0 460 350" role="img" aria-label="V-formad graf med hörn vid x ett och höjden två"></svg><figcaption>Hur lutar grafen från vardera håll?</figcaption></figure>
@@ -96,7 +99,7 @@
 <section class="slide" id="goal" data-teacher="Original s.1–2. Samma skrivsätt som i originalets PDF: vänster och höger anges som f′(a)=lim med h→0⁺ och h>0, men kvoterna skiljer f(a−h) och f(a+h). För matematisk tydlighet ska f′(a) läsas som resultat endast om gränsvärdena sammanfaller. Här har vi tydliga etiketter för gränsvärden var för sig. Deriverbar ⇒ kontinuerlig, inte omvänt.">
 <div class="eyebrow">02 · Mål och huvudidé</div>
 <h2>Derivatan måste bli densamma från båda håll</h2>
-<p class="lead"><strong>Efter lektionen ska du kunna jämföra lutningar från vänster och höger, skilja kontinuitet från deriverbarhet och skapa en mjuk övergång mellan två funktionsdelar.</strong></p>
+<p>Vi måste veta när derivatan faktiskt finns innan vi använder den.</p>
 <p>För en inre punkt <span class="mathsmall">a</span> undersöker vi två differenskvoter med <span class="mathsmall">h&gt;0</span> och <span class="mathsmall">h→0<sup>+</sup></span>:</p>
 <div class="eq-grid">
 <div class="eq-box left"><h3>Från vänster</h3>
@@ -107,7 +110,7 @@
 <p>Högerderivatans gränsvärde – om det finns ändligt.</p></div>
 </div>
 <div class="insight"><strong>Samma ändliga gränsvärde</strong> från båda håll innebär att <span class="mathsmall">f′(a)</span> finns och har detta värde. Om de skiljer sig, eller något ändligt gränsvärde saknas, finns ingen derivata.</div>
-<div class="warning"><strong>Deriverbar ⇒ kontinuerlig.</strong> Däremot gäller inte omvändningen. En graf kan hänga ihop men ändå ha ett hörn.</div>
+<div class="warning"><p><strong>Kontinuerlig i a:</strong> funktionsvärdena närmar sig f(a) från båda håll.</p><p><strong>Deriverbar ⇒ kontinuerlig.</strong> Däremot gäller inte omvändningen. En graf kan hänga ihop men ändå ha ett hörn.</p></div>
 <button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning från Blandade problem (1 minut)</button>
 <div class="panel hidden" id="prior-recall">
 <p><strong>Utan graf:</strong> V(t)=120(1−e<sup>−0,2t</sup>), t≥0. Varför saknar vattenmängden ett största värde, trots att V′(t)&gt;0?</p>
@@ -122,13 +125,17 @@
 <div class="eq-box"><h3>p · mjuk parabel</h3><p class="mathline">p(x)=(x−1)²+2</p><p>Undersök x=1.</p></div>
 <div class="eq-box"><h3>q · skarpt hörn</h3><p class="mathline">q(x)=2|x−1|+2</p><p>Undersök x=1.</p></div>
 </div>
+<div class="graph-grid">
+<figure class="graph-frame"><strong>p · förutsäg vänster och höger sekant</strong><svg id="predict-p-graph" viewBox="0 0 680 430" role="img" aria-label="Parabel p med blå vänstersekant och röd högersekant mot punkten (1,2), utan givna lutningsvärden"></svg></figure>
+<figure class="graph-frame"><strong>q · förutsäg vänster och höger sekant</strong><svg id="predict-q-graph" viewBox="0 0 680 430" role="img" aria-label="Absolutbeloppsgraf q med blå vänstersekant och röd högersekant mot hörnet (1,2), utan givna lutningsvärden"></svg></figure>
+</div>
 <div class="task"><strong>Skriv en förutsägelse:</strong> När punkterna närmar sig <span class="mathsmall">(1,2)</span> från vänster respektive höger, kommer de två sekantlutningarna att bli lika för båda graferna? Vilka gränslutningar tror du att de får?</div>
 <p class="small-note">Blå sekant: från vänster. Röd sekant: från höger. Båda har samma positiva avstånd h till mittpunkten.</p>
-<button type="button" class="secondary" data-go="secants">Valbar sekantanimation: pröva båda graferna med samma h</button>
-<p class="muted">Om du redan kan visa gränslutningarna algebraiskt kan du gå direkt till återkopplingen i nästa kärnsteg.</p>
+<button type="button" class="secondary" data-go="secants">Undersök sekantanimationen: pröva båda graferna med samma h</button>
+<p class="muted">Nästa steg är originalets sekantanimation. Förutsäg och pröva innan du visar återkopplingen.</p>
 </section>
 
-<section class="slide" id="secants" data-optional="true" data-teacher="Original animation s.4 och slutbild s.5. Samma h i två grafer och båda riktningarna. Vänster p-lutning −h, höger +h. Vänster q −2, höger +2. Kontrollera h=1, 0,5, 0,1, 0,02. Det är viktigt att vi låter h→0⁺ men aldrig sätter h=0 i nämnaren.">
+<section class="slide" id="secants" data-teacher="Original animation s.4 och slutbild s.5. Samma h i två grafer och båda riktningarna. Vänster p-lutning −h, höger +h. Vänster q −2, höger +2. Kontrollera h=1, 0,5, 0,1, 0,02. Det är viktigt att vi låter h→0⁺ men aldrig sätter h=0 i nämnaren.">
 <div class="eyebrow">04 · Styr båda sekantparen</div>
 <h2>Se vad som händer när avståndet krymper</h2>
 <div class="sliders"><label for="secant-h">Gemensamt avstånd h från x=1</label>
@@ -166,12 +173,17 @@
 <p class="formula-line">H: <span class="fraction"><span class="num">(2h+2)−2</span><span class="den">h</span></span> = 2</p>
 <p><strong>q′(1) finns inte.</strong> Olika ensidiga gränslutningar trots kontinuitet.</p></div>
 </div>
+<div class="graph-grid">
+<figure class="graph-frame"><strong>p · slutläge h=0,02</strong><svg id="answer-p-graph" viewBox="0 0 680 430" role="img" aria-label="Parabelns vänster- och högersekanter nästan horisontella när h är 0,02"></svg></figure>
+<figure class="graph-frame"><strong>q · slutläge h=0,02</strong><svg id="answer-q-graph" viewBox="0 0 680 430" role="img" aria-label="Hörnkurvans två sekantlutningar är fortsatt minus två och plus två när h är 0,02"></svg></figure>
+</div>
 <div class="insight"><strong>Kom ihåg:</strong> Vi låter <span class="mathsmall">h→0<sup>+</sup></span>. Vi <strong>sätter inte h=0</strong> i kvoten eftersom den då innehåller division med noll. Det är gränsvärdet som avgör derivatan.</div>
 </section>
 
 <section class="slide" id="jump-model" data-teacher="Original s.6. r=1 om x<2 och r=3 om x≥2, r2=3. Be eleverna först avgöra kontinuitet och vänstersekantens lutning h=1,0,5,0,1 och högersekanten. Dynamisk figur med vänster öppen (2,1), höger fylld (2,3). Den vänstra sekanten måste gå till (2,3), inte till hålets punkt.">
 <div class="eyebrow">06 · Din tur · en diskontinuerlig graf</div>
 <h2>Två horisontella delar – derivata noll?</h2>
+<p class="lead">En digital signal växlar nivå vid x=2. Punkten (2,3) tillhör grafen.</p>
 <div class="two"><div>
 <p class="mathline">r(x)=1 &nbsp; om x&lt;2</p><p class="mathline">r(x)=3 &nbsp; om x≥2</p>
 <div class="task"><strong>Lös före återkopplingen:</strong><ol class="spaced">
@@ -203,6 +215,7 @@
 <p class="formula-line"><span class="fraction"><span class="num">r(2+h)−r(2)</span><span class="den">h</span></span> = <span class="fraction"><span class="num">3−3</span><span class="den">h</span></span> = 0</p>
 <p>Högersekantens lutning är 0 för alla h&gt;0.</p></div>
 </div>
+<figure class="graph-frame"><strong>Hoppets faktiska sekant från (2−h,1) till (2,3)</strong><svg id="answer-jump-graph" viewBox="0 0 650 440" role="img" aria-label="Hoppfunktionens blå vänstersekant genom den fyllda punkten (2,3), med öppen punkt vid (2,1)"></svg></figure>
 <div class="warning"><strong>r är inte kontinuerlig vid x=2:</strong> från vänster närmar sig r(x) värdet 1 men r(2)=3. Därför kan r inte vara deriverbar i punkten. Det räcker inte att båda funktionsdelarna är horisontella.</div>
 </section>
 
@@ -217,8 +230,8 @@
 <li><strong>Deriverbarhet:</strong> Lutningarna måste stämma. Vilken ekvation ger det?</li></ol>
 <p>Bestäm a och b så att f är kontinuerlig och deriverbar vid x=1.</p></div>
 </div><div>
-<div class="sliders"><label for="stitch-a">Vänstra linjens lutning a</label><input id="stitch-a" type="range" min="0" max="4" step=".5" value="1">
-<label for="stitch-b">Vänstra linjens konstant b</label><input id="stitch-b" type="range" min="-2" max="3" step=".5" value="1">
+<div class="sliders"><label for="stitch-a">Vänstra linjens lutning a</label><input id="stitch-a" type="range" min="0" max="3" step=".5" value="1">
+<label for="stitch-b">Vänstra linjens konstant b</label><input id="stitch-b" type="range" min="0" max="2" step=".5" value="1">
 </div>
 <button type="button" class="secondary" data-reveal="stitch-check">Visa kontrollvärden och färdiga jämförelsefall efter min lösning</button>
 <div id="stitch-check" class="hidden">
@@ -249,6 +262,7 @@
 <div class="seq-item hidden" data-seq-item data-question="Vilken derivata har linjen? Vilken har parabeln vid x=1?"><strong>2 · Samma lutning</strong><p class="mathline">a=2·1=2</p></div>
 <div class="seq-item hidden" data-seq-item data-question="Lös ut b och beskriv skarven."><strong>3 · Båda villkoren uppfyllda</strong><p class="mathline">2+b=2 ⇒ b=0</p><p class="mathline">a = 2, &nbsp; b = 0</p><div class="solution-math-group"><p class="mathline">f<sub>vänster</sub>(x) = 2x</p><p class="mathline">f<sub>höger</sub>(x) = x² + 1</p></div><p class="solution-explanation">Båda närmar sig 2 och har lutning 2 vid skarven.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
+<figure class="graph-frame"><strong>Den färdiga mjuka skarven, a=2 och b=0</strong><svg id="stitch-answer-graph" viewBox="0 0 790 445" role="img" aria-label="Linjen 2x före x ett och parabeln x kvadrat plus ett från x ett ansluter i punkten (1,2) med gemensam lutning två"></svg></figure>
 <div class="insight"><strong>Deriverbar i ett öppet intervall</strong> betyder att derivatan finns i varje punkt i intervallet. I en skarv mellan två funktionsuttryck krävs både att kurvorna möts och att lutningen är densamma.</div>
 <button type="button" class="secondary" data-reveal="stitch-detail">Fördjupning: varför kan två grenars lika lutning ändå ge ett hopp?</button>
 <div class="answer hidden" id="stitch-detail">
@@ -267,8 +281,8 @@
 <div><strong>Nivå 2</strong><b>3275 a–b</b><p>Undersök ensidiga lutningar.</p></div>
 <div><strong>Nivå 3</strong><b>3276–3277</b><p>Motivera en skarv och deriverbarhet.</p></div>
 </div>
-<div class="task"><strong>Börja med 20 minuter tyst eget arbete.</strong> Arbeta med <strong>minst två nivåer</strong>. Försök själv, kontrollera och rätta. Digitalt verktyg kan hjälpa dig att se, men låt ensidiga lutningar motivera svaret.</div>
-<div class="panel"><p><strong>Grund och nästa steg:</strong> 3272 → 3273 → 3275 a–b.</p><p><strong>Redan säker:</strong> 3275 a–b → 3277 → 3276.</p></div>
+<div class="task"><strong>Börja med 20 minuter tyst eget arbete.</strong> Gör <strong>samtliga uppgifter på minst två hela nivåer</strong> (inte enstaka uppgifter från nivåerna). Försök själv, kontrollera och rätta. Digitalt verktyg kan hjälpa dig att se, men låt ensidiga lutningar motivera svaret.</div>
+<div class="panel"><p><strong>Grund och nästa steg:</strong> 3272 → 3273 → 3275 a–b.</p><p><strong>Redan säker:</strong> 3275 a–b → 3277 → 3276.</p><p class="muted">Det här är startordningar. Fortsätt sedan tills du gjort alla uppgifter på de två nivåer du valt.</p></div>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3274 och 3275</strong>. Redan klar? Gör <strong>3277</strong>.</div>
 </section>
 

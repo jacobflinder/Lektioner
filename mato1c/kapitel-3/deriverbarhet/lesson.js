@@ -45,11 +45,11 @@ const hChoices=[1,.5,.2,.1,.05,.02];
 let showSecantNumbers=false,showJumpNumbers=false;
 function plotCurve(id,fn,{small=false,h=null}={}){
  const root=$(id);root.replaceChildren();
- const w=small?460:680,hg=small?350:430,offset=small?55:72;
+ const w=small?460:680,hg=small?350:430;
  const X=x=>small?67+(x+.5)*111:96+(x+.5)*162;
  const Y=y=>small?299-y*44:355-y*56;
  const grp=clip(root,'clip-'+id,small?57:81,small?42:47,small?362:520,small?275:325);
- grid(root,grp,{X,Y,xTicks:small?[-.5,0,1,2,2.5]:[-.5,0,.5,1,1.5,2,2.5],yTicks:small?[0,1,2,3,4,5,6]:[0,1,2,3,4,5,6],left:small?58:83,right:small?414:616,top:small?44:52,bottom:small?303:359,font:small?13:18});
+ grid(root,grp,{X,Y,xTicks:small?[-.5,0,1,2,2.5]:[-.5,0,.5,1,1.5,2,2.5],yTicks:small?[0,1,2,3,4,5,6]:[0,1,2,3,4,5,6],left:small?58:83,right:small?414:616,top:small?44:52,bottom:small?303:359,font:small?19:25});
  node(grp,'path',{d:polyline(fn,-.5,2.5,X,Y),stroke:'#173e53','stroke-width':small?3.2:3.9,fill:'none','stroke-linejoin':'round','stroke-linecap':'round'});
  filledDot(grp,X(1),Y(2),'#194c68',small?6:7.5);
  if(h!==null){
@@ -60,16 +60,18 @@ function plotCurve(id,fn,{small=false,h=null}={}){
   node(grp,'line',{x1:X(1),y1:Y(2),x2:X(1+right),y2:Y(2+mr*right),stroke:'#b24b56','stroke-width':3.6,'stroke-linecap':'round'});
   filledDot(grp,X(1-h),Y(fn(1-h)),'#286cb9',5.8);
   filledDot(grp,X(1+h),Y(fn(1+h)),'#b24b56',5.8);
-  text(root,113,33,showSecantNumbers?'V: '+format(ml)+'   H: '+format(mr):'Jämför V och H själv',{bold:true,fill:'#174e6a',size:20});
- }else{text(root,111,33,'Undersök x = 1',{bold:true,fill:'#195d72',size:small?16:20})}
- text(root,w-30,hg-11,'x',{anchor:'end',size:small?14:18});
+  const live=id==='p-graph'||id==='q-graph';
+  const label=id.startsWith('predict-')?'Förutsäg V och H':id.startsWith('answer-')?'Slutläge h = 0,02':live&&showSecantNumbers?'V: '+format(ml)+'   H: '+format(mr):'Jämför V och H själv';
+  text(root,113,33,label,{bold:true,fill:'#174e6a',size:26});
+ }else{text(root,111,33,'Undersök x = 1',{bold:true,fill:'#195d72',size:small?21:26})}
+ text(root,w-30,hg-11,'x',{anchor:'end',size:small?20:25});
 }
 function plotJump(id,h=null,{small=false}={}){
  const root=$(id);root.replaceChildren();
  const X=x=>small?58+90*x:71+135*x;
  const Y=y=>small?293-53*y:372-81*y;
  const grp=clip(root,'clip-'+id,small?53:67,small?35:48,small?365:547,small?273:329);
- grid(root,grp,{X,Y,xTicks:[0,1,2,3,4],yTicks:[0,1,2,3,4],left:small?54:68,right:small?419:615,top:small?38:52,bottom:small?297:375,font:small?14:19});
+ grid(root,grp,{X,Y,xTicks:[0,1,2,3,4],yTicks:[0,1,2,3,4],left:small?54:68,right:small?419:615,top:small?38:52,bottom:small?297:375,font:small?19:25});
  node(grp,'line',{x1:X(0),y1:Y(1),x2:X(2),y2:Y(1),stroke:'#183e54','stroke-width':4});
  node(grp,'line',{x1:X(2),y1:Y(3),x2:X(4),y2:Y(3),stroke:'#183e54','stroke-width':4});
  openDot(grp,X(2),Y(1));
@@ -79,21 +81,25 @@ function plotJump(id,h=null,{small=false}={}){
   node(grp,'line',{x1:X(2),y1:Y(3),x2:X(2+h),y2:Y(3),stroke:'#b24b56','stroke-width':3.6});
   filledDot(grp,X(2-h),Y(1),'#286cb9',6);
   filledDot(grp,X(2+h),Y(3),'#b24b56',6);
-  text(root,110,29,showJumpNumbers?'Från vänster: 2/h = '+format(2/h):'Beräkna vänsterkvoten',{bold:true,size:19,fill:'#286cb9'});
+  const label=id==='answer-jump-graph'?'Sekanten går till r(2)=3':id==='jump-graph'&&showJumpNumbers?'Från vänster: 2/h = '+format(2/h):'Beräkna vänsterkvoten';
+  text(root,110,29,label,{bold:true,size:25,fill:'#286cb9'});
  }
- text(root,608,427,'x',{anchor:'end',size:19});
+ text(root,small?428:608,small?342:427,'x',{anchor:'end',size:small?20:25});
 }
-function plotStitch(a,b){
- const root=$('stitch-graph');root.replaceChildren();
- const X=x=>91+300*x,Y=y=>385-69*y;
- const grp=clip(root,'clip-stitch',86,43,620,349);
- grid(root,grp,{X,Y,xTicks:[0,.5,1,1.5,2],yTicks:[0,1,2,3,4,5],left:88,right:700,top:47,bottom:388,font:18});
+function plotStitch(a,b,id='stitch-graph',updateReadouts=true){
+ const root=$(id);root.replaceChildren();
+ // y=5 remains inside the plotted region (the old 69px scale cut off x=2).
+ const X=x=>91+300*x,Y=y=>385-65*y;
+ const grp=clip(root,'clip-'+id,86,43,620,349);
+ grid(root,grp,{X,Y,xTicks:[0,.5,1,1.5,2],yTicks:[0,1,2,3,4,5],left:88,right:700,top:47,bottom:388,font:29});
  node(grp,'path',{d:polyline(x=>a*x+b,0,1,X,Y),stroke:'#286cb9','stroke-width':4,fill:'none','stroke-linecap':'round'});
  node(grp,'path',{d:polyline(x=>x*x+1,1,2,X,Y),stroke:'#bd535a','stroke-width':4,fill:'none','stroke-linecap':'round'});
  openDot(grp,X(1),Y(a+b),'#286cb9');
  filledDot(grp,X(1),Y(2),'#b44c59',7.5);
- text(root,115,29,'Blå: ax+b (x<1)  ·  Röd: x²+1 (x≥1)',{size:20,bold:true,fill:'#14576e'});
- text(root,725,427,'x',{anchor:'end',size:19});
+ text(root,114,31,'Blå: ax+b före 1',{size:29,bold:true,fill:'#2468ad'});
+ text(root,427,31,'Röd: x²+1 från 1',{size:29,bold:true,fill:'#b44c59'});
+ text(root,725,427,'x',{anchor:'end',size:29});
+ if(!updateReadouts)return;
  const matchHeight=Math.abs(a+b-2)<1e-9,matchSlope=Math.abs(a-2)<1e-9;
  $('stitch-left-height').textContent=format(a+b);
  $('stitch-left-slope').textContent=format(a);
@@ -115,6 +121,11 @@ function updateStitch(){
 plotCurve('start-a',p,{small:true});
 plotCurve('start-b',q,{small:true});
 plotJump('start-c',null,{small:true});
+plotCurve('predict-p-graph',p,{h:.5});
+plotCurve('predict-q-graph',q,{h:.5});
+plotCurve('answer-p-graph',p,{h:.02});
+plotCurve('answer-q-graph',q,{h:.02});
+plotJump('answer-jump-graph',1);
 const secantValues=hChoices;
 function updateSecants(){
  const h=secantValues[Number($('secant-h').value)];
@@ -155,5 +166,11 @@ for(const b of document.querySelectorAll('[data-stitch]'))b.addEventListener('cl
  const [a,c]=b.dataset.stitch.split(',').map(Number);$('stitch-a').value=a;$('stitch-b').value=c;updateStitch();
 });
 updateStitch();
-window.addEventListener('resize',()=>{plotCurve('start-a',p,{small:true});plotCurve('start-b',q,{small:true});plotJump('start-c',null,{small:true});updateSecants();updateJump();updateStitch()});
+plotStitch(2,0,'stitch-answer-graph',false);
+window.addEventListener('resize',()=>{
+ plotCurve('start-a',p,{small:true});plotCurve('start-b',q,{small:true});plotJump('start-c',null,{small:true});
+ plotCurve('predict-p-graph',p,{h:.5});plotCurve('predict-q-graph',q,{h:.5});
+ plotCurve('answer-p-graph',p,{h:.02});plotCurve('answer-q-graph',q,{h:.02});plotJump('answer-jump-graph',1);
+ updateSecants();updateJump();updateStitch();plotStitch(2,0,'stitch-answer-graph',false);
+});
 })();
