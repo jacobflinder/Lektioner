@@ -119,7 +119,7 @@ const slides=['start','goal','box-explore','box-solution','rectangle-start',
     }
     if(n===2){
      const words=await page.locator('#goal').innerText();
-     ok(words.includes('andraderivatatestet')&&words.includes('inget besked'),'method and inconclusive case explained');
+     ok(words.toLowerCase().includes('andraderivatatestet')&&words.toLowerCase().includes('inget besked'),'method and inconclusive case explained');
     }
     if(n===3){
      for(const x of [3,6,10,14]){
