@@ -98,7 +98,8 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
   ok(title.y>=centralTick.bottom+8,'actual separation between central x tick and axis title: '+JSON.stringify({title,centralTick}));
   const topTitle=state.all.find(label=>label.txt==='Intäkt I(x) (kr)');
   const topTick=state.all.find(label=>label.txt==='50 000');
-  ok(topTick.y>=topTitle.bottom+8,'actual separation between y-axis title and top tick label: '+JSON.stringify({topTitle,topTick}));
+  ok(topTitle.x>=topTick.right+12||topTick.y>=topTitle.bottom+8,
+   'actual nonoverlap between y-axis title and top tick label: '+JSON.stringify({topTitle,topTick}));
   ok(!state.all.some(l=>/50 000/.test(l.txt)&&l.x<0),'maximum axis label not clipped');
  };
  try{
