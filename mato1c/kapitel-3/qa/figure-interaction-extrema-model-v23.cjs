@@ -89,7 +89,7 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
   if(w===390)ok(state.svg.width>=298,'mobile plot uses full available width, without default figure margins');
   eq(state.all.length,compact?13:17,'tick count and two axis titles at '+w);
   for(const label of state.all){
-   ok(label.x>=-1&&label.y>=-1&&label.right<=791&&label.bottom<=551,
+   ok(label.x>=0&&label.y>=-1&&label.right<=791&&label.bottom<=551,
     `${w}px actual SVG text glyphs within figure: `+label.txt+' '+JSON.stringify(label));
    ok(label.height>=12,`${w}px readable axis label `+label.txt+' '+label.height.toFixed(1)+'px');
   }

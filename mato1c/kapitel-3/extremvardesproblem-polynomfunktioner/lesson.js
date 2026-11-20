@@ -29,7 +29,7 @@ function draw(x){
  }
  for(const v of [0,10000,20000,30000,40000,50000]){
   add(g,'line',{x1:X(0)-4,y1:Y(v),x2:X(200)+8,y2:Y(v),stroke:'#e1ebf0','stroke-width':1});
-  add(svg,'text',{x:X(0)-9,y:Y(v)+7,'text-anchor':'end',fill:'#496778','font-size':compact?32:21},v===0?'0':String(v/1000)+' 000');
+  add(svg,'text',{x:X(0)-(v===0?9:1),y:Y(v)+7,'text-anchor':'end',fill:'#496778','font-size':compact?32:21},v===0?'0':String(v/1000)+' 000');
  }
  add(g,'line',{x1:X(0)-4,y1:Y(0),x2:X(200)+8,y2:Y(0),stroke:'#60798b','stroke-width':2});
  add(g,'line',{x1:X(0),y1:55,x2:X(0),y2:435,stroke:'#60798b','stroke-width':2});
