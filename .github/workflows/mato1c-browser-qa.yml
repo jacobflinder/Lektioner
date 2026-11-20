@@ -68,6 +68,7 @@ jobs:
           node mato1c/kapitel-3/qa/primitiva-villkor-v23-browser.cjs
           node mato1c/kapitel-3/qa/integraler-area-math.cjs
           node mato1c/kapitel-3/qa/integraler-area-v23-browser.cjs
+          node mato1c/kapitel-3/qa/integralberakning-notation-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-deep-browser.cjs
       - name: Upload browser evidence
