@@ -49,7 +49,7 @@ fs.mkdirSync(dir,{recursive:true});
     await page.selectOption('#jump',String(i));
     // The audited graph and global-extrema lessons restore unopened answers
     // on navigation. Reopen every answer and step for a genuine full scan.
-    if(lesson===3||lesson===4||lesson===5){
+    if(lesson===3||lesson===4||lesson===5||lesson===8){
      for(const b of await page.locator('.slide.active [data-reveal]').all()){
       const id=await b.getAttribute('data-reveal');
       if(await page.locator('#'+id).isHidden())await b.click();
@@ -84,11 +84,11 @@ fs.mkdirSync(dir,{recursive:true});
     assert.ok(row.font.includes('Cambria Math'),'L'+(lesson+1)+': matematisk stil saknas: '+row.text);
     assert.ok(row.display==='block','L'+(lesson+1)+': ekvationen står inte i eget block: '+row.text);
     assert.ok(row.size>=16.5,'L'+(lesson+1)+': för liten ekvation '+row.size+'px: '+row.text);
-    // The v2.3 lessons through lesson 40 must actually fit. Lesson 35 still has older
+    // The v2.3-reviewed lessons through Blandade problem must fit. Lesson 35 has older
     // solution-equation wrappers with overflow:auto; those are acceptable only
     // if the entire MathML is already visible without using their scrollbar.
-    if(lesson>=2&&lesson<=7){
-     if(lesson===3||lesson===4||lesson===5||lesson===6||lesson===7||row.className.includes('math-fresh'))
+    if(lesson>=2&&lesson<=8){
+     if(lesson===3||lesson===4||lesson===5||lesson===6||lesson===7||lesson===8||row.className.includes('math-fresh'))
       assert.equal(row.overflow,'visible','L'+(lesson+1)+': matematiska tecken får inte döljas: '+row.text);
      else assert.ok(row.overflow==='auto'||row.overflow==='visible','L'+(lesson+1)+': fel matematikoverflow: '+row.text);
      assert.ok(row.scroll<=row.client+4,'L'+(lesson+1)+': hela matematiken måste rymmas utan intern rullning: '+row.text);
@@ -96,7 +96,7 @@ fs.mkdirSync(dir,{recursive:true});
    }
    allEquations+=lines.length;
    await page.selectOption('#jump',String(mostDense.slide));
-   if(lesson===3||lesson===4||lesson===5){
+   if(lesson===3||lesson===4||lesson===5||lesson===8){
     for(const seq of await page.locator('.slide.active [data-sequence]').all()){
      const n=await seq.locator('[data-seq-item]').count();
      for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();

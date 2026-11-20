@@ -90,7 +90,13 @@ replaceStep('conditions-feedback',1,1,'<strong>Teckenundersökning</strong>'+
  '<p>g′ är negativ före 1 och positiv i båda intervallen <strong>1&lt;x&lt;3</strong> och <strong>x&gt;3</strong>.</p>');
 replaceStep('conditions-feedback',1,2,'<strong>Klassificera</strong>'+
  '<p>Vid x=1 byter g′ tecken från <strong>− till +</strong> och g har en lokal <strong>minimipunkt</strong>.</p>'+
- '<p>Vid x=3 är g′ noll men positiv på <strong>båda sidor</strong>. Där finns ingen maximi- eller minimipunkt. Vi undersöker separat om tangenten är horisontell i en inflexionspunkt.</p>');
+ '<p>Vid x=3 är g′ noll men positiv på <strong>båda sidor</strong>. Där finns ingen maximi- eller minimipunkt. Vi undersöker separat om tangenten är horisontell i en inflexionspunkt.</p>'+
+ '<div class="math-note"><strong>Alternativ metod · andraderivatatestet</strong>'+
+ '<p>Vid x=1 kan vi klassificera punkten utan teckentest:</p>'+
+ work(['g″(x)=(x−3)(3x−5)','g″(1)=(−2)(−2)=4>0'])+
+ '<p>Detta bekräftar ett <strong>lokalt minimum</strong>. Däremot ger</p>'+
+ work(['g″(3)=0'])+
+ '<p><strong>inget besked</strong> om punkttypen vid x=3. Där behövs teckenundersökningen och kontrollen av inflexionen.</p></div>');
 replaceStep('conditions-feedback',1,3,'<strong>Terrasspunkten</strong>'+
  '<p>Derivera det givna uttrycket med produktregeln:</p>'+
  work(['g′(x)=(x−1)(x−3)²',

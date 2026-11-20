@@ -10,7 +10,7 @@
 .slide .math-givens>.mathline{margin:0!important}
 .slide .solution-math-group{display:grid!important;gap:16px!important}
 .slide .solution-math-group>.mathline{margin:0!important}
-.slide .mathline{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .mathline{max-width:100%;white-space:normal;overflow-wrap:normal;overflow-x:visible!important;overflow-y:visible!important}
 .slide .mathline math[display="block"]{font-size:clamp(1rem,2vw,1.30rem);max-width:100%}
 .slide .mathsmall math{font-size:1em}
 .slide .mathline+.mathline{margin-top:16px}
@@ -106,7 +106,7 @@
 <button type="button" class="secondary" data-reveal="prior-recall">Valbar återkallning från modellering (1 minut)</button>
 <div class="panel hidden" id="prior-recall"><p><strong>Utan graf:</strong> C(x)=x+9/x för x&gt;0. Varför är x=3 ett minimum och vad är minimivärdet?</p>
 <button type="button" class="reveal" data-reveal="prior-recall-answer">Kontrollera efter eget försök</button>
-<div class="answer hidden" id="prior-recall-answer"><p class="mathline">C′(x) = 1 − 9/x²</p><div class="solution-math-group"><p class="mathline">C′(x) &lt; 0 för 0 &lt; x &lt; 3</p><p class="mathline">C′(x) &gt; 0 för x &gt; 3</p><p class="mathline">C(3) = 3 + 3 = 6</p></div><p class="solution-explanation">Derivatan byter från negativ till positiv. Därför är 6 ett globalt minimum för x&gt;0.</p></div></div>
+<div class="answer hidden" id="prior-recall-answer"><p class="mathline">C′(x) = 1 − 9/x²</p><div class="solution-math-group"><p class="mathline">C′(x) &lt; 0 för 0 &lt; x &lt; 3</p><p class="mathline">C′(x) &gt; 0 för x &gt; 3</p><p class="mathline">C(3) = 3 + 3 = 6</p></div><p class="solution-explanation">Derivatan byter från negativ till positiv. Därför är 6 ett globalt minimum för x&gt;0.</p><div class="math-note"><strong>Alternativ metod · andraderivatatestet</strong><div class="solution-math-group"><p class="mathline">C″(x)=18/x³</p><p class="mathline">C″(3)=2/3&gt;0</p></div><p>Det ger ett <strong>lokalt minimum</strong> vid x=3. Tillsammans med definitionsmängden x&gt;0 och gränsbeteendet är det också globalt.</p></div></div></div>
 </section>
 
 <section class="slide" id="water" data-optional="true" data-teacher="Original s.3 animation: vattenmängdens punkt och röd tangent rör sig, med tid att tänka. Webbens exakta, manuellt styrda modell kombinerar V, tangent och V′. Inga animeringar kör automatiskt. Be om förutsägelse vid t=0,5,10,20. 120 liter är horisontell asymptot och nås ej vid ändlig tid.">
