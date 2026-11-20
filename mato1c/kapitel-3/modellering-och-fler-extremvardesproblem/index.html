@@ -10,7 +10,7 @@
 .slide .math-givens>.eq{margin:0!important}
 .slide .solution-math-group{display:grid!important;gap:16px!important}
 .slide .solution-math-group>.eq{margin:0!important}
-.slide .eq{max-width:100%;white-space:normal;overflow-wrap:normal}
+.slide .eq{max-width:100%;white-space:normal;overflow-wrap:normal;overflow-x:visible!important;overflow-y:visible!important}
 .slide .eq math[display="block"]{max-width:100%;font-size:clamp(1rem,2vw,1.31rem)}
 .slide .eq-sm math{font-size:1em}
 .slide .eq+.eq{margin-top:16px}
@@ -50,6 +50,9 @@
 .frac .den{padding:3px 4px 0}
 .math-prompt{background:#edf5f9;border:1px solid #d2e2e9;border-radius:10px;padding:12px}
 .book-path{background:#ecf6f2;border-left:4px solid #078276;border-radius:9px;padding:12px 14px;margin:12px 0}
+.book-method-support{border:1px solid #a8cbd2;border-radius:12px;background:#f7fbfc;padding:14px 16px;margin:14px 0}
+.book-method-support summary{cursor:pointer;font-weight:800;color:#126267}
+.book-method-support summary:focus-visible{outline:3px solid #087d70;outline-offset:4px}
 .smallprint{font-size:.87rem;color:#526e7c}
 .quiz-options{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 @media(max-width:920px){.layout-2{grid-template-columns:1fr}.visual svg{max-height:none}}
@@ -108,6 +111,10 @@
 <p class="eq">x &gt; 0, &nbsp; 50−2x &gt; 0, &nbsp; 30−2x &gt; 0</p>
 <p class="eq"><strong>0 &lt; x &lt; 15</strong></p>
 </div>
+<div class="panel"><strong>Två metoder för att motivera stationära extremvärden</strong>
+<p>Hitta först kandidater med <span class="eq-sm">f′(a)=0</span>. Klassificera sedan med <strong>teckentest</strong> (derivatans tecken på var sida) eller <strong>andraderivatatestet</strong>:</p>
+<div class="mini-equations"><div><strong>Lokalt maximum</strong><p class="eq">f″(a)&lt;0</p></div><div><strong>Lokalt minimum</strong><p class="eq">f″(a)&gt;0</p></div><div><strong>Inget besked</strong><p class="eq">f″(a)=0</p></div></div>
+<p>Andraderivatatestet förutsätter att andraderivatan finns i den stationära punkten. Om den är noll ger testet <strong>inget besked</strong>; då behöver du undersöka vidare, exempelvis med teckentest. För ett <strong>globalt</strong> extremvärde måste tillåtna värden, ändpunkter eller gränsvärden också bedömas.</p></div>
 <div class="task"><strong>Förutsäg:</strong> Blir volymen störst om x är mycket litet, mycket stort eller någonstans däremellan? Motivera innan du flyttar reglaget.</div>
 <button type="button" class="secondary" data-go="box-explore">Valbar animation: pröva olika lådmått innan derivatan</button>
 <p class="muted">Om din modell och definitionsmängd redan stämmer kan du gå direkt vidare till den matematiska lösningen.</p>
@@ -136,7 +143,7 @@
 <svg id="box-dynamic" viewBox="0 0 650 440" role="img" aria-label="Klippmall med fyra hörnkvadrater och varierande bottenmått"></svg>
 <figcaption>Figuren är ritad i samma skala medan x varierar.</figcaption></figure>
 <figure class="visual"><h3 class="visual-title">Volymen som funktion av x</h3>
-<svg id="box-volume" viewBox="0 0 650 440" role="img" aria-label="Volymkurva på intervallet 0 till 15 centimeter med gemensam markerad x-position"></svg>
+<svg id="box-volume" viewBox="0 0 650 490" role="img" aria-label="Volymkurva på intervallet 0 till 15 centimeter med gemensam markerad x-position"></svg>
 <figcaption>Öppna cirklar vid 0 och 15: där finns ingen verklig låda.</figcaption></figure>
 </div>
 <button type="button" class="secondary" data-reveal="box-readouts">Visa beräknade mått och volym efter förutsägelsen</button>
@@ -172,7 +179,7 @@
 <h2>Bredare rektangel – större area?</h2>
 <div class="layout-2">
 <figure class="visual"><h3 class="visual-title">Rektangel under y = 3 − x²</h3>
-<svg id="rectangle-preview" viewBox="0 0 650 470" role="img" aria-label="Nedåtvänd parabel och symmetrisk rektangel från minus x till x under parabeln"></svg>
+<svg id="rectangle-preview" viewBox="0 0 650 510" role="img" aria-label="Nedåtvänd parabel och symmetrisk rektangel från minus x till x under parabeln"></svg>
 <figcaption>P ligger på kurvan i första kvadranten; vänstra hörnet ligger vid −x.</figcaption></figure>
 <div>
 <p class="eq">P=(x, 3−x²)</p>
@@ -199,8 +206,8 @@
 <output for="rectangle-x" id="rectangle-x-output">x = 0,50</output>
 <div class="shortcuts"><button type="button" class="secondary" data-rect-x=".5">Pröva x=0,5</button><button type="button" class="secondary" data-rect-x="1">Pröva x=1</button><button type="button" class="secondary" data-rect-x="1.5">Pröva x=1,5</button></div></div>
 <div class="layout-2">
-<figure class="visual"><h3 class="visual-title">Punkten P och den symmetriska rektangeln</h3><svg id="rectangle-live" viewBox="0 0 650 470" role="img" aria-label="Parabel y lika med tre minus x i kvadrat och symmetrisk rektangel med reglerbar bredd 2x"></svg></figure>
-<figure class="visual"><h3 class="visual-title">Areagrafen A(x)</h3><svg id="rectangle-area" viewBox="0 0 650 470" role="img" aria-label="Areafunktionen A lika med sex x minus två x i kubik, med samma flyttbara x-markör"></svg></figure>
+<figure class="visual"><h3 class="visual-title">Punkten P och den symmetriska rektangeln</h3><svg id="rectangle-live" viewBox="0 0 650 510" role="img" aria-label="Parabel y lika med tre minus x i kvadrat och symmetrisk rektangel med reglerbar bredd 2x"></svg></figure>
+<figure class="visual"><h3 class="visual-title">Areagrafen A(x)</h3><svg id="rectangle-area" viewBox="0 0 650 510" role="img" aria-label="Areafunktionen A lika med sex x minus två x i kubik, med samma flyttbara x-markör"></svg></figure>
 </div>
 <button type="button" class="secondary" data-reveal="rect-readouts">Visa beräknad bas, höjd och area efter min förutsägelse</button>
 <div class="mini-data hidden" id="rect-readouts" aria-live="polite">
@@ -233,7 +240,7 @@
 <h2>Samma strategi – nu en bråkfunktion</h2>
 <p class="eq">V(x)=15−0,1x−<span class="frac"><span class="num">40</span><span class="den">x</span></span>, &nbsp; x≥4</p>
 <p class="lead"><strong>x</strong> är antal lampor som tillverkas per dag och <strong>V(x)</strong> är vinsten i tusentals kronor per dag.</p>
-<div class="task"><strong>Bestäm bästa möjliga produktion och vinst själv utan färdig steglista.</strong><p>Visa definitionsmängd, derivata, tillåtna kandidater, motivering och svar med enheter.</p><button type="button" class="secondary" data-reveal="frac-original-steps">Visa originalets fyra stödfrågor vid behov</button><div class="panel hidden" id="frac-original-steps"><ol class="spaced">
+<div class="task"><strong>Bestäm bästa möjliga produktion och vinst själv utan färdig steglista.</strong><p>Visa definitionsmängd, derivata, tillåtna kandidater och motivera maximum <strong>med teckentest eller andraderivatatest</strong>. Kontrollera också gränsen och svara med enheter.</p><button type="button" class="secondary" data-reveal="frac-original-steps">Visa originalets fyra stödfrågor vid behov</button><div class="panel hidden" id="frac-original-steps"><ol class="spaced">
 <li>Skriv bråktermen som en potens.</li>
 <li>Bestäm <span class="eq-sm">V′(x)</span> och lös <span class="eq-sm">V′(x)=0</span>.</li>
 <li>Välj ett tillåtet x och motivera att det ger ett maximum.</li>
@@ -267,7 +274,7 @@
 </div>
 <div><button type="button" class="secondary" data-reveal="fraction-graph-wrap">Visa grafen efter mitt matematiska bevis</button>
 <figure class="visual hidden" id="fraction-graph-wrap"><h3 class="visual-title">Digital kontroll · V(x) för x ≥ 4</h3>
-<svg id="fraction-graph" viewBox="0 0 650 470" role="img" aria-label="Graf för vinstfunktionen 15 minus 0,1x minus 40/x, med markering vid maximum 20 och vinst 11 tusen kronor per dag"></svg>
+<svg id="fraction-graph" viewBox="0 0 650 510" role="img" aria-label="Graf för vinstfunktionen 15 minus 0,1x minus 40/x, med markering vid maximum 20 och vinst 11 tusen kronor per dag"></svg>
 <figcaption>Grafen är en kontroll; derivatan och definitionsmängden motiverar maximum.</figcaption>
 </figure></div>
 </div>
@@ -292,6 +299,10 @@
 </div></div>
 <div class="book-path"><strong>Börja här – uppgifter från båda avsnitten</strong><p>Grund och nästa steg: <strong>3217 → 3222 → 3234 → 3239</strong>.</p><p>Redan säker: <strong>3225 → 3230 → 3241 → 3242</strong>.</p></div>
 <div class="task"><strong>Börja med 20 minuter lugnt eget arbete.</strong> Använd digitalt verktyg för kontroll eller när uppgiften kräver det. Försök och motivera själv först.</div>
+<details class="book-method-support" id="modeling-method-support"><summary>Frivilligt metodstöd – teckentest eller andraderivatatest (utan facit)</summary>
+<p>Skissa först, ange variabeln, bygg funktionen och bestäm definitionsmängden. Lös sedan derivatans nollställen.</p>
+<div class="mini-equations"><div><strong>Stationär kandidat</strong><p class="eq">f′(a)=0</p></div><div><strong>Lokalt maximum</strong><p class="eq">f″(a)&lt;0</p></div><div><strong>Lokalt minimum</strong><p class="eq">f″(a)&gt;0</p></div></div>
+<p><strong>Välj en metod:</strong> teckentest med f′ eller andraderivatatest med f″. Om f″(a)=0 ger testet inget besked. Bedöm också domän, ändpunkter/gränsvärden och eventuella heltal innan du svarar med enhet.</p></details>
 <div class="notice"><strong>Läxa till nästa lektion:</strong> Gör klart <strong>3221 och 3236</strong>. Redan klar? Gör <strong>3241</strong>.</div>
 </section>
 
@@ -303,12 +314,12 @@
 <div class="task">
 <strong>1 · Bygg en modell</strong>
 <p>En rektangel ligger under linjen <span class="eq-sm">y=6−x</span> i första kvadranten. Nedre vänstra hörnet är origo, och övre högra hörnet ligger på linjen.</p>
-<ol class="spaced"><li>Skriv arean som funktion av x.</li><li>Ange definitionsmängden.</li><li>Bestäm största arean och rektangelns mått.</li></ol>
+<ol class="spaced"><li>Skriv arean som funktion av x.</li><li>Ange definitionsmängden.</li><li>Bestäm största arean och rektangelns mått. Motivera med någon av de två derivatametoderna och kontrollera gränserna.</li></ol>
 </div>
 <div class="task">
 <strong>2 · Pröva en bråkfunktion</strong>
 <p class="eq">C(x)=x+<span class="frac"><span class="num">9</span><span class="den">x</span></span>, &nbsp; x&gt;0</p>
-<ol class="spaced"><li>Bestäm funktionens minsta värde.</li><li>Motivera att det är ett minimum.</li></ol>
+<ol class="spaced"><li>Bestäm funktionens minsta värde.</li><li>Motivera minimum med teckentest eller andraderivatatest och kontrollera vad som händer nära definitionsmängdens gränser.</li></ol>
 <p>Varför måste den negativa lösningen väljas bort?</p>
 </div></div>
 <div class="panel"><h3>Dagens mål</h3><p>Bygg en funktion av en variabel. Ange tillåtna värden. Bestäm och motivera extremvärde.</p></div>

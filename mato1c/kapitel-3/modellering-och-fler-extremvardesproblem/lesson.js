@@ -37,7 +37,7 @@ function drawSheet(id,x,initial=false){
  svg(root,'rect',{x:ox+s,y:oy+s,width:w-2*s,height:h-2*s,fill:'#d5edf1',stroke:'#218779','stroke-width':2.5});
  for(const [cx,cy] of [[ox,oy],[ox+w-s,oy],[ox,oy+h-s],[ox+w-s,oy+h-s]]){
   svg(root,'rect',{x:cx,y:cy,width:s,height:s,fill:'#e9a2a4',stroke:'#b84e5c','stroke-width':1.7});
-  if(cx!==ox || cy!==oy){
+  if(s>=18 && (cx!==ox || cy!==oy)){
    svg(root,'line',{x1:cx+6,y1:cy+6,x2:cx+s-6,y2:cy+s-6,stroke:'#b84e5c','stroke-width':2});
    svg(root,'line',{x1:cx+s-6,y1:cy+6,x2:cx+6,y2:cy+s-6,stroke:'#b84e5c','stroke-width':2});
   }
@@ -47,10 +47,12 @@ function drawSheet(id,x,initial=false){
  svg(root,'line',{x1:ox+s,y1:oy+h-s,x2:ox+w-s,y2:oy+h-s,...fold});
  svg(root,'line',{x1:ox+s,y1:oy+s,x2:ox+s,y2:oy+h-s,...fold});
  svg(root,'line',{x1:ox+w-s,y1:oy+s,x2:ox+w-s,y2:oy+h-s,...fold});
- label(root,ox+w/2,oy-20,'50 cm',{anchor:'middle',bold:true});
- label(root,ox-6,oy+h/2,'30 cm',{anchor:'end',bold:true});
- label(root,ox+s/2,oy+s/2+6,'x',{anchor:'middle',bold:true,fill:'#893f4b',size:compact?27:19});
- label(root,ox+w/2,oy+h/2+7,'botten',{anchor:'middle',bold:true,size:compact?29:20});
+ label(root,ox+w/2,oy-20,'50 cm',{anchor:'middle',bold:true,size:compact?28:20});
+ // Place the left dimension inside the viewBox even with the larger mobile font.
+ label(root,ox+16,oy+h/2,'30 cm',{anchor:'end',bold:true,size:compact?25:20});
+ if(s>=31)label(root,ox+s/2,oy+s/2+6,'x',{anchor:'middle',bold:true,fill:'#893f4b',size:compact?27:19});
+ if(h-2*s >= (compact?38:28) && w-2*s>=100)
+  label(root,ox+w/2,oy+h/2+7,'botten',{anchor:'middle',bold:true,size:compact?29:20});
  if(!initial)label(root,ox+w/2,oy+h+38,'Vikkanter med höjd x',{anchor:'middle',size:compact?26:18});
 }
 function graphFrame(id,{xmin,xmax,ymax,X,Y,yTicks,xTicks,lines=true}){
@@ -107,7 +109,7 @@ function drawRectangle(id,x,{showBaseLabel=true}={}){
  for(const x0 of [-1,0,1])label(root,XR(x0),438,String(x0).replace('-','−'),{size:fs,anchor:'middle'});
  for(const y0 of [1,2,3])label(root,XR(0)-11,YR(y0)+5,String(y0),{size:fs,anchor:'end'});
  label(root,83,41,'y = 3 − x²',{size:compact?29:21,fill:'#116d70',bold:true});
- if(showBaseLabel)label(root,XR(0),465,'bas = 2x',{anchor:'middle',size:compact?29:21,fill:'#a36c25',bold:true});
+ if(showBaseLabel)label(root,XR(0),485,'bas = 2x',{anchor:'middle',size:compact?29:21,fill:'#a36c25',bold:true});
 }
 function drawArea(x){
  const root=$('rectangle-area');root.replaceChildren();
@@ -124,7 +126,7 @@ function drawArea(x){
  for(const x0 of [0,.5,1,1.5])label(root,XA(x0),435,fmt(x0,1),{size:fs,anchor:'middle'});
  for(const y0 of [1,2,3,4])label(root,XA(0)-11,YA(y0)+6,y0,{size:fs,anchor:'end'});
  label(root,100,33,'A(x) = 6x − 2x³',{fill:'#116d70',size:compact?28:20,bold:true});
- label(root,375,465,'x',{anchor:'middle',size:compact?28:20,bold:true});
+ label(root,375,485,'x',{anchor:'middle',size:compact?28:20,bold:true});
 }
 function updateRect(){
  const x=Number($('rectangle-x').value),h=3-x*x;
@@ -152,7 +154,7 @@ function drawFraction(){
  for(const x0 of (compact?[4,20,40,60]:[4,10,20,30,40,50,60]))label(root,X(x0),440,x0,{anchor:'middle',size:fs});
  for(const y0 of [4,6,8,10,12])label(root,67,Y(y0)+5,y0,{anchor:'end',size:fs});
  label(root,95,37,'V (tusental kr/dag)',{bold:true,size:compact?28:19});
- label(root,375,471,'x (lampor/dag)',{anchor:'middle',bold:true,size:compact?28:19});
+ label(root,375,485,'x (lampor/dag)',{anchor:'middle',bold:true,size:compact?28:19});
 }
 drawFraction();
 window.addEventListener('resize',()=>{const newValue=window.innerWidth<720;if(newValue===compact)return;compact=newValue;drawSheet('box-start',5,true);updateBox();drawRectangle('rectangle-preview',.65,{showBaseLabel:false});updateRect();drawFraction()});
