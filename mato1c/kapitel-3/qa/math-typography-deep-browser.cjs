@@ -52,11 +52,19 @@ fs.mkdirSync(dir,{recursive:true});
     if(lesson===3||lesson===4||lesson===5||lesson===8){
      for(const b of await page.locator('.slide.active [data-reveal]').all()){
       const id=await b.getAttribute('data-reveal');
-      if(await page.locator('#'+id).isHidden())await b.click();
+      if(await b.isVisible()&&await b.isEnabled()&&await page.locator('#'+id).isHidden())await b.click();
      }
      for(const seq of await page.locator('.slide.active [data-sequence]').all()){
       const n=await seq.locator('[data-seq-item]').count();
       for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();
+     }
+     // The mixed-problems sign graph is intentionally gated until all four
+     // sign/terrace reasoning steps are open. Only then may it be revealed.
+     if(lesson===8){
+      for(const b of await page.locator('.slide.active [data-reveal]').all()){
+       const id=await b.getAttribute('data-reveal');
+       if(await b.isVisible()&&await b.isEnabled()&&await page.locator('#'+id).isHidden())await b.click();
+      }
      }
     }
     const scan=await page.evaluate(()=>{
