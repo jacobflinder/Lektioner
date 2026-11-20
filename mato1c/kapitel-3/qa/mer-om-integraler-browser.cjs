@@ -25,6 +25,11 @@ const sizes = [[390, 844], [768, 900], [916, 940], [1280, 800], [1920, 1080]];
       assert.equal(await page.locator('.book-num').allTextContents().then(xs => xs.join('|')), '3370–3373|3374–3376|3377–3380'); checks++;
       assert.equal(await page.locator('section.slide').first().getAttribute('data-title'), 'Start och mål'); checks++;
       assert.equal(await page.locator('section.slide').nth(1).locator('msubsup').count() >= 2, true, 'Sats visas före beräkningar'); checks++;
+      const parentheses = await page.evaluate(() => [...document.querySelectorAll('math msubsup')]
+        .filter(node => node.firstElementChild?.textContent === '∫' && node.nextElementSibling?.textContent === '(')
+        .map(node => ({ open: node.nextElementSibling?.getAttribute('stretchy'), close: [...node.parentElement.children].find(el => el.textContent === ')' && el.nextElementSibling?.textContent === 'd')?.getAttribute('stretchy') })));
+      assert(parentheses.length >= 12, 'Kontrollera att integralernas parenteser finns'); checks++;
+      assert(parentheses.every(x => x.open === 'false' && x.close === 'false'), 'Inga jättestora parenteser kring integrand'); checks++;
       assert.equal(await page.locator('body').innerText().then(s => s.includes('Socrative')), false); checks++;
 
       for (let i = 0; i < count; i++) {
