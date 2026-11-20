@@ -56,7 +56,11 @@ fs.mkdirSync(dir,{recursive:true});
      }
      for(const seq of await page.locator('.slide.active [data-sequence]').all()){
       const n=await seq.locator('[data-seq-item]').count();
+      // Some lessons retain completed steps when revisited. Start this scan
+      // from the beginning rather than clicking a legitimately disabled next.
+      await seq.locator('[data-seq-reset]').click();
       for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();
+      assert.equal(await seq.locator('[data-seq-item]:visible').count(),n,'L'+(lesson+1)+' steg '+(i+1)+': alla fullständiga lösningssteg syns');
      }
      // The mixed-problems sign graph is intentionally gated until all four
      // sign/terrace reasoning steps are open. Only then may it be revealed.
@@ -107,7 +111,9 @@ fs.mkdirSync(dir,{recursive:true});
    if(lesson===3||lesson===4||lesson===5||lesson===8){
     for(const seq of await page.locator('.slide.active [data-sequence]').all()){
      const n=await seq.locator('[data-seq-item]').count();
+     await seq.locator('[data-seq-reset]').click();
      for(let k=0;k<n;k++)await seq.locator('[data-seq-next]').click();
+     assert.equal(await seq.locator('[data-seq-item]:visible').count(),n,'L'+(lesson+1)+': skärmbilden ska visa alla steg');
     }
    }
    await page.screenshot({path:dir+'/lesson'+(lesson+1)+'-allsteps-mobile.png',fullPage:true});
