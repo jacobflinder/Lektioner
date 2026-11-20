@@ -87,8 +87,8 @@ fs.mkdirSync(dir,{recursive:true});
     // The v2.3 lessons must actually fit. Lesson 35 still has older
     // solution-equation wrappers with overflow:auto; those are acceptable only
     // if the entire MathML is already visible without using their scrollbar.
-    if(lesson>=2&&lesson<=5){
-     if(lesson===3||lesson===4||lesson===5||row.className.includes('math-fresh'))
+    if(lesson>=2&&lesson<=6){
+     if(lesson===3||lesson===4||lesson===5||lesson===6||row.className.includes('math-fresh'))
       assert.equal(row.overflow,'visible','L'+(lesson+1)+': matematiska tecken får inte döljas: '+row.text);
      else assert.ok(row.overflow==='auto'||row.overflow==='visible','L'+(lesson+1)+': fel matematikoverflow: '+row.text);
      assert.ok(row.scroll<=row.client+4,'L'+(lesson+1)+': hela matematiken måste rymmas utan intern rullning: '+row.text);
