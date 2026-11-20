@@ -14,7 +14,7 @@ concurrency:
 jobs:
   coulomb-and-regression:
     runs-on: ubuntu-24.04
-    timeout-minutes: 17
+    timeout-minutes: 24
     permissions:
       contents: read
     steps:
@@ -36,6 +36,7 @@ jobs:
         run: |
           failed=0
           for script in \
+            fy1/kapitel-9/qa/standardmodellen-qa.cjs \
             fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
             fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
             fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
@@ -49,8 +50,7 @@ jobs:
             fy1/kapitel-8/qa/figure-interaction-series-v23.cjs \
             fy1/kapitel-8/qa/figure-interaction-effect-v23.cjs \
             fy1/kapitel-8/qa/figure-interaction-fields-v23.cjs \
-            fy1/kapitel-8/qa/figure-interaction-potential-v23.cjs \
-            fy1/kapitel-9/qa/standardmodellen-qa.cjs
+            fy1/kapitel-8/qa/figure-interaction-potential-v23.cjs
           do
             node "$script" || failed=1
           done
