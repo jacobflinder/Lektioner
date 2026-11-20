@@ -84,9 +84,10 @@ replaceStep('conditions-feedback',1,0,'<strong>Stationära x</strong>'+
  '<p>En dubbelrot är fortfarande ett stationärt x, men inte nödvändigtvis en extrempunkt.</p>');
 replaceStep('conditions-feedback',1,1,'<strong>Teckenundersökning</strong>'+
  '<p>För x≠3 är (x−3)² strikt positiv. g′ får därför tecken efter x−1. Testa ett tal i varje intervall:</p>'+
- work(['g′(0)=(0−1)(0−3)²=−9<0',
- 'g′(2)=(2−1)(2−3)²=1>0',
- 'g′(3,5)=(3,5−1)(3,5−3)²=0,625>0'])+
+ '<p>Vid x=0 är faktorerna −1 och 9; vid x=2 är de 1 och 1. Vid x=3,5 är de 2,5 och 0,25:</p>'+
+ work(['g′(0)=−1·9','g′(0)=−9<0',
+ 'g′(2)=1·1','g′(2)=1>0',
+ 'g′(3,5)=2,5·0,25','g′(3,5)=0,625>0'])+
  '<p>g′ är negativ före 1 och positiv i båda intervallen <strong>1&lt;x&lt;3</strong> och <strong>x&gt;3</strong>.</p>');
 replaceStep('conditions-feedback',1,2,'<strong>Klassificera</strong>'+
  '<p>Vid x=1 byter g′ tecken från <strong>− till +</strong> och g har en lokal <strong>minimipunkt</strong>.</p>'+
@@ -99,10 +100,15 @@ replaceStep('conditions-feedback',1,2,'<strong>Klassificera</strong>'+
  '<p><strong>inget besked</strong> om punkttypen vid x=3. Där behövs teckenundersökningen och kontrollen av inflexionen.</p></div>');
 replaceStep('conditions-feedback',1,3,'<strong>Terrasspunkten</strong>'+
  '<p>Derivera det givna uttrycket med produktregeln:</p>'+
- work(['g′(x)=(x−1)(x−3)²',
- 'g″(x)=(x−3)²+2(x−1)(x−3)',
- 'g″(x)=(x−3)((x−3)+2(x−1))',
- 'g″(x)=(x−3)(3x−5)',
+ work(['g′(x)=(x−1)(x−3)²'])+
+ '<p>Produktregelns <strong>första term</strong> är</p>'+
+ work(['(x−3)²'])+
+ '<p>och dess <strong>andra term</strong> är</p>'+
+ work(['2(x−1)(x−3)'])+
+ '<p><strong>Addera</strong> termerna. Båda innehåller faktorn x−3. Kvar i parentesen blir</p>'+
+ work(['(x−3)+2(x−1)','3x−5'])+
+ '<p>Alltså får hela summan den faktoriserade andraderivatan:</p>'+
+ work(['g″(x)=(x−3)(3x−5)',
  'g″(2,5)=−1,25<0','g″(3,5)=2,75>0',
  'g′(3)=0'])+
  '<p>Andraderivatan byter tecken vid x=3 samtidigt som g′(3)=0. Det är en <strong>terrasspunkt</strong> (stationär inflexionspunkt). g(x) är inte specificerad, så dess <strong>y-koordinat kan inte bestämmas</strong>.</p>');

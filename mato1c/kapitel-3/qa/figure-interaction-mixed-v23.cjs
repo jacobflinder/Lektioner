@@ -41,6 +41,13 @@ const slides=['start','goal','water','water-feedback','robot','robot-feedback','
    const rows=[...root.querySelectorAll('.mathline')].filter(visible).filter(el=>
     el.scrollWidth>el.clientWidth+3||/auto|scroll|hidden|clip/.test(getComputedStyle(el).overflowX)
    ).map(e=>e.textContent.slice(0,80));
+   // Mathematical rows must remain inside their own visible solution cards,
+   // not merely inside the page viewport (a wide row can spill across cards).
+   const loose=[...root.querySelectorAll('.mathline')].filter(visible).flatMap(el=>{
+    const card=el.closest('.seq-item,.answer,.task,.panel');if(!card)return [];
+    const r=el.getBoundingClientRect(),c=card.getBoundingClientRect();
+    return r.left<c.left-1||r.right>c.right+1?[{text:el.textContent.slice(0,80),row:[r.left,r.right],card:[c.left,c.right]}]:[];
+   });
    const small=[...root.querySelectorAll('math')].filter(visible)
     .filter(e=>e.getBoundingClientRect().height<12.0).map(e=>e.getAttribute('aria-label'));
    const gaps=[...root.querySelectorAll('.solution-math-group,.math-givens')].flatMap(g=>{
@@ -53,12 +60,13 @@ const slides=['start','goal','water','water-feedback','robot','robot-feedback','
      return {text:t.textContent,x:v.x,y:v.y,right:v.x+v.width,bottom:v.y+v.height,pixels:r.height};});
     return {id:el.id,left:b.left,right:b.right,width:b.width,vb:[vb.width,vb.height],labels};
    });
-   return {width:document.documentElement.scrollWidth,viewport:innerWidth,math:math.length,clipped,rows,small,gaps,figs};
+   return {width:document.documentElement.scrollWidth,viewport:innerWidth,math:math.length,clipped,rows,loose,small,gaps,figs};
   });
   const name=`${w}px ${n}/${phase}`;
   ok(data.width<=w+2,name+' page fits');
   same(data.clipped,[],name+' semantic MathML not cut off');
   same(data.rows,[],name+' no inner equation scroll/clipping');
+  same(data.loose,[],name+' all mathematical rows inside their own solution cards');
   same(data.small,[],name+' meaningful mathematical glyph size');
   for(const g of data.gaps)ok(g>=15.9,name+' independent equations 16px apart: '+g);
   for(const fig of data.figs){
