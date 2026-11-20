@@ -45,8 +45,11 @@ step('box-solution',3,'<strong>4 · Motivera ett globalt maximum</strong>'+
  '<p>Låt a beteckna den tillåtna roten:</p>'+group(['a=(40−5√(19))/3≈6,07'])+
  '<p>Tecken i de två återstående intervallen:</p>'+group(['V′(3)=648>0','V′(10)=−500<0'])+
  '<p>De andra nollställena ligger utanför definitionsmängden. Därför växer volymen för 0&lt;x&lt;a och avtar för a&lt;x&lt;15.</p>'+
+ '<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Utan teckentest kan vi klassificera a direkt:</p>'+
+ group(['V″(x)=24x−320','V″(a)=−40√(19)<0'])+
+ '<p>Detta ger ett <strong>lokalt maximum</strong> vid a. Det andra stationära x-värdet ligger utanför definitionsmängden.</p></div>'+
  group(['V(0)=0','V(15)=0'])+
- '<p>Ändpunkterna tillhör <em>inte</em> definitionsmängden. Gränsvärdena dit är ändå 0. Därför ger a ett <strong>globalt maximum</strong> för alla tillåtna lådor.</p>');
+ '<p>Ändpunkterna tillhör <em>inte</em> definitionsmängden. Gränsvärdena dit är ändå 0. Både teckentestet och andraderivatatestet, tillsammans med tillåtna kandidater och gränsvärden, visar att a ger ett <strong>globalt maximum</strong> för alla tillåtna lådor.</p>');
 step('box-solution',4,'<strong>5 · Svara med mått och enhet</strong>'+
  '<p>Beräkna dimensionerna vid det exakta stationära värdet före avrundning:</p>'+
  group(['x≈6,0685','50−2x≈37,8630','30−2x≈17,8630',
@@ -62,7 +65,11 @@ step('rectangle-solution',1,'<strong>2 · Stationära kandidater</strong>'+
 step('rectangle-solution',2,'<strong>3 · Motivera maximum</strong>'+
  group(['A′(0,5)=6−6·0,5²','A′(0,5)=4,5>0',
  'A′(1,5)=6−6·1,5²','A′(1,5)=−7,5<0'])+
- '<p>Arean växer före x=1 och avtar sedan. Vid gränserna x→0 och x→√3 går arean mot 0. Därför är maximumet globalt på den öppna definitionsmängden.</p>');
+ '<p>Arean växer före x=1 och avtar sedan.</p>'+
+ '<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Vid den stationära punkten x=1 kan vi i stället beräkna:</p>'+
+ group(['A″(x)=−12x','A″(1)=−12<0'])+
+ '<p>Det visar ett <strong>lokalt maximum</strong> utan teckentest.</p></div>'+
+ '<p>Vid gränserna x→0 och x→√3 går arean mot 0. Endast x=1 är en tillåten stationär punkt, så maximumet är globalt på den öppna definitionsmängden.</p>');
 step('rectangle-solution',3,'<strong>4 · Svara med måtten</strong>'+
  group(['A(1)=2·1·(3−1²)','A(1)=2·1·2','A(1)=4'])+
  '<p><strong>Största arean är 4 areaenheter</strong>. Basen är 2 och höjden 2 längdenheter. Inga centimeter har angivits.</p>');
@@ -81,6 +88,9 @@ step('fraction-solution',2,'<strong>3 · Motivera globalt maximum</strong>'+
  '<p>Skriv derivatan på gemensamt bråkstreck:</p>'+
  group(['V′(x)=(400−x²)/(10x²)'])+
  '<p>Nämnaren är positiv för alla x≥4. Täljaren är positiv för 4≤x&lt;20 och negativ för x&gt;20. Funktionen växer därmed före 20 och minskar för alla större x.</p>'+
+ '<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>I stället för att undersöka tecknen på V′ kan vi kontrollera:</p>'+
+ group(['V″(x)=−80/x³','V″(20)=−80/8000=−0,01<0'])+
+ '<p>Stationära x=20 är alltså ett <strong>lokalt maximum</strong>. Det är den enda tillåtna stationära punkten. Vinstfunktionen går dessutom mot −∞ när x växer utan gräns; även det stöder den globala jämförelsen.</p></div>'+
  group(['V(4)=15−0,1·4−40/4','V(4)=15−0,4−10','V(4)=4,6'])+
  '<p>Eftersom modellen saknar övre ändpunkt men är avtagande för alla x&gt;20 är maxvärdet vid x=20 globalt.</p>');
 step('fraction-solution',3,'<strong>4 · Svara i situationen</strong>'+
@@ -93,7 +103,11 @@ step('exit-feedback',0,'<strong>Modell och definitionsmängd</strong>'+
 step('exit-feedback',1,'<strong>Derivera och motivera</strong>'+
  group(['A′(x)=6−2x','6−2x=0','−2x=−6','x=3',
  'A′(2)=2>0','A′(4)=−2<0'])+
- '<p>Arean ökar före 3 och minskar efter. Vid intervallets gränser blir arean 0. Därför ges största arean vid x=3.</p>',0);
+ '<p>Arean ökar före 3 och minskar efter.</p>'+
+ '<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Vi kan i stället pröva andraderivatan i x=3:</p>'+
+ group(['A″(x)=−2','A″(3)=−2<0'])+
+ '<p>Det ger lokalt maximum utan teckentest.</p></div>'+
+ '<p>Vid intervallets gränser blir arean 0. Endast x=3 är tillåten stationär punkt. Därför ges största arean vid x=3.</p>',0);
 step('exit-feedback',2,'<strong>Svara</strong>'+
  group(['A(3)=3(6−3)','A(3)=3·3','A(3)=9'])+
  '<p><strong>Största arean är 9 areaenheter</strong>. Måtten är 3 × 3 längdenheter.</p>',0);
@@ -106,6 +120,9 @@ step('exit-feedback',2,'<strong>Motivera och beräkna</strong>'+
  '<p>Nämnaren i derivatan är positiv på x&gt;0. Täljaren bestämmer tecknet.</p>'+
  group(['C′(x)=(x²−9)/x²','C′(1)=−8<0','C′(4)=7/16>0'])+
  '<p>Derivatan är negativ för 0&lt;x&lt;3 och positiv för x&gt;3. Funktionen avtar sedan växer, alltså ett globalt minimum.</p>'+
+ '<div class="panel"><strong>Alternativ metod · andraderivatatestet</strong><p>Utan teckentest får vi vid den enda tillåtna stationära punkten:</p>'+
+ group(['C″(x)=18/x³','C″(3)=18/27=2/3>0'])+
+ '<p>Alltså ett <strong>lokalt minimum</strong>. När x→0⁺ eller x→∞ går C(x) mot +∞, så med bara denna tillåtna stationära punkt är minimumet även globalt.</p></div>'+
  group(['C(3)=3+9/3','C(3)=3+3','C(3)=6'])+
  '<p><strong>Minsta värdet är 6 vid x=3.</strong></p>',1);
 // Keep the custom inline fraction source where it is not part of a standalone equation.
