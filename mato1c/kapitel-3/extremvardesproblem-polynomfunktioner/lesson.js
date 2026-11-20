@@ -38,7 +38,7 @@ function draw(x){
  add(g,'line',{x1:X(x),y1:Y(pRev),x2:X(x),y2:Y(0),stroke:'#a4603b','stroke-width':2,'stroke-dasharray':'6 5'});
  add(g,'line',{x1:X(0),y1:Y(pRev),x2:X(x),y2:Y(pRev),stroke:'#a4603b','stroke-width':2,'stroke-dasharray':'6 5'});
  add(g,'circle',{cx:X(x),cy:Y(pRev),r:8,stroke:'#fff','stroke-width':3,fill:'#b55158'});
- add(svg,'text',{x:390,y:475,'text-anchor':'middle',fill:'#33566e','font-size':compact?30:25,'font-weight':'700'},'Biljettpris x (kr)');
+ add(svg,'text',{x:390,y:495,'text-anchor':'middle',fill:'#33566e','font-size':compact?30:25,'font-weight':'700'},'Biljettpris x (kr)');
  add(svg,'text',{x:23,y:46,fill:'#33566e','font-size':compact?30:25,'font-weight':'700'},'Intäkt I(x) (kr)');
  $('ticket-price-output').textContent='x = '+x+' kr';
  $('tickets-sold').textContent=fkr(tickets(x))+' st';

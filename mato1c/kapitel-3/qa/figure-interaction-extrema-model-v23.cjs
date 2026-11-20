@@ -88,10 +88,13 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
   ok(state.svg.left>=-1&&state.svg.right<=w+1,'graph inside '+w+'px viewport');
   eq(state.all.length,compact?13:17,'tick count and two axis titles at '+w);
   for(const label of state.all){
-   ok(label.x>=-1&&label.y>=-1&&label.right<=791&&label.bottom<=486,
+   ok(label.x>=-1&&label.y>=-1&&label.right<=791&&label.bottom<=511,
     `${w}px actual SVG text glyphs within figure: `+label.txt+' '+JSON.stringify(label));
    ok(label.height>=12,`${w}px readable axis label `+label.txt+' '+label.height.toFixed(1)+'px');
   }
+  const title=state.all.find(label=>label.txt==='Biljettpris x (kr)');
+  const centralTick=state.all.find(label=>label.txt==='100');
+  ok(title.y>=centralTick.bottom+8,'actual separation between central x tick and axis title');
   ok(!state.all.some(l=>/50 000/.test(l.txt)&&l.x<0),'maximum axis label not clipped');
  };
  try{
