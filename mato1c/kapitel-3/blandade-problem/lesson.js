@@ -34,11 +34,11 @@ function waterPlot(t){
  const {root,main}=graphGroup('water-graph',[81,58,592,355]);
  for(const v of [0,20,40,60,80,100,120]){
   svg(main,'line',{x1:82,y1:Y(v),x2:670,y2:Y(v),stroke:'#e1ebf0','stroke-width':1});
-  txt(root,76,Y(v)+5,v,{anchor:'end',size:compact?22:16});
+  txt(root,76,Y(v)+5,v,{anchor:'end',size:compact?29:16});
  }
  for(const x of [0,5,10,15,20,25]){
   svg(main,'line',{x1:X(x),y1:57,x2:X(x),y2:414,stroke:'#e1ebf0','stroke-width':1});
-  txt(root,X(x),436,x,{anchor:'middle',size:compact?23:16});
+  txt(root,X(x),436,x,{anchor:'middle',size:compact?29:16});
  }
  svg(main,'line',{x1:83,y1:Y(0),x2:675,y2:Y(0),stroke:'#657e8b','stroke-width':2});
  svg(main,'line',{x1:X(0),y1:55,x2:X(0),y2:413,stroke:'#657e8b','stroke-width':2});
@@ -48,9 +48,9 @@ function waterPlot(t){
  const tangent=u=>a+s*(u-t);
  svg(main,'line',{x1:X(start),y1:Y(tangent(start)),x2:X(end),y2:Y(tangent(end)),stroke:'#b35158','stroke-width':3.6,'stroke-linecap':'round'});
  svg(main,'circle',{cx:X(t),cy:Y(a),r:8,fill:'#b35158',stroke:'#fff','stroke-width':2.5});
- txt(root,97,32,'V(t) i liter',{size:compact?27:21,bold:true,color:'#155b6f'});
- txt(root,375,475,'t (minuter)',{size:compact?26:19,anchor:'middle',bold:true});
- txt(root,649,Y(120)-10,'120 liter',{anchor:'end',size:compact?24:18,bold:true,color:'#9d742d'});
+ txt(root,97,32,'V(t) i liter',{size:compact?30:21,bold:true,color:'#155b6f'});
+ txt(root,375,475,'t (minuter)',{size:compact?29:19,anchor:'middle',bold:true});
+ txt(root,649,Y(120)-10,'120 liter',{anchor:'end',size:compact?29:18,bold:true,color:'#9d742d'});
 }
 function setWater(){
  const t=Number($('water-t').value);
@@ -80,11 +80,11 @@ function signPlot(x){
  const {root,main}=graphGroup('sign-graph',[79,54,608,349]);
  for(const y of [-10,-5,0,5,10]){
   svg(main,'line',{x1:81,y1:Y(y),x2:684,y2:Y(y),stroke:'#e1eaf0','stroke-width':1});
-  txt(root,75,Y(y)+6,y,{anchor:'end',size:compact?24:17});
+  txt(root,75,Y(y)+6,y,{anchor:'end',size:compact?29:17});
  }
  for(const xx of [0,1,2,3,4]){
   svg(main,'line',{x1:X(xx),y1:57,x2:X(xx),y2:405,stroke:'#e0eaf0','stroke-width':1});
-  txt(root,X(xx),427,xx,{anchor:'middle',size:compact?24:17});
+  txt(root,X(xx),427,xx,{anchor:'middle',size:compact?29:17});
  }
  svg(main,'line',{x1:81,y1:Y(0),x2:685,y2:Y(0),stroke:'#677e88','stroke-width':1.8});
  svg(main,'line',{x1:X(0),y1:57,x2:X(0),y2:404,stroke:'#677e88','stroke-width':1.8});
@@ -92,7 +92,7 @@ function signPlot(x){
  for(const zero of [1,3])svg(main,'circle',{cx:X(zero),cy:Y(0),r:6.4,stroke:'#fff','stroke-width':2,fill:'#af6840'});
  svg(main,'line',{x1:X(x),y1:62,x2:X(x),y2:399,stroke:'#3d566c','stroke-dasharray':'6 6','stroke-width':1.6});
  svg(main,'circle',{cx:X(x),cy:Y(gprime(x)),r:8.5,fill:'#b15161',stroke:'#fff','stroke-width':2.5});
- txt(root,100,34,'g′(x) = (x−1)(x−3)²',{size:compact?29:20,bold:true,color:'#185f70'});
+ txt(root,100,34,'g′(x) = (x−1)(x−3)²',{size:compact?31:20,bold:true,color:'#185f70'});
 }
 function setSign(){
  const x=Number($('sign-x').value),y=gprime(x);

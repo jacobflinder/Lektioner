@@ -165,10 +165,12 @@ for(const v of ['f′(x)=3x²+a','12+a=0','a=−12','f″(2)=12>0','f(2)=−16']
 for(let i=1;i<=4;i++){await seq.nth(1).locator('[data-seq-next]').click();ok(await seq.nth(1).locator('[data-seq-item]:visible').count()===i,'gprime reasoning step '+i);if(i<4)ok(await graphButton.isDisabled(),'plot still gated at '+i)}
 ok(await graphButton.isEnabled(),'graph now available after full sign and inflection proof');
 for(const v of ['g′(x)=(x−1)(x−3)²','x=1','x=3',
-'g′(0)=(0−1)(0−3)²=−9<0','g′(2)=(2−1)(2−3)²=1>0',
-'g′(3,5)=(3,5−1)(3,5−3)²=0,625>0',
-'g″(x)=(x−3)((x−3)+2(x−1))','g″(x)=(x−3)(3x−5)',
+'g′(0)=−1·9','g′(0)=−9<0','g′(2)=1·1','g′(2)=1>0',
+'g′(3,5)=2,5·0,25','g′(3,5)=0,625>0',
+'g″(x)=(x−3)(3x−5)','g″(1)=(−2)(−2)=4>0','g″(3)=0',
+'(x−3)²','2(x−1)(x−3)','(x−3)+2(x−1)','3x−5',
 'g″(2,5)=−1,25<0','g″(3,5)=2,75>0','g′(3)=0'])await has('#conditions-feedback',v);
+ok((await seq.nth(1).innerText()).includes('inget besked'),'andraderivatatestets nollfall leder till teckenundersökning');
 ok((await seq.nth(1).innerText()).includes('y-koordinat kan inte bestämmas'),'unknown vertical position not invented');
 await graphButton.click();ok(await page.locator('#sign-explorer').isVisible(),'graph revealed after proof');
 for(const x of [.5,1,2,3,3.5,4]){
