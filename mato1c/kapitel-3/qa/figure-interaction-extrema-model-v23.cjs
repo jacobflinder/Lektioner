@@ -141,7 +141,7 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
     }
     if(n===2){
      const theory=await page.locator('#goal').innerText();
-     ok(theory.includes('andraderivatatestet')&&theory.includes('inget besked'),'test stated with inconclusive case');
+     ok(theory.toLowerCase().includes('andraderivatatestet')&&theory.toLowerCase().includes('inget besked'),'test stated with inconclusive case');
      eq(await page.locator('#goal .panel math').count()>=3,true,'semantic second derivative rule');
     }
     if([3,6,7,10].includes(n)){
