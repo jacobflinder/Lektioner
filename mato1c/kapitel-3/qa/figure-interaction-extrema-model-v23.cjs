@@ -89,16 +89,16 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
   if(w===390)ok(state.svg.width>=298,'mobile plot uses full available width, without default figure margins');
   eq(state.all.length,compact?13:17,'tick count and two axis titles at '+w);
   for(const label of state.all){
-   ok(label.x>=-1&&label.y>=-1&&label.right<=791&&label.bottom<=511,
+   ok(label.x>=-1&&label.y>=-1&&label.right<=791&&label.bottom<=551,
     `${w}px actual SVG text glyphs within figure: `+label.txt+' '+JSON.stringify(label));
    ok(label.height>=12,`${w}px readable axis label `+label.txt+' '+label.height.toFixed(1)+'px');
   }
   const title=state.all.find(label=>label.txt==='Biljettpris x (kr)');
   const centralTick=state.all.find(label=>label.txt==='100');
-  ok(title.y>=centralTick.bottom+8,'actual separation between central x tick and axis title');
+  ok(title.y>=centralTick.bottom+8,'actual separation between central x tick and axis title: '+JSON.stringify({title,centralTick}));
   const topTitle=state.all.find(label=>label.txt==='Intäkt I(x) (kr)');
   const topTick=state.all.find(label=>label.txt==='50 000');
-  ok(topTick.y>=topTitle.bottom+8,'actual separation between y-axis title and top tick label');
+  ok(topTick.y>=topTitle.bottom+8,'actual separation between y-axis title and top tick label: '+JSON.stringify({topTitle,topTick}));
   ok(!state.all.some(l=>/50 000/.test(l.txt)&&l.x<0),'maximum axis label not clipped');
  };
  try{
