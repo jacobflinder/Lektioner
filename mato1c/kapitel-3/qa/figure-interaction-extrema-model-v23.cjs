@@ -10,6 +10,7 @@ const DK=x=>3*x*x-18*x+15;
 const I=x=>x*(1000-5*x),DI=x=>1000-10*x;
 const H=t=>40+10*t-5*t*t,DH=t=>10-10*t;
 const V=x=>-x*x+6*x-5,DV=x=>-2*x+6;
+const D2K=x=>6*x-18,D2I=x=>-10,D2H=t=>-10,D2V=x=>-2;
 const near=(a,b,eps=.005)=>Math.abs(a-b)<=eps;
 const formulas=[
  ['start','K(0)=50'],['goal','k′(x)=−2x+6'],['cost','K′(x)=3(x−1)(x−5)'],
@@ -108,6 +109,10 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
    [H,DH,[0,.5,1,2,4]],[V,DV,[0,1,2,3,4,5,6]]]){
    for(const x of domain){const e=1e-5;ok(near((fn(x+e)-fn(x-e))/(2*e),df(x),1e-5),'independent derivative '+x)}
   }
+  for(const [df,d2,xs] of [[DK,D2K,[1,5]],[DI,D2I,[100]],[DH,D2H,[1]],[DV,D2V,[3]]]){
+   for(const x of xs){const e=1e-5;ok(near((df(x+e)-df(x-e))/(2*e),d2(x),1e-5),'independent second derivative '+x)}
+  }
+  ok(D2K(1)<0&&D2K(5)>0&&D2I(100)<0&&D2H(1)<0&&D2V(3)<0,'second-derivative classifications mathematical oracle');
   for(let x=0;x<=500;x++)ok(K(x)>=K(5)-1e-8,'integer production minimum '+x);
   for(let x=0;x<=200;x++)ok(I(x)<=50000+1e-8,'bounded ticket revenue '+x);
   for(let t=0;t<=4;t+=.025)ok(H(t)<=45+1e-8,'rocket valid time '+t);
@@ -134,6 +139,17 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
      for(let i=0;i<limit;i++)await seq.locator('[data-seq-next]').click();
      eq(await seq.locator('[data-seq-item]:visible').count(),limit,'stepwise original calculations '+n);
     }
+    if(n===2){
+     const theory=await page.locator('#goal').innerText();
+     ok(theory.toLowerCase().includes('andraderivatatestet')&&theory.toLowerCase().includes('inget besked'),'test stated with inconclusive case');
+     eq(await page.locator('#goal .panel math').count()>=3,true,'semantic second derivative rule');
+    }
+    if([3,6,7,10].includes(n)){
+     const expected={3:['K″(1)=6·1−18=−12<0','K″(5)=6·5−18=12>0'],6:['I″(100)=−10<0'],7:['h″(1)=−10<0'],10:['V″(3)=−2<0']}[n];
+     const labels=await page.locator('.slide.active math').evaluateAll(els=>els.map(e=>e.getAttribute('aria-label')));
+     for(const expression of expected)ok(labels.includes(expression),`visible MathML andraderivatatest ${n}: ${expression}`);
+     ok((await page.locator('.slide.active').innerText()).includes('Alternativ'),'independent second-derivative route '+n);
+    }
     if(n===5){
      for(const [price,expectedTickets] of [[0,1000],[25,875],[50,750],[75,625],[100,500],[125,375],[150,250],[175,125],[200,0]]){
       await page.locator('#ticket-price').evaluate((el,x)=>{el.value=String(x);el.dispatchEvent(new Event('input',{bubbles:true}))},price);
@@ -157,6 +173,7 @@ function coords(d){return [...d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(m=>[
      ok(await page.locator('#extrema-model-method-support').evaluate(e=>e.open),'optional support revealed on demand');
      eq(await page.locator('#extrema-model-method-support .method-card').count(),4,'four math-oriented method cards');
      ok(await page.locator('#extrema-model-method-support math').count()>=3,'semantic math in support');
+     ok((await page.locator('#extrema-model-method-support').innerText()).includes('Andraderivatatest'),'optional book support retains independent method');
     }
     await scanMath(w,n,'after');await shot(w,n,'after');
    }
