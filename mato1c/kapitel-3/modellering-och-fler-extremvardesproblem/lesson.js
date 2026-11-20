@@ -49,7 +49,7 @@ function drawSheet(id,x,initial=false){
  svg(root,'line',{x1:ox+w-s,y1:oy+s,x2:ox+w-s,y2:oy+h-s,...fold});
  label(root,ox+w/2,oy-20,'50 cm',{anchor:'middle',bold:true,size:compact?28:20});
  // Place the left dimension inside the viewBox even with the larger mobile font.
- label(root,ox-5,oy+h/2,'30 cm',{anchor:'end',bold:true,size:compact?25:20});
+ label(root,ox+16,oy+h/2,'30 cm',{anchor:'end',bold:true,size:compact?25:20});
  if(s>=31)label(root,ox+s/2,oy+s/2+6,'x',{anchor:'middle',bold:true,fill:'#893f4b',size:compact?27:19});
  if(h-2*s >= (compact?38:28) && w-2*s>=100)
   label(root,ox+w/2,oy+h/2+7,'botten',{anchor:'middle',bold:true,size:compact?29:20});
