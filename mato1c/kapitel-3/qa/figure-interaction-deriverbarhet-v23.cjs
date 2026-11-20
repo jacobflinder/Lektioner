@@ -79,7 +79,7 @@ const pathPoints=d=>[...d.matchAll(/[ML](-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/g)
     return r.left<b.left-1||r.right>b.right+1?[{text:el.textContent.trim().slice(0,85),row:[r.left,r.right],card:[b.left,b.right]}]:[];
    });
    const small=formulas.filter(el=>el.getBoundingClientRect().height<12)
-    .map(el=>el.getAttribute('aria-label'));
+    .map(el=>({label:el.getAttribute('aria-label'),pixels:el.getBoundingClientRect().height,font:getComputedStyle(el).fontSize}));
    const groups=[...root.querySelectorAll('.solution-math-group,.math-givens,.math-case')];
    const gaps=groups.flatMap(g=>{
     const els=[...g.children].filter(visible).filter(e=>e.matches('.mathline,.formula-line,.math-case'));
