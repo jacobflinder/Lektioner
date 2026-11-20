@@ -52,7 +52,7 @@ const data={
       title:'Från atommodellen till en partikelmodell',label:'Knyt ihop · 5 minuter',time:'5 min',
       body:`<p>Rutherford och Bohr hjälpte oss att förstå <b>atomen</b>: en kärna med elektroner omkring. En elektron kan exciteras till en högre energinivå och vid återgång sända ut en <b>foton</b>.</p>
         <p>Partikelacceleratorer gav nästa fråga: <b>vad består protoner och neutroner av?</b></p>
-        <div class="history"><div><b>1897</b><span>Thomson: elektron</span></div><div><b>1910–1913</b><span>Rutherford, Bohr: atommodeller</span></div><div><b>1960-talet</b><span>Kvarkmodellen utvecklas</span></div><div><b>2012</b><span>Higgsbosonen upptäcks</span></div></div>
+        <div class="history"><div><b>1897</b><span>Thomson: elektron</span></div><div><b>1911–1913</b><span>Rutherford, Bohr: atommodeller</span></div><div><b>1960-talet</b><span>Kvarkmodellen utvecklas</span></div><div><b>2012</b><span>Higgsbosonen upptäcks</span></div></div>
         <p class="small-context">Gemensam minikarta: atom → kärna (protoner, neutroner) → kvarkar. Elektronen tillhör i stället leptonerna.</p>`,
       side:`<div class="mindmap"><h3>Mindmap – bygg den tillsammans</h3><ul><li>Atom och energinivåer</li><li>Protoner och neutroner → kvarkar</li><li>Elektroner → leptoner</li><li>Kraftförmedlare → växelverkningar</li><li>Higgsfältet → elementarpartiklars massa</li></ul><p class="small-context">Kort sammanfattning av originalets tavelskiss – inte en ny beräkningsmetod.</p></div>
         <div class="video-refs"><a href="https://youtu.be/8lbJSgnUvsw" target="_blank" rel="noopener noreferrer">Originalets kvarkfilm</a></div>`,
@@ -140,9 +140,9 @@ const data={
     {
       title:'Avslut: kan du förklara med egna ord?',label:'Tre mål · 5 minuter',time:'5 min',
       body:`<p>Stäng boken i två minuter. Skriv själv, jämför kort med gruppen och rätta sedan med hjälp av boken.</p>
-      <div class="exit-grid"><div><b>Mål 1 · Materia</b><p>Varför är en proton en hadron, men en elektron en lepton?</p></div><div><b>Mål 2 · Krafter</b><p>Vem förmedlar elektromagnetisk respektive stark växelverkan?</p></div><div><b>Mål 3 · Förståelse</b><p>Vad säger E = mc², och vad förklarar Higgsfältet?</p></div></div>
+      <div class="exit-grid"><div><b>Mål 1 · Materia</b><p>Ange valenskvarkarna i en proton och en neutron. Varför är en elektron en lepton?</p></div><div><b>Mål 2 · Krafter</b><p>Para ihop elektromagnetisk, stark och svag växelverkan med förmedlarpartiklar. Är gravitonen påvisad?</p></div><div><b>Mål 3 · Förståelse</b><p>Vad säger E = mc²? Vad förklarar Higgsfältet? Vad kan hända när en partikel möter sin antipartikel?</p></div></div>
       <div class="book-note"><b>Repetition efter lektionen:</b> Avsnitt 9.1, s. 325–331. Läs särskilt lärobokens gröna informationsrutor så noggrant som möjligt. Uppgifterna som inte hanns med finns på s. 332. Ingen separat läxa är fastställd.</div>`,
-      steps:[`<b>Jämför efter eget försök:</b> protonen är sammansatt av kvarkar; elektronen är en lepton. Fotoner förmedlar elektromagnetisk växelverkan, gluoner den starka. E = mc² beskriver massa som energi; Higgsfältet förklarar vilomassa för flera elementarpartiklar, inte huvuddelen av protonens massa.`],
+      steps:[`<b>Jämför efter eget försök:</b> proton uud, neutron udd; elektronen är en lepton utan kvarkar. Fotoner hör till elektromagnetisk, gluoner till stark och W/Z-bosoner till svag växelverkan; gravitonen är inte påvisad. E = mc² anger sambandet mellan massa och energi. Higgsfältet förklarar vilomassa för flera elementarpartiklar. En partikel och dess antipartikel kan annihilera.`],
       teacher:'Tre individuella svar motsvarar startmålen. Fånga upp om elever blandar ihop lepton/hadron, gluon/foton eller Higgs och protonens totala massa. Enbart gruppsvar räcker inte som slutkontroll. Ingen ny läxa har lagts till utan lärarbeslut.',
       source:'1',tag:'Mål följdes upp'
     }

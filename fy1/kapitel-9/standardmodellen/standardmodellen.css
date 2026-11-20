@@ -40,4 +40,19 @@
 .exit-grid b{display:block;color:#126273;margin-bottom:9px}.exit-grid p{margin:0}
 .small-context{font-size:.85rem;color:#526e78}
 @media(max-width:930px){.intro-grid,.history{grid-template-columns:repeat(2,minmax(0,1fr))}.force-table,.book-table{font-size:.89rem}.exit-grid{grid-template-columns:1fr}.stage{overflow-x:hidden}}
-@media(max-width:575px){.intro-grid,.history,.defs{grid-template-columns:1fr}.force-table,.book-table{font-size:.78rem}.force-table th,.force-table td,.book-table th,.book-table td{padding:7px 4px}.force-table td:nth-child(2){white-space:normal}.book-table td:nth-child(3){white-space:normal}.page-title{font-size:1.87rem}.math-block{font-size:1.2rem}.particle-box{padding:11px}.body-copy{font-size:1rem}.book-table td:nth-child(2){overflow-wrap:anywhere}}
+@media(max-width:575px){
+ .intro-grid,.history,.defs{grid-template-columns:1fr}.page-title{font-size:1.87rem}
+ .math-block{font-size:1.2rem}.particle-box{padding:11px}.body-copy{font-size:1rem}
+ .force-table,.book-table,.force-table tbody,.book-table tbody,.force-table tr,.book-table tr,.force-table td,.book-table td{display:block;width:100%}
+ .force-table thead,.book-table thead{display:none}
+ .force-table tr,.book-table tr{border:1px solid #d6e6e9;border-radius:11px;padding:10px 12px;margin:9px 0;background:#f6fafb}
+ .force-table td,.book-table td{border:0;padding:3px 0;font-size:.96rem;text-align:left!important;white-space:normal!important}
+ .force-table td:first-child{font-weight:800;font-size:1.07rem}
+ .force-table td:nth-child(2)::before{content:'Förmedlare: ';font-weight:650;color:#53717a}
+ .force-table td:nth-child(3)::before{content:'Om: ';font-weight:650;color:#53717a}
+ .book-table tr{position:relative;padding-left:60px;min-height:94px}
+ .book-table td:first-child{position:absolute;top:12px;left:13px;width:40px;font-size:1.05rem;font-weight:850}
+ .book-table td:nth-child(2){font-size:1rem;font-weight:650;overflow-wrap:anywhere}
+ .book-table td:nth-child(3)::before{content:'Läs: ';font-weight:650;color:#53717a}
+ .book-table td:nth-child(4)::before{content:'Grupp: ';font-weight:650;color:#53717a}
+}
