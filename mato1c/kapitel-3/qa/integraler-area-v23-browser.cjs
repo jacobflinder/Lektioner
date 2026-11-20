@@ -47,14 +47,22 @@ try{
   for(let i=1;i<=3;i++){await page.locator('#recap [data-seq-next]').click();yes(await recall.filter({visible:true}).count()===i,label+' condition recap step '+i)}
   yes(await page.locator('#recap [data-formula="C=4"] math').count()===1,label+' specific constant determined by given condition');
   await go(6);
-  const theorem=page.locator('#bridge [data-seq-item]');
-  yes(await theorem.filter({visible:true}).count()===0,label+' theorem waits for independent thinking');
-  for(let i=1;i<=5;i++){await page.locator('#bridge [data-seq-next]').click();yes(await theorem.filter({visible:true}).count()===i,label+' theorem revealed in step '+i)}
-  yes(await page.locator('#bridge [data-integral-evaluation] math msubsup').count()===4,label+' theorem and worked integral each have integral and bracket limits');
-  yes(await page.locator('#bridge [data-evaluation-rule] math msubsup').count()===2,label+' bracket evaluation has both limits');
-  yes(await page.locator('#bridge [data-evaluation-rule] math msubsup > mrow > mo[fence="true"]').count()===4,label+' upper and lower bound bracket characters are visible in MathML');
+  yes(await page.locator('#ftc-formula').isVisible(),label+' entire theorem is immediately visible BEFORE example, not inside a reveal');
+  yes(await page.locator('#ftc [data-seq-item]').count()===0,label+' no mathematical prerequisite hidden in a solution step');
+  yes(await page.locator('#ftc-formula math msubsup').count()===2,label+' visible theorem has stacked integral and bracket bounds');
+  yes(await page.locator('#ftc-formula math').count()===3,label+' original full equality: integral = bracket = F(b)-F(a)');
+  yes((await page.locator('#ftc-formula').getAttribute('aria-label')).includes('F(b)−F(a)'),label+' theorem clearly states upper minus lower value');
+  const theoremOverflow=await page.locator('#ftc-formula').evaluate(el=>el.scrollWidth-el.clientWidth);
+  yes(theoremOverflow<=2,label+' visible theorem is not cropped on '+width+'px screen: '+theoremOverflow);
+  await shot(label+'-theorem-before-example');
+  await go(7);
+  const workedSteps=page.locator('#bridge [data-seq-item]');
+  yes(await workedSteps.filter({visible:true}).count()===0,label+' worked example waits for pupil attempt AFTER theorem');
+  for(let i=1;i<=4;i++){await page.locator('#bridge [data-seq-next]').click();yes(await workedSteps.filter({visible:true}).count()===i,label+' worked integral step '+i)}
+  yes(await page.locator('#bridge [data-fundamental-theorem] math msubsup').count()===2,label+' worked integral has stacked integral and bracket bounds');
+  yes(await page.locator('#bridge [data-fundamental-theorem] math msubsup > mrow > mo[fence="true"]').count()===2,label+' evaluation brackets are visible mathematical notation');
   yes(await page.locator('#bridge [data-formula="F(x)=x²/2+2x"] math mfrac > mrow > msup').count()===1,label+' primitive x² is the numerator of its fraction');
-  yes((await page.locator('#bridge [data-evaluation-rule="0|3|x²/2+2x|F(3)−F(0)"]').getAttribute('aria-label')).includes('F(3)−F(0)'),label+' true F(3)-F(0) chain rather than isolated values');
+  yes((await page.locator('#bridge [data-fundamental-theorem="0|3|x+2|x|x²/2+2x|F(3)−F(0)"]').getAttribute('aria-label')).includes('F(3)−F(0)'),label+' true F(3)-F(0) chain rather than isolated values');
   yes(await page.locator('#bridge [data-formula-inline="=(3²/2+2·3)"] math').count()===1,label+' actual upper-bound substitution present');
   yes(await page.locator('#bridge [data-formula-inline="=(3²/2+2·3)"] math mfrac > mrow > msup').count()===1,label+' upper-bound 3² is inside the fraction numerator');
   yes(await page.locator('#bridge [data-formula-inline="−(0²/2+2·0)"] math').count()===1,label+' actual lower-bound subtraction present');
@@ -62,9 +70,9 @@ try{
   yes(await page.locator('#bridge math[aria-label="=10,5"]').count()===1,label+' final result after complete calculation');
   const clipped=await page.locator('#bridge .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({text:el.textContent,over:el.scrollWidth-el.clientWidth})));
   yes(clipped.length===0,label+' entire bracket and substitution visible without horizontal scrolling: '+JSON.stringify(clipped));
-  await shot(label+'-fundamentalsatsen-hakparentes');
+  await shot(label+'-worked-example-full-chain');
   yes(await page.locator('#bridge [data-formula="=9/2+6−0"] math').count()===1&&await page.locator('#bridge [data-formula="=4,5+6"] math').count()===1,label+' teacher mathematical norm preserves intermediate simplifications');
-  await go(2);await go(6);yes(await theorem.filter({visible:true}).count()===0,label+' full theorem resets after navigation');
+  await go(2);await go(7);yes(await workedSteps.filter({visible:true}).count()===0,label+' worked example resets after navigation');
   await go(2);await shot(label+'-geometric');
   if(width>=1280){const fig=await page.locator('#geometric .plot-card').evaluate(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom}});yes(fig.bottom<=height-8,label+' whole geometry diagram fits projector: bottom '+fig.bottom)}
   let overview=await page.locator('#overview-plot [data-area-rectangle]').getAttribute('points');
@@ -79,7 +87,7 @@ try{
    const mathX=(pos.x-80)/98, curveY=315-39*(mathX+2);
    yes(pos.y+24<=curveY,label+' function label has 24 SVG units clearance above curve in '+selector);
   }
-  await go(8);
+  await go(9);
   for(const b of [1,2,3,4]){
    await set('linear-b',b);
    const rectangle=coords(await page.locator('#linear-plot [data-area-rectangle]').getAttribute('points'));
@@ -97,7 +105,7 @@ try{
   yes((await page.locator('#area-feedback').innerText()).includes('Fundamentalsatsen'),label+' optional lab connects geometry to exact theorem');
   yes(await page.locator('#area-feedback math').count()>=5,label+' dynamic upper and lower substitutions rendered mathematically');await shot(label+'-linear-feedback');
   await page.locator('#linear-b').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#linear-b').inputValue()==='3',label+' keyboard slider');
-  await go(2);await go(8);yes(await page.locator('#linear-b').inputValue()==='3',label+' linear reset after navigation');yes((await page.locator('#area-feedback').innerText())==='',label+' area result hidden after return');
+  await go(2);await go(9);yes(await page.locator('#linear-b').inputValue()==='3',label+' linear reset after navigation');yes((await page.locator('#area-feedback').innerText())==='',label+' area result hidden after return');
   await go(2);
   let worked=page.locator('#geometric [data-seq-item]');
   yes(await worked.filter({visible:true}).count()===0,label+' worked solution hidden');
@@ -132,9 +140,9 @@ try{
   if(width<=768){const geom=await page.evaluate(()=>{const input=document.querySelector('#rect-lab #rect-method').closest('.control-box').getBoundingClientRect(),fig=document.querySelector('#rect-lab .plot-card').getBoundingClientRect();return {gap:fig.top-input.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' rectangle graph follows inputs, gap '+geom.gap);if(width===390)yes(geom.top<=height-105,label+' rectangle graph begins within mobile viewport')}
   await set('rect-n',5);await page.selectOption('#rect-method','middle');await shot(label+'-rect-n32-middle');
   await page.selectOption('#rect-method','right');await shot(label+'-rect-n32-right');
-  await go(9);await go(3);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
+  await go(10);await go(3);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
   yes(await page.locator('#rect-method').inputValue()==='left',label+' rectangle method resets');
-  await go(9);
+  await go(10);
   for(const t of [1,2,3,4,5]){
    await set('speed-switch',t);
    const rects=await page.locator('#speed-plot [data-speed-rect]').evaluateAll(els=>els.map(e=>({points:e.getAttribute('points'),duration:+e.dataset.duration,speed:+e.dataset.speed})));
@@ -152,20 +160,20 @@ try{
   await set('speed-switch',5);await shot(label+'-speed');
   if(width<=768){const geom=await page.evaluate(()=>{const slider=document.querySelector('#velocity .control-box').getBoundingClientRect(),fig=document.querySelector('#velocity .plot-card').getBoundingClientRect();return {gap:fig.top-slider.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' speed graph follows slider, gap '+geom.gap);if(width===390)yes(geom.top<=height-130,label+' speed graph enters mobile viewport')}
   await page.locator('#speed-switch').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#speed-switch').inputValue()==='4',label+' speed keyboard');
-  await go(10);await go(9);yes(await page.locator('#speed-switch').inputValue()==='3',label+' speed reset after navigation');
+  await go(11);await go(10);yes(await page.locator('#speed-switch').inputValue()==='3',label+' speed reset after navigation');
   yes(await page.locator('#signed-extra, #signed-plot, #signed-answer').count()===0,label+' unrequested negative-area integrals are absent');
-  await go(7);
+  await go(8);
   const practice=page.locator('#practice [data-seq-item]');yes(await practice.filter({visible:true}).count()===0,label+' independent algebra task stays hidden first');
   for(let i=1;i<=4;i++){await page.locator('#practice [data-seq-next]').click();yes(await practice.filter({visible:true}).count()===i,label+' independent theorem practice step '+i)}
-  yes(await page.locator('#practice [data-integral-evaluation] math msubsup').count()===2,label+' independent integral and bracket show both bounds');
-  yes((await page.locator('#practice [data-evaluation-rule]').getAttribute('aria-label')).includes('F(3)−F(1)'),label+' independent use of F(3)-F(1)');
+  yes(await page.locator('#practice [data-fundamental-theorem] math msubsup').count()===2,label+' independent integral and bracket show both bounds');
+  yes((await page.locator('#practice [data-fundamental-theorem]').getAttribute('aria-label')).includes('F(3)−F(1)'),label+' independent use of F(3)-F(1)');
   yes(await page.locator('#practice math[aria-label="=10"]').count()===1,label+' independent calculation simplifies to 10');
   const practiceOverflow=await page.locator('#practice .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({text:el.textContent,over:el.scrollWidth-el.clientWidth})));
   yes(practiceOverflow.length===0,label+' independent theorem solution has no clipped maths '+JSON.stringify(practiceOverflow));await shot(label+'-independent-fundamentalsatsen');
-  await page.locator('#practice [data-jump-to="socrative"]').click();yes(await page.locator('#socrative').evaluate(e=>e.classList.contains('active')),label+' teacher can bypass optional labs and reach Socrative');
-  await go(7);yes(await practice.filter({visible:true}).count()===0,label+' independent task resets after moving away');
-  await go(10);yes((await page.locator('#socrative').innerText()).includes('SOC-36677379'),label+' preserved original Socrative');await shot(label+'-socrative');
-  await go(11);const book=await page.locator('#book').innerText();
+  await page.locator('#practice [data-jump-to="work"]').click();yes(await page.locator('#work').evaluate(e=>e.classList.contains('active')),label+' teacher can bypass optional labs to combined Socrative and book');
+  await go(8);yes(await practice.filter({visible:true}).count()===0,label+' independent task resets after moving away');
+  await go(11);yes((await page.locator('#work').innerText()).includes('SOC-36677379'),label+' preserved original Socrative');await shot(label+'-socrative-and-book');
+  const book=await page.locator('#work').innerText();
   for(const required of ['184–188','3334','3335','3336','3337','3338','3339','3340','3341','3342','3343','3344','3345','3346','3347','alla uppgifter och samtliga deluppgifter','minst 20 minuter'])yes(book.includes(required),label+' book '+required);
   for(const forbidden of ['3401','3415','Uppgiftstexterna finns i boken','Webbsidan återger inte'])yes(!book.includes(forbidden),label+' no old/metadata '+forbidden);
   const support=page.locator('#book-methods');
@@ -184,10 +192,10 @@ try{
   await page.locator('#exit-feedback summary').click();yes(await page.locator('#exit-feedback').evaluate(e=>e.open),label+' same-slide exit feedback opens');
   let exit=page.locator('#exit-answer [data-seq-item]');yes(await exit.filter({visible:true}).count()===0,label+' exit answer steps remain hidden');
   for(let i=1;i<=4;i++){await page.locator('#exit-answer [data-seq-next]').click();yes(await exit.filter({visible:true}).count()===i,label+' exit step '+i)}
-  yes(await page.locator('#exit-answer .seq-item [data-integral-evaluation] math msubsup').count()===2,label+' exit contains proper integral and evaluation bracket');
-  yes((await page.locator('#exit-answer .seq-item [data-evaluation-rule]').getAttribute('aria-label')).includes('G(4)−G(0)'),label+' exit teaches G(4)−G(0)');
-  yes(await page.locator('#ftc-summary [data-integral-evaluation] math msubsup').count()===2,label+' final summary states integral equals evaluated primitive bracket');
-  yes(await page.locator('#ftc-summary [data-evaluation-rule] math msubsup').count()===1,label+' final summary completes bracket equals F(b)-F(a)');
+  yes(await page.locator('#exit-answer .seq-item [data-fundamental-theorem] math msubsup').count()===2,label+' exit contains proper integral and evaluation bracket');
+  yes((await page.locator('#exit-answer .seq-item [data-fundamental-theorem]').getAttribute('aria-label')).includes('G(4)−G(0)'),label+' exit teaches G(4)−G(0)');
+  yes(await page.locator('#ftc-summary [data-fundamental-theorem] math msubsup').count()===2,label+' final summary states integral equals evaluated primitive bracket');
+  yes(await page.locator('#ftc-summary [data-fundamental-theorem] math').count()===3,label+' final summary explicitly completes bracket equals F(b)-F(a)');
   yes(await page.locator('#goal-check ol.numbered > li').count()===3,label+' final self-check mirrors exactly three goals');
   yes(await page.locator('#exit-answer [data-formula-inline="−(0²/2+0)"] math').count()===1,label+' exit subtracts full lower expression');
   yes(await page.locator('#exit-answer [data-formula="=12−0"] math').count()===1,label+' exit has explicit final simplification');
