@@ -39,7 +39,7 @@ fs.mkdirSync(out,{recursive:true});
   check(await page.locator('.slide[data-optional="true"]').count()===2,'Two graph extras clearly optional');
   check(await page.locator('math').count()>=42,'Semantic MathML present');
   const stageIds=await page.locator('.slide').evaluateAll(els=>els.map(el=>el.id));
-  check(stageIds.join(',')==='goal,mindmap,worked,socrative,book,socrative-followup,practice,exponential,exit,exit-answer,lab-one,lab-two','Source order from DOM');
+  check(stageIds.join(',')==='goal,mindmap,worked,socrative,book,socrative-followup,practice,exponential,lab-one,lab-two,exit,exit-answer','Source order and optional sections from DOM');
 
   for(const [width,height] of sizes){
    await page.setViewportSize({width,height});const label=width+'x'+height;
@@ -88,8 +88,9 @@ fs.mkdirSync(out,{recursive:true});
    await checkMath(label+' original inverse power and exponential');
    await shot(label+'-source-types');
 
-   await go(9);check((await page.locator('#exit').innerText()).includes('Lämna tre delar'),label+' individual check');
-   await go(10);const exit=page.locator('#exit-answer [data-seq-item]');
+   await go(8);await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='exit',label+' Next skips both optional graphs');
+   await go(11);check((await page.locator('#exit').innerText()).includes('Lämna tre delar'),label+' individual check');
+   await go(12);const exit=page.locator('#exit-answer [data-seq-item]');
    check(await exit.filter({visible:true}).count()===0,label+' no premature exit answers');
    for(let i=0;i<4;i++)await page.locator('#exit-answer [data-seq-next]').click();
    check(await exit.filter({visible:true}).count()===4,label+' four exit solution steps');
@@ -97,7 +98,7 @@ fs.mkdirSync(out,{recursive:true});
    await checkMath(label+' exit');
    await shot(label+'-exit');
 
-   await go(11);
+   await go(9);
    const reference=await page.locator('#family-plot [data-reference-curve]').getAttribute('d');
    for(const c of [-3,0,3,7]){
     await setSlider('lab-c',c);
@@ -107,7 +108,7 @@ fs.mkdirSync(out,{recursive:true});
     check(await page.locator('#family-plot [data-reference-curve]').getAttribute('d')===reference,label+' reference curve fixed');
    }
    await setSlider('lab-c',3);await shot(label+'-graph-one');
-   await go(12);for(const b of [1,6,10]){
+   await go(10);for(const b of [1,6,10]){
     await setSlider('lab-b',b);
     const pts=await page.locator('#condition-plot [data-actual-point],#condition-plot [data-target-point]').evaluateAll(els=>els.map(e=>({x:+e.getAttribute('cx'),y:+e.getAttribute('cy')})));
     near(pts[0].x,pts[1].x,label+' graph 2 x alignment '+b);

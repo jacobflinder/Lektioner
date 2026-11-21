@@ -1,7 +1,7 @@
 /* Source fidelity to 231219 PDF + film and independent mathematical checks.
  * Original→web: mindmap #2; full example #3; Socrative #4; book #5;
  * Socrative followup #6; handwritten Socrative types #7-8;
- * individual check #9-10; later optional graph extensions #11-12. */
+ * optional graph extensions #9-10 skipped by Next, individual check #11-12. */
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
@@ -13,7 +13,7 @@ const near=(actual,expected,label,tol=1e-8)=>check(Math.abs(actual-expected)<=to
 const derivative=(f,x)=>{const h=1e-5;return (f(x+h)-f(x-h))/(2*h)};
 
 const stages=[...html.matchAll(/<section class="slide[^>]+id="([^"]+)"/g)].map(m=>m[1]);
-check(stages.join(',')==='goal,mindmap,worked,socrative,book,socrative-followup,practice,exponential,exit,exit-answer,lab-one,lab-two','Source-first order, 10 core and 2 optional');
+check(stages.join(',')==='goal,mindmap,worked,socrative,book,socrative-followup,practice,exponential,lab-one,lab-two,exit,exit-answer','Source-first order, 10 core and 2 skippable extras');
 check((html.match(/<section class="slide" id="[^"]+" data-optional="true"/g)||[]).length===2,'Only two optional graph labs');
 check((html.match(/id="(.*?)"/g)||[]).length===new Set([...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1])).size,'No duplicate DOM IDs');
 for(const id of ['goal','mindmap','worked','socrative','book','socrative-followup','practice','exponential','exit','exit-answer'])check(stages.includes(id),'Core stage '+id);
