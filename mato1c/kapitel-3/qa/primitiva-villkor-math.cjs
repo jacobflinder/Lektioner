@@ -19,7 +19,7 @@ check((html.match(/id="(.*?)"/g)||[]).length===new Set([...html.matchAll(/id="([
 for(const id of ['goal','mindmap','worked','socrative','book','socrative-followup','practice','exponential','exit','exit-answer'])check(stages.includes(id),'Core stage '+id);
 for(const token of ['SOC-36677299','321. Ma3c','whiteboard','NOKflex','minst 20 minuter','alla uppgifter och samtliga deluppgifter','s. 182–183','3.4 Integraler'])check(html.includes(token),'Original/source support '+token);
 for(let n=3318;n<=3333;n++)check(html.includes(String(n)),'Current textbook task '+n);
-for(const stale of ['3313–3322','f(x)=6x−4','F(2)=9','f(x)=8x+6e^{3x}','Inga miniwhiteboards krävs'])check(!html.includes(stale),'Removed source-breaking content '+stale);
+for(const stale of ['3313–3322','f(x)=6x−4','F(2)=9','f(x)=8x+6e^{3x}','Inga miniwhiteboards krävs','C=b−G(a)','F(x)=G(x)+C'])check(!html.includes(stale),'Removed source-breaking content '+stale);
 const worked=html.split('id="worked"')[1].split('</section>')[0];
 for(const expr of ['f(x)=x+2','F(6)=35','F(x)=x²/2+2x+C','35=6²/2+2·6+C','35=36/2+12+C','35=18+12+C','35=30+C','C=35−30=5','F(x)=x²/2+2x+5','F′(x)=x+2','F(6)=18+12+5=35'])check(worked.includes(expr),'Full original worked chain '+expr);
 const sourceTypes=html.split('id="practice"')[1].split('id="exit"')[0];

@@ -69,7 +69,7 @@
 
 <section class="slide active" id="goal" data-teacher="Inled med tre kontrollerbara mål. Repetera kort att samma derivata hör till en hel familj och att villkoret väljer en enda funktion. Gå sedan direkt till originalets mindmap och lärarens räkneexempel.">
   <div class="eyebrow">01 · Dagens mål · s. 182–183</div>
-  <h2>Bestäm en bestämd primitiv funktion</h2>
+  <h2>Hitta den primitiva funktion som passar villkoret</h2>
   <p class="lead">Efter lektionen ska du kunna:</p>
   <ol class="spaced"><li>skriva <strong>alla primitiva funktioner</strong> med konstanten <strong>C</strong>,</li><li>använda ett villkor för att <strong>beräkna C</strong> och skriva en bestämd funktion,</li><li><strong>kontrollera</strong> funktionen genom derivering och insättning.</li></ol>
   <div class="statement"><strong>Huvudidé:</strong> Derivatan bestämmer grafens lutningar. Ett villkor som <span class="inline-math" data-formula-inline="F(a)=b"></span> bestämmer vilken graf vi menar.</div>
@@ -82,7 +82,7 @@
   <div class="mindmap"><div><strong>1 · Derivering</strong><p>Vad betyder sambandet mellan F och f?</p></div><div><strong>2 · Alla möjligheter</strong><p>Varför dyker konstanten C upp?</p></div><div><strong>3 · Ett villkor</strong><p>Hur kan ett värde på F bestämma C?</p></div></div>
   <div class="task"><strong>Komplettera din mindmap:</strong> Skriv en formel eller ett litet räkneexempel vid varje gren. Jämför med en granne.</div>
   <button type="button" class="reveal" data-reveal="mindmap-answer">Visa förslag till kopplingar</button>
-  <div class="answer hidden" id="mindmap-answer"><div class="formulas"><p class="formula" data-formula="F′(x)=f(x)"></p><p class="formula" data-formula="F(x)=G(x)+C"></p><p class="formula" data-formula="F(a)=b⇒C=b−G(a)"></p></div><p>G är en primitiv funktion utan den fria konstanten. Villkoret bestämmer sedan <strong>en viss C</strong>.</p></div>
+  <div class="answer hidden" id="mindmap-answer"><div class="formulas"><p class="formula" data-formula="F′(x)=f(x)"></p><p class="formula" data-formula="F(x)=x²+C"></p><p class="formula" data-formula="F(a)=b"></p></div><p>Konstanten C försvinner när vi deriverar. När vi sätter in villkoret i <strong>hela F</strong> får vi en ekvation som bestämmer C.</p></div>
 </section>
 
 <section class="slide" id="worked" data-teacher="Lärarens EXAKTA räkneexempel från original-PDF och film, med alla mellanled i samma sammanhängande lösning. Börja med alla primitiva funktioner: öka exponenten och dividera med den nya exponenten; konstantens derivata är noll. Visa först därefter villkoret F(6)=35. Tappa inte bort mellanleden 36/2, 18+12, 30+C eller 35−30.">
@@ -125,7 +125,7 @@
     <div class="method-grid">
       <div class="method-item"><strong>1 · Börja med familjen</strong><p class="formula" data-formula="F′(x)=f(x)"></p><p>Bestäm en primitiv funktion och lägg till C.</p></div>
       <div class="method-item"><strong>2 · Sätt in villkoret</strong><p class="formula" data-formula="F(a)=b"></p><p>Byt x mot a i hela F-uttrycket, inte i f.</p></div>
-      <div class="method-item"><strong>3 · Lös ut konstanten</strong><p class="formula" data-formula="C=b−G(a)"></p><p>Här är G den primitiva funktionen utan + C.</p></div>
+      <div class="method-item"><strong>3 · Lös ut konstanten</strong><p class="formula" data-formula="35=30+C"></p><p>Förenkla insättningen och lös ekvationen för C, precis som i Jacobs exempel.</p></div>
       <div class="method-item"><strong>4 · Kontrollera två saker</strong><p class="formula" data-formula="F′(x)=f(x)"></p><p>Derivera tillbaka <strong>och</strong> kontrollera funktionsvärdet i villkoret.</p></div>
     </div>
   </details>
