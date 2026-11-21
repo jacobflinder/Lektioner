@@ -71,6 +71,7 @@ jobs:
           node mato1c/kapitel-3/qa/integralberakning-original-math.cjs
           node mato1c/kapitel-3/qa/integralberakning-notation-browser.cjs
           node mato1c/kapitel-3/qa/integralberakning-source-browser.cjs
+          node mato1c/kapitel-3/qa/mer-om-integraler-original-math.cjs
           QA_BASE_URL=http://127.0.0.1:8123 node mato1c/kapitel-3/qa/mer-om-integraler-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-deep-browser.cjs
