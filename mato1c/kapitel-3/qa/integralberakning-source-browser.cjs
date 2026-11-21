@@ -57,7 +57,7 @@ const viewports=[[390,844],[768,900],[1280,800],[1920,1080]];
    await overflow('all main solution steps expanded');
    await shot(page,tag+'-recap-complete-algebra');
    await go(5);
-   yes(await page.locator('#twoCurves [aria-label*="f(x)=6x−3x²+4"]').count()===1,tag+' new functions are documented for graph');
+   yes(await page.locator('#twoCurves[aria-label*="f(x)=6x−3x²+4"]').count()===1,tag+' new functions are documented for graph');
    const polygon=parsePoints(await page.locator('#twoCurvesArt polygon').getAttribute('points'));
    yes(polygon.length===182,tag+' exact composite polygon from sampled upper and lower graphs');
    near(polygon[0][0],75,tag+' polygon x=0');near(polygon[0][1],315-4*38,tag+' upper f(0)=4');
