@@ -1,0 +1,69 @@
+/* Avsnitt 9.1: följer Fy1:s gemensamma visuella skal. */
+.source-note{display:none} /* Originalhänvisningar finns i det separata lärarstödet, inte på elevbilderna. */
+.page-head{margin-bottom:9px}.page-title{max-width:none}
+.topic-kicker{display:inline-block;font-weight:800;letter-spacing:.05em;color:#0b7284;text-transform:uppercase;font-size:.76rem}
+.intro-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}
+.intro-grid>div{background:#eff7f9;border:1px solid #d0e5e9;border-radius:12px;padding:15px 16px}
+.intro-grid b{display:block;font-size:1.12rem;color:#155a6e}.intro-grid p{margin:6px 0 0;font-size:.91rem}
+.video-refs{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0}
+.video-refs a{display:inline-block;text-decoration:none;font-weight:750;background:#eaf5f7;border:1px solid #b7dce3;border-radius:11px;padding:10px 14px}
+.video-refs a:hover{background:#d9eef3}.focus-line{font-size:1.2rem;font-weight:800;color:#0b586c}
+.youtube-start-wrap{margin:14px 0 18px}
+.youtube-start-meta{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 15px;width:min(100%,760px);margin-bottom:8px}
+.youtube-start-meta b{font-size:1.05rem}.youtube-start-meta span{font-size:.79rem;color:#5b737c}
+.youtube-start{width:min(100%,760px);aspect-ratio:16/9;background:#163c51;border:1px solid #abc6ce;border-radius:13px;overflow:hidden;position:relative;isolation:isolate}
+.youtube-start-button{width:100%;height:100%;min-height:0;border:0;border-radius:0;background:radial-gradient(circle at 35% 30%,#256b83,#102d3f 85%);color:#fff;font:inherit;font-size:clamp(1rem,2.2vw,1.5rem);display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer}
+.youtube-start-button:hover:not(:disabled){background:radial-gradient(circle at 35% 30%,#34829d,#12364c 85%)}
+.youtube-start-button:focus-visible{outline:4px solid #f8bd56;outline-offset:-5px}
+.youtube-play-icon{background:#d93b36;padding:13px 16px;border-radius:13px;font-size:1.6rem;line-height:1}
+.youtube-start iframe{display:block;width:100%;height:100%;border:0}
+.youtube-start-fallback{font-size:.81rem;color:#527078;max-width:760px;margin:8px 0 0}.youtube-start-fallback a{font-weight:650}
+.history{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:11px}
+.history>div{padding:14px 12px;background:#f2f7f8;border-radius:12px;border-top:5px solid #579fae;min-width:0}
+.history b{display:block;font-size:1.08rem}.history span{display:block;font-size:.88rem}
+.mindmap{border:1px solid #c8dee4;border-radius:14px;padding:16px;background:#f7fbfc}
+.mindmap h3{margin:0 0 14px;color:#17596b}.mindmap ul{margin:0;padding-left:23px}.mindmap li{margin:7px 0}
+.particle-box{border:1px solid #c6e0e5;background:#f1f9fa;border-radius:15px;padding:18px}
+.particle-box h3{margin:0 0 9px}.particle-box .choices{display:flex;flex-wrap:wrap;gap:8px}
+.particle-box button[aria-pressed=true]{background:#08768a;color:#fff;border-color:#08768a}
+.particle-diagram{display:block;width:100%;max-height:225px;height:auto;margin:15px auto}
+.particle-result{background:white;padding:12px;border:1px solid #c5dce2;border-radius:10px;min-height:80px}
+.math-block{font-size:clamp(1.25rem,2.2vw,1.85rem);max-width:100%;overflow-x:auto;margin:13px 0;font-family:"Cambria Math",Cambria,serif}
+.math-block math{display:block;max-width:100%}.math-block+ .math-block{margin-top:13px}
+.math-small{font-size:1.18rem}.defs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.defs>div{background:#f2f8fa;border:1px solid #d7e7eb;border-radius:11px;padding:12px 15px}
+.defs h3{margin:0 0 6px;color:#145f70;font-size:1.1rem}.defs p{margin:0;font-size:.95rem}
+.force-table,.book-table{width:100%;border-collapse:collapse;font-size:1.01rem}
+.force-table th,.force-table td,.book-table th,.book-table td{border-bottom:1px solid #d8e5e8;text-align:left;padding:9px 10px;vertical-align:top}
+.force-table th,.book-table th{background:#e4f0f2;color:#1e5562}
+.force-table td:first-child{font-weight:700}.force-table td:nth-child(2){white-space:nowrap}
+.book-table{font-size:.94rem}.book-table td:first-child{font-weight:850;font-variant-numeric:tabular-nums;color:#125e72}
+.book-table td:nth-child(3){font-weight:700;color:#356d59;white-space:nowrap}
+.book-table td:nth-child(4){font-weight:750;text-align:center}
+.book-table tr:hover td{background:#f6fafa}
+.book-note{margin-top:12px;background:#e8f4ed;border-left:5px solid #4c8e6c;padding:12px 16px;border-radius:10px}
+.group-note{border:1px solid #c8dee3;border-radius:10px;padding:12px 16px;margin:10px 0;background:#f4fafb}
+.group-note strong{color:#125f70}
+.compact-list{margin:6px 0}.compact-list li{margin:5px 0}
+.exit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}
+.exit-grid>div{padding:16px;background:#f0f8f9;border:1px solid #cfdee2;border-radius:12px}
+.exit-grid b{display:block;color:#126273;margin-bottom:9px}.exit-grid p{margin:0}
+.small-context{font-size:.85rem;color:#526e78}
+@media(max-width:930px){.intro-grid,.history{grid-template-columns:repeat(2,minmax(0,1fr))}.force-table,.book-table{font-size:.89rem}.exit-grid{grid-template-columns:1fr}.stage{overflow-x:hidden}}
+@media(max-width:575px){
+ .intro-grid,.history,.defs{grid-template-columns:1fr}.page-title{font-size:1.87rem}
+ .math-block{font-size:1.2rem}.particle-box{padding:11px}.body-copy{font-size:1rem}
+ .force-table,.book-table,.force-table tbody,.book-table tbody,.force-table tr,.book-table tr,.force-table td,.book-table td{display:block;width:100%}
+ .force-table thead,.book-table thead{display:none}
+ .force-table tr,.book-table tr{border:1px solid #d6e6e9;border-radius:11px;padding:10px 12px;margin:9px 0;background:#f6fafb}
+ .force-table td,.book-table td{border:0;padding:3px 0;font-size:.96rem;text-align:left!important;white-space:normal!important}
+ .force-table td:first-child{font-weight:800;font-size:1.07rem}
+ .force-table td:nth-child(2)::before{content:'Förmedlare: ';font-weight:650;color:#53717a}
+ .force-table td:nth-child(3)::before{content:'Om: ';font-weight:650;color:#53717a}
+ .book-table tr{position:relative;padding-left:60px;min-height:94px}
+ .book-table td:first-child{position:absolute;top:12px;left:13px;width:40px;font-size:1.05rem;font-weight:850}
+ .book-table td:nth-child(2){font-size:1rem;font-weight:650;overflow-wrap:anywhere}
+ .book-table td:nth-child(3)::before{content:''}
+ .book-table td:nth-child(4)::before{content:'Grupp: ';font-weight:650;color:#53717a}
+ .youtube-start-button{font-size:.98rem;gap:9px}.youtube-play-icon{font-size:1.25rem;padding:11px}.youtube-start{border-radius:10px}
+}
