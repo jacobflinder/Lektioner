@@ -15,6 +15,7 @@ async function assertVisibleMath(page, width, slideNumber) {
     documentWidth: document.documentElement.scrollWidth,
     viewportWidth: innerWidth,
     cropped: [...document.querySelectorAll('.slide.active .math-line math')]
+      .filter(node => !node.closest('.answer:not(.on), details:not([open])'))
       .filter(node => {
         const r = node.getBoundingClientRect();
         return r.left < -1 || r.right > innerWidth + 1 || r.width < 1 || r.height < 1;
@@ -70,7 +71,11 @@ async function assertVisibleMath(page, width, slideNumber) {
         const reveals = page.locator('.slide.active [data-reveal]');
         const revealCount = await reveals.count();
         if (i === 6) assert.equal(await page.locator('#area-total').isVisible(), false, 'Den sammanlagda arean får inte ges före elevernas två försök');
-        for (let j = 0; j < revealCount; j++) await reveals.nth(j).click();
+        for (let j = 0; j < revealCount; j++) {
+          const target = await reveals.nth(j).getAttribute('data-reveal');
+          await reveals.nth(j).click();
+          assert.equal(await page.locator(`#${target}`).isVisible(), true, `Bild ${i + 1}: återkopplingen ska vara verkligt synlig`); checks++;
+        }
         if (i === 9) await page.locator('.slide.active details').evaluateAll(nodes => nodes.forEach(node => { node.open = true; }));
         if (i === 6) assert.equal(await page.locator('#area-total').isVisible(), true, 'Arean ska gå att avslöja när båda delarna räknats');
         await assertVisibleMath(page, width, i + 1); checks++;
