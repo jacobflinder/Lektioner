@@ -19,6 +19,8 @@ yes(html.indexOf('Integralkalkylens fundamentalsats') < html.indexOf('En sammanh
 yes(/F\(b\) − F\(a\)/.test(html), 'Lärarens fundamentalsatsmetod bevarad');
 yes((html.match(/<mo>−<\/mo><mi>F<\/mi>/g) || []).length >= 5, 'F(b)−F(a) synligt i fullständiga räknekedjor');
 yes(html.includes('negative-solution') && html.includes('full-signed') && html.includes('area-under') && html.includes('area-over') && html.includes('between-solution'), 'Alla nödvändiga metodled kan visas');
+const betweenSlide = html.split('data-title="Mellan två kurvor"')[1]?.split('data-title="Räkna area mellan kurvor"')[0] ?? '';
+yes((betweenSlide.match(/<msubsup><mo>∫<\/mo>/g) || []).length >= 3, 'Jacobs mellanled: först två integraler som subtraheras, därefter en integral av skillnaden');
 yes(html.includes('id="area-total"') && html.includes('data-reveal="area-total"'), 'Sammanlagd area avslöjas först efter delberäkningarna');
 yes(!html.includes('<mtext> a.e.</mtext>'), 'MathML-enhet skrivs inte utan uttryckligt mellanrum');
 yes((html.match(/<mspace width="\.35em"\/><mtext>a\.e\.<\/mtext>/g) || []).length === 6, 'Alla sex områdesenheter avskilda i MathML');
