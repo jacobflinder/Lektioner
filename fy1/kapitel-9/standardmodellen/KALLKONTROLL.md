@@ -4,7 +4,7 @@
 
 | Originalmoment | Ny placering | Hantering |
 | --- | --- | --- |
-| ”0 Demo” med `youtu.be/LraNu_78sCw` | Bild 1 | Bevarad film och startfråga |
+| ”0 Demo” med `youtu.be/LraNu_78sCw` | Bild 1 | Bevarad film och startfråga; inbäddad klickstartad spelare från tidigare publicerad 9.1-version, stängs vid bildbyte och har YouTube-reservlänk |
 | Kvarkfilm `youtu.be/8lbJSgnUvsw`, tre valenskvarkar och kvark–antikvarkpar | Bild 2, lärarnotis | Bevarad källa, avancerade detaljer i film frivilliga |
 | Mindmap: Thomson, Rutherford, Bohr, atomstruktur | Bild 2 | Kraftigt komprimerad som tidigare kunskap, enligt ny Gy25-avgränsning |
 | Excitation/deexcitation, foton, energinivåer | Bild 2 | Återkallas med ord, inte genomräknad (utanför nya 9.1-fokuset) |

@@ -23,7 +23,7 @@ const diagram=`<div class="particle-box" aria-label="Bygg upp proton eller neutr
   <div class="particle-result" id="particle-result" aria-live="polite"><strong>Räkna först själv.</strong><p>Välj därefter Proton eller Neutron för att kontrollera din laddningssumma.</p></div>
   <p class="small-context">Färgerna hjälper oss att skilja symbolerna. De visar <em>inte</em> kvarkarnas så kallade färgladdning. Figuren visar valenskvarkar, inte protonens alla växelverkande partiklar.</p>
 </div>`;
-const table=(rows)=>`<table class="book-table"><thead><tr><th>Uppgift</th><th>Leta efter</th><th>Läs i boken</th><th>Grupp</th></tr></thead><tbody>${rows.map(([num,key,pages,group])=>`<tr><td>${num}</td><td>${key}</td><td>s. ${pages}</td><td>${group}</td></tr>`).join('')}</tbody></table>`;
+const table=(rows)=>`<table class="book-table"><thead><tr><th>Uppgift</th><th>Leta efter</th><th>Läs i boken</th><th>Grupp</th></tr></thead><tbody>${rows.map(([num,key,pages,group])=>`<tr data-exercise="${num}"><td>${num}</td><td>${key}</td><td>Läs: s. ${pages}</td><td>${group}</td></tr>`).join('')}</tbody></table>`;
 const data={
   title:'9.1 Standardmodellen',
   subject:'Fysik nivå 1b',
@@ -37,15 +37,21 @@ const data={
   pages:[
     {
       title:'Vad finns egentligen i en proton?',label:'Start · 5 minuter',time:'5 min',
-      body:`<p class="focus-line">Vi börjar med en kort demonstration.</p>
-        <div class="video-refs"><a href="https://youtu.be/LraNu_78sCw" target="_blank" rel="noopener noreferrer">Visa originalets demo</a></div>
+      body:`<p class="focus-line">Vi börjar med originalets korta kvarkfilm.</p>
+        <div class="youtube-start-wrap">
+          <div class="youtube-start-meta"><b>Quarks Explained in Four Minutes</b><span>Physics Girl · cirka 4 minuter</span></div>
+          <div class="youtube-start" id="youtube-start" role="group" aria-label="Inbäddad YouTube-film om kvarkar">
+            <button type="button" data-youtube-play class="youtube-start-button" aria-label="Spela filmen om kvarkar här i lektionen"><span class="youtube-play-icon" aria-hidden="true">▶</span><span>Spela klippet här</span></button>
+          </div>
+          <p class="youtube-start-fallback">Om inbäddningen blockeras: <a href="https://youtu.be/LraNu_78sCw" target="_blank" rel="noopener noreferrer">öppna originalfilmen på YouTube</a>. Filmen laddas först när du trycker på Spela.</p>
+        </div>
         <div class="question">Förutsäg: är protonen en odelbar partikel – eller består den av mindre delar? Vad tänker du efter klippet?</div>
         <div class="goal-card"><b>Efter lektionen ska du kunna</b><ol>
           <li>Förklara hur kvarkar och leptoner ingår i materiens byggstenar.</li>
           <li>Koppla fyra växelverkningar till kraftförmedlande partiklar.</li>
           <li>Använda boken för att förklara antimateria, Higgs och massa–energi.</li>
         </ol></div>`,
-      teacher:'Bevara originalets inledande videodemo. Efter visningen: tyst 20 sek, sedan kort parprat. Frågorna är öppna; facit byggs upp på nästa bilder. Den gamla lektionens fokus på instuderingsfrågor står kvar.',
+      teacher:'Bevara originalets inledande kvarkfilm i den inbäddade spelaren som fanns i den publicerade 9.1-versionen. Den stannar vid bildbyte. Vid tidsbrist, visa valda delar. Efter visningen: tyst 20 sek, sedan kort parprat. Frågorna är öppna; facit byggs upp på nästa bilder. Den gamla lektionens fokus på instuderingsfrågor står kvar.',
       source:'1',tag:'Huvudspår'
     },
     {

@@ -1,0 +1,116 @@
+/* Source fidelity, geometry, MathML, reveal and responsive QA for lesson 45. */
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const out='mato1c-qa-screenshots';fs.mkdirSync(out,{recursive:true});
+const url='http://127.0.0.1:8123/mato1c/kapitel-3/integralberakning-med-primitiv-funktion/';
+const viewports=[[390,844],[768,900],[1280,800],[1920,1080]];
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ let checks=0,images=0;
+ const yes=(v,s)=>{assert.ok(v,s);checks++};
+ const near=(v,e,s,tol=.15)=>yes(Math.abs(v-e)<=tol,s+': got '+v+' vs '+e);
+ const parsePoints=s=>s.trim().split(/\s+/).map(p=>p.split(',').map(Number));
+ const shot=async(page,label)=>{await page.screenshot({path:out+'/v25-integral-'+label+'.png',fullPage:false});images++};
+ try{
+  for(const [width,height] of viewports){
+   const page=await browser.newPage({viewport:{width,height}});
+   const errors=[],external=[];
+   page.on('pageerror',e=>errors.push(e.message));
+   page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:8123/'))external.push(r.url())});
+   const tag=width+'x'+height;
+   const go=async(n)=>{const current=Number((await page.locator('#counter').innerText()).split('/')[0].trim());await page.evaluate(delta=>step(delta),n-current);yes((await page.locator('.slide.active').count())===1&&Number((await page.locator('#counter').innerText()).split('/')[0].trim())===n,tag+' one active slide '+n)};
+   const overflow=async(label)=>{
+    const result=await page.evaluate(()=>({page:document.documentElement.scrollWidth-innerWidth,equations:[...document.querySelectorAll('.slide.active .equation')].filter(e=>e.getBoundingClientRect().width>0&&e.scrollWidth>e.clientWidth+2).map(e=>({text:e.textContent.slice(0,100),extra:e.scrollWidth-e.clientWidth}))}));
+    yes(result.page<=2,tag+' no horizontal document overflow '+label+': '+JSON.stringify(result));
+    yes(result.equations.length===0,tag+' full equations visible without internal horizontal scroll '+label+': '+JSON.stringify(result.equations));
+   };
+   await page.goto(url,{waitUntil:'networkidle'});
+   yes(await page.locator('section.slide').count()===9,tag+' nine lesson sections');
+   yes(await page.locator('.goal').count()===3,tag+' exactly three objectives');
+   for(let n=1;n<=9;n++){await go(n);await overflow('slide '+n)}
+   await go(1);await shot(page,tag+'-start');
+   yes((await page.locator('section.slide.active').innerText()).includes('integralkalkylens fundamentalsats'),tag+' recap of lesson 44');
+   await go(2);
+   yes(await page.locator('#fundamental-step-notation msubsup').count()===1,tag+' authentic bracket bounds in theorem');
+   yes((await page.locator('section.slide.active').innerText()).includes('F(b) − F(a)'),tag+' theorem fully stated before use');
+   yes((await page.locator('section.slide.active').innerText()).includes('(F(b) + C) − (F(a) + C)'),tag+' oral C cancellation retained');
+   await shot(page,tag+'-theorem');
+   await go(3);
+   yes(!await page.locator('#s3').isVisible(),tag+' pupil writes integral before reveal');
+   const recap=await page.locator('#recap-plot polygon').getAttribute('points');
+   yes(recap==='112,292 112,202 376,67 376,292',tag+' recap polygon exact width, heights and coordinates');
+   const svg=await page.locator('#recap-plot').evaluate(el=>({bounds:[...el.querySelectorAll('text')].map(e=>{const b=e.getBBox();return{x:b.x,y:b.y,right:b.x+b.width,bottom:b.y+b.height}})}));
+   yes(svg.bounds.every(b=>b.x>=0&&b.y>=0&&b.right<=510&&b.bottom<=350),tag+' recap labels inside SVG viewBox '+JSON.stringify(svg));
+   await shot(page,tag+'-recap-area');
+   await page.locator('[data-reveal="s3"]').click();
+   yes(await page.locator('#s3').isVisible()&&await page.locator('#s3 math msubsup').count()===1,tag+' integral bounds 0..3 become visible after pupil attempt');
+   await overflow('recalled integral');
+   await go(4);
+   yes(!await page.locator('#s4').isVisible(),tag+' main worked algebra hidden until attempt');
+   await page.locator('[data-reveal="s4"]').click();
+   const main=page.locator('#s4');
+   yes(await main.locator('.mathstack > .equation').count()===7,tag+' main calculation has seven full mathematical lines');
+   yes(await main.locator('msubsup').count()>=2,tag+' main example uses true integral and bracket limits');
+   yes((await main.innerText()).includes('10,5'),tag+' original type gives 10.5 using new numbers');
+   yes((await main.innerText()).includes('Geometrisk kontroll – efter beräkningen'),tag+' geometry is a check after algebra');
+   await overflow('all main solution steps expanded');
+   await shot(page,tag+'-recap-complete-algebra');
+   await go(5);
+   yes(await page.locator('#twoCurves[aria-label*="f(x)=6x−3x²+4"]').count()===1,tag+' new functions are documented for graph');
+   const polygon=parsePoints(await page.locator('#twoCurvesArt polygon').getAttribute('points'));
+   yes(polygon.length===182,tag+' exact composite polygon from sampled upper and lower graphs');
+   near(polygon[0][0],75,tag+' polygon x=0');near(polygon[0][1],315-4*38,tag+' upper f(0)=4');
+   near(polygon[90][0],75+2*165,tag+' upper endpoint x=2');near(polygon[90][1],315-4*38,tag+' upper f(2)=4');
+   near(polygon[91][1],315-4*38,tag+' lower g(2)=4');near(polygon[181][1],315,tag+' lower g(0)=0');
+   const labels=await page.locator('#twoCurvesArt text').evaluateAll(els=>els.map(e=>({text:e.textContent,x:e.getBBox().x,right:e.getBBox().x+e.getBBox().width,y:e.getBBox().y,bottom:e.getBBox().y+e.getBBox().height})));
+   yes(labels.every(l=>l.x>=0&&l.right<=540&&l.y>=0&&l.bottom<=375),tag+' all dynamic graph labels fit figure '+JSON.stringify(labels));
+   for(const x of [0,.5,1,1.5,2]){
+    await page.locator('#probe').evaluate((el,value)=>{el.value=String(value);el.dispatchEvent(new Event('input',{bubbles:true}))},x);
+    near(parseFloat((await page.locator('#heightGap').innerText()).replace(',','.')),4*x-3*x*x+4,tag+' slider gap at x='+x,.01);
+    const pts=await page.locator('#twoCurvesArt line[stroke="#03765f"]').getAttribute('y1');
+    near(+pts,315-38*(6*x-3*x*x+4),tag+' interactive marker height at x='+x);
+   }
+   await page.locator('#probe').evaluate(el=>{el.value='1';el.dispatchEvent(new Event('input',{bubbles:true}))});
+   await shot(page,tag+'-two-curves');
+   await page.locator('.choices button').nth(1).click();
+   yes(await page.locator('#curveFeedback math').count()===2&&(await page.locator('#curveFeedback').innerHTML()).includes('<mn>7</mn>'),tag+' wrong area order feedback prompts correct numerical comparison');
+   await page.locator('.choices button').first().click();
+   yes((await page.locator('#curveFeedback').innerText()).includes('större arean minus den mindre'),tag+' upper minus lower feedback');
+   await go(6);
+   yes(await page.locator('section.slide.active .mathstack .equation').count()===3,tag+' both separate and single-integral expressions before simplifying');
+   yes(!await page.locator('#s6').isVisible(),tag+' pupil simplifies the integrand first');
+   await page.locator('[data-reveal="s6"]').click();
+   yes(await page.locator('#s6 math msubsup').count()===1,tag+' simplified difference has correct bounds');
+   await overflow('upper-minus-lower setup');await shot(page,tag+'-source-method');
+   await go(7);
+   yes(!await page.locator('#s7').isVisible(),tag+' entire source solution waits for pupil attempt');
+   await page.locator('[data-reveal="s7"]').click();
+   yes(await page.locator('#s7 .equation').count()===9,tag+' all original calculation links and derivative check shown');
+   yes(await page.locator('#s7 math msubsup').count()>=2,tag+' source bracket notation uses stacked bounds');
+   yes((await page.locator('#s7 .equation').nth(7).textContent()).includes('8 a.e.'),tag+' new exact two-curve area eight');
+   yes((await page.locator('#s7').innerText()).includes('F(2) − F(0)'),tag+' upper minus lower function values intact');
+   await overflow('full two-curve algebra');await shot(page,tag+'-all-algebra');
+   await go(8);
+   yes(await page.locator('.slide.active details').count()===1&&!await page.locator('.slide.active details').evaluate(e=>e.open),tag+' independent facit accessible but collapsed');
+   await page.locator('#studentAnswer').fill('4,5');await page.locator('#checkAnswer').click();
+   yes((await page.locator('#ownFeedback').innerText()).includes('Rätt area'),tag+' independent exact area recognized');
+   await shot(page,tag+'-independent-feedback');
+   await go(9);
+   const book=await page.locator('.slide.active').innerText();
+   for(const phrase of ['3350–3356','3357–3363','3364–3367','alla uppgifter och samtliga deluppgifter','NOKflex 3.4 Integraler'])yes(book.includes(phrase),tag+' homework '+phrase);
+   const final=page.locator('#exitSolutions');yes(!await final.evaluate(e=>e.open),tag+' exit solution initially closed');
+   await final.locator('summary').click();
+   yes(await final.locator('math msubsup').count()>=3,tag+' exit uses exact integral bounds');
+   await overflow('full exit feedback');await shot(page,tag+'-exit');
+   await go(5);yes((await page.locator('#probe').inputValue())==='1',tag+' graph slider resets');
+   yes(await page.locator('#curveFeedback').isHidden(),tag+' feedback hidden on return');
+   await go(7);yes(!await page.locator('#s7').isVisible(),tag+' main worked solution resets');
+   await go(8);yes((await page.locator('#studentAnswer').inputValue())==='',tag+' student answer resets');
+   yes(errors.length===0,tag+' no JS errors '+errors.join(' | '));
+   yes(external.length===0,tag+' no network requests outside own site '+external.join(' | '));
+   await page.close();
+  }
+  console.log(JSON.stringify({result:'PASS',checks,images,viewports,lesson:'Integralberäkning med primitiv funktion'}));
+ }finally{await browser.close()}
+})().catch(e=>{console.error(e.stack);process.exit(1)});

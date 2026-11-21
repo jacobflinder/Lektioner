@@ -20,6 +20,7 @@ assert.equal(data.goals.length, 3, 'Tre övergripande mål');
 assert.deepEqual(Array.from(data.pages, p => Number.parseInt(p.time, 10)), [5, 5, 6, 5, 4, 5, 17, 18, 5], 'Gy25-lektionens minuter och 35 min grupparbete');
 assert.equal(data.pages[0].body.match(/<li>/g).length, 3, 'Tre synliga elevmål på startbilden');
 assert.ok(data.pages[0].body.includes('LraNu_78sCw'), 'Originalets demonstration');
+assert.ok(data.pages[0].body.includes('data-youtube-play'), 'Publicerad inbäddad spelare bevaras');
 assert.ok(data.pages[1].side.includes('8lbJSgnUvsw'), 'Originalets kvarkfilm');
 assert.ok(data.pages[1].side.includes('Mindmap'), 'Originalets mindmap finns kvar');
 assert.ok(data.pages[2].body.includes('uppkvark') && data.pages[2].body.includes('nerkvark'), 'Laddning definieras innan beräkning');
@@ -38,7 +39,7 @@ assert.ok(!script.includes('Socrative'), 'Ingen ny Socrative');
 assert.ok(!allText.includes('1018–1044'), 'Gamla bokens nummer ersatta');
 
 const assignment = new Map();
-for (const match of work.matchAll(/<tr><td>(9\d\d)<\/td><td>[^<]+<\/td><td>s\. ([^<]+)<\/td><td>([ABC])<\/td><\/tr>/g)) {
+for (const match of work.matchAll(/<tr data-exercise="9\d\d"><td>(9\d\d)<\/td><td>[^<]+<\/td><td>Läs: s\. ([^<]+)<\/td><td>([ABC])<\/td><\/tr>/g)) {
   const number = Number(match[1]);
   assert.ok(!assignment.has(number), `Uppgift ${number} förekommer bara en gång`);
   assert.ok(/32[5-9]|33[01]/.test(match[2]), `Uppgift ${number} har sidreferens inom 9.1`);
@@ -66,6 +67,14 @@ console.log('Statisk innehålls-, ordnings- och strukturkontroll: OK');
       assert.equal(await page.locator('.slide').count(), 9, 'Nio bilder i DOM');
       assert.equal(await page.locator('.teacher-note:visible').count(), 0, 'Lärarstödet dolt i elevläget');
       assert.equal(await page.locator('.source-note:visible').count(), 0, 'Källkartan visas inte över elevbilderna');
+      await page.route('**/youtube-nocookie.com/**', route => route.abort());
+      await page.locator('.slide.active [data-youtube-play]').click();
+      assert.match(await page.locator('#youtube-start iframe').getAttribute('src'), /youtube-nocookie.com\/embed\/LraNu_78sCw/, 'Samma originalfilm inbäddad');
+      assert.equal(await page.locator('#youtube-start iframe').getAttribute('title'), 'Quarks Explained in Four Minutes – Physics Girl', 'Tillgängligt namn på filmspelaren');
+      await page.selectOption('#jump', '1');
+      assert.equal(await page.locator('#youtube-start iframe').count(), 0, 'Filmen stannar när läraren lämnar bilden');
+      await page.selectOption('#jump', '0');
+      assert.equal(await page.locator('.slide.active [data-youtube-play]').count(), 1, 'Filmen går att starta igen');
 
       for (let i = 0; i < 9; i++) {
         await page.selectOption('#jump', String(i));

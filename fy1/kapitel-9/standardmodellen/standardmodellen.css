@@ -8,6 +8,16 @@
 .video-refs{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0}
 .video-refs a{display:inline-block;text-decoration:none;font-weight:750;background:#eaf5f7;border:1px solid #b7dce3;border-radius:11px;padding:10px 14px}
 .video-refs a:hover{background:#d9eef3}.focus-line{font-size:1.2rem;font-weight:800;color:#0b586c}
+.youtube-start-wrap{margin:14px 0 18px}
+.youtube-start-meta{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 15px;width:min(100%,760px);margin-bottom:8px}
+.youtube-start-meta b{font-size:1.05rem}.youtube-start-meta span{font-size:.79rem;color:#5b737c}
+.youtube-start{width:min(100%,760px);aspect-ratio:16/9;background:#163c51;border:1px solid #abc6ce;border-radius:13px;overflow:hidden;position:relative;isolation:isolate}
+.youtube-start-button{width:100%;height:100%;min-height:0;border:0;border-radius:0;background:radial-gradient(circle at 35% 30%,#256b83,#102d3f 85%);color:#fff;font:inherit;font-size:clamp(1rem,2.2vw,1.5rem);display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer}
+.youtube-start-button:hover:not(:disabled){background:radial-gradient(circle at 35% 30%,#34829d,#12364c 85%)}
+.youtube-start-button:focus-visible{outline:4px solid #f8bd56;outline-offset:-5px}
+.youtube-play-icon{background:#d93b36;padding:13px 16px;border-radius:13px;font-size:1.6rem;line-height:1}
+.youtube-start iframe{display:block;width:100%;height:100%;border:0}
+.youtube-start-fallback{font-size:.81rem;color:#527078;max-width:760px;margin:8px 0 0}.youtube-start-fallback a{font-weight:650}
 .history{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:11px}
 .history>div{padding:14px 12px;background:#f2f7f8;border-radius:12px;border-top:5px solid #579fae;min-width:0}
 .history b{display:block;font-size:1.08rem}.history span{display:block;font-size:.88rem}
@@ -53,6 +63,7 @@
  .book-table tr{position:relative;padding-left:60px;min-height:94px}
  .book-table td:first-child{position:absolute;top:12px;left:13px;width:40px;font-size:1.05rem;font-weight:850}
  .book-table td:nth-child(2){font-size:1rem;font-weight:650;overflow-wrap:anywhere}
- .book-table td:nth-child(3)::before{content:'Läs: ';font-weight:650;color:#53717a}
+ .book-table td:nth-child(3)::before{content:''}
  .book-table td:nth-child(4)::before{content:'Grupp: ';font-weight:650;color:#53717a}
+ .youtube-start-button{font-size:.98rem;gap:9px}.youtube-play-icon{font-size:1.25rem;padding:11px}.youtube-start{border-radius:10px}
 }

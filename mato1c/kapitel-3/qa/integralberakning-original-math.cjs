@@ -1,0 +1,68 @@
+/* Source-to-web, math, geometry and teaching-order QA: lesson 45. */
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path='mato1c/kapitel-3/integralberakning-med-primitiv-funktion/';
+const html=fs.readFileSync(path+'index.html','utf8');
+const source=fs.readFileSync(path+'KALLGRANSKNING.md','utf8');
+let checks=0;
+const yes=(v,msg)=>{assert.ok(v,msg);checks++};
+const near=(v,expected,msg,tol=1e-9)=>yes(Math.abs(v-expected)<=tol,msg+': '+v+' != '+expected);
+const stages=[...html.matchAll(/<section class="slide(?: active)?" data-title="([^"]+)"/g)].map(x=>x[1]);
+yes(stages.length===9,'Nine meaningful core slides');
+yes(stages.join('|')==='Start och mål|Fundamentalsatsen|Enkel area|Beräkna samma integral|Två kurvor|Ställ upp integralen|Fullständig lösning|Pröva själv|Bokarbete och kontroll','Source order preserved');
+for(const label of ['original → webb','fundamentalsats','övre','undre','NOKflex','Socrative','2026-11-21']){
+ yes(source.toLowerCase().includes(label.toLowerCase()),'Written source map: '+label);
+}
+yes((html.match(/class="goal"/g)||[]).length===3,'Three measurable goals');
+yes(html.includes('Individuell slutkontroll')&&html.includes('1.</strong>')&&html.includes('2.</strong>')&&html.includes('3.</strong>'),'Three matching individual closing tasks');
+yes(html.indexOf('data-title="Fundamentalsatsen"')<html.indexOf('data-title="Beräkna samma integral"'),'Theorem comes before first definite-integral calculation');
+yes(html.includes('fundamental-step-notation')&&html.includes('F(b) − F(a)'),'Fundamental theorem includes bracket and full upper minus lower difference');
+yes(html.includes('(F(b) + C) − (F(a) + C)'),'Source speech: cancellation of C explicitly shown');
+yes(html.indexOf('data-title="Ställ upp integralen"')<html.indexOf('data-title="Fullständig lösning"'),'Upper minus lower algebra introduced before calculation');
+yes(html.includes('Stora arean minus den lilla')&&html.includes('Övre funktion minus undre funktion'),'Original source area-subtraction explanation preserved');
+yes(html.includes('6x − 3x<sup>2</sup> + 4')&&html.includes('g(x) = 2x'),'New quadratic-versus-rising-line example not copied from textbook');
+yes(!html.includes('6x − 3x<sup>2</sup> + 2')&&!html.includes('g(x) = x</div>'),'Original textbook curve expressions not copied');
+yes(!html.includes('y = x + 1')&&!html.includes('från x lika med noll till två ovanför x-axeln'),'Textbook recap numbers replaced with lesson 44 example');
+yes(html.includes('id="recap-plot"')&&html.includes('x=0 och x=3')===false,'Updated recap graph exists with source-type area');
+yes(html.includes('points="112,292 112,202 376,67 376,292"'),'Recap region has mathematically correct four boundary corners');
+yes(html.includes('id="twoCurves"')&&html.includes('id="twoCurvesArt"')&&html.includes('id="probe"'),'Interactive two-curve figure preserved');
+yes(html.includes('function f(x){return 6*x-3*x*x+4;}')&&html.includes('function g(x){return 2*x;}'),'Graph implementation uses exactly the displayed functions');
+yes(html.includes('f(x) = 6x − 3x² + 4')&&html.includes('g(x) = 2x'),'Graph labels agree with formulas');
+yes(html.includes('(2, 4)')&&html.includes('5,0</strong> längdenheter'),'Intersection and probe initial readout consistent');
+yes(html.includes('<mn>4</mn><mi>x</mi><mo>−</mo><mn>3</mn>')&&html.includes('<mn>4</mn><mi>x</mi><mo>]</mo>'),'Difference and primitive terms represented in MathML');
+yes(html.includes('2</mn><msup><mi>x</mi><mn>2')||html.includes('<mn>2</mn><msup><mi>x</mi><mn>2'),'Integral primitive includes 2x²');
+yes(html.includes('<mn>8</mn><mo>−</mo><mn>8</mn><mo>+</mo><mn>8</mn>'),'Substitution simplification full chain retained');
+yes(html.includes('<mn>8</mn><mtext> a.e.</mtext>'),'Area of new principal two-curve example is eight square units');
+yes(html.includes('F(2) − F(0)'),'Constant cancellation located near main worked solution');
+yes(html.includes('Se sedan genomgången i <strong>NOKflex 3.4 Integraler – Tillämpningar och problemlösning</strong>'),'Original exact NOKflex preparation restored');
+for(const item of ['192–193','3350–3356','3357–3363','3364–3367','alla uppgifter och samtliga deluppgifter','minst två av de tre nivåerna'])yes(html.includes(item),'Current-edition book workflow retained: '+item);
+yes(!html.includes('Socrative')&&!html.includes('SOC-'),'No Socrative added where source does not contain it');
+yes(!/originalet|originalets|Jacobs tavellösning|nya tal|din gamla genomgång/i.test(html),'Student-facing lesson contains no internal source-comparison notes');
+yes(!html.includes('negativa integralvärden')&&!html.includes('teckenbyte'),'No invented negative-area exception');
+yes(!/fetch\(|XMLHttpRequest|localStorage|sendBeacon/.test(html),'No tracking or student data transmission');
+const f=x=>6*x-3*x*x+4,g=x=>2*x,d=x=>f(x)-g(x),F=x=>2*x*x-x*x*x+4*x;
+near(f(0),4,'Upper graph starts at height four');
+near(g(0),0,'Lower line crosses the origin');
+near(f(2),4,'Upper graph at curve intersection');
+near(g(2),4,'Lower line at curve intersection');
+near(F(2)-F(0),8,'Area under the difference on [0,2]');
+for(const x of [0,.1,.25,.5,1,1.5,1.9,2]){
+ yes(d(x)>=0,'Upper graph is not below lower on [0,2] at x='+x);
+ near(d(x),4*x-3*x*x+4,'Displayed simplified integrand at x='+x);
+ const h=1e-5;near((F(x+h)-F(x-h))/(2*h),d(x),'Primitive derivative agrees at x='+x,1e-8);
+ const svgX=75+165*x,svgF=315-38*f(x),svgG=315-38*g(x);
+ yes(svgF<=svgG,'SVG upper graph visually above lower at x='+x);
+ if(x<=2)yes(svgX>=75&&svgX<=405,'SVG area x coordinate inside shade at x='+x);
+}
+const P=x=>x*x/2+2*x;
+near(P(3)-P(0),10.5,'Lesson 44 recap integral');
+near(3*2+(3*3)/2,10.5,'Recap rectangle plus triangle checks algebra');
+const fs2=x=>-x*x+4*x+1,gs2=x=>x+1,Fs2=x=>-(x*x*x)/3+1.5*x*x;
+near(fs2(3),gs2(3),'Independent example intersection');
+near(Fs2(3)-Fs2(0),4.5,'Independent example feedback');
+near(2*2*2+2,10,'Exit integral with full substitutions');
+const opening=[...html.matchAll(/<math\b/g)].length,closing=[...html.matchAll(/<\/math>/g)].length;
+yes(opening===closing&&opening>=26,'All manually written MathML blocks closed');
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
+yes(new Set(ids).size===ids.length,'No duplicate DOM ids');
+console.log(JSON.stringify({result:'PASS',checks,lesson:'Integralberäkning med primitiv funktion'}));

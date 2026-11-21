@@ -46,6 +46,14 @@
 .book-methods .method-item .formula{font-size:clamp(1.02rem,1.6vw,1.25rem);margin:8px 0;padding:7px 9px}
 .book-methods .method-item p:last-child{margin-bottom:0}
 .book-note{font-size:1.04rem;font-weight:650;color:#425f72}
+.goal-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:11px 0 15px;padding:0;list-style:none;counter-reset:goal}
+.goal-strip li{counter-increment:goal;min-width:0;padding:9px 11px;border-radius:9px;background:#eef7f3;border:1px solid #c8e4d9;font-size:.99rem;line-height:1.35}
+.goal-strip li::before{content:counter(goal) ' · ';font-weight:800;color:#087d70}
+.goal-definition{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.goal-definition p{flex:1 1 250px;margin:0}
+.goal-definition .formula{flex:0 1 300px;margin:0}
+.exit-checklist{margin:5px 0;padding-left:25px}
+.exit-checklist li{margin:3px 0}
 .booklevels{align-items:stretch}
 .booklevel .number{font-size:1.16rem;line-height:1.55;overflow-wrap:anywhere}
 .small-print{font-size:.85rem;color:#4e697b}
@@ -54,7 +62,7 @@
 .sequence .steps{gap:16px}
 .sequence .seq-item{padding:15px 18px}
 .choice{min-height:53px}
-@media(max-width:1000px){.graph-workbench{display:block}.explain-grid{grid-template-columns:1fr}}
+@media(max-width:1000px){.graph-workbench{display:block}.explain-grid{grid-template-columns:1fr}.goal-strip{grid-template-columns:1fr}}
 @media(min-width:700px) and (max-width:1000px){#graph .graph-instructions{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}#graph .graph-instructions>.formula{grid-column:1/-1}#graph .graph-instructions>.task,#graph .graph-instructions>.graph-slider{margin:4px 0}}
 @media(max-width:720px){.formula{font-size:1.12rem;padding:9px 11px}.formula.small{font-size:1.03rem}.graph-frame{padding:8px}.formulas{gap:16px}.explain-card{padding:12px}.book-methods .method-grid{grid-template-columns:1fr}}
 </style>
@@ -100,24 +108,15 @@
   </div>
 </section>
 
-<section class="slide" id="goal" data-teacher="Målen presenteras efter startfrågan. Poängtera F stor bokstav och f liten bokstav; namnen är en konvention som gör relationen lättare att följa.">
-  <div class="eyebrow">02 · Dagens mål · s. 179–181</div>
-  <h2>Från derivata till funktion</h2>
-  <p class="lead">Efter lektionen ska du kunna:</p>
-  <ol class="spaced">
-    <li>förklara vad en <strong>primitiv funktion</strong> är och varför vi skriver <strong>+ C</strong>,</li>
-    <li>bestämma alla primitiva funktioner till potenser, summor och funktioner med <strong>e</strong>,</li>
-    <li>kontrollera ditt svar genom att <strong>derivera tillbaka</strong>.</li>
-  </ol>
-  <div class="statement"><strong>Huvudidé:</strong> Derivering går från en funktion till dess derivata. Nu ska vi hitta funktioner som ger en viss derivata.</div>
-  <p class="book-note">Läroboken: avsnitt 3.3, s. 179–181. Genomgång och genomräknade bokexempel: s. 179–180.</p>
-</section>
-
-<section class="slide" id="meaning" data-teacher="Läs likheten F′=f högt och åt båda håll. Låt eleverna först testa F=3x²−4x på f=6x−4. Återkoppling: även +100 och −8 fungerar. Betona samtliga F+C, inte ett enstaka svar.">
-  <div class="eyebrow">03 · Begreppet på riktigt</div>
+<section class="slide" id="goal" data-teacher="Efter startfrågan: gå igenom tre elevmål. Läs F′=f åt båda håll; stor F och liten f är en hjälpsam konvention. Låt eleverna testa F=3x²−4x, jämför därefter +100 och −8. Alla primitiva funktioner skrivs F+C.">
+  <div class="eyebrow">02 · Mål och begrepp · s. 179–181</div>
   <h2>Vad betyder primitiv funktion?</h2>
-  <p>En funktion <strong>F</strong> är en primitiv funktion till <strong>f</strong> om derivatan av F är f.</p>
-  <p class="formula emphasis" data-formula="F′(x)=f(x)">F′(x) = f(x)</p>
+  <ol class="goal-strip" aria-label="Efter lektionen ska du kunna">
+    <li>Förklara <strong>primitiv funktion</strong> och varför vi skriver <strong>+ C</strong>.</li>
+    <li>Bestämma alla primitiva funktioner till <strong>potenser, summor och e-funktioner</strong>.</li>
+    <li>Kontrollera genom att <strong>derivera tillbaka</strong>.</li>
+  </ol>
+  <div class="goal-definition"><p>Nu går vi bakåt från en derivata: <strong>F</strong> är en primitiv funktion till <strong>f</strong> när derivatan av F är f.</p><p class="formula emphasis" data-formula="F′(x)=f(x)">F′(x) = f(x)</p></div>
   <div class="explain-grid">
     <div class="explain-card"><h3>Derivera framåt</h3>
       <p class="formula" data-formula="F(x)=3x²−4x">F(x) = 3x² − 4x</p>
@@ -131,10 +130,11 @@
   <div class="task"><strong>Kontrollfråga:</strong> Är <span class="inline-math" data-formula-inline="3x²−4x+100"></span> också en primitiv funktion? Och <span class="inline-math" data-formula-inline="3x²−4x−8"></span>? Förklara.</div>
   <button type="button" class="reveal" data-reveal="meaning-answer">Visa förklaring</button>
   <div class="answer hidden" id="meaning-answer"><p><strong>Ja, båda.</strong> Derivatan av en konstant är 0. Därför får vi <strong>alla</strong> primitiva funktioner i den gemensamma formen</p><p class="formula" data-formula="F(x)=3x²−4x+C"></p><p>där C är ett godtyckligt reellt tal.</p></div>
+  <p class="small-print">Läroboken: teori och genomgång s. 179–180; uppgifter s. 181.</p>
 </section>
 
 <section class="slide" id="graph" data-teacher="Låt alla rita en grov skiss av F för C=0 och förutsäga förskjutningen vid C=2. Visa först därefter reglaget. De tre kurvorna använder samma koordinatsystem och skala: vald F är blå, C=0 streckad och derivatan f=F′ grön. Fråga: hur påverkas varje tangentlutning av förskjutningen?">
-  <div class="eyebrow">04 · Undersök en hel familj grafer</div>
+  <div class="eyebrow">03 · Undersök en hel familj grafer</div>
   <h2>Vad gör konstanten C med grafen?</h2>
   <div class="graph-workbench">
     <div class="graph-instructions">
@@ -155,7 +155,7 @@
 </section>
 
 <section class="slide" id="power" data-teacher="Först ett exempel som inte är bokens. Visa inte stegen förrän eleverna har försökt. Låt dem derivera det färdiga svaret. Regeln uttrycks generellt med n≠−1, och konstantfaktorer går med.">
-  <div class="eyebrow">05 · En regel baklänges</div>
+  <div class="eyebrow">04 · En regel baklänges</div>
   <h2>Potensregeln – men åt andra hållet</h2>
   <div class="explain-grid">
     <div class="explain-card"><h3>När vi deriverar</h3><p class="formula" data-formula="(x⁴)′=4x³">(x⁴)′ = 4x³</p></div>
@@ -176,7 +176,7 @@
 </section>
 
 <section class="slide" id="fractional" data-optional="true" data-teacher="Fördjupning om negativa och brutna exponenter inför bl.a. uppgift 3314. Lägg vid behov; gå vidare från potenssteget om eleverna ännu inte behärskar grundregeln. För x>0 kan √x skrivas x^(1/2). Undantaget n=−1 omfattas inte av potensformeln.">
-  <div class="eyebrow">06 · Valbar fördjupning</div>
+  <div class="eyebrow">05 · Valbar fördjupning</div>
   <h2>Negativa och brutna exponenter fungerar också</h2>
   <p>Vi kan skriva om rötter och bråk som potenser innan vi använder regeln.</p>
   <p class="formula" data-formula="1/√x=x^{−1/2}">1/√x = x⁻¹ᐟ²</p>
@@ -189,7 +189,7 @@
 </section>
 
 <section class="slide" id="exponential" data-teacher="Låt eleverna derivera e^(3x) och e^(−x) först. Kedjeregeln ger faktor 3 respektive −1. För att återfå önskad faktor kompenserar man genom att dela med exponentens x-koefficient k (k≠0). Derivera tillbaka båda exemplen.">
-  <div class="eyebrow">07 · När det finns ett e</div>
+  <div class="eyebrow">06 · När det finns ett e</div>
   <h2>Exponentialfunktioner: kom ihåg faktorn i exponenten</h2>
   <div class="explain-grid">
     <div class="explain-card"><h3>Derivera</h3><p class="formula" data-formula="(e^{3x})′=3e^{3x}">(e^(3x))′ = 3e^(3x)</p></div>
@@ -209,7 +209,7 @@
 </section>
 
 <section class="slide" id="combined" data-teacher="Låt eleverna identifiera varje typ av term (potens, linjär, konstant, exponential) och ge förslag innan varje steg visas. Använd stegknapparna; räkna inte ut åt eleverna direkt. Alla lösningar ska verifieras med derivatan.">
-  <div class="eyebrow">08 · Ett nytt blandat exempel</div>
+  <div class="eyebrow">07 · Ett nytt blandat exempel</div>
   <h2>Fyra termer – en primitiv funktion</h2>
   <p class="formula" data-formula="f(x)=6x²−8x+5+4e^{−2x}">f(x) = 6x² − 8x + 5 + 4e^(−2x)</p>
   <div class="task"><strong>Först själv:</strong> Vad händer med varje term när vi går bakåt från derivatan? Skriv sedan ett förslag på F(x).</div>
@@ -232,7 +232,7 @@
 </section>
 
 <section class="slide" id="trap" data-teacher="Ta en kort diagnos av kedjeregeln. Både glömt delat med 3 och fel multiplikation med 3 ska vara tydliga distraktorer. Be eleven motivera genom derivering, inte endast gissa ett alternativ.">
-  <div class="eyebrow">09 · Hitta det avgörande steget</div>
+  <div class="eyebrow">08 · Hitta det avgörande steget</div>
   <h2>Vilket svar håller vid kontroll?</h2>
   <p class="formula" data-formula="f(x)=9e^{3x}">f(x) = 9e^(3x)</p>
   <p>Du söker <strong>alla</strong> primitiva funktioner. Vilket uttryck ger exakt den givna derivatan?</p>
@@ -246,7 +246,7 @@
 </section>
 
 <section class="slide" id="practice" data-teacher="Börja med 2–3 min helt tyst individuellt arbete. Låt därefter eleverna välja ett stöd om de behöver. Slutsvaret göms tills efter den egna lösningen. Hänvisa inte till bokens exakta uppgiftslydelser här.">
-  <div class="eyebrow">10 · Självständigt försök</div>
+  <div class="eyebrow">09 · Självständigt försök</div>
   <h2>Nu gör du hela kedjan</h2>
   <p>Bestäm <strong>alla</strong> primitiva funktioner till:</p>
   <p class="formula" data-formula="f(x)=10x⁴−9x²+2e^{−x}">f(x) = 10x⁴ − 9x² + 2e^(−x)</p>
@@ -261,7 +261,7 @@
 </section>
 
 <section class="slide" id="book" data-teacher="Säkerställ sammanhängande 20 min bokarbete. Minst två nivåer betyder ALLA uppgifter och deluppgifter på varje vald nivå, inte ett urval. 20 minuter är arbetstid, inte slutgräns; planera fortsättning tills båda valda nivåerna är klara. Ingen bokuppgiftstext återges på webben. Följ upp fel i +C, exponent och derivatakontroll. Visa valbar parameterfördjupning för nivå 3 vid behov.">
-  <div class="eyebrow">11 · Eget arbete i läroboken</div>
+  <div class="eyebrow">10 · Eget arbete i läroboken</div>
   <h2>Boken, s. 180–181</h2>
   <div class="statement"><strong>Uppdrag:</strong> Välj <strong>minst två av de tre nivåerna</strong>. Gör <strong>samtliga uppgifter och alla deluppgifter</strong> på varje nivå du väljer.</div>
   <p class="lead">Arbeta enskilt i ett sammanhängande pass på <strong>minst 20 minuter</strong>. Tiden är inte en gräns för hur många uppgifter du ska göra. Om du inte hinner klart under passet fortsätter du tills dina valda nivåer är färdiga.</p>
@@ -286,7 +286,7 @@
 </section>
 
 <section class="slide" id="parameter" data-optional="true" data-teacher="Valbart stöd till bokuppgift 3317. Belys med ett eget uttryck att man måste se vilken symbol man deriverar med avseende på. För a-konstant när x varierar: F(x)=a x²+3x+C. För x-konstant när a varierar: G(a)=x a²+3a+C. C kan i fler-variabelfallet bero på den parameter som hålls konstant; undvik att göra detta till ett huvudmoment.">
-  <div class="eyebrow">12 · Valbar fördjupning för nivå 3</div>
+  <div class="eyebrow">11 · Valbar fördjupning för nivå 3</div>
   <h2>Vilken bokstav får förändras?</h2>
   <p>Samma uttryck kan ge olika primitiva funktioner beroende på om <strong>x</strong> eller <strong>a</strong> är variabeln.</p>
   <p class="formula" data-formula="h(a,x)=2ax+3">h(a,x) = 2ax + 3</p>
@@ -298,20 +298,17 @@
   <button type="button" class="secondary" data-go="book">Tillbaka till bokens uppgifter</button>
 </section>
 
-<section class="slide" id="exit" data-teacher="Enskild utcheckning utan direktfacit. Eleverna redovisar ett fullständigt F-uttryck med C, en förklaring om varför konstanten finns, och deriverar tillbaka. Först när elevsvaret är insamlat muntligt eller på papper gå till återkopplingen.">
-  <div class="eyebrow">13 · Individuell utcheckning</div>
+<section class="slide" id="exit" data-teacher="Enskild utcheckning: samla in elevens fullständiga F-uttryck med C, en förklaring av konstanten och en derivatakontroll på papper eller muntligt. Visa inte återkopplingen förrän svaret är insamlat. Öppna sedan tre steg och koppla till de tre elevmålen. Vid fel: gå tillbaka till den aktuella regeln.">
+  <div class="eyebrow">12 · Individuell utcheckning och återkoppling</div>
   <h2>Kan du gå bakåt och sedan framåt igen?</h2>
   <p>Utan att titta på genomgången: bestäm alla primitiva funktioner till</p>
   <p class="formula" data-formula="f(x)=8x³+3e^{−x}">f(x) = 8x³ + 3e^(−x)</p>
   <div class="task"><strong>Lämna tre delar på ditt papper:</strong>
-    <ol class="spaced"><li>En formel för samtliga primitiva funktioner F(x).</li><li>En mening som förklarar varför ett C behövs.</li><li>En derivering som verifierar din formel.</li></ol>
+    <ol class="exit-checklist"><li>En formel för samtliga primitiva funktioner F(x).</li><li>En mening som förklarar varför ett C behövs.</li><li>En derivering som verifierar din formel.</li></ol>
   </div>
-  <p class="muted">Gå vidare när du har skrivit ett eget svar. Återkopplingen ligger på nästa sida.</p>
-</section>
-
-<section class="slide" id="exit-answer" data-teacher="Låt eleverna jämföra sina tre delmål: F korrekt? C? Derivatakontroll? Vid rätt svar kan de formulera en egen f med både polynom och exponentialfunktion. Vid fel: gå till rätt regel och kontrollera term för term.">
-  <div class="eyebrow">14 · Återkoppling på utcheckningen</div>
-  <h2>Kontrollera varje del av resonemanget</h2>
+  <button type="button" class="reveal" data-reveal="exit-answer">Visa återkoppling efter eget försök</button>
+  <div class="answer hidden" id="exit-answer">
+  <h3>Kontrollera varje del av resonemanget</h3>
   <div class="sequence" data-sequence>
     <div class="nextprompt" aria-live="polite" data-seq-prompt></div>
     <div class="steps">
@@ -322,6 +319,7 @@
     <div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div>
   </div>
   <div class="statement"><strong>Ta med dig:</strong> Att hitta en primitiv funktion är att vända på deriveringen – men vi måste komma ihåg + C och alltid kunna kontrollera svaret.</div>
+  </div>
 </section>
 </div>
 

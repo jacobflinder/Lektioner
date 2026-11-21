@@ -50,7 +50,8 @@ jobs:
             fy1/kapitel-8/qa/figure-interaction-series-v23.cjs \
             fy1/kapitel-8/qa/figure-interaction-effect-v23.cjs \
             fy1/kapitel-8/qa/figure-interaction-fields-v23.cjs \
-            fy1/kapitel-8/qa/figure-interaction-potential-v23.cjs
+            fy1/kapitel-8/qa/figure-interaction-potential-v23.cjs \
+            fy1/kapitel-9/qa/standardmodellen.cjs
           do
             node "$script" || failed=1
           done
