@@ -51,9 +51,9 @@ async function assertVisibleMath(page, width, slideNumber) {
           const before = document.querySelector('#prev').getBoundingClientRect();
           const after = document.querySelector('#next').getBoundingClientRect();
           const controls = document.querySelector('.controls').getBoundingClientRect();
-          return { rowOffset: Math.abs(before.top - after.top), height: controls.height, jumpHidden: getComputedStyle(document.querySelector('#jump')).display === 'none' };
+          return { rowOffset: Math.abs(before.top - after.top), height: controls.height, jumpVisible: getComputedStyle(document.querySelector('#jump')).display !== 'none', countHidden: getComputedStyle(document.querySelector('#count')).display === 'none' };
         });
-        assert(nav.rowOffset < 3 && nav.height < 72 && nav.jumpHidden, `Mobilnavigationen ska hålla en rad: ${JSON.stringify(nav)}`); checks++;
+        assert(nav.rowOffset < 3 && nav.height < 72 && nav.jumpVisible && nav.countHidden, `Mobilnavigationen ska hålla en rad med direkt bildval: ${JSON.stringify(nav)}`); checks++;
       }
 
       for (let i = 0; i < count; i++) {
