@@ -17,6 +17,7 @@
 .explain-card h3{color:#125e76}.explain-card>.formula{margin:8px 0}
 .mindmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}.mindmap>div{background:#f1f7fa;border:1px solid #c8dce6;border-radius:12px;padding:16px;min-width:0}.mindmap strong{color:#0b685e}
 .sequence .steps{gap:15px}.sequence .seq-item{padding:14px 17px}.sequence .seq-item .formula{display:block;margin:10px 0 0}.sequence .seq-item p{margin:7px 0}.nextprompt{min-height:44px}
+.worked-lines{padding-left:11px;border-left:2px solid #cddfe8}.worked-lines .formula{margin:5px 0;padding:5px 10px;line-height:1.38}.slide#worked .answer>.formula{margin:8px 0}.slide#worked .answer>p{margin:9px 0}
 .lab-layout{display:grid;grid-template-columns:minmax(270px,.76fr) minmax(0,1.24fr);gap:16px;align-items:start}
 .lab-controls{display:grid;gap:10px}.lab-controls>.formula{margin:0}.lab-prompt{background:#e5f5ef;border-left:5px solid #087d70;padding:13px 16px;border-radius:10px}
 .lab-slider{border:1px solid #b9d9d6;background:#edf8f4;padding:13px 15px;border-radius:12px}.lab-slider label{display:block;font-weight:750}.lab-slider input{width:100%;min-height:35px;accent-color:#087d70}.lab-slider output{font-weight:750;color:#066b61;font-size:1.16rem}
@@ -29,6 +30,7 @@
 .book-methods{border:1px solid #b9d9d6;background:#eff8f5;border-radius:12px;padding:13px 16px;margin:16px 0}.book-methods summary{color:#075e57;font-size:1.04rem;cursor:pointer}.book-methods summary:focus-visible{outline:3px solid #e7a62e;outline-offset:4px}.book-methods[open] summary{margin-bottom:13px}
 .method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.method-item{min-width:0;background:#fff;border:1px solid #d0e2df;border-radius:9px;padding:10px 12px}.method-item strong{color:#135f58}.method-item .formula{font-size:clamp(1.01rem,1.55vw,1.22rem);padding:7px 9px}.method-item p:last-child{margin-bottom:0}
 .small-print{font-size:.87rem;color:#4d6a7b}.route-guide p{margin:10px 0}.teacher-route{font-weight:650}
+.explain-card .answer{margin-top:12px;padding:10px 6px}.explain-card .answer .formula{margin:7px 0}.slide[data-optional="true"] .eyebrow{color:#765b16}
 @media(max-width:1000px){.lab-layout{display:block}.lab-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lab-controls>.formula,.lab-controls>.lab-prompt{grid-column:1/-1}.mindmap{grid-template-columns:1fr}.explain-grid{grid-template-columns:1fr}}
 @media(max-width:650px){
  .lab-controls{display:block}.lab-controls>*{margin:10px 0}.formula{font-size:1.12rem}.formula.small{font-size:1.04rem}.method-grid{grid-template-columns:1fr}.lab-plot{padding:7px}.socrative-card{padding:13px}
@@ -53,132 +55,63 @@
 <main>
 <aside class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p>
   <details class="route-guide"><summary>Kärnväg, tidsram och undervisningsbeslut</summary>
-    <p><strong>Kärnväg:</strong> återkallning → mål → gemensam mindmap → villkorsexempel → två grafiska laborationer → begreppskontroll → exponentialexempel → egen tillämpning → befintlig Socrative → bokarbete → Socrative-uppföljning → individuell utcheckning. Valfri modelluppgift vid behov.</p>
+    <p><strong>Kärnväg enligt originalet:</strong> tre elevmål → gemensam mindmap → lärarens fullständiga villkorsexempel → <strong>befintlig Socrative först</strong> → bokarbete → Socrative-uppföljning med originalets tre exempeltyper → individuell utcheckning. Två grafiska laborationer finns som <strong>valfria stöd i avsnittsmenyn</strong> och hoppas över med Nästa-knappen.</p>
     <p><strong>Riktmärke:</strong> kort gemensam del med eget tänkande före svar, därefter Socrative och minst 20 minuter sammanhängande bokarbete. Tiderna anpassas; avbryt inte när eleverna arbetar bra.</p>
-    <p><strong>Elevernas arbete:</strong> låt dem anteckna mindmap och beräkningar på papper. Inga miniwhiteboards krävs. Vid Socrative: enskilt först, därefter par och gemensam uppföljning. Elevsvar hanteras i lärarens befintliga Socrative, aldrig på denna sida.</p>
+    <p><strong>Elevernas arbete:</strong> låt dem anteckna mindmap och beräkningar på papper. <strong>Se till att varje grupp har en whiteboard</strong>, som Jacob uttryckligen gör i filmen. Vid Socrative: enskilt först, därefter resonemang vid gruppens tavla och lärarledd uppföljning. Elevsvar hanteras i lärarens befintliga Socrative, aldrig på denna sida.</p>
     <p><strong>Bokregeln:</strong> Minst två nivåer betyder <strong>alla uppgifter och deluppgifter på två hela valda nivåer</strong>. Låt eleverna fortsätta senare om 20-minuterspasset inte räcker.</p>
     <p><strong>Vanliga fel:</strong> att glömma + C innan villkoret används; förväxla F(a) med f(a); sätta C lika med hela funktionsvärdet; missa faktorn i e-funktionens exponent; inte kontrollera båda kraven. Öppna rätt återkoppling efter elevförsök.</p>
     <p><strong>Framåtblick:</strong> nästa avsnitt 3.4 introducerar integraler. Använd en kort återkallningsfråga om villkoret innan dess.</p>
+    <p><strong>Underlag:</strong> original-PDF 231219, originalfilm/transkription och tre handskrivna Socrative-exempel på PDF-sida 2. Originalets äldre bokuppgifter s. 176–177 har ersatts av den aktuella upplagans s. 182–183; bokexemplen kopieras inte.</p>
   </details>
 </aside>
 <div class="repetition"><strong>Repetitionsläge:</strong> Försök på papper innan du öppnar återkoppling. Interaktionerna lagras inte och inga elevsvar skickas från webbsidan.</div>
 <div class="stage" id="stage">
 
-<section class="slide active" id="start" data-teacher="Starta med föregående lektions idé: samma derivata kan komma från flera funktioner. Låt eleverna derivera och beräkna värdet vid x=1 utan att du avslöjar svaret. Enskilt, sedan par.">
-  <div class="eyebrow">01 · Återkalla från förra lektionen</div>
-  <h1>Samma derivata – men bara en graf passar</h1>
-  <p>Två funktioner är kandidater till samma primitiva funktion:</p>
-  <div class="formulas"><p class="formula" data-formula="A(x)=x²+2x−1"></p><p class="formula" data-formula="B(x)=x²+2x+3"></p></div>
-  <div class="task"><strong>Räkna först själv:</strong> Har de samma derivata? Vilken funktion uppfyller <span class="inline-math" data-formula-inline="F(1)=6"></span>? Hur vet du?</div>
-  <button type="button" class="reveal" data-reveal="start-answer">Visa återkoppling efter försöket</button>
-  <div class="answer hidden" id="start-answer"><p>Båda har derivatan <span class="inline-math" data-formula-inline="2x+2"></span>. Men villkoret väljer en:</p><div class="formulas"><p class="formula" data-formula="A(1)=1+2−1=2"></p><p class="formula emphasis" data-formula="B(1)=1+2+3=6"></p></div><p>Alltså är <strong>B</strong> den funktion som passar både derivatan och villkoret.</p></div>
-</section>
-
-<section class="slide" id="goal" data-teacher="Visa målen efter startfrågan. Poängtera att villkoret inte ändrar derivatan – det väljer ett värde på C. Eleverna ska kunna beräkna, tolka grafiskt och kontrollera båda kraven.">
-  <div class="eyebrow">02 · Dagens mål · s. 182–183</div>
-  <h2>Bestäm en bestämd primitiv funktion</h2>
+<section class="slide active" id="goal" data-teacher="Inled med tre kontrollerbara mål. Repetera kort att samma derivata hör till en hel familj och att villkoret väljer en enda funktion. Gå sedan direkt till originalets mindmap och lärarens räkneexempel.">
+  <div class="eyebrow">01 · Dagens mål · s. 182–183</div>
+  <h2>Hitta den primitiva funktion som passar villkoret</h2>
   <p class="lead">Efter lektionen ska du kunna:</p>
-  <ol class="spaced"><li>bestämma <strong>alla primitiva funktioner</strong> och sedan använda ett villkor för att räkna fram <strong>C</strong>,</li><li>förklara hur villkoret väljer <strong>en graf ur en familj</strong>,</li><li>kontrollera ditt svar genom <strong>derivering och insättning</strong>.</li></ol>
+  <ol class="spaced"><li>skriva <strong>alla primitiva funktioner</strong> med konstanten <strong>C</strong>,</li><li>använda ett villkor för att <strong>beräkna C</strong> och skriva en bestämd funktion,</li><li><strong>kontrollera</strong> funktionen genom derivering och insättning.</li></ol>
   <div class="statement"><strong>Huvudidé:</strong> Derivatan bestämmer grafens lutningar. Ett villkor som <span class="inline-math" data-formula-inline="F(a)=b"></span> bestämmer vilken graf vi menar.</div>
   <p class="book-note">Läroboken: 3.3 Primitiva funktioner med villkor, teori och exempel s. 182, uppgifter s. 182–183.</p>
 </section>
 
 <section class="slide" id="mindmap" data-teacher="Be eleverna först komplettera sin mindmap på papper med tre grenar. Visa först efter eget försök. Utgå från det gamla inslaget mindmap och låt det bli en överblick, inte ett långt lärarprat.">
-  <div class="eyebrow">03 · Bygg vidare på din mindmap</div>
+  <div class="eyebrow">02 · Bygg vidare på din mindmap</div>
   <h2>Tre saker behöver hänga ihop</h2>
   <div class="mindmap"><div><strong>1 · Derivering</strong><p>Vad betyder sambandet mellan F och f?</p></div><div><strong>2 · Alla möjligheter</strong><p>Varför dyker konstanten C upp?</p></div><div><strong>3 · Ett villkor</strong><p>Hur kan ett värde på F bestämma C?</p></div></div>
   <div class="task"><strong>Komplettera din mindmap:</strong> Skriv en formel eller ett litet räkneexempel vid varje gren. Jämför med en granne.</div>
   <button type="button" class="reveal" data-reveal="mindmap-answer">Visa förslag till kopplingar</button>
-  <div class="answer hidden" id="mindmap-answer"><div class="formulas"><p class="formula" data-formula="F′(x)=f(x)"></p><p class="formula" data-formula="F(x)=G(x)+C"></p><p class="formula" data-formula="F(a)=b⇒C=b−G(a)"></p></div><p>G är en primitiv funktion utan den fria konstanten. Villkoret bestämmer sedan <strong>en viss C</strong>.</p></div>
+  <div class="answer hidden" id="mindmap-answer"><div class="formulas"><p class="formula" data-formula="F′(x)=f(x)"></p><p class="formula" data-formula="F(x)=x²+C"></p><p class="formula" data-formula="F(a)=b"></p></div><p>Konstanten C försvinner när vi deriverar. När vi sätter in villkoret i <strong>hela F</strong> får vi en ekvation som bestämmer C.</p></div>
 </section>
 
-<section class="slide" id="worked" data-teacher="Ett nytt exempel, inte bokens eller gamla PDF:ens. Visa stegen en i taget först efter att eleverna förutsett nästa. Låt dem ange C före fjärde steget. Fråga till slut om både derivatan och villkoret stämmer.">
-  <div class="eyebrow">04 · Ett komplett genomräknat exempel</div>
-  <h2>Från en hel familj till en funktion</h2>
-  <p>Bestäm den primitiva funktion till <span class="inline-math" data-formula-inline="f(x)=6x−4"></span> som uppfyller <span class="inline-math" data-formula-inline="F(2)=9"></span>.</p>
-  <div class="task"><strong>Förutsäg:</strong> Vilken form har F innan vi vet C? Vad ska vi sätta in för att hitta C?</div>
-  <div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
-    <div class="seq-item hidden" data-seq-item data-question="Vad blir alla primitiva funktioner till 6x−4?"><strong>1 · Gå bakåt från derivatan</strong><p class="formula" data-formula="F(x)=3x²−4x+C"></p><p>Alla sådana funktioner har samma derivata.</p></div>
-    <div class="seq-item hidden" data-seq-item data-question="Hur översätter du villkoret F(2)=9 till en ekvation?"><strong>2 · Sätt in x=2 och F(2)=9</strong><p class="formula" data-formula="9=3·2²−4·2+C"></p></div>
-    <div class="seq-item hidden" data-seq-item data-question="Vilken ekvation återstår när du räknar ut de kända termerna?"><strong>3 · Förenkla</strong><p class="formula" data-formula="9=12−8+C=4+C"></p></div>
-    <div class="seq-item hidden" data-seq-item data-question="Bestäm C och skriv hela funktionen. Hur kontrollerar du båda kraven?"><strong>4 · Bestäm konstanten och kontrollera</strong><div class="formulas"><p class="formula emphasis" data-formula="C=5⇒F(x)=3x²−4x+5"></p><p class="formula" data-formula="F′(x)=6x−4"></p><p class="formula" data-formula="F(2)=12−8+5=9"></p></div><p>Derivatan och värdet i punkten stämmer.</p></div>
-  </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
-</section>
-
-<section class="slide" id="lab-one" data-teacher="Labb 1: Be eleverna skissa den tänkta förskjutningen och beräkna C utan reglage. Låt dem sedan styra C med tangentbord/mus och jämföra mot den orange villkorspunkten. Fråga varför kurvan inte blir brantare.">
-  <div class="eyebrow">05 · Laboration 1 · Vilken graf passar?</div>
-  <h2>Få grafen att träffa villkorspunkten</h2>
-  <div class="lab-layout"><div class="lab-controls">
-    <p class="formula" data-formula="F(x)=x²+2x+C"></p>
-    <div class="lab-prompt"><strong>Förutsäg innan du drar:</strong> Vilket C gör att grafen går genom <span class="inline-math" data-formula-inline="P=(1, 6)"></span>? Skriv din beräkning.</div>
-    <div class="lab-slider"><label for="lab-c">Flytta grafen med konstanten C</label><input type="range" id="lab-c" min="-3" max="7" step="1" value="0"><output id="lab-c-out" for="lab-c" aria-live="polite"></output></div>
-    <div class="lab-readout"><strong>Grafens höjd vid x=1</strong><p id="lab-f-one" aria-live="polite"></p><span>Pricken visar önskad höjd 6.</span></div>
-  </div><figure class="lab-plot"><h3>En familj – samma form och lutningar</h3><svg id="family-plot" viewBox="0 0 620 360" role="img" aria-label="En blå parabel med styrbar konstant C, grå streckad referens för C lika med noll och en orange fast villkorspunkt vid x lika med 1 och y lika med 6."></svg><figcaption class="legend"><span><i></i> Vald F</span><span><i class="dashed"></i> F med C = 0</span><span><i class="point"></i> Villkorspunkt (1, 6)</span></figcaption></figure></div>
-  <button type="button" class="reveal" data-reveal="lab-one-answer">Visa slutsatsen efter laborationen</button>
-  <div class="answer hidden" id="lab-one-answer"><div class="formulas"><p class="formula" data-formula="6=1²+2·1+C=3+C"></p><p class="formula emphasis" data-formula="C=3"></p></div><p>Den blå grafen måste förskjutas 3 enheter uppåt från referensen. Derivatan <span class="inline-math" data-formula-inline="F′(x)=2x+2"></span> är densamma oavsett C.</p></div>
-</section>
-
-<section class="slide" id="lab-two" data-teacher="Labb 2: Håll derivatan och x=1 fasta. Byt villkorets y-värde. Be alla först ange sambandet C=b−3, ändra sedan villkorsreglaget. Grafen uppdateras exakt från villkoret; knyt ihop symbolerna med den rörliga punkten.">
-  <div class="eyebrow">06 · Laboration 2 · Ändra bara villkoret</div>
-  <h2>Ny punkt – vilken konstant behövs?</h2>
-  <div class="lab-layout"><div class="lab-controls">
-    <p class="formula" data-formula="f(x)=2x+2"></p>
-    <div class="lab-prompt"><strong>Laborera:</strong> Villkoret är nu <span class="inline-math" data-formula-inline="F(1)=b"></span>. Förutsäg C när b ökar med 2. Flytta sedan punkten.</div>
-    <div class="lab-slider"><label for="lab-b">Ändra villkorets funktionsvärde b</label><input type="range" id="lab-b" min="1" max="10" step="1" value="6"><output id="lab-b-out" for="lab-b" aria-live="polite"></output></div>
-    <div class="lab-readout"><strong>Konstanten som följer av villkoret</strong><p id="lab-c-derived" aria-live="polite"></p><span>Derivatan förändras inte.</span></div>
-  </div><figure class="lab-plot"><h3>Grafen följer punkten</h3><svg id="condition-plot" viewBox="0 0 620 360" role="img" aria-label="Graf över F där punkten med x lika med 1 flyttas i höjdled. Grafen flyttas så att den alltid passerar punkten. Samma derivata hela tiden."></svg><figcaption class="legend"><span><i></i> Vald F</span><span><i class="dashed"></i> F med C = 0</span><span><i class="point"></i> Aktuell villkorspunkt</span></figcaption></figure></div>
-  <button type="button" class="reveal" data-reveal="lab-two-answer">Visa sambandet som beskriver laborationen</button>
-  <div class="answer hidden" id="lab-two-answer"><div class="formulas"><p class="formula" data-formula="b=1²+2·1+C=3+C"></p><p class="formula emphasis" data-formula="C=b−3"></p></div><p>När villkorsvärdet b ökar med 2, måste C också öka med 2. Varje tillåtet värde på b ger en bestämd graf.</p></div>
-</section>
-
-<section class="slide" id="diagnose" data-teacher="Diagnos av vanliga fel. Uppgiften är fristående från bokens exakta tal. Eleverna ska först göra kontrollen på papper, inte snabbgissa på A/B/C. Valen återkopplar med insättning, inte bara rätt/fel.">
-  <div class="eyebrow">07 · Upptäck ett vanligt fel</div>
-  <h2>Vilket värde måste C ha?</h2>
-  <div class="formulas"><p class="formula" data-formula="f(x)=4x+3"></p><p class="formula" data-formula="F(1)=8"></p></div>
-  <p>Du har kommit fram till familjen <span class="inline-math" data-formula-inline="F(x)=2x²+3x+C"></span>. Bestäm C.</p>
-  <div class="panel quiz" data-quiz data-correct-text="Rätt. Kontrollera värdet vid x=1." data-wrong-text="Sätt in x=1 och pröva ditt C-värde.">
-    <button type="button" class="choice" data-correct="false" data-test-c="8"><strong>A · </strong><span class="inline-math" data-formula-inline="C=8"></span></button>
-    <button type="button" class="choice" data-correct="true" data-test-c="3"><strong>B · </strong><span class="inline-math" data-formula-inline="C=3"></span></button>
-    <button type="button" class="choice" data-correct="false" data-test-c="5"><strong>C · </strong><span class="inline-math" data-formula-inline="C=5"></span></button>
-    <p class="feedback" aria-live="polite">Välj efter att du räknat själv.</p>
+<section class="slide" id="worked" data-teacher="Lärarens EXAKTA räkneexempel från original-PDF och film, med alla mellanled i samma sammanhängande lösning. Börja med alla primitiva funktioner: öka exponenten och dividera med den nya exponenten; konstantens derivata är noll. Visa först därefter villkoret F(6)=35. Tappa inte bort mellanleden 36/2, 18+12, 30+C eller 35−30.">
+  <div class="eyebrow">03 · Jacobs räkneexempel från originalet</div>
+  <h2>Alla primitiva funktioner – och sedan villkoret</h2>
+  <div class="formulas"><p class="formula" data-formula="f(x)=x+2"></p><p class="formula" data-formula="F(6)=35"></p></div>
+  <div class="task"><strong>Tänk innan vi räknar:</strong> Vilken funktion har derivatan x? Vilken har derivatan 2? Varför behövs + C?</div>
+  <button type="button" class="reveal" data-reveal="worked-answer">Visa hela uträkningen, led för led</button>
+  <div class="answer hidden" id="worked-answer">
+    <strong>1 · Först alla primitiva funktioner</strong>
+    <p class="formula" data-formula="F(x)=x²/2+2x+C"></p>
+    <p><strong>2 · Sätt sedan in hela villkoret</strong></p>
+    <div class="worked-lines"><p class="formula" data-formula="35=6²/2+2·6+C"></p><p class="formula" data-formula="35=36/2+12+C"></p><p class="formula" data-formula="35=18+12+C"></p><p class="formula" data-formula="35=30+C"></p><p class="formula" data-formula="C=35−30=5"></p></div>
+    <p><strong>3 · Skriv den sökta funktionen</strong></p>
+    <p class="formula emphasis" data-formula="F(x)=x²/2+2x+5"></p>
+    <p class="small-print">Kontroll: <span class="inline-math" data-formula-inline="F′(x)=x+2"></span> och <span class="inline-math" data-formula-inline="F(6)=18+12+5=35"></span>.</p>
   </div>
-  <div class="contrast"><strong>Kom ihåg:</strong> Villkoret säger vilket värde <em>hela F</em> ska ha. C är bara det som saknas när alla andra termer räknats ut.</div>
 </section>
 
-<section class="slide" id="exponential" data-teacher="Korta ner vid behov men hoppa inte över att e-termen är 2 vid x=0. Annars tror några att C=−1. Öva båda kontrollerna. Nytt exempel, annat än bokens genomräknade 3318.">
-  <div class="eyebrow">08 · När funktionen innehåller e</div>
-  <h2>Villkoret fungerar också med exponentialfunktioner</h2>
-  <p>Bestäm den primitiva funktion till <span class="inline-math" data-formula-inline="f(x)=8x+6e^{3x}"></span> som uppfyller <span class="inline-math" data-formula-inline="F(0)=−1"></span>.</p>
-  <div class="task"><strong>Innan du öppnar:</strong> Vilken faktor framför <span class="inline-math" data-formula-inline="e^{3x}"></span> behövs i F? Vad är exponentialtermen värd när x=0?</div>
-  <div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
-    <div class="seq-item hidden" data-seq-item data-question="Vilken familj har den givna derivatan?"><strong>1 · Bestäm alla primitiva funktioner</strong><p class="formula" data-formula="F(x)=4x²+2e^{3x}+C"></p></div>
-    <div class="seq-item hidden" data-seq-item data-question="Sätt in x=0, men kom ihåg att e upphöjt till 0 blir 1."><strong>2 · Använd villkoret</strong><p class="formula" data-formula="−1=4·0²+2e⁰+C"></p><p class="formula" data-formula="−1=2+C"></p></div>
-    <div class="seq-item hidden" data-seq-item data-question="Vilket C behövs, och hur kontrollerar du hela funktionen?"><strong>3 · Välj och kontrollera funktionen</strong><div class="formulas"><p class="formula emphasis" data-formula="C=−3⇒F(x)=4x²+2e^{3x}−3"></p><p class="formula" data-formula="F′(x)=8x+6e^{3x}"></p><p class="formula" data-formula="F(0)=0+2−3=−1"></p></div></div>
-  </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
-</section>
-
-<section class="slide" id="practice" data-teacher="Ge 2–3 minuter helt enskilt. Eleven avgör själv om ledtråden behövs. Visa lösningen efter försök. Kontrollera hantering av negativ insättning; ingen kopierad bokuppgift.">
-  <div class="eyebrow">09 · Nu tar du över</div>
-  <h2>Gör hela lösningen med mindre stöd</h2>
-  <p>Bestäm den primitiva funktionen som uppfyller:</p>
-  <div class="formulas"><p class="formula" data-formula="f(x)=4x³−6x"></p><p class="formula" data-formula="F(−1)=7"></p></div>
-  <div class="task"><strong>Skriv på papper:</strong> Familjen med + C, ekvationen som bestämmer C, det slutliga F och två kontroller.</div>
-  <button type="button" class="secondary" data-reveal="practice-hint">Valfri ledtråd</button>
-  <div class="hidden contrast" id="practice-hint">En primitiv funktion utan konstanten är <span class="inline-math" data-formula-inline="G(x)=x⁴−3x²"></span>. Räkna ut G(−1) noggrant innan du bestämmer C.</div>
-  <button type="button" class="reveal" data-reveal="practice-answer">Visa lösning efter eget försök</button>
-  <div class="answer hidden" id="practice-answer"><div class="formulas"><p class="formula" data-formula="F(x)=x⁴−3x²+C"></p><p class="formula" data-formula="7=(−1)⁴−3(−1)²+C=−2+C"></p><p class="formula emphasis" data-formula="C=9⇒F(x)=x⁴−3x²+9"></p><p class="formula" data-formula="F′(x)=4x³−6x"></p><p class="formula" data-formula="F(−1)=1−3+9=7"></p></div><p>Båda villkoren är uppfyllda.</p></div>
-</section>
-
-<section class="slide" id="socrative" data-teacher="Originallektionen innehåller exakt aktiviteten '321. Ma3c … Primitiv fkn …', SOC-36677299, med lärarrum noterat som LRJ. Starta den i din befintliga Socrative-miljö. Låt eleverna svara enskilt, därefter diskutera parvis, sedan samla upp mönster. Ändra inte frågorna eller skapa ny quiz utan lärarens godkännande.">
-  <div class="eyebrow">10 · Socrative från den tidigare lektionen</div>
+<section class="slide" id="socrative" data-teacher="Direkt efter Jacobs räkneexempel: originalets befintliga Socrative '321. Ma3c … Primitiv fkn …', kod SOC-36677299. Filmens rumsangivelse låter som 11RJ; bekräfta aktuellt rumsnamn muntligt, gissa inte. Starta lärarens aktivitet i Socrative, inga ersättningsfrågor. Se till att varje grupp har en whiteboard. Socrative prioriteras före bokuppgifterna.">
+  <div class="eyebrow">04 · Socrative – först efter genomgången</div>
   <h2>Pröva förståelsen i Socrative</h2>
-  <div class="socrative-card"><h3>Befintlig aktivitet · 321. Ma3c – Primitiv funktion</h3><p><span class="code">SOC-36677299</span></p><p>Gå till <strong>lärarens befintliga Socrative-rum</strong> och genomför aktiviteten som läraren startar.</p><p class="small-print">Rumsanteckningen i originalet är LRJ; följ lärarens aktuella rumsinstruktion om den har ändrats.</p></div>
-  <div class="task"><strong>Arbetssätt:</strong> Tänk och svara först själv. Jämför sedan ett resonemang i par. Vid gemensam återkoppling: motivera varför villkoret bestämmer C och hur du kontrollerar svaret.</div>
+  <div class="socrative-card"><h3>Befintlig aktivitet · 321. Ma3c – Primitiv funktion</h3><p><span class="code">SOC-36677299</span></p><p>Gå till <strong>lärarens befintliga Socrative-rum</strong> och genomför aktiviteten som läraren startar.</p><p class="small-print">Läraren anger aktuellt rumsnamn. Originalets rumsanteckning är inte tillräckligt tydlig för att publicera som säkert namn.</p></div>
+  <div class="task"><strong>Arbetssätt:</strong> Svara först själv. Jämför sedan ett resonemang vid <strong>gruppens whiteboard</strong>. Vid återkopplingen: förklara varför villkoret bestämmer C.</div>
   <p class="small-print">Socrative är en separat tjänst. Den här sidan samlar inte in dina svar och försöker inte ersätta den befintliga aktiviteten.</p>
 </section>
 
 <section class="slide" id="book" data-teacher="Nu den nya boken: s. 182 teori, genomräknad uppgift 3318; s. 182–183 uppgifter 3319–3333. Minst två av tre hela nivåer, alla deluppgifter. Socrative ligger före boken enligt den tidigare lärarordningen. 20 min sammanhängande arbete och fortsättning tills valda nivåer är klara. Metodkortet öppnas frivilligt och avslöjar inga bokfacit.">
-  <div class="eyebrow">11 · Sammanhängande arbete i läroboken</div>
+  <div class="eyebrow">05 · Bokarbete efter Socrative</div>
   <h2>Boken, s. 182–183</h2>
   <div class="statement"><strong>Välj minst två av de tre nivåerna.</strong> Gör <strong>alla uppgifter och samtliga deluppgifter</strong> på varje nivå du väljer.</div>
   <p class="lead">Arbeta enskilt i <strong>minst 20 minuter i ett sammanhängande pass</strong>. Fortsätt med de valda nivåerna senare om du inte blir färdig under passet.</p>
@@ -192,7 +125,7 @@
     <div class="method-grid">
       <div class="method-item"><strong>1 · Börja med familjen</strong><p class="formula" data-formula="F′(x)=f(x)"></p><p>Bestäm en primitiv funktion och lägg till C.</p></div>
       <div class="method-item"><strong>2 · Sätt in villkoret</strong><p class="formula" data-formula="F(a)=b"></p><p>Byt x mot a i hela F-uttrycket, inte i f.</p></div>
-      <div class="method-item"><strong>3 · Lös ut konstanten</strong><p class="formula" data-formula="C=b−G(a)"></p><p>Här är G den primitiva funktionen utan + C.</p></div>
+      <div class="method-item"><strong>3 · Lös ut konstanten</strong><p class="formula" data-formula="35=30+C"></p><p>Förenkla insättningen och lös ekvationen för C, precis som i Jacobs exempel.</p></div>
       <div class="method-item"><strong>4 · Kontrollera två saker</strong><p class="formula" data-formula="F′(x)=f(x)"></p><p>Derivera tillbaka <strong>och</strong> kontrollera funktionsvärdet i villkoret.</p></div>
     </div>
   </details>
@@ -200,27 +133,67 @@
 </section>
 
 <section class="slide" id="socrative-followup" data-teacher="Socrative-uppföljning är en bevarad separat punkt från originalet. Titta på lärarens översikt efter Socrative och ett första bokpass. Välj anonymt ett vanligt felsvar, låt eleverna rätta med derivering och insättning. Nämn inte elevnamn.">
-  <div class="eyebrow">12 · Uppföljning av befintlig Socrative</div>
+  <div class="eyebrow">06 · Uppföljning av befintlig Socrative</div>
   <h2>Vad visade svaren?</h2>
   <p>Läraren väljer ett vanligt resonemang från Socrative att diskutera utan namn.</p>
   <div class="explain-grid"><div class="explain-card"><h3>Fråga 1</h3><p>Bestämde vi <strong>hela funktionsvärdet</strong> eller bara konstanten?</p></div><div class="explain-card"><h3>Fråga 2</h3><p>Kontrollerade vi <strong>både derivatan och villkoret</strong>?</p></div></div>
   <div class="task"><strong>Rätta och förklara:</strong> Skriv ett felsteg som någon skulle kunna göra, visa en korrigering och förklara varför den håller.</div>
-  <p class="lead">Fortsätt sedan med bokens uppgifter tills dina minst två valda nivåer är färdiga.</p>
+  <p class="lead">Fortsätt sedan med bokens uppgifter tills dina minst två valda nivåer är färdiga. Har läraren tilldelat uppgifter i NOKflex/NOK ex kan du fortsätta där också, enligt originalets plan.</p>
   <button type="button" class="secondary" data-go="book">Tillbaka till boken</button>
 </section>
 
-<section class="slide" id="application" data-optional="true" data-teacher="Valbar utmaning för elever som kommit långt, som en egen kontext före nivå 3. Detta är inte en av bokens uppgifter. Rörelsemodellen är en förenklad matematisk modell; låt eleven säga vad v och v′ betyder och kontrollera enheter.">
-  <div class="eyebrow">13 · Valbar fördjupning · Tillämpning</div>
-  <h2>Kan du använda villkoret i en modell?</h2>
-  <p>En rörelse beskrivs av acceleration <span class="inline-math" data-formula-inline="a(t)=2t+3"></span> m/s². Vid tiden 0 s är hastigheten 4 m/s.</p>
-  <div class="task"><strong>Undersök på papper:</strong> Bestäm hastigheten v(t) och beräkna hastigheten efter 5 sekunder. Förklara varför startvärdet behövs.</div>
-  <button type="button" class="reveal" data-reveal="application-answer">Visa modell och kontroll</button>
-  <div class="answer hidden" id="application-answer"><div class="formulas"><p class="formula" data-formula="v(t)=t²+3t+C"></p><p class="formula" data-formula="v(0)=C=4"></p><p class="formula emphasis" data-formula="v(5)=25+15+4=44"></p><p class="formula" data-formula="v′(t)=2t+3"></p></div><p>Efter 5 sekunder är hastigheten <strong>44 m/s</strong> enligt modellen. Derivatan ger rätt acceleration och startvärdet stämmer.</p></div>
-  <button type="button" class="secondary" data-go="book">Tillbaka till bokarbetet</button>
+<section class="slide" id="practice" data-teacher="Jacobs handskrivna Socrative-exempel 1 på original-PDF sida 2, inte en påhittad bokuppgift. Låt gruppen räkna på sin whiteboard och avgöra C innan du visar lösningen. Använd bara som fördjupad uppföljning till den riktiga Socrative-aktiviteten.">
+  <div class="eyebrow">07 · Socrative-exempel 1 · Gruppens whiteboard</div>
+  <h2>Räkna och förklara ett Socrative-exempel</h2>
+  <p>Bestäm en primitiv funktion till derivatan som uppfyller villkoret:</p>
+  <div class="formulas"><p class="formula" data-formula="f(x)=4x−3"></p><p class="formula" data-formula="F(2)=1"></p></div>
+  <div class="task"><strong>På whiteboard:</strong> Skriv först alla primitiva funktioner. Sätt sedan in villkoret, lös C och kontrollera båda kraven.</div>
+  <button type="button" class="reveal" data-reveal="practice-answer">Visa Jacobs lösning efter försöket</button>
+  <div class="answer hidden" id="practice-answer"><div class="formulas"><p class="formula" data-formula="F(x)=2x²−3x+C"></p><p class="formula" data-formula="1=2·2²−3·2+C"></p><p class="formula" data-formula="1=8−6+C=2+C"></p><p class="formula" data-formula="C=1−2=−1"></p><p class="formula emphasis" data-formula="F(x)=2x²−3x−1"></p><p class="formula" data-formula="F′(x)=4x−3"></p><p class="formula" data-formula="F(2)=8−6−1=1"></p></div></div>
+</section>
+
+<section class="slide" id="exponential" data-teacher="Jacobs handskrivna Socrative-exempel 2–3 från original-PDF sida 2: den negativa exponenten 4/x^5 respektive e^(2x). De handlar om att bestämma ALLA primitiva funktioner, utan extra villkor. Därför ska de inte förvandlas till nya, svårare villkorsproblem.">
+  <div class="eyebrow">08 · Socrative-exempel 2 och 3</div>
+  <h2>Två funktionstyper från originalet</h2>
+  <p>Här söker vi <strong>alla primitiva funktioner</strong>. Det finns inget extra villkor som bestämmer C.</p>
+  <div class="explain-grid">
+    <div class="explain-card"><h3>Negativ exponent</h3><p class="formula" data-formula="f(x)=4/x⁵=4x⁻⁵"></p><button type="button" class="reveal" data-reveal="power-answer">Visa Jacobs metod</button><div class="answer hidden" id="power-answer"><p class="formula small" data-formula="F(x)=4x⁻⁴/(−4)+C"></p><p class="formula small" data-formula="F(x)=−x⁻⁴+C"></p><p class="formula small emphasis" data-formula="F(x)=−1/x⁴+C"></p><p class="small-print">Kontrollera genom att derivera tillbaka.</p></div></div>
+    <div class="explain-card"><h3>Exponentialfunktion</h3><p class="formula" data-formula="f(x)=e^{2x}"></p><button type="button" class="reveal" data-reveal="exp-answer">Visa Jacobs metod</button><div class="answer hidden" id="exp-answer"><p class="formula small emphasis" data-formula="F(x)=1/2·e^{2x}+C"></p><p class="small-print">Samma uttryck som e upphöjt till 2x, delat med 2. Vid derivering kommer faktorn 2 tillbaka.</p></div></div>
+  </div>
+  <div class="task"><strong>På tavlan:</strong> Visa varför båda uttrycken ger rätt derivata. Gå därefter tillbaka till de bokuppgifter som återstår.</div>
+  <button type="button" class="secondary" data-go="book">Tillbaka till boken</button>
+</section>
+
+<section class="slide" id="lab-one" data-optional="true" data-teacher="Valfri digital visualisering som hoppas över med Nästa-knappen. Inte en aktivitet i Jacobs original. Be eleverna skissa och beräkna C utan reglage; låt dem sedan styra C och jämföra mot den orange punkten. Grafik får aldrig ersätta hans fullständiga uträkning eller prioritetsordningen Socrative → bokarbete.">
+  <div class="eyebrow">09 · Valfritt grafstöd 1 · Vilken graf passar?</div>
+  <h2>Få grafen att träffa villkorspunkten</h2>
+  <div class="lab-layout"><div class="lab-controls">
+    <p class="formula" data-formula="F(x)=x²+2x+C"></p>
+    <div class="lab-prompt"><strong>Förutsäg innan du drar:</strong> Vilket C gör att grafen går genom <span class="inline-math" data-formula-inline="P=(1, 6)"></span>? Skriv din beräkning.</div>
+    <div class="lab-slider"><label for="lab-c">Flytta grafen med konstanten C</label><input type="range" id="lab-c" min="-3" max="7" step="1" value="0"><output id="lab-c-out" for="lab-c" aria-live="polite"></output></div>
+    <div class="lab-readout"><strong>Grafens höjd vid x=1</strong><p id="lab-f-one" aria-live="polite"></p><span>Pricken visar önskad höjd 6.</span></div>
+  </div><figure class="lab-plot"><h3>En familj – samma form och lutningar</h3><svg id="family-plot" viewBox="0 0 620 360" role="img" aria-label="En blå parabel med styrbar konstant C, grå streckad referens för C lika med noll och en orange fast villkorspunkt vid x lika med 1 och y lika med 6."></svg><figcaption class="legend"><span><i></i> Vald F</span><span><i class="dashed"></i> F med C = 0</span><span><i class="point"></i> Villkorspunkt (1, 6)</span></figcaption></figure></div>
+  <button type="button" class="reveal" data-reveal="lab-one-answer">Visa slutsatsen efter laborationen</button>
+  <div class="answer hidden" id="lab-one-answer"><div class="formulas"><p class="formula" data-formula="6=1²+2·1+C=3+C"></p><p class="formula emphasis" data-formula="C=3"></p></div><p>Den blå grafen måste förskjutas 3 enheter uppåt från referensen. Derivatan <span class="inline-math" data-formula-inline="F′(x)=2x+2"></span> är densamma oavsett C.</p></div>
+  <button type="button" class="secondary" data-go="exit">Till huvudlektionens utcheckning</button>
+</section>
+
+<section class="slide" id="lab-two" data-optional="true" data-teacher="Valfri extra visualisering som hoppas över med Nästa-knappen. Inte ett krav från originalet. Håll derivatan och x=1 fasta, ändra endast y-värdet. Avstå om Socrative, bokarbete eller individuell utcheckning behöver tiden.">
+  <div class="eyebrow">10 · Valfritt grafstöd 2 · Ändra bara villkoret</div>
+  <h2>Ny punkt – vilken konstant behövs?</h2>
+  <div class="lab-layout"><div class="lab-controls">
+    <p class="formula" data-formula="f(x)=2x+2"></p>
+    <div class="lab-prompt"><strong>Laborera:</strong> Villkoret är nu <span class="inline-math" data-formula-inline="F(1)=b"></span>. Förutsäg C när b ökar med 2. Flytta sedan punkten.</div>
+    <div class="lab-slider"><label for="lab-b">Ändra villkorets funktionsvärde b</label><input type="range" id="lab-b" min="1" max="10" step="1" value="6"><output id="lab-b-out" for="lab-b" aria-live="polite"></output></div>
+    <div class="lab-readout"><strong>Konstanten som följer av villkoret</strong><p id="lab-c-derived" aria-live="polite"></p><span>Derivatan förändras inte.</span></div>
+  </div><figure class="lab-plot"><h3>Grafen följer punkten</h3><svg id="condition-plot" viewBox="0 0 620 360" role="img" aria-label="Graf över F där punkten med x lika med 1 flyttas i höjdled. Grafen flyttas så att den alltid passerar punkten. Samma derivata hela tiden."></svg><figcaption class="legend"><span><i></i> Vald F</span><span><i class="dashed"></i> F med C = 0</span><span><i class="point"></i> Aktuell villkorspunkt</span></figcaption></figure></div>
+  <button type="button" class="reveal" data-reveal="lab-two-answer">Visa sambandet som beskriver laborationen</button>
+  <div class="answer hidden" id="lab-two-answer"><div class="formulas"><p class="formula" data-formula="b=1²+2·1+C=3+C"></p><p class="formula emphasis" data-formula="C=b−3"></p></div><p>När villkorsvärdet b ökar med 2, måste C också öka med 2. Varje tillåtet värde på b ger en bestämd graf.</p></div>
+  <button type="button" class="secondary" data-go="exit">Till huvudlektionens utcheckning</button>
 </section>
 
 <section class="slide" id="exit" data-teacher="Enskild utcheckning på papper utan direkt facit. Den prövar samma mål med andra tal och x=−1. Först efter elevens egen lösning går du till återkopplingen.">
-  <div class="eyebrow">14 · Individuell utcheckning</div>
+  <div class="eyebrow">11 · Individuell utcheckning</div>
   <h2>Kan du bestämma och kontrollera funktionen?</h2>
   <p>Bestäm den primitiva funktion F till följande derivata och villkor:</p>
   <div class="formulas"><p class="formula" data-formula="f(x)=6x²−4x"></p><p class="formula" data-formula="F(−1)=4"></p></div>
@@ -229,7 +202,7 @@
 </section>
 
 <section class="slide" id="exit-answer" data-teacher="Gå tillbaka till de tre lektionsmålen. Om eleverna fått fel C: låt dem först kontrollera de negativa potenserna vid −1. Om rätt: be dem formulera ett nytt villkor och förutsäga vilket C som skulle behövas.">
-  <div class="eyebrow">15 · Återkoppla till målen</div>
+  <div class="eyebrow">12 · Återkoppla till målen</div>
   <h2>Kontrollera både derivatan och villkoret</h2>
   <div class="sequence" data-sequence><div class="nextprompt" data-seq-prompt aria-live="polite"></div><div class="steps">
     <div class="seq-item hidden" data-seq-item data-question="Vilken familj har den efterfrågade derivatan?"><strong>1 · Bestäm familjen</strong><p class="formula" data-formula="F(x)=2x³−2x²+C"></p></div>
@@ -237,7 +210,8 @@
     <div class="seq-item hidden" data-seq-item data-question="Vilket C får du, och hur ser den färdiga funktionen ut?"><strong>3 · Bestäm den enda funktionen</strong><p class="formula emphasis" data-formula="C=8⇒F(x)=2x³−2x²+8"></p></div>
     <div class="seq-item hidden" data-seq-item data-question="Kan du nu kontrollera BÅDE derivatan och villkoret?"><strong>4 · Kontrollera båda kraven</strong><div class="formulas"><p class="formula" data-formula="F′(x)=6x²−4x"></p><p class="formula" data-formula="F(−1)=−2−2+8=4"></p></div><p>Funktionen uppfyller båda kraven.</p></div>
   </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg</button><button type="button" class="secondary" data-seq-reset>Börja om</button><span class="pill" data-seq-count></span></div></div>
-  <div class="statement"><strong>Ta med dig:</strong> Först alla primitiva funktioner. Sedan ett villkor som bestämmer C. Till sist två kontroller. Nästa del i boken är <strong>3.4 Integraler</strong>.</div>
+  <div class="statement"><strong>Ta med dig:</strong> Först alla primitiva funktioner. Sedan ett villkor som bestämmer C. Till sist två kontroller. Nästa del i boken är <strong>3.4 Integraler – inledning</strong>.</div>
+  <p class="small-print">De valfria grafstöden på sida 9–10 nås via avsnittsmenyn. Nästa-knappen hoppar över dem så att huvudlektionen följer originalet.</p>
 </section>
 </div>
 <div id="inkpanel" class="inkpanel"><div class="inkhead"><strong>Skrivyta – endast på din enhet</strong><div class="flex"><button type="button" id="ink-undo" class="secondary">Ångra</button><button type="button" id="ink-eraser" class="secondary" aria-pressed="false">Sudd</button><button type="button" id="ink-clear" class="secondary">Rensa</button><button type="button" id="ink-max" class="secondary">Förstora</button></div></div><canvas id="ink" aria-label="Skrivyta för matematiska anteckningar"></canvas></div>
