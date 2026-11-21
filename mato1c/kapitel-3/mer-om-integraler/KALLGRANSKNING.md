@@ -21,9 +21,10 @@
 ## Gränser och kontroll
 
 - Inga originalexempel eller formuleringar från boken är kopierade; det matematiska innehållet, sid- och uppgiftsnumren är bevarade.
+- Utcheckning C ber om **vilken integral** som beskriver arean. Facit visar därför den exakta uppställningen med övre minus undre i två läsbara matematiska rader; det hoppar inte till ett numeriskt svar utan fundamentalsatsens mellanled.
 - Ingen Socrative, ingen påhittad laboration och inga uppgifter med en annan algebraisk metod.
 - Grafen `x − 1` har underintervallet `[0,1]` med integral `−1/2`, hela `[0,3]` med integral `3/2` och geometrisk area `5/2`.
 - För `f(x)=4+2x−x²` och `g(x)=4` på `[0,2]` är arean `4/3`.
 - Extra: för `2x−4` på `[0,4]` är integralen `0` och arean `8`; för `3+x−x²` och `3` är arean `1/6`.
-- Den oberoende matematik-/strukturkontrollen ligger i `../qa/mer-om-integraler-original-math.cjs` (31 kontroller vid utvecklingstillfället). Webbläsartestet `../qa/mer-om-integraler-browser.cjs` omfattar fem bredder, samtliga slides både före och efter facit, grafens exakta koordinater, felaktigt överhängande formler och mobilt navigeringsfält. Båda ingår i kursens GitHub Actions-arbetsflöde. Godkännande och ny skärmbildsgranskning ska kontrolleras före sammanfogning till `main`.
+- Den oberoende matematik-/strukturkontrollen ligger i `../qa/mer-om-integraler-original-math.cjs` (33 kontroller vid utvecklingstillfället). Webbläsartestet `../qa/mer-om-integraler-browser.cjs` omfattar fem bredder, samtliga slides både före och efter facit, grafens exakta koordinater, felaktigt överhängande formler och mobilt navigeringsfält. Båda ingår i kursens GitHub Actions-arbetsflöde. Godkännande och ny skärmbildsgranskning ska kontrolleras före sammanfogning till `main`.
 - **Tillgänglig original→webb-status:** alla innehållspunkter i ovanstående bokkarta och Jacobs tidigare godkända metod finns kvar. Ändringarna gäller svarstidpunkt, formeltypografi, mobilnavigation och kontrollomfång, inte nya matematiska fall. Fysisk projektor/iPad och elevlösningar i klassrummet återstår efter teknisk publicering.

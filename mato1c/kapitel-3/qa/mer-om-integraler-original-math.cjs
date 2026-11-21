@@ -24,6 +24,8 @@ yes(!html.includes('<mtext> a.e.</mtext>'), 'MathML-enhet skrivs inte utan uttry
 yes((html.match(/<mspace width="\.35em"\/><mtext>a\.e\.<\/mtext>/g) || []).length === 6, 'Alla sex områdesenheter avskilda i MathML');
 yes(html.includes('3370–3373') && html.includes('3374–3376') && html.includes('3377–3380'), 'Hela bokens tre nivåer och rätt nummer');
 yes(html.includes('alla uppgifter och deluppgifter'), 'Minst två fullständiga nivåer');
+yes(!html.includes('class="math-inline">A = ∫'), 'Utcheckningens metodsvar använder riktiga matematiska rader');
+yes(!html.includes('∫₀² x dx = 2'), 'Integraluppställningen får inte hoppa direkt till ett numeriskt facit');
 yes(!/Socrative/i.test(html.replace(/data-teacher="[^"]*"/g, '')), 'Ingen Socrative i elevvyn utan källa');
 yes(!/Samma exempeltyp som originalet|Jacobs tavellösning|originalets metod/i.test(html), 'Inga interna källjämförelser i elevbilderna');
 yes(js.includes('const fx = x => 4 + 2 * x - x * x') && js.includes('const gx = () => 4'), 'Grafen använder de visade funktionerna');
