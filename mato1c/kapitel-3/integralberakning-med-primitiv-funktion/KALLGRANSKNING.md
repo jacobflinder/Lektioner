@@ -24,6 +24,7 @@ Granskad 2026-11-21 mot lärarens nio-sidiga PDF **240109 Integralberäkning med
 - Tre kontrollerbara mål och slutkontroll, elevförsök före facit, tryckbar återkoppling.
 - Dynamisk parabelgraf där höjdskillnaden kan undersökas inom samma intervall; den förklarar enbart originalets `f−g`.
 - Ett nytt självständigt räkneexempel av samma typ. Inga konkurrerande metodval, nya integralteckenfall eller negativa areor.
+- Källjämförelsens interna formuleringar (t.ex. ”originalet” och ”Jacobs tavellösning”) hålls i denna granskningsfil; elevsidan beskriver i stället det matematiska arbetet direkt. Metod, ordning och mellanled är oförändrade.
 
 **Kontroll av de avsiktligt ändrade talen:** Repetitionens `f(x)=x+2` på `[0,3]` ger `10,5` både med fundamentalsatsen och med rektangel + triangel, i överensstämmelse med den nu publicerade lektion 44. Tvåkurvsexemplet använder `f(x)=6x−3x²+4`, `g(x)=2x`, skärningspunkt `(2,4)` och positiv skillnad `4x−3x²+4` på `[0,2]`. En primitiv funktion är `2x²−x³+4x` och `F(2)−F(0)=8−0=8` areaenheter. Den nya figuren, reglaget och den avslutande lösningskedjan ska alla visa dessa värden.
 

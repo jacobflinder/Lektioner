@@ -37,6 +37,7 @@ yes(html.includes('F(2) − F(0)'),'Constant cancellation located near main work
 yes(html.includes('Se sedan genomgången i <strong>NOKflex 3.4 Integraler – Tillämpningar och problemlösning</strong>'),'Original exact NOKflex preparation restored');
 for(const item of ['192–193','3350–3356','3357–3363','3364–3367','alla uppgifter och samtliga deluppgifter','minst två av de tre nivåerna'])yes(html.includes(item),'Current-edition book workflow retained: '+item);
 yes(!html.includes('Socrative')&&!html.includes('SOC-'),'No Socrative added where source does not contain it');
+yes(!/originalet|originalets|Jacobs tavellösning|nya tal/i.test(html),'Student-facing lesson contains no internal source-comparison notes');
 yes(!html.includes('negativa integralvärden')&&!html.includes('teckenbyte'),'No invented negative-area exception');
 yes(!/fetch\(|XMLHttpRequest|localStorage|sendBeacon/.test(html),'No tracking or student data transmission');
 const f=x=>6*x-3*x*x+4,g=x=>2*x,d=x=>f(x)-g(x),F=x=>2*x*x-x*x*x+4*x;
