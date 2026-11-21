@@ -84,7 +84,7 @@ fs.mkdirSync(out,{recursive:true});
    await shot(label+'-socrative-example');
 
    await go(8);await reveal('power-answer','power-answer');await reveal('exp-answer','exp-answer');
-   for(const expr of ['f(x)=4/x⁵=4x⁻⁵','F(x)=4x⁻⁴/(−4)+C','F(x)=−1/x⁴+C','f(x)=e^{2x}','F(x)=1/2·e^{2x}+C'])check(await page.locator('#exponential math[aria-label="'+expr+'"]').count()===1,label+' source Socrative function type '+expr);
+   for(const expr of ['f(x)=4/x⁵=4x⁻⁵','F(x)=4x⁻⁴/(−4)+C','F(x)=−x⁻⁴+C','F(x)=−1/x⁴+C','f(x)=e^{2x}','F(x)=1/2·e^{2x}+C'])check(await page.locator('#exponential math[aria-label="'+expr+'"]').count()===1,label+' source Socrative function type '+expr);
    await checkMath(label+' original inverse power and exponential');
    await shot(label+'-source-types');
 

@@ -23,7 +23,7 @@ for(const stale of ['3313–3322','f(x)=6x−4','F(2)=9','f(x)=8x+6e^{3x}','Inga
 const worked=html.split('id="worked"')[1].split('</section>')[0];
 for(const expr of ['f(x)=x+2','F(6)=35','F(x)=x²/2+2x+C','35=6²/2+2·6+C','35=36/2+12+C','35=18+12+C','35=30+C','C=35−30=5','F(x)=x²/2+2x+5','F′(x)=x+2','F(6)=18+12+5=35'])check(worked.includes(expr),'Full original worked chain '+expr);
 const sourceTypes=html.split('id="practice"')[1].split('id="exit"')[0];
-for(const expr of ['f(x)=4x−3','F(2)=1','F(x)=2x²−3x−1','f(x)=4/x⁵=4x⁻⁵','F(x)=−1/x⁴+C','f(x)=e^{2x}','F(x)=1/2·e^{2x}+C'])check(sourceTypes.includes(expr),'Handwritten Socrative type '+expr);
+for(const expr of ['f(x)=4x−3','F(2)=1','F(x)=2x²−3x−1','f(x)=4/x⁵=4x⁻⁵','F(x)=−x⁻⁴+C','F(x)=−1/x⁴+C','f(x)=e^{2x}','F(x)=1/2·e^{2x}+C'])check(sourceTypes.includes(expr),'Handwritten Socrative type '+expr);
 check(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|navigator\.sendBeacon/.test(js),'No remote response collection or tracking');
 
 for(const x of [-3,-1,0,1,2,6]){
