@@ -22,7 +22,7 @@ const coords=(points)=>points.trim().split(' ').map(p=>p.split(',').map(Number))
 try{
  await page.goto(url,{waitUntil:'networkidle'});
  yes(await page.locator('.slide').count()===12,'Exactly 12 lesson slides');
- yes(await page.locator('.slide[data-optional="true"]').count()===2,'Exactly 10 core slides and 2 optional labs');
+ yes(await page.locator('.slide[data-optional="true"]').count()===3,'Exactly 9 core slides and 3 optional visualizations');
  yes(await page.locator('[data-integral] math msubsup').count()>=4,'Proper stacked integral limits in semantic MathML');
  yes(await page.locator('[data-formula] math').count()>=22,'All mathematical calculations typeset');
  yes(await page.locator('[data-integral] math[aria-label]').count()>=4,'Integral labels accessible');
@@ -38,24 +38,28 @@ try{
   }
   await go(1);yes(!await page.locator('#start-answer').isVisible(),label+' opening not leaked');yes(!await page.locator('#goals').isVisible(),label+' goals follow the starter');await shot(label+'-start');
   await page.locator('[data-reveal="start-answer"]').click();yes(await page.locator('#start-answer math').count()===2,label+' opening equations semantic');yes(await page.locator('#goals ol.numbered > li').count()===3&&await page.locator('#goals').isVisible(),label+' three goals appear after start');await shot(label+'-three-goals');await go(2);await go(1);yes(!await page.locator('#start-answer').isVisible(),label+' opening reset');
-  await go(4);yes(!await page.locator('#notation-answer').isVisible(),label+' numeric integral not shown before pupils write it');await shot(label+'-notation');
+  await go(3);yes(!await page.locator('#notation-answer').isVisible(),label+' numeric integral not shown before pupils write it');await shot(label+'-notation');
   yes(await page.locator('#notation svg[aria-label*="krökt graf"]').count()===1,label+' general curved region from original');
   await page.locator('[data-reveal="notation-answer"]').click();yes(await page.locator('#notation-answer').isVisible(),label+' notation reveals pupil-written integral');
   yes(await page.locator('#notation-answer [data-integral="0|3|x+2|x"] math msubsup').count()===1,label+' area-to-integral answer has correct bounds');
-  await go(5);await shot(label+'-primitive-condition');
+  await go(2);await shot(label+'-primitive-condition');
   let recall=page.locator('#recap [data-seq-item]');yes(await recall.filter({visible:true}).count()===0,label+' condition recap is hidden before pupil attempt');
   for(let i=1;i<=3;i++){await page.locator('#recap [data-seq-next]').click();yes(await recall.filter({visible:true}).count()===i,label+' condition recap step '+i)}
   yes(await page.locator('#recap [data-formula="C=4"] math').count()===1,label+' specific constant determined by given condition');
-  await go(6);
+  await go(4);
   yes(await page.locator('#ftc-formula').isVisible(),label+' entire theorem is immediately visible BEFORE example, not inside a reveal');
   yes(await page.locator('#ftc [data-seq-item]').count()===0,label+' no mathematical prerequisite hidden in a solution step');
   yes(await page.locator('#ftc-formula math msubsup').count()===2,label+' visible theorem has stacked integral and bracket bounds');
   yes(await page.locator('#ftc-formula math').count()===3,label+' original full equality: integral = bracket = F(b)-F(a)');
   yes((await page.locator('#ftc-formula').getAttribute('aria-label')).includes('F(b)−F(a)'),label+' theorem clearly states upper minus lower value');
+  yes(await page.locator('#ftc [data-formula="(F(b)+C)−(F(a)+C)"] math').count()===1,label+' source explanation includes both arbitrary constants');
+  yes(await page.locator('#ftc [data-formula="=F(b)−F(a)"] math').count()===1,label+' cancelling C leaves original theorem');
+  const cancellationOverflow=await page.locator('#ftc .insight .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({text:el.textContent,over:el.scrollWidth-el.clientWidth})));
+  yes(cancellationOverflow.length===0,label+' cancellation of C is readable on every viewport: '+JSON.stringify(cancellationOverflow));
   const theoremOverflow=await page.locator('#ftc-formula').evaluate(el=>el.scrollWidth-el.clientWidth);
   yes(theoremOverflow<=2,label+' visible theorem is not cropped on '+width+'px screen: '+theoremOverflow);
   await shot(label+'-theorem-before-example');
-  await go(7);
+  await go(5);
   const workedSteps=page.locator('#bridge [data-seq-item]');
   yes(await workedSteps.filter({visible:true}).count()===0,label+' worked example waits for pupil attempt AFTER theorem');
   for(let i=1;i<=4;i++){await page.locator('#bridge [data-seq-next]').click();yes(await workedSteps.filter({visible:true}).count()===i,label+' worked integral step '+i)}
@@ -72,8 +76,8 @@ try{
   yes(clipped.length===0,label+' entire bracket and substitution visible without horizontal scrolling: '+JSON.stringify(clipped));
   await shot(label+'-worked-example-full-chain');
   yes(await page.locator('#bridge [data-formula="=9/2+6−0"] math').count()===1&&await page.locator('#bridge [data-formula="=4,5+6"] math').count()===1,label+' teacher mathematical norm preserves intermediate simplifications');
-  await go(2);await go(7);yes(await workedSteps.filter({visible:true}).count()===0,label+' worked example resets after navigation');
-  await go(2);await shot(label+'-geometric');
+  await go(2);await go(5);yes(await workedSteps.filter({visible:true}).count()===0,label+' worked example resets after navigation');
+  await go(6);await shot(label+'-geometric');
   if(width>=1280){const fig=await page.locator('#geometric .plot-card').evaluate(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom}});yes(fig.bottom<=height-8,label+' whole geometry diagram fits projector: bottom '+fig.bottom)}
   let overview=await page.locator('#overview-plot [data-area-rectangle]').getAttribute('points');
   let rect=coords(overview);
@@ -106,13 +110,13 @@ try{
   yes(await page.locator('#area-feedback math').count()>=5,label+' dynamic upper and lower substitutions rendered mathematically');await shot(label+'-linear-feedback');
   await page.locator('#linear-b').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#linear-b').inputValue()==='3',label+' keyboard slider');
   await go(2);await go(9);yes(await page.locator('#linear-b').inputValue()==='3',label+' linear reset after navigation');yes((await page.locator('#area-feedback').innerText())==='',label+' area result hidden after return');
-  await go(2);
+  await go(6);
   let worked=page.locator('#geometric [data-seq-item]');
   yes(await worked.filter({visible:true}).count()===0,label+' worked solution hidden');
   for(let i=1;i<=3;i++){await page.locator('#geometric [data-seq-next]').click();yes(await worked.filter({visible:true}).count()===i,label+' worked step '+i)}
   yes(await page.locator('#geometric math[aria-label="A=6+4,5=10,5"]').count()===1,label+' geometric calculation exactly 10.5');await shot(label+'-worked');
-  await go(3);await go(2);yes(await worked.filter({visible:true}).count()===0,label+' worked reset');
-  await go(3);
+  await go(8);await go(6);yes(await worked.filter({visible:true}).count()===0,label+' worked reset');
+  await go(8);
   for(const n of [2,4,8,16,32]){
    await set('rect-n',Math.log2(n));
    for(const method of ['left','right','middle']){
@@ -140,7 +144,7 @@ try{
   if(width<=768){const geom=await page.evaluate(()=>{const input=document.querySelector('#rect-lab #rect-method').closest('.control-box').getBoundingClientRect(),fig=document.querySelector('#rect-lab .plot-card').getBoundingClientRect();return {gap:fig.top-input.bottom,top:fig.top}});yes(geom.gap>=0&&geom.gap<=35,label+' rectangle graph follows inputs, gap '+geom.gap);if(width===390)yes(geom.top<=height-105,label+' rectangle graph begins within mobile viewport')}
   await set('rect-n',5);await page.selectOption('#rect-method','middle');await shot(label+'-rect-n32-middle');
   await page.selectOption('#rect-method','right');await shot(label+'-rect-n32-right');
-  await go(10);await go(3);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
+  await go(10);await go(8);yes(await page.locator('#rect-n').inputValue()==='2',label+' rectangle count resets');
   yes(await page.locator('#rect-method').inputValue()==='left',label+' rectangle method resets');
   await go(10);
   for(const t of [1,2,3,4,5]){
@@ -162,7 +166,7 @@ try{
   await page.locator('#speed-switch').focus();await page.keyboard.press('ArrowLeft');yes(await page.locator('#speed-switch').inputValue()==='4',label+' speed keyboard');
   await go(11);await go(10);yes(await page.locator('#speed-switch').inputValue()==='3',label+' speed reset after navigation');
   yes(await page.locator('#signed-extra, #signed-plot, #signed-answer').count()===0,label+' unrequested negative-area integrals are absent');
-  await go(8);
+  await go(7);
   const practice=page.locator('#practice [data-seq-item]');yes(await practice.filter({visible:true}).count()===0,label+' independent algebra task stays hidden first');
   for(let i=1;i<=4;i++){await page.locator('#practice [data-seq-next]').click();yes(await practice.filter({visible:true}).count()===i,label+' independent theorem practice step '+i)}
   yes(await page.locator('#practice [data-fundamental-theorem] math msubsup').count()===2,label+' independent integral and bracket show both bounds');
@@ -171,7 +175,8 @@ try{
   const practiceOverflow=await page.locator('#practice .formula').evaluateAll(els=>els.filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>({text:el.textContent,over:el.scrollWidth-el.clientWidth})));
   yes(practiceOverflow.length===0,label+' independent theorem solution has no clipped maths '+JSON.stringify(practiceOverflow));await shot(label+'-independent-fundamentalsatsen');
   await page.locator('#practice [data-jump-to="work"]').click();yes(await page.locator('#work').evaluate(e=>e.classList.contains('active')),label+' teacher can bypass optional labs to combined Socrative and book');
-  await go(8);yes(await practice.filter({visible:true}).count()===0,label+' independent task resets after moving away');
+  await go(7);await page.locator('#next').click();yes(await page.locator('#work').evaluate(e=>e.classList.contains('active')),label+' Next skips all three optional visualizations');
+  await go(7);yes(await practice.filter({visible:true}).count()===0,label+' independent task resets after moving away');
   await go(11);yes((await page.locator('#work').innerText()).includes('SOC-36677379'),label+' preserved original Socrative');await shot(label+'-socrative-and-book');
   const book=await page.locator('#work').innerText();
   for(const required of ['184–188','3334','3335','3336','3337','3338','3339','3340','3341','3342','3343','3344','3345','3346','3347','alla uppgifter och samtliga deluppgifter','minst 20 minuter'])yes(book.includes(required),label+' book '+required);
