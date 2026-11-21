@@ -24,14 +24,14 @@ const widths=[[390,844],[768,900],[1280,800],[1920,1080]];
  };
  try{
   await page.goto(url,{waitUntil:'networkidle'});
-  check(await page.locator('.slide').count()===14,'All 14 teaching steps preserved');
+  check(await page.locator('.slide').count()===12,'Twelve steps with all original math and two optional extensions');
   check(await page.locator('math').count()>=50,'Semantic equations and inline expressions rendered');
   check(await page.locator('[data-formula] math[display="block"]').count()>=45,'All displayed formulas semantic');
   check(await page.locator('[data-formula-inline] math[display="inline"]').count()>=8,'All inline expressions semantic');
   for(const [width,height] of widths){
    await page.setViewportSize({width,height});
    const label=width+'x'+height;
-   for(let n=1;n<=14;n++){
+   for(let n=1;n<=12;n++){
     await go(n);
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
     check(overflow<=2,label+': no horizontal clipping on slide '+n+', overflow='+overflow);
@@ -45,7 +45,12 @@ const widths=[[390,844],[768,900],[1280,800],[1920,1080]];
    await go(2);await go(1);
    check(!await page.locator('#start-answer').isVisible(),label+': reveal resets after navigation');
 
-   await go(4);
+   await go(2);
+   check(await page.locator('#goal .goal-strip li').count()===3,label+': three concrete goals alongside the mathematical definition');
+   check(await page.locator('#goal math[aria-label="F′(x)=f(x)"]').count()===1,label+': mathematical definition preserved on goals slide');
+   check(!await page.locator('#meaning-answer').isVisible(),label+': explanation is not shown prematurely');
+   await shot(label+'-goals-and-meaning');
+   await go(3);
    const family=page.locator('#family-graph [data-main-curve]');
    const derivative=page.locator('#family-graph [data-derivative-curve]');
    const baseline=page.locator('#family-graph [data-base-curve]');
@@ -70,10 +75,10 @@ const widths=[[390,844],[768,900],[1280,800],[1920,1080]];
    if(width>=1280)check(figure.bottom<=height-8,label+': entire explanatory graph visible in class/projector viewport, bottom='+Math.round(figure.bottom));
    check(figure.svgWidth>=Math.min(290,width*.72),label+': chart not shrunk into illegibility');
    check(figure.tickHeight>=10,label+': chart axis labels legible');
-   await go(5);await go(4);
+   await go(4);await go(3);
    check(await page.locator('#graph-c').inputValue()==='0',label+': slider resets on navigation');
 
-   await go(8);
+   await go(7);
    const steps=page.locator('#combined [data-seq-item]');
    check((await page.locator('#combined [data-seq-prompt]').innerText()).includes('första termen'),label+': first prompt matches first step');
    check(await steps.filter({visible:true}).count()===0,label+': no initial solution steps');
@@ -84,10 +89,10 @@ const widths=[[390,844],[768,900],[1280,800],[1920,1080]];
     check(await steps.nth(i).locator('math[aria-label="'+expected[i]+'"]').count()===1,label+': step '+(i+1)+' matches its prompt');
    }
    await shot(label+'-combined-revealed');
-   await go(9);await go(8);
+   await go(8);await go(7);
    check(await steps.filter({visible:true}).count()===0,label+': sequence resets after navigation');
 
-   await go(9);
+   await go(8);
    check(await page.locator('#trap .choice math[display="inline"]').count()===3,label+': three semantic answer options');
    check(!await page.locator('#trap .feedback math').count(),label+': no premature quiz answer');
    await shot(label+'-quiz-before');
@@ -100,11 +105,11 @@ const widths=[[390,844],[768,900],[1280,800],[1920,1080]];
    await page.locator('#trap button[data-correct="true"]').click();
    check(await page.locator('#trap .feedback math[aria-label="F′(x)=3·3e^{3x}=9e^{3x}"]').count()===1,label+': B gives the correct derivative');
    await shot(label+'-quiz-right');
-   await go(10);await go(9);
+   await go(9);await go(8);
    check(await page.locator('#trap .choice.correct, #trap .choice.wrong').count()===0,label+': selected quiz answer cleared on navigation');
    check(await page.locator('#trap .feedback math').count()===0,label+': feedback cleared on navigation');
 
-   await go(11);
+   await go(10);
    const text=await page.locator('#book').innerText();
    for(const bookToken of ['179–180','180–181','3301–3303','3304','3305','3306','3307','3308','3309','3310','3311','3312','3313','3314','3315','3316','3317','samtliga uppgifter och alla deluppgifter'])check(text.includes(bookToken),label+': book requirement '+bookToken);
    const support=page.locator('#book-methods');
@@ -118,21 +123,26 @@ const widths=[[390,844],[768,900],[1280,800],[1920,1080]];
    check(!await support.evaluate(el=>el.open),label+': summary closes by keyboard');
    await support.locator('summary').press('Enter');
    await shot(label+'-book-open');
-   await go(12);await go(11);
+   await go(11);await go(10);
    check(!await support.evaluate(el=>el.open),label+': summary resets after navigation');
    await support.locator('summary').click();
    await page.locator('#mode').click();
    check(!await support.evaluate(el=>el.open),label+': summary resets on mode change');
    await page.locator('#mode').click();
 
-   await go(14);
-   check(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,label+': no final answer before attempt');
+   await go(12);
+   check(!await page.locator('#exit-answer').isVisible(),label+': no final answer before attempt');
+   await shot(label+'-exit-before-reveal');
+   await page.locator('[data-reveal="exit-answer"]').click();
+   check(await page.locator('#exit-answer').isVisible(),label+': exit feedback opens only on request');
+   check(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,label+': no final result prematurely after opening feedback');
    check((await page.locator('#exit-answer [data-seq-prompt]').innerText()).includes('alla primitiva'),label+': final prompt aligns with first solution');
    for(let i=0;i<3;i++)await page.locator('#exit-answer [data-seq-next]').click();
    check(await page.locator('#exit-answer [data-seq-item]:visible').count()===3,label+': final answer fully revealed');
    await shot(label+'-exit-complete');
-   await go(13);await go(14);
-   check(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,label+': final answer resets on navigation');
+   await go(10);await go(12);
+   check(!await page.locator('#exit-answer').isVisible(),label+': final feedback closes after navigating away');
+   check(await page.locator('#exit-answer [data-seq-item]:visible').count()===0,label+': final result resets on navigation');
    const gaps=await page.locator('.slide.active .formulas').evaluateAll(groups=>groups.map(e=>{
     const lines=[...e.querySelectorAll(':scope > .formula')];
     return lines.length<2?Infinity:lines[1].getBoundingClientRect().top-lines[0].getBoundingClientRect().bottom;
