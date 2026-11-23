@@ -38,6 +38,9 @@ assert.ok(bodies[12].includes('Det du inte hinner under bokarbetet blir läxa'),
 assert.ok(bodies[13].includes('20 moderkärnor')&&bodies[13].includes('0,025')&&bodies[13].includes('kol-14'),'one independent exit per goal');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.ok(html.includes('tarningsdemo.js')&&html.includes('../../gemensamt/app.js'),'interactive local dice and shared shell');
+const css=fs.readFileSync(path.join(root,'aktivitet-och-halveringstid.css'),'utf8');
+assert.ok(css.includes('.figure .axis{stroke:#567987;stroke-width:2;fill:none}')&&css.includes('.figure .grid{stroke:#d4e6e9;stroke-width:1;fill:none}'),'SVG guide paths never fill black polygons');
+assert.ok(css.includes('.socrative-list label{display:block;'),'inline math in Socrative labels does not split into flex items');
 assert.ok(!html.includes('youtu.be')&&!bodies.join(' ').includes('youtu.be'),'no prewatch video added');
 const aid=fs.readFileSync(path.join(root,'lararstod.html'),'utf8');
 assert.ok(aid.includes('3,7 · 10<sup>10</sup>')&&aid.includes('10^8'),'correction is open');

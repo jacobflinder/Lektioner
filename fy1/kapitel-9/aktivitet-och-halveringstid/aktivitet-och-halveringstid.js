@@ -67,7 +67,7 @@
       'Rita kurvan som på tavlan. Låt eleverna peka ut N0, T½ och tre halveringar.', 'N-kurva med exakt originalprogression'),
 
     slide('Aktivitet: hur många sönderfall per sekund?', 'A · becquerel · samma kurvform', 4,
-      '<p><b>Aktivitet A</b> är hur många kärnor som sönderfaller <b>per sekund</b>. Enheten är <b>becquerel (Bq)</b>.</p>' +
+      '<p><b>Aktivitet A</b> är hur många kärnor som sönderfaller <b>per sekund</b>. Enheten är <b>becquerel (Bq)</b>. <b>A<sub>0</sub></b> är aktiviteten vid t = 0.</p>' +
       e('1 Bq = 1 sönderfall/s') +
       graph('A','A₀') +
       '<p class="caption">Aktiviteten A minskar med samma halveringstid som antalet moderkärnor N.</p>' +

@@ -30,8 +30,8 @@
 .figure{display:block;width:min(100%,710px);height:auto;margin:5px auto}
 .figure text{font:15px system-ui,sans-serif;fill:#244d5c}
 .figure .small-label{font-size:13px}
-.figure .grid{stroke:#d4e6e9;stroke-width:1}
-.figure .axis{stroke:#567987;stroke-width:2}
+.figure .grid{stroke:#d4e6e9;stroke-width:1;fill:none}
+.figure .axis{stroke:#567987;stroke-width:2;fill:none}
 .figure .curve{stroke:#117c91;stroke-width:5;fill:none;stroke-linejoin:round;stroke-linecap:round}
 .figure .dot{fill:#e39d4b;stroke:#fff;stroke-width:2}
 .caption{font-size:.81rem;color:#55747c;margin:2px 0 10px;text-align:center}
@@ -51,8 +51,8 @@
 .exit-grid b{color:#146b7c}
 .exit-grid p{margin:7px 0}
 .socrative-list{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;margin:12px 0}
-.socrative-list label{display:flex;align-items:baseline;gap:9px;border:1px solid #d1e3e6;border-radius:8px;padding:8px 10px;background:#fff;cursor:pointer}
-.socrative-list input{accent-color:#0a8295;transform:scale(1.2);flex:0 0 auto}
+.socrative-list label{display:block;border:1px solid #d1e3e6;border-radius:8px;padding:8px 10px;background:#fff;cursor:pointer}
+.socrative-list input{accent-color:#0a8295;transform:scale(1.2);margin-right:9px;vertical-align:middle}
 .socrative-result{min-height:1.5em;font-size:.9rem;color:#22596a}
 .dice-panel{border:1px solid #bbdbe0;background:#f4fafb;border-radius:13px;padding:12px 15px;margin:13px 0}
 .dice-panel h2{font-size:1.14rem;color:#14677b;margin:0 0 5px}
