@@ -13,17 +13,17 @@ assert.equal(data.goals.length,3,'three goals');
 assert.deepEqual(data.pages.map(p=>parseInt(p.time,10)),[4,6,6,5,5,7,8,5,19,5],'70-minute time allocation');
 assert.equal(data.pages.reduce((a,p)=>a+parseInt(p.time,10),0),70);
 assert.equal((data.pages[0].body.match(/<li>/g)||[]).length,3,'goals visible at start');
-for(let k=0;k<8;k++)assert.equal((data.pages[k].body.match(/class="lesson-action"/g)||[]).length,1,'visible class directions slide '+(k+1));
-assert.ok(data.pages[0].body.includes('Starta eller ta fram mindmapen för kapitel 9'),'original mindmap activity on slide 1');
-assert.ok(data.pages[1].body.includes('Mindmap · nuklidnotation'),'nuklide definition written into mindmap');
-assert.ok(data.pages[2].body.includes('Demonstration + mindmap'),'isotope demonstration visible to students');
-assert.ok(data.pages[5].body.includes('Demonstration + mindmap'),'gamma demonstration visible to students');
-assert.ok(data.pages[2].body.indexOf('lesson-action')<data.pages[2].body.indexOf('iso-widget'),'isotope instruction precedes demonstration');
-assert.ok(data.pages[5].body.indexOf('lesson-action')<data.pages[5].body.indexOf('level-widget'),'gamma instruction precedes demonstration');
-assert.ok(data.pages[6].body.includes('Räkna tillsammans'),'worked solution interaction visible');
-assert.ok(data.pages[7].body.includes('Kontrollera mindmapen'),'mindmap review before bookwork');
-assert.ok(!data.pages.map(p=>p.body).join('').includes('Vi förutsätter inte relativitetsteori'),'no teacher-facing program notes on pupil slide');
-assert.ok(!data.pages.map(p=>p.body).join('').includes('youtu.be'),'next-lesson videos are not 9.3 activities');
+assert.ok(data.pages.every(p=>!/mindmap/i.test(p.body)),'No parallel mindmap activities in student lesson');
+assert.deepEqual(data.pages.map(p=>(p.body.match(/class="lesson-action"/g)||[]).length),[0,0,1,0,0,1,0,0,0,0],'Only two interactive demo prompts; original content remains in web lesson');
+assert.ok(data.pages[2].body.includes('Pröva kolisotoperna'),'Student instruction for isotope demo');
+assert.ok(data.pages[5].body.includes('Pröva energinivåerna'),'Student instruction for gamma demo');
+assert.ok(data.pages[2].body.indexOf('lesson-action')<data.pages[2].body.indexOf('iso-widget'),'Isotope instruction precedes model');
+assert.ok(data.pages[5].body.indexOf('level-primer')<data.pages[5].body.indexOf('lesson-action'),'Ground and excited nuclear levels explained before use');
+assert.ok(data.pages[5].body.indexOf('level-primer')<data.pages[5].body.indexOf('math-block'),'Interpretation precedes equations');
+assert.ok(data.pages[5].body.indexOf('math-block')<data.pages[5].body.indexOf('level-widget'),'Energy law and levels before gamma diagram');
+assert.ok(data.pages[5].body.includes('grundtillståndet')&&data.pages[5].body.includes('exciterade tillstånd')&&data.pages[5].body.includes('nedåtriktad pil'),'All diagram conventions explicitly introduced before interaction');
+assert.ok(!data.pages.map(p=>p.body).join('').includes('Vi förutsätter inte relativitetsteori'),'No teacher-facing program notes in student lesson');
+assert.ok(!data.pages.map(p=>p.body).join('').includes('youtu.be'),'Next-lesson videos are not 9.3 activities');
 assert.ok(data.pages[1].body.includes('N')&&data.pages[1].body.includes('nuklid'),'definitions precede example');
 assert.equal((data.pages[2].body.match(/data-isotope="/g)||[]).length,3,'C-12/13/14 interactive choices');
 assert.ok(data.pages[3].body.includes('Stark kärnkraft'),'strong and electric forces');
@@ -62,11 +62,11 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
     await page.goto('http://127.0.0.1:8123/fy1/kapitel-9/isotoper-och-nuklider/',{waitUntil:'networkidle'});
     assert.equal(await page.locator('.slide').count(),10);
     assert.equal(await page.locator('.teacher-note:visible').count(),0,'hide teacher notes from pupils');
-    assert.equal(await page.locator('.lesson-action').count(),8,'eight visible classroom actions across slides 1–8');
+    assert.equal(await page.locator('.lesson-action').count(),2,'Only two demo prompts, no redundant mindmap workflow');
     assert.equal(await page.locator('.source-note:visible').count(),0,'hide source mapping metadata from pupils');
     for(let i=0;i<10;i++){
       await page.selectOption('#jump',String(i));
-      assert.equal(await page.locator('.slide.active .lesson-action:visible').count(),i<8?1:0,'step instructions in student classroom view on slide '+(i+1));
+      assert.equal(await page.locator('.slide.active .lesson-action:visible').count(),(i===2||i===5)?1:0,'Only actual demo instructions visible on slide '+(i+1));
       const issues=await page.evaluate(()=>{
         const active=document.querySelector('.slide.active');
         const math=[...active.querySelectorAll('.math-block')].filter(n=>n.getClientRects().length);
@@ -91,6 +91,16 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
     assert.equal(await page.locator('.isotope-svg .nucleons circle').count(),12,'reset isotope');
     await page.screenshot({path:path.join(out,vp.width+'-isotopes.png'),fullPage:true});
     await page.selectOption('#jump','5');
+    assert.ok(await page.locator('.slide.active .level-primer:visible').count()===1,'Nuclear energy-level theory visible');
+    assert.equal(await page.locator('.slide.active .math-block').count(),2,'Both gamma energy relations visible before diagram');
+    const topOrder=await page.evaluate(()=>{
+      const a=document.querySelector('.slide.active .level-primer').getBoundingClientRect(),
+      f=document.querySelector('.slide.active .math-block').getBoundingClientRect(),
+      d=document.querySelector('.slide.active .level-widget').getBoundingClientRect();
+      return {intro:a.top,formula:f.top,diagram:d.top};
+    });
+    assert.ok(topOrder.intro<topOrder.formula&&topOrder.formula<topOrder.diagram,'Level meanings and equations before using interactive diagram: '+JSON.stringify(topOrder));
+
     if(vp.width===390){assert.equal(await page.locator('.slide.active .mobile-level-svg:visible').count(),1,'mobile diagram visible');}
     else{assert.equal(await page.locator('.slide.active .mobile-level-svg:visible').count(),0,'desktop uses full-size diagram');}
     await page.locator('[data-transition="B"]').click();
