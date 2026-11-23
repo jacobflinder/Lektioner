@@ -32,13 +32,14 @@ jobs:
         run: |
           python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/fy1-http.log 2>&1 &
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy1/kapitel-8/ >/dev/null && break; sleep 1; done
-      - name: Verify Fy1 lessons including 9.3
+      - name: Verify Fy1 lessons including 9.4
         run: |
           failed=0
           for script in \
             fy1/kapitel-9/qa/standardmodellen-qa.cjs \
             fy1/kapitel-9/qa/elektromagnetisk-stralning-qa.cjs \
             fy1/kapitel-9/qa/isotoper-och-nuklider-qa.cjs \
+            fy1/kapitel-9/qa/karnreaktioner-qa.cjs \
             fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
             fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
             fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
@@ -79,4 +80,12 @@ jobs:
         with:
           name: fy1-9-3-visual-evidence
           path: fy1-qa-screenshots/isotoper-och-nuklider/
+          retention-days: 14
+
+      - name: Upload 9.4 screenshots for final visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy1-9-4-visual-evidence
+          path: fy1-qa-screenshots/karnreaktioner/
           retention-days: 14
