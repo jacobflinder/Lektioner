@@ -72,6 +72,10 @@ console.log('Static chapter/source/physics checks: OK');
      await page.screenshot({path:path.join(dir,viewport.width+'-slide-'+String(i+1).padStart(2,'0')+'.png'),fullPage:true});
    }
    await page.selectOption('#jump','2');
+   if(viewport.width===768){
+     const tabletRows=await page.evaluate(()=>[...document.querySelectorAll('.slide.active .spectrum-bands button')].map(b=>Math.round(b.getBoundingClientRect().top)));
+     assert.equal(new Set(tabletRows).size,1,'Tablet spectrum keeps seven regions in a single left-to-right sequence');
+   }
    if(viewport.width===390){
      const mobileSpectrum=await page.evaluate(()=>{
        const band=document.querySelector('.slide.active .spectrum-bands');
