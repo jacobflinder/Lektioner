@@ -28,7 +28,7 @@ for(const n of ['915','916','917','918','919','920','921','922','923'])assert.ok
 assert.ok(data.pages[7].body.includes('joniserande'),'Ionization definition');
 assert.ok(data.pages[8].body.includes('s. 335'),'Exact exercise page');
 assert.ok(data.pages[9].body.includes('924–929'),'Bridge to 9.3');
-assert.ok(!js.includes('Socrative'),'No invented Socrative');
+assert.ok(!data.pages.map(s=>s.body).join(' ').includes('Socrative'),'No invented student Socrative');
 assert.ok(data.pages[9].body.includes('Mål 3'),'Individual goals check');
 for(const page of data.pages){
  const html=[page.body,page.side||'',...(page.steps||[])].join('');
