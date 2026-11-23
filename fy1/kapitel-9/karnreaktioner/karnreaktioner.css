@@ -53,3 +53,6 @@
 
 .nuclide-map{display:block;width:min(100%,480px);height:auto;margin:3px auto 5px;background:#f9fcfd;border-radius:9px;max-height:230px}
 @media(min-width:1000px){.decay-control{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:8px 15px;align-items:center}.decay-buttons{grid-column:1;grid-row:1 / 3}.nuclide-map{grid-column:2;grid-row:1}.decay-control>.unit-note{grid-column:2;grid-row:2}.decay-result{grid-column:1 / 3;grid-row:3}}
+
+#bild-5 .gamma-ec section{padding:11px 13px}#bild-5 .gamma-ec .formula{font-size:1.08rem;line-height:1.36;margin:6px 0;padding:7px 9px}#bild-5 .gamma-ec p{font-size:.93rem;line-height:1.35;margin:6px 0}#bild-5 .question{padding:11px 14px;margin:9px 0}
+@media(max-width:600px){#bild-5 .gamma-ec .formula{font-size:.91rem}}
