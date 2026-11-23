@@ -43,9 +43,9 @@
 - [x] Originalets idéer, notation, räkneordning, exempeltyper och bokarbete kartlagda eller tilldelade senare lektion.
 - [x] Tre mål synliga och individuellt prövbara; samtliga obligatoriska bokuppgifter 924–929 framgår.
 - [x] Inget bokens exempel eller tryckta figur kopierat.
-- [ ] Fullständigt statiskt test av beräkningar, figurer och interaktioner i webbkoden.
-- [ ] Browser-test av **390×844, 768×1024, 1280×800 och 1920×1080** med visade matematikled.
-- [ ] Visuella skärmbilder granskade; därefter först huvudpublicering.
+- [x] Statiska test av samtliga mål, beräkningsled, γ- och isotopmodeller, sidnummer och obligatoriska bokuppgifter godkända.
+- [x] Browser-QA på **390×844, 768×1024, 1280×800 och 1920×1080** godkänd i GitHub Actions-körning 224 (23 november 2026), inklusive uppfälld fyrledsberäkning, isotop/γ-interaktioner och återställning.
+- [x] Fullständiga skärmbilder från körning 224 manuellt granskade, särskilt 390px mobilens nivådiagram, beräkning samt projektorsammanhängande lösningskedja. Intern källa är dold från elevvyn.
 - [ ] Verifiera main/Pages-länkar och publicerad status.
 
-**Status: GRANSKNINGSUTKAST**, inte godkänt för publicering innan sista tester.
+**Status: ORIGINAL- OCH BROWSERGRANSKAD, GODKÄND FÖR MERGE.** Github Pages-kontroll återstår efter att PR #190 slagits samman till main.
