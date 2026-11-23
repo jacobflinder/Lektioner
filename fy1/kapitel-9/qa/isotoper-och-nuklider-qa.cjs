@@ -24,7 +24,7 @@ assert.ok(data.pages[6].steps[0].includes('100'),'energy difference');
 assert.ok(data.pages[6].steps[1].includes('1,602'),'eV to J');
 assert.ok(data.pages[6].steps[3].includes('12,4'),'wavelength in pm');
 assert.ok(data.pages[7].steps[0].includes('100 keV + 50 keV = 150 keV'),'direct transition equals sum of two');
-assert.ok(data.pages[7].body.includes('vågräta axeln'),'gamma spectrum axis explained');
+assert.ok(data.pages[7].body.includes('horisontella axeln'),'gamma spectrum axis explained');
 const tasks=data.pages[8].body;
 assert.ok(tasks.includes('924–929 på s. 339 ska alla göras'),'all six exercises mandatory');
 assert.ok(tasks.includes('924, 925 och 926')&&tasks.includes('927, 928 och 929'),'clear sequence');
