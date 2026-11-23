@@ -105,6 +105,19 @@ console.log('Static chapter/source/physics checks: OK');
    await page.screenshot({path:path.join(dir,viewport.width+'-calculation-revealed.png'),fullPage:true});
    await page.locator('#reset').click();
    assert.equal(await page.locator('.slide.active .step.open').count(),0);
+   await page.selectOption('#jump','8');
+   assert.equal(await page.locator('.slide.active .step.open').count(),0,'923 help hidden until wanted');
+   await page.locator('#step').click();
+   assert.equal(await page.locator('.slide.active .step.open').count(),1,'923 photon-count scaffold opens');
+   const scaffold=await page.evaluate(()=>({
+     mathCount:document.querySelectorAll('.slide.active .step.open math').length,
+     hiddenMath:[...document.querySelectorAll('.slide.active .step.open .math-block')].filter(n=>n.scrollWidth>n.clientWidth+2).length,
+     escaped:[...document.querySelectorAll('.slide.active .step.open math')].filter(m=>{const b=m.getBoundingClientRect();return b.left < -2||b.right>window.innerWidth+2}).length
+   }));
+   assert.equal(scaffold.mathCount,3,'923 scaffold contains full energy–power–photon chain');
+   assert.equal(scaffold.hiddenMath,0,viewport.width+'px: 923 formulas do not overflow');
+   assert.equal(scaffold.escaped,0,viewport.width+'px: 923 formulas stay on screen horizontally');
+   await page.screenshot({path:path.join(dir,viewport.width+'-photon-count-help.png'),fullPage:true});
    assert.deepEqual(errors,[],viewport.width+'px no JS exceptions');
    await page.close();
  }
