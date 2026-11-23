@@ -52,6 +52,10 @@ for(const vp of [{width:390,height:844},{width:768,height:1024},{width:1280,heig
     });
     assert.equal(overflow.screen,false,vp.width+'px slide '+(i+1)+' horizontally overflows');
     assert.deepEqual(overflow.formulas,[],vp.width+'px slide '+(i+1)+' formula scrolled off '+JSON.stringify(overflow));
+    if(vp.width===1280 && i!==8){
+      const bottom=await page.locator('.end-controls').evaluate(el=>el.getBoundingClientRect().bottom);
+      assert.ok(bottom<vp.height+10,'Slide '+(i+1)+' navigation must be visible on 1280x800 projector. bottom='+bottom);
+    }
     if([0,1,3,6,8,9,10,11,12].includes(i)){
       await page.screenshot({path:'fy1-qa-screenshots/9-4-'+vp.width+'-slide-'+(i+1)+'.png',fullPage:true});
     }
