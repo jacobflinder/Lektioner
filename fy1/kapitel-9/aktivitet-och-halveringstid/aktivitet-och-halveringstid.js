@@ -101,6 +101,7 @@
 
     slide('Från N till aktivitet: räkna hela vägen', 'A = λN · Jacobs räkneordning', 7,
       '<p>Vid samma λ sker fler sönderfall per sekund om fler moderkärnor finns. Därför gäller</p>' +
+      '<p class="small-context">På projektorn: tryck <b>högerpil eller blanksteg</b> för nästa led. Webbsidan skrollar till steget och hela beräkningskedjan stannar på samma bild.</p>' +
       '<div class="formula-card">' + e('A = λN') + e('A = A<sub>0</sub> · e<sup>−λt</sup>') +
       '<p><b>För Bq måste λ anges i s<sup>−1</sup></b>, eftersom Bq betyder sönderfall/s.</p></div>' +
       '<p><b>Övningsdata:</b> N<sub>0</sub> = 10 000 moderkärnor, T<sub>½</sub> = 10 s. Bestäm λ, A<sub>0</sub>, N och A efter 20 s.</p>' +
@@ -150,16 +151,11 @@
       'K-Ar-datering och förgreningsandelen kommer från boken, inte 230911-filmen. Behåll samma formelmetod och tydlig startmängd före tidsberäkning.', 'Bok s. 354–355; uppgift 950'),
 
     slide('Socrative: läs av vad kurvan säger', 'Originalets klassrumsaktivitet', 4,
-      '<div class="demo-card"><h2>Socrative · Fy1 1103 Aktivitet</h2><p><b>Quizkod: SOC-38350144.</b> Starta den ursprungliga flervalsfrågan i Socrative. Välj <b>alla påståenden som stämmer</b>. Den avtagande kurvan gäller moderkärnor.</p></div>' +
+      '<div class="demo-card"><h2>Socrative · Fy1 1103 Aktivitet</h2><p><b>Läraren startar den ursprungliga quizen</b> (ID <b>SOC-38350144</b>). Gå in i Socrative med lärarens rumsnamn och välj <b>alla påståenden som stämmer</b>. Den avtagande kurvan gäller moderkärnor.</p>' +
+      '<ol><li><b>Enskilt:</b> granska kurvan och välj dina svar i Socrative.</li><li><b>Par:</b> jämför valen och motivera med N, N<sub>0</sub> och halveringstiden.</li><li><b>Klass:</b> diskutera skillnaden mellan moder- och dotterkärnor innan läraren visar återkopplingen i Socrative.</li></ol>' +
       graph('N','N₀') +
-      '<div class="socrative-list" id="socrative-options" role="group" aria-label="Välj alla korrekta påståenden">' +
-      '<label><input type="checkbox" value="A"> A. Kurvan visar antalet dotterkärnor som funktion av tiden.</label>' +
-      '<label><input type="checkbox" value="B"> B. Kurvan visar antalet moderkärnor som funktion av tiden.</label>' +
-      '<label><input type="checkbox" value="C"> C. Vid start, t = 0, är antalet moderkärnor N<sub>0</sub>.</label>' +
-      '<label><input type="checkbox" value="D"> D. Efter tre halveringstider återstår ⅛ av moderkärnorna från start.</label>' +
-      '<label><input type="checkbox" value="E"> E. Man kan byta ut N mot A, aktiviteten, och få motsvarande kurvform.</label></div>' +
-      '<button type="button" id="socrative-check">Kontrollera mina påståenden</button><p class="socrative-result" id="socrative-result" aria-live="polite">Välj först och motivera med kurvan.</p>',
-      [], 'Den här flervalsfrågan är hämtad i sak från original-PDF, sida 2. Rätt B,C,D,E; fel A. Starta den faktiska Socrative-sessionen, använd sidans avprickning vid frånvaro av klassrumskod.', 'Original PDF 230911 s. 2 · SOC-38350144'),
+      '<p class="small-context">Besluten och återkopplingen sker <b>i Socrative</b>, inte i en extra webbenkät. Efter klassdiskussionen arbetar du vidare med boken.</p>',
+      [], 'Original-PDF, s. 2: rätt B,C,D,E och fel A. Visa inte facit före enskilt svar och parsamtal. Den riktiga Socrative-frågan ska användas; ingen lokal ersättningsquiz. Därefter bokuppgifter 940–950.', 'Original PDF 230911 s. 2 · SOC-38350144'),
 
     slide('Bokarbete: alla 940–950', 'S. 356 · öva och fullfölj', 12,
       '<p class="focus-line">Vi arbetar med <b>samtliga uppgifter 940–950 på s. 356</b>. Börja där metoden är tydlig och markera var du fastnar.</p>' +
@@ -171,6 +167,7 @@
       '<p><b>945</b> · Cs-137; aktivitet, andel kvar och tid.</p><p><b>947</b> · Vad går att datera med kol-14?</p>' +
       '<p><b>949</b> · Medicinsk isotop; halveringstid, aktivitetsgräns och totala sönderfall.</p><p><b>950</b> · Kalium–argon och 10,9 % förgrening.</p></section></div>' +
       '<div class="book-note"><b>Läxa:</b> Alla uppgifter <b>940–950</b> på s. 356 är obligatoriska. <b>Det du inte hinner under bokarbetet blir läxa.</b> Hämta de data och förutsättningar som varje uppgift ger i boken.</div>' +
+      '<p class="small-context">Börja med ett eget lösningsförsök. När en beräkning blir svår: markera vilket steg du måste välja – λ, N, A eller tiden – och jämför sedan med en kamrat.</p>' +
       notice('Lösningsordning som fungerar', '1. Skriv vad som är känt och söks. 2. Bestäm λ med rätt tidsenhet. 3. Välj N- eller A-formeln. 4. Sätt in alla mellanled, ange enhet och rimlighetsbedöm.'),
       [], 'Tillåt självständigt arbete; kontrollera 940/941 tidigt och stöd logaritmsteget först efter att eleverna prövat halveringar. Originalet satte bokarbete efter Socrative. Uppgifter 940–950 obligatoriska, resterande läxa.', 'Boken uppgifter 940–950, s. 356'),
 

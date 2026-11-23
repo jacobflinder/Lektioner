@@ -1,5 +1,13 @@
 # Källkontroll · Fysik nivå 1b 9.4 Kärnreaktioner
 
+## Aktuell justering 2026-11-23
+
+- **Bild 5:** Ursprungliga kedjan **Ra-226 → exciterat Rn-222 + alfa; Rn-222* → Rn-222 + gamma** återförd i två numrerade kärnreaktioner. Först efter att alfa, beta och gamma förklarats gör eleven ett **beslut** mellan tre strålningstyper och motiverar sitt val innan återkopplingen visas.
+- **Bild 9:** Alla sex deuteriumled i Jacobs ordning kvar på **samma bild** med stora läsbara ekvationer. Elevvyn förklarar hur högerpil/blanksteg visar nästa led och automatiskt följer lösningen på projektorn – full matematik prioriteras framför att göra texten oläsligt liten för en enda skärmhöjd.
+- **Bild 14:** Läser 9.5 s. 350–355 och de gröna faktarutorna före nästa lektion.
+- **Oförändrat:** 14 bilder, 70 min; uppgifter 930–939 samtliga obligatoriska; ingen Socrative i originalet, alltså ingen i webblektionen.
+- **Godkännande:** uppdaterad käll-, browser- och projektorgranskning krävs före publicering. Äldre klarmarkering längre ned avser föregående version.
+
 ## Material och mandat
 
 Läroboken **9.4 s. 340–349**, uppgifter **930–939** på s. 349. Jacobs ursprungliga PDF, inspelning och transkript **230905 Kärnreaktioner, massdefekt** samt gamla kapitelmindmapen. Lärarens ursprungliga metod, räkneordning och beteckningar styr; nya boken styr aktuellt stoff och uppgiftsnummer. Senare inkomna s. **366 Vår strålmiljö** tillhör efterföljande avsnitt.

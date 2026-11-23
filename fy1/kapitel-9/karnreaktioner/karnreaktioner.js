@@ -87,10 +87,13 @@
       '</section><section><b>Elektroninfångning ε</b><p>En <b>innersta elektron</b> fångas in av kärnan. Proton + elektron blir neutron + neutrino.</p>' +
       eq(mi('p'), op('+'), betaMinus, op('→'), mi('n'), op('+'), neutrino) +
       '<p><b>A oförändrat, Z minskar 1.</b></p></section></div>' +
+      '<p><b>Jacobs exempel:</b> Radium-226 kan först avge en alfapartikel och bilda <b>exciterat radon-222</b>, markerat med en stjärna. När radonkärnan går till grundtillståndet avges en gammafoton.</p>' +
+      eq(nuc('Ra', 226, 88), op('→'), '<msup>' + nuc('Rn', 222, 86) + op('*') + '</msup>', op('+'), alpha) +
+      eq('<msup>' + nuc('Rn', 222, 86) + op('*') + '</msup>', op('→'), nuc('Rn', 222, 86), op('+'), mi('γ')) +
       notice('Jämför', 'Beta+ och elektroninfångning ändrar kärnans A och Z på samma sätt. Vad är skillnaden i vilka partiklar som går in eller ut?') +
       '<p class="small-context">Elektroninfångning är ett eget sönderfall i boken s. 344 och behövs för uppgift 938.</p>',
       ['Vid <b>beta+</b> lämnar en positron och en neutrino kärnan. Vid <b>elektroninfångning</b> tas en elektron upp och en neutrino sänds ut.'],
-      'Gammastrålning med exciterad kärna följer originalet. Elektroninfångning är tillagt utifrån nya bokens innehåll (inte en ny konkurrerande räknemetod).',
+      'Originalets Ra-226 → exciterat Rn-222 + alfa → Rn-222 + gamma finns nu som sammanhängande tvåstegsillustration. Elektroninfångning kommer från nya boken.',
       'Bok s. 342–344; originalets gamma'),
 
     slide('Fler sätt att förändra en kärna', 'Proton · neutron · spontan fission', 3,
@@ -138,6 +141,7 @@
 
     slide('Räkna hela vägen: deuterium', 'Jacobs metod · u → kg → J → MeV', 9,
       '<p><b>Vi gör som i Jacobs tavellösning:</b> addera massorna för en fri proton och neutron. Jämför med <b>deuteriumkärnans</b> massa, alltså utan atomens elektron.</p>' +
+      '<p class="small-context">På projektorn: använd <b>högerpil eller blanksteg</b> för att visa nästa led. Sidan följer det nya steget utan att bryta den sammanhängande lösningen.</p>' +
       '<div class="given-grid"><div><b>Proton</b><span>1,007276 u</span></div><div><b>Neutron</b><span>1,008665 u</span></div><div><b>Neutral deuteriumatom</b><span>2,014102 u</span></div><div><b>Elektron</b><span>0,00054858 u</span></div></div>' +
       '<p class="small-context">' + convert + '. Använd c = 2,998 · 10<sup>8</sup> m/s. Skriv först Δm själv.</p>',
       [
@@ -235,13 +239,23 @@
       '<section><b>1 · Reaktionsformel</b><p>Vad blir A och Z hos dotterkärnan när ' + eq(nuc('Ra', 226, 88), op('→'), mi('α'), op('+'), mi('?')) + ' sker?</p><p class="goal-tasks">Tränat i 930, 933 och 939.</p></section>' +
       '<section><b>2 · Massdefekt</b><p>En reaktion har Δm = 0,0010 u. Hur beräknar du energin i MeV? Förklara också varför atommassor ibland måste korrigeras.</p><p class="goal-tasks">Tränat i 931–932, 934–936 och 938.</p></section>' +
       '<section><b>3 · Sönderfallskedja</b><p>Varför behövs både α och β⁻ för att uran-238 ska bli bly-206?</p><p class="goal-tasks">Tränat i 937.</p></section></div>' +
-      '<div class="book-note"><b>Läxa:</b> Alla ofärdiga uppgifter 930–939 på s. 349. <b>Framåt:</b> Vi återkommer till kärnreaktionerna när vi behandlar radioaktivitet och stråldoser.</div>',
+      '<div class="book-note"><b>Läxa:</b> Alla ofärdiga uppgifter 930–939 på s. 349. <b>Inför 9.5:</b> läs s. 350–355 och de gröna faktarutorna. Nästa lektion undersöker vi aktivitet och halveringstid.</div>',
       [
         '<b>Kontroll:</b> Ra-226 → Rn-222 + α (A: 226 = 222 + 4; Z: 88 = 86 + 2). Δm = 0,0010 u motsvarar ungefär <b>0,931 MeV</b> (0,0010 · 931,49). Atommassorna innehåller elektroner; räkna samma partiklar före och efter. Uran→bly ger <b>8 α och 6 β⁻</b>.'
       ],
       'Kontrollera alla tre mål individuellt: 1 balansering; 2 massenergi + elektronmassor; 3 originalets metod för sönderfallskedja.',
       'Tre elevmål ↔ sista kontrollen')
   ];
+
+  // Eleven tar ställning först efter att alfa, beta och gamma har introducerats.
+  // Facit visas på lärarens kommando, inte när alternativet väljs.
+  pages[4].quiz = {
+    prompt: 'Beslut: Vilken strålning lämnar det exciterade radonet när A och Z är oförändrade?',
+    options: ['En ny alfapartikel', 'En betaelektron', 'En gammafoton'],
+    correct: 2,
+    hint: 'Titta på vad som händer med A och Z vid alfa och beta.',
+    why: 'En gammafoton bär bort energi utan att förändra proton- eller neutronantal. Radon-222 förblir radon-222.'
+  };
 
   document.getElementById('lesson-data').textContent = JSON.stringify({
     title: '9.4 Kärnreaktioner',

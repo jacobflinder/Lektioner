@@ -1,5 +1,13 @@
 # 9.3 Isotoper och nuklider – original till webb
 
+## Aktuell revision 2026-11-23
+
+- **Bild 2:** Originalets specifika kontroll för **kväve-15**, Z=7, A=15, 7 protoner, 8 neutroner och 7 elektroner, är återställd efter samma första beräkning med C-14. `N=A−Z` introduceras före båda.
+- **Bild 9:** Gammaspektrumets energi- och antalsaxlar behålls. Den saknade bokpoängen att **gammaenergier fungerar som nuklidfingeravtryck** är återförd med ett beslut som eleverna motiverar före nästa återkopplingssteg.
+- **Bild 11:** Nästa avsnitt **9.4 s. 340–348** och de gröna faktarutorna anges som förberedelse.
+- **Bevarat:** 11 bilder, 70 min, interaktiva kolisotoper och A/B/C-övergångar, fyra gamma-beräkningsled, alla 924–929 och ingen separat mindmap eller uppfunnen Socrative.
+- **Godkännande:** kompletteringen måste passera den uppdaterade fyrstorleksgranskningen; tidigare historiska klarmarkeringar nedan avser tidigare versioner.
+
 **Granskade källor:** Nya bokens s. 336–339 (fyra foton, inklusive uppgifterna 924–929), filmen/transkriptet `230904 Atomkärnan Fy1 2208` och PDF `230904 Atomkärnan Na22.pdf`, originalets handskrivna kapitel-11-mindmap (två sidor), uppladdade `230905 Kärnreaktioner, massdefekt Fy1 2208.mp4` och transkriptet samt `230905 Kärnreaktioner, massdefekt Na22.pdf`, Fy1 didaktisk grund v2.6 och den färdiga 9.2.
 
 ## Innehållskarta – inga bortglömda originalmoment

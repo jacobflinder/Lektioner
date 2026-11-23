@@ -50,10 +50,6 @@
 .exit-grid>section{padding:12px 13px;background:#f2f8fa;border:1px solid #cbdfe5;border-radius:12px;min-width:0}
 .exit-grid b{color:#146b7c}
 .exit-grid p{margin:7px 0}
-.socrative-list{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;margin:12px 0}
-.socrative-list label{display:block;border:1px solid #d1e3e6;border-radius:8px;padding:8px 10px;background:#fff;cursor:pointer}
-.socrative-list input{accent-color:#0a8295;transform:scale(1.2);margin-right:9px;vertical-align:middle}
-.socrative-result{min-height:1.5em;font-size:.9rem;color:#22596a}
 .dice-panel{border:1px solid #bbdbe0;background:#f4fafb;border-radius:13px;padding:12px 15px;margin:13px 0}
 .dice-panel h2{font-size:1.14rem;color:#14677b;margin:0 0 5px}
 .dice-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:9px 0}

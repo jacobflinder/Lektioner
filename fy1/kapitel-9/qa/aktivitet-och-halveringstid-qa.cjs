@@ -32,7 +32,8 @@ assert.ok(bodies[8].includes('ln(')&&bodies[8].includes('−λt'),'logarithmic m
 assert.ok(steps[8].includes('8,0 h'),'logarithm example numerical answer');
 assert.ok(bodies[9].includes('5 730')&&bodies[9].includes('kol-14')&&bodies[9].includes('atmosfären'),'C14 age dating and condition');
 assert.ok(bodies[10].includes('10,9 %')&&bodies[10].includes('0,109')&&steps[10].includes('100 000'),'K-Ar branching full example');
-assert.ok(bodies[11].includes('SOC-38350144')&&bodies[11].includes('B.')&&bodies[11].includes('E.'),'actual Socrative question and code');
+assert.ok(bodies[11].includes('SOC-38350144')&&bodies[11].includes('<b>Enskilt:</b>')&&bodies[11].includes('<b>Par:</b>')&&bodies[11].includes('<b>Klass:</b>'),'actual Socrative in individual-pair-class sequence');
+assert.ok(!bodies[11].includes('socrative-options')&&!bodies[11].includes('socrative-check'),'No duplicate web quiz when Socrative is assigned');
 for(let n=940;n<=950;n++)assert.ok(bodies[12].includes(String(n)),'all current tasks '+n);
 assert.ok(bodies[12].includes('Det du inte hinner under bokarbetet blir läxa'),'assigned remainder homework');
 assert.ok(bodies[13].includes('20 moderkärnor')&&bodies[13].includes('0,025')&&bodies[13].includes('kol-14'),'one independent exit per goal');
@@ -40,7 +41,7 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.ok(html.includes('tarningsdemo.js')&&html.includes('../../gemensamt/app.js'),'interactive local dice and shared shell');
 const css=fs.readFileSync(path.join(root,'aktivitet-och-halveringstid.css'),'utf8');
 assert.ok(css.includes('.figure .axis{stroke:#567987;stroke-width:2;fill:none}')&&css.includes('.figure .grid{stroke:#d4e6e9;stroke-width:1;fill:none}'),'SVG guide paths never fill black polygons');
-assert.ok(css.includes('.socrative-list label{display:block;'),'inline math in Socrative labels does not split into flex items');
+assert.ok(!css.includes('.socrative-list'),'Local duplicate Socrative quiz styling removed');
 assert.ok(!html.includes('youtu.be')&&!bodies.join(' ').includes('youtu.be'),'no prewatch video added');
 const aid=fs.readFileSync(path.join(root,'lararstod.html'),'utf8');
 assert.ok(aid.includes('3,7 · 10<sup>10</sup>')&&aid.includes('10^8'),'correction is open');
@@ -99,13 +100,14 @@ console.log('Fy1 9.5 source, goal, original order, physical constants and all as
       await page.locator('#reset').click();
       assert.equal(await page.locator('.slide.active .step.open').count(),0);
       await page.selectOption('#jump','11');
-      for(const letter of ['B','C','D','E'])await page.locator('#socrative-options input[value='+letter+']').check();
-      await page.locator('#socrative-check').click();
-      assert.match(await page.locator('#socrative-result').innerText(),/Rätt/);
-      await page.screenshot({path:path.join(dir,vp.width+'-socrative-right.png'),fullPage:true});
+      assert.equal(await page.locator('#socrative-options').count(),0,'No competitor to real Socrative');
+      assert.equal(await page.locator('#socrative-check').count(),0,'No premature local Socrative facit');
+      assert.match(await page.locator('.slide.active').innerText(),/Läraren startar den ursprungliga quizen/);
+      assert.match(await page.locator('.slide.active').innerText(),/Enskilt:[\s\S]*Par:[\s\S]*Klass:/,'Actual classroom decisions in Socrative');
+      await page.screenshot({path:path.join(dir,vp.width+'-socrative-classroom.png'),fullPage:true});
       assert.deepEqual(errors,[],`${vp.width} no console JS errors`);
       await page.close();
     }
-    console.log('Fy1 9.5 browser all 4 sizes, dice, worked math and Socrative: PASS');
+    console.log('Fy1 9.5 browser all 4 sizes, dice, worked math and original Socrative workflow: PASS');
   }finally{await browser.close()}
 })().catch(error=>{console.error(error);process.exitCode=1});
