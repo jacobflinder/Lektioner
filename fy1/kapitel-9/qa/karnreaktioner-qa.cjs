@@ -29,6 +29,7 @@ assert.ok(d.pages[12].body.includes('Mål 1')&&d.pages[12].body.includes('Mål 2
 assert.ok(!all.includes('SOC-38350144'),'no 9.5 Socrative on 9.4');
 assert.ok(!all.includes('beta-decay'),'no 9.5 PhET on 9.4');
 console.log('FY1 9.4: source/method/text/assignment static checks passed');
+fs.mkdirSync('fy1-qa-screenshots',{recursive:true});
 (async()=>{
 const {chromium}=require('playwright');
 for(const vp of [{width:390,height:844},{width:768,height:1024},{width:1280,height:800},{width:1920,height:1080}]){
