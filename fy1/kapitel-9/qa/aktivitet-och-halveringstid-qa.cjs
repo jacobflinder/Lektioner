@@ -18,6 +18,7 @@ assert.ok(bodies[0].includes('940–950')&&bodies[0].includes('350–355'),'accu
 assert.ok(bodies[1].includes('20 tärningar')&&bodies[1].includes('2, 4 eller 6')&&bodies[1].includes('dice-sim'),'physical 20 dice and digital parity experiment');
 assert.ok(bodies[2].includes('https://phet.colorado.edu/en/simulations/beta-decay')&&bodies[2].includes('HTML5')&&bodies[2].includes('antineutrino'),'played PhET demo as modern link');
 assert.ok(bodies[3].includes('N<sub>0</sub>')&&bodies[3].includes('N₀')&&bodies[3].includes('¼')&&bodies[3].includes('⅛'),'N curve from original');
+assert.ok(bodies[3].includes('Halveringstiden T<sub>½</sub>')&&bodies[3].includes('hälften av moderkärnorna'),'definition introduced before formulas');
 assert.ok(bodies[4].includes('1 Bq = 1 sönderfall/s')&&bodies[4].includes('5 000 Bq')&&bodies[4].includes('10<sup>10</sup>'),'A curve, Bq, body and corrected Ci');
 assert.ok(!bodies[4].includes('10<sup>8</sup>'),'wrong original Curie exponent removed');
 assert.ok(bodies[5].includes('a = 0,97')&&bodies[5].includes('(½)<sup>t/T'),'teacher exponential bridge and half-life expression');

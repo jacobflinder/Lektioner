@@ -16,13 +16,13 @@
 | Flera omgångar, notera antalet kärnor; ungefär hälften försvinner per omgång, men inte exakt varje gång | 2, 4, 14 | **Bevarat**, elevens observation jämförs med statistiskt förväntat antal. |
 | PhET:s **faktiskt körda** beta-sönderfallssimulering: en kärna respektive 10/30; betaelektron och antineutrino; moder- och dotterkärna | 3 | **Bevarat**, med officiell modern HTML5-länk som **teknisk ersättning** för gamla Java-länken `phet.colorado.edu/en/simulation/legacy/beta-decay`. Explicit verklig lektionsdemo, inte förhandsfilm. |
 | Modernuklid, dotternuklid, återkoppling till beta från tidigare avsnitt | 3 | **Bevarat** kort, kärnreaktionsformlerna finns redan i 9.4. |
-| Rita (N) mot (t), markera (N_0), halveringstid (T_{1/2}), (N_0/2), (N_0/4), (N_0/8) | 4 | **Bevarat**, ny egen ritad, tydligt etiketterad kurva. |
-| Rita (A) mot (t) med samma kurvform; (A_0), sönderfall per sekund och (1\,\mathrm{Bq}=1\) sönderfall/s | 5 | **Bevarat**, skild kurva och strikt separerade storheter. |
+| Definiera halveringstid; rita `N` mot `t`, markera `N₀`, halveringstid `T½`, `N₀/2`, `N₀/4`, `N₀/8` | 4 | **Bevarat**, explicit definition innan formler, ny egen ritad, tydligt etiketterad kurva. |
+| Rita `A` mot `t` med samma kurvform; `A₀`, sönderfall per sekund och `1 Bq = 1 sönderfall/s` | 5 | **Bevarat**, skild kurva och strikt separerade storheter. |
 | Aktivitet i kroppen omkring 100 Bq per kg; 50 kg ger omkring 5 000 Bq | 5 | **Bevarat** som uppskattningsvis exempel från tavlan. |
 | Historisk Curie-enhet på tavlan: Jacob har skrivit **3,7·10⁸ Bq per Ci** | 5; lärarstöd | **Korrigerat öppet**: definierat korrekt som **3,7·10¹⁰ Bq per Ci**. I originalfilmens högupplösta tavla står exponenten 8 och detta är ett sakfel, inte en osäker transkriptavläsning. Rättelsen anges synligt för lärare och elever. |
-| Exponentialfunktion (y=C·a^x), exempel (a=0{,}97) betyder 3 % minskning per tidssteg | 6 | **Bevarad exakt begreppsordning** före kärnformeln. |
-| (N=N_0(1/2)^{t/T_{1/2}}), antal halveringstider som exponent | 6 | **Bevarad huvudmetod** med fullständiga led och nya, konstruerade övningssiffror. |
-| Inför (e\approx2{,}718), (lambda=\ln2/T_{1/2}) och (N=N_0e^{-\lambda t}) | 7 | **Bevarat i Jacobs ordning**, alla definitioner före tillämpning. |
+| Exponentialfunktion `y = C·a^x`, exempel `a = 0,97` betyder 3 % minskning per tidssteg | 6 | **Bevarad exakt begreppsordning** före kärnformeln. |
+| `N = N₀(½)^(t/T½)`, antal halveringstider som exponent | 6 | **Bevarad huvudmetod** med fullständiga led och nya, konstruerade övningssiffror. |
+| Inför `e ≈ 2,718`, `λ = ln2/T½` och `N = N₀e^(−λt)` | 7 | **Bevarat i Jacobs ordning**, alla definitioner före tillämpning. |
 | `A = λN`, därefter `A = A₀e^(−λt)`; relevanta enheter | 8 | **Bevarat**, sedan full lösningskedja λ → A₀ → N → A med varje avgörande led på samma bild. |
 | Omvandla kärnantal till massa, kalium-40 ≈ 40 u per kärna (bokens exempel 9.11) | 8 | **Bokkomplettering** som kort stöd utan ett konkurrerande arbetssätt. |
 | Logaritmer nämns men full algebra skjuts upp i 2023-filmen | 7 → 9 | **Bokstyrd komplettering**, inte byte av sönderfallsmodell: nytt kursunderlag innehåller tidsbestämningar, därför visas logaritmsteget separat och tydligt före lösningen. Ingen implicit ny metod mitt i ett exempel. |
@@ -48,14 +48,14 @@
 | 946 | Levande person och C14 | 10, 13 |
 | 947 | Kol i metall vs organiskt material | 10, 13 |
 | 948 | Jämför A och T½ för olika N | 5, 8, 13 |
-| 949 | Medicinsk isotop: T½, aktivitetsfönster, antal sönderfall | 7–9, 13. För antal sönderfall: (\Delta N=N_0-N(t)), med (N=A/\lambda). |
+| 949 | Medicinsk isotop: T½, aktivitetsfönster, antal sönderfall | 7–9, 13. För antal sönderfall: `ΔN = N₀ − N(t)`, med `N = A/λ`. |
 | 950 | Bergdatering med 10,9 % K–Ar-gren | 11, 13 |
 
 ## Bedömning, kunskapsriktighet och avvikelsegrind
 
 - **Tre mätbara mål:** 1 = slump/halveringar, 2 = N/A-beräkning, 3 = dateringsprincip. Slutbild 14 prövar vart och ett med eget elevsvar.
 - **70 minuter:** 2 + 7 + 4 + 4 + 4 + 5 + 5 + 7 + 5 + 4 + 4 + 4 + 12 + 3 = 70. **14 bilder** är motiverat av två konkreta aktiviteter + Socrative, olika funktioner samt C14/K–Ar som nya boken innehåller. Ingen huvudaktivitet är gömd i lärarstöd.
-- **Matematisk norm:** först halveringar och (N_0(1/2)^{t/T_{1/2}}), sedan e och lambda, sedan A=λN och A(t). Introduktion av uttryck före användning. Originalmetoden förblir standard. Logaritmframställningen är boktillägg för tidsgränsuppgifter och inte ett extra konkurrerande fysiksamband.
+- **Matematisk norm:** först halveringar och `N = N₀(½)^(t/T½)`, sedan e och lambda, sedan `A = λN` och `A(t)`. Introduktion av uttryck före användning. Originalmetoden förblir standard. Logaritmframställningen är boktillägg för tidsgränsuppgifter och inte ett extra konkurrerande fysiksamband.
 - **Riktighet:** 1 Ci = 3,7·10¹⁰ Bq; enhet Bq kräver λ i s⁻¹ när A=λN. λ i år⁻¹ är tillåtet för N(t) med t i år men ska inte användas direkt för Bq. Fysiskt antal i tärningsförsöket är stokastiskt. För K–Ar anger övningen noll ursprungligt Ar och ett slutet system. För C14 nämns atmosfärvariation/kärnvapeneffekt och verklig kalibrering.
 - **Begränsning:** påståendena om att C14 inte daterar levande person / stålkniv ensamt är förenklade genom att frågornas antaganden skiljer vanligt dött organiskt material från material som fortsätter ta upp kol eller inte har användbar C14-signal. Utrymme för bokens diskussion.
 - **Slutgranskning av mobil och projektor:** se separat automatiserad QA för 390/768/1280/1920, stegvis matematik, simulationens kast, Socrative, länkval och översvämning. Eventuella fel ska fixas före publicering.

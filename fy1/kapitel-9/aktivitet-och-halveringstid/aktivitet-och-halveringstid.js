@@ -58,6 +58,7 @@
 
     slide('Antalet moderkärnor minskar', 'N · N₀ · halveringstid', 4,
       '<p><b>N</b> är antalet moderkärnor som ännu inte sönderfallit. <b>N<sub>0</sub></b> är antalet vid t = 0.</p>' +
+      '<p><b>Halveringstiden T<sub>½</sub></b> är tiden det tar för <b>hälften av moderkärnorna i ett stort prov</b> att sönderfalla. Samma tid halverar också aktiviteten.</p>' +
       graph('N','N₀') +
       '<p class="caption">Varje lika långt tidssteg T<sub>½</sub> halverar det återstående antalet, inte samma antal varje gång.</p>' +
       '<div class="three-cards"><section><b>Start</b>' + e('N = N<sub>0</sub>') + '</section><section><b>Efter T<sub>½</sub></b>' + e('N = '+f('N<sub>0</sub>','2')) + '</section><section><b>Efter 3T<sub>½</sub></b>' + e('N = '+f('N<sub>0</sub>','8')) + '</section></div>' +
