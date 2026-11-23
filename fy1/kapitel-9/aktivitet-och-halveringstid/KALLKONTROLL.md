@@ -1,5 +1,13 @@
 # Källkontroll och original-till-webb-karta – Fy1 9.5
 
+## Lärarens skarpa Socrative-beslut, revision 2026-11-23
+
+- **Socrative finns i 230911-originalet.** Därför sker den ursprungliga frågan **i Socrative**, som startas av läraren (ID `SOC-38350144`), med elevernas egna beslut först **enskilt**, sedan diskussion i **par** och gemensam genomgång i **klass**. **Ingen extra lokal webbenkät, avprickning eller facitreserv får förekomma.** Den tidigare reservfrågan och dess kod är borttagna.
+- **Efter Socrative:** Bokarbete med samtliga obligatoriska uppgifter **940–950 s. 356**; det ofärdiga är läxa. Lektioner utan Socrative i originalet har i stället bokarbete och får ingen uppfunnen frågebank.
+- **Tärningarna hör till en annan originalaktivitet**, därför behålls 20 fysiska tärningar med digital reserv för samma kastregel. PhET är en faktiskt genomförd demo, inte en förhandsfilm.
+- **Projektor:** läraren kan visa de sex A- och N-leden på samma bild med högerpil/blanksteg och automatisk skroll. Beräkningarna bryts inte på två slides.
+- **Kontroll:** 14 bilder/70 min, ursprunglig räkneordning, C-14/K–Ar från nya boken och uppgifterna 940–950 oförändrade. Browser-QA ska kontrollera att lokal Socrative-quiz saknas. Äldre uppgift nedan om att lokal reservfråga finns är **upphävd**.
+
 ## Faktiska underlag och deras roller
 
 - **Aktuell lärobok:** fotograferade originalsidor **350–356**, avsnitt **9.5 Aktivitet och halveringstid**. Sida **357** börjar **9.6 Strålning möter materia**. På **s. 356** finns **uppgifter 940–950**, alla obligatoriska när de har tilldelats. Bokens exempel återges inte ordagrant.

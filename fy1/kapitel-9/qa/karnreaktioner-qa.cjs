@@ -26,6 +26,8 @@ assert.ok(data.pages[2].steps.join('').includes('237')&&data.pages[2].steps.join
 assert.ok(bodies[3].includes('14')&&bodies[3].includes('18'),'C-14 and F-18 beta examples');
 assert.ok(bodies[3].includes('ν')&&bodies[3].includes('positron'),'Correct neutrino and antiparticle');
 assert.ok(bodies[4].includes('Elektroninfångning')&&bodies[5].includes('Protonemission')&&bodies[5].includes('Neutronemission'),'Book variants');
+assert.ok(bodies[4].includes('Radium-226')&&bodies[4].includes('exciterat radon-222'),'Original Ra-226 alpha followed by excited Rn-222 gamma restored');
+assert.equal(data.pages[4].quiz.correct,2,'Student decides gamma emission after two-stage example, with delayed feedback');
 assert.ok(bodies[5].includes('Spontan fission'),'Spontaneous fission present');
 assert.ok(bodies[6].includes('Al')&&bodies[6].includes('P')&&data.pages[6].steps.length===3,'Balancing method with each intermediate step');
 assert.ok(bodies[7].includes('E')&&bodies[7].includes('Δm')&&bodies[7].includes('relativitetsteorin'),'Mass-energy relationship introduced before example');
@@ -47,6 +49,7 @@ assert.ok(chain.includes('76')&&chain.includes('6')&&chain.includes('8'),'8 alph
 for(let n=930;n<=939;n++)assert.ok(bodies[12].includes(String(n)),'Book exercise '+n+' included');
 assert.ok(bodies[12].includes('Det du inte hinner blir läxa'),'All unfinished assignments become homework');
 assert.ok(bodies[13].includes('930')&&bodies[13].includes('937'),'Goals linked to tasks at exit');
+assert.ok(bodies[13].includes('9.5')&&bodies[13].includes('gröna faktarutorna'),'Textbook preparation before next lesson');
 const dm=1.007276+1.008665-(2.014102-0.00054858);
 const energy=dm*1.66054e-27*(2.998e8)**2/1.60218e-13;
 assert.ok(Math.abs(energy-2.22)<.008,'Deuteron binding energy number');
@@ -87,6 +90,15 @@ console.log('Fy1 9.4 static source, number, three-goal and 70-minute checks: PAS
       await page.screenshot({path:path.join(output,vp.width+'-deuterium-all-steps.png'),fullPage:true});
       await page.locator('#reset').click();
       assert.equal(await page.locator('.slide.active .step.open').count(),0,'Reset deuterium stages');
+      await page.selectOption('#jump','4');
+      await page.locator('.slide.active .quiz [data-choice="0"]').click();
+      assert.match(await page.locator('.slide.active .quiz .feedback').innerText(),/Förklara ditt val/,'Choice before answer');
+      await page.locator('.slide.active .feedback-toggle').click();
+      assert.match(await page.locator('.slide.active .quiz .feedback').innerText(),/A och Z/,'Wrong choice feeds back on conservation');
+      await page.locator('.slide.active .quiz [data-choice="2"]').click();
+      await page.locator('.slide.active .feedback-toggle').click();
+      await page.locator('.slide.active .feedback-toggle').click();
+      assert.match(await page.locator('.slide.active .quiz .feedback').innerText(),/Rätt/,'Correct gamma choice verified');
       await page.selectOption('#jump','11');
       for(let j=0;j<3;j++)await page.locator('#step').click();
       assert.equal(await page.locator('.slide.active .step.open').count(),3,'Uranium stages all accessible');

@@ -1,5 +1,24 @@
 # 9.2 Elektromagnetisk strålning – original-till-webb-karta
 
+## Aktuell revision 2026-11-23 (ersätter äldre bildnummer och godkännandestatus nedan)
+
+Lärarens granskning visade två verkliga luckor. Båda åtgärdas nu **i den synliga elevlektionen**, inte endast i lärarnotiser:
+
+| Källa/krav | Aktuell plats | Kontroll |
+| --- | --- | --- |
+| Pennan och våg–partikelmodellen | Bild 2 | Ursprunglig demonstration bevarad. |
+| Newton, Huygens, Young, Maxwell, Planck, Einstein | **Ny bild 3** | Historisk röd tråd återställd med beslut om interferens; spaltförsök och relativitet flyttas inte ned från nivå 2. |
+| Spektrum, λ, f, c=fλ, E=hf, eV | Bilder 4–7 | Definitionerna före tillämpning; klickbart spektrum bevarat. |
+| 650 nm → f → J → eV, originalets räkneordning | **Bild 8** | Fyra fullständiga led, tillsammans genomgångna 916. |
+| Jonisation och UV:s verkan | Bild 9 | Ämnesmässig precision bevarad. |
+| 923 a–b kostnad/volym, c cirkelyta/energi per m², d UV-fotonantal | **Ny bild 10** | Centrala sambanden, val radie/diameter och fyra steg i **egna övningsdata** visas före bokuppgiften. Elektrisk energi blandas inte med absorberad UV-energi. |
+| Samtliga 915–923 obligatoriska, 916 redan genomgången | **Bild 11** | 19 min bokarbete; det ofärdiga blir läxa; stödet till 923 är frivilligt, aldrig 923. |
+| Tre individuella målfrågor och läsning inför 9.3 | **Bild 12** | Uppgiftskopplingar under respektive mål. |
+
+**Omfattning:** 12 bilder, 70 min. Nya beslut kommer efter sakintroduktionen och har fördröjd återkoppling. Ingen Socrative har lagts till. Äldre uppgifter om att historiken endast finns i lärarnotiser, att fotonantal introduceras först på bokbilden, att bokarbete är bild 9 och att status redan är slutgodkänd avser den tidigare versionen och gäller inte längre.
+
+**Verifieringsgrind:** statisk käll-/matematikkontroll klar; fyrstorleksbrowser-test och publicering återstår att verifiera i GitHub Actions innan någon slutlig status anges.
+
 **Källor faktiskt granskade:** Nuvarande bok s. 333, 334 och 335 (fotograferade sidor från Jacob); originalets `230904 Atomkärnan Na22.pdf` (2 s. med 1101–1103 och kommande kapitel); originalfilmen `230904 Atomkärnan Fy1 2208.mp4` (59 min, provbilder på originaltavla samt 650 nm-beräkning); hela `230904 Atomkärnan Fy1 2208.txt`; handskriven `01. Kap 11 mind map fy1 kap11 kärnfysik Na22.pdf` (hela kapitlet); Na25-planeringen; Fy1 didaktisk grund v2.5; lärarbeslut 2026-11-23 om att boken styr innehåll, originalet metod, att lektioner får överlappa, och att relativitetsteorin flyttats till nivå 2.
 
 ## Innehållskarta

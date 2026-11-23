@@ -1,4 +1,4 @@
-/* Digital reserv för Jacobs fysiska 20-tärningsdemo samt Socrative-återkoppling.
+/* Digital reserv för Jacobs fysiska 20-tärningsdemo.
  * Allt sker lokalt i webbläsaren, utan spårning eller sparade elevsvar. */
 (() => {
   'use strict';
@@ -53,18 +53,4 @@
   resetButton.addEventListener('click',reset);
   root.closest('.slide').addEventListener('lesson:reset',reset);
   reset();
-  const checks=document.querySelectorAll('#socrative-options input[type=checkbox]');
-  const result=document.getElementById('socrative-result');
-  const check=document.getElementById('socrative-check');
-  if(check&&result&&checks.length===5){
-    check.addEventListener('click',()=>{
-      const selected=[...checks].filter(el=>el.checked).map(el=>el.value).join(',');
-      result.textContent=selected==='B,C,D,E'
-        ? 'Rätt! B, C, D och E. Moderkärnor minskar; både N och A halveras.'
-        : 'Jämför med kurvan: A är fel eftersom antalet dotterkärnor normalt ökar. Rätt påståenden är B, C, D och E.';
-    });
-    check.closest('.slide').addEventListener('lesson:reset',()=>{
-      checks.forEach(el=>{el.checked=false});result.textContent='Välj först och motivera med kurvan.';
-    });
-  }
 })();

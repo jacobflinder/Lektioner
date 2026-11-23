@@ -43,15 +43,23 @@
 .exit-grid b{color:#146175}.exit-grid p{margin:7px 0}
 .small-context{font-size:.86rem;color:#54727a}
 .step.open .math-block{font-size:1.36rem}
+.history-grid,.application-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:12px 0}
+.history-grid>section,.application-grid>section,.formula-card{min-width:0;border:1px solid #cddfe5;border-radius:11px;background:#f2f8fa;padding:12px 15px}
+.history-grid b,.application-grid b,.formula-card>b{color:#126578}
+.history-grid p,.application-grid p,.formula-card p{margin:6px 0}
+.application-grid .math-block,.formula-card .math-block{font-size:1.22rem;margin:7px 0}
 /* Räknekedjan har fyra hela, ordnade led på samma projektionsyta. */
 @media(min-width:1001px){
-  #bild-7.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}
-  #bild-7 .page-head,#bild-7 .page-lead,#bild-7 .layout,#bild-7 .steps-label,#bild-7 .teacher-note,#bild-7 .source-note{grid-column:1/-1}
-  #bild-7 .step.open{margin:5px 0;padding:10px 13px}
-  #bild-7 .step.open .math-block{margin:6px 0;font-size:1.24rem}
+  #bild-8.slide.active,#bild-10.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}
+  #bild-8 .page-head,#bild-8 .page-lead,#bild-8 .layout,#bild-8 .steps-label,#bild-8 .teacher-note,#bild-8 .source-note,
+  #bild-10 .page-head,#bild-10 .layout,#bild-10 .quiz,#bild-10 .steps-label,#bild-10 .teacher-note,#bild-10 .source-note{grid-column:1/-1}
+  #bild-8 .step.open,#bild-10 .step.open{margin:5px 0;padding:10px 13px}
+  #bild-8 .step.open .math-block,#bild-10 .step.open .math-block{margin:6px 0;font-size:1.20rem}
 }
 @media(max-width:1000px){.spectrum-bands{grid-template-columns:repeat(7,minmax(0,1fr))}.spectrum-bands button{min-height:62px;padding:6px 2px;font-size:.72rem}.assignment-grid{grid-template-columns:1fr 1fr}.assignment-grid section:last-child{grid-column:1/-1}.exit-grid{grid-template-columns:1fr}}
 @media(max-width:600px){
+  .history-grid,.application-grid{grid-template-columns:1fr}
+  .application-grid .math-block,.formula-card .math-block{font-size:1.07rem}
   .page-title{font-size:1.85rem}.math-block,.step.open .math-block{font-size:1.13rem}
   .spectrum{padding:11px}.spectrum-axis{display:block;margin-bottom:8px}
   .spectrum-axis span{display:block;font-size:0;text-align:left}
