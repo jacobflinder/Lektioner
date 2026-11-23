@@ -13,6 +13,17 @@ assert.equal(data.goals.length,3,'three goals');
 assert.deepEqual(data.pages.map(p=>parseInt(p.time,10)),[4,6,6,5,5,7,8,5,19,5],'70-minute time allocation');
 assert.equal(data.pages.reduce((a,p)=>a+parseInt(p.time,10),0),70);
 assert.equal((data.pages[0].body.match(/<li>/g)||[]).length,3,'goals visible at start');
+for(let k=0;k<8;k++)assert.equal((data.pages[k].body.match(/class="lesson-action"/g)||[]).length,1,'visible class directions slide '+(k+1));
+assert.ok(data.pages[0].body.includes('Starta eller ta fram mindmapen för kapitel 9'),'original mindmap activity on slide 1');
+assert.ok(data.pages[1].body.includes('Mindmap · nuklidnotation'),'nuklide definition written into mindmap');
+assert.ok(data.pages[2].body.includes('Demonstration + mindmap'),'isotope demonstration visible to students');
+assert.ok(data.pages[5].body.includes('Demonstration + mindmap'),'gamma demonstration visible to students');
+assert.ok(data.pages[2].body.indexOf('lesson-action')<data.pages[2].body.indexOf('iso-widget'),'isotope instruction precedes demonstration');
+assert.ok(data.pages[5].body.indexOf('lesson-action')<data.pages[5].body.indexOf('level-widget'),'gamma instruction precedes demonstration');
+assert.ok(data.pages[6].body.includes('Räkna tillsammans'),'worked solution interaction visible');
+assert.ok(data.pages[7].body.includes('Kontrollera mindmapen'),'mindmap review before bookwork');
+assert.ok(!data.pages.map(p=>p.body).join('').includes('Vi förutsätter inte relativitetsteori'),'no teacher-facing program notes on pupil slide');
+assert.ok(!data.pages.map(p=>p.body).join('').includes('youtu.be'),'next-lesson videos are not 9.3 activities');
 assert.ok(data.pages[1].body.includes('N')&&data.pages[1].body.includes('nuklid'),'definitions precede example');
 assert.equal((data.pages[2].body.match(/data-isotope="/g)||[]).length,3,'C-12/13/14 interactive choices');
 assert.ok(data.pages[3].body.includes('Stark kärnkraft'),'strong and electric forces');
@@ -51,18 +62,21 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
     await page.goto('http://127.0.0.1:8123/fy1/kapitel-9/isotoper-och-nuklider/',{waitUntil:'networkidle'});
     assert.equal(await page.locator('.slide').count(),10);
     assert.equal(await page.locator('.teacher-note:visible').count(),0,'hide teacher notes from pupils');
+    assert.equal(await page.locator('.lesson-action').count(),8,'eight visible classroom actions across slides 1–8');
     assert.equal(await page.locator('.source-note:visible').count(),0,'hide source mapping metadata from pupils');
     for(let i=0;i<10;i++){
       await page.selectOption('#jump',String(i));
+      assert.equal(await page.locator('.slide.active .lesson-action:visible').count(),i<8?1:0,'step instructions in student classroom view on slide '+(i+1));
       const issues=await page.evaluate(()=>{
         const active=document.querySelector('.slide.active');
         const math=[...active.querySelectorAll('.math-block')].filter(n=>n.getClientRects().length);
         const err=math.filter(el=>el.scrollWidth>el.clientWidth+2).map(x=>x.textContent.slice(0,110));
-        return{width:window.innerWidth,pageWidth:document.documentElement.scrollWidth,mathOverflow:err,
+        return{width:window.innerWidth,pageWidth:document.documentElement.scrollWidth,mathOverflow:err,actionOverflow:[...active.querySelectorAll('.lesson-action')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>el.textContent.slice(0,80)),
           clippedMath:math.flatMap(n=>[...n.querySelectorAll('math')].filter(m=>{const b=m.getBoundingClientRect();return b.left<0||b.right>window.innerWidth+2}).map(e=>e.textContent.slice(0,70)))};
       });
       assert.ok(issues.pageWidth<=issues.width+2,vp.width+'px slide '+(i+1)+' page overflow: '+JSON.stringify(issues));
       assert.deepEqual(issues.mathOverflow,[],vp.width+'px slide '+(i+1)+' hidden math');
+      assert.deepEqual(issues.actionOverflow,[],vp.width+'px slide '+(i+1)+' classroom instructions visible');
       assert.deepEqual(issues.clippedMath,[],vp.width+'px slide '+(i+1)+' math escapes screen');
       await page.screenshot({path:path.join(out,vp.width+'-slide-'+String(i+1).padStart(2,'0')+'.png'),fullPage:true});
     }

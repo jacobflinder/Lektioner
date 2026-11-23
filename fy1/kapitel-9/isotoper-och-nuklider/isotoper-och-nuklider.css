@@ -1,3 +1,8 @@
+/* Självbärande klassrumsflöde: tydlig instruktion direkt i elevbilden. */
+.lesson-action{display:flex;gap:11px;align-items:baseline;background:#eff7f8;border-left:4px solid #168095;border-radius:8px;padding:9px 13px;margin:12px 0;font-size:.92rem;line-height:1.4}
+.lesson-action b{color:#115f71;flex:0 0 auto}
+.lesson-action span{flex:1;min-width:0}
+@media(max-width:600px){.lesson-action{display:block;padding:10px 12px}.lesson-action b{display:block;margin-bottom:4px}}
 .source-note{display:none}
 /* Fy1 9.3 — responsive teaching materials. */
 .focus-line{font-size:1.17rem;font-weight:740;color:#155c70}
