@@ -37,6 +37,7 @@ jobs:
           failed=0
           for script in \
             fy1/kapitel-9/qa/standardmodellen-qa.cjs \
+            fy1/kapitel-9/qa/elektromagnetisk-stralning-qa.cjs \
             fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
             fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
             fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
