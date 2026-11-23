@@ -76,11 +76,19 @@
 - **Övriga bilder:** Mindmapnotiser på bilderna 1–5 och 8 har strukits. Den verkliga interaktionen med kolisotoperna på bild 3 och gammaövergångarna på bild 6 behålls med korta förutsägelseinstruktioner. Separat bokarbete 924–929 och målkopplad slutkontroll är oförändrade.
 - **Norm för framtida lektioner:** Lägg inte automatiskt till mindmapmoment från äldre PDF:er när webblektionen ersätter det. Låt det gamla innehållet styra stoff och metod men låt lärarens senare explicita beslut styra aktivitetens format. Ny central teori introduceras alltid före användning av en interaktiv modell.
 
-**Status:** inväntar ny statisk och visuell webbläsarkontroll för ovanstående revidering före publicering.
+**Status (senaste revisionen):** Godkänd källa-till-webb-kontroll, statiska tester, browser-QA och visuell granskning av 11-bildsversionen. Kan publiceras efter återställd standard-workflow; separat kontroll av GitHub Pages återstår.
 
 ### Läsbarhetsjustering – teori och klickmodell på två bilder
 
 En fyrstorlekstest av den första revideringen visade att bild 6 blev för lång (bland annat över 1400 px i projektorformat 1280×800) när teori och fullt interaktivt diagram samsades på samma sida. Detta stoppade publicering av den varianten trots godkänd funktionstestning. Den slutliga versionen delar därför innehållet i två bilder: **bild 6 förklarar alla centrala begrepp och lagar, bild 7 prövar A–C med samma interaktiva diagram**. Bild 8 har den fullständiga beräkningen. Totalt 11 bilder och samma 70 minuter, med uppgifterna 924–929 och tre mål oförändrade. Ändringen är en didaktisk förbättring av presentationen; fysik/metod har inte ändrats.
 
-- [ ] Ny webbläsarkontroll och visuell projektor-/mobilgranskning av 11-bildsversionen.
-- [ ] Bekräfta att den slutliga 11-bildsversionen är publicerad och åtkomlig.
+- [x] Ny, slutlig GitHub Actions-körning **#270** godkänd på 390×844, 768×1024, 1280×800, 1920×1080. End-to-end-testet kontrollerar alla 11 bilder, samtliga interaktioner och beräkningsled samt att teori och dialog följer originalets ordning. Projektorbild 6 och 7 uppfyller även navigerings- och skärmhöjdskontroll.
+- [ ] Verifiera att 11-bildsversionen är sammanslagen med `main` och kontrollera live på GitHub Pages.
+
+### Slutlig skärm- och originalgranskning, PR #192
+
+- [x] **Originalets metod och innehåll:** Z/A/N, kolisotoper, kärnans två krafter, isotopanalys, nivåers betydelse, ΔW=Wföre−Wefter, Eγ=ΔW=hf=hc/λ, 100 keV→J→12,4 pm och gammaspektrum med alla nödvändiga mellanled bevarade.
+- [x] **Senare lärarbeslut:** Ingen separat mindmap. Diagrammens teorier och konventioner förklaras på bild 6 innan interaktiv användning på bild 7. Samtliga uppgifter 924–929 obligatoriska.
+- [x] **Läsbarhet:** 11 bilder/70 minuter. Separat teori och interaktion. Kontroller 390×844, 768×1024, 1280×800 och 1920×1080, inklusive projektornavigation och färdigräknade led. Verifierat i GitHub Actions-körning #270 och genom skärmbilder av bild 6–8.
+- [x] **Interaktion:** Kol-12/13/14, gamma A/B/C, reset, visning av alla beräkningssteg och individuell exit kontrollerade.
+- [ ] **Driftsättning:** Huvudgren och offentlig GitHub Pages-adress ska granskas efter merge.
