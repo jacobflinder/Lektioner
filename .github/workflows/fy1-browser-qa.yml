@@ -32,11 +32,12 @@ jobs:
         run: |
           python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/fy1-http.log 2>&1 &
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/fy1/kapitel-8/ >/dev/null && break; sleep 1; done
-      - name: Verify Coulomb lesson and other five Fy1 lessons
+      - name: Verify Fy1 lessons including 9.2
         run: |
           failed=0
           for script in \
             fy1/kapitel-9/qa/standardmodellen-qa.cjs \
+            fy1/kapitel-9/qa/elektromagnetisk-stralning-qa.cjs \
             fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
             fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
             fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
@@ -62,4 +63,11 @@ jobs:
         with:
           name: fy1-browser-quality-evidence
           path: fy1-qa-screenshots/
+          retention-days: 14
+      - name: Upload 9.2 screenshots for final visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy1-9-2-visual-evidence
+          path: fy1-qa-screenshots/elektromagnetisk-stralning/
           retention-days: 14
