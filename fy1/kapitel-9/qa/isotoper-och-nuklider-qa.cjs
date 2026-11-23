@@ -14,10 +14,12 @@ assert.deepEqual(data.pages.map(p=>parseInt(p.time,10)),[4,6,6,5,5,7,8,5,19,5],'
 assert.equal(data.pages.reduce((a,p)=>a+parseInt(p.time,10),0),70);
 assert.equal((data.pages[0].body.match(/<li>/g)||[]).length,3,'goals visible at start');
 for(let k=0;k<8;k++)assert.equal((data.pages[k].body.match(/class="lesson-action"/g)||[]).length,1,'visible class directions slide '+(k+1));
-assert.ok(data.pages[0].body.includes('Ta fram mindmapen för kapitel 9'),'original mindmap activity on slide 1');
+assert.ok(data.pages[0].body.includes('Starta eller ta fram mindmapen för kapitel 9'),'original mindmap activity on slide 1');
 assert.ok(data.pages[1].body.includes('Mindmap · nuklidnotation'),'nuklide definition written into mindmap');
 assert.ok(data.pages[2].body.includes('Demonstration + mindmap'),'isotope demonstration visible to students');
 assert.ok(data.pages[5].body.includes('Demonstration + mindmap'),'gamma demonstration visible to students');
+assert.ok(data.pages[2].body.indexOf('lesson-action')<data.pages[2].body.indexOf('iso-widget'),'isotope instruction precedes demonstration');
+assert.ok(data.pages[5].body.indexOf('lesson-action')<data.pages[5].body.indexOf('level-widget'),'gamma instruction precedes demonstration');
 assert.ok(data.pages[6].body.includes('Räkna tillsammans'),'worked solution interaction visible');
 assert.ok(data.pages[7].body.includes('Kontrollera mindmapen'),'mindmap review before bookwork');
 assert.ok(!data.pages.map(p=>p.body).join('').includes('Vi förutsätter inte relativitetsteori'),'no teacher-facing program notes on pupil slide');
