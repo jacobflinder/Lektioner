@@ -41,7 +41,7 @@
   #bild-7 .step.open{margin:5px 0;padding:10px 13px}
   #bild-7 .step.open .math-block{margin:6px 0;font-size:1.24rem}
 }
-@media(max-width:1000px){.spectrum-bands{grid-template-columns:repeat(4,minmax(0,1fr))}.spectrum-bands button{min-height:62px}.assignment-grid{grid-template-columns:1fr 1fr}.exit-grid{grid-template-columns:1fr}}
+@media(max-width:1000px){.spectrum-bands{grid-template-columns:repeat(7,minmax(0,1fr))}.spectrum-bands button{min-height:62px}.assignment-grid{grid-template-columns:1fr 1fr}.assignment-grid section:last-child{grid-column:1/-1}.exit-grid{grid-template-columns:1fr}}
 @media(max-width:600px){
   .page-title{font-size:1.85rem}.math-block,.step.open .math-block{font-size:1.13rem}
   .spectrum{padding:11px}.spectrum-axis{display:block;margin-bottom:8px}
@@ -52,6 +52,6 @@
   .spectrum-bands button{counter-increment:spectral-band;min-height:41px;text-align:left;font-size:.91rem;padding:7px 12px}
   .spectrum-bands button::before{content:counter(spectral-band) ". ";font-weight:800}
   .spectrum-bands::after{content:"Nederst: kortast våglängd · högst frekvens och fotonenergi";font-size:.79rem;color:#336373;font-weight:700;margin:5px 0}
-  .risk-grid,.assignment-grid{grid-template-columns:1fr}.wave-figure text{font-size:21px}.body-copy{font-size:1rem}.goal-card{padding:12px}
+  .risk-grid,.assignment-grid{grid-template-columns:1fr}.assignment-grid section:last-child{grid-column:auto}.wave-figure text{font-size:21px}.body-copy{font-size:1rem}.goal-card{padding:12px}
 }
 @media print{.spectrum-bands button{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
