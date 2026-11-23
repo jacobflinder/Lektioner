@@ -25,7 +25,7 @@
 | Gamla mindmapens kärnreaktioner, alfa, beta, gamma, massdefekt | Kommande lektioner | **Ej 9.2-stoff** enligt nuvarande bokfördelning. Gamma nämns endast i spektrumet. |
 | Originalets 1101–1103 lärarlett och arbete i bok/par | Bild 7 och 9 | **Bevarat**, med självständig träning innan par. |
 | Nya bokens exempel 9.2 om laser med 632 nm, 1 mW och fotonantal | Allmän stödtrappa på bild 9 | **Stoffet bevarat utan kopia**: eleven får vid behov se hur fotonenergi kopplas till effekt och totalt antal fotoner. Originalets 650 nm-metod förblir huvudexemplet. |
-| Bokens 915–923 (s. 335) | Bild 9 (konkret arbetsorder), bild 10 (målöversikt) och lärarstöd | **Samtliga nummer med**. På bild 9: gör 915, 917 och 921; om tid 918–920, 922–923; 916 är redan genomgången. På bild 10: mål 1 = 915, 919, 920; mål 2 = 916–918, 922, 923; mål 3 = 921. |
+| Bokens 915–923 (s. 335) | Bild 9 (konkret arbetsorder), bild 10 (målöversikt) och lärarstöd | **Samtliga nummer med**. På bild 9: samtliga 915–923 ska göras, med 916 redan genomgången. Börja med 915, 917, 921 och gör sedan 918–920, 922–923; det som återstår blir läxa. På bild 10: mål 1 = 915, 919, 920; mål 2 = 916–918, 922, 923; mål 3 = 921. |
 | Tre mål, individuell kontroll | Bild 1 och 10 | **Didaktiskt förbättrat**, kopplat till exakt samma innehåll. |
 
 ## Ämnes- och metodkontroll
@@ -53,14 +53,21 @@
 
 ## Elevrespons och förbättring 2026-11-23
 
-- **Tidigare bild 9 (ersatt enligt senare lärarbeslut):** Målgrupperingen flyttas till bild 10. Inga målgrupper ska längre belasta arbetsbilden. Bild 9 ger bara uppgiftsordern: 915, 917 och 921; vid tid 918–920 och 922–923; 916 genomgången gemensamt. Hela intervallet 915–923 finns kvar.
+- **Tidigare bild 9 (ersatt enligt senare lärarbeslut):** Målgrupperingen flyttas till bild 10. Inga målgrupper ska längre belasta arbetsbilden. Bild 9 ger bara uppgiftsordern: 915, 917 och 921 först; därefter 918–920 och 922–923. Alla är obligatoriska; 916 är redan genomgången gemensamt. Hela intervallet 915–923 finns kvar.
 - **Bild 9, elevtext:** Den onödiga kommentaren "men kopieras inte här" har tagits bort. Bara användbar bokhänvisning och stöd till faktarutorna återstår.
 - **Bild 10:** Varje exitfråga kan besvaras utifrån genomgången – mål 1 genom bilderna 3–5, mål 2 genom 4–7 och mål 3 genom 8. Inga särskilda bokuppgifter krävs innan slutkontrollen; det framgår nu för eleverna.
 - **Kontroll:** QA testar att alla nio uppgiftsnummer fördelas exakt en gång, under rätt mål, och att de tre målgrupperna visas för eleverna.
 
 ## Lärarkommentar: slutlig uppdelning mellan bild 9 och bild 10
 
-- **Bild 9 – bokarbete (20 min):** konkret uppgiftsorder utan kopplingar till mål: gör 915, 917, 921; fortsätt om tid med 918–920, 922, 923. Uppgift 916 har lösts tillsammans. Arbete enskilt före parjämförelse. Resterande bokuppgifter ligger kvar i läxan.
+- **Bild 9 – bokarbete (20 min):** konkret uppgiftsorder utan kopplingar till mål: gör först 915, 917, 921 och därefter 918–920, 922, 923. Samtliga ska göras; det som inte hinns färdigt blir läxa. Uppgift 916 har lösts tillsammans. Arbete enskilt före parjämförelse. Resterande bokuppgifter ligger kvar i läxan.
 - **Bild 10 – mål och uppgiftskoppling:** mål 1 (915, 919, 920), mål 2 (916–918, 922, 923), mål 3 (921), visade under respektive mål. Tre individuella exitfrågor är oförändrade och besvaras utifrån genomgången, utan bokuppgifter som obligatoriska förkunskaper.
 - **Metod och stoff:** inget har bytts ut på genomgångsbilderna 1–8. Den fullständiga 650 nm-lösningen och stödet till 923 är bevarade.
 - **Granskning:** QA kontrollerar att arbetsbilden saknar målindelning och visar precis två arbetsfaser, samt att alla tre mål på slutbilden har korrekt uppgiftskoppling. Visningskontroll på fyra skärmstorlekar krävs före publicering.
+
+## Förtydligat krav från läraren 2026-11-23
+
+- **Bild 9:** Inga uppgifter får framstå som frivilliga. Samtliga uppgifter **915–923** ska göras. **916 är redan genomgången tillsammans**. De återstående uppgifterna prioriteras i ordning: först 915, 917 och 921, därefter 918–920, 922 och 923. Det som inte hinns under lektionens 20 minuter ska färdigställas hemma.
+- **Bild 10:** Kopplingen mellan uppgifter och mål ligger fortfarande under respektive mål. De tre individuella slutfrågorna är oförändrade.
+- **Bevarat:** Din beräkningsmetod, samtliga genomgångsbilder, uppgiftsintervallet och det frivilliga **stödet** för den obligatoriska uppgiften 923.
+- **Verifiering krävs:** elevtext, lärarstöd och webbtest måste bekräfta skillnaden mellan obligatoriska uppgifter och frivilligt stöd innan ändringen markeras klar.
