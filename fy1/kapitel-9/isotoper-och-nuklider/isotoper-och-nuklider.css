@@ -21,7 +21,7 @@
 .food-chain{display:flex;gap:8px;align-items:center;justify-content:center;margin:18px 0}
 .food-chain span:not(.chain-arrow){border:1px solid #c9dfe3;background:#e8f3f5;padding:14px 11px;border-radius:12px;text-align:center;font-weight:740;flex:1}
 .chain-arrow{color:#14778b;font-size:1.5rem;font-weight:750}
-.level-svg{width:min(100%,660px);display:block;height:auto;margin:0 auto}
+.level-svg{width:min(100%,660px);display:block;height:auto;margin:0 auto}.mobile-level-svg{display:none}
 .level-widget .transition-feedback{font-size:.96rem}
 .book-note{background:#e8f4ed;border-left:5px solid #4b8c6a;padding:13px 16px;border-radius:10px;margin:14px 0}
 .work-plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:17px 0}
@@ -36,4 +36,4 @@
 .step.open .math-block{font-size:1.30rem;margin:6px 0}
 @media(min-width:1001px){#bild-7.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}#bild-7 .page-head,#bild-7 .page-lead,#bild-7 .layout,#bild-7 .steps-label,#bild-7 .teacher-note,#bild-7 .source-note{grid-column:1/-1}#bild-7 .step.open{padding:11px 13px;margin:6px 0}#bild-7 .step.open .math-block{font-size:1.16rem}}
 @media(max-width:1000px){.definitions{grid-template-columns:repeat(2,minmax(0,1fr))}.exit-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.page-title{font-size:1.80rem}.goal-card{padding:12px}.body-copy{font-size:1rem}.math-block{font-size:1.10rem}.step.open .math-block{font-size:.98rem}.definitions,.forces-grid,.work-plan{grid-template-columns:1fr}.food-chain{gap:4px}.food-chain span:not(.chain-arrow){padding:9px 5px;font-size:.86rem}.chain-arrow{font-size:1rem}.iso-widget,.level-widget{padding:10px}.isotope-svg{max-width:100%}.work-plan section{padding:13px}.work-exercises{font-size:1.23rem}}
+@media(max-width:600px){.level-widget .level-svg:not(.mobile-level-svg){display:none}.level-widget .mobile-level-svg{display:block;width:min(100%,340px)}.page-title{font-size:1.80rem}.goal-card{padding:12px}.body-copy{font-size:1rem}.math-block{font-size:1.10rem}.step.open .math-block{font-size:.98rem}.definitions,.forces-grid,.work-plan{grid-template-columns:1fr}.food-chain{gap:4px}.food-chain span:not(.chain-arrow){padding:9px 5px;font-size:.86rem}.chain-arrow{font-size:1rem}.iso-widget,.level-widget{padding:10px}.isotope-svg{max-width:100%}.work-plan section{padding:13px}.work-exercises{font-size:1.23rem}}
