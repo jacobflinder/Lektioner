@@ -19,6 +19,7 @@ assert.ok(data.pages[3].body.includes('Stark kärnkraft'),'strong and electric f
 assert.ok(data.pages[4].body.includes('kväve-15'),'isotope analysis');
 assert.ok(data.pages[5].body.includes('metastabilt')&&data.pages[5].body.includes('Tc-99m'),'book content metastable nucleus');
 assert.equal((data.pages[5].body.match(/data-transition="/g)||[]).length,3,'gamma A/B/C');
+assert.ok(data.pages[5].body.includes('mobile-level-svg'),'mobile gamma diagram with readable labels');
 assert.equal(data.pages[6].steps.length,4,'full four-step gamma calculation');
 assert.ok(data.pages[6].steps[0].includes('100'),'energy difference');
 assert.ok(data.pages[6].steps[1].includes('1,602'),'eV to J');
@@ -75,6 +76,8 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
     assert.equal(await page.locator('.isotope-svg .nucleons circle').count(),12,'reset isotope');
     await page.screenshot({path:path.join(out,vp.width+'-isotopes.png'),fullPage:true});
     await page.selectOption('#jump','5');
+    if(vp.width===390){assert.equal(await page.locator('.slide.active .mobile-level-svg:visible').count(),1,'mobile diagram visible');}
+    else{assert.equal(await page.locator('.slide.active .mobile-level-svg:visible').count(),0,'desktop uses full-size diagram');}
     await page.locator('[data-transition="B"]').click();
     assert.match(await page.locator('.transition-feedback').innerText(),/150 keV/);
     await page.locator('[data-transition="C"]').click();
