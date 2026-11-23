@@ -128,7 +128,7 @@
       '<text x="470" y="57" font-size="26" fill="#2b5966">+</text><text x="502" y="54" font-size="18" font-weight="730" fill="#b56826">frigjord</text><text x="502" y="77" font-size="18" font-weight="730" fill="#b56826">energi</text></svg>' +
       '<div class="concept-rail"><span>Fria nukleoner: större massa</span><span>→</span><span>Bunden kärna: mindre massa + frigjord energi</span></div>' +
       eq(mi('Δm'), op('='), sub('m','fria nukleoner'), op('−'), sub('m','bunden kärna')) +
-      '<p><b>Energi och massa är två sidor av samma fysikaliska storhet.</b> När energi frigörs minskar massan med en motsvarande mängd. Vi använder sambandet direkt:</p>' +
+      '<p><b>Massa och energi hänger ihop.</b> När energi lämnar ett system minskar systemets massa med en motsvarande mängd. Vi använder sambandet direkt:</p>' +
       eq(mi('E'), op('='), mi('Δm'), power(mi('c'), 2)) +
       '<div class="units-card"><b>Du behöver inte ha läst relativitetsteorin.</b> Här betyder <b>c</b> ljusets hastighet i vakuum, ca 3,00 · 10<sup>8</sup> m/s. Enheten <b>u</b> används för små massor.</div>' +
       question('Varför blir energin stor även om Δm är pytteliten?'),
@@ -189,13 +189,13 @@
       '<p><b>Bindningsenergi per nukleon</b> visar hur hårt nukleonerna sitter ihop. Det är bindningsenergin delad med antalet nukleoner A.</p>' +
       eq(sub('E','per nukleon'), op('='), f(sub('E','bindning'), mi('A'))) +
       '<svg class="binding-svg" viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematisk kurva: bindningsenergi per nukleon stiger snabbt för lätta kärnor, når maximum nära järn och sjunker långsamt för tunga kärnor. Fusion och fission kan föra produkter närmare toppen.">' +
-      '<path d="M68 24 V206 H647" fill="none" stroke="#325b69" stroke-width="3"/><text x="80" y="18" font-size="15" fill="#325b69">Bindningsenergi per nukleon</text>' +
+      '<path d="M68 24 V206 H647" fill="none" stroke="#325b69" stroke-width="3"/><text x="80" y="18" font-size="21" fill="#325b69">Bindningsenergi per nukleon</text>' +
       '<path d="M76 180 C112 118 163 62 263 45 C360 39 490 70 627 108" stroke="#117d92" stroke-width="5" fill="none"/>' +
-      '<circle cx="263" cy="45" r="8" fill="#d88a36"/><text x="249" y="32" font-size="16" font-weight="750">≈ järn</text>' +
+      '<circle cx="263" cy="45" r="8" fill="#d88a36"/><text x="277" y="79" font-size="20" font-weight="750">≈ järn</text>' +
       '<path d="M113 160 L178 95" fill="none" stroke="#358961" stroke-width="4"/><path d="M174 96 l-16 4 9 10z" fill="#358961"/>' +
       '<path d="M555 90 L456 60" fill="none" stroke="#bd5b42" stroke-width="4"/><path d="M459 59 l12 -9 3 15z" fill="#bd5b42"/>' +
       '<text x="98" y="182" font-size="17" font-weight="700" fill="#24704f">fusion</text><text x="511" y="126" font-size="17" font-weight="700" fill="#a74c38">fission</text>' +
-      '<text x="615" y="225" font-size="15" fill="#325b69">Masstal A</text></svg>' +
+      '<text x="535" y="225" font-size="20" fill="#325b69">Masstal A</text></svg>' +
       '<p class="small-context">Schematisk form, inte mätdata. Lätta kärnor kan <b>slås samman (fusion)</b> och mycket tunga kärnor <b>delas (fission)</b>. Om produkterna får större bindningsenergi per nukleon kan energi frigöras.</p>' +
       question('Varför kan både sammanslagning av lätta kärnor och delning av tunga kärnor ge energi?'),
       ['Båda kan leda till kärnor som är <b>hårdare bundna per nukleon</b>. Skillnaden i energi frigörs. Massan före reaktionen är då större än efter.'],
