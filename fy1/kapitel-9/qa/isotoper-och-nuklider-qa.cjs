@@ -51,6 +51,7 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
     await page.goto('http://127.0.0.1:8123/fy1/kapitel-9/isotoper-och-nuklider/',{waitUntil:'networkidle'});
     assert.equal(await page.locator('.slide').count(),10);
     assert.equal(await page.locator('.teacher-note:visible').count(),0,'hide teacher notes from pupils');
+    assert.equal(await page.locator('.source-note:visible').count(),0,'hide source mapping metadata from pupils');
     for(let i=0;i<10;i++){
       await page.selectOption('#jump',String(i));
       const issues=await page.evaluate(()=>{
