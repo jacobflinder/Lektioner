@@ -64,3 +64,10 @@ jobs:
           name: fy1-browser-quality-evidence
           path: fy1-qa-screenshots/
           retention-days: 14
+      - name: Upload 9.2 screenshots for final visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy1-9-2-visual-evidence
+          path: fy1-qa-screenshots/elektromagnetisk-stralning/
+          retention-days: 14
