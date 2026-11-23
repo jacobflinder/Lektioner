@@ -1,0 +1,39 @@
+/* Fy N1b 9.4, built on the existing lesson shell. */
+.source-note{display:none}
+.focus-line{font-size:1.15rem;font-weight:720;color:#17596a}
+.goalbox{background:#edf6f9;border:1px solid #cbdfe6;border-radius:12px;padding:14px 18px;margin:12px 0}
+.goalbox li{margin:6px 0}
+.lesson-action{border-left:4px solid #0d8395;background:#eef7f9;border-radius:9px;padding:11px 14px;margin:12px 0;line-height:1.38}
+.lesson-action strong{color:#096b7d}
+.formula{font:1.33rem/1.42 "STIX Two Math","Cambria Math",Cambria,serif;background:#f3f8fa;border:1px solid #d0e1e8;border-radius:10px;padding:9px 13px;margin:9px 0;overflow-x:auto;max-width:100%}
+.formula math{display:block;max-width:100%;width:max-content}
+.formula.tight{font-size:1.09rem}
+.pair-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.pair-grid section{background:#eff7f9;border:1px solid #cddfe6;border-radius:12px;padding:13px}
+.pair-grid section>b{color:#0a6579}
+.pair-grid section p{margin:7px 0}
+.video-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:14px 0}
+.video-row a{border:1px solid #b6d5dd;border-radius:12px;background:#eff7fa;padding:12px 13px;text-decoration:none;font-weight:750;display:block;color:#086e84}
+.video-row a small{display:block;font-weight:450;color:#53707a;margin-top:4px}
+.video-row a:hover{background:#dcedf3}
+.pillline{padding:10px 15px;background:#ebf3f6;border-left:4px solid #2186a0;border-radius:9px}
+.decay-control{background:#eff7f9;border:1px solid #cbdfe6;border-radius:12px;padding:12px 13px;margin:12px 0}
+.decay-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.decay-buttons button[aria-pressed="true"]{background:#cbeef3;border-color:#08788b}
+.decay-result{background:white;border:1px solid #ccdfe5;border-radius:8px;padding:12px;min-height:72px}
+.decay-result .formula{margin:4px 0}
+.unit-note{color:#56717a;font-size:.85rem}
+.task-block{background:#e9f4ee;border-left:5px solid #4a906e;border-radius:10px;padding:15px 18px;margin:11px 0}
+.task-block strong{font-size:1.10rem}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:11px 0}
+.task-grid section{border:1px solid #d0e2e7;background:#f4f8f9;border-radius:11px;padding:12px 16px}
+.task-grid h3{font-size:1rem;margin:0 0 7px;color:#0c6578}
+.task-grid p{margin:5px 0}
+.exit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:13px 0}
+.exit-grid section{background:#eef7f9;border:1px solid #c5dfe7;border-radius:12px;padding:13px}
+.exit-grid b{color:#0b657a}
+.goal-tasks{color:#526c74;font-size:.83rem}
+.conservation{font-size:1.07rem;font-weight:690;border-left:3px solid #6caabb;padding:7px 12px;margin:9px 0}
+@media(max-width:900px){.video-row,.exit-grid{grid-template-columns:1fr}.formula{font-size:1.20rem}}
+@media(max-width:600px){.pair-grid,.task-grid{grid-template-columns:1fr}.formula{font-size:1rem;padding:9px 8px}.formula.tight{font-size:.91rem}.body-copy{font-size:1rem}.stage{overflow-wrap:break-word}.video-row{gap:6px}}
+@media(min-width:1100px){#bild-10 .formula{font-size:1.12rem}#bild-11 .formula{font-size:1.12rem}}
