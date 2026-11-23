@@ -28,6 +28,19 @@ assert.equal(data.pages[6].steps.length,4,'Complete teacher-calculation chain');
 for(const w of ['650','4,62','3,06','1,91'])assert.ok(data.pages[6].steps.join(' ').includes(w),'650nm calculation contains '+w);
 assert.ok(data.pages[6].steps[0].includes('<mspace width="0.16em"/>'),'Units have a visible mathematical thin space');
 for(const n of ['915','916','917','918','919','920','921','922','923'])assert.ok(data.pages.map(s=>s.body).join(' ').includes(n),'New book exercise '+n);
+const groups=[...data.pages[8].body.matchAll(/<section data-goal="([123])">([\\s\\S]*?)<\\/section>/g)];
+assert.deepEqual(groups.map(m=>m[1]),['1','2','3'],'Bookwork displayed under each of the three goals');
+const expectedExercises={1:[915,919,920],2:[916,917,918,922,923],3:[921]};
+const seenExercises=[];
+for(const group of groups){
+ const found=[...group[2].matchAll(/<b>(9\\d\\d)<\\/b>/g)].map(m=>Number(m[1]));
+ assert.deepEqual(found,expectedExercises[group[1]],'Book tasks mapped to goal '+group[1]);
+ seenExercises.push(...found);
+}
+assert.deepEqual([...seenExercises].sort((a,b)=>a-b),[915,916,917,918,919,920,921,922,923],'All assignments present exactly once');
+assert.ok(!data.pages[8].body.includes('men kopieras inte här'),'Remove unnecessary student-facing explanation');
+assert.ok(data.pages[9].body.includes('Alla tre frågorna bygger på genomgången'),'Exit explicitly needs no special book exercise');
+
 assert.ok(data.pages[7].body.includes('joniserande'),'Ionization definition');
 assert.ok(data.pages[8].body.includes('s. 335'),'Exact exercise page');
 assert.ok(data.pages[9].body.includes('924–929'),'Bridge to 9.3');
@@ -118,6 +131,9 @@ console.log('Static chapter/source/physics checks: OK');
    await page.locator('#reset').click();
    assert.equal(await page.locator('.slide.active .step.open').count(),0);
    await page.selectOption('#jump','8');
+   assert.equal(await page.locator('.slide.active .assignment-grid section').count(),3,'Three visible goal groups for bookwork');
+   assert.deepEqual(await page.locator('.slide.active .assignment-grid section > b').allTextContents(),
+     ['Mål 1 · Spektrum och fotoner','Mål 2 · Beräkningar','Mål 3 · Joniserande strålning']);
    assert.equal(await page.locator('.slide.active .step.open').count(),0,'923 help hidden until wanted');
    await page.locator('#step').click();
    assert.equal(await page.locator('.slide.active .step.open').count(),1,'923 photon-count scaffold opens');
