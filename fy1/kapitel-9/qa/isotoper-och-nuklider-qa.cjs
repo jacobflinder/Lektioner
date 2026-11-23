@@ -85,8 +85,8 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
     await page.selectOption('#jump','6');
     for(let i=0;i<4;i++)await page.locator('#step').click();
     assert.equal(await page.locator('.slide.active .step.open').count(),4,'all calculation steps');
-    const inspect=await page.evaluate(()=>{const steps=[...document.querySelectorAll('.slide.active .step.open')];return {mathOverflows:[...document.querySelectorAll('.slide.active .step.open .math-block')].filter(x=>x.scrollWidth>x.clientWidth+2).length,rects:steps.map(e=>{const r=e.getBoundingClientRect();return{top:r.top,left:r.left,bottom:r.bottom}})};});
-    assert.equal(inspect.mathOverflows,0,'worked solution not clipped '+vp.width);
+    const inspect=await page.evaluate(()=>{const steps=[...document.querySelectorAll('.slide.active .step.open')];return {mathOverflows:[...document.querySelectorAll('.slide.active .step.open .math-block')].filter(x=>x.scrollWidth>x.clientWidth+2).map(x=>({text:x.textContent,scroll:x.scrollWidth,width:x.clientWidth})),rects:steps.map(e=>{const r=e.getBoundingClientRect();return{top:r.top,left:r.left,bottom:r.bottom}})};});
+    assert.deepEqual(inspect.mathOverflows,[],'worked solution not clipped '+vp.width+': '+JSON.stringify(inspect.mathOverflows));
     if(vp.width>=1280){assert.ok(inspect.rects[1].left>inspect.rects[0].left,'two-column worked solution');assert.ok(inspect.rects[2].top>inspect.rects[0].top,'second row of steps');}
     await page.screenshot({path:path.join(out,vp.width+'-calculation.png'),fullPage:true});
     await page.selectOption('#jump','8');
