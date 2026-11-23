@@ -1,0 +1,39 @@
+/* 9.2: gemensamt Fy1-skal och anpassningar för matematik/spektrum. */
+.source-note{display:none}
+.focus-line{color:#0f6474;font-size:1.18rem;font-weight:760}
+.goal-card{padding:15px 19px;border:1px solid #cce1e7;border-radius:13px;background:#edf7f9;margin:16px 0}
+.goal-card>b{font-size:1.07rem;color:#125f72}.goal-card ol{margin:7px 0 2px;padding-left:24px}.goal-card li{margin:5px 0}
+.math-block{font:1.46rem/1.35 "STIX Two Math","Cambria Math",Cambria,serif;margin:12px 0;max-width:100%;overflow-x:auto;overflow-y:hidden}
+.math-block math{display:block;max-width:100%}
+.wave-figure{display:block;width:min(100%,600px);height:auto;background:#f2f8fa;border:1px solid #c9e0e5;border-radius:12px;padding:8px;margin:16px auto}
+.wave-figure text{font:18px system-ui,sans-serif;fill:#1d5565}
+.spectrum{margin:12px 0 18px;background:#f1f8fa;border:1px solid #cbdfe5;border-radius:13px;padding:16px}
+.spectrum-axis{display:flex;justify-content:space-between;gap:17px;font-size:.78rem;color:#336373;font-weight:700;margin-bottom:9px}
+.spectrum-axis span{flex:1}.spectrum-axis span:last-child{text-align:right}
+.spectrum-bands{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin:8px 0 13px}
+.spectrum-bands button{min-width:0;min-height:84px;word-break:normal;overflow-wrap:anywhere;text-align:center;border:1px solid #a8bdc6;border-radius:7px;font-size:.78rem;font-weight:750;padding:7px 4px}
+.spectrum-bands button:nth-child(1){background:#d3e9f4}
+.spectrum-bands button:nth-child(2){background:#d8e8ee}
+.spectrum-bands button:nth-child(3){background:#f7d4c1}
+.spectrum-bands button:nth-child(4){background:linear-gradient(115deg,#b3b2e9,#9acbf2,#a7dca9,#f4dc96,#f6b9a5);color:#182c44}
+.spectrum-bands button:nth-child(5){background:#e2d4f7}
+.spectrum-bands button:nth-child(6){background:#dfdfe9}
+.spectrum-bands button:nth-child(7){background:#d3d9e5}
+.spectrum-bands button[aria-pressed=true]{outline:4px solid #096c87;outline-offset:-4px}
+.spectrum-result{background:white;border:1px solid #d0e1e6;padding:12px 15px;border-radius:11px;min-height:86px}
+.spectrum-result strong{font-size:1.05rem;color:#17596b}.spectrum-result p{margin:5px 0}
+.book-note{background:#e8f4ed;border-left:5px solid #4b8c6a;padding:12px 16px;border-radius:10px;margin:14px 0}
+.risk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.risk-grid>div{padding:15px;border-radius:11px;background:#f3f8f9;border:1px solid #d4e6ea}
+.risk-grid b{color:#175f72}.risk-grid p{margin:7px 0 0}
+.assignment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.assignment-grid section{padding:13px 15px;border:1px solid #d2e3e7;background:#f5f9fa;border-radius:12px}
+.assignment-grid section b{color:#165e71}.assignment-grid section p{margin:7px 0}
+.exit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:15px 0}
+.exit-grid>div{padding:14px;background:#eff7f9;border:1px solid #cbdfe6;border-radius:12px}
+.exit-grid b{color:#146175}.exit-grid p{margin:7px 0}
+.small-context{font-size:.86rem;color:#54727a}
+.step.open .math-block{font-size:1.36rem}
+@media(max-width:1000px){.spectrum-bands{grid-template-columns:repeat(4,minmax(0,1fr))}.spectrum-bands button{min-height:62px}.assignment-grid{grid-template-columns:1fr 1fr}.exit-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.page-title{font-size:1.85rem}.math-block,.step.open .math-block{font-size:1.13rem}.spectrum{padding:11px}.spectrum-axis{font-size:.72rem;gap:9px}.spectrum-bands{grid-template-columns:repeat(2,minmax(0,1fr))}.spectrum-bands button{min-height:47px;font-size:.85rem}.risk-grid,.assignment-grid{grid-template-columns:1fr}.wave-figure text{font-size:21px}.body-copy{font-size:1rem}.goal-card{padding:12px}}
+@media print{.spectrum-bands button{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
