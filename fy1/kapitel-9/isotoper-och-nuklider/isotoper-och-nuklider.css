@@ -1,0 +1,40 @@
+.source-note{display:none}
+/* Fy1 9.3 — responsive teaching materials. */
+.focus-line{font-size:1.17rem;font-weight:740;color:#155c70}
+.goal-card{padding:15px 19px;border:1px solid #c7dfe6;border-radius:13px;background:#eff7f9;margin:16px 0}
+.goal-card>b{color:#125f72}.goal-card ol{margin:8px 0 2px;padding-left:24px}.goal-card li{margin:6px 0}
+.math-block{font:1.40rem/1.34 "STIX Two Math","Cambria Math",Cambria,serif;margin:13px 0;overflow-x:auto;overflow-y:hidden;max-width:100%}
+.math-block math{display:block;max-width:100%}
+.definitions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}
+.definitions>div{padding:11px 13px;border:1px solid #d0e2e7;border-radius:12px;background:#f5f9fa}
+.definitions>div>b{color:#0e677b}.definitions p{margin:5px 0}
+.definitions .math-block{font-size:1.13rem;margin:5px 0}
+.iso-widget,.level-widget{border:1px solid #ccdee4;border-radius:13px;background:#f1f8fa;padding:15px;margin:14px 0}
+.iso-controls,.transition-controls{display:flex;justify-content:center;flex-wrap:wrap;gap:7px}
+.iso-controls button,.transition-controls button{background:#fff;border:1px solid #aac7d1;border-radius:9px;padding:9px 13px;font-size:.97rem;font-weight:700;color:#164f60;cursor:pointer}
+.iso-controls button[aria-pressed=true],.transition-controls button[aria-pressed=true]{outline:3px solid #137a92;outline-offset:-3px;background:#e0f2f6}
+.isotope-svg{display:block;width:min(100%,460px);height:auto;margin:12px auto 4px}
+.iso-feedback,.transition-feedback{min-height:52px;margin:8px 0;background:#fff;border-radius:9px;padding:11px 14px;border:1px solid #cfdee3}
+.small-context{color:#526d76;font-size:.86rem}
+.forces-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:15px 0}
+.forces-grid section{border:1px solid #ccdee4;border-radius:12px;padding:14px;background:#f1f8fa}
+.forces-grid b{color:#155d70}.forces-grid p{margin:8px 0}
+.food-chain{display:flex;gap:8px;align-items:center;justify-content:center;margin:18px 0}
+.food-chain span:not(.chain-arrow){border:1px solid #c9dfe3;background:#e8f3f5;padding:14px 11px;border-radius:12px;text-align:center;font-weight:740;flex:1}
+.chain-arrow{color:#14778b;font-size:1.5rem;font-weight:750}
+.level-svg{width:min(100%,660px);display:block;height:auto;margin:0 auto}.mobile-level-svg{display:none}
+.level-widget .transition-feedback{font-size:.96rem}
+.book-note{background:#e8f4ed;border-left:5px solid #4b8c6a;padding:13px 16px;border-radius:10px;margin:14px 0}
+.work-plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:17px 0}
+.work-plan section{padding:17px;border:1px solid #cce0e6;border-radius:13px;background:#f0f7fa}
+.work-plan h3{color:#125f74;margin:0 0 8px;font-size:1.17rem}
+.work-exercises{font-size:1.32rem;font-weight:760;margin:6px 0 12px;color:#16485a}
+.exit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.exit-grid section{border:1px solid #cce0e6;background:#ecf6fa;padding:14px 15px;border-radius:12px}
+.exit-grid b{color:#135e72}.exit-grid p{margin:8px 0}
+.exit-grid .goal-tasks{border-top:1px solid #cedee4;padding-top:9px;font-size:.87rem;color:#335d6b}
+.exit-grid strong{color:#16485b}
+.step.open .math-block{font-size:1.30rem;margin:6px 0}
+@media(min-width:1001px){#bild-7.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}#bild-7 .page-head,#bild-7 .page-lead,#bild-7 .layout,#bild-7 .steps-label,#bild-7 .teacher-note,#bild-7 .source-note{grid-column:1/-1}#bild-7 .step.open{padding:11px 13px;margin:6px 0}#bild-7 .step.open .math-block{font-size:1.16rem}}
+@media(max-width:1000px){.definitions{grid-template-columns:repeat(2,minmax(0,1fr))}.exit-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.level-widget .level-svg:not(.mobile-level-svg){display:none}.level-widget .mobile-level-svg{display:block;width:min(100%,340px)}.page-title{font-size:1.80rem}.goal-card{padding:12px}.body-copy{font-size:1rem}.math-block{font-size:1.10rem}.step.open .math-block{font-size:.98rem}.definitions,.forces-grid,.work-plan{grid-template-columns:1fr}.food-chain{gap:4px}.food-chain span:not(.chain-arrow){padding:9px 5px;font-size:.86rem}.chain-arrow{font-size:1rem}.iso-widget,.level-widget{padding:10px}.isotope-svg{max-width:100%}.work-plan section{padding:13px}.work-exercises{font-size:1.23rem}}
