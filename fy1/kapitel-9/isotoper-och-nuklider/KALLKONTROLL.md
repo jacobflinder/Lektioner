@@ -12,14 +12,14 @@
 | Samma Z, annat N / isotoper | Bild 3 | **Didaktiskt förbättrat** med klickbar kärnmodell: 6 protoner, 6/7/8 neutroner; neutral elektronfördelning förklaras i text |
 | Originalets stabilitet: elektrisk repulsion kontra stark kärnkraft, neutroners roll | Bild 4 | **Bevarat**. Undvik förenklingen att fler neutroner alltid stabiliserar kärnan |
 | Bokens isotopanalys och kväve-15 genom näringskedjan | Bild 5 | **Bokens nya stoff bevarat** i eget exempel; uppgift 928. Ingen kopiering av s. 337:s text |
-| Originalets energi före − efter, nivåer/nollnivå, exciterad kärna, gammafoton | Bild 6–7 | **Bevarat originalskrivsätt** ΔW=W_före−W_efter, Eγ=ΔW=hf=hc/λ. Formler presenteras före räkning |
+| Originalets energi före − efter, nivåer/nollnivå, exciterad kärna, gammafoton | Bild 6–8 | **Bevarat originalskrivsätt** ΔW=W_före−W_efter, Eγ=ΔW=hf=hc/λ. Formler presenteras före räkning |
 | Bokens metastabila kärntillstånd och Tc-99m | Bild 6 | **Bevarat** s. 336 |
-| Bokens räknetyp gammaövergång → fotonenergi → våglängd | Bild 7 | **Samma metod, eget exempel** 150→50 keV. Full beräkning i sammanhållna fyra steg; ej kopia av Au-200-exemplet |
-| Ursprunglig nivådiagramfigur och gammaövergång | Bild 6–8 | **Förbättrat** egen korrekt diagrammodell med tre nivåer. A/B/C har respektive 100/150/50 keV och begriplig återkoppling |
-| Bokens uppgift 927 (Pb-208, nivåövergångarna A–D) | Bild 8–9 och bok s.339 | **Hela uppgiften bevarad som bokarbete**, ingen av figurerna kopierad |
-| Bokens uppgift 929 (Eu-152, spektraltopparna A och B) | Bild 8–9, läs bokens graf | **Hela uppgiften bevarad**. X-axel visar gammaenergi, y-axel antal |
-| Bokens 924–929 samtliga | Bild 9 och 10 | **Alla obligatoriska**, 924–926 först, 927–929 sedan, resten läxa; inga valfria uppgifter |
-| Tre konkreta mål och individuell kontroll | Bild 1 och 10 | **Didaktiskt förbättrat**. Uppgiftsnummer 924–929 under respektive mål på avslutet |
+| Bokens räknetyp gammaövergång → fotonenergi → våglängd | Bild 8 | **Samma metod, eget exempel** 150→50 keV. Full beräkning i sammanhållna fyra steg; ej kopia av Au-200-exemplet |
+| Ursprunglig nivådiagramfigur och gammaövergång | Bild 6–9 | **Förbättrat** egen korrekt diagrammodell med tre nivåer. A/B/C har respektive 100/150/50 keV och begriplig återkoppling |
+| Bokens uppgift 927 (Pb-208, nivåövergångarna A–D) | Bild 9–10 och bok s.339 | **Hela uppgiften bevarad som bokarbete**, ingen av figurerna kopierad |
+| Bokens uppgift 929 (Eu-152, spektraltopparna A och B) | Bild 9–10, läs bokens graf | **Hela uppgiften bevarad**. X-axel visar gammaenergi, y-axel antal |
+| Bokens 924–929 samtliga | Bild 10 och 11 | **Alla obligatoriska**, 924–926 först, 927–929 sedan, resten läxa; inga valfria uppgifter |
+| Tre konkreta mål och individuell kontroll | Bild 1 och 11 | **Didaktiskt förbättrat**. Uppgiftsnummer 924–929 under respektive mål på avslutet |
 | Originalets alfa-, beta−-, beta+- och gammakontext från 230905 | Senare lektion efter 9.3 | **Avgränsat, inte struket**: rena gammanivåer ingår 9.3; kärnreaktioner/sönderfall längre fram |
 | 230905 filmens Americium-241→Neptunium-237 + α, kol-14→kväve-14 + β−, fluor-18→syre-18 + β+, 238U→206Pb (8 α och 6 β−) | Nästa relevanta sönderfallslektion | **Föreslagen senare placering, ingen metodkonflikt i 9.3** |
 | 230905 filmens massdefekt deuterium: u-tabell, subtrahera elektron, Δm, u→kg, E=mc², MeV och 1u≈931,5MeV | Senare massdefektlektion | **Skjutet enligt nya boken**, måste introduceras utan att förutsätta relativitetsteori på nivå 1b |
@@ -77,3 +77,10 @@
 - **Norm för framtida lektioner:** Lägg inte automatiskt till mindmapmoment från äldre PDF:er när webblektionen ersätter det. Låt det gamla innehållet styra stoff och metod men låt lärarens senare explicita beslut styra aktivitetens format. Ny central teori introduceras alltid före användning av en interaktiv modell.
 
 **Status:** inväntar ny statisk och visuell webbläsarkontroll för ovanstående revidering före publicering.
+
+### Läsbarhetsjustering – teori och klickmodell på två bilder
+
+En fyrstorlekstest av den första revideringen visade att bild 6 blev för lång (bland annat över 1400 px i projektorformat 1280×800) när teori och fullt interaktivt diagram samsades på samma sida. Detta stoppade publicering av den varianten trots godkänd funktionstestning. Den slutliga versionen delar därför innehållet i två bilder: **bild 6 förklarar alla centrala begrepp och lagar, bild 7 prövar A–C med samma interaktiva diagram**. Bild 8 har den fullständiga beräkningen. Totalt 11 bilder och samma 70 minuter, med uppgifterna 924–929 och tre mål oförändrade. Ändringen är en didaktisk förbättring av presentationen; fysik/metod har inte ändrats.
+
+- [ ] Ny webbläsarkontroll och visuell projektor-/mobilgranskning av 11-bildsversionen.
+- [ ] Bekräfta att den slutliga 11-bildsversionen är publicerad och åtkomlig.
