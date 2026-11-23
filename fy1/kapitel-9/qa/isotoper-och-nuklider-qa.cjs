@@ -17,6 +17,7 @@ assert.ok(data.pages.every(p=>!/mindmap/i.test(p.body)),'No parallel mindmap act
 assert.deepEqual(data.pages.map(p=>(p.body.match(/class="lesson-action"/g)||[]).length),[0,0,1,0,0,0,1,0,0,0,0],'Only two interactive demo prompts; original content remains in web lesson');
 assert.ok(data.pages[2].body.includes('Pröva kolisotoperna'),'Student instruction for isotope demo');
 assert.ok(data.pages[6].body.includes('Pröva energinivåerna'),'Student instruction for gamma demo');
+assert.ok(data.pages[6].body.includes('varför avges en gammafoton')&&data.pages[6].body.includes('fotonenergin för A'),'Concept check moved to prediction prompt, not omitted');
 assert.ok(data.pages[2].body.indexOf('lesson-action')<data.pages[2].body.indexOf('iso-widget'),'Isotope instruction precedes model');
 assert.ok(data.pages[5].body.includes('level-primer'),'Ground and excited nuclear levels explained on dedicated preceding slide');
 assert.ok(data.pages[5].body.indexOf('level-primer')<data.pages[5].body.indexOf('math-block'),'Interpretation precedes equations');
@@ -81,6 +82,8 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
       if(vp.width===1280&&(i===5||i===6)){
         const contentBottom=await page.locator('.slide.active').evaluate(el=>el.getBoundingClientRect().bottom);
         assert.ok(contentBottom<=vp.height+12,'Projector slide '+(i+1)+' must be entirely visible without scrolling; bottom='+contentBottom);
+        const navBottom=await page.locator('.end-controls').evaluate(el=>el.getBoundingClientRect().bottom);
+        assert.ok(navBottom<=vp.height+12,'Projector navigation visible at 1280×800 slide '+(i+1)+': bottom='+navBottom);
       }
       await page.screenshot({path:path.join(out,vp.width+'-slide-'+String(i+1).padStart(2,'0')+'.png'),fullPage:true});
     }
