@@ -78,6 +78,10 @@ console.log('Fy1 9.3 static, source and numerical controls: PASS');
       assert.deepEqual(issues.mathOverflow,[],vp.width+'px slide '+(i+1)+' hidden math');
       assert.deepEqual(issues.actionOverflow,[],vp.width+'px slide '+(i+1)+' classroom instructions visible');
       assert.deepEqual(issues.clippedMath,[],vp.width+'px slide '+(i+1)+' math escapes screen');
+      if(vp.width===1280&&(i===5||i===6)){
+        const contentBottom=await page.locator('.slide.active').evaluate(el=>el.getBoundingClientRect().bottom);
+        assert.ok(contentBottom<=vp.height+12,'Projector slide '+(i+1)+' must be entirely visible without scrolling; bottom='+contentBottom);
+      }
       await page.screenshot({path:path.join(out,vp.width+'-slide-'+String(i+1).padStart(2,'0')+'.png'),fullPage:true});
     }
     await page.selectOption('#jump','2');
