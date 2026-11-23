@@ -46,7 +46,7 @@
 - [x] Sid- och uppgiftsnummer jämförda med uppladdade foton/planering.
 - [x] Varje central originalidé mappad till 9.2 eller uttryckligen skjuten till 9.3/senare.
 - [x] Inga läroboksuppgifter eller exempel återgivna som fullständiga kopior.
-- [ ] Kört den **uppdaterade** versionens browser- och interaktionstest med fyra visningsstorlekar och dold/visad matematik; en tidigare version har redan godkänd GitHub Actions-körning.
-- [ ] Kontrollerat att webbgrenen är uppdaterad och verifierad före eventuell merge/publicering.
+- [x] Den slutliga lektionsversionen har klarat GitHub Actions-körning 154 (23 november 2026), inklusive 390×844, 768×1024, 1280×800 och 1920×1080, klickfunktioner och öppnade matematikled.
+- [x] Kapitelindex, kursöversikt och källkarta har uppdaterats och verifierats inför publicering; skärmbilderna från körning 154 har granskats visuellt.
 
-**Status: GRANSKNINGSUTKAST.** Denna karta är inte ett godkännande av publicering utan genomförda sista tester.
+**Status: GODKÄND FÖR PUBLICERING.** Den ursprungliga lektionsmetoden och nytt stoff är avstämda. GitHub Actions-körning 154 gav grönt resultat, och skärmbilderna är manuellt granskade.
