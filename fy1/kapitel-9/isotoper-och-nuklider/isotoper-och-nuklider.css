@@ -1,3 +1,18 @@
+/* På projektor: diagram och återkoppling bredvid varandra, utan onödigt långa bilder. */
+@media(min-width:1001px){
+#bild-7 .level-widget{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.9fr);grid-template-rows:auto auto auto;gap:10px 14px;align-items:center;padding:13px}
+#bild-7 .level-svg:not(.mobile-level-svg){grid-column:1;grid-row:1 / 4;width:min(100%,600px);margin:0 auto}
+#bild-7 .transition-controls{grid-column:2;grid-row:1}
+#bild-7 .transition-feedback{grid-column:2;grid-row:2}
+#bild-7 .small-context{grid-column:2;grid-row:3}
+}
+/* Principen och formlerna visas före gammaövergångarnas klickmodell. */
+.level-primer{border-left:3px solid #86b9c8;padding:2px 0 2px 14px;margin:10px 0 8px;font-size:.95rem}
+.level-primer p{margin:6px 0}
+#bild-6 .math-block{margin:7px 0;font-size:1.22rem}
+#bild-7 .lesson-action{margin:10px 0}
+#bild-7 .level-widget{margin-top:8px}#bild-7 .level-svg:not(.mobile-level-svg){width:min(100%,550px)}
+@media(max-width:600px){.level-primer{padding-left:10px}#bild-6 .math-block{font-size:1.10rem}}
 /* Självbärande klassrumsflöde: tydlig instruktion direkt i elevbilden. */
 .lesson-action{display:flex;gap:11px;align-items:baseline;background:#eff7f8;border-left:4px solid #168095;border-radius:8px;padding:9px 13px;margin:12px 0;font-size:.92rem;line-height:1.4}
 .lesson-action b{color:#115f71;flex:0 0 auto}
@@ -40,6 +55,6 @@
 .exit-grid .goal-tasks{border-top:1px solid #cedee4;padding-top:9px;font-size:.87rem;color:#335d6b}
 .exit-grid strong{color:#16485b}
 .step.open .math-block{font-size:1.30rem;margin:6px 0}
-@media(min-width:1001px){#bild-7.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}#bild-7 .page-head,#bild-7 .page-lead,#bild-7 .layout,#bild-7 .steps-label,#bild-7 .teacher-note,#bild-7 .source-note{grid-column:1/-1}#bild-7 .step.open{padding:11px 13px;margin:6px 0}#bild-7 .step.open .math-block{font-size:1.16rem}}
+@media(min-width:1001px){#bild-8.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}#bild-8 .page-head,#bild-8 .page-lead,#bild-8 .layout,#bild-8 .steps-label,#bild-8 .teacher-note,#bild-8 .source-note{grid-column:1/-1}#bild-8 .step.open{padding:11px 13px;margin:6px 0}#bild-8 .step.open .math-block{font-size:1.16rem}}
 @media(max-width:1000px){.definitions{grid-template-columns:repeat(2,minmax(0,1fr))}.exit-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.level-widget .level-svg:not(.mobile-level-svg){display:none}.level-widget .mobile-level-svg{display:block;width:min(100%,340px)}.page-title{font-size:1.80rem}.goal-card{padding:12px}.body-copy{font-size:1rem}.math-block{font-size:1.10rem}.step.open .math-block{font-size:.98rem}.definitions,.forces-grid,.work-plan{grid-template-columns:1fr}.food-chain{gap:4px}.food-chain span:not(.chain-arrow){padding:9px 5px;font-size:.86rem}.chain-arrow{font-size:1rem}.iso-widget,.level-widget{padding:10px}.isotope-svg{max-width:100%}.work-plan section{padding:13px}.work-exercises{font-size:1.23rem}}
