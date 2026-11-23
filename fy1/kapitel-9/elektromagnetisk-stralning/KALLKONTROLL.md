@@ -25,7 +25,7 @@
 | Gamla mindmapens kärnreaktioner, alfa, beta, gamma, massdefekt | Kommande lektioner | **Ej 9.2-stoff** enligt nuvarande bokfördelning. Gamma nämns endast i spektrumet. |
 | Originalets 1101–1103 lärarlett och arbete i bok/par | Bild 7 och 9 | **Bevarat**, med självständig träning innan par. |
 | Nya bokens exempel 9.2 om laser med 632 nm, 1 mW och fotonantal | Allmän stödtrappa på bild 9 | **Stoffet bevarat utan kopia**: eleven får vid behov se hur fotonenergi kopplas till effekt och totalt antal fotoner. Originalets 650 nm-metod förblir huvudexemplet. |
-| Bokens 915–923 (s. 335) | Bild 9–10 och lärarstöd | **Samtliga nummer med**. 916 används i genomgång; resterande uppgifter fördelas på nivå och tid. |
+| Bokens 915–923 (s. 335) | Bild 9–10 och lärarstöd | **Samtliga nummer med** och sorterade efter elevmål: mål 1: 915, 919, 920; mål 2: 916–918, 922, 923; mål 3: 921. Uppgift 916 är genomgången; 923 är fördjupning. |
 | Tre mål, individuell kontroll | Bild 1 och 10 | **Didaktiskt förbättrat**, kopplat till exakt samma innehåll. |
 
 ## Ämnes- och metodkontroll
@@ -50,3 +50,10 @@
 - [x] Kapitelindex, kursöversikt och källkarta har uppdaterats och verifierats inför publicering; skärmbilderna från körning 154 har granskats visuellt.
 
 **Status: GODKÄND FÖR PUBLICERING.** Den ursprungliga lektionsmetoden och nytt stoff är avstämda. GitHub Actions-körning 154 gav grönt resultat, och skärmbilderna är manuellt granskade.
+
+## Elevrespons och förbättring 2026-11-23
+
+- **Bild 9:** Uppgifterna har grupperats efter exakt de tre elevmålen, i stället för efter en allmän ordning med "börja/förståelse/fördjupning". Under lektionens 20 minuter rekommenderas först 919/920 (mål 1), 917/918 (mål 2) och 921 (mål 3), med egen lösning före parjämförelse. 915 återkallar begrepp, 916 är redan genomgången och 922–923 ger fördjupning. Alla 915–923 finns kvar i läxintervallet.
+- **Bild 9, elevtext:** Den onödiga kommentaren "men kopieras inte här" har tagits bort. Bara användbar bokhänvisning och stöd till faktarutorna återstår.
+- **Bild 10:** Varje exitfråga kan besvaras utifrån genomgången – mål 1 genom bilderna 3–5, mål 2 genom 4–7 och mål 3 genom 8. Inga särskilda bokuppgifter krävs innan slutkontrollen; det framgår nu för eleverna.
+- **Kontroll:** QA testar att alla nio uppgiftsnummer fördelas exakt en gång, under rätt mål, och att de tre målgrupperna visas för eleverna.
