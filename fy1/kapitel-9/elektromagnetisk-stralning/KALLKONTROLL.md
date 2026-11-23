@@ -24,7 +24,7 @@
 | Gamla mindmapens neutrala atomer, Z, A, kolisotoper, kärnstabilitet | Nästa 9.3 | **Ej borttaget ur kapitelplanen**; ligger på s. 336–339 och 924–929. |
 | Gamla mindmapens kärnreaktioner, alfa, beta, gamma, massdefekt | Kommande lektioner | **Ej 9.2-stoff** enligt nuvarande bokfördelning. Gamma nämns endast i spektrumet. |
 | Originalets 1101–1103 lärarlett och arbete i bok/par | Bild 7 och 9 | **Bevarat**, med självständig träning innan par. |
-| Nya bokens exempel 9.2 om laser med 632 nm, 1 mW och fotonantal | Ingen direkt kopia | **Inte kopierat**. Möjlig fördjupning i 923 via bokens eget stöd. |
+| Nya bokens exempel 9.2 om laser med 632 nm, 1 mW och fotonantal | Allmän stödtrappa på bild 9 | **Stoffet bevarat utan kopia**: eleven får vid behov se hur fotonenergi kopplas till effekt och totalt antal fotoner. Originalets 650 nm-metod förblir huvudexemplet. |
 | Bokens 915–923 (s. 335) | Bild 9–10 och lärarstöd | **Samtliga nummer med**. 916 används i genomgång; resterande uppgifter fördelas på nivå och tid. |
 | Tre mål, individuell kontroll | Bild 1 och 10 | **Didaktiskt förbättrat**, kopplat till exakt samma innehåll. |
 
@@ -34,6 +34,7 @@
 - **Definitioner och formler före lösning**: λ/f och c bild 2/4; h/E bild 5; eV och E=qU bild 6; exempel bild 7.
 - **Högre nivåer:** inga extra konkurrerande metoder eller fotonkvantitetsberäkningar från bokens tryckta exempel fört in i huvudspåret.
 - **Ämnespreciseringar** synliga: elektromagnetisk strålning i vakuum går med c; foton har ingen vilomassa; UV vid 254 nm kan vara bakteriedödande utan att vara joniserande; röntgen och gamma är joniserande; hög energi per foton är inte samma sak som stor total effekt.
+- **Bokens fotonantal** introduceras enbart som stöd vid uppgift 923: först en fotons energi, sedan energin från effekten under en viss tid och slutligen antal fotoner. Eleven behöver inte kunna någon ny konkurrerande metod.
 - **Relativitet:** ingen förkunskap om Einsteins teori antas. Planera självständig, begriplig introduktion av E=mc² och massdefekt senare.
 - **Bokhänvisning:** s. 333–335; uppgifter 915–923 på s. 335; nästa 9.3 s. 336–339 och 924–929. Kursplaneringen anger läxa 915–923 tillsammans med kommande 924–929 för avsnitten.
 - **Elevaktiviteter** utan extra Socrative: enskilt → par, demonstration, spektruminteraktion, stegvis genomgång, eget arbete och individuell exit.
@@ -45,7 +46,7 @@
 - [x] Sid- och uppgiftsnummer jämförda med uppladdade foton/planering.
 - [x] Varje central originalidé mappad till 9.2 eller uttryckligen skjuten till 9.3/senare.
 - [x] Inga läroboksuppgifter eller exempel återgivna som fullständiga kopior.
-- [ ] Faktiskt kört browser- och interaktionstest med fyra visningsstorlekar och dold/visad matematik.
+- [ ] Kört den **uppdaterade** versionens browser- och interaktionstest med fyra visningsstorlekar och dold/visad matematik; en tidigare version har redan godkänd GitHub Actions-körning.
 - [ ] Kontrollerat att webbgrenen är uppdaterad och verifierad före eventuell merge/publicering.
 
 **Status: GRANSKNINGSUTKAST.** Denna karta är inte ett godkännande av publicering utan genomförda sista tester.
