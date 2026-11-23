@@ -34,6 +34,24 @@
 .exit-grid b{color:#146175}.exit-grid p{margin:7px 0}
 .small-context{font-size:.86rem;color:#54727a}
 .step.open .math-block{font-size:1.36rem}
+/* Räknekedjan har fyra hela, ordnade led på samma projektionsyta. */
+@media(min-width:1001px){
+  #bild-7.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;align-content:start}
+  #bild-7 .page-head,#bild-7 .page-lead,#bild-7 .layout,#bild-7 .steps-label,#bild-7 .teacher-note,#bild-7 .source-note{grid-column:1/-1}
+  #bild-7 .step.open{margin:5px 0;padding:10px 13px}
+  #bild-7 .step.open .math-block{margin:6px 0;font-size:1.24rem}
+}
 @media(max-width:1000px){.spectrum-bands{grid-template-columns:repeat(4,minmax(0,1fr))}.spectrum-bands button{min-height:62px}.assignment-grid{grid-template-columns:1fr 1fr}.exit-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.page-title{font-size:1.85rem}.math-block,.step.open .math-block{font-size:1.13rem}.spectrum{padding:11px}.spectrum-axis{font-size:.72rem;gap:9px}.spectrum-bands{grid-template-columns:repeat(2,minmax(0,1fr))}.spectrum-bands button{min-height:47px;font-size:.85rem}.risk-grid,.assignment-grid{grid-template-columns:1fr}.wave-figure text{font-size:21px}.body-copy{font-size:1rem}.goal-card{padding:12px}}
+@media(max-width:600px){
+  .page-title{font-size:1.85rem}.math-block,.step.open .math-block{font-size:1.13rem}
+  .spectrum{padding:11px}.spectrum-axis{display:block;margin-bottom:8px}
+  .spectrum-axis span{display:block;font-size:0;text-align:left}
+  .spectrum-axis span:first-child::after{content:"Överst: längst våglängd · lägst frekvens och fotonenergi";font-size:.79rem}
+  .spectrum-axis span:last-child{display:none}
+  .spectrum-bands{grid-template-columns:1fr;counter-reset:spectral-band;gap:3px}
+  .spectrum-bands button{counter-increment:spectral-band;min-height:41px;text-align:left;font-size:.91rem;padding:7px 12px}
+  .spectrum-bands button::before{content:counter(spectral-band) ". ";font-weight:800}
+  .spectrum-bands::after{content:"Nederst: kortast våglängd · högst frekvens och fotonenergi";font-size:.79rem;color:#336373;font-weight:700;margin:5px 0}
+  .risk-grid,.assignment-grid{grid-template-columns:1fr}.wave-figure text{font-size:21px}.body-copy{font-size:1rem}.goal-card{padding:12px}
+}
 @media print{.spectrum-bands button{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
