@@ -29,6 +29,15 @@
 .assignment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .assignment-grid section{padding:13px 15px;border:1px solid #d2e3e7;background:#f5f9fa;border-radius:12px}
 .assignment-grid section b{color:#165e71}.assignment-grid section p{margin:7px 0}
+/* Bild 9: konkret arbetsorder utan målgrupper. Bild 10: liten uppgiftskarta under målen. */
+.work-plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.work-plan section{padding:18px;border:1px solid #cfe1e7;border-radius:13px;background:#f2f8fa;min-width:0}
+.work-plan h3{font-size:1.17rem;color:#155f72;margin:0 0 8px}
+.work-plan p{margin:6px 0}
+.work-plan .work-exercises{font-size:1.32rem;color:#123d4c;margin:6px 0 12px}
+.exit-grid .goal-tasks{margin:12px 0 0;padding-top:9px;border-top:1px solid #c9dce3;font-size:.86rem;line-height:1.4;color:#365f6c}
+.exit-grid .goal-tasks strong{color:#184b5b}
+@media(max-width:600px){.work-plan{grid-template-columns:1fr}.work-plan section{padding:14px}.work-plan .work-exercises{font-size:1.22rem}}
 .exit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:15px 0}
 .exit-grid>div{padding:14px;background:#eff7f9;border:1px solid #cbdfe6;border-radius:12px}
 .exit-grid b{color:#146175}.exit-grid p{margin:7px 0}
