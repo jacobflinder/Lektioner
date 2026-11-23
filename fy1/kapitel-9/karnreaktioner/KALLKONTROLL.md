@@ -17,7 +17,7 @@
 | Gamma efter Ra-226 → Rn-222, exciterat tillstånd till grundtillstånd | Bild 5 | Bevarat, återkoppling till 9.3 |
 | Boken elektroninfångning, neutron-/protonemission, spontan fission s. 343–345 | Bild 5–6 | Innehåll från aktuell bok |
 | Jämföra reaktionstyper och nuklidkartan | Bild 7 med klickbar, avsiktligt förutsägelse-före-val-modell | Didaktiskt förbättrat |
-| Bindningsenergi/massdefekt s. 341; originalet: fri proton + fri neutron → deuteron, atomens elektron måste tas bort | Bild 8, definition och regler FÖRE uträkning | Bevarad huvudmetod |
+| Bokens bindningsenergi per nukleon och stabilitetstopp kring järn-56, principiell förklaring av fusion/fission på s.341 | Bild 8 med schematisk skalad energikurva; reaktorfysik kvar i 9.8 | Innehåll bevarat och visuellt förbättrat |\n| Bindningsenergi/massdefekt s. 341; originalet: fri proton + fri neutron → deuteron, atomens elektron måste tas bort | Bild 8, definition och regler FÖRE uträkning | Bevarad huvudmetod |
 | **Originalets fullständiga beräkning** m före → m efter → Δm i u → kg → E = Δmc² i J → eV → MeV | Bild 9, fem fullständiga synliga led på samma bild | Bevarad ordning och metod |
 | Först därefter `1 u ↔ 931,5 MeV`; jämförelse vätes jonisationsenergi 13,6 eV | Bild 10 | Bevarad ordning, tillägg om konsekventa atommassor för de aktuella uppgifterna |
 | Lärarens gemensamma exempel U-238 → Pb-206: 238−206=32, 8α; 92−16=76, 6β⁻ | Bild 11, tre led, masstal före laddningstal | Bevarad metod |
