@@ -1,3 +1,10 @@
+/* Principen och formlerna visas före gammaövergångarnas klickmodell. */
+.level-primer{border-left:3px solid #86b9c8;padding:2px 0 2px 14px;margin:10px 0 8px;font-size:.95rem}
+.level-primer p{margin:6px 0}
+#bild-6 .math-block{margin:7px 0;font-size:1.22rem}
+#bild-6 .lesson-action{margin:10px 0}
+#bild-6 .level-widget{margin-top:8px}
+@media(max-width:600px){.level-primer{padding-left:10px}#bild-6 .math-block{font-size:1.10rem}}
 /* Självbärande klassrumsflöde: tydlig instruktion direkt i elevbilden. */
 .lesson-action{display:flex;gap:11px;align-items:baseline;background:#eff7f8;border-left:4px solid #168095;border-radius:8px;padding:9px 13px;margin:12px 0;font-size:.92rem;line-height:1.4}
 .lesson-action b{color:#115f71;flex:0 0 auto}
