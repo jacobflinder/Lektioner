@@ -5,7 +5,9 @@
   const wrap = inner => '<div class="math-block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow>' + inner + '</mrow></math></div>';
   const mi = value => '<mi>' + value + '</mi>';
   const mn = value => '<mn>' + value + '</mn>';
-  const tx = value => '<mtext>' + value + '</mtext>';
+  const tx = value => /^\s/.test(value)
+    ? '<mspace width="0.22em"/><mtext>' + value.trim() + '</mtext>'
+    : '<mtext>' + value + '</mtext>';
   const op = value => '<mo>' + value + '</mo>';
   const index = value => /^[-+−]?\d+$/.test(String(value)) ? mn(value) : mi(value);
   const nuc = (sym, mass, charge) => '<msubsup><mi mathvariant="normal">' + sym + '</mi>' + index(charge) + index(mass) + '</msubsup>';
@@ -38,13 +40,20 @@
       '<p>I en <b>nuklidkarta</b> jämförs antalet protoner med antalet neutroner. En instabil <b>moderkärna</b> kan sönderfalla till en <b>dotterkärna</b>, utsända partiklar och frigjord energi.</p>' +
       '<div class="concept-rail"><span>moderkärna</span><span>→</span><span>dotterkärna + partikel + energi</span></div>' +
       question('Varför behöver en tung kärna normalt ett större överskott av neutroner än en lätt kärna?') +
-      '<p class="small-context">Bokens kärnkarta finns på s. 340. En ny dotterkärna kan också vara instabil. Sannolikheten för sönderfall beskrivs senare med halveringstid.</p>',
+      '<p class="small-context">Bokens kärnkarta finns på s. 340. En ny dotterkärna kan också vara instabil. <b>Halveringstid</b> är tiden det tar för hälften av ett stort antal radioaktiva kärnor att sönderfalla. Vi arbetar vidare med själva halveringstiden i ett senare avsnitt.</p>',
       ['Neutroner bidrar till den starka bindningen utan att öka den elektriska repulsionen. När kärnan blir mycket stor kan den ändå bli instabil.'],
-      'Stabilitet och balans från originalgenomgången samt bokens nuklidkarta. Halveringstiden fördjupas i ett senare avsnitt.',
+      'Stabilitet och balans från originalgenomgången samt bokens nuklidkarta. Bokens definition av halveringstid finns kort, men beräknings- och tärningsmoment kommer senare.',
       'Bok s. 340; bevarar moderkärna → dotterkärna'),
 
     slide('Alfasönderfall: kärnan blir mindre', 'Alfa · A och Z minskar', 4,
       '<p>En <b>alfapartikel</b> är en helium-4-kärna: <b>två protoner + två neutroner</b>, alltså inga elektroner.</p>' +
+      '<svg class="decay-illustration" viewBox="0 0 640 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Samma schematiska bild som Jacobs tavla: en stor orange moderkärna sönderfaller till en mindre grön dotterkärna och en alfapartikel med två protoner och två neutroner.">' +
+      '<circle cx="85" cy="61" r="39" fill="#e89466" stroke="#a85b37" stroke-width="3"/><text x="30" y="125">Moderkärna</text>' +
+      '<path d="M150 61 H245" stroke="#2b5966" stroke-width="3"/><path d="M245 61 l-15 -8 v16z" fill="#2b5966"/>' +
+      '<circle cx="317" cy="61" r="30" fill="#8dc69b" stroke="#488c5c" stroke-width="3"/><text x="270" y="125">Dotterkärna</text>' +
+      '<text x="385" y="72" font-size="30" fill="#2b5966">+</text>' +
+      '<g stroke="#ffffff" stroke-width="2"><circle cx="470" cy="45" r="16" fill="#de7d6c"/><circle cx="502" cy="45" r="16" fill="#639dc1"/><circle cx="470" cy="77" r="16" fill="#639dc1"/><circle cx="502" cy="77" r="16" fill="#de7d6c"/></g>' +
+      '<text x="454" y="125">α: 2p + 2n</text></svg>' +
       eq(mi('α'), op('='), alpha) +
       '<p>Alfasönderfall gör att <b>masstalet A minskar med 4</b> och <b>atomnumret Z minskar med 2</b>.</p>' +
       notice('Pröva först', 'Americium-241 har Z = 95. Vilken dotterkärna bildas om en alfapartikel lämnar kärnan?') +
@@ -66,6 +75,7 @@
       eq(mi('p'), op('→'), mi('n'), op('+'), betaPlus, op('+'), neutrino) +
       eq(nuc('F', 18, 9), op('→'), nuc('O', 18, 8), op('+'), betaPlus, op('+'), neutrino) +
       '<p><b>A oförändrat, Z minskar 1.</b> Neutrino avges.</p></section></div>' +
+      '<p class="small-context">En antineutrino eller neutrino kan ta med sig en del av energin. Därför kan en betaelektron få olika stor rörelseenergi vid olika sönderfall.</p>' +
       question('Varför ändras inte masstalet vid beta? Varför måste en elektron eller positron följa med?'),
       ['En proton och en neutron räknas båda som <b>en nukleon</b>. Därför är A oförändrat. Elektronen/positronen gör att laddningen bevaras.'],
       'Bevara originalordningen beta− C-14/N-14 och beta+ F-18/O-18, samt neutron/proton-omvandling och korrekt neutrino/antineutrino.',
@@ -88,7 +98,7 @@
       '<div class="compact-rows"><div><b>Protonemission</b><span>A − 1, Z − 1</span></div>' +
       '<div><b>Neutronemission</b><span>A − 1, Z oförändrat</span></div>' +
       '<div><b>Spontan fission</b><span>Kärnan delas i stora delar, ibland med fria neutroner</span></div></div>' +
-      '<p>Vid alla kärnreaktioner ska <b>masstal, laddning och energi</b> bevaras. Vi använder särskilt masstal och laddning för att skriva reaktionsformler.</p>' +
+      '<p>Vid alla kärnreaktioner bevaras <b>masstal, laddning, energi och rörelsemängd</b>. Vi använder särskilt masstal och laddning för att skriva reaktionsformler.</p>' +
       question('En kärna tappar en neutron. Hur förändras A och Z? Kontrollera med nuklidnotationen.') +
       eq(nuc('X', 'A', 'Z'), op('→'), nuc('Y', 'A−1', 'Z'), op('+'), nuc('n', 1, 0)),
       ['Masstalet minskar med 1. Atomnumret ändras inte eftersom en neutron saknar laddning.'],
@@ -111,6 +121,11 @@
 
     slide('Vad menas med massdefekt?', 'Massa och energi · tydlig början', 5,
       '<p>Om en proton och neutron binds samman till en kärna har den färdiga kärnan <b>mindre massa än de fria partiklarna tillsammans</b>. Skillnaden kallas <b>massdefekt</b>.</p>' +
+      '<svg class="mass-illustration" viewBox="0 0 660 135" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Jacobs principbild: fri proton och fri neutron binds till en deuteriumkärna. En liten masskillnad motsvarar frigjord energi.">' +
+      '<circle cx="92" cy="53" r="21" fill="#df766b"/><circle cx="157" cy="53" r="21" fill="#6096c2"/><text x="56" y="106">proton + neutron</text>' +
+      '<path d="M225 54 H318" stroke="#2b5966" stroke-width="3"/><path d="M318 54 l-14 -8 v16z" fill="#2b5966"/>' +
+      '<circle cx="385" cy="49" r="23" fill="#df766b"/><circle cx="412" cy="59" r="23" fill="#6096c2"/><text x="354" y="106">deuterium</text>' +
+      '<text x="470" y="57" font-size="26" fill="#2b5966">+</text><text x="502" y="54" font-size="18" font-weight="730" fill="#b56826">frigjord</text><text x="502" y="77" font-size="18" font-weight="730" fill="#b56826">energi</text></svg>' +
       '<div class="concept-rail"><span>Fria nukleoner: större massa</span><span>→</span><span>Bunden kärna: mindre massa + frigjord energi</span></div>' +
       eq(mi('Δm'), op('='), sub('m','fria nukleoner'), op('−'), sub('m','bunden kärna')) +
       '<p><b>Energi och massa är två sidor av samma fysikaliska storhet.</b> När energi frigörs minskar massan med en motsvarande mängd. Vi använder sambandet direkt:</p>' +
@@ -146,7 +161,8 @@
         eq(mi('E'), op('≈'), f(mn('3,56') + op('·') + power(mn('10'), '−13'), mn('1,60218') + op('·') + power(mn('10'), '−19')), tx(' eV')) +
         eq(mi('E'), op('≈'), mn('2,22'), tx(' MeV')) +
         '<p><b>Svar:</b> Deuteriumkärnans bindningsenergi är ungefär <b>2,22 MeV</b>. För att dela kärnan i proton + neutron måste samma energi tillföras.</p>' +
-        '<p class="small-context">Efter att vi har räknat med SI-enheter kan man även använda 1 u · c² ≈ 931,49 MeV som en kortare omvandling. Huvudmetoden här är den fullständiga uträkningen ovan.</p>'
+        '<p class="small-context">Efter att vi har räknat med SI-enheter kan man även använda 1 u · c² ≈ 931,49 MeV som en kortare omvandling. Huvudmetoden här är den fullständiga uträkningen ovan.</p>' +
+        '<p><b>Jämför storlekarna:</b> Att frigöra en elektron från en väteatom kräver <b>13,6 eV</b>, medan deuteriumkärnans bindningsenergi är <b>2,22 miljoner eV</b>. Det är en enorm skillnad mellan energi i elektronskal och kärna.</p>'
       ],
       'Originalets uträkning i exakt ordning: fria protonen och neutronen; deuteriumatomens elektron bort; Δm i u; kilogram; E=mc² i joule; eV och MeV; därefter eventuell omvandling 931,49 MeV/u. Centrala mellanled visas sammanhållet på denna bild.',
       'Jacobs fullständiga massdefektberäkning; boken s. 341'),

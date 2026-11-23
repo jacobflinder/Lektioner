@@ -10,17 +10,19 @@ Läroboken **9.4 s. 340–349**, uppgifter **930–939** på s. 349. Jacobs ursp
 | --- | --- | --- |
 | Stabilitet som balans mellan protoner och neutroner; moderkärna, dotterkärna, partiklar, energi. | Bild 1–2 | Bevarat och förtydligat med individuell startfråga. |
 | Stark och elektrisk kraft, nuklidkarta, beroende av N/Z (bok s. 340). | Bild 2 | Bokkomplettering med originalets nivå. |
-| Alfa = helium-4-kärna (inga elektroner); Am-241 → Np-237 + alfa. | Bild 3 | Bevarat exakt som Jacobs originalexempel och med A/Z-kontroll. |
+| Alfa = helium-4-kärna (inga elektroner); Am-241 → Np-237 + alfa. | Bild 3 | Bevarat exakt som Jacobs originalexempel, dess färgkodade moderkärna–dotterkärna–partikel-figur och A/Z-kontroll. |
 | Beta−: neutron → proton, elektron, antineutrino; C-14 → N-14. | Bild 4 | Bevarat, korrekt neutrino- och laddningsbokföring. |
 | Beta+: proton → neutron, positron och neutrino; F-18 → O-18. | Bild 4 | Bevarat; positron förklaras som elektronens antipartikel. |
 | Gamma efter excitation; ingen ändring av A/Z. | Bild 5 | Bevarat; knyter an till 9.3. |
+| Betaelektronens energi kan variera när neutrino/antineutrino för bort energi. | Bild 4 | Bokkomplettering s. 343. |
 | Elektroninfångning, proton-/neutronemission och spontan fission. | Bild 5–6 | Bokkompletteringar s. 344–345. |
-| Bevarande av masstal och laddning även i syntesreaktioner. | Bild 6–7 | Bevarat; nytt Al-27 + alfa → P-30 + neutron ersätter kopiering av bokens exempel. |
-| Massdefekt: bunden kärna väger mindre än summan av fria nukleoner. | Bild 8 | Bevarat; förklara E = Δmc² före räkning, utan krav på redan genomgången relativitetsteori. |
+| Bevarande av masstal, laddning, energi och rörelsemängd även i syntesreaktioner. | Bild 6–7 | Bevarat och bokkompletterat; nytt Al-27 + alfa → P-30 + neutron ersätter kopiering av bokens exempel. |
+| Massdefekt: bunden kärna väger mindre än summan av fria nukleoner. | Bild 8 | Bevarat med principfigur över fri proton + fri neutron → deuterium + energi; E = Δmc² före räkning, utan krav på redan genomgången relativitetsteori. |
 | D: proton 1,007276 u + neutron 1,008665 u = 2,015941 u. | Bild 9, steg 1 | Bevarat. |
 | Från neutral D-atom 2,014102 u dras elektronmassa 0,00054858 u av: kärnan 2,01355342 u. | Bild 9, steg 2 | Bevarat; feltranskriberat värde rättat öppet. |
 | Δm = 0,00238758 u; multiplicera med 1,66054·10⁻²⁷ kg/u. | Bild 9, steg 3–4 | Bevarat. |
 | E = Δmc² med SI-insättning → cirka 3,56·10⁻¹³ J → 2,22 MeV. | Bild 9, steg 5–6 | Bevarat som full, sammanhängande lösning. |
+| Jämförelse väteatomens jonisation 13,6 eV mot bindningsenergi 2,22 miljoner eV. | Bild 9, efter steg 6 | Bevarad storleksordningsjämförelse från Jacobs två anmärkningar. |
 | 1 u·c² ≈ 931,49 MeV introduceras som kortare omvandling först efter hela SI-lösningen. | Bild 9, efter steg 6 | Bevarat; huvudmetoden inte ersatt. |
 | Neutral atommassa i β⁻, β⁺ och elektroninfångning; elektronernas massor före/efter. | Bild 10 | Bokkomplettering s. 347–348 enligt Jacobs partikelbokföring, innan övning. |
 | Bindningsenergi per nukleon och fusion/fission. | Bild 11 | Bokkomplettering s. 341–342; ny schematisk figur, inte kopierad. |
@@ -28,7 +30,7 @@ Läroboken **9.4 s. 340–349**, uppgifter **930–939** på s. 349. Jacobs ursp
 | Gamla mindmapaktiviteten. | Begrepp på relevanta bilder. | Ersatt enligt senare lärarbeslut: ingen separat parallell mindmap. |
 | Gamla uppgifter 1115–1122, gemensam 1122. | Bild 13, alla 930–939, gemensam 937. | Ny boks uppgiftsnummer, allt obligatoriskt. |
 | Avslutande kontroll av tre mål. | Bild 14. | Tre individuella frågor med tydligt facit efter eget försök. |
-| Halveringstid. | Bild 2 som framåtblick. | Får fördjupning i senare lektion, där tärningsaktiviteten hör hemma. |
+| Halveringstid definieras kort i bokens inledning. | Bild 2. | Definitionen bevarad; fördjupning och tärningsaktivitet hör till senare lektion. |
 | Socrative. | Ingen. | Finns inte belagt i detta original; läggs inte till. |
 
 ## Uppgiftsavstämning
@@ -50,9 +52,9 @@ Alla uppgifter 930–939 ska göras. Det ofärdiga är läxa.
 
 ## Demonstration eller förhandsgenomgång?
 
-Tre länkar längst upp på original-PDF:en (6-lHIJCwnss, krBZhNyCJfM, hFQkazgbgVs) finns även angivna på den **föregående** lektionens PDF under rubriken ”Nästa lektion: Genomgång”. Transkriptet börjar visserligen ”Här har vi tre klipp … alfa … beta … gamma”, men visar inte entydigt att dessa spelades upp som **demonstrationer under själva lektionen**. Nästa trio (caOhd8xhVoU, 5y7iyA3BvfY, JFu_TUaNiyU) anges uttryckligen under ”Nästa lektion: Genomgång” i 230905-PDF:en.
+Tre länkar längst upp på original-PDF:en (6-lHIJCwnss, krBZhNyCJfM, hFQkazgbgVs) finns även på **föregående** lektionens PDF under rubriken ”Nästa lektion: Genomgång”. Originalfilmen (51 min) har granskats med en kontaktkarta för de första fem minuterna och genomgående bildnedslag cirka var femte minut. De tre klippen syns som **textlänkar på lärarens PDF i filmens början**, varefter läraren går vidare till egen tavelförklaring. Inga aktiva filmuppspelningar framträder i de granskade delarna; transkriptet visar samma sammanhängande förklaring. Nästa trio (caOhd8xhVoU, 5y7iyA3BvfY, JFu_TUaNiyU) anges uttryckligen under ”Nästa lektion: Genomgång”.
 
-De sex länkarna har därför inte lagts till i elevbilden som filmer att titta på. **Kvarstående källfråga:** Om Jacob i själva inspelningen visar något av de första tre klippen som klassrumsdemonstration ska det klippet läggas in. Bara frivillig förhandsgenomgång hör inte hemma i webblektionen. Det kräver ett lärarbesked eller säker kontroll av originalinspelningen för att slutligt avgöras.
+De sex länkarna har därför inte lagts till i elevbilderna. **Källkontroll utförd:** I denna originallektion har ingen faktisk YouTube-demonstration påvisats. Om läraren senare identifierar ett särskilt visat klipp justeras motsvarande elevbild.
 
 ## Fysik- och lektionsgranskning
 
@@ -64,8 +66,8 @@ De sex länkarna har därför inte lagts till i elevbilden som filmer att titta 
 - [x] Tre mätbara elevmål ↔ individuell slutkontroll.
 - [x] Samtliga nya uppgifter 930–939, inga frivilliga uppgifter, resterande läxa.
 - [x] Kapitelgräns s. 366 och halveringstid tydligt separerade från 9.4.
-- [ ] Dokumentera säker klassificering av de första tre YouTube-länkarna.
+- [x] Videoindelningen kontrollerad mot filmernas synliga förlopp samt PDF:ernas placering av förberedande genomgångslänkar.
 - [ ] Testa alla presentationens bilder, stegrevealer och mobil/projektorlayout i webbläsare.
 - [ ] Kontrollera CI, granska skärmbilder och först därefter publicera.
 
-**Kvalitetsstatus:** Under granskning. Den öppna YouTube-källfrågan är ett stopvillkor för att rapportera lektionen som definitivt färdig.
+**Kvalitetsstatus:** Under teknisk granskning. Källorna och videourvalet är genomgångna; publikation får vänta på passerade browsertester och visuell kontroll.
