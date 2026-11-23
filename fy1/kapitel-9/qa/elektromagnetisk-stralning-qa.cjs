@@ -28,12 +28,12 @@ assert.equal(data.pages[6].steps.length,4,'Complete teacher-calculation chain');
 for(const w of ['650','4,62','3,06','1,91'])assert.ok(data.pages[6].steps.join(' ').includes(w),'650nm calculation contains '+w);
 assert.ok(data.pages[6].steps[0].includes('<mspace width="0.16em"/>'),'Units have a visible mathematical thin space');
 for(const n of ['915','916','917','918','919','920','921','922','923'])assert.ok(data.pages.map(s=>s.body).join(' ').includes(n),'New book exercise '+n);
-const groups=[...data.pages[8].body.matchAll(/<section data-goal="([123])">([\\s\\S]*?)<\\/section>/g)];
+const groups=[...data.pages[8].body.matchAll(/<section data-goal="([123])">([\s\S]*?)<\/section>/g)];
 assert.deepEqual(groups.map(m=>m[1]),['1','2','3'],'Bookwork displayed under each of the three goals');
 const expectedExercises={1:[915,919,920],2:[916,917,918,922,923],3:[921]};
 const seenExercises=[];
 for(const group of groups){
- const found=[...group[2].matchAll(/<b>(9\\d\\d)<\\/b>/g)].map(m=>Number(m[1]));
+ const found=[...group[2].matchAll(/<b>(9\d\d)<\/b>/g)].map(m=>Number(m[1]));
  assert.deepEqual(found,expectedExercises[group[1]],'Book tasks mapped to goal '+group[1]);
  seenExercises.push(...found);
 }
