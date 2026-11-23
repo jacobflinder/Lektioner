@@ -81,4 +81,4 @@ for(const vp of [{width:390,height:844},{width:768,height:1024},{width:1280,heig
   await browser.close();
 }
 console.log('FY1 9.4: all four viewport, nuclear controls, math and screenshots passed');
-})().catch(e=>{console.error(e);process.exitCode=1});
+})().catch(e=>{console.error(e);process.exit(1)});
