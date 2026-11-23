@@ -68,7 +68,7 @@ for(const vp of [{width:390,height:844},{width:768,height:1024},{width:1280,heig
   await page.locator('[data-decay="bm"]').click();
   assert.match(await page.locator('.decay-result').innerText(),/Z \+ 1/);
   assert.equal(await page.locator('.map-arrow').getAttribute('x2'),'195','beta minus left one N cell');
-  assert.equal(await page.locator('.map-arrow').getAttribute('y2'),'114','beta minus up one Z cell');
+  assert.equal(await page.locator('.map-arrow').getAttribute('y2'),'105','beta minus up one Z cell');
   await page.click('#reset');
   assert.match(await page.locator('.decay-result').innerText(),/Förutsäg/);
   await page.selectOption('#jump','8');
