@@ -118,6 +118,10 @@ console.log('Static chapter/source/physics checks: OK');
    assert.equal(scaffold.hiddenMath,0,viewport.width+'px: 923 formulas do not overflow');
    assert.equal(scaffold.escaped,0,viewport.width+'px: 923 formulas stay on screen horizontally');
    await page.screenshot({path:path.join(dir,viewport.width+'-photon-count-help.png'),fullPage:true});
+   await page.selectOption('#jump','9');
+   await page.locator('#step').click();
+   const exitMath=await page.evaluate(()=>[...document.querySelectorAll('.slide.active .step.open .math-block')].filter(n=>n.scrollWidth>n.clientWidth+2).length);
+   assert.equal(exitMath,0,viewport.width+'px: exit-feedback equations visible');
    assert.deepEqual(errors,[],viewport.width+'px no JS exceptions');
    await page.close();
  }
