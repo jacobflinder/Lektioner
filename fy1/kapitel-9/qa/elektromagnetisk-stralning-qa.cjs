@@ -19,6 +19,7 @@ assert.equal(minutes.reduce((a,b)=>a+b,0),70,'70 minutes without hypothetical ex
 assert.deepEqual(Array.from(minutes),[5,5,6,5,5,5,9,5,20,5]);
 assert.ok(data.pages[1].body.includes('penna'),'Original pen demonstration visible');
 assert.ok(data.pages[1].body.includes('text x="14" y="138"'),'Wavelength labels separated from wave curves');
+assert.ok(data.pages[1].body.includes('Q80 48 140 86'),'Wavelength sketch varies period without varying wave amplitude');
 assert.equal((data.pages[2].body.match(/data-band=/g)||[]).length,7,'Seven spectrum regions');
 assert.ok(data.pages[3].body.includes('<math')&&data.pages[3].body.includes('<mfrac>'),'c=fλ and f=c/λ shown before calculation');
 assert.ok(data.pages[4].body.includes('Plancks konstant'),'Photon energy and Planck constant before example');
@@ -73,8 +74,13 @@ console.log('Static chapter/source/physics checks: OK');
    }
    await page.selectOption('#jump','2');
    if(viewport.width===768){
-     const tabletRows=await page.evaluate(()=>[...document.querySelectorAll('.slide.active .spectrum-bands button')].map(b=>Math.round(b.getBoundingClientRect().top)));
-     assert.equal(new Set(tabletRows).size,1,'Tablet spectrum keeps seven regions in a single left-to-right sequence');
+     const tablet=await page.evaluate(()=>{
+       const buttons=[...document.querySelectorAll('.slide.active .spectrum-bands button')];
+       const wrapped=buttons.slice(0,2).filter(b=>{const r=document.createRange();r.selectNodeContents(b);return r.getClientRects().length>1;});
+       return {rows:buttons.map(b=>Math.round(b.getBoundingClientRect().top)),wrapped:wrapped.length};
+     });
+     assert.equal(new Set(tablet.rows).size,1,'Tablet spectrum keeps seven regions in a single left-to-right sequence');
+     assert.equal(tablet.wrapped,0,'Radiovågor and Mikrovågor are legible without splitting their names');
    }
    if(viewport.width===390){
      const mobileSpectrum=await page.evaluate(()=>{
