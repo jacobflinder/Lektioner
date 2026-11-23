@@ -24,7 +24,7 @@ assert.ok(d.pages[8].steps[4].includes('2,22 MeV'),'electronvolt conversion');
 assert.ok(d.pages[9].body.includes('931,5'),'short method only after full SI');
 assert.ok(d.pages[10].steps[0].includes('32 / 4 = 8'),'chain starts with A');
 assert.ok(d.pages[10].steps[2].includes('6 beta-minus'),'chain finishes with Z');
-assert.ok(d.pages[11].body.includes('ALLA uppgifter 930–939'),'all textbook exercises mandatory');
+assert.ok(d.pages[11].body.includes('uppgifter 930–939')&&d.pages[11].body.includes('Alla ska göras'),'all textbook exercises mandatory');
 assert.ok(d.pages[12].body.includes('Mål 1')&&d.pages[12].body.includes('Mål 2')&&d.pages[12].body.includes('Mål 3'),'three goal exits');
 assert.ok(!all.includes('SOC-38350144'),'no 9.5 Socrative on 9.4');
 assert.ok(!all.includes('beta-decay'),'no 9.5 PhET on 9.4');
