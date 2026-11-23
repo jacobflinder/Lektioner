@@ -56,3 +56,18 @@
 
 #bild-5 .gamma-ec section{padding:11px 13px}#bild-5 .gamma-ec .formula{font-size:1.08rem;line-height:1.36;margin:6px 0;padding:7px 9px}#bild-5 .gamma-ec p{font-size:.93rem;line-height:1.35;margin:6px 0}#bild-5 .question{padding:11px 14px;margin:9px 0}
 @media(max-width:600px){#bild-5 .gamma-ec .formula{font-size:.91rem}}
+
+/* 1280×800 classroom: preserve interactive map, buttons and feedback without hiding navigation. */
+@media(min-width:1000px){
+.stage:has(#bild-7.active){padding:20px 28px}
+#bild-7 .page-title{font-size:2.3rem;margin:5px 0 8px}
+#bild-7 .body-copy>p:first-child{font-size:.96rem;margin:0 0 5px}
+#bild-7 .decay-control{margin:6px 0;padding:8px 10px;gap:5px 10px}
+#bild-7 .decay-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin:0}
+#bild-7 .decay-buttons button{font-size:.79rem;padding:6px 7px}
+#bild-7 .nuclide-map{max-height:155px;width:min(100%,380px);margin:0 auto}
+#bild-7 .decay-control>.unit-note{font-size:.73rem;line-height:1.2;margin:0}
+#bild-7 .decay-result{min-height:46px;font-size:.88rem;padding:8px}
+#bild-7 .question{padding:9px 12px;margin:6px 0}
+#bild-7 .steps-label{margin:7px 0 2px}
+}
