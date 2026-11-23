@@ -48,4 +48,21 @@
 - [x] Fullständiga skärmbilder från körning 224 manuellt granskade, särskilt 390px mobilens nivådiagram, beräkning samt projektorsammanhängande lösningskedja. Intern källa är dold från elevvyn.
 - [ ] Verifiera main/Pages-länkar och publicerad status.
 
-**Status: ORIGINAL- OCH BROWSERGRANSKAD, GODKÄND FÖR MERGE.** Github Pages-kontroll återstår efter att PR #190 slagits samman till main.
+**Status: 9.3 publicerad i main efter PR #190. Ny revidering för självbärande lektionsflöde måste testas innan den rapporteras som godkänd.**
+
+## Ny lärarinstruktion: lektionen ska bära sitt eget genomförande (23 november 2026)
+
+- **Bevarad originalaktivitet:** Original-PDF `230904 Atomkärnan Na22.pdf` säger uttryckligen `1) Mindmap 2) Bokuppgifter`. Transkriptet visar att mindmapen byggs gemensamt under genomgången och fortsätter i kommande lektioner. Detta måste därför stå på elevbilden, inte bara i lärarstödet.
+- **Nya synliga instruktioner:** Bild 1: ta fram gemensam kapitelmindmap. Bilderna 2–6: fyll på nuklidnotation, kolisotoper, kärnans två krafter, kväve-15 och gamma. Bild 7: räkna själv före stegvis gemensam lösning. Bild 8: kontrollera mindmapens avsnitt inför bokarbete. Alla instruktioner syns i klassrumsläget.
+- **Synliga interaktiva demonstrationer:** Bild 3: växla mellan kol-12/13/14 efter att eleverna förutsagt vad som händer. Bild 6: välj övergång A/B/C efter en energiförutsägelse. Demonstrationens handling och när den ska utföras finns i elevflödet, inte enbart i läraranteckningar.
+- **Ingen fysisk demo i originalets 9.3-del:** Den föregående lektionens penndemonstration hör till elektromagnetisk strålning (9.2), inte 9.3. Vi lägger därför inte till en påhittad fysisk demonstration eller laboration.
+- **Tre filmklipp rätt avgränsade:** Original-PDF:s `Nästa lektion`-länkar (V1 `https://youtu.be/6-lHIJCwnss`, V2 `https://youtu.be/krBZhNyCJfM`, V3 `https://youtu.be/hFQkazgbgVs`) hör till den följande genomgången om alfa, beta och gamma enligt `230905 Kärnreaktioner, massdefekt`. De ska bevaras på **kommande webblektion**, inte presenteras som en aktivitet i 9.3.
+- **Bokarbete och avslut oförändrade:** Samtliga 924–929 är obligatoriska, 924–926 först och därefter 927–929, resten läxa. Uppgiftskopplingarna ligger under elevmålen i slutkontrollen. Inga andra moment strukna eller metoder ersatta.
+- **Lärarstöd endast referens:** Extra läraranvisningar får aldrig behövas för att köra själva lektionen; allt undervisningskritiskt framgår av klassrumsvyn. Källkartor och bakgrund kan kvarstå i en separat stödvy.
+
+### Reviderad teknisk och didaktisk slutgranskning
+- [x] Originalets mindmap och videornas plats i undervisningsserien kontrollerade i PDF och transkription.
+- [x] Mindmap, modell-/demonstrationssteg och arbetsordning införda direkt på lektionsbilderna.
+- [ ] Fyra skärmstorlekar och synlighet av nya instruktioner testade i verklig webbläsare.
+- [ ] Bilderna 1–8 visuellt kontrollerade på mobil och projektor efter denna ändring.
+- [ ] Verifierat att ändringen ligger i main/Pages efter merge.
