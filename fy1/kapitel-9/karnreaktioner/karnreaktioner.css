@@ -47,3 +47,6 @@
 #bild-9 .step .formula{font-size:1.12rem}
 #bild-9 .step .formula{white-space:normal;overflow-wrap:anywhere}
 @media(max-width:600px){#bild-9 .step .formula{font-size:.94rem;line-height:1.50}.nuc .indices{font-size:.7em}}
+
+.binding-curve{display:flex;gap:15px;align-items:center;border:1px solid #cbdfe5;background:#f1f8fa;border-radius:12px;padding:9px 12px;margin:9px 0}.binding-curve svg{display:block;width:min(49%,480px);height:auto;flex:0 0 49%}.binding-curve p{font-size:.88rem;line-height:1.35;margin:0}.binding-curve text{font-family:system-ui,sans-serif}
+@media(max-width:700px){.binding-curve{display:block}.binding-curve svg{width:100%;max-width:550px}.binding-curve p{margin-top:5px}}
