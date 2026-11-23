@@ -1,0 +1,80 @@
+/* Följer projektets gemensamma skal. Inga viktiga aktiviteter får döljas i lärarläget. */
+.source-note{display:none}
+.page-title{font-size:clamp(1.65rem,3.5vw,2.7rem)}
+.body-copy{font-size:1rem}
+.body-copy p{margin:8px 0}
+.focus-line{color:#105e72;font-size:1.18rem;font-weight:745}
+.small-context{font-size:.86rem;color:#4a6c77}
+.goal-card,.demo-card,.formula-card,.note-card{padding:13px 16px;border:1px solid #c8e0e6;background:#f1f8fa;border-radius:12px;margin:10px 0}
+.goal-card ol{margin:7px 0 0;padding-left:1.3em}
+.goal-card li{margin:7px 0}
+.demo-card{background:#edf8f4;border-color:#b6dbc8}
+.demo-card h2{margin:0 0 5px;color:#166a56}
+.formula-card{border-left:5px solid #0c8296}
+.note-card{background:#fff7e9;border-left:4px solid #d8a04c}
+.notice{display:flex;gap:12px;align-items:baseline;padding:9px 13px;border-left:4px solid #168498;background:#eef7f9;border-radius:9px;margin:10px 0}
+.notice>b{flex:0 0 auto;color:#136c80}
+.notice>span{min-width:0}
+.equation{font:1.42rem/1.5 "STIX Two Math","Cambria Math",Cambria,serif;letter-spacing:.012em;padding:5px 0;max-width:100%;overflow-x:auto;white-space:nowrap}
+.equation.tight{font-size:1.26rem}
+.equation sub{font-size:.64em}.equation sup{font-size:.67em}
+.equation .frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.85em;transform:translateY(3px)}
+.equation .frac>span{display:block;padding:0 5px}.equation .frac>span:first-child{border-bottom:1.2px solid currentColor}
+.equation .indent{display:inline-block;min-width:2.4em;text-align:right}
+.unit{font-size:.91rem;color:#385c68}
+.two-cards,.three-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.three-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.two-cards>section,.three-cards>section{min-width:0;border:1px solid #cbdfe5;border-radius:12px;background:#f2f8fa;padding:12px 15px}
+.two-cards b,.three-cards b{color:#13687b}
+.two-cards p,.three-cards p{margin:5px 0}
+.figure{display:block;width:min(100%,710px);height:auto;margin:5px auto}
+.figure text{font:15px system-ui,sans-serif;fill:#244d5c}
+.figure .small-label{font-size:13px}
+.figure .grid{stroke:#d4e6e9;stroke-width:1}
+.figure .axis{stroke:#567987;stroke-width:2}
+.figure .curve{stroke:#117c91;stroke-width:5;fill:none;stroke-linejoin:round;stroke-linecap:round}
+.figure .dot{fill:#e39d4b;stroke:#fff;stroke-width:2}
+.caption{font-size:.81rem;color:#55747c;margin:2px 0 10px;text-align:center}
+.concept-rail{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin:14px 0}
+.concept-rail span:not(.arrow){background:#e8f5f8;padding:9px 12px;border:1px solid #c5dfe4;border-radius:10px;font-weight:720;text-align:center}
+.concept-rail .arrow{color:#0c788a;font-weight:800;font-size:1.4rem}
+.steps-label{margin-top:13px}
+.step.open p{margin:5px 0}
+.work-plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:12px 0}
+.work-plan>section{border:1px solid #cddfe4;border-radius:12px;padding:12px 15px;background:#f3f9fa;min-width:0}
+.work-plan h3{margin:0 0 6px;font-size:1.07rem;color:#136c80}
+.work-plan p{margin:5px 0;font-size:.92rem}
+.book-note{background:#eaf5ec;border-left:5px solid #4d946e;border-radius:12px;padding:13px 16px;margin:10px 0}
+.book-note>b{color:#24674c}
+.exit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.exit-grid>section{padding:12px 13px;background:#f2f8fa;border:1px solid #cbdfe5;border-radius:12px;min-width:0}
+.exit-grid b{color:#146b7c}
+.exit-grid p{margin:7px 0}
+.socrative-list{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;margin:12px 0}
+.socrative-list label{display:flex;align-items:baseline;gap:9px;border:1px solid #d1e3e6;border-radius:8px;padding:8px 10px;background:#fff;cursor:pointer}
+.socrative-list input{accent-color:#0a8295;transform:scale(1.2);flex:0 0 auto}
+.socrative-result{min-height:1.5em;font-size:.9rem;color:#22596a}
+.dice-panel{border:1px solid #bbdbe0;background:#f4fafb;border-radius:13px;padding:12px 15px;margin:13px 0}
+.dice-panel h2{font-size:1.14rem;color:#14677b;margin:0 0 5px}
+.dice-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:9px 0}
+.dice-actions button{font-size:.91rem}
+.dice-tiles{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px;margin:11px 0}
+.die{display:grid;place-items:center;min-height:42px;background:white;border:2px solid #a9cbd5;border-radius:8px;font-size:1.5rem;line-height:1.1;font-weight:800;color:#1e667a}
+.die.out{background:#f5e9e1;border-style:dashed;color:#a6a0a0;font-size:1.2rem}
+.dice-table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.91rem}
+.dice-table th,.dice-table td{border-bottom:1px solid #cbdfe5;text-align:center;padding:6px 7px}
+.dice-table th:first-child,.dice-table td:first-child{text-align:left}
+.dice-table thead{background:#deeff3}
+.result-value{color:#116f80;font-weight:810}
+.dice-status{font-size:.91rem;margin:8px 0}
+@media(min-width:1100px){
+ #bild-8.slide.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px;align-content:start}
+ #bild-8 .page-head,#bild-8 .layout,#bild-8 .steps-label,#bild-8 .teacher-note,#bild-8 .source-note{grid-column:1/-1}
+ #bild-8 .step.open{padding:8px 12px;margin:2px 0}
+ #bild-8 .step[data-step="0"],#bild-8 .step[data-step="2"],#bild-8 .step[data-step="4"]{grid-column:1}
+ #bild-8 .step[data-step="1"],#bild-8 .step[data-step="3"],#bild-8 .step[data-step="5"]{grid-column:2}
+}
+@media(max-width:950px){.three-cards,.exit-grid{grid-template-columns:1fr}.dice-tiles{grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}.die{min-height:36px}}
+@media(max-width:680px){.two-cards,.work-plan{grid-template-columns:1fr}.notice{display:block}.notice>b{display:block;margin-bottom:4px}.dice-tiles{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:460px){.equation{font-size:1.17rem}.equation.tight{font-size:1.03rem}.dice-tiles{gap:5px}.die{min-height:38px}.dice-panel{padding:9px}.dice-table{font-size:.76rem}.dice-table th,.dice-table td{padding:4px 3px}}
+@media print{.step{display:block!important}#bild-8.slide{display:block!important}}
