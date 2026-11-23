@@ -67,7 +67,7 @@ De sex länkarna har därför inte lagts till i elevbilderna. **Källkontroll ut
 - [x] Samtliga nya uppgifter 930–939, inga frivilliga uppgifter, resterande läxa.
 - [x] Kapitelgräns s. 366 och halveringstid tydligt separerade från 9.4.
 - [x] Videoindelningen kontrollerad mot filmernas synliga förlopp samt PDF:ernas placering av förberedande genomgångslänkar.
-- [ ] Testa alla presentationens bilder, stegrevealer och mobil/projektorlayout i webbläsare.
-- [ ] Kontrollera CI, granska skärmbilder och först därefter publicera.
+- [x] Testat alla 14 bilder, stegrevealer, återställning och mobil-/projektorlayout i Chromium vid 390, 768, 1280 och 1920 px.
+- [x] Samtliga GitHub Actions-tester godkända. Skärmbilder av nya principfigurer, mobiltabell, energikurva och hela deuterium- respektive uranlösningen granskade.
 
-**Kvalitetsstatus:** Under teknisk granskning. Källorna och videourvalet är genomgångna; publikation får vänta på passerade browsertester och visuell kontroll.
+**Kvalitetsstatus:** Slutgranskad och godkänd för publicering. [GitHub Actions-körning 45205193791](https://github.com/jacobflinder/Lektioner/actions/runs/45205193791) passerade den 23 november 2026. Ändringen av denna statusrad påverkar inte elevlektionens kod eller utseende. Ingen obestämd metodavvikelse kvarstår.
