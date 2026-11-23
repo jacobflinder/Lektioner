@@ -68,3 +68,12 @@
 - [ ] Slå samman PR #191 med main och verifiera GitHub Pages-länken efteråt.
 
 **Granskningsstatus (revidering):** Originalkarta, statisk källkontroll och browser-QA godkända; publik URL kontrolleras efter merge. Testad PR-kod: 0785b378c6f73fc11d495b86c1c32d0b9a43635c, körning 240.
+
+## Senare lärarbeslut: webben ersätter mindmapen och metoden går före interaktionen
+
+- **Mindmapmomentet utgår som separat elevaktivitet efter uttryckligt lärarbeslut.** Originalets innehållsliga idéer och ordning bevaras i webblektionens definitioner, genomgång, klickmodeller och frågor. Inga instruktioner om att eleverna ska göra eller fylla i en mindmap får finnas i klassrumsvyn. Det är en **godkänd avvikelse i aktivitet**, inte i fysikens innehåll.
+- **Bild 6:** Den gamla genomgången förklarade energinivådiagrammet innan det användes. Den nya webblektionen anger nu, FÖRE det interaktiva diagrammet, vad grundtillståndet 0 keV betyder, vad 50 och 150 keV som exciterade tillstånd betyder, vad en nedåtriktad pil innebär, samt att Eγ=ΔW=Wföre−Wefter och Eγ=hf=hc/λ. Först efter introduktionen får eleverna välja övergångarna A–C. Full beräkningskedja på nästa bild är oförändrad.
+- **Övriga bilder:** Mindmapnotiser på bilderna 1–5 och 8 har strukits. Den verkliga interaktionen med kolisotoperna på bild 3 och gammaövergångarna på bild 6 behålls med korta förutsägelseinstruktioner. Separat bokarbete 924–929 och målkopplad slutkontroll är oförändrade.
+- **Norm för framtida lektioner:** Lägg inte automatiskt till mindmapmoment från äldre PDF:er när webblektionen ersätter det. Låt det gamla innehållet styra stoff och metod men låt lärarens senare explicita beslut styra aktivitetens format. Ny central teori introduceras alltid före användning av en interaktiv modell.
+
+**Status:** inväntar ny statisk och visuell webbläsarkontroll för ovanstående revidering före publicering.
