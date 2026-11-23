@@ -63,6 +63,8 @@
 ### Reviderad teknisk och didaktisk slutgranskning
 - [x] Originalets mindmap och videornas plats i undervisningsserien kontrollerade i PDF och transkription.
 - [x] Mindmap, modell-/demonstrationssteg och arbetsordning införda direkt på lektionsbilderna.
-- [ ] Fyra skärmstorlekar och synlighet av nya instruktioner testade i verklig webbläsare.
-- [ ] Bilderna 1–8 visuellt kontrollerade på mobil och projektor efter denna ändring.
-- [ ] Verifierat att ändringen ligger i main/Pages efter merge.
+- [x] Den slutliga kodversionen passerade GitHub Actions **körning 240** (23 november 2026) på 390×844, 768×1024, 1280×800 och 1920×1080. Testet verifierade att samtliga åtta instruktioner visas i klassrumsläget, att demos ligger efter instruktionerna, och att interaktioner/beräkningar inte klipps.
+- [x] Skärmbilderna från körning 240 granskade för mobil (390px) och projektor (1280px), särskilt startbilden, isotopdemonstrationen och gammaövergångarna. Instruktionerna kommer före de klickbara modellerna. Inga dolda obligatoriska moment.
+- [ ] Slå samman PR #191 med main och verifiera GitHub Pages-länken efteråt.
+
+**Granskningsstatus (revidering):** Originalkarta, statisk källkontroll och browser-QA godkända; publik URL kontrolleras efter merge. Testad PR-kod: 0785b378c6f73fc11d495b86c1c32d0b9a43635c, körning 240.
