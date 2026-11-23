@@ -70,6 +70,15 @@ console.log('Static chapter/source/physics checks: OK');
      await page.screenshot({path:path.join(dir,viewport.width+'-slide-'+String(i+1).padStart(2,'0')+'.png'),fullPage:true});
    }
    await page.selectOption('#jump','2');
+   if(viewport.width===390){
+     const mobileSpectrum=await page.evaluate(()=>{
+       const band=document.querySelector('.slide.active .spectrum-bands');
+       const buttons=[...band.querySelectorAll('button')];
+       return {rows:buttons.map(b=>Math.round(b.getBoundingClientRect().top)),label:getComputedStyle(band,'::after').content};
+     });
+     assert.equal(new Set(mobileSpectrum.rows).size,7,'Mobile spectrum shows seven vertical, ordered regions');
+     assert.match(mobileSpectrum.label,/Nederst: kortast våglängd/);
+   }
    await page.locator('[data-band=gamma]').click();
    assert.match(await page.locator('.spectrum-result').innerText(),/Gammastrålning/);
    await page.locator('[data-band=radio]').click();
@@ -80,8 +89,19 @@ console.log('Static chapter/source/physics checks: OK');
    assert.equal(await page.locator('.slide.active .step.open').count(),0);
    for(let i=0;i<4;i++)await page.locator('#step').click();
    assert.equal(await page.locator('.slide.active .step.open').count(),4);
-   const visibility=await page.evaluate(()=>[...document.querySelectorAll('.slide.active .step.open .math-block')].filter(n=>n.scrollWidth>n.clientWidth+2).length);
-   assert.equal(visibility,0,viewport.width+'px: all revealed mathematical steps visible');
+   const calculation=await page.evaluate(()=>{
+     const slide=document.querySelector('.slide.active');
+     const steps=[...slide.querySelectorAll('.step.open')].map(el=>{
+       const r=el.getBoundingClientRect();return {left:Math.round(r.left),top:Math.round(r.top),bottom:Math.round(r.bottom)};
+     });
+     return {hiddenMath:[...slide.querySelectorAll('.step.open .math-block')].filter(n=>n.scrollWidth>n.clientWidth+2).length,steps,viewportHeight:window.innerHeight};
+   });
+   assert.equal(calculation.hiddenMath,0,viewport.width+'px: all revealed mathematical steps visible');
+   if(viewport.width>=1280){
+     assert.ok(calculation.steps[1].left>calculation.steps[0].left,'Projector calculation shows steps 1 and 2 alongside each other');
+     assert.ok(calculation.steps[2].top>calculation.steps[0].top,'Projector calculation shows steps 3 and 4 on the next row');
+   }
+   console.log(viewport.width+'px: calculation geometry '+JSON.stringify(calculation));
    await page.screenshot({path:path.join(dir,viewport.width+'-calculation-revealed.png'),fullPage:true});
    await page.locator('#reset').click();
    assert.equal(await page.locator('.slide.active .step.open').count(),0);
