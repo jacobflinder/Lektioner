@@ -37,7 +37,7 @@ assert.ok(!work.includes('data-goal='),'No goal mappings on the work slide');
 assert.deepEqual([...work.matchAll(/<section data-phase="(now|next)">/g)].map(x=>x[1]),['now','next'],'Two clear work phases');
 assert.ok(work.includes('<b>915, 917 och 921</b>'),'Assigned tasks are explicit');
 assert.ok(work.includes('<b>918–920, 922 och 923</b>'),'Follow-on tasks are explicit');
-assert.ok(work.includes('Uppgift 916 har vi redan löst tillsammans'),'Worked example is acknowledged');
+assert.ok(work.includes('Uppgift <b>916</b> har vi redan löst tillsammans'),'Worked example is acknowledged');
 const exit=data.pages[9].body;
 const goalMap=[...exit.matchAll(/<div data-goal="([123])">([\s\S]*?)<\/div>/g)];
 assert.deepEqual(goalMap.map(x=>x[1]),['1','2','3'],'Exit is grouped by three student goals');
