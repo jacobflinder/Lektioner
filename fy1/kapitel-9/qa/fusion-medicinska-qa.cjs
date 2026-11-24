@@ -1,13 +1,12 @@
-/* Fy1 9.8/9.9: static source gates and Playwright visual/interaction smoke tests.
- * SOURCE STOPP is intentional: 974–998 question texts still require direct source retrieval.
- * Passing this file alone NEVER marks lessons publication-ready. */
+/* Fy1 9.8/9.9: original-to-book source gates and Playwright visual/interaction QA.
+ * Passing static tests alone never replaces physical slide/feedback review. */
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const base=path.resolve(__dirname,'..');
 function lesson(slug){const folder=path.join(base,slug);let raw='';const content=fs.readFileSync(path.join(folder,'lektion.js'),'utf8');vm.runInNewContext(content,{document:{getElementById:()=>({set textContent(v){raw=v}})}});return {folder,pages:JSON.parse(raw).pages}}
 const a=lesson('fusion-och-fission'),b=lesson('medicinska-metoder');
 for(const [s,x] of [['9.8',a],['9.9',b]]){
- assert.equal(x.pages.length,10,s+' ten slides');
+ assert.equal(x.pages.length,s==='9.8'?10:11,s+' required slide count');
  assert.equal(x.pages.reduce((a,p)=>a+Number.parseInt(p.time,10),0),70,s+' 70-minute duration');
  assert.ok(x.pages[1].body.includes('Tre')||x.pages[1].body.includes('Efter lektionen ska du kunna'),s+' goals present');
  for(const q of x.pages.filter(p=>p.quiz).map(p=>p.quiz)){
@@ -21,21 +20,30 @@ for(const [s,x] of [['9.8',a],['9.9',b]]){
 }
 assert.equal(a.pages[7].steps.length,6,'fusion mass defect six complete ordered steps');
 assert.ok(a.pages[2].body.includes('Mindmap – fission') && a.pages[5].body.includes('Mindmap efter filmen'),'both original nuclear mindmap activities retained');
-assert.ok(b.pages[7].body.includes('Gemensam mindmap'),'original medical mindmap activity retained');
+assert.ok(b.pages[8].body.includes('Gemensam mindmap'),'original medical mindmap activity retained');
+assert.ok(b.pages[7].body.includes('strålbehandling')&&b.pages[7].body.includes('Protonstrålning'),'book 9.9 cancer treatment has own taught slide');
 for(const number of ['2,014102','4,028204','3,016029','1,008665','0,003510','931,5','3,27'])assert.ok(a.pages[7].steps.join('').includes(number),'fusion value '+number);
 assert.ok(a.pages[3].body.includes('karnmodell.html?mode=fission'),'fission embedded');
 assert.ok(a.pages[6].body.includes('karnmodell.html?mode=fusion'),'fusion embedded');
 assert.ok(a.pages[5].body.includes('Ux33-5k8cjg'),'original Veritasium retained');
 assert.equal((a.pages[8].body.match(/class="bookrow"/g)||[]).length,14,'974–987 book rows');
-assert.equal((b.pages[8].body.match(/class="bookrow"/g)||[]).length,11,'988–998 book rows');
-assert.ok(b.pages[7].body.includes('medicinsk-modell.html'),'five imaging methods embedded');
-for(const key of ['Röntgen','CT','MR','PET','gammakamera'])assert.ok(b.pages.slice(2,8).some(p=>p.body.includes(key)), 'medical method '+key);
+assert.equal((b.pages[9].body.match(/class="bookrow"/g)||[]).length,11,'988–998 book rows');
+assert.ok(b.pages[8].body.includes('medicinsk-modell.html'),'five imaging methods embedded');
+for(const key of ['Röntgen','CT','MR','PET','gammakamera'])assert.ok(b.pages.slice(2,9).some(p=>p.body.includes(key)), 'medical method '+key);
+for(const [x,first,last,work,end] of [[a,974,987,8,9],[b,988,998,9,10]]){
+ const book=x.pages[work].body,goals=x.pages[end].body;
+ for(let n=first;n<=last;n++){
+  assert.ok(book.includes('<b>'+n+'</b>'),'individual book task '+n);
+  assert.ok(goals.includes('>'+n+' <small>s. '),'task '+n+' linked to goal and theory page');
+ }
+ assert.ok(!book.includes('under källkontroll')&&!goals.includes('källspärr'),'source-verified book task mapping');
+}
 for(const [slug,file] of [['fusion-och-fission','karnmodell.html'],['medicinska-metoder','medicinsk-modell.html']]){
  const html=fs.readFileSync(path.join(base,slug,file),'utf8');
  const code=html.match(/<script>([\s\S]*?)<\/script>/)?.[1];assert.ok(code,'model JS exists '+slug);new vm.Script(code);
  assert.ok(html.includes('aria-live="polite"'),'model has feedback '+slug);
 }
-console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered tasks and visual models. BOOK REFERENCE STOPP REMAINS.');
+console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 verified numbered tasks linked to exact goals and theory, complete visual models.');
 (async()=>{
  const {chromium}=require('playwright');
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -47,7 +55,7 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered ta
     const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
     page.on('pageerror',e=>errors.push(slug+': '+e.message));
     await page.goto('http://127.0.0.1:8123/fy1/kapitel-9/'+slug+'/',{waitUntil:'networkidle'});
-    assert.equal(await page.locator('.slide').count(),10);
+    assert.equal(await page.locator('.slide').count(),x.pages.length);
     assert.equal(await page.locator('#teacher-toggle').count(),0,'no teacher button '+slug);
     assert.equal(await page.locator('#teacher-link').count(),0,'no student teacher-support link '+slug);
     await page.locator('#jump').selectOption('1');
@@ -55,7 +63,7 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered ta
     const info=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,innerWidth:innerWidth}));
     assert.ok(info.scrollWidth<=info.innerWidth+3,slug+' '+width+' px horizontal overflow '+JSON.stringify(info));
     await page.screenshot({path:path.join(dir,slug+'-'+width+'-goals.png'),fullPage:true});
-    for(let idx=0;idx<10;idx++){
+    for(let idx=0;idx<x.pages.length;idx++){
       await page.locator('#jump').selectOption(String(idx));
       if((slug==='fusion-och-fission'&&idx===7)){
        for(let j=0;j<6;j++)await page.locator('#step').click();
@@ -64,7 +72,8 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered ta
        assert.deepEqual(overflowing,[],'mass-defect formulas must be fully visible on '+width+'px mobile/projector');
        await page.screenshot({path:path.join(dir,slug+'-'+width+'-massdefect.png'),fullPage:true});
       }
-      if((slug==='fusion-och-fission'&&(idx===3||idx===6))||(slug==='medicinska-metoder'&&idx===7)){
+      if((slug==='medicinska-metoder'&&idx===7))await page.screenshot({path:path.join(dir,slug+'-'+width+'-radiotherapy.png'),fullPage:true});
+      if((slug==='fusion-och-fission'&&(idx===3||idx===6))||(slug==='medicinska-metoder'&&idx===8)){
        const frame=page.frameLocator('.slide.active iframe');
        await frame.locator('#run').waitFor();
        assert.ok(await frame.locator('#run').isDisabled(),'run gated before selection');
@@ -105,6 +114,6 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered ta
    }
   }
   assert.deepEqual(errors,[],'browser JS errors');
-  console.log('9.8/9.9 BROWSER: 4 responsive sizes, 20 slides, 2 nuclear modes, five imaging methods, feedback, staged mass defect: PASS.');
+  console.log('9.8/9.9 BROWSER: 4 responsive sizes, 21 slides, 2 nuclear modes, five imaging methods, 15 feedback branches, radiotherapy slide, staged mass defect: PASS.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
