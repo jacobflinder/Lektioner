@@ -8,6 +8,12 @@ insertSolutions({
  step('2 · Avståndet enligt Pythagoras',['d = √(3² + (−4)²)','= √(9 + 16)','= √25']),
  answer(['d = 5'])
 ),
+'k-source-root-answer':solution(
+ step('1 · Identifiera koefficienterna',['p = −6','q = 25']),
+ step('2 · Använd pq-formeln',['z = −p/2 ± √((p/2)² − q)','z = 3 ± √((−3)² − 25)','z = 3 ± √(9 − 25)','z = 3 ± √(−16)','z = 3 ± 4i']),
+ answer(['z₁ = 3 + 4i','z₂ = 3 − 4i']),
+ step('3 · Jämför rötterna',['Re(z₁) = 3','Re(z₂) = 3','Im(z₁) = 4','Im(z₂) = −4','z₂ = z̄₁'],'Rötterna är varandras konjugat. I talplanet är punkterna speglade i realaxeln.')
+),
 'k-modans':solution(
  step('1 · Ursprungliga talet',['z = −3 + 4i','|z| = √((−3)² + 4²)','= √(9 + 16)','= √25 = 5']),
  step('2 · Talets konjugat',['z̄ = −3 − 4i','|z̄| = √((−3)² + (−4)²)','= √(9 + 16)','= √25 = 5']),
