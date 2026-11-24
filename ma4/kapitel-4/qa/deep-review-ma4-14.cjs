@@ -93,11 +93,11 @@ assert.ok(P(.9)>0&&P(1.1)>0,'Dubbelrot tangerar utan teckenbyte');assert.ok(P(-2
   await go(2);await sequence('#h-kand',6);
   await label('#h-kand','q(z) = z² + 4');await label('#h-kand','r = 0');
   await label('#h-kand','z₁ = 1');await label('#h-kand','z₂ = 2i');await label('#h-kand','z₃ = −2i');
-  assert.ok(await page.locator('#h-kand .longdiv-demo td math').count()>=15,'Alla gradkolumner och subtraktioner MathML');
-  assert.ok(await page.locator('#h-kand .longdiv-demo td.place-zero math[aria-label="+ 0z"]').count()===1,'Kvotens nollterm bevarad som semantisk MathML');
-  assert.ok(await page.locator('#h-kand details').isHidden()===false,'Alternativ gruppering finns kvar');
+  assert.ok(await page.locator('#h-kand .longdiv-demo td math').count()>=13,'Alla synliga gradtermer och subtraktioner MathML');
+  assert.ok(await page.locator('#h-kand .longdiv-demo td[data-q-degree="1"][data-blank="true"]').count()===1,'Originalets tomma gradplats i kvoten bevarad');
+  assert.ok(await page.locator('#h-kand details').isHidden()===false,'Multiplikationskontrollen finns kvar');
   await page.locator('#h-kand details summary').click();
-  await label('#h-kand details','z²(z − 1) + 4(z − 1) = 0');
+  await label('#h-kand details','(z − 1)(z² + 4)');
   await allSpacing();await shot('03-desktop');
   await page.locator('#h-kand [data-seq-reset]').click();
   assert.equal(await page.locator('#h-kand [data-seq-item]:visible').count(),0);
@@ -119,7 +119,8 @@ assert.ok(P(.9)>0&&P(1.1)>0,'Dubbelrot tangerar utan teckenbyte');assert.ok(P(-2
   await allSpacing();await shot('05-desktop');
   // 06: koefficientjämförelse + full kvadratkomplettering
   await go(5);await sequence('#h-kvot',7);
-  await label('#h-kvot','b = 2');await label('#h-kvot','c + 1 = 6 ⇒ c = 5');
+  await label('#h-kvot','q(z) = z² + 2z + 5');await label('#h-kvot','r = 0');
+  assert.equal(await page.locator('[data-source-chair="higher3"] .source-product').count(),3,'Tre hela produkter med andragradsdivisor');
   await label('#h-kvot','z = −1 ± 2i');
   for(const root of ['z₁ = i','z₂ = −i','z₃ = −1 + 2i','z₄ = −1 − 2i'])await label('#h-kvot',root);
   await allSpacing();await shot('06-desktop');
