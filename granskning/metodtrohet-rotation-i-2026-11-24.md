@@ -1,0 +1,7 @@
+# Multiplicera och dividera med i – originalmetod
+
+Metodkälla: film 230424–230428 Polär form samt rita i det komplexa talplanet Lek3, bildrutor vid 05:00 och 06:00. Originalet visar z, iz och −iz i ett komplext talplan, samma avstånd från origo och rotation med positiv respektive negativ π/2. Argumentet ökar vid multiplikation och minskar vid division. Originalet börjar i geometrin; tidigare webb lät en längre generell härledning föregå figuren.
+
+Återställt: tydliga rotationsregler och absolutbeloppsidentiteter, radianer (π/2), figur och successiva rotationer före den allmänna algebraiska härledningen. Alla tidigare härledningssteg, självständiga exempel, felanalys och utcheckning bevaras. Definition av argument för z≠0 och hela varv förtydligas för matematisk korrekthet. Befintliga uppgifter 4232–4240 och nivåkrav lämnas oförändrade; de styrs av aktuellt kursunderlag, inte filmens gamla uppgiftsnummer. PDF används inte som källa för metodval.
+
+Status: riktad rättning i arbetsgren, originalets synliga geometriska metod verifierad. Fullständig ljudgranskning, ny faktisk visuell kontroll och kurs-QA återstår före publicering.

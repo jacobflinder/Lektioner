@@ -3,7 +3,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const url='http://127.0.0.1:8123/ma4/kapitel-4/multiplicera-dividera-med-i/';
 const out='ma4-qa-screenshots/rotation-i-v23';fs.mkdirSync(out,{recursive:true});
-const ids=['intro','proof','plot','trap','practice','nok','exit'];
+const ids=['intro','plot','proof','trap','practice','nok','exit'];
 const cases=[{id:'2,1',a:2,b:1},{id:'-1,2',a:-1,b:2},{id:'-2,-1',a:-2,b:-1}];
 let checks=0,shots=0;
 function ok(c,m){assert.ok(c,m);checks++}
@@ -31,11 +31,17 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  }
  await go(0);
  ok(await page.locator('#startans').isHidden()&&await page.locator('#i-goals').isHidden(),'start answers/goals withheld');
- await go(1);const seq=page.locator('#proof [data-sequence]');
+ await go(2);const seq=page.locator('#proof [data-sequence]');
  ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===0,'proof initially hidden');
  for(let i=1;i<=5;i++){await seq.locator('[data-seq-next]').click();ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===i,'progressive step '+i)}
  await seq.locator('[data-seq-reset]').click();ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===0,'proof reset');
- await go(2);
+ await go(0);await page.locator('#next').click();
+ ok(await page.locator('.slide.active').getAttribute('id')==='plot','original rotation rules and figure precede algebraic justification');
+ ok(await page.locator('#i-source-rules').isVisible(),'rules visible before interactive examples');
+ for(const formula of ['|iz| = |z|','|z/i| = |z|','arg(iz) = arg(z) + π/2','arg(z/i) = arg(z) − π/2']){
+  ok(await page.locator('#i-source-rules math[aria-label="'+formula+'"]').count()===1,'original rule '+formula);
+ }
+ const visible=await page.locator('#i-source-rules .math').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+2));ok(visible,'original rules fully readable');
  const svg=page.locator('#rot-plane');
  const geometry=()=>svg.evaluate(el=>{
    const get=(c)=>[...el.querySelectorAll('g[clip-path] line')].filter(e=>e.getAttribute('stroke')===c).map(e=>[+e.getAttribute('x1'),+e.getAttribute('y1'),+e.getAttribute('x2'),+e.getAttribute('y2')]);
