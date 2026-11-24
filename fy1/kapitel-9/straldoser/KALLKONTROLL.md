@@ -57,3 +57,10 @@
 - **Bild 3 – didaktiskt förtydligat:** `Sv`, `mSv`, `µSv` och `µSv/h` förklaras före figuren, filmens mätvärden och den första doshastighetsfrågan. Film → originalets cellbegrepp → D, H och effektiv dos → uppgift 962 ligger kvar i samma ordning. Den korta enhetsnyckeln introducerar ingen alternativ beräkningsmetod.
 - **Bild 8 – ursprungets frågor återställda:** a) absorberad energi för Erik; b) pröva om hans lägre stråldos kan förklaras av större kroppsmassa. Ålder 17 år, längd 184 cm, 78 kg / 3,5 mGy och systerns pilotyrke, 55 kg / 7,4 mGy finns i uppgiftens givna data. Fem befintliga lösningsled och D=E/m → E=Dm är oförändrade.
 - **Ny spärr:** automatiska tester kontrollerar att glossary kommer före filmen, att a) och b) finns som synliga frågor och att föregående käll- och metodtester fortfarande passerar. Teknik- och bildgranskning måste godkännas för ny SHA före merge/publicering.
+
+## Elevvy utan lärarnotiser (Jacob, 24 november 2026)
+
+- Eleven ska inte behöva öppna en lärarnotis eller ett separat lärarstöd för att förstå uppgift, metod eller aktivitet. All nödvändig information visas i lektionsbilden vid rätt tillfälle.
+- 9.7 har därför avlägsnat både **Lärarnotiser** och **Lärarstöd** från toppmenyn och tar bort de interna lärar- och källnotisernas HTML-element från elevens sida efter att den gemensamma lektionsmotorn initierats. Projektets källkarta och lärarstöd finns kvar separat för intern granskning, inte som en elevfunktion.
+- Delad `fy1/gemensamt/app.js` ändras inte, för att övriga lektionssidor ska behålla fungerande navigering. Ett lektionsspecifikt `elevvy.js` körs efter motorn. Klassrum/Repetition, Helskärm, stegvisa lösningar och quiz ska fungera precis som tidigare.
+- Webbläsar-QA kontrollerar att knappar, lärarnotiser och källmetadata saknas i elevens DOM på samtliga fyra skärmstorlekar. Slutligt godkännande kräver ett lyckat test av den aktuella committen och visuell granskning innan merge till huvudgrenen.
