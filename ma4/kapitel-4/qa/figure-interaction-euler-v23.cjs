@@ -129,6 +129,10 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
    equal(await page.locator('[data-conversion-step]:visible').count(),step,'Stegvis omvandling');
   }
   await screenshot('08-omvandling-efter');
+  for(const id of ['e-source-factor','e-source-tan']){check(await page.locator('#'+id).isHidden(),'Originalets omvandling dold före eget försök');await reveal(id);check(await page.locator('#'+id+' math msup').count()>=1,'Semantisk exponentialform');}
+  check(await page.locator('#e-source-factor math[aria-label="z = 3√2e^(iπ/4)"]').count()===1,'Belopp utbrutet och rätt exponentialform');
+  check(await page.locator('#e-source-tan math[aria-label="z = 2e^(iπ/3)"]').count()===1,'Tangentmetod och rätt exponentialform');
+  await screenshot('08-original-bada-metoder');
   await go(8);
   check(await page.locator('#negative').isHidden(),'Negativt argument har dolt facit');
   check(await page.locator('.slide.active .choice math[aria-label]').count()===3,'Tre semantiska numeriska alternativ');
