@@ -67,7 +67,7 @@ hide();
 function reportHeight(){
  const main=document.querySelector('main');
  const padding=parseFloat(getComputedStyle(document.body).paddingBottom)||0;
- const height=Math.ceil(main.getBoundingClientRect().bottom+padding);
+ const height=Math.ceil(main.getBoundingClientRect().bottom+window.scrollY+padding);
  if(window.parent!==window)window.parent.postMessage({type:'fy1-dose-model-height',height},window.location.origin);
 }
 if('ResizeObserver' in window)new ResizeObserver(reportHeight).observe(document.querySelector('main'));

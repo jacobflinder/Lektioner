@@ -115,7 +115,7 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
       await page.waitForFunction(()=>{
         const iframe=document.querySelector('iframe.dose-animation');
         const content=iframe?.contentDocument?.querySelector('main');
-        return Boolean(iframe&&content&&iframe.clientHeight>=content.getBoundingClientRect().bottom+4);
+        return Boolean(iframe&&content&&iframe.clientHeight>=content.getBoundingClientRect().bottom+iframe.contentWindow.scrollY+4);
       },null,{timeout:5000});
       const visibleFeedback=await frame.locator('#explain').evaluate(el=>el.getBoundingClientRect().bottom);
       const visibleFrame=await page.locator('iframe.dose-animation').evaluate(el=>el.clientHeight);
