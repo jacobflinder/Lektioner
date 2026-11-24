@@ -39,7 +39,7 @@ async function run(){
    const result=await page.goto(target,{waitUntil:'networkidle'});
    equal(result.status(),200,'Sidan laddad '+size.name);
    equal(await page.locator('.slide').count(),14,'Samtliga 14 elevbilder '+size.name);
-   equal(await page.locator('.slide[data-optional="true"]').count(),1,'Endast fördjupningen är frivillig; originalets metod 2 och felanalys ingår i huvudspåret');
+   equal(await page.locator('.slide[data-optional="true"]').count(),2,'Filmens ansats är huvudmetod; PDF:ens extra metodjämförelse och fördjupning är frivilliga');
    for(let n=0;n<14;n++){
     await visit(page,n);
     const dims=await page.evaluate(()=>({actual:document.documentElement.scrollWidth,width:innerWidth}));
