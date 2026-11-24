@@ -13,7 +13,7 @@
 <div id="result" aria-live="polite"></div></div></div></main>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg';let mode='fission',choice=null,completed=false,phase=0;
+const $=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg';let mode=new URLSearchParams(location.search).get('mode')==='fusion'?'fusion':'fission',choice=null,completed=false,phase=0;
 const prediction={fission:['Kedjan stannar','Antalet är ungefär konstant','Antalet ökar'],fusion:['Kärnorna repellerar','Kärnorna kan komma nära nog för fusion']};
 const sets={fission:[['0','Inga vidare klyvningar'],['1','En möjlig fortsättning per klyvning'],['2','Två möjliga fortsättningar per klyvning']],fusion:[['low','Låg relativ rörelseenergi'],['high','Hög relativ rörelseenergi']]};
 function element(type,attrs,text){const n=document.createElementNS(ns,type);for(const [k,v] of Object.entries(attrs||{}))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n}
