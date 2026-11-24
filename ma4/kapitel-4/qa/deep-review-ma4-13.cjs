@@ -95,7 +95,7 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   assert.equal(await page.locator('[data-reveal="factor-goals"]').innerText(),'Dölj dagens mål');
   await workedGap();await shot('01-desktop');
   // 02: algebra och plot ger samma nollställen; markeringar inte i förväg
-  await go(1);assert.equal(await page.locator('#graf-noll circle.mark').count(),0,'Nollställena inte förmarkerade');
+  await go(3);assert.equal(await page.locator('#graf-noll circle.mark').count(),0,'Nollställena inte förmarkerade');
   await page.locator('[data-set-x="2"]').click();await label('#graf-readout','f(2) = 0');
   await page.locator('#graf-x').evaluate(e=>{e.value='-1';e.dispatchEvent(new Event('input',{bubbles:true}))});
   await label('#graf-readout','f(−1) = 0');
@@ -108,7 +108,7 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   await reveal('graf-answer');await label('#graf-answer','x₁ = −1');await label('#graf-answer','x₂ = 2');
   await workedGap();await shot('02-desktop');
   // 03: båda riktningarna i restsats/faktorsats; sekvens med tillbaka/reset
-  await go(2);await sequence('#f-sats',4);
+  await go(1);await sequence('#f-sats',4);
   await label('#f-sats','f(a) = 0 ⇔ r = 0');
   assert.ok((await page.locator('#f-sats').innerText()).includes('om och endast om'));
   await shot('03-desktop');
@@ -116,7 +116,7 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   assert.equal(await page.locator('#f-sats [data-seq-item]:visible').count(),0,'Beviset nollställs');
   for(let i=0;i<4;i++)await page.locator('#f-sats [data-seq-next]').click();
   // 04: quiz och alla tre rest-facit
-  await go(3);
+  await go(2);
   const quiz=page.locator('.slide.active [data-quiz]');
   await quiz.locator('[data-correct="false"]').first().click();
   assert.ok((await quiz.locator('.feedback').innerText()).includes('Sätt divisorn'),'Felvalet kräver att eleven sätter divisorn lika med noll');

@@ -30,7 +30,7 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
   check(await support.locator('.factor-method-card').count()===4,'four lesson-specific reminders');
   for(const eq of ['r = f(a)','f(a) = 0','f(x) = k(x − a)(x − b)(x − c)'])await mathLabel(support,eq);
   const st=await support.innerText();check(!st.includes('p(−1)')&&!st.includes('k = 2')&&!st.includes('4431 ='),'no solution leaked from support');
-  await go(3);check(!await support.evaluate(e=>e.open),'support reset on navigation');
+  await go(2);check(!await support.evaluate(e=>e.open),'support reset on navigation');
   const quiz=page.locator('#f-rest [data-quiz]');
   check(await quiz.locator('button[data-correct] math').count()===3,'math in all answer choices');
   await quiz.locator('button[data-correct="false"]').first().click();
@@ -40,12 +40,12 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
   check(await quiz.locator('.feedback math').count()===3,'correct answer semantic formulae');
   await mathLabel(quiz.locator('.feedback'),'x = −2');await mathLabel(quiz.locator('.feedback'),'f(−2)');
   await page.locator('[data-reveal="rest1"]').click();check(await page.locator('#rest1').isVisible(),'feedback opened');
-  await go(2);await go(3);await invisible('rest1');
+  await go(1);await go(2);await invisible('rest1');
   check((await quiz.locator('.feedback').innerText()).trim()==='','quiz feedback reset');
   check(await quiz.locator('.correct,.wrong').count()===0,'quiz selection reset');
-  await go(1);await page.locator('#graf-show-roots').click();
+  await go(3);await page.locator('#graf-show-roots').click();
   check(await page.locator('#graf-noll circle.mark').count()===2,'roots revealed after choice');
-  await go(2);await go(1);check(await page.locator('#graf-noll circle.mark').count()===0,'graph markers reset on navigation');
+  await go(1);await go(3);check(await page.locator('#graf-noll circle.mark').count()===0,'graph markers reset on navigation');
   check(await page.locator('#graf-x').inputValue()==='0','x slider reset');
   await go(4);await page.locator('#f-graf2 [data-seq-next]').click();
   check(await page.locator('#f-graf2 [data-seq-item]:visible').count()===1,'proof step revealed');
@@ -66,16 +66,25 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
     check(measures.scroll<=measures.width+3,name+' slide '+(i+1)+' no horizontal overflow');
     await shot(name+'-'+(i+1)+'-start');
     if(i===5){await page.locator('[data-reveal="newk"]').click();check(await page.locator('#graf-k').isVisible(),name+' slide 6: inspect ticks only after optional graph has been revealed')}
-    if(w>=1280&&[1,4,5,7].includes(i)){
+    if(w>=1280&&[3,4,5,7].includes(i)){
      const tickHeights=await page.locator('.slide.active .plot text').evaluateAll(es=>es.filter(e=>/^-?\d+$/.test(e.textContent.trim())).map(e=>e.getBoundingClientRect().height));
      check(tickHeights.length>=4&&tickHeights.every(h=>h>=12),name+' slide '+(i+1)+' visible graph tick labels on classroom/projector');
     }
-    if(w===390&&[1,4,5,7].includes(i)){
+    if(w===390&&[3,4,5,7].includes(i)){
      const glyphs=await page.locator('.slide.active .plot text').evaluateAll(es=>es.filter(e=>/^-?\d+$/.test(e.textContent.trim())).map(e=>({height:e.getBoundingClientRect().height,label:e.textContent.trim()})));
      check(glyphs.length>=4&&glyphs.every(x=>x.height>=10),name+' slide '+(i+1)+' plotted tick labels must be visibly legible: '+JSON.stringify(glyphs));
     }
    }
-   await go(3);await quiz.locator('button[data-correct="true"]').click();await page.locator('[data-reveal="rest3"]').click();
+   await go(0);await invisible('factor-source-bridge');
+   await page.locator('[data-reveal="factor-source-bridge"]').click();
+   await mathLabel(page.locator('#factor-source-bridge'),'= 12');await shot(name+'-original-division');
+   await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='f-sats','Sats före exempel i huvudvägen');
+   check(await page.locator('#factor-fundamental').isVisible(),'Algebrans fundamentalsats synlig före tillämpning');
+   await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='f-rest','Rest före grafisk tillämpning');
+   await invisible('factor-quartic-rest');await page.locator('[data-reveal="factor-quartic-rest"]').click();
+   await mathLabel(page.locator('#factor-quartic-rest'),'= −2');check(1**4-2*1**3+3*1**2-4===-2,'Oberoende restberäkning');
+   await shot(name+'-original-rest');
+   await go(2);await quiz.locator('button[data-correct="true"]').click();await page.locator('[data-reveal="rest3"]').click();
    check(await quiz.locator('.feedback math').count()===3,name+' semantic quiz feedback');await shot(name+'-rest-feedback');
    await go(4);for(let n=0;n<4;n++)await page.locator('#f-graf2 [data-seq-next]').click();await shot(name+'-factor-proof');
    await go(5);await page.locator('[data-reveal="newk"]').click();await page.locator('#scale-k').evaluate(e=>{e.value='2';e.dispatchEvent(new Event('input',{bubbles:true}))});
