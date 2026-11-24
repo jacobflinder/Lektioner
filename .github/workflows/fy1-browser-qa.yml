@@ -41,6 +41,7 @@ jobs:
             fy1/kapitel-9/qa/isotoper-och-nuklider-qa.cjs \
             fy1/kapitel-9/qa/karnreaktioner-qa.cjs \
             fy1/kapitel-9/qa/aktivitet-och-halveringstid-qa.cjs \
+            fy1/kapitel-9/qa/straldoser-qa.cjs \
             fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
             fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
             fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
@@ -96,4 +97,11 @@ jobs:
         with:
           name: fy1-9-5-visual-evidence
           path: fy1-qa-screenshots/aktivitet-och-halveringstid/
+          retention-days: 14
+      - name: Upload 9.7 screenshots for final visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy1-9-7-visual-evidence
+          path: fy1-qa-screenshots/straldoser/
           retention-days: 14

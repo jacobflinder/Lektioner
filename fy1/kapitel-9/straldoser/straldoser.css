@@ -1,4 +1,4 @@
-/* Fy N1b 9.6 – mobil och projektion. Källa och internkarta syns endast i lärarstöd. */
+/* Fy N1b 9.7 – mobil och projektion. Källa och internkarta syns endast i lärarstöd. */
 .source-note{display:none}
 .page-title{font-size:clamp(1.75rem,3.4vw,2.7rem)}
 .body-copy{font-size:1rem}
@@ -94,5 +94,7 @@
 .number-card small{display:block;color:#386b52;font-weight:800;font-size:.72rem}
 .dose-animation{display:block;width:100%;min-height:710px;height:730px;border:2px solid #b5d7dc;border-radius:15px;background:#f3f9fa}
 .dose-quote{border-left:4px solid #2f92a1;background:#eef8fa;padding:12px 15px;border-radius:11px}
+.background-bars{display:grid;gap:6px;margin:12px 0}.background-bars>div{display:grid;grid-template-columns:minmax(155px,1fr) minmax(80px,1fr) 3rem;gap:10px;align-items:center;font-size:.86rem}.background-bars meter{width:100%;height:17px;accent-color:#14899a}.background-bars b{text-align:right;color:#18566a}
+@media(max-width:560px){.background-bars>div{grid-template-columns:minmax(100px,1fr) 85px 2.5rem;gap:6px;font-size:.75rem}}
 @media(max-width:850px){.dose-map{grid-template-columns:1fr}.video-preview{grid-template-columns:1fr 100px}.video-preview .radiation-visual{width:100px}.dose-animation{min-height:1150px;height:1160px}}
-@media(max-width:560px){.video-preview{display:block}.video-preview .radiation-visual{display:none}.dose-compare{grid-template-columns:1fr}.number-card .big{font-size:2.25rem}.dose-animation{height:1260px}}
+@media(max-width:560px){.video-preview{display:block}.video-preview .radiation-visual{display:none}.dose-compare{grid-template-columns:1fr}.number-card .big{font-size:2.25rem}.dose-animation{height:1310px}}

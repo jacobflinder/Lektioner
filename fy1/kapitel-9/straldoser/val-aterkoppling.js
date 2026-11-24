@@ -20,9 +20,10 @@ for(const section of document.querySelectorAll('.slide')){
  };
  const lock=()=>{toggle.disabled=true;toggle.textContent='Välj svar först';};
  choices.forEach(b=>b.addEventListener('click',()=>{
+   // Nytt val får aldrig visa förra eller nya facit automatiskt, inte ens i repetitionsläget.
+   if(visible())toggle.click();
    toggle.disabled=false;
-   if(!visible())toggle.textContent='Visa återkoppling';
-   explain();
+   toggle.textContent='Visa återkoppling';
  }));
  toggle.addEventListener('click',explain);
  section.addEventListener('lesson:reset',lock);

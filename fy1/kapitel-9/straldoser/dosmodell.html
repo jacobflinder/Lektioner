@@ -18,11 +18,14 @@ button:disabled{opacity:.45;cursor:not-allowed}.note{font-size:.9rem;color:#3659
 <div class="layout">
 <section class="card"><h2>1 · Välj samma absorberade dos, ändra två faktorer</h2>
 <label for="dose">Absorberad dos D</label><select id="dose"><option value=".5">0,5 mGy</option><option value="1">1,0 mGy</option><option value="3">3,0 mGy</option><option value="5">5,0 mGy</option></select>
-<label for="rad">Strålslag</label><select id="rad"><option value="gamma">Gamma / röntgen · Q = 1</option><option value="beta">Beta · Q = 1</option><option value="alpha">Alfa · Q = 20</option></select>
+<label for="rad">Strålslag</label><select id="rad"><option value="gamma">Gamma / röntgen · Q = 1</option><option value="beta">Beta · Q = 1</option><option value="proton">Proton · Q = 5</option><option value="alpha">Alfa · Q = 20</option></select>
 <label for="organ">Organ som absorberar dosen</label><select id="organ"><option value="breast">Bröst · w = 0,12</option><option value="skin">Hud · w = 0,01</option><option value="marrow">Röd benmärg · w = 0,12</option><option value="liver">Lever · w = 0,04</option></select>
-<h2>2 · Förutsäg först</h2><p>Om samma absorberade dos ges av alfa i stället för gamma, vad händer med ekvivalent dos H?</p>
-<div class="choices" id="answers"><button data-choice="less" aria-pressed="false">Den minskar</button><button data-choice="same" aria-pressed="false">Den är lika</button><button data-choice="more" aria-pressed="false">Den ökar</button></div>
-<button id="reveal" class="primary" disabled>Visa modellens beräkning</button><p id="status" aria-live="polite" class="note">Välj en förutsägelse innan resultatet öppnas.</p>
+<h2>2 · Förutsäg först</h2>
+<p><b>Strålslag:</b> Jämför ditt val med gamma vid samma D. Blir H lika stor eller större?</p>
+<div class="choices" id="answers-h" role="group" aria-label="Förutsäg ekvivalent dos"><button data-choice="same" aria-pressed="false">Lika stor H</button><button data-choice="more" aria-pressed="false">Större H</button></div>
+<p><b>Organ:</b> Jämför ditt val med hud vid samma H. Blir den effektiva dosen lika stor eller större?</p>
+<div class="choices" id="answers-e" role="group" aria-label="Förutsäg effektiv dos"><button data-choice="same" aria-pressed="false">Lika stor ε</button><button data-choice="more" aria-pressed="false">Större ε</button></div>
+<button id="reveal" class="primary" disabled>Visa beräkning och återkoppling</button><p id="status" aria-live="polite" class="note">Välj ett svar i båda frågorna innan återkopplingen visas.</p>
 </section>
 <section class="card"><h2>3 · Jämför och förklara</h2>
 <svg class="diagram" viewBox="0 0 450 250" role="img" aria-label="Schematisk kroppssilhuett där bröst, hud, lever eller röd benmärg markeras beroende på vald vävnad.">
@@ -32,29 +35,31 @@ button:disabled{opacity:.45;cursor:not-allowed}.note{font-size:.9rem;color:#3659
 <text x="305" y="108" fill="#245c70" font-size="18" id="organname">Bröst</text><text x="305" y="128" fill="#547887" font-size="15" id="organfactor">w = 0,12</text>
 </svg>
 <div id="result"><div class="stat"><article><small>Ekvivalent dos, H = D · Q</small><strong id="h">–</strong></article><article><small>Effektiv dos, ε = H · w</small><strong id="eff">–</strong></article></div>
-<div style="margin-top:12px"><b>Ekvivalent dos – relativ skala</b><div class="bar"><div class="fill" id="barh"></div></div><b>Effektiv dos – samma skala</b><div class="bar"><div class="fill" id="bare"></div></div></div>
+<div style="margin-top:12px"><b>Ekvivalent dos – referens 100 %</b><div class="bar"><div class="fill" id="barh"></div></div><b>Effektiv dos – andel av H som viktas för det valda organet</b><div class="bar"><div class="fill" id="bare"></div></div></div>
 <div id="explain" class="feedback"></div></div>
 <p class="note" id="blind">Storheterna och formlerna är kända. Resultaten visas när du har förutsagt och valt återkoppling.</p>
 </section></div>
 </main><script>
 (()=>{'use strict';
 const $=x=>document.getElementById(x);
-let choice=null;
+let choices={h:null,e:null};
 const organs={breast:{text:'Bröst',w:.12},skin:{text:'Hud',w:.01},marrow:{text:'Röd benmärg',w:.12},liver:{text:'Lever',w:.04}};
-const q={gamma:1,beta:1,alpha:20};
+const q={gamma:1,beta:1,proton:5,alpha:20};
 const fmt=x=>x.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:3});
-function hide(){choice=null;$('result').style.display='none';$('blind').style.display='block';$('reveal').disabled=true;$('status').textContent='Välj en förutsägelse innan resultatet öppnas.';document.querySelectorAll('#answers button').forEach(b=>b.setAttribute('aria-pressed','false'));const id=$('organ').value;for(const key of Object.keys(organs))$('spot-'+key).setAttribute('opacity',key===id?'0.85':'0');$('organname').textContent=organs[id].text;$('organfactor').textContent='w = '+fmt(organs[id].w);}
+function hide(){choices={h:null,e:null};$('result').style.display='none';$('blind').style.display='block';$('reveal').disabled=true;$('status').textContent='Välj ett svar i båda frågorna innan återkopplingen visas.';document.querySelectorAll('.choices button').forEach(b=>b.setAttribute('aria-pressed','false'));const id=$('organ').value;for(const key of Object.keys(organs))$('spot-'+key).setAttribute('opacity',key===id?'0.85':'0');$('organname').textContent=organs[id].text;$('organfactor').textContent='w = '+fmt(organs[id].w);}
 for(const k of ['dose','rad','organ'])$(k).onchange=hide;
-document.querySelectorAll('#answers button').forEach(b=>b.onclick=()=>{choice=b.dataset.choice;document.querySelectorAll('#answers button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('reveal').disabled=false;$('status').textContent='Du har valt. Visa nu beräkningen och förklara utfallet.'});
+for(const kind of ['h','e'])document.querySelectorAll('#answers-'+kind+' button').forEach(b=>b.onclick=()=>{choices[kind]=b.dataset.choice;document.querySelectorAll('#answers-'+kind+' button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('result').style.display='none';$('blind').style.display='block';$('reveal').disabled=!(choices.h&&choices.e);$('status').textContent=choices.h&&choices.e?'Du har valt två svar. Visa beräkningen och motivera båda.':'Välj även ett svar i den andra frågan.'});
 $('reveal').onclick=()=>{
- if(!choice)return;
+ if(!choices.h||!choices.e)return;
  const D=Number($('dose').value),radiation=$('rad').value,organ=organs[$('organ').value],H=D*q[radiation],eff=H*organ.w;
  $('result').style.display='block';$('blind').style.display='none';
  $('h').textContent=fmt(H)+' mSv';$('eff').textContent=fmt(eff)+' mSv';
- $('barh').style.width=Math.min(100,H/100*100)+'%';$('bare').style.width=Math.min(100,eff/100*100)+'%';
- const yes=choice==='more';
- $('explain').textContent=(yes?'Rätt: ':'Prova igen: ')+'Vid samma absorberade dos är kvalitetsfaktorn för alfa 20 och för gamma 1, så den ekvivalenta dosen blir 20 gånger större för alfa. För ditt val blir H = '+fmt(D)+' mGy · '+q[radiation]+' = '+fmt(H)+' mSv. Eftersom vävnadsviktfaktorn är '+fmt(organ.w)+' blir ε = '+fmt(H)+' · '+fmt(organ.w)+' = '+fmt(eff)+' mSv. Detta gäller en dos som redan absorberats i den angivna vävnaden; det säger inte att alfa lätt passerar huden.';
- $('status').textContent=yes?'Din förutsägelse stämmer med sambandet H = D · Q.':'Din förutsägelse stämde inte. Jämför kvalitetsfaktorerna och pröva ett nytt val.';
+ $('barh').style.width='100%';$('bare').style.width=organ.w*100+'%';
+ const radCorrect=q[radiation]>1?'more':'same',organCorrect=organ.w>.01?'more':'same';
+ const radMessage=(choices.h===radCorrect?'Rätt. ':'Inte riktigt. ')+(q[radiation]>1?'För '+radiation+' är Q = '+q[radiation]+', vilket ger större H än gamma med Q = 1.':'Det valda strålslaget har Q = 1, samma som gamma. Därför blir H lika stor.');
+ const organMessage=(choices.e===organCorrect?'Rätt. ':'Inte riktigt. ')+(organ.w>.01?organ.text+' har w = '+fmt(organ.w)+', större än hudens 0,01. Därför blir organets bidrag till ε större.':'Hud har w = 0,01, samma som referensorganet hud. Därför är organets bidrag till ε lika stort.');
+ $('explain').textContent='Svar 1 – H: '+radMessage+' H = '+fmt(D)+' mGy · '+q[radiation]+' = '+fmt(H)+' mSv. Svar 2 – effektiv dos: '+organMessage+' ε = '+fmt(H)+' mSv · '+fmt(organ.w)+' = '+fmt(eff)+' mSv. Det är en dos som redan absorberats i vävnaden – modellen beskriver inte genomträngningsförmåga.';
+ $('status').textContent='Du har fått återkoppling på båda valen. Byt strålslag eller organ och förutsäg på nytt.';
  };
 hide();
 })();</script></body></html>
