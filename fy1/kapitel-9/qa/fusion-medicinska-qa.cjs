@@ -19,6 +19,12 @@ for(const [s,x] of [['9.8',a],['9.9',b]]){
  assert.ok(fs.readFileSync(path.join(x.folder,'lektion.css'),'utf8').includes('booklist'),s+' mobile book list');
 }
 assert.equal(a.pages[7].steps.length,6,'fusion mass defect six complete ordered steps');
+assert.deepEqual([...new Set(a.pages.filter(p=>p.quiz).map(p=>p.quiz.correct))].sort(),[0,1,2],
+ 'fission correct answers must use all three choice positions');
+assert.equal((a.pages[9].body.match(/class="goal-feedback"/g)||[]).length,3,'9.8 three delayed goal-specific feedback panels');
+assert.equal((b.pages[10].body.match(/class="goal-feedback"/g)||[]).length,3,'9.9 three delayed goal-specific feedback panels');
+assert.ok(b.pages[7].body.includes('dosmodell.html'),'radiotherapy must use live dose curves');
+assert.ok(a.pages[3].body.includes('Jämför två försök'),'fission model has two-round prediction prompt');
 assert.ok(a.pages[2].body.includes('Mindmap – fission') && a.pages[5].body.includes('Mindmap efter filmen'),'both original nuclear mindmap activities retained');
 assert.ok(b.pages[8].body.includes('Gemensam mindmap'),'original medical mindmap activity retained');
 assert.ok(b.pages[7].body.includes('strålbehandling')&&b.pages[7].body.includes('Protonstrålning'),'book 9.9 cancer treatment has own taught slide');
@@ -42,6 +48,12 @@ for(const [slug,file] of [['fusion-och-fission','karnmodell.html'],['medicinska-
  const html=fs.readFileSync(path.join(base,slug,file),'utf8');
  const code=html.match(/<script>([\s\S]*?)<\/script>/)?.[1];assert.ok(code,'model JS exists '+slug);new vm.Script(code);
  assert.ok(html.includes('aria-live="polite"'),'model has feedback '+slug);
+}
+{
+ const html=fs.readFileSync(path.join(b.folder,'dosmodell.html'),'utf8');
+ const code=html.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+ assert.ok(code,'dose model JS exists');new vm.Script(code);
+ assert.ok(html.includes('id="feedback"')&&html.includes('aria-live="polite"'));
 }
 console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 verified numbered tasks linked to exact goals and theory, complete visual models.');
 (async()=>{
@@ -72,7 +84,30 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 verified nu
        assert.deepEqual(overflowing,[],'mass-defect formulas must be fully visible on '+width+'px mobile/projector');
        await page.screenshot({path:path.join(dir,slug+'-'+width+'-massdefect.png'),fullPage:true});
       }
-      if((slug==='medicinska-metoder'&&idx===7))await page.screenshot({path:path.join(dir,slug+'-'+width+'-radiotherapy.png'),fullPage:true});
+      if(slug==='medicinska-metoder'&&idx===7){
+       const dose=page.frameLocator('.slide.active iframe.dose-demo');
+       await dose.locator('#run').waitFor();
+       assert.ok(await dose.locator('#run').isDisabled(),'dose feedback gated before choice');
+       assert.ok(await dose.locator('#zone').isHidden(),'no target marker before tumor depth selected');
+       for(const scenario of ['shallow','deep']){
+        await dose.locator('#cases button[data-case="'+scenario+'"]').click();
+        assert.ok(await dose.locator('#zone').isVisible(),'tumor marker must be visible for '+scenario);
+        assert.equal(await dose.locator('#target-line').getAttribute('d'),scenario==='shallow'?'M97 35 V199':'M393 35 V199','tumor marker must move with depth');
+        if(scenario==='shallow')assert.ok(await dose.locator('#run').isDisabled(),'depth alone does not reveal answer');
+        for(const method of ['electron','gamma','proton']){
+         await dose.locator('#methods button[data-method="'+method+'"]').click();
+         assert.ok(await dose.locator('#feedback').isHidden(),'no dose feedback before reveal '+scenario+'/'+method);
+         await dose.locator('#run').click();
+         assert.ok(await dose.locator('#feedback').isVisible(),'dose feedback '+scenario+'/'+method);
+         assert.ok((await dose.locator('#feedback').innerText()).length>60,'specific dose explanation '+scenario+'/'+method);
+        }
+       }
+       await page.waitForFunction(()=>{
+        const f=document.querySelector('.slide.active iframe');
+        return !!f?.contentDocument?.body&&f.getBoundingClientRect().height>=f.contentDocument.body.getBoundingClientRect().height+15;
+       },{},{timeout:10000});
+       await page.screenshot({path:path.join(dir,slug+'-'+width+'-radiotherapy.png'),fullPage:true});
+      }
       if((slug==='fusion-och-fission'&&(idx===3||idx===6))||(slug==='medicinska-metoder'&&idx===8)){
        const frame=page.frameLocator('.slide.active iframe');
        await frame.locator('#run').waitFor();
@@ -109,6 +144,14 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 verified nu
       }
       const metrics=await page.evaluate(()=>({w:document.documentElement.scrollWidth,innerWidth:window.innerWidth}));
       assert.ok(metrics.w<=metrics.innerWidth+3,slug+' '+width+' slide '+(idx+1)+' overflow '+JSON.stringify(metrics));
+      if(idx===x.pages.length-1){
+       const panels=page.locator('.slide.active details.goal-feedback');
+       assert.equal(await panels.count(),3,'three goals have self-assessment feedback');
+       assert.equal(await panels.first().getAttribute('open'),null,'feedback initially hidden');
+       await panels.first().locator('summary').click();
+       assert.ok(await panels.first().getAttribute('open')!==null,'feedback visible only after pupil reveal');
+       await page.screenshot({path:path.join(dir,slug+'-'+width+'-goal-feedback.png'),fullPage:true});
+      }
     }
     await page.close();
    }

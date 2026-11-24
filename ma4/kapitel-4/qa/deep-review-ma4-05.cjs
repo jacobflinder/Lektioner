@@ -127,10 +127,10 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   }
   await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
   for(const exact of ['r = √(a² + b²)','= √((−3)² + 3²)','= √(9 + 9)','= √18','= √(9 · 2) = 3√2',
-   'tan α = |b|/|a|','= 3/3 = 1','α = 45°','v = 180° − α','= 180° − 45°','= 135°',
+   'tan v = b/a','= 3/(−3) = −1','v = arctan(−1) + n · 180°','v = −45° + n · 180°','n = 1','v = −45° + 1 · 180°','= 135°',
    'r = 3√2','v = 135°','cos 135° = −√2/2','sin 135° = √2/2',
    'z = r(cos v + i sin v)','= 3√2(−√2/2 + i√2/2)','= −(3 · 2)/2 + ((3 · 2)/2)i','= −3 + 3i']){
-   await one('#procedure math[aria-label="'+exact+'"]','03 fullständigt steg: '+exact);
+   await one('#procedure [data-sequence] math[aria-label="'+exact+'"]','03 fullständigt steg: '+exact);
   }
   assert.ok((await seq.locator('math mfrac').count())>=4,'03 exakta MathML-bråk');
   await seq.locator('[data-seq-back]').click();
@@ -173,8 +173,8 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   assert.ok(await page.locator('#independent-ans').isHidden(),'06 dolda slutsvar');
   await page.locator('[data-reveal="independent-ans"]').click();
   assert.equal(await page.locator('#independent-ans .ma4-step').count(),5,'06 fem självkontrollsteg');
-  for(const e of ['a = −2','b = −2','= √(4 + 4)','= √8','= 2√2','tan α = |b|/|a|',
-   'α = 45°','v = 180° + α','= 225°','z = 2√2(cos 225° + i sin 225°)','= −2 − 2i']){
+  for(const e of ['a = −2','b = −2','= √(4 + 4)','= √8','= 2√2','tan v = b/a',
+   '= (−2)/(−2) = 1','v = arctan(1) + n · 180°','v = 45° + n · 180°','n = 1','v = 45° + 1 · 180°','= 225°','z = 2√2(cos 225° + i sin 225°)','= −2 − 2i']){
     await one('#independent-ans math[aria-label="'+e+'"]','06 fullständigt kontrollsteg '+e);
   }
   assert.equal(await page.locator('#independent-ans .ma4-final math').count(),2,'06 r och v som egna ekvationer');
@@ -197,7 +197,7 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   assert.equal(await page.locator('#exit-ans .ma4-step').count(),7,'09 sju framåtriktade kontrollsteg');
   assert.equal(await page.locator('#exit-ans .ma4-final').count(),2,'09 separata slutsvar i två riktningar');
   for(const e of ['r = √(a² + b²)','= √((−√3)² + 1²)','= √(3 + 1)','= √4 = 2',
-   'tan α = |b|/|a|','= 1/√3','α = 30°','v = 180° − α','= 150°',
+   'tan v = b/a','= 1/(−√3)','= −1/√3','v = arctan(−1/√3) + n · 180°','v = −30° + n · 180°','n = 1','v = −30° + 1 · 180°','= 150°',
    'w = 2(cos 240° + i sin 240°)','cos 240° = −1/2','sin 240° = −√3/2',
    'w = 2(−1/2 − i√3/2)','= −1 − √3i','|w| = √((−1)² + (−√3)²)','= √(1 + 3)','= 2']){
     await one('#exit-ans math[aria-label="'+e+'"]','09 kontrollberäkning '+e);
@@ -225,14 +225,16 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
     for(let j=0;j<3;j++)await page.locator('#polar-next').click();
     await spaced('#polar-reading',2);
     await spaced('#polar-rule .math-givens',4);
-    await spaced('#polar-live',2);
+    assert.ok(await page.locator('#polar-live').isHidden(),'02 slutläget döljer duplicerade mellanvärden');
+    assert.ok(await page.locator('#polar-discovery').isVisible(),'02 slutlägets polära återkoppling syns');
    }
    if(i===2){
     for(let j=0;j<5;j++)await page.locator('#procedure [data-seq-next]').click();
     await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
     await spaced('#procedure [data-seq-item]:nth-child(5) .math-givens',4);
     const modelLineSizes=await page.locator('#procedure [data-seq-item]:nth-child(5) .math-working > p.math').evaluateAll(xs=>xs.map(x=>({shown:x.clientWidth,needed:x.scrollWidth,formula:x.querySelector('math')?.getAttribute('aria-label')})));
-    assert.equal(modelLineSizes.length,4,'03 fyra algebraiska led');
+    assert.equal(modelLineSizes.length,5,'03 fem algebraiska led inklusive insättning i polär form');
+    assert.ok(modelLineSizes.some(x=>x.formula==='= 3√2(cos 135° + i sin 135°)'),'03 polär insättning synlig som eget led');
     assert.ok(modelLineSizes.every(x=>x.needed<=x.shown+2),'03 ALLA rader i den polära återkontrollen ska vara fullt synliga på 390px: '+JSON.stringify(modelLineSizes));
    }
    if(i===4)await spaced('#traps .math-givens',2);

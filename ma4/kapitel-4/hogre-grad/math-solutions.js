@@ -24,8 +24,8 @@ insertSolutions({
   step('Slutsats',[],'Polynomet har grad 4, men bara två olika rötter. Roten 3 är tredubbel och −1 enkel.')
  ),
  'h-cubictry':solution(
-  step('1 · Gruppera två par',['z³ + z² + 4z + 4 = 0','z²(z + 1) + 4(z + 1) = 0']),
-  step('2 · Bryt ut gemensam faktor',['(z + 1)(z² + 4) = 0']),
+  step('1 · Pröva den givna kandidaten',['p(−1) = (−1)³ + (−1)² + 4(−1) + 4','= −1 + 1 − 4 + 4 = 0'],'Faktorsatsen ger faktorn z + 1.'),
+  step('2 · Dividera med liggande stolen',['z³/z = z²','q(z) = z² + 4','r = 0','(z + 1)(z² + 4) = 0']),
   step('3 · Lös de två faktorerna',['z + 1 = 0','z² + 4 = 0','z² = −4']),
   answer(['z₁ = −1','z₂ = 2i','z₃ = −2i']),
   step('Kontrollera',[],'Tre olika enkla rötter stämmer med polynomets grad 3. Utveckling av faktorerna ger ursprungspolynomet.')
@@ -33,7 +33,8 @@ insertSolutions({
  'h-quartictry':solution(
   step('1 · Använd konjugatregeln',['z = 2i','z = −2i']),
   step('2 · Bygg en faktor med reella koefficienter',['(z − 2i)(z + 2i) = z² + 4']),
-  step('3 · Sänk graden och kontrollera faktoriseringen',[
+  step('3 · Dividera med liggande stolen och kontrollera faktoriseringen',[
+    'z⁴/z² = z²','q(z) = z² + 1','r = 0',
     'z⁴ + 5z² + 4',
     '= (z² + 4)(z² + 1)',
     '= z⁴ + z² + 4z² + 4',
@@ -53,12 +54,8 @@ insertSolutions({
   step('Slutsats',[],'Minst en rot till ett reellt polynom av udda grad måste vara reell.')
  ),
  'h-exit-1':solution(
-  step('1 · Gruppera polynomets termer',[
-    'f(z) = z³ + 2z² + 9z + 18',
-    '= (z³ + 2z²) + (9z + 18)',
-    '= z²(z + 2) + 9(z + 2)'
-  ]),
-  step('2 · Bryt ut en gemensam faktor',['f(z) = (z + 2)(z² + 9)']),
+  step('1 · Använd faktorsatsen',['f(−2) = −8 + 8 − 18 + 18 = 0'],'Roten −2 ger faktorn z + 2.'),
+  step('2 · Dividera med liggande stolen',['z³/z = z²','q(z) = z² + 9','r = 0','f(z) = (z + 2)(z² + 9)']),
   step('3 · Använd nollproduktmetoden',['z + 2 = 0','z = −2','z² + 9 = 0','z² = −9','z = ±3i']),
   answer(['z₁ = −2','z₂ = 3i','z₃ = −3i']),
   step('Kontrollera antalet',[],'Tre olika enkla rötter är precis det antal som graden kräver.')
@@ -78,12 +75,12 @@ insertSolutions({
   step('Multiplicitet',[],'Roten 1 har multiplicitet 2, roten −3 har multiplicitet 1. Tillsammans räknas tre rötter.')
  ),
  'h-homeans':solution(
-  step('1 · Pröva given rot och gruppera',['p(3) = 3³ − 3·3² + 4·3 − 12','= 27 − 27 + 12 − 12','= 0']),
-  step('2 · Sänk graden genom faktorisering',['z³ − 3z² + 4z − 12','= z²(z − 3) + 4(z − 3)','= (z − 3)(z² + 4)']),
+  step('1 · Pröva given rot med faktorsatsen',['p(3) = 3³ − 3·3² + 4·3 − 12','= 27 − 27 + 12 − 12','= 0']),
+  step('2 · Dividera med liggande stolen',['q(z) = z² + 4','r = 0','z³ − 3z² + 4z − 12','= (z − 3)(z² + 4)']),
   step('3 · Lös de båda faktorerna',['z − 3 = 0','z² + 4 = 0','z² = −4']),
   answer(['z = 3','z = 2i','z = −2i']),
   step('4 · Använd konjugatet till den givna roten',['z = i','z = −i','(z − i)(z + i) = z² + 1']),
-  step('5 · Identifiera och kontrollera nästa faktor',['z⁴ + 10z² + 9','= (z² + 1)(z² + 9)','= z⁴ + 9z² + z² + 9','= z⁴ + 10z² + 9']),
+  step('5 · Dividera med den reella andragradsfaktorn',['q(z) = z² + 9','r = 0','z⁴ + 10z² + 9','= (z² + 1)(z² + 9)','= z⁴ + 9z² + z² + 9','= z⁴ + 10z² + 9']),
   step('6 · Lös resterande faktorn',['z² + 1 = 0','z² + 9 = 0']),
   answer(['z = ±i','z = ±3i']),
   step('Kontrollera',[],'Första polynomet har tre enkla rötter och det andra fyra enkla rötter. Antalen stämmer med respektive grad.')

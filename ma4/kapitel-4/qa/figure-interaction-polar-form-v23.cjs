@@ -105,6 +105,14 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
     const label=(await page.locator('#polar-reading math').evaluateAll(es=>es.map(el=>el.getAttribute('aria-label')))).join(' ');
     ok(label.includes('r = ')&&label.includes('v = '),'two labeled polar coordinates '+p.id);
   }
+  if(w>=1050){
+   await page.evaluate(()=>scrollTo(0,0));
+   const fit=await page.locator('#representation').evaluate(el=>{
+    const nodes=[el.querySelector('#polar-plane'),...el.querySelectorAll('#polar-discovery math')].filter(e=>e&&e.getBoundingClientRect().height>0);
+    return {top:Math.min(...nodes.map(e=>e.getBoundingClientRect().top)),bottom:Math.max(...nodes.map(e=>e.getBoundingClientRect().bottom)),height:innerHeight,overflow:[...el.querySelectorAll('.math')].filter(e=>e.clientWidth>0&&e.scrollWidth>e.clientWidth+2).map(e=>e.textContent)};
+   });
+   ok(fit.top>=0&&fit.bottom<=fit.height&&fit.overflow.length===0,'polar figure and result visible together '+JSON.stringify(fit));
+  }
   await page.screenshot({path:path.join(out,'polar-revealed-'+p.id.replaceAll('-','m').replaceAll(',','_')+'-'+w+'.png'),fullPage:true});shots++;
   await page.locator('#polar-back').click();
   ok(await page.locator('#polar-discovery').isHidden(),'back conceals result '+p.id);
@@ -130,6 +138,8 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  ok(await recap.locator('.polar-method-card').count()===4,'four targeted method cards');
  const body=await recap.innerText();
  ok(body.includes('Pythagoras')&&body.includes('Kvadrant')===false&&body.includes('kvadrantkontroll'),'targeted coordinate conversion not main quadrant quiz');
+ ok(await recap.locator('math[aria-label="tan v = b/a"]').count()===1,'original signed tangent rule present in support');
+ ok(await recap.locator('math[aria-label="v = arctan(b/a) + n · 180°"]').count()===1,'original integer-angle rule present in support');
  ok(body.includes('argumentet')&&body.includes('inte definierat'),'zero and direction described');
  ok(!body.includes('225°')&&!body.includes('150°')&&!body.includes('2√2')&&!body.includes('−2 − 2i'),'method cards do not leak exercise answers');
  ok(await recap.locator('math').count()>=6,'semantic rendered equations in support');

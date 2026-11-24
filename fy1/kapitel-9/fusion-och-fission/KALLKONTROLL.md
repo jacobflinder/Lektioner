@@ -68,3 +68,10 @@ I transkriptionen 231002 anges att kommersiella kraftreaktorer skulle kräva cir
 - Nedladdade riktiga webbläsarskärmbilder granskade visuellt, särskilt mobilens massdefekt, fissionskedja och fusion samt målbild på projektor. Sammanhängande lösning, enheter, knappar, diagram och resultat kan läsas utan avklippning.
 - Originalets fissions- och fusionsinnehåll, båda mindmap-aktiviteterna och lärarens valda massdefektsmetod har stämts av i tabellen ovan. De 14 uppgifterna **974–987** är var för sig kopplade till mål och bokställe. Ingen ouppklarad metodkonflikt finns.
 - **Öppet redovisad fysikalisk faktakorrigering:** originaltranskriptionens uppgift om cirka 90 % U-235 för kommersiell kraftreaktor återges inte, eftersom den är felaktig. Den ändrar ingen beräkningsmetod. Riktig jämförelse mellan kedjereaktionerna finns kvar.
+
+## Interaktiv uppföljning efter lärarens återkoppling 24 november
+
+- Alla fyra huvudfrågorna har fått mer rimliga, fysikaliskt diagnostiska felalternativ, varierad plats för korrekt svar och förklaring **för vart och ett** av alternativen. Elevernas första val måste fortfarande komma före återkopplingen.
+- Den ursprungliga fissionsmodellen med 0, 1 eller 2 fortsättande grenar är bevarad men kopplas tydligare till **styrstavarnas neutronabsorption**. Eleven ska göra två förutsägelser med olika lägen och jämföra antal klyvningar medan energin per fission inte ändras. Den är fortsatt uttryckligen en principmodell, inte ett påstående om exakta neutronantal.
+- Den ursprungliga D+D-beräkningen i sex matematiska led är oförändrad. Avslutningsbildens tre mål har nu varsitt dolt bedömningsstöd som eleven själv öppnar **efter att ha skrivit sitt svar**, utan att någon elevtext sparas.
+- Ingen ny metod, nytt specialfall, Socrative eller bokuppgift har lagts till. Befintlig tidsfördelning, mindmaps och lärarens genomgångsordning bevaras. Förfiningarna testas i `qa/fusion-medicinska-qa.cjs` för samtliga skärmstorlekar.

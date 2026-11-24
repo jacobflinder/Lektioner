@@ -15,13 +15,31 @@
 .v23-k-item .math{display:block;max-width:100%;overflow-x:auto;margin:0 0 16px}
 .v23-k-item p:last-child{margin-bottom:0}
 @media(max-width:880px){.k-mod-response{grid-template-columns:minmax(0,1fr)}}
+</style><style>
+#k-conjugate:has(#k-source-root-answer:not(.hidden))>.two{display:none}
+#k-source-root-answer .ma4-worked{min-width:0}
+@media(min-width:1050px){
+ main:has(#k-conjugate.active #k-source-root-answer:not(.hidden)){max-width:1500px}
+ main:has(#k-conjugate.active #k-source-root-answer:not(.hidden)) .repetition{display:none}
+ main:has(#k-conjugate.active #k-source-root-answer:not(.hidden)) .stage{padding:16px 24px}
+ #k-conjugate h2{margin:6px 0 10px}
+ #k-source-root-pair{margin:8px 0;padding:12px 16px}
+ #k-source-root-pair>.task{margin:6px 0;padding:8px 12px} #k-source-root-pair:has(#k-source-root-answer:not(.hidden))>.task{display:none} main:has(#k-conjugate.active #k-source-root-answer:not(.hidden)){margin-top:6px}
+ #k-source-root-answer{margin:8px 0;padding:8px}
+ #k-source-root-answer .ma4-worked{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:start}
+ #k-source-root-answer .ma4-worked>:nth-child(1){grid-column:1;grid-row:1}
+ #k-source-root-answer .ma4-worked>:nth-child(2){grid-column:1;grid-row:2/span 2}
+ #k-source-root-answer .ma4-worked>:nth-child(3){grid-column:2;grid-row:1}
+ #k-source-root-answer .ma4-worked>:nth-child(4){grid-column:2;grid-row:2}
+ #k-source-root-answer .ma4-step,#k-source-root-answer .ma4-final{margin:0;padding:8px 12px}
+}
 </style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.1</strong><div class="head-actions"><button class="secondary" id="teacher-toggle" aria-expanded="false" type="button">Visa lärarstöd</button><button class="secondary" id="mode" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Styr takten efter elevernas resonemang. Låt dem skriva för hand, diskutera, och först därefter visa nästa steg.</small></div><div class="repetition"><strong>Repetitionsläge:</strong> försök på papper eller i egna anteckningar före återkopplingen. Alla beräkningar görs utan insamling av elevsvar.</div><div class="stage" id="stage"><section class="slide active" id="intro" data-teacher="Låt eleverna först bestämma punkt och avstånd utan nya formler. Använd Pythagoras som relevant förkunskap. Visa målen efter startfrågan.">
 <div class="eyebrow">01 · Aktivera förkunskaper</div><h2>Konjugat och absolutbelopp</h2><p class="lead">4.1 Aritmetik med komplexa tal · Beräkningar, konjugat och absolutbelopp</p>
 <div class="task"><strong>Enskilt 45 sekunder → par 30 sekunder</strong><p class="math math-big">z = 3 − 4i</p><p>Vilken punkt representerar talet i det komplexa talplanet? Vad är avståndet från origo till punkten?</p></div>
 <button type="button" class="reveal" data-reveal="k-start">Visa beräkningen</button><div class="answer hidden" id="k-start"><p class="math">P = (3, −4)</p><p class="math">d = √(3² + (−4)²) = √25 = 5</p><p>Avstånd kan inte vara negativt.</p></div>
 <button type="button" class="reveal" data-reveal="k-goals">Visa målen efter startfrågan</button><div class="panel hidden" id="k-goals"><strong>Efter lektionen ska du kunna</strong><p>Bestämma konjugatet till <span class="math">a + bi</span>, beräkna ett komplext tals absolutbelopp och förklara med algebra varför <span class="math">z z̄ = |z|²</span>.</p></div></section>
 <section class="slide" id="k-conjugate" data-teacher="Låt eleverna först rita z=2−3i och markera speglingen. Visa sedan konjugatet. Efter varje ändring av b döljs speglingen igen, så att nästa fall kan förutsägas. Visa särskilt b=0.">
-<div class="eyebrow">02 · Konjugering som spegling</div><h2>Vad händer med imaginärdelen?</h2>
+<div class="eyebrow">02 · Konjugering som spegling</div><h2>Vad händer med imaginärdelen?</h2><div id="k-source-root-pair" class="panel"><h3>Varför dyker konjugat upp när vi löser ekvationer?</h3><p class="math">z² − 6z + 25 = 0</p><div class="task"><strong>Återkalla pq-formeln</strong>Beräkna båda rötterna och rita dem i samma talplan. Vilken koordinat är gemensam?</div><button type="button" class="reveal secondary" data-reveal="k-source-root-answer">Visa hela lösningen</button><div class="answer hidden" id="k-source-root-answer"></div><p class="muted">Stäng lösningen för att fortsätta med den interaktiva speglingen.</p></div>
 <div class="two"><div class="plot-box"><svg class="plot" id="k-plane" viewBox="0 0 680 430" role="img" aria-label="Komplext talplan med z och, efter elevens val, dess konjugat speglat i realaxeln"></svg><p class="muted">Samma skala på real- och imaginäraxeln. Pilarna går från origo till respektive punkt.</p></div>
 <div><div class="task"><strong>Förutsäg → rita → visa</strong>Starta med <span class="math">z = 2 − 3i</span>. Rita först punkten för <span class="math">z̄</span> själv. Vilken koordinat ändras vid spegling i realaxeln?</div>
 <button type="button" class="reveal" data-reveal="k-rule">Visa regeln efter förutsägelsen</button><div class="answer hidden" id="k-rule"><p class="math">a, b ∈ ℝ</p><div class="math-givens" role="group" aria-label="Separata matematiska uttryck"><p class="math math-big">z = a + bi</p><p class="math math-big">⇒ z̄ = a − bi</p></div><p class="math">(a; b) ⇒ (a; −b)</p><p>Realdelen <strong>a är oförändrad</strong>. Imaginärdelen <strong>b byter tecken</strong>. Om b = 0 är talet reellt och sitt eget konjugat.</p></div>

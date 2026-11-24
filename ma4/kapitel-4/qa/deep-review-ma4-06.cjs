@@ -7,7 +7,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const URL='http://127.0.0.1:8123/ma4/kapitel-4/multiplicera-dividera-med-i/';
-const order=['intro','proof','plot','trap','practice','nok','exit'];
+const order=['intro','plot','proof','trap','practice','nok','exit'];
 const z=(a,b)=>[a,b],multiply=(x,y)=>z(x[0]*y[0]-x[1]*y[1],x[0]*y[1]+x[1]*y[0]);
 const norm2=x=>x[0]**2+x[1]**2;
 const division=(x,y)=>{
@@ -70,7 +70,7 @@ const formatted=(a,b)=>{
   await pic('01-start-desktop');
   console.log('PASS bild 01: stegvis startfacit, Pythagoras och mål fördröjda');
   // 02: allmän matematisk härledning, samtliga insättningar, 5 elevsteg.
-  await active(1);await spacing('#proof .math-givens',2);
+  await active(2);await spacing('#proof .math-givens',2);
   const process=page.locator('#proof [data-sequence]');
   assert.equal(await process.locator('[data-seq-item]:not(.hidden)').count(),0,'02 all härledning dolt');
   for(let step=1;step<=5;step++){
@@ -95,7 +95,7 @@ const formatted=(a,b)=>{
   await pic('02-proof-desktop');
   console.log('PASS bild 02: generell rotation och division med i, fem kompletta steg');
   // 03: interaktivt talplan, tre starttal, dolda facit och hel rotationsgeometri.
-  await active(2);
+  await active(1);
   assert.ok(await page.locator('#rot-answers').isHidden(),'03 dolda facit innan elevprognos');
   for(const c of testCases){
    await page.locator('[data-rot="'+c.id+'"]').click();
@@ -179,8 +179,8 @@ const formatted=(a,b)=>{
   await page.setViewportSize({width:390,height:844});
   for(let i=0;i<7;i++){
    await active(i);
-   if(i===1)await spacing('#proof .math-givens',2);
-   if(i===2){
+   if(i===2)await spacing('#proof .math-givens',2);
+   if(i===1){
     await page.locator('[data-rot="2,1"]').click();
     for(let k=0;k<3;k++)await page.locator('#rot-next').click();
     await accessible('#rot-answers .math-working .math');

@@ -141,6 +141,25 @@ for(const p of [[1,Math.sqrt(3)],[-2,0],[1,-Math.sqrt(3)]]){close(power(p,3)[0],
    await coordinate('#roots-solution-selfans g line[stroke="#0a8176"]',[0,-2]);
    await shot('07-sjalv-efter');
 
+   for(const id of ['fifth-polar','fifth-equations','fifth-solutions','fifth-figure']){
+    ok(await page.locator('#'+id).isHidden(),'Originalets femtegradsexempel dolt före eget försök');
+    await page.locator('[data-reveal="'+id+'"]').click();
+   }
+   const fifthMath=await page.locator('#fifth-polar math, #fifth-equations math, #fifth-solutions math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')).filter(Boolean));
+   for(const step of ['= 243(cos π + i sin π)','5v = π + k · 2π','v = (π + k · 2π)/5','= π/5 + k · 2π/5','v = π/5 + 4 · 2π/5','= 9π/5','z₅ = 3(cos(9π/5) + i sin(9π/5))'])
+    ok(fifthMath.includes(step),'Filmens radianmetod, fullständigt led: '+step);
+   ok(fifthMath.every(x=>!x.includes('°')),'Inga grader i filmens radianberäkning av de fem rötterna');
+   const fifthText=await page.locator('#source-fifth').innerText();
+   ok(!fifthText.includes('°')&&fifthText.includes('argumentet π radianer'),'Även figurens slutkommentar använder filmens radianer');
+   const fifth=await page.locator('#fifth-root-plane [data-fifth-root]').evaluateAll(es=>es.map(e=>({v:Number(e.dataset.v),x:Number(e.querySelector('circle').getAttribute('cx')),y:Number(e.querySelector('circle').getAttribute('cy'))})));
+   ok(fifth.length===5,'fem rötter, inte tre eller fyra');
+   fifth.forEach(({v,x,y},i)=>{
+    ok(Math.abs(v-(36+72*i))<1e-9,'originalets fem argument i ordning');
+    ok(Math.abs(Math.hypot(x-180,y-180)-120)<1e-4,'samma radie');
+    ok(Math.abs(Math.cos(v*Math.PI/180)-(x-180)/120)<1e-6&&Math.abs(Math.sin(v*Math.PI/180)-(180-y)/120)<1e-6,'korrekt placering av rot');
+    ok(Math.abs(3**5*Math.cos(5*v*Math.PI/180)+243)<1e-8&&Math.abs(3**5*Math.sin(5*v*Math.PI/180))<1e-8,'oberoende kontroll av femtepotens');
+   });
+   await shot('original-fem-rotter');
    await go(7);
    const nok=await page.locator('#nok').innerText();
    ok(nok.includes('4315–4328')&&nok.includes('minst tre av fem nivåer'),'NOKflex och nivåval bevarade');

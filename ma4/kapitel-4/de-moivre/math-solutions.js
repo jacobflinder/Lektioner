@@ -23,7 +23,17 @@ insertSolutions({
    'Absolutbeloppet förblir 1. Argumentet ökar med π/4 för varje ytterligare faktor; det är upprepad multiplikation, inte en lös minnesregel.')
  ),
  practiceans:solution(
-  step('1 · Identifiera r, v och exponenten',
+  step('Räknesätt A · Kvadrera först talet',[
+   'z = −√3 + i','z² = (−√3 + i)²',
+   '= (−√3)² + 2(−√3)i + i²',
+   '= 3 − 2√3i + (−1)','= 2 − 2√3i']),
+  step('Kvadrera resultatet en gång till',[
+   'z⁴ = (z²)²','= (2 − 2√3i)²',
+   '= 2² + 2 · 2(−2√3i) + (−2√3i)²',
+   '= 4 − 8√3i + 12i²',
+   '= 4 − 8√3i + 12(−1)',
+   '= 4 − 8√3i − 12','= −8 − 8√3i']),
+  step('Räknesätt B · Identifiera r, v och exponenten',
    ['z = −√3 + i','r = 2','v = 150°','n = 4']),
   step('2 · Upphöj absolutbeloppet',
    ['r⁴ = 2⁴','= 2 · 2 · 2 · 2','= 16']),

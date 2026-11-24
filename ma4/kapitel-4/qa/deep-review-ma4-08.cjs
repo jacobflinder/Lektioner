@@ -178,7 +178,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   await formulas('#worked [data-seq-item]:nth-child(1) .math-givens',2);
   await formulas('#worked [data-seq-item]:nth-child(5) .math-givens',2);
   for(const e of ['a = −√3','b = 1','r = √(a² + b²)','= √((−√3)² + 1²)','= √(3 + 1)','= √4 = 2',
-   'tan α = |b|/|a|','= 1/√3','α = 30°','v = 180° − α','= 150°',
+   'tan v = b/a','= 1/(−√3)','= −1/√3','v = arctan(−1/√3) + n · 180°','v = −30° + n · 180°','n = 1','v = −30° + 1 · 180°','= 150°',
    'r⁵ = 2⁵ = 32','5v = 5 · 150° = 750°',
    'z⁵ = r⁵(cos(5v) + i sin(5v))','= 32(cos(750°) + i sin(750°))',
    '750° = 2 · 360° + 30°','cos(30°) = √3/2','sin(30°) = 1/2',
@@ -196,6 +196,8 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
    await has('#practiceans math[aria-label="'+e+'"]','05 korrekt eget facit '+e);
   }
   await one('#practiceans .ma4-final math[aria-label="z⁴ = −8 − 8√3i"]','05 korrekt tredje kvadranten');
+  await has('#practiceans math[aria-label="= 4 − 8√3i + 12(−1)"]','originalets upprepade kvadrering med i²-substitution');
+  await has('#practiceans math[aria-label="= 4 − 8√3i − 12"]','originalets sista algebraiska mellanled');
   await snap('05-desktop');
   console.log('PASS 05: egen uppgift med r^4 och exakt trigonometrisk kontroll');
   await go(5);

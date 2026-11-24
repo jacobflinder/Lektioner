@@ -1,0 +1,5 @@
+# Multiplikation och division i polär form – riktad metodtrohetsrättning
+
+Källfilm Polär form Lek2 00:45–03:45: definition och de två allmänna reglerna före räkneexemplet. 06:45–12:45: separat beräkning av produktens absolutbelopp och argument i radianer, polär produkt, motsvarande för kvoten. Lek3 03:45 återkopplar till samma fullständiga lösning. Nuvarande webblektion använde grader som enda huvudsakliga vinkelenhet och de fullständiga reglerna var inte synliga före användningen.
+
+Återställt: båda fullständiga reglerna före tillämpning; explicit arg-notation; insättning i kvotens polära form före trigonometriska värden och distributiv förenkling; startfrågans arctan och heltalsval; nytt radianexempel med egna tal (produkt 32, argument 5π/6; kvot 2, argument π/2). Befintliga figurer, elevuppgifter och aktuellt NOKflex-intervall bevarade. Filmens äldre 4234–4248 ersätter inte nuvarande 4217–4231 utan aktuellt bokunderlag. Filmens GeoGebra-länk behöver separat tillgänglighetskontroll innan den återinförs. Filmens muntliga innehåll och eventuell annan original-PDF ej slutverifierade. QA och faktisk visuell kontroll återstår före publicering.
