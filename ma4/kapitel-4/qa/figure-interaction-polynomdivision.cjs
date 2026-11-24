@@ -57,7 +57,13 @@ const prefix='figure-poly-';
   await shot('04-predict');
   await host.locator('.forward').click();
   ok((await host.locator('.stol-quotient-row math').count())===1,'first quotient term appears in top row after choice');
-  ok(await host.locator('.stol-quotient-row math').first().getAttribute('aria-label')==='2x²','2x² is placed above leading dividend term');
+  ok(await host.locator('.stol-quotient-row math').first().getAttribute('aria-label')==='2x²','first quotient term equals 2x²');
+  ok(await host.evaluate(el=>{
+   const quotient=el.querySelector('.stol-quotient-row th:nth-child(3)');
+   const degree=el.querySelector('.division-grade-row th[data-grade="2"]');
+   const q=quotient?.getBoundingClientRect(),d=degree?.getBoundingClientRect();
+   return !!q&&!!d&&Math.abs(q.x+q.width/2-d.x-d.width/2)<2;
+  }),'first quotient term aligned to its own x² degree column');
   await phase('multiply');await highlighted(3);
   ok((await host.locator('tbody tr.product').count())===0,'full product still concealed during multiplication question');
   await shot('04-choose');

@@ -137,6 +137,14 @@ for(const [name,c] of Object.entries(CASES)){
    check(await host.locator('tbody tr.product').count()>0&&await host.locator('tbody tr.remainder').count()>0,name+': visible product and difference rows');
    check(await host.locator('.stol-divisor').getAttribute('rowspan')===String(await host.locator('tbody tr').count()),name+': divisor spans the complete vertical calculation');
    check(await host.locator('.stol-quotient-row math').count()===c.q.filter(x=>x!==0).length,name+': quotient terms are shown above the dividend');
+   const quotientPlaces=await host.evaluate(el=>[...el.querySelectorAll('.division-grade-row th[data-grade]')].every((heading,i)=>{
+    const cell=el.querySelector('.stol-quotient-row').children[i+1];
+    const formula=cell?.querySelector('math');
+    if(!formula)return true;
+    const h=heading.getBoundingClientRect(),q=cell.getBoundingClientRect();
+    return Math.abs(h.x+h.width/2-q.x-q.width/2)<2;
+   }));
+   check(quotientPlaces,name+': every quotient term aligned to its degree column');
    await host.locator('.back').click();
    check(await host.locator('.result-summary math').count()===0,name+': finish feedback hides when stepping back');
    if(name==='main'||name==='extraC')await photo('dator-'+name+'-fardig-back');
