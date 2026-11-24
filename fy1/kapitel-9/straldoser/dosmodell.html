@@ -1,0 +1,75 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Digital dosmodell – Fysik 1b 9.7</title><style>
+:root{font:16px/1.45 system-ui,sans-serif;background:#f3f9fa;color:#143e4c}*{box-sizing:border-box}body{margin:0;padding:10px}main{max-width:1030px;margin:auto}
+.layout{display:grid;grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:15px}.card{border:1px solid #c7dfe5;background:white;border-radius:15px;padding:15px;margin:0 0 12px}
+h2{font-size:1.1rem;margin:0 0 10px}p{margin:8px 0}label{font-weight:750;display:block;margin:12px 0 5px}
+select{width:100%;border-radius:9px;border:1px solid #9cbec5;padding:9px;font:inherit;color:inherit;background:#fff}
+select:focus-visible,button:focus-visible{outline:3px solid orange;outline-offset:2px}
+.choices{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.choices button{border-radius:10px;background:white;border:1px solid #95b6c0;padding:8px 11px;cursor:pointer;font:inherit}
+.choices button[aria-pressed=true]{background:#0e7080;color:white;border-color:#0e7080}
+button.primary{border:0;background:#08768a;color:white;font:inherit;font-weight:800;padding:11px 18px;border-radius:10px;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}.note{font-size:.9rem;color:#365965;background:#ecf5f7;padding:10px 12px;border-radius:10px}
+.diagram{width:100%;height:auto;max-height:270px;display:block}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat article{border-radius:11px;background:#e9f4f7;padding:13px}.stat small{display:block;color:#476d76}.stat strong{display:block;font-size:clamp(1.25rem,4vw,2rem);font-variant-numeric:tabular-nums}
+.bar{border-radius:8px;height:15px;background:#dae6e9;overflow:hidden;margin:4px 0 12px}.fill{height:100%;width:0;background:#1993a5;transition:width .3s}
+#result{display:none}.feedback{padding:13px;background:#edf7f1;border-left:4px solid #378c66;border-radius:11px;margin:10px 0}
+@media(max-width:720px){.layout{grid-template-columns:1fr}body{padding:8px}.card{padding:12px}.diagram{max-height:220px}}
+@media(prefers-reduced-motion:reduce){.fill{transition:none}}
+</style></head><body><main><p class="note"><b>Idealiserad visualisering.</b> Vi anger redan absorberad dos till ett valt organ. Modellen visar beräkningen av ekvivalent och effektiv dos, inte hur strålningen når kroppen eller någon individuell riskprognos.</p>
+<div class="layout">
+<section class="card"><h2>1 · Välj samma absorberade dos, ändra två faktorer</h2>
+<label for="dose">Absorberad dos D</label><select id="dose"><option value=".5">0,5 mGy</option><option value="1">1,0 mGy</option><option value="3">3,0 mGy</option><option value="5">5,0 mGy</option></select>
+<label for="rad">Strålslag</label><select id="rad"><option value="gamma">Gamma / röntgen · Q = 1</option><option value="beta">Beta · Q = 1</option><option value="proton">Proton · Q = 5</option><option value="alpha">Alfa · Q = 20</option></select>
+<label for="organ">Organ som absorberar dosen</label><select id="organ"><option value="breast">Bröst · w = 0,12</option><option value="skin">Hud · w = 0,01</option><option value="marrow">Röd benmärg · w = 0,12</option><option value="liver">Lever · w = 0,04</option></select>
+<h2>2 · Förutsäg först</h2>
+<p><b>Strålslag:</b> Jämför ditt val med gamma vid samma D. Blir H lika stor eller större?</p>
+<div class="choices" id="answers-h" role="group" aria-label="Förutsäg ekvivalent dos"><button data-choice="same" aria-pressed="false">Lika stor H</button><button data-choice="more" aria-pressed="false">Större H</button></div>
+<p><b>Organ:</b> Jämför ditt val med hud vid samma H. Blir den effektiva dosen lika stor eller större?</p>
+<div class="choices" id="answers-e" role="group" aria-label="Förutsäg effektiv dos"><button data-choice="same" aria-pressed="false">Lika stor ε</button><button data-choice="more" aria-pressed="false">Större ε</button></div>
+<button id="reveal" class="primary" disabled>Visa beräkning och återkoppling</button><p id="status" aria-live="polite" class="note">Välj ett svar i båda frågorna innan återkopplingen visas.</p>
+</section>
+<section class="card"><h2>3 · Jämför och förklara</h2>
+<svg class="diagram" viewBox="0 0 450 250" role="img" aria-label="Schematisk kroppssilhuett där bröst, hud, lever eller röd benmärg markeras beroende på vald vävnad.">
+<g fill="#d5e8ed" stroke="#7dabb8" stroke-width="3"><circle cx="225" cy="31" r="27"/><path d="M188 65 Q164 72 162 99 L148 159 Q145 175 158 180 Q169 182 174 169 L195 114 L195 192 L184 236 L210 238 L224 184 L239 238 L265 236 L255 191 L255 114 L276 170 Q282 184 293 180 Q304 177 298 159 L289 99 Q287 70 260 65Z"/></g>
+<g id="spots"><ellipse id="spot-breast" cx="214" cy="100" rx="22" ry="14" fill="#c97755" opacity="0.85"/><ellipse id="spot-skin" cx="280" cy="118" rx="8" ry="24" fill="#c97755" opacity=".0"/><ellipse id="spot-marrow" cx="222" cy="192" rx="18" ry="13" fill="#c97755" opacity="0"/><ellipse id="spot-liver" cx="245" cy="143" rx="20" ry="14" fill="#c97755" opacity="0"/></g>
+<text x="25" y="36" fill="#245c70" font-size="18">Absorberad dos</text><text x="25" y="59" fill="#3c7787" font-size="14">i vald vävnad</text><path d="M120 62 H183" stroke="#3c7787" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="305" y="108" fill="#245c70" font-size="18" id="organname">Bröst</text><text x="305" y="128" fill="#547887" font-size="15" id="organfactor">w = 0,12</text>
+</svg>
+<div id="result"><div class="stat"><article><small>Ekvivalent dos, H = D · Q</small><strong id="h">–</strong></article><article><small>Effektiv dos, ε = H · w</small><strong id="eff">–</strong></article></div>
+<div style="margin-top:12px"><b>Ekvivalent dos – referens 100 %</b><div class="bar"><div class="fill" id="barh"></div></div><b>Effektiv dos – andel av H som viktas för det valda organet</b><div class="bar"><div class="fill" id="bare"></div></div></div>
+<div id="explain" class="feedback"></div></div>
+<p class="note" id="blind">Storheterna och formlerna är kända. Resultaten visas när du har förutsagt och valt återkoppling.</p>
+</section></div>
+</main><script>
+(()=>{'use strict';
+const $=x=>document.getElementById(x);
+let choices={h:null,e:null};
+const organs={breast:{text:'Bröst',w:.12},skin:{text:'Hud',w:.01},marrow:{text:'Röd benmärg',w:.12},liver:{text:'Lever',w:.04}};
+const q={gamma:1,beta:1,proton:5,alpha:20};
+const fmt=x=>x.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:3});
+function hide(){choices={h:null,e:null};$('result').style.display='none';$('blind').style.display='block';$('reveal').disabled=true;$('status').textContent='Välj ett svar i båda frågorna innan återkopplingen visas.';document.querySelectorAll('.choices button').forEach(b=>b.setAttribute('aria-pressed','false'));const id=$('organ').value;for(const key of Object.keys(organs))$('spot-'+key).setAttribute('opacity',key===id?'0.85':'0');$('organname').textContent=organs[id].text;$('organfactor').textContent='w = '+fmt(organs[id].w);}
+for(const k of ['dose','rad','organ'])$(k).onchange=hide;
+for(const kind of ['h','e'])document.querySelectorAll('#answers-'+kind+' button').forEach(b=>b.onclick=()=>{choices[kind]=b.dataset.choice;document.querySelectorAll('#answers-'+kind+' button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('result').style.display='none';$('blind').style.display='block';$('reveal').disabled=!(choices.h&&choices.e);$('status').textContent=choices.h&&choices.e?'Du har valt två svar. Visa beräkningen och motivera båda.':'Välj även ett svar i den andra frågan.'});
+$('reveal').onclick=()=>{
+ if(!choices.h||!choices.e)return;
+ const D=Number($('dose').value),radiation=$('rad').value,organ=organs[$('organ').value],H=D*q[radiation],eff=H*organ.w;
+ $('result').style.display='block';$('blind').style.display='none';
+ $('h').textContent=fmt(H)+' mSv';$('eff').textContent=fmt(eff)+' mSv';
+ $('barh').style.width='100%';$('bare').style.width=organ.w*100+'%';
+ const radCorrect=q[radiation]>1?'more':'same',organCorrect=organ.w>.01?'more':'same';
+ const radMessage=(choices.h===radCorrect?'Rätt. ':'Inte riktigt. ')+(q[radiation]>1?'För '+radiation+' är Q = '+q[radiation]+', vilket ger större H än gamma med Q = 1.':'Det valda strålslaget har Q = 1, samma som gamma. Därför blir H lika stor.');
+ const organMessage=(choices.e===organCorrect?'Rätt. ':'Inte riktigt. ')+(organ.w>.01?organ.text+' har w = '+fmt(organ.w)+', större än hudens 0,01. Därför blir organets bidrag till ε större.':'Hud har w = 0,01, samma som referensorganet hud. Därför är organets bidrag till ε lika stort.');
+ $('explain').textContent='Svar 1 – H: '+radMessage+' H = '+fmt(D)+' mGy · '+q[radiation]+' = '+fmt(H)+' mSv. Svar 2 – effektiv dos: '+organMessage+' ε = '+fmt(H)+' mSv · '+fmt(organ.w)+' = '+fmt(eff)+' mSv. Det är en dos som redan absorberats i vävnaden – modellen beskriver inte genomträngningsförmåga.';
+ $('status').textContent='Du har fått återkoppling på båda valen. Byt strålslag eller organ och förutsäg på nytt.';
+ };
+hide();
+// Resize the parent iframe when the two separate feedback messages appear or disappear.
+// Measure the content, not the iframe viewport, so it can shrink after new choices.
+function reportHeight(){
+ const main=document.querySelector('main');
+ const padding=parseFloat(getComputedStyle(document.body).paddingBottom)||0;
+ const height=Math.ceil(main.getBoundingClientRect().bottom+window.scrollY+padding);
+ if(window.parent!==window)window.parent.postMessage({type:'fy1-dose-model-height',height},window.location.origin);
+}
+if('ResizeObserver' in window)new ResizeObserver(reportHeight).observe(document.querySelector('main'));
+window.addEventListener('load',reportHeight);
+})();</script></body></html>
