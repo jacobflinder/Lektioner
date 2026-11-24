@@ -47,12 +47,29 @@
  #f-rest .three>.panel h3{display:inline-block;margin-right:8px}
  #f-rest .three>.panel>p{margin:4px 0}
 }
+</style><style>
+@media(min-width:1050px){
+ main:has(#f-start.active #factor-source-bridge:not(.hidden)) .repetition{display:none}
+ main:has(#f-start.active #factor-source-bridge:not(.hidden)) .stage{padding-top:16px}
+ #f-start:has(#factor-source-bridge:not(.hidden)) h1{margin:4px 0 8px}
+ #f-start:has(#factor-source-bridge:not(.hidden)) .factor-original-layout{display:block}
+ #f-start:has(#factor-source-bridge:not(.hidden)) #factor-source-division{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start;margin:8px 0;padding:12px 16px}
+ #f-start:has(#factor-source-bridge:not(.hidden)) .factor-original-followup{display:none}
+ #factor-source-division .math-givens{row-gap:16px;margin:8px 0 12px}
+ #factor-source-division .math-givens>.math{margin:0}
+ #factor-source-division p{margin-block:6px}
+ #factor-source-division .answer{margin:0;padding:12px}
+ #factor-source-bridge>.math{margin-block:8px}
+ #f-rest .factor-original-layout>.panel{padding:12px 16px}
+ #factor-original-rest .task{padding:8px 12px;margin:8px 0}
+ #factor-quartic-rest{padding:8px 12px;margin:8px 0 0}
+}
 </style></head>
 <body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.4</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false" type="button">Visa lärarstöd</button><button class="secondary" id="mode" aria-pressed="false">Klassrumsläge</button></div></header><main>
 <div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Enskilt tänkande → par → klass → omedelbar återkoppling. Du kan alltid rita och skriva i Notability.</small></div>
 <div class="repetition"><strong>Repetitionsläge:</strong> Lös och förklara först på papper eller i egna anteckningar. Avslöja därefter matematiken stegvis. Inga elevsvar lagras eller skickas.</div>
 <div id="stage" class="stage">
-<section id="f-start" class="slide active" data-teacher="Samla f(2) enskilt i 45 sekunder, par 30 sekunder. Avslöja först efter att eleverna motiverat vad noll betyder i grafen."><div class="eyebrow">01 · Start och mål</div><h1>Faktorsatsen</h1><p class="lead">Hur kan ett funktionsvärde avslöja en rest och en faktor?</p><div class="factor-original-layout"><div id="factor-source-division" class="panel"><h3>Repetition: polynomdivision med rest</h3><p>Från förra lektionen har vi en kvot och en rest. Sambandet kan skrivas på två sätt.</p><div class="math-givens"><p class="math">f(x) = 2x³ + 3x² − 5x + 6</p><p class="math">q(x) = 2x² − x − 3</p><p class="math">r = 12</p><p class="math">f(x)/(x + 2)</p><p class="math">= q(x) + 12/(x + 2)</p></div><p>Som bråkuttryck gäller <span class="math">x ≠ −2</span>. Multiplicera med divisorn för att få polynomidentiteten:</p><p class="math">f(x) = (x + 2)q(x) + 12</p><p>Identiteten gäller för alla reella x. Förutsäg vad som blir kvar när vi sätter in <span class="math">x = −2</span>.</p><button class="reveal secondary" data-reveal="factor-source-bridge">Visa sambandet med resten</button><div id="factor-source-bridge" class="answer hidden"><p class="math">f(−2)</p><p class="math">= (−2 + 2)q(−2) + 12</p><p class="math">= 0 · q(−2) + 12</p><p class="math">= 12</p><p>Funktionsvärdet ger resten.</p></div></div><div class="factor-original-followup">
+<section id="f-start" class="slide active" data-teacher="Samla f(2) enskilt i 45 sekunder, par 30 sekunder. Avslöja först efter att eleverna motiverat vad noll betyder i grafen."><div class="eyebrow">01 · Start och mål</div><h1>Faktorsatsen</h1><p class="lead">Hur kan ett funktionsvärde avslöja en rest och en faktor?</p><div class="factor-original-layout"><div id="factor-source-division" class="panel"><div class="factor-bridge-given"><h3>Repetition: polynomdivision med rest</h3><p>Från förra lektionen har vi en kvot och en rest. Sambandet kan skrivas på två sätt.</p><div class="math-givens"><p class="math">f(x) = 2x³ + 3x² − 5x + 6</p><p class="math">q(x) = 2x² − x − 3</p><p class="math">r = 12</p><p class="math">f(x)/(x + 2)</p><p class="math">= q(x) + 12/(x + 2)</p></div><p>Som bråkuttryck gäller <span class="math">x ≠ −2</span>. Multiplicera med divisorn för att få polynomidentiteten:</p><p class="math">f(x) = (x + 2)q(x) + 12</p><p>Identiteten gäller för alla reella x. Förutsäg vad som blir kvar när vi sätter in <span class="math">x = −2</span>.</p><button class="reveal secondary" data-reveal="factor-source-bridge">Visa sambandet med resten</button></div><div id="factor-source-bridge" class="answer hidden"><p class="math">f(−2)</p><p class="math">= (−2 + 2)q(−2) + 12</p><p class="math">= 0 · q(−2) + 12</p><p class="math">= 12</p><p>Funktionsvärdet ger resten.</p></div></div><div class="factor-original-followup">
 <p class="math math-big">f(x) = x² − x − 2</p><div class="task"><strong>Enskilt 45 sekunder → par 30 sekunder</strong>Beräkna f(2). Vad berättar resultatet om grafen?</div>
 <button class="secondary reveal" data-reveal="factor-goals">Visa dagens mål efter startfrågan</button><div class="panel hidden" id="factor-goals"><strong>Efter lektionen ska du kunna</strong><ul><li>Bestämma resten med restsatsen.</li><li>Avgöra om en binom är en faktor med faktorsatsen.</li><li>Förklara algebrans fundamentalsats och använda nollställen för att skriva faktorform.</li></ul></div>
 <button data-reveal="start-answer" class="reveal">Visa och förklara</button><div id="start-answer" class="answer hidden"><p class="math">f(2) = 2² − 2 − 2 = 0</p><p>Grafen skär x-axeln i punkten (2, 0). Det säger också något om faktorn x − 2 – men varför?</p></div></div></div></section>

@@ -79,12 +79,14 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
    await page.locator('[data-reveal="factor-source-bridge"]').click();
    await mathLabel(page.locator('#factor-source-bridge'),'= 12');
    const divisionLayout=await page.locator('#f-start .factor-original-layout').evaluate(el=>{
-     const a=el.firstElementChild.getBoundingClientRect(),b=el.lastElementChild.getBoundingClientRect();
-     return {wide:innerWidth>=1050,sideBySide:b.left>=a.right-2,stacked:b.top>=a.bottom-2,mathBottom:el.querySelector('#factor-source-bridge').getBoundingClientRect().bottom,screen:innerHeight}
+     const a=el.querySelector('.factor-bridge-given').getBoundingClientRect(),b=el.querySelector('#factor-source-bridge').getBoundingClientRect();
+     return {wide:innerWidth>=1050,sideBySide:b.left>=a.right-2,stacked:b.top>=a.bottom-2,mathBottom:b.bottom,givenBottom:a.bottom,screen:innerHeight}
    });
    check(divisionLayout.wide?divisionLayout.sideBySide:divisionLayout.stacked,name+' originalrepetition responsiv '+JSON.stringify(divisionLayout));
-   if(divisionLayout.wide)check(divisionLayout.mathBottom<=divisionLayout.screen,name+' hela repetitionsberäkningen synlig utan scroll');
+   if(divisionLayout.wide)check(Math.max(divisionLayout.mathBottom,divisionLayout.givenBottom)<=divisionLayout.screen,name+' hela repetitionsberäkningen synlig utan scroll '+JSON.stringify(divisionLayout));
    await shot(name+'-original-division');
+   await page.locator('[data-reveal="factor-source-bridge"]').click();
+   check(await page.locator('#f-start .factor-original-followup').isVisible(),name+' startuppgiften återkommer när repetitionen stängs');
    await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='f-sats','Sats före exempel i huvudvägen');
    check(await page.locator('#factor-fundamental').isVisible(),'Algebrans fundamentalsats synlig före tillämpning');
    await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='f-rest','Rest före grafisk tillämpning');
