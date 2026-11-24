@@ -38,7 +38,7 @@ try{
  assert.equal(response.status(),200,'Lektionswebben svarar');
  assert.deepEqual(await page.locator('.slide').evaluateAll(x=>x.map(n=>n.id)),order,'Exakt åtta bilder');
  assert.equal(await page.locator('#jump option').count(),8,'Alla bilder i navigeringen');
- assert.equal(await page.locator('.slide[data-optional="true"]').count(),2,'Frivilliga bilder 4 och 5');
+ assert.equal(await page.locator('.slide[data-optional="true"]').count(),0,'Samtliga tre original-PDF-bilder ingår i huvudvägen');
  // 1. Starta med förutsägelse; inga mål eller lösningar synliga före kontroll.
  assert.ok(await page.locator('#v-goals').isHidden(),'01 mål dolda innan starten');
  await expectSpace('#intro .math-givens',2);
@@ -122,7 +122,7 @@ try{
  await one('#v-minute .ma4-final math[aria-label="|u − z| = √13"]','03 minutuppgiftens rätta längd');
  await pic('03-desktop');
  console.log('PASS bild 03: fyra steg, insättningar, Pythagoras och dold minutkontroll');
- // 4. Valfria cirkeln: randen och samma skala, omstart vid nytt centrum.
+ // 4. Cirkeln: randen och samma skala, omstart vid nytt centrum.
  await go(3);
  assert.ok(await page.locator('#circle-explain').isHidden(),'04 förklaring dold');
  await expectSpace('#circles .math-givens',2);
@@ -167,8 +167,9 @@ try{
  assert.equal(await page.locator('#region-plane g circle[stroke-dasharray="7 7"]').count(),1,'05 öppen skivas rand streckad');
  await pic('05-desktop');
  console.log('PASS bild 05: regionsgränser, fel/rätt-quiz och öppen skiva');
- // 6. Eget arbete: kärnfacit inte blandat med frivillig geometri.
+ // 6. Eget arbete: kärnfacit inte blandat med geometrisk tillämpning.
  await go(5);
+ assert.equal(await page.locator('#try .task ol li:visible').count(),3,'Alla tre originalrelaterade frågor synliga före facit');
  assert.ok(await page.locator('#tryans').isHidden(),'06 kärnfacit dolt');
  assert.ok(await page.locator('#tryextra').isHidden(),'06 fördjupning dold');
  await page.locator('[data-reveal="tryans"]').click();
@@ -189,6 +190,7 @@ try{
  console.log('PASS bild 07: NOKflex 4146–4160 och valfri nivå');
  // 8. Kärnexit med alla tecken och frivillig exit separat.
  await go(7);await expectSpace('#exit .math-givens',2);
+ assert.equal(await page.locator('#exit .task ol li:visible').count(),3,'Geometrisk utcheckning obligatorisk och synlig');
  assert.ok(await page.locator('#exitans').isHidden(),'08 exitfacit dolt');
  assert.ok(await page.locator('#exitextra').isHidden(),'08 frivillig exit dold');
  await page.locator('[data-reveal="exitans"]').click();
@@ -202,19 +204,21 @@ try{
  await one('#exitextra math[aria-label="Im(w) = 2"]','08 funktionsnotation med tydliga parenteser');
  assert.ok((await page.locator('#exitextra .ma4-final').innerText()).includes('Nej.'),'08 svensk slutsats visas som text, inte som felaktig matematisk ekvation');
  await pic('08-desktop');
- console.log('PASS bild 08: självständig kärnexit, teckenförklaring och frivillig utcheckning');
- // Huvudvägen hoppar över valfria bilder, men tillämpningen är nåbar.
+ console.log('PASS bild 08: självständig kärnexit, teckenförklaring och geometrisk utcheckning');
+ // Huvudvägen följer hela originalets geometri.
  await go(2);
  await page.locator('#next').click();
- assert.equal(await page.locator('.slide.active').getAttribute('id'),'try','Navigeringen hoppar frivilliga bilder');
+ assert.equal(await page.locator('.slide.active').getAttribute('id'),'circles','Nästa visar originalets cirklar');
+ await page.locator('#next').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'regions','Nästa visar originalets linjer och områden');
+ await page.locator('#next').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'try','Eget försök efter båda geometribilderna');
  await go(2);await page.locator('[data-go="circles"]').click();
- assert.equal(await page.locator('.slide.active').getAttribute('id'),'circles','Valbar geometriväg nåbar');
+ assert.equal(await page.locator('.slide.active').getAttribute('id'),'circles','Geometriväg nåbar');
  await page.locator('#mode').click();
  assert.equal(await page.locator('#mode').getAttribute('aria-pressed'),'true','Klassrumsläget');
  await page.locator('#teacher-toggle').click();
  assert.ok(await page.locator('.teacher').isVisible(),'Lärarstöd bevarat');
  await page.locator('#mode').click();
- // Alla åtta mobillägen, även frivilliga.
+ // Alla åtta mobillägen.
  await page.setViewportSize({width:390,height:844});
  for(let i=0;i<8;i++){
   await go(i);

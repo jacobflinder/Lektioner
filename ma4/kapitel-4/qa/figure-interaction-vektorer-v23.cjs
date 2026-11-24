@@ -27,8 +27,9 @@ ok(Math.hypot(0,1-(-1))===2,'open disk excludes boundary point');
   const response=await page.goto(url,{waitUntil:'networkidle'});
   ok(response.status()===200,'HTTP 200 '+width);
   ok(JSON.stringify(await page.locator('.slide').evaluateAll(xs=>xs.map(x=>x.id)))===JSON.stringify(ids),'8 original slides '+width);
-  ok(await page.locator('.slide[data-optional]').count()===2,'optional geometrical slides');
+  ok(await page.locator('.slide[data-optional]').count()===0,'all original geometrical slides required');
   const go=async i=>{await page.selectOption('#jump',String(i));ok(await page.locator('.slide.active').getAttribute('id')===ids[i],'slide '+i+' '+width)};
+  await go(2);await page.locator('#next').click();ok(await page.locator('.slide.active').getAttribute('id')==='circles','original circle slide on main route');await page.locator('#next').click();ok(await page.locator('.slide.active').getAttribute('id')==='regions','original regions slide on main route');
   for(let i=0;i<8;i++){
    await go(i);
    ok(await page.evaluate(()=>document.documentElement.scrollWidth)<=width+4,'no horizontal overflow '+i+' '+width);
@@ -93,7 +94,7 @@ ok(Math.hypot(0,1-(-1))===2,'open disk excludes boundary point');
    if(region==='disk')ok(await page.locator('#region-plane g circle[stroke-dasharray="7 7"]').count()===1,'disk excludes circular boundary');
    await page.screenshot({path:path.join(out,'region-'+region+'-'+width+'.png'),fullPage:true});shots++;
   }
-  await go(5);ok(await page.locator('#tryans').isHidden(),'core self solution hidden');ok(await page.locator('#tryextra').isHidden(),'optional solution hidden');
+  await go(5);ok(await page.locator('#tryans').isHidden(),'core self solution hidden');ok(await page.locator('#tryextra').isHidden(),'geometrical solution hidden');
   await go(6);const work=await page.locator('#nok').innerText();
   ok(work.includes('4146–4160')&&work.includes('tre av fem nivåer'),'original NOKflex tasks and choice preserved');
   const recap=page.locator('#v-method-recap');
