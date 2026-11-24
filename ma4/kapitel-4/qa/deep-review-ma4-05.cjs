@@ -130,7 +130,7 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
    'tan v = b/a','= 3/(−3) = −1','v = arctan(−1) + n · 180°','v = −45° + n · 180°','n = 1','v = −45° + 1 · 180°','= 135°',
    'r = 3√2','v = 135°','cos 135° = −√2/2','sin 135° = √2/2',
    'z = r(cos v + i sin v)','= 3√2(−√2/2 + i√2/2)','= −(3 · 2)/2 + ((3 · 2)/2)i','= −3 + 3i']){
-   await one('#procedure math[aria-label="'+exact+'"]','03 fullständigt steg: '+exact);
+   await one('#procedure [data-sequence] math[aria-label="'+exact+'"]','03 fullständigt steg: '+exact);
   }
   assert.ok((await seq.locator('math mfrac').count())>=4,'03 exakta MathML-bråk');
   await seq.locator('[data-seq-back]').click();
