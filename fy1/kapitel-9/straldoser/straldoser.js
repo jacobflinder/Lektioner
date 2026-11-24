@@ -31,6 +31,8 @@ pages[9].teacher='Båda aktuella uppgiftssidorna är verifierade direkt. Målmap
 pages[1].body=pages[1].body.replace('<b>Nya boken:</b>','<b>Boken:</b>');
 pages[2].body='<div class="science-card pre-film-units"><b>Förstå enheterna innan filmen</b><p><b>Sv (sievert)</b> är en enhet för stråldos där strålningens biologiska verkan vägs in.</p><p><b>mSv</b> betyder millisievert: <b>1 mSv = 0,001 Sv.</b> <b>µSv</b> betyder mikrosievert: <b>1 µSv = 0,000001 Sv.</b></p><p><b>µSv/h</b> betyder mikrosievert per timme – en <b>doshastighet</b>. För att beräkna dosen vid konstant doshastighet behöver vi också känna till <b>tiden</b>.</p></div>'+pages[2].body;
 pages[2].teacher+=' Enheterna förklaras före videon och dosmätaren. D=E/m och H=DQ kommer före första matematiska tillämpningen.';
+pages[2].label='Film · mätvärden och stråldos';
+pages[3].title='Vad händer med cellerna?';
 pages[7].title='Hur mycket energi absorberar Erik?';
 pages[7].label='Uppgift 962 a–b · fråga före lösning';
 pages[7].body=pages[7].body.replace("<p><b>Erik:</b> m = 78 kg, absorberad dos D = 3,5 mGy. <b>Systern:</b> m = 55 kg, D = 7,4 mGy. Bestäm Eriks absorberade energi och avgör om stor kroppsmassa automatiskt ger lägre dos.</p>","<p><b>Erik</b> är 17 år, 184 cm lång och väger 78 kg. Han får under ett år den absorberade dosen <b>3,5 mGy</b>. Hans syster är pilot, väger 55 kg och får <b>7,4 mGy</b> under ett år.</p><div class=\"lesson-action\"><b>a) Fråga</b><p>Hur stor strålningsenergi absorberar Erik under året?</p></div><div class=\"lesson-action\"><b>b) Fråga</b><p>Erik tror att hans lägre stråldos beror på att han väger mer än sin syster. <b>Har han rätt? Motivera.</b></p></div>");
