@@ -13,7 +13,7 @@
 |---|---|---|
 | Startfråga, tre lärandemål | 1–2 | Didaktiskt förbättrat: individuellt → par, sedan kontrollerbara mål. |
 | Jacobs demofilm och doshastighet, följt av vardagskällor till strålning (bok s.366) | 3 | Bevarat/förbättrat: exakt film, µSv/h jämfört med µSv, historiska dosbidrag i en kompakt fördelning. |
-| Originalets mindmap: jonisation, cellskada, reparation, celldöd, DNA-fel/mutation, cancerrisk; inne/ute och helkropp/lokalt | 4 | Bevarat; visuellt förbättrat. **Ingen parallell mindmap**. Bestrålad kontra radioaktivt material tydliggjort inför 972–973. |
+| Originalets mindmap: jonisation, cellskada, reparation, celldöd, DNA-fel/mutation, cancerrisk; inne/ute och helkropp/lokalt | 4 | Bevarat; visuellt förbättrat. **Ingen parallell mindmap**. Bestrålad kontra radioaktivt material och bokens grova >3 Sv-helkroppsgräns tydliggjorda inför 972–973. |
 | Absorberad dos `D=E/m`, `1 Gy=1 J/kg`, milli → grund | 5,8 | Bevarat i Jacobs ordning, definition **före** exempel. |
 | Ekvivalent dos `H=D·Q` i Sv; alfa 20, beta/gamma 1 | 6 | Bevarat enligt s.365. Proton **Q=5** kompletterat från obligatoriska 970; neutroners energiberoende Q hänvisat till boktabell. |
 | Effektiv dos `ε=ΣHᵢwᵢ`, organs viktfaktorer och flerorganssummering | 7 | Bevarat/förbättrat: full definition, egen kort flerorgansberäkning och digital modell med **två förutsägelser och feedback**. |

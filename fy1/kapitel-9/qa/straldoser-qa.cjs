@@ -18,6 +18,7 @@ assert.ok(pages[2].body.includes('https://youtu.be/TRL7o2kPqw0'),'correct video'
 assert.ok(pages[2].body.includes('2,4 mSv/år'),'book page 366 background');
 assert.ok(pages[3].body.includes('Reparation, celldöd eller kvarstående DNA-fel'),'biology before calculation');
 assert.ok(pages[3].body.includes('Bestrålad är inte samma sak som radioaktiv'),'concepts needed in 972/973');
+assert.ok(pages[3].body.includes('3 Sv till hela kroppen'),'textbook acute danger threshold for 973d');
 assert.ok(pages[4].body.includes('1 Gy = 1 J/kg'),'absorbed dose introduced');
 assert.ok(pages[5].body.includes('Q = 5')&&pages[5].body.includes('protoner'),'proton factor before book 970');
 assert.ok(pages[6].body.includes('0,05 mSv')&&pages[6].body.includes('dosmodell.html'),'two-organ dose before digital demo');
