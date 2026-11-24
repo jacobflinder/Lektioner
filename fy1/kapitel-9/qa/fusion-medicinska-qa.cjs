@@ -58,6 +58,8 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered ta
       if((slug==='fusion-och-fission'&&idx===7)){
        for(let j=0;j<6;j++)await page.locator('#step').click();
        assert.equal(await page.locator('.slide.active .step.open').count(),6);
+       const overflowing=await page.locator('.slide.active .step.open .math-block').evaluateAll(nodes=>nodes.map((e,i)=>({i,excess:e.scrollWidth-e.clientWidth})).filter(x=>x.excess>3));
+       assert.deepEqual(overflowing,[],'mass-defect formulas must be fully visible on '+width+'px mobile/projector');
        await page.screenshot({path:path.join(dir,slug+'-'+width+'-massdefect.png'),fullPage:true});
       }
       if((slug==='fusion-och-fission'&&(idx===3||idx===6))||(slug==='medicinska-metoder'&&idx===7)){
@@ -72,13 +74,26 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 numbered ta
         const modes=['xray','ct','mri','pet','gamma'];
         for(const mode of modes){
          await frame.locator('#modes button[data-mode="'+mode+'"]').click();
-         const correct={xray:0,ct:0,mri:1,pet:0,gamma:0}[mode];
-         await frame.locator('#answers button[data-choice="'+correct+'"]').click();
-         for(let step=0;step<3;step++)await frame.locator('#run').click();
-         assert.ok(await frame.locator('#feedback').isVisible(),'feedback '+mode);
-         assert.equal(await frame.locator('#step').innerText(),'Steg 3 av 3');
+         for(let answer=0;answer<3;answer++){
+          await frame.locator('#answers button[data-choice="'+answer+'"]').click();
+          assert.ok(await frame.locator('#feedback').isHidden(),'no feedback before reveal: '+mode+' answer '+answer);
+          for(let step=0;step<3;step++)await frame.locator('#run').click();
+          assert.ok(await frame.locator('#feedback').isVisible(),'feedback '+mode+' answer '+answer);
+          assert.ok((await frame.locator('#feedback').innerText()).length>40,'meaningful explanation '+mode+' answer '+answer);
+          assert.equal(await frame.locator('#step').innerText(),'Steg 3 av 3');
+         }
         }
        }
+       await page.waitForFunction(()=>{
+         const f=document.querySelector('.slide.active iframe');
+         if(!f?.contentDocument?.body)return false;
+         return f.getBoundingClientRect().height >= f.contentDocument.body.getBoundingClientRect().height + 15;
+       },{},{timeout:10000});
+       const internalScroll=await page.locator('.slide.active iframe').evaluate(f=>({
+         frameHeight:f.getBoundingClientRect().height,
+         bodyHeight:f.contentDocument.body.getBoundingClientRect().height
+       }));
+       assert.ok(internalScroll.frameHeight>=internalScroll.bodyHeight+15,'full model feedback must fit visible iframe '+slug+' '+width);
        await page.screenshot({path:path.join(dir,slug+'-'+width+'-visual-'+idx+'.png'),fullPage:true});
       }
       const metrics=await page.evaluate(()=>({w:document.documentElement.scrollWidth,innerWidth:window.innerWidth}));
