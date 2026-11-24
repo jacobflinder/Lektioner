@@ -88,8 +88,11 @@ console.log('9.8/9.9 STATIC: valid pages, original fusion method, 25 verified nu
        const dose=page.frameLocator('.slide.active iframe.dose-demo');
        await dose.locator('#run').waitFor();
        assert.ok(await dose.locator('#run').isDisabled(),'dose feedback gated before choice');
+       assert.ok(await dose.locator('#zone').isHidden(),'no target marker before tumor depth selected');
        for(const scenario of ['shallow','deep']){
         await dose.locator('#cases button[data-case="'+scenario+'"]').click();
+        assert.ok(await dose.locator('#zone').isVisible(),'tumor marker must be visible for '+scenario);
+        assert.equal(await dose.locator('#target-line').getAttribute('d'),scenario==='shallow'?'M97 35 V199':'M393 35 V199','tumor marker must move with depth');
         if(scenario==='shallow')assert.ok(await dose.locator('#run').isDisabled(),'depth alone does not reveal answer');
         for(const method of ['electron','gamma','proton']){
          await dose.locator('#methods button[data-method="'+method+'"]').click();

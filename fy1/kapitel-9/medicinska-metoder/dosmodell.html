@@ -96,7 +96,10 @@ const feedback={
 function choose(group,key,value){document.querySelectorAll('#'+group+' button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset[key]===value)));}
 function update(){
  $('question').textContent=scenario?prompts[scenario]:'Välj tumördjup för att se vilken fysikalisk fråga du ska pröva.';
- const zone=$('zone');zone.hidden=!scenario;
+ const zone=$('zone');
+ // SVG <g> has no consistently reflected .hidden property: toggle the
+ // attribute explicitly so the tumor marker truly follows the pupil's choice.
+ if(scenario)zone.removeAttribute('hidden');else zone.setAttribute('hidden','');
  if(scenario){const x=scenario==='shallow'?97:393;$('band').setAttribute('x',String(x-10));$('target-line').setAttribute('d','M'+x+' 35 V199');$('target-label').setAttribute('x',String(x));$('target-label').textContent='Tumör';}
  $('run').disabled=!scenario||!method;
  $('feedback').hidden=true;$('feedback').textContent='';
