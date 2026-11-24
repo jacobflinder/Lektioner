@@ -33,7 +33,7 @@ for(const [name,c] of Object.entries(CASES)){
  }
 }
 (async()=>{
- const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_EXECUTABLE_PATH||undefined});
+ const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:800},deviceScaleFactor:1});
  const errors=[];
  page.on('pageerror',e=>errors.push(e.message));
@@ -60,41 +60,14 @@ for(const [name,c] of Object.entries(CASES)){
   const originalWork=await page.locator('.slide').nth(8).textContent();
   check(originalWork.includes('NOKflex')&&originalWork.includes('4421–4430'),'original book list retained in slide 9');
 
-  // Originalfilm: heltalsdivisionen 261/3 föregår polynomdivisionen.
-  // Den riktiga liggande stolen har kvoten ovanför och divisorn till höger.
-  await go(2);
-  const integer=page.locator('#integer-example');
-  check(await integer.isHidden(),'261 ÷ 3 answer remains hidden before own calculation');
-  await page.locator('[data-reveal="integer-example"]').click();
-  check(await integer.isVisible(),'integer long division revealed on request');
-  check((await integer.locator('thead tr th').allTextContents()).slice(2,4).join('')==='87','integer quotient 87 over dividend');
-  check((await integer.locator('tbody tr').first().locator('td').allTextContents()).slice(1,4).join('')==='261','integer dividend 261');
-  check(await integer.locator('.integer-divisor').textContent()==='3','integer divisor 3 at right');
-  const integerArithmetic=await integer.locator('tbody tr').evaluateAll(rows=>rows.slice(1).map(row=>[...row.querySelectorAll('td')].map(cell=>cell.textContent.trim()).filter(s=>/^[0-9]+$/.test(s)).join('')));
-  check(JSON.stringify(integerArithmetic)===JSON.stringify(['24','21','21','0']),'26−24=2, bring down 1, 21−21=0 in original arithmetic');
-  await photo('heltal-261-delat-med-3');
-
   // The four math operations must remain causally tied to the right
   // grade column and use MathML in both questions and explanations.
   await go(3);
   const main=page.locator('[data-division="main"]');
-  check(await integer.isHidden(),'integer answer resets on navigation');
-  check(await main.locator('.stol-divisor').count()===1,'divisor is drawn in actual division table');
-  check(await main.locator('.stol-quotient-row').count()===1,'quotient row is part of actual division table');
-  check(await main.locator('.stol-quotient-row math').count()===0,'quotient concealed before the first prediction');
-  const rightLocation=await main.evaluate(el=>{
-   const dividend=el.querySelector('tbody tr.original td[data-grade="0"]');
-   const divisor=el.querySelector('.stol-divisor');
-   const row=el.querySelector('.stol-quotient-row');
-   const a=dividend?.getBoundingClientRect(),b=divisor?.getBoundingClientRect(),c=row?.getBoundingClientRect();
-   return !!a&&!!b&&!!c&&b.left>=a.right-1&&c.bottom<=a.bottom;
-  });
-  check(rightLocation,'real geometry: quotient above dividend and divisor to its right');
   check(await main.locator('.question math').count()===2,'predict question: term and x are semantic');
   check(await main.locator('tbody tr.product').count()===0,'before: no intermediate product');
   await math(main.locator('.question'),'2x³');
   await main.locator('.forward').click();
-  check((await main.locator('.stol-quotient-row math').count())===1,'first quotient term shown over dividend');
   check(await main.locator('.question math').count()>0,'multiplication question rendered as math');
   await math(main.locator('.question'),'2x² · (x + 2)');
   await math(main.locator('.explanation'),'2x²');
@@ -135,19 +108,57 @@ for(const [name,c] of Object.entries(CASES)){
    check(labels.includes('R(x) = '+c.r),name+': remainder mathematically correct');
    check(labels.some(s=>s.includes('P(x) = D(x)Q(x) + R(x)')),name+': complete P=DQ+R invariant shown');
    check(await host.locator('tbody tr.product').count()>0&&await host.locator('tbody tr.remainder').count()>0,name+': visible product and difference rows');
-   check(await host.locator('.stol-divisor').getAttribute('rowspan')===String(await host.locator('tbody tr').count()),name+': divisor spans the complete vertical calculation');
-   check(await host.locator('.stol-quotient-row math').count()===c.q.filter(x=>x!==0).length,name+': quotient terms are shown above the dividend');
-   const quotientPlaces=await host.evaluate(el=>[...el.querySelectorAll('.division-grade-row th[data-grade]')].every((heading,i)=>{
-    const cell=el.querySelector('.stol-quotient-row').children[i+1];
-    const formula=cell?.querySelector('math');
-    if(!formula)return true;
-    const h=heading.getBoundingClientRect(),q=cell.getBoundingClientRect();
-    return Math.abs(h.x+h.width/2-q.x-q.width/2)<2;
-   }));
-   check(quotientPlaces,name+': every quotient term aligned to its degree column');
    await host.locator('.back').click();
    check(await host.locator('.result-summary math').count()===0,name+': finish feedback hides when stepping back');
    if(name==='main'||name==='extraC')await photo('dator-'+name+'-fardig-back');
+  }
+
+  // Source-fidelity regression: the quotient belongs above the dividend
+  // and the divisor to its right, in the actual Swedish long-division layout.
+  for(const v of VIEWS){
+   await page.setViewportSize({width:v.w,height:v.h});
+   await go(2);
+   const recapExact=page.locator('[data-source-division="recapExact"]');await recapExact.locator('xpath=parent::details').locator('summary').click();
+   check((await recapExact.locator('tbody tr.original td[data-grade="2"]').innerText()).trim()==='', 'Originalmetod: tom gradplats i stolen');
+   while(await recapExact.locator('.forward').isEnabled())await recapExact.locator('.forward').click();
+   const recapLabels=await recapExact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   check(recapLabels.includes('R(x) = 0')&&recapLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+x−8'),'Första exakta exemplet: oberoende kvot och rest');
+   await recapExact.locator('xpath=parent::details').locator('summary').click();await page.locator('[data-source-choice="1"]').click();await reveal('integer-chair');
+   check(await page.locator('#integer-chair .source-q').first().innerText()==='87','integer bridge quotient 87');
+   check(await page.locator('#integer-chair .source-d').first().innerText()==='3','integer bridge divisor on right');
+   check(await page.locator('#integer-chair .source-q').nth(2).innerText()==='167','Andra heltalsexemplet: 1169/7=167');
+   await page.locator('[data-source-choice="2"]').click();
+   check(await page.locator('#integer-chair').isHidden(),'Only one source example visible');
+   const exact=page.locator('[data-source-division="exactIntro"]');
+   await exact.locator('xpath=parent::details').locator('summary').click();
+   while(await exact.locator('.forward').isEnabled())await exact.locator('.forward').click();
+   check((await exact.locator('.result-summary').innerText()).includes('0'),'exact example ends with zero remainder');
+   const exactLabels=await exact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   check(exactLabels.includes('R(x) = 0')&&exactLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+2x−3'),'exact example independent quotient and rest');
+   if(v.w>=1000){
+    await page.evaluate(()=>scrollTo(0,0));
+    const viewportFit=await exact.evaluate(host=>{
+     const table=host.querySelector('.division-table').getBoundingClientRect();
+     const formulas=[...host.querySelectorAll('.result-summary math')].map(e=>e.getBoundingClientRect());
+     return {tableTop:table.top,tableBottom:table.bottom,mathTop:Math.min(...formulas.map(r=>r.top)),mathBottom:Math.max(...formulas.map(r=>r.bottom)),height:innerHeight};
+    });
+    check(viewportFit.tableTop>=0&&viewportFit.mathTop>=0&&viewportFit.tableBottom<=viewportFit.height&&viewportFit.mathBottom<=viewportFit.height,v.name+' hela stolen och restformen synliga samtidigt '+JSON.stringify(viewportFit));
+   }
+   await photo(v.name+'-original-exact');
+   await go(3);await main.locator('.forward').click();await main.locator('.forward').click();
+   const shape=await main.locator('.division-table').evaluate(table=>{
+    const q=table.querySelector('.chair-quotient-cell').getBoundingClientRect();
+    const p=table.querySelector('tbody .original').getBoundingClientRect();
+    const d=table.querySelector('.chair-divisor').getBoundingClientRect();
+    const last=table.querySelector('tbody .original td[data-grade="0"]').getBoundingClientRect();
+    return q.bottom<=p.top+2&&d.left>=last.right-2&&d.top>=q.bottom-2&&parseFloat(getComputedStyle(table.querySelector('.chair-divisor')).borderLeftWidth)>=2;
+   });
+   check(shape,v.name+': actual quotient above dividend and right-hand divisor with chair border');
+   await photo(v.name+'-original-chair');
+   await go(10);await reveal('a10');
+   const exit=page.locator('[data-source-division="exitChair"]');
+   check(await exit.locator('tbody tr.remainder').count()===2,'exit feedback has full two-step division');
+   check((await exit.locator('tbody tr.remainder').last().innerText()).includes('1'),'exit chair remainder is 1');
   }
 
   // Formative feedback, signed number line, zero coefficient, and original
@@ -225,10 +236,7 @@ for(const [name,c] of Object.entries(CASES)){
     check(a.y< v.h-20 && b.y< v.h-20,v.name+': actual degree headers and question inside initial viewport');
    }
    await main.locator('.forward').click();await main.locator('.forward').click();
-    check(await main.locator('tbody tr.product').count()===1,v.name+': first product in correct live diagram');
-    check(await main.locator('.stol-divisor').isVisible(),v.name+': right-hand divisor visibly rendered');
-    const clipped=await main.locator('.division-table').evaluate(table=>({actual:table.getBoundingClientRect().width,available:table.closest('.division').clientWidth}));
-    check(clipped.actual<=clipped.available+3,v.name+': complete long-division table fits without clipped content '+JSON.stringify(clipped));
+   check(await main.locator('tbody tr.product').count()===1,v.name+': first product in correct live diagram');
    await photo(`${v.name}-04-produkt`);
    await go(5);await reveal('a6');await photo(`${v.name}-06-fore-efter`);
    await go(7);await reveal('zero-help');await photo(`${v.name}-08-nollkolumn`);

@@ -83,9 +83,12 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      let moves=1;
      while(await main.locator('.forward').isEnabled()&&moves<16){await main.locator('.forward').click();moves++}
      assert.ok(await main.locator('.forward').isDisabled(),'Förklaringen avslutas vid sista steget');
-     assert.ok(await main.locator('.result-summary math').count()===5,'Slutlig kontroll är riktig matematisk ekvation');
-     assert.ok((await main.locator('.result-summary math').last().getAttribute('aria-label')).replace(/\s+/g,'').includes('2x³+3x²−5x+6'),
-       'Sambandet divisor · kvot + rest återger täljaren');
+     const finalLabels=await main.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label').replace(/\s+/g,'')));
+     assert.equal(finalLabels.length,8,'Fem ursprungliga kontrollled och tre nya led med restformen');
+     assert.ok(finalLabels[4].includes('2x³+3x²−5x+6'),'Sambandet divisor · kvot + rest återger täljaren');
+     assert.ok(finalLabels[5].includes('2x³+3x²−5x+6')&&finalLabels[5].includes('x+2'),'Restformen har rätt täljare och divisor');
+     assert.ok(finalLabels[6].includes('2x²−x−3')&&finalLabels[6].includes('12')&&finalLabels[6].includes('x+2'),'Restformen visar kvoten och restbråket');
+     assert.equal(finalLabels[7],'x≠−2','Restbråkets definitionsvillkor');
      assert.ok(await main.locator('.division-table .product td math').count()>0,'Hela produkter inom parentes satt som matematik');
      await page.screenshot({path:OUT+'/ma4-polynomdivision-math-stolen.png',fullPage:true});
      await page.selectOption('#jump','4');
