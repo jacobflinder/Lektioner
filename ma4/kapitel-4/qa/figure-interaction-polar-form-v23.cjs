@@ -130,6 +130,8 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  ok(await recap.locator('.polar-method-card').count()===4,'four targeted method cards');
  const body=await recap.innerText();
  ok(body.includes('Pythagoras')&&body.includes('Kvadrant')===false&&body.includes('kvadrantkontroll'),'targeted coordinate conversion not main quadrant quiz');
+ ok(await recap.locator('math[aria-label="tan v = b/a"]').count()===1,'original signed tangent rule present in support');
+ ok(await recap.locator('math[aria-label="v = arctan(b/a) + n · 180°"]').count()===1,'original integer-angle rule present in support');
  ok(body.includes('argumentet')&&body.includes('inte definierat'),'zero and direction described');
  ok(!body.includes('225°')&&!body.includes('150°')&&!body.includes('2√2')&&!body.includes('−2 − 2i'),'method cards do not leak exercise answers');
  ok(await recap.locator('math').count()>=6,'semantic rendered equations in support');
