@@ -232,7 +232,8 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
     await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
     await spaced('#procedure [data-seq-item]:nth-child(5) .math-givens',4);
     const modelLineSizes=await page.locator('#procedure [data-seq-item]:nth-child(5) .math-working > p.math').evaluateAll(xs=>xs.map(x=>({shown:x.clientWidth,needed:x.scrollWidth,formula:x.querySelector('math')?.getAttribute('aria-label')})));
-    assert.equal(modelLineSizes.length,4,'03 fyra algebraiska led');
+    assert.equal(modelLineSizes.length,5,'03 fem algebraiska led inklusive insättning i polär form');
+    assert.ok(modelLineSizes.some(x=>x.formula==='= 3√2(cos 135° + i sin 135°)'),'03 polär insättning synlig som eget led');
     assert.ok(modelLineSizes.every(x=>x.needed<=x.shown+2),'03 ALLA rader i den polära återkontrollen ska vara fullt synliga på 390px: '+JSON.stringify(modelLineSizes));
    }
    if(i===4)await spaced('#traps .math-givens',2);
