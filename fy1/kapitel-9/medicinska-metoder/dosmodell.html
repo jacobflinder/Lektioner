@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dos på olika djup – välj före återkoppling</title>
+<style>
+:root{font:16px/1.48 system-ui,-apple-system,sans-serif;color:#153e4d;background:#edf5f7}
+*{box-sizing:border-box}
+body{margin:0;padding:11px}
+main{max-width:1000px;margin:auto}
+h2{font-size:1.32rem;margin:0 0 6px;line-height:1.25}
+p{margin:6px 0 12px}
+.intro{font-size:.9rem;color:#476976}
+.card{background:#fff;border:1px solid #bdd8df;border-radius:14px;padding:15px;margin-bottom:12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:800;margin-bottom:8px}
+.buttons{display:flex;gap:7px;flex-wrap:wrap}
+button{font:inherit;border:1px solid #a5c5cf;border-radius:9px;background:#fff;color:#163f4c;padding:9px 11px;cursor:pointer;min-width:0}
+.buttons button{flex:1 1 0}
+button[aria-pressed=true],button.primary{background:#146d80;color:#fff;border-color:#146d80}
+button:disabled{opacity:.48;cursor:not-allowed}
+button:focus-visible{outline:3px solid #eaa851;outline-offset:2px}
+.figure{background:#143745;border-radius:11px;padding:7px;margin:10px 0}
+svg{width:100%;height:auto;display:block}
+.axis{stroke:#e2eff3;stroke-width:2;fill:none}
+.curve{fill:none;stroke-width:4;opacity:.82;transition:opacity .2s,stroke-width .2s}
+.curve.chosen{opacity:1;stroke-width:7}
+.curve.faded{opacity:.35}
+.figtext{fill:#eaf6fa;font:15px system-ui}
+#zone[hidden],#feedback[hidden]{display:none!important}
+#status{background:#e7f3f7;border-radius:9px;padding:10px 12px;margin:10px 0;color:#295363}
+#feedback{background:#e8f5ed;border:1px solid #a5d4b9;border-left:5px solid #318e67;border-radius:10px;padding:12px;margin:12px 0}
+#feedback[data-correct=false]{background:#fff5e7;border-color:#edcda3;border-left-color:#c18836}
+#feedback strong{display:block;margin-bottom:4px}
+.foot{font-size:.85rem;color:#4b6c79;margin-top:9px}
+@media(max-width:740px){body{padding:7px}.card{padding:12px}.choices{grid-template-columns:1fr;gap:15px}.buttons button{flex-basis:100%}.figtext{font-size:24px}}
+</style>
+</head>
+<body><main>
+<div class="card">
+ <h2>Strålbehandling – vilken kurva passar målet?</h2>
+ <p class="intro">Pröva två principiella situationer från bokens djupdosdiagram. Detta är förenklad fysik, inte ett behandlingsråd eller ett exakt dosvärde.</p>
+ <div class="choices">
+  <fieldset><legend>1. Välj tumörens läge</legend><div class="buttons" id="cases">
+   <button type="button" data-case="shallow" aria-pressed="false">Ytligt · 20 mm</button>
+   <button type="button" data-case="deep" aria-pressed="false">Djupare · 150 mm</button>
+  </div></fieldset>
+  <fieldset><legend>2. Välj strålprincip</legend><div class="buttons" id="methods">
+   <button type="button" data-method="electron" aria-pressed="false">Elektroner</button>
+   <button type="button" data-method="gamma" aria-pressed="false">Gamma</button>
+   <button type="button" data-method="proton" aria-pressed="false">Protoner</button>
+  </div></fieldset>
+ </div>
+ <p id="question" style="font-weight:750;margin-top:14px">Välj tumördjup för att se vilken fysikalisk fråga du ska pröva.</p>
+ <div class="figure">
+  <svg viewBox="0 0 670 242" role="img" aria-label="Schematisk djupdos: elektroner ger hög dos ytligt och faller av, gamma dämpas gradvis, protoner har en Braggtopp vid ungefär 150 millimeter">
+   <rect width="670" height="242" rx="9" fill="#143745"/>
+   <path class="axis" d="M52 30 V197 H625"/>
+   <text class="figtext" x="56" y="20">Relativ dos</text>
+   <text class="figtext" x="340" y="235" text-anchor="middle">Djup i vävnad (mm)</text>
+   <g class="figtext" text-anchor="middle"><text x="52" y="218">0</text><text x="279" y="218">100</text><text x="393" y="218">150</text><text x="506" y="218">200</text><text x="620" y="218">250</text></g>
+   <path d="M52 116 C69 62 97 61 125 67 C245 82 427 120 620 151" class="curve" id="gamma" stroke="#f6af90"/>
+   <path d="M52 61 Q89 45 118 70 C149 98 185 195 280 197 L620 197" class="curve" id="electron" stroke="#9ccef8"/>
+   <path d="M52 178 L315 178 Q358 174 378 130 L392 55 L405 197 L620 197" class="curve" id="proton" stroke="#bfe68a"/>
+   <g class="figtext"><text x="500" y="113">Gamma</text><text x="114" y="112">Elektroner</text><text x="421" y="56">Protoner</text></g>
+   <g id="zone" hidden><rect id="band" x="88" y="35" width="19" height="164" fill="#ffd66d" opacity=".25"/><path id="target-line" d="M97 35 V199" fill="none" stroke="#ffdc73" stroke-width="2" stroke-dasharray="5 4"/><text id="target-label" class="figtext" x="97" y="32" text-anchor="middle" fill="#ffe59c">Tumör</text></g>
+  </svg>
+ </div>
+ <div><button id="run" type="button" class="primary" disabled>Visa återkoppling</button> <button id="reset" type="button">Återställ</button></div>
+ <p id="status" aria-live="polite">Välj först både tumördjup och strålprincip.</p>
+ <div id="feedback" aria-live="polite" hidden></div>
+ <p class="foot">Det illustrerade protonmaximumet ligger kring 150 mm. I verkligheten kan man flytta Braggtoppen genom att ändra protonernas energi. Beslut om vård avgörs aldrig av en sådan här förenklad graf.</p>
+</div>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);let scenario=null,method=null;
+const prompts={
+ shallow:'Vilket strålslag används ofta för att begränsa räckvidden vid ett ytligt mål, som i den blå kurvan?',
+ deep:'Vilket strålslag kan få sitt tydliga dosmaximum vid 150 mm och sedan avge mycket liten dos bortom det djupet?'
+};
+const feedback={
+ shallow:{
+  electron:['Rätt i denna principjämförelse.','Elektroner avger mycket av sin dos nära ytan och har relativt kort räckvidd. De används därför bland annat mot ytligare tumörer.'],
+  gamma:['Jämför kurvorna igen.','Gammafotoner avger dos även djupare in i vävnaden. Flera strålfält kan visserligen riktas mot ett mål, men för just kort räckvidd är elektroner bättre exempel.'],
+  proton:['Inte den mest typiska principen som frågan efterfrågar.','Protoner kan också användas för andra djup om energin anpassas. Men den gröna kurvan här är inställd för cirka 150 mm, medan elektroner visar kort räckvidd.']
+ },
+ deep:{
+  electron:['Jämför räckvidden med målmarkeringen.','Elektronernas dos har redan minskat kraftigt långt före 150 mm i den blå exempelkurvan.'],
+  gamma:['Gamma kan användas vid djupa mål, men är inte svaret här.','Många strålfält kan tillsammans koncentrera dos till en tumör. En ensam gammastråle har dock inget motsvarande tvärt slutmaximum vid 150 mm.'],
+  proton:['Rätt fysikalisk princip.','Med anpassad energi kan protonernas Braggtopp placeras kring målområdet. De avger energi också före toppen men mycket mindre bortom räckvidden i den idealiserade kurvan.']
+ }
+};
+function choose(group,key,value){document.querySelectorAll('#'+group+' button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset[key]===value)));}
+function update(){
+ $('question').textContent=scenario?prompts[scenario]:'Välj tumördjup för att se vilken fysikalisk fråga du ska pröva.';
+ const zone=$('zone');zone.hidden=!scenario;
+ if(scenario){const x=scenario==='shallow'?97:393;$('band').setAttribute('x',String(x-10));$('target-line').setAttribute('d','M'+x+' 35 V199');$('target-label').setAttribute('x',String(x));$('target-label').textContent='Tumör';}
+ $('run').disabled=!scenario||!method;
+ $('feedback').hidden=true;$('feedback').textContent='';
+ ['gamma','electron','proton'].forEach(id=>$(id).setAttribute('class','curve'));
+ $('status').textContent=(!scenario||!method)?'Välj först både tumördjup och strålprincip.':'Förutsäg med din kamrat varför du valde den kurvan. Visa sedan återkopplingen.';
+}
+document.querySelectorAll('#cases button').forEach(b=>b.onclick=()=>{scenario=b.dataset.case;choose('cases','case',scenario);update();});
+document.querySelectorAll('#methods button').forEach(b=>b.onclick=()=>{method=b.dataset.method;choose('methods','method',method);update();});
+$('run').onclick=()=>{
+ if(!scenario||!method)return;
+ const isCorrect=(scenario==='shallow'&&method==='electron')||(scenario==='deep'&&method==='proton');
+ const [header,detail]=feedback[scenario][method];
+ const f=$('feedback');f.textContent='';const title=document.createElement('strong');title.textContent=header;const p=document.createElement('p');p.textContent=detail;f.append(title,p);f.dataset.correct=String(isCorrect);f.hidden=false;
+ ['gamma','electron','proton'].forEach(id=>$(id).setAttribute('class','curve '+(id===method?'chosen':'faded')));
+ $('status').textContent='Jämför med de andra kurvorna. Prova gärna det andra tumördjupet och gör en ny förutsägelse.';
+};
+$('reset').onclick=()=>{scenario=null;method=null;choose('cases','case',null);choose('methods','method',null);update();};
+update();
+})();
+</script>
+<script>
+/* Preserve full visible feedback in the lesson iframe, without internal scrolling. */
+(()=>{
+ let last=0;
+ const send=()=>{
+  const height=Math.ceil(document.body.getBoundingClientRect().height)+20;
+  if(Math.abs(height-last)<2)return;
+  last=height;
+  window.parent.postMessage({type:'fy1-embedded-demo-height',height},location.origin);
+ };
+ if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);
+ window.addEventListener('load',send);
+ window.addEventListener('message',event=>{if(event.origin===location.origin&&event.data?.type==='fy1-request-demo-height')send();});
+ requestAnimationFrame(send);
+})();
+</script>
+</body>
+</html>
