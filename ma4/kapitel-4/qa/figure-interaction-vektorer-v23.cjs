@@ -28,8 +28,8 @@ ok(Math.hypot(0,1-(-1))===2,'open disk excludes boundary point');
   ok(response.status()===200,'HTTP 200 '+width);
   ok(JSON.stringify(await page.locator('.slide').evaluateAll(xs=>xs.map(x=>x.id)))===JSON.stringify(ids),'8 original slides '+width);
   ok(await page.locator('.slide[data-optional]').count()===0,'all original geometrical slides required');
-  await go(2);await page.locator('#next').click();ok(await page.locator('.slide.active').getAttribute('id')==='circles','original circle slide on main route');await page.locator('#next').click();ok(await page.locator('.slide.active').getAttribute('id')==='regions','original regions slide on main route');
   const go=async i=>{await page.selectOption('#jump',String(i));ok(await page.locator('.slide.active').getAttribute('id')===ids[i],'slide '+i+' '+width)};
+  await go(2);await page.locator('#next').click();ok(await page.locator('.slide.active').getAttribute('id')==='circles','original circle slide on main route');await page.locator('#next').click();ok(await page.locator('.slide.active').getAttribute('id')==='regions','original regions slide on main route');
   for(let i=0;i<8;i++){
    await go(i);
    ok(await page.evaluate(()=>document.documentElement.scrollWidth)<=width+4,'no horizontal overflow '+i+' '+width);
