@@ -120,6 +120,21 @@ async function run(){
    ok(await details.evaluate(x=>x.open),'Stöd fungerar i klassrumsläge');
    await click(page,'#mode');ok(!(await details.evaluate(x=>x.open)),'Metodstöd återställs vid lägesbyte');
    await visit(page,2);
+   const restored=page.locator('#teacher-rectangular-method');
+   ok(await restored.isVisible(),'Lärarens fullständiga rektangulära metod ingår i huvudbilden');
+   const ids=['teacher-rect-expand','teacher-rect-system','teacher-rect-cases','teacher-rect-roots'];
+   for(const id of ids)ok(await page.locator('#'+id).isHidden(),'Metodfacit dolt före eget försök '+id);
+   for(const id of ids)await click(page,'[data-reveal="'+id+'"]');
+   const labels=await restored.locator('math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   for(const expression of ['a² − b² − 2b + 8 = 0','2ab + 2a = 0','2a(b + 1) = 0','b² + 2b − 8 = 0','a² = −9','z₁ = 0 + 2i = 2i','z₂ = 0 − 4i = −4i']){
+    ok(labels.some(label=>label&&label.replaceAll(' ','')===expression.replaceAll(' ','')),'Restored semantic step '+expression);
+   }
+   ok((await page.locator('#teacher-rect-roots').innerText()).includes('positiv imaginärdel'),'Villkoret bevarat');
+   const overflow=await restored.locator('math').evaluateAll(es=>es.filter(e=>{const a=e.getBoundingClientRect(),p=e.parentElement.getBoundingClientRect();return a.width>p.width+3}).map(e=>e.getAttribute('aria-label')));
+   equal(overflow,[],'Ingen beskuren matematik i lärarens metod '+size.name);
+   await photo(page,size.name+'-03-original-rektangular');
+   await visit(page,3);await visit(page,2);
+   for(const id of ids)ok(await page.locator('#'+id).isHidden(),'Metodfacit återställs '+id);
    const variant=page.locator('[data-check="variant"]');
    await variant.locator('input').fill('5i;5i');await variant.locator('[data-check-action="check"]').click();
    ok((await variant.locator('.sc-feedback').innerText()).includes('samma rot'),'Förklarande respons vid dubbelinskriven rot');
