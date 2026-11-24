@@ -139,6 +139,9 @@ async function run(){
    ok((await page.locator('#teacher-rect-roots').innerText()).includes('positiv imaginärdel'),'Villkoret bevarat');
    const overflow=await restored.locator('math').evaluateAll(es=>es.filter(e=>{const a=e.getBoundingClientRect(),p=e.parentElement.getBoundingClientRect();return a.width>p.width+3}).map(e=>e.getAttribute('aria-label')));
    equal(overflow,[],'Ingen beskuren matematik i lärarens metod '+size.name);
+   const case2line=await page.locator('#teacher-rect-cases p.math.compact-math').evaluateAll(es=>es.filter(e=>e.textContent.includes('a² − (−1)²')).map(e=>({visible:e.clientWidth,needed:e.scrollWidth})));
+   equal(case2line.length,1,'Fall 2:s insättning finns kvar i fullständig form');
+   ok(case2line[0].needed<=case2line[0].visible+2,'Hela insättningsraden inklusive = 0 är synlig utan sidscroll i '+size.name+': '+JSON.stringify(case2line));
    await photo(page,size.name+'-03-original-rektangular');
    await visit(page,3);await visit(page,2);
    for(const id of ids)ok(await page.locator('#'+id).isHidden(),'Metodfacit återställs '+id);
