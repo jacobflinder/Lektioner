@@ -9,3 +9,5 @@ Källfilm Lek1 (13:17): ca 00:30 bokplan 4431–4443; 02:00–03:30 kvot/rest i 
 - Tester uppdaterar ordningen, kontroll av formler, facitdöljning och visuell evidens på fyra storlekar.
 
 Status: arbetsgren; ingen publicering före faktisk visuell kontroll och full kursregression. Filmgranskningen bygger på återkommande bildrutor och närbilder, inte en verifierad ordagrann ljudtranskription.
+
+Visuell inspektion av faktorsatsen, körning 45435438398: original-division och original-rest var för långa i projektorformat. Flyttar nu repetition respektive restexempel till vänster och befintlig elevaktivitet till höger på breda skärmar, med oförändrad läsordning och vertikal stapling på mobil. Lägger till test som kontrollerar verklig position och att hela den öppnade beräkningen ligger inom skärmens höjd. Ny rendering och fortsatt originalkontroll krävs; inte publicerat.

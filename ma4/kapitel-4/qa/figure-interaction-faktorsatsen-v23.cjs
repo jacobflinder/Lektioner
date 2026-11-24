@@ -77,12 +77,25 @@ const check=(ok,label)=>{assert.ok(ok,label);tests++};
    }
    await go(0);await invisible('factor-source-bridge');
    await page.locator('[data-reveal="factor-source-bridge"]').click();
-   await mathLabel(page.locator('#factor-source-bridge'),'= 12');await shot(name+'-original-division');
+   await mathLabel(page.locator('#factor-source-bridge'),'= 12');
+   const divisionLayout=await page.locator('#f-start .factor-original-layout').evaluate(el=>{
+     const a=el.firstElementChild.getBoundingClientRect(),b=el.lastElementChild.getBoundingClientRect();
+     return {wide:innerWidth>=1050,sideBySide:b.left>=a.right-2,stacked:b.top>=a.bottom-2,mathBottom:el.querySelector('#factor-source-bridge').getBoundingClientRect().bottom,screen:innerHeight}
+   });
+   check(divisionLayout.wide?divisionLayout.sideBySide:divisionLayout.stacked,name+' originalrepetition responsiv '+JSON.stringify(divisionLayout));
+   if(divisionLayout.wide)check(divisionLayout.mathBottom<=divisionLayout.screen,name+' hela repetitionsberäkningen synlig utan scroll');
+   await shot(name+'-original-division');
    await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='f-sats','Sats före exempel i huvudvägen');
    check(await page.locator('#factor-fundamental').isVisible(),'Algebrans fundamentalsats synlig före tillämpning');
    await page.locator('#next').click();check(await page.locator('.slide.active').getAttribute('id')==='f-rest','Rest före grafisk tillämpning');
    await invisible('factor-quartic-rest');await page.locator('[data-reveal="factor-quartic-rest"]').click();
    await mathLabel(page.locator('#factor-quartic-rest'),'= −2');check(1**4-2*1**3+3*1**2-4===-2,'Oberoende restberäkning');
+   const restLayout=await page.locator('#f-rest .factor-original-layout').evaluate(el=>{
+     const a=el.firstElementChild.getBoundingClientRect(),b=el.lastElementChild.getBoundingClientRect();
+     return {wide:innerWidth>=1050,sideBySide:b.left>=a.right-2,stacked:b.top>=a.bottom-2,mathBottom:el.querySelector('#factor-quartic-rest').getBoundingClientRect().bottom,screen:innerHeight}
+   });
+   check(restLayout.wide?restLayout.sideBySide:restLayout.stacked,name+' restexemplet och faktorkandidaterna responsiva '+JSON.stringify(restLayout));
+   if(restLayout.wide)check(restLayout.mathBottom<=restLayout.screen,name+' hela restberäkningen synlig utan scroll');
    await shot(name+'-original-rest');
    await go(2);await quiz.locator('button[data-correct="true"]').click();await page.locator('[data-reveal="rest3"]').click();
    check(await quiz.locator('.feedback math').count()===3,name+' semantic quiz feedback');await shot(name+'-rest-feedback');
