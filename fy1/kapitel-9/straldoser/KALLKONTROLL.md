@@ -64,3 +64,26 @@
 - 9.7 har därför avlägsnat både **Lärarnotiser** och **Lärarstöd** från toppmenyn och tar bort de interna lärar- och källnotisernas HTML-element från elevens sida efter att den gemensamma lektionsmotorn initierats. Projektets källkarta och lärarstöd finns kvar separat för intern granskning, inte som en elevfunktion.
 - Delad `fy1/gemensamt/app.js` ändras inte, för att övriga lektionssidor ska behålla fungerande navigering. Ett lektionsspecifikt `elevvy.js` körs efter motorn. Klassrum/Repetition, Helskärm, stegvisa lösningar och quiz ska fungera precis som tidigare.
 - Webbläsar-QA kontrollerar att knappar, lärarnotiser och källmetadata saknas i elevens DOM på samtliga fyra skärmstorlekar. Slutligt godkännande kräver ett lyckat test av den aktuella committen och visuell granskning innan merge till huvudgrenen.
+
+## Lässtöd per bokuppgift 962–973 – tillagt efter lärargranskning
+
+Bild 9 visar nu tydligt **en konkret teorihänvisning till text eller tabell för var och en av de tolv obligatoriska uppgifterna**, i ett kompakt tvåkolumnsläge på stor skärm och enkolumnsläge på mobil. Uppgifternas frågetexter står alltjämt på s. 368–369. Här är hänvisningarna till *stödmaterialet*, inte till frågans placering:
+
+| Uppgift | Teori-/tabellhänvisning |
+|---|---|
+| 962 | s. 364, absorberad dos och D=E/m; gemensamt löst på bild 8 |
+| 963 | s. 365–366, kvalitetsfaktor, organvikter och förenklad riskmodell |
+| 964 | s. 365, vävnadsviktfaktorer |
+| 965 | s. 364–365, cellskador och strålslag |
+| 966 | s. 365, kvalitets- och vävnadsviktfaktorer |
+| 967 | s. 364–366, dos, effektiv dos och risk |
+| 968 | s. 366, bakgrundsdoser, årsdos och risk |
+| 969 | s. 365, protoners kvalitetsfaktor samt organvikter |
+| 970 | s. 364–365, absorberad dos, Q och effektiv dos |
+| 971 | s. 359 (9.6), s. 364 (9.7), alfapartiklars jonisation och biologiska effekt |
+| 972 | s. 366–367, doshastighet och högdosverkan |
+| 973 | s. 340–343 (9.4), s. 350–353 (9.5) och s. 364–365 (9.7), alfasönderfall, aktivitet och dos |
+
+Ingen teori har kopierats från bokens exempel; referenserna är sökhjälp för självständiga lösningar. Målkopplingarna på bild 10 och Jacobs metod i uppgift 962 är oförändrade.
+
+**Slutkrav:** rätt och tydlig mobil/projektorvisning, inga avklippta formel- eller referensrader, och verifierat fungerande val/återkoppling på aktuell PR-commit. Separat webbläsargranskning krävs före merge/publicering.
