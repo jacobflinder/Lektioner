@@ -145,6 +145,10 @@ for(const p of [[1,Math.sqrt(3)],[-2,0],[1,-Math.sqrt(3)]]){close(power(p,3)[0],
     ok(await page.locator('#'+id).isHidden(),'Originalets femtegradsexempel dolt före eget försök');
     await page.locator('[data-reveal="'+id+'"]').click();
    }
+   const fifthMath=await page.locator('#fifth-polar math, #fifth-equations math, #fifth-solutions math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')).filter(Boolean));
+   for(const step of ['= 243(cos π + i sin π)','5v = π + k · 2π','v = (π + k · 2π)/5','= π/5 + k · 2π/5','v = π/5 + 4 · 2π/5','= 9π/5','z₅ = 3(cos(9π/5) + i sin(9π/5))'])
+    ok(fifthMath.includes(step),'Filmens radianmetod, fullständigt led: '+step);
+   ok(fifthMath.every(x=>!x.includes('°')),'Inga grader i filmens radianberäkning av de fem rötterna');
    const fifth=await page.locator('#fifth-root-plane [data-fifth-root]').evaluateAll(es=>es.map(e=>({v:Number(e.dataset.v),x:Number(e.querySelector('circle').getAttribute('cx')),y:Number(e.querySelector('circle').getAttribute('cy'))})));
    ok(fifth.length===5,'fem rötter, inte tre eller fyra');
    fifth.forEach(({v,x,y},i)=>{
