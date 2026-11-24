@@ -96,7 +96,7 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      assert.equal(await longDivision.locator('[data-seq-item]:not(.hidden)').count(),0,'Polynomdivision dold innan eleverna räknar');
      for(let i=0;i<4;i++)await longDivision.locator('[data-seq-next]').click();
      assert.equal(await longDivision.locator('[data-seq-item]:not(.hidden)').count(),4,'Fyra divisionssteg vid eget arbete');
-     assert.ok(await longDivision.locator('.longdiv-demo td math').count()>=15,'Liggande stolens termer typograferade');
+     assert.ok(await longDivision.locator('.longdiv-demo td math').count()>=13,'Liggande stolens termer typograferade');
      assert.ok(await longDivision.locator('math msup').count()>=10,'Graderna på alla termer korrekt uppställda');
      for(let i=4;i<6;i++)await longDivision.locator('[data-seq-next]').click();
      assert.equal(await longDivision.locator('[data-seq-item]:not(.hidden)').count(),6,'Komplexa rötter och fullständighet följer efter divisionen');

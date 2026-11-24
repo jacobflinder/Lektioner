@@ -18,7 +18,9 @@ for(const [name,coeff,roots] of [
  ['huvudexempel',[1,-1,4,-4],[[1,0],[0,2],[0,-2]]],
  ['kvartisk',[1,2,6,2,5],[[0,1],[0,-1],[-1,2],[-1,-2]]],
  ['eget försök',[1,0,5,0,4],[[0,2],[0,-2],[0,1],[0,-1]]],
- ['utcheckning',[1,2,9,18],[[-2,0],[0,3],[0,-3]]]
+ ['utcheckning',[1,2,9,18],[[-2,0],[0,3],[0,-3]]],
+ ['original kvartisk',[1,-1,-10,-8,0],[[0,0],[-1,0],[4,0],[-2,0]]],
+ ['original komplex rot',[1,-2,9,-18],[[0,3],[0,-3],[2,0]]]
 ]){
  eq(coeff.length-1,roots.length,name+': antal komplexa rötter = graden');
  roots.forEach(([re,im])=>{
@@ -74,10 +76,35 @@ ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
    eq(await seq.locator('[data-seq-prompt] math[aria-label="p(1) = 0"]').count(),1,width+': första förutsägelsefrågans matematik är MathML');
    for(let i=0;i<4;i++)await seq.locator('[data-seq-next]').click();
    eq(await seq.locator('[data-seq-item]:visible').count(),4,width+': stegvis polynomdivision');
-   ok(await page.locator('#h-kand .longdiv-demo math[aria-label="+ 0z"]').count()===1,width+': nollkoefficienten kvar i gradkolumnen');
+   ok(await page.locator('#h-kand .longdiv-demo td[data-q-degree="1"][data-blank="true"]').count()===1,width+': tom gradplats kvar i kvoten');
    await within('#h-kand .division-demo', 'divisionsuppställningens synliga container');
    await shot('03-division');
 
+   const chairGeometry=async id=>{
+    const loc=page.locator('[data-source-chair="'+id+'"] table');
+    ok(await loc.isVisible(),width+': synlig originaluppställning '+id);
+    const geom=await loc.evaluate(table=>{
+     const q=table.querySelector('.source-q').getBoundingClientRect(),p=table.querySelector('.source-original').getBoundingClientRect(),d=table.querySelector('.source-divisor').getBoundingClientRect(),last=table.querySelector('.source-original [data-degree="0"]').getBoundingClientRect();
+     const bounds=table.getBoundingClientRect();
+     const math=[...table.querySelectorAll('math')].map(e=>e.getBoundingClientRect());
+     return {correct:q.bottom<=p.top+2&&d.left>=last.right-2&&parseFloat(getComputedStyle(table.querySelector('.source-divisor')).borderLeftWidth)>=2,inside:math.every(m=>m.left>=bounds.left-3&&m.right<=bounds.right+3),rest:table.querySelector('.source-rest:last-child')?.textContent.trim()};
+    });
+    ok(geom.correct&&geom.inside,width+': kvot ovanför, divisor till höger och ingen klippning '+id+' '+JSON.stringify(geom));
+    eq(geom.rest,'0',width+': fullständig nollrest '+id);
+   };
+   await chairGeometry('known');
+   await go(3);
+   for(const id of ['source-q-extract','source-q-divide','source-q-pq'])ok(!(await page.locator('#'+id).isVisible()),width+': originalfacit dolt '+id);
+   for(const id of ['source-q-extract','source-q-divide','source-q-pq'])await page.locator('[data-reveal="'+id+'"]').click();
+   await chairGeometry('originalQuartic');ok((await math('#source-q-pq').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('x₃ = 4'),width+': positiv rot 4');
+   await page.locator('[data-reveal="source-q-divide"]').scrollIntoViewIfNeeded();await shot('04-original-kvartisk');
+   await go(5);
+   for(const id of ['source-c-factor','source-c-divide','source-c-root'])ok(!(await page.locator('#'+id).isVisible()),width+': originalfacit dolt '+id);
+   for(const id of ['source-c-factor','source-c-divide','source-c-root'])await page.locator('[data-reveal="'+id+'"]').click();
+   await chairGeometry('originalComplex');ok((await math('#source-c-root').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('x₃ = 2'),width+': reell rot 2');
+   await page.locator('[data-reveal="source-c-divide"]').scrollIntoViewIfNeeded();await shot('06-original-komplex');
+   for(let i=0;i<4;i++)await page.locator('#h-kvot [data-seq-next]').click();
+   await chairGeometry('higher3');await noPageOverflow('andragradsdivisor');
    await go(4);
    const decision=page.locator('#h-conjugate-decision');
    ok(!(await decision.locator('[data-decision-submit]').isEnabled()),width+': återkoppling kräver val');
