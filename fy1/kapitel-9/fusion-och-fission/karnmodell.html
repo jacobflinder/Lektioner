@@ -29,4 +29,18 @@ if(mode==='fission'){let k=Number(v);const counts=[1,k,k*k,k*k*k];for(let g=0;g<
 else{const high=v==='high';if(high){circ(230,160,42,'#f3c974','He-3');circ(380,165,18,'#93dff5','n');add('path',{d:'M290 162 H345',stroke:'#ffd270','stroke-width':4,'stroke-dasharray':'9 7'});add('text',{x:335,y:243,class:'diagram-label','text-anchor':'middle'},'2 D → He-3 + neutron + energi');$('count').textContent='Fusion möjlig';$('energy').textContent='≈ 3,27 MeV';outcome=1;why='Vid tillräckligt nära möte kan deuteriumkärnor genomgå fusion till helium-3 och en neutron. Skillnaden i massa frigörs som energi. Modellen avser inte att varje kollision vid hög energi leder till fusion.';}else{circ(180,170,32,'#e7c16c','D');circ(465,170,32,'#e7c16c','D');add('path',{d:'M250 160 L220 160 M395 160 L425 160',stroke:'#f0b670','stroke-width':4});$('count').textContent='Ingen fusion';$('energy').textContent='Ingen reaktion';outcome=0;why='Positivt laddade kärnor repellerar elektriskt. Vid låg energi kommer de normalt inte nära nog för att den starka kärnkraften ska binda dem.';}$('caption').textContent='Schematiskt utfall i en vald situation, inte en sannolikhetsmätning av verkligt plasma.'}
 const good=choice===outcome;$('result').textContent=(good?'Rätt förutsägelse. ':'Din förutsägelse stämde inte med modellen. ')+why;$('result').style.display='block';$('status').textContent='Jämför din förutsägelse med utfallet och motivera fysikaliskt.';$('run').disabled=false;}
 $('modes').querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;setup()});$('setting').onchange=()=>reset();$('run').onclick=run;$('reset').onclick=()=>reset();setup();
-})();</script></body></html>
+})();</script><script>
+/* Send intrinsic content height to the same-origin lesson view; no nested scrolling. */
+(()=>{
+  let last=0;
+  const send=()=>{
+    const height=Math.ceil(document.body.getBoundingClientRect().height)+20;
+    if(Math.abs(height-last)<2)return;
+    last=height;
+    window.parent.postMessage({type:'fy1-embedded-demo-height',height},location.origin);
+  };
+  if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);
+  window.addEventListener('load',send);
+  requestAnimationFrame(send);
+})();
+</script></body></html>
