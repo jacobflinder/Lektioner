@@ -1,13 +1,13 @@
 # Källkontroll – 9.9 Medicinska metoder
 
-**Status: UTKAST / STOPP. Publiceras inte som färdig lektion innan uppgiftstexterna och teorisidorna kan kontrolleras.**
+**Status 24 november: Samtliga bokuppgifter direktverifierade. Ny bokstyrd bild om strålbehandling tillagd; slutlig fysik- och visuell QA återstår före merge/publicering.**
 
 ## Faktiskt kontrollerade källor
 - 231009 Medicinska metoder Na22.pdf och 231009 Medicinska metoder Fy1 2208.txt.
 - Planering 01. åk2 Na25 Planering Fy1.pdf: avsnitt 9.9 s. 376–381, uppgifter 988–998.
 - Fem äldre Blausen-videolänkar i original-PDF: röntgen, datortomografi, magnetresonans, PET/CT, gammakamera/skintigrafi. Tidigare uppgift från läraren: länkarna är otillförlitliga/kan kräva betalning. Interaktiva illustrationer fungerar därför utan länkarna.
 - För moderna begreppsavgränsningar kontrollerad extern medicinsk information, t.ex. 1177:s beskrivningar av röntgen, CT, MR och PET. Extern information är en **saklig kontroll**, inte ny valfri lektionsmetod.
-- **Bokbilderna s. 376–381 inklusive den exakta uppgiftstexten 988–998 i s. 381 kunde inte återöppnas via sessionens filverktyg**, trots tidigare uppladdning. En uppgiftssidas nummer från planeringen är inte en verifierad teorihänvisning. Därför markeras varje enskild teorisida tills direkt källkontroll är möjlig.
+- Direkt återfunna bokfoton: `IMG_6550.jpg`–`IMG_6555.jpg` (s. 376–381). Alla elva uppgifter 988–998, inklusive deluppgifter, har kontrollerats. Användaren har dessutom bifogat läsbara foton på s. 376–380 i detta arbetssteg.
 
 ## Original → elevwebb
 | Originalidé / representation / aktivitet | Bild | Bedömning |
@@ -19,9 +19,10 @@
 | "Magnetröntgen" i äldre talspråk = magnetkamera MR med magnetfält och radiovågor, ej röntgenfotoner | 5 | Bevarat med terminologisk precisering |
 | PET = positronemissionstomografi; positron+elektron → två nästan motsatta gammafotoner | 6 | Bevarat, rättat osäker transkription och illustrerat |
 | Gammakamera med radioaktiv spårsubstans och gammafotoner; kollimator | 7 | Bevarat och tydligt åtskilt från PET |
-| De fem ursprungliga videometoderna | 8 | Var sin interaktiv elevstyrd trestegsvisualisering i en sammanhängande modell |
-| Mindmap, därefter grupparbete med gamla 1173–1184 | 3–9 | Originalets gemensamma mindmap finns nu uttryckligen på bild 8 före de interaktiva jämförelserna; ny bok 988–998 obligatorisk |
-| Nästa lektion Andra chansen, gemensam avslutning | 10 | Bevarat som kort slutkontroll och planeringspåminnelse |
+| De fem ursprungliga videometoderna | 9 | Var sin interaktiv elevstyrd trestegsvisualisering i en sammanhängande modell |
+| Mindmap, därefter grupparbete med gamla 1173–1184 | 9–10 | Originalets gemensamma mindmap på bild 9 före de interaktiva jämförelserna; ny bok 988–998 obligatorisk och individuellt målkopplad |
+| Strålkniv, elektron-/protonbehandling, dos i Gy/Sv | 8 | Nödvändig bokförstärkning för uppgift 992, 996, 997 från s. 379–380; alla strålslag presenteras med egen korrekt schematisk djupdosprofil och val → feedback |
+| Nästa lektion Andra chansen, gemensam avslutning | 11 | Bevarat som kort slutkontroll och planeringspåminnelse |
 
 ## Interaktiv didaktik
 - Fem knappar: Röntgen / CT / MR / PET / Gammakamera.
@@ -30,12 +31,20 @@
 - Inga personuppgifter, ingen inloggning, inga patientbilder eller falska dosvärden, ingen ny Socrative.
 - Ingen separat lärarnotis/lärarstöd i elevgränssnittet.
 
-## Blockerande publiceringskrav
-1. Direktgranska läroboken s. 376–381 och samtliga uppgifter/deluppgifter 988–998.
-2. Ge **varje uppgift** en relevant verifierad teorisida/figur/tabell (inklusive eventuella tidigare avsnitt), inte endast uppgiftssidans nummer.
-3. Koppla alla uppgifter till tre elevmål i sista bild; upptäck och åtgärda saknade centralfall från bokoriginalet.
-4. Gör webbläsargranskning 390/768/1280/1920 px, animationer och alla 15 valalternativ.
-5. Testa att allt innehåll i iframe är synligt utan avklippt respons och att PR-versionen är den godkända versionen.
+## Bokuppgift → mål → teorisida (verifierat mot s. 381)
+
+| Mål | Uppgifter (stöd i teorin) |
+|---|---|
+| 1 Röntgen, CT och MR | 989 (376), 993 (376, repetera 9.6) |
+| 2 PET och gammakamera | 988 (378), 990 (378–379), 991 (378–379), 994 (378, repetera 9.5), 995 (378–379), 998 (378) |
+| 3 Strålbehandling och dos | 992 (379, repetera 9.7), 996 (380, repetera 9.7), 997 (379, repetera 9.7) |
+
+## Publiceringskontroll
+
+1. **Klart:** Granskat teori s. 376–380 och bokens 11 uppgifter s. 381 och kopplat var och en till mål, teorisida och relevant repetition.
+2. **Klart:** Identifierat bokens strålbehandlingsdel (s. 379–380), som tidigare saknades i webbutkastet; tillagd som egen nödvändig bild utan att ersätta originalets fem metoder.
+3. **Återstår:** Ny webbläsarkörning 390/768/1280/1920 px inklusive nya behandlingsbilden, alla 15 alternativ i fem bilddiagnostiska modeller och full respons i iframe.
+4. **Återstår:** Visuell fysikgranskning och jämförelse med PDF/transkription innan publicering.
 
 ## Visuell originalgranskning och ny layoutkontroll (24 november 2026)
 
@@ -43,4 +52,4 @@
 - Första gröna webbläsarkörningen på granskningsgrenen gav skärmbilder i 390/768/1280/1920 px, men **visuell granskning hittade dolda delar av återkopplingen i iframe**. På mobil var även gammakamerans slutdiagram delvis utanför iframe.
 - Koden har nu fått en höjdrapporterande iframe-lösning som låter rutan växa efter elevval/feedback. Fusionens massdefekt har delats upp i flera **sammanhängande, fullt synliga matematiska led på samma bild**, med korrekta enheter. Ingen fysikalisk metod eller begreppsordning har bytts ut.
 - Förnyat GitHub-test kräver nu fullt synliga matematiska uttryck, ingen dold iframe-återkoppling och samtliga 15 alternativ i de fem medicinska demonstrationerna.
-- Publiceringsspärren kvarstår oavsett teknisk teststatus, tills var och en av de 11 bokuppgifterna fått verifierad individuell teorisida och korrekt målkoppling.
+- **Tidigare bokspärr borttagen:** s. 381 återfanns i `source_book/Fy N1b 2627/IMG_6555.jpg`; samtliga elva uppgifter har verifierats. Merge/publicering inväntar fortfarande ny visuell och fysikalisk kontroll.
