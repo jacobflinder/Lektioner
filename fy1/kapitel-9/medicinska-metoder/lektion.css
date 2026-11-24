@@ -117,6 +117,14 @@
 .bookrow{display:flex;gap:11px;align-items:start;border:1px solid #c7e1e5;border-radius:10px;background:#f0f8f9;padding:10px 12px}
 .bookrow>b{flex:0 0 3rem;color:#0c7084;font-variant-numeric:tabular-nums}
 .bookrow span{font-size:.86rem;line-height:1.35}
+.bookrow span strong{display:block;color:#154958;font-size:.94rem;line-height:1.35}
+.bookrow span small{display:block;color:#255968;font-size:.83rem;margin-top:3px}
+.book-goal{border:1px solid #b6d6cf;border-radius:13px;padding:11px 15px;margin:12px 0;background:#f9fcfa}
+.book-goal h3{color:#155565;margin:0 0 8px;font-size:1.02rem}
+.book-goal .booklist{margin:0}
+.task-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.task-chip{display:inline-flex;align-items:center;gap:5px;background:#d8ebdf;color:#164c37;padding:6px 9px;border:1px solid #a5cdb3;border-radius:9px;font-weight:750;font-variant-numeric:tabular-nums;font-size:.86rem}
+.task-chip small{font-size:.77rem;font-weight:550;color:#365c46}
 .pending{color:#825d26;font-weight:750}
 .explanation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
 .explanation-grid>section{background:#f2f8fa;border-radius:12px;padding:14px;border:1px solid #c9dfe5}
