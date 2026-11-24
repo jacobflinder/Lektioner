@@ -39,13 +39,20 @@ async function run(){
    const result=await page.goto(target,{waitUntil:'networkidle'});
    equal(result.status(),200,'Sidan laddad '+size.name);
    equal(await page.locator('.slide').count(),14,'Samtliga 14 elevbilder '+size.name);
-   equal(await page.locator('.slide[data-optional="true"]').count(),3,'Tre valfria bilder bevarade');
+   equal(await page.locator('.slide[data-optional="true"]').count(),3,'Filmens ansats är huvudmetod; PDF:ens metodjämförelse, felanalys och fördjupning är frivilliga');
    for(let n=0;n<14;n++){
     await visit(page,n);
     const dims=await page.evaluate(()=>({actual:document.documentElement.scrollWidth,width:innerWidth}));
     ok(dims.actual<=dims.width+3,'Ingen horisontell sidbeskärning '+size.name+' bild '+(n+1));
    }
    // Skillnaden konjugat/motsatt har samma origo, samma skala och korrekt transformationsbild.
+   await visit(page,1);
+   ok(await page.locator('#teacher-normalize').isVisible(),'Normalisering före pq finns i huvudgenomgången');
+   ok(await page.locator('#teacher-normalize-answer').isHidden(),'Facit dolt före eget försök');
+   await click(page,'[data-reveal="teacher-normalize-answer"]');
+   const normLabels=await page.locator('#teacher-normalize-answer math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   ok(normLabels.some(x=>x&&x.replaceAll(' ','')==='b=√7/4'),'Rätt positiv imaginärdel efter normalisering');
+   await photo(page,size.name+'-02-normalisering');
    await visit(page,3);
    const cards=page.locator('.slide.active .quadratic-plane-card');equal(await cards.count(),2,'Två begreppsfigurer');
    for(const card of [cards.nth(0),cards.nth(1)]){
@@ -120,6 +127,24 @@ async function run(){
    ok(await details.evaluate(x=>x.open),'Stöd fungerar i klassrumsläge');
    await click(page,'#mode');ok(!(await details.evaluate(x=>x.open)),'Metodstöd återställs vid lägesbyte');
    await visit(page,2);
+   const restored=page.locator('#teacher-rectangular-method');
+   ok(await restored.isVisible(),'Lärarens fullständiga rektangulära metod ingår i huvudbilden');
+   const ids=['teacher-rect-expand','teacher-rect-system','teacher-rect-cases','teacher-rect-roots'];
+   for(const id of ids)ok(await page.locator('#'+id).isHidden(),'Metodfacit dolt före eget försök '+id);
+   for(const id of ids)await click(page,'[data-reveal="'+id+'"]');
+   const labels=await restored.locator('math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   for(const expression of ['a² − b² − 2b + 8 = 0','2ab + 2a = 0','2a(b + 1) = 0','b² + 2b − 8 = 0','a² = −9','z₁ = 0 + 2i = 2i','z₂ = 0 − 4i = −4i']){
+    ok(labels.some(label=>label&&label.replaceAll(' ','')===expression.replaceAll(' ','')),'Restored semantic step '+expression);
+   }
+   ok((await page.locator('#teacher-rect-roots').innerText()).includes('positiv imaginärdel'),'Villkoret bevarat');
+   const overflow=await restored.locator('math').evaluateAll(es=>es.filter(e=>{const a=e.getBoundingClientRect(),p=e.parentElement.getBoundingClientRect();return a.width>p.width+3}).map(e=>e.getAttribute('aria-label')));
+   equal(overflow,[],'Ingen beskuren matematik i lärarens metod '+size.name);
+   const case2line=await page.locator('#teacher-rect-cases p.math.compact-math').evaluateAll(es=>es.filter(e=>e.querySelector('math')?.getAttribute('aria-label')==='a² − (−1)² − 2(−1) + 8 = 0').map(e=>({visible:e.clientWidth,needed:e.scrollWidth})));
+   equal(case2line.length,1,'Fall 2:s insättning finns kvar i fullständig form');
+   ok(case2line[0].needed<=case2line[0].visible+2,'Hela insättningsraden inklusive = 0 är synlig utan sidscroll i '+size.name+': '+JSON.stringify(case2line));
+   await photo(page,size.name+'-03-original-rektangular');
+   await visit(page,3);await visit(page,2);
+   for(const id of ids)ok(await page.locator('#'+id).isHidden(),'Metodfacit återställs '+id);
    const variant=page.locator('[data-check="variant"]');
    await variant.locator('input').fill('5i;5i');await variant.locator('[data-check-action="check"]').click();
    ok((await variant.locator('.sc-feedback').innerText()).includes('samma rot'),'Förklarande respons vid dubbelinskriven rot');
