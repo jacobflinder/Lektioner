@@ -123,10 +123,12 @@ for(const [name,c] of Object.entries(CASES)){
    while(await recapExact.locator('.forward').isEnabled())await recapExact.locator('.forward').click();
    const recapLabels=await recapExact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
    check(recapLabels.includes('R(x) = 0')&&recapLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+x−8'),'Första exakta exemplet: oberoende kvot och rest');
-   await recapExact.locator('xpath=parent::details').locator('summary').click();await reveal('integer-chair');
+   await recapExact.locator('xpath=parent::details').locator('summary').click();await page.locator('[data-source-choice="1"]').click();await reveal('integer-chair');
    check(await page.locator('#integer-chair .source-q').first().innerText()==='87','integer bridge quotient 87');
    check(await page.locator('#integer-chair .source-d').first().innerText()==='3','integer bridge divisor on right');
    check(await page.locator('#integer-chair .source-q').nth(2).innerText()==='167','Andra heltalsexemplet: 1169/7=167');
+   await page.locator('[data-source-choice="2"]').click();
+   check(await page.locator('#integer-chair').isHidden(),'Only one source example visible');
    const exact=page.locator('[data-source-division="exactIntro"]');
    await exact.locator('xpath=parent::details').locator('summary').click();
    while(await exact.locator('.forward').isEnabled())await exact.locator('.forward').click();
