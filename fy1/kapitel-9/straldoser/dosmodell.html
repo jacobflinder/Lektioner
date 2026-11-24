@@ -62,4 +62,14 @@ $('reveal').onclick=()=>{
  $('status').textContent='Du har fått återkoppling på båda valen. Byt strålslag eller organ och förutsäg på nytt.';
  };
 hide();
+// Resize the parent iframe when the two separate feedback messages appear or disappear.
+// Measure the content, not the iframe viewport, so it can shrink after new choices.
+function reportHeight(){
+ const main=document.querySelector('main');
+ const padding=parseFloat(getComputedStyle(document.body).paddingBottom)||0;
+ const height=Math.ceil(main.getBoundingClientRect().bottom+padding);
+ if(window.parent!==window)window.parent.postMessage({type:'fy1-dose-model-height',height},window.location.origin);
+}
+if('ResizeObserver' in window)new ResizeObserver(reportHeight).observe(document.querySelector('main'));
+window.addEventListener('load',reportHeight);
 })();</script></body></html>

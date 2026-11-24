@@ -45,7 +45,7 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
 
 (async()=>{
   const {chromium}=require('playwright');
-  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+  const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.FY1_CHROMIUM_PATH?{executablePath:process.env.FY1_CHROMIUM_PATH}:{})});
   const output=path.resolve(__dirname,'../../../fy1-qa-screenshots/straldoser');
   fs.mkdirSync(output,{recursive:true});
   try{
@@ -112,6 +112,14 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
       assert.match(await frame.locator('#explain').innerText(),/Svar 2[\s\S]*Rätt/,'skin comparison correct');
       const inner=await frame.locator('body').evaluate(el=>({scroll:el.scrollWidth,view:innerWidth,height:el.scrollHeight}));
       assert.ok(inner.scroll<=inner.view+2,`${vp.width}px iframe overflow ${JSON.stringify(inner)}`);
+      await page.waitForFunction(()=>{
+        const iframe=document.querySelector('iframe.dose-animation');
+        const content=iframe?.contentDocument?.querySelector('main');
+        return Boolean(iframe&&content&&iframe.clientHeight>=content.getBoundingClientRect().bottom+4);
+      },null,{timeout:5000});
+      const visibleFeedback=await frame.locator('#explain').evaluate(el=>el.getBoundingClientRect().bottom);
+      const visibleFrame=await page.locator('iframe.dose-animation').evaluate(el=>el.clientHeight);
+      assert.ok(visibleFrame>=visibleFeedback+4,`${vp.width}px feedback clipped inside iframe (${visibleFrame}px vs ${visibleFeedback}px)`);
       await page.screenshot({path:path.join(output,`${vp.width}-model-result.png`),fullPage:true});
 
       await page.selectOption('#jump','7');
