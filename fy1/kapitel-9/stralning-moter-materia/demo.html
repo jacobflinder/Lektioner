@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>9.6 – Digital GM-demonstration | Förhandsvisning</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#153544;background:#edf4f6}*{box-sizing:border-box}
+body{margin:0}main{max-width:1180px;padding:20px;margin:auto}a{color:#12647a}header{display:flex;gap:18px;justify-content:space-between;align-items:start;flex-wrap:wrap}
+h1{font-size:clamp(1.6rem,3.6vw,2.7rem);margin:8px 0;line-height:1.15}h2{font-size:1.13rem;margin:0 0 12px}.eyebrow{letter-spacing:.1em;font-size:.75rem;font-weight:800;color:#387386;text-transform:uppercase}
+p{line-height:1.5}.muted{color:#496775}.card{border:1px solid #d2e1e5;border-radius:18px;background:white;padding:18px;box-shadow:0 5px 18px #183d4a08}
+.layout{display:grid;grid-template-columns:minmax(260px,325px) minmax(0,1fr);gap:16px;margin:16px 0}
+fieldset{border:0;padding:0;margin:0 0 16px}legend{font-weight:750;margin-bottom:7px}.choices{display:flex;flex-wrap:wrap;gap:7px}
+button{font:inherit;cursor:pointer;border-radius:11px;border:1px solid #a5c2ca;background:white;padding:10px 13px;color:#153544}
+button[aria-pressed="true"],button.primary{background:#0d6173;color:white;border-color:#0d6173}button:focus-visible,input:focus-visible{outline:3px solid #e89c45;outline-offset:3px}
+button:disabled{opacity:.5;cursor:not-allowed}.btnrow{display:flex;flex-wrap:wrap;gap:9px}
+input[type=range]{width:100%;accent-color:#0d6173}label{display:block}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.stage{position:relative;background:#0e2733;border-radius:16px;overflow:hidden;border:3px solid #254654}
+svg{display:block;width:100%;height:auto}.simtext{fill:#e3f3f6;font-family:system-ui,sans-serif}.tag{display:inline-block;background:#f1f6f7;border-radius:8px;padding:4px 9px;font-size:.85rem}
+.readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}.metric{padding:12px;border-radius:12px;background:#edf5f7}.metric small{display:block;color:#4b6d77}.metric strong{font-size:clamp(1.2rem,3vw,2rem);font-variant-numeric:tabular-nums}
+.note{font-size:.88rem;color:#415d68;background:#f0f6f7;border-left:4px solid #2b7989;padding:10px 13px;border-radius:8px}
+#reason{min-height:3em}.bars{display:grid;gap:10px}.bar{background:#d8e7ea;height:17px;border-radius:50px;overflow:hidden}.fill{height:100%;background:#1b95a1;transition:width .35s}
+@media(max-width:760px){.layout{grid-template-columns:1fr}main{padding:12px}.card{padding:14px}.readout{grid-template-columns:repeat(3,minmax(0,1fr))}.metric{padding:8px}.metric strong{font-size:1.35rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body><main>
+<header><div><div class="eyebrow">Fysik nivå 1b · 9.6 · digital laborationsmodell</div><h1>När strålning möter materia</h1><p class="muted">Förutsäg → kör → observera → förklara. Jämför med den verkliga GM-rörsdemonstrationen.</p></div><div class="tag">Förhandsvisning av bild 6</div></header>
+<div class="layout">
+<section class="card" aria-label="Inställningar"><h2>1. Välj ett försök</h2>
+<fieldset><legend>Strålslag</legend><div class="choices" id="rads">
+<button type="button" data-rad="alpha" aria-pressed="false">α Alfa</button>
+<button type="button" data-rad="beta" aria-pressed="true">β Beta</button>
+<button type="button" data-rad="gamma" aria-pressed="false">γ Gamma</button></div></fieldset>
+<fieldset><legend>Skärmmaterial</legend><div class="choices" id="materials">
+<button type="button" data-mat="none" aria-pressed="false">Ingen</button>
+<button type="button" data-mat="paper" aria-pressed="false">Papper</button>
+<button type="button" data-mat="alu" aria-pressed="true">Aluminium</button>
+<button type="button" data-mat="lead" aria-pressed="false">Bly</button></div></fieldset>
+<div class="row"><label for="thick"><b>Tjocklek på skärmen</b></label><strong id="thicklabel">3 mm</strong></div>
+<input type="range" id="thick" min="1" max="10" value="3" step="1"><p class="muted" style="font-size:.87rem;margin-top:0">Modellen visar olika material på samma principiella skala – inte jämförbara laboratoriemätningar.</p>
+<h2>2. Förutsäg</h2><fieldset><legend>Hur förändras GM-rörets registrering?</legend>
+<div class="choices" id="predict"><button type="button" data-pred="little" aria-pressed="false">Nästan oförändrad</button><button type="button" data-pred="less" aria-pressed="false">Minskar</button><button type="button" data-pred="background" aria-pressed="false">Nästan bakgrund</button></div></fieldset>
+<div class="btnrow"><button type="button" class="primary" id="run">▶ Starta 10 s</button><button type="button" id="stop">■ Stoppa</button><button type="button" id="reset">↺ Nollställ</button></div>
+<p id="feedback" aria-live="polite" class="note">Välj en förutsägelse och starta försöket.</p>
+</section>
+<section class="card"><h2>3. Se vad som händer</h2>
+<div class="stage"><svg viewBox="0 0 760 315" role="img" aria-label="Animerad schematisk uppställning: strålkälla till vänster, vald skärm i mitten och GM-rör till höger. Partiklar rör sig mot detektorn och kan stoppas vid skärmen.">
+<defs><linearGradient id="det" x1="0" x2="1"><stop stop-color="#719aaa"/><stop offset="1" stop-color="#bbd9e1"/></linearGradient></defs>
+<g><rect x="16" y="55" width="128" height="180" rx="18" fill="#34505f" stroke="#7da4b3" stroke-width="4"/><circle cx="80" cy="145" r="48" fill="#4f6c77" stroke="#aec8d0" stroke-width="4"/>
+<text x="80" y="153" text-anchor="middle" class="simtext" font-size="42" id="sourceSymbol">β</text><text x="80" y="260" text-anchor="middle" class="simtext" font-size="18">Strålkälla</text></g>
+<g><rect id="shield" x="356" y="34" width="26" height="220" rx="6" fill="#9eb5c3" stroke="#e1ebf1" stroke-width="3"/><text x="369" y="280" text-anchor="middle" class="simtext" font-size="17" id="shieldText">Aluminium</text></g>
+<g><rect x="600" y="51" width="143" height="188" rx="18" fill="url(#det)" stroke="#f0fcff" stroke-width="4"/><rect x="613" y="69" width="118" height="68" rx="9" fill="#112f3b"/><text x="673" y="110" text-anchor="middle" font-size="27" fill="#a9f6cb" id="display">0</text>
+<text x="671" y="171" text-anchor="middle" fill="#173b48" font-weight="bold" font-size="24">GM-rör</text><text x="671" y="196" text-anchor="middle" fill="#173b48" font-size="17">registrering</text></g>
+<path d="M148 145 H594" stroke="#d6edf1" stroke-width="2" stroke-dasharray="7 9" opacity=".42"/>
+<g id="particles"></g><text x="373" y="18" text-anchor="middle" class="simtext" font-size="17">Skärm</text>
+</svg></div>
+<div class="readout"><div class="metric"><small>Tid</small><strong id="time">0,0 s</strong></div><div class="metric"><small>Registrerade pulser</small><strong id="count">0</strong></div><div class="metric"><small>Bakgrundspulser</small><strong id="back">0</strong></div></div>
+<div class="bars"><div><div class="row"><b>Förväntad genomträngning</b><span id="passlabel">–</span></div><div class="bar"><div class="fill" id="passbar" style="width:0"></div></div></div></div>
+<p id="reason" class="note" aria-live="polite">Partiklarna och pulserna är en illustration. Detektorn registrerar också bakgrundsstrålning.</p>
+</section></div>
+<section class="card"><h2>4. Jämför den verkliga och digitala demonstrationen</h2><p>Anteckna för varje strålslag: <b>Din förutsägelse</b> → <b>vad modellen visade</b> → <b>vad GM-röret faktiskt visade</b> → <b>fysikalisk förklaring</b>.</p><p class="note">Digital modell: partiklar och pulser genereras schematiskt. Värdena är <b>inte uppmätta data</b>, inte kalibrerade dämpningskoefficienter och kan inte användas för att bestämma stråldos eller aktivitet. Materialets tjocklek, strålningsenergi, geometri och detektorns känslighet påverkar verkliga mätresultat. Endast läraren hanterar strålkällorna.</p><p><a href="../">Till kapitel 9</a></p></section>
+</main><script>
+(()=>{
+'use strict';
+let rad='beta',mat='alu',thick=3,pred='',running=false,t=0,registered=0,background=0,elapsed=0,raf=0,last=0,spawn=0;
+const $=id=>document.getElementById(id), svg=$('particles'), ns='http://www.w3.org/2000/svg';
+const titles={none:'Ingen skärm',paper:'Papper',alu:'Aluminium',lead:'Bly'};
+const explanation={alpha:'Alfa joniserar starkt och stoppas lätt av en tunn skärm. Förutsätter att källan och detektorn är tillräckligt nära.',beta:'Beta kan passera papper men dämpas ofta tydligt av en lämplig metallskärm. Resultatet beror på betapartiklarnas energi.',gamma:'Gammastrålning dämpas successivt, inte genom att varje foton alltid stoppas. Bly kan ge starkare dämpning än tunnare, lättare skärmar.'};
+const nodes=[];
+function pthrough(){if(mat==='none')return .95;if(rad==='alpha')return mat==='paper'?.015:.007;if(rad==='beta')return mat==='paper'?Math.exp(-.12*thick):mat==='alu'?Math.exp(-1.15*thick):Math.exp(-1.8*thick);return mat==='paper'?Math.exp(-.007*thick):mat==='alu'?Math.exp(-.052*thick):Math.exp(-.27*thick)}
+function setButtons(group,attr,val){document.querySelectorAll('#'+group+' button').forEach(b=>b.setAttribute('aria-pressed',b.dataset[attr]===val?'true':'false'))}
+function updateUI(){setButtons('rads','rad',rad);setButtons('materials','mat',mat);setButtons('predict','pred',pred);$('sourceSymbol').textContent={alpha:'α',beta:'β',gamma:'γ'}[rad];$('shield').style.display=mat==='none'?'none':'';$('shieldText').textContent=mat==='none'?'Ingen skärm':titles[mat];$('shield').setAttribute('fill',{paper:'#d8c8a4',alu:'#a1b4c1',lead:'#626982',none:'none'}[mat]);$('shield').setAttribute('width',String(Math.max(9,9+thick*5)));$('shield').setAttribute('x',String(369-(9+thick*5)/2));$('thicklabel').textContent=thick+' mm';$('passbar').style.width=(100*pthrough()).toFixed(0)+'%';$('passlabel').textContent=mat==='none'?'Utan skärm':(pthrough()>.7?'Hög':pthrough()>.12?'Delvis':'Låg');$('reason').textContent=explanation[rad];}
+function reset(){running=false;cancelAnimationFrame(raf);t=elapsed=registered=background=spawn=0;nodes.splice(0).forEach(n=>n.el.remove());$('time').textContent='0,0 s';$('count').textContent='0';$('back').textContent='0';$('display').textContent='0';$('run').textContent='▶ Starta 10 s';$('feedback').textContent='Välj en förutsägelse och starta försöket.';updateUI()}
+function change(key,value){reset();if(key==='rad')rad=value;if(key==='mat')mat=value;if(key==='pred')pred=value;updateUI()}
+document.querySelectorAll('[data-rad]').forEach(b=>b.onclick=()=>change('rad',b.dataset.rad));
+document.querySelectorAll('[data-mat]').forEach(b=>b.onclick=()=>change('mat',b.dataset.mat));
+document.querySelectorAll('[data-pred]').forEach(b=>b.onclick=()=>{pred=b.dataset.pred;setButtons('predict','pred',pred)});
+$('thick').oninput=e=>{thick=Number(e.target.value);reset()};
+function particle(){const el=document.createElementNS(ns,'circle');const y=82+Math.random()*123;el.setAttribute('r',rad==='alpha'?'6':'4');el.setAttribute('fill',{alpha:'#f7af63',beta:'#6ce0e1',gamma:'#f3da64'}[rad]);el.setAttribute('cx','144');el.setAttribute('cy',y);svg.appendChild(el);nodes.push({el,x:144,y,v:rad==='alpha'?135:rad==='beta'?205:260,passed:Math.random()<pthrough(),checked:false});}
+function register(isBackground){registered++;if(isBackground)background++;$('count').textContent=registered;$('back').textContent=background;$('display').textContent=registered;const screen=$('display');screen.style.fill='#ffffff';setTimeout(()=>screen.style.fill='#a9f6cb',70);}
+function tick(now){if(!running)return;const dt=Math.min(.05,(now-last)/1000||.016);last=now;elapsed+=dt;t+=dt;$('time').textContent=Math.min(t,10).toFixed(1).replace('.',',')+' s';
+spawn+=dt*7;while(spawn>=1){particle();spawn--}
+if(Math.random()<dt*.65)register(true);
+for(let i=nodes.length-1;i>=0;i--){const n=nodes[i];n.x+=dt*n.v;n.el.setAttribute('cx',n.x);if(n.x>356&&!n.checked){n.checked=true;if(!n.passed&&mat!=='none'){n.el.setAttribute('fill','#f29d83');n.el.setAttribute('r','7');n.v=0;n.stop=elapsed}}if(n.x>=598&&n.passed){register(false);n.el.remove();nodes.splice(i,1)}else if((n.stop!==undefined&&elapsed-n.stop>.25)||n.x>755){n.el.remove();nodes.splice(i,1)}}
+if(t>=10){running=false;$('run').textContent='▶ Kör igen';let expected=pthrough()>.7?'little':pthrough()>.12?'less':'background';$('feedback').textContent=(pred?pred===expected?'Din förutsägelse stämmer med modellens kvalitativa utfall. ':'Modellen gav ett annat utfall än din förutsägelse. ':'')+'Tolka framför allt skillnaden mellan skärmarna, inte det exakta pulstalet.';return}raf=requestAnimationFrame(tick)}
+$('run').onclick=()=>{if(running)return;reset();running=true;last=performance.now();$('feedback').textContent='Modellen körs. Följ partiklarna och GM-rörets registrering.';$('run').textContent='Kör…';raf=requestAnimationFrame(tick)};
+$('stop').onclick=()=>{running=false;cancelAnimationFrame(raf);$('run').textContent='▶ Kör om'};
+$('reset').onclick=reset;updateUI();
+})();
+</script></body></html>
