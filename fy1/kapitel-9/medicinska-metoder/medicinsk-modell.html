@@ -40,6 +40,7 @@ document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{mode=b.data
   };
   if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);
   window.addEventListener('load',send);
+  window.addEventListener('message',event=>{if(event.origin===location.origin && event.data?.type==='fy1-request-demo-height')send();});
   requestAnimationFrame(send);
 })();
 </script></body></html>
