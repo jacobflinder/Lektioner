@@ -117,9 +117,16 @@ for(const [name,c] of Object.entries(CASES)){
   // and the divisor to its right, in the actual Swedish long-division layout.
   for(const v of VIEWS){
    await page.setViewportSize({width:v.w,height:v.h});
-   await go(2);await reveal('integer-chair');
+   await go(2);
+   const recapExact=page.locator('[data-source-division="recapExact"]');await recapExact.locator('xpath=parent::details').locator('summary').click();
+   check((await recapExact.locator('tbody tr.original td[data-grade="2"]').innerText()).trim()==='', 'Originalmetod: tom gradplats i stolen');
+   while(await recapExact.locator('.forward').isEnabled())await recapExact.locator('.forward').click();
+   const recapLabels=await recapExact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   check(recapLabels.includes('R(x) = 0')&&recapLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+x−8'),'Första exakta exemplet: oberoende kvot och rest');
+   await recapExact.locator('xpath=parent::details').locator('summary').click();await reveal('integer-chair');
    check(await page.locator('#integer-chair .source-q').first().innerText()==='87','integer bridge quotient 87');
-   check(await page.locator('#integer-chair .source-d').innerText()==='3','integer bridge divisor on right');
+   check(await page.locator('#integer-chair .source-d').first().innerText()==='3','integer bridge divisor on right');
+   check(await page.locator('#integer-chair .source-q').nth(2).innerText()==='167','Andra heltalsexemplet: 1169/7=167');
    const exact=page.locator('[data-source-division="exactIntro"]');
    await exact.locator('xpath=parent::details').locator('summary').click();
    while(await exact.locator('.forward').isEnabled())await exact.locator('.forward').click();
