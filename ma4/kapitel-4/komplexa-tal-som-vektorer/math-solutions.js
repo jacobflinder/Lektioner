@@ -1,5 +1,5 @@
 /* Ma4 4.1 – lektion 04/41. Självständigt skrivande före facit.
- * Kärnuppgifternas återkoppling skiljs från frivillig fördjupning.
+ * Återkopplingen till de obligatoriska geometriska uppgifterna visas separat efter eget försök.
  * Alla insättningar, negativa tecken och kvadratsummor visas i egna led. */
 (()=>{'use strict';
 const {step,answer,solution,insertSolutions,typesetStatic}=window.Ma4Math;
