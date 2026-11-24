@@ -26,7 +26,7 @@
 | 2·2,014102 u = 4,028204 u; 3,016029 u + 1,008665 u = 4,024694 u; Δm=0,003510 u | 8 steg 1–4 | Bevarat, avrundat enligt källvärden |
 | Δmc², 1 u·c²≈931,5 MeV; E≈3,27 MeV | 8 steg 5–6 | Bevarat som ursprunglig korta MeV-metod (eleverna har full SI-metod från 9.4) |
 | Grupparbete (gamla 1158–1165 och 1166–1172) | 9 | Ersatt av nya bokens 974–987, samtliga obligatoriska |
-| Separat gemensam mindmap | 3–8 | Integrerad begreppsprogression enligt senare kursbeslut; inte en konkurrerande extra aktivitet |
+| Separat gemensam mindmap | 3–8 | Explicit bevarad mindmap-aktivitet på bild 3 (fission) och bild 6 (fusion efter filmen), samtidigt som begreppen byggs upp stegvis |
 | Tre mål, individuell utcheckning, det som inte hinns läxa | 2,9,10 | Förbättrat. Målkoppling för varje bokuppgift **blockerad av saknad verifierad uppgiftstext** |
 
 ## Särskild faktakonflikt
