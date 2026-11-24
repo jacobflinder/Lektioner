@@ -42,6 +42,7 @@ jobs:
             fy1/kapitel-9/qa/karnreaktioner-qa.cjs \
             fy1/kapitel-9/qa/aktivitet-och-halveringstid-qa.cjs \
             fy1/kapitel-9/qa/straldoser-qa.cjs \
+            fy1/kapitel-9/qa/fusion-medicinska-qa.cjs \
             fy1/kapitel-8/qa/charge-q-v23-all-16.cjs \
             fy1/kapitel-8/qa/deep-review-fy1-36.cjs \
             fy1/kapitel-8/qa/figure-interaction-coulomb-v23.cjs \
@@ -104,4 +105,12 @@ jobs:
         with:
           name: fy1-9-7-visual-evidence
           path: fy1-qa-screenshots/straldoser/
+          retention-days: 14
+
+      - name: Upload 9.8 and 9.9 visual previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fy1-9-8-9-9-visual-evidence
+          path: fy1-qa-screenshots/fusion-medical/
           retention-days: 14
