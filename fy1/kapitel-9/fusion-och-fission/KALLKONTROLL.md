@@ -44,3 +44,11 @@ I transkriptionen 231002 anges att kommersiella kraftreaktorer skulle kräva cir
 3. Jämför eventuella genomräknade uppgifter på bokunderlaget med originalets norm och återställ nödvändiga detaljer.
 4. Verifiera modeller, alla svarsalternativ, mellanled och faktisk layout på 390, 768, 1280 och 1920 px med GitHub Actions.
 5. Granska resultatbilder och signera att ingenting innehållsligt bortfallit.
+
+## Visuell originalgranskning och ny layoutkontroll (24 november 2026)
+
+- Originalvideo: representativa bildrutor från fissionsfilmen har granskats mot PDF/transkript: sekund 30, 120, 240, 360, 480, 600 och 720. Videon i sin helhet är inte omgranskad bildruta för bildruta. Fusionsvideon på 2,2 GB är inte tillgänglig som fil, men dess transkription och PDF är lästa.
+- Första gröna webbläsarkörningen på granskningsgrenen gav skärmbilder i 390/768/1280/1920 px, men **visuell granskning hittade dolda delar av återkopplingen i iframe**. På mobil var även massdefektens mellanled för långa.
+- Koden har nu fått en höjdrapporterande iframe-lösning som låter rutan växa efter elevval/feedback. Fusionens massdefekt har delats upp i flera **sammanhängande, fullt synliga matematiska led på samma bild**, med korrekta enheter. Ingen fysikalisk metod eller begreppsordning har bytts ut.
+- Förnyat GitHub-test kräver nu fullt synliga matematiska uttryck, ingen dold iframe-återkoppling och både fissions- och fusionsdemonstration.
+- Publiceringsspärren kvarstår oavsett teknisk teststatus, tills var och en av de 14 bokuppgifterna fått verifierad individuell teorisida och korrekt målkoppling.
