@@ -19,8 +19,8 @@ for(const [name,coeff,roots] of [
  ['kvartisk',[1,2,6,2,5],[[0,1],[0,-1],[-1,2],[-1,-2]]],
  ['eget försök',[1,0,5,0,4],[[0,2],[0,-2],[0,1],[0,-1]]],
  ['utcheckning',[1,2,9,18],[[-2,0],[0,3],[0,-3]]],
- ['original kvartisk',[1,-1,-10,-8,0],[[0,0],[-1,0],[4,0],[-2,0]]],
- ['original komplex rot',[1,-2,9,-18],[[0,3],[0,-3],[2,0]]]
+ ['original kvartisk',[1,2,-5,-6,0],[[0,0],[-1,0],[2,0],[-3,0]]],
+ ['original komplex rot',[1,-3,16,-48],[[0,4],[0,-4],[3,0]]]
 ]){
  eq(coeff.length-1,roots.length,name+': antal komplexa rötter = graden');
  roots.forEach(([re,im])=>{
@@ -32,7 +32,7 @@ eq((1-1)**2*(1+2),0,'dubbelrot 1');
 ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
 
 (async()=>{
- const browser=await chromium.launch({headless:true});
+ const browser=await chromium.launch({headless:true,...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH}:{})});
  const issues=[];
  try{
   for(const {width,height} of [
@@ -96,12 +96,12 @@ ok((0.9-1)**2*(0.9+2)>0&&(1.1-1)**2*(1.1+2)>0,'tangering utan teckenbyte');
    await go(3);
    for(const id of ['source-q-extract','source-q-divide','source-q-pq'])ok(!(await page.locator('#'+id).isVisible()),width+': originalfacit dolt '+id);
    for(const id of ['source-q-extract','source-q-divide','source-q-pq'])await page.locator('[data-reveal="'+id+'"]').click();
-   await chairGeometry('originalQuartic');ok((await math('#source-q-pq').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('x₃ = 4'),width+': positiv rot 4');
+   await chairGeometry('originalQuartic');ok((await math('#source-q-pq').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('x₃ = 2'),width+': positiv rot 2');
    await page.locator('[data-reveal="source-q-divide"]').scrollIntoViewIfNeeded();await shot('04-original-kvartisk');
    await go(5);
    for(const id of ['source-c-factor','source-c-divide','source-c-root'])ok(!(await page.locator('#'+id).isVisible()),width+': originalfacit dolt '+id);
    for(const id of ['source-c-factor','source-c-divide','source-c-root'])await page.locator('[data-reveal="'+id+'"]').click();
-   await chairGeometry('originalComplex');ok((await math('#source-c-root').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('x₃ = 2'),width+': reell rot 2');
+   await chairGeometry('originalComplex');ok((await math('#source-c-root').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')))).includes('x₃ = 3'),width+': reell rot 3');
    await page.locator('[data-reveal="source-c-divide"]').scrollIntoViewIfNeeded();await shot('06-original-komplex');
    for(let i=0;i<4;i++)await page.locator('#h-kvot [data-seq-next]').click();
    await chairGeometry('higher3');await noPageOverflow('andragradsdivisor');
