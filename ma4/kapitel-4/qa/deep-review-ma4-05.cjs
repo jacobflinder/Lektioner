@@ -225,7 +225,8 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
     for(let j=0;j<3;j++)await page.locator('#polar-next').click();
     await spaced('#polar-reading',2);
     await spaced('#polar-rule .math-givens',4);
-    await spaced('#polar-live',2);
+    assert.ok(await page.locator('#polar-live').isHidden(),'02 slutläget döljer duplicerade mellanvärden');
+    assert.ok(await page.locator('#polar-discovery').isVisible(),'02 slutlägets polära återkoppling syns');
    }
    if(i===2){
     for(let j=0;j<5;j++)await page.locator('#procedure [data-seq-next]').click();
