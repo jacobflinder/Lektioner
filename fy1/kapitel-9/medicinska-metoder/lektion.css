@@ -136,3 +136,12 @@
 .video-link small{display:block;color:#bcd6df;font-weight:400;margin-top:7px}
 .extra-topic{font-size:.9rem;color:#416572}
 @media(max-width:750px){.booklist,.explanation-grid{grid-template-columns:1fr}.embedded-demo{height:1250px}.medical-demo{height:1270px}.bookrow{padding:9px}}
+
+/* Undersökande doskurvor och individuell fördröjd återkoppling. */
+.dose-demo{height:780px}
+.goal-feedback{border:1px solid #abd0bd;background:#f0f8f2;border-radius:12px;margin:9px 0;overflow:hidden}
+.goal-feedback summary{list-style:revert;cursor:pointer;padding:13px 15px;color:#145b43;font-weight:800;line-height:1.4}
+.goal-feedback summary:focus-visible{outline:3px solid #e9ab5a;outline-offset:-3px}
+.goal-feedback[open] summary{border-bottom:1px solid #c1dfcb;background:#e2f2e7}
+.goal-feedback p{margin:0;padding:13px 15px;line-height:1.55}
+@media(max-width:750px){.dose-demo{height:1120px}}

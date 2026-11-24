@@ -61,5 +61,104 @@ pages[10].body=`<div class="goal-check">
 <div class="lesson-action"><b>Individuell slutkontroll</b><p>Skriv ett kort svar per mål: jämför CT och MR; skilj PET från gammakamera; motivera var en protonstråle kan ge som mest dos.</p></div>
 <div class="green-card"><b>Läxa:</b> färdigställ 988–998 på s. 381. <b>Inför nästa gång:</b> frågestund enligt planeringen. Repetera särskilt bokens gröna sammanfattningsrutor.</div>`;
 pages[10].teacher='Tre verifierade mål med alla elva bokuppgifter placerade individuellt. Extra slide för strålbehandling behövs för stoffet på s.379–380.';
+
+/* Diagnostiska felalternativ: varje alternativ får egen saklig förklaring. */
+pages[2].quiz={
+ prompt:'Vad bygger en vanlig röntgendetektors bild på?',
+ options:[
+  'Den mäter hur många röntgenfotoner som passerar olika delar av kroppen.',
+  'Den mäter direkt hur många fotoner som absorberas i varje ben inuti kroppen.',
+  'Den mäter främst den strålning som kroppens vävnader själva avger.'
+ ],correct:0,hint:'Vad når detektorn som sitter på andra sidan patienten?',
+ why:'Röntgenbildens kontraster bygger på att olika vävnader dämpar strålen olika mycket, så olika många fotoner når detektorn.',
+ explanations:[
+  'Rätt. Detektorn tar emot strålningen som återstår efter passage genom kroppen. Skillnader i dämpning ger bildens kontrast.',
+  'Detektorn sitter utanför kroppen och registrerar inte absorberade fotoner direkt. Absorptionen märks genom att färre fotoner kommer fram.',
+  'Det skulle passa bättre för vissa metoder med radioaktiva spårämnen. Vid vanlig röntgen skickas fotoner in utifrån.'
+ ]
+};
+pages[3].quiz={
+ prompt:'Varför kan CT ge snittbilder som en enda vanlig röntgenbild inte ger?',
+ options:[
+  'CT använder en mycket starkare röntgenstråle, så detektorn ser automatiskt djupet.',
+  'CT ger snittbilder enbart när ett kontrastmedel används.',
+  'CT bygger på projektioner från många vinklar som datorn räknar samman.'
+ ],correct:2,hint:'Fundera på vad som tillkommer när källan och detektorn roterar.',
+ why:'Datortomografi rekonstruerar tvärsnitt ur röntgenmätningar från många riktningar.',
+ explanations:[
+  'En starkare stråle ger inte automatiskt djupinformation. Det är de många mätvinklarna och rekonstruktionen som är avgörande.',
+  'Kontrastmedel kan göra vissa strukturer tydligare men är inte förutsättningen för att CT ska kunna ge snittbilder.',
+  'Rätt. Många projektioner från olika vinklar kombineras matematiskt till en snittbild.'
+ ]
+};
+pages[4].quiz={
+ prompt:'Vad behövs för att MR ska kunna registrera en bild?',
+ options:[
+  'Det starka magnetfältet får kroppen att sända ut röntgenfotoner.',
+  'Ett starkt magnetfält och radiovågor används för att skapa mätbara signaler.',
+  'Magnetfältet räcker helt ensamt; radiovågor har ingen uppgift i undersökningen.'
+ ],correct:1,hint:'Skilj radiovågor från röntgenfotoner. Vilka signaler används vid MR?',
+ why:'MR använder magnetfält och radiovågspulser; signalerna som vävnaden avger efter excitation registreras och bildbehandlas.',
+ explanations:[
+  'Nej. MR skapar inte röntgenfotoner. Metoden bygger på magnetfält, radiovågor och signaler från vävnaden.',
+  'Rätt. Magnetfältet och radiovågorna behövs tillsammans för att skapa de mätbara signalerna.',
+  'Magnetfältet är centralt, men radiovågorna behövs för att påverka kärnornas tillstånd och göra signalmätning möjlig.'
+ ]
+};
+pages[5].quiz={
+ prompt:'Varför söker PET efter två nästan samtidiga gammafotoner?',
+ options:[
+  'När en positron möter en elektron bildas normalt två nästan motsatt riktade gammafotoner.',
+  'Spårämnet skickar alltid ut två positroner samtidigt, en åt varje håll.',
+  'PET skickar två röntgenstrålar utifrån och mäter hur de dämpas.'
+ ],correct:0,hint:'Vad händer när positronen annihilerar med en elektron?',
+ why:'Positronen och elektronen annihilerar. Två gammafotoner ger en nära samtidig träff i två detektorer som hjälper till att bestämma linjen till händelsen.',
+ explanations:[
+  'Rätt. Två nästan motsatta gammafotoner registreras i tidsmässig samträff för att lokalisera annihilationen.',
+  'Nej. Det är inte två positroner som registreras. En positron annihilerar med en elektron och ger två gammafotoner.',
+  'Det beskriver i stället röntgenbaserad avbildning. PET mäter strålning från ett spårämne inuti kroppen.'
+ ]
+};
+pages[6].quiz={
+ prompt:'Vad är en avgörande skillnad mellan gammakamera och PET?',
+ options:[
+  'Gammakameran och PET lokaliserar alltid spårämnen genom exakt samma parvisa sammanträffar.',
+  'PET registrerar främst hur många röntgenfotoner som passerat genom patienten.',
+  'Gammakameran kan registrera enskilda gammafotoner genom kollimator; PET söker parvisa träffar.'
+ ],correct:2,hint:'En metod arbetar med kollimator; den andra med två fotoner i nästan motsatta riktningar.',
+ why:'Gammakameran använder ofta kollimator för riktningen hos enskilda gammafotoner. PET detekterar sammanträffar av två annihilationsfotoner.',
+ explanations:[
+  'Nej. Just detekteringen är olika: gammakameran använder kollimator, PET utnyttjar samtidiga träffar från annihilation.',
+  'Nej. Det är röntgen eller CT som mäter genomsläppta röntgenfotoner. PET använder en radioaktiv spårsubstans.',
+  'Rätt. Det är skillnaden mellan kollimerad registrering av gammafotoner och PET:s sammanträffande fotonpar.'
+ ]
+};
+pages[7].quiz={
+ prompt:'Vilken beskrivning stämmer med protonernas djupdosprofil?',
+ options:[
+  'Protoner ger ungefär samma dos på alla djup och slutar sedan utan dosmaximum.',
+  'Med anpassad energi kan protonerna ge en tydlig dostopp nära slutet av sin räckvidd.',
+  'Gammafotoner gör en motsvarande tvärstoppande Braggtopp när deras energi är tillräckligt hög.'
+ ],correct:1,hint:'Titta efter en tydlig topp nära slutet av räckvidden, inte bara gradvis dämpning.',
+ why:'Protoner kan avge en stor del av sin energi nära slutet av räckvidden. Denna Braggtopp kan flyttas med protonernas energi.',
+ explanations:[
+  'Inte riktigt. Protonerna avger också energi på vägen in och kan ge ett markant dosmaximum nära slutet av sin bana.',
+  'Rätt. Protonernas Braggtopp kan placeras vid ett planerat djup genom att välja deras energi.',
+  'Nej. Gammafotoner dämpas gradvis och har inte protonernas distinkta slutmaximum.'
+ ]
+};
+
+/* Bevara bokens tre schematiska kurvor men gör tolkningen elevstyrd. */
+pages[7].body=pages[7].body.replace(/<svg class="diagram depth-profile"[\s\S]*?<\/svg>/,
+ '<iframe class="embedded-demo dose-demo" src="dosmodell.html" title="Välj tumördjup och strålprincip, jämför elektroner, gamma och protoner och visa fysikalisk återkoppling" loading="eager"></iframe>');
+pages[8].body=pages[8].body.replace(
+ 'Växla mellan röntgen, CT, MR, PET och gammakamera. För varje metod: välj vilken signal detektorn arbetar med, få återkoppling och klicka fram alla tre stegen. Jämför sedan två metoder med varandra.',
+ 'Under 9 minuter: gör mindmapens fem grenar gemensamt (2 min), låt varje par välja <b>en</b> av de fem metoderna och klicka igenom val, återkoppling och tre steg (4 min), och jämför sedan två olika metoder (3 min). Alla fem modellerna finns kvar för repetition.');
+pages[10].body=pages[10].body.replace('<div class="green-card">',`
+<div class="lesson-action"><b>Jämför först när du skrivit</b><p>Öppna återkopplingen ett mål i taget. Kontrollera att din förklaring har fysiken med – och komplettera på papper vid behov.</p></div>
+<details class="goal-feedback"><summary>Mål 1 · Visa återkoppling</summary><p>Röntgen och CT registrerar hur mycket röntgenstrålning som passerar kroppen. CT använder många vinklar och rekonstruerar snitt. MR använder starkt magnetfält och radiovågor; vanlig MR använder inte joniserande strålning.</p></details>
+<details class="goal-feedback"><summary>Mål 2 · Visa återkoppling</summary><p>Vid PET annihilerar positron och elektron så att två nästan motsatt riktade gammafotoner kan registreras samtidigt. En gammakamera detekterar enskilda gammafotoner från spårämnet, normalt genom en kollimator.</p></details>
+<details class="goal-feedback"><summary>Mål 3 · Visa återkoppling</summary><p>Elektroner används ofta för ytligare mål, protoner kan få en Braggtopp på valt djup och gamma från flera riktningar kan koncentrera dosen i ett mål. Absorberad dos är <b>D = E/m</b> med enheten <b>Gy = J/kg</b>. Val av verklig behandling kräver fler hänsyn än modellen visar.</p></details>
+<div class="green-card">`);
 document.getElementById('lesson-data').textContent=JSON.stringify({title:'9.9 Medicinska metoder',subject:'Fysik nivå 1b',chapter:'9.9 · Partikel- och kärnfysik',source:'Original 231009 Medicinska metoder; bok 9.9 s. 376–381, uppgifter 988–998 verifierade',pages});
 })();

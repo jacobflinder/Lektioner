@@ -59,3 +59,11 @@
 - Godkänd GitHub Actions-körning **45406307830** för commit `469145c2ddbbd0a3bdbfa1033b43125fdfd7d5f2`: elva bilder i 390/768/1280/1920 px, inga horisontella sidöverflöden, fem bildmetoder gånger tre svarsalternativ, återkoppling efter val samt hela iframens innehåll synligt även när sista steget visas.
 - Nedladdade webbläsarskärmbilder granskade visuellt på mobil och projektor. Strålbehandlingens tre doskurvor, formler, frågor och knappar är tydliga; gammakamerans sista schematiska diagram och dess feedback är inte längre avklippta.
 - Originalets fem metoder och gemensamma mindmap finns kvar; tillägget om strålkniv, elektroner och protoner följer bokens s. 379–380. Alla uppgifter **988–998** är individuellt kopplade till rätt elevmål och teorisida. Ingen ouppklarad central metodavvikelse finns.
+
+## Interaktiv uppföljning efter lärarens återkoppling 24 november
+
+- Bokens schematiska djupdosjämförelse har utvecklats till en digital principmodell på bild 8: eleven väljer **ytligt eller djupare tumörläge**, väljer **elektroner, gamma eller protoner**, motiverar och visar först därefter individuell fysikalisk återkoppling. De tre doskurvorna, protonernas Braggtopp och informationen om flera gammavinklar finns kvar. Fallet är ingen klinisk behandlingsrekommendation och inga påhittade dosvärden visas.
+- Felalternativen i huvudfrågorna har gjorts diagnostiska för missuppfattningar om absorberade/genomsläppta fotoner, CT-vinklar, MR:s radiovågor, PET:s annihilationsfotoner och gammakamerans kollimator. Samtliga får en egen förklaring efter val.
+- Originalets fem bildmetoder och gemensamma mindmap bevaras. För att nio minuter ska vara realistiskt är arbetsgången nu **2 min mindmap → 4 min parutforskning av en metod → 3 min jämförelse**, med alla fem modeller kvar för repetition. Inget nytt Socrative införs.
+- Slutbildens tre mål har varsitt dolt, ämnesspecifikt bedömningsstöd som öppnas **efter elevens korta skriftliga svar**. Bokuppgifterna 988–998 och målmatchningen är orörda; ingen elevtext eller annan personuppgift lagras.
+- Automatisk mobil-/projektorkontroll omfattar nu även båda tumörlägena, alla sex strålval, fördröjd återkoppling samt öppna målpaneler.

@@ -43,5 +43,78 @@ pages[9].body=`<div class="goal-check">
 <div class="lesson-action"><b>Individuell slutkontroll</b><p>Skriv en mening för mål 1 och 2. För mål 3: varför kan atommassor användas i vår D+D-beräkning, och hur får vi energin i MeV?</p></div>
 <div class="green-card"><b>Läxa:</b> kvarvarande uppgifter 974–987 på s. 375. <b>Inför 9.9:</b> läs s. 376–380. Läs särskilt de gröna rutorna så noggrant som möjligt och försök förstå begreppen, sambanden och formlerna.</div>`;
 pages[9].teacher='Slutkontrollen följer samma tre mål som inledningen. Var och en av de 14 verifierade bokuppgifterna står under exakt ett primärmål och en teorisida.';
+
+/* Fysikaliskt diagnostiska missuppfattningar i stället för uppenbara skenalternativ.
+   Varje val har en egen återkoppling. Facitpositionerna är medvetet varierade. */
+pages[0].quiz={
+ prompt:'Vilken beskrivning skiljer fission från fusion?',
+ options:[
+  'Fission handlar om att dela en atomkärna; fusion handlar om att sammanföra elektronskal.',
+  'Fission slår samman lätta kärnor medan fusion klyver tunga kärnor.',
+  'Fission klyver en tung kärna; fusion förenar två lätta kärnor.'
+ ],correct:2,
+ hint:'Fokusera på vad som händer med själva atomkärnorna, inte elektronerna.',
+ why:'Fission innebär kärnklyvning och fusion kärnsammanslagning. Båda handlar om förändringar i kärnan.',
+ explanations:[
+  'Du har rätt om fission, men det är kärnor – inte elektronskal – som slås samman vid fusion.',
+  'Du har bytt plats på orden. Fusion förenar lätta kärnor; fission är klyvning av en tung kärna.',
+  'Rätt. Det är atomkärnorna som förändras: en tung kärna klyvs eller två lätta förenas.'
+ ]
+};
+pages[2].quiz={
+ prompt:'Varför kan en fission leda till ytterligare fissioner?',
+ options:[
+  'Några frigjorda neutroner kan fångas in av andra klyvbara kärnor.',
+  'Energin från den första klyvningen räcker för att automatiskt klyva alla närliggande kärnor.',
+  'Fissionsfragmenten måste alltid själva kollidera med och klyva nästa urankärna.'
+ ],correct:0,
+ hint:'Vilka partiklar kan färdas vidare och utlösa en ny klyvning?',
+ why:'Neutroner som frigörs vid fission kan träffa nya klyvbara kärnor. Om tillräckligt många fortsätter kan en kedjereaktion uppstå.',
+ explanations:[
+  'Rätt. Det är framför allt neutronerna som kan utlösa ytterligare kärnklyvningar och föra kedjan vidare.',
+  'Inte automatiskt. Frigjord energi betyder inte att varje närliggande kärna klyvs; nya klyvningar måste utlösas.',
+  'Nej. Fissionsfragmenten är inte det som normalt upprätthåller kedjereaktionen; de frigjorda neutronerna är avgörande.'
+ ]
+};
+pages[4].quiz={
+ prompt:'Vad händer i princip när styrstavarna absorberar fler neutroner?',
+ options:[
+  'Styrstavarna bromsar neutronerna så att fler av dem kan orsaka nya fissioner.',
+  'Varje enskild fission frigör mindre energi, även om lika många kärnor klyvs.',
+  'Färre neutroner kan utlösa nya klyvningar och kedjereaktionen avtar.'
+ ],correct:2,
+ hint:'Skilj på moderatorns uppgift och styrstavarnas uppgift.',
+ why:'Styrstavarna absorberar neutroner och påverkar hur många nya fissioner som kan ske, inte energin per klyvning.',
+ explanations:[
+  'Det beskriver delvis moderatorns uppgift. Styrstavarna absorberar neutroner och minskar antalet som kan orsaka nya fissioner.',
+  'Nej. Regleringen ändrar framför allt antalet klyvningar per tid, inte den energi som frigörs vid en enskild klyvning.',
+  'Rätt. Färre fortsättande neutroner betyder färre nya klyvningar. Det är så styrstavarna kan reglera reaktorn.'
+ ]
+};
+pages[5].quiz={
+ prompt:'Varför är det svårt för två positivt laddade kärnor att fusionera vid låg rörelseenergi?',
+ options:[
+  'Den starka kärnkraften stöter bort dem redan på stora avstånd.',
+  'Den elektriska repulsionen hindrar dem från att komma tillräckligt nära.',
+  'Den elektriska repulsionen försvinner först när temperaturen är mycket hög.'
+ ],correct:1,
+ hint:'Den starka kärnkraften har mycket kort räckvidd. Vilken kraft märks innan kärnorna kommer nära?',
+ why:'Positiva kärnor repellerar elektriskt. Hög relativ rörelseenergi kan göra nära möten möjliga; den elektriska kraften försvinner inte.',
+ explanations:[
+  'Nej. Den starka kärnkraften är kortverkande och kan binda kärnorna när de väl kommer tillräckligt nära.',
+  'Rätt. Den elektriska repulsionen motverkar nära möten, och därför behövs mycket hög relativ rörelseenergi.',
+  'Inte riktigt. Den elektriska kraften finns kvar också vid hög temperatur, men kärnorna kan då röra sig tillräckligt snabbt för att närma sig varandra.'
+ ]
+};
+pages[3].body += `<div class="lesson-action"><b>Jämför två försök</b><p>Välj först ett läge där fler neutroner absorberas och sedan ett där fler får fortsätta. Förutsäg båda utfallen innan du kör. Vad händer med <b>antalet klyvningar</b> – och vad händer med <b>energin per klyvning</b>?</p></div>`;
+
+/* Samma tre mål får nu kriterier som eleven själv aktivt väljer att visa EFTER
+   sitt skriftliga svar. Ingen ny metod, inget digitalt elevsvar sparas. */
+pages[9].body=pages[9].body.replace('<div class="green-card">',`
+<div class="lesson-action"><b>Jämför först när du skrivit</b><p>Öppna återkopplingen för ett mål i taget. Stryk under det som finns i ditt svar och komplettera det som saknas.</p></div>
+<details class="goal-feedback"><summary>Mål 1 · Visa återkoppling</summary><p>Ett hållbart svar förklarar att neutroner kan starta nya fissioner, att <b>moderatorn bromsar</b> neutroner och att <b>styrstavarna absorberar</b> neutroner. Radioaktiva restprodukter fortsätter sönderfalla och avge värme efteråt.</p></details>
+<details class="goal-feedback"><summary>Mål 2 · Visa återkoppling</summary><p>Två positiva kärnor repellerar elektriskt. Hög rörelseenergi kan göra nära möten möjliga; kommer kärnorna tillräckligt nära kan den starka kärnkraften binda dem. Energi frigörs genom massdefekten. I solen balanseras gravitationen av det utåtriktade trycket.</p></details>
+<details class="goal-feedback"><summary>Mål 3 · Visa återkoppling</summary><p>Reaktionen ska vara balanserad i masstal och atomnummer. I D + D → He-3 + n är antalet elektroner lika före och efter, så atommassor går att använda. Skriv <b>m(före) − m(efter) = 0,003510 u</b> och <b>E = Δmc² ≈ 3,27 MeV</b> i rätt ordning.</p></details>
+<div class="green-card">`);
 document.getElementById('lesson-data').textContent=JSON.stringify({title:'9.8 Fusion och fission',subject:'Fysik nivå 1b',chapter:'9.8 · Partikel- och kärnfysik',source:'Original 231002 Fission och 231003 Fusion; bok 9.8 s. 370–375, uppgifter 974–987 verifierade',pages});
 })();
