@@ -17,7 +17,18 @@ ok(JSON.stringify(ids)===JSON.stringify(slides),'all 8 original slides '+w);
 const go=async n=>{await page.selectOption('#jump',String(n));ok(await page.locator('.slide.active').getAttribute('id')===slides[n],'slide '+n+' at '+w)};
 for(let n=0;n<8;n++){await go(n);ok((await page.evaluate(()=>document.documentElement.scrollWidth))<=w+4,'no overflow slide '+n+' width '+w);
 await page.screenshot({path:path.join(out,'slide-'+(n+1)+'-'+w+'.png'),fullPage:true});shots++;}
-await go(1);ok(await page.locator('#k-plane circle').count()===1,'conjugate initially not shown');
+await go(1);
+ok(await page.locator('#k-source-root-answer').isHidden(),'original pq answer hidden initially');
+await page.locator('[data-reveal="k-source-root-answer"]').click();
+const pqFit=await page.locator('#k-source-root-answer').evaluate(el=>{
+ const rows=[...el.querySelectorAll('math')];return {count:rows.length,overflow:rows.filter(e=>e.getBoundingClientRect().right>innerWidth+2||e.getBoundingClientRect().left<0).length,top:Math.min(...rows.map(e=>e.getBoundingClientRect().top)),bottom:Math.max(...rows.map(e=>e.getBoundingClientRect().bottom)),height:innerHeight}
+});
+ok(pqFit.count>=12&&pqFit.overflow===0,'all original pq formulas present and horizontally visible '+JSON.stringify(pqFit));
+if(w>=1050){await page.evaluate(()=>scrollTo(0,0));ok(pqFit.bottom<=pqFit.height,'all original pq algebra within desktop viewport '+JSON.stringify(pqFit))}
+await page.screenshot({path:path.join(out,'original-pq-'+w+'.png'),fullPage:true});shots++;
+await page.locator('[data-reveal="k-source-root-answer"]').click();
+ok(await page.locator('#k-plane').isVisible(),'interactive plane restored after pq');
+ok(await page.locator('#k-plane circle').count()===1,'conjugate initially not shown');
 ok(await page.locator('#k-readout-conj').isHidden(),'second formula hidden');
 await page.locator('#k-show-conj').click();ok(await page.locator('#k-plane circle').count()===2,'two reflected points');
 ok(await page.locator('#k-readout-z math').count()===1&&await page.locator('#k-readout-conj math').count()===1,'two MathML formulas instead of merged expression');

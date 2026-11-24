@@ -47,6 +47,9 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   assert.ok(await page.locator('#k-source-root-answer').isHidden(),'Konjugatexemplet dolt före försök');
   await page.locator('[data-reveal="k-source-root-answer"]').click();
   for(const expr of ['z = 3 ± √(9 − 25)','z = 3 ± √(−16)','z = 3 ± 4i','z₁ = 3 + 4i','z₂ = 3 − 4i','z₂ = z̄₁'])await has('#k-source-root-answer math[aria-label="'+expr+'"]','Originalets pq/konjugatkedja '+expr);
+  await page.screenshot({path:out+'/ma4-02-original-pq-desktop.png',fullPage:true});
+  await page.locator('[data-reveal="k-source-root-answer"]').click();
+  assert.ok(await page.locator('#k-plane').isVisible(),'Interaktiv spegling återkommer när pq-lösningen stängs');
   assert.ok(await page.locator('#k-rule').isHidden(),'02 konjugeringsregeln dolt');
   assert.ok(!(await page.locator('#k-readout').innerText()).includes('z̄'),'02 inget konjugat i första readout');
   assert.equal(await page.locator('#k-plane circle').count(),1,'02 bara ursprungspunkten synlig');
