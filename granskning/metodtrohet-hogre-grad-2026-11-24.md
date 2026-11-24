@@ -25,7 +25,7 @@ Underlag: originalfilm ”230515–230517 Faktorsatsen samt Polynomekvationer av
 - Filmens metodordning är **bryt ut x → använd given rot/faktorsatsen → liggande stolen → pq**, respektive **reella koefficienter → konjugat → reell andragradsfaktor → liggande stolen → reell rot**. Varken gruppering eller koefficientjämförelse tar över huvudmetoden.
 - Filmens uppgift uttrycker ”en positiv och tre negativa rötter”, men ekvationen har faktiskt rötterna 0, −1, 2 och −3. Webbsidan anger därför korrekt att 0 varken är positivt eller negativt. Detta är en **saklig rättelse**, inte ändrat metodval.
 - PDF:ens gruppering och koefficientjämförelse är **bevarade som separata kontrollsätt efter genomförd division**. De introduceras inte som konkurrerande huvudmetoder.
-- Polynomdivisionens hela mellanled, inklusive nollrest och tomma gradplatser, skapas med samma uppställningskomponent i båda originalexemplen och i dolda facit. Den tidigare felaktiga likhetskedjan i ett subtraktionssteg har korrigerats.
+- Polynomdivisionens hela mellanled, inklusive nollrest och tomma gradplatser, skapas med samma uppställningskomponent i båda originalexemplen och i dolda facit. Den tidigare felaktiga likhetskedjan i ett subtraktionssteg har korrigerats. Efter granskning av den faktiska 390px-skärmbilden delades det långa subtraktionsledet upp i korta, läsbara avbokningar; originalets matematiska räknesteg är kvar.
 - Tre kontrollerbara mål knyts till utcheckningen. Huvudlektion 01–08 och 10; bild 09 är tydligt frivillig. Filmens GeoGebra-aktivitet och PDF:ens NOKflex samt läxor är kvar.
 
 ## Kontrollvillkor
