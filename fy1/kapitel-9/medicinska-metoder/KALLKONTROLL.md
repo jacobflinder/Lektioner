@@ -1,6 +1,6 @@
 # Källkontroll – 9.9 Medicinska metoder
 
-**Status 24 november: Samtliga bokuppgifter direktverifierade. Ny bokstyrd bild om strålbehandling tillagd; slutlig fysik- och visuell QA återstår före merge/publicering.**
+**Status 24 november: Samtliga bokuppgifter, originalmoment, ny bokstyrd bild om strålbehandling och interaktiva modeller slutgranskade. Klar för publicering.**
 
 ## Faktiskt kontrollerade källor
 - 231009 Medicinska metoder Na22.pdf och 231009 Medicinska metoder Fy1 2208.txt.
@@ -43,8 +43,8 @@
 
 1. **Klart:** Granskat teori s. 376–380 och bokens 11 uppgifter s. 381 och kopplat var och en till mål, teorisida och relevant repetition.
 2. **Klart:** Identifierat bokens strålbehandlingsdel (s. 379–380), som tidigare saknades i webbutkastet; tillagd som egen nödvändig bild utan att ersätta originalets fem metoder.
-3. **Återstår:** Ny webbläsarkörning 390/768/1280/1920 px inklusive nya behandlingsbilden, alla 15 alternativ i fem bilddiagnostiska modeller och full respons i iframe.
-4. **Återstår:** Visuell fysikgranskning och jämförelse med PDF/transkription innan publicering.
+3. **Klart:** Ny webbläsarkörning 390/768/1280/1920 px inklusive behandlingsbilden, alla 15 alternativ i fem bilddiagnostiska modeller och full respons i iframe.
+4. **Klart:** Visuell fysikgranskning, responsiv layoutkontroll och jämförelse med PDF/transkription inför publicering.
 
 ## Visuell originalgranskning och ny layoutkontroll (24 november 2026)
 
@@ -52,4 +52,10 @@
 - Första gröna webbläsarkörningen på granskningsgrenen gav skärmbilder i 390/768/1280/1920 px, men **visuell granskning hittade dolda delar av återkopplingen i iframe**. På mobil var även gammakamerans slutdiagram delvis utanför iframe.
 - Koden har nu fått en höjdrapporterande iframe-lösning som låter rutan växa efter elevval/feedback. Fusionens massdefekt har delats upp i flera **sammanhängande, fullt synliga matematiska led på samma bild**, med korrekta enheter. Ingen fysikalisk metod eller begreppsordning har bytts ut.
 - Förnyat GitHub-test kräver nu fullt synliga matematiska uttryck, ingen dold iframe-återkoppling och samtliga 15 alternativ i de fem medicinska demonstrationerna.
-- **Tidigare bokspärr borttagen:** s. 381 återfanns i `source_book/Fy N1b 2627/IMG_6555.jpg`; samtliga elva uppgifter har verifierats. Merge/publicering inväntar fortfarande ny visuell och fysikalisk kontroll.
+- **Tidigare bokspärr borttagen:** s. 381 återfanns i `source_book/Fy N1b 2627/IMG_6555.jpg`; samtliga elva uppgifter har verifierats.
+
+## Slutlig signoff – 24 november 2026
+
+- Godkänd GitHub Actions-körning **45406307830** för commit `469145c2ddbbd0a3bdbfa1033b43125fdfd7d5f2`: elva bilder i 390/768/1280/1920 px, inga horisontella sidöverflöden, fem bildmetoder gånger tre svarsalternativ, återkoppling efter val samt hela iframens innehåll synligt även när sista steget visas.
+- Nedladdade webbläsarskärmbilder granskade visuellt på mobil och projektor. Strålbehandlingens tre doskurvor, formler, frågor och knappar är tydliga; gammakamerans sista schematiska diagram och dess feedback är inte längre avklippta.
+- Originalets fem metoder och gemensamma mindmap finns kvar; tillägget om strålkniv, elektroner och protoner följer bokens s. 379–380. Alla uppgifter **988–998** är individuellt kopplade till rätt elevmål och teorisida. Ingen ouppklarad central metodavvikelse finns.
