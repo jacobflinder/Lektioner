@@ -33,7 +33,7 @@ for(const [name,c] of Object.entries(CASES)){
  }
 }
 (async()=>{
- const browser=await chromium.launch({headless:true});
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_EXECUTABLE_PATH||undefined});
  const page=await browser.newPage({viewport:{width:1280,height:800},deviceScaleFactor:1});
  const errors=[];
  page.on('pageerror',e=>errors.push(e.message));
@@ -60,14 +60,41 @@ for(const [name,c] of Object.entries(CASES)){
   const originalWork=await page.locator('.slide').nth(8).textContent();
   check(originalWork.includes('NOKflex')&&originalWork.includes('4421–4430'),'original book list retained in slide 9');
 
+  // Originalfilm: heltalsdivisionen 261/3 föregår polynomdivisionen.
+  // Den riktiga liggande stolen har kvoten ovanför och divisorn till höger.
+  await go(2);
+  const integer=page.locator('#integer-example');
+  check(await integer.isHidden(),'261 ÷ 3 answer remains hidden before own calculation');
+  await page.locator('[data-reveal="integer-example"]').click();
+  check(await integer.isVisible(),'integer long division revealed on request');
+  check((await integer.locator('thead tr th').allTextContents()).slice(2,4).join('')==='87','integer quotient 87 over dividend');
+  check((await integer.locator('tbody tr').first().locator('td').allTextContents()).slice(1,4).join('')==='261','integer dividend 261');
+  check(await integer.locator('.integer-divisor').textContent()==='3','integer divisor 3 at right');
+  const integerArithmetic=await integer.locator('tbody tr').evaluateAll(rows=>rows.slice(1).map(row=>[...row.querySelectorAll('td')].map(cell=>cell.textContent.trim()).filter(s=>/^[0-9]+$/.test(s)).join('')));
+  check(JSON.stringify(integerArithmetic)===JSON.stringify(['24','21','21','0']),'26−24=2, bring down 1, 21−21=0 in original arithmetic');
+  await photo('heltal-261-delat-med-3');
+
   // The four math operations must remain causally tied to the right
   // grade column and use MathML in both questions and explanations.
   await go(3);
   const main=page.locator('[data-division="main"]');
+  check(await integer.isHidden(),'integer answer resets on navigation');
+  check(await main.locator('.stol-divisor').count()===1,'divisor is drawn in actual division table');
+  check(await main.locator('.stol-quotient-row').count()===1,'quotient row is part of actual division table');
+  check(await main.locator('.stol-quotient-row math').count()===0,'quotient concealed before the first prediction');
+  const rightLocation=await main.evaluate(el=>{
+   const dividend=el.querySelector('tbody tr.original td[data-grade="0"]');
+   const divisor=el.querySelector('.stol-divisor');
+   const row=el.querySelector('.stol-quotient-row');
+   const a=dividend?.getBoundingClientRect(),b=divisor?.getBoundingClientRect(),c=row?.getBoundingClientRect();
+   return !!a&&!!b&&!!c&&b.left>=a.right-1&&c.bottom<=a.bottom;
+  });
+  check(rightLocation,'real geometry: quotient above dividend and divisor to its right');
   check(await main.locator('.question math').count()===2,'predict question: term and x are semantic');
   check(await main.locator('tbody tr.product').count()===0,'before: no intermediate product');
   await math(main.locator('.question'),'2x³');
   await main.locator('.forward').click();
+  check((await main.locator('.stol-quotient-row math').count())===1,'first quotient term shown over dividend');
   check(await main.locator('.question math').count()>0,'multiplication question rendered as math');
   await math(main.locator('.question'),'2x² · (x + 2)');
   await math(main.locator('.explanation'),'2x²');
@@ -108,6 +135,8 @@ for(const [name,c] of Object.entries(CASES)){
    check(labels.includes('R(x) = '+c.r),name+': remainder mathematically correct');
    check(labels.some(s=>s.includes('P(x) = D(x)Q(x) + R(x)')),name+': complete P=DQ+R invariant shown');
    check(await host.locator('tbody tr.product').count()>0&&await host.locator('tbody tr.remainder').count()>0,name+': visible product and difference rows');
+   check(await host.locator('.stol-divisor').getAttribute('rowspan')===String(await host.locator('tbody tr').count()),name+': divisor spans the complete vertical calculation');
+   check(await host.locator('.stol-quotient-row math').count()===c.q.filter(x=>x!==0).length,name+': quotient terms are shown above the dividend');
    await host.locator('.back').click();
    check(await host.locator('.result-summary math').count()===0,name+': finish feedback hides when stepping back');
    if(name==='main'||name==='extraC')await photo('dator-'+name+'-fardig-back');
@@ -188,7 +217,10 @@ for(const [name,c] of Object.entries(CASES)){
     check(a.y< v.h-20 && b.y< v.h-20,v.name+': actual degree headers and question inside initial viewport');
    }
    await main.locator('.forward').click();await main.locator('.forward').click();
-   check(await main.locator('tbody tr.product').count()===1,v.name+': first product in correct live diagram');
+    check(await main.locator('tbody tr.product').count()===1,v.name+': first product in correct live diagram');
+    check(await main.locator('.stol-divisor').isVisible(),v.name+': right-hand divisor visibly rendered');
+    const clipped=await main.locator('.division-table').evaluate(table=>({actual:table.getBoundingClientRect().width,available:table.closest('.division').clientWidth}));
+    check(clipped.actual<=clipped.available+3,v.name+': complete long-division table fits without clipped content '+JSON.stringify(clipped));
    await photo(`${v.name}-04-produkt`);
    await go(5);await reveal('a6');await photo(`${v.name}-06-fore-efter`);
    await go(7);await reveal('zero-help');await photo(`${v.name}-08-nollkolumn`);
