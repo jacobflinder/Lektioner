@@ -50,3 +50,10 @@
 - [x] Senare källverifiering har rensat samtliga inaktuella lärarnotiser om "saknad" s. 369. Driftsverifiering av huvudgrenens GitHub Actions och Pages redovisas vid faktisk publicering, eftersom den sker efter sista commit.
 
 **Status:** Källspärren för s. 369 och visuell/funktionell QA är lösta. Förloppet finns redovisat i PR och Actions. Originalets stora video är fortsatt inte direkt inspekterad, och det redovisas öppet.
+
+## Användargranskning 2026-11-24 – tre webbläsarkommentarer
+
+- **Bild 2 – bevarat:** bokreferensen s. 364–369 och obligatoriska uppgifter 962–973; endast etiketten ändrad från ”Nya boken” till ”Boken”.
+- **Bild 3 – didaktiskt förtydligat:** `Sv`, `mSv`, `µSv` och `µSv/h` förklaras före figuren, filmens mätvärden och den första doshastighetsfrågan. Film → originalets cellbegrepp → D, H och effektiv dos → uppgift 962 ligger kvar i samma ordning. Den korta enhetsnyckeln introducerar ingen alternativ beräkningsmetod.
+- **Bild 8 – ursprungets frågor återställda:** a) absorberad energi för Erik; b) pröva om hans lägre stråldos kan förklaras av större kroppsmassa. Ålder 17 år, längd 184 cm, 78 kg / 3,5 mGy och systerns pilotyrke, 55 kg / 7,4 mGy finns i uppgiftens givna data. Fem befintliga lösningsled och D=E/m → E=Dm är oförändrade.
+- **Ny spärr:** automatiska tester kontrollerar att glossary kommer före filmen, att a) och b) finns som synliga frågor och att föregående käll- och metodtester fortfarande passerar. Teknik- och bildgranskning måste godkännas för ny SHA före merge/publicering.
