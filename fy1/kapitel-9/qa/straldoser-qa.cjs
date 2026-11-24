@@ -15,6 +15,12 @@ assert.equal(pages.length,10,'ten main slides');
 assert.ok(pages.every(p=>!/ej slutförd|måste fortfarande|Slutgranskning STOPP|ännu under källkontroll/i.test(p.teacher||'')),'no obsolete source blockers in teacher notes');
 assert.equal(pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');
 assert.match(pages[1].body,/Förklara[\s\S]*Beräkna[\s\S]*Tolka/,'three measurable goals');
+assert.ok(!pages[1].body.includes('Nya boken') && pages[1].body.includes('<b>Boken:</b>'),'book label should not say new');
+assert.ok(pages[2].body.indexOf('Förstå enheterna innan filmen')>=0 && pages[2].body.indexOf('Förstå enheterna innan filmen')<pages[2].body.indexOf('class="video-preview"'),'dose units defined before film illustration');
+for(const unit of ['Sv (sievert)','1 mSv = 0,001 Sv','1 µSv = 0,000001 Sv','µSv/h','doshastighet'])assert.ok(pages[2].body.includes(unit),'unit glossary '+unit);
+assert.ok(pages[7].title.includes('energi absorberar Erik'),'learner sees the actual question in title');
+assert.ok(pages[7].label.includes('Uppgift 962 a–b')&&!pages[7].label.includes('Ny bok'),'exercise label, not editorial metadata');
+for(const phrase of ['<b>a) Fråga</b>','<b>b) Fråga</b>','Erik tror','Har han rätt? Motivera.','184 cm','55 kg','7,4 mGy'])assert.ok(pages[7].body.includes(phrase),'original question text '+phrase);
 assert.ok(pages[2].body.includes('https://youtu.be/TRL7o2kPqw0'),'correct video');
 assert.ok(pages[2].body.includes('2,4 mSv/år'),'book page 366 background');
 assert.ok(pages[3].body.includes('Reparation, celldöd eller kvarstående DNA-fel'),'biology before calculation');
@@ -67,6 +73,7 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
         if([2,3,5,6,7,8,9].includes(i))await page.screenshot({path:path.join(output,`${vp.width}-slide-${i+1}.png`),fullPage:true});
       }
       await page.selectOption('#jump','2');
+      assert.equal(await page.locator('.slide.active .pre-film-units').count(),1,'units visible on film slide');
       const filmNoteColor=await page.locator('.slide.active .video-preview .small-context').evaluate(el=>getComputedStyle(el).color);
       assert.equal(filmNoteColor,'rgb(215, 230, 237)','historical-video disclaimer must be readable on dark background');
       let q=page.locator('.slide.active .quiz');
