@@ -12,6 +12,7 @@ vm.runInNewContext(fs.readFileSync(path.join(folder,'straldoser.js'),'utf8'),{
 const lesson=JSON.parse(raw);
 const pages=lesson.pages;
 assert.equal(pages.length,10,'ten main slides');
+assert.ok(pages.every(p=>!/ej slutförd|måste fortfarande|Slutgranskning STOPP|ännu under källkontroll/i.test(p.teacher||'')),'no obsolete source blockers in teacher notes');
 assert.equal(pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');
 assert.match(pages[1].body,/Förklara[\s\S]*Beräkna[\s\S]*Tolka/,'three measurable goals');
 assert.ok(pages[2].body.includes('https://youtu.be/TRL7o2kPqw0'),'correct video');
