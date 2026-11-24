@@ -20,7 +20,7 @@
 | PET = positronemissionstomografi; positron+elektron → två nästan motsatta gammafotoner | 6 | Bevarat, rättat osäker transkription och illustrerat |
 | Gammakamera med radioaktiv spårsubstans och gammafotoner; kollimator | 7 | Bevarat och tydligt åtskilt från PET |
 | De fem ursprungliga videometoderna | 8 | Var sin interaktiv elevstyrd trestegsvisualisering i en sammanhängande modell |
-| Mindmap, därefter grupparbete med gamla 1173–1184 | 3–9 | Begreppen integreras i elevslides; ny bok 988–998 obligatorisk |
+| Mindmap, därefter grupparbete med gamla 1173–1184 | 3–9 | Originalets gemensamma mindmap finns nu uttryckligen på bild 8 före de interaktiva jämförelserna; ny bok 988–998 obligatorisk |
 | Nästa lektion Andra chansen, gemensam avslutning | 10 | Bevarat som kort slutkontroll och planeringspåminnelse |
 
 ## Interaktiv didaktik
