@@ -1,0 +1,3 @@
+# Ekvationen zⁿ=a – riktad originalrättning
+
+Källa: Komplexa tal i potensform Lek2 ca 15:45–33:45, tavlans femtegradsekvation. Återställt VL och HL, likställning, r⁵, positiv femterot, fullständig argumentdivision och alla fem insättningar, polära rötter, nästa heltalsvärde och talplansfigur med samma skala. Egna tal −243 i stället för −32. Exemplet ingår i huvudspåret före NOKflex. Befintligt tre- och tvåröttersexempel, arbete och utcheckning bevarade. Ny oberoende geometriregression i fyra vyer. Riktad ändring; originalinventering och faktisk visuell QA krävs före publicering.
