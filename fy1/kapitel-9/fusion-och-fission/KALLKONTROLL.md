@@ -51,8 +51,8 @@ I transkriptionen 231002 anges att kommersiella kraftreaktorer skulle kräva cir
 
 1. **Klart:** Direktgranskat teori s. 370–374 och 14 uppgifter på s. 375; varje uppgift kopplad till mål och relevant teorisida.
 2. **Klart:** Lärarens D+D-massdefekt, figur, mellanled och elektronbokföring bevarade; de nya bokuppgifterna använder vid behov repetition från 9.3.
-3. **Återstår:** Visuell kontroll i 390, 768, 1280, 1920 px, båda interaktiva modellerna och återkopplingar i senaste PR-commit.
-4. **Återstår:** Oberoende kontroll av alla fysikaliska påståenden och jämförelse av slutresultat med originalen innan publiceringsspärren lyfts.
+3. **Klart:** Visuell kontroll i 390, 768, 1280, 1920 px, båda interaktiva modellerna och återkopplingar i sista kodrevisionen.
+4. **Klart:** Fysikaliska påståenden, räkneordning och slutresultat jämförda med originalen; den enda konstaterade faktakorrigeringen redovisas separat.
 
 ## Visuell originalgranskning och ny layoutkontroll (24 november 2026)
 
