@@ -44,6 +44,9 @@ for(const z of [[3,-4],[-3,4],[1,2],[-2,-3],[2,0],[0,0],[-5,-4]]){
   console.log('PASS bild 01: förkunskaper, mål och fördröjt facit');
   // 2: Konjugeringsregel först efter elevens förutsägelse.
   await active(1);
+  assert.ok(await page.locator('#k-source-root-answer').isHidden(),'Konjugatexemplet dolt före försök');
+  await page.locator('[data-reveal="k-source-root-answer"]').click();
+  for(const expr of ['z = 3 ± √(9 − 25)','z = 3 ± √(−16)','z = 3 ± 4i','z₁ = 3 + 4i','z₂ = 3 − 4i','z₂ = z̄₁'])await has('#k-source-root-answer math[aria-label="'+expr+'"]','Originalets pq/konjugatkedja '+expr);
   assert.ok(await page.locator('#k-rule').isHidden(),'02 konjugeringsregeln dolt');
   assert.ok(!(await page.locator('#k-readout').innerText()).includes('z̄'),'02 inget konjugat i första readout');
   assert.equal(await page.locator('#k-plane circle').count(),1,'02 bara ursprungspunkten synlig');

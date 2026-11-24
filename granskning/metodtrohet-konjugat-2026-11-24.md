@@ -1,0 +1,3 @@
+# Konjugat och absolutbelopp – riktad originalrättning
+
+Källfilm 230403–230406, 17:30–22:00: pq-formeln ger ett konjugatpar, som läraren kopplar till rektangulär form och talplanet. Tidigare webblektion visade geometrisk spegling utan denna algebraiska brygga. Återställt ett eget exempel z²−6z+25=0 med samtliga pq-led, båda rötter, real-/imaginärdel och konjugatnotation. Befintliga speglingsmodellen, absolutbeloppsberäkningar, konjugatprodukten, arbetsuppgifter och utcheckning är bevarade. Riktad rättning; fullständig källinventering och visuell granskning måste göras före publicering.
