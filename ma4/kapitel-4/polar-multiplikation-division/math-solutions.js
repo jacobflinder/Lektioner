@@ -9,12 +9,21 @@ insertSolutions({
    'Båda koordinaterna är positiva, alltså ligger punkten i första kvadranten.'),
   step('2 · Beräkna avståndet till origo',['r = √(a² + b²)','= √(4² + 3²)','= √(16 + 9)','= √25','= 5']),
   step('3 · Beräkna argumentet och kontrollera kvadranten',
-   ['tan v = b/a','= 3/4','v ≈ 36,87°'],
+   ['tan v = b/a','= 3/4','v = arctan(3/4) + n · 180°','n = 0','v = arctan(3/4)','v ≈ 36,87°'],
    'Första kvadranten gör att vinkeln från arctan är rätt argument.'),
   answer(['z ≈ 5(cos 36,87° + i sin 36,87°)']),
   step('4 · Kontrollera den avrundade vinkeln',
    ['a ≈ 5 cos 36,87° ≈ 4','b ≈ 5 sin 36,87° ≈ 3'],
    'Tecknet ≈ behövs eftersom argumentet är avrundat.')
+ ),
+ 'source-polar-radians-answer':solution(
+  step('1 · Absolutbeloppet för produkten',['|u₁u₂| = r₁r₂','= 8 · 4','= 32']),
+  step('2 · Argumentet för produkten',['arg(u₁u₂) = v₁ + v₂','= 2π/3 + π/6','= 4π/6 + π/6','= 5π/6']),
+  answer(['u₁u₂ = 32(cos(5π/6) + i sin(5π/6))']),
+  step('3 · Absolutbeloppet för kvoten',['|u₁/u₂| = r₁/r₂','= 8/4','= 2']),
+  step('4 · Argumentet för kvoten',['arg(u₁/u₂) = v₁ − v₂','= 2π/3 − π/6','= 4π/6 − π/6','= 3π/6','= π/2']),
+  answer(['u₁/u₂ = 2(cos(π/2) + i sin(π/2))']),
+  step('5 · Kontroll',['(2) · 4 = 8','π/2 + π/6 = 4π/6','= 2π/3'],'Multiplikation med nämnaren återger täljaren.')
  ),
  selfans:solution(
   step('1 · Läs av de två talens värden',
