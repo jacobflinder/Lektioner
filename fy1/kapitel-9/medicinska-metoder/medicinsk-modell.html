@@ -28,4 +28,18 @@ function reset(){stage=0;selection=null;$('feedback').style.display='none';$('fe
 function setup(){document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));const d=data[mode];$('title').textContent=d.title;$('description').textContent=d.description;$('question').textContent=d.q;$('compare').textContent=d.compare;$('answers').innerHTML=d.opts.map((s,i)=>'<button type="button" data-choice="'+i+'" aria-pressed="false">'+s+'</button>').join('');document.querySelectorAll('#answers button').forEach(b=>b.onclick=()=>{selection=Number(b.dataset.choice);stage=0;$('feedback').style.display='none';$('run').disabled=false;$('run').textContent='Visa första steget';document.querySelectorAll('#answers button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw();$('status').textContent='Valt. Visa nu förloppet.'});reset()}
 function run(){if(selection===null||stage>=3)return;const d=data[mode];stage++;draw();$('caption').textContent=d.steps[stage-1];$('step').textContent='Steg '+stage+' av 3';if(stage===1){$('feedback').style.display='block';$('feedback').textContent=d.feed[selection];$('status').textContent=selection===d.correct?'Rätt. Följ nu nästa steg i bilden.':'Pröva att förklara varför valet inte stämmer. Följ nästa steg i bilden.'}if(stage===3){$('run').disabled=true;$('run').textContent='Alla tre steg visade'}else $('run').textContent='Visa nästa steg';}
 document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;setup()});$('run').onclick=run;$('reset').onclick=reset;setup();
-})();</script></body></html>
+})();</script><script>
+/* Send intrinsic content height to the same-origin lesson view; no nested scrolling. */
+(()=>{
+  let last=0;
+  const send=()=>{
+    const height=Math.ceil(document.body.getBoundingClientRect().height)+20;
+    if(Math.abs(height-last)<2)return;
+    last=height;
+    window.parent.postMessage({type:'fy1-embedded-demo-height',height},location.origin);
+  };
+  if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);
+  window.addEventListener('load',send);
+  requestAnimationFrame(send);
+})();
+</script></body></html>
