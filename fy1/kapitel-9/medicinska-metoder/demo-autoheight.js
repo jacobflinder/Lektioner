@@ -1,5 +1,8 @@
 /* Fix each iframe height to its actual document content, including late feedback. */
 (()=>{'use strict';
+ document.querySelectorAll('iframe.embedded-demo').forEach(frame=>frame.addEventListener('load',()=>{
+   frame.contentWindow?.postMessage({type:'fy1-request-demo-height'},location.origin);
+ }));
  window.addEventListener('message', event=>{
   if(event.origin!==location.origin||event.data?.type!=='fy1-embedded-demo-height')return;
   const frame=[...document.querySelectorAll('iframe.embedded-demo')].find(f=>f.contentWindow===event.source);
