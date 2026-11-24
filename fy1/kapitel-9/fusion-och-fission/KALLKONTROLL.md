@@ -1,6 +1,6 @@
 # Källkontroll – 9.8 Fusion och fission
 
-**Status 24 november: Boktext och samtliga uppgiftstexter verifierade. Utökad webbläsar- och fysikgranskning återstår före merge/publicering.**
+**Status 24 november: Källor, bokuppgifter, ämnesinnehåll och responsiv elevwebb slutgranskade. Klar för publicering.**
 
 ## Faktiskt kontrollerade källor
 - 231002 Fission Na22.pdf och 231002 Fission Fy1 2208.txt.
@@ -60,4 +60,11 @@ I transkriptionen 231002 anges att kommersiella kraftreaktorer skulle kräva cir
 - Första gröna webbläsarkörningen på granskningsgrenen gav skärmbilder i 390/768/1280/1920 px, men **visuell granskning hittade dolda delar av återkopplingen i iframe**. På mobil var även massdefektens mellanled för långa.
 - Koden har nu fått en höjdrapporterande iframe-lösning som låter rutan växa efter elevval/feedback. Fusionens massdefekt har delats upp i flera **sammanhängande, fullt synliga matematiska led på samma bild**, med korrekta enheter. Ingen fysikalisk metod eller begreppsordning har bytts ut.
 - Förnyat GitHub-test kräver nu fullt synliga matematiska uttryck, ingen dold iframe-återkoppling och både fissions- och fusionsdemonstration.
-- **Tidigare stopporsak borttagen:** bokens s. 375 har återfunnits i `source_book/Fy N1b 2627/IMG_6549.jpg`. Slutligt godkännande kräver fortfarande ny visuell QA och original-till-webb-granskning.
+- **Tidigare stopporsak borttagen:** bokens s. 375 har återfunnits i `source_book/Fy N1b 2627/IMG_6549.jpg`.
+
+## Slutlig signoff – 24 november 2026
+
+- Godkänd GitHub Actions-körning **45406307830** för commit `469145c2ddbbd0a3bdbfa1033b43125fdfd7d5f2`: alla tio bilder, responsivt 390/768/1280/1920 px, inga horisontella sidöverflöden, sex kompletta och synliga räkneled, fissions- och fusionsmodellens återkoppling och iframe-höjder.
+- Nedladdade riktiga webbläsarskärmbilder granskade visuellt, särskilt mobilens massdefekt, fissionskedja och fusion samt målbild på projektor. Sammanhängande lösning, enheter, knappar, diagram och resultat kan läsas utan avklippning.
+- Originalets fissions- och fusionsinnehåll, båda mindmap-aktiviteterna och lärarens valda massdefektsmetod har stämts av i tabellen ovan. De 14 uppgifterna **974–987** är var för sig kopplade till mål och bokställe. Ingen ouppklarad metodkonflikt finns.
+- **Öppet redovisad fysikalisk faktakorrigering:** originaltranskriptionens uppgift om cirka 90 % U-235 för kommersiell kraftreaktor återges inte, eftersom den är felaktig. Den ändrar ingen beräkningsmetod. Riktig jämförelse mellan kedjereaktionerna finns kvar.
