@@ -113,6 +113,36 @@ for(const [name,c] of Object.entries(CASES)){
    if(name==='main'||name==='extraC')await photo('dator-'+name+'-fardig-back');
   }
 
+  // Source-fidelity regression: the quotient belongs above the dividend
+  // and the divisor to its right, in the actual Swedish long-division layout.
+  for(const v of VIEWS){
+   await page.setViewportSize({width:v.w,height:v.h});
+   await go(2);await reveal('integer-chair');
+   check(await page.locator('#integer-chair .source-q').first().innerText()==='87','integer bridge quotient 87');
+   check(await page.locator('#integer-chair .source-d').innerText()==='3','integer bridge divisor on right');
+   const exact=page.locator('[data-source-division="exactIntro"]');
+   await exact.locator('xpath=parent::details').locator('summary').click();
+   while(await exact.locator('.forward').isEnabled())await exact.locator('.forward').click();
+   check((await exact.locator('.result-summary').innerText()).includes('0'),'exact example ends with zero remainder');
+   const exactLabels=await exact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   check(exactLabels.includes('R(x) = 0')&&exactLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+2x−3'),'exact example independent quotient and rest');
+   await photo(v.name+'-original-exact');
+   await go(3);await main.locator('.forward').click();await main.locator('.forward').click();
+   const shape=await main.locator('.division-table').evaluate(table=>{
+    const q=table.querySelector('.chair-quotient-cell').getBoundingClientRect();
+    const p=table.querySelector('tbody .original').getBoundingClientRect();
+    const d=table.querySelector('.chair-divisor').getBoundingClientRect();
+    const last=table.querySelector('tbody .original td[data-grade="0"]').getBoundingClientRect();
+    return q.bottom<=p.top+2&&d.left>=last.right-2&&d.top>=q.bottom-2&&parseFloat(getComputedStyle(table.querySelector('.chair-divisor')).borderLeftWidth)>=2;
+   });
+   check(shape,v.name+': actual quotient above dividend and right-hand divisor with chair border');
+   await photo(v.name+'-original-chair');
+   await go(10);await reveal('a10');
+   const exit=page.locator('[data-source-division="exitChair"]');
+   check(await exit.locator('tbody tr.remainder').count()===2,'exit feedback has full two-step division');
+   check((await exit.locator('tbody tr.remainder').last().innerText()).includes('1'),'exit chair remainder is 1');
+  }
+
   // Formative feedback, signed number line, zero coefficient, and original
   // teacher/independent work remain placed after the correct MathML step.
   await go(4);await reveal('a5');

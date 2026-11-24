@@ -52,7 +52,7 @@
    if(m)parts(focus,['Aktuell gradkolumn: ',[m[1]]]);
   }
  }
- for(const host of document.querySelectorAll('[data-division]')){
+ for(const host of document.querySelectorAll('[data-division], [data-source-division]')){
   renderDynamic(host);
   for(const btn of host.querySelectorAll('button.forward, button.back, button.reset')){
    // Motorns .onclick har redan registrerats och körs före denna lyssnare.
@@ -99,7 +99,7 @@
    btn.setAttribute('aria-expanded','false');
   }
   for(const details of slide.querySelectorAll('details'))details.open=false;
-  for(const host of slide.querySelectorAll('[data-division]'))host.querySelector('button.reset')?.click();
+  for(const host of slide.querySelectorAll('[data-division], [data-source-division]'))host.querySelector('button.reset')?.click();
   for(const group of slide.querySelectorAll('[data-quiz]')){
    for(const b of group.querySelectorAll('button'))b.classList.remove('correct','wrong');
    const feedback=group.querySelector('.feedback');
