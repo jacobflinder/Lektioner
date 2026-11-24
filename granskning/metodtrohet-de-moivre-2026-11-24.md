@@ -1,0 +1,3 @@
+# de Moivres formel – riktad originalrättning 2026-11-24
+
+Källa: Komplexa tal i potensform Lek1, ca 27:45–33:45. Originalet jämför upprepad kvadrering och de Moivres formel för fjärdepotens. Tidigare webb hade bara de Moivre i huvudspåret. Återställt jämförelsen på bild 5 med befintliga egna tal z=−√3+i, samtliga distributiva mellanled, substitution i²=−1, och samma slutsvar −8−8√3i. Bild 4 använder nu originalets tan v=b/a med tecken, arctan och val av heltal i stället för positiv referensvinkel. Övriga uppgifter och interaktioner bevarade. Källkontroll, rendering och full QA återstår före publicering.
