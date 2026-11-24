@@ -27,6 +27,7 @@ const solution=pages[7].steps.join('');
 for(const step of ['3,5','78','0,273','0,27','7,4'])assert.ok(solution.includes(step),`original solution ${step}`);
 assert.match(pages[8].body,/963–967[\s\S]*968–973[\s\S]*läxa/,'all required textbook work');
 assert.match(pages[9].body,/973 d/,'newly read page 369 mapped to exit goal');
+assert.match(pages[9].body,/Läs särskilt lärobokens gröna rutor så noggrant som möjligt/,'Fy1 class reading convention before next lesson');
 const goals=pages[9].body;
 for(let n=962;n<=973;n++)assert.match(goals,new RegExp(`\\b${n}\\b`),`book exercise ${n} mapped under goal`);
 for(const p of pages.filter(p=>p.quiz)){
