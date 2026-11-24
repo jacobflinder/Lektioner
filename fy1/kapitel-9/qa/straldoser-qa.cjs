@@ -19,6 +19,8 @@ assert.ok(!pages[1].body.includes('Nya boken') && pages[1].body.includes('<b>Bok
 assert.ok(pages[2].body.indexOf('Förstå enheterna innan filmen')>=0 && pages[2].body.indexOf('Förstå enheterna innan filmen')<pages[2].body.indexOf('class="video-preview"'),'dose units defined before film illustration');
 for(const unit of ['Sv (sievert)','1 mSv = 0,001 Sv','1 µSv = 0,000001 Sv','µSv/h','doshastighet'])assert.ok(pages[2].body.includes(unit),'unit glossary '+unit);
 assert.ok(pages[7].title.includes('energi absorberar Erik'),'learner sees the actual question in title');
+assert.equal(pages[2].label,'Film · mätvärden och stråldos','film slide has student-facing label');
+assert.equal(pages[3].title,'Vad händer med cellerna?','no teacher-source metadata in student title');
 assert.ok(pages[7].label.includes('Uppgift 962 a–b')&&!pages[7].label.includes('Ny bok'),'exercise label, not editorial metadata');
 for(const phrase of ['<b>a) Fråga</b>','<b>b) Fråga</b>','Erik tror','Har han rätt? Motivera.','184 cm','55 kg','7,4 mGy'])assert.ok(pages[7].body.includes(phrase),'original question text '+phrase);
 assert.ok(pages[2].body.includes('https://youtu.be/TRL7o2kPqw0'),'correct video');
