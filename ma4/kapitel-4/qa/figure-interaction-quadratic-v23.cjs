@@ -46,6 +46,13 @@ async function run(){
     ok(dims.actual<=dims.width+3,'Ingen horisontell sidbeskärning '+size.name+' bild '+(n+1));
    }
    // Skillnaden konjugat/motsatt har samma origo, samma skala och korrekt transformationsbild.
+   await visit(page,1);
+   ok(await page.locator('#teacher-normalize').isVisible(),'Normalisering före pq finns i huvudgenomgången');
+   ok(await page.locator('#teacher-normalize-answer').isHidden(),'Facit dolt före eget försök');
+   await click(page,'[data-reveal="teacher-normalize-answer"]');
+   const normLabels=await page.locator('#teacher-normalize-answer math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   ok(normLabels.some(x=>x&&x.replaceAll(' ','')==='b=√7/4'),'Rätt positiv imaginärdel efter normalisering');
+   await photo(page,size.name+'-02-normalisering');
    await visit(page,3);
    const cards=page.locator('.slide.active .quadratic-plane-card');equal(await cards.count(),2,'Två begreppsfigurer');
    for(const card of [cards.nth(0),cards.nth(1)]){
