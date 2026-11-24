@@ -35,7 +35,17 @@ assert.ok(pages[6].body.includes('5 %-per-sievert-regel'),'simplified ICRP model
 assert.equal(pages[7].steps.length,5,'complete original Erik calculation');
 const solution=pages[7].steps.join('');
 for(const step of ['3,5','78','0,273','0,27','7,4'])assert.ok(solution.includes(step),`original solution ${step}`);
-assert.match(pages[8].body,/963–967[\s\S]*968–973[\s\S]*läxa/,'all required textbook work');
+const bookWork=pages[8].body;
+assert.ok(bookWork.includes('class="book-help-grid"'),'bookwork includes theory help');
+assert.equal((bookWork.match(/class="book-help-item"/g)||[]).length,12,'all twelve textbook exercises have independent help rows');
+const helpRows=[...bookWork.matchAll(/<div class="book-help-item"><b>(9\d\d)<\/b><div><strong>(s\. [^<]+)<\/strong><span>([^<]+)<\/span><\/div><\/div>/g)];
+assert.equal(helpRows.length,12,'each theory reference has page and topic');
+for(let n=962;n<=973;n++){
+ const hits=helpRows.filter(m=>Number(m[1])===n);
+ assert.equal(hits.length,1,`exercise ${n} has exactly one relevant theory-page reference`);
+ assert.ok(hits[0][2].startsWith('s. ')&&hits[0][3].length>=20,`exercise ${n} shows theory page and topic`);
+}
+assert.ok(bookWork.includes('Uppgifter 962–973')&&bookWork.includes('läxa'),'all tasks and homework preserved');
 assert.match(pages[9].body,/973 d/,'newly read page 369 mapped to exit goal');
 assert.match(pages[9].body,/Läs särskilt lärobokens gröna rutor så noggrant som möjligt/,'Fy1 class reading convention before next lesson');
 const goals=pages[9].body;
