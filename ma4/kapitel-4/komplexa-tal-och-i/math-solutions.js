@@ -3,6 +3,18 @@
 'use strict';
 const {step,answer,solution,insertSolutions,typesetStatic}=window.Ma4Math;
 insertSolutions({
+'i-source-simple':solution(
+ step('Isolera kvadraten',['z² + 14 = 5','z² = 5 − 14','z² = −9']),
+ step('Skriv båda rötterna',['z = ±√(−9)','z = ±3i']),
+ step('Kontrollera',['(3i)² = 9i² = −9','(−3i)² = 9i² = −9']),
+ answer(['z₁ = 3i','z₂ = −3i'])
+),
+'i-source-quadratic':solution(
+ step('Identifiera p och q',['p = −8','q = 25']),
+ step('Använd pq-formeln',['z = −p/2 ± √((p/2)² − q)','z = 4 ± √((−4)² − 25)','z = 4 ± √(16 − 25)','z = 4 ± √(−9)','z = 4 ± 3i']),
+ answer(['z₁ = 4 + 3i','z₂ = 4 − 3i']),
+ step('Kontrollera båda lösningarna',['(4 + 3i)² = 16 + 24i + 9i²','= 7 + 24i','−8(4 + 3i) = −32 − 24i','7 + 24i − 32 − 24i + 25 = 0','(4 − 3i)² = 16 − 24i + 9i²','= 7 − 24i','−8(4 − 3i) = −32 + 24i','7 − 24i − 32 + 24i + 25 = 0'])
+),
 'i-start':solution(
  step('1 · Lös över de reella talen',['x² = 9','3² = 9','(−3)² = 9']),
  answer(['x = ±3']),
@@ -39,7 +51,9 @@ insertSolutions({
  answer(['z = ±4i']),
  step('2 · Läs av realdel och imaginärdel',['z = −5 + 7i','a = −5','b = 7','Re(z) = −5','Im(z) = 7']),
  step('3 · Kvadrera genom att multiplicera parenteserna',['(1 + i)² = (1 + i)(1 + i)','= 1 + i + i + i²','= 1 + 2i + (−1)']),
- answer(['(1 + i)² = 2i'])
+ answer(['(1 + i)² = 2i']),
+ step('4 · Använd pq-formeln',['z² + 6z + 13 = 0','p = 6','q = 13','z = −3 ± √(3² − 13)','z = −3 ± √(9 − 13)','z = −3 ± √(−4)']),
+ answer(['z = −3 ± 2i'])
 )
 });
 // Visual reminder of the four-step repetition, inside the existing optional

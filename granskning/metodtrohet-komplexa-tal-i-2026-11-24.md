@@ -1,0 +1,7 @@
+# Komplexa tal och i – metodtrohetsgranskning, 2026-11-24
+
+Källa: 230403–230406, 22:36, bildrutor 01:00–22:00 i 90-sekundersintervall. Definition i²=−1; identifiera real- och imaginärdel; ca 05:30–07:00 isolera z² och lös med två rötter samt pq-formeln på andragradsekvation med negativt uttryck under rottecknet. Därefter addition, subtraktion, multiplikation, kvadrering (08:30–11:30). Komplexa talplanet och en konjugatillustration med pq (14:30–22:00) berör efterföljande lektioner och ingår inte i denna ändringsgren.
+
+Återställt: saknad fullständig pq-beräkning före aritmetiken, enkel ekvation med isolering av kvadraten, båda rötter och kontroll. Egna exempel. Tre mål och ny individuell kontroll av pq. Befintlig övning, typografi, bokarbete 4101–4114 och aritmetik bevarade. Titeln "fyra räknesätt" ersatt på aritmetikbilden eftersom division behandlas i en senare lektion. Filmen innehåller även 4118–4142 och 4201–4215 som tillhör andra moment; de ska kontrolleras separat mot aktuell bokplan. Rötterna för negativa reella tal anges med ± framför roten i ekvationen, inte som ett flervärt rottecken. Tidigare webbexempel bevarade i väntan på en fullständig bok-/originaljämförelse.
+
+Begränsning: återkommande bildrutor, ej komplett ljudtranskription. Första lektions originaltrohet inte slutgodkänd. Browser-QA och visuell granskning krävs före publicering.

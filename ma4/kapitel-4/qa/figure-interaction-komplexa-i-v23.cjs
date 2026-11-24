@@ -135,6 +135,19 @@ const power=(v,n)=>{let s=z(1,0);for(let j=0;j<n;j++)s=multiply(s,v);return s};
     await page.selectOption('#jump','6');
     ok(!(await details.evaluate(e=>e.open)),'returning to own work does not show previous recap');
     await page.selectOption('#jump','8');
+    await page.selectOption('#jump','2');
+    for(const id of ['i-source-simple','i-source-quadratic']){
+      ok(await page.locator('#'+id).isHidden(),'Original solution hidden '+id);
+      await page.locator('[data-reveal="'+id+'"]').click();
+      ok(await page.locator('#'+id+' math').count()>=6,'Full original algebra '+id);
+    }
+    const pq=page.locator('#i-source-quadratic');
+    for(const expr of ['z = 4 ± √(−9)','z = 4 ± 3i','z₁ = 4 + 3i','z₂ = 4 − 3i']){
+      ok(await pq.locator('math[aria-label="'+expr+'"]').count()===1,'Source pq step '+expr);
+    }
+    const overflow=await pq.locator('.ma4-equation').evaluateAll(es=>es.filter(e=>e.scrollWidth>e.clientWidth+3).map(e=>e.querySelector('math')?.getAttribute('aria-label')));
+    ok(overflow.length===0,'No clipped pq algebra '+JSON.stringify(overflow));
+    await page.selectOption('#jump','8');
     ok(await page.locator('#i-exitfacit').isHidden(),'goal-based exit remains independent and unrevealed');
     await page.locator('#mode').click();
     ok((await page.locator('#mode').getAttribute('aria-pressed'))==='true','classroom view unaffected');
