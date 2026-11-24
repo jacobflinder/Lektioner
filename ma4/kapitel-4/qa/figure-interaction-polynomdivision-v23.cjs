@@ -135,6 +135,15 @@ for(const [name,c] of Object.entries(CASES)){
    check((await exact.locator('.result-summary').innerText()).includes('0'),'exact example ends with zero remainder');
    const exactLabels=await exact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
    check(exactLabels.includes('R(x) = 0')&&exactLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+2x−3'),'exact example independent quotient and rest');
+   if(v.w>=1000){
+    await page.evaluate(()=>scrollTo(0,0));
+    const viewportFit=await exact.evaluate(host=>{
+     const table=host.querySelector('.division-table').getBoundingClientRect();
+     const formulas=[...host.querySelectorAll('.result-summary math')].map(e=>e.getBoundingClientRect());
+     return {tableTop:table.top,tableBottom:table.bottom,mathTop:Math.min(...formulas.map(r=>r.top)),mathBottom:Math.max(...formulas.map(r=>r.bottom)),height:innerHeight};
+    });
+    check(viewportFit.tableTop>=0&&viewportFit.mathTop>=0&&viewportFit.tableBottom<=viewportFit.height&&viewportFit.mathBottom<=viewportFit.height,v.name+' hela stolen och restformen synliga samtidigt '+JSON.stringify(viewportFit));
+   }
    await photo(v.name+'-original-exact');
    await go(3);await main.locator('.forward').click();await main.locator('.forward').click();
    const shape=await main.locator('.division-table').evaluate(table=>{
