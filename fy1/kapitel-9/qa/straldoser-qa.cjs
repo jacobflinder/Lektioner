@@ -44,6 +44,8 @@ for(const p of pages.filter(p=>p.quiz)){
   assert.equal(p.quiz.options.length,p.quiz.explanations.length,'every option has differentiated feedback');
   assert.ok(p.quiz.explanations.every(v=>v.length>=25),'feedback is explanatory');
 }
+const studentUI=fs.readFileSync(path.join(folder,'elevvy.js'),'utf8');
+assert.ok(studentUI.includes("getElementById('teacher-toggle')") && studentUI.includes("getElementById('teacher-link')"),'teacher-only UI removed after app init');
 const modelHTML=fs.readFileSync(path.join(folder,'dosmodell.html'),'utf8');
 assert.ok(modelHTML.includes('proton:5'),'model physics matches textbook protons');
 assert.ok(modelHTML.includes("choices.h&&choices.e"),'two predictions gate result');
@@ -65,6 +67,12 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
       page.on('pageerror',e=>errors.push(e.message));
       await page.goto('http://127.0.0.1:8123/fy1/kapitel-9/straldoser/',{waitUntil:'networkidle'});
       assert.equal(await page.locator('.slide').count(),10);
+      assert.equal(await page.locator('#teacher-toggle').count(),0,'no teacher notes button in student view');
+      assert.equal(await page.locator('#teacher-link').count(),0,'no teacher support link in student view');
+      assert.equal(await page.locator('.teacher-note').count(),0,'teacher notes not included in student DOM');
+      assert.equal(await page.locator('.source-note').count(),0,'source metadata not included in student DOM');
+      assert.equal(await page.locator('#classmode').count(),1,'classroom controls intact');
+      assert.equal(await page.locator('#repeatmode').count(),1,'repeat controls intact');
       assert.equal(await page.locator('.teacher-note:visible').count(),0,'teacher notes hidden');
       assert.equal(await page.locator('.source-note:visible').count(),0,'provenance hidden');
       for(let i=0;i<10;i++){
