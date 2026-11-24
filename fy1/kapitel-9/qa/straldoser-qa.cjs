@@ -17,7 +17,7 @@ assert.equal(pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute l
 assert.match(pages[1].body,/Förklara[\s\S]*Beräkna[\s\S]*Tolka/,'three measurable goals');
 assert.ok(!pages[1].body.includes('Nya boken') && pages[1].body.includes('<b>Boken:</b>'),'book label should not say new');
 assert.ok(pages[2].body.indexOf('Förstå enheterna innan filmen')>=0 && pages[2].body.indexOf('Förstå enheterna innan filmen')<pages[2].body.indexOf('class="video-preview"'),'dose units defined before film illustration');
-for(const unit of ['Sv (sievert)','1 mSv = 0,001 Sv','1 µSv = 0,000001 Sv','µSv/h','doshastighet'])assert.ok(pages[2].body.includes(unit),'unit glossary '+unit);
+for(const unit of ['Sv står för sievert','enheten för <b>ekvivalent dos</b> och <b>effektiv dos</b>','biologiska verkan','1 mSv = 0,001 Sv','1 µSv = 0,000001 Sv','µSv/h','doshastighet'])assert.ok(pages[2].body.includes(unit),'unit glossary '+unit);
 assert.ok(pages[7].title.includes('energi absorberar Erik'),'learner sees the actual question in title');
 assert.equal(pages[2].label,'Film · mätvärden och stråldos','film slide has student-facing label');
 assert.equal(pages[3].title,'Vad händer med cellerna?','no teacher-source metadata in student title');
