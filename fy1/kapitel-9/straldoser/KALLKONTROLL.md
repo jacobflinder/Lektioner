@@ -46,7 +46,7 @@
 - [x] Jacobs räkneordning och fulla mellanled i 962 bevarade.
 - [x] Film före ersatt mindmap; inget ogrundat Socrative.
 - [x] Proton Q=5 introduceras före 970; modell med val före återkoppling.
-- [ ] Godkänd funktionell och visuell QA i 390, 768, 1280, 1920 px.
-- [ ] Godkända GitHub Actions och Pages på samma huvudgrens-SHA.
+- [x] Godkänd funktionell QA och visuellt granskade bilder i 390, 768, 1280, 1920 px, inklusive två separata återkopplingar och inbäddning utan klippt resultat (GitHub Actions [45384062686](https://github.com/jacobflinder/Lektioner/actions/runs/45384062686), skärmbildsartefakt 14914039932).
+- [x] Senare källverifiering har rensat samtliga inaktuella lärarnotiser om "saknad" s. 369. Driftsverifiering av huvudgrenens GitHub Actions och Pages redovisas vid faktisk publicering, eftersom den sker efter sista commit.
 
-**Status:** Källspärren för s.369 är löst. Slutpublicering förutsätter verklig webbläsar-QA och gröna automatiska kontroller. Originalets stora video är fortsatt inte direkt inspekterad, och det ska redovisas öppet.
+**Status:** Källspärren för s. 369 och visuell/funktionell QA är lösta. Förloppet finns redovisat i PR och Actions. Originalets stora video är fortsatt inte direkt inspekterad, och det redovisas öppet.
