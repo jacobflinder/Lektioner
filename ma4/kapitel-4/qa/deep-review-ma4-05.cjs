@@ -127,7 +127,7 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   }
   await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
   for(const exact of ['r = √(a² + b²)','= √((−3)² + 3²)','= √(9 + 9)','= √18','= √(9 · 2) = 3√2',
-   'tan α = |b|/|a|','= 3/3 = 1','α = 45°','v = 180° − α','= 180° − 45°','= 135°',
+   'tan v = b/a','= 3/(−3) = −1','v = arctan(−1) + n · 180°','v = −45° + n · 180°','n = 1','v = −45° + 1 · 180°','= 135°',
    'r = 3√2','v = 135°','cos 135° = −√2/2','sin 135° = √2/2',
    'z = r(cos v + i sin v)','= 3√2(−√2/2 + i√2/2)','= −(3 · 2)/2 + ((3 · 2)/2)i','= −3 + 3i']){
    await one('#procedure math[aria-label="'+exact+'"]','03 fullständigt steg: '+exact);
@@ -173,8 +173,8 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   assert.ok(await page.locator('#independent-ans').isHidden(),'06 dolda slutsvar');
   await page.locator('[data-reveal="independent-ans"]').click();
   assert.equal(await page.locator('#independent-ans .ma4-step').count(),5,'06 fem självkontrollsteg');
-  for(const e of ['a = −2','b = −2','= √(4 + 4)','= √8','= 2√2','tan α = |b|/|a|',
-   'α = 45°','v = 180° + α','= 225°','z = 2√2(cos 225° + i sin 225°)','= −2 − 2i']){
+  for(const e of ['a = −2','b = −2','= √(4 + 4)','= √8','= 2√2','tan v = b/a',
+   '= (−2)/(−2) = 1','v = arctan(1) + n · 180°','v = 45° + n · 180°','n = 1','v = 45° + 1 · 180°','= 225°','z = 2√2(cos 225° + i sin 225°)','= −2 − 2i']){
     await one('#independent-ans math[aria-label="'+e+'"]','06 fullständigt kontrollsteg '+e);
   }
   assert.equal(await page.locator('#independent-ans .ma4-final math').count(),2,'06 r och v som egna ekvationer');
@@ -197,7 +197,7 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   assert.equal(await page.locator('#exit-ans .ma4-step').count(),7,'09 sju framåtriktade kontrollsteg');
   assert.equal(await page.locator('#exit-ans .ma4-final').count(),2,'09 separata slutsvar i två riktningar');
   for(const e of ['r = √(a² + b²)','= √((−√3)² + 1²)','= √(3 + 1)','= √4 = 2',
-   'tan α = |b|/|a|','= 1/√3','α = 30°','v = 180° − α','= 150°',
+   'tan v = b/a','= 1/(−√3)','= −1/√3','v = arctan(−1/√3) + n · 180°','v = −30° + n · 180°','n = 1','v = −30° + 1 · 180°','= 150°',
    'w = 2(cos 240° + i sin 240°)','cos 240° = −1/2','sin 240° = −√3/2',
    'w = 2(−1/2 − i√3/2)','= −1 − √3i','|w| = √((−1)² + (−√3)²)','= √(1 + 3)','= 2']){
     await one('#exit-ans math[aria-label="'+e+'"]','09 kontrollberäkning '+e);
