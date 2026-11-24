@@ -75,6 +75,14 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   ok([vi,vd].every(v=>near(Math.hypot(v[2]-v[0],v[3]-v[1]),r0)),'all three actual SVG arrows equal length '+p.id);
   ok(near(g.circle.r,r0)&&near(g.circle.cx,vz[0])&&near(g.circle.cy,vz[1]),'circle radius and center equal original arrow '+p.id);
   ok(await page.locator('#rot-length').isVisible(),'explicit equal-length algebra shown at last stage');
+  if(width>=1050){
+   await page.evaluate(()=>scrollTo(0,0));
+   const fit=await page.locator('#plot').evaluate(el=>{
+    const nodes=[el.querySelector('#rot-plane'),...el.querySelectorAll('#rot-answers math')].filter(Boolean);
+    return {top:Math.min(...nodes.map(e=>e.getBoundingClientRect().top)),bottom:Math.max(...nodes.map(e=>e.getBoundingClientRect().bottom)),height:innerHeight,overflow:[...el.querySelectorAll('#rot-answers .math')].filter(e=>e.scrollWidth>e.clientWidth+2).map(e=>e.textContent)};
+   });
+   ok(fit.top>=0&&fit.bottom<=fit.height&&fit.overflow.length===0,'figure and all calculation lines fit in desktop/projector view '+JSON.stringify(fit));
+  }
   await page.screenshot({path:path.join(out,'rotations-full-'+p.id.replaceAll('-','m').replace(',','_')+'-'+width+'.png'),fullPage:true});shots++;
   await page.locator('#rot-back').click();ok(await page.locator('#rot-length').isHidden(),'back hides last length solution');
   await page.locator('#rot-reset').click();ok(await page.locator('#rot-answers').isHidden(),'reset hides all formulas');

@@ -24,6 +24,32 @@
 .i-method-card .i-formulas>.math{margin:0}
 @media(max-width:730px){.i-method-grid{grid-template-columns:minmax(0,1fr)}}
 .i-source-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.i-source-rules .panel{margin:4px 0;padding:12px 16px;min-width:0}.i-source-rules .math{font-size:clamp(1.05rem,1.65vw,1.4rem);margin:6px 0}.i-source-rules h3{margin:0 0 8px}@media(max-width:720px){.i-source-rules{grid-template-columns:1fr}.i-source-rules .panel{padding:10px 12px}}
+</style><style>
+.rotation-calc:not(:has(.math:not(.hidden))):not(:has(.math-working:not(.hidden))){display:none}
+@media(min-width:1050px){
+ main:has(#plot.active){max-width:1780px;margin-block:10px}
+ main:has(#plot.active) .stage{padding:16px 24px}
+ main:has(#plot.active) .repetition{display:none}
+ #plot h2{margin:6px 0 12px}
+ #plot>.two{grid-template-columns:minmax(0,0.9fr) minmax(0,1.5fr);gap:18px;align-items:start}
+ #plot .i-source-rules{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ #plot .i-source-rules .panel{padding:8px;min-width:0}
+ #plot .i-source-rules .math{font-size:clamp(1rem,1.25vw,1.35rem)}
+ #plot .i-source-rules .panel h3{font-size:1rem}
+ #plot .plot-box{padding:6px}
+ #plot .plot-box svg{display:block;width:100%;max-height:310px}
+ #plot .task{padding:8px 12px;margin:6px 0}
+ #plot #rot-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start;padding:8px;margin:8px 0}
+ #plot #rot-answers .math-working{padding:5px 6px;margin:0;min-width:0}
+ #plot #rot-answers .math{font-size:clamp(1.05rem,1.4vw,1.5rem);margin:2px 0}
+ #plot #rot-answers .rotation-calc{min-width:0}
+ #plot #rot-feedback{grid-column:1/-1;margin:4px 0}
+ #plot .seq-controls{margin:6px 0}
+}
+@media(min-width:1500px){
+ #plot #rot-answers{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #plot .plot-box svg{max-height:365px}
+}
 </style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> gör ett eget försök före återkopplingen. Alla interaktioner är lokala.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Börja med den tidigare kända regeln i²=−1. Eleverna räknar själva, skissar och jämför i par innan du visar återkoppling och mål. Knyt beräkningen till geometrin utan att ge förklaringen för tidigt.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Multiplicera och dividera med i</h2><p class="lead">4.2 Komplexa tal i polär form · Samma längd, en rotation på 90°</p>
 <div class="task"><strong>Enskilt → par · skriv först</strong><p class="math math-big">z = 2 + i</p><p>Beräkna <span class="math">iz</span> med <span class="math">i² = −1</span>. Rita z och iz i samma talplan. Vad förändras? Vad är oförändrat?</p></div>
@@ -32,8 +58,8 @@
 <p>Punkten flyttas från (2, 1) till (−1, 2): en rotation <strong>90° moturs</strong>. Längden är densamma, nämligen <span class="math">√(2² + 1²) = √5</span>.</p></div>
 <button type="button" class="reveal" data-reveal="i-goals">Visa målen efter startfrågan</button><div class="panel hidden" id="i-goals"><strong>Efter lektionen ska du kunna</strong><p>Beräkna <span class="math">iz</span> och <span class="math">z/i</span>, förklara rotationsriktningarna med algebra och talplan samt visa varför absolutbeloppet är oförändrat.</p></div></section>
 <section id="plot" class="slide" data-teacher="Originalfilmen introducerar rotationsreglerna med talplanet och π/2. Visa reglerna först. På webben bygger vi upp samma jämförelse: först bara z, sedan iz, sedan z/i och till sist en cirkel som kontroll av samma absolutbelopp. Låt eleverna förutsäga och rita innan varje klick. Talen i de tre valen har alla längden √5.">
-<div class="eyebrow">02 · Rotationsregler · förutsäg → visa</div><h2>Två rotationer – samma längd</h2><div class="i-source-rules" id="i-source-rules"><div class="panel"><h3>Multiplicera med i</h3><p class="math">|iz| = |z|</p><p class="math">arg(iz) = arg(z) + π/2</p><p>90° moturs, positiv rotationsriktning.</p></div><div class="panel"><h3>Dividera med i</h3><p class="math">|z/i| = |z|</p><p class="math">arg(z/i) = arg(z) − π/2</p><p>90° medurs, negativ rotationsriktning.</p></div></div><p class="muted">Argumentreglerna gäller för z ≠ 0 och anger möjliga argument; hela varv kan läggas till eller dras ifrån. Längden bevaras även för z = 0.</p>
-<div class="two"><div>
+<div class="eyebrow">02 · Rotationsregler · förutsäg → visa</div><h2>Två rotationer – samma längd</h2><div class="two"><div><div class="i-source-rules" id="i-source-rules"><div class="panel"><h3>Multiplicera med i</h3><p class="math">|iz| = |z|</p><p class="math">arg(iz) = arg(z) + π/2</p><p>90° moturs, positiv rotationsriktning.</p></div><div class="panel"><h3>Dividera med i</h3><p class="math">|z/i| = |z|</p><p class="math">arg(z/i) = arg(z) − π/2</p><p>90° medurs, negativ rotationsriktning.</p></div></div><p class="muted">Argumentreglerna gäller för z ≠ 0 och anger möjliga argument; hela varv kan läggas till eller dras ifrån. Längden bevaras även för z = 0.</p>
+
 <div class="plot-box"><svg id="rot-plane" class="plot" viewBox="0 0 680 430" role="img" aria-label="Likskaligt komplext talplan där multiplikation och division med i visas i separata steg"></svg></div>
 <div class="plane-buttons"><button type="button" data-rot="2,1" aria-pressed="true">2 + i</button><button type="button" data-rot="-1,2" class="secondary" aria-pressed="false">−1 + 2i</button><button type="button" data-rot="-2,-1" class="secondary" aria-pressed="false">−2 − i</button></div>
 <p class="muted">Alla tre starttalen har samma absolutbelopp √5. Axlarna har samma längdskala. Byter du tal återställs figuren.</p>
@@ -42,7 +68,7 @@
 <div class="task"><strong>Rita och förutsäg innan nästa klick</strong><p id="rot-question" aria-live="polite">Beräkna iz. Vilken punkt får du om z roteras 90° moturs?</p></div>
 <div class="seq-controls"><button id="rot-back" class="secondary" type="button">← Tillbaka</button><button id="rot-next" type="button">Visa nästa steg →</button><button id="rot-reset" class="secondary" type="button">Börja om</button></div>
 <p class="muted" id="rot-step" aria-live="polite">Steg 0 av 3</p>
-<div id="rot-answers" class="answer hidden"><div class="math-working hidden" id="rot-work-iz"></div><p class="math hidden" id="rot-iz"></p><div class="math-working hidden" id="rot-work-div"></div><p class="math hidden" id="rot-div"></p><div id="rot-length" class="math-working hidden"></div><p id="rot-feedback"></p></div>
+<div id="rot-answers" class="answer hidden"><div class="rotation-calc"><div class="math-working hidden" id="rot-work-iz"></div><p class="math hidden" id="rot-iz"></p></div><div class="rotation-calc"><div class="math-working hidden" id="rot-work-div"></div><p class="math hidden" id="rot-div"></p></div><div id="rot-length" class="math-working hidden"></div><p id="rot-feedback"></p></div>
 </div></div></section>
 <section id="proof" class="slide" data-teacher="Skriv de fem stegen för hand tillsammans med eleverna. Fråga särskilt varför division med i är samma sak som multiplikation med −i, och skilj på koordinatförändring och längd. Avsluta med ett kort elevresonemang: vilken regel skulle de använda för att kontrollera figuren?">
 <div class="eyebrow">03 · Varför gäller rotationsreglerna?</div><h2>Förklara rotationsreglerna med algebra</h2><div class="math-givens" role="group" aria-label="Generellt komplext tal och reala koefficienter"><p class="math math-big">z = a + bi</p><p class="math">a, b ∈ ℝ</p></div>
