@@ -20,7 +20,7 @@
 | Skillnad kärnkraftverk / okontrollerad kedja; radioaktiva fissionsfragment | 5 | Bevarat begreppsligt. Inga riskabla konstruktionsexempel tillförda |
 | Originalets fissionsförberedelsefilm | 3 | Bevarad som valfri repetitionslänk |
 | Fusion med Veritasium-klipp före egen fusionstankekarta och frågestund | 6–7 | Bevarat; filmfrågorna används i framklickad visualisering |
-| Positiva kärnor stöter bort varandra elektriskt, hög T kan underlätta nära möten | 6–7 | Bevarat, med kvanttunnling som vetenskaplig förklaring i anslutning till filmens huvudidé |
+| Positiva kärnor stöter bort varandra elektriskt, hög T kan underlätta nära möten | 6–7 | Bevarat utan ett nytt specialfall; visualiseringen visar hur högre rörelseenergi gör nära möten möjliga men är inte en modell för verklig reaktionssannolikhet |
 | D + D → He-3 + neutron + E | 7–8 | Bevarat ordagrant som Jacobs representativa fusionsexempel |
 | Jacobs massdefektmetod: m_före − m_efter (atommassor); samma antal elektroner på båda sidor | 8 steg 1–4 | Bevarat i fullständiga led |
 | 2·2,014102 u = 4,028204 u; 3,016029 u + 1,008665 u = 4,024694 u; Δm=0,003510 u | 8 steg 1–4 | Bevarat, avrundat enligt källvärden |
