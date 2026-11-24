@@ -66,6 +66,8 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
         if([2,3,5,6,7,8,9].includes(i))await page.screenshot({path:path.join(output,`${vp.width}-slide-${i+1}.png`),fullPage:true});
       }
       await page.selectOption('#jump','2');
+      const filmNoteColor=await page.locator('.slide.active .video-preview .small-context').evaluate(el=>getComputedStyle(el).color);
+      assert.equal(filmNoteColor,'rgb(215, 230, 237)','historical-video disclaimer must be readable on dark background');
       let q=page.locator('.slide.active .quiz');
       assert.equal(await q.locator('.feedback-toggle').isDisabled(),true,'no feedback before choice');
       await q.locator('button[data-choice="0"]').click();

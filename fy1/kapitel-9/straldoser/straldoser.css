@@ -74,6 +74,7 @@
 .video-preview h2{margin:3px 0 8px;color:white}
 .video-preview p{margin:6px 0 11px}
 .video-preview a{color:#102e37;background:#ffcd78;display:inline-block;padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none}
+.video-preview .small-context{color:#d7e6ed}
 .video-preview .radiation-visual{width:145px;max-width:100%;height:auto}
 .dose-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .dose-map>section{border:1px solid #cbdee3;border-radius:13px;background:#f3f9fa;padding:14px}
