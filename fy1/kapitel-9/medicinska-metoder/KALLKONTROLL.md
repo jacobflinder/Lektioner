@@ -36,3 +36,11 @@
 3. Koppla alla uppgifter till tre elevmål i sista bild; upptäck och åtgärda saknade centralfall från bokoriginalet.
 4. Gör webbläsargranskning 390/768/1280/1920 px, animationer och alla 15 valalternativ.
 5. Testa att allt innehåll i iframe är synligt utan avklippt respons och att PR-versionen är den godkända versionen.
+
+## Visuell originalgranskning och ny layoutkontroll (24 november 2026)
+
+- Originalvideo: representativa bildrutor från filmen om medicinska metoder har granskats mot PDF/transkript: sekund 30, 100, 180, 260, 340, 420 och 500. Videon i sin helhet är inte omgranskad bildruta för bildruta. 
+- Första gröna webbläsarkörningen på granskningsgrenen gav skärmbilder i 390/768/1280/1920 px, men **visuell granskning hittade dolda delar av återkopplingen i iframe**. På mobil var även gammakamerans slutdiagram delvis utanför iframe.
+- Koden har nu fått en höjdrapporterande iframe-lösning som låter rutan växa efter elevval/feedback. Fusionens massdefekt har delats upp i flera **sammanhängande, fullt synliga matematiska led på samma bild**, med korrekta enheter. Ingen fysikalisk metod eller begreppsordning har bytts ut.
+- Förnyat GitHub-test kräver nu fullt synliga matematiska uttryck, ingen dold iframe-återkoppling och samtliga 15 alternativ i de fem medicinska demonstrationerna.
+- Publiceringsspärren kvarstår oavsett teknisk teststatus, tills var och en av de 11 bokuppgifterna fått verifierad individuell teorisida och korrekt målkoppling.
