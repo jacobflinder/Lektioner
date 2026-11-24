@@ -20,6 +20,8 @@ for(const [s,x] of [['9.8',a],['9.9',b]]){
  assert.ok(fs.readFileSync(path.join(x.folder,'lektion.css'),'utf8').includes('booklist'),s+' mobile book list');
 }
 assert.equal(a.pages[7].steps.length,6,'fusion mass defect six complete ordered steps');
+assert.ok(a.pages[2].body.includes('Mindmap – fission') && a.pages[5].body.includes('Mindmap efter filmen'),'both original nuclear mindmap activities retained');
+assert.ok(b.pages[7].body.includes('Gemensam mindmap'),'original medical mindmap activity retained');
 for(const number of ['2,014102','4,028204','3,016029','1,008665','0,003510','931,5','3,27'])assert.ok(a.pages[7].steps.join('').includes(number),'fusion value '+number);
 assert.ok(a.pages[3].body.includes('karnmodell.html?mode=fission'),'fission embedded');
 assert.ok(a.pages[6].body.includes('karnmodell.html?mode=fusion'),'fusion embedded');
