@@ -79,6 +79,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   console.log('PASS 01: självständig polär form, kvadrant och mål efter försök');
   await active(1);
   assert.ok(await page.locator('#source-product-rule').isVisible(),'Originalets allmänna multiplikationsregel före tillämpningen');
+  for(const f of ['r = r₁r₂','v = v₁ + v₂','z₁z₂ = r(cos v + i sin v)'])await has('#source-product-rule math[aria-label="'+f+'"]','Originalregel '+f);
   await spacing('#product > .math-givens',2);
   const prod=page.locator('#product [data-sequence]');
   assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0,'02 inga steg före elevens prognos');
@@ -115,6 +116,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   console.log('PASS 02: fyra elevstyrda steg och distributiv härledning utan hoppade termer');
   await active(2);
   assert.ok(await page.locator('#source-quotient-rule').isVisible(),'Originalets allmänna divisionsregel före tillämpningen');
+  for(const f of ['r = r₁/r₂','v = v₁ − v₂','z₁/z₂ = r(cos v + i sin v)'])await has('#source-quotient-rule math[aria-label="'+f+'"]','Originalregel '+f);
   await spacing('#quotient > .math-givens',2); // den yttre givengruppen med nämnarvillkor
   const quo=page.locator('#quotient [data-sequence]');
   assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 inga förhandsvisade kvotsteg');
