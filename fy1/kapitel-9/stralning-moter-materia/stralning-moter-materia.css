@@ -1,0 +1,39 @@
+/* Fy N1b 9.6 – mobil och projektion. Källa och internkarta syns endast i lärarstöd. */
+.source-note{display:none}
+.page-title{font-size:clamp(1.75rem,3.4vw,2.7rem)}
+.body-copy{font-size:1rem}
+.body-copy p{margin:10px 0}
+.body-copy>p:first-child{margin-top:0}
+.focus-line{font-size:clamp(1.08rem,1.9vw,1.4rem);font-weight:740;color:#125b70}
+.small-context{font-size:.86rem;color:#496c76}
+.goal-card,.green-card,.science-card{padding:14px 17px;border:1px solid #c4e0e5;border-radius:13px;background:#f0f8fa;margin:13px 0}
+.green-card{background:#e9f6e9;border-color:#a5d4b4}
+.green-card b{color:#245f37}
+.goal-card ol{margin:8px 0;padding-left:1.4em}.goal-card li{margin:8px 0}
+.lesson-action{background:#eaf5f7;border-left:5px solid #1d8a9c;border-radius:10px;padding:12px 15px;margin:13px 0}
+.lesson-action b{color:#126078}.lesson-action p{margin:6px 0}
+.pair-grid,.triad,.process-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.triad,.process-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pair-grid>section,.triad>section,.process-grid>section{border:1px solid #cee1e6;border-radius:13px;padding:13px;background:#f6fafb;min-width:0}
+.pair-grid b,.triad b,.process-grid b{color:#17647a}
+.process-grid p{font-size:.88rem;line-height:1.35;margin:7px 0}
+.process-grid svg{width:100%;max-height:115px;display:block;overflow:visible}
+.iconrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.iconrow span{padding:7px 10px;border-radius:10px;background:#e7f3f5;font-weight:700}
+.math-block{font:1.3rem/1.5 "STIX Two Math","Cambria Math",Cambria,serif;overflow-x:auto;max-width:100%;margin:9px 0}
+.math-block math{display:block;width:max-content;max-width:100%;min-height:1.4em}
+.solution-lines{border-left:4px solid #54a8b1;padding:8px 13px;border-radius:10px;background:#f2f9fa;margin:11px 0}
+.solution-lines>div{margin:8px 0;overflow-x:auto}
+.work-plan{display:grid;gap:8px;margin:12px 0}.work-plan>div{display:flex;gap:12px;align-items:baseline;background:#eff8fa;border:1px solid #d0e4e7;border-radius:10px;padding:10px 13px}
+.work-plan b{flex:0 0 auto;color:#12647a}
+.goal-check{display:grid;gap:10px}.goal-check article{border:1px solid #cfe1e6;background:#f4f9fa;padding:12px 15px;border-radius:11px}
+.goal-check article>p{margin:5px 0}.goal-check b{color:#12687a}
+.exercises{font-weight:820;font-variant-numeric:tabular-nums;color:#175e70}
+.diagram{max-height:210px;width:min(100%,700px);height:auto;display:block;margin:12px auto}
+.sim-frame{display:block;width:100%;min-height:780px;height:825px;border:2px solid #bed5dc;border-radius:15px;background:#e9f3f5}
+.demo-heading{display:flex;align-items:baseline;gap:18px;justify-content:space-between;flex-wrap:wrap}
+.demo-intro{font-size:1.05rem}
+.demo-alert{background:#fff8e8;border-left:5px solid #d29d3e;padding:10px 14px;border-radius:9px;margin:12px 0}
+.step{overflow-x:auto}.step.open{display:block}
+@media(max-width:950px){.triad,.process-grid{grid-template-columns:1fr}.process-grid svg{max-height:100px}.pair-grid{grid-template-columns:1fr}.sim-frame{height:1150px}}
+@media(max-width:580px){.shell{padding:0 9px}.stage{padding:14px}.sim-frame{height:1260px}.work-plan>div{display:block}.page-title{font-size:1.72rem}.process-grid>section{padding:10px}}
