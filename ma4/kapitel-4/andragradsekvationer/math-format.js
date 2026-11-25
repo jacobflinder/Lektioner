@@ -321,12 +321,6 @@ Object.assign(html,{
  )
 });
 
-function render(id){
- const target=document.getElementById(id);
- if(!target)throw new Error('Matematiklösning saknar mål: '+id);
- target.innerHTML=html[id];
- target.dataset.mathTypeset='true';
-}
-for(const id of Object.keys(html).filter(id=>/^r\d/.test(id)))render(id);
+// Metodraderna i den omgranskade filmen är skrivna direkt i HTML och får inte ersättas av äldre, PDF-baserade facit.
 window.quadraticMathSolutions=Object.freeze({html,math});
 })();
