@@ -90,7 +90,7 @@ document.querySelectorAll('[data-circle-demo]').forEach(root=>{
  const choose=(angle)=>{
   const v=Number(angle);if(range)range.value=String(v);
   const rad=v*Math.PI/180,cos=Math.cos(rad),sin=Math.sin(rad);
-  drawCircle(svg,[v]);readout.textContent=`${v}°`;
+  drawCircle(svg,[v]);if(readout)readout.textContent=`${v}°`;
   if(coord)coord.textContent=`P ≈ (${cos.toFixed(2).replace('.',',')}; ${sin.toFixed(2).replace('.',',')})`;
   root.querySelectorAll('[data-angle]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.angle)===v)));
  };
