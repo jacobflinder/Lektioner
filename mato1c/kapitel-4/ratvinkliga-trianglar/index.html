@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142e43">
+<meta name="description" content="Trigonometri i rätvinkliga trianglar. Repetition, sinus, cosinus, tangens och arcusfunktionerna med fullständiga lösningar. Matematik fortsättning nivå 1c, s. 218–220.">
+<title>Rätvinkliga trianglar · Matematik – fortsättning nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css"></head><body>
+<header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 1c · 4.1</strong><div class="head-actions"><button class="btn" id="mode" type="button" aria-pressed="false">Klassrumsläge</button><button class="btn" id="teacher-toggle" type="button" aria-expanded="false">Visa lärarstöd</button></div></header>
+<main><aside class="teacher" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside><div class="repetition"><strong>Repetitionsläge:</strong> Försök först i häftet. Öppna lösningarna efter ditt försök. Inga elevsvar samlas in.</div>
+
+<section class="slide active" data-title="Start och mål" data-teacher="Original-PDF 240124/29: kort repetition från Matematik 1, länkad film, därefter bokuppgifter. Den elevaktiva starten prövar de tre sidrollerna. Ingen Socrative finns i detta original.">
+ <div class="kicker">01 · Repetition · boken s. 218–220</div><h1>Vilken sida behöver vi?</h1>
+ <p class="lead">Vi kan redan räkna i rätvinkliga trianglar. Nu plockar vi fram metoden så att den är säker när vi fortsätter med trigonometri.</p>
+ <div class="question">En vinkel är markerad i en rätvinklig triangel. Vilken sida är alltid hypotenusan? Vilken är motstående respektive närliggande katet?</div>
+ <h2>Efter lektionen ska du kunna</h2><div class="grid three">
+  <div class="card green"><strong>1. Välja</strong><p>sinus, cosinus eller tangens utifrån kända och sökta sidor.</p></div>
+  <div class="card green"><strong>2. Beräkna</strong><p>en okänd sida eller vinkel med tydlig ekvation och mellanled.</p></div>
+  <div class="card green"><strong>3. Använda</strong><p>rätvinkliga deltrianglar för att lösa en sammansatt uppgift.</p></div>
+ </div><p class="note">Räkna på papper. Genomgången visar metoden; lärobokens uppgifter kommer i slutet.</p>
+</section>
+
+<section class="slide" data-title="Sidorna och vinkeln" data-teacher="Be eleverna välja vilken sida som ligger mittemot 90°, sedan de två kateterna relativt v. Håll kvar samma triangel när definitionerna presenteras.">
+ <div class="kicker">02 · Lär känna triangeln igen</div><h1>Sidornas namn beror på vinkeln</h1>
+ <div class="grid"><figure class="diagram"><svg viewBox="0 0 530 330" role="img" aria-label="Rätvinklig triangel med vinkel v vid A, katet b närmast vinkeln, katet a mitt emot och hypotenusa c.">
+  <path class="triangle-outline" d="M 88 268 L 438 268 L 438 43 Z"/><path d="M 415 268 L 415 245 L 438 245" fill="none" stroke="#17384b" stroke-width="2.5"/>
+  <path class="angle-mark" d="M 134 268 A 46 46 0 0 0 126 241"/><text x="139" y="253">v</text><text x="76" y="291">A</text><text x="442" y="291">C</text><text x="441" y="37">B</text>
+  <text x="259" y="294" class="side">b · närliggande</text><text x="446" y="155" class="side">a · motstående</text><text x="204" y="142" class="side">c · hypotenusa</text></svg><figcaption>Hypotenusan ligger mittemot den räta vinkeln. De andra sidornas namn bestäms av vinkeln v.</figcaption></figure>
+  <div><div class="question">För vinkeln v: Om vi känner b och söker a – vilken kvot kopplar ihop just de två kateterna?</div><details><summary>Visa återkopplingen</summary><p>Motstående katet delat med närliggande katet. Vi använder <strong>tangens</strong>.</p></details><p>Flyttar vi den markerade spetsiga vinkeln byter kateterna roller. Hypotenusan är däremot alltid densamma.</p></div></div>
+</section>
+
+<section class="slide" data-title="Tre definitioner" data-teacher="Definitionsordningen kommer innan första beräkningen, som i repetitionen. Låt eleverna läsa kvoterna högt eller skriva av dem, inte memorera etiketter utan figur.">
+ <div class="kicker">03 · De tre kvoterna</div><h1>Sinus, cosinus och tangens</h1>
+ <div class="grid three"><div class="card green"><h3>Sinus</h3><div class="math-line good"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mfrac><mi>a</mi><mi>c</mi></mfrac></mrow></math></div><p>Motstående katet / hypotenusan.</p></div>
+ <div class="card green"><h3>Cosinus</h3><div class="math-line good"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mfrac><mi>b</mi><mi>c</mi></mfrac></mrow></math></div><p>Närliggande katet / hypotenusan.</p></div>
+ <div class="card green"><h3>Tangens</h3><div class="math-line good"><math display="block"><mrow><mi>tan</mi><mi>v</mi><mo>=</mo><mfrac><mi>a</mi><mi>b</mi></mfrac></mrow></math></div><p>Motstående / närliggande katet.</p></div></div>
+ <div class="question">Vilken kvot använder du om du känner hypotenusan och motstående katet, men vill hitta vinkeln?</div><details><summary>Visa återkopplingen</summary>Sinus: de två kända sidorna är precis a och c. Skriv först <span class="math-inline">sin v = a/c</span>.</details>
+</section>
+
+<section class="slide" data-title="Motstående katet" data-teacher="Följ originalets algebraiska norm: skriv definitionen med rätt sidor, lös sedan ekvationen för x. Använd andra tal än bokens exempel.">
+ <div class="kicker">04 · Genomarbetat exempel</div><h1>Bestäm den motstående kateten</h1>
+ <p>Den närliggande kateten är <strong>9,0 cm</strong> och vinkeln är <strong>36°</strong>. Bestäm motstående katet <span class="math-inline">x</span>.</p>
+ <div class="question">Skriv först definitionen med våra tal. Vilken faktor behöver vi multiplicera med för att få ensamt x?</div>
+ <button class="btn primary" data-reveal="answer-tan" type="button">Visa hela beräkningen</button><div class="answer" id="answer-tan"><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mi>tan</mi><mn>36°</mn><mo>=</mo><mfrac><mi>x</mi><mn>9,0</mn></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>x</mi><mo>=</mo><mn>9,0</mn><mo>·</mo><mi>tan</mi><mn>36°</mn></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>6,54</mn><mtext> cm</mtext></mrow></math></div></div><p><strong>Svar:</strong> Den motstående kateten är ungefär 6,5 cm.</p></div>
+</section>
+
+<section class="slide" data-title="Närliggande katet" data-teacher="Som originalets exempel 2: cosinus med hypotenusa och närliggande katet. Sök x, visa båda ekvationsleden och rimligheten x<hypotenusan.">
+ <div class="kicker">05 · Samma arbetsgång</div><h1>Bestäm den närliggande kateten</h1>
+ <p>Hypotenusan är <strong>14 cm</strong> och vinkeln är <strong>52°</strong>. Hur lång är den närliggande kateten?</p>
+ <div class="question">Ställ upp med cosinus. Kontrollera att svaret blir kortare än hypotenusan.</div>
+ <button class="btn primary" data-reveal="answer-cos" type="button">Visa lösningen</button><div class="answer" id="answer-cos"><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mn>52°</mn><mo>=</mo><mfrac><mi>x</mi><mn>14</mn></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>x</mi><mo>=</mo><mn>14</mn><mo>·</mo><mi>cos</mi><mn>52°</mn></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>8,62</mn><mtext> cm</mtext></mrow></math></div></div><p><strong>Svar:</strong> Cirka 8,6 cm, vilket är kortare än 14 cm.</p></div>
+</section>
+
+<section class="slide" data-title="Hypotenusan" data-teacher="Bevarar originalets tredje grundfall med x i nämnaren. Eleverna måste först multiplicera och därefter dividera med sinusvärdet.">
+ <div class="kicker">06 · När x står i nämnaren</div><h1>Bestäm hypotenusan</h1>
+ <p>Motstående katet är <strong>8,0 dm</strong> och vinkeln är <strong>35°</strong>. Bestäm hypotenusan <span class="math-inline">x</span>.</p><div class="question">Är hypotenusan större eller mindre än 8,0 dm? Räkna sedan med sinus.</div>
+ <button class="btn primary" data-reveal="answer-hyp" type="button">Visa hela lösningen</button><div class="answer" id="answer-hyp"><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mn>35°</mn><mo>=</mo><mfrac><mn>8,0</mn><mi>x</mi></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>x</mi><mo>·</mo><mi>sin</mi><mn>35°</mn><mo>=</mo><mn>8,0</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mn>8,0</mn><mrow><mi>sin</mi><mn>35°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>13,9</mn><mtext> dm</mtext></mrow></math></div></div><p><strong>Svar:</strong> Hypotenusan är ungefär 13,9 dm.</p></div>
+</section>
+
+<section class="slide" data-title="När vinkeln söks" data-teacher="Arcusoperationerna introduceras före exemplet, precis som i boken. Vinkel i grader kräver gradläge på räknaren; båda skrivsätten arccos och cos⁻¹ godtas.">
+ <div class="kicker">07 · Om vi söker vinkeln</div><h1>Arcusoperationerna</h1>
+ <p>När två sidor är kända väljer vi kvoten som tidigare. Sedan bestämmer vi vinkeln med motsvarande omvänd operation.</p>
+ <div class="grid three"><div class="card green"><h3>Sinus</h3><div class="math-line good"><math display="block"><mrow><mi>v</mi><mo>=</mo><mi>arcsin</mi><mo>(</mo><mfrac><mi>a</mi><mi>c</mi></mfrac><mo>)</mo></mrow></math></div></div>
+ <div class="card green"><h3>Cosinus</h3><div class="math-line good"><math display="block"><mrow><mi>v</mi><mo>=</mo><mi>arccos</mi><mo>(</mo><mfrac><mi>b</mi><mi>c</mi></mfrac><mo>)</mo></mrow></math></div></div>
+ <div class="card green"><h3>Tangens</h3><div class="math-line good"><math display="block"><mrow><mi>v</mi><mo>=</mo><mi>arctan</mi><mo>(</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>)</mo></mrow></math></div></div></div>
+ <p class="note">På vissa räknare heter de <span class="math-inline">sin<sup>−1</sup>, cos<sup>−1</sup>, tan<sup>−1</sup></span>. Kontrollera att räknaren står i grader (DEG).</p>
+</section>
+
+<section class="slide" data-title="Beräkna en vinkel" data-teacher="Hela uträkningen ska synas i en sammanhängande kedja. Välj cos eftersom närliggande och hypotenusa är givna.">
+ <div class="kicker">08 · Tillämpa arcus</div><h1>Hur stor är vinkeln?</h1>
+ <p>En rätvinklig triangel har hypotenusan <strong>20 cm</strong> och den närliggande kateten <strong>12 cm</strong>. Bestäm vinkeln <span class="math-inline">v</span>.</p>
+ <div class="question">Vilken kvot har vi uppgifter till? Skriv ekvationen före räknaren.</div>
+ <button class="btn primary" data-reveal="answer-arc" type="button">Visa beräkningen</button><div class="answer" id="answer-arc"><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mfrac><mn>12</mn><mn>20</mn></mfrac><mo>=</mo><mn>0,6</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>v</mi><mo>=</mo><mi>arccos</mi><mo>(</mo><mn>0,6</mn><mo>)</mo></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>v</mi><mo>≈</mo><mn>53,1°</mn></mrow></math></div></div><p><strong>Svar:</strong> Vinkeln är ungefär 53°.</p></div>
+</section>
+
+<section class="slide" data-title="Två trianglar tillsammans" data-teacher="Original-PDF avslutas med gemensam uppgift med två inritade rätvinkliga trianglar. Här samma metod men nya tal. Viktigt: beräkna först två hela vinklar vid C och ta deras differens.">
+ <div class="kicker">09 · Gemensam uppgift</div><h1>Två vinklar ger den sökta vinkeln</h1>
+ <div class="grid"><figure class="diagram"><svg viewBox="0 0 550 320" role="img" aria-label="Vertikal höjd AC 6 m, vågräta A-D-B 8 m och 5 m. Från C går sträckor till D och B. Vinkeln DCB söks.">
+  <path class="triangle-outline" d="M 80 240 L 80 60 L 470 240 Z"/><path class="triangle-outline" d="M 80 60 L 320 240"/><path d="M 80 217 L 103 217 L 103 240" fill="none" stroke="#17384b" stroke-width="2.2"/>
+  <text x="65" y="253">A</text><text x="62" y="47">C</text><text x="317" y="263">D</text><text x="466" y="263">B</text><text x="28" y="156">6 m</text><text x="186" y="265">8 m</text><text x="380" y="265">5 m</text><path class="angle-mark" d="M 80 112 A 52 52 0 0 1 103 113"/><text x="113" y="99">?</text></svg><figcaption>Vi söker vinkeln DCB. Både ACD och ACB är rätvinkliga trianglar.</figcaption></figure>
+  <div><div class="question">Hur får vi fram vinkeln mellan CD och CB? Bestäm först de båda större vinklarna vid C.</div><button class="btn primary" type="button" data-reveal="answer-two">Visa beräkningen</button></div></div>
+ <div class="answer" id="answer-two"><p>Vi räknar med tangens i de två rätvinkliga trianglarna och tar skillnaden.</p><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mi>tan</mi><mo>∠</mo><mi>ACD</mi><mo>=</mo><mfrac><mn>8</mn><mn>6</mn></mfrac><mo>⇒</mo><mo>∠</mo><mi>ACD</mi><mo>≈</mo><mn>53,13°</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>tan</mi><mo>∠</mo><mi>ACB</mi><mo>=</mo><mfrac><mn>13</mn><mn>6</mn></mfrac><mo>⇒</mo><mo>∠</mo><mi>ACB</mi><mo>≈</mo><mn>65,22°</mn></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mo>∠</mo><mi>DCB</mi><mo>=</mo><mn>65,22°</mn><mo>−</mo><mn>53,13°</mn><mo>≈</mo><mn>12,1°</mn></mrow></math></div></div><p><strong>Svar:</strong> Vinkeln DCB är ungefär 12°.</p></div>
+</section>
+
+<section class="slide" data-title="Bokarbete och mål" data-teacher="Nya boken s.219–220: nivå1 samtliga 4101–4106; nivå2 samtliga 4107–4109; nivå3 samtliga 4110–4111. Minst två HELA nivåer, alla deluppgifter. Ingen Socrative i originalet. Avslutningen använder redan gjorda boklösningar i stället för nya uppgifter.">
+ <div class="kicker">10 · Öva · stäm av</div><h1>Nu räknar du i boken</h1>
+ <p><strong>Läroboken s. 219–220.</strong> Välj minst två av tre nivåer. Gör <strong>alla uppgifter och deluppgifter</strong> på de nivåer du väljer.</p>
+ <div class="levels"><div class="card green"><h3>Nivå 1</h3><p>s. 219–220</p><div class="book-number">4101–4106</div></div><div class="card"><h3>Nivå 2</h3><p>s. 220</p><div class="book-number">4107–4109</div></div><div class="card amber"><h3>Nivå 3</h3><p>s. 220</p><div class="book-number">4110–4111</div></div></div>
+ <h2>Stäm av målen med dina lösningar</h2><p class="note">Inga nya uppgifter: hitta i dina egna boklösningar vad du kan visa.</p>
+ <div class="goal-list"><div><strong>1. Välja rätt kvot</strong><small>Se till exempel 4101 och 4102: varför sinus, cosinus eller tangens?</small></div><div><strong>2. Beräkna en sida eller vinkel</strong><small>Se 4101–4104 och 4106: går dina ekvationsled att följa?</small></div><div><strong>3. Använda deltrianglar</strong><small>Se 4105–4107: har du ritat och tolkat triangeln rätt?</small></div></div>
+ <p class="endnote">När du är redo går vi vidare till de exakta värdena för 30°, 45° och 60°.</p>
+</section>
+
+<section class="slide" data-optional="true" data-title="Extra: repetitionsfilmer" data-teacher="Original-PDF länkar till en repetitionsfilm från Matematik 1 och till en ny genomgång för exakta värden. Öppna bara om det tillför; den egna genomgången och boken bär lektionen.">
+ <span class="extra-label">Frivilligt stöd</span><h1>Repetera med originalfilmerna</h1>
+ <p>I den äldre lektionsplaneringen fanns två filmer att se. Den första repeterar rätvinkliga trianglar. Den andra hör till nästa lektion om exakta värden.</p>
+ <ul><li><a href="https://youtu.be/-kdpNKtXbAA" target="_blank" rel="noopener noreferrer">Trigonometri i rätvinkliga trianglar – repetition</a>.</li><li><a href="https://youtu.be/egoH2raVEvE" target="_blank" rel="noopener noreferrer">Några exakta trigonometriska värden – inför nästa lektion</a>.</li></ul>
+ <p class="note">Filmerna är kompletterande stöd. Räkna och kontrollera dina egna mellanled.</p>
+</section>
+</main><nav class="controls" aria-label="Lektionsnavigation"><button class="btn" id="prev" type="button">Föregående</button><div class="middle"><span class="counter" id="progress">1 / 11</span><label for="jump">Gå till</label><select id="jump" aria-label="Gå till bild"></select></div><button class="btn primary" id="next" type="button">Nästa</button></nav>
+<script src="../assets/lesson.js" defer></script></body></html>

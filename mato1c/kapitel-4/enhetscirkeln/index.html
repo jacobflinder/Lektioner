@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142e43">
+<meta name="description" content="Enhetscirkeln, cirkelns ekvation, koordinaterna cos v och sin v, tangens samt symmetrier. Originalmetod med full cirkel och Socrative 326. Matematik fortsättning nivå 1c, s. 222–225.">
+<title>Enhetscirkeln · Matematik – fortsättning nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css"></head><body>
+<header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 1c · 4.2</strong><div class="head-actions"><button class="btn" id="mode" type="button" aria-pressed="false">Klassrumsläge</button><button class="btn" id="teacher-toggle" type="button" aria-expanded="false">Visa lärarstöd</button></div></header>
+<main><aside class="teacher" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside><div class="repetition"><strong>Repetitionsläge:</strong> Förutsäg koordinaterna före du flyttar punkten. Sidan skickar inte dina svar vidare.</div>
+
+<section class="slide active" data-title="Start och mål" data-teacher="Originaltranskript 240130: Jacob börjar med cirkelns ekvation och går därifrån till radie 1, hela enhetscirkeln och trigonometriska värden. Bokens 4.2 börjar direkt med enhetscirkeln, men vi bevarar lärarens tidigare steg. Dela vid behov på två lektionstillfällen som i originalet.">
+ <div class="kicker">01 · Trigonometri och enhetscirkeln · s. 222–225</div><h1>Varför behöver vi en hel cirkel?</h1>
+ <p class="lead">Sinus och cosinus har vi hittills använt i rätvinkliga trianglar. Vi bygger vidare till vinklar i hela koordinatsystemet.</p>
+ <div class="question">En punkt ligger på en cirkel med radien 1 och centrum i origo. Vilket samband måste dess x- och y-koordinater uppfylla?</div>
+ <h2>Efter lektionen ska du kunna</h2><div class="grid three"><div class="card green"><strong>1. Beskriva</strong><p>en cirkel och enhetscirkeln med ekvationer och koordinater.</p></div><div class="card green"><strong>2. Bestämma</strong><p>sinus, cosinus och tangens med hjälp av en punkt på enhetscirkeln.</p></div><div class="card green"><strong>3. Förklara</strong><p>hur symmetrier och negativa vinklar påverkar koordinaterna.</p></div></div>
+</section>
+
+<section class="slide" data-title="Från Pythagoras till en cirkel" data-teacher="Originalets tavla: rita en cirkel med centrum (a,b), punkt (x,y), kateterna x-a och y-b samt hypotenusan r. Härled formeln, ange därefter exempel x²+y²=36 ⇒ r=6. Starta inte direkt med enhetscirkelns färdiga regel.">
+ <div class="kicker">02 · Cirkelns ekvation</div><h1>Pythagoras ger cirkelns ekvation</h1>
+ <div class="grid"><figure class="diagram"><svg viewBox="0 0 525 370" role="img" aria-label="Cirkel med centrum C=(a,b), radie r, punkt P=(x,y) på cirkeln samt en rätvinklig triangel med kateterna x-a och y-b.">
+  <line x1="44" y1="318" x2="500" y2="318" stroke="#647e8e" stroke-width="2"/><line x1="84" y1="350" x2="84" y2="22" stroke="#647e8e" stroke-width="2"/>
+  <circle cx="238" cy="217" r="128" fill="#f1f8f9" stroke="#17384b" stroke-width="2.5"/><path d="M 238 217 L 329 128 L 329 217 Z" fill="#e6f4ed" stroke="#0a7267" stroke-width="2"/>
+  <path d="M 309 217 L 309 197 L 329 197" fill="none" stroke="#17384b" stroke-width="2"/><circle cx="238" cy="217" r="4" fill="#17384b"/><circle cx="329" cy="128" r="5" fill="#ad6d2e"/>
+  <text x="179" y="246">C=(a,b)</text><text x="336" y="121">P=(x,y)</text><text x="260" y="155">r</text><text x="270" y="242">x−a</text><text x="338" y="177">y−b</text><text x="495" y="342">x</text><text x="66" y="26">y</text></svg><figcaption>Triangeln mellan centrum och punkten på cirkeln är rätvinklig.</figcaption></figure>
+  <div><div class="question">Skriv Pythagoras sats med sträckorna som står i figuren.</div><button class="btn primary" data-reveal="circle-eqn" type="button">Visa sambandet</button><div class="answer" id="circle-eqn"><div class="math-line good strong"><math display="block"><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>−</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mi>y</mi><mo>−</mo><mi>b</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math></div><p>Centrum är <span class="math-inline">(a,b)</span>, punkten <span class="math-inline">(x,y)</span> och radien <span class="math-inline">r</span>.</p></div></div></div>
+</section>
+
+<section class="slide" data-title="Enhetscirkeln från radien 1" data-teacher="Original: först r²=x²+y² med origo, exemplet x²+y²=36 ger radien 6, sedan enhetscirkeln med radie1. Rita HELA cirkeln; Jacob avvisar halvcirkeln som för snäv representation.">
+ <div class="kicker">03 · Ett särskilt fall</div><h1>Radien 1 – enhetscirkeln</h1>
+ <p>När centrum ligger i origo är <span class="math-inline">a = b = 0</span>. Då förenklas ekvationen.</p>
+ <div class="eq-chain"><div class="math-line"><math display="block"><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><mn>36</mn><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>⇒</mo><mi>r</mi><mo>=</mo><mn>6</mn></mrow></math></div>
+ <div class="math-line good strong"><math display="block"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow></math></div></div>
+ <p>Den sista ekvationen är <strong>enhetscirkeln</strong>: alla punkter ligger på avståndet 1 från origo.</p>
+ <div class="question">Kan punkten (0,6; 0,8) ligga på enhetscirkeln? Kontrollera med ekvationen.</div><details><summary>Visa kontrollen</summary><div class="math-line good"><math display="block"><mrow><msup><mn>0,6</mn><mn>2</mn></msup><mo>+</mo><msup><mn>0,8</mn><mn>2</mn></msup><mo>=</mo><mn>0,36</mn><mo>+</mo><mn>0,64</mn><mo>=</mo><mn>1</mn></mrow></math></div><p>Ja, punkten ligger på enhetscirkeln.</p></details>
+</section>
+
+<section class="slide" data-title="Från triangeln till koordinater" data-teacher="Lärarens originalmetod är att utgå från radie 1 och rätvinklig triangel: sin v=y/1 och cos v=x/1. Tangens får sedan y/x=sin v/cos v. Be eleverna göra överföringen från 1:a kvadranten innan den gäller på hela cirkeln.">
+ <div class="kicker">04 · Triangeln finns kvar</div><h1>Sinus och cosinus är koordinater</h1>
+ <p>Vi sätter en punkt <span class="math-inline">P=(x,y)</span> på cirkeln. Radien är hypotenusan 1.</p>
+ <div class="grid"><div class="card green"><h2>Från rätvinklig triangel</h2>
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mfrac><mi>y</mi><mn>1</mn></mfrac><mo>=</mo><mi>y</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mfrac><mi>x</mi><mn>1</mn></mfrac><mo>=</mo><mi>x</mi></mrow></math></div>
+  <div class="math-line good strong"><math display="block"><mrow><mi>P</mi><mo>=</mo><mo>(</mo><mi>cos</mi><mi>v</mi><mo>,</mo><mi>sin</mi><mi>v</mi><mo>)</mo></mrow></math></div></div>
+  <div class="card"><h2>Tangens</h2><div class="math-line"><math display="block"><mrow><mi>tan</mi><mi>v</mi><mo>=</mo><mfrac><mi>y</mi><mi>x</mi></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mi>v</mi></mrow><mrow><mi>cos</mi><mi>v</mi></mrow></mfrac></mrow></math></div><p>För tangens måste <span class="math-inline">x ≠ 0</span>.</p><div class="question">Vilken koordinat ger cosinus? Vilken ger sinus?</div></div></div>
+</section>
+
+<section class="slide" data-title="Flytta punkten runt hela cirkeln" data-teacher="I originalet används hela enhetscirkeln, inte en halv. Börja med 35° och låt eleverna förutsäga tecknen när punkten går till 130°, 225° och 315°. Den interaktiva figuren beräknar koordinater från cos och sin varje gång.">
+ <div class="kicker">05 · Undersök alla kvadranter</div><h1>Flytta punkten på enhetscirkeln</h1>
+ <div class="grid"><div class="card" data-circle-demo="35"><figure class="diagram"><svg role="img" aria-label="Interaktiv enhetscirkel med punkt P, radiell sträcka och projektioner på koordinataxlarna."></svg><figcaption>Vinkeln mäts från positiva x-axeln, positivt moturs.</figcaption></figure>
+ <div class="circle-controls"><input type="range" min="-180" max="540" step="1" value="35" aria-label="Vinkel i grader"><output>35°</output></div><div class="choices"><button class="btn" type="button" data-angle="35">35°</button><button class="btn" type="button" data-angle="130">130°</button><button class="btn" type="button" data-angle="225">225°</button><button class="btn" type="button" data-angle="315">315°</button></div><p class="readout" data-coordinates></p></div>
+ <div><div class="question">Förutsäg först: när vinkeln är 130°, är cosinus positiv eller negativ? Är sinus positiv eller negativ?</div>
+ <details><summary>Visa återkopplingen</summary><p>130° ligger i andra kvadranten: x-koordinaten är negativ och y-koordinaten positiv. Alltså cosinus negativ och sinus positiv.</p></details><p><strong>Tecken:</strong> till höger är cosinus positiv, till vänster negativ. Ovanför x-axeln är sinus positiv, under den negativ.</p></div></div>
+</section>
+
+<section class="slide" data-title="Läs sin, cos och tan från en punkt" data-teacher="Samma metod som i originalet: ange punktens x och y; sin är y, cos är x, tan=y/x. Det är ett eget valt trippelvärde, inte bokens exempel P=(0,94;0,34).">
+ <div class="kicker">06 · Använd definitionerna</div><h1>Om punkten är given</h1>
+ <p>En punkt på enhetscirkeln är <span class="math-inline">P=(−0,8; 0,6)</span>. Bestäm <span class="math-inline">sin v</span>, <span class="math-inline">cos v</span> och <span class="math-inline">tan v</span>.</p>
+ <div class="question">Läs först av koordinaterna. Vilket tecken måste tangens få?</div><button class="btn primary" data-reveal="point-answer" type="button">Visa beräkningen</button>
+ <div class="answer" id="point-answer"><div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mi>y</mi><mo>=</mo><mn>0,6</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mi>x</mi><mo>=</mo><mo>−</mo><mn>0,8</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><mi>tan</mi><mi>v</mi><mo>=</mo><mfrac><mi>y</mi><mi>x</mi></mfrac><mo>=</mo><mfrac><mn>0,6</mn><mrow><mo>−</mo><mn>0,8</mn></mrow></mfrac><mo>=</mo><mo>−</mo><mn>0,75</mn></mrow></math></div></div>
+ <p>Tecknet är rimligt: punkten ligger till vänster och ovanför origo.</p></div>
+</section>
+
+<section class="slide" data-title="Symmetri i y-axeln" data-teacher="Originalfilm 240130 bygger med två punkter P=(a,b) och Q=(-a,b), samma höjd och motsatt x. Då fås sin(180−v)=sin v och cos(180−v)=−cos v. Visa den geometriska orsaken, inte bara reglerna.">
+ <div class="kicker">07 · En spegling</div><h1>Vad händer på andra sidan y-axeln?</h1>
+ <div class="grid"><figure class="diagram" data-symmetry="vertical" data-base="35"><svg role="img" aria-label="Punkt P vid 35 grader och spegelpunkten Q vid 145 grader i enhetscirkeln."></svg><figcaption>Vinklarna är v och 180° − v. Punkterna har samma höjd.</figcaption></figure><div>
+  <div class="question">P och Q har samma y-koordinat men x-koordinater med motsatt tecken. Vad betyder det för sinus och cosinus?</div><button class="btn primary" data-reveal="sym-y" type="button">Visa sambanden</button><div class="answer" id="sym-y"><div class="eq-chain">
+  <div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mi>v</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mi>v</mi></mrow></math></div></div></div></div></div>
+</section>
+
+<section class="slide" data-title="Symmetri i x-axeln" data-teacher="Original fortsätter med spegling under x-axeln: samma cosinusvärde, motsatt sinusvärde. Från 35° till −35° respektive 325°. Ta detta först efter speglingen i y-axeln.">
+ <div class="kicker">08 · En annan spegling</div><h1>Vad händer under x-axeln?</h1>
+ <div class="grid"><figure class="diagram" data-symmetry="horizontal" data-base="35"><svg role="img" aria-label="Punkt P vid 35 grader och spegelpunkten Q vid minus 35 grader på enhetscirkeln."></svg><figcaption>Vinklarna är v och −v. Punkterna har samma x-koordinat.</figcaption></figure><div>
+  <div class="question">Vad händer med x- och y-koordinaten när vi speglar i x-axeln?</div><button class="btn primary" data-reveal="sym-x" type="button">Visa sambanden</button><div class="answer" id="sym-x"><div class="eq-chain">
+  <div class="math-line good"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mi>v</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mi>v</mi></mrow></math></div></div></div></div></div>
+</section>
+
+<section class="slide" data-title="Vinklar som ger samma punkt" data-teacher="Förbered originalets nästa lektion: positiv riktning moturs, negativ medurs. -35° och 325° ger samma punkt. Stanna vid geometrisk tolkning; full period och ekvationslösning följer i nästa webblektion.">
+ <div class="kicker">09 · Positivt och negativt håll</div><h1>Minus 35° och 325°</h1>
+ <p>En positiv vinkel mäts <strong>moturs</strong>, en negativ vinkel <strong>medurs</strong>. Båda vinklarna nedan leder till samma punkt på enhetscirkeln:</p>
+ <div class="math-line good strong"><math display="block"><mrow><mo>−</mo><mn>35°</mn><mo>+</mo><mn>360°</mn><mo>=</mo><mn>325°</mn></mrow></math></div>
+ <div class="question">Hur blir det om vi vrider ytterligare ett helt varv? Ändras punktens koordinater?</div><details><summary>Visa återkopplingen</summary><p>Nej. Efter 360° kommer vi tillbaka till samma punkt. Nästa lektion använder vi detta när vi bestämmer flera vinklar med samma sinus eller cosinus.</p></details>
+</section>
+
+<section class="slide" data-title="Socrative, bokarbete och mål" data-teacher="Original-PDF: Socrative 326 Ma3c Enhetscirkeln SOC-37277932, bokuppgifter i gamla NOKflex 4124–4131. Ny bok p224–225 har nivå1 4203–4208, nivå2 4209–4213, nivå3 4214–4215. Det andra Socrative 329 kommer i fortsättningslektionen. Kräver minst två hela nivåer över 4.2.">
+ <div class="kicker">10 · Öva och stäm av</div><h1>Socrative 326 och nya boken</h1>
+ <div class="card green"><strong>Originalaktivitet:</strong> Socrative <strong>326 · Ma3c Enhetscirkeln</strong>, kod <strong>SOC-37277932</strong>. Gör den enligt lärarens instruktioner.</div>
+ <p><strong>Boken s. 224–225.</strong> Under 4.2 ska du göra <strong>alla uppgifter på minst två hela nivåer</strong>. Fortsätt i nästa lektion där du slutade.</p>
+ <div class="levels"><div class="card green"><h3>Nivå 1</h3><p>s. 224</p><div class="book-number">4203–4208</div></div><div class="card"><h3>Nivå 2</h3><p>s. 225</p><div class="book-number">4209–4213</div></div><div class="card amber"><h3>Nivå 3</h3><p>s. 225</p><div class="book-number">4214–4215</div></div></div>
+ <h2>Stäm av de tre målen</h2><p class="note">Titta i dina påbörjade boklösningar. Ingen ny uppgift behövs här.</p>
+ <div class="goal-list"><div><strong>1. Beskriva cirkeln</strong><small>4203–4204: markerar du vinklar och punkter med rätt riktning?</small></div><div><strong>2. Bestämma sinus och cosinus</strong><small>4205–4207 och 4212: tolkar du koordinater och tecken rätt?</small></div><div><strong>3. Förklara symmetrierna</strong><small>4208–4209, 4215: kan du motivera med punkternas lägen?</small></div></div>
+</section>
+
+<section class="slide" data-optional="true" data-title="Extra: originalfilm och nästa steg" data-teacher="Originalet nämner Barkers film ObyLiKZ-3RU och att en felaktig benämning förekommer. Länken är frivilligt stöd. Ingen ny Socrative ska skapas.">
+ <span class="extra-label">Frivilligt stöd</span><h1>Visa enhetscirkeln en gång till</h1>
+ <p><a href="https://youtu.be/ObyLiKZ-3RU" target="_blank" rel="noopener noreferrer">Barkers genomgång om enhetscirkeln</a> fanns som förberedelse i din tidigare lektionsplanering.</p>
+ <p class="note">I originalanteckningen påpekades en felsägning vid cirka 1:03: sidan b kallas katet trots att den är hypotenusa. Kontrollera alltid triangelns räta vinkel.</p>
+ <p><a href="../enhetscirkeln-ekvationer/">Nästa webblektion: trigonometriska ekvationer och hela varv</a>.</p>
+</section>
+</main><nav class="controls" aria-label="Lektionsnavigation"><button class="btn" id="prev" type="button">Föregående</button><div class="middle"><span class="counter" id="progress">1 / 11</span><label for="jump">Gå till</label><select id="jump" aria-label="Gå till bild"></select></div><button class="btn primary" id="next" type="button">Nästa</button></nav><script src="../assets/lesson.js" defer></script></body></html>

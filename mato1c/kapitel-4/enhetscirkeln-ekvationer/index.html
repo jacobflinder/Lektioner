@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142e43">
+<meta name="description" content="Enhetscirkeln fortsättning: två lösningar till sin v och cos v, symmetri, hela varv och perioder. Jacobs algebraiska metod och Socrative 329.">
+<title>Enhetscirkeln – ekvationer och hela varv · Matematik – fortsättning nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css"></head><body>
+<header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 1c · 4.2 fortsättning</strong><div class="head-actions"><button class="btn" id="mode" type="button" aria-pressed="false">Klassrumsläge</button><button class="btn" id="teacher-toggle" type="button" aria-expanded="false">Visa lärarstöd</button></div></header>
+<main><aside class="teacher" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside><div class="repetition"><strong>Repetitionsläge:</strong> Lös ekvationen först i häftet, jämför sedan med den fullständiga kedjan.</div>
+
+<section class="slide active" data-title="Repetition och mål" data-teacher="Originaltranskript 240131: andra tillfället börjar med repetition av föregående dags enhetscirkel och genomgår perioder, flera varv. Original 240130 visar lösningarna sin v=0,4, cos v=−0,2, och Socrative 329 tas vid fortsättningen. Dessa metoder bevaras även om boken 4.2 främst har koordinatövningar.">
+ <div class="kicker">01 · Fortsättning på enhetscirkeln · s. 222–225</div><h1>Kan två vinklar ge samma värde?</h1>
+ <p class="lead">Förra lektionen läste vi sinus och cosinus som koordinater. Nu använder vi cirkeln för att bestämma vinklarna – och för att förstå hela varv.</p>
+ <div class="question">En punkt ligger ovanför x-axeln med y-koordinaten 0,4. Finns det bara en vinkel mellan 0° och 360° som når den höjden?</div>
+ <h2>Efter lektionen ska du kunna</h2><div class="grid three"><div class="card green"><strong>1. Hitta</strong><p>de två vinklar som ger ett givet sinus- eller cosinusvärde.</p></div><div class="card green"><strong>2. Använda</strong><p>arcus och enhetscirkelns symmetri i fullständiga lösningar.</p></div><div class="card green"><strong>3. Förklara</strong><p>varför ett helt varv ger samma värde och använda perioder.</p></div></div>
+</section>
+
+<section class="slide" data-title="Symmetrierna vi använder" data-teacher="Repetera båda speglingarna från originalets tavla och låt eleverna peka ut de två punkterna. Den centrala metoden bygger på att sin är y-koordinaten och cos x-koordinaten. Gör inte en ny alternativ beräkningsmetod.">
+ <div class="kicker">02 · Geometrin före lösningen</div><h1>Speglingen förklarar två lösningar</h1>
+ <div class="grid"><div class="card green"><h2>Samma sinus</h2><p>Två punkter ovanför x-axeln kan ha samma <strong>y-koordinat</strong>.</p><div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mi>v</mi></mrow></math></div></div>
+ <div class="card green"><h2>Samma cosinus</h2><p>Två punkter till vänster om y-axeln kan ha samma <strong>x-koordinat</strong>.</p><div class="math-line good"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mi>v</mi></mrow></math></div></div></div>
+ <div class="question">Vilka två kvadranter måste vi söka i om sinus är positivt? Och om cosinus är negativt?</div><details><summary>Visa återkopplingen</summary><p>Positiv sinus: första och andra kvadranten. Negativ cosinus: andra och tredje kvadranten.</p></details>
+</section>
+
+<section class="slide" data-title="Arcus ger första vinkeln" data-teacher="Arcusoperationerna finns redan i 4.1 och repeteras nu före första lösningen: arcsin(0,4) ger grundvinkel i första kvadranten; arccos(−0,2) ger vinkel i andra. Presentera INTE proceduren första gången mitt i lösningen.">
+ <div class="kicker">03 · Metoden innan vi räknar</div><h1>Arcus och enhetscirkeln</h1>
+ <p>Räknaren hjälper oss att hitta en <strong>första vinkel</strong>. Enhetscirkeln visar om det finns en till inom det efterfrågade intervallet.</p>
+ <div class="grid"><div class="card green"><h2>Med sinus</h2><div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mi>k</mi></mrow></math></div><div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>(</mo><mi>k</mi><mo>)</mo></mrow></math></div><p>För positivt k finns en speglad vinkel <span class="math-inline">180° − v₁</span> i andra kvadranten.</p></div>
+ <div class="card green"><h2>Med cosinus</h2><div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mi>k</mi></mrow></math></div><div class="math-line"><math display="block"><mrow><mi>v</mi><mo>=</mo><mo>±</mo><mi>arccos</mi><mo>(</mo><mi>k</mi><mo>)</mo></mrow></math></div><p>Den negativa vinkeln kan skrivas som en positiv genom att lägga till 360°.</p></div></div>
+ <p class="note">Vi löser nu de två ekvationstyperna som finns på din tidigare tavla. Räknaren är i grader (DEG).</p>
+</section>
+
+<section class="slide" data-title="Lös sin v = 0,4" data-teacher="EXAKT originalmetod från filmen: sin v=0,4; v1=arcsin 0,4=23,58°; v2=180°−v1=156,42°. Utgå från cirkeln, inte en formell generell lösningsmall som ersätter lärarens arbetssätt.">
+ <div class="kicker">04 · Genomarbetad trigonometrisk ekvation</div><h1>Lös sin v = 0,4</h1>
+ <p>Bestäm <strong>alla vinklar</strong> <span class="math-inline">0° ≤ v &lt; 360°</span> som uppfyller ekvationen.</p><div class="question">Rita enhetscirkeln. Sinus är y-koordinaten: i vilka kvadranter finns höjden 0,4? Räkna sedan den första vinkeln.</div>
+ <button class="btn primary" type="button" data-reveal="sin-sol">Visa hela lösningen</button><div class="answer" id="sin-sol"><div class="eq-chain">
+ <div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mn>0,4</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>(</mo><mn>0,4</mn><mo>)</mo><mo>≈</mo><mn>23,58°</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><msub><mi>v</mi><mn>1</mn></msub></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><mn>23,58°</mn><mo>≈</mo><mn>156,42°</mn></mrow></math></div></div>
+ <p><strong>Svar:</strong> <span class="math-inline">v ≈ 23,58°</span> eller <span class="math-inline">v ≈ 156,42°</span>.</p></div>
+</section>
+
+<section class="slide" data-title="Lös cos v = −0,2" data-teacher="EXAKT originalnorm från film 240130: v=±arccos(−0,2)≈±101,54°, sedan v1=101,54°, v2=−101,54°+360°=258,46°. Behåll detta skrivsätt, ersätt inte med 360°−arccos direkt.">
+ <div class="kicker">05 · Samma norm, nu med cosinus</div><h1>Lös cos v = −0,2</h1>
+ <p>Bestäm <strong>alla vinklar</strong> <span class="math-inline">0° ≤ v &lt; 360°</span> som uppfyller ekvationen.</p><div class="question">Cosinus är x-koordinaten. Vilka två kvadranter har negativt x? Hur använder vi speglingen i x-axeln?</div>
+ <button class="btn primary" type="button" data-reveal="cos-sol">Visa hela lösningen</button><div class="answer" id="cos-sol"><div class="eq-chain">
+ <div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mo>−</mo><mn>0,2</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><mi>v</mi><mo>=</mo><mo>±</mo><mi>arccos</mi><mo>(</mo><mo>−</mo><mn>0,2</mn><mo>)</mo><mo>≈</mo><mo>±</mo><mn>101,54°</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>101,54°</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mo>−</mo><mn>101,54°</mn><mo>+</mo><mn>360°</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>258,46°</mn></mrow></math></div></div>
+ <p><strong>Svar:</strong> <span class="math-inline">v ≈ 101,54°</span> eller <span class="math-inline">v ≈ 258,46°</span>.</p></div>
+</section>
+
+<section class="slide" data-title="Ett helt varv ger samma punkt" data-teacher="Original 240131: Jacob går flera hela varv och förklarar perioden 360° för sinus och cosinus, även negativa varv. Skriv n∈Z, och visa 40°, 400° och -320° på SAMMA punkt.">
+ <div class="kicker">06 · Varför kan lösningar upprepas?</div><h1>Vi kommer tillbaka efter 360°</h1>
+ <p>En punkt får <strong>samma x- och y-koordinater</strong> efter ett helt varv på enhetscirkeln.</p>
+ <div class="grid"><div class="card" data-cycle-demo><figure class="diagram"><svg role="img" aria-label="Enhetscirkel som visar vinklarna 40 grader, 400 grader och minus 320 grader med samma slutpunkt."></svg><figcaption>Startpunkten är alltid positiva x-axeln.</figcaption></figure><div class="choices"><button class="btn" type="button" data-cycle-angle="40">40°</button><button class="btn" type="button" data-cycle-angle="400">400°</button><button class="btn" type="button" data-cycle-angle="-320">−320°</button></div><p class="readout" data-cycle-result></p></div>
+ <div><div class="question">Förklara varför de tre vinklarna har samma sinus och cosinus.</div><div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>)</mo><mo>=</mo><mi>sin</mi><mi>v</mi></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>)</mo><mo>=</mo><mi>cos</mi><mi>v</mi></mrow></math></div><p>Här är <span class="math-inline">n</span> ett heltal: 0, ±1, ±2, …</p></div></div>
+</section>
+
+<section class="slide" data-title="Skriv lösningar med hela varv" data-teacher="Originalet lägger n·360° till BÅDA lösningarna för sinus och cosinus. Visa det samlat efter de konkreta beräkningarna, inte som ersättande beräkningsnorm.">
+ <div class="kicker">07 · Samma två vinklar, fler varv</div><h1>Så kan lösningarna skrivas vidare</h1>
+ <p>Vi har redan hittat två vinklar för <span class="math-inline">sin v = 0,4</span> inom ett varv. För varje helt varv kan vi lägga till eller dra ifrån 360°.</p>
+ <div class="eq-chain"><div class="math-line good"><math display="block"><mrow><mi>v</mi><mo>≈</mo><mn>23,58°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><mi>v</mi><mo>≈</mo><mn>156,42°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math></div></div>
+ <div class="question">Varför måste vi lägga till hela varv på <em>båda</em> vinklarna? Rita de två punkterna innan du svarar.</div><details><summary>Visa återkopplingen</summary><p>Båda punkterna har y-koordinaten 0,4. Var och en besöks igen efter ytterligare 360° i samma riktning.</p></details>
+</section>
+
+<section class="slide" data-title="Jämför med cirkeln" data-teacher="Låt eleverna kontrollera båda ursprungliga ekvationerna visuellt, innan avslutande Socrative 329. Interaktiviteten ger samma två lösningar och ingen ny algebraisk metod.">
+ <div class="kicker">08 · Kontroll mot geometrin</div><h1>Ligger lösningarna i rätt kvadranter?</h1>
+ <div class="grid"><div class="card" data-circle-demo="24"><figure class="diagram"><svg role="img" aria-label="Enhetscirkel för att jämföra de fyra beräknade vinkelvärdena och deras koordinattecken."></svg></figure><div class="choices"><button class="btn" type="button" data-angle="24">sin: 24°</button><button class="btn" type="button" data-angle="156">sin: 156°</button><button class="btn" type="button" data-angle="102">cos: 102°</button><button class="btn" type="button" data-angle="258">cos: 258°</button></div><p class="readout" data-coordinates></p></div>
+ <div><div class="question">Välj de fyra ungefärliga vinklarna på cirkeln. Kontrollera tecknen. Har båda sinuslösningarna positiv y-koordinat och båda cosinuslösningarna negativ x-koordinat?</div><p class="note">Knapparna använder avrundade hela grader för att du ska kunna kontrollera grafiskt; de algebraiska lösningarna behåller två decimaler.</p></div></div>
+</section>
+
+<section class="slide" data-title="Socrative, bokarbete och mål" data-teacher="Original 240131: andra Socrative, 329 Ma3c Enhetscirkeln 4, kod SOC-37278098. Nya boken s.224–225: 4203–4208, 4209–4213, 4214–4215 på tre nivåer. Samma moment fortsätter från föregående lektion; de valda två HELA nivåerna görs sammanlagt, inte två gånger. Boken 4.2 testar främst enhetscirkelns koordinater; de två trigekvationerna prövas i originalets Socrative och egna visade lösningar, inte i ett påhittat boknummer.">
+ <div class="kicker">09 · Öva och stäm av</div><h1>Socrative 329 och bokarbete</h1>
+ <div class="card green"><strong>Originalaktivitet:</strong> Socrative <strong>329 · Ma3c Enhetscirkeln 4</strong>, kod <strong>SOC-37278098</strong>.</div>
+ <p>Fortsätt med <strong>bokens s. 224–225</strong>. Arbetet gäller hela avsnitt 4.2: <strong>minst två hela nivåer</strong>, alla uppgifter och deluppgifter, tillsammans med förra lektionen.</p>
+ <div class="levels"><div class="card green"><h3>Nivå 1</h3><p>s. 224</p><div class="book-number">4203–4208</div></div><div class="card"><h3>Nivå 2</h3><p>s. 225</p><div class="book-number">4209–4213</div></div><div class="card amber"><h3>Nivå 3</h3><p>s. 225</p><div class="book-number">4214–4215</div></div></div>
+ <h2>Stäm av målen med det du redan gjort</h2><div class="goal-list"><div><strong>1. Hitta två vinklar</strong><small>Kontrollera dina två uträkningar på bilderna 4–5 och svaren i Socrative 329.</small></div><div><strong>2. Använda arcus och symmetri</strong><small>Har du med båda beräkningskedjorna och en motivering från cirkeln?</small></div><div><strong>3. Förklara hela varv</strong><small>4208–4209 samt Socrative 329: kan du motivera v och v + 360°?</small></div></div>
+ <p class="note">Bokens 4.2-uppgifter handlar främst om koordinater och vinklar. De fullständiga trigonometriska ekvationerna kommer från din tidigare genomgång och Socrative, inte från påhittade bokuppgifter.</p>
+</section>
+
+<section class="slide" data-optional="true" data-title="Extra: ett stort vinkelintervall" data-teacher="Originalfilmen nämner 1080°–1500° för att visa varför n·360° är användbart. Detta är extra eftersom boken 4.2 ännu fokuserar på enhetscirkeln; inga nya standardmetoder.">
+ <span class="extra-label">Extra utmaning från originalet</span><h1>Om vinkeln ligger flera varv bort</h1>
+ <p>Bestäm lösningarna till <span class="math-inline">sin v = 0,4</span> i intervallet <span class="math-inline">1080° ≤ v ≤ 1500°</span>.</p>
+ <p>Vi har redan lösningarna inom ett varv och lägger nu till hela varv.</p>
+ <div class="question">Testa heltalen n = 3 och n = 4 i de två uttrycken från bild 7. Vilka resultat ligger i intervallet?</div>
+ <button class="btn primary" data-reveal="extra-interval-answer" type="button">Visa beräkningen</button><div class="answer" id="extra-interval-answer"><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mn>23,58°</mn><mo>+</mo><mn>3</mn><mo>·</mo><mn>360°</mn><mo>=</mo><mn>1103,58°</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mn>156,42°</mn><mo>+</mo><mn>3</mn><mo>·</mo><mn>360°</mn><mo>=</mo><mn>1236,42°</mn></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mn>23,58°</mn><mo>+</mo><mn>4</mn><mo>·</mo><mn>360°</mn><mo>=</mo><mn>1463,58°</mn></mrow></math></div></div>
+  <p>Den fjärde kandidaten 156,42° + 4·360° = 1596,42° ligger utanför intervallet.</p>
+  <p><strong>Svar:</strong> Cirka 1103,58°, 1236,42° och 1463,58°.</p></div>
+</section>
+
+<section class="slide" data-optional="true" data-title="Extra: hela tavlan som metodstöd" data-teacher="Metodkartan följer originalets ordning och kan tas fram vid repetition. Ingen ny specialmetod tillförs. Klassen fortsätter senare med areasatsen enligt original-PDF.">
+ <span class="extra-label">Frivilligt metodstöd</span><h1>Samma sammanhang – hela metoden</h1>
+ <ol class="step-list"><li><strong>Rita enhetscirkeln</strong> och markera tecknet på sinus eller cosinus.</li><li><strong>Bestäm första vinkeln med arcus</strong> i gradläge.</li><li><strong>Hitta den andra med cirkelns symmetri</strong>: för sinus 180° − v, för cosinus ±v och vid behov +360°.</li><li><strong>Begränsa svaret till intervallet.</strong> Om det behövs: lägg till eller dra ifrån hela varv med n·360°.</li></ol>
+ <p class="note">Din gamla planering går sedan vidare till areasatsen. Vi tar den när dess nya boksidor finns på plats.</p>
+</section>
+</main><nav class="controls" aria-label="Lektionsnavigation"><button class="btn" id="prev" type="button">Föregående</button><div class="middle"><span class="counter" id="progress">1 / 11</span><label for="jump">Gå till</label><select id="jump" aria-label="Gå till bild"></select></div><button class="btn primary" id="next" type="button">Nästa</button></nav><script src="../assets/lesson.js" defer></script></body></html>
