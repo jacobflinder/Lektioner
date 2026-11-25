@@ -36,7 +36,7 @@ const IDS=['start-answer','graf-answer','rest1','rest2','rest3','newk','dubbel-a
       for(let k=0;k<8 && !(await next.isDisabled());k++)await next.click();
       assert.ok(await next.isDisabled(),'sekvensen ska kunna öppnas helt');
      }
-     if(i===2)await slide.locator('[data-correct="true"]').click();
+     if(i===2)assert.equal(await slide.locator('[data-quiz]').count(),0,'Ingen separat facitläckande snabbkontroll');
      if(i===6){
       const recap=slide.locator('#factor-recap');
       if(!(await recap.evaluate(e=>e.open)))await recap.locator('summary').click();

@@ -115,14 +115,10 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   await page.locator('#f-sats [data-seq-reset]').click();
   assert.equal(await page.locator('#f-sats [data-seq-item]:visible').count(),0,'Beviset nollställs');
   for(let i=0;i<4;i++)await page.locator('#f-sats [data-seq-next]').click();
-  // 04: quiz och alla tre rest-facit
+  // 04: egen beräkning och separat klickbar återkoppling
   await go(2);
-  const quiz=page.locator('.slide.active [data-quiz]');
-  await quiz.locator('[data-correct="false"]').first().click();
-  assert.ok((await quiz.locator('.feedback').innerText()).includes('Sätt divisorn'),'Felvalet kräver att eleven sätter divisorn lika med noll');
-  assert.equal(await quiz.locator('.feedback math[aria-label="x + 2"]').count(),1,'Återkopplingen visar divisorn som semantisk MathML');
-  await quiz.locator('[data-correct="true"]').click();
-  assert.ok((await quiz.locator('.feedback').innerText()).includes('Rätt'));
+  assert.equal(await page.locator('#f-rest [data-quiz]').count(),0,'Ingen separat fråga avslöjar svaret i tredje exemplet');
+  for(const id of ['rest1','rest2','rest3'])assert.ok(await page.locator('#'+id).isHidden());
   for(const id of ['rest1','rest2','rest3'])await reveal(id);
   await label('#rest1','r = f(1) = 0');await label('#rest2','r = f(2) = −4');await label('#rest3','r = f(−2) = 0');
   await workedGap();await shot('04-desktop');
