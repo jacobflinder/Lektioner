@@ -71,8 +71,32 @@ async function inspectLayout(page,id,width,i){
     await page.locator('#jump').selectOption('6');
     const button=page.locator('[data-table-reveal]');await button.click();
     assert.equal(await page.locator('.math-table.show-answer').count(),1);checks++;
+    for(const slide of ['2','4','5','8']){
+     await page.locator('#jump').selectOption(slide);
+     assert((await page.locator('.slide.active [data-right-triangle] svg path').count())>=3,`Exakta värden bild ${Number(slide)+1}: ritad triangel`);checks++;
+    }
+   }
+   if(lesson.id==='ratvinkliga-trianglar'){
+    for(const slide of ['2','3','4','5','6','7']){
+     await page.locator('#jump').selectOption(slide);
+     const fig=page.locator('.slide.active [data-right-triangle] svg');
+     assert((await fig.locator('path').count())>=3,`Rätvinkliga bild ${Number(slide)+1}: figur bredvid matematiken`);checks++;
+     assert((await fig.locator('text').count())>=3,`Rätvinkliga bild ${Number(slide)+1}: märkta sidor`);checks++;
+    }
    }
    if(lesson.id==='enhetscirkeln'){
+    for(const slide of ['2','3','5','8']){
+     await page.locator('#jump').selectOption(slide);
+     assert((await page.locator('.slide.active [data-static-circle] svg circle').count())>=2,`Enhetscirkeln bild ${Number(slide)+1}: visad enhetscirkel`);checks++;
+    }
+    for(const slide of ['9','10']){
+     await page.locator('#jump').selectOption(slide);
+     const diagram=page.locator('.slide.active [data-equation-circle]');
+     await diagram.locator('[data-circle-step="first"]').click();
+     assert.equal(await diagram.locator('svg circle').count(),2);checks++;
+     await diagram.locator('[data-circle-step="both"]').click();
+     assert.equal(await diagram.locator('svg circle').count(),3);checks++;
+    }
     await page.locator('#jump').selectOption('4');
     const root=page.locator('[data-circle-demo]');
     await root.locator('[data-angle="130"]').click();

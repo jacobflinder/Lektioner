@@ -27,21 +27,21 @@ Planeringens följande separata moment är När ger sinussatsen två fall? s. 23
 
 | Ursprungligt innehåll, metod, aktivitet | Plats i webb | Bedömning |
 |---|---|---|
-| Sinus, cosinus och tangens med rätvinklig triangel, arcus och fulla lösningar | Rätvinkliga trianglar, bilder 2–8 | Bevarat, tre tydliga genomräknade fall |
+| Sinus, cosinus och tangens med rätvinklig triangel, arcus och fulla lösningar | Rätvinkliga trianglar, bilder 2–8 | Bevarat, tre tydliga genomräknade fall. På **varje** beräkningsbild och vid såväl definitioner som arcus finns den korrekt märkta triangeln på samma bild som de fullständiga ekvationsleden. |
 | Två trianglar, vinkelskillnad som gemensam uppgift | Rätvinkliga trianglar, bild 9 | Samma problemtyp, ny figur/tal |
 | Originalets två förberedande filmer, mindmap hoppas över | Rätvinkliga trianglar och exakta värden, första bild och extra | Bevarat, ingen påhittad Socrative |
-| Kvadrat med kateterna 1, 1 och hypotenusa √2 | Exakta värden, bilder 2–3 | Härlett med Pythagoras |
-| Halverad liksidig triangel: halva basen 1 och höjden √3 | Exakta värden, bilder 4–5 | Bevarad härledning |
+| Kvadrat med kateterna 1, 1 och hypotenusa √2 | Exakta värden, bilder 2–3 | Härlett med Pythagoras; 45°-triangeln syns även bredvid de två trigonometriska kvoterna och det fulla förlängningssteget på bild 3. |
+| Halverad liksidig triangel: halva basen 1 och höjden √3 | Exakta värden, bilder 4–5 | Bevarad härledning; den märkta 30°–60°–90°-triangeln visas också bredvid de fyra exakta värdena på bild 5, samt vid tangensförkortningen på bild 6. |
 | Värden för 30°, 45°, 60°, sin, cos, tan; exakta rotbråk | Exakta värden, bilder 5–8 | Tabellen fylls först av eleverna, sedan återkoppling; fulla förlängningsled |
 | Hand som minnesstöd efter geometrisk förståelse | Exakta värden, frivillig extra | Bevarat frivilligt |
-| Cirkelns ekvation från Pythagoras och radie 1 | Enhetscirkeln, bilder 2–3 | Bevarat |
+| Cirkelns ekvation från Pythagoras och radie 1 | Enhetscirkeln, bilder 2–3 | Bevarat; en hel enhetscirkel ligger bredvid den resulterande ekvationen på bild 3. |
 | Hela enhetscirkeln, positiva och negativa vinklar | Enhetscirkeln, bilder 4–6 och 9 | Bevarat med interaktiv illustration |
-| P = (cos v, sin v) och tan v = sin v / cos v | Enhetscirkeln, bilder 4–6 | Bevarad notation och tydlig läsning |
+| P = (cos v, sin v) och tan v = sin v / cos v | Enhetscirkeln, bilder 4–6 | Bevarad notation och tydlig läsning. Samma enhetscirkel med projektioner visas bredvid koordinatformlerna på bild 4 och punktexemplet på bild 6. |
 | Spegling i y-axeln resp. x-axeln, med teckenkonventioner | Enhetscirkeln, bilder 7–8 | Bevarade symmetrier före tillämpning |
-| Originalet löser sin v = 0,4 med arcsin och 180°−v | Enhetscirkeln, bild 10 | Samma tal och fulla mellanled **före Socrative 326** |
-| Originalet löser cos v = −0,2 med ±arccos och +360° | Enhetscirkeln, bild 11 | Samma tal och fulla mellanled **före Socrative 326** |
+| Originalet löser sin v = 0,4 med arcsin och 180°−v | Enhetscirkeln, bild 10 | Samma tal och fulla mellanled **före Socrative 326**, nu med klickbar första och speglad vinkel på enhetscirkeln bredvid varje algebraled. |
+| Originalet löser cos v = −0,2 med ±arccos och +360° | Enhetscirkeln, bild 11 | Samma tal och fulla mellanled **före Socrative 326**, med klickbar x-spegling i samma bild som lösningen. |
 | Socrative 326, först efter två ekvationer | Enhetscirkeln, bild 12 | Bevarat, avgränsar första originalpasset |
-| Hela varv, sin och cos är periodiska med 360°, heltal n | Enhetscirkeln, bild 13–14 | Bevarat efter första originalpasset; fortsatt arbete i samma bokmoment |
+| Hela varv, sin och cos är periodiska med 360°, heltal n | Enhetscirkeln, bild 13–14 | Bevarat efter första originalpasset; fortsatt arbete i samma bokmoment. De två återkommande punkterna visas också med cirklar på bild 14 bredvid de fyra vinkelserierna. |
 | Socrative 329 | Enhetscirkeln, bild 15 | Bevarat i originalets ordning |
 | Jacobs arcus → symmetri → intervallkontroll vid trigonometri | Trigonometriska ekvationer, bilder 2–6 och 9 | Samma metod som original 240130–31; nya tal, inte bokexemplens tal. På bilderna 4 och 6 finns enhetscirkeln bredvid exakt samma beräkningskedja, med klick för första vinkel respektive spegling. |
 | Nya bokens symmetrisamband för sin och cos i fyra kvadranter | Trigonometriska ekvationer, bilder 7–8 | Alla fyra koordinatpunkterna och de sex sambanden visas samtidigt på bild 7, före exakta-värden-tillämpningen. |
@@ -67,6 +67,7 @@ Planeringens följande separata moment är När ger sinussatsen två fall? s. 23
 - Nya bokens fotograferade sinussatsavsnitt s.234–235 visar **endast två uppgiftsnivåer** (4315–4318 och 4319–4320). Inga nivå-3-nummer antas. Eleverna får uttryckligen instruktion att göra båda **hela** nivåerna, och slutkontrollen knyts till dessa.
 - Alla aktiviteter görs utan elevinloggning och utan personuppgiftsinsamling. Originalets Socrative-länkar/koder verifieras vid behov i lärarens konto.
 - Alla originalfilmer syns direkt i de aktuella lektionerna. Ingen ny matematisk metod eller alternativ lösningsnorm införs.
+- Lärarens senare bildgranskningskrav gäller **samtliga sex** lektioner: figur, beteckningar, räknesätt och motsvarande algebra hör ihop på samma bild. De första tre lektionerna har därför fått illustrerad sats-/metodåterkoppling även där en figur tidigare bara låg på föregående bild. Matematiska funktioner och alla inline-uttryck i de berörda lektionerna har normaliserats till MathML, utan att ändra lärarens metod.
 
 ## Återstående extern kontroll
 

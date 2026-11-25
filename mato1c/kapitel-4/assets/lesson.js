@@ -84,6 +84,21 @@ function drawCircle(svg,angles,{symmetry=false}={}){
  });
  if(symmetry){const [x0,y0]=xy(angles[0]),[x1,y1]=xy(angles[1]);add(svg,'path',{d:`M ${x0} ${y0} Q ${cx} ${Math.min(y0,y1)-28} ${x1} ${y1}`,fill:'none',stroke:'#d5a442','stroke-dasharray':'5 7','stroke-width':2});}
 }
+document.querySelectorAll('[data-right-triangle]').forEach(root=>{
+ const svg=root.querySelector('svg'),angle=Number(root.dataset.angle),rad=angle*Math.PI/180;
+ const baseline=290,width=Math.min(355,235/Math.tan(rad)),ax=Math.max(58,(520-width)/2-25),bx=ax+width,top=baseline-width*Math.tan(rad);
+ const adjacent=root.dataset.adjacent||'',opposite=root.dataset.opposite||'',hypotenuse=root.dataset.hypotenuse||'';
+ svg.replaceChildren();svg.setAttribute('viewBox','0 0 520 335');
+ add(svg,'path',{d:`M ${ax} ${baseline} L ${bx} ${baseline} L ${bx} ${top} Z`,fill:'none',stroke:'#17384b','stroke-width':3.2,'stroke-linejoin':'round'});
+ add(svg,'path',{d:`M ${bx-20} ${baseline} V ${baseline-20} H ${bx}`,fill:'none',stroke:'#17384b','stroke-width':2.5});
+ const radius=43;add(svg,'path',{d:`M ${ax+radius} ${baseline} A ${radius} ${radius} 0 0 0 ${ax+radius*Math.cos(rad)} ${baseline-radius*Math.sin(rad)}`,fill:'none',stroke:'#087d70','stroke-width':3});
+ add(svg,'text',{x:ax+52,y:baseline-11,fill:'#08766b','font-weight':700},root.dataset.angleLabel||`${angle}°`);
+ if(adjacent)add(svg,'text',{x:(ax+bx)/2-27,y:baseline+25},adjacent);
+ if(opposite)add(svg,'text',{x:bx+11,y:(baseline+top)/2},opposite);
+ if(hypotenuse)add(svg,'text',{x:(ax+bx)/2-48,y:(baseline+top)/2-20},hypotenuse);
+ if(root.dataset.complement==='true')add(svg,'text',{x:bx-45,y:top+43,fill:'#08766b'},`${90-angle}°`);
+});
+document.querySelectorAll('[data-static-circle]').forEach(root=>drawCircle(root.querySelector('svg'),[Number(root.dataset.staticCircle)]));
 document.querySelectorAll('[data-circle-demo]').forEach(root=>{
  const svg=root.querySelector('svg');const range=root.querySelector('input[type=range]');const readout=root.querySelector('output');
  const coord=root.querySelector('[data-coordinates]');

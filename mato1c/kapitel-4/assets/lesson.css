@@ -18,6 +18,7 @@ details{background:#f6fafc;border:1px solid var(--border);border-radius:9px;padd
 /* Kapitel 4: geometrin och den sammanhängande lösningen på samma bild. */
 math[display=inline]{font:1.09em "Cambria Math","STIX Two Math",serif;vertical-align:-.1em;white-space:nowrap}
 .illustrated-solution{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:20px;align-items:start;margin:15px 0}
+.definition-cards{display:grid;grid-template-columns:1fr;gap:9px}.definition-cards .card{padding:12px 16px}.definition-cards .math-line{margin:6px 0}.definition-cards p{font-size:.9rem;margin:5px 0}
 .illustrated-solution>*{min-width:0}.illustrated-solution .eq-chain{margin:0}
 .illustrated-solution .math-line{font-size:clamp(1.06rem,1.8vw,1.36rem)}
 .visual-explanation{font-size:.9rem;color:#3b6575;margin:10px 4px}
@@ -31,5 +32,6 @@ math[display=inline]{font:1.09em "Cambria Math","STIX Two Math",serif;vertical-a
 .diagram svg text.diagram-emphasis{font-weight:750;fill:#08766b}
 .diagram svg .case-geometry{opacity:.28;transition:opacity .2s}.diagram svg .case-geometry.is-selected{opacity:1}
 .diagram svg text.big-svg-label{font-size:20px}
+.diagram.compact-geometry svg{max-height:240px}
 @media(max-width:790px){.illustrated-solution{grid-template-columns:1fr}.illustrated-solution .math-line{font-size:clamp(1.06rem,4.45vw,1.24rem);padding:8px 10px}}
 @media(max-width:600px){.case-gallery{grid-template-columns:1fr}.case-gallery .diagram svg{max-height:175px}}
