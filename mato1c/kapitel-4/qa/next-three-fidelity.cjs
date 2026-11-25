@@ -65,7 +65,8 @@ check(sin.includes('Socrative 331')&&!/mindmap/i.test(sin.replace(/data-teacher=
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 for(const item of cases)check(index.includes('href="'+item.id+'/"'),item.id+': länkad i översikt');
-check(index.includes('s. 236')&&!index.includes('href="sinussatsens-tva-fall/"'),'Nästa moment ej publicerat');
+check(!index.includes('s. 236')&&!index.includes('s.236')&&!index.includes('href="sinussatsens-tva-fall/"'),'Kommande opublicerat moment visas inte som elevlektion');
+check(!/Jacobs|din planering|webblektion|bokbilder/i.test(index),'Kapitelöversikten saknar produktions- och lärarkommentarer');
 const deg=x=>x*Math.PI/180;
 check(Math.abs(Math.sin(deg(20.487315))-0.35)<2e-6,'Trigekv: sinus korrekt');
 check(Math.abs(Math.cos(deg(126.869897))+0.6)<2e-6,'Trigekv: cosinus korrekt');
