@@ -51,7 +51,7 @@ async function active(page){
     if(slug==='komplexa-tal-som-vektorer'){
       await page.selectOption('#jump','2');
       await page.locator('#next').click();
-      assert.equal(await (await active(page)).getAttribute('id'),'try','Vektorer: huvudväg hoppar över frivillig geometri');
+      assert.equal(await (await active(page)).getAttribute('id'),'circles','Vektorer: PDF:ens cirklar är ordinarie huvudväg');
       await page.selectOption('#jump','3');
       assert.equal(await (await active(page)).getAttribute('id'),'circles','Vektorer: geometri finns tillgänglig');
     }

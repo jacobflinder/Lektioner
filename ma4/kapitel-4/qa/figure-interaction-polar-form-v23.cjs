@@ -3,7 +3,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const url='http://127.0.0.1:8123/ma4/kapitel-4/polar-form/';
 const out='ma4-qa-screenshots/polar-form-v23';fs.mkdirSync(out,{recursive:true});
-const ids=['intro','representation','procedure','from-polar','traps','independent','nok','optional','exit'];
+const ids=['intro','representation','from-polar','procedure','traps','independent','nok','optional','exit'];
 const cases=[
  {id:'3,4',a:3,b:4,r:5,v:Math.atan2(4,3)*180/Math.PI},
  {id:'-3,3',a:-3,b:3,r:3*Math.SQRT2,v:135},
@@ -117,11 +117,11 @@ try{for(const [w,h] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   await page.locator('#polar-back').click();
   ok(await page.locator('#polar-discovery').isHidden(),'back conceals result '+p.id);
  }
- await go(2);const seq=page.locator('#procedure [data-sequence]');
+ await go(3);const seq=page.locator('#procedure [data-sequence]');
  ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===0,'worked example originally hidden');
  for(let n=1;n<=5;n++){await seq.locator('[data-seq-next]').click();ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===n,'one new algebra step '+n)}
  await seq.locator('[data-seq-reset]').click();ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===0,'reset worked solution');
- await go(3);ok(await page.locator('#reverse-ans').isHidden(),'reverse calculation hidden');
+ await go(2);ok(await page.locator('#reverse-ans').isHidden(),'reverse calculation hidden');
  await go(4);const trap=page.locator('#traps [data-decision]');
  await trap.locator('[data-answer="0"]').click();await trap.locator('[data-decision-submit]').click();
  ok((await trap.locator('.feedback').innerText()).includes('första kvadranten'),'first quadrant error explained');
