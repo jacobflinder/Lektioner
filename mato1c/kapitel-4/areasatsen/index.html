@@ -3,9 +3,9 @@
 <meta name="description" content="Areasatsen i Matematik fortsättning nivå 1c. Jacobs härledning från triangelns höjd, fullständiga exempel och bokuppgifter s. 231–233.">
 <title>Areasatsen · Matematik – fortsättning nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css"></head><body>
 <header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 1c · 4.3</strong><div class="head-actions"><button class="btn" id="mode" type="button" aria-pressed="false">Klassrumsläge</button><button class="btn" id="teacher-toggle" type="button" aria-expanded="false">Visa lärarstöd</button></div></header>
-<main><aside class="teacher" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside><div class="repetition"><strong>Repetitionsläge:</strong> Börja med ett eget försök i häftet. Öppna sedan återkopplingen. Inga elevsvar samlas in.</div>
+<main><aside class="teacher" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside>
 
-<section class="slide active" data-title="Start och mål" data-teacher="Original 240206: från triangelns bas och höjd till areasatsen, därefter eget exempel, två möjliga trianglar, PhET-demo, mindmap, Socrative 330 och NOK. Ny bok s.231–233. Tre elevmål kopplas i slutet till hela boknivåer.">
+<section class="slide active" data-title="Start och mål" data-teacher="Original 240206: från triangelns bas och höjd till areasatsen, därefter eget exempel, två möjliga trianglar, PhET-demo, Socrative 330 och NOK. Ny bok s.231–233. Tre elevmål kopplas i slutet till hela boknivåer.">
  <div class="kicker">01 · Areasatsen · s. 231–233</div><h1>Hur kan vi räkna area utan höjden?</h1>
  <p class="lead">Vi kan redan bestämma triangelns area om vi vet basen och höjden. Nu vill vi klara en godtycklig triangel med två sidor och vinkeln mellan dem.</p>
  <div class="question">Vilken formel använde vi tidigare för en triangels area? Rita en höjd i en sned triangel.</div>
@@ -13,7 +13,7 @@
   <div class="card green"><strong>1. Härleda</strong><p>areasatsen från bas, höjd och sinus.</p></div>
   <div class="card green"><strong>2. Beräkna</strong><p>en triangels area från två sidor och mellanliggande vinkel.</p></div>
   <div class="card green"><strong>3. Bestämma</strong><p>en möjlig vinkel från area och sidor och undersöka om det finns två.</p></div>
- </div><p class="note">Lösningarna följer Jacobs sätt att skriva med stora T för area och sidorna a, b, c motstående A, B, C.</p>
+ </div><p class="note">I en triangel betecknar vi arean med <math display="inline"><mi>T</mi></math>. Sidan <math display="inline"><mi>a</mi></math> ligger mittemot vinkeln <math display="inline"><mi>A</mi></math>, och på samma sätt för <math display="inline"><mi>b</mi></math>, <math display="inline"><mi>c</mi></math>, <math display="inline"><mi>B</mi></math> och <math display="inline"><mi>C</mi></math>.</p>
 </section>
 
 <section class="slide" data-title="Höjden genom sinus" data-teacher="Jacobs tavla börjar med T=c·h/2. Rita höjden mot AB, använd sin A=h/b och sin B=h/a. Be eleverna ge ett uttryck för h innan nästa led visas. Behåll sida/vinkel-konventionen.">
@@ -47,8 +47,8 @@
  <div class="kicker">04 · Genomarbetat exempel</div><h1>Vi känner två sidor och vinkeln</h1>
  <p>En triangel har två sidor <strong>9,0 m</strong> och <strong>12,0 m</strong> med den mellanliggande vinkeln <strong>70°</strong>. Bestäm arean.</p>
  <div class="grid"><figure class="diagram"><svg viewBox="0 0 500 315" role="img" aria-label="Triangel med sidorna 9,0 meter och 12,0 meter som möts i vinkeln 70 grader.">
-  <path class="triangle-outline" d="M 105 265 L 431 265 L 190 63 Z"/><path class="angle-mark" d="M 175 97 A 34 34 0 0 1 223 91"/>
-  <text x="68" y="290">A</text><text x="442" y="290">B</text><text x="185" y="46">C</text><text x="101" y="160" class="side">9,0 m</text><text x="331" y="132" class="side">12,0 m</text><text x="204" y="112">70°</text></svg><figcaption>Vinkeln ligger mellan de två angivna sidorna.</figcaption></figure>
+  <path class="triangle-outline" d="M 156 224 L 377 224 L 220 75 Z"/><path class="angle-mark" d="M 206 107 A 35 35 0 0 0 245 99"/>
+  <text x="136" y="249">A</text><text x="387" y="249">B</text><text x="215" y="60">C</text><text x="139" y="153" class="side">9,0 m</text><text x="326" y="150" class="side">12,0 m</text><text x="226" y="123">70°</text></svg><figcaption>Vinkeln ligger mellan de två angivna sidorna.</figcaption></figure>
   <div><p>Areasatsen ger direkt:</p>
    <div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mi>a</mi><mi>b</mi><mspace width="0.16em"/><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mi>C</mi></mrow><mn>2</mn></mfrac></mrow></math></div>
    <div class="math-line"><math display="block"><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mn>9,0</mn><mo>·</mo><mn>12,0</mn><mo>·</mo><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>70°</mn></mrow><mn>2</mn></mfrac></mrow></math></div>
@@ -86,7 +86,7 @@
 </section>
 
 <section class="slide" data-title="Två trianglar med samma area" data-teacher="Original 240206 visar två skisser av trianglar med samma två sidor och area. Använd sin(180°−A)=sin A och skriv 180−36,87=143,13 med båda vinklarna. Denna poäng är central i lärarens metod och ska inte strykas.">
- <div class="kicker">07 · Originalets viktiga iakttagelse</div><h1>Ibland finns två trianglar</h1>
+ <div class="kicker">07 · Jämför två trianglar</div><h1>Ibland finns två trianglar</h1>
  <div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>−</mo><mi>A</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mi>A</mi></mrow></math></div>
  <div class="eq-chain"><div class="math-line"><math display="block"><mrow><msub><mi>A</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><msub><mi>A</mi><mn>1</mn></msub></mrow></math></div>
  <div class="math-line good"><math display="block"><mrow><msub><mi>A</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>36,87°</mn><mo>=</mo><mn>143,13°</mn></mrow></math></div></div>
@@ -102,14 +102,13 @@
  <p><strong>Svar:</strong> vinkeln kan vara ungefär 36,87° eller 143,13°. Båda ger samma sinus och därmed samma area för dessa sidor.</p>
 </section>
 
-<section class="slide" data-title="Originalaktivitet: demo, mindmap och Socrative" data-teacher="Jacobs PDF 240206 har Phet Trig Tour, mindmap och Socrative 330. Bevara alla tre, men korta demonstrationens tid så att minst 20 min boken återstår. Socrative room code SOC-37278150, namnet 'Enhetscirkeln 5 och areasats'.">
- <div class="kicker">08 · Prova och förklara</div><h1>Demo → mindmap → Socrative 330</h1>
+<section class="slide" data-title="PhET och Socrative" data-teacher="Jacobs PDF 240206 har PhET Trig Tour och Socrative 330. Korta demonstrationen så att minst 20 min boken återstår. Socrative room code SOC-37278150, namnet 'Enhetscirkeln 5 och areasats'.">
+ <div class="kicker">08 · Prova och förklara</div><h1>PhET och Socrative 330</h1>
  <div class="grid"><div class="card green"><h2>Visa i enhetscirkeln</h2>
-  <p>Öppna originalets <a href="https://phet.colorado.edu/en/simulation/trig-tour" target="_blank" rel="noopener noreferrer">PhET Trig Tour</a>. Jämför <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>37°</mn></mrow></math> och <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>143°</mn></mrow></math>.</p>
+  <p>Öppna <a href="https://phet.colorado.edu/en/simulation/trig-tour" target="_blank" rel="noopener noreferrer">PhET Trig Tour</a>. Jämför <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>37°</mn></mrow></math> och <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>143°</mn></mrow></math>.</p>
   <div class="question">Varför blir trianglarnas area lika stor fast vinklarna är olika?</div></div>
-  <div class="card"><h2>Repetera</h2><p>Komplettera momentets <strong>mindmap</strong>: skriv areasatsen och förklara varför två vinklar ibland är möjliga.</p>
-  <p><strong>Socrative 330:</strong> Ma3c Enhetscirkeln 5 och areasats</p><p class="readout">SOC-37278150</p></div></div>
- <p class="note">Som i originallektionen: genomgång, demo och återkoppling först – därefter bokarbete. Ingen ny Socrative har skapats.</p>
+  <div class="card"><h2>Socrative 330 – Areasatsen</h2><p>Svara först själv och jämför sedan hur ni har tänkt. Använd sambandet mellan sinusvärdet och triangelns area när du motiverar ditt svar.</p></div></div>
+ <p class="note">När du har provat och förklarat sambandet arbetar du vidare med bokens uppgifter.</p>
 </section>
 
 <section class="slide" data-title="Bokarbete och mål" data-teacher="Ny lärobok: 4301 och 4302 på s.232 är bokexempel. Alla nivåuppgifter på s.233: nivå1 4303–4307, nivå2 4308–4311, nivå3 4312–4313. Minst två hela nivåer, inklusive deluppgifter. Mål återkopplade till redan räknade uppgifter.">
@@ -122,7 +121,7 @@
   <div><strong>1. Härleda areasatsen</strong><small>4303 eller 4306: kan du före insättningen förklara hur <math display="inline"><mrow><mi>h</mi><mo>=</mo><mi>b</mi><mspace width="0.16em"/><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mi>A</mi></mrow></math> leder till formeln du använder?</small></div>
   <div><strong>2. Beräkna area</strong><small>4304 och 4309: har du formeln, insättning, värde och rätt enhet?</small></div>
   <div><strong>3. Bestämma vinkel</strong><small>4305 och 4308: kontrollerar du om den andra sinusvinkeln också är möjlig?</small></div></div>
- <p class="note">4301–4302 är bokens genomgångna exempel och räknas inte in i nivåerna.</p>
+ <p class="note">Följ hela lösningen i häftet och kontrollera att du använt den mellanliggande vinkeln.</p>
 </section>
 
 <section class="slide" data-optional="true" data-title="Extra: varför två vinklar?" data-teacher="Frivillig fördjupning av just originalets två-triangelpoäng, inte ett nytt obligatoriskt specialfall. Be eleverna uttrycka orsaken med sin(180°−v)=sin v.">
@@ -130,6 +129,6 @@
  <div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>36,87°</mn><mo>≈</mo><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>143,13°</mn><mo>≈</mo><mn>0,6</mn></mrow></math></div>
  <p>Med sidorna 6 cm och 10 cm blir arean i båda fallen</p>
  <div class="math-line good"><math display="block"><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mn>6</mn><mo>·</mo><mn>10</mn><mo>·</mo><mn>0,6</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>18</mn><mspace width="0.18em"/><msup><mtext>cm</mtext><mn>2</mn></msup></mrow></math></div>
- <p class="note">Det är just symmetrin i sinus som förklarar Jacobs två trianglar.</p>
+ <p class="note">Samma sinusvärde kan höra till en spetsig eller trubbig vinkel, och då får vi två olika trianglar.</p>
 </section>
 </main><nav class="controls" aria-label="Lektionsnavigation"><button class="btn" id="prev" type="button">Föregående</button><div class="middle"><span class="counter" id="progress">1 / 10</span><label for="jump">Gå till</label><select id="jump" aria-label="Gå till bild"></select></div><button class="btn primary" id="next" type="button">Nästa</button></nav><script src="../assets/lesson.js" defer></script></body></html>

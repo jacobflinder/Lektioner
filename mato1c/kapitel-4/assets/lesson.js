@@ -28,6 +28,8 @@ document.addEventListener('keydown',e=>{
  if(e.key==='ArrowLeft')go(position-1);
 });
 const teacherToggle=document.getElementById('teacher-toggle');
+// Undervisningsverktygen visas bara via ?larare=1; elevvyn är standard.
+if(new URLSearchParams(location.search).get('larare')==='1')document.body.classList.add('teacher-mode');
 teacherToggle.addEventListener('click',()=>{
  const on=document.body.classList.toggle('teacher-open');teacherToggle.textContent=on?'Dölj lärarstöd':'Visa lärarstöd';
  teacherToggle.setAttribute('aria-expanded',String(on));
@@ -82,7 +84,17 @@ function drawCircle(svg,angles,{symmetry=false}={}){
   const label=i===0?'P':'Q';
   add(svg,'text',{x:Math.max(10,Math.min(478,px+(x>=0?11:-27))),y:Math.max(23,Math.min(418,py+(y>=0?-11:24))),fill:color},label);
  });
- if(symmetry){const [x0,y0]=xy(angles[0]),[x1,y1]=xy(angles[1]);add(svg,'path',{d:`M ${x0} ${y0} Q ${cx} ${Math.min(y0,y1)-28} ${x1} ${y1}`,fill:'none',stroke:'#d5a442','stroke-dasharray':'5 7','stroke-width':2});}
+ if(symmetry){
+  const first=angles[0],second=angles[1];
+  const arc=(radius,end,color)=>{
+   const [ex,ey]=[cx+radius*Math.cos(end*Math.PI/180),cy-radius*Math.sin(end*Math.PI/180)];
+   add(svg,'path',{d:`M ${cx+radius} ${cy} A ${radius} ${radius} 0 0 ${end<0?1:0} ${ex.toFixed(2)} ${ey.toFixed(2)}`,fill:'none',stroke:color,'stroke-width':2.8,'stroke-linecap':'round'});
+  };
+  const label=(angle,r,text,color)=>add(svg,'text',{x:(cx+r*Math.cos(angle*Math.PI/180)).toFixed(2),y:(cy-r*Math.sin(angle*Math.PI/180)).toFixed(2),fill:color,'font-size':19,'font-weight':700,'text-anchor':'middle'},text);
+  arc(56,first,'#087d70');arc(93,second,'#bf782c');
+  label(first/2,83,'v','#087d70');
+  label(second/2,116,second<0?'−v':'180° − v','#995d1c');
+ }
 }
 document.querySelectorAll('[data-right-triangle]').forEach(root=>{
  const svg=root.querySelector('svg'),angle=Number(root.dataset.angle),rad=angle*Math.PI/180;
@@ -115,7 +127,17 @@ document.querySelectorAll('[data-circle-demo]').forEach(root=>{
 });
 document.querySelectorAll('[data-symmetry]').forEach(root=>{
  const svg=root.querySelector('svg');const base=Number(root.dataset.base||35);const kind=root.dataset.symmetry;
- drawCircle(svg,[base,kind==='vertical'?180-base:-base],{symmetry:true});
+ const second=kind==='vertical'?180-base:-base;
+ const show=both=>{
+  drawCircle(svg,both?[base,second]:[base],{symmetry:both});
+  root.querySelectorAll('[data-symmetry-step]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.symmetryStep===(both?'both':'first'))));
+  const explanation=root.querySelector('[data-symmetry-explanation]');
+  if(explanation)explanation.textContent=both?
+   (kind==='vertical'?`Punkterna ligger på samma höjd. Vinklarna är ${base}° och ${180-base}° = 180° − ${base}°.`:`Punkterna har samma x-koordinat. Vinklarna är ${base}° och −${base}°.`):
+   (kind==='vertical'?'Förutsäg var Q hamnar på samma höjd som P.':'Förutsäg var Q hamnar under x-axeln.');
+ };
+ root.querySelectorAll('[data-symmetry-step]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.symmetryStep==='both')));
+ show(false);
 });
 document.querySelectorAll('[data-equation-circle]').forEach(root=>{
  const svg=root.querySelector('svg'),kind=root.dataset.equationCircle,first=Number(root.dataset.first),second=Number(root.dataset.second);
