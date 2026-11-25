@@ -8,8 +8,7 @@ const root=path.resolve(__dirname,'../..');
 const lessons=[
  {id:'ratvinkliga-trianglar',levels:['4101–4106','4107–4109','4110–4111'],extras:1},
  {id:'exakta-trigonometriska-varden',levels:['4113–4115','4116–4118','4119'],extras:1},
- {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:1},
- {id:'enhetscirkeln-ekvationer',levels:['4203–4208','4209–4213','4214–4215'],extras:2}
+ {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:1}
 ];
 const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
 const screenshotDir=path.resolve(process.env.QA_SCREENSHOT_DIR||'mato1c-qa-screenshots/kapitel-4');
@@ -45,7 +44,8 @@ async function inspectLayout(page,id,width,i){
    const url=process.env.QA_BASE_URL?`${process.env.QA_BASE_URL}/mato1c/kapitel-4/${lesson.id}/`:`file://${path.join(root,'kapitel-4',lesson.id,'index.html')}`;
    await page.goto(url,{waitUntil:'load'});
    const count=await page.locator('.slide').count();
-   assert(count>=10&&count<=13,`${lesson.id}: expected 10–13 slides, got ${count}`);checks++;
+   const maxSlides=lesson.id==='enhetscirkeln'?16:13;
+   assert(count>=10&&count<=maxSlides,`${lesson.id}: expected 10–${maxSlides} slides, got ${count}`);checks++;
    assert.equal(await page.locator('.slide[data-optional="true"]').count(),lesson.extras);checks++;
    assert.equal(await page.locator('.slide.active .goal-list > div').count(),0); // goals are visibly at the start, no goal review there
    assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
@@ -74,9 +74,7 @@ async function inspectLayout(page,id,width,i){
     await root.locator('[data-angle="130"]').click();
     assert.match(await root.locator('[data-coordinates]').innerText(),/-0,64/);checks++;
     assert.equal(await root.locator('svg circle').count()>1,true);checks++;
-   }
-   if(lesson.id==='enhetscirkeln-ekvationer'){
-    await page.locator('#jump').selectOption('5');
+    await page.locator('#jump').selectOption('12');
     assert((await page.locator('body').textContent()).includes('SOC-37278098'));checks++;
     const cycle=page.locator('[data-cycle-demo]');await cycle.locator('[data-cycle-angle="400"]').click();
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;

@@ -1,51 +1,54 @@
-# Kapitel 4, Ma3c 2627 – original-till-webb-granskning
+# Kapitel 4 – källgranskning och planeringsstyrd lektionsindelning
 
-## Faktiska primärkällor
+## Källor och lärarbeslut
 
-- **4.1:** `240124 240129 4.1 Trigonometri i rätvinkliga trianglar NaTe22.pdf` (2 sidor), `240124 240129 ... Ma3c 2308.mp4` (ca 17 min), dess texttranskription (kontrollerad mot fyra filmrutor). Originalfilmen går först till **två speciella trianglar**, Pythagoras, sinus/cosinus och tabell, sedan tangens och rotbråk. PDF föreskriver även två filmgenomgångar som repetition/förberedelse, gemensam uppgift vid behov, mindmap hoppas över och tre nivåer i äldre NOKflex.
-- **4.2:** `240130 240131 Cirkeln, enhetscirkeln och godtyckliga trianglar Na22.pdf` (3 sidor), `240130 ... Ma3c Vik.txt` och `240131 ... Ma3c Vik.txt`. Dessa visar tydligt cirkelns ekvation från Pythagoras, **hela** enhetscirkeln (läraren tar uttryckligen inte bara halvcirkeln), definitionerna via koordinater, speglingar, två originalekvationer och heltalsmultiplar av 360°. Två originalaktiviteter är Socrative 326, `SOC-37277932`, och 329, `SOC-37278098`. Original-PDF refererar även Barkers film.
-- **Aktuell lärobok, användarens foton:** s. 218–225. Den nya bokens exempel är **inte** återgivna, endast samma matematik med nya tal/figurer. Arbetsuppgifter från boken hämtas från listorna på s. 219–221 respektive 224–225, inte från det äldre originalets NOKflex-nummer.
-- **Norm:** `Ma3c_2627_Didaktisk_grund_och_lektionsstruktur_v1.4(1).md` och projektets överordnade lektionsinstruktion. Senare beslut: tre konkreta mål, fullständiga algebraiska kedjor, 8–10 huvudslides när stoffet tillåter, ca 10–13 totalt, minst **två hela** boknivåer, målåterkoppling genom redan gjorda bokuppgifter.
+- Lärarens original 4.1: PDF «240124 240129 4.1 Trigonometri i rätvinkliga trianglar NaTe22», motsvarande film och kontrollerad transkription. Filmen härleder de exakta värdena ur två speciella trianglar och visar fullständiga algebraiska mellanled.
+- Lärarens original 4.2: PDF «240130 240131 Cirkeln, enhetscirkeln och godtyckliga trianglar Na22», två transkriptioner, Socrative 326 (SOC-37277932), Socrative 329 (SOC-37278098), Barkers förberedande film.
+- Den nya läroboken: användarens nio bokbilder s. 218–225, med uppgiftslistorna för nivå 1–3. De nya bokexemplen har inte kopierats.
+- «Ma3c 2627 – didaktisk grund och lektionsstruktur v1.4», samt överordnad AGENTS.md-instruktion: originalets matematikinnehåll och metod är bindande; tre kontrollerbara mål, korrekt bokarbete på minst två **hela** nivåer, målavstämning med redan gjorda boklösningar.
+- **Senaste uttryckliga planeringsbeslut 25 november 2026:** ett moment i planeringen = en webblektion. Planeringen visar s. 218, s. 221, s. 222, s. 228, s. 231, s. 234, s. 236, s. 240 och s. 244 som separata moment. De nio bokbilderna täcker endast de **tre första** momenten.
 
-## Innehållskarta – inget grundläggande borttaget
+## Moment, nivåer och faktisk täckning
 
-| Originalets väsentliga innehåll/metod | Plats i ny webb | Åtgärd |
+| Webblektion | Boksidor | Nivå 1 (samtliga) | Nivå 2 (samtliga) | Nivå 3 (samtliga) | Status |
+|---|---|---|---|---|---|
+| Trigonometri i rätvinkliga trianglar | 218–220 | 4101–4106 | 4107–4109 | 4110–4111 | Färdiggranskad |
+| Några exakta trigonometriska värden | 221 | 4113–4115 | 4116–4118 | 4119 | Färdiggranskad (4112 är bokexempel) |
+| 4.2 Enhetscirkeln | 222–225 | 4203–4208 | 4209–4213 | 4214–4215 | Färdiggranskad (4201–4202 är bokexempel) |
+| Trigonometriska ekvationer | **228** och följande sidor | Ej granskade | Ej granskade | Ej granskade | **Inte skapad som färdig lektion** |
+
+Planeringens följande separata moment är Areasatsen s. 231, Sinussatsen s. 234, När ger sinussatsen två fall? s. 236, Cosinussatsen s. 240, Tillämpningar och problemlösning s. 244. Alla behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering.
+
+## Original-till-webb-karta
+
+| Ursprungligt innehåll, metod, aktivitet | Plats i webb | Bedömning |
 |---|---|---|
-| Repetition av sin = motstående/hypotenusa, cos = närliggande/hypotenusa, tan = motstående/närliggande, samt arcus | `ratvinkliga-trianglar`, bilder 2–8 | Bevarad metod. Tre egna genomräknade fall och en vinkelberäkning. |
-| Gemensam uppgift med två rätvinkliga trianglar och vinkelsskillnad | `ratvinkliga-trianglar`, bild 9 | Bevarad problemtyp, annan figur och andra längder. |
-| 4.1 äldre videolänkar och skip av mindmap | `ratvinkliga-trianglar` extra; lärarstöd | Bevarade. Ingen påhittad Socrative. |
-| Liksidig/halv kvadrat med sida 1 ⇒ hypotenusan √2 | `exakta-trigonometriska-varden`, bilder 2–3 | Bevarade algebraiska led. |
-| Liksidig triangel med sida 2 ⇒ halva basen 1, höjden √3 | `exakta-trigonometriska-varden`, bilder 4–5 | Bevarad härledning. |
-| Sin/cos 30°, 45°, 60° och tan = sin/cos | `exakta-trigonometriska-varden`, bilder 5–7 | Bevarat; elever fyller tabellen själva före återkoppling. |
-| Förlängning 1/√2 till √2/2, även 1/√3 | `exakta-trigonometriska-varden`, bild 8 | Bevarade och fullständiga led. |
-| Minneshjälp med hand, men först förståelse genom trianglar | `exakta-trigonometriska-varden`, extra | Bevarad prioritering. |
-| Cirkelns ekvation `r²=(x−a)²+(y−b)²`, origo, radie 1 | `enhetscirkeln`, bilder 2–3 | Bevarat trots att nya boken börjar direkt med enhetscirkeln. |
-| Hela enhetscirkeln, positiv moturs/negativ medurs; `P=(cos v,sin v)` och `tan v=sin v/cos v` | `enhetscirkeln`, bilder 4–6, 9 | Bevarat, förbättrad interaktiv och matematisk teckenkontroll. |
-| Y-symmetri: sin(180°−v)=sin v, cos(180°−v)=−cos v | `enhetscirkeln`, bild 7 | Bevarat och visat geometriskt innan användning. |
-| X-symmetri: cos(−v)=cos v, sin(−v)=−sin v | `enhetscirkeln`, bild 8 | Bevarat och visat geometriskt innan användning. |
-| `sin v=0,4`: arcsin, 180°−arcsin ⇒ två vinklar | `enhetscirkeln`, bild 10; repetition `enhetscirkeln-ekvationer`, bild 4 | Originaltal och originalets fulla lösningsordning **före Socrative 326**, sedan återkallning nästa pass. |
-| `cos v=−0,2`: `±arccos`, negativ vinkel +360° | `enhetscirkeln`, bild 11; repetition `enhetscirkeln-ekvationer`, bild 5 | Originaltal och fulla mellanled **före Socrative 326**, sedan fortsatt arbete nästa pass. |
-| Hela varv, period 360°, n heltal; större vinkelintervall | `enhetscirkeln-ekvationer`, bilder 6–7, frivilligt 10 | Originalets begrepp och notation, interaktiv punkt som kontroll. |
-| Socrative 326 och 329 | `enhetscirkeln` bild 10; `enhetscirkeln-ekvationer` bild 9 | Båda originalaktiviteter behållna utan att hitta på nya koder/quiz. |
-| Bokarbete på tre nivåer och målåterkoppling | Slutbild i samtliga fyra lektioner | Nya bokens korrekta nummer; två **hela** nivåer, inga nya slutuppgifter. |
+| Sinus, cosinus och tangens med rätvinklig triangel, arcus och fulla lösningar | Rätvinkliga trianglar, bilder 2–8 | Bevarat, tre tydliga genomräknade fall |
+| Två trianglar, vinkelskillnad som gemensam uppgift | Rätvinkliga trianglar, bild 9 | Samma problemtyp, ny figur/tal |
+| Originalets två förberedande filmer, mindmap hoppas över | Rätvinkliga trianglar och exakta värden, första bild och extra | Bevarat, ingen påhittad Socrative |
+| Kvadrat med kateterna 1, 1 och hypotenusa √2 | Exakta värden, bilder 2–3 | Härlett med Pythagoras |
+| Halverad liksidig triangel: halva basen 1 och höjden √3 | Exakta värden, bilder 4–5 | Bevarad härledning |
+| Värden för 30°, 45°, 60°, sin, cos, tan; exakta rotbråk | Exakta värden, bilder 5–8 | Tabellen fylls först av eleverna, sedan återkoppling; fulla förlängningsled |
+| Hand som minnesstöd efter geometrisk förståelse | Exakta värden, frivillig extra | Bevarat frivilligt |
+| Cirkelns ekvation från Pythagoras och radie 1 | Enhetscirkeln, bilder 2–3 | Bevarat |
+| Hela enhetscirkeln, positiva och negativa vinklar | Enhetscirkeln, bilder 4–6 och 9 | Bevarat med interaktiv illustration |
+| P = (cos v, sin v) och tan v = sin v / cos v | Enhetscirkeln, bilder 4–6 | Bevarad notation och tydlig läsning |
+| Spegling i y-axeln resp. x-axeln, med teckenkonventioner | Enhetscirkeln, bilder 7–8 | Bevarade symmetrier före tillämpning |
+| Originalet löser sin v = 0,4 med arcsin och 180°−v | Enhetscirkeln, bild 10 | Samma tal och fulla mellanled **före Socrative 326** |
+| Originalet löser cos v = −0,2 med ±arccos och +360° | Enhetscirkeln, bild 11 | Samma tal och fulla mellanled **före Socrative 326** |
+| Socrative 326, först efter två ekvationer | Enhetscirkeln, bild 12 | Bevarat, avgränsar första originalpasset |
+| Hela varv, sin och cos är periodiska med 360°, heltal n | Enhetscirkeln, bild 13–14 | Bevarat efter första originalpasset; fortsatt arbete i samma bokmoment |
+| Socrative 329 | Enhetscirkeln, bild 15 | Bevarat i originalets ordning |
+| Tre boksnivåer, minst två kompletta och slutmål kopplade till gjorda uppgifter | Slutbild i var och en av de tre webblektionerna | Alla tre nivåers exakta nummer, tre konkreta mål och återkoppling |
 
-## Nya bokens kontrollerade uppgifter
+## Didaktiska avvägningar och avvikelser
 
-| Moment | Nivå 1 | Nivå 2 | Nivå 3 | Sidangivelse |
-|---|---|---|---|---|
-| 4.1 rätvinkliga trianglar | 4101–4106 | 4107–4109 | 4110–4111 | 219–220 |
-| 4.1 exakta värden | 4113–4115 | 4116–4118 | 4119 | 221 (4112 är genomgånget bokexempel) |
-| 4.2 enhetscirkeln över de båda tillfällena | 4203–4208 | 4209–4213 | 4214–4215 | 224–225 (4201–4202 är bokexempel) |
+- Föregående utkast hade **fyra** webbsidor och delade Enhetscirkeln över två webblektioner. Detta bröt mot senare visad planering. Nu är 4.2 **en** webblektion. Den gamla separat publiceringsbara fortsättningen har tagits bort ur förslaget och dess väsentliga innehåll integrerats i samma enhetscirkelwebb.
+- Enhetscirkeln omfattar två tydligt avgränsade lektionspass inom en webbsida: efter Socrative 326 markeras naturlig paus; efter hela varv och Socrative 329 ges slutkontroll. Den är längre än normalmallen: **15 huvudbilder plus 1 frivillig**. Att bevara två originalpass, fulla lösningskedjor och båda Socrative har prioritet framför bildantal.
+- Originalet 240130–240131 visar **två tidiga trigonometriska ekvationer** redan i enhetscirkelgenomgången. De har bevarats där med exakt metod, utan att utges för att vara uppgifter på s. 224–225. Det separata bokmomentet **Trigonometriska ekvationer s. 228** är därför fortfarande nästa nya webblektion och behöver de nya bokbilderna.
+- Alla aktiviteter görs utan elevinloggning och utan personuppgiftsinsamling. Originalets Socrative-länkar/koder verifieras vid behov i lärarens konto.
+- Alla originalfilmer syns direkt i de aktuella lektionerna. Ingen ny matematisk metod eller alternativ lösningsnorm införs.
 
-## Didaktiska förbättringar och öppna avvägningar
+## Återstående extern kontroll
 
-- Kapitel 4 är delat i **fyra** fokuserade webbsidor. De två första skiljer repetitionsmatematiken från originalfilmens exakta värden. De två sista följer originalets två lektionspass med enhetscirkeln och dess Socrative. Originalets båda ekvationslösningar ligger i första passet **före** Socrative 326 och repeteras i det andra, där perioderna utvecklas. Första passet har därför 12 huvudbilder och 1 frivillig extra; matematikens ordning och fullständiga led prioriteras framför en mekanisk bildgräns. Boknivåerna för 4.2 räknas **tillsammans** över båda webbsidorna, aldrig två gånger.
-- Lektionsmålen är tre konkreta handlingar per sida. Avslutningen pekar tillbaka på befintliga lösningar; inga nya uppgifter på målåterkopplingen. Korrekt matematik står först; frivilliga filmer och extra utmaningar är tydligt skilda.
-- Ekvationerna sin v=0,4 och cos v=−0,2 liksom perioder ligger **utöver de första fyra sidorna i den nya bokens 4.2**, men är dokumenterat centralt i lärarens original. De ingår därför utan att utges för att vara uppgifter i den nya boken. Deras mål stäms av genom de redan visade beräkningarna och originalets Socrative 329.
-- Originalets PDF var från en äldre bok. Den nya uppgiftsnumreringen är fullständigt utbytt. Nytt material hämtar inte formuleringar eller siffervärden från nya bokens lösta exempel.
-- Ingen specialmetod, räkneregel eller extra Socrative har införts som obligatoriskt alternativ till originalets norm.
-- Originalplanens förberedande filmer finns med synligt på första huvudbilden i respektive moment (och kvar som frivilliga stöd i extraslides). Alla fyra pass anger minst **20 minuters sammanhängande bokarbete**.
-
-## Återstående klassrumsverifiering
-
-Socrative-quizens liveinnehåll och länkar kan inte kontrolleras utan lärarkontot. Läraren behöver därför öppna originalens 326 respektive 329 i klassrummet. Filmerna är oförändrade externa länkar.
+Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326 och 329 i klassrummet. De externa filmerna är oförändrade. **Ingen separat webblektion från s. 228 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
