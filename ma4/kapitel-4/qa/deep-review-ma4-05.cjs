@@ -7,7 +7,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const URL='http://127.0.0.1:8123/ma4/kapitel-4/polar-form/';
-const order=['intro','representation','procedure','from-polar','traps','independent','nok','optional','exit'];
+const order=['intro','representation','from-polar','procedure','traps','independent','nok','optional','exit'];
 const values=[
  {id:'3,4',a:3,b:4,r:5,v:53.13},
  {id:'-3,3',a:-3,b:3,r:3*Math.sqrt(2),v:135},
@@ -116,8 +116,20 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   await page.locator('#polar-reset').click();
   assert.equal(await page.locator('#polar-step').innerText(),'Steg 0 av 3','02 reset fungerande');
   console.log('PASS bild 02: fyra kvadranter, två axelfall, sex val och trestegsanimation');
-  // 3 femstegsmodell: a,b, absolutbelopp, referensvinkel, rätt kvadrant, återkontroll.
+  // 3: Filmens första genomräknade riktning: längd/vinkel till koordinater.
   await active(2);
+  assert.ok(await page.locator('#reverse-ans').isHidden(),'03 facit dolt');
+  await page.locator('[data-reveal="reverse-ans"]').click();
+  assert.equal(await page.locator('#reverse-ans .ma4-step').count(),5,'03 fem separata genomgångssteg');
+  for(const e of ['a = r cos v','b = r sin v','a = 4 cos 150°','= −2√3','b = 4 sin 150°','= 2',
+   '|z| = √((−2√3)² + 2²)','= √(12 + 4)','= √16','= 4']){
+    await one('#reverse-ans math[aria-label="'+e+'"]','03 längd och vinkel till koordinater '+e);
+  }
+  await one('#reverse-ans .ma4-final math[aria-label="z = −2√3 + 2i"]','03 korrekt exakt resultat');
+  await shot('03-desktop');
+  console.log('PASS bild 03: filmens polär till rektangulär form före den omvända metoden');
+  // 4: koordinater till polär form med fullständig tan/arctan-kedja.
+  await active(3);
   const seq=page.locator('#procedure [data-sequence]');
   assert.equal(await seq.locator('[data-seq-item]:not(.hidden)').count(),0,'03 genomgången börjar med dold lösning');
   for(let j=1;j<=5;j++){
@@ -137,20 +149,8 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
   assert.equal(await seq.locator('[data-seq-item]:not(.hidden)').count(),4,'03 bakåt fungerar');
   await seq.locator('[data-seq-reset]').click();
   assert.equal(await seq.locator('[data-seq-item]:not(.hidden)').count(),0,'03 återställning döljer alla steg');
-  await shot('03-desktop');
-  console.log('PASS bild 03: allmän formel, insättning, referensvinkel, kvadrant och återkontroll');
-  // 4 polär→rektangulär form, först eget försök.
-  await active(3);
-  assert.ok(await page.locator('#reverse-ans').isHidden(),'04 facit dolt');
-  await page.locator('[data-reveal="reverse-ans"]').click();
-  assert.equal(await page.locator('#reverse-ans .ma4-step').count(),5,'04 fem separata genomgångssteg');
-  for(const e of ['a = r cos v','b = r sin v','a = 4 cos 150°','= −2√3','b = 4 sin 150°','= 2',
-   '|z| = √((−2√3)² + 2²)','= √(12 + 4)','= √16','= 4']){
-    await one('#reverse-ans math[aria-label="'+e+'"]','04 tillbaka till koordinater '+e);
-  }
-  await one('#reverse-ans .ma4-final math[aria-label="z = −2√3 + 2i"]','04 korrekt exakt resultat');
   await shot('04-desktop');
-  console.log('PASS bild 04: andra kvadranten, fullständiga insättningar och Pythagoras');
+  console.log('PASS bild 04: allmän formel, insättning, referensvinkel, kvadrant och återkontroll');
   // 5 arctan ensam bestämmer inte kvadranten; åtgärdad feedback och specialfall.
   await active(4);
   await spaced('#traps .math-givens',2);
@@ -228,7 +228,7 @@ assert.ok(Math.abs(2*Math.sin(240*Math.PI/180)+Math.sqrt(3))<1e-12,'Exit w imagi
     assert.ok(await page.locator('#polar-live').isHidden(),'02 slutläget döljer duplicerade mellanvärden');
     assert.ok(await page.locator('#polar-discovery').isVisible(),'02 slutlägets polära återkoppling syns');
    }
-   if(i===2){
+   if(i===3){
     for(let j=0;j<5;j++)await page.locator('#procedure [data-seq-next]').click();
     await spaced('#procedure [data-seq-item]:nth-child(1) .math-givens',2);
     await spaced('#procedure [data-seq-item]:nth-child(5) .math-givens',4);
