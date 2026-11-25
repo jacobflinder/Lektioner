@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#142e43">
+<meta name="description" content="Interaktiv matematiklektion om integraler som förändring: rektangelsummor, integralkalkylens fundamentalsats, sträcka, hastighetsändring, energi och population. Matematik – fortsättning nivå 1c, kapitel 3.">
+<title>Tillämpningar av integraler · Matematik – fortsättning nivå 1c</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a href="../">← Kapitel 3</a>
+  <strong>Matematik – fortsättning, nivå 1c · 3.3</strong>
+  <div class="head-actions"><button class="btn" type="button" id="mode" aria-pressed="false">Klassrumsläge</button><button class="btn" type="button" id="teacher-toggle" aria-expanded="false">Visa lärarstöd</button><button class="btn" type="button" id="ink-toggle" aria-expanded="false">Visa skrivyta</button></div>
+</header>
+<main>
+<aside class="teacher" id="teacher-box" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside>
+<div class="repetition"><strong>Repetitionsläge:</strong> Räkna först i häftet. Öppna återkopplingen när du är redo. Inga elevsvar skickas vidare.</div>
+<div class="inkpanel" id="inkpanel"><div class="inkhead"><strong>Frivillig skrivyta</strong><div><button class="btn" id="ink-undo" type="button">Ångra</button> <button class="btn" id="ink-clear" type="button">Rensa</button></div></div><canvas id="ink" aria-label="Digital skrivyta för egna anteckningar"></canvas></div>
+
+<section class="slide active" data-title="Start och tre mål" data-teacher="Originalfilm 240115: läraren inleder tillämpningar, upprepar rektangelsummor/dx och visar en bolluppgift. Låt alla först svara individuellt på den korta volymfrågan. Ingen Socrative finns i originalet.">
+  <div class="kicker">01 · Start · läroboken s. 200–202</div>
+  <h1>Vad får vi när vi integrerar en hastighet?</h1>
+  <p class="lead">Förra lektionen beräknade vi integraler. Nu använder vi <strong>samma metod</strong> för att ta reda på hur något förändras i verkligheten.</p>
+  <div class="question">Startfråga: En kran ger 8 liter per minut under 3 minuter. Hur mycket vatten har runnit ut? Vilken enhet ska svaret ha?</div>
+  <h2>Efter lektionen ska du kunna</h2>
+  <div class="grid three">
+    <div class="card green"><strong>1. Tolka</strong><p>en bestämd integral som förändring och ange rätt enhet.</p></div>
+    <div class="card green"><strong>2. Beräkna</strong><p>förändringen med integralkalkylens fundamentalsats.</p></div>
+    <div class="card green"><strong>3. Bestämma</strong><p>en total mängd när även startvärdet är känt.</p></div>
+  </div>
+  <details><summary>Visa startfrågans återkoppling</summary><p><strong>24 liter.</strong> Hastighet gånger tid ger mängd: <span class="math-inline">8 liter/minut · 3 minuter = 24 liter</span>. Med varierande hastighet behöver vi summera små delar.</p></details>
+  <div class="endnote">Räkna på papper under genomgången. Bokens uppgifter finns samlade mot slutet.</div>
+</section>
+
+<section class="slide" data-title="Rektanglar och summor" data-teacher="Återskapar originalfilmens ordning: en kurva, nio rektanglar, A₁…A₉, deras gemensamma bredd Δx, f(xᵢ) som höjd. Visa nio först. Låt eleverna tala om vad som händer när antalet blir 18 och 36.">
+  <div class="kicker">02 · Från rektanglar till en summa</div>
+  <h1>Vi börjar med rektanglarna</h1>
+  <p>Kurvan visar <span class="math-inline">y = f(x)</span>. Vi delar området i nio lika breda rektanglar. <strong>Varje rektangel har en bredd och en höjd.</strong></p>
+  <div class="grid">
+    <figure class="plot"><svg id="rect-graph" viewBox="0 0 620 370" role="img" aria-label="En positiv, böjd kurva med nio mittpunktsrektanglar mellan x lika med noll och fyra. Rektanglarna byter antal när valen används."></svg><figcaption>Höjd: <span class="math-inline">f(xᵢ)</span> vid rektangelns mitt. Bredd: <span class="math-inline">Δx</span>.</figcaption></figure>
+    <div>
+      <div class="question">Skriv arean av en rektangel. Hur skulle du skriva summan av alla nio?</div>
+      <div class="math-line"><math display="block"><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>·</mo><mi>Δ</mi><mi>x</mi></mrow></math></div>
+      <div class="math-line good"><math display="block"><mrow><mi>A</mi><mo>≈</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>9</mn></munderover><msub><mi>A</mi><mi>i</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>9</mn></munderover><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi>Δ</mi><mi>x</mi></mrow></math></div>
+      <div class="choices" role="group" aria-label="Antal rektanglar"><button class="btn" type="button" data-rectangles="9" aria-pressed="true">9 rektanglar</button><button class="btn" type="button" data-rectangles="18" aria-pressed="false">18</button><button class="btn" type="button" data-rectangles="36" aria-pressed="false">36</button></div>
+      <p class="readout" id="rectangle-readout">Bredd Δx = 4/9</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-title="Från summan till dx och dt" data-teacher="Originalfilmens centrala fråga var varför dx/dt finns: det är rektangelns bredd som blir allt mindre. Byt sedan x till t på den horisontella axeln, precis som i filmen. Peka på att enheterna multipliceras.">
+  <div class="kicker">03 · Samma idé, ny notation</div>
+  <h1>Varför står det <span class="math-inline">dx</span> eller <span class="math-inline">dt</span>?</h1>
+  <p>När rektanglarna blir allt smalare närmar sig deras summa ett exakt värde.</p>
+  <div class="math-line strong"><math display="block"><mrow><munder><mo>lim</mo><mrow><mi>Δ</mi><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi>Δ</mi><mi>x</mi><mo>=</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow></math></div>
+  <div class="grid">
+    <div class="card green"><h3>Om vågräta axeln visar tid</h3><p>… skriver vi <span class="math-inline">t</span> och <span class="math-inline">dt</span>.</p><div class="math-line good"><math display="block"><mrow><mi>Δ</mi><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>v</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi></mrow></math></div></div>
+    <div class="card"><h3>Enheterna följer med</h3><p>En liten sträcka är <strong>hastighet · tid</strong>.</p><div class="math-line"><math display="block"><mrow><mfrac><mtext>m</mtext><mtext>s</mtext></mfrac><mo>·</mo><mtext>s</mtext><mo>=</mo><mtext>m</mtext></mrow></math></div><p>Integralen får alltså enheten meter.</p></div>
+  </div>
+  <div class="question">Varför skulle vi skriva <span class="math-inline">dt</span> i en hastighet–tid-graf, men <span class="math-inline">dx</span> när den vågräta axeln heter <span class="math-inline">x</span>?</div>
+</section>
+
+<section class="slide" data-title="Satsen före beräkningen" data-teacher="Ta fram den exakta algebraiska metoden INNAN bollen räknas. Skriv på tavlan eller peka på kedjan [F(t)] = F(b)−F(a). Ingen elev ska upptäcka en ny regel mitt i nästa lösning.">
+  <div class="kicker">04 · Repetition · vår beräkningsmetod</div>
+  <h1>Integralkalkylens fundamentalsats</h1>
+  <p>När <span class="math-inline">F′(t) = f(t)</span> och <span class="math-inline">f</span> är kontinuerlig mellan <span class="math-inline">a</span> och <span class="math-inline">b</span>, gäller:</p>
+  <div class="math-line good strong"><math display="block"><mrow><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mi>F</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><mi>a</mi><mi>b</mi></msubsup><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></math></div>
+  <div class="grid">
+    <div class="card green"><h3>Om hastigheten är given</h3><div class="math-line"><math display="block"><mrow><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>v</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></math></div><div class="math-line"><math display="block"><mrow><mi>Δ</mi><mi>s</mi><mo>=</mo><mi>s</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>−</mo><mi>s</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>v</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi></mrow></math></div></div>
+    <div class="card"><h3>Arbetsgången sitter redan</h3><ol><li>Ställ upp integralen med rätt gränser.</li><li>Bestäm en primitiv funktion.</li><li>Skriv hela kedjan <span class="math-inline">[F(t)]<sub>a</sub><sup>b</sup> = F(b) − F(a)</span>.</li><li>Räkna klart och tolka enheten.</li></ol></div>
+  </div>
+  <p class="note">Vi kommer inte att byta metod när frågan handlar om sträcka, vatten, hastighet eller population.</p>
+</section>
+
+<section class="slide" data-title="Bollen och sträckan" data-teacher="Samma exempeltyp och samma notation som på originalfilmens tavla, men andra siffror för att inte kopiera uppgift 3382. Låt eleverna först välja 0 och 1,5 samt skriva en primitiv funktion. Öppna sedan hela kedjan samlat. Snabb rimlighetskontroll: v är fortfarande positiv under intervallet.">
+  <div class="kicker">05 · Tillämpning med samma beräkningsmetod</div>
+  <h1>En boll kastas uppåt</h1>
+  <p>En boll lämnar handen med hastigheten <span class="math-inline">v(t) = 16 − 8t</span> m/s. Tiden <span class="math-inline">t</span> mäts i sekunder. <strong>Hur långt har bollen kommit uppåt efter 1,5 sekunder?</strong></p>
+  <div class="grid">
+    <figure class="plot"><svg id="ball-graph" viewBox="0 0 620 360" role="img" aria-label="Rät linje v(t)=16−8t från 0 till 2 sekunder. Arean under linjen från 0 till 1,5 är markerad och positiv."></svg><figcaption>Den markerade ytan motsvarar sträckan under de första 1,5 sekunderna.</figcaption></figure>
+    <div><div class="question">Skriv integralen först. Bestäm sedan en primitiv funktion till <span class="math-inline">16 − 8t</span>.</div>
+      <div class="math-line"><math display="block"><mrow><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>1,5</mn></msubsup><mo stretchy="false">(</mo><mn>16</mn><mo>−</mo><mn>8</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi></mrow></math></div>
+      <button class="btn primary" type="button" data-reveal="ball-answer">Visa hela beräkningen</button>
+    </div>
+  </div>
+  <div class="answer" id="ball-answer"><p>En primitiv funktion är <span class="math-inline">F(t) = 16t − 4t²</span>. Vi räknar i en sammanhängande kedja:</p>
+    <div class="eq-chain">
+      <div class="math-line"><math display="block"><mrow><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>1,5</mn></msubsup><mo stretchy="false">(</mo><mn>16</mn><mo>−</mo><mn>8</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>16</mn><mi>t</mi><mo>−</mo><mn>4</mn><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>1,5</mn></msubsup></mrow></math></div>
+      <div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>1,5</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math></div>
+      <div class="math-line"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>16</mn><mo>·</mo><mn>1,5</mn><mo>−</mo><mn>4</mn><mo>·</mo><msup><mn>1,5</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mn>16</mn><mo>·</mo><mn>0</mn><mo>−</mo><mn>4</mn><mo>·</mo><msup><mn>0</mn><mn>2</mn></msup><mo stretchy="false">)</mo></mrow></math></div>
+      <div class="math-line good"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>24</mn><mo>−</mo><mn>9</mn><mo stretchy="false">)</mo><mo>−</mo><mn>0</mn><mo>=</mo><mn>15</mn><mtext> m</mtext></mrow></math></div>
+    </div><p><strong>Svar:</strong> Bollen har stigit <strong>15 meter</strong>. Hastigheten är positiv under hela tiden, så här är sträckan också lika med förflyttningen uppåt.</p>
+  </div>
+</section>
+
+<section class="slide" data-title="Samma metod med vatten" data-teacher="Den här tillämpningen täcker lärobokens stoff om flöde utan att kopiera exemplen. Eleven prövar först, sedan visas samma fullständiga algebraiska uppställning som i bolluppgiften. Bevaka enheten liter/minut gånger minut.">
+  <div class="kicker">06 · Egen tillämpning · samma kedja</div>
+  <h1>Hur mycket vatten har fyllts på?</h1>
+  <p>En behållare är tom när vi börjar. Vatten rinner in med hastigheten <span class="math-inline">q(t) = 12 + 3t</span> liter/minut, där <span class="math-inline">t</span> är minuter. <strong>Hur mycket finns i behållaren efter 4 minuter?</strong></p>
+  <div class="question">Gör tre saker på papper: ange gränserna, skriv integralen och hitta en primitiv funktion.</div>
+  <button class="btn primary" type="button" data-reveal="water-answer">Visa hela lösningen</button>
+  <div class="answer" id="water-answer"><p>En primitiv funktion är <span class="math-inline">F(t) = 12t + 3t²/2</span>.</p>
+    <div class="eq-chain">
+      <div class="math-line"><math display="block"><mrow><mi>V</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>4</mn></msubsup><mo stretchy="false">(</mo><mn>12</mn><mo>+</mo><mn>3</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>12</mn><mi>t</mi><mo>+</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>4</mn></msubsup></mrow></math></div>
+      <div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math></div>
+      <div class="math-line"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>12</mn><mo>·</mo><mn>4</mn><mo>+</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>·</mo><msup><mn>4</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mn>12</mn><mo>·</mo><mn>0</mn><mo>+</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>·</mo><msup><mn>0</mn><mn>2</mn></msup><mo stretchy="false">)</mo></mrow></math></div>
+      <div class="math-line good"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>48</mn><mo>+</mo><mn>24</mn><mo stretchy="false">)</mo><mo>−</mo><mn>0</mn><mo>=</mo><mn>72</mn><mtext> liter</mtext></mrow></math></div>
+    </div><p><strong>Svar:</strong> Det har runnit in 72 liter. Integralen ger mängden eftersom flödet har enheten liter/minut och vi integrerar över minuter.</p>
+  </div>
+</section>
+
+<section class="slide" data-title="Fyra sorters förändring" data-teacher="Bokens s.200 använder hastighet→sträcka, acceleration→hastighetsändring, tillväxthastighet→antal och effekt→energi. Samma metod gäller varje rad. Be eleverna själva säga vilket svar och vilken enhet varje integral har. Lös ett kort accelerationsexempel med fundamentalsatsen.">
+  <div class="kicker">07 · En matematisk idé i flera sammanhang</div>
+  <h1>Vad förändras när vi integrerar?</h1>
+  <div class="grid">
+    <div class="card"><h3>Hastighet</h3><p>Meter/sekund · sekunder ger <strong>sträcka i meter</strong>.</p></div>
+    <div class="card"><h3>Acceleration</h3><p>Meter/sekund² · sekunder ger <strong>ändring av hastighet i m/s</strong>.</p></div>
+    <div class="card"><h3>Effekt</h3><p>Joule/sekund · sekunder ger <strong>energi i joule</strong>.</p></div>
+    <div class="card"><h3>Tillväxthastighet</h3><p>Individer/år · år ger <strong>ändring av antal individer</strong>.</p></div>
+  </div>
+  <div class="question">En acceleration är konstant <span class="math-inline">a(t) = 3 m/s²</span> i fyra sekunder. Hur mycket ökar hastigheten?</div>
+  <button class="btn primary" type="button" data-reveal="accel-answer">Visa beräkningen</button>
+  <div class="answer" id="accel-answer"><div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>Δ</mi><mi>v</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>4</mn></msubsup><mn>3</mn><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>3</mn><mi>t</mi><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>4</mn></msubsup></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mo>·</mo><mn>4</mn><mo>−</mo><mn>3</mn><mo>·</mo><mn>0</mn></mrow></math></div><div class="math-line good"><math display="block"><mrow><mo>=</mo><mn>12</mn><mtext> m/s</mtext></mrow></math></div></div><p>Detta är en <strong>hastighetsändring</strong>, inte en sträcka.</p></div>
+</section>
+
+<section class="slide" data-title="När det finns ett startvärde" data-teacher="Bokens uppgifter 3385–3386 ber eleverna bestämma både förändring och ny population. Introducera först sambandet slutvärde = startvärde + förändring, därefter samma kompletta integralkedja. Djurexemplet är omskrivet, inte hämtat från boken.">
+  <div class="kicker">08 · Förändring och totalt antal</div>
+  <h1>Hur många finns det till slut?</h1>
+  <p>En sjö innehåller från början <strong>90 fiskar</strong>. Under de kommande åren ökar antalet med hastigheten <span class="math-inline">N′(t) = 6 + 2t</span> fiskar/år. Tiden <span class="math-inline">t</span> räknas i år.</p>
+  <div class="math-line good"><math display="block"><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>+</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><msup><mi>N</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi></mrow></math></div>
+  <div class="question">Hur många fiskar finns det enligt modellen efter tre år? Beräkna <strong>förändringen</strong> först och lägg sedan till startvärdet.</div>
+  <button class="btn primary" type="button" data-reveal="fish-answer">Visa hela beräkningen</button>
+  <div class="answer" id="fish-answer"><div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>Δ</mi><mi>N</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>3</mn></msubsup><mo stretchy="false">(</mo><mn>6</mn><mo>+</mo><mn>2</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>6</mn><mi>t</mi><mo>+</mo><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>3</mn></msubsup></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>6</mn><mo>·</mo><mn>3</mn><mo>+</mo><msup><mn>3</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mn>6</mn><mo>·</mo><mn>0</mn><mo>+</mo><msup><mn>0</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mn>27</mn></mrow></math></div><div class="math-line good"><math display="block"><mrow><mi>N</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mn>90</mn><mo>+</mo><mn>27</mn><mo>=</mo><mn>117</mn></mrow></math></div></div><p><strong>Svar:</strong> Modellen ger 117 fiskar efter tre år. Integralen gav <strong>ökningen 27</strong>, inte hela populationen.</p></div>
+</section>
+
+<section class="slide" data-title="Kan du tolka själv?" data-teacher="Kort individuell avstämning innan bokarbetet. Alla skriver vad integralen beskriver och rätt enhet. Återkoppla snabbt. De algebraiska grunderna har redan visats på sidorna 4–8.">
+  <div class="kicker">09 · Tre frågor · utan nytt räknesätt</div>
+  <h1>Vad berättar integralen?</h1>
+  <p>Skriv tre korta svar i häftet innan du öppnar återkopplingen.</p>
+  <div class="grid three">
+    <div class="card"><h3>A · Effekt</h3><p>En elapparat har <span class="math-inline">P(t) = 500 W</span> i 20 sekunder.</p><p>Vad betyder integralen av <span class="math-inline">P(t)</span> mellan 0 och 20? Vilken enhet får den?</p></div>
+    <div class="card"><h3>B · Tillväxt</h3><p><span class="math-inline">N′(t)</span> är antal nya träd per år.</p><p>Vad betyder integralen mellan år 2 och år 5?</p></div>
+    <div class="card"><h3>C · Hastighet</h3><p><span class="math-inline">v(t)</span> mäts i kilometer per timme och <span class="math-inline">t</span> i timmar.</p><p>Vilken enhet får integralen?</p></div>
+  </div>
+  <button class="btn primary" type="button" data-reveal="meaning-answer">Visa återkoppling</button>
+  <div class="answer" id="meaning-answer"><p><strong>A.</strong> Energin som apparaten använder under 20 sekunder: <span class="math-inline">500 W · 20 s = 10 000 J</span>.</p><p><strong>B.</strong> Ökningen av antalet träd från år 2 till år 5, med enheten träd.</p><p><strong>C.</strong> Kilometer. Kilometer/timme gånger timmar ger kilometer.</p></div>
+</section>
+
+<section class="slide" data-title="Sammanfattning och bokarbete" data-teacher="Original-PDF:n: arbeta med uppgifter, sedan Kunskapsmatrisen; filmen avslutar med arbetsuppgifter och berättar om nästa dags kattungeaktivitet (ett framtida moment, inte denna lektion). Nya boken: tre nivåer med 3382–3395, minst två HELA nivåer. Ingen Socrative finns i det här originalet. Slutfrågorna motsvarar de tre målen.">
+  <div class="kicker">10 · Sammanfatta · öva ordentligt</div>
+  <h1>Ta med dig den här metoden</h1>
+  <div class="summary-list"><div><strong>1. Tolka:</strong> Integralen av en förändringshastighet ger <strong>förändringen</strong>. Enheten blir hastighetens enhet gånger tidsenheten.</div><div><strong>2. Beräkna:</strong> Med <span class="math-inline">F′(t) = f(t)</span> använder vi alltid samma kedja:</div></div>
+  <div class="math-line good"><math display="block"><mrow><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mi>F</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><mi>a</mi><mi>b</mi></msubsup><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></math></div>
+  <div class="summary-list"><div><strong>3. Bestäm totalen:</strong> Slutvärde = startvärde + förändring. Det är bara när startvärdet är noll som integralen ensam ger hela mängden.</div></div>
+  <h2 style="margin-top:24px">Läroboken s. 201–202</h2>
+  <p>Välj <strong>minst två av tre nivåer</strong>. Gör <strong>alla uppgifter och samtliga deluppgifter</strong> på båda valda nivåerna – inte bara ett urval.</p>
+  <div class="levels"><div class="card"><h3>Nivå 1 · s. 201</h3><p class="book-number">3382–3386</p></div><div class="card green"><h3>Nivå 2 · s. 202</h3><p class="book-number">3387–3393</p></div><div class="card"><h3>Nivå 3 · s. 202</h3><p class="book-number">3394–3395</p></div></div>
+  <p class="note">Bokarbete först. Fortsätt sedan i Kunskapsmatrisen, som i originallektionens planering.</p>
+  <details><summary>Individuell slutkontroll – tre mål</summary>
+    <p><strong>1 · Tolka.</strong> En maskin tillför 7 liter/minut i fem minuter. Vad ger integralen och vilken enhet får svaret?</p>
+    <p><strong>2 · Beräkna.</strong> Räkna med fundamentalsatsen:</p>
+    <div class="math-line"><math display="block"><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>2</mn></msubsup><mo stretchy="false">(</mo><mn>5</mn><mo>+</mo><mn>2</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi></mrow></math></div>
+    <p><strong>3 · Bestäm totalen.</strong> Ett bestånd har 60 individer från början. Ökningen under två år är 14. Hur stort är beståndet efter två år?</p>
+    <details><summary>Visa lösning efter eget försök</summary><p><strong>1.</strong> Förändringen i vattenmängd, <strong>35 liter</strong>.</p><div class="eq-chain"><div class="math-line"><math display="block"><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>2</mn></msubsup><mo stretchy="false">(</mo><mn>5</mn><mo>+</mo><mn>2</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>5</mn><mi>t</mi><mo>+</mo><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>2</mn></msubsup></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math></div><div class="math-line compact good"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>5</mn><mo>·</mo><mn>2</mn><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mn>5</mn><mo>·</mo><mn>0</mn><mo>+</mo><msup><mn>0</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mn>14</mn></mrow></math></div></div><p><strong>3.</strong> <span class="math-inline">60 + 14 = 74</span> individer.</p></details>
+  </details>
+</section>
+
+<section class="slide" data-optional="true" data-title="Extra: effekt och energi" data-teacher="Boken har även effekt→energi. Använd bara om tid finns; annars är matchningsfrågan i bild 9 tillräcklig. Algebraisk beräkning görs fortfarande med samma sats.">
+  <span class="extra-label">Extra · om tid finns</span><div class="kicker">11 · Energi från effekt</div><h1>Hur mycket energi använder apparaten?</h1>
+  <p>En apparat har effekten <span class="math-inline">P(t) = 300 + 10t</span> W under de första 20 sekunderna.</p>
+  <div class="question">Skriv integralen och räkna med vår vanliga kedja. Vilken enhet får svaret?</div>
+  <button class="btn primary" data-reveal="power-answer" type="button">Visa fullständig lösning</button>
+  <div class="answer" id="power-answer"><div class="eq-chain"><div class="math-line compact"><math display="block"><mrow><mi>Δ</mi><mi>E</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>20</mn></msubsup><mo stretchy="false">(</mo><mn>300</mn><mo>+</mo><mn>10</mn><mi>t</mi><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>300</mn><mi>t</mi><mo>+</mo><mn>5</mn><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>20</mn></msubsup></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>20</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>300</mn><mo>·</mo><mn>20</mn><mo>+</mo><mn>5</mn><mo>·</mo><msup><mn>20</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>−</mo><mn>0</mn></mrow></math></div><div class="math-line good"><math display="block"><mrow><mo>=</mo><mn>6 000</mn><mo>+</mo><mn>2 000</mn><mo>=</mo><mn>8 000</mn><mtext> J</mtext></mrow></math></div></div><p><strong>Resultat:</strong> 8 000 joule, alltså 8 kJ. W · s = J.</p></div>
+</section>
+
+<section class="slide" data-optional="true" data-title="Extra: kontroll med digitalt verktyg" data-teacher="Den nya läroboken har modeller där digital beräkning är lämplig. Detta ersätter inte den uppställda integralen eller matematiska tolkningen. Välj utifrån klassens tid; originalet har inte en sådan separat genomgång.">
+  <span class="extra-label">Extra · valbar fördjupning</span><div class="kicker">12 · Från modell till rimlighetskontroll</div><h1>Vad måste stå även om vi använder teknik?</h1>
+  <p>En energimätare ger effekten <span class="math-inline">P(t) = 100 + 4t + 0,05t²</span> W under <span class="math-inline">0 ≤ t ≤ 60</span> sekunder.</p>
+  <p>Teknik kan vara bra för stora tal. Men <strong>först</strong> visar vi fortfarande vad som ska beräknas:</p>
+  <div class="math-line"><math display="block"><mrow><mi>Δ</mi><mi>E</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>60</mn></msubsup><mo stretchy="false">(</mo><mn>100</mn><mo>+</mo><mn>4</mn><mi>t</mi><mo>+</mo><mn>0,05</mn><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi></mrow></math></div>
+  <div class="question">Bestäm en primitiv funktion. Kontrollera sedan resultatet med ett digitalt verktyg om du vill.</div>
+  <details><summary>Visa algebraiskt kontrollsvar</summary><div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>Δ</mi><mi>E</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><mn>100</mn><mi>t</mi><mo>+</mo><mn>2</mn><msup><mi>t</mi><mn>2</mn></msup><mo>+</mo><mfrac><mn>0,05</mn><mn>3</mn></mfrac><msup><mi>t</mi><mn>3</mn></msup><mo stretchy="false">]</mo></mrow><mn>0</mn><mn>60</mn></msubsup></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mn>60</mn><mo stretchy="false">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></math></div><div class="math-line"><math display="block"><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>6 000</mn><mo>+</mo><mn>7 200</mn><mo>+</mo><mn>3 600</mn><mo stretchy="false">)</mo><mo>−</mo><mn>0</mn></mrow></math></div><div class="math-line good"><math display="block"><mrow><mo>=</mo><mn>16 800</mn><mtext> J</mtext></mrow></math></div></div></details>
+  <p class="note">Samma fundamentalsats – programmet är en kontroll, inte en ny beräkningsnorm.</p>
+</section>
+</main>
+<nav class="controls" aria-label="Lektionsnavigation"><button id="prev" class="btn" type="button">Föregående</button><div class="middle"><span class="counter" id="count">1 / 12</span><label class="hidden-label" for="jump">Gå till bild</label><select id="jump"></select></div><button id="next" class="btn primary" type="button">Nästa</button></nav>
+<script src="lesson.js"></script>
+</body>
+</html>
