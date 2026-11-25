@@ -1,0 +1,64 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'..');
+let checks=0;
+const check=(condition,message)=>{assert(condition,message);checks++};
+const cases=[
+ {id:'trigonometriska-ekvationer',slides:11,levels:['4218–4223','4224–4227','4228'],optional:1,socrative:null},
+ {id:'areasatsen',slides:10,levels:['4303–4307','4308–4311','4312–4313'],optional:1,socrative:'SOC-37278150'},
+ {id:'sinussatsen',slides:9,levels:['4315–4318','4319–4320'],optional:0,socrative:'SOC-37278423'}
+];
+const htmls={};
+for(const item of cases){
+ const html=fs.readFileSync(path.join(root,item.id,'index.html'),'utf8');
+ htmls[item.id]=html;
+ check((html.match(/<section class="slide(?: active)?"/g)||[]).length===item.slides,item.id+': antal bilder');
+ check((html.match(/data-optional="true"/g)||[]).length===item.optional,item.id+': antal extrasaker');
+ check((html.match(/class="card green"><strong>\d\./g)||[]).length===3,item.id+': tre elevmål');
+ check((html.match(/class="goal-list"/g)||[]).length===1,item.id+': mål återkopplas');
+ check(/20[^.]{0,40}minut/.test(html),item.id+': bokarbete');
+ check(/hela nivåer|hela nivåerna/.test(html),item.id+': hela nivåer');
+ check(html.includes('deluppgifter'),item.id+': deluppgifter');
+ const ranges=(html.match(/class="book-number">[^<]+/g)||[]).map(x=>x.split('>')[1]);
+ check(JSON.stringify(ranges)===JSON.stringify(item.levels),item.id+': kompletta nivålistor');
+ const ids=[...html.matchAll(/\bid="([\w-]+)"/g)].map(m=>m[1]);
+ check(ids.length===new Set(ids).size,item.id+': unika id');
+ for(const b of html.matchAll(/data-reveal="([\w-]+)"/g))check(ids.includes(b[1]),item.id+': facit finns');
+ check(item.socrative?html.includes(item.socrative):!html.includes('SOC-3727'),item.id+': Socrative original');
+ check(html.indexOf('class="goal-list"')>html.lastIndexOf('class="book-number"'),item.id+': mål efter boknivåer');
+ check(html.includes('lesson.js'),item.id+': navigation');
+}
+const trig=htmls['trigonometriska-ekvationer'];
+check(trig.includes('arcsin')&&trig.includes('arccos'),'Trigekv: arcus');
+check(trig.indexOf('data-title="Metoden före beräkningen"')<trig.indexOf('data-title="Fullständig sinuslösning"'),'Trigekv: metod före exempel');
+check(trig.includes('20,49°')&&trig.includes('159,51°'),'Trigekv: sinusvinklar');
+check(trig.includes('126,87°')&&trig.includes('233,13°'),'Trigekv: cosinusvinklar');
+check(trig.indexOf('data-title="Symmetrierna i hela cirkeln"')<trig.indexOf('data-title="Exakta värden med spegling"'),'Trigekv: symmetrier före exakta värden');
+check(trig.includes('4226')&&trig.includes('−180°'),'Trigekv: intervall med negativ gräns');
+const area=htmls.areasatsen;
+check(area.indexOf('data-title="Höjden genom sinus"')<area.indexOf('data-title="Areasatsen i tre former"'),'Areasats: höjd före sats');
+check(area.indexOf('data-title="Areasatsen i tre former"')<area.indexOf('data-title="Beräkna area med två sidor"'),'Areasats: sats före metod');
+check(area.includes('36,87°')&&area.includes('143,13°'),'Areasats: två trianglar');
+check(area.includes('PhET Trig Tour')&&area.includes('mindmap')&&area.includes('Socrative 330'),'Areasats: originalaktiviteter');
+check(!area.includes('4301–4302</div>'),'Areasats: bokexempel ej uppgifter');
+const sin=htmls.sinussatsen;
+check(sin.includes('eU_OzLqB6uc'),'Sinussats: Barkerfilm');
+check(sin.indexOf('data-title="Härled sinussatsen"')<sin.indexOf('data-title="Jacobs första exempel"'),'Sinussats: sats före exempel');
+check(sin.includes('130°')&&sin.includes('1,8'),'Sinussats: originalexempel 1');
+check(sin.includes('116°')&&sin.includes('0,90'),'Sinussats: originalexempel 2');
+check(sin.includes('Nästa bokmoment, s. 236'),'Sinussats: nästa moment för två fall');
+check(sin.includes('mindmap')&&sin.includes('Socrative 331'),'Sinussats: originalaktiviteter');
+check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
+const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
+for(const item of cases)check(index.includes('href="'+item.id+'/"'),item.id+': länkad i översikt');
+check(index.includes('s. 236')&&!index.includes('href="sinussatsens-tva-fall/"'),'Nästa moment ej publicerat');
+const deg=x=>x*Math.PI/180;
+check(Math.abs(Math.sin(deg(20.487315))-0.35)<2e-6,'Trigekv: sinus korrekt');
+check(Math.abs(Math.cos(deg(126.869897))+0.6)<2e-6,'Trigekv: cosinus korrekt');
+check(Math.abs(9*12*Math.sin(deg(70))/2-50.7434)<0.01,'Areasats: exempel 1 korrekt');
+check(Math.abs(5*11*Math.sin(deg(120))/2-23.8157)<0.01,'Areasats: trubbig vinkel korrekt');
+check(Math.abs(6*10*Math.sin(deg(36.869897))/2-18)<0.001,'Areasats: vinkel från area korrekt');
+check(Math.abs(4*Math.sin(deg(20))/Math.sin(deg(130))-1.786)<0.01,'Sinussats: sida korrekt');
+console.log(JSON.stringify({result:'PASS',checks,lessons:3,pages:'228–235'}));
