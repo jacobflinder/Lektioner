@@ -8,7 +8,10 @@ const root=path.resolve(__dirname,'../..');
 const lessons=[
  {id:'ratvinkliga-trianglar',levels:['4101–4106','4107–4109','4110–4111'],extras:1},
  {id:'exakta-trigonometriska-varden',levels:['4113–4115','4116–4118','4119'],extras:1},
- {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:1}
+ {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:1},
+ {id:'trigonometriska-ekvationer',levels:['4218–4223','4224–4227','4228'],extras:1},
+ {id:'areasatsen',levels:['4303–4307','4308–4311','4312–4313'],extras:1},
+ {id:'sinussatsen',levels:['4315–4318','4319–4320'],extras:0}
 ];
 const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
 const screenshotDir=path.resolve(process.env.QA_SCREENSHOT_DIR||'mato1c-qa-screenshots/kapitel-4');
@@ -45,11 +48,11 @@ async function inspectLayout(page,id,width,i){
    await page.goto(url,{waitUntil:'load'});
    const count=await page.locator('.slide').count();
    const maxSlides=lesson.id==='enhetscirkeln'?16:13;
-   assert(count>=10&&count<=maxSlides,`${lesson.id}: expected 10–${maxSlides} slides, got ${count}`);checks++;
+   assert(count>=9&&count<=maxSlides,`${lesson.id}: expected 9–${maxSlides} slides, got ${count}`);checks++;
    assert.equal(await page.locator('.slide[data-optional="true"]').count(),lesson.extras);checks++;
    assert.equal(await page.locator('.slide.active .goal-list > div').count(),0); // goals are visibly at the start, no goal review there
    assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
-   assert.deepEqual(await page.locator('.levels .book-number').allTextContents(),lesson.levels,`${lesson.id}: full book levels`);checks++;
+   assert.deepEqual(await page.locator('.book-number').allTextContents(),lesson.levels,`${lesson.id}: full book levels`);checks++;
    assert.equal(await page.locator('.goal-list > div').count(),3,`${lesson.id}: goal to work mapping`);checks++;
    for(let i=0;i<count;i++){
     await page.locator('#jump').selectOption(String(i));
@@ -78,6 +81,21 @@ async function inspectLayout(page,id,width,i){
     assert((await page.locator('body').textContent()).includes('SOC-37278098'));checks++;
     const cycle=page.locator('[data-cycle-demo]');await cycle.locator('[data-cycle-angle="400"]').click();
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
+   }
+   if(lesson.id==='trigonometriska-ekvationer'){
+    await page.locator('#jump').selectOption('10');
+    const circle=page.locator('[data-circle-demo]');await circle.locator('[data-angle="150"]').click();
+    assert.match(await circle.locator('[data-coordinates]').innerText(),/0,50/);checks++;
+   }
+   if(lesson.id==='areasatsen'){
+    assert((await page.locator('body').textContent()).includes('SOC-37278150'));checks++;
+    await page.locator('#jump').selectOption('4');
+    const answer=page.locator('#area-trubbig');
+    assert(await answer.isVisible());checks++;
+   }
+   if(lesson.id==='sinussatsen'){
+    assert((await page.locator('body').textContent()).includes('SOC-37278423'));checks++;
+    assert.equal(await page.locator('.book-number').count(),2);checks++;
    }
    if(lesson.id==='enhetscirkeln')assert((await page.locator('body').textContent()).includes('SOC-37277932'));
    await page.locator('#mode').click();assert.equal(await page.locator('body.classroom').count(),1);checks++;

@@ -4,9 +4,11 @@
 
 - Lärarens original 4.1: PDF «240124 240129 4.1 Trigonometri i rätvinkliga trianglar NaTe22», motsvarande film och kontrollerad transkription. Filmen härleder de exakta värdena ur två speciella trianglar och visar fullständiga algebraiska mellanled.
 - Lärarens original 4.2: PDF «240130 240131 Cirkeln, enhetscirkeln och godtyckliga trianglar Na22», två transkriptioner, Socrative 326 (SOC-37277932), Socrative 329 (SOC-37278098), Barkers förberedande film.
-- Den nya läroboken: användarens nio bokbilder s. 218–225, med uppgiftslistorna för nivå 1–3. De nya bokexemplen har inte kopierats.
+- Lärarens original 4.3 Areasatsen: «240206 Areasatsen och trigonometriska ekvationer Na21a Kopia.pdf» (inklusive tavelfoto) och tillhörande full transkription. Härledning via höjden; tre likvärdiga områdesuttryck; triangel med två lika sidor; uppgift där area/sidor leder till två olika vinklar; PhET Trig Tour; mindmap; Socrative 330 SOC-37278150.
+- Lärarens original Sinussatsen: «240207 Sinussatsen Na22.pdf» (inklusive tavelfoto) och tillhörande transkription. Höjdhärledning; båda reciproka skrivsätten; ett löst sida-exempel med vinklar 20°, 30° och c=4; ett andra originalexempel A=37°, c=15, a=10 som ger två möjliga C; Barkers film; mindmap; Socrative 331 SOC-37278423. Originalet skjuter uttryckligen upp systematiken 0/1/2 fall till följande pass.
+- Den nya läroboken: användarens tidigare nio bokbilder s. 218–225 samt **åtta nya foton s. 228–235**. Alla nivågränser har lästs av i fotona. Bokens genomgångna exempel 4216–4217, 4301–4302 och 4314 kopieras inte.
 - «Ma3c 2627 – didaktisk grund och lektionsstruktur v1.4», samt överordnad AGENTS.md-instruktion: originalets matematikinnehåll och metod är bindande; tre kontrollerbara mål, korrekt bokarbete på minst två **hela** nivåer, målavstämning med redan gjorda boklösningar.
-- **Senaste uttryckliga planeringsbeslut 25 november 2026:** ett moment i planeringen = en webblektion. Planeringen visar s. 218, s. 221, s. 222, s. 228, s. 231, s. 234, s. 236, s. 240 och s. 244 som separata moment. De nio bokbilderna täcker endast de **tre första** momenten.
+- **Senaste uttryckliga planeringsbeslut 25 november 2026:** ett moment i planeringen = en webblektion. Planeringen visar s. 218, s. 221, s. 222, s. 228, s. 231, s. 234, s. 236, s. 240 och s. 244 som separata moment. De 17 bokbilderna täcker de **sex första** momenten t.o.m. s. 235.
 
 ## Moment, nivåer och faktisk täckning
 
@@ -15,9 +17,11 @@
 | Trigonometri i rätvinkliga trianglar | 218–220 | 4101–4106 | 4107–4109 | 4110–4111 | Färdiggranskad |
 | Några exakta trigonometriska värden | 221 | 4113–4115 | 4116–4118 | 4119 | Färdiggranskad (4112 är bokexempel) |
 | 4.2 Enhetscirkeln | 222–225 | 4203–4208 | 4209–4213 | 4214–4215 | Färdiggranskad (4201–4202 är bokexempel) |
-| Trigonometriska ekvationer | **228** och följande sidor | Ej granskade | Ej granskade | Ej granskade | **Inte skapad som färdig lektion** |
+| Trigonometriska ekvationer | 228–230 | 4218–4223 | 4224–4227 | 4228 | Färdigbyggd, teknisk slutkontroll före publicering |
+| Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Färdigbyggd, teknisk slutkontroll före publicering |
+| Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Färdigbyggd, teknisk slutkontroll före publicering |
 
-Planeringens följande separata moment är Areasatsen s. 231, Sinussatsen s. 234, När ger sinussatsen två fall? s. 236, Cosinussatsen s. 240, Tillämpningar och problemlösning s. 244. Alla behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering.
+Planeringens följande separata moment är När ger sinussatsen två fall? s. 236, Cosinussatsen s. 240 och Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
 
 ## Original-till-webb-karta
 
@@ -39,16 +43,30 @@ Planeringens följande separata moment är Areasatsen s. 231, Sinussatsen s. 234
 | Socrative 326, först efter två ekvationer | Enhetscirkeln, bild 12 | Bevarat, avgränsar första originalpasset |
 | Hela varv, sin och cos är periodiska med 360°, heltal n | Enhetscirkeln, bild 13–14 | Bevarat efter första originalpasset; fortsatt arbete i samma bokmoment |
 | Socrative 329 | Enhetscirkeln, bild 15 | Bevarat i originalets ordning |
-| Tre boksnivåer, minst två kompletta och slutmål kopplade till gjorda uppgifter | Slutbild i var och en av de tre webblektionerna | Alla tre nivåers exakta nummer, tre konkreta mål och återkoppling |
+| Jacobs arcus → symmetri → intervallkontroll vid trigonometri | Trigonometriska ekvationer, bilder 2–6 och 9 | Samma metod som original 240130–31; nya tal, inte bokexemplens tal |
+| Nya bokens symmetrisamband för sin och cos i fyra kvadranter | Trigonometriska ekvationer, bilder 7–8 | Härledda som konsekvens av originalets enhetscirkel, visas före exakta-värden-tillämpningen |
+| Triangelns area T=c·h/2; h=b sin A och h=a sin B; de tre formerna av areasatsen | Areasatsen, bilder 2–3 | Bevarad matematisk ordning och samtliga avgörande mellanled |
+| Originalets första areaexempel med två kända sidor och mellanliggande vinkel | Areasatsen, bild 4 | Samma problemtyp, nya siffror och korrekt enhet |
+| Originalets andra areaexempel med känd area → sin A=0,6 → arcsin och 180°−A, två trianglar | Areasatsen, bilder 6–7 | Samma algebraiska norm, nya sidlängder, båda lösningarna och två geometriska figurer |
+| PhET Trig Tour, mindmap och Socrative 330 (SOC-37278150) | Areasatsen, bild 8 | Bevarat från original-PDF, ingen extra Socrative |
+| Sin A=h/b, sin B=h/a → b sin A=a sin B → sin A/a=sin B/b=sin C/c | Sinussatsen, bilder 2–3 | Fullständig originalhärledning innan exemplen |
+| Den inverterade formen a/sin A=b/sin B=c/sin C | Sinussatsen, bild 3 | Bevarad explicit som läraren skriver |
+| Originalexempel: A20°, B30°, c4 m, sök a≈1,8 m | Sinussatsen, bild 4 | Samma tal, metod, ordning, mellanled, inte bokens exempel |
+| Originalexempel: A37°, c15, a10, C≈64° eller 116° | Sinussatsen, bilder 6–7 | Bevarad tidig upptäckt att två trianglar kan uppstå. 0/1/2-fall behandlas senare s.236 |
+| Daniel Barkers film, mindmap och Socrative 331 (SOC-37278423) | Sinussatsen, bilder 1 och 8 | Bevarade |
+| Minst två hela boknivåer och målåterkoppling | Slutbild i samtliga sex webblektioner | Exakta uppgiftsnummer och kontrollerbara mål knutna till redan gjorda uppgifter |
 
 ## Didaktiska avvägningar och avvikelser
 
 - Föregående utkast hade **fyra** webbsidor och delade Enhetscirkeln över två webblektioner. Detta bröt mot senare visad planering. Nu är 4.2 **en** webblektion. Den gamla separat publiceringsbara fortsättningen har tagits bort ur förslaget och dess väsentliga innehåll integrerats i samma enhetscirkelwebb.
 - Enhetscirkeln omfattar två tydligt avgränsade lektionspass inom en webbsida: efter Socrative 326 markeras naturlig paus; efter hela varv och Socrative 329 ges slutkontroll. Den är längre än normalmallen: **15 huvudbilder plus 1 frivillig**. Att bevara två originalpass, fulla lösningskedjor och båda Socrative har prioritet framför bildantal.
-- Originalet 240130–240131 visar **två tidiga trigonometriska ekvationer** redan i enhetscirkelgenomgången. De har bevarats där med exakt metod, utan att utges för att vara uppgifter på s. 224–225. Det separata bokmomentet **Trigonometriska ekvationer s. 228** är därför fortfarande nästa nya webblektion och behöver de nya bokbilderna.
+- Originalet 240130–240131 visar **två tidiga trigonometriska ekvationer** redan i enhetscirkelgenomgången. De har bevarats där med exakt metod, utan att utges för att vara uppgifter på s. 224–225. Det separata bokmomentet **Trigonometriska ekvationer s. 228** bygger vidare på exakt samma metod med nya, icke kopierade exempeltal. Det tillför **ingen** ny Socrative.
+- Original-PDF 240206 är en gemensam gammal lektion med både areasats och PhET trigonometriska ekvationer; den nya planeringen har uttryckligen en separat bokrad för trigonometriska ekvationer **före** areasatsen. Vi har inte strukit PhET-demonstrationen; den finns på Areasatsens originalplats före mindmap och Socrative 330.
+- Sinussatsens original visar ett fall med två möjliga trianglar innan nästa pass. Detta är kvar som **försmak** i den egna sinussatslektionen; detaljerad analys av antalet fall får sin separata lektion enligt s.236. Att ignorera den tidiga iakttagelsen hade varit ett verkligt innehållsbortfall.
+- Nya bokens fotograferade sinussatsavsnitt s.234–235 visar **endast två uppgiftsnivåer** (4315–4318 och 4319–4320). Inga nivå-3-nummer antas. Eleverna får uttryckligen instruktion att göra båda **hela** nivåerna, och slutkontrollen knyts till dessa.
 - Alla aktiviteter görs utan elevinloggning och utan personuppgiftsinsamling. Originalets Socrative-länkar/koder verifieras vid behov i lärarens konto.
 - Alla originalfilmer syns direkt i de aktuella lektionerna. Ingen ny matematisk metod eller alternativ lösningsnorm införs.
 
 ## Återstående extern kontroll
 
-Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326 och 329 i klassrummet. De externa filmerna är oförändrade. **Ingen separat webblektion från s. 228 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
+Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. De externa filmerna är oförändrade. **Ingen separat webblektion från s. 236 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
