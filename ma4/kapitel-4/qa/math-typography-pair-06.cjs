@@ -27,7 +27,7 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      await page.selectOption('#jump','1');
      await page.locator('[data-reveal="teacher-normalize-answer"]').click();
      assert.ok(await page.locator('#teacher-normalize-answer math').count()>=6,'Full normalisering och pq-beräkning');
-     assert.ok((await page.locator('#teacher-normalize-answer').innerText()).includes('0,66'),'Originalets b ≈ 0,66');
+     assert.ok(await page.locator('#teacher-normalize-answer math[aria-label*="0,66"]').count()>0,'Originalets b ≈ 0,66');
      await page.selectOption('#jump','2');
      const details=page.locator('.slide.active details').first();
      await details.locator('summary').click();
@@ -35,8 +35,8 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      assert.ok(await page.locator('#r3').isHidden(),'Pq-facit dolt före förutsägelse');
      await page.locator('[data-reveal="r3"]').click();
      assert.ok(await page.locator('#r3 math').count()>=8,'Filmens pq-metod i MathML');
-     const pq=await page.locator('#r3').innerText();
-     assert.ok(pq.includes('−2i')&&pq.includes('3i')&&pq.includes('−i'),'Filmens två rötter, inte äldre PDF-exempel');
+     const pq=await page.locator('#r3 math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')||''));
+     assert.ok(pq.some(s=>s.includes('−2i'))&&pq.some(s=>s.includes('3i'))&&pq.some(s=>s.includes('−i')),'Filmens två rötter, inte äldre PDF-exempel');
      await page.screenshot({path:OUT+'/ma4-andragrad-film-pq-math.png',fullPage:true});
      await page.selectOption('#jump','3');
      for(const id of ['teacher-rect-expand','teacher-rect-system','teacher-rect-cases','teacher-rect-roots']){
@@ -45,8 +45,8 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      }
      assert.ok(await page.locator('#teacher-rect-system math').count()>=3,'Separat real- och imaginärdel');
      assert.ok(await page.locator('#teacher-rect-cases math').count()>=8,'Fullständig prövning av båda fallen');
-     assert.ok((await page.locator('#teacher-rect-cases').innerText()).includes('a² = −4'),'Omöjligt reellt fall bevarat');
-     assert.ok((await page.locator('.slide.active').innerText()).includes('b > 0'),'Positiv imaginärdel från start');
+     assert.ok(await page.locator('#teacher-rect-cases math[aria-label="a² = −4"]').count()>0,'Omöjligt reellt fall bevarat');
+     assert.ok(await page.locator('.slide.active math[aria-label*="b > 0"]').count()>0,'Positiv imaginärdel från start');
      await page.screenshot({path:OUT+'/ma4-andragrad-film-ansats-math.png',fullPage:true});
      await page.selectOption('#jump','5');
      assert.ok(await page.locator('#r9').isHidden(),'Metodval utan synligt facit');
@@ -132,3 +132,4 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
   }
  }finally{await browser.close()}
 })();
+

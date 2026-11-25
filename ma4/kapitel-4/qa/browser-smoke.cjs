@@ -18,6 +18,8 @@ fs.mkdirSync(OUT,{recursive:true});
 async function active(page){
  return page.locator('.slide.active').first();
 }
+const mathLabels=async locator=>locator.locator('math[aria-label]').evaluateAll(ms=>ms.map(m=>(m.getAttribute('aria-label')||'').replace(/\s+/g,'')));
+const hasMath=async(locator,source)=>(await mathLabels(locator)).some(s=>s.includes(source.replace(/\s+/g,'')));
 (async()=>{
  const browser=await chromium.launch({headless:true});
  let total=0;
@@ -76,20 +78,19 @@ async function active(page){
       await page.selectOption('#jump','1');
       assert.ok(await page.locator('#teacher-normalize-answer').isHidden(),'Andragrad: normalisering dold');
       await page.locator('[data-reveal="teacher-normalize-answer"]').click();
-      assert.ok((await page.locator('#teacher-normalize-answer').innerText()).includes('0,66'),'Andragrad: filmens positiv b');
+      assert.ok(await hasMath(page.locator('#teacher-normalize-answer'),'0,66'),'Andragrad: filmens positiv b');
       await page.selectOption('#jump','2');
       assert.ok(await page.locator('#r3').isHidden(),'Andragrad: pq-facit dolt');
       await page.locator('[data-reveal="r3"]').click();
-      const pq=await page.locator('#r3').innerText();
-      assert.ok(pq.includes('3i')&&pq.includes('−i')&&!pq.includes('2iz + 8'),'Andragrad: filmens pq-rötter visas utan gamla facit');
+      const pq=await mathLabels(page.locator('#r3'));
+      assert.ok(pq.some(s=>s.includes('3i'))&&pq.some(s=>s.includes('−i'))&&!pq.some(s=>s.includes('2iz+8')),'Andragrad: filmens pq-rötter visas utan gamla facit');
       await page.selectOption('#jump','3');
-      assert.ok((await (await active(page)).innerText()).includes('b > 0'),'Andragrad: villkoret b>0 står från början');
+      assert.ok(await hasMath(await active(page),'b > 0'),'Andragrad: villkoret b>0 står från början');
       for(const id of ['teacher-rect-expand','teacher-rect-system','teacher-rect-cases','teacher-rect-roots']){
        assert.ok(await page.locator('#'+id).isHidden(),'Andragrad: ansatsens steg dolt');
        await page.locator('[data-reveal="'+id+'"]').click();
       }
-      const all=await (await active(page)).innerText();
-      assert.ok(all.includes('2a(b − 1)')&&all.includes('a² = −4'),'Andragrad: båda filmfallen prövade');
+      assert.ok(await hasMath(await active(page),'2a(b − 1)')&&await hasMath(await active(page),'a² = −4'),'Andragrad: båda filmfallen prövade');
       const variant=page.locator('[data-check=variant]'),variantInput=page.locator('#variant-input');
       assert.ok(await variant.locator('.digital-solution').isDisabled(),'Andragrad: full lösning kräver försök');
       await variantInput.fill('5i;5i');
@@ -105,8 +106,7 @@ async function active(page){
       await page.locator('[data-quiz=q11] button[data-correct=true]').click();
       assert.ok((await page.locator('[data-quiz=q11] .feedback').innerText()).includes('reella'),'Andragrad: konjugatregel');
       await page.selectOption('#jump','9');
-      const exitText=await (await active(page)).innerText();
-      assert.ok(exitText.includes('2z² − 2z + 5'),'Andragrad: ny exit testar normalisering');
+      assert.ok(await hasMath(await active(page),'2z² − 2z + 5'),'Andragrad: ny exit testar normalisering');
       assert.ok(await page.locator('#r13a').isHidden()&&await page.locator('#r13b').isHidden(),'Andragrad: exitfacit dolt');
       await page.locator('[data-reveal=r13a]').click();
       await page.locator('[data-reveal=r13b]').click();
@@ -144,3 +144,4 @@ async function active(page){
   console.log('PASS Ma4: '+total+' lektionssidor kontrollerade desktop/mobil inklusive kritiska navigationsvägar');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
+

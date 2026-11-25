@@ -83,7 +83,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   await active(1);
   assert.ok(await page.locator('#source-product-rule').isVisible(),'Filmens allmänna multiplikationsregel står före lösningen');
   for(const f of ['r = r₁r₂','v = v₁ + v₂','z₁z₂ = r(cos v + i sin v)'])await has('#source-product-rule math[aria-label="'+f+'"]','Produktregel '+f);
-  assert.ok((await page.locator('#product').innerText()).includes('12')&&(await page.locator('#product').innerText()).includes('2π/3'),'Originalfilmens radianpar');
+  assert.ok(await page.locator('#product math[aria-label*="12("]').count()>0&&await page.locator('#product math[aria-label*="2π/3"]').count()>0,'Originalfilmens radianpar');
   const prod=page.locator('#product [data-sequence]');
   assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0,'02 produktsteg dolt före prognos');
   for(let i=1;i<=4;i++){
@@ -132,7 +132,7 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 återställ');
   for(let i=0;i<4;i++)await quo.locator('[data-seq-next]').click();
   const proof=page.locator('#quotient details');await proof.locator('summary').click();
-  assert.ok((await proof.innerText()).includes('2π'),'03 inversregel i filmens radianer');
+  assert.ok(await proof.locator('math[aria-label*="2π"]').count()>0,'03 inversregel i filmens radianer');
   await shot('03-filmens-radiankvot');
   await active(3);
   assert.ok(await page.locator('#pd-answer').isHidden(),'04 grafens slutsvar dolt');
@@ -286,3 +286,4 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    await shot('FAIL').catch(()=>{});
  }finally{await page.close();await browser.close()}
 })();
+
