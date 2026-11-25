@@ -48,7 +48,8 @@ async function inspectLayout(page,id,width,i){
    await page.goto(url,{waitUntil:'load'});
    const count=await page.locator('.slide').count();
    const maxSlides=lesson.id==='enhetscirkeln'?16:13;
-   assert(count>=9&&count<=maxSlides,`${lesson.id}: expected 9–${maxSlides} slides, got ${count}`);checks++;
+   const minSlides=lesson.id==='sinussatsen'?8:9;
+   assert(count>=minSlides&&count<=maxSlides,`${lesson.id}: expected ${minSlides}–${maxSlides} slides, got ${count}`);checks++;
    assert.equal(await page.locator('.slide[data-optional="true"]').count(),lesson.extras);checks++;
    assert.equal(await page.locator('.slide.active .goal-list > div').count(),0); // goals are visibly at the start, no goal review there
    assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
@@ -64,7 +65,7 @@ async function inspectLayout(page,id,width,i){
      assert(await page.locator('#'+id).isVisible(),`${lesson.id}: hidden answer missing ${id}`);checks++;
     }
     await inspectLayout(page,lesson.id,width,i);
-    if(width===390&&[2,4,6,count-2].includes(i))await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
+    if(width===390&&[1,2,3,4,5,6,count-2].includes(i))await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
    }
    if(lesson.id==='exakta-trigonometriska-varden'){
     await page.locator('#jump').selectOption('6');
@@ -83,6 +84,16 @@ async function inspectLayout(page,id,width,i){
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
    }
    if(lesson.id==='trigonometriska-ekvationer'){
+    for(const [slide,coordinate] of [['3','0,35'],['5','−0,6']]){
+     await page.locator('#jump').selectOption(slide);
+     const figure=page.locator('.slide.active [data-equation-circle]');
+     assert.equal(await figure.count(),1);checks++;
+     await figure.locator('[data-circle-step="first"]').click();
+     assert.equal(await figure.locator('svg circle').count(),2);checks++;
+     await figure.locator('[data-circle-step="both"]').click();
+     assert.equal(await figure.locator('svg circle').count(),3);checks++;
+     assert((await figure.locator('svg').textContent()).includes(coordinate));checks++;
+    }
     await page.locator('#jump').selectOption('10');
     const circle=page.locator('[data-circle-demo]');await circle.locator('[data-angle="150"]').click();
     assert.match(await circle.locator('[data-coordinates]').innerText(),/0,50/);checks++;
@@ -92,10 +103,21 @@ async function inspectLayout(page,id,width,i){
     await page.locator('#jump').selectOption('4');
     const answer=page.locator('#area-trubbig');
     assert(await answer.isVisible());checks++;
+    await page.locator('#jump').selectOption('6');
+    const cases=page.locator('.slide.active [data-case-choices]');
+    await cases.locator('[data-case-select="obtuse"]').click();
+    assert(await cases.locator('[data-case-panel="obtuse"]').isVisible());checks++;
+    assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
    }
    if(lesson.id==='sinussatsen'){
     assert((await page.locator('body').textContent()).includes('SOC-37278423'));checks++;
     assert.equal(await page.locator('.book-number').count(),2);checks++;
+    await page.locator('#jump').selectOption('5');
+    const cases=page.locator('.slide.active [data-case-choices]');
+    await cases.locator('[data-case-select="obtuse"]').click();
+    assert(await cases.locator('[data-case-panel="obtuse"]').isVisible());checks++;
+    assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
+    assert((await cases.locator('[data-case-panel="obtuse"]').textContent()).includes('27°'));checks++;
    }
    if(lesson.id==='enhetscirkeln')assert((await page.locator('body').textContent()).includes('SOC-37277932'));
    await page.locator('#mode').click();assert.equal(await page.locator('body.classroom').count(),1);checks++;

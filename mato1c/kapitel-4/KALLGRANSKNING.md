@@ -17,9 +17,9 @@
 | Trigonometri i rätvinkliga trianglar | 218–220 | 4101–4106 | 4107–4109 | 4110–4111 | Färdiggranskad |
 | Några exakta trigonometriska värden | 221 | 4113–4115 | 4116–4118 | 4119 | Färdiggranskad (4112 är bokexempel) |
 | 4.2 Enhetscirkeln | 222–225 | 4203–4208 | 4209–4213 | 4214–4215 | Färdiggranskad (4201–4202 är bokexempel) |
-| Trigonometriska ekvationer | 228–230 | 4218–4223 | 4224–4227 | 4228 | Färdigbyggd, teknisk slutkontroll före publicering |
-| Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Färdigbyggd, teknisk slutkontroll före publicering |
-| Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Färdigbyggd, teknisk slutkontroll före publicering |
+| Trigonometriska ekvationer | 228–230 | 4218–4223 | 4224–4227 | 4228 | Källmappad, separat bild- och interaktionsgranskning |
+| Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Källmappad, separat bild- och interaktionsgranskning |
+| Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Källmappad, separat bild- och interaktionsgranskning |
 
 Planeringens följande separata moment är När ger sinussatsen två fall? s. 236, Cosinussatsen s. 240 och Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
 
@@ -43,17 +43,17 @@ Planeringens följande separata moment är När ger sinussatsen två fall? s. 23
 | Socrative 326, först efter två ekvationer | Enhetscirkeln, bild 12 | Bevarat, avgränsar första originalpasset |
 | Hela varv, sin och cos är periodiska med 360°, heltal n | Enhetscirkeln, bild 13–14 | Bevarat efter första originalpasset; fortsatt arbete i samma bokmoment |
 | Socrative 329 | Enhetscirkeln, bild 15 | Bevarat i originalets ordning |
-| Jacobs arcus → symmetri → intervallkontroll vid trigonometri | Trigonometriska ekvationer, bilder 2–6 och 9 | Samma metod som original 240130–31; nya tal, inte bokexemplens tal |
-| Nya bokens symmetrisamband för sin och cos i fyra kvadranter | Trigonometriska ekvationer, bilder 7–8 | Härledda som konsekvens av originalets enhetscirkel, visas före exakta-värden-tillämpningen |
-| Triangelns area T=c·h/2; h=b sin A och h=a sin B; de tre formerna av areasatsen | Areasatsen, bilder 2–3 | Bevarad matematisk ordning och samtliga avgörande mellanled |
+| Jacobs arcus → symmetri → intervallkontroll vid trigonometri | Trigonometriska ekvationer, bilder 2–6 och 9 | Samma metod som original 240130–31; nya tal, inte bokexemplens tal. På bilderna 4 och 6 finns enhetscirkeln bredvid exakt samma beräkningskedja, med klick för första vinkel respektive spegling. |
+| Nya bokens symmetrisamband för sin och cos i fyra kvadranter | Trigonometriska ekvationer, bilder 7–8 | Alla fyra koordinatpunkterna och de sex sambanden visas samtidigt på bild 7, före exakta-värden-tillämpningen. |
+| Triangelns area T=c·h/2; h=b sin A och h=a sin B; de tre formerna av areasatsen | Areasatsen, bilder 2–3 | Bevarad matematisk ordning och samtliga avgörande mellanled; triangel med motstående sidor och mellanliggande vinkel visas på samma bild som satsen. |
 | Originalets första areaexempel med två kända sidor och mellanliggande vinkel | Areasatsen, bild 4 | Samma problemtyp, nya siffror och korrekt enhet |
-| Originalets andra areaexempel med känd area → sin A=0,6 → arcsin och 180°−A, två trianglar | Areasatsen, bilder 6–7 | Samma algebraiska norm, nya sidlängder, båda lösningarna och två geometriska figurer |
+| Originalets andra areaexempel med känd area → sin A=0,6 → arcsin och 180°−A, två trianglar | Areasatsen, bilder 6–7 | Samma algebraiska norm, nya sidlängder, båda lösningarna och proportionellt korrekta figurer. Lösning och triangel visas ihop på respektive bild; eleverna kan växla figur och areaberäkning på bild 7. |
 | PhET Trig Tour, mindmap och Socrative 330 (SOC-37278150) | Areasatsen, bild 8 | Bevarat från original-PDF, ingen extra Socrative |
-| Sin A=h/b, sin B=h/a → b sin A=a sin B → sin A/a=sin B/b=sin C/c | Sinussatsen, bilder 2–3 | Fullständig originalhärledning innan exemplen |
+| Sin A=h/b, sin B=h/a → b sin A=a sin B → sin A/a=sin B/b=sin C/c | Sinussatsen, bilder 2–3 | Fullständig originalhärledning innan exemplen; satsen står bredvid triangelns märkta motstående sida/vinkel-par. |
 | Den inverterade formen a/sin A=b/sin B=c/sin C | Sinussatsen, bild 3 | Bevarad explicit som läraren skriver |
 | Originalexempel: A20°, B30°, c4 m, sök a≈1,8 m | Sinussatsen, bild 4 | Samma tal, metod, ordning, mellanled, inte bokens exempel |
-| Originalexempel: A37°, c15, a10, C≈64° eller 116° | Sinussatsen, bilder 6–7 | Bevarad tidig upptäckt att två trianglar kan uppstå. 0/1/2-fall behandlas senare s.236 |
-| Daniel Barkers film, mindmap och Socrative 331 (SOC-37278423) | Sinussatsen, bilder 1 och 8 | Bevarade |
+| Originalexempel: A37°, c15, a10, C≈64° eller 116° | Sinussatsen, bild 6 | Bevarad tidig upptäckt: uträkning, de två möjliga punkterna C, lika lång BC och elevens val av triangel visas **samtidigt**. Vinkelsumman för respektive fall visas vid figurval. 0/1/2-fall behandlas senare s.236. Den gamla figurbilden 7 har avsiktligt förenats med beräkningen, inte strukits. |
+| Daniel Barkers film, mindmap och Socrative 331 (SOC-37278423) | Sinussatsen, bilder 1 och 7 | Bevarade |
 | Minst två hela boknivåer och målåterkoppling | Slutbild i samtliga sex webblektioner | Exakta uppgiftsnummer och kontrollerbara mål knutna till redan gjorda uppgifter |
 
 ## Didaktiska avvägningar och avvikelser

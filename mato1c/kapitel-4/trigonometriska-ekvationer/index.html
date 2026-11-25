@@ -8,7 +8,7 @@
 <section class="slide active" data-title="Start och mål" data-teacher="Följ Jacobs original 240130/31: enhetscirkelns x-/y-koordinater och speglingar förklarar lösningarna; arcus ger en första vinkel, därefter cirkeln en andra. Det här är nu ett SEPARAT bokmoment s. 228–230 efter den redan publicerade Enhetscirkeln. Ingen ny Socrative: 326 och 329 ligger i originalmomentet.">
  <div class="kicker">01 · Trigonometriska ekvationer · s. 228–230</div><h1>Hur många vinklar löser samma ekvation?</h1>
  <p class="lead">Enhetscirkeln visar varför samma sinus- eller cosinusvärde ofta hör till två vinklar under ett varv.</p>
- <div class="question">Från förra momentet: Om <span class="math-inline">sin v = 0,4</span> och vi känner vinkeln 23,58° – var finns den andra punkten på cirkeln?</div>
+ <div class="question">Från förra momentet: Om <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi><mo>=</mo><mn>0,4</mn></mrow></math> och vi känner vinkeln 23,58° – var finns den andra punkten på cirkeln?</div>
  <h2>Efter lektionen ska du kunna</h2><div class="grid three">
   <div class="card green"><strong>1. Lösa</strong><p>ekvationer med sinus och cosinus med arcus och enhetscirkeln.</p></div>
   <div class="card green"><strong>2. Använda</strong><p>symmetrier för att bestämma vinklar och exakta trigonometriska värden.</p></div>
@@ -21,75 +21,86 @@
  <div class="grid">
   <div class="card"><h2>Sinus är y-koordinaten</h2><figure class="diagram" data-symmetry="vertical" data-base="35"><svg role="img" aria-label="Två punkter speglade i y-axeln ger samma sinusvärde."></svg><figcaption>Vinklarna v och 180° − v ger samma y-koordinat.</figcaption></figure></div>
   <div class="card"><h2>Cosinus är x-koordinaten</h2><figure class="diagram" data-symmetry="horizontal" data-base="35"><svg role="img" aria-label="Två punkter speglade i x-axeln ger samma cosinusvärde."></svg><figcaption>Vinklarna v och −v ger samma x-koordinat.</figcaption></figure></div>
- </div><div class="question">För ekvationen <span class="math-inline">cos v = −0,6</span>: på vilken halva av cirkeln ska vi söka?</div><details><summary>Visa återkopplingen</summary><p>Vänstra halvan, eftersom alla dessa punkter har negativ x-koordinat. Punkterna ligger symmetriskt om x-axeln.</p></details>
+ </div><div class="question">För ekvationen <math display="inline"><mrow><mi>cos</mi><mo>&#x2061;</mo><mi>v</mi><mo>=</mo><mo>−</mo><mn>0,6</mn></mrow></math>: på vilken halva av cirkeln ska vi söka?</div><details><summary>Visa återkopplingen</summary><p>Vänstra halvan, eftersom alla dessa punkter har negativ x-koordinat. Punkterna ligger symmetriskt om x-axeln.</p></details>
 </section>
 
 <section class="slide" data-title="Metoden före beräkningen" data-teacher="Presentera arcsin/arccos och speglingarna uttryckligen FÖRE det nya genomräknade exemplet. Originalet använder arcsin för en positiv sinus och ±arccos för cosinus; den negativa vinkeln kan sedan flyttas med +360°. Ingen konkurrerande metod.">
  <div class="kicker">03 · Så gör Jacob</div><h1>Först en vinkel – sedan den andra</h1>
  <div class="grid"><div class="card green"><h2>Sinus</h2>
-  <p>1. Bestäm en vinkel med <span class="math-inline">arcsin</span>.</p>
+  <p>1. Bestäm en vinkel med <math display="inline"><mi>arcsin</mi></math>.</p>
   <p>2. Använd speglingen i y-axeln.</p>
-  <div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mi>v</mi></mrow></math></div></div>
+  <div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div></div>
   <div class="card green"><h2>Cosinus</h2>
-  <p>1. Bestäm en vinkel med <span class="math-inline">arccos</span>.</p>
+  <p>1. Bestäm en vinkel med <math display="inline"><mi>arccos</mi></math>.</p>
   <p>2. Spegla i x-axeln och flytta vid behov ett helt varv.</p>
-  <div class="math-line good"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mi>v</mi></mrow></math></div></div></div>
- <p class="note">Avsluta alltid med att kontrollera intervallet i uppgiften, till exempel 0° ≤ v ≤ 360°.</p>
+  <div class="math-line good"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div></div></div>
+ <p class="note">Avsluta alltid med att kontrollera intervallet i uppgiften, till exempel <math display="inline"><mrow><mn>0°</mn><mo>≤</mo><mi>v</mi><mo>≤</mo><mn>360°</mn></mrow></math>.</p>
 </section>
 
 <section class="slide" data-title="Fullständig sinuslösning" data-teacher="Egen siffra 0,35, inte bokens exempel sin v=0,72. Fullständig originalkedja arcsin, 180°−v; låt eleven förutsäga andra vinkeln innan den visas.">
- <div class="kicker">04 · Genomarbetat exempel</div><h1>Lös sin v = 0,35</h1><p>Bestäm vinklarna i intervallet <strong>0° ≤ v ≤ 360°</strong>. y-koordinaten är positiv i första och andra kvadranten.</p>
+ <div class="kicker">04 · Genomarbetat exempel</div><h1>Lös en sinusekvation</h1><p>Bestäm vinklarna i intervallet <math display="inline"><mrow><mn>0°</mn><mo>≤</mo><mi>v</mi><mo>≤</mo><mn>360°</mn></mrow></math>. y-koordinaten är positiv i första och andra kvadranten.</p>
+ <div class="illustrated-solution">
+ <div data-equation-circle="sin" data-first="20.49" data-second="159.51" data-value="0.35"><figure class="diagram"><svg role="img" aria-label="Enhetscirkel som visar de två vinklarna med samma y-koordinat 0,35."></svg><figcaption>Samma horisontella höjd ger två möjliga vinklar.</figcaption></figure><div class="case-actions"><button class="btn" type="button" data-circle-step="first">Bara arcusvinkeln</button><button class="btn" type="button" data-circle-step="both">Visa speglingen</button></div><p class="visual-explanation" data-equation-explanation aria-live="polite"></p></div>
  <div class="eq-chain">
-  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mn>0,35</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>(</mo><mn>0,35</mn><mo>)</mo><mo>≈</mo><mn>20,49°</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi><mo>=</mo><mn>0,35</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>&#x2061;</mo><mo>(</mo><mn>0,35</mn><mo>)</mo><mo>≈</mo><mn>20,49°</mn></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><msub><mi>v</mi><mn>1</mn></msub></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>20,49°</mn></mrow></math></div>
   <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>159,51°</mn></mrow></math></div>
- </div><p><strong>Svar:</strong> v ≈ 20,49° eller v ≈ 159,51°. Båda ligger i intervallet.</p>
+ </div></div><p><strong>Svar:</strong> <math display="inline"><mrow><mi>v</mi><mo>≈</mo><mn>20,49°</mn></mrow></math> eller <math display="inline"><mrow><mi>v</mi><mo>≈</mo><mn>159,51°</mn></mrow></math>. Båda ligger i intervallet.</p>
 </section>
 
 <section class="slide" data-title="Pröva nästa sinusvärde" data-teacher="Kort individuell överföring på samma metod, andra tal än bokexemplen. Efter eget försök: jämför i par, visa facit först därefter.">
  <div class="kicker">05 · Nu räknar du</div><h1>Var finns den andra vinkeln?</h1>
- <p>Bestäm vinklarna i ett helt varv om <span class="math-inline">sin v = 0,55</span>.</p>
- <div class="question">Skriv en full lösningskedja: först <span class="math-inline">arcsin</span>, sedan symmetrin. Vilka två värden får du?</div>
+ <p>Bestäm vinklarna i ett helt varv om <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi><mo>=</mo><mn>0,55</mn></mrow></math>.</p>
+ <div class="question">Skriv en full lösningskedja: först <math display="inline"><mi>arcsin</mi></math>, sedan symmetrin. Vilka två värden får du?</div>
  <button class="btn" type="button" data-reveal="sin-svar">Visa återkopplingen</button>
  <div id="sin-svar" class="answer"><div class="eq-chain">
-  <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>(</mo><mn>0,55</mn><mo>)</mo><mo>≈</mo><mn>33,37°</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>&#x2061;</mo><mo>(</mo><mn>0,55</mn><mo>)</mo><mo>≈</mo><mn>33,37°</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><msub><mi>v</mi><mn>1</mn></msub></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>33,37°</mn><mo>=</mo><mn>146,63°</mn></mrow></math></div>
   </div><p>Båda punkterna har y-koordinaten 0,55.</p></div>
 </section>
 
 <section class="slide" data-title="Fullständig cosinuslösning" data-teacher="Samma metodval som Jacobs original 240130: v≈±arccos(−0,6), sedan den negativa vinkeln +360°. Eget tal, ej bokens cos v=0,64.">
- <div class="kicker">06 · Genomarbetat exempel</div><h1>Lös cos v = −0,6</h1>
+ <div class="kicker">06 · Genomarbetat exempel</div><h1>Lös en cosinusekvation</h1>
  <p>Nu är x-koordinaten negativ. Vi får två vinklar, på var sin sida om x-axeln.</p>
+ <div class="illustrated-solution"><div data-equation-circle="cos" data-first="126.87" data-second="233.13" data-value="-0.6"><figure class="diagram"><svg role="img" aria-label="Enhetscirkel som visar de två vinklarna med samma x-koordinat minus 0,6."></svg><figcaption>Samma lodräta linje ger två möjliga vinklar.</figcaption></figure><div class="case-actions"><button class="btn" type="button" data-circle-step="first">Bara arcusvinkeln</button><button class="btn" type="button" data-circle-step="both">Visa speglingen</button></div><p class="visual-explanation" data-equation-explanation aria-live="polite"></p></div>
  <div class="eq-chain">
-  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mo>−</mo><mn>0,6</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>v</mi><mo>≈</mo><mo>±</mo><mi>arccos</mi><mo>(</mo><mo>−</mo><mn>0,6</mn><mo>)</mo></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mi>v</mi><mo>=</mo><mo>−</mo><mn>0,6</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>v</mi><mo>≈</mo><mo>±</mo><mi>arccos</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mn>0,6</mn><mo>)</mo></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><mi>v</mi><mo>≈</mo><mo>±</mo><mn>126,87°</mn></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>126,87°</mn></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mo>−</mo><mn>126,87°</mn><mo>+</mo><mn>360°</mn></mrow></math></div>
   <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>233,13°</mn></mrow></math></div>
- </div><p><strong>Svar:</strong> v ≈ 126,87° eller v ≈ 233,13°.</p>
+ </div></div><p><strong>Svar:</strong> <math display="inline"><mrow><mi>v</mi><mo>≈</mo><mn>126,87°</mn></mrow></math> eller <math display="inline"><mrow><mi>v</mi><mo>≈</mo><mn>233,13°</mn></mrow></math>.</p>
 </section>
 
 <section class="slide" data-title="Symmetrierna i hela cirkeln" data-teacher="Boken s.228 anger tre relationer för sinus och tre för cosinus. Dessa introduceras som konsekvenser av x-/y-speglingarna före användningen på följande bild. Ingen ny alternativ ekvationsmetod.">
  <div class="kicker">07 · Samband ur cirkeln</div><h1>Alla fyra kvadranterna hör ihop</h1>
- <div class="grid"><div class="card"><h2>Sinus</h2><div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mi>v</mi></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mn>180°</mn><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mi>v</mi></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>(</mo><mn>360°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mi>v</mi></mrow></math></div></div>
-  <div class="card"><h2>Cosinus</h2><div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mi>v</mi></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mn>180°</mn><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mi>v</mi></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>(</mo><mn>360°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mi>v</mi></mrow></math></div></div></div>
+ <div class="illustrated-solution"><figure class="diagram"><svg viewBox="0 0 420 420" role="img" aria-label="Fyra radier till punkterna a b, minus a b, minus a minus b, och a minus b som visar tecken och symmetrier i enhetscirkeln.">
+  <circle cx="210" cy="205" r="154" fill="#f7fbfe" stroke="#24516a" stroke-width="2.5"/><path d="M 33 205 H 390 M 210 25 V 387" stroke="#718a99" stroke-width="2"/>
+  <path d="M 210 205 L 333 112 M 210 205 L 87 112 M 210 205 L 87 298 M 210 205 L 333 298" stroke="#0b756d" stroke-width="3" fill="none"/>
+  <path d="M 87 112 H 333 M 87 298 H 333 M 87 112 V 298 M 333 112 V 298" stroke="#d3973d" stroke-width="1.7" stroke-dasharray="5 6" fill="none"/>
+  <circle cx="333" cy="112" r="5.5" fill="#0b756d"/><circle cx="87" cy="112" r="5.5" fill="#0b756d"/><circle cx="87" cy="298" r="5.5" fill="#0b756d"/><circle cx="333" cy="298" r="5.5" fill="#0b756d"/>
+  <text x="304" y="91">(a, b)</text><text x="19" y="91">(−a, b)</text><text x="12" y="342">(−a, −b)</text><text x="302" y="342">(a, −b)</text><text x="391" y="198">x</text><text x="219" y="29">y</text><text x="197" y="224">O</text>
+ </svg><figcaption>De streckade linjerna visar lika eller motsatta koordinater. Läs av tecknen i varje kvadrant.</figcaption></figure>
+ <div><div class="card"><h2>Sinus – y-koordinaten</h2><div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>360°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div></div>
+  <div class="card"><h2>Cosinus – x-koordinaten</h2><div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>360°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mo>&#x2061;</mo><mi>v</mi></mrow></math></div></div></div></div>
  <p class="note">Tecknen följer av punktens koordinater, inte av en ny minnesregel.</p>
 </section>
 
 <section class="slide" data-title="Exakta värden med spegling" data-teacher="Bokens uppgift 4225 tränar exaktvärden i andra kvadranter. Använd andra vinklar än bokens 210°, 225°, 240°, 315°. Återanvänd de redan härledda 30°/60°-värdena från 4.1.">
  <div class="kicker">08 · Använd redan kända värden</div><h1>Exakta värden även efter spegling</h1>
- <div class="grid"><div class="card green"><h2>Sinus 150°</h2><div class="math-line"><math display="block"><mrow><mi>sin</mi><mn>150°</mn><mo>=</mo><mi>sin</mi><mo>(</mo><mn>180°</mn><mo>−</mo><mn>30°</mn><mo>)</mo></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><mo>=</mo><mi>sin</mi><mn>30°</mn><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math></div></div>
-  <div class="card green"><h2>Cosinus 300°</h2><div class="math-line"><math display="block"><mrow><mi>cos</mi><mn>300°</mn><mo>=</mo><mi>cos</mi><mo>(</mo><mn>360°</mn><mo>−</mo><mn>60°</mn><mo>)</mo></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><mo>=</mo><mi>cos</mi><mn>60°</mn><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math></div></div></div>
- <div class="question">Vilket blir tecknet för <span class="math-inline">sin 300°</span>? Motivera med y-koordinaten.</div><details><summary>Visa kontrollen</summary><div class="math-line good"><math display="block"><mrow><mi>sin</mi><mn>300°</mn><mo>=</mo><mo>−</mo><mi>sin</mi><mn>60°</mn><mo>=</mo><mo>−</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac></mrow></math></div></details>
+ <div class="grid"><div class="card green"><h2>Sinus 150°</h2><div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>150°</mn><mo>=</mo><mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>180°</mn><mo>−</mo><mn>30°</mn><mo>)</mo></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mo>=</mo><mi>sin</mi><mo>&#x2061;</mo><mn>30°</mn><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math></div></div>
+  <div class="card green"><h2>Cosinus 300°</h2><div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mn>300°</mn><mo>=</mo><mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>360°</mn><mo>−</mo><mn>60°</mn><mo>)</mo></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mo>=</mo><mi>cos</mi><mo>&#x2061;</mo><mn>60°</mn><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math></div></div></div>
+ <div class="question">Vilket blir tecknet för <math display="inline"><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>300°</mn></mrow></math>? Motivera med y-koordinaten.</div><details><summary>Visa kontrollen</summary><div class="math-line good"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>300°</mn><mo>=</mo><mo>−</mo><mi>sin</mi><mo>&#x2061;</mo><mn>60°</mn><mo>=</mo><mo>−</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac></mrow></math></div></details>
 </section>
 
 <section class="slide" data-title="Kontrollera intervallet" data-teacher="Original 240131 arbetar med vinklar utanför ett varv och hela varv. Boken 4226 använder intervallet −180° till 180°. Håll fokus på lärarens redan introducerade +n·360° och intervallkontroll; undvik nya specialfall.">
@@ -97,7 +108,7 @@
  <p>Vinklar som skiljer ett helt antal varv har samma sinus och cosinus. Vi skriver ett helt varv som 360°.</p>
  <div class="math-line good"><math display="block"><mrow><mn>40°</mn><mo>−</mo><mn>360°</mn><mo>=</mo><mo>−</mo><mn>320°</mn></mrow></math></div>
  <div class="math-line"><math display="block"><mrow><mn>40°</mn><mo>+</mo><mn>360°</mn><mo>=</mo><mn>400°</mn></mrow></math></div>
- <div class="question">En uppgift frågar efter vinklar i intervallet −180° ≤ v ≤ 180°. Ska svaret 400° stå kvar?</div><details><summary>Visa återkopplingen</summary><p>Nej. Det ligger utanför intervallet. Med ett helt varv mindre blir det 40°, som däremot ligger där.</p></details>
+ <div class="question">En uppgift frågar efter vinklar i intervallet <math display="inline"><mrow><mo>−</mo><mn>180°</mn><mo>≤</mo><mi>v</mi><mo>≤</mo><mn>180°</mn></mrow></math>. Ska svaret 400° stå kvar?</div><details><summary>Visa återkopplingen</summary><p>Nej. Det ligger utanför intervallet. Med ett helt varv mindre blir det 40°, som däremot ligger där.</p></details>
 </section>
 
 <section class="slide" data-title="Bokarbete och mål" data-teacher="Ny bok: s.229 har exempel 4216–4217, inte övningslistor. På s.230 är nivå1 samtliga 4218–4223, nivå2 samtliga 4224–4227, nivå3 4228. Eleven gör minst två HELA nivåer, inklusive alla deluppgifter. Lektionens mål stäms av med redan räknade bokuppgifter. Ingen Socrative hör specifikt till denna separata bokrubrik.">

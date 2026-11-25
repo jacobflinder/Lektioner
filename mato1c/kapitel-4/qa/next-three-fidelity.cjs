@@ -8,7 +8,7 @@ const check=(condition,message)=>{assert(condition,message);checks++};
 const cases=[
  {id:'trigonometriska-ekvationer',slides:11,levels:['4218–4223','4224–4227','4228'],optional:1,socrative:null},
  {id:'areasatsen',slides:10,levels:['4303–4307','4308–4311','4312–4313'],optional:1,socrative:'SOC-37278150'},
- {id:'sinussatsen',slides:9,levels:['4315–4318','4319–4320'],optional:0,socrative:'SOC-37278423'}
+ {id:'sinussatsen',slides:8,levels:['4315–4318','4319–4320'],optional:0,socrative:'SOC-37278423'}
 ];
 const htmls={};
 for(const item of cases){
@@ -29,6 +29,8 @@ for(const item of cases){
  check(item.socrative?html.includes(item.socrative):!html.includes('SOC-3727'),item.id+': Socrative original');
  check(html.indexOf('class="goal-list"')>html.lastIndexOf('class="book-number"'),item.id+': mål efter boknivåer');
  check(html.includes('lesson.js'),item.id+': navigation');
+ check(!/<mi>(?:m|cm)<\/mi>/.test(html),item.id+': enheter ska vara upprätta, inte kursiverade variabler');
+ check(!html.includes('class="math-inline"'),item.id+': matematisk notation använder MathML');
 }
 const trig=htmls['trigonometriska-ekvationer'];
 check(trig.includes('arcsin')&&trig.includes('arccos'),'Trigekv: arcus');
@@ -36,11 +38,16 @@ check(trig.indexOf('data-title="Metoden före beräkningen"')<trig.indexOf('data
 check(trig.includes('20,49°')&&trig.includes('159,51°'),'Trigekv: sinusvinklar');
 check(trig.includes('126,87°')&&trig.includes('233,13°'),'Trigekv: cosinusvinklar');
 check(trig.indexOf('data-title="Symmetrierna i hela cirkeln"')<trig.indexOf('data-title="Exakta värden med spegling"'),'Trigekv: symmetrier före exakta värden');
+check((trig.match(/data-equation-circle=/g)||[]).length===2,'Trigekv: båda lösta ekvationerna har samlokaliserad interaktiv cirkel');
+check(trig.includes('Alla fyra kvadranterna hör ihop')&&trig.includes('Fyra radier till punkterna'),'Trigekv: samlad fyrkvadrantsfigur och samband');
+check(!trig.includes('class="math-inline"'),'Trigekv: ingen oformaterad matematik i hjälptexter');
 check(trig.includes('4226')&&trig.includes('−180°'),'Trigekv: intervall med negativ gräns');
 const area=htmls.areasatsen;
 check(area.indexOf('data-title="Höjden genom sinus"')<area.indexOf('data-title="Areasatsen i tre former"'),'Areasats: höjd före sats');
 check(area.indexOf('data-title="Areasatsen i tre former"')<area.indexOf('data-title="Beräkna area med två sidor"'),'Areasats: sats före metod');
 check(area.includes('36,87°')&&area.includes('143,13°'),'Areasats: två trianglar');
+check(area.includes('data-case-select="acute"')&&area.includes('data-case-select="obtuse"'),'Areasats: jämför två figurer och beräkningar i samma bild');
+check(area.includes('Välj två sidor som möts i en känd vinkel'),'Areasats: sats med sid- och vinkelbild');
 check(area.includes('PhET Trig Tour')&&area.includes('mindmap')&&area.includes('Socrative 330'),'Areasats: originalaktiviteter');
 check(!area.includes('4301–4302</div>'),'Areasats: bokexempel ej uppgifter');
 const sin=htmls.sinussatsen;
@@ -48,6 +55,10 @@ check(sin.includes('eU_OzLqB6uc'),'Sinussats: Barkerfilm');
 check(sin.indexOf('data-title="Härled sinussatsen"')<sin.indexOf('data-title="Jacobs första exempel"'),'Sinussats: sats före exempel');
 check(sin.includes('130°')&&sin.includes('1,8'),'Sinussats: originalexempel 1');
 check(sin.includes('116°')&&sin.includes('0,90'),'Sinussats: originalexempel 2');
+check(sin.includes('data-case-choices')&&sin.includes('data-case-figure="acute"')&&sin.includes('data-case-figure="obtuse"'),'Sinussats: beräkning och båda trianglarna på samma bild');
+check(sin.includes('Sträckan BC har samma längd i båda fallen'),'Sinussats: geometrisk motivering med samma sidlängd');
+check(!sin.includes('data-title="Förstå de två trianglarna"'),'Sinussats: ingen bild som skjuts till nästa slide');
+check(sin.includes('Varje sida hör ihop med')&&sin.includes('motstående vinkel'),'Sinussats: formel och motstående sidpar samtidigt');
 check(sin.includes('Nästa bokmoment, s. 236'),'Sinussats: nästa moment för två fall');
 check(sin.includes('mindmap')&&sin.includes('Socrative 331'),'Sinussats: originalaktiviteter');
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');

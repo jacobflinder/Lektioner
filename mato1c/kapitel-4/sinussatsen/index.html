@@ -25,77 +25,83 @@
   <text x="69" y="306">A</text><text x="491" y="306">B</text><text x="324" y="39">C</text><text x="165" y="159" class="side">b</text><text x="429" y="159" class="side">a</text><text x="283" y="319" class="side">c</text><text x="337" y="176">h</text>
   <path class="angle-mark" d="M 128 284 A 43 43 0 0 0 112 258"/><path class="angle-mark" d="M 452 284 A 35 35 0 0 1 467 254"/></svg><figcaption>Höjden h är samma sträcka från båda deltrianglarna.</figcaption></figure>
   <div><div class="eq-chain">
-   <div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>A</mi><mo>=</mo><mfrac><mi>h</mi><mi>b</mi></mfrac></mrow></math></div>
-   <div class="math-line good"><math display="block"><mrow><mi>h</mi><mo>=</mo><mi>b</mi><mi>sin</mi><mi>A</mi></mrow></math></div>
-   <div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>B</mi><mo>=</mo><mfrac><mi>h</mi><mi>a</mi></mfrac></mrow></math></div>
-   <div class="math-line good"><math display="block"><mrow><mi>h</mi><mo>=</mo><mi>a</mi><mi>sin</mi><mi>B</mi></mrow></math></div></div>
+   <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi><mo>=</mo><mfrac><mi>h</mi><mi>b</mi></mfrac></mrow></math></div>
+   <div class="math-line good"><math display="block"><mrow><mi>h</mi><mo>=</mo><mi>b</mi><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow></math></div>
+   <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi><mo>=</mo><mfrac><mi>h</mi><mi>a</mi></mfrac></mrow></math></div>
+   <div class="math-line good"><math display="block"><mrow><mi>h</mi><mo>=</mo><mi>a</mi><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow></math></div></div>
    <div class="question">De båda uttrycken är samma h. Vad får vi om vi sätter dem lika?</div></div></div>
 </section>
 
 <section class="slide" data-title="Härled sinussatsen" data-teacher="Originalet skriver b·sin A=a·sin B, förkortar till sin A/a=sin B/b och inkluderar det tredje paret; därefter vänder Jacob samtliga kvoter till a/sin A = b/sin B = c/sin C. Båda formerna ska bevaras före första exempel.">
  <div class="kicker">03 · Satsen får sin egen bild</div><h1>Sinussatsen</h1>
- <div class="eq-chain">
-  <div class="math-line"><math display="block"><mrow><mi>b</mi><mi>sin</mi><mi>A</mi><mo>=</mo><mi>a</mi><mi>sin</mi><mi>B</mi></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mfrac><mrow><mi>b</mi><mi>sin</mi><mi>A</mi></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>a</mi><mi>sin</mi><mi>B</mi></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><mfrac><mrow><mi>sin</mi><mi>A</mi></mrow><mi>a</mi></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mi>B</mi></mrow><mi>b</mi></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mi>C</mi></mrow><mi>c</mi></mfrac></mrow></math></div>
- </div><p>Samma samband kan också skrivas med sidan överst, precis som Jacob gör:</p>
- <div class="math-line good strong"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mi>b</mi><mrow><mi>sin</mi><mi>B</mi></mrow></mfrac><mo>=</mo><mfrac><mi>c</mi><mrow><mi>sin</mi><mi>C</mi></mrow></mfrac></mrow></math></div>
- <div class="question">Vilka två kvoter ska du välja om du känner sidan c och söker sidan a?</div><details><summary>Visa svaret</summary><p>Välj a/sin A = c/sin C. Varje sida paras med sin motstående vinkel.</p></details>
+ <div class="illustrated-solution"><figure class="diagram"><svg viewBox="0 0 470 300" role="img" aria-label="Triangel ABC med de motstående sidparen A till a, B till b och C till c.">
+  <path class="triangle-outline" d="M 64 246 L 421 246 L 210 47 Z"/><path class="angle-mark" d="M 103 246 A 39 39 0 0 0 88 215 M 381 246 A 40 40 0 0 1 391 216 M 189 70 Q 209 103 240 78"/>
+  <text x="44" y="270">A</text><text x="427" y="270">B</text><text x="205" y="36">C</text><text x="127" y="135" class="side">b</text><text x="329" y="132" class="side">a</text><text x="240" y="269" class="side">c</text>
+ </svg><figcaption>Varje sida hör ihop med <strong>sin motstående vinkel</strong>: a med A, b med B och c med C.</figcaption></figure><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mi>b</mi><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi><mo>=</mo><mi>a</mi><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mfrac><mrow><mi>b</mi><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>a</mi><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow><mrow><mi>a</mi><mi>b</mi></mrow></mfrac></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow><mi>a</mi></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow><mi>b</mi></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi></mrow><mi>c</mi></mfrac></mrow></math></div>
+ </div></div><p>Samma samband kan också skrivas med sidan överst, precis som Jacob gör:</p>
+ <div class="math-line good strong"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mi>b</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow></mfrac><mo>=</mo><mfrac><mi>c</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi></mrow></mfrac></mrow></math></div>
+ <div class="question">Vilka två kvoter ska du välja om du känner sidan c och söker sidan a?</div><details><summary>Visa svaret</summary><div class="math-line good"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mi>c</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi></mrow></mfrac></mrow></math></div><p>Varje sida paras med sin motstående vinkel.</p></details>
 </section>
 
 <section class="slide" data-title="Jacobs första exempel" data-teacher="Läraroriginalet 240207: vinklar A=20°, B=30°, sidan c=4,0 m, bestäm sidan a. Jacob beräknar C=130° före han skriver a/sin20=4/sin130, och får ≈1,8 m. Bevara exakt hans valda tal, räkneordning och notation. Detta är inte samma som bokens s.234-exempel.">
  <div class="kicker">04 · Genomarbetat tavla-till-webb-exempel</div><h1>Vi känner en motstående sida och vinkel</h1>
- <p>I triangel ABC är <strong>A = 20°</strong>, <strong>B = 30°</strong> och <strong>c = 4,0 m</strong>. Bestäm sidan a.</p>
+ <p>I triangel ABC är <math display="inline"><mrow><mi>A</mi><mo>=</mo><mn>20°</mn></mrow></math>, <math display="inline"><mrow><mi>B</mi><mo>=</mo><mn>30°</mn></mrow></math> och <math display="inline"><mrow><mi>c</mi><mo>=</mo><mn>4,0</mn><mspace width="0.18em"/><mtext>m</mtext></mrow></math>. Bestäm sidan a.</p>
  <div class="grid"><figure class="diagram"><svg viewBox="0 0 520 330" role="img" aria-label="Triangel med vinklarna A 20 grader, B 30 grader, C 130 grader och sidan c lika med 4,0 meter.">
   <path class="triangle-outline" d="M 55 266 L 477 266 L 314 172 Z"/>
   <text x="42" y="294">A</text><text x="479" y="292">B</text><text x="311" y="156">C</text><text x="91" y="258">20°</text><text x="421" y="258">30°</text><text x="293" y="207">130°</text><text x="242" y="292">c = 4,0 m</text><text x="396" y="208" class="side">a = ?</text></svg><figcaption>Skissen visar vinklarna 20°, 30° och 130°. Sidan c ligger mot vinkeln C.</figcaption></figure>
  <div><p>Vinkelsumman ger först den saknade vinkeln:</p>
   <div class="math-line"><math display="block"><mrow><mi>C</mi><mo>=</mo><mn>180°</mn><mo>−</mo><mn>20°</mn><mo>−</mo><mn>30°</mn><mo>=</mo><mn>130°</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mn>20°</mn></mrow></mfrac><mo>=</mo><mfrac><mn>4,0</mn><mrow><mi>sin</mi><mn>130°</mn></mrow></mfrac></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>a</mi><mo>=</mo><mfrac><mrow><mn>4,0</mn><mo>·</mo><mi>sin</mi><mn>20°</mn></mrow><mrow><mi>sin</mi><mn>130°</mn></mrow></mfrac></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><mi>a</mi><mo>≈</mo><mn>1,8</mn><mi>m</mi></mrow></math></div></div></div>
+  <div class="math-line"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>20°</mn></mrow></mfrac><mo>=</mo><mfrac><mn>4,0</mn><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>130°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>a</mi><mo>=</mo><mfrac><mrow><mn>4,0</mn><mo>·</mo><mi>sin</mi><mo>&#x2061;</mo><mn>20°</mn></mrow><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>130°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>a</mi><mo>≈</mo><mn>1,8</mn><mspace width="0.18em"/><mtext>m</mtext></mrow></math></div></div></div>
 </section>
 
 <section class="slide" data-title="Eget försök med en sida" data-teacher="Stöd trappas ner: andra tal och samma lärarmetod. A35°, B65°, C80°, c7cm ger a≈4,08cm. Låt elever skriva vinkelsumma och korrekt sidpar innan facit visas.">
  <div class="kicker">05 · Nu gör du ett eget försök</div><h1>Vilket par ska stå i sinussatsen?</h1>
- <p>En triangel har <strong>A = 35°</strong>, <strong>B = 65°</strong> och <strong>c = 7,0 cm</strong>. Bestäm a.</p>
+ <p>En triangel har <math display="inline"><mrow><mi>A</mi><mo>=</mo><mn>35°</mn></mrow></math>, <math display="inline"><mrow><mi>B</mi><mo>=</mo><mn>65°</mn></mrow></math> och <math display="inline"><mrow><mi>c</mi><mo>=</mo><mn>7,0</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math>. Bestäm a.</p>
+ <div class="illustrated-solution"><figure class="diagram"><svg viewBox="0 0 470 300" role="img" aria-label="Triangel med A 35 grader och B 65 grader. Sidan c mellan dessa vinklar är 7 centimeter, och sidan a är sökt.">
+  <path class="triangle-outline" d="M 65 250 L 399 250 L 317 74 Z"/><path class="angle-mark" d="M 109 250 A 44 44 0 0 0 102 225 M 361 250 A 38 38 0 0 1 380 218"/>
+  <text x="42" y="272">A</text><text x="403" y="272">B</text><text x="314" y="59">C</text><text x="109" y="239">35°</text><text x="352" y="236">65°</text><text x="240" y="275">c = 7,0 cm</text><text x="366" y="151" class="side">a = ?</text>
+ </svg><figcaption>Vilken vinkel hör till sidan c? Vilken hör till den sökta sidan a?</figcaption></figure><div>
  <div class="question">Räkna först ut C. Skriv sedan sinussatsen med bara de två par vi behöver och lös ut a.</div>
  <button class="btn" type="button" data-reveal="sinus-eget">Visa genomräkningen</button>
  <div class="answer" id="sinus-eget"><div class="eq-chain">
   <div class="math-line"><math display="block"><mrow><mi>C</mi><mo>=</mo><mn>180°</mn><mo>−</mo><mn>35°</mn><mo>−</mo><mn>65°</mn><mo>=</mo><mn>80°</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mn>35°</mn></mrow></mfrac><mo>=</mo><mfrac><mn>7,0</mn><mrow><mi>sin</mi><mn>80°</mn></mrow></mfrac></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>a</mi><mo>=</mo><mfrac><mrow><mn>7,0</mn><mo>·</mo><mi>sin</mi><mn>35°</mn></mrow><mrow><mi>sin</mi><mn>80°</mn></mrow></mfrac></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><mi>a</mi><mo>≈</mo><mn>4,1</mn><mi>cm</mi></mrow></math></div></div>
-  <p>Den kända sidan 7,0 hör till vinkeln C = 80°, inte till en valfri vinkel.</p></div>
+  <div class="math-line"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>35°</mn></mrow></mfrac><mo>=</mo><mfrac><mn>7,0</mn><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>80°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>a</mi><mo>=</mo><mfrac><mrow><mn>7,0</mn><mo>·</mo><mi>sin</mi><mo>&#x2061;</mo><mn>35°</mn></mrow><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>80°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>a</mi><mo>≈</mo><mn>4,1</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math></div></div>
+  <p>Den kända sidan 7,0 hör till vinkeln <math display="inline"><mrow><mi>C</mi><mo>=</mo><mn>80°</mn></mrow></math>, inte till en valfri vinkel.</p></div></div></div>
 </section>
 
 <section class="slide" data-title="Originalets andra exempel: två vinklar" data-teacher="Jacobs andra tavlexempel A=37°, AB=15 m=c, BC=10 m=a: sin C/15=sin37/10, sin C≈0,90, C≈64° eller 116°. Han introducerar två fall här och tar full analys 0/1/2 till nästa lektion. Bevara det, men gör inte en stor undantagslista.">
  <div class="kicker">06 · Ett viktigt nästa steg från originalet</div><h1>Sinussatsen kan ge två vinklar</h1>
- <p>I triangeln ABC känner vi <strong>A = 37°</strong>, <strong>AB = 15 m</strong> och <strong>BC = 10 m</strong>. Bestäm möjliga värden på C.</p>
- <div class="eq-chain">
-  <div class="math-line"><math display="block"><mrow><mfrac><mrow><mi>sin</mi><mi>C</mi></mrow><mn>15</mn></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mn>37°</mn></mrow><mn>10</mn></mfrac></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>C</mi><mo>=</mo><mfrac><mrow><mn>15</mn><mo>·</mo><mi>sin</mi><mn>37°</mn></mrow><mn>10</mn></mfrac><mo>≈</mo><mn>0,90</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>≈</mo><mi>arcsin</mi><mo>(</mo><mn>0,90</mn><mo>)</mo><mo>≈</mo><mn>64°</mn></mrow></math></div>
+ <p>I triangeln ABC känner vi <math display="inline"><mrow><mi>A</mi><mo>=</mo><mn>37°</mn></mrow></math>, <math display="inline"><mrow><mi>AB</mi><mo>=</mo><mn>15</mn><mspace width="0.18em"/><mtext>m</mtext></mrow></math> och <math display="inline"><mrow><mi>BC</mi><mo>=</mo><mn>10</mn><mspace width="0.18em"/><mtext>m</mtext></mrow></math>. Bestäm möjliga värden på C.</p>
+ <div class="illustrated-solution"><div data-case-choices data-default-case="acute"><figure class="diagram linked-geometry"><svg viewBox="0 0 500 270" role="img" aria-label="Två möjliga trianglar ABC med samma vinkel A och samma sidlängder AB 15 meter och BC 10 meter. På samma stråle från A ligger två möjliga punkter för C.">
+  <path d="M 58 229 L 358 229" stroke="#17384b" stroke-width="3"/><path d="M 58 229 L 318 33" stroke="#17384b" stroke-width="2.5" fill="none"/>
+  <circle cx="358" cy="229" r="200" fill="none" stroke="#d3973d" stroke-width="2" stroke-dasharray="6 7" opacity=".6"/>
+  <path class="angle-mark" d="M 103 229 A 45 45 0 0 0 94 202"/>
+  <g class="case-geometry" data-case-figure="acute"><path d="M 358 229 L 318 33" stroke="#0b756d" stroke-width="4"/><circle cx="318" cy="33" r="6" fill="#0b756d"/><text x="326" y="26" class="big-svg-label">C₁</text><text x="269" y="113" class="big-svg-label diagram-emphasis">64°</text><text x="347" y="119" class="big-svg-label">10 m</text></g>
+  <g class="case-geometry" data-case-figure="obtuse"><path d="M 358 229 L 181 137" stroke="#b46e28" stroke-width="4"/><circle cx="181" cy="137" r="6" fill="#b46e28"/><text x="157" y="121" class="big-svg-label">C₂</text><text x="207" y="200" class="big-svg-label diagram-emphasis">116°</text><text x="270" y="140" class="big-svg-label">10 m</text></g>
+  <text x="43" y="255" class="big-svg-label">A</text><text x="366" y="255" class="big-svg-label">B</text><text x="101" y="215" class="big-svg-label">37°</text><text x="181" y="255" class="big-svg-label">15 m</text>
+ </svg><figcaption>Sträckan BC har samma längd i båda fallen. Den streckade cirkeln visar var C kan ligga.</figcaption></figure>
+ <div class="case-actions"><button class="btn" type="button" data-case-select="acute">Visa första triangeln</button><button class="btn" type="button" data-case-select="obtuse">Visa andra triangeln</button></div>
+ <div class="case-panel" data-case-panel="acute" aria-live="polite"><math display="block"><mrow><msub><mi>B</mi><mn>1</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>37°</mn><mo>−</mo><mn>64°</mn><mo>=</mo><mn>79°</mn></mrow></math></div>
+ <div class="case-panel" data-case-panel="obtuse" aria-live="polite"><math display="block"><mrow><msub><mi>B</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>37°</mn><mo>−</mo><mn>116°</mn><mo>=</mo><mn>27°</mn></mrow></math></div>
+ </div><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi></mrow><mn>15</mn></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>37°</mn></mrow><mn>10</mn></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi><mo>=</mo><mfrac><mrow><mn>15</mn><mo>·</mo><mi>sin</mi><mo>&#x2061;</mo><mn>37°</mn></mrow><mn>10</mn></mfrac><mo>≈</mo><mn>0,90</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>≈</mo><mi>arcsin</mi><mo>&#x2061;</mo><mo>(</mo><mn>0,90</mn><mo>)</mo><mo>≈</mo><mn>64°</mn></mrow></math></div>
   <div class="math-line"><math display="block"><mrow><msub><mi>C</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>64°</mn></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><msub><mi>C</mi><mn>2</mn></msub><mo>≈</mo><mn>116°</mn></mrow></math></div></div>
- <p>Vi känner igen symmetrin från enhetscirkeln. Två vinklar har samma sinusvärde.</p>
-</section>
-
-<section class="slide" data-title="Förstå de två trianglarna" data-teacher="Jacob visar med ett roterande sidsegment/ritning två trianglar för samma A, a och c. Visa två separata tydliga figurer utan nya fallregler. Han skjuter uttryckligen upp noll/ett/två-fallsanalysen till nästa pass, bokens s.236.">
- <div class="kicker">07 · Två möjliga figurer</div><h1>Samma givna längder – olika trianglar</h1>
- <div class="grid">
-  <figure class="diagram"><svg viewBox="0 0 500 270" role="img" aria-label="Första möjliga triangel med A 37 grader och vinkel C ungefär 64 grader.">
-   <path class="triangle-outline" d="M 58 229 L 358 229 L 318 33 Z"/>
-   <text x="43" y="253">A</text><text x="365" y="253">B</text><text x="315" y="23">C</text><text x="110" y="210">37°</text><text x="313" y="71">64°</text><text x="205" y="251">15 m</text><text x="351" y="128">10 m</text></svg><figcaption>Första lösningen: C ≈ 64°.</figcaption></figure>
-  <figure class="diagram"><svg viewBox="0 0 500 270" role="img" aria-label="Andra möjliga triangel med A 37 grader och vinkel C ungefär 116 grader.">
-   <path class="triangle-outline" d="M 58 229 L 358 229 L 181 137 Z"/>
-   <text x="43" y="253">A</text><text x="365" y="253">B</text><text x="179" y="123">C</text><text x="108" y="215">37°</text><text x="195" y="166">116°</text><text x="205" y="251">15 m</text><text x="266" y="170">10 m</text></svg><figcaption>Andra lösningen: C ≈ 116°.</figcaption></figure></div>
- <div class="question">Kan båda trianglarna finnas om vinkeln A är 37°? Kontrollera vinkelsumman för respektive fall.</div>
- <details><summary>Visa återkopplingen</summary><p>Ja. Med C ≈ 64° blir den sista vinkeln 79°. Med C ≈ 116° blir den sista vinkeln 27°. Båda är positiva. <strong>Nästa bokmoment, s. 236, handlar om när sinussatsen ger två fall.</strong></p></details>
+  <div class="math-line good"><math display="block"><mrow><msub><mi>C</mi><mn>2</mn></msub><mo>≈</mo><mn>116°</mn></mrow></math></div></div></div>
+ <div class="question">Undersök båda trianglarna med knapparna. Varför kan båda finnas? Kontrollera vinkelsumman – den tredje vinkeln visas vid varje figur.</div>
+ <p class="note">Vi känner igen sinusvärdets symmetri. Här är båda återstående vinklarna positiva. <strong>Nästa bokmoment, s. 236</strong> behandlar när två fall uppstår.</p>
 </section>
 
 <section class="slide" data-title="Originalets film, mindmap och Socrative" data-teacher="PDF 240207: 'från film', mindmap, Socrative 331 Areasats och Sinussatsen1 kod SOC-37278423, arbete i NOK. Bär över utan att lägga på extra quiz.">
- <div class="kicker">08 · Återkoppling</div><h1>Film, mindmap och Socrative 331</h1>
+ <div class="kicker">07 · Återkoppling</div><h1>Film, mindmap och Socrative 331</h1>
  <div class="grid"><div class="card green"><h2>Förbered och förklara</h2>
   <p><a href="https://youtu.be/eU_OzLqB6uc" target="_blank" rel="noopener noreferrer">Barkers film om sinussatsen</a> hör till originallektionen.</p>
   <p>Komplettera din <strong>mindmap</strong> med sinussatsen i båda skrivsätten, och när en sida hör till en vinkel.</p></div>
@@ -106,7 +112,7 @@
 </section>
 
 <section class="slide" data-title="Bokarbete och tre mål" data-teacher="Ny bok s.235: uppgift 4314 är ett genomgånget exempel. Nivå 1 består av 4315–4318, nivå 2 av 4319–4320. Inga uppgifter på nivå 3 syns inom det uppladdade bokmomentet före nästa rubrik s.236. Därför ska ELEVERNA göra BÅDA dessa HELA nivåer, inklusive deluppgifter. Mål återkopplas till räknade bokuppgifter, inte en ny exit-ticket.">
- <div class="kicker">09 · Arbeta med boken</div><h1>Sinussatsen – uppgifter s. 235</h1>
+ <div class="kicker">08 · Arbeta med boken</div><h1>Sinussatsen – uppgifter s. 235</h1>
  <p>Arbeta sammanhängande i minst <strong>20 minuter</strong>. För detta moment visar boken två uppgiftsnivåer: <strong>gör båda hela nivåerna</strong>, med alla deluppgifter.</p>
  <div class="grid"><div class="card green"><h3>Nivå 1</h3><p>s. 235</p><div class="book-number">4315–4318</div></div>
  <div class="card"><h3>Nivå 2</h3><p>s. 235</p><div class="book-number">4319–4320</div></div></div>
@@ -116,4 +122,4 @@
   <div><strong>3. Kombinera metoder</strong><small>4318–4320: använder du vinkelsumman före sinussatsen när det behövs?</small></div></div>
  <p class="note">4314 är ett genomgånget bokexempel. Nivå 3 anges inte, eftersom ingen sådan uppgiftslista finns i det visade momentet.</p>
 </section>
-</main><nav class="controls" aria-label="Lektionsnavigation"><button class="btn" id="prev" type="button">Föregående</button><div class="middle"><span class="counter" id="progress">1 / 9</span><label for="jump">Gå till</label><select id="jump" aria-label="Gå till bild"></select></div><button class="btn primary" id="next" type="button">Nästa</button></nav><script src="../assets/lesson.js" defer></script></body></html>
+</main><nav class="controls" aria-label="Lektionsnavigation"><button class="btn" id="prev" type="button">Föregående</button><div class="middle"><span class="counter" id="progress">1 / 8</span><label for="jump">Gå till</label><select id="jump" aria-label="Gå till bild"></select></div><button class="btn primary" id="next" type="button">Nästa</button></nav><script src="../assets/lesson.js" defer></script></body></html>

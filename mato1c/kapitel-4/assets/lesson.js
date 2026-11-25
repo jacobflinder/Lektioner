@@ -102,6 +102,34 @@ document.querySelectorAll('[data-symmetry]').forEach(root=>{
  const svg=root.querySelector('svg');const base=Number(root.dataset.base||35);const kind=root.dataset.symmetry;
  drawCircle(svg,[base,kind==='vertical'?180-base:-base],{symmetry:true});
 });
+document.querySelectorAll('[data-equation-circle]').forEach(root=>{
+ const svg=root.querySelector('svg'),kind=root.dataset.equationCircle,first=Number(root.dataset.first),second=Number(root.dataset.second);
+ const value=Number(root.dataset.value),cx=268,cy=219,r=163;
+ const show=(both)=>{
+  drawCircle(svg,both?[first,second]:[first]);
+  if(both){
+   const rad=v=>v*Math.PI/180;
+   const xy=v=>[cx+r*Math.cos(rad(v)),cy-r*Math.sin(rad(v))];
+   const [x1,y1]=xy(first),[x2,y2]=xy(second);
+   add(svg,'line',{x1,y1,x2,y2,stroke:'#d79336','stroke-width':3,'stroke-dasharray':'7 5'});
+  }
+  add(svg,'text',{x:kind==='sin'?cx+166:cx+r*value-36,y:kind==='sin'?cy-r*value-12:cy+184,fill:'#9a631d','font-weight':700},`${kind==='sin'?'y':'x'} = ${value.toString().replace('.',',').replace('-', '−')}`);
+  root.querySelectorAll('[data-circle-step]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.circleStep===(both?'both':'first'))));
+  const explanation=root.querySelector('[data-equation-explanation]');
+  if(explanation)explanation.textContent=both?'Två punkter har samma '+(kind==='sin'?'y-koordinat (sinus)':'x-koordinat (cosinus)')+'.': 'En första vinkel kommer från '+(kind==='sin'?'arcsin':'arccos')+'. Var ligger den speglade punkten?';
+ };
+ root.querySelectorAll('[data-circle-step]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.circleStep==='both')));
+ show(true);
+});
+document.querySelectorAll('[data-case-choices]').forEach(root=>{
+ const choose=id=>{
+  root.querySelectorAll('[data-case-select]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.caseSelect===id)));
+  root.querySelectorAll('[data-case-panel]').forEach(panel=>panel.classList.toggle('on',panel.dataset.casePanel===id));
+  root.querySelectorAll('[data-case-figure]').forEach(figure=>figure.classList.toggle('is-selected',figure.dataset.caseFigure===id));
+ };
+ root.querySelectorAll('[data-case-select]').forEach(button=>button.addEventListener('click',()=>choose(button.dataset.caseSelect)));
+ choose(root.dataset.defaultCase||root.querySelector('[data-case-select]')?.dataset.caseSelect);
+});
 document.querySelectorAll('[data-cycle-demo]').forEach(root=>{
  const svg=root.querySelector('svg'),text=root.querySelector('[data-cycle-result]');
  const choose=(v)=>{

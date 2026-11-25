@@ -14,3 +14,22 @@ details{background:#f6fafc;border:1px solid var(--border);border-radius:9px;padd
 @media(max-width:600px){.counter{display:none}.controls select{max-width:48vw}.controls .middle{flex:1;justify-content:center}}
 @media(max-width:385px){.controls select{max-width:39vw}.controls .middle{gap:4px}.controls .btn{padding:7px}.math-line{font-size:1.04rem}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Kapitel 4: geometrin och den sammanhängande lösningen på samma bild. */
+math[display=inline]{font:1.09em "Cambria Math","STIX Two Math",serif;vertical-align:-.1em;white-space:nowrap}
+.illustrated-solution{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:20px;align-items:start;margin:15px 0}
+.illustrated-solution>*{min-width:0}.illustrated-solution .eq-chain{margin:0}
+.illustrated-solution .math-line{font-size:clamp(1.06rem,1.8vw,1.36rem)}
+.visual-explanation{font-size:.9rem;color:#3b6575;margin:10px 4px}
+.case-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.case-gallery .diagram{transition:border-color .16s,background .16s;align-self:stretch}
+.case-gallery .diagram.is-selected{border:3px solid var(--green);background:#eefaf4;padding:8px}
+.case-gallery .diagram svg{max-height:215px}
+.case-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.case-panel{display:none;background:var(--pale);border-left:4px solid var(--green);padding:10px 14px;border-radius:9px;margin:10px 0}
+.case-panel.on{display:block}.case-panel math[display=block]{display:block;text-align:left;font-size:1.22rem}
+.diagram svg text.diagram-emphasis{font-weight:750;fill:#08766b}
+.diagram svg .case-geometry{opacity:.28;transition:opacity .2s}.diagram svg .case-geometry.is-selected{opacity:1}
+.diagram svg text.big-svg-label{font-size:20px}
+@media(max-width:790px){.illustrated-solution{grid-template-columns:1fr}.illustrated-solution .math-line{font-size:clamp(1.06rem,4.45vw,1.24rem);padding:8px 10px}}
+@media(max-width:600px){.case-gallery{grid-template-columns:1fr}.case-gallery .diagram svg{max-height:175px}}
