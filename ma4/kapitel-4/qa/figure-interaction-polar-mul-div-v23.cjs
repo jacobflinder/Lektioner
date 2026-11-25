@@ -10,7 +10,7 @@ const near=(a,b,msg,e=.09)=>ok(Math.abs(a-b)<e,msg+': '+a+' vs '+b);
 const cis=(r,v)=>[r*Math.cos(Math.PI*v/180),r*Math.sin(Math.PI*v/180)];
 const mul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]];
 const div=(a,b)=>{let n=b[0]*b[0]+b[1]*b[1];if(!n)throw RangeError('zero');return[(a[0]*b[0]+a[1]*b[1])/n,(a[1]*b[0]-a[0]*b[1])/n]};
-for(const [r,s,p,t] of [[2,30,3,60],[4,150,2,30],[3,20,2,80],[0,0,2,70],[2,200,3,320]]){
+for(const [r,s,p,t] of [[12,120,6,60],[2,30,3,60],[4,150,2,30],[3,20,2,80],[0,0,2,70],[2,200,3,320]]){
  const a=cis(r,s),b=cis(p,t),m=mul(a,b),d=div(a,b);
  for(let i=0;i<2;i++){near(m[i],cis(r*p,s+t)[i],'product');near(d[i],cis(r/p,s-t)[i],'quotient');near(mul(d,b)[i],a[i],'reverse');}
 }
@@ -55,7 +55,7 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   const rows=await page.locator('#pd-result > p.math').evaluateAll(es=>es.map(e=>{let r=e.getBoundingClientRect();return{t:r.top,b:r.bottom,math:e.querySelectorAll('math').length,label:e.querySelector('math')?.getAttribute('aria-label')}}));
   ok(rows.length===4&&rows.every(r=>r.math===1),'four semantic MathML rows');
   for(let i=1;i<rows.length;i++)ok(rows[i].t-rows[i-1].b>=15,'16px vertical spacing');
-  const expected=mode==='mul'?'z₁z₂ = 6(cos 90° + i sin 90°)':'z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))';
+  const expected=mode==='mul'?'z₁z₂ = 6(cos(π/2) + i sin(π/2))':'z₁/z₂ = (2/3)(cos(−π/6) + i sin(−π/6))';
   ok(rows.some(r=>r.label===expected),'complete specific answer '+mode);
   const formulaView=await page.locator('#pd-result > p.math:nth-child(3)').evaluate(e=>({scroll:e.scrollWidth,width:e.clientWidth}));
   ok(formulaView.scroll<=formulaView.width+2,'completed polar formula visible without internal clipping '+mode+' '+width+' '+JSON.stringify(formulaView));

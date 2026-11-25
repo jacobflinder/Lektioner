@@ -48,7 +48,7 @@ insertSolutions({
   step('1 · Välj rätt insättningsvärde',['x + 1 = 0','a = −1']),
   step('2 · Beräkna de enskilda termerna',['(−1)³ = −1','2(−1)² = 2','−5(−1) = 5']),
   step('3 · Summera resten',['p(−1) = −1 + 2 + 5 − 6','= 0']),
-  step('4 · Motivera med restsatsen',['p(x) = (x + 1)q(x) + r','p(−1) = 0 · q(−1) + r','= r']),
+  step('4 · Motivera med restsatsen',['p(x) = (x + 1)k(x) + r','p(−1) = 0 · k(−1) + r','= r']),
   answer(['r = 0']),
   step('Slutsats',[],'x + 1 är en faktor eftersom p(−1) = 0.')
  ),
@@ -60,10 +60,9 @@ insertSolutions({
   step('Varför räcker det?',[],'Vid division med x − a är resten alltid p(a).')
  ),
  'exit-check3':solution(
-  step('1 · Nollställena bestämmer faktorerna',['x = −2 ⇒ x + 2 = 0','x = 0','x = 1 ⇒ x − 1 = 0','h(x) = k(x + 2)x(x − 1)']),
-  step('2 · Punkten (2; 8) bestämmer k',['h(2) = 8','2 + 2 = 4','2 − 1 = 1','8 = k · 4 · 2 · 1','= 8k','k = 1']),
-  answer(['h(x) = x(x + 2)(x − 1)']),
-  step('Kontroll',[],'Funktionen är noll vid −2, 0 och 1 och har funktionsvärdet 8 då x = 2.')
+  step('Algebrans fundamentalsats',[],'Varje polynom av grad minst 1 har minst ett komplext nollställe.'),
+  answer(['p(z) = 0']),
+  step('Tolka',[],'Minst en sådan lösning finns i de komplexa talen. Den behöver inte vara reell.')
  ),
  homefacit:solution(
   step('1 · Beräkna varje term när x = −1',['h(x) = x³ + x² − 4x − 4',

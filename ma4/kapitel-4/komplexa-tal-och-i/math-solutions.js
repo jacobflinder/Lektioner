@@ -27,12 +27,6 @@ insertSolutions({
  step('4 · Kontrollera båda rötterna',['(3i)² = 9i² = −9','(−3i)² = 9i² = −9']),
  answer(['x = ±3i'])
 ),
-'i-mis':solution(
- step('1 · Behåll det korrekta mellanledet',['(−3 + 2i)² = 9 − 12i + 4i²']),
- step('2 · Ersätt i² med −1',['= 9 − 12i + 4(−1)','= 9 − 12i − 4']),
- answer(['= 5 − 12i']),
- step('Hitta felet',''.split(''),'I den konstruerade felaktiga lösningen byttes 4i² mot +4. Eftersom i² = −1 ska termen vara −4.')
-),
 'i-selffacit':solution(
  step('1 · Multiplikation: samla och ersätt i²',['(2 + i)(1 − 2i)','= 2 − 4i + i − 2i²','= 2 − 3i − 2(−1)','= 2 − 3i + 2']),
  answer(['= 4 − 3i']),

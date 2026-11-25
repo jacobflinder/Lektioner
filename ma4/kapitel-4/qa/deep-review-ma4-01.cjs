@@ -17,7 +17,7 @@ assert.deepEqual(times(z(-3,2),z(-3,2)),z(5,-12),'Kvadrering oberoende beräknad
 assert.deepEqual(times(z(2,1),z(1,-2)),z(4,-3),'Självständig multiplikation oberoende beräknad');
 assert.deepEqual(times(z(1,2),z(1,2)),z(-3,4),'Självständig kvadrering oberoende beräknad');
 assert.deepEqual(pow(z(0,1),2026),z(-1,0),'Potenser av i har period fyra');
-const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-nok','i-extra','i-exit'];
+const order=['intro','i-define','i-standard','i-exempel','i-self','i-nok','i-extra','i-exit'];
 (async()=>{
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:860}});
@@ -25,7 +25,7 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
  try{
   const res=await page.goto(base,{waitUntil:'networkidle'});
   assert.equal(res.status(),200);
-  assert.deepEqual(await page.locator('.slide').evaluateAll(nodes=>nodes.map(el=>el.id)),order,'Exakt nio bilder');
+  assert.deepEqual(await page.locator('.slide').evaluateAll(nodes=>nodes.map(el=>el.id)),order,'Åtta bilder utan felanalys');
   assert.equal(await page.locator('script[src*="math-solutions.js?v=genomgang-01-20261113"]').count(),1,'Ny svarsversion hämtas');
   const active=async(n)=>{await page.selectOption('#jump',String(n));assert.equal(await page.locator('.slide.active').getAttribute('id'),order[n]);};
   const has=async(selector,description)=>assert.equal(await page.locator(selector).count(),1,description);
@@ -71,17 +71,8 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   await has('#i-exempel math[aria-label="= 3 + 11i"]','04 multiplikationsresultat');
   await has('#i-exempel math[aria-label="= 5 − 12i"]','04 kvadreringsresultat');
   console.log('PASS bild 04: sju steg, full fördelning och kvadrering');
-  // 5. Felanalys – 4i² är −4 och inte +4.
+  // Eget arbete med synliga mellanled först när eleven klickar.
   await active(4);
-  assert.ok(await page.locator('#i-mis').isHidden(),'05 rättelsen först dold');
-  const quiz5=page.locator('#i-check .quiz-inline');
-  await quiz5.locator('.choice[data-correct="true"]').click();
-  assert.ok((await quiz5.locator('.feedback').innerText()).includes('−4'),'05 rätt återkoppling');
-  await page.locator('[data-reveal="i-mis"]').click();
-  await has('#i-mis .ma4-final math[aria-label="= 5 − 12i"]','05 fullständig rättelse');
-  console.log('PASS bild 05: teckenfel och förklaring');
-  // 6. Eget arbete med synliga mellanled först när eleven klickar.
-  await active(5);
   assert.ok(await page.locator('#i-selffacit').isHidden(),'06 självständigt arbete');
   await page.locator('[data-reveal="i-selffacit"]').click();
   await has('#i-selffacit math[aria-label="= 2 − 3i + 2"]','06 extra led vid −2i²');
@@ -89,13 +80,13 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   await has('#i-selffacit .ma4-final math[aria-label="= −3 + 4i"]','06 uppgift två');
   console.log('PASS bild 06: två uppgifter med mellanled');
   // 7. Inga bokuppgifter ändrade.
-  await active(6);
+  await active(5);
   const nok=await page.locator('#i-nok').innerText();
   assert.ok(nok.includes('4101–4114')&&nok.includes('tre av fem nivåer'),'07 NOKflex-uppgifter och nivåval bevaras');
   assert.equal(await page.locator('[data-go="i-extra"]').count(),1);
   console.log('PASS bild 07: NOKflex och frivillig aktivitet');
   // 8. Varför perioden upprepas och varför 2026 ger −1.
-  await active(7);
+  await active(6);
   assert.ok(await page.locator('#i-extraans').isHidden(),'08 facit dolt');
   await page.locator('[data-reveal="i-extraans"]').click();
   await has('#i-extraans math[aria-label="i⁵ = i⁴ · i = i"]','08 femte potens visar upprepning');
@@ -103,7 +94,7 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   await has('#i-extraans .ma4-final math[aria-label="i²⁰²⁶ = −1"]','08 rätt slutsvar');
   console.log('PASS bild 08: period fyra och exponentrest');
   // 9. Exit: dubbel lösning, identifiera reell/imaginärdel, visa alla fyra produkter.
-  await active(8);
+  await active(7);
   assert.ok(await page.locator('#i-exitfacit').isHidden(),'09 exitfacit dolt');
   await page.locator('[data-reveal="i-exitfacit"]').click();
   await has('#i-exitfacit math[aria-label="−16 = 16i²"]','09 sätt in imaginära enheten');
@@ -114,7 +105,7 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
   await has('#i-exitfacit .ma4-final math[aria-label="(1 + i)² = 2i"]','09 kvadreringens slutsvar');
   console.log('PASS bild 09: målanknuten utcheckning utan utelämnad algebra');
   await page.setViewportSize({width:390,height:844});
-  for(let k=0;k<9;k++){
+  for(let k=0;k<8;k++){
    await active(k);
    if(k===3){
     const gap=await page.locator('#i-exempel .math-givens > p.math').evaluateAll(rows=>rows[1].getBoundingClientRect().top-rows[0].getBoundingClientRect().bottom);
@@ -124,7 +115,7 @@ const order=['intro','i-define','i-standard','i-exempel','i-check','i-self','i-n
    assert.ok(width.page<=width.viewport+4,'Bild '+(k+1)+' horisontell scroll '+JSON.stringify(width));
   }
   assert.deepEqual(errors,[],'Inga Javascript-fel');
-  console.log('PASS Ma4 djupgranskning 01/41: alla 9 bilder, självständiga facit och mobil');
+  console.log('PASS Ma4 djupgranskning 01/41: åtta fokusbilder, självständiga facit och mobil');
  }catch(error){console.error('FAIL Ma4 djupgranskning 01/41: '+(error.stack||error));process.exitCode=1}
  finally{await page.close();await browser.close()}
 })();

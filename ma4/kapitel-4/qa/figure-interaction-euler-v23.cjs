@@ -73,8 +73,8 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  try{
   const response=await page.goto(URL,{waitUntil:'networkidle'});
   equal(response.status(),200,'Eulers elevlektion laddas');
-  equal(await page.locator('.slide').count(),15,'Femton ursprungliga lektionsbilder');
-  equal(await page.locator('#jump option').count(),15,'Alla bilder går att välja');
+  equal(await page.locator('.slide').count(),14,'Fjorton fokusbilder');
+  equal(await page.locator('#jump option').count(),14,'Alla bilder går att välja');
   check(await page.locator('#euler-practice-support').count()===1,'Stödet finns på bokens arbetsbild');
   await go(0);check((await page.locator('.slide.active').innerText()).includes('Eulers formel'),'Lärandemål bevarade');await screenshot('01-start');
   await go(1);await reveal('recall');
@@ -187,21 +187,20 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   }
   equal(await page.locator('#euler-practice-support details[open]').count(),4,'Alla stöd öppnade utan facit');
   await screenshot('11-bok-stod-oppet');
-  await go(11);await reveal('fav');check(await page.locator('#fav svg').isVisible(),'Korrigerad felanalys har geometrisk efterbild');await screenshot('12-felanalys');
-  await go(12);await reveal('transfer');check(await page.locator('#transfer math').count()>=4,'Fördjupning fulla matematiska led');await screenshot('13-fordjupning');
-  await go(13);
+  await go(11);await reveal('transfer');check(await page.locator('#transfer math').count()>=4,'Fördjupning fulla matematiska led');await screenshot('12-fordjupning');
+  await go(12);
   for(let step=1;step<=4;step++){
    await page.locator('#series-next').click();
    check(await page.locator('[data-series-step="'+step+'"]').isVisible(),'Potensserien visar ett steg i taget');
   }
   check(await page.locator('[data-series-step="4"] math').count()===1,'Slutsats i semantisk form');
   await screenshot('14-serier-efter');
-  await go(14);
+  await go(13);
   for(const id of ['e-exit1','e-exit2','e-exit3'])check(await page.locator('#'+id).isHidden(),'Utcheckningsfacit dolt före eget försök');
   await screenshot('15-utcheckning-fore');
   for(const id of ['e-exit1','e-exit2','e-exit3'])await reveal(id);
   check(await page.locator('#e-exit1 math[aria-label]').count()>=3,'Fullständig omvandling i facit');
-  check(await page.locator('#e-exit2 math[aria-label]').count()>=3,'Fullständig multiplikation i facit');
+  check(await page.locator('#e-exit2 math[aria-label]').count()>=3,'Fullständig omvandling genom att bryta ut absolutbeloppet');
   check(await page.locator('#e-exit3 math[aria-label]').count()>=2,'Fullständig identitet i facit');
   await screenshot('15-utcheckning-efter');
   await go(10);equal(await page.locator('#euler-practice-support details[open]').count(),0,'Metodkorten återställda efter navigation');
@@ -210,7 +209,7 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   await go(9);check(await page.locator('#final1').isHidden()&&await page.locator('#final2').isHidden(),'Identitetens facit återställt efter navigation');
   check(await page.locator('[data-show="final2"]').isDisabled(),'Identiteten måste åter öppnas stegvis');
   await go(10);await page.locator('#next').click();
-  equal(await page.locator('.slide.active').evaluate(el=>[...document.querySelectorAll('.slide')].indexOf(el)),14,'Huvudvägen hoppar över frivilliga aktiviteter');
+  equal(await page.locator('.slide.active').evaluate(el=>[...document.querySelectorAll('.slide')].indexOf(el)),13,'Huvudvägen hoppar över frivilliga aktiviteter');
   await page.locator('#mode').click();
   equal(await page.locator('#mode').getAttribute('aria-pressed'),'true','Klassrumsläge går att slå på');
   await page.locator('#teacher-toggle').click();

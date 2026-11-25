@@ -75,8 +75,8 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
  try{
   const res=await page.goto(URL,{waitUntil:'networkidle',timeout:30000});
   assert.equal(res.status(),200,'Webblektionens HTML laddas');
-  assert.equal(await page.locator('.slide').count(),14,'Alla 14 originalbilder bevarade');
-  assert.equal(await page.locator('#jump option').count(),14,'Hoppmenyn komplett');
+  assert.equal(await page.locator('.slide').count(),13,'Tretton fokusbilder');
+  assert.equal(await page.locator('#jump option').count(),13,'Hoppmenyn komplett');
   assert.ok(await page.locator('script[src="./math-format.js?v=ma4-11-complete-20261113"]').count()===1,'Uppdaterad matematikkod');
   // 01: inledande tanke före målen
   await go(0);await hidden('quadratic-goals');await reveal('quadratic-goals');await shot('01-desktop');
@@ -139,10 +139,8 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await go(8);await reveal('r9');
   for(const x of ['p = 6','q = 13','z = −6/2 ± √((6/2)² − 13)','z = −3 ± √(−4)','z₁ = −3 + 2i','z₂ = −3 − 2i','z = 1 − i','z = −1 + i','z = 1 ± 2i'])await formula('#r9',x);
   await shot('09-desktop');
-  // 10: frivillig felanalys visar två rotkontroller
-  await go(9);await reveal('r10');await formula('#r10','z₂ = −3 + 3i');await shot('10-desktop');
-  // 11: begrepp + gränsfall w=0
-  await go(10);
+  // Begrepp och gränsfall w=0 kommer direkt efter metodvalet.
+  await go(9);
   const q11=page.locator('[data-quiz="q11"]');await q11.locator('button').nth(0).click();
   assert.ok((await q11.locator('.feedback').innerText()).includes('komplexa'));
   await q11.locator('button').nth(1).click();assert.ok((await q11.locator('.feedback').innerText()).includes('Rätt'));
@@ -153,16 +151,16 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   assert.ok((await page.locator('#r11').innerText()).includes('dubbelrot'));
   await shot('11-desktop');
   // 12: bokens innehåll, uppgifter och frivilliga spår bevarade
-  await go(11);const nok=await current().innerText();
+  await go(10);const nok=await current().innerText();
   assert.ok(nok.includes('NOKflex')&&nok.includes('4401–4420')&&nok.includes('minst tre av fem nivåer'));
-  await page.locator('#next').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),13,'Ordinarie väg hoppar över frivillig bild');
-  await go(11);await shot('12-desktop');
+  await page.locator('#next').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),12,'Ordinarie väg hoppar över frivillig bild');
+  await go(10);await shot('11-desktop');
   // 13: egen konstruktion av polynom, inklusive synlig faktorisering
-  await go(12);await reveal('r15');
+  await go(11);await reveal('r15');
   for(const x of ['(z − 2)² − (3i)² = 0','z² − 4z + 13 = 0'])await formula('#r15',x);
   await shot('13-desktop');
   // 14: utcheckning, full pq-insättning och båda fallen med ansats z=a+bi
-  await go(13);for(const id of ['r13a','r13b','r13c'])await hidden(id);
+  await go(12);for(const id of ['r13a','r13b','r13c'])await hidden(id);
   for(const id of ['r13a','r13b','r13c'])await reveal(id);
   for(const x of ['p = −2i','q = 8','z = −(−2i)/2 ± √(((−2i)/2)² − 8)','z₁ = i + 3i = 4i','z₂ = i − 3i = −2i'])await formula('#r13a',x);
   for(const x of ['z = a + bi','a² − b² = 0','2ab = 18','ab = 9','a² = −9','a = ±3','z₁ = 3 + 3i','z₂ = −3 − 3i'])await formula('#r13b',x);
@@ -176,7 +174,7 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   // Mobil: skärmklipp och sidscroll kontrolleras på samtliga 14 bilder.
   await page.setViewportSize({width:390,height:844});
   const allMobileOverflows=[];
-  for(let i=0;i<14;i++){
+  for(let i=0;i<13;i++){
    await go(i);
    const d=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,width:innerWidth}));
    assert.ok(d.doc<=d.width+3,'Ingen total sidscroll på mobilbild '+(i+1)+' '+JSON.stringify(d));
@@ -187,10 +185,10 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   }
   assert.deepEqual(allMobileOverflows,[],'Alla synliga matematiska mellanled måste rymmas i samtliga 14 mobilbilder: '+JSON.stringify(allMobileOverflows));
   await go(6);await page.locator('#methodAlternate').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),7,'Valfri alternativmetod nås');
-  await go(11);await page.locator('#quadraticExtra').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),12,'Valfri extraaktivitet nås');
-  await page.locator('#quadraticSkip').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),13,'Gå direkt till exit');
+  await go(10);await page.locator('#quadraticExtra').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),11,'Valfri extraaktivitet nås');
+  await page.locator('#quadraticSkip').click();assert.equal(await current().evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),12,'Gå direkt till exit');
   assert.deepEqual(errors,[],'Inga JavaScript- eller nätverksfel');
-  console.log('PASS Ma4 11/41: 14/14 bilder, alla facit, fullständig pq-insättning, 390px mobil, projektor, digital respons och SVG');
+  console.log('PASS Ma4 11/41: 13/13 bilder, alla facit, fullständig pq-insättning, 390px mobil, projektor, digital respons och SVG');
  }catch(e){console.error('FAIL Ma4 11/41 '+(e.stack||e));process.exitCode=1;await shot('FAIL').catch(()=>{});}
  finally{await page.close();await browser.close();}
 })();

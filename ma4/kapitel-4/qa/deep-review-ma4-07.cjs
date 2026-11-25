@@ -15,10 +15,10 @@ const mul=(a,b)=>({x:a.x*b.x-a.y*b.y,y:a.x*b.y+a.y*b.x});
 const div=(a,b)=>{const n=b.x*b.x+b.y*b.y;if(n===0)throw new RangeError('Division med noll');return {x:(a.x*b.x+a.y*b.y)/n,y:(a.y*b.x-a.x*b.y)/n}};
 const near=(a,b,eps=1e-9)=>assert.ok(Math.abs(a-b)<eps,'Oberoende taljämförelse: '+a+' ≈ '+b);
 const same=(a,b)=>{near(a.x,b.x);near(a.y,b.y)};
-const a=cis(2,30),b=cis(3,60);
-same(mul(a,b),cis(6,90));
-same(div(a,b),cis(2/3,-30));
-same(div(a,b),{x:Math.sqrt(3)/3,y:-1/3});
+const a=cis(12,120),b=cis(6,60);
+same(mul(a,b),cis(72,180));
+same(div(a,b),cis(2,60));
+same(div(a,b),{x:1,y:Math.sqrt(3)});
 same(mul(div(a,b),b),a);
 const w1=cis(4,150),w2=cis(2,30);
 same(mul(w1,w2),{x:-8,y:0});
@@ -69,10 +69,10 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   await page.locator('[data-reveal="startans"]').click();
   assert.equal(await page.locator('#startans .ma4-step').count(),4,'01 fyra kompletta förklaringssteg');
   for(const f of ['a = 4','b = 3','r = √(a² + b²)','= √(4² + 3²)','= √(16 + 9)','= √25','= 5',
-    'tan v = b/a','= 3/4','v ≈ 36,87°','a ≈ 5 cos 36,87° ≈ 4','b ≈ 5 sin 36,87° ≈ 3']){
+    'tan v = b/a','= 3/4','v ≈ 0,64','a ≈ 5 cos(0,64) ≈ 4','b ≈ 5 sin(0,64) ≈ 3']){
    await has('#startans math[aria-label="'+f+'"]','01 saknat mellanled '+f);
   }
-  await one('#startans .ma4-final math[aria-label="z ≈ 5(cos 36,87° + i sin 36,87°)"]','01 avrundning korrekt');
+  await one('#startans .ma4-final math[aria-label="z ≈ 5(cos(0,64) + i sin(0,64))"]','01 avrundning korrekt');
   await page.locator('[data-reveal="pd-goals"]').click();
   assert.ok(await page.locator('#pd-goals').isVisible(),'01 mål efter elevförsök');
   await shot('01-desktop');
@@ -89,10 +89,10 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),i,'02 exakt ett nytt steg');
   }
   await spacing('#product [data-seq-item]:nth-child(1) .math-givens',4);
-  for(const f of ['r₁ = 2','v₁ = 30°','r₂ = 3','v₂ = 60°',
-   '|z₁z₂| = r₁r₂ = 2 · 3 = 6','v = v₁ + v₂ = 30° + 60° = 90°',
-   'r = 2 · 3 = 6','v = 30° + 60° = 90°','z₁z₂ = r(cos v + i sin v)',
-   '= 6(cos 90° + i sin 90°)','= 6(0 + i · 1)','= 6i']){
+  for(const f of ['r₁ = 12','v₁ = 2π/3','r₂ = 6','v₂ = π/3',
+   '|z₁z₂| = r₁r₂ = 12 · 6 = 72','v = v₁ + v₂ = 2π/3 + π/3 = π',
+   'r = 12 · 6 = 72','v = 2π/3 + π/3 = π','z₁z₂ = r(cos v + i sin v)',
+   '= 72(cos π + i sin π)','= 72(−1 + i · 0)','= −72']){
    await has('#product [data-sequence] math[aria-label="'+f+'"]','02 produktregel och mellanled '+f);
   }
   await prod.locator('[data-seq-back]').click();
@@ -126,10 +126,10 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   }
   await spacing('#quotient [data-seq-item]:nth-child(1) .math-givens',4);
   await spacing('#quotient [data-seq-item]:nth-child(4) .math-givens',4);
-  for(const f of ['r₁ = 2','r₂ = 3','v₁ = 30°','v₂ = 60°','|z₁/z₂| = r₁/r₂','= 2/3',
-   'v = v₁ − v₂','= 30° − 60°','= −30°','−30° + 360° = 330°',
-   'cos(−30°) = √3/2','sin(−30°) = −1/2',
-   'z₁/z₂ = r(cos v + i sin v)','= (2/3)(√3/2 − i/2)','= √3/3 − (1/3)i']){
+  for(const f of ['r₁ = 12','r₂ = 6','v₁ = 2π/3','v₂ = π/3','|z₁/z₂| = r₁/r₂','= 12/6','= 2',
+   'v = v₁ − v₂','= 2π/3 − π/3','= π/3',
+   'cos(π/3) = 1/2','sin(π/3) = √3/2',
+   'z₁/z₂ = r(cos v + i sin v)','= 2(1/2 + i√3/2)','= 1 + √3i']){
    await has('#quotient [data-sequence] math[aria-label="'+f+'"]','03 kvotregel och insättning '+f);
   }
   assert.ok(await quo.locator('math mfrac').count()>=5,'03 bråk i äkta MathML');
@@ -139,8 +139,8 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 reset');
   for(let i=0;i<4;i++)await quo.locator('[data-seq-next]').click();
   const proof=page.locator('#quotient details');await proof.locator('summary').click();
-  for(const f of ['|w| · r₂ = r₁','|w| = r₁/r₂','arg(w) + v₂ ≡ v₁ (mod 360°)',
-   'arg(w) ≡ v₁ − v₂ (mod 360°)']){
+  for(const f of ['|w| · r₂ = r₁','|w| = r₁/r₂','arg(w) + v₂ ≡ v₁ (mod 2π)',
+   'arg(w) ≡ v₁ − v₂ (mod 2π)']){
    await has('#quotient details math[aria-label="'+f+'"]','03 omvänd multiplikation '+f);
   }
   await shot('03-desktop-med-bevis');
@@ -207,8 +207,8 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    }
    if(op==='mul')await one('#pd-result math[aria-label="= 6i"]','04 korrekt produkt');
    else{
-     await one('#pd-result math[aria-label="v = 30° − 60° = −30°"]','04 korrekt kvotvinkel');
-     await one('#pd-result math[aria-label="z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))"]','04 fullständigt insatt argument och polär form');
+     await one('#pd-result math[aria-label="v = π/6 − π/3 = −π/6"]','04 korrekt kvotvinkel');
+     await one('#pd-result math[aria-label="z₁/z₂ = (2/3)(cos(−π/6) + i sin(−π/6))"]','04 fullständigt insatt argument och polär form');
      await one('#pd-result math[aria-label="= √3/3 − (1/3)i"]','04 självständigt kontrollerad rektangulär form');
     }
    await shot('04-'+op+'-desktop');

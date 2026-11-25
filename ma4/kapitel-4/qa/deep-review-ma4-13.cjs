@@ -126,7 +126,8 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   for(const id of ['rest1','rest2','rest3'])await reveal(id);
   await label('#rest1','r = f(1) = 0');await label('#rest2','r = f(2) = −4');await label('#rest3','r = f(−2) = 0');
   await workedGap();await shot('04-desktop');
-  // 05: skalfaktor bygger på g(0)=3; inte på nollställena ensamma
+  await go(3);await page.locator('#next').click();assert.equal(await active().getAttribute('id'),'f-nok','Huvudvägen hoppar över skalfaktoruppgifterna');
+  // 05: frivillig skalfaktortillämpning
   await go(4);await sequence('#f-graf2',4);
   for(const x of [-1,1,3])await circleNear('#graf-faktor circle.mark',x2(x,-1.35,3.45),y2(0,-12,14));
   await circleNear('#graf-faktor circle[fill="#ba632a"]',x2(0,-1.35,3.45),y2(3,-12,14));
@@ -165,7 +166,7 @@ const y2=(y,min,max)=>15+(max-y)*321/(max-min);
   for(const id of ['exit-check1','exit-check2','exit-check3','homefacit'])assert.ok(await page.locator('#'+id).isHidden(),id+' dolt fram till eget försök');
   for(const id of ['exit-check1','exit-check2','exit-check3','homefacit'])await reveal(id);
   await label('#exit-check1','r = 0');await label('#exit-check2','r = p(1) = −8');
-  await label('#exit-check3','h(x) = x(x + 2)(x − 1)');
+  await label('#exit-check3','p(z) = 0');assert.ok((await page.locator('#exit-check3').innerText()).includes('grad minst 1'));
   await label('#homefacit','r = 20');
   await workedGap();await shot('09-desktop');
   // Klassrums- och lärarstödsvyn
