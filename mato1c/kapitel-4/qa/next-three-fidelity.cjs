@@ -59,6 +59,7 @@ check(sin.includes('data-case-choices')&&sin.includes('data-case-figure="pair-a"
 check(sin.includes('id="sinus-sidpar"')&&sin.includes('Visa hela lösningen'),'Sinussats: hela lösningen som synlig återkoppling vid figuren');
 check(!sin.includes('116°')&&!sin.includes('data-case-figure="obtuse"'),'Sinussats: senare beslut skjuter två möjliga fall till s.236');
 check(sin.includes('Varje sida hör ihop med')&&sin.includes('motstående vinkel'),'Sinussats: formel och motstående sidpar samtidigt');
+check(sin.includes('Med en höjd från A får vi på samma sätt:')&&sin.includes('<mi>c</mi><mspace width="0.16em"/><mi>sin</mi>'),'Sinussats: tredje kvoten härleds, inte bara läggs till');
 check(sin.includes('Nästa bokmoment, s. 236'),'Sinussats: nästa moment för två fall');
 check(sin.includes('Socrative 331')&&!/mindmap/i.test(sin.replace(/data-teacher="[^"]*"/g,'')),'Sinussats: aktuella aktiviteter utan mindmap');
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
@@ -69,6 +70,10 @@ const deg=x=>x*Math.PI/180;
 check(Math.abs(Math.sin(deg(20.487315))-0.35)<2e-6,'Trigekv: sinus korrekt');
 check(Math.abs(Math.cos(deg(126.869897))+0.6)<2e-6,'Trigekv: cosinus korrekt');
 check(Math.abs(9*12*Math.sin(deg(70))/2-50.7434)<0.01,'Areasats: exempel 1 korrekt');
+const c=[220,75],a=[156,224],b=[377,224];
+const u=[a[0]-c[0],a[1]-c[1]],v=[b[0]-c[0],b[1]-c[1]];
+const L=Math.hypot(...u),R=Math.hypot(...v);
+check(Math.abs(Math.acos((u[0]*v[0]+u[1]*v[1])/(L*R))*180/Math.PI-70)<0.5&&Math.abs(L/R-9/12)<0.01,'Areasats: triangelns skiss överensstämmer med 70° och sidförhållandet 9:12');
 check(Math.abs(5*11*Math.sin(deg(120))/2-23.8157)<0.01,'Areasats: trubbig vinkel korrekt');
 check(Math.abs(6*10*Math.sin(deg(36.869897))/2-18)<0.001,'Areasats: vinkel från area korrekt');
 check(Math.abs(4*Math.sin(deg(20))/Math.sin(deg(130))-1.786)<0.01,'Sinussats: sida korrekt');
