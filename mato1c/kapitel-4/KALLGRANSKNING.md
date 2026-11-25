@@ -17,9 +17,9 @@
 | Trigonometri i rätvinkliga trianglar | 218–220 | 4101–4106 | 4107–4109 | 4110–4111 | Färdiggranskad |
 | Några exakta trigonometriska värden | 221 | 4113–4115 | 4116–4118 | 4119 | Färdiggranskad (4112 är bokexempel) |
 | 4.2 Enhetscirkeln | 222–225 | 4203–4208 | 4209–4213 | 4214–4215 | Färdiggranskad (4201–4202 är bokexempel) |
-| Trigonometriska ekvationer | 228–230 | 4218–4223 | 4224–4227 | 4228 | Källmappad, separat bild- och interaktionsgranskning |
-| Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Källmappad, separat bild- och interaktionsgranskning |
-| Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Källmappad, separat bild- och interaktionsgranskning |
+| Trigonometriska ekvationer | 228–230 | 4218–4223 | 4224–4227 | 4228 | Käll- och innehållsgranskad; webbläsarkontroll nedan |
+| Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Käll- och innehållsgranskad; webbläsarkontroll nedan |
+| Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 
 Planeringens följande separata moment är När ger sinussatsen två fall? s. 236, Cosinussatsen s. 240 och Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
 
@@ -68,6 +68,7 @@ Planeringens följande separata moment är När ger sinussatsen två fall? s. 23
 - Alla aktiviteter görs utan elevinloggning och utan personuppgiftsinsamling. Originalets Socrative-länkar/koder verifieras vid behov i lärarens konto.
 - Alla originalfilmer syns direkt i de aktuella lektionerna. Ingen ny matematisk metod eller alternativ lösningsnorm införs.
 - Lärarens senare bildgranskningskrav gäller **samtliga sex** lektioner: figur, beteckningar, räknesätt och motsvarande algebra hör ihop på samma bild. De första tre lektionerna har därför fått illustrerad sats-/metodåterkoppling även där en figur tidigare bara låg på föregående bild. Matematiska funktioner och alla inline-uttryck i de berörda lektionerna har normaliserats till MathML, utan att ändra lärarens metod.
+- Samtliga sex webblektioner ingår i samma automatiska webbläsarkontroll med fyra bredder, navigering genom alla bilder, kontroll av matematikens visuella marginaler och aktiva diagramknappar. Dessutom sparas en separat skärmbild av varje mobilslide för manuell läsbarhetsgranskning. **Socrative-innehållet** är fortsatt ett externt kontrollsteg som endast läraren har tillgång till.
 
 ## Återstående extern kontroll
 
