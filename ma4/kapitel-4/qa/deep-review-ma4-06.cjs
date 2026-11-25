@@ -7,7 +7,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const URL='http://127.0.0.1:8123/ma4/kapitel-4/multiplicera-dividera-med-i/';
-const order=['intro','plot','proof','trap','practice','nok','exit'];
+const order=['intro','plot','proof','practice','nok','exit'];
 const z=(a,b)=>[a,b],multiply=(x,y)=>z(x[0]*y[0]-x[1]*y[1],x[0]*y[1]+x[1]*y[0]);
 const norm2=x=>x[0]**2+x[1]**2;
 const division=(x,y)=>{
@@ -52,8 +52,8 @@ const formatted=(a,b)=>{
  try{
   const response=await page.goto(URL,{waitUntil:'networkidle',timeout:30000});
   assert.equal(response.status(),200,'Lektionssidan kan laddas');
-  assert.deepEqual(await page.locator('.slide').evaluateAll(nodes=>nodes.map(n=>n.id)),order,'Exakt sju bilder');
-  assert.equal(await page.locator('#jump option').count(),7,'Alla bildlänkar');
+  assert.deepEqual(await page.locator('.slide').evaluateAll(nodes=>nodes.map(n=>n.id)),order,'Sex fokusbilder');
+  assert.equal(await page.locator('#jump option').count(),6,'Alla bildlänkar');
   assert.equal(await page.locator('script[src$="math-solutions.js"]').count(),1,'Facit finns i lokalt skript');
   // 01: motivera i² och egen prognos före facit och mål.
   assert.ok(await page.locator('#startans').isHidden(),'01 facit dolt initialt');
@@ -127,20 +127,8 @@ const formatted=(a,b)=>{
   assert.equal(await page.locator('#rot-step').innerText(),'Steg 0 av 3','03 omstart');
   assert.ok(await page.locator('#rot-answers').isHidden(),'03 inga svar efter reset');
   console.log('PASS bild 03: tre rotationspar, medurs/moturs, Pythagoras, back/reset');
-  // 04: skilj spegling från rotation, både matematik och tolkning.
+  // Eget försök, alla produkter och båda längdkontrollerna.
   await active(3);
-  assert.ok(await page.locator('#trapans').isHidden(),'04 konstruerat fel innan elevens analys');
-  await page.locator('[data-reveal="trapans"]').click();
-  assert.ok(await page.locator('#trapans math mover').count()>0,'04 konjugatstreck synligt i MathML');
-  for(const e of ['z̄ = 1 − 2i','iz = i(1 + 2i)','= i + 2(−1)','= −2 + i',
-    '1/i = −i','z/i = −i(1 + 2i)','= −i − 2(−1)','= 2 − i']){
-    await has('#trapans math[aria-label="'+e.normalize('NFD')+'"]','04 konjugat/rotation '+e);
-  }
-  assert.equal(await page.locator('#trapans .ma4-final math').count(),3,'04 tre olika operationer och resultat');
-  await pic('04-trap-desktop');
-  console.log('PASS bild 04: spegling kontra rotation med felanalys');
-  // 05: eget försök, alla produkter och båda längdkontrollerna.
-  await active(4);
   assert.ok(await page.locator('#practiceans').isHidden(),'05 facit dolt');
   await page.locator('[data-reveal="practiceans"]').click();
   assert.equal(await page.locator('#practiceans .ma4-final math').count(),2,'05 båda resultat åtskilda');
@@ -152,13 +140,13 @@ const formatted=(a,b)=>{
   await pic('05-practice-desktop');
   console.log('PASS bild 05: egna beräkningar och oförändrade absolutbelopp');
   // 06: läroboksuppgifter, nivåval och uppgift att diskutera bevarade.
-  await active(5);
+  await active(4);
   const nok=await page.locator('#nok').innerText();
   assert.ok(nok.includes('4232–4240')&&nok.includes('minst tre av fem nivåer')&&nok.includes('NOKflex'),'06 uppgifter bevarade');
   assert.ok(nok.includes('Markera en uppgift'),'06 välja uppgift för diskussion');
   console.log('PASS bild 06: NOKflex bevarat');
   // 07: två slutsvar, både riktningar och tre längder.
-  await active(6);
+  await active(5);
   assert.ok(await page.locator('#exitans').isHidden(),'07 avslutningsfacit dolt');
   await page.locator('[data-reveal="exitans"]').click();
   assert.equal(await page.locator('#exitans .ma4-final math').count(),2,'07 resultat var för sig');
@@ -177,7 +165,7 @@ const formatted=(a,b)=>{
   assert.ok(await page.locator('.teacher').isVisible(),'Lärarstöd');
   await page.locator('#mode').click();
   await page.setViewportSize({width:390,height:844});
-  for(let i=0;i<7;i++){
+  for(let i=0;i<6;i++){
    await active(i);
    if(i===2)await spacing('#proof .math-givens',2);
    if(i===1){
@@ -190,7 +178,7 @@ const formatted=(a,b)=>{
    await pic('mobile-bild-'+(i+1));
   }
   assert.deepEqual(errors,[],'Inga runtime- eller resursfel');
-  console.log('PASS Ma4 06/41: 7/7 bilder, samtliga figurer, dolda facit, MathML och mobil');
+  console.log('PASS Ma4 06/41: 6/6 fokusbilder, rotationsfigurer, dolda facit, MathML och mobil');
  }catch(e){console.error('FAIL Ma4 06/41: '+(e.stack||e));process.exitCode=1}
  finally{await page.close();await browser.close()}
 })();

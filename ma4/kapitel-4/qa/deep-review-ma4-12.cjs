@@ -65,9 +65,9 @@ for(const [k,c] of Object.entries(CASES)){
    assert.equal(n,q.rounds-1-(key==='guided'?1:0),'Alla steg: '+key);
    const result=host.locator('.result-summary');assert.ok(await result.isVisible());
    const labels=await result.locator('math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')?.replaceAll(' ','')));
-   assert.ok(labels.some(x=>x==='Q(x)='+polynomial(q.q).replaceAll(' ','')),'Korrekt kvot i tabell och slutkontroll '+key+' '+JSON.stringify(labels));
-   assert.ok(labels.includes('R(x)='+q.r),'Korrekt rest '+key);
-   assert.ok(labels.some(x=>x.includes('P(x)=D(x)Q(x)+R(x)')),'Algoritmens invariant '+key);
+   assert.ok(labels.some(x=>x==='k(x)='+polynomial(q.q).replaceAll(' ','')),'Korrekt kvot i tabell och slutkontroll '+key+' '+JSON.stringify(labels));
+   assert.ok(labels.includes('rest='+q.r),'Korrekt rest '+key);
+   assert.ok(labels.some(x=>x.includes('p(x)/q(x)=k(x)+rest/q(x)')),'Jacobs divisionsskrivsätt '+key);
    assert.ok(await host.locator('tbody tr.product').count()>0,'Hela produkter visas '+key);
    assert.ok(await host.locator('tbody tr.remainder').count()>0,'Subtraktionens rester visas '+key);
    await shot('engine-'+key+'-done');
@@ -78,8 +78,8 @@ for(const [k,c] of Object.entries(CASES)){
  try{
   const res=await page.goto(URL,{waitUntil:'networkidle',timeout:30000});
   assert.equal(res.status(),200);
-  assert.equal(await page.locator('.slide').count(),11,'Alla 11 bilder ska finnas kvar');
-  assert.equal(await page.locator('#jump option').count(),11);
+  assert.equal(await page.locator('.slide').count(),10,'Tio bilder utan fristående felanalys');
+  assert.equal(await page.locator('#jump option').count(),10);
   await go(0);
   assert.ok((await active().innerText()).includes('Tänk 20 sekunder'));
   assert.ok((await active().innerText()).includes('2x³'));
@@ -93,22 +93,21 @@ for(const [k,c] of Object.entries(CASES)){
   await quiz.locator('button[data-ok="1"]').click();assert.ok((await quiz.locator('.feedback').innerText()).includes('Rätt'));
   await shot('03-desktop');
   await go(3);await engine('main',true);await shot('04-desktop');
-  await go(4);await reveal('a5');await label('#a5','Q(x) = 2x² − x − 3');await label('#a5','R(x) = 12');
+  await go(4);await reveal('a5');await label('#a5','k(x) = 2x² − x − 3');await label('#a5','rest = 12');
   assert.ok((await page.locator('#a5 .ma4-step').count())>=4);
   await testSpacing('.slide.active .math-givens > div');
   await active().locator('details summary').click();
   await reveal('stop-answer');await label('#stop-answer','(3x + 1) − (3x + 6)');
   await stepSpacing();await shot('05-desktop');
-  await go(5);await reveal('a6');await label('#a6','−5x − (−2x)');await label('#a6','= −5x + 2x');await stepSpacing();await shot('06-desktop');
-  await go(6);await engine('guided',true);await reveal('a7');await label('#a7','−5x − (−3x) = −2x');await stepSpacing();await shot('07-desktop');
-  await go(7);await reveal('zero-help');await label('#zero-help','= x³ + 0x² − 4x + 3');
+  await go(5);await engine('guided',true);await reveal('a7');await label('#a7','−5x − (−3x) = −2x');await stepSpacing();await shot('06-desktop');
+  await go(6);await reveal('zero-help');await label('#zero-help','= x³ + 0x² − 4x + 3');
   await reveal('a8');await label('#a8','0x² − (−x²) = x²');
   const detail8=active().locator('details summary');await detail8.click();await engine('independent',true);await stepSpacing();await shot('08-desktop');
-  await go(8);const nok=await active().innerText();assert.ok(nok.includes('NOKflex')&&nok.includes('4421–4430')&&nok.includes('minst tre av fem nivåer'));
-  await page.locator('#next').click();assert.equal(await active().evaluate(el=>[...document.querySelectorAll('.slide')].indexOf(el)),10,'Huvudvägen hoppar över frivillig övning');
-  await go(8);await page.locator('#polyExtra').click();assert.equal(await active().evaluate(el=>[...document.querySelectorAll('.slide')].indexOf(el)),9,'Frivillig aktivitet nås');
-  await go(8);await shot('09-desktop');
-  await go(9);for(const id of ['extra-a','extra-b','extra-c','extra-d'])await reveal(id);
+  await go(7);const nok=await active().innerText();assert.ok(nok.includes('NOKflex')&&nok.includes('4421–4430')&&nok.includes('minst tre av fem nivåer'));
+  await page.locator('#next').click();assert.equal(await active().evaluate(el=>[...document.querySelectorAll('.slide')].indexOf(el)),9,'Huvudvägen hoppar över frivillig övning');
+  await go(7);await page.locator('#polyExtra').click();assert.equal(await active().evaluate(el=>[...document.querySelectorAll('.slide')].indexOf(el)),8,'Frivillig aktivitet nås');
+  await go(7);await shot('08-desktop');
+  await go(8);for(const id of ['extra-a','extra-b','extra-c','extra-d'])await reveal(id);
   assert.equal(await active().locator('.ma4-final math').count(),8,'Alla fyra extrauppgifter har kvot och rest');
   for(const key of ['extraA','extraB','extraC','extraD']){
    const panel=active().locator('[data-division="'+key+'"]').locator('..').locator('summary');
@@ -116,8 +115,8 @@ for(const [k,c] of Object.entries(CASES)){
    await engine(key,true);
   }
   await stepSpacing();await shot('10-desktop');
-  await go(10);assert.ok(await page.locator('#a10').isHidden());
-  await reveal('a10');await label('#a10','Q(x) = x − 2');await label('#a10','R(x) = 1');
+  await go(9);assert.ok(await page.locator('#a10').isHidden());
+  await reveal('a10');await label('#a10','k(x) = x − 2');await label('#a10','rest = 1');
   await label('#a10','= −2x − 5 + 2x + 6');
   await stepSpacing();await shot('11-desktop');
   // Lärare visar ett fullt pappersfacit även i klassrumsläge utan digital inmatning.
@@ -126,7 +125,7 @@ for(const [k,c] of Object.entries(CASES)){
   await shot('11-projector');await page.locator('#mode').click();
   await page.setViewportSize({width:390,height:844});
   const overflow=[];
-  for(let i=0;i<11;i++){
+  for(let i=0;i<10;i++){
     await go(i);
     const dim=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:window.innerWidth}));
     assert.ok(dim.scroll<=dim.width+3,'Sidan får inte horisontell mobilscroll: bild '+(i+1)+' '+JSON.stringify(dim));

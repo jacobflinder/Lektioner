@@ -9,12 +9,6 @@ insertSolutions({
   step('3 · Visa varför nämnaren blir reell',['(1 − 3i)(1 + 3i)','= 1 + 3i − 3i − 9i²','= 1 − 9(−1)','= 1 + 9 = 10']),
   step('Nästa fråga',[],'Hur ser den nya täljaren ut när du också multiplicerar med 1 + 3i?')
  ),
- 'd-error':solution(
-  step('1 · Skriv alla fyra produkter',['(2 + i)(3 − 2i)','= 2·3 + 2(−2i) + i·3 + i(−2i)','= 6 − 4i + 3i − 2i²']),
-  step('2 · Samla termerna och sätt in i² = −1',['= 6 − i − 2i²','= 6 − i − 2(−1)','= 6 − i + 2']),
-  answer(['(2 + i)(3 − 2i) = 8 − i']),
-  step('Förklara felet',[],'Det felaktiga exemplet lämnade bort båda korsprodukterna −4i och +3i. De tar inte ut varandra.')
- ),
  'd-selfans':solution(
   step('1 · Identifiera nämnaren och dess konjugat',['u = 1 + i','ū = 1 − i','(2 + i)/(1 + i) = ((2 + i)(1 − i))/((1 + i)(1 − i))']),
   step('2 · Utveckla täljaren',['(2 + i)(1 − i)','= 2 − 2i + i − i²','= 2 − i − (−1)','= 3 − i']),
@@ -42,16 +36,6 @@ insertSolutions({
   step('6 · Multiplicera tillbaka',['(1 − i)(−1/2 + (3/2)i)','= −1/2 + (3/2)i + (1/2)i − (3/2)i²','= −1/2 + 2i − (3/2)(−1)','= −1/2 + 3/2 + 2i','= 1 + 2i'],'Kontrollen ger den ursprungliga täljaren. Produkten av en nämnare och dess konjugat är alltid reell och positiv när nämnaren inte är noll.')
  )
 });
-
-// Efter matematiken byggts: den korrekta 2×2-modellen hör till det dolda facit.
-const errorAnswer=document.getElementById('d-error');
-if(errorAnswer){
- const worked=errorAnswer.querySelector('.ma4-worked');
- const layout=document.createElement('div');layout.className='d-error-layout';
- const figure=document.createElement('div');figure.className='d-visual-products';
- figure.innerHTML="<h3>Efter – alla fyra produkter</h3>\n<table class=\"d-products\" aria-label=\"Två gånger två produkter, med de två saknade korsprodukterna markerade\">\n<caption class=\"muted\">Rad från första parentesen, kolumn från andra</caption>\n<thead><tr><th scope=\"col\">×</th><th scope=\"col\"><span class=\"math\">3</span></th><th scope=\"col\"><span class=\"math\">−2i</span></th></tr></thead>\n<tbody><tr><th scope=\"row\"><span class=\"math\">2</span></th><td><span class=\"math\">6</span></td><td class=\"d-cross\"><span class=\"math\">−4i</span><span class=\"d-cross-note\">Saknades</span></td></tr>\n<tr><th scope=\"row\"><span class=\"math\">i</span></th><td class=\"d-cross\"><span class=\"math\">+3i</span><span class=\"d-cross-note\">Saknades</span></td><td><span class=\"math\">−2i²</span></td></tr></tbody></table>\n<p>De fyra rutorna är fyra termer. <strong>Båda markerade korsprodukterna måste vara med</strong> innan termerna förenklas. Resultatet är <strong>8 − i</strong>.</p>";
- worked.replaceWith(layout);layout.append(worked,figure);
-}
 
 function flatten(node){
  if(node.nodeType===Node.TEXT_NODE)return node.textContent;

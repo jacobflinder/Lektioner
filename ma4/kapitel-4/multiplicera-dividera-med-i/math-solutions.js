@@ -18,19 +18,6 @@ insertSolutions({
     '|iz| = √((−1)² + 2²)','= √(1 + 4)','= √5'],
    'Punkterna har samma avstånd till origo.')
  ),
- 'trapans':solution(
-  step('1 · Konjugera genom att byta imaginärdelens tecken',
-   ['z = 1 + 2i','z̄ = 1 − 2i'],
-   'Den geometriska speglingen sker i realaxeln, inte genom rotation.'),
-  step('2 · Multiplicera med i',
-   ['iz = i(1 + 2i)','= i + 2i²','= i + 2(−1)','= −2 + i']),
-  step('3 · Dividera med i genom att multiplicera med −i',
-   ['1/i = −i','z/i = −i(1 + 2i)','= −i − 2i²','= −i − 2(−1)','= 2 − i']),
-  answer(['z̄ = 1 − 2i','iz = −2 + i','z/i = 2 − i']),
-  step('4 · Varför är påståendet falskt?',
-   [],
-   'Konjugering ger spegling i realaxeln. Multiplikation med i roterar 90° moturs och division med i roterar 90° medurs. Alla tre bevarar avståndet till origo men ger i detta fall tre olika punkter.')
- ),
  'practiceans':solution(
   step('1 · Identifiera startvärden och kvadrant',
    ['z = −3 + 2i','a = −3','b = 2'],

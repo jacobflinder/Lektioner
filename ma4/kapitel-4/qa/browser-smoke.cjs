@@ -31,7 +31,7 @@ async function active(page){
     const resp=await page.goto(ROOT+slug+'/',{waitUntil:'networkidle',timeout:30000});
     assert.equal(resp.status(),200,slug+': HTTP 200');
     const n=await page.locator('.slide').count();
-    assert.ok(n>=7,slug+': steg saknas');
+    assert.ok(n>=6,slug+': steg saknas');
     assert.equal(await page.locator('.slide.active').count(),1,slug+': exakt en aktiv bild');
     assert.ok(await (await active(page)).isVisible(),slug+': aktiv bild synlig');
     assert.ok(await page.locator('body').innerText().then(s=>/NOKflex/.test(s)),slug+': bokarbete saknas');
