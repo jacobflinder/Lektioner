@@ -1,0 +1,90 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const {chromium}=require('playwright');
+
+const root=path.resolve(__dirname,'../..');
+const lessons=[
+ {id:'ratvinkliga-trianglar',levels:['4101–4106','4107–4109','4110–4111'],extras:1},
+ {id:'exakta-trigonometriska-varden',levels:['4113–4115','4116–4118','4119'],extras:1},
+ {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:1}
+];
+const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
+const screenshotDir=path.resolve(process.env.QA_SCREENSHOT_DIR||'mato1c-qa-screenshots/kapitel-4');
+fs.mkdirSync(screenshotDir,{recursive:true});
+let checks=0;
+
+async function inspectLayout(page,id,width,i){
+ const result=await page.evaluate(()=>{
+  const rect=document.querySelector('.slide.active').getBoundingClientRect();
+  const math=[...document.querySelectorAll('.slide.active .math-line math')].filter(el=>{
+   let p=el;
+   while(p){if(p.classList?.contains('answer')&&!p.classList.contains('on'))return false;p=p.parentElement}
+   return true;
+  }).map(el=>({text:el.textContent.slice(0,65),width:el.getBoundingClientRect().width,scroll:el.scrollWidth,client:el.clientWidth,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right}));
+  const a=document.querySelector('#prev').getBoundingClientRect(),b=document.querySelector('#next').getBoundingClientRect();
+  return {viewport:innerWidth,body:document.documentElement.scrollWidth,rect:{left:rect.left,right:rect.right},math,navDelta:Math.abs(a.top-b.top),navHeight:document.querySelector('.controls').getBoundingClientRect().height};
+ });
+ assert(result.body<=result.viewport+2,`${id} ${width}px slide ${i+1}: horizontal page scroll ${JSON.stringify(result)}`);checks++;
+ assert(result.rect.left>=-1&&result.rect.right<=result.viewport+1,`${id} ${width}px slide ${i+1}: card offscreen`);checks++;
+ for(const m of result.math){
+  assert(m.width>0&&m.left>=-1&&m.right<=result.viewport+1,`${id} ${width}px slide ${i+1}: math offscreen ${JSON.stringify(m)}`);checks++;
+  assert(m.scroll<=m.client+2,`${id} ${width}px slide ${i+1}: math needs horizontal scroll ${JSON.stringify(m)}`);checks++;
+ }
+ if(width===390){assert(result.navDelta<3&&result.navHeight<80,`${id}: mobile nav must be single row ${JSON.stringify(result)}`);checks++;}
+}
+
+(async()=>{
+ const browser=await chromium.launch({headless:true,...(process.env.QA_BROWSER_PATH?{executablePath:process.env.QA_BROWSER_PATH}:{})});
+ try{
+  for(const lesson of lessons)for(const [width,height] of sizes){
+   const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
+   const errors=[];page.on('pageerror',error=>errors.push(error.message));
+   const url=process.env.QA_BASE_URL?`${process.env.QA_BASE_URL}/mato1c/kapitel-4/${lesson.id}/`:`file://${path.join(root,'kapitel-4',lesson.id,'index.html')}`;
+   await page.goto(url,{waitUntil:'load'});
+   const count=await page.locator('.slide').count();
+   const maxSlides=lesson.id==='enhetscirkeln'?16:13;
+   assert(count>=10&&count<=maxSlides,`${lesson.id}: expected 10–${maxSlides} slides, got ${count}`);checks++;
+   assert.equal(await page.locator('.slide[data-optional="true"]').count(),lesson.extras);checks++;
+   assert.equal(await page.locator('.slide.active .goal-list > div').count(),0); // goals are visibly at the start, no goal review there
+   assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
+   assert.deepEqual(await page.locator('.levels .book-number').allTextContents(),lesson.levels,`${lesson.id}: full book levels`);checks++;
+   assert.equal(await page.locator('.goal-list > div').count(),3,`${lesson.id}: goal to work mapping`);checks++;
+   for(let i=0;i<count;i++){
+    await page.locator('#jump').selectOption(String(i));
+    assert.equal(await page.locator('.slide.active').count(),1);checks++;
+    const buttons=page.locator('.slide.active [data-reveal]');
+    for(let j=0;j<await buttons.count();j++){
+     const button=buttons.nth(j),id=await button.getAttribute('data-reveal');
+     await button.click();
+     assert(await page.locator('#'+id).isVisible(),`${lesson.id}: hidden answer missing ${id}`);checks++;
+    }
+    await inspectLayout(page,lesson.id,width,i);
+    if(width===390&&[2,4,6,count-2].includes(i))await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
+   }
+   if(lesson.id==='exakta-trigonometriska-varden'){
+    await page.locator('#jump').selectOption('6');
+    const button=page.locator('[data-table-reveal]');await button.click();
+    assert.equal(await page.locator('.math-table.show-answer').count(),1);checks++;
+   }
+   if(lesson.id==='enhetscirkeln'){
+    await page.locator('#jump').selectOption('4');
+    const root=page.locator('[data-circle-demo]');
+    await root.locator('[data-angle="130"]').click();
+    assert.match(await root.locator('[data-coordinates]').innerText(),/-0,64/);checks++;
+    assert.equal(await root.locator('svg circle').count()>1,true);checks++;
+    await page.locator('#jump').selectOption('12');
+    assert((await page.locator('body').textContent()).includes('SOC-37278098'));checks++;
+    const cycle=page.locator('[data-cycle-demo]');await cycle.locator('[data-cycle-angle="400"]').click();
+    assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
+   }
+   if(lesson.id==='enhetscirkeln')assert((await page.locator('body').textContent()).includes('SOC-37277932'));
+   await page.locator('#mode').click();assert.equal(await page.locator('body.classroom').count(),1);checks++;
+   await page.locator('#teacher-toggle').click();assert.equal(await page.locator('body.teacher-open').count(),1);checks++;
+   assert.deepEqual(errors,[],`${lesson.id} ${width}px JavaScript errors`);checks++;
+   await page.close();
+  }
+  console.log(JSON.stringify({result:'PASS',checks,lessons:lessons.length,sizes:sizes.length,screenshots:fs.readdirSync(screenshotDir).length}));
+ } finally {await browser.close()}
+})().catch(error=>{console.error(error);process.exitCode=1});
