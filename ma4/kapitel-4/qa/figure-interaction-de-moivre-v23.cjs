@@ -40,7 +40,7 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
    }));
    const response=await page.goto(url,{waitUntil:'networkidle'});
    ck(response.status()===200,'Sidan laddar');
-   ck((await page.locator('.slide').count())===10,'Nio fokusbilder');
+   ck((await page.locator('.slide').count())===9,'Nio fokusbilder');
    ck(await page.locator('#intro-facit').isHidden(),'Startfacit dolt');
    await save('01-intro-fore');
    await page.locator('[data-reveal="intro-facit"]').click();
