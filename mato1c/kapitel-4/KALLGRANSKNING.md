@@ -23,8 +23,8 @@
 | Hela enhetscirkeln, positiv moturs/negativ medurs; `P=(cos v,sin v)` och `tan v=sin v/cos v` | `enhetscirkeln`, bilder 4–6, 9 | Bevarat, förbättrad interaktiv och matematisk teckenkontroll. |
 | Y-symmetri: sin(180°−v)=sin v, cos(180°−v)=−cos v | `enhetscirkeln`, bild 7 | Bevarat och visat geometriskt innan användning. |
 | X-symmetri: cos(−v)=cos v, sin(−v)=−sin v | `enhetscirkeln`, bild 8 | Bevarat och visat geometriskt innan användning. |
-| `sin v=0,4`: arcsin, 180°−arcsin ⇒ två vinklar | `enhetscirkeln-ekvationer`, bild 4 | Originaltal och originalets fulla lösningsordning. |
-| `cos v=−0,2`: `±arccos`, negativ vinkel +360° | `enhetscirkeln-ekvationer`, bild 5 | Originaltal, originalets fulla lösningsordning. |
+| `sin v=0,4`: arcsin, 180°−arcsin ⇒ två vinklar | `enhetscirkeln`, bild 10; repetition `enhetscirkeln-ekvationer`, bild 4 | Originaltal och originalets fulla lösningsordning **före Socrative 326**, sedan återkallning nästa pass. |
+| `cos v=−0,2`: `±arccos`, negativ vinkel +360° | `enhetscirkeln`, bild 11; repetition `enhetscirkeln-ekvationer`, bild 5 | Originaltal och fulla mellanled **före Socrative 326**, sedan fortsatt arbete nästa pass. |
 | Hela varv, period 360°, n heltal; större vinkelintervall | `enhetscirkeln-ekvationer`, bilder 6–7, frivilligt 10 | Originalets begrepp och notation, interaktiv punkt som kontroll. |
 | Socrative 326 och 329 | `enhetscirkeln` bild 10; `enhetscirkeln-ekvationer` bild 9 | Båda originalaktiviteter behållna utan att hitta på nya koder/quiz. |
 | Bokarbete på tre nivåer och målåterkoppling | Slutbild i samtliga fyra lektioner | Nya bokens korrekta nummer; två **hela** nivåer, inga nya slutuppgifter. |
@@ -39,11 +39,12 @@
 
 ## Didaktiska förbättringar och öppna avvägningar
 
-- Kapitel 4 är delat i **fyra** fokuserade webbsidor. De två första skiljer repetitionsmatematiken från originalfilmens exakta värden. De två sista följer originalets två lektionspass med enhetscirkeln och dess Socrative. Boknivåerna för 4.2 räknas **tillsammans** över båda webbsidorna, aldrig två gånger.
+- Kapitel 4 är delat i **fyra** fokuserade webbsidor. De två första skiljer repetitionsmatematiken från originalfilmens exakta värden. De två sista följer originalets två lektionspass med enhetscirkeln och dess Socrative. Originalets båda ekvationslösningar ligger i första passet **före** Socrative 326 och repeteras i det andra, där perioderna utvecklas. Första passet har därför 12 huvudbilder och 1 frivillig extra; matematikens ordning och fullständiga led prioriteras framför en mekanisk bildgräns. Boknivåerna för 4.2 räknas **tillsammans** över båda webbsidorna, aldrig två gånger.
 - Lektionsmålen är tre konkreta handlingar per sida. Avslutningen pekar tillbaka på befintliga lösningar; inga nya uppgifter på målåterkopplingen. Korrekt matematik står först; frivilliga filmer och extra utmaningar är tydligt skilda.
 - Ekvationerna sin v=0,4 och cos v=−0,2 liksom perioder ligger **utöver de första fyra sidorna i den nya bokens 4.2**, men är dokumenterat centralt i lärarens original. De ingår därför utan att utges för att vara uppgifter i den nya boken. Deras mål stäms av genom de redan visade beräkningarna och originalets Socrative 329.
 - Originalets PDF var från en äldre bok. Den nya uppgiftsnumreringen är fullständigt utbytt. Nytt material hämtar inte formuleringar eller siffervärden från nya bokens lösta exempel.
 - Ingen specialmetod, räkneregel eller extra Socrative har införts som obligatoriskt alternativ till originalets norm.
+- Originalplanens förberedande filmer finns med synligt på första huvudbilden i respektive moment (och kvar som frivilliga stöd i extraslides). Alla fyra pass anger minst **20 minuters sammanhängande bokarbete**.
 
 ## Återstående klassrumsverifiering
 

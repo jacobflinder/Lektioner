@@ -8,6 +8,7 @@
 <section class="slide active" data-title="Start och mål" data-teacher="Originaltranskript 240130: Jacob börjar med cirkelns ekvation och går därifrån till radie 1, hela enhetscirkeln och trigonometriska värden. Bokens 4.2 börjar direkt med enhetscirkeln, men vi bevarar lärarens tidigare steg. Dela vid behov på två lektionstillfällen som i originalet.">
  <div class="kicker">01 · Trigonometri och enhetscirkeln · s. 222–225</div><h1>Varför behöver vi en hel cirkel?</h1>
  <p class="lead">Sinus och cosinus har vi hittills använt i rätvinkliga trianglar. Vi bygger vidare till vinklar i hela koordinatsystemet.</p>
+ <p class="note"><strong>Originalets förberedelse:</strong> Se <a href="https://youtu.be/ObyLiKZ-3RU" target="_blank" rel="noopener noreferrer">Barkers film om enhetscirkeln</a>. Vi följer sedan Jacobs genomgång från cirkelns ekvation till den hela enhetscirkeln.</p>
  <div class="question">En punkt ligger på en cirkel med radien 1 och centrum i origo. Vilket samband måste dess x- och y-koordinater uppfylla?</div>
  <h2>Efter lektionen ska du kunna</h2><div class="grid three"><div class="card green"><strong>1. Beskriva</strong><p>en cirkel och enhetscirkeln med ekvationer och koordinater.</p></div><div class="card green"><strong>2. Bestämma</strong><p>sinus, cosinus och tangens med hjälp av en punkt på enhetscirkeln.</p></div><div class="card green"><strong>3. Förklara</strong><p>hur symmetrier och negativa vinklar påverkar koordinaterna.</p></div></div>
 </section>
@@ -83,10 +84,35 @@
  <div class="question">Hur blir det om vi vrider ytterligare ett helt varv? Ändras punktens koordinater?</div><details><summary>Visa återkopplingen</summary><p>Nej. Efter 360° kommer vi tillbaka till samma punkt. Nästa lektion använder vi detta när vi bestämmer flera vinklar med samma sinus eller cosinus.</p></details>
 </section>
 
-<section class="slide" data-title="Socrative, bokarbete och mål" data-teacher="Original-PDF: Socrative 326 Ma3c Enhetscirkeln SOC-37277932, bokuppgifter i gamla NOKflex 4124–4131. Ny bok p224–225 har nivå1 4203–4208, nivå2 4209–4213, nivå3 4214–4215. Det andra Socrative 329 kommer i fortsättningslektionen. Kräver minst två hela nivåer över 4.2.">
- <div class="kicker">10 · Öva och stäm av</div><h1>Socrative 326 och nya boken</h1>
+<section class="slide" data-title="Originalets ekvation: sin v = 0,4" data-teacher="I originaltranskriptionen 240130 räknar Jacob sin v=0,4 innan Socrative 326. Han använder arcsin till den första vinkeln och speglingen 180°−v till den andra. Lösningen återkommer som repetition i nästa webblektion.">
+ <div class="kicker">10 · Använd cirkelns y-symmetri</div><h1>Två vinklar när sin v = 0,4</h1>
+ <p>Bestäm <strong>alla vinklar 0° &lt; v &lt; 360°</strong> för vilka <span class="math-inline">sin v = 0,4</span>. Sinus är punktens y-koordinat: de två punkterna ligger på samma höjd.</p>
+ <p>Vi använder invers sinus från repetitionen och symmetrin <span class="math-inline">sin(180° − v) = sin v</span> som vi just härlett.</p>
+ <div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>sin</mi><mi>v</mi><mo>=</mo><mn>0,4</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi>arcsin</mi><mo>(</mo><mn>0,4</mn><mo>)</mo><mo>≈</mo><mn>23,58°</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>23,58°</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>23,58°</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>156,42°</mn></mrow></math></div></div>
+ <div class="question">Markera båda vinklarna på enhetscirkeln. Varför ger de samma sinusvärde?</div>
+</section>
+
+<section class="slide" data-title="Originalets ekvation: cos v = −0,2" data-teacher="Originaltranskript 240130: cos v=−0,2 löses först som v≈±arccos(−0,2). Den negativa vinkeln skrivs sedan om till intervallet 0–360 genom att lägga till 360°. Bevara just dessa led.">
+ <div class="kicker">11 · Använd cirkelns x-symmetri</div><h1>Två vinklar när cos v = −0,2</h1>
+ <p>Bestäm <strong>alla vinklar 0° &lt; v &lt; 360°</strong> för vilka <span class="math-inline">cos v = −0,2</span>. Nu har punkterna samma negativa x-koordinat.</p>
+ <p>Vi använder invers cosinus och speglingen <span class="math-inline">cos(−v) = cos v</span>. Den negativa vinkeln flyttas ett helt varv för att hamna i intervallet.</p>
+ <div class="eq-chain"><div class="math-line"><math display="block"><mrow><mi>cos</mi><mi>v</mi><mo>=</mo><mo>−</mo><mn>0,2</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><mi>v</mi><mo>=</mo><mo>±</mo><mi>arccos</mi><mo>(</mo><mo>−</mo><mn>0,2</mn><mo>)</mo><mo>≈</mo><mo>±</mo><mn>101,54°</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>101,54°</mn></mrow></math></div>
+ <div class="math-line"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mo>−</mo><mn>101,54°</mn><mo>+</mo><mn>360°</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>101,54°</mn></mrow></math></div>
+ <div class="math-line good"><math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>≈</mo><mn>258,46°</mn></mrow></math></div></div>
+ <div class="question">Markera de båda punkterna. Varför ligger de på var sin sida om x-axeln?</div>
+</section>
+
+<section class="slide" data-title="Socrative, bokarbete och mål" data-teacher="Original-PDF: Socrative 326 Ma3c Enhetscirkeln SOC-37277932 efter Jacobs två tavlekvationer, bokuppgifter i gamla NOKflex 4124–4131. Ny bok p224–225 har nivå1 4203–4208, nivå2 4209–4213, nivå3 4214–4215. Det andra Socrative 329 kommer i fortsättningslektionen. Kräver minst två hela nivåer över 4.2.">
+ <div class="kicker">12 · Öva och stäm av</div><h1>Socrative 326 och nya boken</h1>
  <div class="card green"><strong>Originalaktivitet:</strong> Socrative <strong>326 · Ma3c Enhetscirkeln</strong>, kod <strong>SOC-37277932</strong>. Gör den enligt lärarens instruktioner.</div>
- <p><strong>Boken s. 224–225.</strong> Under 4.2 ska du göra <strong>alla uppgifter på minst två hela nivåer</strong>. Fortsätt i nästa lektion där du slutade.</p>
+ <p><strong>Boken s. 224–225.</strong> Arbeta sammanhängande i minst <strong>20 minuter</strong>. Under 4.2 ska du göra <strong>alla uppgifter på minst två hela nivåer</strong>, inklusive deluppgifter. Fortsätt i nästa lektion där du slutade.</p>
  <div class="levels"><div class="card green"><h3>Nivå 1</h3><p>s. 224</p><div class="book-number">4203–4208</div></div><div class="card"><h3>Nivå 2</h3><p>s. 225</p><div class="book-number">4209–4213</div></div><div class="card amber"><h3>Nivå 3</h3><p>s. 225</p><div class="book-number">4214–4215</div></div></div>
  <h2>Stäm av de tre målen</h2><p class="note">Titta i dina påbörjade boklösningar. Ingen ny uppgift behövs här.</p>
  <div class="goal-list"><div><strong>1. Beskriva cirkeln</strong><small>4203–4204: markerar du vinklar och punkter med rätt riktning?</small></div><div><strong>2. Bestämma sinus och cosinus</strong><small>4205–4207 och 4212: tolkar du koordinater och tecken rätt?</small></div><div><strong>3. Förklara symmetrierna</strong><small>4208–4209, 4215: kan du motivera med punkternas lägen?</small></div></div>
