@@ -87,3 +87,10 @@ jobs:
           name: mato1c-browser-quality-evidence
           path: mato1c-qa-screenshots/
           retention-days: 14
+      - name: Upload chapter 4 mobile teaching evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ma3c-chapter4-mobile-review
+          path: mato1c-qa-screenshots/kapitel-4/
+          retention-days: 7

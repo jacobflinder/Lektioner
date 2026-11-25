@@ -33,9 +33,18 @@ for (const lesson of lessons) {
 }
 
 const exact = content['exakta-trigonometriska-varden'];
+const right = content['ratvinkliga-trianglar'];
+check((right.match(/data-right-triangle\b/g)||[]).length===6,'Rätvinkliga: definitionsbild och alla fyra grundfallen har triangel på samma bild');
+check(right.includes('data-angle="36" data-adjacent="9,0 cm" data-opposite="x"'),'Rätvinkliga: korrekt figur till tangensuträkning');
+check(right.includes('data-angle="53.13" data-angle-label="v"'),'Rätvinkliga: korrekt figur till arcusexemplet');
 check(exact.includes('pyt-45')&&exact.includes('pyt-60'), 'Båda Pythagorashärledningarna bevarade');
 check(exact.includes('1</mn><mo>·</mo><msqrt>'), 'Rotbråkens kritiska förlängningsled finns');
+check((exact.match(/data-right-triangle\b/g)||[]).length===4,'Exakta värden: figurer bredvid 45°, 30°/60°, tangens och egen tillämpning');
+check(exact.includes('data-complement="true"'),'Exakta värden: båda komplementvinklarna visas i samma triangel');
 const circle = content.enhetscirkeln;
+check((circle.match(/data-static-circle\b/g)||[]).length===4,'Enhetscirkeln: cirkel tillsammans med ekvation, koordinater, punkt och hela varv');
+check((circle.match(/data-equation-circle=/g)||[]).length===4,'Enhetscirkeln: två ursprungliga ekvationer och periodiska lösningar har cirkel bredvid algebra');
+for(const [name,html] of Object.entries(content))check(!html.includes('class="math-inline"'),`${name}: allt synligt formelstoff i MathML`);
 const sinIndex = circle.indexOf('data-title="Originalets ekvation: sin v = 0,4"');
 const cosIndex = circle.indexOf('data-title="Originalets ekvation: cos v = −0,2"');
 const socIndex = circle.indexOf('data-title="Socrative 326 och bokarbete"');

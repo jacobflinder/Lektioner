@@ -84,6 +84,21 @@ function drawCircle(svg,angles,{symmetry=false}={}){
  });
  if(symmetry){const [x0,y0]=xy(angles[0]),[x1,y1]=xy(angles[1]);add(svg,'path',{d:`M ${x0} ${y0} Q ${cx} ${Math.min(y0,y1)-28} ${x1} ${y1}`,fill:'none',stroke:'#d5a442','stroke-dasharray':'5 7','stroke-width':2});}
 }
+document.querySelectorAll('[data-right-triangle]').forEach(root=>{
+ const svg=root.querySelector('svg'),angle=Number(root.dataset.angle),rad=angle*Math.PI/180;
+ const baseline=290,width=Math.min(355,235/Math.tan(rad)),ax=Math.max(58,(520-width)/2-25),bx=ax+width,top=baseline-width*Math.tan(rad);
+ const adjacent=root.dataset.adjacent||'',opposite=root.dataset.opposite||'',hypotenuse=root.dataset.hypotenuse||'';
+ svg.replaceChildren();svg.setAttribute('viewBox','0 0 520 335');
+ add(svg,'path',{d:`M ${ax} ${baseline} L ${bx} ${baseline} L ${bx} ${top} Z`,fill:'none',stroke:'#17384b','stroke-width':3.2,'stroke-linejoin':'round'});
+ add(svg,'path',{d:`M ${bx-20} ${baseline} V ${baseline-20} H ${bx}`,fill:'none',stroke:'#17384b','stroke-width':2.5});
+ const radius=43;add(svg,'path',{d:`M ${ax+radius} ${baseline} A ${radius} ${radius} 0 0 0 ${ax+radius*Math.cos(rad)} ${baseline-radius*Math.sin(rad)}`,fill:'none',stroke:'#087d70','stroke-width':3});
+ add(svg,'text',{x:ax+52,y:baseline-11,fill:'#08766b','font-weight':700},root.dataset.angleLabel||`${angle}°`);
+ if(adjacent)add(svg,'text',{x:(ax+bx)/2-27,y:baseline+25},adjacent);
+ if(opposite)add(svg,'text',{x:bx+11,y:(baseline+top)/2},opposite);
+ if(hypotenuse)add(svg,'text',{x:(ax+bx)/2-48,y:(baseline+top)/2-20},hypotenuse);
+ if(root.dataset.complement==='true')add(svg,'text',{x:bx-45,y:top+43,fill:'#08766b'},`${90-angle}°`);
+});
+document.querySelectorAll('[data-static-circle]').forEach(root=>drawCircle(root.querySelector('svg'),[Number(root.dataset.staticCircle)]));
 document.querySelectorAll('[data-circle-demo]').forEach(root=>{
  const svg=root.querySelector('svg');const range=root.querySelector('input[type=range]');const readout=root.querySelector('output');
  const coord=root.querySelector('[data-coordinates]');
@@ -101,6 +116,34 @@ document.querySelectorAll('[data-circle-demo]').forEach(root=>{
 document.querySelectorAll('[data-symmetry]').forEach(root=>{
  const svg=root.querySelector('svg');const base=Number(root.dataset.base||35);const kind=root.dataset.symmetry;
  drawCircle(svg,[base,kind==='vertical'?180-base:-base],{symmetry:true});
+});
+document.querySelectorAll('[data-equation-circle]').forEach(root=>{
+ const svg=root.querySelector('svg'),kind=root.dataset.equationCircle,first=Number(root.dataset.first),second=Number(root.dataset.second);
+ const value=Number(root.dataset.value),cx=268,cy=219,r=163;
+ const show=(both)=>{
+  drawCircle(svg,both?[first,second]:[first]);
+  if(both){
+   const rad=v=>v*Math.PI/180;
+   const xy=v=>[cx+r*Math.cos(rad(v)),cy-r*Math.sin(rad(v))];
+   const [x1,y1]=xy(first),[x2,y2]=xy(second);
+   add(svg,'line',{x1,y1,x2,y2,stroke:'#d79336','stroke-width':3,'stroke-dasharray':'7 5'});
+  }
+  add(svg,'text',{x:kind==='sin'?cx+184:cx+r*value-36,y:kind==='sin'?cy-r*value-28:cy+184,fill:'#9a631d','font-weight':700},`${kind==='sin'?'y':'x'} = ${value.toString().replace('.',',').replace('-', '−')}`);
+  root.querySelectorAll('[data-circle-step]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.circleStep===(both?'both':'first'))));
+  const explanation=root.querySelector('[data-equation-explanation]');
+  if(explanation)explanation.textContent=both?'Två punkter har samma '+(kind==='sin'?'y-koordinat (sinus)':'x-koordinat (cosinus)')+'.': 'En första vinkel kommer från '+(kind==='sin'?'arcsin':'arccos')+'. Var ligger den speglade punkten?';
+ };
+ root.querySelectorAll('[data-circle-step]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.circleStep==='both')));
+ show(true);
+});
+document.querySelectorAll('[data-case-choices]').forEach(root=>{
+ const choose=id=>{
+  root.querySelectorAll('[data-case-select]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.caseSelect===id)));
+  root.querySelectorAll('[data-case-panel]').forEach(panel=>panel.classList.toggle('on',panel.dataset.casePanel===id));
+  root.querySelectorAll('[data-case-figure]').forEach(figure=>figure.classList.toggle('is-selected',figure.dataset.caseFigure===id));
+ };
+ root.querySelectorAll('[data-case-select]').forEach(button=>button.addEventListener('click',()=>choose(button.dataset.caseSelect)));
+ choose(root.dataset.defaultCase||root.querySelector('[data-case-select]')?.dataset.caseSelect);
 });
 document.querySelectorAll('[data-cycle-demo]').forEach(root=>{
  const svg=root.querySelector('svg'),text=root.querySelector('[data-cycle-result]');

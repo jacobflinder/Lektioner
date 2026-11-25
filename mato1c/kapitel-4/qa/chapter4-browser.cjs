@@ -48,7 +48,8 @@ async function inspectLayout(page,id,width,i){
    await page.goto(url,{waitUntil:'load'});
    const count=await page.locator('.slide').count();
    const maxSlides=lesson.id==='enhetscirkeln'?16:13;
-   assert(count>=9&&count<=maxSlides,`${lesson.id}: expected 9–${maxSlides} slides, got ${count}`);checks++;
+   const minSlides=lesson.id==='sinussatsen'?8:9;
+   assert(count>=minSlides&&count<=maxSlides,`${lesson.id}: expected ${minSlides}–${maxSlides} slides, got ${count}`);checks++;
    assert.equal(await page.locator('.slide[data-optional="true"]').count(),lesson.extras);checks++;
    assert.equal(await page.locator('.slide.active .goal-list > div').count(),0); // goals are visibly at the start, no goal review there
    assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
@@ -64,14 +65,38 @@ async function inspectLayout(page,id,width,i){
      assert(await page.locator('#'+id).isVisible(),`${lesson.id}: hidden answer missing ${id}`);checks++;
     }
     await inspectLayout(page,lesson.id,width,i);
-    if(width===390&&[2,4,6,count-2].includes(i))await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
+    if(width===390)await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
    }
    if(lesson.id==='exakta-trigonometriska-varden'){
     await page.locator('#jump').selectOption('6');
     const button=page.locator('[data-table-reveal]');await button.click();
     assert.equal(await page.locator('.math-table.show-answer').count(),1);checks++;
+    for(const slide of ['2','4','5','8']){
+     await page.locator('#jump').selectOption(slide);
+     assert((await page.locator('.slide.active [data-right-triangle] svg path').count())>=3,`Exakta värden bild ${Number(slide)+1}: ritad triangel`);checks++;
+    }
+   }
+   if(lesson.id==='ratvinkliga-trianglar'){
+    for(const slide of ['2','3','4','5','6','7']){
+     await page.locator('#jump').selectOption(slide);
+     const fig=page.locator('.slide.active [data-right-triangle] svg');
+     assert((await fig.locator('path').count())>=3,`Rätvinkliga bild ${Number(slide)+1}: figur bredvid matematiken`);checks++;
+     assert((await fig.locator('text').count())>=3,`Rätvinkliga bild ${Number(slide)+1}: märkta sidor`);checks++;
+    }
    }
    if(lesson.id==='enhetscirkeln'){
+    for(const slide of ['2','3','5','8']){
+     await page.locator('#jump').selectOption(slide);
+     assert((await page.locator('.slide.active [data-static-circle] svg circle').count())>=2,`Enhetscirkeln bild ${Number(slide)+1}: visad enhetscirkel`);checks++;
+    }
+    for(const slide of ['9','10']){
+     await page.locator('#jump').selectOption(slide);
+     const diagram=page.locator('.slide.active [data-equation-circle]');
+     await diagram.locator('[data-circle-step="first"]').click();
+     assert.equal(await diagram.locator('svg circle').count(),2);checks++;
+     await diagram.locator('[data-circle-step="both"]').click();
+     assert.equal(await diagram.locator('svg circle').count(),3);checks++;
+    }
     await page.locator('#jump').selectOption('4');
     const root=page.locator('[data-circle-demo]');
     await root.locator('[data-angle="130"]').click();
@@ -83,6 +108,16 @@ async function inspectLayout(page,id,width,i){
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
    }
    if(lesson.id==='trigonometriska-ekvationer'){
+    for(const [slide,coordinate] of [['3','0,35'],['5','−0,6']]){
+     await page.locator('#jump').selectOption(slide);
+     const figure=page.locator('.slide.active [data-equation-circle]');
+     assert.equal(await figure.count(),1);checks++;
+     await figure.locator('[data-circle-step="first"]').click();
+     assert.equal(await figure.locator('svg circle').count(),2);checks++;
+     await figure.locator('[data-circle-step="both"]').click();
+     assert.equal(await figure.locator('svg circle').count(),3);checks++;
+     assert((await figure.locator('svg').textContent()).includes(coordinate));checks++;
+    }
     await page.locator('#jump').selectOption('10');
     const circle=page.locator('[data-circle-demo]');await circle.locator('[data-angle="150"]').click();
     assert.match(await circle.locator('[data-coordinates]').innerText(),/0,50/);checks++;
@@ -92,10 +127,25 @@ async function inspectLayout(page,id,width,i){
     await page.locator('#jump').selectOption('4');
     const answer=page.locator('#area-trubbig');
     assert(await answer.isVisible());checks++;
+    await page.locator('#jump').selectOption('6');
+    const cases=page.locator('.slide.active [data-case-choices]');
+    await cases.locator('[data-case-select="obtuse"]').click();
+    assert(await cases.locator('[data-case-panel="obtuse"]').isVisible());checks++;
+    assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
    }
    if(lesson.id==='sinussatsen'){
     assert((await page.locator('body').textContent()).includes('SOC-37278423'));checks++;
     assert.equal(await page.locator('.book-number').count(),2);checks++;
+    await page.locator('#jump').selectOption('5');
+    const cases=page.locator('.slide.active [data-case-choices]');
+    await cases.locator('[data-case-select="pair-b"]').click();
+    assert(await cases.locator('[data-case-panel="pair-b"]').isVisible());checks++;
+    assert.equal(await cases.locator('[data-case-figure="pair-b"].is-selected').count(),1);checks++;
+    assert((await cases.locator('[data-case-panel="pair-b"]').textContent()).includes('73°'));checks++;
+    const solution=page.locator('#sinus-sidpar');
+    if(!(await solution.isVisible()))await page.locator('.slide.active [data-reveal="sinus-sidpar"]').click();
+    assert(await solution.isVisible());checks++;
+    assert((await solution.textContent()).includes('7,1'));checks++;
    }
    if(lesson.id==='enhetscirkeln')assert((await page.locator('body').textContent()).includes('SOC-37277932'));
    await page.locator('#mode').click();assert.equal(await page.locator('body.classroom').count(),1);checks++;
