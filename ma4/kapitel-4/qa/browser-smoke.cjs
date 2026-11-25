@@ -155,7 +155,7 @@ async function active(page){
       assert.ok(await page.locator('#r13a math').count()>5,'Andragrad: utcheckning A har satta ekvationsled');
       assert.ok(await page.locator('#r13a msqrt').count()>0,'Andragrad: utcheckning A visar riktig rot');
       await page.locator('button[data-reveal="r13b"]').click();
-      assert.ok(await page.locator('#r13b math').count()>8,'Andragrad: utcheckning B har matematiskt uppställd polär lösning');
+      assert.ok(await page.locator('#r13b math').count()>8,'Andragrad: utcheckning B har fullständigt uppställd ansats med real- och imaginärdel');
       await page.screenshot({path:OUT+'/andragrad-math-exit-desktop.png',fullPage:true});
       await page.locator('#jump').selectOption('8');
       await page.locator('button[data-reveal="r9"]').click();

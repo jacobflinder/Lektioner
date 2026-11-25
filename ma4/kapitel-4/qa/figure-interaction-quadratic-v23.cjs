@@ -29,7 +29,7 @@ const visit=async(page,n)=>{await page.selectOption('#jump',String(n));equal(awa
 const click=async(page,selector)=>{await page.locator(selector).click();};
 const photo=async(page,name)=>{await page.screenshot({path:dir+'/quadratic-v23-'+name+'.png',fullPage:true});images++};
 async function run(){
- const browser=await chromium.launch({headless:true});
+ const browser=await chromium.launch({headless:true,...(process.env.MA4_CHROMIUM_PATH?{executablePath:process.env.MA4_CHROMIUM_PATH}:{})});
  try{
   for(const size of sizes){
    const page=await browser.newPage({viewport:{width:size.width,height:size.height},deviceScaleFactor:1});
@@ -39,12 +39,23 @@ async function run(){
    const result=await page.goto(target,{waitUntil:'networkidle'});
    equal(result.status(),200,'Sidan laddad '+size.name);
    equal(await page.locator('.slide').count(),14,'Samtliga 14 elevbilder '+size.name);
-   equal(await page.locator('.slide[data-optional="true"]').count(),3,'Filmens ansats är huvudmetod; PDF:ens metodjämförelse, felanalys och fördjupning är frivilliga');
+   equal(await page.locator('.slide[data-optional="true"]').count(),6,'Polär repetition samt metodjämförelse, felanalys och fördjupning är frivilliga');
+   equal(await page.locator('.slide:not([data-optional="true"])').count(),8,'Åtta huvudbilder prioriterar filmens pq-formel och ansats');
    for(let n=0;n<14;n++){
     await visit(page,n);
     const dims=await page.evaluate(()=>({actual:document.documentElement.scrollWidth,width:innerWidth}));
     ok(dims.actual<=dims.width+3,'Ingen horisontell sidbeskärning '+size.name+' bild '+(n+1));
    }
+   await visit(page,3);
+   await click(page,'#next');
+   equal(await page.locator('#jump').inputValue(),'8','Ordinarie framåt-navigering går från begreppsbild 4 till metodval 9');
+   await click(page,'#prev');
+   equal(await page.locator('#jump').inputValue(),'3','Ordinarie bakåt-navigering hoppar över polär repetition');
+   await click(page,'#quadraticPolar');
+   equal(await page.locator('#jump').inputValue(),'4','Frivillig polär repetition går att öppna separat');
+   equal(await page.locator('#progress').innerText(),'Frivillig aktivitet','Repetitionen markeras tydligt frivillig');
+   await click(page,'#next');
+   equal(await page.locator('#jump').inputValue(),'8','Frivillig repetition återgår till filmens huvudflöde');
    // Skillnaden konjugat/motsatt har samma origo, samma skala och korrekt transformationsbild.
    await visit(page,1);
    ok(await page.locator('#teacher-normalize').isVisible(),'Normalisering före pq finns i huvudgenomgången');
@@ -157,6 +168,12 @@ async function run(){
    equal(await variant.locator('input').inputValue(),'','Inmatning rensas vid ny omgång');
    await visit(page,13);
    for(const id of ['r13a','r13b','r13c'])ok(await page.locator('#'+id).isHidden(),'Exitfacit initialt dolt');
+   await click(page,'[data-reveal="r13b"]');
+   const exitLabels=await page.locator('#r13b math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
+   for(const expression of ['z = a + bi','a² − b² = 0','2ab = 18','a = ±3','z₁ = 3 + 3i','z₂ = −3 − 3i']){
+    ok(exitLabels.some(label=>label&&label.replaceAll(' ','')===expression.replaceAll(' ','')),'Slutkontroll använder filmens ansats: '+expression);
+   }
+   ok(!(await page.locator('#r13b').innerText()).includes('cos'),'Ingen obligatorisk polär metod i slutkontrollen');
    await photo(page,size.name+'-14-exit');
    equal(errors,[],'Inga JS-/lokala resursfel '+size.name);
    await page.close();

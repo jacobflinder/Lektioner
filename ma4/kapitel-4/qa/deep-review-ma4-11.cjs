@@ -116,7 +116,7 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   for(const x of ['2·5π/4 = 5π/2 = π/2 + 2π','= 4 + 8i − 4 = 8i','= 4 − 8i − 4 = −8i'])await formula('#squareText',x);
   await shot('06-desktop');
   await page.locator('#squareBack').click();await hidden('squareTarget');await page.locator('#squareReset').click();for(const id of ['rootA','rootB','squareTarget','squareText'])await hidden(id);
-  // 07: polära huvudmetoden och digital uppföljning
+  // 07: frivillig repetition av tidigare polär potensekvationsmetod och digital uppföljning
   await go(6);for(const id of ['r7a','r7b','r7c','r7d'])await hidden(id);
   assert.ok(await page.locator('[data-reveal="r7c"]').isDisabled(),'Steg 3 låst före steg 2');
   for(const id of ['r7a','r7b','r7c','r7d'])await reveal(id);
@@ -161,11 +161,11 @@ for(const z of [c(2,3),c(2,-3)])check(z,[[c(-4),1],[c(13),0]],'13 bygg ekvation'
   await go(12);await reveal('r15');
   for(const x of ['(z − 2)² − (3i)² = 0','z² − 4z + 13 = 0'])await formula('#r15',x);
   await shot('13-desktop');
-  // 14: utcheckning, full pq-insättning, k=0/1 och båda teckenfallen
+  // 14: utcheckning, full pq-insättning och båda fallen med ansats z=a+bi
   await go(13);for(const id of ['r13a','r13b','r13c'])await hidden(id);
   for(const id of ['r13a','r13b','r13c'])await reveal(id);
   for(const x of ['p = −2i','q = 8','z = −(−2i)/2 ± √(((−2i)/2)² − 8)','z₁ = i + 3i = 4i','z₂ = i − 3i = −2i'])await formula('#r13a',x);
-  for(const x of ['r = √18 = √(9·2) = 3√2','v = (π/2 + 2πk)/2','z₀ = 3 + 3i','z₁ = −3 − 3i'])await formula('#r13b',x);
+  for(const x of ['z = a + bi','a² − b² = 0','2ab = 18','ab = 9','a² = −9','a = ±3','z₁ = 3 + 3i','z₂ = −3 − 3i'])await formula('#r13b',x);
   await formula('#r13c','(3 − 3i)² = 9 − 18i + 9i² = −18i');
   await shot('14-desktop');
   // Projektor och lärarstöd
