@@ -45,8 +45,8 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
  };
  try{
   const response=await page.goto(URL,{waitUntil:'networkidle'});assert.equal(response.status(),200);
-  assert.equal(await page.locator('.slide').count(),15,'Alla 15 originalbilderna');
-  assert.equal(await page.locator('#jump option').count(),15,'Hoppmenyn');
+  assert.equal(await page.locator('.slide').count(),14,'Fjorton fokusbilder');
+  assert.equal(await page.locator('#jump option').count(),14,'Hoppmenyn');
   // 01–03: mål, förkunskaper och frivillig kvadrantdiagnos.
   await go(0);assert.ok((await page.locator('.slide.active').innerText()).includes('Efter lektionen'));await pic('01-desktop');
   await go(1);await reveal('recall');assert.ok((await page.locator('#recall').innerText()).toLowerCase().includes('realdelen'));await pic('02-desktop');
@@ -82,21 +82,20 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   // 11: originalets bokmoment och huvudväg måste finnas kvar.
   await go(10);const nok=await page.locator('.slide.active').innerText();
   assert.ok(nok.includes('NOKflex')&&nok.includes('4329–4338')&&nok.includes('tre av fem nivåer'));await pic('11-desktop');
-  await page.locator('#next').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),14,'Frivilliga bilder hoppas över på huvudvägen');
-  // 12/13: frivillig felanalys samt reella och imaginära delar bevarade.
-  await go(11);await reveal('fav');await findMath('#fav','e^(−iπ) = −1');await pic('12-desktop');
-  await go(12);await reveal('transfer');
+  await page.locator('#next').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),13,'Frivilliga bilder hoppas över på huvudvägen');
+  // Frivillig fördjupning ligger utanför huvudvägen.
+  await go(11);await reveal('transfer');
   for(const x of ['e^(2−3i) = e² · e^(−3i)','cos(−3) = cos 3','sin(−3) = −sin 3','z = e² cos 3 − i e² sin 3'])await findMath('#transfer',x);
   assert.ok((await page.locator('#transfer').innerText()).includes('Re')&&(await page.locator('#transfer').innerText()).includes('Im'));
   await pic('13-desktop');
   // 14: fyra kontrollerbara serieövergångar, korrekt parentes för (iv)^n.
-  await go(13);assert.equal(await page.locator('[data-series-step]:visible').count(),1);
+  await go(12);assert.equal(await page.locator('[data-series-step]:visible').count(),1);
   for(let j=1;j<=4;j++){await page.locator('#series-next').click();assert.equal(await page.locator('[data-series-step]:visible').count(),1);assert.ok(await page.locator('[data-series-step="'+j+'"]').isVisible());await pic('14-serie-'+j);}
   assert.equal(await page.locator('[data-series-step="2"] .series-powers .ma4-equation').count(),6,'Sex separata potenser i');
   assert.ok(await page.locator('[data-series-step="1"] msup > mrow > mo').count()>0,'Synliga parenteser runt iv');
   await page.locator('#series-reset').click();assert.ok(await page.locator('[data-series-step="0"]').isVisible());await pic('14-desktop');
   // 15: tre dolda, fullständiga återkopplingar, vart och ett av målen.
-  await go(14);for(const id of ['e-exit1','e-exit2','e-exit3'])assert.ok(await page.locator('#'+id).isHidden());
+  await go(13);for(const id of ['e-exit1','e-exit2','e-exit3'])assert.ok(await page.locator('#'+id).isHidden());
   assert.equal(await page.locator('.slide.active .math-givens .math').count(),2);
   await gap('.slide.active .math-givens > .math');
   for(const id of ['e-exit1','e-exit2','e-exit3'])await reveal(id);
@@ -109,18 +108,18 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   await page.locator('#teacher-toggle').click();assert.ok(await page.locator('.teacher-note').isVisible());await pic('15-projektor');
   await page.locator('#mode').click();
   await page.setViewportSize({width:390,height:844});
-  for(let i=0;i<15;i++){
+  for(let i=0;i<14;i++){
    await go(i);
    const dims=await page.evaluate(()=>({width:document.documentElement.scrollWidth,screen:innerWidth}));
    assert.ok(dims.width<=dims.screen+3,'Sidscroll vid mobilbild '+(i+1)+': '+JSON.stringify(dims));
-   if(i===6||i===14)await gap('.slide.active .math-givens > .math');
+   if(i===6||i===13)await gap('.slide.active .math-givens > .math');
    await pic('mobil-'+String(i+1).padStart(2,'0'));
   }
   await go(10);await page.locator('#eulerExtra').click();
   assert.equal(await page.locator('.slide.active').getAttribute('id'),'euler-option-transfer');
-  await page.locator('.euler-skip:visible').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),14,'Hoppa över frivillig fördjupning till den sista utcheckningsbilden');
+  await page.locator('.euler-skip:visible').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),13,'Hoppa över frivillig fördjupning till den sista utcheckningsbilden');
   await go(3);await page.locator('#euler-open-notation').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'euler-notation-help');
   assert.deepEqual(errors,[],'Ingen JavaScript-krasch eller missad resurs');
-  console.log('PASS Ma4 10/41: 15/15 bilder, exakta beräkningar, dolda facit, 390px, projektor, 4 seriesteg och bilder');
+  console.log('PASS Ma4 10/41: 14/14 fokusbilder, exakta beräkningar, dolda facit, 390px, projektor, 4 seriesteg och bilder');
  }catch(e){console.error('FAIL Ma4 10: '+(e.stack||e));process.exitCode=1;await pic('FAIL').catch(()=>{});}finally{await page.close();await browser.close();}
 })();

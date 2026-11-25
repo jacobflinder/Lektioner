@@ -9,12 +9,6 @@ insertSolutions({
   step('3 · Visa varför nämnaren blir reell',['(1 − 3i)(1 + 3i)','= 1 + 3i − 3i − 9i²','= 1 − 9(−1)','= 1 + 9 = 10']),
   step('Nästa fråga',[],'Hur ser den nya täljaren ut när du också multiplicerar med 1 + 3i?')
  ),
- 'd-error':solution(
-  step('1 · Skriv alla fyra produkter',['(2 + i)(3 − 2i)','= 2·3 + 2(−2i) + i·3 + i(−2i)','= 6 − 4i + 3i − 2i²']),
-  step('2 · Samla termerna och sätt in i² = −1',['= 6 − i − 2i²','= 6 − i − 2(−1)','= 6 − i + 2']),
-  answer(['(2 + i)(3 − 2i) = 8 − i']),
-  step('Förklara felet',[],'Det felaktiga exemplet lämnade bort båda korsprodukterna −4i och +3i. De tar inte ut varandra.')
- ),
  'd-selfans':solution(
   step('1 · Identifiera nämnaren och dess konjugat',['u = 1 + i','ū = 1 − i','(2 + i)/(1 + i) = ((2 + i)(1 − i))/((1 + i)(1 − i))']),
   step('2 · Utveckla täljaren',['(2 + i)(1 − i)','= 2 − 2i + i − i²','= 2 − i − (−1)','= 3 − i']),

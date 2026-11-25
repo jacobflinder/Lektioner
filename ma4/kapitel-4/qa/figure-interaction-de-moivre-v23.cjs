@@ -1,5 +1,5 @@
 /* Figur- och interaktionsgranskning 21/41: de Moivres formel, krav v2.3.
- * Samtliga nio exakta potensfall, två felanalysfigurer, semantic MathML,
+ * Samtliga nio exakta potensfall, fullständiga lösningar, semantisk MathML,
  * 7C-stöd och reset vid 390/768/1280/1920 pixlar.
  * Screenshots är granskningsunderlag – PASS ensamt ersätter inte bildinspektion.
  */
@@ -40,7 +40,7 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
    }));
    const response=await page.goto(url,{waitUntil:'networkidle'});
    ck(response.status()===200,'Sidan laddar');
-   ck((await page.locator('.slide').count())===10,'Tio originalbilder');
+   ck((await page.locator('.slide').count())===10,'Nio fokusbilder');
    ck(await page.locator('#intro-facit').isHidden(),'Startfacit dolt');
    await save('01-intro-fore');
    await page.locator('[data-reveal="intro-facit"]').click();
@@ -127,29 +127,6 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
    ck((await page.locator('#radians .math-big math').getAttribute('aria-label')).startsWith('w = ('),
       'Radianexemplets w betecknar redan fjärde potensen');
    await go(6);
-   ck((await page.locator('#mistakes .task math').count())>=3,'Felanalysens givna uttryck och fråga semantiska');
-   const before=page.locator('#moivre-error-before line[stroke="#bc633a"]');
-   const after=page.locator('#moivre-error-after line[stroke="#bc633a"]');
-   const beforeLength=await before.evaluate(e=>Math.hypot(+e.getAttribute('x2')-e.getAttribute('x1'),+e.getAttribute('y2')-e.getAttribute('y1')));
-   const afterLength=await after.evaluate(e=>Math.hypot(+e.getAttribute('x2')-e.getAttribute('x1'),+e.getAttribute('y2')-e.getAttribute('y1')));
-   close(beforeLength,6*36.4);close(afterLength,8*36.4);checks+=2;
-   close(afterLength/beforeLength,4/3);checks++;
-   const labelHeight=await page.locator('#moivre-error-before text').filter({hasText:'z³ (fel)'}).evaluate(e=>e.getBoundingClientRect().height);
-   ck(labelHeight>=10,'Felanalysens punktetikett måste vara faktiskt läsbar: '+labelHeight);
-   ck(await page.locator('#moivre-error-correction').isHidden(),'Rättad figur avslöjas inte före elevens svar');
-   await save('07-fel-fore');
-   await page.locator('[data-reveal="errorans"]').click();
-   ck(await page.locator('#moivre-error-correction').isVisible(),'Rättad figur visas när facit öppnas');
-   ck((await page.locator('#errorans .ma4-final').count())===2,'Båda exakta slutlösningarna bevarade');
-   ck((await page.locator('#moivre-error-correction math').count())>=1,'Rättelsens uttryck semantiskt');
-   ck((await page.locator('#errorans .ma4-final').first().locator('xpath=following-sibling::*[1]').getAttribute('id'))==='moivre-error-correction',
-      'Rättelsefiguren ligger direkt intill sitt mellanled');
-   await save('07-fel-efter');
-   await page.locator('[data-reveal="errorans"]').click();
-   ck(await page.locator('#moivre-error-correction').isHidden(),'Dölj facit döljer korrekt figur');
-   await page.locator('[data-reveal="errorans"]').click();
-   await go(7);
-   ck(await page.locator('#moivre-error-correction').isHidden(),'Navigation återställer felanalysen');
    ck((await page.locator('#nok').innerText()).includes('4301–4314'),'NOKflex-uppgifter bevarade');
    ck((await page.locator('#nok').innerText()).includes('minst tre av fem nivåer'),'NOKflex-nivåer bevarade');
    const recap=page.locator('#moivre-method-recap');
@@ -168,16 +145,16 @@ const evidence='ma4-qa-screenshots';fs.mkdirSync(evidence,{recursive:true});
    await save('08-arbete-stod-oppet');
    await page.locator('#next').click();
    ck((await page.locator('.slide.active').getAttribute('id'))==='exit','Frivillig fördjupning förblir frivillig');
-   await go(7);
+   await go(6);
    ck(!(await recap.evaluate(e=>e.open)),'Stödet stängs vid navigation');
    await recap.locator('summary').click();
    await page.locator('#mode').click();
    ck(!(await recap.evaluate(e=>e.open)),'Stödet stängs vid lägesbyte');
    await page.locator('#mode').click();
-   await go(8);
+   await go(7);
    ck(await page.locator('#optionalans').isHidden(),'Frivillig fördjupning inte förhandssvarad');
    await save('09-frivillig');
-   await go(9);
+   await go(8);
    ck(await page.locator('#exitans').isHidden(),'Utcheckningsfacit dolt');
    await save('10-utcheckning-fore');
    await page.locator('[data-reveal="exitans"]').click();

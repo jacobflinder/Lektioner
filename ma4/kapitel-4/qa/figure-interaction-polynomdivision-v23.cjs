@@ -10,12 +10,12 @@ const OUTPUT='ma4-qa-screenshots';fs.mkdirSync(OUTPUT,{recursive:true});
 const BASE='http://127.0.0.1:8123/ma4/kapitel-4/polynomdivision/';
 const CASES={
  main:{slide:3,p:[2,3,-5,6],d:2,q:[2,-1,-3],r:12},
- guided:{slide:6,p:[1,2,-5,-6],d:3,q:[1,-1,-2],r:0},
- independent:{slide:7,p:[1,0,-4,3],d:-1,q:[1,1,-3],r:0,details:true},
- extraA:{slide:9,p:[1,5,6],d:2,q:[1,3],r:0,details:true},
- extraB:{slide:9,p:[2,1,-5,4],d:-1,q:[2,3,-2],r:2,details:true},
- extraC:{slide:9,p:[1,0,-2,5],d:2,q:[1,-2,2],r:1,details:true},
- extraD:{slide:9,p:[1,-3,4,-12],d:-3,q:[1,0,4],r:0,details:true}
+ guided:{slide:5,p:[1,2,-5,-6],d:3,q:[1,-1,-2],r:0},
+ independent:{slide:6,p:[1,0,-4,3],d:-1,q:[1,1,-3],r:0,details:true},
+ extraA:{slide:8,p:[1,5,6],d:2,q:[1,3],r:0,details:true},
+ extraB:{slide:8,p:[2,1,-5,4],d:-1,q:[2,3,-2],r:2,details:true},
+ extraC:{slide:8,p:[1,0,-2,5],d:2,q:[1,-2,2],r:1,details:true},
+ extraD:{slide:8,p:[1,-3,4,-12],d:-3,q:[1,0,4],r:0,details:true}
 };
 const VIEWS=[{w:390,h:844,name:'mobil'},{w:768,h:900,name:'platta'},
  {w:1280,h:800,name:'dator'},{w:1920,h:1080,name:'projektor'}];
@@ -29,7 +29,7 @@ for(const [name,c] of Object.entries(CASES)){
  const product=multiply(c.q,c.d);product[product.length-1]+=c.r;
  check(JSON.stringify(product)===JSON.stringify(c.p),name+': independent coefficient identity');
  for(const x of [-7,-3.5,-1,0,1,2.75,9]){
-  check(evaluate(c.p,x)===(x+c.d)*evaluate(c.q,x)+c.r,name+': P=DQ+R at '+x);
+  check(evaluate(c.p,x)===(x+c.d)*evaluate(c.q,x)+c.r,name+': p=qk+rest at '+x);
  }
 }
 (async()=>{
@@ -54,11 +54,11 @@ for(const [name,c] of Object.entries(CASES)){
  try{
   const response=await page.goto(BASE,{waitUntil:'networkidle'});
   check(response.status()===200,'lesson is reachable');
-  check(await slides.count()===11,'all eleven original slides');
+  check(await slides.count()===10,'all ten slides');
   check(await page.locator('[data-division]').count()===7,'seven original interactive engines');
   check(await page.locator('script[src="./figure-interaction-v23.js"]').count()===1,'new lesson-scoped enhancements');
-  const originalWork=await page.locator('.slide').nth(8).textContent();
-  check(originalWork.includes('NOKflex')&&originalWork.includes('4421–4430'),'original book list retained in slide 9');
+  const originalWork=await page.locator('.slide').nth(7).textContent();
+  check(originalWork.includes('NOKflex')&&originalWork.includes('4421–4430'),'original book list retained in slide 8');
 
   // The four math operations must remain causally tied to the right
   // grade column and use MathML in both questions and explanations.
@@ -104,9 +104,9 @@ for(const [name,c] of Object.entries(CASES)){
    }
    check(visited>=6&&visited<=10,name+': all meaningful division states traversed');
    const labels=await host.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
-   check(labels.some(s=>s.replaceAll(' ','')===`Q(x)=${expected[name]}`.replaceAll(' ','')),name+': quotient mathematically correct');
-   check(labels.includes('R(x) = '+c.r),name+': remainder mathematically correct');
-   check(labels.some(s=>s.includes('P(x) = D(x)Q(x) + R(x)')),name+': complete P=DQ+R invariant shown');
+   check(labels.some(s=>s.replaceAll(' ','')===`k(x)=${expected[name]}`.replaceAll(' ','')),name+': quotient mathematically correct');
+   check(labels.includes('rest = '+c.r),name+': remainder mathematically correct');
+   check(labels.some(s=>s.includes('p(x)/q(x) = k(x) + rest/q(x)')),name+': teacher quotient-remainder notation shown');
    check(await host.locator('tbody tr.product').count()>0&&await host.locator('tbody tr.remainder').count()>0,name+': visible product and difference rows');
    await host.locator('.back').click();
    check(await host.locator('.result-summary math').count()===0,name+': finish feedback hides when stepping back');
@@ -122,7 +122,7 @@ for(const [name,c] of Object.entries(CASES)){
    check((await recapExact.locator('tbody tr.original td[data-grade="2"]').innerText()).trim()==='', 'Originalmetod: tom gradplats i stolen');
    while(await recapExact.locator('.forward').isEnabled())await recapExact.locator('.forward').click();
    const recapLabels=await recapExact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
-   check(recapLabels.includes('R(x) = 0')&&recapLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+x−8'),'Första exakta exemplet: oberoende kvot och rest');
+   check(recapLabels.includes('rest = 0')&&recapLabels.some(x=>x.replaceAll(' ','')==='k(x)=x²+x−8'),'Första exakta exemplet: oberoende kvot och rest');
    await recapExact.locator('xpath=parent::details').locator('summary').click();await page.locator('[data-source-choice="1"]').click();await reveal('integer-chair');
    check(await page.locator('#integer-chair .source-q').first().innerText()==='87','integer bridge quotient 87');
    check(await page.locator('#integer-chair .source-d').first().innerText()==='3','integer bridge divisor on right');
@@ -134,7 +134,7 @@ for(const [name,c] of Object.entries(CASES)){
    while(await exact.locator('.forward').isEnabled())await exact.locator('.forward').click();
    check((await exact.locator('.result-summary').innerText()).includes('0'),'exact example ends with zero remainder');
    const exactLabels=await exact.locator('.result-summary math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));
-   check(exactLabels.includes('R(x) = 0')&&exactLabels.some(x=>x.replaceAll(' ','')==='Q(x)=x²+2x−3'),'exact example independent quotient and rest');
+   check(exactLabels.includes('rest = 0')&&exactLabels.some(x=>x.replaceAll(' ','')==='k(x)=x²+2x−3'),'exact example independent quotient and rest');
    if(v.w>=1000){
     await page.evaluate(()=>scrollTo(0,0));
     const viewportFit=await exact.evaluate(host=>{
@@ -155,49 +155,40 @@ for(const [name,c] of Object.entries(CASES)){
    });
    check(shape,v.name+': actual quotient above dividend and right-hand divisor with chair border');
    await photo(v.name+'-original-chair');
-   await go(10);await reveal('a10');
+   await go(9);await reveal('a10');
    const exit=page.locator('[data-source-division="exitChair"]');
    check(await exit.locator('tbody tr.remainder').count()===2,'exit feedback has full two-step division');
    check((await exit.locator('tbody tr.remainder').last().innerText()).includes('1'),'exit chair remainder is 1');
   }
 
-  // Formative feedback, signed number line, zero coefficient, and original
-  // teacher/independent work remain placed after the correct MathML step.
+  // Kontrollera koefficienter och nollkoefficient utan separat felanalys.
+  // Stöd och facit visas endast efter elevens eget försök.
   await go(4);await reveal('a5');
   const table=page.locator('#a5 .coefficient-check');
   check(await table.isVisible(),'column coefficient check shown only on demand');
   const nums=await table.locator('tbody tr').evaluateAll(rows=>rows.map(r=>[...r.querySelectorAll('td')].map(td=>+td.textContent.replace('−','-'))));
   for(let i=0;i<4;i++)check(nums[0][i]+nums[1][i]+nums[2][i]===nums[3][i],'column check '+i);
   check(JSON.stringify(nums[3])===JSON.stringify([2,3,-5,6]),'correct polynomial reconstruction');
-  await go(5);await reveal('a6');
-  const svg=page.locator('#a6 svg.sign-line-figure');
-  check(await svg.isVisible(),'corrected feedback figure visible after reveal');
-  check(await svg.getAttribute('viewBox')==='0 0 360 184','legible mobile-adapted number-line coordinate space');
-  check(await svg.locator('path[stroke="#137e6a"]').count()===2,'correct sign arrow has line + arrowhead');
-  check(await svg.locator('path[stroke="#bb5b48"]').first().getAttribute('d')==='M180 70H80','wrong step really goes 2 units left');
-  check(await svg.locator('path[stroke="#137e6a"]').first().getAttribute('d')==='M180 104H280','correct step really goes 2 units right');
-  const descr=await svg.getAttribute('aria-label');
-  check(descr.includes('minus 7')&&descr.includes('minus 3'),'both before/after endpoints explained');
-  await go(7);await reveal('zero-help');
+  await go(6);await reveal('zero-help');
   const map=page.locator('#zero-help .degree-place-map');
   check(await map.locator('.degree-cell').count()===4,'four actual degree places');
   check((await map.locator('.degree-zero').innerText()).includes('0x²'),'missing x² term actually occupies column');
 
   // 7C: only lesson-specific, opt-in summary. Test keyboard, no answers,
   // and reset after navigation and mode changes.
-  await go(8);
+  await go(7);
   const recap=page.locator('.slide.active .v23-summary');
   check(await recap.count()===1,'NOKflex contains its own reminder');
   check(await recap.getAttribute('open')===null,'closed without leaking strategy');
   check(await recap.locator('summary').count()===1,'native keyboard/touch disclosure');
   await recap.locator('summary').focus();await page.keyboard.press('Enter');
   check(await recap.getAttribute('open')!==null,'keyboard Enter expands reminder');
-  check(await recap.locator('math').count()>=3,'three correct MathML relations in summary');
-  check(await recap.locator('p').count()===4,'four short lesson-relevant reminders');
+  check(await recap.locator('math').count()>=1,'the stop condition has semantic MathML');
+  check(await recap.locator('p').count()>=3,'three short lesson-relevant reminders');
   const recapText=await recap.innerText();
-  check(recapText.includes('Välj kvotterm')&&recapText.toLowerCase().includes('när resten inte är noll'),'method and zero remainder clarified');
+  check(recapText.includes('Division med rest')&&recapText.includes('Stoppa när')&&recapText.includes('Exakt delbarhet'),'division form, stop condition and zero remainder clarified');
   check(!recapText.includes('2x² − x − 3'),'no exercise answer leaked in summary');
-  await go(10);await go(8);
+  await go(9);await go(7);
   check(await recap.getAttribute('open')===null,'summary closes on slide change');
   await recap.locator('summary').click();
   await page.locator('#mode').click();
@@ -219,7 +210,7 @@ for(const [name,c] of Object.entries(CASES)){
 
   for(const v of VIEWS){
    await page.setViewportSize({width:v.w,height:v.h});
-   for(let slide=0;slide<11;slide++){
+   for(let slide=0;slide<10;slide++){
     await go(slide);
     const metrics=await page.evaluate(()=>({page:document.documentElement.scrollWidth,width:innerWidth}));
     check(metrics.page<=metrics.width+2,v.name+' slide '+(slide+1)+': no horizontal page overflow '+JSON.stringify(metrics));
@@ -238,15 +229,14 @@ for(const [name,c] of Object.entries(CASES)){
    await main.locator('.forward').click();await main.locator('.forward').click();
    check(await main.locator('tbody tr.product').count()===1,v.name+': first product in correct live diagram');
    await photo(`${v.name}-04-produkt`);
-   await go(5);await reveal('a6');await photo(`${v.name}-06-fore-efter`);
-   await go(7);await reveal('zero-help');await photo(`${v.name}-08-nollkolumn`);
-   await go(8);await recap.locator('summary').click();
+   await go(6);await reveal('zero-help');await photo(`${v.name}-08-nollkolumn`);
+   await go(7);await recap.locator('summary').click();
    const rect=await recap.boundingBox();
    check(rect.width>200,v.name+': summary readable width');
    await photo(`${v.name}-09-metodstod`);
   }
   check(errors.length===0,'no JS errors or failed local requests: '+errors.join(';'));
-  console.log('PASS Ma4 polynomdivision v2.3 '+JSON.stringify({checks:assertions,screenshots:shots,slides:11,engines:7,views:VIEWS.map(v=>v.name)}));
+  console.log('PASS Ma4 polynomdivision v2.3 '+JSON.stringify({checks:assertions,screenshots:shots,slides:10,engines:7,views:VIEWS.map(v=>v.name)}));
  }catch(e){
   console.error('FAIL Ma4 polynomdivision v2.3 '+(e.stack||e));process.exitCode=1;
   await photo('fel').catch(()=>{});

@@ -287,6 +287,13 @@
 </div>
 <button data-reveal="practiceans" class="reveal">Visa återkoppling</button>
 <div class="answer hidden" id="practiceans">
+<p><strong>1 · Kvadrera två gånger (filmens första räknesätt)</strong></p>
+<p class="math">(−√3 + i)² = (−√3)² + 2(−√3)i + i²</p>
+<p class="math">= 3 − 2√3i − 1 = 2 − 2√3i</p>
+<p class="math">(−√3 + i)⁴ = (2 − 2√3i)²</p>
+<p class="math">= 4 − 8√3i + 12i² = 4 − 8√3i − 12</p>
+<p class="math">= −8 − 8√3i</p>
+<p><strong>2 · de Moivres formel</strong></p>
 <p class="math">2⁴(cos(600°) + i sin(600°))</p>
 <p class="math">= 16(cos(240°) + i sin(240°))</p>
 <p class="math">= 16(−1/2 − i√3/2)</p>
@@ -350,38 +357,8 @@
 </p>
 </div>
 </section>
-<section id="mistakes" class="slide" data-teacher="Konstruerat fel, inte My Favorite No. Knyt till vanligt misstag med potens.">
-<div class="eyebrow">07 · Hitta och rätta felet</div>
-<h2>Skilj på multiplikation och potens</h2>
-<div class="task">
-<strong>Par · två frågor</strong>
-<p>En elev påstår följande. Undersök om svaret är rätt. Den andra raden är elevens påstådda svar:</p>
-<div class="math-givens" role="group" aria-label="Givet tal och konstruerat felaktigt svar">
-<p class="math">z = 2(cos(20°) + i sin(20°))</p>
-<p class="math">z³ = 6(cos(60°) + i sin(60°))</p>
-</div>
-<div class="moivre-error-figure">
-<strong>Före – elevens felaktiga punkt</strong>
-<div class="plot-box"><svg class="plot" id="moivre-error-before" viewBox="0 0 680 430" role="img" aria-label="Felaktigt förslag: punkt på vinkeln 60 grader med längd 6."></svg></div>
-<p class="muted">Den ritade pilen visar elevens påstådda resultat. Stämmer avståndet från origo?</p>
-</div>
-<p>1. Vad är fel i uttrycket ovan?</p>
-<p>2. Bestäm längd, argument och resultat för <span class="math">w³</span> när</p>
-<p class="math">w = (1/2)(cos(π/2) + i sin(π/2))</p>
-</div>
-<button data-reveal="errorans" class="reveal">Visa återkoppling</button>
-<div class="answer hidden" id="errorans">
-</div>
-<div id="moivre-error-correction" class="hidden">
-<div class="moivre-error-figure">
-<strong>Efter – korrigerad punkt</strong>
-<div class="plot-box"><svg class="plot" id="moivre-error-after" viewBox="0 0 680 430" role="img" aria-label="Rättelse: punkt på vinkeln 60 grader med längd 8; pilen är längre än i elevens felaktiga förslag."></svg></div>
-<p class="muted">Samma riktning som före, men korrekt avstånd är <span class="math">2³ = 8</span>. Jämför med pilen ovan.</p>
-</div>
-</div>
-</section>
 <section id="nok" class="slide" data-teacher="NOKflex-indelningen kommer från PDF-originalet. Extra går inte automatiskt in i huvudflödet.">
-<div class="eyebrow">08 · Eget arbete · NOKflex</div>
+<div class="eyebrow">07 · Eget arbete · NOKflex</div>
 <h2>Jobba i NOKflex</h2>
 <div class="panel">
 <p class="lead">NOKflex → 4.3 Potenser och komplexa tal → de Moivres formel</p>
@@ -425,7 +402,7 @@
 <button type="button" class="secondary" data-go="optional">Frivillig fördjupning: dubbelvinkelformler</button>
 </section>
 <section id="optional" class="slide" data-teacher="Valfri matematiskt motiverad fördjupning från originalet." data-optional="true">
-<div class="eyebrow">09 · Frivillig fördjupning</div>
+<div class="eyebrow">08 · Frivillig fördjupning</div>
 <h2>Härled dubbelvinkelformlerna</h2>
 <p class="opt-tag">Frivilligt när grundarbetet är klart</p>
 <div class="task">
@@ -450,7 +427,7 @@
 <button type="button" class="secondary" data-go="exit">Gå till utcheckningen</button>
 </section>
 <section id="exit" class="slide" data-teacher="Utcheckningen avslutar dagens lärandemål utan att introducera nästa avsnitt.">
-<div class="eyebrow">10 · Individuell utcheckning</div>
+<div class="eyebrow">09 · Individuell utcheckning</div>
 <h2>Visa vad du kan</h2>
 <div class="task">
 <strong>3 minuter, utan hjälp</strong>
@@ -572,24 +549,11 @@ document.querySelectorAll('[data-power]').forEach(button=>button.addEventListene
 next.addEventListener('click',()=>{stage=Math.min(2,stage+1);render()});
 back.addEventListener('click',()=>{stage=Math.max(0,stage-1);render()});
 document.getElementById('moivre-reset').addEventListener('click',reset);
-// Samma skala före och efter rättelsen: felet gäller enbart längden, inte vinkeln.
-const mistakeBase={x:2*Math.cos(Math.PI/9),y:2*Math.sin(Math.PI/9),label:'z',color:'blue',dx:10,dy:-12};
-for(const [id,length,label] of [['moivre-error-before',6,'z³ (fel)'],['moivre-error-after',8,'z³ (rätt)']]){
- Ma4Plane.plot(id,{minX:-1,maxX:9,minY:-1,maxY:9,
-  alt:(length===6?'Felaktigt förslag, ':'Rättelse, ')+'samma koordinatskala och argument 60 grader. Resultatvektorns längd är '+length+'.',
-  vectors:[mistakeBase,{x:length*Math.cos(Math.PI/3),y:length*Math.sin(Math.PI/3),label,color:'orange',dx:12,dy:-12,width:4}]});
-}
 const recap=document.getElementById('moivre-method-recap');
-const errorFeedback=document.getElementById('errorans'),errorCorrection=document.getElementById('moivre-error-correction');
-errorFeedback.querySelector('.ma4-final').after(errorCorrection);
-document.querySelector('[data-reveal="errorans"]').addEventListener('click',()=>{
- errorCorrection.classList.toggle('hidden',errorFeedback.classList.contains('hidden'));
-});
 const revealButtons=[...document.querySelectorAll('[data-reveal]')].map(button=>({button,
  label:button.textContent,target:document.getElementById(button.dataset.reveal)}));
 function closeRevealsAndSupport(){
  recap.open=false;
- errorCorrection.classList.add('hidden');
  for(const {button,label,target} of revealButtons){target.classList.add('hidden');button.setAttribute('aria-expanded','false');button.textContent=label}
  for(const box of document.querySelectorAll('[data-sequence]'))box.querySelector('[data-seq-reset]').click();
  reset();

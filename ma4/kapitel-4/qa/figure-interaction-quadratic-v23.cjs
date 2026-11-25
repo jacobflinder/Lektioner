@@ -38,10 +38,10 @@ async function run(){
    page.on('requestfailed',r=>{if(r.url().includes('127.0.0.1'))errors.push(r.url())});
    const result=await page.goto(target,{waitUntil:'networkidle'});
    equal(result.status(),200,'Sidan laddad '+size.name);
-   equal(await page.locator('.slide').count(),14,'Samtliga 14 elevbilder '+size.name);
-   equal(await page.locator('.slide[data-optional="true"]').count(),6,'Polär repetition samt metodjämförelse, felanalys och fördjupning är frivilliga');
+   equal(await page.locator('.slide').count(),13,'Tretton fokusbilder '+size.name);
+   equal(await page.locator('.slide[data-optional="true"]').count(),5,'Polär repetition och fördjupning är frivilliga');
    equal(await page.locator('.slide:not([data-optional="true"])').count(),8,'Åtta huvudbilder prioriterar filmens pq-formel och ansats');
-   for(let n=0;n<14;n++){
+   for(let n=0;n<13;n++){
     await visit(page,n);
     const dims=await page.evaluate(()=>({actual:document.documentElement.scrollWidth,width:innerWidth}));
     ok(dims.actual<=dims.width+3,'Ingen horisontell sidbeskärning '+size.name+' bild '+(n+1));
@@ -114,21 +114,9 @@ async function run(){
    await click(page,'#squareBack');ok(await page.locator('#squareTarget').isHidden(),'Steg bakåt döljer facit');
    await click(page,'#squareReset');for(const id of ['rootA','rootB','squareTarget','squareText'])ok(await page.locator('#'+id).isHidden(),'Återställning döljer '+id);
    await visit(page,9);
-   ok(await page.locator('#quadratic-error-after').isHidden(),'Korrigerad figur dolt före elevförsök');
-   const before=page.locator('#quadratic-error-comparison .quadratic-plane-card').nth(0);
-   const after=page.locator('#quadratic-error-after');
-   equal(await svgPoint(before,'first'),{x:210,y:172},'Visad rot i tredje/fjärde kvadranten');
-   await click(page,'[data-reveal="r10"]');
-   ok(await after.isVisible(),'Före–efter visas tillsammans med rättat svar');
-   equal(await svgPoint(after,'first'),{x:210,y:172},'Korrigeringen behåller ursprunglig rot');
-   equal(await svgPoint(after,'second'),{x:90,y:52},'Korrigeringen visar motsatt rot');
-   ok(await page.locator('#r10 math[aria-label="z₂ = −3 + 3i"]').count()>0,'Fullständigt andrarotssvar');
-   await photo(page,size.name+'-10-foere-efter');
-   await click(page,'[data-reveal="r10"]');ok(await after.isHidden(),'Figuren döljs när återkopplingen stängs');
-   await visit(page,10);
    const q11b=page.locator('[data-quiz="q11b"]');await q11b.locator('button').first().click();
    ok(await q11b.locator('.feedback math[aria-label="2i"]').count()>0,'Matematik i ytterligare quiz semantisk');
-   await visit(page,11);
+   await visit(page,10);
    const work=page.locator('.slide.active'),whole=await work.innerText();
    ok(whole.includes('4401–4420')&&whole.includes('minst tre av fem nivåer'),'Bokuppgifter och nivåval bevarade');
    const details=page.locator('#quadratic-method-recap');
@@ -139,7 +127,7 @@ async function run(){
    ok(await details.locator('math[aria-label]').count()>=4,'Metoderna har MathML');
    ok((await details.innerText()).includes('dubbelrot'),'Nollfallet skiljs från två olika kvadratrötter');
    await photo(page,size.name+'-12-metodstod');
-   await visit(page,10);await visit(page,11);
+   await visit(page,9);await visit(page,10);
    ok(!(await details.evaluate(x=>x.open)),'Stödet återställt vid navigering');
    await click(page,'#mode');await details.locator('summary').click();
    ok(await details.evaluate(x=>x.open),'Stöd fungerar i klassrumsläge');
@@ -173,7 +161,7 @@ async function run(){
    await visit(page,3);await visit(page,2);
    ok(await variant.locator('.sc-answer').isHidden(),'Digitalt facit döljs efter navigation');
    equal(await variant.locator('input').inputValue(),'','Inmatning rensas vid ny omgång');
-   await visit(page,13);
+   await visit(page,12);
    for(const id of ['r13a','r13b','r13c'])ok(await page.locator('#'+id).isHidden(),'Exitfacit initialt dolt');
    await click(page,'[data-reveal="r13b"]');
    const exitLabels=await page.locator('#r13b math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')));

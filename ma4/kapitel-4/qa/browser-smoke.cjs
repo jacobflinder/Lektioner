@@ -31,7 +31,7 @@ async function active(page){
     const resp=await page.goto(ROOT+slug+'/',{waitUntil:'networkidle',timeout:30000});
     assert.equal(resp.status(),200,slug+': HTTP 200');
     const n=await page.locator('.slide').count();
-    assert.ok(n>=7,slug+': steg saknas');
+    assert.ok(n>=6,slug+': steg saknas');
     assert.equal(await page.locator('.slide.active').count(),1,slug+': exakt en aktiv bild');
     assert.ok(await (await active(page)).isVisible(),slug+': aktiv bild synlig');
     assert.ok(await page.locator('body').innerText().then(s=>/NOKflex/.test(s)),slug+': bokarbete saknas');
@@ -65,12 +65,10 @@ async function active(page){
     if(slug==='andragradsekvationer'){
       await page.selectOption('#jump','8');
       await page.locator('#next').click();
-      assert.ok((await (await active(page)).innerText()).includes('11 ·'),'Andragrad: felanalys valfri i huvudvägen');
+      assert.ok((await (await active(page)).innerText()).includes('10 ·'),'Andragrad: begreppskontroll följer utan avbrott');
       await page.selectOption('#jump','8');
-      assert.deepEqual(problems,[],'Andragrad: fel innan valbar aktivitet');
-      await page.locator('#quadraticError').click();
-
-      assert.equal(await (await active(page)).getAttribute('id'),'quadratic-optional-error','Andragrad: frivillig felanalys går att nå');
+      assert.deepEqual(problems,[],'Andragrad: inga skriptfel vid sammanhängande huvudväg');
+      assert.equal(await page.locator('#quadraticError').count(),0,'Andragrad: extra felanalys borttagen');
       // Pedagogisk integritet: den första prognosen får INTE innehålla facit.
       await page.selectOption('#jump','4');
       assert.ok(await page.locator('#r5a').isHidden()&&await page.locator('#r5b').isHidden(),'Andragrad: stödtrappan dold');
@@ -139,13 +137,13 @@ async function active(page){
       await page.locator('#mode').click();
       assert.ok(await variant.locator('.sc-answer').isHidden()&&await variant.locator('.digital-solution').isDisabled(),'Andragrad: repetitionsläget återställer försökskravet');
       // Begrepp: motsatt och konjugat kan gälla samtidigt.
-      await page.selectOption('#jump','10');
+      await page.selectOption('#jump','9');
       await page.locator('[data-quiz="q11b"] button[data-correct="false"]').first().click();
       assert.ok((await page.locator('[data-quiz="q11b"] .feedback').innerText()).includes('motsatta'),'Andragrad: förklarar begreppsfel');
       await page.locator('[data-quiz="q11b"] button[data-correct="true"]').click();
       assert.ok((await page.locator('[data-quiz="q11b"] .feedback').innerText()).includes('både'),'Andragrad: rätt relation återkopplas');
       // Ett helt nytt exit-test, inga tidigare lösningssvar före elevförsök.
-      await page.selectOption('#jump','13');
+      await page.selectOption('#jump','12');
       const exitText=await (await active(page)).innerText();
       assert.ok(await page.locator('.slide.active > ol.spaced math[aria-label="z² − 2iz + 8 = 0"]').count()===1&&await page.locator('.slide.active > ol.spaced math[aria-label="z² = 18i"]').count()===1,'Andragrad: nya exit-ekvationer satta som MathML');
       assert.ok(!exitText.includes('z² = −8i'),'Andragrad: tidigare övning återanvänds inte');

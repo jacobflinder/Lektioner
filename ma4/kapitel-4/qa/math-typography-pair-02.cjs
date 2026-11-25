@@ -43,15 +43,15 @@ const screenshots='ma4-qa-screenshots';fs.mkdirSync(screenshots,{recursive:true}
      const final=seq.locator('[data-seq-item]').nth(5);
      assert.ok(await final.locator('math mfrac').count()>=4,'Resultat i rektangulär form som egna bråk');
      await page.screenshot({path:screenshots+'/ma4-multdiv-math-seven-steps.png',fullPage:true});
-     await page.selectOption('#jump','4');
+     await page.selectOption('#jump','3');
      assert.ok(await page.locator('#d-selfans').isHidden(),'Självständig uppgift avslöjas inte');
      await page.locator('[data-reveal="d-selfans"]').click();
      assert.ok(await page.locator('#d-selfans .ma4-final').count()>0,'Eget svar har slutsvar');
      assert.ok(await page.locator('#d-selfans mfrac').count()>=5,'Facit har riktiga bråk och mellanled');
-     await page.selectOption('#jump','6');
+     await page.selectOption('#jump','5');
      await page.locator('[data-reveal="d-extraans"]').click();
      assert.ok(await page.locator('#d-extraans .ma4-step').count()>=3,'Frivillig uppgift har separata mellanled');
-     await page.selectOption('#jump','7');
+     await page.selectOption('#jump','6');
      assert.ok(await page.locator('#d-exitfacit').isHidden(),'Exitfacit dolt först');
      await page.locator('[data-reveal="d-exitfacit"]').click();
      assert.ok(await page.locator('#d-exitfacit .ma4-final').count()===2,'Multiplikation och division har separata slutsvar');

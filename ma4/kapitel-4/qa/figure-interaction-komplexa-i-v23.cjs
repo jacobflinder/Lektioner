@@ -29,9 +29,9 @@ const power=(v,n)=>{let s=z(1,0);for(let j=0;j<n;j++)s=multiply(s,v);return s};
   try{
     const res=await page.goto('http://127.0.0.1:8123/ma4/kapitel-4/komplexa-tal-och-i/',{waitUntil:'networkidle'});
     ok(res&&res.ok(),'lesson HTTP 200');
-    ok(await page.locator('.slide').count()===9,'nine original slides preserved');
-    ok(await page.locator('.slide[data-teacher]').count()===9,'nine separate teacher guidance items');
-    for(const pair of [['i-start',0],['i-defans',1],['i-standard-answer',2],['i-mis',4],['i-selffacit',5],['i-extraans',7],['i-exitfacit',8]]){
+    ok(await page.locator('.slide').count()===8,'eight focused slides preserved');
+    ok(await page.locator('.slide[data-teacher]').count()===8,'eight teacher guidance items');
+    for(const pair of [['i-start',0],['i-defans',1],['i-standard-answer',2],['i-selffacit',4],['i-extraans',6],['i-exitfacit',7]]){
       await page.selectOption('#jump',String(pair[1]));
       ok(await page.locator('#'+pair[0]).isHidden(),pair[0]+' feedback concealed before learner action');
     }
@@ -49,7 +49,7 @@ const power=(v,n)=>{let s=z(1,0);for(let j=0;j<n;j++)s=multiply(s,v);return s};
     await seq.locator('[data-seq-reset]').click();
     ok(await seq.locator('[data-seq-item]:not(.hidden)').count()===0,'reset hides all mathematical solutions');
 
-    await page.selectOption('#jump','6');
+    await page.selectOption('#jump','5');
     const nok=await page.locator('#i-nok').innerText();
     ok(nok.includes('4101–4114')&&nok.includes('tre av fem nivåer'),'NOKflex original task range and flexible levels');
     ok(await page.locator('#i-nok [data-go="i-extra"]').count()===1,'voluntary follow-on preserved');

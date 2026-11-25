@@ -1,6 +1,6 @@
 /* Ma4 08/41 · de Moivres formel. Oavkortade mellanled efter elevförsöket.
  * Fullständiga koefficienter, insättningar, referensvinklar och exakta värden.
- * Samtliga ursprungliga elevaktiviteter, felanalys och frivillig fördjupning bevaras.
+ * Genomarbetade beräkningar och frivillig fördjupning bevaras.
  */
 (()=>{'use strict';
 const {step,answer,solution,insertSolutions,typesetStatic}=window.Ma4Math;
@@ -50,24 +50,6 @@ insertSolutions({
   answer(['z⁴ = −8 − 8√3i']),
   step('Kontrollera svaret', ['|z⁴| = 16'],
    'Realdel och imaginärdel är negativa. Svaret ska alltså ligga i tredje kvadranten.')
- ),
- errorans:solution(
-  step('1 · Jämför det påstådda svaret med potensregeln',
-   ['z = 2(cos(20°) + i sin(20°))','n = 3',
-    'r³ = 2³','= 2 · 2 · 2','= 8','nv = 3 · 20° = 60°'],
-   'Det påstådda absolutbeloppet 6 var fel. Argumentet 60° är däremot korrekt.'),
-  answer(['z³ = 8(cos(60°) + i sin(60°))']),
-  step('2 · Identifiera w:s värden',
-   ['w = (1/2)(cos(π/2) + i sin(π/2))','r = 1/2','v = π/2','n = 3']),
-  step('3 · Beräkna längd och argument var för sig',
-   ['|w³| = (1/2)³','= 1/8','3v = 3 · (π/2)','= 3π/2']),
-  step('4 · Sätt in och kontrollera exakta trigvärden',
-   ['w³ = (1/8)(cos(3π/2) + i sin(3π/2))',
-    'cos(3π/2) = 0','sin(3π/2) = −1',
-    'w³ = (1/8)(0 − i)']),
-  answer(['w³ = −i/8']),
-  step('Rimlighetskontroll',[],
-   'När 0 < r < 1 blir rⁿ mindre när exponenten n ökar. Vinkeln 3π/2 pekar längs negativa imaginära axeln.')
  ),
  optionalans:solution(
   step('1 · Utveckla kvadraten med två faktorer',

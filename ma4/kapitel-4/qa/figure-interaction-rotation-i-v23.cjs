@@ -3,7 +3,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const url='http://127.0.0.1:8123/ma4/kapitel-4/multiplicera-dividera-med-i/';
 const out='ma4-qa-screenshots/rotation-i-v23';fs.mkdirSync(out,{recursive:true});
-const ids=['intro','plot','proof','trap','practice','nok','exit'];
+const ids=['intro','plot','proof','practice','nok','exit'];
 const cases=[{id:'2,1',a:2,b:1},{id:'-1,2',a:-1,b:2},{id:'-2,-1',a:-2,b:-1}];
 let checks=0,shots=0;
 function ok(c,m){assert.ok(c,m);checks++}
@@ -23,9 +23,9 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1'))external.push(r.url())});
  const response=await page.goto(url,{waitUntil:'networkidle'});
  ok(response.status()===200,'200 '+width);
- ok(JSON.stringify(await page.locator('.slide').evaluateAll(xs=>xs.map(x=>x.id)))===JSON.stringify(ids),'seven existing lesson slides '+width);
+ ok(JSON.stringify(await page.locator('.slide').evaluateAll(xs=>xs.map(x=>x.id)))===JSON.stringify(ids),'six focused lesson slides '+width);
  const go=async i=>{await page.selectOption('#jump',String(i));ok(await page.locator('.slide.active').getAttribute('id')===ids[i],'navigate '+i+' '+width)};
- for(let i=0;i<7;i++){
+ for(let i=0;i<6;i++){
   await go(i);ok((await page.evaluate(()=>document.documentElement.scrollWidth))<=width+4,'no whole-page overflow '+width+' slide '+i);
   await page.screenshot({path:path.join(out,'initial-'+(i+1)+'-'+width+'.png'),fullPage:true});shots++;
  }
@@ -87,36 +87,8 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   await page.locator('#rot-back').click();ok(await page.locator('#rot-length').isHidden(),'back hides last length solution');
   await page.locator('#rot-reset').click();ok(await page.locator('#rot-answers').isHidden(),'reset hides all formulas');
  }
- await go(3);ok(await page.locator('#trapans').isHidden(),'misconception initially hidden');
- await page.locator('[data-reveal="trapans"]').click();
- ok(await page.locator('#trapans .ma4-final math').count()===3,'conjugate and two rotations distinct in answer');
- const vals=await page.locator('#trapans .ma4-final math').evaluateAll(es=>es.map(e=>e.getAttribute('aria-label')).join(' / '));
- ok(vals.includes('1 − 2i')&&vals.includes('−2 + i')&&vals.includes('2 − i'),'correct three distinct values');
- const fig=page.locator('#trap-plane');
- ok(await fig.count()===1&&await fig.isVisible(),'visible comparison diagram appears only with full feedback');
- const drawn=await fig.evaluate(svg=>{
-  const get=col=>[...svg.querySelectorAll('g[clip-path] line')].filter(e=>e.getAttribute('stroke')===col).map(e=>[+e.getAttribute('x1'),+e.getAttribute('y1'),+e.getAttribute('x2'),+e.getAttribute('y2')]);
-  const c=[...svg.querySelectorAll('g[clip-path] circle')].find(e=>e.getAttribute('stroke')==='#9cb6c4');
-  return{z:get('#19739f')[0],conjugate:get('#7860b5')[1],iz:get('#0a8176')[0],division:get('#bc633a')[0],purple:get('#7860b5'),radius:c&&{cx:+c.getAttribute('cx'),cy:+c.getAttribute('cy'),r:+c.getAttribute('r')}};
- });
- ok([drawn.z,drawn.conjugate,drawn.iz,drawn.division].every(Boolean),'all four geometrical vectors drawn');
- const org=drawn.z;
- ok([drawn.conjugate,drawn.iz,drawn.division].every(v=>near(v[0],org[0])&&near(v[1],org[1])),'four vectors from same origin');
- const xy=v=>[v[2]-v[0],v[1]-v[3]],zxy=xy(org),conj=xy(drawn.conjugate),iVec=xy(drawn.iz),dVec=xy(drawn.division);
- ok(near(conj[0],zxy[0])&&near(conj[1],-zxy[1]),'conjugate really reflected in real axis');
- ok(near(iVec[0],-zxy[1])&&near(iVec[1],zxy[0]),'i multiplication visibly +90°');
- ok(near(dVec[0],zxy[1])&&near(dVec[1],-zxy[0]),'division visibly -90°');
- const lengths=[org,drawn.conjugate,drawn.iz,drawn.division].map(v=>Math.hypot(v[2]-v[0],v[3]-v[1]));
- ok(lengths.every(l=>near(l,lengths[0]))&&drawn.radius&&near(drawn.radius.r,lengths[0]),'four points on exact common radius circle');
- ok(drawn.purple.length===2,'one purple vector and one dashed reflection segment');
- const reflection=drawn.purple.find(v=>!near(v[0],org[0])||!near(v[1],org[1]));
- ok(reflection&&near(reflection[0],reflection[2])&&near(reflection[1],org[3])&&near(reflection[3],drawn.conjugate[3]),'dashed line connects conjugate endpoints vertically');
- await page.screenshot({path:path.join(out,'trap-geometry-'+width+'.png'),fullPage:true});shots++;
- await page.locator('[data-reveal="trapans"]').click();ok(await page.locator('#trapans').isHidden(),'geometry hides together with original algebra');
-
- await page.screenshot({path:path.join(out,'trap-after-'+width+'.png'),fullPage:true});shots++;
- await go(4);ok(await page.locator('#practiceans').isHidden(),'own try still hidden');
- await go(5);
+ await go(3);ok(await page.locator('#practiceans').isHidden(),'own try still hidden');
+ await go(4);
  const work=await page.locator('#nok').innerText();
  ok(work.includes('4232–4240')&&work.includes('minst tre av fem nivåer'),'original NOKflex tasks and levels preserved');
  const details=page.locator('#i-method-recap');
@@ -131,12 +103,12 @@ try{for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
  ok(geo.left>=-3&&geo.right<=width+4&&geo.documentWidth<=width+4,'method support fits viewport '+width);
  await page.screenshot({path:path.join(out,'method-open-'+width+'.png'),fullPage:true});shots++;
  await details.locator('summary').click();ok(!(await details.evaluate(e=>e.open)),'pointer closes support');
- await details.locator('summary').click();await go(6);ok(!(await details.evaluate(e=>e.open)),'navigation resets support');
+ await details.locator('summary').click();await go(5);ok(!(await details.evaluate(e=>e.open)),'navigation resets support');
  ok(await page.locator('#exitans').isHidden(),'final independent exit concealed');
  await page.screenshot({path:path.join(out,'exit-hidden-'+width+'.png'),fullPage:true});shots++;
  ok(errors.length===0,'zero JavaScript errors '+errors.join(';'));
  ok(external.length===0,'no external requests '+external.join(';'));
  await page.close();
 }
-console.log('MA4_ROTATION_I_V23_PASS '+JSON.stringify({checks,slides:7,viewports:4,screenshots:shots,methodCards:4,points:cases.length}));
+console.log('MA4_ROTATION_I_V23_PASS '+JSON.stringify({checks,slides:6,viewports:4,screenshots:shots,methodCards:4,points:cases.length}));
 }catch(e){console.error('MA4_ROTATION_I_V23_FAIL '+(e.stack||e));process.exitCode=1}finally{await browser.close()}})();

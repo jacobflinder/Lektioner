@@ -144,9 +144,6 @@ const html={
   step('D · Redan kvadratkompletterad',eq('(z − 1)² = −4'),eq('z − 1 = ±2i'),eq('z = 1 ± 2i')),
   prose('Flera metoder kan vara riktiga. Motivera ditt val utifrån ekvationens struktur.')
  ),
- r10:worked(
-  step('Roten är korrekt, men den andra saknas',eq('(3 − 3i)² = −18i'),eq('(−z)² = z²'),result('z₁ = 3 − 3i','z₂ = −3 + 3i'))
- ),
  r11:worked(
   step('När är rötterna konjugerade?',prose('Icke-reella rötter till polynom med reella koefficienter kommer i konjugatpar. För komplexa koefficienter gäller detta inte generellt.')),
   step('När är rötterna motsatta?',eq('z² = w'),eq('(−z)² = z²'),prose('Om w ≠ 0 är rötterna olika och motsatta. De kan också vara konjugerade i särskilda fall.')),
@@ -277,12 +274,6 @@ Object.assign(html,{
   step('C · Jämför realdel och imaginärdel',eq('z² = −2i'),eq('z = a + bi'),eq('(a + bi)² = (a² − b²) + 2abi'),eq('a² − b² = 0'),eq('2ab = −2'),eq('a² = b²'),eq('ab = −1'),eq('b = a ⇒ a² = −1'),prose('Omöjligt för reella a.'),eq('b = −a ⇒ −a² = −1'),eq('a² = 1 ⇒ a = ±1'),eq('z = 1 − i'),eq('z = −1 + i')),
   step('D · Redan kvadratkompletterad',eq('(z − 1)² = −4'),eq('z − 1 = ±√(−4)'),eq('z − 1 = ±2i'),eq('z = 1 ± 2i')),
   prose('Flera metoder är möjliga. Förklara varför en viss form gör just den metoden enkel.')
- ),
- r10:worked(
-  step('Roten är korrekt – kontrollera den',eq('(3 − 3i)²'),eq('= 9 − 18i + 9i²'),eq('= 9 − 18i − 9'),eq('= −18i')),
-  step('Hitta den saknade roten',eq('(−z)² = z²'),eq('−(3 − 3i) = −3 + 3i'),eq('(−3 + 3i)² = −18i')),
-  result('z₁ = 3 − 3i','z₂ = −3 + 3i'),
-  prose('Båda rötterna behövs. Ingen slutsats om elevens tanke kan dras av en enda skriven rot.')
  ),
  r11:worked(
   step('När är icke-reella rötter konjugerade?',prose('Ett polynom med reella koefficienter har konjugatpar. Det gäller inte generellt om koefficienterna är komplexa.')),

@@ -9,7 +9,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const URL='http://127.0.0.1:8123/ma4/kapitel-4/de-moivre/';
-const ids=['intro','geometry','formula','worked','practice','radians','mistakes','nok','optional','exit'];
+const ids=['intro','geometry','formula','worked','practice','radians','nok','optional','exit'];
 const cis=(r,v)=>({x:r*Math.cos(v),y:r*Math.sin(v)});
 const mul=(a,b)=>({x:a.x*b.x-a.y*b.y,y:a.x*b.y+a.y*b.x});
 const near=(a,b,why,tol=1e-8)=>assert.ok(Math.abs(a-b)<tol,why+': '+a+' ≈ '+b);
@@ -71,8 +71,8 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
  try{
   const resp=await page.goto(URL,{waitUntil:'networkidle',timeout:30000});
   assert.equal(resp.status(),200,'Lektionssidan går att ladda');
-  assert.deepEqual(await page.locator('.slide').evaluateAll(xs=>xs.map(x=>x.id)),ids,'Alla tio originalbilder bevarade');
-  assert.equal(await page.locator('#jump option').count(),10,'Tio navigeringspunkter');
+  assert.deepEqual(await page.locator('.slide').evaluateAll(xs=>xs.map(x=>x.id)),ids,'Nio fokusbilder bevarade');
+  assert.equal(await page.locator('#jump option').count(),9,'Nio navigeringspunkter');
   // Bild 1: förkunskap, inga synliga facit/mål innan elevens resonemang.
   assert.ok(await page.locator('#intro-facit').isHidden(),'01 facit initialt dolt');
   assert.ok(await page.locator('#moivre-goals').isHidden(),'01 mål efter självständigt försök');
@@ -213,22 +213,10 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   }
   await snap('06-desktop');
   console.log('PASS 06: radianer, reducering 2π och exakt tredje kvadrant');
-  await go(6);
-  await formulas('#mistakes .task .math-givens',2);
-  assert.ok(await page.locator('#errorans').isHidden(),'07 felanalysfacit dolt');
-  await page.locator('[data-reveal="errorans"]').click();
-  assert.equal(await page.locator('#errorans .ma4-final').count(),2,'07 både korrigerad potens och 1/8-svar');
-  for(const e of ['r³ = 2³','= 2 · 2 · 2','= 8','nv = 3 · 20° = 60°',
-   '|w³| = (1/2)³','= 1/8','3v = 3 · (π/2)','= 3π/2',
-   'cos(3π/2) = 0','sin(3π/2) = −1']){
-   await has('#errorans math[aria-label="'+e+'"]','07 felanalys '+e);
-  }
-  await snap('07-desktop');
-  console.log('PASS 07: potens ej multiplikation, nollradie undviks, små potenser');
-  await go(7);const nok=await page.locator('#nok').innerText();
+  await go(6);const nok=await page.locator('#nok').innerText();
   assert.ok(nok.includes('4301–4314')&&nok.includes('NOKflex')&&nok.includes('minst tre av fem nivåer'),'08 NOKflex och fem nivåer bevarade');
   await page.locator('#next').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'exit','08 huvudvägen hoppar över frivilligt spår');
-  await go(8);assert.equal(await page.locator('#progress').innerText(),'Frivillig aktivitet','09 frivillighet synlig');
+  await go(7);assert.equal(await page.locator('#progress').innerText(),'Frivillig aktivitet','Fördjupning är frivillig');
   assert.ok(await page.locator('#optionalans').isHidden(),'09 frivilligt bevisfacit dolt');
   await page.locator('[data-reveal="optionalans"]').click();
   assert.equal(await page.locator('#optionalans .ma4-final math').count(),2,'09 två korrekt härledda dubbelvinkelformler');
@@ -239,7 +227,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
    await has('#optionalans math[aria-label="'+e+'"]','09 distributiva lagen '+e);
   }
   await page.locator('[data-go="exit"]').click();assert.equal(await page.locator('.slide.active').getAttribute('id'),'exit','09 tillbaka till utcheckning');
-  await go(9);await formulas('#exit .task .math-givens',2);
+  await go(8);await formulas('#exit .task .math-givens',2);
   assert.ok(await page.locator('#exitans').isHidden(),'10 utcheckning utan avslöjat facit');
   await page.locator('[data-reveal="exitans"]').click();
   for(const e of ['r = 2','v = π/4','n = 6','r⁶ = 2⁶','= 64',
@@ -259,7 +247,7 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
   assert.ok(await page.locator('.teacher').isVisible(),'Lärarstöd');
   await page.locator('#mode').click();
   await page.setViewportSize({width:390,height:844});
-  for(let i=0;i<10;i++){
+  for(let i=0;i<9;i++){
    await go(i);
    if(i===1){
     await page.locator('[data-length="0.5"]').click();
@@ -285,17 +273,16 @@ near(exit.x,0,'Exit realdel');near(exit.y,-64,'Exit imaginärdel');
     await page.locator('#radians [data-seq-next]').click();
     await formulas('#radians [data-seq-item]:nth-child(1) .math-givens',2);
    }
-   if(i===6)await formulas('#mistakes .task .math-givens',2);
-   if(i===9)await formulas('#exit .task .math-givens',2);
+   if(i===8)await formulas('#exit .task .math-givens',2);
    const dim=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
    assert.ok(dim.scroll<=dim.viewport+4,'Mobilbild '+(i+1)+' får inte få sidledes rullning '+JSON.stringify(dim));
    await noScroll('.slide.active p.math[data-math-presentation="true"]');
    await noScroll('.slide.active .ma4-equation');
    await snap('mobil-bild-'+(i+1));
   }
-  assert.deepEqual(overflowProblems,[],'Inga matematikrader får ha intern sidscroll i någon av de tio mobilbilderna');
+  assert.deepEqual(overflowProblems,[],'Inga matematikrader får ha intern sidscroll i någon av de nio mobilbilderna');
   assert.deepEqual(errors,[],'Inga JS-fel eller saknade resurser');
-  console.log('PASS Ma4 08/41: 10/10 bilder, 9 dynamiska fall och 10 mobilbilder');
+  console.log('PASS Ma4 08/41: 9/9 fokusbilder, 9 dynamiska fall och 9 mobilbilder');
  }catch(e){console.error('FAIL Ma4 08/41 '+(e.stack||e));process.exitCode=1;await snap('FAIL').catch(()=>{});}
  finally{await page.close();await browser.close()}
 })();
