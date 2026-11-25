@@ -1,5 +1,14 @@
 # Ma4 2627 – samlad original–webbgranskning av 15 lektioner
 
+> **Rättelse och ersättning 25 november 2026:** Denna första rapport bedömde felaktigt
+> polynomdivisionen som helt metodtrogen. Jacobs notation
+> `p(x)/q(x) = k(x) + rest/q(x)` saknades i central genomgång och genererade facit,
+> och fristående felanalysbilder tillförde för hög elevbelastning. Rapportens slutsats
+> om lektion 13 och dess publiceringsstatus är därför **återkallad**. Läs i stället
+> `ma4-fördjupad-omgranskning-efter-lärarfeedback-2026-11-25.md` samt PR 220.
+> Den första rapporten läste dessutom bara statisk HTML för ett exempel på
+> upprepad kvadrering i de Moivre, trots att det genererade facit redan innehöll kedjan.
+
 **Datum:** 25 november 2026  
 **Avsikt:** granska hela den publicerade Ma4-serien i kapitel 4 mot Jacobs synliga tavellösningar i elva inspelade filmer samt komplettera endast *Komplexa tal som vektorer* med den särskilt anvisade PDF:en. Detta är en ändrings- och kontrollista; en grön teknisk testkörning ensam bevisar inte metodtrohet.
 

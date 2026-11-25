@@ -134,7 +134,7 @@ const power=(v,n)=>{let s=z(1,0);for(let j=0;j<n;j++)s=multiply(s,v);return s};
     ok(await cycle.isHidden(),'visualization hides with revealed solution');
     await page.selectOption('#jump','6');
     ok(!(await details.evaluate(e=>e.open)),'returning to own work does not show previous recap');
-    await page.selectOption('#jump','8');
+    await page.selectOption('#jump','7');
     await page.selectOption('#jump','2');
     for(const id of ['i-source-simple','i-source-quadratic']){
       ok(await page.locator('#'+id).isHidden(),'Original solution hidden '+id);
@@ -147,7 +147,7 @@ const power=(v,n)=>{let s=z(1,0);for(let j=0;j<n;j++)s=multiply(s,v);return s};
     }
     const overflow=await pq.locator('.ma4-equation').evaluateAll(es=>es.filter(e=>e.scrollWidth>e.clientWidth+3).map(e=>e.querySelector('math')?.getAttribute('aria-label')));
     ok(overflow.length===0,'No clipped pq algebra '+JSON.stringify(overflow));
-    await page.selectOption('#jump','8');
+    await page.selectOption('#jump','7');
     ok(await page.locator('#i-exitfacit').isHidden(),'goal-based exit remains independent and unrevealed');
     await page.locator('#mode').click();
     ok((await page.locator('#mode').getAttribute('aria-pressed'))==='true','classroom view unaffected');
