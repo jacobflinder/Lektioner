@@ -62,7 +62,7 @@ async function inspectLayout(page,id,width,i){
     await page.locator('#jump').selectOption(String(i));
     assert.equal(await page.locator('.slide.active').count(),1);checks++;
     const studentText=await page.locator('.slide.active').innerText();
-    assert(!/Originalets|originallektionen|Jacobs|samma webblektion|SOC-3727|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
+    assert(!/Originalets|originallektionen|Jacobs?|samma webblektion|SOC-3727|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
     const buttons=page.locator('.slide.active [data-reveal]');
     for(let j=0;j<await buttons.count();j++){
      const button=buttons.nth(j),id=await button.getAttribute('data-reveal');
