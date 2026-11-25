@@ -119,7 +119,7 @@ for(const [name,c] of Object.entries(CASES)){
    await page.setViewportSize({width:v.w,height:v.h});
    await go(2);
    for(const [i,id,fragment] of [
-    [0,'source-feedback-1','0x²'],
+    [0,'source-feedback-1','Koefficienten är'],
     [1,'source-feedback-2','26 − 24'],
     [2,'source-feedback-3','resten är 0']
    ]){

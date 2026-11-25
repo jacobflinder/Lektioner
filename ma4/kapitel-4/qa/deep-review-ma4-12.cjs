@@ -89,7 +89,7 @@ for(const [k,c] of Object.entries(CASES)){
   await go(2);
   await testSpacing('.slide.active .math-givens > .math');
   const sourceChecks=[
-   {id:'source-feedback-1',fragment:'0x²'},
+   {id:'source-feedback-1',fragment:'Koefficienten är'},
    {id:'source-feedback-2',fragment:'26 − 24'},
    {id:'source-feedback-3',fragment:'resten är 0'}
   ];
