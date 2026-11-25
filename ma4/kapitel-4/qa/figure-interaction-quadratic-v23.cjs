@@ -55,7 +55,14 @@ async function run(){
    equal(await page.locator('#jump').inputValue(),'4','Frivillig polär repetition går att öppna separat');
    equal(await page.locator('#progress').innerText(),'Frivillig aktivitet','Repetitionen markeras tydligt frivillig');
    await click(page,'#next');
-   equal(await page.locator('#jump').inputValue(),'8','Frivillig repetition återgår till filmens huvudflöde');
+   equal(await page.locator('#jump').inputValue(),'5','Frivillig repetition går vidare till den förutsagda talplansfiguren');
+   await click(page,'#next');
+   equal(await page.locator('#jump').inputValue(),'6','Frivillig repetition går vidare till hela lösningen');
+   await click(page,'#prev');
+   equal(await page.locator('#jump').inputValue(),'5','Inom frivillig repetition fungerar tillbaka till figuren');
+   await click(page,'#next');
+   await click(page,'#next');
+   equal(await page.locator('#jump').inputValue(),'8','Efter repetitionslösningen återgår nästa till filmens huvudflöde');
    // Skillnaden konjugat/motsatt har samma origo, samma skala och korrekt transformationsbild.
    await visit(page,1);
    ok(await page.locator('#teacher-normalize').isVisible(),'Normalisering före pq finns i huvudgenomgången');
