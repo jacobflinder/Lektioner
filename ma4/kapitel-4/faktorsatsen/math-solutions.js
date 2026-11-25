@@ -60,10 +60,9 @@ insertSolutions({
   step('Varför räcker det?',[],'Vid division med x − a är resten alltid p(a).')
  ),
  'exit-check3':solution(
-  step('1 · Nollställena bestämmer faktorerna',['x = −2 ⇒ x + 2 = 0','x = 0','x = 1 ⇒ x − 1 = 0','h(x) = k(x + 2)x(x − 1)']),
-  step('2 · Punkten (2; 8) bestämmer k',['h(2) = 8','2 + 2 = 4','2 − 1 = 1','8 = k · 4 · 2 · 1','= 8k','k = 1']),
-  answer(['h(x) = x(x + 2)(x − 1)']),
-  step('Kontroll',[],'Funktionen är noll vid −2, 0 och 1 och har funktionsvärdet 8 då x = 2.')
+  step('Algebrans fundamentalsats',[],'Varje polynom av grad minst 1 har minst ett komplext nollställe.'),
+  answer(['p(z) = 0']),
+  step('Tolka',[],'Minst en sådan lösning finns i de komplexa talen. Den behöver inte vara reell.')
  ),
  homefacit:solution(
   step('1 · Beräkna varje term när x = −1',['h(x) = x³ + x² − 4x − 4',

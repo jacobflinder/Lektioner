@@ -77,3 +77,6 @@ for(const expression of ['|z − 2i|','Im(z)','Re(z)','√41','√13']){
 const factor=read('faktorsatsen');
 assert.ok(factor.includes('k(x)')&&factor.includes('rest'),'Factor theorem recap matches polynomdivision notation');
 console.log(`PASS Ma4 method-fidelity static: ${checked} lessons, teacher quotient/remainder notation, source geometry, no intrusive error slides, valid inline JavaScript and reveal targets`);
+
+assert.ok(/id="f-graf2" class="slide" data-optional="true"/.test(factor)&&/id="f-sjalv" class="slide" data-optional="true"/.test(factor),'Non-film scaling is not required');
+assert.ok(/data-optional="true" id="euler-multiplication-extra"/.test(read('eulers-formel')),'Non-film exponential multiplication is not required');

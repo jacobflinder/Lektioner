@@ -78,7 +78,7 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      await page.locator('[data-reveal="exit-check3"]').click();
      assert.ok(await page.locator('#exit-check1 .ma4-step').count()>=3,'Motivering med restsatsen');
      assert.ok(await page.locator('#exit-check2 .ma4-final math[aria-label*="−8"]').count()===1,'Rest −8');
-     assert.ok(await page.locator('#exit-check3 .ma4-final math[aria-label*="x(x + 2)"]').count()===1,'Faktorform från punkt');
+     assert.ok(await page.locator('#exit-check3 .ma4-final math[aria-label="p(z) = 0"]').count()===1,'Algebrans fundamentalsats i utcheckningen');
      await page.screenshot({path:OUT+'/ma4-faktor-math-exit.png',fullPage:true});
     }else{
      assert.equal(await page.locator('.slide').count(),10,'Tio lektionsbilder kvar');

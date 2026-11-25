@@ -64,4 +64,11 @@ Bedömningen **ingen saknad kärnmetod** betyder att den tidigare film–webb-ka
 
 ## Stoppvillkor och slutbeslut
 
-**Slutgranskning är tekniskt godkänd men ännu inte godkänd för publicering.** Huvudexemplets grader/radianer i lektion 08 är en kvarvarande exakt källskillnad. Den är inte en alternativ multiplikationsalgoritm, men eftersom Jacobs original ska styra även representation och ordning måste den antingen justeras källtroget eller accepteras uttryckligen. Ingen ”klar och publicerad” märkning innan dess och verifierad Pages-driftsättning.
+**Historisk status före radianrättningen:** Huvudexemplets grader/radianer i lektion 08 var en kvarvarande exakt källskillnad. Den är inte en alternativ multiplikationsalgoritm, men eftersom Jacobs original ska styra även representation och ordning måste den antingen justeras källtroget eller accepteras uttryckligen. Ingen ”klar och publicerad” märkning innan dess och verifierad Pages-driftsättning.
+
+
+## Slutlig avgränsning av huvudmetoder 25 november 2026
+
+Läraren godkände radianer först. Radianrättningen och layoutjusteringen passerade full webbläsarregression [45583684219](https://github.com/jacobflinder/Lektioner/actions/runs/45583684219). De tre första rättningarna slogs ihop via PR 221 efter grön delregression 45586102512; faktisk Pages-publicering måste verifieras separat.
+
+I denna fortsättning utgår vi från de tidigare dokumenterade synliga tavellösningarna, inte från en ny granskning av filmfilerna eller ordagrann ljudtranskription. I faktorsatsen ska inte den senare PDF:ens skalfaktoruppgift vara obligatorisk metod eller mål: de två befintliga skalfaktoruppgifterna är nu markerade frivilliga och ordinarie navigation hoppar över dem. Utcheckningen och metodstödet återgår till restsatsen, faktorsatsen och algebrans fundamentalsats. I Eulerlektionens huvudväg utgår exponentialmultiplikationen som obligatorisk metod och mål; befintlig multiplikation är frivillig, och utcheckning samt metodstöd prövar filmens omvandlingar (bryt ut absolutbeloppet och argumentberäkning) och identiteten. Tidigare frivilliga tillämpningar ligger kvar utanför huvudvägen; de är inte nygodkända filmmetoder. Ändringarna är ännu inte testade på denna sammanslagna kodversion. Godkänd webbläsarregression och faktisk Pages-verifiering krävs före färdigrapport.

@@ -62,6 +62,7 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   // 06: Euler gör ett giltigt skrivformsbyte, vinkel i radianer och r>0.
   await go(5);await quiz(0,0,1);await reveal('same');await findMath('.slide.active p.muted','z skilt från noll');await pic('06-desktop');
   // 07: ingen facitläcka, helt mellanled, två separata givna tal.
+  await go(5);await page.locator('#next').click();assert.equal(await page.locator('.slide.active').evaluate(el=>Array.from(document.querySelectorAll('.slide')).indexOf(el)),7,'Huvudvägen hoppar över frivillig exponentialmultiplikation');
   await go(6);assert.ok(await page.locator('#multiply').isHidden());assert.equal(await page.locator('.slide.active > .math-givens > .math').count(),2);
   await gap('.slide.active > .math-givens > .math');await reveal('multiply');
   for(const x of ['v = π/6 + 2π/6','v = 3π/6 = π/2','cos(π/2) = 0','sin(π/2) = 1','z₁z₂ = 6i'])await findMath('#multiply',x);
@@ -96,11 +97,10 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
   await page.locator('#series-reset').click();assert.ok(await page.locator('[data-series-step="0"]').isVisible());await pic('14-desktop');
   // 15: tre dolda, fullständiga återkopplingar, vart och ett av målen.
   await go(13);for(const id of ['e-exit1','e-exit2','e-exit3'])assert.ok(await page.locator('#'+id).isHidden());
-  assert.equal(await page.locator('.slide.active .math-givens .math').count(),2);
-  await gap('.slide.active .math-givens > .math');
+  assert.equal(await page.locator('.slide.active #e-exit2').count(),1);
   for(const id of ['e-exit1','e-exit2','e-exit3'])await reveal(id);
   for(const x of ['cos(−π/2) = 0','sin(−π/2) = −1','z = −2i'])await findMath('#e-exit1',x);
-  for(const x of ['v = v₁ + v₂ = π/3 + (−π/3) = 0','z₁z₂ = 6e^(i·0)','e⁰ = 1','z₁z₂ = 6'])await findMath('#e-exit2',x);
+  for(const x of ['r = √((−2)² + 2²)','= 2√2','v = 3π/4','u = 2√2e^(i3π/4)'])await findMath('#e-exit2',x);
   for(const x of ['cos(π) = −1','sin(π) = 0','e^(iπ) + 1 = 0'])await findMath('#e-exit3',x);
   await pic('15-desktop');
   // Desktop projektor, lättåtkomligt lärarstöd och 390px mobil i alla 15 bilder.

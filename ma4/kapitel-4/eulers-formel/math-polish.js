@@ -148,26 +148,15 @@ if(check1)check1.innerHTML='<div class="ma4-worked">'+
    '<p>Kontroll: punkten (0; −2) ligger två enheter från origo, på negativa imaginära axeln.</p>')+
  '</div>';
 
-const exitInputs=document.getElementById('e-exit2')?.parentElement?.querySelector('.math');
-if(exitInputs)exitInputs.outerHTML=givens([
- [R(SUB(I('z'),N('1')),O('='),N('2'),expI(piFrac(3))),'z₁ = 2e^(iπ/3)'],
- [R(SUB(I('z'),N('2')),O('='),N('3'),expI(R(O('−'),i,piFrac(3)))),'z₂ = 3e^(−iπ/3)']
-]);
 const check2=document.getElementById('e-exit2');
 if(check2){
- const product=R(SUB(I('z'),N('1')),SUB(I('z'),N('2')));
+ const angle=FR(R(N('3'),π),N('4'));
  check2.innerHTML='<div class="ma4-worked">'+
- S('1 · Identifiera belopp och argument',
-   eq('r₁ = 2')+eq('r₂ = 3')+eq('v₁ = π/3')+eq('v₂ = −π/3'))+
- S('2 · Multiplicera beloppen och addera argumenten',
-   eq('r = r₁r₂ = 2 · 3 = 6')+
-   eq('v = v₁ + v₂ = π/3 + (−π/3) = 0'))+
- S('3 · Använd exponentiallagen och förenkla',
-   L(R(product,O('='),pth(N('2'),expI(piFrac(3))),pth(N('3'),expI(R(O('−'),i,piFrac(3))))),'z₁z₂ = (2e^(iπ/3))(3e^(−iπ/3))')+
-   L(R(product,O('='),N('2'),O('·'),N('3'),expI(R(i,P(R(piFrac(3),O('−'),piFrac(3)))))), 'z₁z₂ = 2·3 e^(i(π/3−π/3))')+
-   L(R(product,O('='),N('6'),E(R(i,N('0')))),'z₁z₂ = 6e^(i·0)')+
-   L(R(E(N('0')),O('='),N('1')),'e⁰ = 1')+
-   eq('z₁z₂ = 6 · 1')+A(eq('z₁z₂ = 6')))+
+ S('1 · Beräkna absolutbeloppet',eq('r = √((−2)² + 2²)')+eq('= √(4 + 4)')+eq('= √8')+eq('= 2√2'))+
+ S('2 · Bryt ut absolutbeloppet',eq('u = 2√2(−2/(2√2) + i·2/(2√2))')+eq('= 2√2(−1/√2 + i/√2)')+eq('= 2√2(−√2/2 + i√2/2)'))+
+ S('3 · Identifiera argumentet',eq('cos v = −√2/2')+eq('sin v = √2/2')+eq('v = 3π/4')+'<p>Realdelen är negativ och imaginärdelen positiv: andra kvadranten.</p>')+
+ S('4 · Använd Eulers formel',eq('u = 2√2(cos(3π/4) + i sin(3π/4))')+
+ A(L(R(I('u'),O('='),N('2'),'<msqrt>'+N('2')+'</msqrt>',expI(angle)),'u = 2√2e^(i3π/4)')))+
  '</div>';
 }
 const check3=document.getElementById('e-exit3');

@@ -200,7 +200,7 @@ for(const [width,height] of [[390,844],[768,900],[1280,800],[1920,1080]]){
   await screenshot('15-utcheckning-fore');
   for(const id of ['e-exit1','e-exit2','e-exit3'])await reveal(id);
   check(await page.locator('#e-exit1 math[aria-label]').count()>=3,'Fullständig omvandling i facit');
-  check(await page.locator('#e-exit2 math[aria-label]').count()>=3,'Fullständig multiplikation i facit');
+  check(await page.locator('#e-exit2 math[aria-label]').count()>=3,'Fullständig omvandling genom att bryta ut absolutbeloppet');
   check(await page.locator('#e-exit3 math[aria-label]').count()>=2,'Fullständig identitet i facit');
   await screenshot('15-utcheckning-efter');
   await go(10);equal(await page.locator('#euler-practice-support details[open]').count(),0,'Metodkorten återställda efter navigation');
