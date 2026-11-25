@@ -55,11 +55,13 @@ Bedömningen **ingen saknad kärnmetod** betyder att den tidigare film–webb-ka
 | Filmens polynomdivision och slutskrivning | Återkontrollerad mot filmruta 09, cirka 21–29 min. Filmens exempelsiffror skiljer sig från webbens, men metoden, stolsformen och restuttrycket är samma. |
 | Lärarmetoden och dynamiska facit | Statisk kontroll godkänd. `math-polish.js` och lektionsskriptet använder nu `k(x)`/`rest`. |
 | Antal bilder, facitknappar och Javascript-syntax | Statiskt test godkänt: 14 bildspel, `enhetscirkeln` separat. Alla Javascript-testfiler syntaxkontrollerade. |
-| Matematiken i varje steg och återställning | Flera mekaniska och visuella jämförelser genomförda. Fullständig interaktiv exekvering behöver fortfarande Playwright/Chromium. |
-| Mobil, projektor, skärmbild för varje slide | **Ej slutverifierad i denna körning.** Lokal Chromium saknas och den separata molnwebbläsaren når inte lokal förhandsserver. GitHub Actions kan genomföra den. |
+| Matematiken i varje steg och återställning | **Godkänd i automatiserad webbläsarkontroll.** Interaktiva facit, stolssteg, kvot-/restidentiteter, geometri, klick och återställning kontrollerade. |
+| Mobil, projektor, skärmbild för varje slide | **Godkänd i GitHub Actions** med Chromium: bland annat 390 px mobil, 768 px surfplatta, 1280 px dator och 1920 px projektor. Lokala Chromium-programmet var otillgängligt, men samma kod testades i CI. |
 | NOKflex-intervall | Alla 14 ordinarie bildspel har de aktuella intervallen. Enhetscirkelverkstaden har inget eget uppgiftsintervall. |
-| Publicerad webb | **Inte uppdaterad av denna rapport.** Ingen version får betecknas färdig förrän grön webbläsar-QA och publiceringskontroll är genomförda. |
+| Publicerad webb | **Inte uppdaterad av denna rapport.** Grön webbläsar-QA är uppnådd; källskillnaden i lektion 08 och kontroll av faktisk Pages-publicering återstår. |
+
+**Verifierbar regression:** [GitHub Actions, körning 45576957142](https://github.com/jacobflinder/Lektioner/actions/runs/45576957142), grön 25 november 2026. Arbetsgrenens kontrollerade kodversion var `7d7dd835ed449a8d60f26c0ced6c0468a0b104ec`. Samtliga 44 kontrollskript i workflowen passerade, inklusive det statiska metodestriktionsprovet. Senare ändring i denna rapport är dokumentation, inte lektionskod.
 
 ## Stoppvillkor och slutbeslut
 
-**Slutgranskning är ännu inte godkänd för publicering.** Utöver den tekniska webbläsarkontrollen är huvudexemplets grader/radianer i lektion 08 en kvarvarande exakt källskillnad. Den är inte en alternativ multiplikationsalgoritm, men eftersom Jacobs original ska styra även representation och ordning måste den antingen justeras källtroget eller accepteras uttryckligen. Ingen ”klar och publicerad” märkning innan dess.
+**Slutgranskning är tekniskt godkänd men ännu inte godkänd för publicering.** Huvudexemplets grader/radianer i lektion 08 är en kvarvarande exakt källskillnad. Den är inte en alternativ multiplikationsalgoritm, men eftersom Jacobs original ska styra även representation och ordning måste den antingen justeras källtroget eller accepteras uttryckligen. Ingen ”klar och publicerad” märkning innan dess och verifierad Pages-driftsättning.
