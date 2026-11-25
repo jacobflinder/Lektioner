@@ -128,7 +128,7 @@ document.querySelectorAll('[data-equation-circle]').forEach(root=>{
    const [x1,y1]=xy(first),[x2,y2]=xy(second);
    add(svg,'line',{x1,y1,x2,y2,stroke:'#d79336','stroke-width':3,'stroke-dasharray':'7 5'});
   }
-  add(svg,'text',{x:kind==='sin'?cx+166:cx+r*value-36,y:kind==='sin'?cy-r*value-12:cy+184,fill:'#9a631d','font-weight':700},`${kind==='sin'?'y':'x'} = ${value.toString().replace('.',',').replace('-', '−')}`);
+  add(svg,'text',{x:kind==='sin'?cx+184:cx+r*value-36,y:kind==='sin'?cy-r*value-28:cy+184,fill:'#9a631d','font-weight':700},`${kind==='sin'?'y':'x'} = ${value.toString().replace('.',',').replace('-', '−')}`);
   root.querySelectorAll('[data-circle-step]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.circleStep===(both?'both':'first'))));
   const explanation=root.querySelector('[data-equation-explanation]');
   if(explanation)explanation.textContent=both?'Två punkter har samma '+(kind==='sin'?'y-koordinat (sinus)':'x-koordinat (cosinus)')+'.': 'En första vinkel kommer från '+(kind==='sin'?'arcsin':'arccos')+'. Var ligger den speglade punkten?';

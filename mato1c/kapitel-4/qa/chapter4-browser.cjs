@@ -65,7 +65,7 @@ async function inspectLayout(page,id,width,i){
      assert(await page.locator('#'+id).isVisible(),`${lesson.id}: hidden answer missing ${id}`);checks++;
     }
     await inspectLayout(page,lesson.id,width,i);
-    if(width===390&&[1,2,3,4,5,6,count-2].includes(i))await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
+    if(width===390)await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
    }
    if(lesson.id==='exakta-trigonometriska-varden'){
     await page.locator('#jump').selectOption('6');
