@@ -26,7 +26,7 @@ async function checkMath(page, width, slide) {
     return {
       pageWidth:document.documentElement.scrollWidth,
       viewport:innerWidth,
-      math:[...document.querySelectorAll('.slide.active .math-line math')].filter(visible).map(el => {
+      math:[...document.querySelectorAll('.slide.active .math-line math, .slide.active .math-inline math')].filter(visible).map(el => {
         const rect=el.getBoundingClientRect();
         return {value:el.textContent?.slice(0,80),left:rect.left,right:rect.right,width:rect.width,height:rect.height,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth};
       })
@@ -53,6 +53,8 @@ async function checkMath(page, width, slide) {
       assert.equal(await slides.count(),12);checks++;
       assert.equal(await page.locator('.slide[data-optional="true"]').count(),2);checks++;
       assert.equal(await page.locator('.levels .book-number').allTextContents().then(x=>x.join('|')),'3382–3386|3387–3393|3394–3395');checks++;
+      assert.equal(await page.locator('.goal-review .goal-exercises').count(),3,'Alla tre mål ska kopplas till bokuppgifter');checks++;
+      assert.equal(await page.locator('.slide').nth(9).getByText('Individuell slutkontroll').count(),0,'Inga nya räkneuppgifter i målåterkopplingen');checks++;
       assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).fontSize!=='0px'),true);checks++;
       if(width<=390){
         const nav=await page.evaluate(()=>{
@@ -74,7 +76,9 @@ async function checkMath(page, width, slide) {
           await button.click();
           assert.equal(await page.locator(`#${target}`).isVisible(),true,`Bild ${i+1} saknar synlig återkoppling`);checks++;
         }
-        if(i===9) await page.locator('.slide.active details').evaluateAll(nodes=>nodes.forEach(node=>{node.open=true;}));
+        if(i===3){
+          assert.equal(await page.locator('.slide.active ol li').nth(2).locator('msubsup').count(),1,'[F(t)] ska ha symmetriska övre och undre gränser i arbetsgången');checks++;
+        }
         await checkMath(page,width,i+1);
         if([390,1280].includes(width)&&screenshotSlides.has(i)){
           await page.screenshot({path:path.join(screenshotDir,`${width}-slide-${i+1}.png`),fullPage:true});

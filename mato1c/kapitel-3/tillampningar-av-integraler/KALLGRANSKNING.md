@@ -43,7 +43,7 @@
 - Bild 7: lärobokens fyra kategorier (hastighet, acceleration, effekt, population) kopplas tydligt till rätt enheter. Algebraiskt accelerationsexempel använder exakt samma metod.
 - Bild 8: startvärdet läggs till *efter* den med fundamentalsatsen beräknade förändringen, för att förbereda 3385–3386; egen fiskmodell.
 - Bild 9: individuell kontroll av tolkning och enheter innan arbetstid.
-- Bild 10: fullständig bokarbetsinstruktion, Kunskapsmatrisen efteråt och individuell slutkontroll för samtliga tre mål.
+- Bild 10: fullständig bokarbetsinstruktion, tre synliga mål med hänvisningar till redan valda bokuppgifter, därefter Kunskapsmatrisen. Den tidigare separata slutkontrollen med nya räkneuppgifter har tagits bort efter lärarens återkoppling 25 november.
 - Bilder 11–12: märkta extra, med energi/effekt och valbar digital kontroll. Ingen av dem behövs för att nå bokarbetet.
 
 ## Matematiska kontrollpunkter
@@ -54,7 +54,11 @@
 - Acceleration: `∫₀⁴ 3dt=[3t]₀⁴=12 m/s`.
 - Fiskar: `∫₀³ (6+2t)dt=[6t+t²]₀³=27`; `90+27=117` fiskar.
 - Effekt: `∫₀²⁰ (300+10t)dt = 8 000 J`; valbar modell `∫₀⁶⁰(100+4t+0,05t²)dt=16 800 J`.
-- Slutkontroll: `∫₀²(5+2t)dt = 14`; ny mängd `60+14=74`.
+- Målåterkoppling: mål 1 hänvisar till **3383, 3388 a–c och 3392**, mål 2 till **3382, 3383, 3384 b och 3393**, mål 3 till **3385 b och 3386 b**. Dessa är befintliga bokuppgifter och innebär ingen extra elevbelastning.
+
+## Justering av matematisk typografi
+
+- Arbetsgången på bild 4 använder samma symmetriskt satta `msubsup`-notation för gränserna på `[F(t)]` som själva fundamentalsatsen, i stället för två separata HTML-taggar `sub` och `sup`. Matematiken och räkneordningen är oförändrade.
 
 ## Redaktionell gräns
 

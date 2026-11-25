@@ -24,6 +24,12 @@ yes(html.includes('<mi>d</mi><mi>t</mi>'), 'dt följer originalfilmens byte av v
 yes(html.includes('3382–3386') && html.includes('3387–3393') && html.includes('3394–3395'), 'Hela de tre nya nivåerna enligt s.201–202');
 yes(html.includes('alla uppgifter och samtliga deluppgifter'), 'Kravet är två hela nivåer');
 yes(html.includes('Kunskapsmatrisen'), 'Originalets arbete i Kunskapsmatrisen bevarat');
+yes(html.includes('Stäm av de tre målen med dina lösningar') && !html.includes('Individuell slutkontroll'), 'Slutåterkoppling använder gjorda bokuppgifter, inga nya slutproblem');
+yes((html.match(/class="goal-exercises"/g) || []).length === 3, 'Varje elevmål har bokkoppling');
+yes(html.includes('3383, 3388 a–c, 3392') && html.includes('3382, 3383, 3384 b, 3393') && html.includes('3385 b, 3386 b'), 'Bokkopplingen täcker tolkning, beräkning och startvärde');
+yes(html.indexOf('Stäm av de tre målen') < html.lastIndexOf('Kunskapsmatrisen'), 'Självbedömning följs av originalets Kunskapsmatrisen');
+const methodStep = html.match(/<li>Skriv hela kedjan (.*?)<\/li>/)?.[1] ?? '';
+yes(methodStep.includes('<msubsup>') && !methodStep.includes('<sub>') && !methodStep.includes('<sup>'), 'Gränserna på [F(t)] sätts symmetriskt med MathML');
 yes(!/Socrative/i.test(html.replace(/data-teacher="[^"]*"/g, '')), 'Ingen Socrative i elevdel utan källa');
 yes(!html.includes('17 − 10t') && !html.includes('0,9 sekunder'), 'Bollens gamla och nya lärobokstal har bytts ut');
 yes(html.includes('id="ball-answer"') && html.includes('id="water-answer"') && html.includes('id="accel-answer"') && html.includes('id="fish-answer"'), 'Fullständiga lösningskedjor finns');
@@ -51,9 +57,6 @@ const energy = t => 300*t+5*t*t;
 near(energy(20)-energy(0), 8000, 'Energi');
 const advanced = t => 100*t+2*t*t+.05*t*t*t/3;
 near(advanced(60)-advanced(0), 16800, 'Extraeffekt');
-const exit = t => 5*t+t*t;
-near(exit(2)-exit(0), 14, 'Slutkontrollens integral');
-near(60+14, 74, 'Slutkontrollens total');
 const f = x => 3+2*x-.5*x*x;
 near(3*4 + 4*4 - Math.pow(4,3)/6, 52/3, 'Rektangelgrafens exakta integral');
 for(const n of [9,18,36]) {
