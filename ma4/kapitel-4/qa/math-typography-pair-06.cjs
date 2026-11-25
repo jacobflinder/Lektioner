@@ -66,7 +66,9 @@ const OUT='ma4-qa-screenshots';fs.mkdirSync(OUT,{recursive:true});
      await page.locator('[data-reveal="r13a"]').click();
      await page.locator('[data-reveal="r13b"]').click();
      assert.ok(await page.locator('#r13a math[display="block"]').count()>3,'Fullständig kvadratkomplettering');
-     assert.ok(await page.locator('#r13b msqrt').count()>0,'Exakta komplexa rötter');
+     assert.ok(await page.locator('#r13b math[aria-label="a² − b² = 0"]').count()>0,'Realdelen i filmens ansats finns i exit B');
+     assert.ok(await page.locator('#r13b math[aria-label="2ab = 18"]').count()>0,'Imaginärdelen i filmens ansats finns i exit B');
+     assert.ok(await page.locator('#r13b .worked-result math').count()===2,'Båda komplexa rötterna redovisas efter fallprövning');
      assert.ok((await page.locator('.slide.active').innerText()).includes('NOKflex')===false,'Utcheckning är separat från bokarbetet');
      await page.screenshot({path:OUT+'/ma4-andragrad-polished-exit-math.png',fullPage:true});
     }else{

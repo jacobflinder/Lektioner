@@ -140,7 +140,7 @@ const html={
  r9:worked(
   step('A · Kvadratskillnad',eq('z² − 9 = 0'),eq('(z − 3)(z + 3) = 0'),eq('z = ±3')),
   step('B · pq-formeln',eq('z² + 6z + 13 = 0'),eq('z = −3 ± √(9 − 13)'),eq('z = −3 ± 2i'),label('Kontroll av första roten'),eq('(−3 + 2i)² + 6(−3 + 2i) + 13'),eq('= 5 − 12i − 18 + 12i + 13 = 0')),
-  step('C · Polär form eller real- och imaginärdel',eq('z² = −2i'),eq('z = ±(1 − i)')),
+  step('C · Ansats och jämförelse av delarna',eq('z² = −2i'),eq('z = a + bi'),eq('a² − b² = 0'),eq('2ab = −2'),eq('ab = −1'),eq('b = −a'),eq('a = ±1'),eq('z = 1 − i eller z = −1 + i')),
   step('D · Redan kvadratkompletterad',eq('(z − 1)² = −4'),eq('z − 1 = ±2i'),eq('z = 1 ± 2i')),
   prose('Flera metoder kan vara riktiga. Motivera ditt val utifrån ekvationens struktur.')
  ),
@@ -164,10 +164,10 @@ const html={
   step('Kontroll av första roten',eq('(4i)² − 2i(4i) + 8'),eq('= −16 + 8 + 8 = 0'))
  ),
  r13b:worked(
-  step('Polär form',eq('18i = 18(cos(π/2) + i sin(π/2))')),
-  step('Belopp och argument',eq('r² = 18 ⇒ r = 3√2'),eq('2v = π/2 + 2πk'),eq('v = π/4 + πk')),
-  step('Omvandla båda rötterna',eq('k = 0 ⇒ z₀ = 3√2(√2/2 + i√2/2)'),eq('z₀ = 3 + 3i'),eq('k = 1 ⇒ z₁ = 3√2(−√2/2 − i√2/2)'),eq('z₁ = −3 − 3i')),
-  result('z = 3 + 3i','z = −3 − 3i'),
+  step('Ansätt real- och imaginärdel',eq('z = a + bi'),eq('z² = (a² − b²) + 2abi'),eq('= 18i')),
+  step('Sätt delarna lika',eq('a² − b² = 0'),eq('2ab = 18'),eq('a² = b²'),eq('ab = 9')),
+  step('Pröva teckenfallen',eq('b = −a ⇒ −a² = 9'),prose('Omöjligt för reella a.'),eq('b = a ⇒ a² = 9'),eq('a = ±3')),
+  result('z₁ = 3 + 3i','z₂ = −3 − 3i'),
   step('Kontroll',eq('(3 + 3i)² = 9 + 18i − 9 = 18i'))
  ),
  r13c:worked(
@@ -274,7 +274,7 @@ Object.assign(html,{
   step('B · Sätt in i pq-formeln',eq('z = −p/2 ± √((p/2)² − q)'),eq('z = −6/2 ± √((6/2)² − 13)'),eq('z = −3 ± √(9 − 13)'),eq('z = −3 ± √(−4)'),eq('z = −3 ± 2i')),
   result('z₁ = −3 + 2i','z₂ = −3 − 2i'),
   step('B · Kontrollera en rot',eq('(−3 + 2i)² = 9 − 12i + 4i²'),eq('= 9 − 12i − 4 = 5 − 12i'),eq('6(−3 + 2i) = −18 + 12i'),eq('(−3 + 2i)² + 6(−3 + 2i) + 13'),eq('= 5 − 12i − 18 + 12i + 13 = 0')),
-  step('C · Polär form eller real- och imaginärdel',eq('z² = −2i'),eq('(1 − i)² = 1 − 2i + i² = −2i'),eq('z = 1 − i'),eq('z = −1 + i')),
+  step('C · Jämför realdel och imaginärdel',eq('z² = −2i'),eq('z = a + bi'),eq('(a + bi)² = (a² − b²) + 2abi'),eq('a² − b² = 0'),eq('2ab = −2'),eq('a² = b²'),eq('ab = −1'),eq('b = a ⇒ a² = −1'),prose('Omöjligt för reella a.'),eq('b = −a ⇒ −a² = −1'),eq('a² = 1 ⇒ a = ±1'),eq('z = 1 − i'),eq('z = −1 + i')),
   step('D · Redan kvadratkompletterad',eq('(z − 1)² = −4'),eq('z − 1 = ±√(−4)'),eq('z − 1 = ±2i'),eq('z = 1 ± 2i')),
   prose('Flera metoder är möjliga. Förklara varför en viss form gör just den metoden enkel.')
  ),
@@ -306,13 +306,13 @@ Object.assign(html,{
   step('5 · Kontrollera genom insättning',eq('(4i)² − 2i(4i) + 8 = −16 + 8 + 8 = 0'),eq('(−2i)² − 2i(−2i) + 8 = −4 − 4 + 8 = 0'))
  ),
  r13b:worked(
-  step('1 · Skriv högerledet i polär form',eq('z² = 18i'),eq('18i = 18(cos(π/2) + i sin(π/2))')),
-  step('2 · Bestäm beloppet',eq('r² = 18'),eq('r = √18 = √(9·2) = 3√2')),
-  step('3 · Bestäm argumenten',eq('2v = π/2 + 2πk'),eq('k ∈ ℤ'),eq('v = (π/2 + 2πk)/2'),eq('v = π/4 + πk')),
-  step('4 · Använd k = 0',eq('v₀ = π/4'),eq('cos(π/4) = √2/2'),eq('sin(π/4) = √2/2'),eq('z₀ = 3√2(√2/2 + i√2/2)'),eq('z₀ = 3 + 3i')),
-  step('5 · Använd k = 1',eq('v₁ = π/4 + π = 5π/4'),eq('cos(5π/4) = −√2/2'),eq('sin(5π/4) = −√2/2'),eq('z₁ = 3√2(−√2/2 − i√2/2)'),eq('z₁ = −3 − 3i')),
-  result('z = 3 + 3i','z = −3 − 3i'),
-  step('6 · Kontrollera',eq('(3 + 3i)² = 9 + 18i + 9i²'),eq('= 9 + 18i − 9 = 18i'),eq('(−3 − 3i)² = 9 + 18i + 9i²'),eq('= 9 + 18i − 9 = 18i'))
+  step('1 · Ansätt reella a och b',eq('z² = 18i'),eq('z = a + bi'),eq('a, b ∈ ℝ')),
+  step('2 · Kvadrera och utveckla varje produkt',eq('(a + bi)² = (a + bi)(a + bi)'),eq('= a² + abi + abi + b²i²'),eq('= a² + 2abi − b²'),eq('= (a² − b²) + 2abi'),eq('= 18i')),
+  step('3 · Jämför realdel och imaginärdel',eq('a² − b² = 0'),eq('2ab = 18'),eq('a² = b²'),eq('ab = 9')),
+  step('4 · Fall 1: b = −a',eq('ab = a(−a) = −a² = 9'),eq('a² = −9'),prose('Detta är omöjligt eftersom a ska vara reellt.')),
+  step('5 · Fall 2: b = a',eq('ab = a·a = a² = 9'),eq('a = ±3'),eq('b = a'),eq('a = 3 ⇒ b = 3'),eq('a = −3 ⇒ b = −3')),
+  result('z₁ = 3 + 3i','z₂ = −3 − 3i'),
+  step('6 · Kontrollera båda rötterna',eq('(3 + 3i)² = 9 + 18i + 9i²'),eq('= 9 + 18i − 9 = 18i'),eq('(−3 − 3i)² = 9 + 18i + 9i²'),eq('= 9 + 18i − 9 = 18i'))
  ),
  r13c:worked(
   step('Jämför motsatt tal med konjugat',eq('z₀ = 3 + 3i'),eq('−z₀ = −3 − 3i'),eq('(3 − 3i)² = 9 − 18i + 9i² = −18i')),
