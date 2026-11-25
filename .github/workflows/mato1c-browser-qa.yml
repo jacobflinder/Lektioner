@@ -32,6 +32,7 @@ jobs:
           for i in {1..20}; do curl -fsS http://127.0.0.1:8123/mato1c/kapitel-3/ >/dev/null && break; sleep 1; done
       - name: Verify navigation, interactivity, responsivity and screenshots
         run: |
+          node mato1c/kapitel-4/qa/source-content.cjs
           node mato1c/kapitel-3/qa/figure-interaction-deriverbarhet-v23.cjs
           node mato1c/kapitel-3/qa/figure-interaction-mixed-v23.cjs
           node mato1c/kapitel-3/qa/figure-interaction-modeling-v23.cjs
@@ -75,6 +76,7 @@ jobs:
           QA_BASE_URL=http://127.0.0.1:8123 node mato1c/kapitel-3/qa/mer-om-integraler-browser.cjs
           node mato1c/kapitel-3/qa/tillampningar-av-integraler-original-math.cjs
           QA_BASE_URL=http://127.0.0.1:8123 node mato1c/kapitel-3/qa/tillampningar-av-integraler-browser.cjs
+          QA_BASE_URL=http://127.0.0.1:8123 node mato1c/kapitel-4/qa/chapter4-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-browser.cjs
           node mato1c/kapitel-3/qa/math-typography-deep-browser.cjs
       - name: Upload browser evidence
