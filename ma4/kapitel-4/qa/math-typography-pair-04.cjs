@@ -68,7 +68,7 @@ fs.mkdirSync(OUT,{recursive:true});
      assert.ok(await page.locator('#exitans mfrac').count()>=1,'Exakt division i utcheckningen');
      await page.screenshot({path:OUT+'/ma4-polar-multdiv-exit-math.png',fullPage:true});
     } else {
-     assert.equal(await page.locator('.slide').count(),10,'Tio lektionsbilder kvar');
+     assert.equal(await page.locator('.slide').count(),9,'Nio lektionsbilder efter borttagen felanalys');
      assert.ok(await page.locator('#intro-facit').isHidden(),'Startfacit initialt dolt');
      await page.locator('[data-reveal="intro-facit"]').click();
      assert.ok(await page.locator('#intro-facit math msup').count()>=4,'Potenser i inledningen skrivs med exponenter');
