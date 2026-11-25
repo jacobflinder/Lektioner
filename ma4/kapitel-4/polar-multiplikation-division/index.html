@@ -9,6 +9,22 @@
 .pd-method-card .math{font-size:clamp(1.16rem,1.8vw,1.38rem)}
 @media(max-width:800px){.pd-method-grid{grid-template-columns:1fr}.pd-method-recap{padding:10px 12px}}
 @media(max-width:520px){#pd-plane text,#pd-zoom-plane text{font-size:25px!important}#pd-result>p.math:nth-child(3) math{font-size:1.08rem}}
+
+/* Håll hela talplanet och resultatet synliga tillsammans på klassrumsskärmar.
+   Inga matematikrader tas bort; radavståndet är fortfarande minst 16 px. */
+@media(min-width:1000px){
+ #plot .two>div{min-width:0}
+ #plot .two>div:nth-child(2)>.math-givens{margin:4px 0 10px;row-gap:16px}
+ #plot .two>div:nth-child(2)>.math-givens>.math{font-size:1.38rem}
+ #plot .task{margin:8px 0;padding:9px 12px}
+ #plot .task p{margin:5px 0;line-height:1.35}
+ #plot .seq-controls{display:flex;flex-wrap:wrap;gap:6px}
+ #plot .seq-controls button{padding:8px 12px}
+ #pd-step{margin:4px 0}
+ #pd-answer{margin:8px 0;padding:10px 14px}
+ #pd-result{margin:0;row-gap:16px}
+ #pd-explain{margin:8px 0 0;line-height:1.35}
+}
 </style><style>@media(max-width:720px){main:has(#quotient.active){padding-inline:8px}main:has(#quotient.active) .stage{padding-inline:12px}#quotient .sequence.panel{padding-inline:8px}#quotient .seq-item{padding-inline:8px}#quotient .math-working{padding-inline:6px}}</style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.2</strong><div class="head-actions"><button id="teacher-toggle" class="secondary" aria-expanded="false">Visa lärarstöd</button><button id="mode" class="secondary" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p></div><div class="repetition"><strong>Repetitionsläge:</strong> försök innan du klickar fram återkoppling. Inga elevdata samlas in.</div><div id="stage" class="stage"><section id="intro" class="slide active" data-teacher="Original-PDF:en börjar med z=4+3i. Ge en minut enskilt och en minut tillsammans. Eleverna beräknar r och v och kontrollerar kvadranten; lyft fram att multiplikation av komplexa tal snart blir enklare med dessa två mått.">
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Multiplikation och division i polär form</h2><p class="lead">4.2 Komplexa tal i polär form · Multiplikation förändrar längd och riktning</p>
 <div class="task"><strong>Tänk själv 1 minut → skriv tillsammans 1 minut</strong><p class="math math-big">z = 4 + 3i</p><p>Skriv talet i polär form. Hur stort är absolutbeloppet? Vilken riktning har talet? Skissa först.</p></div>
