@@ -164,7 +164,7 @@ const html={
   step('Kontroll av första roten',eq('(4i)² − 2i(4i) + 8'),eq('= −16 + 8 + 8 = 0'))
  ),
  r13b:worked(
-  step('Ansätt real- och imaginärdel',eq('z = a + bi'),eq('z² = (a² − b²) + 2abi = 18i')),
+  step('Ansätt real- och imaginärdel',eq('z = a + bi'),eq('z² = (a² − b²) + 2abi'),eq('= 18i')),
   step('Sätt delarna lika',eq('a² − b² = 0'),eq('2ab = 18'),eq('a² = b²'),eq('ab = 9')),
   step('Pröva teckenfallen',eq('b = −a ⇒ −a² = 9'),prose('Omöjligt för reella a.'),eq('b = a ⇒ a² = 9'),eq('a = ±3')),
   result('z₁ = 3 + 3i','z₂ = −3 − 3i'),
@@ -307,7 +307,7 @@ Object.assign(html,{
  ),
  r13b:worked(
   step('1 · Ansätt reella a och b',eq('z² = 18i'),eq('z = a + bi'),eq('a, b ∈ ℝ')),
-  step('2 · Kvadrera och utveckla varje produkt',eq('(a + bi)² = (a + bi)(a + bi)'),eq('= a² + abi + abi + b²i²'),eq('= a² + 2abi − b²'),eq('= (a² − b²) + 2abi = 18i')),
+  step('2 · Kvadrera och utveckla varje produkt',eq('(a + bi)² = (a + bi)(a + bi)'),eq('= a² + abi + abi + b²i²'),eq('= a² + 2abi − b²'),eq('= (a² − b²) + 2abi'),eq('= 18i')),
   step('3 · Jämför realdel och imaginärdel',eq('a² − b² = 0'),eq('2ab = 18'),eq('a² = b²'),eq('ab = 9')),
   step('4 · Fall 1: b = −a',eq('ab = a(−a) = −a² = 9'),eq('a² = −9'),prose('Detta är omöjligt eftersom a ska vara reellt.')),
   step('5 · Fall 2: b = a',eq('ab = a·a = a² = 9'),eq('a = ±3'),eq('b = a'),eq('a = 3 ⇒ b = 3'),eq('a = −3 ⇒ b = −3')),

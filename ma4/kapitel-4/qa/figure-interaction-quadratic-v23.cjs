@@ -181,6 +181,8 @@ async function run(){
     ok(exitLabels.some(label=>label&&label.replaceAll(' ','')===expression.replaceAll(' ','')),'Slutkontroll använder filmens ansats: '+expression);
    }
    ok(!(await page.locator('#r13b').innerText()).includes('cos'),'Ingen obligatorisk polär metod i slutkontrollen');
+   const exitOverflow=await page.locator('#r13b .worked-equation:visible').evaluateAll(rows=>rows.filter(row=>row.scrollWidth>row.clientWidth+3).map(row=>row.querySelector('math')?.getAttribute('aria-label')));
+   equal(exitOverflow,[],'Slutkontrollens fullständiga ansats får inte klippas på '+size.name);
    await photo(page,size.name+'-14-exit');
    equal(errors,[],'Inga JS-/lokala resursfel '+size.name);
    await page.close();
