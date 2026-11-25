@@ -46,6 +46,7 @@ async function inspectLayout(page,id,width,i){
    const errors=[];page.on('pageerror',error=>errors.push(error.message));
    const url=process.env.QA_BASE_URL?`${process.env.QA_BASE_URL}/mato1c/kapitel-4/${lesson.id}/`:`file://${path.join(root,'kapitel-4',lesson.id,'index.html')}`;
    await page.goto(url,{waitUntil:'load'});
+   assert(!/youtu\.be|youtube\.com|mindmap|tankekarta/i.test(await page.locator('main').evaluate(el=>el.outerHTML)),`${lesson.id}: inga filmer eller mindmap i elevlektionens källkod`);checks++;
    assert.equal(await page.locator('.head-actions').isVisible(),false,`${lesson.id}: studentvyn har inga lärarknappar`);checks++;
    assert.equal(await page.locator('.repetition').count(),0,`${lesson.id}: ingen teknisk upprepningsbanner för elever`);checks++;
    const count=await page.locator('.slide').count();
