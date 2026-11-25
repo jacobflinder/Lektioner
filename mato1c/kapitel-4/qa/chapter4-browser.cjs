@@ -64,16 +64,19 @@ async function inspectLayout(page,id,width,i){
     if(width===390&&[2,4,6,count-2].includes(i))await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
    }
    if(lesson.id==='exakta-trigonometriska-varden'){
+    await page.evaluate(()=>window.lessonCore.go(6));
     const button=page.locator('[data-table-reveal]');await button.click();
     assert.equal(await page.locator('.math-table.show-answer').count(),1);checks++;
    }
    if(lesson.id==='enhetscirkeln'){
+    await page.evaluate(()=>window.lessonCore.go(4));
     const root=page.locator('[data-circle-demo]');
     await root.locator('[data-angle="130"]').click();
     assert.match(await root.locator('[data-coordinates]').innerText(),/-0,64/);checks++;
     assert.equal(await root.locator('svg circle').count()>1,true);checks++;
    }
    if(lesson.id==='enhetscirkeln-ekvationer'){
+    await page.evaluate(()=>window.lessonCore.go(5));
     assert((await page.locator('body').textContent()).includes('SOC-37278098'));checks++;
     const cycle=page.locator('[data-cycle-demo]');await cycle.locator('[data-cycle-angle="400"]').click();
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
