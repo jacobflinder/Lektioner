@@ -21,21 +21,21 @@ insertSolutions({
   step('1 · Hitta insättningsvärdet',['x − 1 = 0','a = 1']),
   step('2 · Räkna termerna var för sig',['1³ = 1','−2 · 1² = −2','−5 · 1 = −5']),
   step('3 · Summera hela polynomet',['f(1) = 1 − 2 − 5 + 6','= 0']),
-  answer(['rest = f(1) = 0']),
+  answer(['r = f(1) = 0']),
   step('Slutsats',[],'x − 1 är en faktor, eftersom resten är noll.')
  ),
  rest2:solution(
   step('1 · Hitta insättningsvärdet',['x − 2 = 0','a = 2']),
   step('2 · Räkna termerna var för sig',['2³ = 8','−2 · 2² = −8','−5 · 2 = −10']),
   step('3 · Summera hela polynomet',['f(2) = 8 − 8 − 10 + 6','= −4']),
-  answer(['rest = f(2) = −4']),
+  answer(['r = f(2) = −4']),
   step('Slutsats',[],'x − 2 är inte en faktor, eftersom resten inte är noll.')
  ),
  rest3:solution(
   step('1 · Plustecken i divisorn – negativt insättningsvärde',['x + 2 = 0','a = −2']),
   step('2 · Beräkna potenser och produkter var för sig',['(−2)³ = −8','−2(−2)² = −8','−5(−2) = 10']),
   step('3 · Samla och jämför med noll',['−8 − 8 = −16','10 + 6 = 16','f(−2) = −16 + 16','= 0']),
-  answer(['rest = f(−2) = 0']),
+  answer(['r = f(−2) = 0']),
   step('Slutsats',[],'x + 2 är en faktor. Det avgörs av f(−2), inte f(2).')
  ),
  'dubbel-answer':solution(
@@ -48,15 +48,15 @@ insertSolutions({
   step('1 · Välj rätt insättningsvärde',['x + 1 = 0','a = −1']),
   step('2 · Beräkna de enskilda termerna',['(−1)³ = −1','2(−1)² = 2','−5(−1) = 5']),
   step('3 · Summera resten',['p(−1) = −1 + 2 + 5 − 6','= 0']),
-  step('4 · Motivera med restsatsen',['p(x) = (x + 1)k(x) + rest','p(−1) = 0 · k(−1) + rest','= r']),
-  answer(['rest = 0']),
+  step('4 · Motivera med restsatsen',['p(x) = (x + 1)k(x) + r','p(−1) = 0 · k(−1) + r','= r']),
+  answer(['r = 0']),
   step('Slutsats',[],'x + 1 är en faktor eftersom p(−1) = 0.')
  ),
  'exit-check2':solution(
   step('1 · Välj insättningsvärde',['x − 1 = 0','a = 1']),
   step('2 · Räkna termerna var för sig',['1³ = 1','2 · 1² = 2','−5 · 1 = −5']),
   step('3 · Summera utan polynomdivision',['p(1) = 1 + 2 − 5 − 6','= −8']),
-  answer(['rest = p(1) = −8']),
+  answer(['r = p(1) = −8']),
   step('Varför räcker det?',[],'Vid division med x − a är resten alltid p(a).')
  ),
  'exit-check3':solution(
@@ -72,7 +72,7 @@ insertSolutions({
   answer(['h(−1) = 0']),
   step('Slutsats',[],'x + 1 är en faktor enligt faktorsatsen.'),
   step('3 · Beräkna resten vid division med x − 3',['x − 3 = 0','3³ = 27','3² = 9','−4 · 3 = −12','h(3) = 27 + 9 − 12 − 4','= 20']),
-  answer(['rest = 20'])
+  answer(['r = 20'])
  )
 });
 // En lång stegvis grafkontroll ligger inuti svaret och får INTE tas bort.
@@ -99,7 +99,7 @@ const finalStep=document.querySelector('#f-sats [data-seq-item]:last-child');
 if(!finalStep)throw Error('Satsens sista bevissteg saknas');
 const mixed=finalStep.querySelector('.math');
 if(!mixed)throw Error('Blandad matematik i faktorsatsens bevis saknas');
-setFormula(mixed,'f(a) = 0 ⇔ rest = 0','block');
+setFormula(mixed,'f(a) = 0 ⇔ r = 0','block');
 const why=document.createElement('p');
 why.textContent='Detta gäller om och endast om x − a är en faktor i f(x).';
 mixed.after(why);

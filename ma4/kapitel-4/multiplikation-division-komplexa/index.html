@@ -1,16 +1,5 @@
 <!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiplikation och division med komplexa tal · Matematik – fortsättning, nivå 2</title><link rel="stylesheet" href="../assets/lesson.css"><link rel="stylesheet" href="../assets/math-presentation.css"><style>
-/* Lokal v2.3-figur och sammanfattning, utan gemensamma kursändringar */
-.d-error-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.95fr);gap:14px;align-items:start}
-.d-error-layout>.ma4-worked,.d-visual-products{min-width:0}
-.d-visual-products{background:#f6fafc;border:1px solid #c5dce9;border-radius:11px;padding:12px 14px}
-.d-visual-products h3{font-size:1rem;line-height:1.4;margin:0 0 8px}
-.d-products{border-collapse:separate;border-spacing:3px;margin:6px 0;width:100%;table-layout:fixed}
-.d-products th,.d-products td{border:1px solid #d4e4ed;border-radius:6px;padding:8px 5px;text-align:center;vertical-align:middle;background:#fff}
-.d-products th{background:#eaf3f8;font-weight:700}
-.d-products th .math,.d-products td .math{font-size:clamp(1.05rem,1.75vw,1.35rem)}
-.d-products td.d-cross{background:#e1f4ee;border:2px solid #3b8f7d}
-.d-cross-note{display:block;font-size:.75rem;color:#275f53;font-weight:750}
-.d-visual-products p{font-size:.91rem;margin:8px 0 0}
+/* Lokal metodöversikt, utan fristående felanalys. */
 .d-method-recap{margin:18px 0;border:2px solid #bdd4e1;border-radius:13px;background:#f6fafc;padding:12px 17px}
 .d-method-recap summary{font-weight:760;cursor:pointer;padding:7px 2px;line-height:1.45}
 .d-method-recap summary:focus-visible{outline:3px solid #167396;outline-offset:4px}
@@ -19,8 +8,7 @@
 .d-method-item h3{font-size:1rem;margin:0 0 7px}
 .d-method-item p{margin:8px 0}
 .d-method-item .math{max-width:100%;overflow-x:auto;white-space:nowrap}
-@media(max-width:1000px){.d-error-layout{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:640px){.d-method-grid{grid-template-columns:minmax(0,1fr)}.d-products th,.d-products td{padding:7px 3px}}
+@media(max-width:640px){.d-method-grid{grid-template-columns:minmax(0,1fr)}}
 </style></head><body><header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 2 · 4.1</strong><div class="head-actions"><button class="secondary" id="teacher-toggle" aria-expanded="false" type="button">Visa lärarstöd</button><button class="secondary" id="mode" aria-pressed="false">Klassrumsläge</button></div></header><main><div class="teacher"><strong>Lärarstöd</strong><p id="teacher-text"></p><small>Styr takten efter elevernas resonemang. Låt dem skriva för hand, diskutera, och först därefter visa nästa steg.</small></div><div class="repetition"><strong>Repetitionsläge:</strong> försök på papper eller i egna anteckningar före återkopplingen. Alla beräkningar görs utan insamling av elevsvar.</div><div class="stage" id="stage"><section class="slide active" id="intro" data-teacher="Starta med originalets kvot. 45 sekunder enskilt, sedan i par. Låt eleverna föreslå konjugatet innan du visar."><div class="eyebrow">01 · Startproblem</div><h2>Konjugatet gör division möjlig</h2><p class="lead">4.1 Aritmetik med komplexa tal · Multiplikation och division</p>
 <div class="task"><strong>Förutsäg → diskutera</strong><p class="math math-big"><span class="fraction"><span>−3 + 2i</span><span>1 − 3i</span></span></p><p>Hur får vi kvoten på formen <span class="math">a + bi</span> när nämnaren innehåller i? Vilket uttryck som är lika med 1 kan vi multiplicera hela kvoten med? Varför måste både täljaren och nämnaren påverkas?</p></div><button type="button" class="reveal" data-reveal="d-idea">Visa idén</button><div class="answer hidden" id="d-idea"><p>Nämnarens konjugat är <span class="math">1 + 3i</span>. Vi förlänger med <span class="math">(1 + 3i)/(1 + 3i)</span>, ett uttryck som är lika med 1. Då blir nämnaren reell.</p></div><button type="button" class="reveal" data-reveal="d-goals">Visa målen efter startproblemet</button><div class="panel hidden" id="d-goals"><strong>Efter lektionen ska du kunna</strong><p>Multiplicera komplexa tal, förlänga med nämnarens konjugat, förenkla kvoter till <span class="math">a + bi</span> och kontrollera svaret genom multiplikation tillbaka.</p></div></section>
 <section class="slide" id="d-why" data-teacher="Knyt an till föregående lektions konjugat och absolutbelopp. Varför är konjugatets produkt ett reellt tal? Markera att nämnaren måste vara skild från noll."><div class="eyebrow">02 · Varför fungerar metoden?</div><h2>Förläng utan att ändra värdet</h2><div class="math-givens" role="group" aria-label="Separata matematiska uttryck"><p class="math math-big">u = a + bi</p><p class="math math-big">ū = a − bi</p></div>
