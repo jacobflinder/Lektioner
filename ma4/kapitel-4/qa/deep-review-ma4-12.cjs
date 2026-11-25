@@ -88,9 +88,22 @@ for(const [k,c] of Object.entries(CASES)){
   await shot('02-desktop');
   await go(2);
   await testSpacing('.slide.active .math-givens > .math');
-  const quiz=page.locator('.slide.active [data-quiz]');
-  await quiz.locator('button[data-ok="0"]').first().click();assert.ok((await quiz.locator('.feedback').innerText()).includes('andragradsterm'));
-  await quiz.locator('button[data-ok="1"]').click();assert.ok((await quiz.locator('.feedback').innerText()).includes('Rätt'));
+  const sourceChecks=[
+   {id:'source-feedback-1',fragment:'0x²'},
+   {id:'source-feedback-2',fragment:'26 − 24'},
+   {id:'source-feedback-3',fragment:'resten är 0'}
+  ];
+  for(let i=0;i<sourceChecks.length;i++){
+   const {id,fragment}=sourceChecks[i];
+   await page.locator(`[data-source-choice="${i}"]`).click();
+   const example=page.locator(`[data-source-part="${i}"]`);
+   assert.ok((await example.locator('.source-check .task').innerText()).includes('Fråga till exempel '+(i+1)),'Fråga hör till valt exempel');
+   assert.ok(await page.locator('#'+id).isHidden(),'Återkoppling först dold för '+id);
+   await page.locator(`[data-reveal="${id}"]`).click();
+   assert.ok((await page.locator('#'+id).innerText()).includes(fragment),'Klickbar, exempelbunden återkoppling '+id);
+  }
+  await page.locator('[data-source-choice="0"]').click();
+  assert.ok(await page.locator('#source-feedback-1').isHidden(),'Återkoppling återställs vid flikbyte');
   await shot('03-desktop');
   await go(3);await engine('main',true);await shot('04-desktop');
   await go(4);await reveal('a5');await label('#a5','k(x) = 2x² − x − 3');await label('#a5','rest = 12');

@@ -118,6 +118,21 @@ for(const [name,c] of Object.entries(CASES)){
   for(const v of VIEWS){
    await page.setViewportSize({width:v.w,height:v.h});
    await go(2);
+   for(const [i,id,fragment] of [
+    [0,'source-feedback-1','0x²'],
+    [1,'source-feedback-2','26 − 24'],
+    [2,'source-feedback-3','resten är 0']
+   ]){
+    await page.locator(`[data-source-choice="${i}"]`).click();
+    const sourcePart=page.locator(`[data-source-part="${i}"]`);
+    check(await sourcePart.isVisible(),v.name+': source tab '+(i+1)+' is visible');
+    check((await sourcePart.locator('.source-check .task').innerText()).includes('Fråga till exempel '+(i+1)),v.name+': question belongs to example '+(i+1));
+    check(await page.locator('#'+id).isHidden(),v.name+': feedback '+id+' is initially hidden');
+    await page.locator(`[data-reveal="${id}"]`).click();
+    check((await page.locator('#'+id).innerText()).includes(fragment),v.name+': feedback '+id+' revealed on click');
+   }
+   await page.locator('[data-source-choice="0"]').click();
+   check(await page.locator('#source-feedback-1').isHidden(),v.name+': old feedback hidden when switching tabs');
    const recapExact=page.locator('[data-source-division="recapExact"]');await recapExact.locator('xpath=parent::details').locator('summary').click();
    check((await recapExact.locator('tbody tr.original td[data-grade="2"]').innerText()).trim()==='', 'Originalmetod: tom gradplats i stolen');
    while(await recapExact.locator('.forward').isEnabled())await recapExact.locator('.forward').click();
@@ -196,17 +211,18 @@ for(const [name,c] of Object.entries(CASES)){
   check(await page.locator('#mode').getAttribute('aria-pressed')==='true','classroom mode activates');
   await page.locator('#mode').click();
 
-  // No old reveal, engine steps or quiz selection may follow pupils to a
+  // No old reveal or engine steps may follow pupils to a
   // new slide or presentation mode.
   await go(4);await reveal('a5');await go(5);await go(4);await hidden('a5');
   check(await page.locator('button[data-reveal="a5"]').getAttribute('aria-expanded')==='false','reveal aria state resets');
   await go(3);await main.locator('.forward').click();await go(4);await go(3);
   check(await main.locator('tbody tr').count()===1,'division back at initial display after navigation');
-  await go(2);await page.locator('[data-quiz] [data-ok="0"]').first().click();
-  check(await page.locator('[data-quiz] .wrong').count()===1,'error choice marked');
+  await go(2);await page.locator('[data-source-choice="2"]').click();
+  await page.locator('[data-reveal="source-feedback-3"]').click();
+  check(await page.locator('#source-feedback-3').isVisible(),'selected example feedback revealed on request');
   await go(3);await go(2);
-  check(await page.locator('[data-quiz] .wrong,[data-quiz] .correct').count()===0,'quiz choice resets');
-  check((await page.locator('[data-quiz] .feedback').textContent()).trim()==='','quiz feedback resets');
+  check(await page.locator('#source-feedback-3').isHidden(),'feedback hidden after navigation');
+  check(await page.locator('[data-reveal="source-feedback-3"]').getAttribute('aria-expanded')==='false','feedback button reset after navigation');
 
   for(const v of VIEWS){
    await page.setViewportSize({width:v.w,height:v.h});
