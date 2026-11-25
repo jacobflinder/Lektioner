@@ -8,7 +8,7 @@ const subMap={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':
 const operatorChars=new Set(['+','−','=','±','⇔','⇒','≥','≤','≠','∈','⋅','·','×','÷',':',',',';', '↔','>','<']);
 const mo=value=>'<mo>'+esc(value)+'</mo>';
 const mn=value=>'<mn>'+esc(value)+'</mn>';
-const mi=value=>'<mi'+(['Re','Im','sin','cos','tan','eller'].includes(value)?' mathvariant="normal"':'')+'>'+esc(value)+'</mi>';
+const mi=value=>'<mi'+(['Re','Im','sin','cos','tan','eller','rest'].includes(value)?' mathvariant="normal"':'')+'>'+esc(value)+'</mi>';
 function typeFormula(source,display='block'){
  const raw=String(source).replaceAll('\u00a0',' ').replaceAll('ū','u\u0304').replaceAll('ā','a\u0304').replaceAll('—','−').replaceAll('–','−').replaceAll('->','⇒').replace(/\s+/g,' ').trim();
  const glyphs=Array.from(raw);let cursor=0;
@@ -56,7 +56,7 @@ function typeFormula(source,display='block'){
    return suffix(mn(c));
   }
   if(isLetter(c)){
-   while(isLetter(glyphs[cursor])&&['Re','Im','sin','cos','tan','eller'].some(word=>word.startsWith(c+glyphs[cursor]))){c+=glyphs[cursor++]}
+   while(isLetter(glyphs[cursor])&&['Re','Im','sin','cos','tan','eller','rest'].some(word=>word.startsWith(c+glyphs[cursor]))){c+=glyphs[cursor++]}
    return suffix(mi(c));
   }
   if(c==='π'||c==='ℝ'||c==='ℤ')return suffix(mi(c));

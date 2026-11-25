@@ -7,7 +7,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const base='http://127.0.0.1:8123/ma4/kapitel-4/multiplikation-division-komplexa/';
-const order=['intro','d-why','d-princip','d-when','d-self','d-nok','d-extra','d-exit'];
+const order=['intro','d-why','d-princip','d-self','d-nok','d-extra','d-exit'];
 const z=(re,im)=>[re,im],mul=(a,b)=>z(a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]);
 const conj=a=>z(a[0],-a[1]);
 const div=(a,b)=>{const d=b[0]**2+b[1]**2;if(!d)throw new RangeError('Nämnaren får inte vara noll');
@@ -42,8 +42,8 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
  try{
   const res=await page.goto(base,{waitUntil:'networkidle',timeout:30000});
   assert.equal(res.status(),200,'Serverar lektionen');
-  assert.deepEqual(await page.locator('.slide').evaluateAll(ns=>ns.map(n=>n.id)),order,'Exakt åtta bilder');
-  assert.equal(await page.locator('#jump option').count(),8);
+  assert.deepEqual(await page.locator('.slide').evaluateAll(ns=>ns.map(n=>n.id)),order,'Sju fokusbilder');
+  assert.equal(await page.locator('#jump option').count(),7);
   assert.ok(await page.locator('.slide math').count()>30,'MathML i lektionen');
   // 01: elevens prognos innan lösning och målen efter startfrågan.
   assert.ok(await page.locator('#d-idea').isHidden(),'01 svar dolt');
@@ -103,20 +103,8 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   assert.equal(await worked.locator('[data-seq-item]:not(.hidden)').count(),0,'03 reset');
   for(let k=0;k<7;k++)await worked.locator('[data-seq-next]').click();
   await screenshot('03-sju-steg-desktop');console.log('PASS bild 03/08: hela kvoten −9/10 − 7i/10 och återkontroll');
-  // 04: konstruerat fel, två korsprodukter och feedback för båda utfall.
+  // Eget försök med fullständig konjugatförlängning.
   await slide(3);
-  assert.ok(await page.locator('#d-error').isHidden(),'04 felrättning dold');
-  const quiz=page.locator('#d-when [data-quiz]');
-  await quiz.locator('[data-correct="false"]').first().click();
-  assert.ok((await quiz.locator('.feedback').innerText()).includes('distributiva'),'04 fel får metodfeedback');
-  await quiz.locator('[data-correct="true"]').click();
-  assert.ok((await quiz.locator('.feedback').innerText()).includes('−4i'),'04 rätt svar förklarar korsprodukter');
-  await page.locator('[data-reveal="d-error"]').click();
-  await one('#d-error math[aria-label="= 2·3 + 2(−2i) + i·3 + i(−2i)"]','04 fyra produkter');
-  await one('#d-error .ma4-final math[aria-label="(2 + i)(3 − 2i) = 8 − i"]','04 rätt resultat');
-  await screenshot('04-felanalys-desktop');console.log('PASS bild 04/08: felsökning och facit');
-  // 05: eget försök, inte felaktig beteckning av kvot som z.
-  await slide(4);
   assert.ok(await page.locator('#d-selfans').isHidden(),'05 eget arbete före facit');
   await page.locator('[data-reveal="d-selfans"]').click();
   await one('#d-selfans math[aria-label="= 2 − i − (−1)"]','05 täljaren i²');
@@ -126,12 +114,12 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   assert.equal(await page.locator('#d-selfans .ma4-final math[aria-label^="z ="]').count(),0,'05 ingen odefinierad variabel z');
   await screenshot('05-egen-kontroll-desktop');console.log('PASS bild 05/08: självständighet, fullständigt facit och rätt variabel');
   // 06: bevara faktiskt arbete och frivilligt spår.
-  await slide(5);
+  await slide(4);
   const nok=await page.locator('#d-nok').innerText();
   assert.ok(nok.includes('4125–4142')&&nok.includes('tre av fem nivåer')&&nok.includes('NOKflex'),'06 lärobok och nivåval');
   await page.locator('#next').click();
   assert.equal(await page.locator('.slide.active').getAttribute('id'),'d-exit','06→08 hoppar över frivillig');
-  await slide(5);
+  await slide(4);
   await page.locator('[data-go="d-extra"]').click();
   assert.equal(await page.locator('.slide.active').getAttribute('id'),'d-extra','06→07 frivilligt val fungerar');
   console.log('PASS bild 06/08: NOKflex 4125–4142 och frivilligt spår bevarat');
@@ -143,10 +131,10 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   await one('#d-extraans .ma4-final math[aria-label="(3 + i)/(2i) = 1/2 − (3/2)i"]','07 rätt alternativ');
   await page.locator('[data-go="d-exit"]').click();
   assert.equal(await page.locator('.slide.active').getAttribute('id'),'d-exit','07 exit-knapp');
-  await slide(6);await screenshot('07-frivillig-desktop');
+  await slide(5);await screenshot('07-frivillig-desktop');
   console.log('PASS bild 07/08: rent imaginär nämnare, division och navigering');
   // 08: båda svaren, fyra produkter och bakåtkontroll.
-  await slide(7);
+  await slide(6);
   assert.ok(await page.locator('#d-exitfacit').isHidden(),'08 exitfacit dolt');
   await page.locator('[data-reveal="d-exitfacit"]').click();
   assert.equal(await page.locator('#d-exitfacit .ma4-final').count(),2,'08 två slutsvar');
@@ -157,14 +145,14 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
   await one('#d-exitfacit .ma4-final math[aria-label="(1 + i)(2 − i) = 3 + i"]','08 multiplikationssvar');
   await one('#d-exitfacit .ma4-final math[aria-label="(1 + 2i)/(1 − i) = −1/2 + (3/2)i"]','08 divisionssvar');
   await screenshot('08-utcheckning-desktop');
-  // Klassrum, repetition och mobilkontroll på alla åtta bilder.
+  // Klassrum, repetition och mobilkontroll på alla sju bilder.
   await page.locator('#mode').click();
   assert.equal(await page.locator('#mode').getAttribute('aria-pressed'),'true','Klassrumsläge');
   await page.locator('#teacher-toggle').click();
   assert.ok(await page.locator('.teacher').isVisible(),'Lärarstöd bevarat');
   await page.locator('#mode').click();
   await page.setViewportSize({width:390,height:844});
-  for(let n=0;n<8;n++){
+  for(let n=0;n<7;n++){
    await slide(n);
    const sizes=await page.evaluate(()=>({body:document.documentElement.scrollWidth,screen:innerWidth}));
    assert.ok(sizes.body<=sizes.screen+4,'Mobilbild '+(n+1)+' sidöverspill '+JSON.stringify(sizes));
@@ -178,7 +166,7 @@ assert.throws(()=>div(z(1,1),z(0,0)),RangeError,'Division med noll förbjuden');
    await screenshot('mobil-bild-'+(n+1));
   }
   assert.deepEqual(errors,[],'Inga JS- eller laddningsfel');
-  console.log('PASS Ma4 03/41: 8/8 bilder, oberoende matematik, alla facit, desktop/mobil');
+  console.log('PASS Ma4 03/41: 7/7 fokusbilder, oberoende matematik, alla facit, desktop/mobil');
  }catch(e){console.error('FAIL Ma4 03/41: '+(e.stack||e));process.exitCode=1}
  finally{await page.close();await browser.close()}
 })();
