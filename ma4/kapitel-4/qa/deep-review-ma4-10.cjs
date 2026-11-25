@@ -112,7 +112,14 @@ const out=(z)=>fs.writeFileSync(dir+'/ma4-10-'+z+'.txt','Kontrollerad bild '+z+'
    await go(i);
    const dims=await page.evaluate(()=>({width:document.documentElement.scrollWidth,screen:innerWidth}));
    assert.ok(dims.width<=dims.screen+3,'Sidscroll vid mobilbild '+(i+1)+': '+JSON.stringify(dims));
-   if(i===6||i===13)await gap('.slide.active .math-givens > .math');
+   if(i===6)await gap('.slide.active .math-givens > .math');
+   if(i===13){
+    for(const id of ['e-source-exit','e-exit2']){
+     const given=page.locator('#'+id).locator('..').locator('p.math').first();
+     assert.ok(await given.locator('math').count()===1,'Varje omvandlingsuppgift har ett separat synligt matematiskt uttryck');
+     assert.ok(await given.isVisible(),'Givet tal synligt på mobil');
+    }
+   }
    await pic('mobil-'+String(i+1).padStart(2,'0'));
   }
   await go(10);await page.locator('#eulerExtra').click();
