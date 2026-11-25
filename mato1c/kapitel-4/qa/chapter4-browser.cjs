@@ -114,10 +114,14 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await page.locator('.book-number').count(),2);checks++;
     await page.locator('#jump').selectOption('5');
     const cases=page.locator('.slide.active [data-case-choices]');
-    await cases.locator('[data-case-select="obtuse"]').click();
-    assert(await cases.locator('[data-case-panel="obtuse"]').isVisible());checks++;
-    assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
-    assert((await cases.locator('[data-case-panel="obtuse"]').textContent()).includes('27°'));checks++;
+    await cases.locator('[data-case-select="pair-b"]').click();
+    assert(await cases.locator('[data-case-panel="pair-b"]').isVisible());checks++;
+    assert.equal(await cases.locator('[data-case-figure="pair-b"].is-selected').count(),1);checks++;
+    assert((await cases.locator('[data-case-panel="pair-b"]').textContent()).includes('73°'));checks++;
+    const solution=page.locator('#sinus-sidpar');
+    if(!(await solution.isVisible()))await page.locator('.slide.active [data-reveal="sinus-sidpar"]').click();
+    assert(await solution.isVisible());checks++;
+    assert((await solution.textContent()).includes('7,1'));checks++;
    }
    if(lesson.id==='enhetscirkeln')assert((await page.locator('body').textContent()).includes('SOC-37277932'));
    await page.locator('#mode').click();assert.equal(await page.locator('body.classroom').count(),1);checks++;

@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142e43">
-<meta name="description" content="Sinussatsen härledd med höjden i en triangel, Jacobs två ursprungliga exempel och lärobokens uppgifter på s. 234–235.">
+<meta name="description" content="Sinussatsen härledd med höjden i en triangel, ett fullständigt originalexempel, visuella sidpar och lärobokens uppgifter på s. 234–235.">
 <title>Sinussatsen · Matematik – fortsättning nivå 1c</title><link rel="stylesheet" href="../assets/lesson.css"></head><body>
 <header><a href="../">← Kapitel 4</a><strong>Matematik – fortsättning, nivå 1c · 4.3</strong><div class="head-actions"><button class="btn" id="mode" type="button" aria-pressed="false">Klassrumsläge</button><button class="btn" id="teacher-toggle" type="button" aria-expanded="false">Visa lärarstöd</button></div></header>
 <main><aside class="teacher" aria-live="polite"><strong>Lärarstöd: </strong><span id="teacher-text"></span></aside><div class="repetition"><strong>Repetitionsläge:</strong> Pröva stegen i häftet först. Öppna återkopplingen efter ditt försök. Inga elevsvar samlas in.</div>
 
-<section class="slide active" data-title="Start och mål" data-teacher="Original 240207: Daniel Barkers film eU_OzLqB6uc, sedan höjdhärledning, två exempel (det andra leder till två fall), mindmap, Socrative 331 och NOK. Läraren säger uttryckligen att den fulla frågan om 0/1/2 fall kommer nästa lektion. Bokens 4.3 sinussatsen s.234–235 är ett eget moment före s.236.">
+<section class="slide active" data-title="Start och mål" data-teacher="Original 240207: Daniel Barkers film eU_OzLqB6uc, höjdhärledning, ett exempel med en bestämd sida, mindmap, Socrative 331 och NOK. Jacobs senare uttryckliga kursbeslut: sinussatsens två fall har ännu inte behandlats och hör helt till det egna bokmomentet s. 236. Originalets andra exempel A=37°, c=15, a=10 hålls därför till nästa lektion.">
  <div class="kicker">01 · Sinussatsen · s. 234–235</div><h1>Kan vi räkna utan en rät vinkel?</h1>
  <p class="lead">Vi känner en sida och dess motstående vinkel. Med en triangelhöjd kan vi komma fram till en formel som hjälper oss att bestämma andra sidor och vinklar.</p>
  <p class="note"><strong>Originalets förberedelse:</strong> <a href="https://youtu.be/eU_OzLqB6uc" target="_blank" rel="noopener noreferrer">Daniel Barkers film om sinussatsen</a>.</p>
@@ -76,28 +76,27 @@
   <p>Den kända sidan 7,0 hör till vinkeln <math display="inline"><mrow><mi>C</mi><mo>=</mo><mn>80°</mn></mrow></math>, inte till en valfri vinkel.</p></div></div></div>
 </section>
 
-<section class="slide" data-title="Originalets andra exempel: två vinklar" data-teacher="Jacobs andra tavlexempel A=37°, AB=15 m=c, BC=10 m=a: sin C/15=sin37/10, sin C≈0,90, C≈64° eller 116°. Han introducerar två fall här och tar full analys 0/1/2 till nästa lektion. Bevara det, men gör inte en stor undantagslista.">
- <div class="kicker">06 · Ett viktigt nästa steg från originalet</div><h1>Sinussatsen kan ge två vinklar</h1>
- <p>I triangeln ABC känner vi <math display="inline"><mrow><mi>A</mi><mo>=</mo><mn>37°</mn></mrow></math>, <math display="inline"><mrow><mi>AB</mi><mo>=</mo><mn>15</mn><mspace width="0.18em"/><mtext>m</mtext></mrow></math> och <math display="inline"><mrow><mi>BC</mi><mo>=</mo><mn>10</mn><mspace width="0.18em"/><mtext>m</mtext></mrow></math>. Bestäm möjliga värden på C.</p>
- <div class="illustrated-solution"><div data-case-choices data-default-case="acute"><figure class="diagram linked-geometry"><svg viewBox="0 0 500 270" role="img" aria-label="Två möjliga trianglar ABC med samma vinkel A och samma sidlängder AB 15 meter och BC 10 meter. På samma stråle från A ligger två möjliga punkter för C.">
-  <path d="M 58 229 L 358 229" stroke="#17384b" stroke-width="3"/><path d="M 58 229 L 318 33" stroke="#17384b" stroke-width="2.5" fill="none"/>
-  <circle cx="358" cy="229" r="200" fill="none" stroke="#d3973d" stroke-width="2" stroke-dasharray="6 7" opacity=".6"/>
-  <path class="angle-mark" d="M 103 229 A 45 45 0 0 0 94 202"/>
-  <g class="case-geometry" data-case-figure="acute"><path d="M 358 229 L 318 33" stroke="#0b756d" stroke-width="4"/><circle cx="318" cy="33" r="6" fill="#0b756d"/><text x="326" y="26" class="big-svg-label">C₁</text><text x="269" y="113" class="big-svg-label diagram-emphasis">64°</text><text x="347" y="119" class="big-svg-label">10 m</text></g>
-  <g class="case-geometry" data-case-figure="obtuse"><path d="M 358 229 L 181 137" stroke="#b46e28" stroke-width="4"/><circle cx="181" cy="137" r="6" fill="#b46e28"/><text x="157" y="121" class="big-svg-label">C₂</text><text x="207" y="200" class="big-svg-label diagram-emphasis">116°</text><text x="270" y="140" class="big-svg-label">10 m</text></g>
-  <text x="43" y="255" class="big-svg-label">A</text><text x="366" y="255" class="big-svg-label">B</text><text x="101" y="215" class="big-svg-label">37°</text><text x="181" y="255" class="big-svg-label">15 m</text>
- </svg><figcaption>Sträckan BC har samma längd i båda fallen. Den streckade cirkeln visar var C kan ligga.</figcaption></figure>
- <div class="case-actions"><button class="btn" type="button" data-case-select="acute">Visa första triangeln</button><button class="btn" type="button" data-case-select="obtuse">Visa andra triangeln</button></div>
- <div class="case-panel" data-case-panel="acute" aria-live="polite"><math display="block"><mrow><msub><mi>B</mi><mn>1</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>37°</mn><mo>−</mo><mn>64°</mn><mo>=</mo><mn>79°</mn></mrow></math></div>
- <div class="case-panel" data-case-panel="obtuse" aria-live="polite"><math display="block"><mrow><msub><mi>B</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>37°</mn><mo>−</mo><mn>116°</mn><mo>=</mo><mn>27°</mn></mrow></math></div>
- </div><div class="eq-chain">
-  <div class="math-line"><math display="block"><mrow><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi></mrow><mn>15</mn></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>37°</mn></mrow><mn>10</mn></mfrac></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>C</mi><mo>=</mo><mfrac><mrow><mn>15</mn><mo>·</mo><mi>sin</mi><mo>&#x2061;</mo><mn>37°</mn></mrow><mn>10</mn></mfrac><mo>≈</mo><mn>0,90</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>≈</mo><mi>arcsin</mi><mo>&#x2061;</mo><mo>(</mo><mn>0,90</mn><mo>)</mo><mo>≈</mo><mn>64°</mn></mrow></math></div>
-  <div class="math-line"><math display="block"><mrow><msub><mi>C</mi><mn>2</mn></msub><mo>≈</mo><mn>180°</mn><mo>−</mo><mn>64°</mn></mrow></math></div>
-  <div class="math-line good"><math display="block"><mrow><msub><mi>C</mi><mn>2</mn></msub><mo>≈</mo><mn>116°</mn></mrow></math></div></div></div>
- <div class="question">Undersök båda trianglarna med knapparna. Varför kan båda finnas? Kontrollera vinkelsumman – den tredje vinkeln visas vid varje figur.</div>
- <p class="note">Vi känner igen sinusvärdets symmetri. Här är båda återstående vinklarna positiva. <strong>Nästa bokmoment, s. 236</strong> behandlar när två fall uppstår.</p>
+<section class="slide" data-title="Välj motstående sidpar" data-teacher="Det senare kursbeslutet lägger originalets tvåfalls-exempel i bokmomentet s.236. Här befäster eleverna endast standardmetoden från första originalexemplet: välj motstående par, skriv sinussatsen, lös algebraisk för en sida. Siffrorna och figuren är egna. Ingen ny metod eller ett fallresonemang.">
+ <div class="kicker">06 · Pröva om du väljer rätt par</div><h1>Se sidan och vinkeln tillsammans</h1>
+ <p>I triangeln är <math display="inline"><mrow><mi>A</mi><mo>=</mo><mn>42°</mn></mrow></math>, <math display="inline"><mrow><mi>B</mi><mo>=</mo><mn>73°</mn></mrow></math> och <math display="inline"><mrow><mi>a</mi><mo>=</mo><mn>5,0</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math>. Bestäm sidan <math display="inline"><mi>b</mi></math>.</p>
+ <div class="illustrated-solution"><div data-case-choices data-default-case="pair-a"><figure class="diagram"><svg viewBox="0 0 480 295" role="img" aria-label="Triangel ABC med vinkel A lika med 42 grader, vinkel B lika med 73 grader, motstående sidan a lika med 5 centimeter och motstående sidan b okänd. Knapparna markerar ett motstående par åt gången.">
+  <path class="triangle-outline" d="M 70 250 L 360 250 L 298 45 Z"/>
+  <g class="case-geometry" data-case-figure="pair-a"><path d="M 360 250 L 298 45" fill="none" stroke="#0b756d" stroke-width="5"/><path class="angle-mark" d="M 117 250 A 47 47 0 0 0 104 218"/><text x="114" y="232" class="big-svg-label diagram-emphasis">42°</text><text x="362" y="156" class="big-svg-label">a = 5,0 cm</text></g>
+  <g class="case-geometry" data-case-figure="pair-b"><path d="M 70 250 L 298 45" fill="none" stroke="#b46e28" stroke-width="5"/><path class="angle-mark" d="M 314 250 A 46 46 0 0 1 347 206"/><text x="289" y="233" class="big-svg-label diagram-emphasis">73°</text><text x="114" y="135" class="big-svg-label">b = ?</text></g>
+  <text x="49" y="275">A</text><text x="369" y="275">B</text><text x="292" y="29">C</text><text x="208" y="275">c</text>
+ </svg><figcaption>Markera A med motstående a, och därefter B med motstående b. De hör ihop även om de ligger på olika ställen i figuren.</figcaption></figure>
+ <div class="case-actions"><button class="btn" type="button" data-case-select="pair-a">Visa paret A–a</button><button class="btn" type="button" data-case-select="pair-b">Visa paret B–b</button></div>
+ <div class="case-panel" data-case-panel="pair-a" aria-live="polite"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mn>5,0</mn><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>42°</mn></mrow></mfrac></mrow></math></div>
+ <div class="case-panel" data-case-panel="pair-b" aria-live="polite"><math display="block"><mrow><mfrac><mi>b</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow></mfrac><mo>=</mo><mfrac><mi>b</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>73°</mn></mrow></mfrac></mrow></math></div>
+ </div><div><div class="question">Skriv de två kvoterna med rätt sidor och vinklar. Lös sedan ut b innan du visar beräkningen.</div>
+ <button class="btn" type="button" data-reveal="sinus-sidpar">Visa hela lösningen</button>
+ <div class="answer" id="sinus-sidpar"><div class="eq-chain">
+  <div class="math-line"><math display="block"><mrow><mfrac><mi>a</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>A</mi></mrow></mfrac><mo>=</mo><mfrac><mi>b</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>B</mi></mrow></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mfrac><mn>5,0</mn><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>42°</mn></mrow></mfrac><mo>=</mo><mfrac><mi>b</mi><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>73°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>b</mi><mi>sin</mi><mo>&#x2061;</mo><mn>42°</mn><mo>=</mo><mn>5,0</mn><mi>sin</mi><mo>&#x2061;</mo><mn>73°</mn></mrow></math></div>
+  <div class="math-line"><math display="block"><mrow><mi>b</mi><mo>=</mo><mfrac><mrow><mn>5,0</mn><mo>·</mo><mi>sin</mi><mo>&#x2061;</mo><mn>73°</mn></mrow><mrow><mi>sin</mi><mo>&#x2061;</mo><mn>42°</mn></mrow></mfrac></mrow></math></div>
+  <div class="math-line good"><math display="block"><mrow><mi>b</mi><mo>≈</mo><mn>7,1</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math></div></div></div></div></div>
+ <p class="note">Vi arbetar bara med sinussatsens vanliga sidberäkning här. <strong>Nästa bokmoment, s. 236</strong>, tar upp när sinussatsen kan ge två fall.</p>
 </section>
 
 <section class="slide" data-title="Originalets film, mindmap och Socrative" data-teacher="PDF 240207: 'från film', mindmap, Socrative 331 Areasats och Sinussatsen1 kod SOC-37278423, arbete i NOK. Bär över utan att lägga på extra quiz.">
