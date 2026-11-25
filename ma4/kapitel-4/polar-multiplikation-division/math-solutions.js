@@ -9,11 +9,11 @@ insertSolutions({
    'Båda koordinaterna är positiva, alltså ligger punkten i första kvadranten.'),
   step('2 · Beräkna avståndet till origo',['r = √(a² + b²)','= √(4² + 3²)','= √(16 + 9)','= √25','= 5']),
   step('3 · Beräkna argumentet och kontrollera kvadranten',
-   ['tan v = b/a','= 3/4','v = arctan(3/4) + n · 180°','n = 0','v = arctan(3/4)','v ≈ 36,87°'],
+   ['tan v = b/a','= 3/4','v = arctan(3/4) + n · π','n = 0','v = arctan(3/4)','v ≈ 0,64'],
    'Första kvadranten gör att vinkeln från arctan är rätt argument.'),
-  answer(['z ≈ 5(cos 36,87° + i sin 36,87°)']),
+  answer(['z ≈ 5(cos(0,64) + i sin(0,64))']),
   step('4 · Kontrollera den avrundade vinkeln',
-   ['a ≈ 5 cos 36,87° ≈ 4','b ≈ 5 sin 36,87° ≈ 3'],
+   ['a ≈ 5 cos(0,64) ≈ 4','b ≈ 5 sin(0,64) ≈ 3'],
    'Tecknet ≈ behövs eftersom argumentet är avrundat.')
  ),
  'source-polar-radians-answer':solution(

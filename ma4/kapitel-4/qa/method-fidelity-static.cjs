@@ -64,6 +64,12 @@ const removed=[
 for(const [slug,oldSlide] of removed){
  assert.ok(!read(slug).includes(oldSlide),`${slug}: old error-analysis slide remains`);
 }
+const polar=read('polar-multiplikation-division');
+for(const section of ['product','quotient']){
+ const body=polar.split('<section id="'+section+'"')[1].split('</section>')[0];
+ for(const e of ['12(cos(2π/3) + i sin(2π/3))','6(cos(π/3) + i sin(π/3))'])assert.ok(body.includes(e),'Filmexempel '+section+': '+e);
+}
+assert.ok(polar.includes('= −72')&&polar.includes('= 1 + √3i'),'Filmexemplens exakta svar');
 const vectors=read('komplexa-tal-som-vektorer');
 for(const expression of ['|z − 2i|','Im(z)','Re(z)','√41','√13']){
  assert.ok(vectors.includes(expression),`PDF vector extension preserved: ${expression}`);

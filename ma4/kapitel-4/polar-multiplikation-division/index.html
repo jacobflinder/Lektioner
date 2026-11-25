@@ -13,16 +13,16 @@
 <div class="eyebrow">01 · Startfråga och mål</div><h2>Multiplikation och division i polär form</h2><p class="lead">4.2 Komplexa tal i polär form · Multiplikation förändrar längd och riktning</p>
 <div class="task"><strong>Tänk själv 1 minut → skriv tillsammans 1 minut</strong><p class="math math-big">z = 4 + 3i</p><p>Skriv talet i polär form. Hur stort är absolutbeloppet? Vilken riktning har talet? Skissa först.</p></div>
 <button type="button" class="reveal" data-reveal="startans">Visa och förklara</button>
-<div class="answer hidden" id="startans"><div class="math-working"><p class="math">r = √(4² + 3²)</p><p class="math">= √(16 + 9) = 5</p><p class="math">tan v = 3/4</p><p class="math">v ≈ 36,87°</p><p class="math">z ≈ 5(cos 36,87° + i sin 36,87°)</p></div><p>Båda koordinaterna är positiva: punkten ligger i första kvadranten. Vinkeln är avrundad, därför används ≈.</p></div>
+<div class="answer hidden" id="startans"><div class="math-working"><p class="math">r = √(4² + 3²)</p><p class="math">= √(16 + 9) = 5</p><p class="math">tan v = 3/4</p><p class="math">v ≈ 0,64</p><p class="math">z ≈ 5(cos(0,64) + i sin(0,64))</p></div><p>Båda koordinaterna är positiva: punkten ligger i första kvadranten. Vinkeln anges i radianer och är avrundad, därför används ≈.</p></div>
 <button type="button" class="reveal" data-reveal="pd-goals">Visa målen efter startfrågan</button><div class="panel hidden" id="pd-goals"><strong>Efter lektionen ska du kunna</strong><p>Multiplicera och dividera komplexa tal i polär form, förklara hur <strong>absolutbelopp och argument</strong> förändras och kontrollera resultatet med både beräkningar och geometri.</p></div></section>
-<section id="product" class="slide" data-teacher="Originalexemplet använder z₁ med r=2, v=30° och z₂ med r=3, v=60°. Låt eleverna först uppskatta längd och riktning. Skriv formeln, visa beräkningen ett beslut i taget och koppla därefter till grafen. Den valfria härledningen ska inte bryta grundspåret.">
+<section id="product" class="slide" data-teacher="Filmexemplet använder z₁ med r=12, v=2π/3 och z₂ med r=6, v=π/3. Låt eleverna först uppskatta längd och riktning. Skriv formeln, visa beräkningen ett beslut i taget och koppla därefter till grafen. Den valfria härledningen ska inte bryta grundspåret.">
 <div class="eyebrow">02 · Multiplikation · förutsäg → visa</div><h2>Multiplicera längderna – addera vinklarna</h2><div id="source-product-rule" class="panel"><strong>Multiplikationsregeln</strong><p>Multiplicera absolutbeloppen och addera argumenten.</p><div class="math-givens"><p class="math">r = r₁r₂</p><p class="math">v = v₁ + v₂</p><p class="math">z₁z₂ = r(cos v + i sin v)</p></div></div>
-<div class="math-givens" role="group" aria-label="Två olika komplexa tal"><p class="math">z₁ = 2(cos 30° + i sin 30°)</p><p class="math">z₂ = 3(cos 60° + i sin 60°)</p></div>
+<div class="math-givens" role="group" aria-label="Två olika komplexa tal"><p class="math">z₁ = 12(cos(2π/3) + i sin(2π/3))</p><p class="math">z₂ = 6(cos(π/3) + i sin(π/3))</p></div>
 <div class="sequence panel" data-sequence><div class="task"><strong>Innan varje klick</strong>Beräkna nästa steg själv. Jämför gärna med en kamrat innan du visar.</div><div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div><div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Vilka är absolutbeloppen och argumenten till z₁ och z₂?"><strong>1 · Läs av båda talen</strong><div class="math-givens" role="group" aria-label="Längder och argument var för sig"><p class="math">r₁ = 2</p><p class="math">v₁ = 30°</p><p class="math">r₂ = 3</p><p class="math">v₂ = 60°</p></div></div>
-<div class="seq-item hidden" data-seq-item data-question="Om produkten förstorar z₁ med faktorn |z₂|, vilket absolutbelopp blir det?"><strong>2 · Multiplicera absolutbeloppen</strong><p class="math">|z₁z₂| = r₁r₂ = 2 · 3 = 6</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Om multiplikationen också roterar z₁ med v₂, vilket argument får produkten?"><strong>3 · Addera argumenten</strong><p class="math">arg(z₁z₂) = v₁ + v₂</p><p class="math">v = v₁ + v₂ = 30° + 60° = 90°</p><p>Argument kan alltid justeras med hela varv, alltså multiplar av 360°.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Skriv produkten i polär form och kontrollera läget i talplanet."><strong>4 · Skriv och kontrollera resultatet</strong><div class="math-working"><p class="math">r = 2 · 3 = 6</p><p class="math">v = 30° + 60° = 90°</p><p class="math">z₁z₂ = r(cos v + i sin v)</p><p class="math">= 6(cos 90° + i sin 90°)</p><p class="math">= 6(0 + i · 1)</p><p class="math">= 6i</p></div><p>Produkten pekar rakt upp längs positiva imaginära axeln och har längden 6.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka är absolutbeloppen och argumenten till z₁ och z₂?"><strong>1 · Läs av båda talen</strong><div class="math-givens" role="group" aria-label="Längder och argument var för sig"><p class="math">r₁ = 12</p><p class="math">v₁ = 2π/3</p><p class="math">r₂ = 6</p><p class="math">v₂ = π/3</p></div></div>
+<div class="seq-item hidden" data-seq-item data-question="Om produkten förstorar z₁ med faktorn |z₂|, vilket absolutbelopp blir det?"><strong>2 · Multiplicera absolutbeloppen</strong><p class="math">|z₁z₂| = r₁r₂ = 12 · 6 = 72</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Om multiplikationen också roterar z₁ med v₂, vilket argument får produkten?"><strong>3 · Addera argumenten</strong><p class="math">arg(z₁z₂) = v₁ + v₂</p><p class="math">v = v₁ + v₂ = 2π/3 + π/3 = π</p><p>Argument kan alltid justeras med hela varv, alltså multiplar av 2π.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Skriv produkten i polär form och kontrollera läget i talplanet."><strong>4 · Skriv och kontrollera resultatet</strong><div class="math-working"><p class="math">r = 12 · 6 = 72</p><p class="math">v = 2π/3 + π/3 = π</p><p class="math">z₁z₂ = r(cos v + i sin v)</p><p class="math">= 72(cos π + i sin π)</p><p class="math">= 72(−1 + i · 0)</p><p class="math">= −72</p></div><p>Produkten ligger på negativa realaxeln och har längden 72.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
 <details class="panel"><summary>Varför får vi addera vinklarna? Visa den algebraiska motiveringen</summary><p class="muted">Fördjupning efter genomgången. Använd distributiva lagen, i² = −1 och additionsformlerna.</p>
 <p>För att hålla varje algebraiskt led läsbart sätter vi först korta namn på trigonometriska värden:</p>
@@ -34,23 +34,23 @@
 <p>Absolutbeloppen ger dessutom faktorn r₁r₂. Härmed är multiplikationsregeln motiverad matematiskt.</p></details></section>
 <section id="quotient" class="slide" data-teacher="Samma z₁ och z₂. Division är omvänd multiplikation: r₁ delas med r₂ och v₂ subtraheras. Markera att z₂≠0. Eleverna kontrollerar genom att multiplicera kvoten med z₂.">
 <div class="eyebrow">03 · Division · omvänd förändring</div><h2>Dividera längderna – subtrahera vinklarna</h2><div id="source-quotient-rule" class="panel"><strong>Divisionsregeln</strong><p>Dividera absolutbeloppen och subtrahera argumenten.</p><div class="math-givens"><p class="math">r = r₁/r₂</p><p class="math">v = v₁ − v₂</p><p class="math">z₁/z₂ = r(cos v + i sin v)</p><p class="math">z₂ ≠ 0</p></div></div>
-<p class="math">z₁ = 2(cos 30° + i sin 30°)</p><div class="math-givens" role="group" aria-label="Nämnaren och giltighetsvillkoret"><p class="math">z₂ = 3(cos 60° + i sin 60°)</p><p class="math">z₂ ≠ 0</p></div>
+<p class="math">z₁ = 12(cos(2π/3) + i sin(2π/3))</p><div class="math-givens" role="group" aria-label="Nämnaren och giltighetsvillkoret"><p class="math">z₂ = 6(cos(π/3) + i sin(π/3))</p><p class="math">z₂ ≠ 0</p></div>
 <div class="sequence panel" data-sequence><div class="task"><strong>Förutsäg före varje klick</strong>Hur ändras längden? Hur ändras riktningen? Skriv först, klicka sedan.</div><div class="nextprompt"><strong>Nästa fråga:</strong> <span data-seq-prompt></span></div><div class="steps">
-<div class="seq-item hidden" data-seq-item data-question="Vilka två absolutbelopp och två argument har vi? Vad måste gälla för nämnaren?"><strong>1 · Identifiera storheterna</strong><div class="math-givens" role="group" aria-label="Nämnarens och täljarens värden"><p class="math">r₁ = 2</p><p class="math">r₂ = 3</p><p class="math">v₁ = 30°</p><p class="math">v₂ = 60°</p></div><p>Divisorn är inte noll eftersom r₂ = 3 &gt; 0.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vad är 2/3 och vad betyder det för kvotens längd?"><strong>2 · Dividera absolutbeloppen</strong><div class="math-working"><p class="math">|z₁/z₂| = r₁/r₂</p><p class="math">= 2/3</p></div><p>Kvoten är kortare än z₁ eftersom vi dividerar dess längd med 3.</p></div>
-<div class="seq-item hidden" data-seq-item data-question="Vilken vinkel får kvoten när vi subtraherar nämnarens argument?"><strong>3 · Subtrahera argumenten</strong><div class="math-working"><p class="math">arg(z₁/z₂) = v₁ − v₂</p><p class="math">v = v₁ − v₂</p><p class="math">= 30° − 60°</p><p class="math">= −30°</p><p class="math">−30° + 360° = 330°</p></div><p>En lika giltig positiv vinkel är 330°.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilka två absolutbelopp och två argument har vi? Vad måste gälla för nämnaren?"><strong>1 · Identifiera storheterna</strong><div class="math-givens" role="group" aria-label="Nämnarens och täljarens värden"><p class="math">r₁ = 12</p><p class="math">r₂ = 6</p><p class="math">v₁ = 2π/3</p><p class="math">v₂ = π/3</p></div><p>Divisorn är inte noll eftersom r₂ = 6 &gt; 0.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vad är 12/6 och vad betyder det för kvotens längd?"><strong>2 · Dividera absolutbeloppen</strong><div class="math-working"><p class="math">|z₁/z₂| = r₁/r₂</p><p class="math">= 12/6</p><p class="math">= 2</p></div><p>Kvoten är kortare än z₁ eftersom vi dividerar dess längd med 6.</p></div>
+<div class="seq-item hidden" data-seq-item data-question="Vilken vinkel får kvoten när vi subtraherar nämnarens argument?"><strong>3 · Subtrahera argumenten</strong><div class="math-working"><p class="math">arg(z₁/z₂) = v₁ − v₂</p><p class="math">v = v₁ − v₂</p><p class="math">= 2π/3 − π/3</p><p class="math">= π/3</p></div></div>
 <div class="seq-item hidden" data-seq-item data-question="Skriv kvoten i polär form och kontrollera genom att multiplicera tillbaka med z₂."><strong>4 · Skriv kvoten och kontrollera</strong>
-<div class="math-givens" role="group" aria-label="Insatta värden för kvoten"><p class="math">r = 2/3</p><p class="math">v = −30°</p><p class="math">cos(−30°) = √3/2</p><p class="math">sin(−30°) = −1/2</p></div>
-<div class="math-working"><p class="math">z₁/z₂ = r(cos v + i sin v)</p><p class="math">= (2/3)(cos(−30°) + i sin(−30°))</p><p class="math">= (2/3)(√3/2 − i/2)</p><p class="math">= (2/3)(√3/2) − (2/3)(1/2)i</p><p class="math">= √3/3 − (1/3)i</p></div>
-<p>Kontroll i polär form: kvotens längd 2/3 multipliceras med 3 till 2, och vinkeln −30° adderas med 60° till 30°. Alltså får vi tillbaka z₁.</p></div>
+<div class="math-givens" role="group" aria-label="Insatta värden för kvoten"><p class="math">r = 2</p><p class="math">v = π/3</p><p class="math">cos(π/3) = 1/2</p><p class="math">sin(π/3) = √3/2</p></div>
+<div class="math-working"><p class="math">z₁/z₂ = r(cos v + i sin v)</p><p class="math">= 2(cos(π/3) + i sin(π/3))</p><p class="math">= 2(1/2 + i√3/2)</p><p class="math">= 2 · (1/2) + 2 · (√3/2)i</p><p class="math">= 1 + √3i</p></div>
+<p>Kontroll i polär form: kvotens längd 2 multipliceras med 6 till 12, och vinkeln π/3 adderas med π/3 till 2π/3. Alltså får vi tillbaka z₁.</p></div>
 </div><div class="seq-controls"><button type="button" class="secondary" data-seq-back>← Tillbaka</button><button type="button" data-seq-next>Visa nästa steg →</button><button type="button" class="secondary" data-seq-reset>Börja om</button></div><p class="muted" data-seq-count></p></div>
 <details class="panel"><summary>Varför subtraheras vinklarna? Visa förklaringen</summary>
 <p>Om <span class="math">w = z₁/z₂</span>, måste <span class="math">wz₂ = z₁</span> för <span class="math">z₂ ≠ 0</span>. Vi använder multiplikationsregeln baklänges.</p>
-<div class="math-working"><p class="math">|w| · r₂ = r₁</p><p class="math">|w| = r₁/r₂</p><p class="math">arg(w) + v₂ ≡ v₁ (mod 360°)</p><p class="math">arg(w) ≡ v₁ − v₂ (mod 360°)</p></div>
+<div class="math-working"><p class="math">|w| · r₂ = r₁</p><p class="math">|w| = r₁/r₂</p><p class="math">arg(w) + v₂ ≡ v₁ (mod 2π)</p><p class="math">arg(w) ≡ v₁ − v₂ (mod 2π)</p></div>
 <p>Det är därför division både <strong>delar absolutbeloppen</strong> och <strong>subtraherar argumenten</strong>.</p></details></section>
-<section id="plot" class="slide" data-teacher="Grafen visar själva operationen, inte bara slutresultatet. Start: z₁ och z₂. Första klicket: skala z₁ med |z₂| vid produkt, eller 1/|z₂| vid division; riktningen är oförändrad. Andra klicket: rotera med +60° eller −60°. Stanna upp före varje klick. Alla lägen använder samma axelskala.">
+<section id="plot" class="slide" data-teacher="Ett nytt exempel med mindre längder gör skalning och rotation tydliga i samma figur. Start: z₁ och z₂. Första klicket: skala z₁ med |z₂| vid produkt, eller 1/|z₂| vid division; riktningen är oförändrad. Andra klicket: rotera med +π/3 eller −π/3. Stanna upp före varje klick. Alla lägen använder samma axelskala.">
 <div class="eyebrow">04 · Undersök geometriskt · längd och riktning</div>
-<h2>Först skala – sedan rotera</h2>
+<h2>Först skala – sedan rotera</h2><p>Nytt exempel i radianer med kortare vektorer.</p>
 <div class="two"><div>
 <div class="plot-box"><svg class="plot" id="pd-plane" viewBox="0 0 680 430" role="img" aria-label="Komplext talplan där z₁ skalas och sedan roteras stegvis vid multiplikation och division"></svg></div>
 <div class="flex"><button type="button" data-operation="mul" aria-pressed="true">Multiplikation</button><button type="button" data-operation="div" class="secondary" aria-pressed="false">Division</button></div>
@@ -59,7 +59,7 @@
 <div class="plot-box"><svg class="plot" id="pd-zoom-plane" viewBox="0 0 680 430" role="img" aria-label="Förstorad detalj kring origo för division, med stegvis skalning och rotation"></svg></div>
 <p class="muted">Den korta kvotvektorn syns tydligare här. Huvudfiguren ovan behåller samma skala i båda lägena. Förutsäg nästa pil innan du klickar.</p></div>
 </div><div>
-<div class="math-givens" role="group" aria-label="Två olika komplexa tal"><p class="math">z₁ = 2(cos 30° + i sin 30°)</p><p class="math">z₂ = 3(cos 60° + i sin 60°)</p></div>
+<div class="math-givens" role="group" aria-label="Två olika komplexa tal"><p class="math">z₁ = 2(cos(π/6) + i sin(π/6))</p><p class="math">z₂ = 3(cos(π/3) + i sin(π/3))</p></div>
 <div class="task"><strong>Förutsäg före nästa steg</strong><p id="pd-question" aria-live="polite">Vilken längd och riktning har z₁? Hur påverkas längden först?</p></div>
 <div class="seq-controls"><button type="button" id="pd-back" class="secondary">← Tillbaka</button><button type="button" id="pd-next">Visa nästa steg →</button><button type="button" id="pd-reset" class="secondary">Börja om</button></div>
 <p id="pd-step" class="muted" aria-live="polite">Steg 0 av 2</p>
@@ -72,7 +72,7 @@
 <button class="reveal" type="button" data-reveal="selfans">Visa återkoppling</button>
 <div class="answer hidden" id="selfans"><div class="math-working">
 <p class="math">|w₁w₂| = 4 · 2 = 8</p><p class="math">arg(w₁w₂) = 150° + 30° = 180°</p><p class="math">w₁w₂ = 8(cos 180° + i sin 180°) = −8</p>
-<p class="math">|w₁/w₂| = <span class="fraction"><span>4</span><span>2</span></span> = 2</p><p class="math">arg(w₁/w₂) = 150° − 30° = 120°</p><p class="math">w₁/w₂ = 2(cos 120° + i sin 120°)</p></div><p>Kontroll: den första produkten ligger på negativa realaxeln, kvoten i andra kvadranten.</p></div><div class="panel" id="source-polar-radians"><h3>Samma räkneregler i radianer</h3><div class="math-givens"><p class="math">u₁ = 8(cos(2π/3) + i sin(2π/3))</p><p class="math">u₂ = 4(cos(π/6) + i sin(π/6))</p></div><div class="task"><strong>Räkna på papper före visning</strong>Bestäm absolutbeloppet och argumentet för produkten, sedan absolutbeloppet och argumentet för kvoten. Skriv båda i polär form.</div><button type="button" class="reveal secondary" data-reveal="source-polar-radians-answer">Visa alla mellanled</button><div class="answer hidden" id="source-polar-radians-answer"></div></div></section>
+<p class="math">|w₁/w₂| = <span class="fraction"><span>4</span><span>2</span></span> = 2</p><p class="math">arg(w₁/w₂) = 150° − 30° = 120°</p><p class="math">w₁/w₂ = 2(cos 120° + i sin 120°)</p></div><p>Kontroll: den första produkten ligger på negativa realaxeln, kvoten i andra kvadranten.</p></div><div class="panel" id="source-polar-radians"><h3>Mer träning i radianer</h3><div class="math-givens"><p class="math">u₁ = 8(cos(2π/3) + i sin(2π/3))</p><p class="math">u₂ = 4(cos(π/6) + i sin(π/6))</p></div><div class="task"><strong>Räkna på papper före visning</strong>Bestäm absolutbeloppet och argumentet för produkten, sedan absolutbeloppet och argumentet för kvoten. Skriv båda i polär form.</div><button type="button" class="reveal secondary" data-reveal="source-polar-radians-answer">Visa alla mellanled</button><div class="answer hidden" id="source-polar-radians-answer"></div></div></section>
 <section id="nok" class="slide" data-teacher="Original-PDF:en anger uppgifter 4217–4231 och tre nivåer eller mer. Använd den etablerade formuleringen minst tre av fem nivåer. Eleverna väljer efter svårighet under arbetet, utan digitala förhandsval.">
 <div class="eyebrow">06 · Eget arbete · NOKflex</div><h2>Jobba i NOKflex</h2>
 <div class="panel"><p class="lead">NOKflex → 4.2 Komplexa tal i polär form → Multiplikation och division i polär form</p>
@@ -118,14 +118,14 @@ function draw(){
  if(step>=1)vectors.push({...scaled,label:multiplication?'Skalad z₁':'',color:'purple',dashed:true,dx:12,dy:17,width:3});
  if(step>=2)vectors.push({...result,label:multiplication?'z₁z₂':'',color:'orange',dx:16,dy:22,width:4});
  // Samma geografiska skala i båda lägena för att längderna ska vara jämförbara.
- const g=Ma4Plane.plot(svg,{minX:-2.2,maxX:6.7,minY:-2.2,maxY:6.7,alt:'Lika skalenheter i både reell och imaginär riktning. '+(multiplication?'Multiplikation':'Division')+', steg '+step+' av 2. '+(step===0?'Endast z₁ och z₂ visas.':step===1?'z₁ har skalats utan rotation.':'Resultatvektorn har roterats med '+(multiplication?'+60°':'−60°')+'.'),vectors});
+ const g=Ma4Plane.plot(svg,{minX:-2.2,maxX:6.7,minY:-2.2,maxY:6.7,alt:'Lika skalenheter i både reell och imaginär riktning. '+(multiplication?'Multiplikation':'Division')+', steg '+step+' av 2. '+(step===0?'Endast z₁ och z₂ visas.':step===1?'z₁ har skalats utan rotation.':'Resultatvektorn har roterats med '+(multiplication?'+π/3':'−π/3')+'.'),vectors});
  if(step>=2&&multiplication){
   const rPx=1.35*g.scale,cx=g.X(0),cy=g.Y(0);
   const angle1=30*Math.PI/180,angle2=90*Math.PI/180;
   const pt=(a)=>[cx+rPx*Math.cos(a),cy-rPx*Math.sin(a)],p1=pt(angle1),p2=pt(angle2);
   el('path',{d:'M '+p1[0]+' '+p1[1]+' A '+rPx+' '+rPx+' 0 0 0 '+p2[0]+' '+p2[1],stroke:'#9b631c','stroke-width':3,fill:'none'});
   const mid=(angle1+angle2)/2;
-  el('text',{x:cx+(rPx+15)*Math.cos(mid)-2,y:cy-(rPx+15)*Math.sin(mid)-2,'font-size':17,'font-weight':750,fill:'#9b631c'},'+60°');
+  el('text',{x:cx+(rPx+15)*Math.cos(mid)-2,y:cy-(rPx+15)*Math.sin(mid)-2,'font-size':17,'font-weight':750,fill:'#9b631c'},'+π/3');
  }
  const zoom=document.getElementById('pd-zoom');
  zoom.classList.toggle('hidden',multiplication);
@@ -135,19 +135,19 @@ function draw(){
   if(step>=1)insetVectors.push({...scaled,label:'skalad',color:'purple',dashed:true,dx:-26,dy:-20,width:3});
   if(step>=2)insetVectors.push({...result,label:'kvot',color:'orange',dx:12,dy:23,width:4});
   const zg=Ma4Plane.plot(zoomSvg,{minX:-.4,maxX:2.6,minY:-1,maxY:1.9,showAllTicks:true,
-   alt:'Förstorad detalj kring origo, annan skala än huvudfiguren. '+(step===0?'Bara startvektorn visas.':step===1?'Den skalade vektorn har längden två tredjedelar och vinkeln trettio grader.':'Kvotvektorn har längden två tredjedelar och vinkeln minus trettio grader.'),vectors:insetVectors});
+   alt:'Förstorad detalj kring origo, annan skala än huvudfiguren. '+(step===0?'Bara startvektorn visas.':step===1?'Den skalade vektorn har längden två tredjedelar och vinkeln π/6 radianer.':'Kvotvektorn har längden två tredjedelar och vinkeln −π/6 radianer.'),vectors:insetVectors});
   if(step>=2){
    const radius=.43*zg.scale,cx=zg.X(0),cy=zg.Y(0),start=30*Math.PI/180,end=-30*Math.PI/180;
    const x1=cx+radius*Math.cos(start),y1=cy-radius*Math.sin(start);
    const x2=cx+radius*Math.cos(end),y2=cy-radius*Math.sin(end);
    el('path',{d:'M '+x1+' '+y1+' A '+radius+' '+radius+' 0 0 1 '+x2+' '+y2,stroke:'#9b631c','stroke-width':3,fill:'none'},undefined,zoomSvg);
-   el('text',{x:cx+radius+22,y:cy-13,'font-size':17,'font-weight':750,fill:'#9b631c'},'−60°',zoomSvg);
+   el('text',{x:cx+radius+22,y:cy-13,'font-size':17,'font-weight':750,fill:'#9b631c'},'−π/3',zoomSvg);
   }
  }
  const question=step===0
   ?(multiplication?'Vad blir längden om z₁ multipliceras med |z₂| = 3? Vilken riktning har den skalade vektorn?':'Vad blir längden om z₁ divideras med |z₂| = 3? Vilken riktning har den skalade vektorn?')
-  :step===1?(multiplication?'Den streckade pilen har längden 6. Var hamnar spetsen om den roteras +60°?':'Den streckade pilen har längden 2/3. Var hamnar spetsen om den roteras −60°?')
-  :(multiplication?'Varför blir argumentet 90° och absolutbeloppet 6?':'Varför blir argumentet −30° och absolutbeloppet 2/3?');
+  :step===1?(multiplication?'Den streckade pilen har längden 6. Var hamnar spetsen om den roteras +π/3?':'Den streckade pilen har längden 2/3. Var hamnar spetsen om den roteras −π/3?')
+  :(multiplication?'Varför blir argumentet π/2 och absolutbeloppet 6?':'Varför blir argumentet −π/6 och absolutbeloppet 2/3?');
  document.getElementById('pd-question').textContent=question;
  document.getElementById('pd-step').textContent='Steg '+step+' av 2';
  document.getElementById('pd-back').disabled=step===0;
@@ -155,14 +155,14 @@ function draw(){
  const answer=document.getElementById('pd-answer');answer.classList.toggle('hidden',step!==2);
  const intermediate=document.getElementById('pd-intermediate');
  intermediate.classList.toggle('hidden',step!==1);
- if(step===1)showMathRows(intermediate,multiplication?['r = 2 · 3 = 6','v = 30°']:['r = 2/3','v = 30°']);
+ if(step===1)showMathRows(intermediate,multiplication?['r = 2 · 3 = 6','v = π/6']:['r = 2/3','v = π/6']);
  if(step===2){
   showMathRows(document.getElementById('pd-result'),multiplication?
-   ['r = 2 · 3 = 6','v = 30° + 60° = 90°','z₁z₂ = 6(cos 90° + i sin 90°)','= 6i']:
-   ['r = 2/3','v = 30° − 60° = −30°','z₁/z₂ = (2/3)(cos(−30°) + i sin(−30°))','= √3/3 − (1/3)i']);
+   ['r = 2 · 3 = 6','v = π/6 + π/3 = π/2','z₁z₂ = 6(cos(π/2) + i sin(π/2))','= 6i']:
+   ['r = 2/3','v = π/6 − π/3 = −π/6','z₁/z₂ = (2/3)(cos(−π/6) + i sin(−π/6))','= √3/3 − (1/3)i']);
   document.getElementById('pd-explain').textContent=multiplication?
-   'Först skalar z₂ längden 2 till 6. Sedan roterar den vektorn 60° moturs, från 30° till 90°.' :
-   'Divisionen skalar först längden 2 till 2/3 och roterar sedan 60° medurs, från 30° till −30° (330°). Figuren och den färdiga polära formen visar samma resultat.';
+   'Först skalar z₂ längden 2 till 6. Sedan roterar den vektorn π/3 moturs, från π/6 till π/2.' :
+   'Divisionen skalar först längden 2 till 2/3 och roterar sedan π/3 medurs, från π/6 till −π/6 (11π/6). Figuren och den färdiga polära formen visar samma resultat.';
  }
  document.querySelectorAll('[data-operation]').forEach(button=>{const selected=button.dataset.operation===op;button.setAttribute('aria-pressed',String(selected));button.classList.toggle('secondary',!selected)});
 }
