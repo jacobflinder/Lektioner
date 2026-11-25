@@ -1,0 +1,55 @@
+name: Verify published lesson site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "ma4/**"
+      - "fy1/**"
+      - "fy2/**"
+      - "mato1c/**"
+      - ".github/workflows/published-site-qa.yml"
+      - ".github/qa/verify-published.cjs"
+  pull_request:
+    paths:
+      - ".github/workflows/published-site-qa.yml"
+      - ".github/qa/verify-published.cjs"
+  workflow_dispatch:
+concurrency:
+  group: published-site-qa-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  published-site:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Select the exact published source revision
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = pull_request ]; then
+            git fetch origin main
+            echo "EXPECTED_SHA=$(git rev-parse origin/main)" >> "$GITHUB_ENV"
+          else
+            echo "EXPECTED_SHA=$GITHUB_SHA" >> "$GITHUB_ENV"
+          fi
+      - name: Verify real HTTPS responses and browser navigation
+        run: node .github/qa/verify-published.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: published-site-evidence
+          path: published-site-evidence/
+          retention-days: 14
