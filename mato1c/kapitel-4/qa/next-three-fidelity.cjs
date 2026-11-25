@@ -48,7 +48,7 @@ check(area.indexOf('data-title="Areasatsen i tre former"')<area.indexOf('data-ti
 check(area.includes('36,87°')&&area.includes('143,13°'),'Areasats: två trianglar');
 check(area.includes('data-case-select="acute"')&&area.includes('data-case-select="obtuse"'),'Areasats: jämför två figurer och beräkningar i samma bild');
 check(area.includes('Välj två sidor som möts i en känd vinkel'),'Areasats: sats med sid- och vinkelbild');
-check(area.includes('PhET Trig Tour')&&area.includes('mindmap')&&area.includes('Socrative 330'),'Areasats: originalaktiviteter');
+check(area.includes('PhET Trig Tour')&&area.includes('Socrative 330')&&!/mindmap/i.test(area.replace(/data-teacher="[^"]*"/g,'')),'Areasats: aktuella aktiviteter utan mindmap');
 check(!area.includes('4301–4302</div>'),'Areasats: bokexempel ej uppgifter');
 const sin=htmls.sinussatsen;
 check(!/youtu\.be|youtube\.com/.test(sin),'Sinussats: inga filmer i webblektionen');
@@ -60,7 +60,7 @@ check(sin.includes('id="sinus-sidpar"')&&sin.includes('Visa hela lösningen'),'S
 check(!sin.includes('116°')&&!sin.includes('data-case-figure="obtuse"'),'Sinussats: senare beslut skjuter två möjliga fall till s.236');
 check(sin.includes('Varje sida hör ihop med')&&sin.includes('motstående vinkel'),'Sinussats: formel och motstående sidpar samtidigt');
 check(sin.includes('Nästa bokmoment, s. 236'),'Sinussats: nästa moment för två fall');
-check(sin.includes('mindmap')&&sin.includes('Socrative 331'),'Sinussats: originalaktiviteter');
+check(sin.includes('Socrative 331')&&!/mindmap/i.test(sin.replace(/data-teacher="[^"]*"/g,'')),'Sinussats: aktuella aktiviteter utan mindmap');
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 for(const item of cases)check(index.includes('href="'+item.id+'/"'),item.id+': länkad i översikt');

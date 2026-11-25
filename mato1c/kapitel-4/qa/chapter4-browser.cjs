@@ -138,7 +138,7 @@ async function inspectLayout(page,id,width,i){
     assert.match(await circle.locator('[data-coordinates]').innerText(),/0,50/);checks++;
    }
    if(lesson.id==='areasatsen'){
-    assert((await page.locator('.slide[data-title="Demo, mindmap och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278150'));checks++;
+    assert((await page.locator('.slide[data-title="PhET och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278150'));checks++;
     await page.locator('#jump').selectOption('4');
     const answer=page.locator('#area-trubbig');
     assert(await answer.isVisible());checks++;
@@ -149,7 +149,7 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
    }
    if(lesson.id==='sinussatsen'){
-    assert((await page.locator('.slide[data-title="Mindmap och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278423'));checks++;
+    assert((await page.locator('.slide[data-title="Socrative 331"]').getAttribute('data-teacher')).includes('SOC-37278423'));checks++;
     assert.equal(await page.locator('.book-number').count(),2);checks++;
     await page.locator('#jump').selectOption('5');
     const cases=page.locator('.slide.active [data-case-choices]');
