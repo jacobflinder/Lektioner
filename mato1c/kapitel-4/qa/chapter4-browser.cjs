@@ -46,6 +46,8 @@ async function inspectLayout(page,id,width,i){
    const errors=[];page.on('pageerror',error=>errors.push(error.message));
    const url=process.env.QA_BASE_URL?`${process.env.QA_BASE_URL}/mato1c/kapitel-4/${lesson.id}/`:`file://${path.join(root,'kapitel-4',lesson.id,'index.html')}`;
    await page.goto(url,{waitUntil:'load'});
+   assert.equal(await page.locator('.head-actions').isVisible(),false,`${lesson.id}: studentvyn har inga lärarknappar`);checks++;
+   assert.equal(await page.locator('.repetition').count(),0,`${lesson.id}: ingen teknisk upprepningsbanner för elever`);checks++;
    const count=await page.locator('.slide').count();
    const maxSlides=lesson.id==='enhetscirkeln'?16:13;
    const minSlides=lesson.id==='sinussatsen'?8:9;
@@ -58,6 +60,8 @@ async function inspectLayout(page,id,width,i){
    for(let i=0;i<count;i++){
     await page.locator('#jump').selectOption(String(i));
     assert.equal(await page.locator('.slide.active').count(),1);checks++;
+    const studentText=await page.locator('.slide.active').innerText();
+    assert(!/Originalets|originallektionen|Jacobs|samma webblektion|SOC-3727|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
     const buttons=page.locator('.slide.active [data-reveal]');
     for(let j=0;j<await buttons.count();j++){
      const button=buttons.nth(j),id=await button.getAttribute('data-reveal');
@@ -69,8 +73,11 @@ async function inspectLayout(page,id,width,i){
    }
    if(lesson.id==='exakta-trigonometriska-varden'){
     await page.locator('#jump').selectOption('6');
+    assert.equal(await page.locator('#exact-table tbody tr').count(),5);checks++;
     const button=page.locator('[data-table-reveal]');await button.click();
     assert.equal(await page.locator('.math-table.show-answer').count(),1);checks++;
+    assert.match(await page.locator('#exact-table tbody tr').last().innerText(),/ej definierad/);checks++;
+    assert(await page.locator('#exact-table').evaluate(el=>el.scrollWidth<=el.parentElement.clientWidth+2),`${lesson.id}: hela tabellen synlig utan horisontell rullning`);checks++;
     for(const slide of ['2','4','5','8']){
      await page.locator('#jump').selectOption(slide);
      assert((await page.locator('.slide.active [data-right-triangle] svg path').count())>=3,`Exakta värden bild ${Number(slide)+1}: ritad triangel`);checks++;
@@ -85,6 +92,14 @@ async function inspectLayout(page,id,width,i){
     }
    }
    if(lesson.id==='enhetscirkeln'){
+    for(const slide of ['6','7']){
+     await page.locator('#jump').selectOption(slide);
+     const figure=page.locator('.slide.active [data-symmetry]');
+     assert.equal(await figure.locator('svg circle').count(),2);checks++;
+     await figure.locator('[data-symmetry-step="both"]').click();
+     assert.equal(await figure.locator('svg circle').count(),3);checks++;
+     assert((await figure.locator('svg path').count())>=4);checks++;
+    }
     for(const slide of ['2','3','5','8']){
      await page.locator('#jump').selectOption(slide);
      assert((await page.locator('.slide.active [data-static-circle] svg circle').count())>=2,`Enhetscirkeln bild ${Number(slide)+1}: visad enhetscirkel`);checks++;
@@ -103,7 +118,7 @@ async function inspectLayout(page,id,width,i){
     assert.match(await root.locator('[data-coordinates]').innerText(),/-0,64/);checks++;
     assert.equal(await root.locator('svg circle').count()>1,true);checks++;
     await page.locator('#jump').selectOption('12');
-    assert((await page.locator('body').textContent()).includes('SOC-37278098'));checks++;
+    assert((await page.locator('.slide[data-title="Socrative 329, bokens nivåer och mål"]').getAttribute('data-teacher')).includes('SOC-37278098'));checks++;
     const cycle=page.locator('[data-cycle-demo]');await cycle.locator('[data-cycle-angle="400"]').click();
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
    }
@@ -123,7 +138,7 @@ async function inspectLayout(page,id,width,i){
     assert.match(await circle.locator('[data-coordinates]').innerText(),/0,50/);checks++;
    }
    if(lesson.id==='areasatsen'){
-    assert((await page.locator('body').textContent()).includes('SOC-37278150'));checks++;
+    assert((await page.locator('.slide[data-title="Demo, mindmap och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278150'));checks++;
     await page.locator('#jump').selectOption('4');
     const answer=page.locator('#area-trubbig');
     assert(await answer.isVisible());checks++;
@@ -134,7 +149,7 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
    }
    if(lesson.id==='sinussatsen'){
-    assert((await page.locator('body').textContent()).includes('SOC-37278423'));checks++;
+    assert((await page.locator('.slide[data-title="Film, mindmap och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278423'));checks++;
     assert.equal(await page.locator('.book-number').count(),2);checks++;
     await page.locator('#jump').selectOption('5');
     const cases=page.locator('.slide.active [data-case-choices]');
@@ -147,7 +162,9 @@ async function inspectLayout(page,id,width,i){
     assert(await solution.isVisible());checks++;
     assert((await solution.textContent()).includes('7,1'));checks++;
    }
-   if(lesson.id==='enhetscirkeln')assert((await page.locator('body').textContent()).includes('SOC-37277932'));
+   if(lesson.id==='enhetscirkeln')assert((await page.locator('.slide[data-title="Socrative 326 och bokarbete"]').getAttribute('data-teacher')).includes('SOC-37277932'));
+   await page.goto(url+'?larare=1',{waitUntil:'load'});
+   assert(await page.locator('.head-actions').isVisible(),`${lesson.id}: lärarverktyg kan öppnas separat`);checks++;
    await page.locator('#mode').click();assert.equal(await page.locator('body.classroom').count(),1);checks++;
    await page.locator('#teacher-toggle').click();assert.equal(await page.locator('body.teacher-open').count(),1);checks++;
    assert.deepEqual(errors,[],`${lesson.id} ${width}px JavaScript errors`);checks++;

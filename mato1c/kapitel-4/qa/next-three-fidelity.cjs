@@ -52,7 +52,7 @@ check(area.includes('PhET Trig Tour')&&area.includes('mindmap')&&area.includes('
 check(!area.includes('4301–4302</div>'),'Areasats: bokexempel ej uppgifter');
 const sin=htmls.sinussatsen;
 check(sin.includes('eU_OzLqB6uc'),'Sinussats: Barkerfilm');
-check(sin.indexOf('data-title="Härled sinussatsen"')<sin.indexOf('data-title="Jacobs första exempel"'),'Sinussats: sats före exempel');
+check(sin.indexOf('data-title="Härled sinussatsen"')<sin.indexOf('data-title="Beräkna en sida med sinussatsen"'),'Sinussats: sats före exempel');
 check(sin.includes('130°')&&sin.includes('1,8'),'Sinussats: originalexempel 1');
 check(sin.includes('42°')&&sin.includes('73°')&&sin.includes('7,1'),'Sinussats: fullständig entydig sidberäkning');
 check(sin.includes('data-case-choices')&&sin.includes('data-case-figure="pair-a"')&&sin.includes('data-case-figure="pair-b"'),'Sinussats: motstående sidpar visas ihop med formeln');

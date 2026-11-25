@@ -9,6 +9,7 @@
 - Den nya läroboken: användarens tidigare nio bokbilder s. 218–225 samt **åtta nya foton s. 228–235**. Alla nivågränser har lästs av i fotona. Bokens genomgångna exempel 4216–4217, 4301–4302 och 4314 kopieras inte.
 - «Ma3c 2627 – didaktisk grund och lektionsstruktur v1.4», samt överordnad AGENTS.md-instruktion: originalets matematikinnehåll och metod är bindande; tre kontrollerbara mål, korrekt bokarbete på minst två **hela** nivåer, målavstämning med redan gjorda boklösningar.
 - **Senaste uttryckliga planeringsbeslut 25 november 2026:** ett moment i planeringen = en webblektion. Planeringen visar s. 218, s. 221, s. 222, s. 228, s. 231, s. 234, s. 236, s. 240 och s. 244 som separata moment. De 17 bokbilderna täcker de **sex första** momenten t.o.m. s. 235.
+- **Ny elevgranskning samma dag:** Jacob upptäckte att tabellen för exakta värden saknade 0° och 90°, att elevbilder innehöll kommentarer om originallektion och webbproduktion, och att speglingsbilderna inte förklarade vinklarna tydligt. Detta är styrande rättelser för **alla sex** lektionerna. Endast innehåll som gör matematik eller aktivitet begripligare får stå i elevvyn. Befintligt lärarstöd är fortsatt tillgängligt med `?larare=1`.
 
 ## Moment, nivåer och faktisk täckning
 
@@ -33,11 +34,13 @@ Planeringens följande separata moment är När ger sinussatsen två fall? s. 23
 | Kvadrat med kateterna 1, 1 och hypotenusa √2 | Exakta värden, bilder 2–3 | Härlett med Pythagoras; 45°-triangeln syns även bredvid de två trigonometriska kvoterna och det fulla förlängningssteget på bild 3. |
 | Halverad liksidig triangel: halva basen 1 och höjden √3 | Exakta värden, bilder 4–5 | Bevarad härledning; den märkta 30°–60°–90°-triangeln visas också bredvid de fyra exakta värdena på bild 5, samt vid tangensförkortningen på bild 6. |
 | Värden för 30°, 45°, 60°, sin, cos, tan; exakta rotbråk | Exakta värden, bilder 5–8 | Tabellen fylls först av eleverna, sedan återkoppling; fulla förlängningsled |
+| Tabellens saknade ändvinklar 0° och 90° | Exakta värden, bild 7 | **Korrigerat enligt Jacobs nya elevgranskning:** fem rader 0°, 30°, 45°, 60°, 90°. Sinus och cosinus har rätt ändvärden, tangens 90° anges uttryckligen som *ej definierad* därför att cosinus är noll. Tabellen passar nu även 390 px utan sidledsrullning. Härledningen ur specialtrianglarna sker fortfarande först. |
 | Hand som minnesstöd efter geometrisk förståelse | Exakta värden, frivillig extra | Bevarat frivilligt |
 | Cirkelns ekvation från Pythagoras och radie 1 | Enhetscirkeln, bilder 2–3 | Bevarat; en hel enhetscirkel ligger bredvid den resulterande ekvationen på bild 3. |
 | Hela enhetscirkeln, positiva och negativa vinklar | Enhetscirkeln, bilder 4–6 och 9 | Bevarat med interaktiv illustration |
 | P = (cos v, sin v) och tan v = sin v / cos v | Enhetscirkeln, bilder 4–6 | Bevarad notation och tydlig läsning. Samma enhetscirkel med projektioner visas bredvid koordinatformlerna på bild 4 och punktexemplet på bild 6. |
 | Spegling i y-axeln resp. x-axeln, med teckenkonventioner | Enhetscirkeln, bilder 7–8 | Bevarade symmetrier före tillämpning |
+| Speglingsfigurernas synliga vinkelmarkeringar | Enhetscirkeln, bilder 7–8 | **Korrigerat:** en felaktigt antydande böjd förbindelselinje mellan P och Q ersätts av geometriskt riktiga vinkelbågar med centrum i O. Eleverna får förutsäga spegelpunkten och klicka fram den; v, 180°−v respektive −v märks vid rätt vinkel. |
 | Originalet löser sin v = 0,4 med arcsin och 180°−v | Enhetscirkeln, bild 10 | Samma tal och fulla mellanled **före Socrative 326**, nu med klickbar första och speglad vinkel på enhetscirkeln bredvid varje algebraled. |
 | Originalet löser cos v = −0,2 med ±arccos och +360° | Enhetscirkeln, bild 11 | Samma tal och fulla mellanled **före Socrative 326**, med klickbar x-spegling i samma bild som lösningen. |
 | Socrative 326, först efter två ekvationer | Enhetscirkeln, bild 12 | Bevarat, avgränsar första originalpasset |
@@ -68,6 +71,7 @@ Planeringens följande separata moment är När ger sinussatsen två fall? s. 23
 - Alla aktiviteter görs utan elevinloggning och utan personuppgiftsinsamling. Originalets Socrative-länkar/koder verifieras vid behov i lärarens konto.
 - Alla originalfilmer syns direkt i de aktuella lektionerna. Ingen ny matematisk metod eller alternativ lösningsnorm införs.
 - Lärarens senare bildgranskningskrav gäller **samtliga sex** lektioner: figur, beteckningar, räknesätt och motsvarande algebra hör ihop på samma bild. De första tre lektionerna har därför fått illustrerad sats-/metodåterkoppling även där en figur tidigare bara låg på föregående bild. Matematiska funktioner och alla inline-uttryck i de berörda lektionerna har normaliserats till MathML, utan att ändra lärarens metod.
+- Den sena elevgranskningen gav en separat **språklig och gränssnittsorienterad** korrigering i alla sex: metauttryck om ”originalaktivitet”, ”Jacobs tavla”, att sidan inte skickar elevsvar, intern Socrative-importkod och hur många pass en webblektion motsvarar är borttagna ur elevbilderna. Filmer, mindmap, Socrative och matematisk ordning är bevarade; lärarens interna koder och anvisningar ligger i det avskilda lärarstödet. Lärarknappar och lärarstöd visas bara när adressen avslutas med `?larare=1`.
 - Samtliga sex webblektioner ingår i samma automatiska webbläsarkontroll med fyra bredder, navigering genom alla bilder, kontroll av matematikens visuella marginaler och aktiva diagramknappar. Dessutom sparas en separat skärmbild av varje mobilslide för manuell läsbarhetsgranskning. **Socrative-innehållet** är fortsatt ett externt kontrollsteg som endast läraren har tillgång till.
 
 ## Återstående extern kontroll
