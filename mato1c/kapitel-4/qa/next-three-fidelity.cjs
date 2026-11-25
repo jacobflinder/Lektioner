@@ -51,7 +51,7 @@ check(area.includes('Välj två sidor som möts i en känd vinkel'),'Areasats: s
 check(area.includes('PhET Trig Tour')&&area.includes('mindmap')&&area.includes('Socrative 330'),'Areasats: originalaktiviteter');
 check(!area.includes('4301–4302</div>'),'Areasats: bokexempel ej uppgifter');
 const sin=htmls.sinussatsen;
-check(sin.includes('eU_OzLqB6uc'),'Sinussats: Barkerfilm');
+check(!/youtu\.be|youtube\.com/.test(sin),'Sinussats: inga filmer i webblektionen');
 check(sin.indexOf('data-title="Härled sinussatsen"')<sin.indexOf('data-title="Beräkna en sida med sinussatsen"'),'Sinussats: sats före exempel');
 check(sin.includes('130°')&&sin.includes('1,8'),'Sinussats: originalexempel 1');
 check(sin.includes('42°')&&sin.includes('73°')&&sin.includes('7,1'),'Sinussats: fullständig entydig sidberäkning');

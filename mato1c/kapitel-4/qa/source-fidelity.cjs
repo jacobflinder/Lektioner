@@ -5,9 +5,9 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const lessons = [
-  { id:'ratvinkliga-trianglar', count:11, video:'-kdpNKtXbAA', levels:['4101–4106','4107–4109','4110–4111'], socrative:0 },
-  { id:'exakta-trigonometriska-varden', count:11, video:'egoH2raVEvE', levels:['4113–4115','4116–4118','4119'], socrative:0 },
-  { id:'enhetscirkeln', count:16, video:'ObyLiKZ-3RU', levels:['4203–4208','4209–4213','4214–4215'], socrative:326 }
+  { id:'ratvinkliga-trianglar', count:10, levels:['4101–4106','4107–4109','4110–4111'], socrative:0 },
+  { id:'exakta-trigonometriska-varden', count:11, levels:['4113–4115','4116–4118','4119'], socrative:0 },
+  { id:'enhetscirkeln', count:15, levels:['4203–4208','4209–4213','4214–4215'], socrative:326 }
 ];
 let checks = 0;
 const check = (test, label) => { assert(test, label); checks++; };
@@ -23,8 +23,7 @@ for (const lesson of lessons) {
   check((html.match(/class="goal-list"/g)||[]).length === 1, `${lesson.id}: mål kopplade till redan gjorda lösningar`);
   check((html.match(/class="book-number"/g)||[]).length === 3, `${lesson.id}: alla tre boknivåerna`);
   for (const number of lesson.levels) check(html.includes(number), `${lesson.id}: nivå ${number}`);
-  const firstSlide = html.split(/<section class="slide"/)[0];
-  if (lesson.video) check(firstSlide.includes(lesson.video), `${lesson.id}: originalfilmen synlig i huvudspåret`);
+  check(!/youtu\.be|youtube\.com/.test(html), `${lesson.id}: inga filmer i webblektionen`);
   if (lesson.socrative) check(html.includes('Socrative 326')&&html.includes('Socrative 329')&&html.includes('SOC-37277932')&&html.includes('SOC-37278098'), `${lesson.id}: ursprungliga Socrative 326/329 bevarade, importkoder i lärarstöd`);
   else check(!/SOC-3727/.test(html), `${lesson.id}: inget tillagt Socrative`);
   const ids=[...html.matchAll(/\bid="([\w-]+)"/g)].map(m=>m[1]);

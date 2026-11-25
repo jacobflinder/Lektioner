@@ -6,9 +6,9 @@ const {chromium}=require('playwright');
 
 const root=path.resolve(__dirname,'../..');
 const lessons=[
- {id:'ratvinkliga-trianglar',levels:['4101–4106','4107–4109','4110–4111'],extras:1},
+ {id:'ratvinkliga-trianglar',levels:['4101–4106','4107–4109','4110–4111'],extras:0},
  {id:'exakta-trigonometriska-varden',levels:['4113–4115','4116–4118','4119'],extras:1},
- {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:1},
+ {id:'enhetscirkeln',levels:['4203–4208','4209–4213','4214–4215'],extras:0},
  {id:'trigonometriska-ekvationer',levels:['4218–4223','4224–4227','4228'],extras:1},
  {id:'areasatsen',levels:['4303–4307','4308–4311','4312–4313'],extras:1},
  {id:'sinussatsen',levels:['4315–4318','4319–4320'],extras:0}
@@ -149,7 +149,7 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await cases.locator('[data-case-figure="obtuse"].is-selected').count(),1);checks++;
    }
    if(lesson.id==='sinussatsen'){
-    assert((await page.locator('.slide[data-title="Film, mindmap och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278423'));checks++;
+    assert((await page.locator('.slide[data-title="Mindmap och Socrative"]').getAttribute('data-teacher')).includes('SOC-37278423'));checks++;
     assert.equal(await page.locator('.book-number').count(),2);checks++;
     await page.locator('#jump').selectOption('5');
     const cases=page.locator('.slide.active [data-case-choices]');
