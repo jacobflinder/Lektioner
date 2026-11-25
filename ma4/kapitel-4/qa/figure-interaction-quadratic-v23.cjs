@@ -51,7 +51,7 @@ for(const z of [[.5,1.5],[.5,-1.5]])assert.ok(root(...z,-1,0,2.5,0),'Exit B norm
    await go(3);
    ok(await hasMath(page.locator('.slide.active > .panel').first(),'b > 0'),'Villkoret b>0 visas innan lösningen');
    for(const id of ['teacher-rect-expand','teacher-rect-system','teacher-rect-cases','teacher-rect-roots','teacher-root-relations-answer'])await reveal(id);
-   for(const value of ['a² − b² + 2b + 3','2a(b − 1)','b₁ = 3','b₂ = −1','a² = −4','a = 0, b = 3'])
+   for(const value of ['a² − b² + 2b + 3','2a(b − 1)','b₁ = 3','b₂ = −1','a² = −4','a = 0','b = 3','z = 3i'])
     ok(await hasMath(page.locator('.slide.active'),value),'Filmens ansats/fall bevarar '+value);
    ok((await page.locator('#teacher-rect-cases').innerText()).includes('Omöjligt'),'Omöjligt fall förkastat');
    const over=await page.locator('.slide.active .math').evaluateAll(es=>es.filter(e=>e.scrollWidth>e.clientWidth+4).length);

@@ -31,7 +31,7 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <main><div class="teacher" id="teacher"><strong>Klassrumsstöd</strong><p id="teacherprompt"></p><small>Enskilt → par → gemensamt. Visa svar först efter elevförsök. Du styr takten.</small></div><div class="practice"><strong>Repetitionsläge</strong> – försök först för hand på papper eller i egna anteckningar. Kontrollera, förklara felet och försök igen. Inga elevsvar sparas eller skickas.</div>
 <div class="stage" id="stage" tabindex="-1">
 <section class="slide active"><div class="eyebrow">1 · Start och mål</div><h1>Andragrads&shy;ekvationer i komplexa tal</h1><p class="lead">Vi använder pq-formeln och ansatsen z = a + bi, precis som i filmgenomgången. Vi skriver alla led och använder villkor som b &gt; 0 från uppgiftens början.</p><div class="task"><strong>Startfråga · tänk först enskilt, sedan i par</strong>När ger en andragradsekvation konjugerade rötter? Fundera på betydelsen av reella respektive komplexa koefficienter.</div><button type="button" class="secondary" data-reveal="quadratic-goals">Visa dagens mål efter startfrågan</button><div id="quadratic-goals" class="panel hidden"><strong>Efter lektionen ska du kunna</strong><ul><li>Normalisera en andragradsekvation och lösa med pq-formeln, med alla mellanled.</li><li>Ansätta z = a + bi, skilja realdel från imaginärdel och pröva båda fallen.</li><li>Använda ett givet villkor som b &gt; 0, kontrollera en rot och förklara konjugatregeln.</li></ul></div></section>
-<section class="slide"><div class="eyebrow">2 · Återkalla och normalisera</div><h2>Vad kan vi redan?</h2><p>3 minuter själv → 1 minut i par. Skriv mellanled och förklara minst ett steg.</p><ol><li>Beräkna (2i)².</li><li>Lös z² + 4z + 8 = 0 och ange båda rötterna.</li><li>Hur kan en rot kontrolleras genom insättning?</li></ol><details><summary>Extra om du blir klar: beräkna (1 − i)²</summary><p>Jämför din beräkning efter återkopplingen.</p></details><button data-reveal="r2">Visa återkoppling</button><div id="r2" class="answer hidden"><p class="math">(2i)² = −4, &nbsp; (1 − i)² = −2i</p><p class="math">z² + 4z + 8 = 0</p><p class="math">p = 4, q = 8</p><p class="math">z = −p/2 ± √((p/2)² − q)</p><p class="math">z = −2 ± √(4 − 8)</p><p class="math">z = −2 ± √(−4)</p><p class="math">z = −2 ± 2i</p><p>En rot kontrolleras genom insättning i ursprungsekvationen, till exempel (−2 + 2i)² + 4(−2 + 2i) + 8 = 0. Rötterna är konjugerade eftersom ekvationen har reella koefficienter.</p></div><div id="teacher-first-degree" class="panel"><h3>Repetera först: ekvationer av första graden</h3><p>Två tidigare metoder behövs även när vi löser mer komplicerade ekvationer.</p><div class="task"><strong>Isolera z och förläng med konjugatet</strong><p class="math">z = 10i + 3iz</p><p>Samla alla termer med z på samma sida.</p></div><button type="button" data-reveal="teacher-linear-one">Visa lösningen</button><div id="teacher-linear-one" class="answer hidden"><p class="math">z − 3iz = 10i</p><p class="math">z(1 − 3i) = 10i</p><p class="math">z = 10i/(1 − 3i)</p><p class="math">= (10i(1 + 3i))/((1 − 3i)(1 + 3i))</p><p class="math">= (10i + 30i²)/(1 − 9i²)</p><p class="math">= (10i − 30)/(1 + 9)</p><p class="math">= (10i − 30)/10</p><p class="math">= i − 3</p><p class="math">z = −3 + i</p></div><div class="task"><strong>När konjugatet ingår: ansätt rektangulär form</strong><p class="math">z + 2z̄ = 9 + 4i</p><p>Vad får du om z = a + bi? Vad blir konjugatet?</p></div><button type="button" data-reveal="teacher-linear-two">Visa lösningen</button><div id="teacher-linear-two" class="answer hidden"><div class="math-givens"><p class="math">z = a + bi</p><p class="math">z̄ = a − bi</p></div><p>Här är a och b reella.</p><p class="math">(a + bi) + 2(a − bi)</p><p class="math">= 9 + 4i</p><p class="math">a + bi + 2a − 2bi = 9 + 4i</p><p class="math">3a − bi = 9 + 4i</p><div class="grid"><div class="panel"><strong>Realdel</strong><p class="math">3a = 9</p><p class="math">a = 3</p></div><div class="panel"><strong>Imaginärdel</strong><p class="math">−b = 4</p><p class="math">b = −4</p></div></div><p class="math">z = 3 − 4i</p><p>Kontroll genom insättning:</p><p class="math">(3 − 4i) + 2(3 + 4i)</p><p class="math">= 3 − 4i + 6 + 8i</p><p class="math">= 9 + 4i</p></div></div>
+<section class="slide"><div class="eyebrow">2 · Återkalla och normalisera</div><h2>Vad kan vi redan?</h2><p>3 minuter själv → 1 minut i par. Skriv mellanled och förklara minst ett steg.</p><ol><li>Beräkna (2i)².</li><li>Lös z² + 4z + 8 = 0 och ange båda rötterna.</li><li>Hur kan en rot kontrolleras genom insättning?</li></ol><details><summary>Extra om du blir klar: beräkna (1 − i)²</summary><p>Jämför din beräkning efter återkopplingen.</p></details><button data-reveal="r2">Visa återkoppling</button><div id="r2" class="answer hidden"><div class="math-givens"><p class="math">(2i)² = −4</p><p class="math">(1 − i)² = −2i</p></div><p class="math">z² + 4z + 8 = 0</p><div class="math-givens"><p class="math">p = 4</p><p class="math">q = 8</p></div><p class="math">z = −p/2 ± √((p/2)² − q)</p><p class="math">z = −2 ± √(4 − 8)</p><p class="math">z = −2 ± √(−4)</p><p class="math">z = −2 ± 2i</p><p>En rot kontrolleras genom insättning i ursprungsekvationen, till exempel (−2 + 2i)² + 4(−2 + 2i) + 8 = 0. Rötterna är konjugerade eftersom ekvationen har reella koefficienter.</p></div><div id="teacher-first-degree" class="panel"><h3>Repetera först: ekvationer av första graden</h3><p>Två tidigare metoder behövs även när vi löser mer komplicerade ekvationer.</p><div class="task"><strong>Isolera z och förläng med konjugatet</strong><p class="math">z = 10i + 3iz</p><p>Samla alla termer med z på samma sida.</p></div><button type="button" data-reveal="teacher-linear-one">Visa lösningen</button><div id="teacher-linear-one" class="answer hidden"><p class="math">z − 3iz = 10i</p><p class="math">z(1 − 3i) = 10i</p><p class="math">z = 10i/(1 − 3i)</p><p class="math">= (10i(1 + 3i))/((1 − 3i)(1 + 3i))</p><p class="math">= (10i + 30i²)/(1 − 9i²)</p><p class="math">= (10i − 30)/(1 + 9)</p><p class="math">= (10i − 30)/10</p><p class="math">= i − 3</p><p class="math">z = −3 + i</p></div><div class="task"><strong>När konjugatet ingår: ansätt rektangulär form</strong><p class="math">z + 2z̄ = 9 + 4i</p><p>Vad får du om z = a + bi? Vad blir konjugatet?</p></div><button type="button" data-reveal="teacher-linear-two">Visa lösningen</button><div id="teacher-linear-two" class="answer hidden"><div class="math-givens"><p class="math">z = a + bi</p><p class="math">z̄ = a − bi</p></div><p>Här är a och b reella.</p><p class="math">(a + bi) + 2(a − bi)</p><p class="math">= 9 + 4i</p><p class="math">a + bi + 2a − 2bi = 9 + 4i</p><p class="math">3a − bi = 9 + 4i</p><div class="grid"><div class="panel"><strong>Realdel</strong><p class="math">3a = 9</p><p class="math">a = 3</p></div><div class="panel"><strong>Imaginärdel</strong><p class="math">−b = 4</p><p class="math">b = −4</p></div></div><p class="math">z = 3 − 4i</p><p>Kontroll genom insättning:</p><p class="math">(3 − 4i) + 2(3 + 4i)</p><p class="math">= 3 − 4i + 6 + 8i</p><p class="math">= 9 + 4i</p></div></div>
 <div id="teacher-normalize" class="panel"><h3>Före pq-formeln: gör koefficienten framför z² till 1</h3>
 <p class="math">2z² − z + 1 = 0</p>
 <p>Filmens första andragradsexempel: bestäm den rot som har positiv imaginärdel och ange dess imaginärdel med två decimaler.</p>
@@ -56,20 +56,20 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <details><summary>Varför fungerar pq-formeln även med komplexa koefficienter?</summary><p>Kvadratkompletteringen använder samma räkneregler:</p><p class="math compact-math">z² + pz + q = 0<br>⇔ (z + p/2)² = (p/2)² − q.</p></details>
 <button data-reveal="r3">Visa alla led med pq-formeln</button>
 <div id="r3" class="answer hidden">
-<p class="math">p = −2i, q = 3</p>
+<div class="math-givens"><p class="math">p = −2i</p><p class="math">q = 3</p></div>
 <p class="math">z = −p/2 ± √((p/2)² − q)</p>
 <p class="math">z = −(−2i)/2 ± √(((−2i)/2)² − 3)</p>
 <p class="math">z = i ± √(i² − 3)</p>
 <p class="math">z = i ± √(−1 − 3)</p>
 <p class="math">z = i ± √(−4)</p>
 <p class="math">z = i ± 2i</p>
-<p class="math">z₁ = 3i, z₂ = −i</p>
+<div class="math-givens"><p class="math">z₁ = 3i</p><p class="math">z₂ = −i</p></div>
 <p>Av dessa har endast z₁ positiv imaginärdel: <span class="math">b = 3</span>. Nästa bild löser exakt samma uppgift med ansatsen från filmen.</p>
 </div></section>
 <section class="slide"><div class="eyebrow">4 · Filmmetod · ansats</div><h2>Ansätt z = a + bi och jämför delarna</h2>
 <div class="panel"><strong>Filmens uppgift och villkor från början</strong>
 <p class="math">z² − 2iz + 3 = 0</p>
-<p class="math">z = a + bi, &nbsp; a,b ∈ ℝ, &nbsp; b &gt; 0</p>
+<div class="math-givens"><p class="math">z = a + bi</p><p class="math">a,b ∈ ℝ</p><p class="math">b &gt; 0</p></div>
 <p>Bestäm b. Vi känner ännu inte a och b, så vi sätter in ansatsen och skiljer på reell och imaginär del.</p></div>
 <div class="task"><strong>1 · Utveckla varje produkt</strong>Utför kvadreringen och multiplikationen med −2i. Skriv hela vänsterledet.</div>
 <button type="button" data-reveal="teacher-rect-expand">Visa utvecklingen</button>
@@ -97,7 +97,7 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <p class="math">b² − 2b − 3 = 0</p>
 <p class="math">b = 1 ± √(1 + 3)</p>
 <p class="math">b = 1 ± 2</p>
-<p class="math">b₁ = 3, &nbsp; b₂ = −1</p>
+<div class="math-givens"><p class="math">b₁ = 3</p><p class="math">b₂ = −1</p></div>
 <p>Vi kräver b &gt; 0, därför förkastas b = −1.</p></div>
 <div class="panel"><strong>Fall 2: b = 1</strong>
 <p class="math">a² − 1 + 2 + 3 = 0</p>
@@ -108,7 +108,7 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <div class="task"><strong>4 · Svara och kontrollera</strong>Vilken av pq-formelns rötter uppfyller villkoret? Kontrollera i ursprungsekvationen.</div>
 <button type="button" data-reveal="teacher-rect-roots">Visa kontrollen</button>
 <div id="teacher-rect-roots" class="answer hidden">
-<p class="math">a = 0, b = 3 ⇒ z = 3i</p>
+<div class="math-givens"><p class="math">a = 0</p><p class="math">b = 3</p><p class="math">z = 3i</p></div>
 <p class="math">(3i)² − 2i(3i) + 3</p>
 <p class="math">= 9i² − 6i² + 3</p>
 <p class="math">= −9 + 6 + 3 = 0</p>
@@ -123,8 +123,8 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <div id="teacher-root-relations" class="panel"><h3>Kontroll genom rötternas summa och produkt</h3>
 <p>Filmen kopplar pq-formeln till faktorformen. För <span class="math">z² + pz + q = 0</span> gäller:</p>
 <p class="math">(z − z₁)(z − z₂) = z² − (z₁ + z₂)z + z₁z₂</p>
-<p class="math">z₁ + z₂ = −p, &nbsp; z₁z₂ = q</p>
-<div class="task"><strong>Kontrollera filmens rötter</strong><p class="math">z₁ = 3i, z₂ = −i</p></div>
+<div class="math-givens"><p class="math">z₁ + z₂ = −p</p><p class="math">z₁z₂ = q</p></div>
+<div class="task"><strong>Kontrollera filmens rötter</strong><div class="math-givens"><p class="math">z₁ = 3i</p><p class="math">z₂ = −i</p></div></div>
 <button data-reveal="teacher-root-relations-answer">Visa kontrollen</button>
 <div id="teacher-root-relations-answer" class="answer hidden">
 <p class="math">z₁ + z₂ = 3i − i = 2i = −p</p>
@@ -183,23 +183,23 @@ summary{cursor:pointer;font-weight:650;padding:10px 0}details{margin:14px 0}tabl
 <div class="panel"><strong>Återkoppling – öppna efter eget försök</strong>
 <p><button type="button" data-reveal="r13a" class="secondary">A · pq-formeln</button></p>
 <div id="r13a" class="answer hidden">
-<p class="math">p = −2i, q = 8</p>
+<div class="math-givens"><p class="math">p = −2i</p><p class="math">q = 8</p></div>
 <p class="math">z = −p/2 ± √((p/2)² − q)</p>
 <p class="math">z = i ± √(i² − 8)</p>
 <p class="math">= i ± √(−1 − 8)</p>
 <p class="math">= i ± 3i</p>
-<p class="math">z₁ = 4i, z₂ = −2i</p>
+<div class="math-givens"><p class="math">z₁ = 4i</p><p class="math">z₂ = −2i</p></div>
 <p class="math">(4i)² − 2i(4i) + 8 = −16 + 8 + 8 = 0</p></div>
 <p><button type="button" data-reveal="r13b" class="secondary">B · normalisering och villkor</button></p>
 <div id="r13b" class="answer hidden">
 <p class="math">(2z² − 2z + 5)/2 = 0/2</p>
 <p class="math">z² − z + 5/2 = 0</p>
-<p class="math">p = −1, q = 5/2</p>
+<div class="math-givens"><p class="math">p = −1</p><p class="math">q = 5/2</p></div>
 <p class="math">z = 1/2 ± √(1/4 − 5/2)</p>
 <p class="math">z = 1/2 ± √(1/4 − 10/4)</p>
 <p class="math">z = 1/2 ± √(−9/4)</p>
 <p class="math">z = 1/2 ± (3/2)i</p>
-<p class="math">b &gt; 0 ⇒ a = 1/2, b = 3/2</p>
+<p>Välj roten som uppfyller b &gt; 0:</p><div class="math-givens"><p class="math">a = 1/2</p><p class="math">b = 3/2</p></div>
 <p class="math">z = 1/2 + (3/2)i</p></div>
 <p><button type="button" data-reveal="r13c" class="secondary">C · konjugatregeln</button></p>
 <div id="r13c" class="answer hidden"><p>I B är alla koefficienterna reella, så de två icke-reella rötterna är konjugerade: 1/2 ± (3/2)i. I A är koefficienten −2i inte reell, och därför gäller inte något krav på konjugerade rötter. Rötterna 4i och −2i är inte konjugat.</p></div></div>
@@ -320,3 +320,4 @@ document.getElementById('quadraticSkip').addEventListener('click',()=>show(slide
 document.getElementById('quadraticExtra').addEventListener('click',()=>show(slides.findIndex(x=>x.id==='quadratic-optional-extra')));
 show(0);
 </script></body></html>
+
