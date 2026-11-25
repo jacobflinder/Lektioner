@@ -32,7 +32,7 @@ fs.mkdirSync(OUT,{recursive:true});
      assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0);
      for(let i=0;i<4;i++)await prod.locator('[data-seq-next]').click();
      assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),4,'Fyra elevstyrda produktsteg');
-     assert.ok((await prod.locator('math[aria-label*="6i"]').count())>=1,'Produkten slutar i 6i');
+     assert.ok((await prod.locator('math[aria-label*="−72"]').count())>=1,'Filmens radianprodukt slutar i −72');
      await page.screenshot({path:OUT+'/ma4-polar-mult-math-steps.png',fullPage:true});
      await page.selectOption('#jump','2');
      const quotient=page.locator('#quotient [data-sequence]');

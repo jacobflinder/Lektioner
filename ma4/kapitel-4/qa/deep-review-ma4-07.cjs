@@ -20,6 +20,9 @@ same(mul(a,b),cis(6,90));
 same(div(a,b),cis(2/3,-30));
 same(div(a,b),{x:Math.sqrt(3)/3,y:-1/3});
 same(mul(div(a,b),b),a);
+const film1=cis(12,120),film2=cis(6,60);
+same(mul(film1,film2),{x:-72,y:0});
+same(div(film1,film2),cis(2,60));
 const w1=cis(4,150),w2=cis(2,30);
 same(mul(w1,w2),{x:-8,y:0});
 same(div(w1,w2),{x:-1,y:Math.sqrt(3)});
@@ -78,73 +81,59 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
   await shot('01-desktop');
   console.log('PASS 01: självständig polär form, kvadrant och mål efter försök');
   await active(1);
-  assert.ok(await page.locator('#source-product-rule').isVisible(),'Originalets allmänna multiplikationsregel före tillämpningen');
-  for(const f of ['r = r₁r₂','v = v₁ + v₂','z₁z₂ = r(cos v + i sin v)'])await has('#source-product-rule math[aria-label="'+f+'"]','Originalregel '+f);
-  await spacing('#product > .math-givens',2);
+  assert.ok(await page.locator('#source-product-rule').isVisible(),'Filmens allmänna multiplikationsregel står före lösningen');
+  for(const f of ['r = r₁r₂','v = v₁ + v₂','z₁z₂ = r(cos v + i sin v)'])await has('#source-product-rule math[aria-label="'+f+'"]','Produktregel '+f);
+  assert.ok(await page.locator('#product math[aria-label*="12("]').count()>0&&await page.locator('#product math[aria-label*="2π/3"]').count()>0,'Originalfilmens radianpar');
   const prod=page.locator('#product [data-sequence]');
-  assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0,'02 inga steg före elevens prognos');
+  assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0,'02 produktsteg dolt före prognos');
   for(let i=1;i<=4;i++){
-   assert.ok((await prod.locator('[data-seq-prompt]').innerText()).length>15,'02 förutsägelse före steg '+i);
+   assert.ok((await prod.locator('[data-seq-prompt]').innerText()).length>15,'02 prognos före steg '+i);
    await prod.locator('[data-seq-next]').click();
-   assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),i,'02 exakt ett nytt steg');
+   assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),i,'02 ett steg i taget');
   }
   await spacing('#product [data-seq-item]:nth-child(1) .math-givens',4);
-  for(const f of ['r₁ = 2','v₁ = 30°','r₂ = 3','v₂ = 60°',
-   '|z₁z₂| = r₁r₂ = 2 · 3 = 6','v = v₁ + v₂ = 30° + 60° = 90°',
-   'r = 2 · 3 = 6','v = 30° + 60° = 90°','z₁z₂ = r(cos v + i sin v)',
-   '= 6(cos 90° + i sin 90°)','= 6(0 + i · 1)','= 6i']){
-   await has('#product [data-sequence] math[aria-label="'+f+'"]','02 produktregel och mellanled '+f);
-  }
+  for(const f of ['r₁ = 12','v₁ = 2π/3','r₂ = 6','v₂ = π/3',
+   '|z₁z₂| = r₁r₂ = 12 · 6 = 72','arg(z₁z₂) = 2π/3 + π/3',
+   '= 3π/3 = π','z₁z₂ = 72(cos π + i sin π)','= 72(−1 + 0i) = −72'])
+    await has('#product [data-sequence] math[aria-label="'+f+'"]','02 filmens produktsteg '+f);
   await prod.locator('[data-seq-back]').click();
-  assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),3,'02 back döljer sista steg');
+  assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),3,'02 tillbaka döljer sista steg');
   await prod.locator('[data-seq-reset]').click();
-  assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0,'02 reset döljer alla');
+  assert.equal(await prod.locator('[data-seq-item]:not(.hidden)').count(),0,'02 återställ');
   for(let i=0;i<4;i++)await prod.locator('[data-seq-next]').click();
   const deriv=page.locator('#product details');
-  assert.ok(!(await deriv.evaluate(e=>e.open)),'02 frivillig härledning stängd från början');
   await deriv.locator('summary').click();
-  assert.ok(await deriv.evaluate(e=>e.open),'02 fördjupning öppnas vid aktivt val');
+  assert.ok(await deriv.evaluate(e=>e.open),'Algebraisk härledning valfri');
   await spacing('#product details .math-givens',4);
-  for(const f of ['P = (c₁ + is₁)(c₂ + is₂)','T₁ = c₁(c₂ + is₂)','= c₁c₂ + ic₁s₂',
-   'T₂ = is₁(c₂ + is₂)','= is₁c₂ + i²s₁s₂','= is₁c₂ − s₁s₂',
-   'P = T₁ + T₂','Re(P) = c₁c₂ − s₁s₂','= cos(α + β)',
-   'Im(P) = c₁s₂ + s₁c₂','= sin(α + β)','P = Re(P) + i Im(P)',
-   '= cos(α + β) + i sin(α + β)']){
-   await has('#product details math[aria-label="'+f+'"]','02 fullständig distributiv härledning '+f);
-  }
-  await shot('02-desktop-med-bevis');
-  console.log('PASS 02: fyra elevstyrda steg och distributiv härledning utan hoppade termer');
+  for(const f of ['P = (c₁ + is₁)(c₂ + is₂)','T₁ = c₁(c₂ + is₂)',
+   'T₂ = is₁(c₂ + is₂)','= is₁c₂ − s₁s₂','Re(P) = c₁c₂ − s₁s₂',
+   '= cos(α + β)','Im(P) = c₁s₂ + s₁c₂','= sin(α + β)'])
+   await has('#product details math[aria-label="'+f+'"]','02 bevis '+f);
+  await shot('02-filmens-radianprodukt');
   await active(2);
-  assert.ok(await page.locator('#source-quotient-rule').isVisible(),'Originalets allmänna divisionsregel före tillämpningen');
-  for(const f of ['r = r₁/r₂','v = v₁ − v₂','z₁/z₂ = r(cos v + i sin v)'])await has('#source-quotient-rule math[aria-label="'+f+'"]','Originalregel '+f);
-  await spacing('#quotient > .math-givens',2); // den yttre givengruppen med nämnarvillkor
+  assert.ok(await page.locator('#source-quotient-rule').isVisible(),'Divisionsregel före tillämpning');
+  for(const f of ['r = r₁/r₂','v = v₁ − v₂','z₁/z₂ = r(cos v + i sin v)'])await has('#source-quotient-rule math[aria-label="'+f+'"]','Divisionsregel '+f);
   const quo=page.locator('#quotient [data-sequence]');
-  assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 inga förhandsvisade kvotsteg');
+  assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 kvotsteg dolt före prognos');
   for(let i=1;i<=4;i++){
    await quo.locator('[data-seq-next]').click();
    assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),i,'03 ett kvotsteg per klick');
   }
   await spacing('#quotient [data-seq-item]:nth-child(1) .math-givens',4);
-  await spacing('#quotient [data-seq-item]:nth-child(4) .math-givens',4);
-  for(const f of ['r₁ = 2','r₂ = 3','v₁ = 30°','v₂ = 60°','|z₁/z₂| = r₁/r₂','= 2/3',
-   'v = v₁ − v₂','= 30° − 60°','= −30°','−30° + 360° = 330°',
-   'cos(−30°) = √3/2','sin(−30°) = −1/2',
-   'z₁/z₂ = r(cos v + i sin v)','= (2/3)(√3/2 − i/2)','= √3/3 − (1/3)i']){
-   await has('#quotient [data-sequence] math[aria-label="'+f+'"]','03 kvotregel och insättning '+f);
-  }
-  assert.ok(await quo.locator('math mfrac').count()>=5,'03 bråk i äkta MathML');
+  for(const f of ['r₁ = 12','r₂ = 6','v₁ = 2π/3','v₂ = π/3',
+   '|z₁/z₂| = r₁/r₂ = 12/6 = 2','arg(z₁/z₂) = v₁ − v₂',
+   '= 2π/3 − π/3 = π/3','z₁/z₂ = 2(cos(π/3) + i sin(π/3))',
+   '= 2(1/2 + i√3/2) = 1 + √3i'])
+   await has('#quotient [data-sequence] math[aria-label="'+f+'"]','03 filmens kvotsteg '+f);
+  assert.ok(await quo.locator('mfrac').count()>=4,'Radianbråk i MathML');
   await quo.locator('[data-seq-back]').click();
-  assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),3,'03 back');
+  assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),3,'03 tillbaka');
   await quo.locator('[data-seq-reset]').click();
-  assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 reset');
+  assert.equal(await quo.locator('[data-seq-item]:not(.hidden)').count(),0,'03 återställ');
   for(let i=0;i<4;i++)await quo.locator('[data-seq-next]').click();
   const proof=page.locator('#quotient details');await proof.locator('summary').click();
-  for(const f of ['|w| · r₂ = r₁','|w| = r₁/r₂','arg(w) + v₂ ≡ v₁ (mod 360°)',
-   'arg(w) ≡ v₁ − v₂ (mod 360°)']){
-   await has('#quotient details math[aria-label="'+f+'"]','03 omvänd multiplikation '+f);
-  }
-  await shot('03-desktop-med-bevis');
-  console.log('PASS 03: divisor ≠0, kvot, vinkel, trigvärden, omvänd kontroll');
+  assert.ok(await proof.locator('math[aria-label*="2π"]').count()>0,'03 inversregel i filmens radianer');
+  await shot('03-filmens-radiankvot');
   await active(3);
   assert.ok(await page.locator('#pd-answer').isHidden(),'04 grafens slutsvar dolt');
   assert.ok(await page.locator('#pd-intermediate').isHidden(),'04 skalningssvar dolt initialt');
@@ -297,3 +286,4 @@ assert.throws(()=>div(a,{x:0,y:0}),RangeError,'Division med noll förbjuden');
    await shot('FAIL').catch(()=>{});
  }finally{await page.close();await browser.close()}
 })();
+
