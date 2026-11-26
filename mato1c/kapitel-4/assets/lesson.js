@@ -61,7 +61,7 @@ function add(parent,name,attributes={},content){
  if(content!==undefined)el.textContent=content;
  parent.append(el);return el;
 }
-function drawCircle(svg,angles,{symmetry=false}={}){
+function drawCircle(svg,angles,{symmetry=false,projectSine=false}={}){
  svg.replaceChildren();svg.setAttribute('viewBox','0 0 540 440');
  const cx=268,cy=219,r=163;
  const xy=(deg)=>{const rad=deg*Math.PI/180;return [cx+r*Math.cos(rad),cy-r*Math.sin(rad)]};
@@ -80,6 +80,16 @@ function drawCircle(svg,angles,{symmetry=false}={}){
   add(svg,'line',{x1:cx,y1:cy,x2:px,y2:py,stroke:color,'stroke-width':3.6});
   add(svg,'line',{x1:px,y1:py,x2:px,y2:cy,stroke:color,'stroke-width':1.6,'stroke-dasharray':'5 6'});
   add(svg,'line',{x1:cx,y1:cy,x2:px,y2:cy,stroke:color,'stroke-width':1.6,'stroke-dasharray':'5 6'});
+  if(projectSine){
+   // Den vågräta projektionen visar vilken y-koordinat (= sinus) punkten har.
+   add(svg,'line',{'data-role':'sine-guide',x1:cx,y1:py,x2:px,y2:py,stroke:color,'stroke-width':1.8,'stroke-dasharray':'5 6'});
+   // Spegling i y-axeln ger samma sinussträcka; rita den bara en gång.
+   const sameAsFirst=i>0&&Math.abs(y-Math.sin(angles[0]*Math.PI/180))<0.00001;
+   if(!sameAsFirst){
+    add(svg,'line',{'data-role':'sine-segment',x1:cx,y1:cy,x2:cx,y2:py,stroke:color,'stroke-width':4.2,'stroke-linecap':'round'});
+    add(svg,'text',{'data-role':'sine-label',x:cx-12,y:(cy+py)/2-6,fill:color,'font-size':18,'font-weight':700,'text-anchor':'end'},i===0?'sin v':'−sin v');
+   }
+  }
   add(svg,'circle',{cx:px,cy:py,r:6.5,fill:color,stroke:'#fff','stroke-width':2});
   const label=i===0?'P':'Q';
   add(svg,'text',{x:Math.max(10,Math.min(478,px+(x>=0?11:-27))),y:Math.max(23,Math.min(418,py+(y>=0?-11:24))),fill:color},label);
@@ -129,7 +139,7 @@ document.querySelectorAll('[data-symmetry]').forEach(root=>{
  const svg=root.querySelector('svg');const base=Number(root.dataset.base||35);const kind=root.dataset.symmetry;
  const second=kind==='vertical'?180-base:-base;
  const show=both=>{
-  drawCircle(svg,both?[base,second]:[base],{symmetry:both});
+  drawCircle(svg,both?[base,second]:[base],{symmetry:both,projectSine:true});
   root.querySelectorAll('[data-symmetry-step]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.symmetryStep===(both?'both':'first'))));
   const explanation=root.querySelector('[data-symmetry-explanation]');
   if(explanation)explanation.textContent=both?

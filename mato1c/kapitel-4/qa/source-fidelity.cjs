@@ -24,7 +24,7 @@ for (const lesson of lessons) {
   check((html.match(/class="book-number"/g)||[]).length === 3, `${lesson.id}: alla tre boknivåerna`);
   for (const number of lesson.levels) check(html.includes(number), `${lesson.id}: nivå ${number}`);
   check(!/youtu\.be|youtube\.com/.test(html), `${lesson.id}: inga filmer i webblektionen`);
-  if (lesson.socrative) check(html.includes('Socrative 326')&&html.includes('Socrative 329')&&html.includes('SOC-37277932')&&html.includes('SOC-37278098'), `${lesson.id}: ursprungliga Socrative 326/329 bevarade, importkoder i lärarstöd`);
+  if (lesson.socrative) check(html.includes('Socrative 326')&&html.includes('Socrative 329')&&html.includes('Ma3c Enhetscirkeln')&&html.includes('Ma3c Enhetscirkeln 4')&&html.includes('SOC-37277932')&&html.includes('SOC-37278098'), `${lesson.id}: ursprungliga Socrative 326/329 med fullständiga namn och koder`);
   else check(!/SOC-3727/.test(html), `${lesson.id}: inget tillagt Socrative`);
   const ids=[...html.matchAll(/\bid="([\w-]+)"/g)].map(m=>m[1]);
   check(ids.length===new Set(ids).size, `${lesson.id}: unika id`);
@@ -59,7 +59,7 @@ const nextSocIndex = circle.indexOf('data-title="Socrative 329, bokens nivåer o
 const turnsIndex = circle.indexOf('data-title="Ett helt varv ger samma punkt"');
 check(nextSocIndex>turnsIndex && turnsIndex>socIndex, 'Socrative 326 och 329 i originalordning, inom samma webblektion');
 check(circle.includes('data-symmetry-step="first"')&&circle.includes('data-symmetry-step="both"'),'Enhetscirkeln: båda speglingarna kan avslöjas stegvis efter elevens förutsägelse');
-check(circle.includes('Socrative 329 – Enhetscirkeln'), 'Originalets Socrative 329 finns med som elevaktivitet');
+check(circle.includes('Socrative 329 – Ma3c Enhetscirkeln 4'), 'Originalets Socrative 329 finns med i elevvyn med hela namnet');
 check(circle.includes('360°')&&circle.includes('heltal'), 'Alla hela varv bevarade');
 check(!/(tangensperiod|tan\(v\s*\+\s*180)/i.test(circle), 'Ingen ny tangentperiod i normspåret');
 const index = fs.readFileSync(path.join(root,'index.html'),'utf8');
