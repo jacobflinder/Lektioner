@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Additions- och subtraktionsformler · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="korda.js" defer></script>
+</head>
+<body class="addition">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Additions- och subtraktionsformler</h1>
+<p>Vi jämför sinus av en vinkelsumma med summan av två sinusvärden.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>+</mo><mn>30°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn></mrow></math>
+</div><p class="task">Vilket av uttrycken är störst? Motivera med hur stora sinusvärden kan bli.</p><form class="practice" data-success="Det stämmer. Summan av de två sinusvärdena är större än 1." novalidate><div class="practice-fields"><label>Jämför uttrycken<select data-answer="2" data-hint="Sinus av en vinkel är högst 1. Vad får du när du adderar 1 och en halv?"><option value="">Välj</option><option value="1">Det första</option><option value="2">Det andra</option><option value="3">De är lika stora</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa jämförelsen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>+</mo><mn>30°</mn><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>120°</mn><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>60°</mn><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mo>=</mo><mn>1</mn><mo>+</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Välja rätt formel och förklara cosinusformeln för en vinkelskillnad.</li><li>Utveckla och förenkla ett trigonometriskt uttryck.</li><li>Bestämma ett exakt värde genom att dela upp en vinkel.</li></ol>
+</section>
+
+<section class="slide" id="regler" aria-labelledby="regler-title">
+  <h1 id="regler-title" tabindex="-1">Välj produkt och tecken</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>I sinusformlerna blandar vi sinus och cosinus i varje produkt. Tecknet mellan produkterna är samma som mellan vinklarna. I cosinusformlerna är funktionerna lika i varje produkt och tecknet byts.</p><p class="task">Välj den andra termen i formeln för cosinus av en summa.</p><form class="practice" data-success="Det stämmer. För cosinus av en summa subtraherar vi sinusprodukten." novalidate><div class="practice-fields"><label>Andra termen i cos(u + v)<select data-answer="2" data-hint="I cosinusformeln har vinklarna samma funktion i varje produkt. Ett plus mellan vinklarna blir minus mellan produkterna."><option value="">Välj</option><option value="1">+ sin u sin v</option><option value="2">− sin u sin v</option><option value="3">− cos u sin v</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa formeln du valde</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="bevis" aria-labelledby="bevis-title">
+  <h1 id="bevis-title" tabindex="-1">Härled cosinus av en vinkelskillnad</h1>
+<div class="split proof-split"><figure class="diagram circle proof-diagram">
+  <svg viewBox="0 0 390 278" role="img" aria-labelledby="chord-caption">
+    <title id="chord-caption">Två radier och kordan mellan P och Q på enhetscirkeln</title>
+    <defs><marker id="proof-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M45 166 H348" marker-end="url(#proof-arrow)"/>
+    <path class="axes" d="M195 260 V38" marker-end="url(#proof-arrow)"/>
+    <circle class="rim" cx="195" cy="166" r="91"/>
+    <text x="353" y="172">x</text><text x="204" y="44">y</text><text x="181" y="183">O</text>
+    <line class="radius" data-radius="p" x1="195" y1="166"/>
+    <line class="radius" data-radius="q" x1="195" y1="166"/>
+    <line class="chord" data-chord/>
+    <path class="rotation arc-u" data-arc="u"/>
+    <path class="rotation arc-v" data-arc="v"/>
+    <path class="rotation arc-difference" data-arc="u-v"/>
+    <circle class="point" data-point="p" r="4.5"/><circle class="point" data-point="q" r="4.5"/>
+    <text data-label="p">P</text><text data-label="q">Q</text>
+    <text data-label="u">u</text><text data-label="v">v</text><text data-label="u-v">u − v</text>
+  </svg>
+  <div class="chord-controls" role="group" aria-label="Välj läge för kordan">
+    <button type="button" data-chord-mode="0" aria-pressed="true">Första läget</button>
+    <button type="button" data-chord-mode="1" aria-pressed="false">Vrid 25°</button>
+  </div>
+  <p id="chord-status" role="status"></p>
+</figure><div class="work"><p>P har koordinaterna (cos v; sin v), Q har (cos u; sin u). Radierna är 1 och vinkeln mellan dem är u − v i figuren.</p><p class="task">Tänk först. Om båda vinklarna ökar lika mycket, vad händer med kordans längd? Vrid sedan figuren och jämför.</p><p>Vi räknar ut samma sträcka PQ med avståndsformeln och med cosinussatsen.</p><details class="answer"><summary>Visa beviset</summary><div class="answer-body"><div class="calculation-pair proof-methods"><div><h2>Avståndsformeln</h2><div class="math-steps">
+<math display="block"><mrow><msup><mrow><mo>(</mo><mi>PQ</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><msup><mrow><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math>
+<math display="block"><mrow><mo>+</mo><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math>
+</div><p>Utveckla kvadraterna.</p><div class="math-steps">
+<math display="block"><mrow><mo>=</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>+</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mo>+</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>Samla kvadraterna för samma vinkel.</p><div class="math-steps">
+<math display="block"><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div><div><h2>Cosinussatsen</h2><div class="math-steps">
+<math display="block"><mrow><msup><mrow><mo>(</mo><mi>PQ</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>1</mn><mn>2</mn></msup></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>2</mn><mo>·</mo><mn>1</mn><mo>·</mo><mn>1</mn><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>2</mn><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo></mrow></math>
+</div><p>Vänster och höger beskriver samma sträcka. Stryk 2 i båda leden och bryt ut −2.</p><div class="math-steps">
+<math display="block"><mrow><mo>−</mo><mn>2</mn><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo></mrow></math>
+</div><p>Dividera båda leden med −2.</p><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></div></div></details></div></div>
+</section>
+
+<section class="slide" id="tabell" aria-labelledby="tabell-title">
+  <h1 id="tabell-title" tabindex="-1">Ta fram exakta värden</h1>
+<p>Kom ihåg vinklarna 0°, 30°, 45°, 60° och 90°. Sinusvärdena kan läsas som kvadratrötterna ur 0/4, 1/4, 2/4, 3/4 och 4/4. Cosinus följer samma ordning baklänges.</p><p class="task">Vilket värde får cos 60° när du läser roten i cosinusraden?</p><form class="practice" data-success="Det stämmer. Kvadratroten ur 1/4 är 1/2." novalidate><div class="practice-fields"><label>Cosinus vid 60°<select data-answer="1" data-hint="Räkna baklänges i cosinusraden. Vid 60° är det roten ur en fjärdedel."><option value="">Välj</option><option value="1">1/2</option><option value="2">√2/2</option><option value="3">√3/2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa tabellen och speglingen</summary><div class="answer-body"><table class="exact-table"><caption>Exakta värden</caption><thead><tr><th scope="col">Vinkel</th><th scope="col">0°</th><th scope="col">30°</th><th scope="col">45°</th><th scope="col">60°</th><th scope="col">90°</th></tr></thead><tbody><tr><th scope="row">sin v</th><td><math display="inline"><mrow><mn>0</mn></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mn>1</mn></mrow></math></td></tr><tr><th scope="row">cos v</th><td><math display="inline"><mrow><mn>1</mn></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mn>0</mn></mrow></math></td></tr></tbody></table><p>I andra kvadranten behåller speglingen sinusvärdet och byter tecken på cosinusvärdet. Utgå från 60°, 45° och 30° för 120°, 135° och 150°.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>135°</mn><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>45°</mn><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>135°</mn><mo>=</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>45°</mn><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="forenkla" aria-labelledby="forenkla-title">
+  <h1 id="forenkla-title" tabindex="-1">Utveckla och samla lika termer</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>30°</mn><mo>+</mo><mi>x</mi><mo>)</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>30°</mn><mo>−</mo><mi>x</mi><mo>)</mo></mrow></math>
+</div><p class="task">När du har utvecklat båda cosinusuttrycken och tagit bort parentesen, vilka termer tar ut varandra?</p><form class="practice" data-success="Det stämmer. Cosinusprodukterna har motsatta tecken efter att parentesen tagits bort." novalidate><div class="practice-fields"><label>Termer som tar ut varandra<select data-answer="1" data-hint="Båda formlerna börjar med samma cosinusprodukt. Framför den andra parentesen står minus."><option value="">Välj</option><option value="1">Produkterna cos 30° · cos x</option><option value="2">Produkterna sin 30° · sin x</option><option value="3">Båda produkterna</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>30°</mn><mo>+</mo><mi>x</mi><mo>)</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>30°</mn><mo>−</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>−</mo><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>−</mo><mn>2</mn><mo>·</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="komplement" aria-labelledby="komplement-title">
+  <h1 id="komplement-title" tabindex="-1">Använd en komplementvinkel</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p class="task">Vilken produkt finns kvar när du sätter in värdena vid 90°?</p><form class="practice" data-success="Det stämmer. Cosinusprodukten blir noll medan sinusprodukten blir sin v." novalidate><div class="practice-fields"><label>Produkt som finns kvar<select data-answer="2" data-hint="Punkten vid 90° har x-koordinaten 0 och y-koordinaten 1."><option value="">Välj</option><option value="1">cos 90° · cos v</option><option value="2">sin 90° · sin v</option><option value="3">Båda produkterna</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mo>=</mo><mn>1</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mn>1</mn><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>I enhetscirkeln motsvarar det att koordinaterna byter plats vid spegling i linjen y = x.</p></div></details>
+</section>
+
+<section class="slide" id="exakt" aria-labelledby="exakt-title">
+  <h1 id="exakt-title" tabindex="-1">Dela upp vinkeln och räkna exakt</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>165°</mn></mrow></math>
+</div><p>Välj en summa där du redan känner både sinus och cosinus för delvinklarna.</p><p class="task">Vilken uppdelning kan du använda direkt?</p><form class="practice" data-success="Det stämmer. 135° ger samma sinusvärde som 45° och cosinusvärdet byter tecken." novalidate><div class="practice-fields"><label>Uppdelning av 165°<select data-answer="2" data-hint="Använd en vinkel ur tabellen och spegla 45° till andra kvadranten."><option value="">Välj</option><option value="1">90° + 75°</option><option value="2">135° + 30°</option><option value="3">105° + 60°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>165°</mn><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>135°</mn><mo>+</mo><mn>30°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>135°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>135°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>30°</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>·</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>+</mo><mo>(</mo><mo>−</mo><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>)</mo><mo>·</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>6</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>−</mo><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>6</mn></mrow></msqrt><mo>−</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · beräkna och visa</h1>
+<div class="calculation-pair"><div><h2>Bestäm exakt</h2><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>150°</mn><mo>−</mo><mn>120°</mn><mo>)</mo></mrow></math>
+</div><p class="task">Välj formel och sätt in de exakta värdena på papper.</p></div><div><h2>Visa ett samband</h2><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p class="task">Använd subtraktionsformeln för sinus. Visa vad som händer med båda produkterna.</p></div></div><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>150°</mn><mo>−</mo><mn>120°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>150°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>120°</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>150°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>120°</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>(</mo><mo>−</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>)</mo><mo>·</mo><mo>(</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>)</mo><mo>+</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>·</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>+</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>1</mn><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mn>0</mn><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></div></details>
+</section>
+
+<section class="slide" id="socrative" aria-labelledby="socrative-title">
+  <h1 id="socrative-title" tabindex="-1">Socrative</h1>
+
+  <div class="card socrative-activity">
+    <h2>402. Ma4 ... Additionsformler mm ...</h2>
+    <p><strong>SOC-38226568</strong></p>
+    <p>Gå till <a href="https://b.socrative.com/login/student/" target="_blank" rel="noopener">Socrative för elever</a>. Skriv rumsnamnet <strong>LRJ</strong> och invänta att läraren startar aktiviteten.</p>
+  </div>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 29–32 · Additions- och subtraktionsformler</p>
+  <p>Titta vid behov på de lösta exemplen 1225–1226. Följ tecknen när en parentes tas bort.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1227–1233</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1234–1238</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1239–1243</p></article>
+  </div><details class="answer"><summary>Visa formlerna och tabellen</summary><div class="answer-body"><div class="calculation-pair book-reference"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>u</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><table class="exact-table"><caption>Exakta värden</caption><thead><tr><th scope="col">Vinkel</th><th scope="col">0°</th><th scope="col">30°</th><th scope="col">45°</th><th scope="col">60°</th><th scope="col">90°</th></tr></thead><tbody><tr><th scope="row">sin v</th><td><math display="inline"><mrow><mn>0</mn></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mn>1</mn></mrow></math></td></tr><tr><th scope="row">cos v</th><td><math display="inline"><mrow><mn>1</mn></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mn>0</mn></mrow></math></td></tr></tbody></table></div></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Utgå från genomgången eller en uppgift du redan har löst. Förklara ett avgörande steg för varje mål.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Formel och tecken</h2><p>Visa vilket tecken formeln för cosinus av en vinkelskillnad får. Förklara varför beviset räknar ut samma korda två gånger.</p></article>
+    <article class="card"><h2>Förenkla</h2><p>Visa hur du hanterade en parentes, till exempel i 1228, 1229 eller 1238.</p></article>
+    <article class="card"><h2>Exakt värde</h2><p>Visa hur du delade upp en vinkel i <em>Din tur</em> eller hur du använde två kända värden i 1232 eller 1237.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>

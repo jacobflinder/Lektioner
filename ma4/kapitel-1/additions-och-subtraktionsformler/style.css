@@ -1,0 +1,37 @@
+.addition .slide:has(.answer[open]) .practice { display: none; }
+.addition .slide > .math-givens { justify-items: start; }
+.addition .proof-split { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+.addition .proof-diagram svg { max-height: 255px; }
+.addition .chord { stroke: #8b4b17; stroke-width: 3; }
+.addition .arc-difference { stroke: #8b4b17; stroke-dasharray: 5 3; }
+.addition .circle [data-label] {
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: #f4f9f6;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.addition .chord-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem; }
+.addition .chord-controls button[aria-pressed="true"] { background: var(--accent); color: white; border-color: var(--accent); }
+.addition #chord-status { margin: .35rem; text-align: center; }
+.addition .proof-methods { align-items: start; }
+.addition .proof-methods .math-steps { padding-inline: .2rem; }
+.addition .proof-methods > div { min-width: 0; }
+.addition .exact-table { width: 100%; max-width: 42rem; border-collapse: collapse; table-layout: fixed; }
+.addition .exact-table caption { font-weight: 700; padding-bottom: .25rem; }
+.addition .exact-table th, .addition .exact-table td {
+  padding: .35rem .15rem;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+.addition .socrative-activity { display: grid; gap: .65rem; max-width: 52rem; padding: 1rem; }
+@media (max-width: 880px) {
+  .addition .proof-split { grid-template-columns: 1fr; }
+  .addition .proof-methods { grid-template-columns: 1fr; }
+}
+@media (max-width: 580px) {
+  .addition .proof-diagram svg { max-height: 215px; }
+  .addition .exact-table { font-size: .85rem; }
+}
+.addition .book-reference { align-items: start; }
+.addition .math-givens { gap: 18px; }
