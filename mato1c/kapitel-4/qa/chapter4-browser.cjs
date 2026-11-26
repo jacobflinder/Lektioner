@@ -63,7 +63,7 @@ async function inspectLayout(page,id,width,i){
    assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
    assert.deepEqual(await page.locator('.book-number').allTextContents(),lesson.levels,`${lesson.id}: full book levels`);checks++;
    assert.equal(await page.locator('.goal-list > div').count(),3,`${lesson.id}: goal to work mapping`);checks++;
-   const studentContent=await page.locator('main').innerText();
+   const studentContent=await page.locator('main').textContent();
    for(const [number,name,code] of socrativeActivities[lesson.id]||[]){
     assert(studentContent.includes(`Socrative ${number}`)&&studentContent.includes(name)&&studentContent.includes(code),`${lesson.id}: fullständigt Socrative-namn och kod ${number} syns för eleverna`);checks++;
    }
