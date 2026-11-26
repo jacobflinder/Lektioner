@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lös trigonometriska grundekvationer och sammansatta vinklar med arcus och enhetscirkeln.">
+  <title>Trigonometriska ekvationer · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+</head>
+<body>
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Trigonometriska ekvationer</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkel med höjden y lika med 1,2 ovanför cirkeln.">
+    <defs><marker id="range-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#range-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#range-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <text x="190" y="57">1</text>
+    <g class="figure-reveal"><path class="eq-guide" d="M42 29.200 H317"/><text x="244" y="20.200">y = 1,2</text></g>
+  </svg>
+</figure>
+<div class="work">
+<p class="task">Vilken ekvation saknar lösning? Använd enhetscirkeln och motivera med en koordinat eller kvot.</p><form class="practice" novalidate><div class="practice-fields"><label>Ekvation<select data-answer="1" data-hint="Jämför sinusens höjd med den högsta punkten på cirkeln."><option value="">Välj</option><option value="1">sin x = 1,2</option><option value="2">cos x = −0,4</option><option value="3">tan x = 2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa varför</summary><div class="answer-body"><p>Sinus är y-koordinaten och ligger mellan −1 och 1. Linjen y = 1,2 går ovanför cirkeln. Samma gränser gäller för cosinus på x-axeln.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Lösa grundekvationer med arcus och enhetscirkeln.</li><li>Få med alla lösningar genom att välja rätt period.</li><li>Frilägga den okända vinkeln och välja lösningar i ett intervall.</li></ol>
+</div>
+</div>
+</section>
+<section class="slide" id="sinus" aria-labelledby="sinus-title">
+  <h1 id="sinus-title" tabindex="-1">Sinus · två punkter på samma höjd</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Cirkeln med den horisontella linjen y lika med 0,6. Lösningen markerar skärningarna.">
+    <defs><marker id="sin-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#sin-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#sin-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M42 91.600 H317"/><text x="244" y="82.600">y = 0,6</text>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L263.200 91.600"/><circle class="point " cx="263.200" cy="91.600" r="4.5"/><text x="273.200" y="107.600">P</text><path class="radius alternate" d="M180 154 L96.800 91.600"/><circle class="point alternate" cx="96.800" cy="91.600" r="4.5"/><text x="76.800" y="107.600">Q</text><path class="rotation " d="M216 154 A36 36 0 0 0 208.800 132.400" marker-end="url(#sin-arrow)"/><path class="rotation alternate" d="M233 154 A53 53 0 0 0 137.600 122.200" marker-end="url(#sin-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>Sinus är punktens y-koordinat. Om k ligger mellan −1 och 1 ger arcsin k en första vinkel. Den andra ligger på samma höjd vid 180° minus den första vinkeln. Lägg till hela varv i båda fallen.</p><p class="task">Lös sin <i>x</i> = 0,6. Hitta först den vinkel räknaren ger i gradläge. Markera sedan den andra på din cirkel.</p><form class="practice" novalidate><div class="practice-fields"><label>Andra vinkeln<select data-answer="2" data-hint="Använd att båda punkterna har samma y-koordinat."><option value="">Välj</option><option value="1">−v₁</option><option value="2">180° − v₁</option><option value="3">v₁ + 180°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi mathvariant="normal">arcsin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>0,6</mn><mo>≈</mo><mn>36,9°</mn></mrow></math>
+<math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mn>180°</mn><mo>−</mo><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mn>143,1°</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>36,9°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>143,1°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div><p><i>n</i> är ett heltal. När k = 1 eller k = −1 möts de två fallen i samma lösningsfamilj.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="cosinus" aria-labelledby="cosinus-title" data-menu-title="Cosinus och spegling">
+  <h1 id="cosinus-title" tabindex="-1">Cosinus · två punkter på samma lodräta linje</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Cirkeln med den lodräta linjen x lika med minus 0,4. Lösningen markerar skärningarna.">
+    <defs><marker id="cos-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#cos-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#cos-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M138.400 37 V273"/><text x="130.400" y="35" text-anchor="end">x = −0,4</text>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L138.400 58.682"/><circle class="point " cx="138.400" cy="58.682" r="4.5"/><text x="114.400" y="72.682">P</text><path class="radius alternate" d="M180 154 L138.400 249.318"/><circle class="point alternate" cx="138.400" cy="249.318" r="4.5"/><text x="116.400" y="265.318">Q</text><path class="rotation " d="M214 154 A34 34 0 0 0 166.400 122.838" marker-end="url(#cos-arrow)"/><path class="rotation alternate" d="M228 154 A48 48 0 0 1 160.800 197.993" marker-end="url(#cos-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>Cosinus är punktens x-koordinat. Om k ligger mellan −1 och 1 ger arccos k en första vinkel. Den speglade punkten har vinkeln med motsatt tecken. Båda upprepas efter 360°.</p><p class="task">Lös cos <i>x</i> = −0,4. Vilken vinkel får du med arccos? Hur hittar du den andra vinkeln?</p><form class="practice" novalidate><div class="practice-fields"><label>Andra vinkeln<select data-answer="1" data-hint="Jämför punkterna ovanför och nedanför x-axeln."><option value="">Välj</option><option value="1">−v₁</option><option value="2">180° − v₁</option><option value="3">v₁ + 180°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi mathvariant="normal">arccos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mo>−</mo><mn>0,4</mn><mo>)</mo><mo>≈</mo><mn>113,6°</mn></mrow></math>
+<math display="block"><mrow><msub><mi>v</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><msub><mi>v</mi><mn>1</mn></msub><mo>≈</mo><mo>−</mo><mn>113,6°</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>113,6°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>−</mo><mn>113,6°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div><p><i>n</i> är ett heltal. Vid k = 1 eller k = −1 sammanfaller fallen.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="tangens" aria-labelledby="tangens-title" data-menu-title="Tangens och period">
+  <h1 id="tangens-title" tabindex="-1">Tangens · samma lutning efter ett halvvarv</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Cirkeln med en linje genom origo med lutningen minus 1,2.">
+    <defs><marker id="tan-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#tan-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#tan-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M254.902 243.882 L105.098 64.118"/>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L246.579 233.895"/><circle class="point " cx="246.579" cy="233.895" r="4.5"/><text x="255.579" y="250.895">P</text><path class="radius alternate" d="M180 154 L113.421 74.105"/><circle class="point alternate" cx="113.421" cy="74.105" r="4.5"/><text x="95.421" y="65.105">Q</text><path class="rotation " d="M217 154 A37 37 0 0 1 203.687 182.424" marker-end="url(#tan-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>Tangens är kvoten y/x. Arctan ger en vinkel, och samma kvot återkommer efter 180°. Tangens saknar värde där cos <i>x</i> = 0.</p><p class="task">Lös tan <i>x</i> = −1,2. Vilket tecken får räknarens vinkel? Med hur många grader behöver du flytta den för att nå nästa lösning?</p><form class="practice" novalidate><div class="practice-fields"><label>Period i grader<input type="text" autocomplete="off" data-answer="180" data-hint="Titta på de två motsatta punkterna längs samma räta linje."></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mo>−</mo><mn>1,2</mn><mo>)</mo><mo>≈</mo><mo>−</mo><mn>50,2°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>−</mo><mn>50,2°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div><p><i>n</i> är ett heltal. Motsatta punkter ger samma kvot eftersom båda koordinaterna byter tecken.</p></div></details><p>Anteckna perioderna för sinus, cosinus och tangens i din mindmap eller i häftet.</p>
+</div>
+</div>
+</section>
+<section class="slide" id="halva" aria-labelledby="halva-title">
+  <h1 id="halva-title" tabindex="-1">Lös sinus när vinkeln är x/2</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Cirkeln visar linjen y lika med minus 0,6. Punkterna representerar vinklar för x delat med två.">
+    <defs><marker id="half-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#half-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#half-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M42 216.400 H317"/><text x="244" y="207.400">y = −0,6</text>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L263.200 216.400"/><circle class="point " cx="263.200" cy="216.400" r="4.5"/><text x="273.200" y="231.400">P</text><path class="radius alternate" d="M180 154 L96.800 216.400"/><circle class="point alternate" cx="96.800" cy="216.400" r="4.5"/><text x="77.800" y="231.400">Q</text><path class="rotation " d="M215 154 A35 35 0 0 1 208.000 175.000" marker-end="url(#half-arrow)"/><path class="rotation alternate" d="M233 154 A53 53 0 1 0 137.600 185.800" marker-end="url(#half-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo><mo>=</mo><mo>−</mo><mn>0,6</mn></mrow></math>
+</div><p class="task">Lös först för hela vinkeln x/2. Skriv båda familjerna. Vad blir perioden för <i>x</i> när du sedan multiplicerar hela ekvationerna med 2?</p><form class="practice" novalidate><div class="practice-fields"><label>Period för x i grader<input type="text" autocomplete="off" data-answer="720" data-hint="Multiplicera också termen som innehåller 360° med 2."></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Sätt <i>a</i> = arcsin(−0,6). Båda punkterna i figuren gäller x/2.</p><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>=</mo><mi>a</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mo>·</mo><mo>(</mo><mi>a</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>−</mo><mn>73,7°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>720°</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>=</mo><mn>180°</mn><mo>−</mo><mi>a</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mo>·</mo><mo>(</mo><mn>180°</mn><mo>−</mo><mi>a</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>433,7°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>720°</mn></mrow></math>
+</div></div><p><i>n</i> är ett heltal. Avrunda först i svaret.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="sammansatt" aria-labelledby="sammansatt-title" data-menu-title="Sammansatt cosinusekvation">
+  <h1 id="sammansatt-title" tabindex="-1">Lös cosinus när vinkeln är 3x − 20°</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Cirkeln visar linjen x lika med 0,4. Vinkelbågarna avser hela uttrycket 3x minus 20 grader.">
+    <defs><marker id="comp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#comp-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#comp-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M221.600 37 V273"/><text x="235.600" y="35">x = 0,4</text>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L221.600 58.682"/><circle class="point " cx="221.600" cy="58.682" r="4.5"/><text x="233.600" y="71.682">P</text><path class="radius alternate" d="M180 154 L221.600 249.318"/><circle class="point alternate" cx="221.600" cy="249.318" r="4.5"/><text x="231.600" y="265.318">Q</text><path class="rotation " d="M218 154 A38 38 0 0 0 195.200 119.172" marker-end="url(#comp-arrow)"/><path class="rotation alternate" d="M230 154 A50 50 0 0 1 200.000 199.826" marker-end="url(#comp-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>20°</mn><mo>)</mo><mo>=</mo><mn>0,4</mn></mrow></math>
+</div><p class="task">Skriv de två vinkelfamiljerna för hela uttrycket. Vilken operation gör du först när du löser ut <i>x</i>?</p><form class="practice" novalidate><div class="practice-fields"><label>Första operationen<select data-answer="1" data-hint="Frilägg 3x på vänster sida innan du dividerar."><option value="">Välj</option><option value="1">Addera 20° i båda leden</option><option value="2">Subtrahera 20° i båda leden</option><option value="3">Dividera enbart 3x med 3</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Sätt <i>a</i> = arccos 0,4. Punkterna P och Q ger vinklarna <i>a</i> och −<i>a</i>.</p><div class="math-steps">
+<math display="block"><mrow><mn>3</mn><mi>x</mi><mo>−</mo><mn>20°</mn><mo>=</mo><mo>±</mo><mi>a</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mn>3</mn><mi>x</mi><mo>=</mo><mo>±</mo><mi>a</mi><mo>+</mo><mn>20°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mo>±</mo><mi>a</mi><mo>+</mo><mn>20°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>28,8°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>120°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>−</mo><mn>15,5°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>120°</mn></mrow></math>
+</div><p><i>n</i> är ett heltal. Divisionen gäller hela högerledet.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="intervall" aria-labelledby="intervall-title">
+  <h1 id="intervall-title" tabindex="-1">Din tur · välj lösningar i intervallet</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Cirkeln visar en linje med lutningen 0,6. Punkternas vinklar motsvarar 2x.">
+    <defs><marker id="interval-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#interval-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#interval-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M280.327 93.804 L79.673 214.196"/>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L269.179 100.492"/><circle class="point " cx="269.179" cy="100.492" r="4.5"/><text x="278.179" y="90.492">P</text><path class="radius alternate" d="M180 154 L90.821 207.508"/><circle class="point alternate" cx="90.821" cy="207.508" r="4.5"/><text x="72.821" y="226.508">Q</text><path class="rotation " d="M218 154 A38 38 0 0 0 212.585 134.449" marker-end="url(#interval-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mn>0,6</mn></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>360°</mn></mrow></math>
+</div><p class="task">Skriv den allmänna lösningen först. Räkna därefter vilka vinklar som ligger i intervallet.</p><form class="practice" novalidate><div class="practice-fields"><label>Period för x i grader<input type="text" autocomplete="off" data-answer="90" data-hint="Dividera hela lösningen för 2x med 2."></label><label>Antal lösningar<input type="text" autocomplete="off" data-answer="4" data-hint="Prova heltalen n i ordning och kontrollera båda intervallgränserna."></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi>x</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>0,6</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>0,6</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>15,5°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>90°</mn></mrow></math>
+</div><p>n = 0, 1, 2 eller 3 ger ungefär 15,5°, 105,5°, 195,5° och 285,5°. För n ≤ −1 ligger vinkeln under 0°. För n ≥ 4 ligger den över 360°.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 16–19 · Trigonometriska ekvationer</p>
+  <p>Läs de lösta exemplen 1125–1128. Följ vad som händer med periodtermen när du löser ut den okända vinkeln.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1129–1138</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1139–1142</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1143–1145</p></article>
+  </div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Välj lösningar du redan har arbetat med. Visa och förklara dina mellanled.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Grundekvationer</h2><p>Visa hur du fick fram första vinkeln i exempelvis 1129, 1139 eller 1145.</p></article>
+    <article class="card"><h2>Alla lösningar</h2><p>Förklara hur du fick med rätt vinkel eller vinklar under ett varv och valde period. Använd exempelvis 1131, 1140 eller 1144.</p></article>
+    <article class="card"><h2>Sammansatt vinkel</h2><p>Visa hur periodtermen följde med när du löste för den okända vinkeln i exempelvis 1135–1138 eller 1142. Motivera ditt val av heltal i en intervalluppgift.</p></article>
+  </div><details class="answer"><summary>Visa vad du kan kontrollera</summary><div class="answer-body"><p>Kontrollera arcussteget, cirkelns punkter, periodtermen och alla algebraiska led. Om ett intervall är givet, jämför även lösningarna närmast utanför gränserna.</p></div></details>
+</section>
+</main>
+</body>
+</html>

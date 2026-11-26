@@ -87,6 +87,7 @@ async function run() {
       assert.ok((await page.goto(`${site}/ma4/kapitel-1/`)).ok());
       await page.getByRole('link', { name: /Enhetscirkeln/ }).click();
       await page.locator('#start').waitFor();
+      await page.locator('#jump option').nth(8).waitFor({ state: 'attached' });
       assert.equal(await page.locator('#jump option').count(), 9);
 
       const save = name => page.screenshot({ path: path.join(screenshots, `${width}-${name}.png`), fullPage: width < 1280 });
