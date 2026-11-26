@@ -150,6 +150,7 @@ async function main() {
       await page.locator('#namnare [data-slide-link]').click();
       await book.getByRole('button', { name: 'Förkorta och faktorisera' }).click();
       assert.equal(await jump.inputValue(), 'konjugat');
+      assert.match(await page.locator('#konjugat .task').first().innerText(), /1\/tan x med sinus och cosinus/);
       await jump.selectOption('tecken');
       assert.equal(await page.locator('#tecken select').inputValue(), '');
       assert.equal(await page.locator('#tecken .figure-reveal').isVisible(), false);
