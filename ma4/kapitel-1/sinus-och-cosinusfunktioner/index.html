@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sinus- och cosinusfunktioner · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="grafer.js" defer></script>
+</head>
+<body class="sinusgraph">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Sinus- och cosinusfunktioner</h1>
+<p>En svängning kan ritas som en graf. När vi ritar sinus- eller cosinuskurvan sätter vi vinkeln x i grader på grafens vågräta axel. Funktionsvärdet kommer från en koordinat på enhetscirkeln.</p><div class="math-givens">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>;</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></math>
+</div><p class="task">Vilken koordinat hos P anger höjden på sinuskurvan?</p><form class="practice" data-success="Det stämmer. Vinkeln blir grafens x-värde och cirkelpunktens höjd blir sinusvärdet." novalidate><div class="practice-fields"><label>Koordinat för sinus<select data-answer="2" data-hint="På enhetscirkeln är sinus punktens andra koordinat."><option value="">Välj</option><option value="1">Den vågräta</option><option value="2">Den lodräta</option><option value="3">Radien</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa kopplingen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p>För sinus tar vi den lodräta koordinaten. För cosinus tar vi den vågräta koordinaten.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Koppla enhetscirkeln till sinus- och cosinuskurvorna.</li><li>Förklara hur A och k påverkar amplitud och period.</li><li>Skissa en kurva och bestämma dess funktionsuttryck.</li></ol>
+</section>
+
+<section class="slide" id="koppling" aria-labelledby="koppling-title">
+  <h1 id="koppling-title" tabindex="-1">Följ en vinkel från cirkel till graf</h1>
+<p>P har koordinaterna (cos x; sin x). Byt funktion och se vilken koordinat som blir höjd i grafen.</p><div id="cirkel-graf" class="graph-tool"><div class="graph-pair"><svg class="circle-point" viewBox="0 0 228 218" role="img" aria-label="Punkt, radie och vald koordinat på enhetscirkeln">
+      <path class="plot-axis" d="M18 106 H212 M114 197 V14"/>
+      <circle class="circle-rim" cx="114" cy="106" r="71"/>
+      <text x="211" y="101">x</text><text x="121" y="20">y</text>
+      <path class="projection" data-circle-projection/>
+      <path class="coordinate" data-coordinate/>
+      <line class="circle-radius" x1="114" y1="106" data-circle-radius/>
+      <circle class="plot-point" data-circle-point r="4.5"/>
+      <text data-circle-label>P</text>
+    </svg><svg id="koppling-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Sinus- eller cosinuskurvan med en punkt vid den valda vinkeln" data-end="360" data-limit="1">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">90°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">180°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">270°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">360°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">1</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/><path class="projection" data-plot-projection/><circle class="plot-point" data-plot-point r="5"/>
+    </svg></div><div class="graph-controls"><label>Funktion <select id="cirkel-funktion"><option value="sin">Sinus</option><option value="cos">Cosinus</option></select></label><label>Vinkel x <input id="cirkel-vinkel" type="range" min="0" max="360" step="15" value="0"></label></div><p id="cirkel-status" role="status"></p></div><p>Pröva 0°, 90°, 180°, 270° och 360° för båda funktionerna. Jämför största och minsta värde.</p><p><a href="https://www.geogebra.org/m/rqkfm83e" target="_blank" rel="noopener">Öppna cirkeldemon i GeoGebra</a>.</p>
+</section>
+
+<section class="slide" id="period" aria-labelledby="period-title">
+  <h1 id="period-title" tabindex="-1">Läs av en hel period</h1>
+<p>Perioden är den kortaste positiva längd du kan flytta grafen i x-led så att den sammanfaller med sig själv. Efter ett varv är cirkelpunkten tillbaka på samma ställe.</p><svg id="period-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Sinuskurvan under två varv. Toppar vid 90 och 450 grader." data-end="720" data-limit="1">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M114.1 23 V183"/><text class="tick-x" x="114.1" y="204">90°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">180°</text><path class="grid-x" d="M234.4 23 V183"/><text class="tick-x" x="234.4" y="204">270°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">360°</text><path class="grid-x" d="M354.6 23 V183"/><text class="tick-x" x="354.6" y="204">450°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">540°</text><path class="grid-x" d="M474.9 23 V183"/><text class="tick-x" x="474.9" y="204">630°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">720°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">1</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg><p class="task">Vid 90° har sinus ett maximum. Efter hur många grader möter du nästa maximum?</p><form class="practice" data-success="Det stämmer. Hela svängningen upprepas efter ett varv." novalidate><div class="practice-fields"><label>Period<select data-answer="3" data-hint="Jämför de två intilliggande topparnas x-värden."><option value="">Välj</option><option value="1">90°</option><option value="2">180°</option><option value="3">360°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa hur perioden avläses</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mn>450°</mn><mo>−</mo><mn>90°</mn><mo>=</mo><mn>360°</mn></mrow></math>
+</div><p>Både sinus- och cosinuskurvan upprepas efter 360°. Ett enstaka funktionsvärde kan upprepas tidigare.</p></div></details>
+</section>
+
+<section class="slide" id="amplitud" aria-labelledby="amplitud-title">
+  <h1 id="amplitud-title" tabindex="-1">A ändrar kurvans höjd</h1>
+<p>Amplituden är avståndet från mittlinjen till en topp, alltså halva skillnaden mellan största och minsta värdet. På kurvorna här är mittlinjen y = 0. För y = A sin x eller y = A cos x är amplituden |A|.</p><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">Vad händer när A byter tecken från 2 till −2?</p><form class="practice" data-success="Det stämmer. Toppar och dalar byter plats. Amplituden är 2 i båda fallen." novalidate><div class="practice-fields"><label>När A blir negativt<select data-answer="1" data-hint="Värdet i varje punkt byter tecken. Avståndet till x-axeln är lika stort."><option value="">Välj</option><option value="1">Kurvan speglas i x-axeln</option><option value="2">Perioden halveras</option><option value="3">Amplituden blir −2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa de två kurvorna</summary><div class="answer-body"><svg id="amplitud-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Sinuskurvor med A lika med 2 och minus 2 speglade i x-axeln" data-end="360" data-limit="2">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">90°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">180°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">270°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">360°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−2</text><path class="grid" d="M54 146.0 H535"/><text class="tick-y" x="46" y="151.0">−1</text><path class="grid" d="M54 70.0 H535"/><text class="tick-y" x="46" y="75.0">1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">2</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg><p>Hel linje visar A = −2. Streckad linje visar A = 2.</p><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mrow><mo>(</mo><mn>2</mn><mo>−</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>2</mn></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="k-faktor" aria-labelledby="k-faktor-title">
+  <h1 id="k-faktor-title" tabindex="-1">k ändrar perioden</h1>
+<p>För k > 0 är perioden P = 360°/k i y = A sin kx och y = A cos kx när A inte är noll. Argumentet kx behöver öka med 360° för att kurvan ska upprepa sig.</p><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>1,5</mn><mi>x</mi><mo>)</mo></mrow></math>
+</div><p class="task">Vilken är perioden för den här kurvan? Tänk på hur långt x måste öka.</p><form class="practice" data-success="Det stämmer. Med k = 1,5 blir perioden 240°." novalidate><div class="practice-fields"><label>Period<select data-answer="2" data-hint="Sätt 1,5 · P = 360° och lös ut P."><option value="">Välj</option><option value="1">180°</option><option value="2">240°</option><option value="3">540°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa perioden och kurvan</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>1,5</mn><mi>P</mi><mo>=</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mn>1,5</mn></mrow></mrow></mfrac><mo>=</mo><mn>240°</mn></mrow></math>
+</div><svg id="period-exempel" class="plot" viewBox="0 0 558 218" role="img" aria-label="Cosinuskurvan med k lika med 1,5 och toppar på 0, 240 och 480 grader" data-end="480" data-limit="1">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">120°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">240°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">360°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">480°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">1</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg></div></details>
+</section>
+
+<section class="slide" id="aktivitet" aria-labelledby="aktivitet-title">
+  <h1 id="aktivitet-title" tabindex="-1">Undersök hur A och k ändrar kurvan</h1>
+<p>Förutsäg först vad som händer. Jämför A = 3 med A = 0,5 vid samma k. Jämför sedan k = 2 med k = 0,5 vid samma A. Byt till cosinus och pröva också ett negativt A.</p><div id="kurvverktyg" class="graph-tool"><div class="graph-controls"><label>Funktion <select id="graf-funktion"><option value="sin">Sinus</option><option value="cos">Cosinus</option></select></label><label>A <select id="graf-a"><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option><option value="0.5">0,5</option><option value="1" selected>1</option><option value="1.5">1,5</option><option value="2">2</option><option value="3">3</option></select></label><label>k <select id="graf-k"><option value="0.2">0,2</option><option value="0.5">0,5</option><option value="0.6">0,6</option><option value="0.75">0,75</option><option value="1" selected>1</option><option value="1.5">1,5</option><option value="2">2</option><option value="2.5">2,5</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label><label>x-intervall <select id="graf-intervall"><option value="720">0–720°</option><option value="2160">0–2160°</option></select></label></div><svg id="aktivitet-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Vald sinus- eller cosinuskurva jämförd med grundkurvan" data-end="720" data-limit="3">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">180°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">360°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">540°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">720°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−3</text><path class="grid" d="M54 158.7 H535"/><text class="tick-y" x="46" y="163.7">−2</text><path class="grid" d="M54 133.3 H535"/><text class="tick-y" x="46" y="138.3">−1</text><path class="grid" d="M54 82.7 H535"/><text class="tick-y" x="46" y="87.7">1</text><path class="grid" d="M54 57.3 H535"/><text class="tick-y" x="46" y="62.3">2</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">3</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg><p id="graf-status" role="status"></p></div><p>Hel linje visar ditt val. Streckad linje visar samma funktionstyp med A = 1 och k = 1. Använd verktyget när du gör aktiviteten på s. 38.</p>
+</section>
+
+<section class="slide" id="las-av" aria-labelledby="las-av-title">
+  <h1 id="las-av-title" tabindex="-1">Bestäm funktionsuttrycket från grafen</h1>
+<svg id="las-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Kurvan börjar i minimum minus två och har en topp vid 120 grader. Omarkerad funktion." data-end="480" data-limit="2">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M114.1 23 V183"/><text class="tick-x" x="114.1" y="204">60°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">120°</text><path class="grid-x" d="M234.4 23 V183"/><text class="tick-x" x="234.4" y="204">180°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">240°</text><path class="grid-x" d="M354.6 23 V183"/><text class="tick-x" x="354.6" y="204">300°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">360°</text><path class="grid-x" d="M474.9 23 V183"/><text class="tick-x" x="474.9" y="204">420°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">480°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−2</text><path class="grid" d="M54 146.0 H535"/><text class="tick-y" x="46" y="151.0">−1</text><path class="grid" d="M54 70.0 H535"/><text class="tick-y" x="46" y="75.0">1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">2</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg><p>Kurvan är av typen y = A cos kx. Läs av det minsta värdet och avståndet mellan två intilliggande dalar.</p><p class="task">Vilket tecken har A? Använd att cos 0° = 1.</p><form class="practice" data-success="Det stämmer. Vid x = 0 ligger kurvan i sin dal." novalidate><div class="practice-fields"><label>Tecken på A<select data-answer="2" data-hint="Läs av y när x är 0. Då är y = A · 1."><option value="">Välj</option><option value="1">Positivt</option><option value="2">Negativt</option><option value="3">Det går inte att avgöra</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa avläsningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>A</mi><mo>=</mo><mo>−</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mn>240°</mn></mrow></math>
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mn>240°</mn></mrow></mrow></mfrac><mo>=</mo><mn>1,5</mn></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>1,5</mn><mi>x</mi><mo>)</mo></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · skissa fem punkter</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>1,5</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>0,75</mn><mi>x</mi><mo>)</mo></mrow></math>
+</div><p class="task">Beräkna period och amplitud. Dela perioden i fyra lika delar och sätt ut fem punkter från x = 0. Skissa kurvan på papper före kontrollen.</p><details class="answer"><summary>Kontrollera skissen</summary><div class="answer-body"><div class="calculation-pair"><div><div class="math-steps">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mn>0,75</mn></mrow></mrow></mfrac><mo>=</mo><mn>480°</mn></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mrow><mi>P</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>=</mo><mn>120°</mn></mrow></math>
+</div><p>Amplituden är 1,5. Punkterna (0°; 0), (120°; 1,5), (240°; 0), (360°; −1,5) och (480°; 0) ger en hel period.</p></div><svg id="din-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Skiss med de fem punkterna, från vinkel noll till 480 grader" data-end="480" data-limit="2">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">120°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">240°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">360°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">480°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−2</text><path class="grid" d="M54 146.0 H535"/><text class="tick-y" x="46" y="151.0">−1</text><path class="grid" d="M54 70.0 H535"/><text class="tick-y" x="46" y="75.0">1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">2</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg></div></div></details>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 38–43 · Sinus- och cosinusfunktioner</p>
+  <p>Gör aktiviteten på s. 38 med <button type="button" data-slide-link="aktivitet">grafverktyget</button>. Titta vid behov på de lösta exemplen 1301–1302 när du ska läsa av eller skissa en kurva.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1303–1310</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1311–1313</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1314–1316</p></article>
+  </div><details class="answer"><summary>Visa formler för bokarbetet</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mi>k</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Amplituden är |A|. Vid skiss sätter du ut en punkt varje fjärdedels period.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med din graf</h1>
+
+  <p class="lead">Använd en graf du redan har ritat eller läst av.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Cirkel och kurva</h2><p>Förklara varför cosinus börjar på 1 medan sinus börjar på 0. Använd enhetscirkeln.</p></article>
+    <article class="card"><h2>Amplitud och period</h2><p>Visa hur du hittade båda i en uppgift, till exempel 1307 eller 1313.</p></article>
+    <article class="card"><h2>Skiss och funktion</h2><p>Förklara dina fem punkter i <em>Din tur</em> eller hur du bestämde A och k från en graf i boken.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>

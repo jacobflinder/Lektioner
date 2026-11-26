@@ -1,0 +1,37 @@
+.sinusgraph .slide:has(.answer[open]) .practice { display: none; }
+.sinusgraph .slide > .math-givens { justify-items: start; }
+.sinusgraph .math-givens { gap: 18px; }
+.sinusgraph .graph-tool {
+  display: grid;
+  gap: .55rem;
+  padding: .6rem;
+  background: #f4f9f6;
+  border: 1px solid var(--line);
+  border-radius: .6rem;
+}
+.sinusgraph .graph-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); align-items: center; }
+.sinusgraph svg { display: block; width: 100%; max-height: 238px; }
+.sinusgraph .plot { max-width: 650px; margin-inline: auto; }
+.sinusgraph .slide > .plot { max-height: 225px; }
+.sinusgraph .answer-body .plot { max-height: 195px; }
+.sinusgraph .circle-point { max-height: 202px; margin-inline: auto; }
+.sinusgraph svg text { fill: var(--ink); font: 16px system-ui, sans-serif; }
+.sinusgraph .tick-x { text-anchor: middle; font-size: 15px; }
+.sinusgraph .tick-y { text-anchor: end; }
+.sinusgraph .grid, .sinusgraph .grid-x { stroke: #cadbd4; }
+.sinusgraph :is(.plot-axis, .circle-rim, .plot-curve, .reference-curve, .circle-radius, .coordinate, .projection) { fill: none; }
+.sinusgraph :is(.plot-axis, .circle-rim) { stroke: #345a56; stroke-width: 1.6; }
+.sinusgraph :is(.plot-curve, .coordinate) { stroke: #08705c; stroke-width: 3; }
+.sinusgraph .reference-curve { stroke: #835227; stroke-width: 2.25; stroke-dasharray: 7 5; }
+.sinusgraph .circle-radius { stroke: #345a56; stroke-width: 2; }
+.sinusgraph .projection { stroke: #6c7f78; stroke-dasharray: 4 4; }
+.sinusgraph .plot-point { fill: #08705c; stroke: white; stroke-width: 1.25; }
+.sinusgraph .graph-controls { display: flex; flex-wrap: wrap; gap: .45rem; }
+.sinusgraph .graph-controls label { display: grid; flex: 1 1 6rem; gap: .2rem; min-width: 0; }
+.sinusgraph .graph-controls input { width: 100%; min-height: 44px; accent-color: #08705c; }
+.sinusgraph #cirkel-status, .sinusgraph #graf-status { font-weight: 650; }
+@media (max-width: 650px) {
+  .sinusgraph .graph-pair { grid-template-columns: 1fr; }
+  .sinusgraph .circle-point { max-height: 152px; }
+  .sinusgraph .tick-x { font-size: 17px; }
+}
