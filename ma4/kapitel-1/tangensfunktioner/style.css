@@ -1,0 +1,3 @@
+.tangens .tan-pole { fill: none; stroke: #854420; stroke-width: 1.65; stroke-dasharray: 2 4; }
+.tangens .socrative-activity { display: grid; gap: .65rem; max-width: 52rem; padding: 1rem; }
+.tangens #tan-result { font-weight: 650; }
