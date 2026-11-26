@@ -84,7 +84,7 @@ async function main() {
         assert.match(await page.locator('#bokarbete').textContent(), new RegExp(value));
       }
       assert.match(await page.locator('#bokarbete').textContent(), /alla uppgifter och deluppgifter på båda nivåerna/i);
-      assert.doesNotMatch(await page.locator('main').textContent(), /NOKflex|1108|1109|1110|Enhetscirkeln/);
+      assert.doesNotMatch(await page.locator('main').textContent(), /NOKflex|\b11(?:08|09|10)\b|Enhetscirkeln/);
       assert.ok(await page.locator('#previous').isDisabled());
       await page.screenshot({ path: path.join(screenshots, `${width}-start.png`) });
 

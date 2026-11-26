@@ -10,7 +10,7 @@ const mode = document.querySelector('#mode');
 let current = slides[0];
 
 for (const [index, slide] of slides.entries()) {
-  const label = slide.querySelector('h1').textContent;
+  const label = slide.dataset.menuTitle || slide.querySelector('h1').textContent;
   jump.add(new Option(`${index + 1}. ${label}`, slide.id));
 }
 
