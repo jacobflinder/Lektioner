@@ -1,0 +1,17 @@
+.modeller .model-plot [data-level] { visibility: hidden; }
+.modeller .slide:has(.answer[open]) .model-plot [data-level] { visibility: visible; }
+.modeller #temperatur-graf .model-marker { display: none; }
+.modeller .graph-pair { grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr); }
+.modeller #hjul-figur { max-height: 185px; }
+.modeller #wheel-result { font-weight: 650; }
+.modeller #startlage .answer-body { gap: .3rem; }
+@media (max-width: 650px) {
+  .modeller .graph-pair { grid-template-columns: 1fr; }
+  .modeller #hjul-figur { max-height: 150px; }
+}
+@media (min-width: 900px) {
+  .modeller #startlage .answer-body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+    align-items: start;
+  }
+}
