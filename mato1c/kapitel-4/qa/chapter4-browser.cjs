@@ -12,13 +12,15 @@ const lessons=[
  {id:'trigonometriska-ekvationer',levels:['4218–4223','4224–4227','4228'],extras:1},
  {id:'areasatsen',levels:['4303–4307','4308–4311','4312–4313'],extras:1},
  {id:'sinussatsen',levels:['4315–4318','4319–4320'],extras:0},
- {id:'sinussatsens-tva-fall',levels:['4322–4327','4328–4336','4337–4338'],extras:0}
+ {id:'sinussatsens-tva-fall',levels:['4322–4327','4328–4336','4337–4338'],extras:0},
+ {id:'cosinussatsen',levels:['4341–4346','4347–4351','4352–4353'],extras:0}
 ];
 const socrativeActivities={
  enhetscirkeln:[['326','Ma3c Enhetscirkeln','SOC-37277932'],['329','Ma3c Enhetscirkeln 4','SOC-37278098']],
  areasatsen:[['330','Ma3c Enhetscirkeln 5 och areasats','SOC-37278150']],
  sinussatsen:[['331','Ma3c Areasats och Sinussatsen1','SOC-37278423']],
- 'sinussatsens-tva-fall':[['332','Ma3c Sinussatsen2','SOC-37390020']]
+ 'sinussatsens-tva-fall':[['332','Ma3c Sinussatsen2','SOC-37390020']],
+ cosinussatsen:[['333','Ma3c Cosinussatsen1','SOC-37390519']]
 };
 // Facit, mellanled och de avgörande definitionerna ska inte synas före elevens försök.
 const thoughtPauseTargets={
@@ -28,7 +30,8 @@ const thoughtPauseTargets={
  'trigonometriska-ekvationer':['trig-sin-full','trig-cos-full','trig-all-symmetries','trig-exact-mirrors'],
  areasatsen:['area-height','area-formula','area-worked','area-inverse','area-two-triangles','area-extra-recall'],
  sinussatsen:['sine-heights','sine-theorem','sine-original'],
- 'sinussatsens-tva-fall':['start-answer','height-expression','short','height','two','long','obtuse-short','obtuse-long','worked-example']
+ 'sinussatsens-tva-fall':['start-answer','height-expression','short','height','two','long','obtuse-short','obtuse-long','worked-example'],
+ cosinussatsen:['cos-start','cos-pair','cos-acute-proof','cos-obtuse-proof','cos-right','cos-side','cos-angle']
 };
 const twoCaseLesson='sinussatsens-tva-fall';
 const validVertices={short:0,height:1,two:2,long:1,'obtuse-short':0,'obtuse-long':1,'worked-example':2};
@@ -90,7 +93,7 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await page.locator('.slide.active').count(),1);checks++;
     const studentText=await page.locator('.slide.active').innerText();
     assert(!/Originalets|originallektionen|Jacobs?|samma webblektion|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
-    if(lesson.id===twoCaseLesson){
+    if(lesson.id===twoCaseLesson||lesson.id==='cosinussatsen'){
      await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}-before.png`),fullPage:true});
     }
     const buttons=page.locator('.slide.active [data-reveal]');
@@ -124,7 +127,7 @@ async function inspectLayout(page,id,width,i){
      assert.deepEqual(await table.locator('.filled:visible').allTextContents(),['0','1','2','1','0','1']);checks++;
     }
     await inspectLayout(page,lesson.id,width,i);
-    if(lesson.id===twoCaseLesson){
+    if(lesson.id===twoCaseLesson||lesson.id==='cosinussatsen'){
      await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}-after.png`),fullPage:true});
     }
     if(width===390)await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
@@ -142,6 +145,30 @@ async function inspectLayout(page,id,width,i){
     await page.locator('[data-reveal="worked-example"]').press('Enter');
     assert.equal(await page.locator('#worked-example .math-line').count(),6);checks++;
     await inspectLayout(page,lesson.id,width,6);
+   }
+   if(lesson.id==='cosinussatsen'){
+    await page.goto(url+'?larare=1');
+    await page.locator('#mode').click();
+    assert.equal(await page.locator('#mode').getAttribute('aria-pressed'),'true');checks++;
+    for(let i=0;i<count;i++){
+     await page.locator('#jump').selectOption(String(i));
+     await inspectLayout(page,lesson.id,width,i);
+    }
+    const proofs=[
+     ['2','cos-acute-proof','acute',9],
+     ['3','cos-obtuse-proof','obtuse',10],
+     ['4','cos-right','right',4],
+     ['5','cos-side','side',4],
+     ['6','cos-angle','angle',6]
+    ];
+    for(const [i,target,figure,steps] of proofs){
+     await page.locator('#jump').selectOption(i);
+     assert.equal(await page.locator(`.slide.active [data-cos-diagram="${figure}"]`).isVisible(),true);checks++;
+     assert.equal(await page.locator('#'+target).isVisible(),false);checks++;
+     await page.locator(`[data-reveal="${target}"]`).press('Enter');
+     assert.equal(await page.locator(`#${target} .math-line:visible`).count(),steps);checks++;
+     await inspectLayout(page,lesson.id,width,Number(i));
+    }
    }
    if(lesson.id==='exakta-trigonometriska-varden'){
     await page.locator('#jump').selectOption('6');

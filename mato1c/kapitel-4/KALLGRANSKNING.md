@@ -25,7 +25,7 @@
 | Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 | Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 
-Planeringens följande separata moment är Cosinussatsen s. 240 och Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
+Planeringens nästa separata moment är Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
 
 ## Original-till-webb-karta
 
@@ -92,7 +92,7 @@ Detta är **didaktiska förbättringar, inte matematiska metodavvikelser**: inga
 
 ## Återstående extern kontroll
 
-Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. **Ingen separat webblektion från s. 240 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
+Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. **Ingen separat webblektion från s. 244 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
 
 
 ## När ger sinussatsen två fall? · s. 236–239
@@ -110,3 +110,20 @@ Källor är lärarens lektions-PDF «240212 Sinussatsens två fall Na22.pdf» (a
 | Arbete med bokens nivåuppgifter efter Socrative | Bild 9 | Aktuell bok och planering ersätter äldre numrering. Nivå 1 4322–4327, nivå 2 4328–4336, nivå 3 4337–4338. Alla uppgifter och deluppgifter på minst två nivåer. Tre mål följs upp med bokuppgifter. |
 
 Nästa moment i planeringen är Cosinussatsen på s. 240. Inspelningen används här som lärarkälla. Lektionsflödet har ingen visning av en demonstrationsfilm enligt aktivitetslistan för detta pass.
+
+
+## Cosinussatsen · s. 240–243
+
+Källor är lärarens original-PDF «240213 Cosinussatsen NaTe22.pdf», inspelningen och transkriptionen «240213 Cosinussatsen Ma3c Vik», bokbilderna s. 240–243 samt kursens aktuella planering. Originalets formelblad, bevisfigurer och matematiska tecken jämfördes med bilder ur filmen.
+
+| Originalets innehåll | Plats i webblektionen | Kontroll |
+|---|---|---|
+| Alla tre skrivsätten för cosinussatsen, med c och C först | Bild 2 | Första skrivsättet introduceras tillsammans med triangeln. Eleven föreslår formen med b, sedan visas båda de övriga skrivsätten. |
+| Spetsig C: höjd från B, p och b − p, Pythagoras två gånger, likställning, utveckling, p = a cos C och substitution | Bild 3 | Samma beteckningar, ordning och lösningsled. Om p ≥ b förklaras kort varför samma kvadratuttryck gäller. |
+| Trubbig C: höjden på förlängningen, b + p, Pythagoras två gånger, likställning, cosinussymmetri och substitution | Bild 4 | Samma beteckningar, tecken och ordning. Sambandet cos(180° − C) = −cos C görs synligt före insättningen. |
+| Rät vinkel: cos 90° = 0 och Pythagoras sats återstår | Bild 5 | Samma räkneled efter elevens försök. |
+| Bokens två tillämpningstyper: två sidor och mellanliggande vinkel, respektive tre sidor | Bilder 6–7 | Egna uppgifter med 5 cm, 7 cm, 120° respektive 7 cm, 10 cm, 13 cm. Figurer och uträkningar hålls samman. |
+| Socrative 333 – Ma3c Cosinussatsen1, SOC-37390519, och gemensam genomgång av svåra frågor | Bild 8 | Namn och kod verifierade mot original-PDF och filmen. Aktuellt innehåll i frågorna ingår i Socrative. |
+| Uppgiftsarbete efter Socrative | Bild 9 | Aktuella nivågränser: 4341–4346, 4347–4351, 4352–4353. Samtliga deluppgifter på minst två hela nivåer enligt kursens aktuella beslut. Mål följs upp med egna lösningar ur boken. |
+
+En äldre instruktion om mindmap utgår enligt senare lärarbeslut. Veckokollens datum och salar i originalet gäller 2024. Nästa moment i den aktuella planeringen är Tillämpningar och problemlösning på s. 244.

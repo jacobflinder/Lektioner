@@ -6,6 +6,7 @@ const root=path.resolve(__dirname,'..');
 let checks=0;
 const check=(condition,message)=>{assert(condition,message);checks++};
 const cases=[
+ {id:'cosinussatsen',slides:9,levels:['4341–4346','4347–4351','4352–4353'],optional:0,socrative:'SOC-37390519'},
  {id:'sinussatsens-tva-fall',slides:9,levels:['4322–4327','4328–4336','4337–4338'],optional:0,socrative:'SOC-37390020'},
  {id:'trigonometriska-ekvationer',slides:11,levels:['4218–4223','4224–4227','4228'],optional:1,socrative:null},
  {id:'areasatsen',slides:10,levels:['4303–4307','4308–4311','4312–4313'],optional:1,socrative:'SOC-37278150'},
@@ -66,9 +67,17 @@ check(sin.includes('Socrative 331')&&sin.includes('Ma3c Areasats och Sinussatsen
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 for(const item of cases)check(index.includes('href="'+item.id+'/"'),item.id+': länkad i översikt');
-check(!index.includes('s. 240')&&!index.includes('href="cosinussatsen/"'),'Kommande opublicerat moment visas inte som elevlektion');
+check(!index.includes('href="tillampningar-och-problemlosning/"'),'Kommande opublicerat moment visas inte som elevlektion');
 check(!/Jacobs|din planering|webblektion|bokbilder/i.test(index),'Kapitelöversikten saknar produktions- och lärarkommentarer');
+const cosine=htmls.cosinussatsen;
 const deg=x=>x*Math.PI/180;
+check(cosine.indexOf('data-title="Satsen i tre former"')<cosine.indexOf('data-title="Bevis: spetsig vinkel"'),'Cosinus: satsen före bevis och beräkningar');
+for(const label of ['acute','obtuse','right','side','angle']){
+ check(cosine.includes(`data-cos-diagram="${label}"`),'Cosinus: figur finns för '+label);
+}
+check(cosine.includes('Ma3c Cosinussatsen1')&&cosine.includes('Socrative 333'),'Cosinus: fullständigt Socrative-namn');
+check(Math.abs(25+49-2*5*7*Math.cos(deg(120))-109)<1e-10,'Cosinus: sidexemplet ger 109');
+check(Math.abs(Math.acos((7**2+10**2-13**2)/(2*7*10))*180/Math.PI-98.2132)<1e-4,'Cosinus: vinkelexemplet ger ungefär 98,2°');
 check(Math.abs(Math.sin(deg(20.487315))-0.35)<2e-6,'Trigekv: sinus korrekt');
 check(Math.abs(Math.cos(deg(126.869897))+0.6)<2e-6,'Trigekv: cosinus korrekt');
 check(Math.abs(9*12*Math.sin(deg(70))/2-50.7434)<0.01,'Areasats: exempel 1 korrekt');
@@ -79,4 +88,4 @@ check(Math.abs(Math.acos((u[0]*v[0]+u[1]*v[1])/(L*R))*180/Math.PI-70)<0.5&&Math.
 check(Math.abs(5*11*Math.sin(deg(120))/2-23.8157)<0.01,'Areasats: trubbig vinkel korrekt');
 check(Math.abs(6*10*Math.sin(deg(36.869897))/2-18)<0.001,'Areasats: vinkel från area korrekt');
 check(Math.abs(4*Math.sin(deg(20))/Math.sin(deg(130))-1.786)<0.01,'Sinussats: sida korrekt');
-console.log(JSON.stringify({result:'PASS',checks,lessons:cases.length,pages:'228–239'}));
+console.log(JSON.stringify({result:'PASS',checks,lessons:cases.length,pages:'228–243'}));
