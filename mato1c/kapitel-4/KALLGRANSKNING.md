@@ -25,7 +25,7 @@
 | Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 | Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 
-Planeringens följande separata moment är När ger sinussatsen två fall? s. 236, Cosinussatsen s. 240 och Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
+Planeringens följande separata moment är Cosinussatsen s. 240 och Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
 
 ## Original-till-webb-karta
 
@@ -92,4 +92,21 @@ Detta är **didaktiska förbättringar, inte matematiska metodavvikelser**: inga
 
 ## Återstående extern kontroll
 
-Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. **Ingen separat webblektion från s. 236 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
+Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. **Ingen separat webblektion från s. 240 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
+
+
+## När ger sinussatsen två fall? · s. 236–239
+
+Källor är lärarens lektions-PDF «240212 Sinussatsens två fall Na22.pdf» (aktivitetslistan), den matchande inspelningen och transkriptionen «240212 Sinussatsens två fall Ma3c Vik» (tavla och metod), aktuell planering, bokbilderna s. 236–239 och kursens didaktiska grund v1.4. Filmen visar också det flyttade tavelexemplet högst upp på tavlan.
+
+| Originalets innehåll | Plats i webblektionen | Kontroll |
+|---|---|---|
+| Spetsig vinkel, fast sida b, basstråle och höjd h | Bild 2 | Samma konstruktion. Momentet repeterar sambandet h = b sin A före fallen. |
+| Läraren vrider sidan a från C och prövar var den når basen | Bilder 3–5 | Efter egen förutsägelse visar figuren sträckans ändpunkt för alla vridningar som en streckad cirkel. Endast giltiga träffar visas som möjliga B. |
+| Spetsig A: a < h, a = h, h < a < b, a > b | Bilder 3–4, tabell bild 6 | Samma ordning och resonemang. Det fjärde fallet omfattar även a = b enligt aktuell bok. Träffen i A ger ingen triangel och det återstår precis en giltig träff. |
+| Trubbig A: a ≤ b, a > b | Bild 5, tabell bild 6 | Samma ordning. När a = b når sträckan A men triangeln blir degenererad, som läraren visar. |
+| Tavelexempel: A = 37°, c = 15 m, a = 10 m, två möjliga C | Bild 7 | Kvot, isolering, arcsin och supplement bevarade, med tillagd kontroll genom vinkelsumman. Det exakta kvotuttrycket går in i arcsin före avrundning. Detta ger 64,52° och 115,48° jämfört med tavlans tidigare avrundning av sin C till 0,90. |
+| Socrative 332 – Ma3c Sinussatsen2, SOC-37390020, följt av gemensam genomgång av svåra frågor | Bild 8 | Namn och kod verifierade i PDF. Rumsnamn LRJ framgår i filmen. Frågornas innehåll återges först i Socrative. |
+| Arbete med bokens nivåuppgifter efter Socrative | Bild 9 | Aktuell bok och planering ersätter äldre numrering. Nivå 1 4322–4327, nivå 2 4328–4336, nivå 3 4337–4338. Alla uppgifter och deluppgifter på minst två nivåer. Tre mål följs upp med bokuppgifter. |
+
+Nästa moment i planeringen är Cosinussatsen på s. 240. Inspelningen används här som lärarkälla. Lektionsflödet har ingen visning av en demonstrationsfilm enligt aktivitetslistan för detta pass.
