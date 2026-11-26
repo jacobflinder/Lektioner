@@ -108,11 +108,13 @@ async function inspectLayout(page,id,width,i){
      assert.equal(await figure.locator('svg circle').count(),2);checks++;
      assert.equal(await figure.locator('svg line[data-role="sine-guide"]').count(),1,`Enhetscirkeln bild ${Number(slide)+1}: sinusprojektion till y-axeln för P`);checks++;
      assert.equal(await figure.locator('svg line[data-role="sine-segment"]').count(),1);checks++;
+     assert.equal(await figure.locator('svg text[data-role="sine-label"]').count(),1);checks++;
      await figure.locator('[data-symmetry-step="both"]').click();
      assert.equal(await figure.locator('svg circle').count(),3);checks++;
      assert((await figure.locator('svg path').count())>=4);checks++;
      assert.equal(await figure.locator('svg line[data-role="sine-guide"]').count(),2,`Enhetscirkeln bild ${Number(slide)+1}: båda punkternas sinusprojektioner`);checks++;
      assert.equal(await figure.locator('svg line[data-role="sine-segment"]').count(),slide==='6'?1:2,`Enhetscirkeln bild ${Number(slide)+1}: en gemensam eller två motsatta sinussträckor`);checks++;
+     assert.equal(await figure.locator('svg text[data-role="sine-label"]').count(),slide==='6'?1:2);checks++;
      if(width===390)await page.screenshot({path:path.join(screenshotDir,`enhetscirkeln-${width}-spegling-${Number(slide)+1}.png`),fullPage:true});
     }
     for(const slide of ['2','3','5','8']){
