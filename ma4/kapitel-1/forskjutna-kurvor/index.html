@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Förskjutna kurvor · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="../sinus-och-cosinusfunktioner/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="forskjutning.js" defer></script>
+</head>
+<body class="sinusgraph shift">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Förskjutna kurvor</h1>
+<p>Vi flyttar en kurva i sidled eller höjdled. En förskjutning lämnar amplituden och perioden oförändrade.</p><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>3</mn></mrow></math>
+</div><p class="task">Hur flyttas den andra grafen i förhållande till den första?</p><form class="practice" data-success="Det stämmer. Varje y-värde ökar med 3." novalidate><div class="practice-fields"><label>Förskjutning<select data-answer="2" data-hint="Talet adderas efter att sinusvärdet har beräknats."><option value="">Välj</option><option value="1">Tre enheter nedåt</option><option value="2">Tre enheter uppåt</option><option value="3">Tre grader åt höger</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa vad som flyttas</summary><div class="answer-body"><p>Mittlinjen flyttas från y = 0 till y = 3.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Förklara förskjutning i x- och y-led.</li><li>Skissa en förskjuten kurva från dess uttryck.</li><li>Bestämma amplitud, period och förskjutning från en graf.</li></ol>
+</section>
+
+<section class="slide" id="vertikal" aria-labelledby="vertikal-title">
+  <h1 id="vertikal-title" tabindex="-1">B flyttar hela kurvan i y-led</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>2</mn></mrow></math>
+</div><p class="task">Vilken höjd får den högsta punkten efter förskjutningen?</p><form class="practice" data-success="Det stämmer. Dra 2 från varje värde, också från den högsta punkten." novalidate><div class="practice-fields"><label>Största värde<select data-answer="2" data-hint="Största värdet av cos x är 1 före flytten."><option value="">Välj</option><option value="1">1</option><option value="2">−1</option><option value="3">−2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa förskjutningen</summary><div class="answer-body"><svg id="y-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Cosinuskurvor före och efter förskjutning två enheter nedåt." data-low="-90" data-high="450" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-90°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">0°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">180°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">270°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">360°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">450°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M136.33 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="123.33" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg><div class="math-givens">
+<math display="block"><mrow><mn>1</mn><mo>−</mo><mn>2</mn><mo>=</mo><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>1</mn><mo>−</mo><mn>2</mn><mo>=</mo><mo>−</mo><mn>3</mn></mrow></math>
+</div><p>Den heldragna kurvan har mittlinjen y = −2. Streckad kurva visar cos x.</p></div></details>
+</section>
+
+<section class="slide" id="horisontell" aria-labelledby="horisontell-title">
+  <h1 id="horisontell-title" tabindex="-1">v flyttar kurvan i x-led</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mn>60°</mn><mo>)</mo></mrow></math>
+</div><p>Grundkurvan passerar mittlinjen uppåt där argumentet är 0°. Sätt parentesen till 0° för att hitta motsvarande punkt.</p><p class="task">Var ligger den punkten när du adderar 60° inuti parentesen?</p><form class="practice" data-success="Det stämmer. Hela kurvan flyttas 60° åt vänster." novalidate><div class="practice-fields"><label>x-värde<select data-answer="1" data-hint="Vilket x gör summan x + 60° lika med noll?"><option value="">Välj</option><option value="1">−60°</option><option value="2">60°</option><option value="3">0°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>x</mi><mo>+</mo><mn>60°</mn><mo>=</mo><mn>0°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>60°</mn></mrow></math>
+</div><svg id="x-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Streckad sinuskurva, med en heldragen kurva förskjuten 60 grader åt vänster." data-low="-180" data-high="360" data-limit="2">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-180°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">-90°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">0°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">90°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">180°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">270°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">360°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-2</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">1</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">2</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M214.67 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="201.67" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg><p>När v är positiv förskjuts kurvan åt vänster. När v är negativ förskjuts den åt höger.</p></div></details>
+</section>
+
+<section class="slide" id="faktorisera" aria-labelledby="faktorisera-title">
+  <h1 id="faktorisera-title" tabindex="-1">Bryt ut k innan du läser av förskjutningen</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>60°</mn><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+</div><p class="task">Vilket uttryck får du i parentesen när du bryter ut 3?</p><form class="practice" data-success="Det stämmer. Den inre parentesen blir noll vid x = 20°." novalidate><div class="practice-fields"><label>Omskrivning av argumentet<select data-answer="2" data-hint="Dela både 3x och 60° med 3."><option value="">Välj</option><option value="1">3(x − 60°)</option><option value="2">3(x − 20°)</option><option value="3">3(x + 20°)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>3</mn><mi>x</mi><mo>−</mo><mn>60°</mn><mo>=</mo><mn>3</mn><mo>(</mo><mi>x</mi><mo>−</mo><mn>20°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>3</mn><mo>(</mo><mi>x</mi><mo>−</mo><mn>20°</mn><mo>)</mo><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+</div><div class="calculation-pair"><div><div class="math-givens">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mn>3</mn></mrow></mrow></mfrac><mo>=</mo><mn>120°</mn></mrow></math>
+</div><p>Amplituden är 2. Skissa först grundkurvan med ändrad period och amplitud.</p></div><div><p>Flytta sedan hela kurvan 20° åt höger och en enhet uppåt.</p></div></div><svg id="kombination-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Sinuskurva från skalning, förskjutning till höger och förskjutning uppåt." data-low="-60" data-high="300" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-60°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">0°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">60°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">120°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">180°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">240°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">300°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M136.33 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="123.33" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg></div></details>
+</section>
+
+<section class="slide" id="aktivitet" aria-labelledby="aktivitet-title">
+  <h1 id="aktivitet-title" tabindex="-1">Undersök de fyra parametrarna</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>k</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mi>B</mi></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>k</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mi>B</mi></mrow></math>
+</div><p>Amplituden är |A|, perioden är 360°/k när k > 0 och A ≠ 0, mittlinjen är y = B och förskjutningen i x-led är −v.</p><p>Ändra en parameter i taget. Förutsäg åt vilket håll mittlinjens uppåtgående passage flyttas när v ändras från 0 till 30° och sedan till −30°.</p><div class="graph-tool"><div class="graph-controls"><label>A <select id="shift-a"><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option></select></label><label>k <select id="shift-k"><option value="0.5">0,5</option><option value="1" selected>1</option><option value="1.5">1,5</option><option value="2">2</option><option value="3">3</option></select></label><label>v i grader <select id="shift-v"><option value="-60">−60</option><option value="-30">−30</option><option value="0" selected>0</option><option value="30">30</option><option value="60">60</option></select></label><label>B <select id="shift-b"><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></div><svg id="verktyg-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Vald sinuskurva, jämförelsekurva och markerad mittlinje." data-low="-180" data-high="540" data-limit="6">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-180°</text><path class="grid" d="M116.75 23 V181"/><text class="tick-x" x="116.75" y="200">-90°</text><path class="grid" d="M175.50 23 V181"/><text class="tick-x" x="175.50" y="200">0°</text><path class="grid" d="M234.25 23 V181"/><text class="tick-x" x="234.25" y="200">90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">180°</text><path class="grid" d="M351.75 23 V181"/><text class="tick-x" x="351.75" y="200">270°</text><path class="grid" d="M410.50 23 V181"/><text class="tick-x" x="410.50" y="200">360°</text><path class="grid" d="M469.25 23 V181"/><text class="tick-x" x="469.25" y="200">450°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">540°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-6</text><path class="grid" d="M58 151.67 H528"/><text class="tick-y" x="50" y="156.67">-4</text><path class="grid" d="M58 127.33 H528"/><text class="tick-y" x="50" y="132.33">-2</text><path class="grid" d="M58 78.67 H528"/><text class="tick-y" x="50" y="83.67">2</text><path class="grid" d="M58 54.33 H528"/><text class="tick-y" x="50" y="59.33">4</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">6</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M175.50 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="162.50" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg><p id="shift-result" role="status"></p></div><p>Hel linje visar dina val. Streckad kurva är y = sin x. Prickad linje visar mittlinjen. <a href="https://www.geogebra.org/m/tphudvak" target="_blank" rel="noopener">Öppna den allmänna sinuskurvan i GeoGebra</a>.</p>
+</section>
+
+<section class="slide" id="las-av" aria-labelledby="las-av-title">
+  <h1 id="las-av-title" tabindex="-1">Bestäm uttrycket från grafen</h1>
+<svg id="avlasning-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Sinusformad kurva med extremvärden och streckad mittlinje." data-low="-90" data-high="390" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-90°</text><path class="grid" d="M116.75 23 V181"/><text class="tick-x" x="116.75" y="200">-30°</text><path class="grid" d="M175.50 23 V181"/><text class="tick-x" x="175.50" y="200">30°</text><path class="grid" d="M234.25 23 V181"/><text class="tick-x" x="234.25" y="200">90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">150°</text><path class="grid" d="M351.75 23 V181"/><text class="tick-x" x="351.75" y="200">210°</text><path class="grid" d="M410.50 23 V181"/><text class="tick-x" x="410.50" y="200">270°</text><path class="grid" d="M469.25 23 V181"/><text class="tick-x" x="469.25" y="200">330°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">390°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M146.12 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="133.12" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg><p>Utgå från y = A sin(k(x + v)) + B med positivt A. Läs av toppens höjd 3 och dalens höjd −1. Kurvan passerar mittlinjen uppåt vid 30° och upprepar sig efter 240°.</p><p class="task">Vilket uttryck ger mittlinjens höjd?</p><form class="practice" data-success="Det stämmer. Ta medelvärdet av de två höjderna." novalidate><div class="practice-fields"><label>Sätt in höjderna<select data-answer="1" data-hint="Mittlinjen ligger mitt emellan största och minsta värdet."><option value="">Välj</option><option value="1">(3 + (−1)) / 2</option><option value="2">(3 − (−1)) / 2</option><option value="3">3 − (−1)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mi>B</mi><mo>=</mo><mfrac><mrow><mrow><mo>(</mo><mn>3</mn><mo>+</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>)</mo></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi>A</mi><mo>=</mo><mfrac><mrow><mrow><mo>(</mo><mn>3</mn><mo>−</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>)</mo></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>2</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mn>240°</mn></mrow></mrow></mfrac><mo>=</mo><mn>1,5</mn></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mo>−</mo><mn>30°</mn></mrow></math>
+</div></div><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>1,5</mn><mo>(</mo><mi>x</mi><mo>−</mo><mn>30°</mn><mo>)</mo><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="sin-eller-cos" aria-labelledby="sin-eller-cos-title">
+  <h1 id="sin-eller-cos-title" tabindex="-1">Beskriv samma kurva med sinus och cosinus</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mn>30°</mn><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>z</mi><mo>+</mo><mn>90°</mn><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>z</mi></mrow></math>
+</div><p class="task">Vilken cosinusfunktion beskriver samma graf? Jämför var kurvan har sin topp.</p><form class="practice" data-success="Det stämmer. Båda uttrycken når sin första topp efter 0° vid x = 60°." novalidate><div class="practice-fields"><label>Cosinusuttryck<select data-answer="2" data-hint="Skriv x + 30° som (x − 60°) + 90°."><option value="">Välj</option><option value="1">2 cos(x + 30°) + 1</option><option value="2">2 cos(x − 60°) + 1</option><option value="3">2 cos(x + 60°) + 1</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mn>30°</mn><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mo>(</mo><mi>x</mi><mo>−</mo><mn>60°</mn><mo>)</mo><mo>+</mo><mn>90°</mn><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>−</mo><mn>60°</mn><mo>)</mo><mo>+</mo><mn>1</mn></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · skissa på papper</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>80°</mn><mo>)</mo><mo>−</mo><mn>1</mn></mrow></math>
+</div><p class="task">Faktorisera argumentet. Beräkna perioden och mittlinjen. Sätt ut en topp och fyra följande punkter med en fjärdedels period mellan dem.</p><details class="answer"><summary>Kontrollera skissen</summary><div class="answer-body"><div class="calculation-pair"><div><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi>x</mi><mo>−</mo><mn>80°</mn><mo>=</mo><mn>2</mn><mo>(</mo><mi>x</mi><mo>−</mo><mn>40°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>360°</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>180°</mn></mrow></math>
+</div><p>Amplituden är 2 och mittlinjen är y = −1. Från toppen vid 40° följer punkterna vid 85°, 130°, 175° och 220°.</p></div><svg id="egen-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Den förskjutna cosinuskurvan med fem markerade punkter." data-low="-5" data-high="265" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-5°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">40°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">85°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">130°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">175°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">220°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">265°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M66.70 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="53.70" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg></div></div></details>
+</section>
+
+<section class="slide" id="socrative" aria-labelledby="socrative-title">
+  <h1 id="socrative-title" tabindex="-1">Socrative</h1>
+
+  <div class="card socrative-activity">
+    <h2>405. Ma4 ... Kurvor - förskjuta ...</h2>
+    <p><strong>SOC-38685286</strong></p>
+    <p>Gå till <a href="https://b.socrative.com/login/student/" target="_blank" rel="noopener">Socrative för elever</a>, ange rummet som läraren visar och invänta start.</p>
+  </div>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 47–50 · Förskjutna kurvor</p>
+  <p>Titta vid behov på de lösta exemplen 1331–1333 och använd grafverktyget om du vill kontrollera en skiss.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1334–1340</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1341–1351</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1352–1354</p></article>
+  </div><details class="answer"><summary>Visa formlerna för bokarbetet</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>k</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mi>B</mi></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>k</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mi>B</mi></mrow></math>
+</div><p>Amplituden är |A|, perioden är 360°/k när k > 0 och A ≠ 0, mittlinjen är y = B och förskjutningen i x-led är −v.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina grafer</h1>
+
+  <p class="lead">Visa hur en förskjutning kan läsas av i uttrycket och i en graf du har arbetat med.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Förskjutning</h2><p>Förklara tecknen för v och B, till exempel med 1334 eller 1344.</p></article>
+    <article class="card"><h2>Skissa</h2><p>Visa en topp och en hel period från <em>Din tur</em>, 1336 eller 1348.</p></article>
+    <article class="card"><h2>Bestäm uttryck</h2><p>Visa vilka punkter och extremvärden du använde, till exempel i 1338, 1350 eller 1354.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>
