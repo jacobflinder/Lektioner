@@ -1,0 +1,10 @@
+.circle .eq-guide { fill: none; stroke: #795022; stroke-width: 2; stroke-dasharray: 5 4; }
+.circle .alternate { stroke: #395b8c; }
+.circle .point.alternate { fill: #395b8c; }
+.split:has(.answer[open]) .practice { display: none; }
+.circle svg { max-height: 320px; }
+.classroom .circle svg { max-height: 355px; }
+.math-steps + .math-steps { margin-top: .35rem; }
+@media (max-width: 580px) {
+  .circle svg, .classroom .circle svg { max-height: 222px; }
+}

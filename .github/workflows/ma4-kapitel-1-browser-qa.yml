@@ -37,6 +37,7 @@ jobs:
         run: |
           node ma4/kapitel-1/qa/trigonometri-och-trianglar.cjs
           node ma4/kapitel-1/qa/enhetscirkeln.cjs
+          node ma4/kapitel-1/qa/trigonometriska-ekvationer.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,3 +46,4 @@ jobs:
           path: |
             /tmp/ma4-trianglar-qa
             /tmp/ma4-enhetscirkeln-qa
+            /tmp/ma4-trigekv-qa

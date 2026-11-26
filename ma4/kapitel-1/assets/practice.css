@@ -1,0 +1,25 @@
+.practice, .practice-fields { display: flex; flex-wrap: wrap; gap: .4rem; }
+.practice { align-items: end; }
+.practice-fields { flex: 1 1 18rem; }
+.practice-fields label {
+  display: grid;
+  flex: 1 1 6rem;
+  gap: .2rem;
+  min-width: 0;
+  font-size: .92em;
+}
+.practice-fields input {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: .4rem .5rem;
+  border: 1px solid #96b3ad;
+  border-radius: .45rem;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
+.practice-fields select { padding-inline: .4rem; }
+.practice-status { flex-basis: 100%; }
+.practice-status:empty { display: none; }
+.practice [aria-invalid="true"] { border: 2px solid #9c401c; }
