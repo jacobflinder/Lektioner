@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Summan av sinus och cosinus · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="../sinus-och-cosinusfunktioner/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="summan.js" defer></script>
+</head>
+<body class="sinusgraph sum">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Kurvan y = a sin x + b cos x</h1>
+<p>Sinus och cosinus med samma period kan tillsammans bilda en förskjuten sinuskurva. Vi söker c och v så att kurvan kan skrivas c sin(x + v).</p><div class="math-givens">
+<math display="block"><mrow><mi>a</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mi>b</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mi>c</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo></mrow></math>
+</div><p class="task">Vilken konstant anger avståndet från mittlinjen till toppen i den nya formen?</p><form class="practice" data-success="Det stämmer. Vi väljer den positiva amplituden c." novalidate><div class="practice-fields"><label>Amplitud<select data-answer="2" data-hint="Amplituden multiplicerar hela sinusvärdet."><option value="">Välj</option><option value="1">v</option><option value="2">c</option><option value="3">x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa villkoret</summary><div class="answer-body"><p>Här är a > 0. Då väljer vi v mellan −90° och 90°.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Härleda c och v genom att jämföra koefficienter.</li><li>Skriva om summan till en sinusfunktion och kontrollera dess graf.</li><li>Använda omskrivningen för att hitta extremvärden eller lösa en ekvation.</li></ol>
+</section>
+
+<section class="slide" id="koefficienter" aria-labelledby="koefficienter-title">
+  <h1 id="koefficienter-title" tabindex="-1">Jämför koefficienterna</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p class="task">Vilken koefficient står framför cos x när c multipliceras in?</p><form class="practice" data-success="Det stämmer. Koefficienten framför cos x är c sin v." novalidate><div class="practice-fields"><label>Koefficient för cos x<select data-answer="2" data-hint="Samla faktorn framför den andra produkten i additionsformeln."><option value="">Välj</option><option value="1">c cos v</option><option value="2">c sin v</option><option value="3">sin v</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>c</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>c</mi><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi>c</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mi>c</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><div class="math-givens">
+<math display="block"><mrow><mi>a</mi><mo>=</mo><mi>c</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi>b</mi><mo>=</mo><mi>c</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>Koefficienterna i de två uttrycken jämförs för samma funktion.</p></div></details>
+</section>
+
+<section class="slide" id="harledning" aria-labelledby="harledning-title">
+  <h1 id="harledning-title" tabindex="-1">Härled amplitud och fas</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>a</mi><mo>=</mo><mi>c</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi>b</mi><mo>=</mo><mi>c</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p class="task">Vilken känd identitet använder du när du har kvadrerat och adderat?</p><form class="practice" data-success="Det stämmer. Trigonometriska ettan gör att c² återstår." novalidate><div class="practice-fields"><label>Samband<select data-answer="2" data-hint="Skriv ut de kvadrerade uttrycken och bryt ut den gemensamma faktorn c²."><option value="">Välj</option><option value="1">sin v + cos v = 1</option><option value="2">sin² v + cos² v = 1</option><option value="3">sin² v − cos² v = 1</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Amplitud</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><msup><mi>c</mi><mn>2</mn></msup><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup><mo>(</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>)</mo><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></math>
+<math display="block"><mrow><mi>c</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mrow></math>
+</div></div><div><h2>Förskjutning</h2><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mrow><mi>b</mi></mrow></mrow><mrow><mrow><mi>a</mi></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mi>c</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow><mrow><mrow><mi>c</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow></mfrac><mo>=</mo><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>Eftersom a > 0 och c > 0 är cos v positiv. Tecknet på b avgör tecknet på sin v.</p></div></div></div></details>
+</section>
+
+<section class="slide" id="exempel" aria-labelledby="exempel-title">
+  <h1 id="exempel-title" tabindex="-1">Skriv om och kontrollera fasens tecken</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>8</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>6</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">Vilket tecken måste v ha om a är positivt och b är negativt?</p><form class="practice" data-success="Det stämmer. b = c sin v är negativt." novalidate><div class="practice-fields"><label>Tecken på v<select data-answer="2" data-hint="I intervallet mellan −90° och 90° har v samma tecken som sin v."><option value="">Välj</option><option value="1">Positivt</option><option value="2">Negativt</option><option value="3">Inget av dem</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mi>c</mi><mo>=</mo><msqrt><mrow><msup><mn>8</mn><mn>2</mn></msup><mo>+</mo><mo>(</mo><mo>−</mo><mn>6</mn><msup><mo>)</mo><mn>2</mn></msup></mrow></msqrt></mrow></math>
+<math display="block"><mrow><mo>=</mo><msqrt><mrow><mn>64</mn><mo>+</mo><mn>36</mn></mrow></msqrt><mo>=</mo><mn>10</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mrow><mo>−</mo><mn>6</mn></mrow></mrow><mrow><mrow><mn>8</mn></mrow></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>≈</mo><mo>−</mo><mn>36,9°</mn></mrow></math>
+</div></div><div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>≈</mo><mn>10</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>−</mo><mn>36,9°</mn><mo>)</mo></mrow></math>
+</div><p>Minustecknet ger en förskjutning åt höger. Avrunda fasen först i svaret.</p></div></details>
+</section>
+
+<section class="slide" id="grafer" aria-labelledby="grafer-title">
+  <h1 id="grafer-title" tabindex="-1">Kontrollera att uttrycken ger samma graf</h1>
+<p>Välj a och b. Förutsäg åt vilket håll sinuskurvan flyttas när b byter tecken. Växla sedan mellan uttrycken i samma koordinatsystem.</p><div class="graph-tool"><div class="graph-controls"><label>a <select id="sum-a"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label><label>b <select id="sum-b"><option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option></select></label><label>Visa <select id="sum-form"><option value="sum">Summan</option><option value="phase">Sinusformen</option></select></label></div><svg id="sum-graf" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Grafen för den valda summan eller dess motsvarande sinusform." data-low="-90" data-high="450" data-limit="6">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-90°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">0°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">180°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">270°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">360°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">450°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-6</text><path class="grid" d="M58 151.67 H528"/><text class="tick-y" x="50" y="156.67">-4</text><path class="grid" d="M58 127.33 H528"/><text class="tick-y" x="50" y="132.33">-2</text><path class="grid" d="M58 78.67 H528"/><text class="tick-y" x="50" y="83.67">2</text><path class="grid" d="M58 54.33 H528"/><text class="tick-y" x="50" y="59.33">4</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">6</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M136.33 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="123.33" y="16">y</text>
+<path class="reference-curve" data-reference/><path class="plot-curve" data-curve/><path class="midline" data-midline/><g data-points></g></svg><p id="sum-result" role="status"></p></div><p>Båda uttrycken ger samma värde vid varje x. Grafen ritas med den oavrundade fasen.</p>
+</section>
+
+<section class="slide" id="extremvarden" aria-labelledby="extremvarden-title">
+  <h1 id="extremvarden-title" tabindex="-1">Bestäm största och minsta värdet</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>4</mn><mo>+</mo><mn>9</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>12</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">Vilken av c och v behöver du för att bestämma kurvans största och minsta värde?</p><form class="practice" data-success="Det stämmer. Största och minsta värdet ligger lika långt från mittlinjen." novalidate><div class="practice-fields"><label>Vad räcker?<select data-answer="1" data-hint="Fasen flyttar grafen i sidled. Jämför mittlinjen med amplituden."><option value="">Välj</option><option value="1">c</option><option value="2">v</option><option value="3">Båda</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>c</mi><mo>=</mo><msqrt><mrow><msup><mn>9</mn><mn>2</mn></msup><mo>+</mo><msup><mn>12</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mrow><mn>81</mn><mo>+</mo><mn>144</mn></mrow></msqrt><mo>=</mo><mn>15</mn></mrow></math>
+</div><p>Mittlinjen ligger vid y = 4. Sinusdelen har största värde 15 och minsta värde −15.</p><div class="math-givens">
+<math display="block"><mrow><mn>4</mn><mo>+</mo><mn>15</mn><mo>=</mo><mn>19</mn></mrow></math>
+<math display="block"><mrow><mn>4</mn><mo>−</mo><mn>15</mn><mo>=</mo><mo>−</mo><mn>11</mn></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · skriv om och lös</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>3</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>3</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>360°</mn></mrow></math>
+</div><p class="task">Beräkna c och v, lös för hela vinkeln x + v och välj sedan lösningarna i intervallet.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Skriv om</h2><div class="math-steps">
+<math display="block"><mrow><mi>c</mi><mo>=</mo><msqrt><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>3</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>3</mn><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>3</mn></mrow></mrow></mfrac><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mn>45°</mn></mrow></math>
+<math display="block"><mrow><mn>3</mn><msqrt><mrow><mn>2</mn></mrow></msqrt><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mn>45°</mn><mo>)</mo><mo>=</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mn>45°</mn><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow></mfrac></mrow></math>
+</div></div><div><h2>Lös för vinkeln</h2><div class="math-steps">
+<math display="block"><mrow><mi>x</mi><mo>+</mo><mn>45°</mn><mo>=</mo><mn>45°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>+</mo><mn>45°</mn><mo>=</mo><mn>135°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div><p>Dra bort 45° i båda fallen. I intervallet får vi x = 0°, 90° och 360°.</p></div></div></div></details>
+</section>
+
+<section class="slide" id="socrative" aria-labelledby="socrative-title">
+  <h1 id="socrative-title" tabindex="-1">Socrative</h1>
+
+  <div class="card socrative-activity">
+    <h2>407. Ma4 ... Kurvor - summan ...</h2>
+    <p><strong>SOC-39053342</strong></p>
+    <p>Gå till <a href="https://b.socrative.com/login/student/" target="_blank" rel="noopener">Socrative för elever</a>, ange rummet som läraren visar och invänta start.</p>
+  </div>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 51–53 · Kurvan y = a sin x + b cos x</p>
+  <p>Titta vid behov på det lösta exemplet 1355. Jämför hur fasens tecken följer av cosinuskoefficienten.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1356–1359</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1360–1365</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1366–1368</p></article>
+  </div><details class="answer"><summary>Visa formlerna</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>c</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mrow><mi>b</mi></mrow></mrow><mrow><mrow><mi>a</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Här är a > 0 och vi väljer v mellan −90° och 90°.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Visa vilka samband eller värden du använde i en egen lösning.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Härled</h2><p>Förklara sambandet mellan additionsformeln, koefficienterna och trigonometriska ettan.</p></article>
+    <article class="card"><h2>Skriv om</h2><p>Visa hur du fick fram amplitud och fas, till exempel i 1357 eller 1360.</p></article>
+    <article class="card"><h2>Använd formen</h2><p>Visa varför amplituden räcker till ett extremvärde eller hur du löste för hela vinkeln i en ekvation.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>

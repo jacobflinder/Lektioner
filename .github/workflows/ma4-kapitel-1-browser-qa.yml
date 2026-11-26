@@ -46,6 +46,7 @@ jobs:
           node ma4/kapitel-1/qa/sinus-och-cosinusfunktioner.cjs
           node ma4/kapitel-1/qa/trigonometriska-ekvationer-och-digitala-verktyg.cjs
           node ma4/kapitel-1/qa/forskjutna-kurvor.cjs
+          node ma4/kapitel-1/qa/summan-av-sinus-och-cosinus.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -63,3 +64,4 @@ jobs:
             /tmp/ma4-graf-qa
             /tmp/ma4-grafekv-qa
             /tmp/ma4-shift-qa
+            /tmp/ma4-sum-qa
