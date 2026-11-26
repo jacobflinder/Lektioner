@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Läs av sinus och cosinus i enhetscirkeln och jämför deras perioder med tangens.">
+  <title>Enhetscirkeln · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="period.js" defer></script>
+</head>
+<body>
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Enhetscirkeln</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="P ligger i cirkelns andra kvadrant.">
+    <defs><marker id="start-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#start-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#start-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+<g class="quadrants"><text x="223" y="94">I</text><text x="130" y="105">II</text><text x="116" y="228">III</text><text x="229" y="228">IV</text></g>
+    <circle class="point " cx="96.561" cy="73.561" r="5"/><text x="82.000" y="66.000" text-anchor="start">P</text><g class="figure-reveal"><path class="projection" d="M96.561 157 V73.561 H180"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p class="task">Titta på punkten P. Är x-koordinaten och y-koordinaten positiva eller negativa? Motivera med axlarna.</p><form class="practice" novalidate><div class="practice-fields">
+<label>x-koordinat<select data-answer="-1" data-hint="Läs det vågräta läget mot x-axelns skala."><option value="">Välj</option><option value="-1">Negativ</option><option value="1">Positiv</option></select></label><label>y-koordinat<select data-answer="1" data-hint="Läs det lodräta läget mot y-axelns skala."><option value="">Välj</option><option value="-1">Negativ</option><option value="1">Positiv</option></select></label>
+</div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa återkoppling</summary><div class="answer-body"><p>P ligger till vänster om y-axeln och ovanför x-axeln. Därför är x negativt och y positivt.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Läsa av sinus och cosinus som koordinater och beräkna tangens.</li><li>Hitta vinklar som slutar i samma punkt efter hela varv.</li><li>Förklara varför tangens har perioden 180°.</li></ol>
+</div>
+</div>
+</section>
+<section class="slide" id="koordinater" aria-labelledby="koordinater-title" data-menu-title="Sinus och cosinus som koordinater">
+  <h1 id="koordinater-title" tabindex="-1">Från triangelns sidor till koordinater</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="Radien OP är 1. Triangelns kateter ligger längs x och parallellt med y.">
+    <defs><marker id="definition-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#definition-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#definition-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+    <path class="triangle" d="M180 157 H274.400 V86.200 Z"/><path class="right-angle" d="M262.400 157 v-12 h12"/><path class="radius " d="M180 157 L274.400 86.200"/><circle class="point " cx="274.400" cy="86.200" r="5"/><path class="rotation fixed" d="M212 157 A32 32 0 0 0 205.600 137.800"/><text x="229.000" y="178.000" text-anchor="middle">x</text><text x="283.400" y="127.000" text-anchor="start">y</text><text x="219.000" y="117.000" text-anchor="start">1</text><text x="239.400" y="74.200" text-anchor="start">P = (x; y)</text><text x="223.000" y="150.000" text-anchor="start">v</text>
+  </svg>
+</figure>
+<div class="work">
+<p>Enhetscirkeln har centrum i origo och radie 1. När P ligger i första kvadranten är radien hypotenusan i en rätvinklig triangel. Kateterna är x och y.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mi>x</mi></mrow><mrow><mn>1</mn></mrow></mfrac><mo>=</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mi>y</mi></mrow><mrow><mn>1</mn></mrow></mfrac><mo>=</mo><mi>y</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mi>y</mi></mrow><mrow><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>På hela cirkeln är cos <i>v</i> punktens x-koordinat och sin <i>v</i> dess y-koordinat. Tangens är definierad när x ≠ 0. Skriv sambanden i dina anteckningar eller din mindmap.</p>
+</div>
+</div>
+</section>
+<section class="slide" id="riktning" aria-labelledby="riktning-title">
+  <h1 id="riktning-title" tabindex="-1">Vrid från den positiva x-axeln</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="Startpunkten på positiva x-axeln är markerad. Återkopplingen visar två olika vridriktningar.">
+    <defs><marker id="direction-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#direction-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#direction-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+    <text x="267.000" y="207.000" text-anchor="start">Start (1; 0)</text><path class="radius reference" d="M180 157 L298.000 157.000"/><g class="figure-reveal"><path class="radius " d="M180 157 L270.393 81.151"/><path class="radius clockwise" d="M180 157 L270.393 232.849"/><circle class="point " cx="270.393" cy="81.151" r="5"/><circle class="point clockwise" cx="270.393" cy="232.849" r="5"/><path class="rotation" d="M238 157 A58 58 0 0 0 224.431 119.718" marker-end="url(#direction-arrow)"/><path class="rotation clockwise" d="M238 157 A58 58 0 0 1 224.431 194.282" marker-end="url(#direction-arrow)"/><text x="289.000" y="72.000" text-anchor="start">40°</text><text x="287.000" y="243.000" text-anchor="start">−40°</text></g>
+  </svg>
+</figure>
+<div class="work">
+<p>Starta vid (1; 0). Positiva vinklar mäts <strong>moturs</strong> och negativa vinklar <strong>medurs</strong>.</p><p class="task">Skissa var radien slutar vid 40° respektive −40°. I vilka kvadranter hamnar punkterna?</p><details class="answer"><summary>Visa båda vridningarna</summary><div class="answer-body"><p>40° går moturs till första kvadranten. −40° går medurs till fjärde kvadranten.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="helvarv" aria-labelledby="helvarv-title">
+  <h1 id="helvarv-title" tabindex="-1">Ett helt varv ger samma punkt</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="Cirkeln visar grundvinkeln 40 grader. Efter ditt försök kan du jämföra tre vridningar som slutar vid samma punkt.">
+    <defs><marker id="turn-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#turn-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#turn-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+    <path class="radius " d="M180 157 L270.393 81.151"/><circle class="point " cx="270.393" cy="81.151" r="5"/><text x="284.000" y="76.000" text-anchor="start">P</text><path class="rotation" data-turn-arc marker-end="url(#turn-arrow)"/><text class="turn-label" data-turn-label x="180" y="251" text-anchor="middle"></text>
+  </svg>
+</figure>
+<div class="work">
+<p>P ligger vid 40°. Ett helt varv är 360° och tar radien tillbaka till samma punkt.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p><i>n</i> är ett heltal. Ett negativt <i>n</i> betyder hela varv medurs.</p><p class="task">Vilka vinklar får du om du lägger till eller drar ifrån ett helt varv från 40°? Peka ut slutpunkten innan du öppnar svaret.</p><form class="practice" novalidate><div class="practice-fields">
+<label>Ett varv moturs<input type="text" autocomplete="off" data-answer="400" data-hint="Lägg ett positivt helt varv till grundvinkeln."></label><label>Ett varv medurs<input type="text" autocomplete="off" data-answer="-320" data-hint="Dra bort ett helt varv från grundvinkeln."></label>
+</div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa och jämför vridningarna</summary><div class="answer-body"><div class="turn-controls" role="group" aria-label="Jämför vridningar">
+      <button type="button" data-turn="0" aria-pressed="true">40°</button>
+      <button type="button" data-turn="1" aria-pressed="false">400°</button>
+      <button type="button" data-turn="-1" aria-pressed="false">−320°</button>
+    </div>
+    <p class="turn-status" aria-live="polite"></p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="halvvarv" aria-labelledby="halvvarv-title">
+  <h1 id="halvvarv-title" tabindex="-1">Vad händer med tangens efter ett halvvarv?</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="P ligger i första kvadranten. Vid återkopplingen markeras den diametralt motsatta punkten Q.">
+    <defs><marker id="half-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#half-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#half-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+    <path class="radius " d="M180 157 L274.400 86.200"/><circle class="point " cx="274.400" cy="86.200" r="5"/><path class="projection" d="M274.400 157 V86.200 H180"/><text x="258.000" y="70.000" text-anchor="start">P = (x; y)</text><g class="figure-reveal"><path class="radius clockwise" d="M180 157 L85.600 227.800"/><circle class="point clockwise" cx="85.600" cy="227.800" r="5"/><path class="projection" d="M85.600 157 V227.800 H180"/><text x="58.000" y="292.000" text-anchor="start">Q = (−x; −y)</text><path class="rotation" d="M226.400 122.200 A58 58 0 0 0 133.600 191.800" marker-end="url(#half-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>Efter 180° hamnar radien mitt emot P. Tangens är kvoten av y- och x-koordinaten när x ≠ 0.</p><p class="task">Skriv koordinaterna för den motsatta punkten. Vad händer med kvoten när båda koordinaterna byter tecken?</p><form class="practice" novalidate><div class="practice-fields">
+<label>Tangenskvoten<select data-answer="1" data-hint="Skriv upp kvoten med båda de nya tecknen."><option value="">Välj</option><option value="1">Samma värde</option><option value="-1">Motsatt tecken</option><option value="0">Alltid odefinierad</option></select></label>
+</div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>v</mi><mo>+</mo><mn>180°</mn><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mo>−</mo><mi>y</mi></mrow></mrow><mrow><mrow><mo>−</mo><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>y</mi></mrow><mrow><mi>x</mi></mrow></mfrac><mo>=</mo><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>Båda minustecknen förkortas bort. Perioden för tangens är 180°.</p><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn><mo>)</mo><mo>=</mo><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div><p>Här är <i>n</i> ett heltal och cos <i>v</i> ≠ 0.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="las-av" aria-labelledby="las-av-title">
+  <h1 id="las-av-title" tabindex="-1">Din tur · läs av och beräkna</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="P ligger i andra kvadranten. Dess givna koordinater står bredvid figuren.">
+    <defs><marker id="reading-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#reading-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#reading-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+    <circle class="point " cx="85.600" cy="86.200" r="5"/><path class="radius " d="M180 157 L85.600 86.200"/><text x="66.000" y="69.000" text-anchor="start">P</text><g class="figure-reveal"><path class="projection" d="M85.600 157 V86.200 H180"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>Punkten P har koordinaterna <math display="inline"><mrow><mo>(</mo><mrow><mo>−</mo><mfrac><mrow><mn>4</mn></mrow><mrow><mn>5</mn></mrow></mfrac></mrow><mo>;</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mn>5</mn></mrow></mfrac><mo>)</mo></mrow></math>.</p><p class="task">Läs av cos <i>v</i> och sin <i>v</i>. Beräkna sedan tan <i>v</i> som ett exakt värde. Motivera tangensens tecken.</p><form class="practice" novalidate><div class="practice-fields">
+<label>cos v<input type="text" autocomplete="off" data-answer="-0.8" data-hint="Läs av x-koordinaten med tecken."></label><label>sin v<input type="text" autocomplete="off" data-answer="0.6" data-hint="Läs av y-koordinaten med tecken."></label><label>tan v<input type="text" autocomplete="off" data-answer="-0.75" data-hint="Dividera y-koordinaten med x-koordinaten."></label>
+</div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mn>4</mn></mrow><mrow><mn>5</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mn>5</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mfrac><mrow><mn>3</mn></mrow><mrow><mn>5</mn></mrow></mfrac></mrow><mrow><mrow><mo>−</mo><mfrac><mrow><mn>4</mn></mrow><mrow><mn>5</mn></mrow></mfrac></mrow></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mn>4</mn></mrow></mfrac></mrow></math>
+</div><p>En positiv y-koordinat divideras med en negativ x-koordinat. Därför är tangens negativ.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="intervall" aria-labelledby="intervall-title">
+  <h1 id="intervall-title" tabindex="-1">Samma punkt i ett givet intervall</h1>
+<div class="split">
+
+<figure class="diagram circle">
+  <svg class="unit-circle" viewBox="0 0 360 315" role="img" aria-label="P ligger vid 40 grader. Alla sökta vinklar slutar i P.">
+    <defs><marker id="interval-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M42 157 H322" marker-end="url(#interval-arrow)"/><path class="axes" d="M180 294 V19" marker-end="url(#interval-arrow)"/>
+    <text x="328" y="163">x</text><text x="189" y="25">y</text><text x="163" y="174">O</text>
+    <circle class="rim" cx="180" cy="157" r="118"/>
+    <circle class="axis-dot" cx="298" cy="157" r="3"/>
+    <text x="297" y="181" text-anchor="middle">1</text>
+    <path class="radius " d="M180 157 L270.393 81.151"/><circle class="point " cx="270.393" cy="81.151" r="5"/><path class="rotation" d="M223 157 A43 43 0 0 0 212.940 129.360" marker-end="url(#interval-arrow)"/><text x="286.000" y="77.000" text-anchor="start">P</text><text x="241.000" y="150.000" text-anchor="start">40°</text>
+  </svg>
+</figure>
+<div class="work">
+<p>Utgå från punkten vid 40° och lägg till hela varv.</p><p class="task">Vilka vinklar i intervallet 1080° ≤ <i>v</i> ≤ 1500° slutar i P? Kontrollera var heltalet <i>n</i> kan börja och sluta.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mn>40°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mn>1080°</mn><mo>≤</mo><mn>40°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>≤</mo><mn>1500°</mn></mrow></math>
+<math display="block"><mrow><mn>1040°</mn><mo>≤</mo><mi>n</mi><mo>·</mo><mn>360°</mn><mo>≤</mo><mn>1460°</mn></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mn>1040</mn></mrow><mrow><mn>360</mn></mrow></mfrac><mo>≤</mo><mi>n</mi><mo>≤</mo><mfrac><mrow><mn>1460</mn></mrow><mrow><mn>360</mn></mrow></mfrac></mrow></math>
+</div><p>Heltalen är 3 och 4.</p><div class="math-steps">
+<math display="block"><mrow><mn>40°</mn><mo>+</mo><mn>3</mn><mo>·</mo><mn>360°</mn><mo>=</mo><mn>1120°</mn></mrow></math>
+<math display="block"><mrow><mn>40°</mn><mo>+</mo><mn>4</mn><mo>·</mo><mn>360°</mn><mo>=</mo><mn>1480°</mn></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 12–15 · Enhetscirkeln</p>
+  <p>Läs exemplen 1108 och 1109. Använd cirkeln för att förklara hur boken läser av koordinater och flyttar en vinkel ett helt varv.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1110–1118</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1119–1122</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1123–1124</p></article>
+  </div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Välj lösningar du redan har arbetat med på dina två nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Koordinater</h2><p>Visa var du läser av sinus och cosinus i exempelvis 1110, 1119 eller 1124.</p></article>
+    <article class="card"><h2>Hela varv</h2><p>Förklara hur vridningen och slutpunkten hänger ihop i exempelvis 1116 eller 1122.</p></article>
+    <article class="card"><h2>Tangens</h2><p>Förklara halvvarvet i 1118. Du kan också använda din figur från 1119 eller 1124 och markera den motsatta punkten.</p></article>
+  </div><details class="answer"><summary>Visa vad du kan kontrollera</summary><div class="answer-body"><p>Punktens x-koordinat ger cosinus och y-koordinaten ger sinus. Ett helt varv ger samma punkt. Ett halvvarv byter tecken på båda koordinaterna, så tangenskvoten är densamma där den är definierad.</p></div></details>
+</section>
+</main>
+</body>
+</html>
