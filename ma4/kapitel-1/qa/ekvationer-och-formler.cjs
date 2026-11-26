@@ -109,6 +109,7 @@ async function main() {
       const jump = page.locator('#jump');
       await jump.locator('option').nth(order.length - 1).waitFor({ state: 'attached' });
       assert.equal(await jump.locator('option').count(), order.length);
+      assert.equal(await page.locator('math mo').filter({ hasText: /^≈$/ }).count(), 4);
       if (width >= 1280) await page.locator('#mode').click();
       const save = id => page.screenshot({ path: path.join(evidence, `${width}-${id}.png`), fullPage: width < 1280 });
       for (const id of order) {
