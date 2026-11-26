@@ -48,7 +48,11 @@ async function inspectLayout(page,id,width,i){
   const rect=document.querySelector('.slide.active').getBoundingClientRect();
   const math=[...document.querySelectorAll('.slide.active .math-line math')].filter(el=>{
    let p=el;
-   while(p){if(p.classList?.contains('answer')&&!p.classList.contains('on'))return false;p=p.parentElement}
+   while(p){
+    if(p.classList?.contains('answer')&&!p.classList.contains('on'))return false;
+    if(p.tagName==='DETAILS'&&!p.open&&!p.querySelector(':scope > summary')?.contains(el))return false;
+    p=p.parentElement;
+   }
    return true;
   }).map(el=>({text:el.textContent.slice(0,65),width:el.getBoundingClientRect().width,scroll:el.scrollWidth,client:el.clientWidth,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right}));
   const a=document.querySelector('#prev').getBoundingClientRect(),b=document.querySelector('#next').getBoundingClientRect();
@@ -166,6 +170,15 @@ async function inspectLayout(page,id,width,i){
      assert.equal(await geometry.isVisible(),true);checks++;
      assert.equal(await page.locator(`#${target} .math-line:visible`).count(),steps);checks++;
      await inspectLayout(page,lesson.id,width,Number(i));
+     if(target==='app-cosine'){
+      const pq=page.locator('.slide.active details');
+      assert.equal(await pq.evaluate(element=>element.open),false);checks++;
+      await pq.locator('summary').press('Enter');
+      assert.equal(await pq.locator('.math-line:visible').count(),2);checks++;
+      await inspectLayout(page,lesson.id,width,Number(i));
+      await pq.locator('summary').press('Enter');
+      assert.equal(await pq.evaluate(element=>element.open),false);checks++;
+     }
     }
    }
    if(lesson.id==='cosinussatsen'){
