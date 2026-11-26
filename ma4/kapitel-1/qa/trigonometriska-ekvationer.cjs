@@ -117,7 +117,7 @@ async function main() {
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
       assert.ok((await page.goto(`${site}/ma4/kapitel-1/`)).ok());
-      await page.getByRole('link', { name: /Trigonometriska ekvationer/ }).click();
+      await page.locator('a[href="trigonometriska-ekvationer/"]').click();
       await page.locator('#jump option').nth(8).waitFor({ state: 'attached' });
       assert.equal(await page.locator('#jump option').count(), 9);
       if (width >= 1280) await page.locator('#mode').click();
