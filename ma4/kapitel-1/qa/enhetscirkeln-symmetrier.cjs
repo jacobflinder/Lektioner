@@ -14,10 +14,10 @@ const feedback = {
   'x-spegel': { wrong: ['2'], right: ['3'], hint: /lika långt åt höger/ },
   halvvarv: { wrong: ['1'], right: ['4'], hint: /andra hållet/ },
   komplement: { wrong: ['2'], right: ['5'], hint: /horisontellt/ },
-  specialtrianglar: { wrong: ['3', '2'], right: ['2', '4'], hint: /hypotenusans kvadrat/ },
-  exakta: { wrong: ['30'], right: ['45'], hint: /lika långa/ },
-  utanfor: { wrong: ['1', '-1'], right: ['-1', '1'], hint: /under x-axeln/ },
-  ekvation: { wrong: ['360'], right: ['180'], hint: /Dividera periodtermen/ }
+  specialtrianglar: { wrong: ['3', '2'], right: ['2', '4'], hint: /hypotenusans kvadrat/, correct: /Diagonalen är hypotenusan/ },
+  exakta: { wrong: ['30'], right: ['45'], hint: /lika långa/, correct: /har samma hypotenusa/ },
+  utanfor: { wrong: ['1', '-1'], right: ['-1', '1'], hint: /under x-axeln/, correct: /Bestäm nu de två exakta värdena/ },
+  ekvation: { wrong: ['360'], right: ['180'], hint: /Dividera periodtermen/, correct: /delar du också periodtermen/ }
 };
 const near = (a, b) => assert.ok(Math.abs(a - b) < .001, `${a} ≠ ${b}`);
 
@@ -154,7 +154,7 @@ async function main() {
         const overlay = section.locator('.figure-reveal');
         if (await overlay.count()) assert.equal(await overlay.isVisible(), false);
         await submit(section, test.wrong, test.hint);
-        await submit(section, test.right, /Det stämmer/);
+        await submit(section, test.right, test.correct || /Det stämmer/);
         await save(`${id}-fore`);
         await section.locator('summary').press('Enter');
         assert.equal(await section.locator('.answer-body').isVisible(), true);

@@ -35,6 +35,8 @@ for (const form of document.querySelectorAll('.practice')) {
       field.setAttribute('aria-invalid', String(!correct));
       if (!correct) mistakes.push(field.dataset.hint);
     }
-    feedback.textContent = mistakes.length ? mistakes.join(' ') : 'Det stämmer. Förklara varför med cirkeln.';
+    feedback.textContent = mistakes.length
+      ? mistakes.join(' ')
+      : (form.dataset.success || 'Det stämmer. Förklara varför med cirkeln.');
   });
 }
