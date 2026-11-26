@@ -1,0 +1,30 @@
+.circle .symmetry-guide,
+.triangle-pair .light-guide {
+  fill: none;
+  stroke: #795022;
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+.circle .radius.alternate, .circle .rotation.alternate { stroke: #395b8c; }
+.circle .point.alternate { fill: #395b8c; }
+.triangle-pair svg { max-height: 290px; }
+.triangle-pair text { font-size: 18px; }
+.triangle-pair .light-guide { stroke: #577b78; }
+.exact-reminder { display: none; padding: .5rem; }
+#exakta .split:has(.answer[open]) .exact-reminder { display: block; }
+.exact-controls { display: flex; flex-wrap: wrap; gap: .4rem; }
+.exact-controls [aria-pressed="true"] { color: white; background: var(--accent); border-color: var(--accent); }
+.exact-table { width: 100%; border-collapse: collapse; text-align: center; }
+.exact-table caption { text-align: left; font-weight: 700; }
+.exact-table th, .exact-table td { padding: .17rem; border: 1px solid var(--line); }
+.exact-table .current { background: #dff1e9; font-weight: 700; }
+.exact-table thead .current { border-bottom: 3px solid var(--accent); }
+.exact-table math { font-size: .95em; }
+@media (min-width: 581px) and (max-width: 820px) {
+  #specialtrianglar .split { grid-template-columns: 1fr; }
+  .triangle-pair svg { max-height: 220px; }
+}
+@media (max-width: 580px) {
+  .exact-table th, .exact-table td { padding: .15rem .08rem; }
+  .exact-table { font-size: .92rem; }
+}
