@@ -6,6 +6,7 @@ const root=path.resolve(__dirname,'..');
 let checks=0;
 const check=(condition,message)=>{assert(condition,message);checks++};
 const cases=[
+ {id:'sinussatsens-tva-fall',slides:9,levels:['4322–4327','4328–4336','4337–4338'],optional:0,socrative:'SOC-37390020'},
  {id:'trigonometriska-ekvationer',slides:11,levels:['4218–4223','4224–4227','4228'],optional:1,socrative:null},
  {id:'areasatsen',slides:10,levels:['4303–4307','4308–4311','4312–4313'],optional:1,socrative:'SOC-37278150'},
  {id:'sinussatsen',slides:8,levels:['4315–4318','4319–4320'],optional:0,socrative:'SOC-37278423'}
@@ -65,7 +66,7 @@ check(sin.includes('Socrative 331')&&sin.includes('Ma3c Areasats och Sinussatsen
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 for(const item of cases)check(index.includes('href="'+item.id+'/"'),item.id+': länkad i översikt');
-check(!index.includes('s. 236')&&!index.includes('s.236')&&!index.includes('href="sinussatsens-tva-fall/"'),'Kommande opublicerat moment visas inte som elevlektion');
+check(!index.includes('s. 240')&&!index.includes('href="cosinussatsen/"'),'Kommande opublicerat moment visas inte som elevlektion');
 check(!/Jacobs|din planering|webblektion|bokbilder/i.test(index),'Kapitelöversikten saknar produktions- och lärarkommentarer');
 const deg=x=>x*Math.PI/180;
 check(Math.abs(Math.sin(deg(20.487315))-0.35)<2e-6,'Trigekv: sinus korrekt');
@@ -78,4 +79,4 @@ check(Math.abs(Math.acos((u[0]*v[0]+u[1]*v[1])/(L*R))*180/Math.PI-70)<0.5&&Math.
 check(Math.abs(5*11*Math.sin(deg(120))/2-23.8157)<0.01,'Areasats: trubbig vinkel korrekt');
 check(Math.abs(6*10*Math.sin(deg(36.869897))/2-18)<0.001,'Areasats: vinkel från area korrekt');
 check(Math.abs(4*Math.sin(deg(20))/Math.sin(deg(130))-1.786)<0.01,'Sinussats: sida korrekt');
-console.log(JSON.stringify({result:'PASS',checks,lessons:3,pages:'228–235'}));
+console.log(JSON.stringify({result:'PASS',checks,lessons:cases.length,pages:'228–239'}));

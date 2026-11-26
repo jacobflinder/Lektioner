@@ -1,0 +1,34 @@
+.ssa-case svg text {
+  font-size: 23px;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.diagram .given, .diagram .candidate, .diagram .guide-ray,
+.diagram .helper, .diagram .extension, .diagram .sweep {
+  fill: none;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.diagram .given { stroke: #24495d; }
+.diagram .candidate { stroke: #09766d; }
+.diagram .candidate.alternate { stroke: #a35d18; }
+.diagram .helper, .diagram .guide-ray, .diagram .extension, .diagram .sweep {
+  stroke-width: 1.6;
+  stroke-dasharray: 5 5;
+}
+.diagram .helper { stroke: #a35d18; }
+.diagram .guide-ray, .diagram .extension { stroke: #597487; }
+.diagram .sweep { stroke: #41887e; }
+.diagram .vertex { fill: #09766d; stroke: #fff; stroke-width: 2; }
+
+.ssa-case .after-case,
+.ssa-case:has(.answer.on) .before-case { display: none; }
+.ssa-case:has(.answer.on) .after-case { display: inline; }
+.ssa-case .diagram svg { max-height: 285px; }
+.case-summary { margin-top: 16px; }
+.case-summary:not(.show-answer) .filled,
+.case-summary.show-answer .blank { display: none; }
