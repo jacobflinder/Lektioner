@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ekvationer och formler · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+</head>
+<body class="omforma">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Ekvationer och formler</h1>
+<p>Skriv om ekvationen tills du får en grundekvation eller en produkt som är noll. Vid en nollprodukt kan varje faktor ge egna lösningar.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math>
+</div><p class="task">Vilken grundekvation måste ingå när du löser produkten?</p><form class="practice" data-success="Det stämmer. Pröva båda faktorerna var för sig." novalidate><div class="practice-fields"><label>Möjlig grundekvation<select data-answer="2" data-hint="En produkt kan bli noll när den första faktorn är noll."><option value="">Välj</option><option value="1">sin x = 1</option><option value="2">sin x = 0</option><option value="3">cos x = 0</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa de två fallen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow></math>
+</div><p>Om vi dividerar med sin x direkt försvinner lösningar från den första faktorn.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Välja en omskrivning och behålla alla lösningar.</li><li>Lösa en trigonometrisk nollprodukt faktor för faktor.</li><li>Använda substitution och kontrollera möjliga sinusvärden.</li></ol>
+</section>
+
+<section class="slide" id="tangens" aria-labelledby="tangens-title">
+  <h1 id="tangens-title" tabindex="-1">Kontrollera nämnaren före division</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">Vad behöver du kontrollera innan du delar båda leden med cos x?</p><form class="practice" data-success="Det stämmer. Om cos x = 0 har sin x värdet ±1 och högerledet är noll." novalidate><div class="practice-fields"><label>Kontroll före division<select data-answer="2" data-hint="Division med noll är inte definierad. Sätt in cos x = 0 i ursprungsekvationen."><option value="">Välj</option><option value="1">Att sin x = 0</option><option value="2">Om cos x = 0 kan ge en lösning</option><option value="3">Att tan x är positiv</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Om cos x = 0 är sin x = ±1. Inget av dessa fall uppfyller ekvationen. Vi kan därför dela med cos x.</p><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mo>−</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>−</mo><mn>63,4°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div><p>Här och i resten av lektionen är n ett heltal.</p></div></details>
+</section>
+
+<section class="slide" id="produkt" aria-labelledby="produkt-title">
+  <h1 id="produkt-title" tabindex="-1">Lös en faktor i taget</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkeln visar efter lösningen två punkter på x-axeln och två punkter på höjden 0,4.">
+    <defs><marker id="faktor-figur-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#faktor-figur-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#faktor-figur-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <text x="289" y="176">0°</text><text x="75" y="176">180°</text>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L284.000 154.000"/><circle class="point " cx="284.000" cy="154.000" r="4.5"/><text x="275.000" y="141.000">A</text><path class="radius " d="M180 154 L76.000 154.000"/><circle class="point " cx="76.000" cy="154.000" r="4.5"/><text x="70.000" y="141.000">B</text><path class="radius second-family" d="M180 154 L275.318 112.400"/><circle class="point second-family" cx="275.318" cy="112.400" r="4.5"/><text x="283.318" y="102.400">C</text><path class="radius second-family" d="M180 154 L84.682 112.400"/><circle class="point second-family" cx="84.682" cy="112.400" r="4.5"/><text x="65.682" y="102.400">D</text></g>
+  </svg>
+</figure>
+<div class="work">
+<div class="math-givens">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>0,4</mn><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math>
+</div><p class="task">Vilka två grundekvationer får du av de två faktorerna? Välj innan du löser dem.</p><form class="practice" data-success="Det stämmer. A och B hör till den första faktorn. C och D ligger på höjden 0,4." novalidate><div class="practice-fields"><label>Grundekvationer<select data-answer="2" data-hint="Första faktorn är 2 sin x. I den andra sätter du sin x − 0,4 lika med noll."><option value="">Välj</option><option value="1">sin x = 0,4 och cos x = 0</option><option value="2">sin x = 0 eller sin x = 0,4</option><option value="3">sin x = 0 eller sin x = −0,4</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Första faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>0°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>180°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div></div><div><h2>Andra faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>0,4</mn><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0,4</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi mathvariant="normal">arcsin</mi><mo>&#x2061;</mo><mn>0,4</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>23,6°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>180°</mn><mo>−</mo><mi mathvariant="normal">arcsin</mi><mo>&#x2061;</mo><mn>0,4</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>156,4°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div></div></div><p>Samtliga tre familjer ingår i svaret.</p></div></details>
+</div>
+</div>
+</section>
+
+<section class="slide" id="dubbel" aria-labelledby="dubbel-title">
+  <h1 id="dubbel-title" tabindex="-1">Känn igen cosinus för dubbla vinkeln</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>3</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>3</mn><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div><p class="task">Använd cosinusformeln och lös för 2x. Vilken period får x när du delar hela ledet med 2?</p><form class="practice" data-success="Det stämmer. Dividera både första vinkeln och periodtermen med 2." novalidate><div class="practice-fields"><label>Period för x<select data-answer="2" data-hint="Lös först för 2x. Där är perioden 360°, som också ska delas med 2."><option value="">Välj</option><option value="1">90°</option><option value="2">180°</option><option value="3">360°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>3</mn><mo>(</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mn>3</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mn>2</mn><mi>x</mi><mo>=</mo><mo>±</mo><mn>60°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>±</mo><mn>30°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div></div></details>
+</section>
+
+<section class="slide" id="bryt-ut" aria-labelledby="bryt-ut-title">
+  <h1 id="bryt-ut-title" tabindex="-1">Skriv om och bryt ut</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>3</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">När alla termer står i vänsterledet, vilken faktor kan du bryta ut?</p><form class="practice" data-success="Det stämmer. Då får även fallet sin x = 0 en egen lösningsgren." novalidate><div class="practice-fields"><label>Gemensam faktor<select data-answer="2" data-hint="Byt ut sin 2x mot 2 sin x cos x innan du jämför termerna."><option value="">Välj</option><option value="1">cos x</option><option value="2">sin x</option><option value="3">sin 2x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>3</mn><mo>·</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mn>6</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>6</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math>
+</div><div class="calculation-pair"><div><h2>Första faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div></div><div><h2>Andra faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mn>6</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>3</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>±</mo><mi mathvariant="normal">arccos</mi><mo>&#x2061;</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>3</mn></mrow></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>±</mo><mn>70,5°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div></div></div></div></details>
+</section>
+
+<section class="slide" id="substitution" aria-labelledby="substitution-title">
+  <h1 id="substitution-title" tabindex="-1">Byt ut cosinus och sätt t = sin x</h1>
+<div class="math-givens">
+<math display="block"><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+</div><p class="task">Vilket uttryck ersätter cos² x så att ekvationen bara innehåller sinus?</p><form class="practice" data-success="Det stämmer. Efter omskrivningen kan du sätta t = sin x." novalidate><div class="practice-fields"><label>Ersätt cos² x med<select data-answer="2" data-hint="Lös ut cosinus i kvadrat ur trigonometriska ettan."><option value="">Välj</option><option value="1">1 + sin² x</option><option value="2">1 − sin² x</option><option value="3">sin² x − 1</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Skriv om ekvationen</h2><div class="math-steps">
+<math display="block"><mrow><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>=</mo><mn>0</mn></mrow></math>
+</div><p>Sätt t = sin x.</p></div><div><h2>Använd pq-formeln</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>t</mi><mn>2</mn></msup><mo>+</mo><mi>t</mi><mo>−</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>±</mo><msqrt><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>+</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></msqrt></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>±</mo><mn>1</mn></mrow></math>
+</div><div class="math-givens">
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div></div></div></div></details>
+</section>
+
+<section class="slide" id="intervall" aria-labelledby="intervall-title">
+  <h1 id="intervall-title" tabindex="-1">Kontrollera rötterna innan du löser för x</h1>
+<div class="split">
+<figure class="diagram range-figure">
+  <svg viewBox="0 0 405 146" role="img" aria-label="Tallinjen visar det möjliga intervallet för sinus, från minus ett till ett. Efter lösningen markeras båda rötterna.">
+    <path class="axis" d="M24 67 H381 l-10 -5 m10 5 l-10 5"/>
+    <path class="interval" d="M144 67 H344"/>
+    <path class="ticks" d="M44 58 V76 M144 58 V76 M244 58 V76 M344 58 V76"/>
+    <text x="35" y="98">−2</text><text x="134" y="98">−1</text><text x="239" y="98">0</text><text x="341" y="98">1</text>
+    <g class="figure-reveal">
+      <circle class="outside" cx="94" cy="67" r="5"/>
+      <circle class="inside" cx="294" cy="67" r="5"/>
+      <text x="77" y="43">−1,5</text><text x="282" y="43">0,5</text>
+    </g>
+  </svg>
+  <figcaption>Möjliga värden för sin x ligger mellan −1 och 1.</figcaption>
+</figure>
+<div class="work">
+<p>Andragradsekvationen gav två värden för t. Nu byter vi tillbaka till sin x.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div><p class="task">Vilken grundekvation har reella lösningar?</p><form class="practice" data-success="Det stämmer. Sinus kan vara 0,5, eftersom det ligger i intervallet." novalidate><div class="practice-fields"><label>Möjlig grundekvation<select data-answer="1" data-hint="Sinus är y-koordinaten på enhetscirkeln och kan inte ligga utanför intervallet −1 till 1."><option value="">Välj</option><option value="1">sin x = 1/2</option><option value="2">sin x = −3/2</option><option value="3">Båda har lösningar</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Roten −3/2 är mindre än −1. Vi behåller sin x = 1/2 och väljer de två punkterna på samma höjd i enhetscirkeln.</p><div class="math-steps">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>30°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>150°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · behåll alla lösningar</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">Använd en formel för dubbla vinkeln. Bryt sedan ut den gemensamma faktorn och lös båda fallen på papper.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math>
+</div><div class="calculation-pair"><div><h2>Första faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>90°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div></div><div><h2>Andra faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>30°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>150°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+</div></div></div><p>Kontrollera att båda faktorerna bidrar till ditt svar.</p></div></details>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 35–37 · Ekvationer och formler</p>
+  <p>De lösta exemplen 1263–1267 visar olika sätt att skriva om ekvationen. Välj en formel utifrån uttrycket framför dig.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1268–1273</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1274–1278</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1279</p></article>
+  </div><details class="answer"><summary>Visa samband för bokarbetet</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+</div><p>Vid en nollprodukt löser du en faktor i taget. Vid substitution kontrollerar du värdet innan du löser för vinkeln.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av vad du kan och vad som återstår</h1>
+
+  <p class="lead">Visa en egen lösning. Jämför med en klasskamrat och notera vad du behöver göra klart före nästa lektion.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Omskrivning</h2><p>Visa varför en division är giltig eller hur du använde dubbla vinkeln, som i 1270 eller 1275.</p></article>
+    <article class="card"><h2>Nollprodukt</h2><p>Visa resultaten från båda faktorerna, till exempel i 1268 eller <em>Din tur</em>.</p></article>
+    <article class="card"><h2>Substitution</h2><p>Visa hur du kontrollerar de två rötterna från genomgången eller relevant bokuppgift mot tillåtna värden.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>
