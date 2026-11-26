@@ -48,6 +48,7 @@ jobs:
           node ma4/kapitel-1/qa/forskjutna-kurvor.cjs
           node ma4/kapitel-1/qa/summan-av-sinus-och-cosinus.cjs
           node ma4/kapitel-1/qa/tangensfunktioner.cjs
+          node ma4/kapitel-1/qa/radianer-och-trigonometriska-ekvationer.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -67,3 +68,4 @@ jobs:
             /tmp/ma4-shift-qa
             /tmp/ma4-sum-qa
             /tmp/ma4-tan-qa
+            /tmp/ma4-rad-qa
