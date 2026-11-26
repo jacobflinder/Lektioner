@@ -18,6 +18,15 @@ const socrativeActivities={
  areasatsen:[['330','Ma3c Enhetscirkeln 5 och areasats','SOC-37278150']],
  sinussatsen:[['331','Ma3c Areasats och Sinussatsen1','SOC-37278423']]
 };
+// Facit, mellanled och de avgörande definitionerna ska inte synas före elevens försök.
+const thoughtPauseTargets={
+ 'ratvinkliga-trianglar':['rat-definitions','rat-arc-defs'],
+ 'exakta-trigonometriska-varden':['exact-30-60','rationalize-two'],
+ enhetscirkeln:['unit-coordinates','unit-sin-solve','unit-cos-solve','unit-period','unit-series'],
+ 'trigonometriska-ekvationer':['trig-sin-full','trig-cos-full','trig-all-symmetries','trig-exact-mirrors'],
+ areasatsen:['area-height','area-formula','area-worked','area-inverse','area-two-triangles','area-extra-recall'],
+ sinussatsen:['sine-heights','sine-theorem','sine-original']
+};
 const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
 const screenshotDir=path.resolve(process.env.QA_SCREENSHOT_DIR||'mato1c-qa-screenshots/kapitel-4');
 fs.mkdirSync(screenshotDir,{recursive:true});
@@ -67,6 +76,10 @@ async function inspectLayout(page,id,width,i){
    for(const [number,name,code] of socrativeActivities[lesson.id]||[]){
     assert(studentContent.includes(`Socrative ${number}`)&&studentContent.includes(name)&&studentContent.includes(code),`${lesson.id}: fullständigt Socrative-namn och kod ${number} syns för eleverna`);checks++;
    }
+   for(const id of thoughtPauseTargets[lesson.id]){
+    assert.equal(await page.locator(`[data-reveal="${id}"]`).count(),1,`${lesson.id}: tankepausen ${id} har en knapp`);checks++;
+    assert.equal(await page.locator(`#${id}`).count(),1,`${lesson.id}: tankepausen ${id} har en återkoppling`);checks++;
+   }
    for(let i=0;i<count;i++){
     await page.locator('#jump').selectOption(String(i));
     assert.equal(await page.locator('.slide.active').count(),1);checks++;
@@ -75,8 +88,17 @@ async function inspectLayout(page,id,width,i){
     const buttons=page.locator('.slide.active [data-reveal]');
     for(let j=0;j<await buttons.count();j++){
      const button=buttons.nth(j),id=await button.getAttribute('data-reveal');
+     const target=page.locator('#'+id);
+     assert.equal(await button.getAttribute('aria-expanded'),'false',`${lesson.id} bild ${i+1}: återkopplingsknapp börjar stängd`);checks++;
+     if(id==='unit-series')assert.equal(await target.locator('.series-result:visible').count(),0,'Vinkelserier ska inte synas före elevens försök');
+     else assert.equal(await target.isVisible(),false,`${lesson.id} bild ${i+1}: matematik i ${id} visas för tidigt`);checks++;
+     if(id==='sine-original'){
+      assert.equal(await page.locator('[data-reveal-label="sine-original"]').textContent(),'?','Den eftersökta vinkeln C ska vara dold på figuren');checks++;
+     }
      await button.click();
-     assert(await page.locator('#'+id).isVisible(),`${lesson.id}: hidden answer missing ${id}`);checks++;
+     assert(await target.isVisible(),`${lesson.id}: hidden answer missing ${id}`);checks++;
+     if(id==='unit-series')assert.equal(await target.locator('.series-result:visible').count(),4,'Fyra vinkelserier avslöjas tillsammans');
+     if(id==='sine-original')assert.equal(await page.locator('[data-reveal-label="sine-original"]').textContent(),'130°','Den tredje vinkeln visas först med beräkningen');checks++;
     }
     await inspectLayout(page,lesson.id,width,i);
     if(width===390)await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
@@ -124,6 +146,7 @@ async function inspectLayout(page,id,width,i){
     for(const slide of ['9','10']){
      await page.locator('#jump').selectOption(slide);
      const diagram=page.locator('.slide.active [data-equation-circle]');
+     assert.equal(await diagram.locator('svg circle').count(),2,'Endast första ekvationspunkten visas före elevens val');checks++;
      await diagram.locator('[data-circle-step="first"]').click();
      assert.equal(await diagram.locator('svg circle').count(),2);checks++;
      await diagram.locator('[data-circle-step="both"]').click();
@@ -140,10 +163,15 @@ async function inspectLayout(page,id,width,i){
     assert.match(await cycle.locator('[data-cycle-result]').innerText(),/400°/);checks++;
    }
    if(lesson.id==='trigonometriska-ekvationer'){
+    await page.locator('#jump').selectOption('1');
+    for(const figure of await page.locator('.slide.active [data-symmetry]').all()){
+     assert.equal(await figure.locator('svg circle').count(),3,'Statiska symmetrifigurer ska visa båda punkterna');checks++;
+    }
     for(const [slide,coordinate] of [['3','0,35'],['5','−0,6']]){
      await page.locator('#jump').selectOption(slide);
      const figure=page.locator('.slide.active [data-equation-circle]');
      assert.equal(await figure.count(),1);checks++;
+     assert.equal(await figure.locator('svg circle').count(),2,'Ekvationsfiguren ska börja med bara den första lösningspunkten');checks++;
      await figure.locator('[data-circle-step="first"]').click();
      assert.equal(await figure.locator('svg circle').count(),2);checks++;
      await figure.locator('[data-circle-step="both"]').click();
@@ -160,6 +188,7 @@ async function inspectLayout(page,id,width,i){
     const answer=page.locator('#area-trubbig');
     assert(await answer.isVisible());checks++;
     await page.locator('#jump').selectOption('6');
+    if(!(await page.locator('#area-two-triangles').isVisible()))await page.locator('[data-reveal="area-two-triangles"]').click();
     const cases=page.locator('.slide.active [data-case-choices]');
     await cases.locator('[data-case-select="obtuse"]').click();
     assert(await cases.locator('[data-case-panel="obtuse"]').isVisible());checks++;
@@ -170,6 +199,7 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await page.locator('.book-number').count(),2);checks++;
     await page.locator('#jump').selectOption('5');
     const cases=page.locator('.slide.active [data-case-choices]');
+    assert.equal(await cases.locator('.case-panel.on').count(),0,'Sinussatsen: inga färdiga kvoter innan eleven har valt par');checks++;
     await cases.locator('[data-case-select="pair-b"]').click();
     assert(await cases.locator('[data-case-panel="pair-b"]').isVisible());checks++;
     assert.equal(await cases.locator('[data-case-figure="pair-b"].is-selected').count(),1);checks++;
