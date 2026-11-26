@@ -70,6 +70,11 @@
 <section class="slide" data-title="Fyll din exakta tabell" data-teacher="Precis som i originalfilmen skriver eleverna av tabellen och fyller den för hand. Visa därefter hela tabellen, utan att byta metod till minnesramsa före härledningen.">
  <div class="kicker">07 · Samla resultatet</div><h1>Fyll i tabellen själv</h1>
  <p>Fyll i <strong>alla fem vinklarna</strong>. Försök först själv med de tre vi har härlett. Fundera sedan på vad sinus och cosinus blir när vinkeln är 0° respektive 90°.</p>
+ <details class="endpoint-hint"><summary>Ledtråd för 0° och 90°</summary>
+ <figure class="diagram compact-geometry"><svg viewBox="0 0 440 195" role="img" aria-label="Två lika långa sträckor, en vågrät vid 0 grader och en lodrät vid 90 grader.">
+ <path d="M 144 156 H 280 M 144 156 V 20" class="triangle-outline"/><circle cx="144" cy="156" r="4" fill="#17384b"/>
+ <text x="208" y="182">0°</text><text x="105" y="90">90°</text><text x="206" y="143">1</text><text x="155" y="92">1</text>
+ </svg><figcaption>Tänk dig en hypotenusa med längden 1 som vrids från vågrätt till lodrätt. Följ längden vågrätt för cosinus och längden lodrätt för sinus. Vad händer med de två längderna i ändlägena?</figcaption></figure></details>
  <div class="table-scroll"><table class="math-table" id="exact-table"><thead><tr><th><math><mi>v</mi></math></th><th><math><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mi>v</mi></mrow></math></th><th><math><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mi>v</mi></mrow></math></th><th><math><mrow><mi>tan</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mi>v</mi></mrow></math></th></tr></thead><tbody>
   <tr><th>0°</th><td><span class="teacher-answer"><math><mn>0</mn></math></span></td><td><span class="teacher-answer"><math><mn>1</mn></math></span></td><td><span class="teacher-answer"><math><mn>0</mn></math></span></td></tr>
   <tr><th>30°</th><td><span class="teacher-answer"><math><mfrac><mn>1</mn><mn>2</mn></mfrac></math></span></td><td><span class="teacher-answer"><math><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac></math></span></td><td><span class="teacher-answer"><math><mfrac><mn>1</mn><msqrt><mn>3</mn></msqrt></mfrac></math></span></td></tr>
@@ -77,7 +82,7 @@
   <tr><th>60°</th><td><span class="teacher-answer"><math><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac></math></span></td><td><span class="teacher-answer"><math><mfrac><mn>1</mn><mn>2</mn></mfrac></math></span></td><td><span class="teacher-answer"><math><msqrt><mn>3</mn></msqrt></math></span></td></tr>
   <tr><th>90°</th><td><span class="teacher-answer"><math><mn>1</mn></math></span></td><td><span class="teacher-answer"><math><mn>0</mn></math></span></td><td><span class="teacher-answer undefined">ej definierad</span></td></tr>
  </tbody></table></div><div class="choices"><button class="btn primary" type="button" data-table-reveal="exact-table">Visa den färdiga tabellen</button></div>
- <details><summary>Varför är tangens för 90° inte definierad?</summary>
+ <details><summary>Kontrollera tangens i ändlägena</summary>
  <p>När vinkeln är 90° är sinus 1 och cosinus 0. Därför skulle vi behöva dividera med noll:</p>
  <div class="math-line"><math display="block"><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.16em"/><mn>90°</mn><mo>=</mo><mn>0</mn></mrow></math></div>
  <p>Division med noll är inte definierad. För 0° är däremot tangens 0 eftersom sinus är 0 och cosinus är 1. Vi kan se dessa två vinklar på enhetscirkeln i nästa moment.</p></details>

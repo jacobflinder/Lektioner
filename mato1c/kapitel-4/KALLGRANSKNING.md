@@ -52,7 +52,7 @@ De tre återstående momenten i planeringen, från s. 236 till s. 247, har kontr
 | Jacobs arcus → symmetri → intervallkontroll vid trigonometri | Trigonometriska ekvationer, bilder 2–6 och 9 | Samma metod som original 240130–31; nya tal, inte bokexemplens tal. På bilderna 4 och 6 finns enhetscirkeln bredvid exakt samma beräkningskedja, med klick för första vinkel respektive spegling. |
 | Nya bokens symmetrisamband för sin och cos i fyra kvadranter | Trigonometriska ekvationer, bilder 7–8 | Alla fyra koordinatpunkterna syns från början; eleverna får formulera teckensambanden innan de sex fullständiga sambanden visas på bild 7, före exakta-värden-tillämpningen. |
 | Triangelns area T=c·h/2; h=b sin A och h=a sin B; de tre formerna av areasatsen | Areasatsen, bilder 2–3 | Bevarad matematisk ordning och samtliga avgörande mellanled; triangel med motstående sidor och mellanliggande vinkel visas på samma bild som satsen. |
-| Originalets första areaexempel med två kända sidor och mellanliggande vinkel | Areasatsen, bild 4 | Samma problemtyp, nya siffror och korrekt enhet |
+| Originalets första areaexempel med två lika långa sidor och en trubbig mellanliggande vinkel | Areasatsen, bild 4 | Likbent och trubbigt, nya tal (12 m, 12 m, 110°), samma metod samt avrundning till två värdesiffror |
 | Originalets andra areaexempel med känd area → sin A=0,6 → arcsin och 180°−A, två trianglar | Areasatsen, bilder 6–7 | Samma algebraiska norm, nya sidlängder, båda lösningarna och proportionellt korrekta figurer. Lösning och triangel visas ihop på respektive bild; eleverna kan växla figur och areaberäkning på bild 7. |
 | PhET Trig Tour och Socrative 330 (SOC-37278150) | Areasatsen, bild 8 | Bevarade från original-PDF. Socratives hela namn «Ma3c Enhetscirkeln 5 och areasats» och koden syns för eleverna. Tidigare mindmap utgår enligt senare beslut. |
 | Sin A=h/b, sin B=h/a → b sin A=a sin B → sin A/a=sin B/b=sin C/c | Sinussatsen, bilder 2–3 | Fullständig originalhärledning innan exemplen; satsen står bredvid triangelns märkta motstående sida/vinkel-par. |
@@ -144,3 +144,12 @@ Källor är original-PDF «240214 Tillämpningar NaTe22.pdf», den matchande ins
 | Arbete med uppgifterna efter genomgången | Bilder 8–9 | Aktuella hela nivåer: 4357–4362, 4363–4369 och 4370–4372. Enskilt första försök och sedan möjlighet till gemensamt arbete. Mål följs upp främst med 4357a–b. |
 
 Originalet anger ingen Socrative. Filmhänvisningen avser elevernas egen repetition och bär inte en klassrumsdemonstration. Filmen används som lärarkälla. Räknestugan som markeras som nästa pass i inspelningen ligger utanför detta bokmoment.
+
+
+## Efter granskning av lektion 1–6
+
+- Rätvinkliga trianglar: hela etiketten vid motstående katet ryms. Bågen i slutuppgiften ligger mellan CB och CD. Frågan om hypotenusans längd visas före svaret.
+- Exakta värden: en valfri ledtråd visar den vridna enhetssträckan vid 0° och 90°. Tabellens facit och tangensförklaringen kan öppnas separat.
+- Enhetscirkeln: alla tre uppgiftsnivåer visas både efter Socrative 326 och efter 329. Minst två hela nivåer görs över momentets två pass.
+- Trigonometriska ekvationer: intervallbilden tillämpar arcus, spegling och hela varv på en hel uppgift. Det fullständiga svaret visas först vid återkoppling.
+- Areasatsen: det första räkneexemplet är åter likbent och trubbigt. Eleven får räkna fram den spetsiga vinkeln innan följdfrågan blir synlig. Jämförelsen förklarar hur den tredje sidans längd skiljer trianglarna åt.
