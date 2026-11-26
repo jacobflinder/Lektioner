@@ -1,0 +1,14 @@
+.ettan .slide > :is(.work, .answer, .practice, .task) { width: 100%; }
+.ettan .slide > .math-givens { justify-items: start; }
+.ettan .slide > .math-givens math { max-width: 100%; }
+.ettan .circle svg { max-height: 270px; }
+.ettan .slide:has(.answer[open]) .practice { display: none; }
+.ettan .own-work h2 { margin-bottom: .15rem; }
+.ettan #bokarbete [data-slide-link] { color: var(--accent); font-weight: 650; }
+.ettan #bokarbete p:last-child { line-height: 2.65; }
+.ettan #tva-led .answer-body .calculation-pair { align-items: start; }
+.ettan #tva-led .answer-body > .math-steps { border-top: 1px solid var(--line); padding-top: .32rem; }
+@media (max-width: 580px) {
+  .ettan .circle svg { max-height: 218px; }
+  .ettan #tva-led > .math-givens math { font-size: .93em; }
+}
