@@ -38,6 +38,7 @@ math[display=inline]{font:1.09em "Cambria Math","STIX Two Math",serif;vertical-a
 .diagram.compact-geometry svg{max-height:240px}
 .eq-chain.answer.on{display:grid}
 .definition-cards.answer.on{display:grid}
+.definition-cards.answer:not(.on){display:none}
 .grid.answer.on{display:grid}
 .deferred-series .series-result{display:none}
 .deferred-series.on .series-result{display:block}
