@@ -110,6 +110,7 @@ async function main() {
       assert.ok((await page.goto(`${baseURL}/ma4/kapitel-1/`)).ok());
       await page.locator('a[href="additions-och-subtraktionsformler/"]').click();
       const jump = page.locator('#jump');
+      await jump.locator('option').nth(order.length - 1).waitFor({ state: 'attached' });
       assert.equal(await jump.locator('option').count(), order.length);
       if (width >= 1280) await page.locator('#mode').click();
       const save = id => page.screenshot({ path: path.join(evidence, `${width}-${id}.png`), fullPage: width < 1280 });

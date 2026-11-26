@@ -98,6 +98,7 @@ async function main() {
       assert.ok((await page.goto(`${site}/ma4/kapitel-1/`)).ok());
       await page.locator('a[href="trigonometriska-ettan/"]').click();
       const jump = page.locator('#jump');
+      await jump.locator('option').nth(route.length - 1).waitFor({ state: 'attached' });
       assert.equal(await jump.locator('option').count(), route.length);
       assert.ok(await page.locator("math msup").evaluateAll(nodes =>
         nodes.length > 20 && nodes.every(node => node.children.length === 2)));
