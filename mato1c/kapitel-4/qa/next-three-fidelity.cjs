@@ -6,6 +6,7 @@ const root=path.resolve(__dirname,'..');
 let checks=0;
 const check=(condition,message)=>{assert(condition,message);checks++};
 const cases=[
+ {id:'tillampningar-och-problemlosning',slides:9,levels:['4357–4362','4363–4369','4370–4372'],optional:0,socrative:null},
  {id:'cosinussatsen',slides:9,levels:['4341–4346','4347–4351','4352–4353'],optional:0,socrative:'SOC-37390519'},
  {id:'sinussatsens-tva-fall',slides:9,levels:['4322–4327','4328–4336','4337–4338'],optional:0,socrative:'SOC-37390020'},
  {id:'trigonometriska-ekvationer',slides:11,levels:['4218–4223','4224–4227','4228'],optional:1,socrative:null},
@@ -67,8 +68,19 @@ check(sin.includes('Socrative 331')&&sin.includes('Ma3c Areasats och Sinussatsen
 check(!sin.includes('Nivå 3</h3>'),'Sinussats: ingen påhittad nivå');
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 for(const item of cases)check(index.includes('href="'+item.id+'/"'),item.id+': länkad i översikt');
-check(!index.includes('href="tillampningar-och-problemlosning/"'),'Kommande opublicerat moment visas inte som elevlektion');
 check(!/Jacobs|din planering|webblektion|bokbilder/i.test(index),'Kapitelöversikten saknar produktions- och lärarkommentarer');
+const applications=htmls['tillampningar-och-problemlosning'];
+check(!/Socrative|SOC-\d/.test(applications),'Tillämpningar: ingen Socrative i originalpasset');
+for(const key of ['app-angles','app-sine','app-cosine']){
+ check(applications.includes('id="'+key+'"'),'Tillämpningar: fullständig återkoppling för '+key);
+}
+check(applications.indexOf('id="app-angles"')<applications.indexOf('id="app-sine"')&&applications.indexOf('id="app-sine"')<applications.indexOf('id="app-cosine"'),'Tillämpningar: vinklar, sinussatsen för sidan, cosinussatsen med pq-formeln');
+const large=10*Math.sqrt(3)+Math.sqrt(69);
+const small=10*Math.sqrt(3)-Math.sqrt(69);
+const firstAngle=Math.asin(10/13);
+check(Math.abs(large-26*Math.sin(5*Math.PI/6-firstAngle))<1e-10,'Tillämpningar: stora längden stämmer med båda metoderna');
+check(Math.abs(small-26*Math.sin(firstAngle-Math.PI/6))<1e-10,'Tillämpningar: lilla längden stämmer med båda metoderna');
+check(small>0&&large>small,'Tillämpningar: båda rötterna är giltiga längder');
 const cosine=htmls.cosinussatsen;
 const deg=x=>x*Math.PI/180;
 check(cosine.indexOf('data-title="Satsen i tre former"')<cosine.indexOf('data-title="Bevis: spetsig vinkel"'),'Cosinus: satsen före bevis och beräkningar');
@@ -88,4 +100,4 @@ check(Math.abs(Math.acos((u[0]*v[0]+u[1]*v[1])/(L*R))*180/Math.PI-70)<0.5&&Math.
 check(Math.abs(5*11*Math.sin(deg(120))/2-23.8157)<0.01,'Areasats: trubbig vinkel korrekt');
 check(Math.abs(6*10*Math.sin(deg(36.869897))/2-18)<0.001,'Areasats: vinkel från area korrekt');
 check(Math.abs(4*Math.sin(deg(20))/Math.sin(deg(130))-1.786)<0.01,'Sinussats: sida korrekt');
-console.log(JSON.stringify({result:'PASS',checks,lessons:cases.length,pages:'228–243'}));
+console.log(JSON.stringify({result:'PASS',checks,lessons:cases.length,pages:'228–247'}));

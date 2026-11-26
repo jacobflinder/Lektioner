@@ -13,7 +13,8 @@ const lessons=[
  {id:'areasatsen',levels:['4303–4307','4308–4311','4312–4313'],extras:1},
  {id:'sinussatsen',levels:['4315–4318','4319–4320'],extras:0},
  {id:'sinussatsens-tva-fall',levels:['4322–4327','4328–4336','4337–4338'],extras:0},
- {id:'cosinussatsen',levels:['4341–4346','4347–4351','4352–4353'],extras:0}
+ {id:'cosinussatsen',levels:['4341–4346','4347–4351','4352–4353'],extras:0},
+ {id:'tillampningar-och-problemlosning',levels:['4357–4362','4363–4369','4370–4372'],extras:0}
 ];
 const socrativeActivities={
  enhetscirkeln:[['326','Ma3c Enhetscirkeln','SOC-37277932'],['329','Ma3c Enhetscirkeln 4','SOC-37278098']],
@@ -31,9 +32,11 @@ const thoughtPauseTargets={
  areasatsen:['area-height','area-formula','area-worked','area-inverse','area-two-triangles','area-extra-recall'],
  sinussatsen:['sine-heights','sine-theorem','sine-original'],
  'sinussatsens-tva-fall':['start-answer','height-expression','short','height','two','long','obtuse-short','obtuse-long','worked-example'],
- cosinussatsen:['cos-start','cos-pair','cos-acute-proof','cos-obtuse-proof','cos-right','cos-side','cos-angle']
+ cosinussatsen:['cos-start','cos-pair','cos-acute-proof','cos-obtuse-proof','cos-right','cos-side','cos-angle'],
+ 'tillampningar-och-problemlosning':['app-recall','app-pairs','app-angles','app-sine','app-cosine','app-compare','app-choice']
 };
 const twoCaseLesson='sinussatsens-tva-fall';
+const applicationLesson='tillampningar-och-problemlosning';
 const validVertices={short:0,height:1,two:2,long:1,'obtuse-short':0,'obtuse-long':1,'worked-example':2};
 const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
 const screenshotDir=path.resolve(process.env.QA_SCREENSHOT_DIR||'mato1c-qa-screenshots/kapitel-4');
@@ -45,7 +48,11 @@ async function inspectLayout(page,id,width,i){
   const rect=document.querySelector('.slide.active').getBoundingClientRect();
   const math=[...document.querySelectorAll('.slide.active .math-line math')].filter(el=>{
    let p=el;
-   while(p){if(p.classList?.contains('answer')&&!p.classList.contains('on'))return false;p=p.parentElement}
+   while(p){
+    if(p.classList?.contains('answer')&&!p.classList.contains('on'))return false;
+    if(p.tagName==='DETAILS'&&!p.open&&!p.querySelector(':scope > summary')?.contains(el))return false;
+    p=p.parentElement;
+   }
    return true;
   }).map(el=>({text:el.textContent.slice(0,65),width:el.getBoundingClientRect().width,scroll:el.scrollWidth,client:el.clientWidth,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right}));
   const a=document.querySelector('#prev').getBoundingClientRect(),b=document.querySelector('#next').getBoundingClientRect();
@@ -93,7 +100,7 @@ async function inspectLayout(page,id,width,i){
     assert.equal(await page.locator('.slide.active').count(),1);checks++;
     const studentText=await page.locator('.slide.active').innerText();
     assert(!/Originalets|originallektionen|Jacobs?|samma webblektion|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
-    if(lesson.id===twoCaseLesson||lesson.id==='cosinussatsen'){
+    if([twoCaseLesson,'cosinussatsen',applicationLesson].includes(lesson.id)){
      await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}-before.png`),fullPage:true});
     }
     const buttons=page.locator('.slide.active [data-reveal]');
@@ -127,7 +134,7 @@ async function inspectLayout(page,id,width,i){
      assert.deepEqual(await table.locator('.filled:visible').allTextContents(),['0','1','2','1','0','1']);checks++;
     }
     await inspectLayout(page,lesson.id,width,i);
-    if(lesson.id===twoCaseLesson||lesson.id==='cosinussatsen'){
+    if([twoCaseLesson,'cosinussatsen',applicationLesson].includes(lesson.id)){
      await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}-after.png`),fullPage:true});
     }
     if(width===390)await page.screenshot({path:path.join(screenshotDir,`${lesson.id}-${width}-${i+1}.png`),fullPage:true});
@@ -145,6 +152,34 @@ async function inspectLayout(page,id,width,i){
     await page.locator('[data-reveal="worked-example"]').press('Enter');
     assert.equal(await page.locator('#worked-example .math-line').count(),6);checks++;
     await inspectLayout(page,lesson.id,width,6);
+   }
+   if(lesson.id===applicationLesson){
+    await page.goto(url+'?larare=1');
+    await page.locator('#mode').click();
+    assert.equal(await page.locator('#mode').getAttribute('aria-pressed'),'true');checks++;
+    for(let i=0;i<count;i++){
+     await page.locator('#jump').selectOption(String(i));
+     await inspectLayout(page,lesson.id,width,i);
+    }
+    const models=[['2','app-angles','angles',6],['3','app-sine','sine',4],['4','app-cosine','cosine',11]];
+    for(const [i,target,figure,steps] of models){
+     await page.locator('#jump').selectOption(i);
+     const geometry=page.locator(`.slide.active [data-diagram="${figure}"] .diagram-after`);
+     assert.equal(await geometry.isVisible(),false);checks++;
+     await page.locator(`[data-reveal="${target}"]`).press('Enter');
+     assert.equal(await geometry.isVisible(),true);checks++;
+     assert.equal(await page.locator(`#${target} .math-line:visible`).count(),steps);checks++;
+     await inspectLayout(page,lesson.id,width,Number(i));
+     if(target==='app-cosine'){
+      const pq=page.locator('.slide.active details');
+      assert.equal(await pq.evaluate(element=>element.open),false);checks++;
+      await pq.locator('summary').press('Enter');
+      assert.equal(await pq.locator('.math-line:visible').count(),2);checks++;
+      await inspectLayout(page,lesson.id,width,Number(i));
+      await pq.locator('summary').press('Enter');
+      assert.equal(await pq.evaluate(element=>element.open),false);checks++;
+     }
+    }
    }
    if(lesson.id==='cosinussatsen'){
     await page.goto(url+'?larare=1');

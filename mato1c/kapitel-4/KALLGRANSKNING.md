@@ -25,7 +25,7 @@
 | Areasatsen | 231–233 | 4303–4307 | 4308–4311 | 4312–4313 | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 | Sinussatsen | 234–235 | 4315–4318 | 4319–4320 | **Ingen nivå 3 synlig i detta bokmoment** | Käll- och innehållsgranskad; webbläsarkontroll nedan |
 
-Planeringens nästa separata moment är Tillämpningar och problemlösning s. 244. Dessa behöver egna, faktiskt kontrollerade bokuppgiftslistor före publicering. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
+De tre återstående momenten i planeringen, från s. 236 till s. 247, har kontrollerade uppgiftslistor i avsnitten nedan. I sinussatsens **visade** moment finns bara nivåerna 1 och 2, alltså måste eleverna göra båda hela.
 
 ## Original-till-webb-karta
 
@@ -92,7 +92,7 @@ Detta är **didaktiska förbättringar, inte matematiska metodavvikelser**: inga
 
 ## Återstående extern kontroll
 
-Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. **Ingen separat webblektion från s. 244 eller senare får uppges som färdig förrän dess bokuppgifter och originalmetoder har granskats.**
+Socrative-quizens levande innehåll är inte åtkomligt utan lärarkonto. Läraren behöver öppna original 326, 329, 330 och 331 i klassrummet. **Publiceringskontrollen gäller även de nya lektionerna från s. 236–247.**
 
 
 ## När ger sinussatsen två fall? · s. 236–239
@@ -127,3 +127,20 @@ Källor är lärarens original-PDF «240213 Cosinussatsen NaTe22.pdf», inspelni
 | Uppgiftsarbete efter Socrative | Bild 9 | Aktuella nivågränser: 4341–4346, 4347–4351, 4352–4353. Samtliga deluppgifter på minst två hela nivåer enligt kursens aktuella beslut. Mål följs upp med egna lösningar ur boken. |
 
 En äldre instruktion om mindmap utgår enligt senare lärarbeslut. Veckokollens datum och salar i originalet gäller 2024. Nästa moment i den aktuella planeringen är Tillämpningar och problemlösning på s. 244.
+
+
+## Tillämpningar och problemlösning · s. 244–247
+
+Källor är original-PDF «240214 Tillämpningar NaTe22.pdf», den matchande inspelningen och transkriptionen «240214 Tillämpningar Ma3c Vik», bokbilderna s. 244–247 och aktuell kursplanering. Både lösningskedjorna och beteckningarna i utskriften och tavlan har kontrollerats mot filmen.
+
+| Originalets innehåll | Plats i webblektionen | Kontroll |
+|---|---|---|
+| En okänd sida x, vinkeln v mot den kända basen, vinkeln w mot x | Bild 2 | Samma problemtyp och beteckningar. Nya mått med bas 20 cm, motstående sida 13 cm och given vinkel 30°. |
+| Sinussatsen: vinkelkvoten, arcsin, supplement och vinkelsumman för två w | Bild 3 | Bevarad ordning och fullständiga beräkningar. Vinkelvärdenas avrundning visas men används inte som indata i nästa steg. |
+| Sinussatsen igen för x, en sida för varje vinkel | Bild 4 | Samma sida/vinkelform som läraren använder. Två separata längdberäkningar. |
+| Cosinussatsen: uppställning för motstående sida, andragradsekvation och pq-formeln | Bild 5 | Samma ordning och båda rötterna bevarade. Två exakta rötter visas före avrundning. |
+| Jämför vägarna och varför den ena kräver flera vinkelberäkningar | Bild 6 | Eleverna formulerar först sin jämförelse. Figuren visar hur båda metoderna ger samma två trianglar. |
+| Enhetscirkel och triangelsatser som förkunskaper | Bilder 1 och 7 | Aktiv återkallning av sinussymmetri och ett kort val av lämplig triangelsats. Originalets historiska provlista och datum ersätts inte med antagna uppgifter. |
+| Arbete med uppgifterna efter genomgången | Bilder 8–9 | Aktuella hela nivåer: 4357–4362, 4363–4369 och 4370–4372. Enskilt första försök och sedan möjlighet till gemensamt arbete. Mål följs upp främst med 4357a–b. |
+
+Originalet anger ingen Socrative. Filmhänvisningen avser elevernas egen repetition och bär inte en klassrumsdemonstration. Filmen används som lärarkälla. Räknestugan som markeras som nästa pass i inspelningen ligger utanför detta bokmoment.
