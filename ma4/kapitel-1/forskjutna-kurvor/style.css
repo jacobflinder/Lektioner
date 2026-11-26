@@ -1,0 +1,5 @@
+.shift .midline { stroke: #3a5d86; stroke-width: 2; stroke-dasharray: 2 4; fill: none; }
+.shift .slide:has(.answer[open]) .practice { display: none; }
+.shift .answer-body .plot { max-height: 185px; }
+.shift .socrative-activity { display: grid; gap: .65rem; max-width: 52rem; padding: 1rem; }
+.shift #shift-result { font-weight: 650; }
