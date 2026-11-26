@@ -40,6 +40,7 @@ jobs:
           node ma4/kapitel-1/qa/trigonometriska-ekvationer.cjs
           node ma4/kapitel-1/qa/enhetscirkeln-symmetrier.cjs
           node ma4/kapitel-1/qa/trigonometriska-ettan.cjs
+          node ma4/kapitel-1/qa/additions-och-subtraktionsformler.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -51,3 +52,4 @@ jobs:
             /tmp/ma4-trigekv-qa
             /tmp/ma4-symmetri-qa
             /tmp/ma4-ettan-qa
+            /tmp/ma4-add-qa
