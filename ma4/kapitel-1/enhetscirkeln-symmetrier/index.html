@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enhetscirkeln – symmetrier och exakta värden · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../trigonometriska-ekvationer/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="exakta-varden.js" defer></script>
+</head>
+<body>
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="y-spegel" aria-labelledby="y-spegel-title" data-menu-title="Symmetrier och exakta värden">
+  <h1 id="y-spegel-title" tabindex="-1">Enhetscirkeln – symmetrier och exakta värden</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkeln med punkten P vid vinkeln v. Figuren visar sedan punkten Q vid 180° − v.">
+    <defs><marker id="y-spegel-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#y-spegel-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#y-spegel-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="radius " d="M180 154 L267.222 97.358"/><circle class="point " cx="267.222" cy="97.358" r="4.5"/><text x="279.222" y="89.358">P</text><path class="projection" d="M267.222 154 V97.358 H180"/><path class="rotation " d="M218 154 A38 38 0 0 0 211.869 133.304" marker-end="url(#y-spegel-arrow)"/>
+    <g class="figure-reveal"><path class="symmetry-guide" d="M267.222 97.358 L92.778 97.358"/><path class="radius alternate" d="M180 154 L92.778 97.358"/><circle class="point alternate" cx="92.778" cy="97.358" r="4.5"/><text x="70.778" y="90.358">Q</text><path class="projection" d="M92.778 154 V97.358 H180"/><path class="rotation alternate" d="M233 154 A53 53 0 0 0 135.550 125.134" marker-end="url(#y-spegel-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>P har vinkeln <i>v</i> och koordinaterna (a; b). Följ x- och y-koordinaterna när du speglar P i y-axeln.</p><p class="task">Vilka koordinater får Q vid 180° − v? Välj och motivera med figuren.</p><form class="practice" novalidate><div class="practice-fields"><label>Koordinater för Q<select data-answer="2" data-hint="Vid spegling i y-axeln är punkternas höjd densamma."><option value="">Välj</option><option value="1">(a; b)</option><option value="2">(−a; b)</option><option value="3">(a; −b)</option><option value="4">(−a; −b)</option><option value="5">(b; a)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa punkten och sambanden</summary><div class="answer-body"><p>Q = (−a; b). P och Q har samma höjd. x-koordinaten byter tecken.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>180°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Använda enhetscirkelns symmetrier.</li><li>Härleda och använda exakta värden.</li><li>Lösa en trigonometrisk ekvation med en exakt vinkel.</li></ol>
+</div>
+</div>
+</section>
+<section class="slide" id="x-spegel" aria-labelledby="x-spegel-title">
+  <h1 id="x-spegel-title" tabindex="-1">Spegla punkten i x-axeln</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkeln med punkten P vid vinkeln v. Figuren visar sedan punkten S vid −v.">
+    <defs><marker id="x-spegel-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#x-spegel-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#x-spegel-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="radius " d="M180 154 L267.222 97.358"/><circle class="point " cx="267.222" cy="97.358" r="4.5"/><text x="279.222" y="89.358">P</text><path class="projection" d="M267.222 154 V97.358 H180"/><path class="rotation " d="M218 154 A38 38 0 0 0 211.869 133.304" marker-end="url(#x-spegel-arrow)"/>
+    <g class="figure-reveal"><path class="symmetry-guide" d="M267.222 97.358 L267.222 210.642"/><path class="radius alternate" d="M180 154 L267.222 210.642"/><circle class="point alternate" cx="267.222" cy="210.642" r="4.5"/><text x="277.222" y="229.642">S</text><path class="projection" d="M267.222 154 V210.642 H180"/><path class="rotation alternate" d="M233 154 A53 53 0 0 1 224.450 182.866" marker-end="url(#x-spegel-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>P har vinkeln <i>v</i> och koordinaterna (a; b). Vrid vinkeln lika långt medurs från positiva x-axeln.</p><p class="task">Vilka koordinater får S vid −v? Välj och motivera med figuren.</p><form class="practice" novalidate><div class="practice-fields"><label>Koordinater för S<select data-answer="3" data-hint="Vid spegling i x-axeln är punkterna lika långt åt höger."><option value="">Välj</option><option value="1">(a; b)</option><option value="2">(−a; b)</option><option value="3">(a; −b)</option><option value="4">(−a; −b)</option><option value="5">(b; a)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa punkten och sambanden</summary><div class="answer-body"><p>S = (a; −b). P och S har samma x-koordinat. y-koordinaten byter tecken.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="halvvarv" aria-labelledby="halvvarv-title">
+  <h1 id="halvvarv-title" tabindex="-1">Vrid punkten ett halvvarv</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkeln med punkten P vid vinkeln v. Figuren visar sedan punkten R vid 180° + v.">
+    <defs><marker id="halvvarv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#halvvarv-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#halvvarv-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="radius " d="M180 154 L267.222 97.358"/><circle class="point " cx="267.222" cy="97.358" r="4.5"/><text x="279.222" y="89.358">P</text><path class="projection" d="M267.222 154 V97.358 H180"/><path class="rotation " d="M218 154 A38 38 0 0 0 211.869 133.304" marker-end="url(#halvvarv-arrow)"/>
+    <g class="figure-reveal"><path class="symmetry-guide" d="M267.222 97.358 L92.778 210.642"/><path class="radius alternate" d="M180 154 L92.778 210.642"/><circle class="point alternate" cx="92.778" cy="210.642" r="4.5"/><text x="70.778" y="229.642">R</text><path class="projection" d="M92.778 154 V210.642 H180"/><path class="rotation alternate" d="M233 154 A53 53 0 1 0 135.550 182.866" marker-end="url(#halvvarv-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>P har vinkeln <i>v</i> och koordinaterna (a; b). Lägg till 180° till vinkeln.</p><p class="task">Vilka koordinater får R vid 180° + v? Välj och motivera med figuren.</p><form class="practice" novalidate><div class="practice-fields"><label>Koordinater för R<select data-answer="4" data-hint="Ett halvvarv tar punkten lika långt åt andra hållet från origo."><option value="">Välj</option><option value="1">(a; b)</option><option value="2">(−a; b)</option><option value="3">(a; −b)</option><option value="4">(−a; −b)</option><option value="5">(b; a)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa punkten och sambanden</summary><div class="answer-body"><p>R = (−a; −b). P och R ligger på varsin sida om origo. Båda koordinaterna byter tecken.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>180°</mn><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>180°</mn><mo>+</mo><mi>v</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="komplement" aria-labelledby="komplement-title">
+  <h1 id="komplement-title" tabindex="-1">Byt plats på koordinaterna</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkeln med punkten P vid vinkeln v. Figuren visar sedan punkten T vid 90° − v.">
+    <defs><marker id="komplement-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#komplement-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#komplement-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="radius " d="M180 154 L267.222 97.358"/><circle class="point " cx="267.222" cy="97.358" r="4.5"/><text x="279.222" y="115.358">P</text><path class="projection" d="M267.222 154 V97.358 H180"/><path class="rotation " d="M218 154 A38 38 0 0 0 211.869 133.304" marker-end="url(#komplement-arrow)"/>
+    <g class="figure-reveal"><path class="symmetry-guide" d="M100 234 L260 74"/><text x="44" y="224">y = x</text><path class="radius alternate" d="M180 154 L236.642 66.778"/><circle class="point alternate" cx="236.642" cy="66.778" r="4.5"/><text x="246.642" y="59.778">T</text><path class="projection" d="M236.642 154 V66.778 H180"/><path class="rotation alternate" d="M233 154 A53 53 0 0 0 208.866 109.550" marker-end="url(#komplement-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<p>P har en spetsig vinkel <i>v</i> och koordinaterna (a; b). Gå från positiva y-axeln tillbaka lika långt som <i>v</i>.</p><p class="task">Vilka koordinater får T vid 90° − v? Välj och motivera med figuren.</p><form class="practice" novalidate><div class="practice-fields"><label>Koordinater för T<select data-answer="5" data-hint="Jämför horisontellt och lodrätt avstånd till origo."><option value="">Välj</option><option value="1">(a; b)</option><option value="2">(−a; b)</option><option value="3">(a; −b)</option><option value="4">(−a; −b)</option><option value="5">(b; a)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa punkten och sambanden</summary><div class="answer-body"><p>T = (b; a). Speglingen i y = x byter plats på koordinaterna. I figuren är v en spetsig vinkel.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>90°</mn><mo>−</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="specialtrianglar" aria-labelledby="specialtrianglar-title">
+  <h1 id="specialtrianglar-title" tabindex="-1">Två trianglar ger exakta längder</h1>
+<div class="split">
+<figure class="diagram triangle-pair">
+<svg viewBox="0 0 430 216" role="img" aria-label="En halv kvadrat med kateter 1 och 1 samt en halv liksidig triangel med hypotenusa 2 och den korta kateten 1.">
+  <path class="light-guide" d="M42 157 V54 H145 V157 Z M280 157 L334 63.47 L388 157 Z"/>
+  <path class="triangle" d="M42 157 H145 V54 Z M280 157 H334 V63.47 Z"/>
+  <path class="right-angle" d="M132 157 v-13 h13 M321 157 v-13 h13"/>
+  <text x="35" y="29">Halv kvadrat</text>
+  <text x="252" y="29">Halv liksidig triangel</text>
+  <text x="92" y="181">1</text><text x="152" y="112">1</text><text x="76" y="98">d</text><text x="65" y="149">45°</text>
+  <text x="301" y="181">1</text><text x="343" y="109">h</text><text x="294" y="101">2</text>
+  <text x="295" y="148">60°</text><text x="303" y="110">30°</text>
+</svg>
+</figure>
+<div class="work">
+<p>Dela en kvadrat med sidan 1 längs diagonalen. Dela sedan en liksidig triangel med sidan 2 längs höjden.</p><p class="task">Vilket uttryck ger <i>d</i>² och vilket ger <i>h</i>²? Välj med hjälp av figurerna.</p><form class="practice" data-success="Det stämmer. Diagonalen är hypotenusan i den första triangeln. Höjden är en katet i den andra." novalidate><div class="practice-fields"><label>Diagonalens kvadrat d²<select data-answer="2" data-hint="Addera kvadraterna på de två kateterna innan du tar kvadratroten."><option value="">Välj</option><option value="1">1² − 1²</option><option value="2">1² + 1²</option><option value="3">2² + 1²</option><option value="4">2² − 1²</option></select></label><label>Höjdens kvadrat h²<select data-answer="4" data-hint="Dra ifrån kvadraten på den kända kateten från hypotenusans kvadrat."><option value="">Välj</option><option value="1">1² − 1²</option><option value="2">1² + 1²</option><option value="3">2² + 1²</option><option value="4">2² − 1²</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><msup><mi>d</mi><mn>2</mn></msup><mo>=</mo><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>1</mn><mn>2</mn></msup><mo>=</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><mi>d</mi><mo>=</mo><msqrt><mn>2</mn></msqrt></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><msup><mi>h</mi><mn>2</mn></msup><mo>=</mo><msup><mn>2</mn><mn>2</mn></msup><mo>−</mo><msup><mn>1</mn><mn>2</mn></msup><mo>=</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mi>h</mi><mo>=</mo><msqrt><mn>3</mn></msqrt></mrow></math>
+</div></div><p>Nu kan du använda sidornas kvoter för 30°, 45° och 60°.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="exakta" aria-labelledby="exakta-title" data-menu-title="Exakta värden">
+  <h1 id="exakta-title" tabindex="-1">Från sidkvoter till exakta trigonometriska värden</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkel. Efter ditt försök kan du välja en vinkel och se dess koordinater.">
+    <defs><marker id="exact-model-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#exact-model-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#exact-model-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    
+    <g class="figure-reveal"><path class="radius" data-exact-radius/><path class="projection" data-exact-projection/><circle class="point" r="5" data-exact-point/><text data-exact-label text-anchor="start"></text></g>
+  </svg>
+<figcaption class="exact-reminder"><p>Minnesregel. För sinus vid 0°, 30°, 45°, 60° och 90° tar du kvadratrötterna ur 0/4, 1/4, 2/4, 3/4 och 4/4 i ordning. För cosinus går du baklänges.</p></figcaption>
+</figure>
+<div class="work">
+<p>Sinus och cosinus är kateterna dividerade med hypotenusan. Tangens är sinus dividerat med cosinus när cosinus är skild från 0.</p><p class="task">Använd trianglarna från förra bilden. Vilken av 30°, 45° och 60° har lika stora sinus- och cosinusvärden?</p><form class="practice" data-success="Det stämmer. Vid 45° är kateterna lika långa och har samma hypotenusa." novalidate><div class="practice-fields"><label>Vinkel<select data-answer="45" data-hint="Leta efter den rätvinkliga triangeln där kateterna är lika långa."><option value="">Välj</option><option value="30">30°</option><option value="45">45°</option><option value="60">60°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa cirkeln och tabellen</summary><div class="answer-body"><div class="exact-controls" role="group" aria-label="Välj vinkel på enhetscirkeln"><button type="button" data-exact-choice="30" aria-pressed="false">30°</button><button type="button" data-exact-choice="45" aria-pressed="false">45°</button><button type="button" data-exact-choice="60" aria-pressed="false">60°</button></div><p data-exact-status role="status"></p><table class="exact-table"><caption>Exakta värden</caption><thead><tr><th scope="col">v</th><th scope="col" data-exact-angle="0">0°</th><th scope="col" data-exact-angle="30">30°</th><th scope="col" data-exact-angle="45">45°</th><th scope="col" data-exact-angle="60">60°</th><th scope="col" data-exact-angle="90">90°</th></tr></thead><tbody><tr><th scope="row">sin v</th><td data-exact-angle="0"><math display="inline"><mrow><mn>0</mn></mrow></math></td><td data-exact-angle="30"><math display="inline"><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math></td><td data-exact-angle="45"><math display="inline"><mrow><mfrac><mrow><msqrt><mn>2</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math></td><td data-exact-angle="60"><math display="inline"><mrow><mfrac><mrow><msqrt><mn>3</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math></td><td data-exact-angle="90"><math display="inline"><mrow><mn>1</mn></mrow></math></td></tr><tr><th scope="row">cos v</th><td data-exact-angle="0"><math display="inline"><mrow><mn>1</mn></mrow></math></td><td data-exact-angle="30"><math display="inline"><mrow><mfrac><mrow><msqrt><mn>3</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math></td><td data-exact-angle="45"><math display="inline"><mrow><mfrac><mrow><msqrt><mn>2</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math></td><td data-exact-angle="60"><math display="inline"><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math></td><td data-exact-angle="90"><math display="inline"><mrow><mn>0</mn></mrow></math></td></tr><tr><th scope="row">tan v</th><td data-exact-angle="0"><math display="inline"><mrow><mn>0</mn></mrow></math></td><td data-exact-angle="30"><math display="inline"><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><msqrt><mn>3</mn></msqrt></mrow></mfrac></mrow></math></td><td data-exact-angle="45"><math display="inline"><mrow><mn>1</mn></mrow></math></td><td data-exact-angle="60"><math display="inline"><mrow><msqrt><mn>3</mn></msqrt></mrow></math></td><td data-exact-angle="90">odefinierad</td></tr></tbody></table></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="utanfor" aria-labelledby="utanfor-title" data-menu-title="Exakta värden utanför första kvadranten">
+  <h1 id="utanfor-title" tabindex="-1">Din tur · exakta värden i andra kvadranter</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkeln. Markeringarna för 60 grader, 240 grader, 45 grader och minus 45 grader visas i lösningen.">
+    <defs><marker id="outside-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#outside-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#outside-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    
+    <g class="figure-reveal"><path class="radius " d="M180 154 L232.000 63.933"/><circle class="point " cx="232.000" cy="63.933" r="4.5"/><text x="241.000" y="55.933">60°</text><path class="radius alternate" d="M180 154 L128.000 244.067"/><circle class="point alternate" cx="128.000" cy="244.067" r="4.5"/><text x="58.000" y="259.067">240°</text><path class="radius " d="M180 154 L253.539 80.461"/><circle class="point " cx="253.539" cy="80.461" r="4.5"/><text x="263.539" y="77.461">45°</text><path class="radius alternate" d="M180 154 L253.539 227.539"/><circle class="point alternate" cx="253.539" cy="227.539" r="4.5"/><text x="263.539" y="239.539">−45°</text></g>
+  </svg>
+</figure>
+<div class="work">
+<p class="task">Bestäm sin 240° och cos(−45°) exakt. Skriv vilken referensvinkel och symmetri du använder för varje värde.</p><form class="practice" data-success="Tecknen stämmer. Bestäm nu de två exakta värdena med hjälp av referensvinklarna." novalidate><div class="practice-fields"><label>Tecken för sin 240°<select data-answer="-1" data-hint="240° ligger under x-axeln."><option value="">Välj</option><option value="1">Positivt</option><option value="-1">Negativt</option></select></label><label>Tecken för cos(−45°)<select data-answer="1" data-hint="Speglingen i x-axeln låter x-koordinaten vara kvar."><option value="">Välj</option><option value="1">Positivt</option><option value="-1">Negativt</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>240°</mn><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>180°</mn><mo>+</mo><mn>60°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>240°</mn><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>60°</mn><mo>=</mo><mo>−</mo><mfrac><mrow><msqrt><mn>3</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mo>−</mo><mn>45°</mn><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>45°</mn><mo>=</mo><mfrac><mrow><msqrt><mn>2</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="ekvation" aria-labelledby="ekvation-title">
+  <h1 id="ekvation-title" tabindex="-1">Lös en ekvation med exakt vinkel</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Horisontell linje under x-axeln. De två skärningarna motsvarar vinkeln 2x i lösningen.">
+    <defs><marker id="equation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#equation-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#equation-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="eq-guide" d="M42 227.539 H317"/>
+    <g class="figure-reveal"><path class="radius " d="M180 154 L253.539 227.539"/><circle class="point " cx="253.539" cy="227.539" r="4.5"/><text x="263.539" y="243.539">−45°</text><path class="radius alternate" d="M180 154 L106.461 227.539"/><circle class="point alternate" cx="106.461" cy="227.539" r="4.5"/><text x="51.461" y="243.539">225°</text><path class="rotation " d="M216 154 A36 36 0 0 1 205.456 179.456" marker-end="url(#equation-arrow)"/><path class="rotation alternate" d="M235 154 A55 55 0 1 0 141.109 192.891" marker-end="url(#equation-arrow)"/></g>
+  </svg>
+</figure>
+<div class="work">
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mrow><msqrt><mn>2</mn></msqrt></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+</div><p class="task">Varje lösningsfamilj för 2x har period 360°. Vilken period får familjerna när du löser ut x?</p><form class="practice" data-success="Det stämmer. När du delar 2x med 2 delar du också periodtermen med 2." novalidate><div class="practice-fields"><label>Period för x<select data-answer="180" data-hint="Dividera periodtermen 360° med 2, precis som de andra termerna."><option value="">Välj</option><option value="90">90°</option><option value="180">180°</option><option value="360">360°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Referensvinkeln är 45°. En vinkel är −45°. Den andra är 180° − (−45°) = 225°.</p><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi>x</mi><mo>=</mo><mo>−</mo><mn>45°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mo>−</mo><mn>45°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>22,5°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi>x</mi><mo>=</mo><mn>225°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>225°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>360°</mn></mrow></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>112,5°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div></div><p><i>n</i> är ett heltal.</p></div></details>
+</div>
+</div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 20–24 · Enhetscirkeln – symmetrier och exakta värden</p>
+  <p>Läs de lösta exemplen 1146 och 1147. Följ den valda symmetrin och se när periodtermen tas med.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1148–1154</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1155–1158</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1159–1162</p></article>
+  </div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Använd lösningar du har skrivit under lektionen. Förklara varifrån värdet och tecknet kommer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Symmetri</h2><p>Skissa två punkter från exempelvis 1148, 1155 eller 1161. Förklara vilken koordinat som byter tecken eller plats.</p></article>
+    <article class="card"><h2>Exakta värden</h2><p>Utgå från en av trianglarna på bild 5. Visa hur sidkvoten ger ett exakt värde som du använde i lektionen.</p></article>
+    <article class="card"><h2>Exakt lösning</h2><p>Förklara hur du fick med båda vinkelfamiljerna och rätt period på bild 8 eller i exempelvis 1152 eller 1157.</p></article>
+  </div><details class="answer"><summary>Visa vad du kan kontrollera</summary><div class="answer-body"><p>Kontrollera referensvinkel, koordinat och tecken. Vid en ekvation behöver även vinklarna som återkommer efter hela perioder finnas med.</p></div></details>
+</section>
+</main>
+</body>
+</html>
