@@ -1,0 +1,10 @@
+.sinusgraph .plot .figure-reveal { visibility: hidden; }
+.sinusgraph .slide:has(.answer[open]) .plot .figure-reveal { visibility: visible; }
+.sinusgraph .plot .intersection { fill: #854420; stroke: white; stroke-width: 1.4; }
+.sinusgraph .plot .intersection.open { fill: white; stroke: #854420; stroke-width: 2.3; }
+.sinusgraph .plot .solution-guide { fill: none; stroke: #735c49; stroke-dasharray: 3 3; }
+.sinusgraph .plot .solution-band { fill: #08705c; fill-opacity: .17; stroke: none; }
+.sinusgraph .window-control { margin-block: .15rem; }
+.sinusgraph .window-control label { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.sinusgraph .window-control select { min-height: 44px; }
+.sinusgraph code { font-size: 1em; }

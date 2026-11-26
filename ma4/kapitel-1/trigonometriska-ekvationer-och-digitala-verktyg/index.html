@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trigonometriska ekvationer och digitala verktyg · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="../sinus-och-cosinusfunktioner/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="skarningar.js" defer></script>
+</head>
+<body class="sinusgraph">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Trigonometriska ekvationer och digitala verktyg</h1>
+<p>En ekvation med vänsterled f(x) och högerled g(x) kan lösas grafiskt. Rita båda i samma koordinatsystem. Där graferna möts är värdena lika.</p><p class="task">Vilken koordinat i en skärningspunkt ger en lösning till ekvationen?</p><form class="practice" data-success="Det stämmer. Höjden i skärningspunkten är det gemensamma funktionsvärdet." novalidate><div class="practice-fields"><label>Läs av<select data-answer="1" data-hint="En lösning anger vilket värde variabeln x har."><option value="">Välj</option><option value="1">x-koordinaten</option><option value="2">y-koordinaten</option><option value="3">Båda koordinaterna</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa ett exempel</summary><div class="answer-body"><p>Om graferna möts i exempelvis (45°; 1,2), är x = 45° en lösning.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Lösa en trigonometrisk ekvation från grafernas skärningspunkter.</li><li>Välja ett ritfönster som visar rätt intervall.</li><li>Avgöra var en graf ligger över en annan och när skärningar saknas.</li></ol>
+</section>
+
+<section class="slide" id="grader" aria-labelledby="grader-title">
+  <h1 id="grader-title" tabindex="-1">Ställ in grader och rita båda leden</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>3</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>180°</mn></mrow></math>
+</div><p>Använd gradläget på räknaren. I GeoGebra skriver du gradtecknet inne i sinusfunktionen.</p><div class="calculation-pair"><div><h2>Första grafen</h2><p><code>f(x) = 3*sin((2*x)°)</code></p></div><div><h2>Andra grafen</h2><p><code>g(x) = 1</code></p></div></div><p class="task">Rita båda graferna och ställ in fönstret så att 0 till 180 syns på x-axeln. Använd Skärning och läs av x-värdena inom intervallet.</p><p><a href="https://www.geogebra.org/graphing" target="_blank" rel="noopener">Öppna GeoGebras grafritare</a></p>
+</section>
+
+<section class="slide" id="skarning" aria-labelledby="skarning-title">
+  <h1 id="skarning-title" tabindex="-1">Läs av båda skärningarna</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>3</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+</div><svg id="exempel-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Sinuskurva och vågrät linje. Skärningspunkterna kan visas med lösningen." data-end="180" data-limit="3">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M134.2 23 V183"/><text class="tick-x" x="134.2" y="204">30°</text><path class="grid-x" d="M214.3 23 V183"/><text class="tick-x" x="214.3" y="204">60°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">90°</text><path class="grid-x" d="M374.7 23 V183"/><text class="tick-x" x="374.7" y="204">120°</text><path class="grid-x" d="M454.8 23 V183"/><text class="tick-x" x="454.8" y="204">150°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">180°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−3</text><path class="grid" d="M54 158.7 H535"/><text class="tick-y" x="46" y="163.7">−2</text><path class="grid" d="M54 133.3 H535"/><text class="tick-y" x="46" y="138.3">−1</text><path class="grid" d="M54 82.7 H535"/><text class="tick-y" x="46" y="87.7">1</text><path class="grid" d="M54 57.3 H535"/><text class="tick-y" x="46" y="62.3">2</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">3</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    <g class="figure-reveal" data-marks></g></svg><p>Hel linje visar vänsterledet och streckad linje visar högerledet.</p><p class="task">Jämför med din graf. Hur många skärningar ser du mellan 0° och 180°?</p><form class="practice" data-success="Det stämmer. Läs av båda x-värdena." novalidate><div class="practice-fields"><label>Antal skärningar<select data-answer="2" data-hint="Sök både där kurvan stiger över linjen och där den sjunker under den."><option value="">Välj</option><option value="1">En</option><option value="2">Två</option><option value="3">Fyra</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa punkterna och avläsningen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>9,7°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>80,3°</mn></mrow></math>
+</div><p>Avrunda avläsningarna till en decimal.</p></div></details>
+</section>
+
+<section class="slide" id="fonster" aria-labelledby="fonster-title">
+  <h1 id="fonster-title" tabindex="-1">Välj ett ritfönster som täcker intervallet</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+</div><p>Nu ska du hitta alla lösningar från 0° till 360°. Börja med delintervallet 0° till 180°. Tänk efter innan du byter ritfönster.</p><div class="window-control"><label>Visa x-intervall <select id="equation-window"><option value="180">0–180°</option><option value="360">0–360°</option></select></label></div><svg id="fonster-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Heldragen graf för vänsterledet och streckad linje för högerledet." data-end="180" data-limit="3">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">45°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">90°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">135°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">180°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−3</text><path class="grid" d="M54 158.7 H535"/><text class="tick-y" x="46" y="163.7">−2</text><path class="grid" d="M54 133.3 H535"/><text class="tick-y" x="46" y="138.3">−1</text><path class="grid" d="M54 82.7 H535"/><text class="tick-y" x="46" y="87.7">1</text><path class="grid" d="M54 57.3 H535"/><text class="tick-y" x="46" y="62.3">2</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">3</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    <g class="figure-reveal" data-marks></g></svg><p class="task">Hur många lösningar kan du missa om du bara visar den första halvan?</p><details class="answer"><summary>Visa skärningarna i valt fönster</summary><div class="answer-body"><p>Det första fönstret visar två lösningar. Det hela intervallet visar fyra. Två ligger i den andra halvan.</p><p id="window-result" role="status"></p></div></details>
+</section>
+
+<section class="slide" id="olikhet" aria-labelledby="olikhet-title">
+  <h1 id="olikhet-title" tabindex="-1">Läs av var grafen ligger ovanför linjen</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>&gt;</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>360°</mn></mrow></math>
+</div><svg id="olikhet-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Sinuskurva och vågrät linje. Efter lösningen markeras intervallet mellan skärningarna." data-end="360" data-limit="2">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">90°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">180°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">270°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">360°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−2</text><path class="grid" d="M54 146.0 H535"/><text class="tick-y" x="46" y="151.0">−1</text><path class="grid" d="M54 70.0 H535"/><text class="tick-y" x="46" y="75.0">1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">2</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    <g class="figure-reveal" data-marks></g></svg><p class="task">Ska skärningspunkternas x-värden ingå i svaret?</p><form class="practice" data-success="Det stämmer. Lösningen börjar direkt efter den första skärningen och slutar före den andra." novalidate><div class="practice-fields"><label>Vid skärningarna<select data-answer="2" data-hint="I en skärningspunkt gäller likhet. Här krävs ett strikt större värde."><option value="">Välj</option><option value="1">Ja</option><option value="2">Nej</option><option value="3">Bara den första</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mn>30°</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>150°</mn></mrow></math>
+</div><p>Den heldragna kurvan ligger ovanför den streckade linjen mellan de öppna punkterna.</p></div></details>
+</section>
+
+<section class="slide" id="utan-skarning" aria-labelledby="utan-skarning-title">
+  <h1 id="utan-skarning-title" tabindex="-1">Avgör när en lösning saknas</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math>
+</div><svg id="ingen-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Sinuskurva med amplitud två och en vågrät linje på tre." data-end="360" data-limit="3">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">90°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">180°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">270°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">360°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−3</text><path class="grid" d="M54 158.7 H535"/><text class="tick-y" x="46" y="163.7">−2</text><path class="grid" d="M54 133.3 H535"/><text class="tick-y" x="46" y="138.3">−1</text><path class="grid" d="M54 82.7 H535"/><text class="tick-y" x="46" y="87.7">1</text><path class="grid" d="M54 57.3 H535"/><text class="tick-y" x="46" y="62.3">2</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">3</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    </svg><p class="task">Varför finns ingen skärningspunkt, även om du utökar ritfönstret?</p><form class="practice" data-success="Det stämmer. Den vågräta linjen har större höjd än varje topp." novalidate><div class="practice-fields"><label>Jämför värden<select data-answer="1" data-hint="Sinusvärdet är högst 1. Vad blir vänsterledets största värde?"><option value="">Välj</option><option value="1">Vänsterledet är högst 2</option><option value="2">Perioden är för kort</option><option value="3">Linjens lutning är för stor</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa motiveringen</summary><div class="answer-body"><p>Eftersom −2 ≤ 2 sin x ≤ 2 kan vänsterledet aldrig bli 3.</p></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · två kurvor</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>360°</mn></mrow></math>
+</div><svg id="din-graf" class="plot" viewBox="0 0 558 218" role="img" aria-label="Cosinus som hel linje och en halv sinus som streckad linje." data-end="360" data-limit="1">
+      <g class="plot-ticks"><path class="grid-x" d="M54.0 23 V183"/><text class="tick-x" x="54.0" y="204">0°</text><path class="grid-x" d="M174.2 23 V183"/><text class="tick-x" x="174.2" y="204">90°</text><path class="grid-x" d="M294.5 23 V183"/><text class="tick-x" x="294.5" y="204">180°</text><path class="grid-x" d="M414.8 23 V183"/><text class="tick-x" x="414.8" y="204">270°</text><path class="grid-x" d="M535.0 23 V183"/><text class="tick-x" x="535.0" y="204">360°</text><path class="grid" d="M54 184.0 H535"/><text class="tick-y" x="46" y="189.0">−1</text><path class="grid" d="M54 32.0 H535"/><text class="tick-y" x="46" y="37.0">1</text></g>
+      <path class="plot-axis" d="M54 188 V20 m0 0 l-5 8 m5 -8 l5 8 M48 108 H548 m0 0 l-8 -5 m8 5 l-8 5"/>
+      <text x="40" y="20">y</text><text x="546" y="99">x</text>
+      <path class="reference-curve" data-reference/>
+      <path class="plot-curve" data-curve/>
+    <g class="figure-reveal" data-marks></g></svg><p class="task">Markera skärningarna på din skiss. Använd sedan grafverktyget och avrunda x-värdena till en decimal.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>63,4°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>243,4°</mn></mrow></math>
+</div><p>De båda skärningarna ligger i första respektive tredje kvadranten.</p></div></details>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 44–45 · Trigonometriska ekvationer och digitala verktyg</p>
+  <p>Titta vid behov på de lösta exemplen 1317–1318. Kontrollera alltid inställningen för grader och hela det angivna intervallet.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1319–1323</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1324–1326</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1327–1330</p></article>
+  </div>
+  <p><a href="https://www.geogebra.org/graphing" target="_blank" rel="noopener">Öppna GeoGebras grafritare</a></p>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med din graf</h1>
+
+  <p class="lead">Visa en graf du har arbetat med och förklara hur du läste av den.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Skärningspunkter</h2><p>Visa vad x-koordinaten betyder i <em>Din tur</em> eller i 1319–1320.</p></article>
+    <article class="card"><h2>Rätt intervall</h2><p>Förklara hur ritfönstret hjälper dig få med alla lösningar, till exempel i 1322.</p></article>
+    <article class="card"><h2>Jämför grafer</h2><p>Visa när ett värde ska ingå i en olikhet eller varför en nivå ligger utanför grafens värden, som i 1323 eller 1324.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>
