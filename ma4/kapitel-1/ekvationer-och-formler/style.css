@@ -1,0 +1,18 @@
+.omforma .slide:has(.answer[open]) .practice { display: none; }
+.omforma .slide > .math-givens { justify-items: start; }
+.omforma .math-givens { gap: 18px; }
+.omforma .circle svg { max-height: 266px; }
+.omforma .circle .radius.second-family { stroke: #854420; }
+.omforma .circle .point.second-family { fill: #854420; }
+.omforma .range-figure svg { max-height: 146px; }
+.omforma .range-figure .axis,
+.omforma .range-figure .ticks { fill: none; stroke: #304e56; stroke-width: 2; }
+.omforma .range-figure .interval { fill: none; stroke: #0a6452; stroke-width: 6; }
+.omforma .range-figure .outside { fill: #854420; }
+.omforma .range-figure .inside { fill: #0a6452; }
+.omforma .range-figure .figure-reveal { visibility: hidden; }
+.omforma .split:has(.answer[open]) .range-figure .figure-reveal { visibility: visible; }
+.omforma .range-figure figcaption { text-align: center; padding: 0 .35rem .45rem; }
+@media (max-width: 580px) {
+  .omforma .circle svg { max-height: 225px; }
+}
