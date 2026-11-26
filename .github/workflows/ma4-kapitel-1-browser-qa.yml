@@ -34,10 +34,14 @@ jobs:
           python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/ma4-http.log 2>&1 &
           curl --fail --retry 12 --retry-connrefused --retry-delay 1 http://127.0.0.1:8123/ma4/kapitel-1/ > /dev/null
       - name: Verify trigonometry lesson in Chromium
-        run: node ma4/kapitel-1/qa/trigonometri-och-trianglar.cjs
+        run: |
+          node ma4/kapitel-1/qa/trigonometri-och-trianglar.cjs
+          node ma4/kapitel-1/qa/enhetscirkeln.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ma4-kapitel-1-screenshots
-          path: /tmp/ma4-trianglar-qa
+          path: |
+            /tmp/ma4-trianglar-qa
+            /tmp/ma4-enhetscirkeln-qa

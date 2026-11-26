@@ -1,0 +1,54 @@
+.circle svg { max-height: 330px; }
+.classroom .circle svg { max-height: 390px; }
+.circle .rim, .circle .axes, .circle .radius, .circle .projection, .circle .rotation { fill: none; }
+.circle .rim { stroke: #6d8980; stroke-width: 2; }
+.circle .axes { stroke: #304e56; stroke-width: 1.8; }
+.circle .radius { stroke: #0a6452; stroke-width: 3; }
+.circle .reference { stroke: #536f77; stroke-width: 2; }
+.circle .projection { stroke: #577b78; stroke-width: 1.6; stroke-dasharray: 5 4; }
+.circle .rotation { stroke: #096451; stroke-width: 3; }
+.circle .clockwise { stroke: #8b4b17; }
+.circle .point { fill: #096451; stroke: none; }
+.circle .point.clockwise { fill: #8b4b17; }
+.circle .axis-dot { fill: #304e56; }
+.circle .quadrants text { fill: #53716e; font-size: 17px; }
+.circle .figure-reveal, [data-turn-arc], [data-turn-label] { visibility: hidden; }
+.split:has(.answer[open]) :is(.figure-reveal, [data-turn-arc], [data-turn-label]) { visibility: visible; }
+.circle .turn-label {
+  paint-order: stroke;
+  stroke: #f4f9f6;
+  stroke-width: 5px;
+}
+
+.practice, .practice-fields, .turn-controls { display: flex; flex-wrap: wrap; gap: .4rem; }
+.practice { align-items: end; }
+.practice-fields { flex: 1 1 18rem; }
+.practice-fields label {
+  display: grid;
+  flex: 1 1 6rem;
+  gap: .2rem;
+  min-width: 0;
+  font-size: .92em;
+}
+.practice-fields input {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: .4rem .5rem;
+  border: 1px solid #96b3ad;
+  border-radius: .45rem;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
+.practice-fields select { padding-inline: .4rem; }
+.practice-status { flex-basis: 100%; }
+.practice-status:empty { display: none; }
+.practice [aria-invalid="true"] { border: 2px solid #9c401c; }
+#las-av .split:has(.answer[open]) .practice { display: none; }
+.turn-controls button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: white; }
+#intervall .math-steps { gap: .2rem; }
+#intervall .answer-body { gap: .4rem; }
+@media (max-width: 580px) {
+  .circle svg, .classroom .circle svg { max-height: 225px; }
+}
