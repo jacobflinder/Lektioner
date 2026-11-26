@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trigonometriska ettan · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="stod.js" defer></script>
+</head>
+<body class="ettan">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Trigonometriska ettan</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="Enhetscirkel. En rätvinklig triangel har radien 1 som hypotenusa och koordinaterna cos v och sin v som kateter.">
+    <defs><marker id="ettan-figur-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#ettan-figur-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#ettan-figur-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <path class="triangle" d="M180 154 H263.200 V91.600 Z"/><path class="right-angle" d="M253.200 154 v-10 h10"/><path class="radius " d="M180 154 L263.200 91.600"/><circle class="point " cx="263.200" cy="91.600" r="4.5"/><text x="273.200" y="84.600">P</text><path class="rotation " d="M213 154 A33 33 0 0 0 206.400 134.200" marker-end="url(#ettan-figur-arrow)"/><text x="217" y="148">v</text><text x="224" y="113">1</text><text x="198" y="178">cos v</text><text x="270" y="132">sin v</text>
+    <g class="figure-reveal"></g>
+  </svg>
+</figure>
+<div class="work">
+<p>För en vinkel <i>v</i> har punkten P koordinaterna (cos <i>v</i>; sin <i>v</i>). Radien är 1.</p><p class="task">Vilket samband får du när du använder Pythagoras på triangeln?</p><form class="practice" data-success="Det stämmer. Summan är radien i kvadrat." novalidate><div class="practice-fields"><label>Samband<select data-answer="2" data-hint="Pythagoras adderar kateternas kvadrater."><option value="">Välj</option><option value="1">sin v + cos v = 1</option><option value="2">sin² v + cos² v = 1</option><option value="3">sin² v − cos² v = 1</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa härledningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><msup><mn>1</mn><mn>2</mn></msup></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn></mrow></math>
+</div><p>Detta är trigonometriska ettan. För punkter i övriga kvadranter använder vi avstånden till axlarna. Kvadraterna blir desamma även när en koordinat är negativ.</p><div class="math-givens">
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></math>
+</div></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Härleda trigonometriska ettan med enhetscirkeln.</li><li>Beräkna ett exakt värde och avgöra tecknet.</li><li>Förenkla uttryck och visa en identitet.</li></ol>
+</div>
+</div>
+</section>
+
+<section class="slide" id="tecken" aria-labelledby="tecken-title">
+  <h1 id="tecken-title" tabindex="-1">Bestäm ett värde och välj tecken</h1>
+<div class="split">
+<figure class="diagram circle">
+  <svg viewBox="0 0 360 308" role="img" aria-label="P ligger i andra kvadranten. Den horisontella koordinaten ligger till vänster om y-axeln.">
+    <defs><marker id="tecken-figur-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker></defs>
+    <path class="axes" d="M36 154 H324" marker-end="url(#tecken-figur-arrow)"/>
+    <path class="axes" d="M180 281 V25" marker-end="url(#tecken-figur-arrow)"/>
+    <circle class="rim" cx="180" cy="154" r="104"/>
+    <text x="329" y="160">x</text><text x="190" y="33">y</text><text x="161" y="172">O</text>
+    <g class="quadrants"><text x="92" y="80">II</text><text x="258" y="80">I</text><text x="93" y="233">III</text><text x="260" y="233">IV</text></g><path class="radius " d="M180 154 L84.000 114.000"/><circle class="point " cx="84.000" cy="114.000" r="4.5"/><text x="59.000" y="105.000">P</text><path class="projection" d="M84.000 154 V114.000 H180"/><path class="rotation " d="M227 154 A47 47 0 0 0 136.615 135.923" marker-end="url(#tecken-figur-arrow)"/><text x="206" y="146">v</text>
+    <g class="figure-reveal"><text x="66" y="178">−12/13</text><text x="189" y="101">5/13</text></g>
+  </svg>
+</figure>
+<div class="work">
+<div class="math-givens">
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mrow><mn>5</mn></mrow></mrow><mrow><mrow><mn>13</mn></mrow></mrow></mfrac></mrow></math>
+</div><p>Vinkeln <i>v</i> ligger i andra kvadranten. <math display="inline"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math>.</p><p class="task">Vilket tecken ska cosinus ha? Välj med hjälp av figuren.</p><form class="practice" data-success="Det stämmer. Punkten ligger till vänster om y-axeln." novalidate><div class="practice-fields"><label>Tecken för cos v<select data-answer="2" data-hint="Cosinus är den horisontella koordinaten. Jämför med y-axeln."><option value="">Välj</option><option value="1">Positivt</option><option value="2">Negativt</option><option value="3">Båda tecknen</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mrow><mrow><mn>5</mn></mrow></mrow><mrow><mrow><mn>13</mn></mrow></mrow></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mrow><mn>25</mn></mrow></mrow><mrow><mrow><mn>169</mn></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mn>144</mn></mrow></mrow><mrow><mrow><mn>169</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mo>±</mo><msqrt><mrow><mfrac><mrow><mrow><mn>144</mn></mrow></mrow><mrow><mrow><mn>169</mn></mrow></mrow></mfrac></mrow></msqrt><mo>=</mo><mo>±</mo><mfrac><mrow><mrow><mn>12</mn></mrow></mrow><mrow><mrow><mn>13</mn></mrow></mrow></mfrac></mrow></math>
+</div><p>Andra kvadranten ger det negativa värdet.</p><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>12</mn></mrow></mrow><mrow><mrow><mn>13</mn></mrow></mrow></mfrac></mrow></math>
+</div></div></details>
+</div>
+</div>
+</section>
+
+<section class="slide" id="vansterled" aria-labelledby="vansterled-title">
+  <h1 id="vansterled-title" tabindex="-1">Visa en identitet från vänsterledet</h1>
+<p>En identitet gäller för varje <i>x</i> där uttrycken är definierade. VL betyder vänsterled och HL betyder högerled. Vi skriver om VL tills vi får HL.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mn>3</mn><mo>+</mo><mn>3</mn><msup><mi mathvariant="normal">tan</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p>Här måste <math display="inline"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>.</p><p class="task">Hur kan du skriva om täljaren så att tangenskvoten går att få fram?</p><form class="practice" data-success="Det stämmer. Nu kan nämnaren fördelas på två termer." novalidate><div class="practice-fields"><label>Skriv om 3 som<select data-answer="2" data-hint="Använd trigonometriska ettan för att ersätta talet 1 i 3 · 1."><option value="">Välj</option><option value="1">3(sin² x − cos² x)</option><option value="2">3sin² x + 3cos² x</option><option value="3">3(sin x + cos x)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mtext>VL</mtext><mo>=</mo><mfrac><mrow><mrow><mn>3</mn></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>3</mn><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>3</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>3</mn><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>+</mo><mfrac><mrow><mrow><mn>3</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>3</mn><msup><mi mathvariant="normal">tan</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>3</mn><mo>+</mo><mn>3</mn><msup><mi mathvariant="normal">tan</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mtext>HL</mtext></mrow></math>
+</div><p>Delar du båda leden med 3 får du sambandet <math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mn>1</mn><mo>+</mo><msup><mi mathvariant="normal">tan</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>. V.S.V.</p></div></details>
+</section>
+
+<section class="slide" id="kvot" aria-labelledby="kvot-title">
+  <h1 id="kvot-title" tabindex="-1">Dela både täljare och nämnare</h1>
+<div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>2</mn><mo>−</mo><msup><mi mathvariant="normal">tan</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Här måste <math display="inline"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math> och <math display="inline"><mrow><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>.</p><p class="task">Vad delar du båda delarna av bråket med för att få tangens?</p><form class="practice" data-success="Det stämmer. Kvoten sin x cos x delat med cos² x ger tan x." novalidate><div class="practice-fields"><label>Gemensam divisor<select data-answer="2" data-hint="I täljaren vill du få kvar sin x delat med cos x."><option value="">Välj</option><option value="1">sin² x</option><option value="2">cos² x</option><option value="3">sin x cos x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa alla mellanled</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mtext>VL</mtext><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow><mrow><mrow><mfrac><mrow><mrow><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow><mrow><mrow><mfrac><mrow><mrow><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>−</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>2</mn><mo>−</mo><msup><mi mathvariant="normal">tan</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mtext>HL</mtext></mrow></math>
+</div><p>V.S.V. betyder vilket skulle visas.</p></div></details>
+</section>
+
+<section class="slide" id="forenkla" aria-labelledby="forenkla-title">
+  <h1 id="forenkla-title" tabindex="-1">Förenkla med trigonometriska ettan</h1>
+<div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Uttrycket är definierat när <math display="inline"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>≠</mo><mn>1</mn></mrow></math>.</p><p class="task">Välj vad du kan sätta in i stället för täljaren. Vilken faktor går sedan att förkorta?</p><form class="practice" data-success="Det stämmer. Faktorisera differensen av två kvadrater." novalidate><div class="practice-fields"><label>Ersätt cos² x med<select data-answer="3" data-hint="Lös ut cosinus i kvadrat ur trigonometriska ettan."><option value="">Välj</option><option value="1">1 − sin x</option><option value="2">1 + sin² x</option><option value="3">1 − sin² x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow><mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p>Förkortningen använder faktorn <math display="inline"><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>, som inte är noll där det ursprungliga uttrycket är definierat.</p></div></details>
+</section>
+
+<section class="slide" id="tva-led" aria-labelledby="tva-led-title">
+  <h1 id="tva-led-title" tabindex="-1">Skriv båda leden på samma form</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>2</mn><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>=</mo><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p>Båda leden är definierade för alla vinklar. Börja med att utveckla parenteserna.</p><p class="task">Välj termen som uppstår när du utvecklar kvadraten i högerledet. Vilken form får sedan båda leden?</p><form class="practice" data-success="Det stämmer. Efter additionen med 6 sin x cos x återstår 4 sin x cos x." novalidate><div class="practice-fields"><label>Blandtermen i HL:s kvadrat<select data-answer="2" data-hint="Multiplicera sinus och minus cosinus på båda sätten."><option value="">Välj</option><option value="1">+2 sin x cos x</option><option value="2">−2 sin x cos x</option><option value="3">−sin x cos x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mtext>VL</mtext><mo>=</mo><mn>2</mn><mo>(</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>2</mn><mo>(</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mtext>HL</mtext><mo>=</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mn>6</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mspace width="0.18em"/><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div></div><div class="math-steps">
+<math display="block"><mrow><mtext>VL</mtext><mo>=</mo><mtext>HL</mtext></mrow></math>
+</div><p>V.S.V. betyder vilket skulle visas.</p></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · bestäm och förenkla</h1>
+<div class="calculation-pair own-work"><div><h2>Bestäm sinus</h2><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>8</mn></mrow></mrow><mrow><mrow><mn>17</mn></mrow></mrow></mfrac></mrow></math>
+</div><p class="task">Bestäm alla möjliga exakta värden på sin v. Skriv mellanleden.</p></div><div><h2>Förenkla exakt</h2><div class="math-givens">
+<math display="block"><mrow><mn>5</mn><mo>+</mo><mn>2</mn><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mn>17°</mn><mo>+</mo><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mn>17°</mn></mrow></math>
+</div><p class="task">Gruppera termerna så att du kan använda trigonometriska ettan.</p></div></div><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>+</mo><msup><mrow><mo>(</mo><mo>−</mo><mfrac><mrow><mrow><mn>8</mn></mrow></mrow><mrow><mrow><mn>17</mn></mrow></mrow></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mrow><mn>64</mn></mrow></mrow><mrow><mrow><mn>289</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>225</mn></mrow></mrow><mrow><mrow><mn>289</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mo>±</mo><msqrt><mrow><mfrac><mrow><mrow><mn>225</mn></mrow></mrow><mrow><mrow><mn>289</mn></mrow></mrow></mfrac></mrow></msqrt><mo>=</mo><mo>±</mo><mfrac><mrow><mrow><mn>15</mn></mrow></mrow><mrow><mrow><mn>17</mn></mrow></mrow></mfrac></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mn>5</mn><mo>+</mo><mn>2</mn><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mn>17°</mn><mo>+</mo><mn>2</mn><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mn>17°</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>5</mn><mo>+</mo><mn>2</mn><mo>(</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mn>17°</mn><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mn>17°</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>5</mn><mo>+</mo><mn>2</mn><mo>·</mo><mn>1</mn><mo>=</mo><mn>7</mn></mrow></math>
+</div></div><p>Här kan <i>v</i> ligga i andra eller tredje kvadranten. Därför är båda sinusvärdena möjliga.</p></div></details>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 25–28 · Trigonometriska ettan</p>
+  <p>Titta vid behov på de lösta exemplen 1201–1205. Följ särskilt när en kvadrat ersätts eller två bråk får samma nämnare.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1206–1216</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1217–1222</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1223–1224</p></article>
+  </div>
+  <p>Om du kör fast kan du öppna <button type="button" data-slide-link="namnare">Gemensam nämnare</button> eller <button type="button" data-slide-link="konjugat">Förkorta och faktorisera</button>.</p><details class="answer"><summary>Visa sambanden för bokarbetet</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Tangens är definierad när <math display="inline"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Utgå från lösningar du har arbetat med. Förklara ett avgörande steg för varje mål.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Härled ettan</h2><p>Rita triangeln i enhetscirkeln från första bilden. Visa var radien och de två koordinaterna hamnar i Pythagoras sats.</p></article>
+    <article class="card"><h2>Bestäm värde och tecken</h2><p>Använd <em>Din tur</em> eller till exempel 1207, 1209 eller 1218. Visa hur du väljer rätt tecken eller varför båda behövs.</p></article>
+    <article class="card"><h2>Visa eller förenkla</h2><p>Visa till exempel i 1214, 1221 eller 1224 vilket uttryck du ersatte med hjälp av trigonometriska ettan.</p></article>
+  </div>
+</section>
+
+<section class="slide" id="namnare" aria-labelledby="namnare-title">
+  <h1 id="namnare-title" tabindex="-1">Frivilligt stöd · gemensam nämnare</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Uttrycket är definierat när <math display="inline"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>.</p><p class="task">Skriv allt som ett bråk. Vilken summa hoppas du få i täljaren?</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Gemensam nämnare först</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>+</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div></div><div><h2>Byt ut kvadraten först</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div></div></div></div></details><p><button type="button" data-slide-link="bokarbete">Till bokarbetet</button></p>
+</section>
+
+<section class="slide" id="konjugat" aria-labelledby="konjugat-title">
+  <h1 id="konjugat-title" tabindex="-1">Frivilligt stöd · förkorta och faktorisera</h1>
+<div class="calculation-pair own-work"><div><h2>Visa en identitet</h2><div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>3</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow></math>
+</div><p>Här är både sinus och cosinus skilda från 0.</p><p class="task">Skriv först om 1/tan x med sinus och cosinus.</p></div><div><h2>Förläng med konjugatet</h2><div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>−</mo><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Här är cosinus skild från 0.</p><p class="task">Skriv vänsterledet som ett bråk. Vilken faktor kan du förlänga med?</p></div></div><details class="answer"><summary>Visa lösningarna</summary><div class="answer-body"><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mtext>VL</mtext><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mfrac><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>3</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>1</mn><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></mrow><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac><mo>=</mo><mtext>HL</mtext></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mtext>VL</mtext><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>−</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mn>1</mn><mo>−</mo><msup><mi mathvariant="normal">sin</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><msup><mi mathvariant="normal">cos</mi><mn>2</mn></msup><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mn>1</mn><mo>+</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mtext>HL</mtext></mrow></math>
+</div></div></div></details><p><button type="button" data-slide-link="bokarbete">Till bokarbetet</button></p>
+</section>
+</main>
+</body>
+</html>
