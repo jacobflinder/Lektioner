@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tangensfunktioner · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="../sinus-och-cosinusfunktioner/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="tangens.js" defer></script>
+</head>
+<body class="sinusgraph tangens">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Tangensfunktioner</h1>
+<p>Tangens av en vinkel är lutningen hos linjen genom origo och cirkelpunkten. Med punktens koordinater blir lutningen sinus delat med cosinus.</p><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p class="task">Varför kan vi inte beräkna tan 90°?</p><form class="practice" data-success="Det stämmer. En lodrät linje har ingen ändlig lutning." novalidate><div class="practice-fields"><label>Välj förklaring<select data-answer="2" data-hint="På enhetscirkeln pekar radien rakt upp vid 90°. Jämför med y-axeln."><option value="">Välj</option><option value="1">Sin 90° = 0</option><option value="2">Cos 90° = 0</option><option value="3">Båda koordinaterna är noll</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa koordinaterna</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>90°</mn><mo>=</mo><mn>0</mn></mrow></math>
+</div><p>Kvoten skulle innebära division med noll.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Förklara asymptoter och tangensperioden.</li><li>Förutsäga vad som händer när tangensgrafen förändras.</li><li>Lösa en tangensekvation i ett givet intervall.</li></ol>
+</section>
+
+<section class="slide" id="period" aria-labelledby="period-title">
+  <h1 id="period-title" tabindex="-1">Ett halvvarv ger samma lutning</h1>
+<svg id="tangens-grund" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Tangenskurvan med separata grenar och lodräta asymptoter." data-low="-180" data-high="360" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-180°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">-90°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">0°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">90°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">180°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">270°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">360°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M214.67 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="201.67" y="16">y</text>
+<path class="reference-curve" data-reference/><g data-asymptotes></g><g data-tan-curve></g><path class="midline" data-midline/><g data-points></g></svg><p>Efter 180° har cirkelpunktens båda koordinater bytt tecken. Deras kvot är densamma.</p><p class="task">Hur långt går du i x-led från ett nollställe till nästa likadana läge?</p><form class="practice" data-success="Det stämmer. Ett halvvarv ger samma lutning." novalidate><div class="practice-fields"><label>Minsta positiva period<select data-answer="2" data-hint="Jämför nollställena vid 0° och 180°. Mellan dem finns en hel gren som upprepas."><option value="">Välj</option><option value="1">90°</option><option value="2">180°</option><option value="3">360°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>x</mi><mo>+</mo><mn>180°</mn><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac><mo>=</mo><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p>Jämför de två lägena i <a href="https://www.geogebra.org/m/cf6KYJeb" target="_blank" rel="noopener">enhetscirkeln och tangensgrafen i GeoGebra</a>.</p></div></details>
+</section>
+
+<section class="slide" id="asymptoter" aria-labelledby="asymptoter-title">
+  <h1 id="asymptoter-title" tabindex="-1">Tangensgrenen närmar sig en asymptot</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+</div><p class="task">Tänk på vinklarna strax under 90°. Vad händer med tangens när cosinus närmar sig 0 från positiva sidan?</p><form class="practice" data-success="Det stämmer. Punkten närmar sig en lodrät asymptot." novalidate><div class="practice-fields"><label>När x närmar sig 90° underifrån<select data-answer="1" data-hint="Täljaren är nära 1. Dividera den med allt mindre positiva tal."><option value="">Välj</option><option value="1">Tangens växer utan gräns</option><option value="2">Tangens närmar sig 0</option><option value="3">Tangens närmar sig 1</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>85°</mn><mo>≈</mo><mn>11,4</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>89°</mn><mo>≈</mo><mn>57,3</mn></mrow></math>
+</div></div><div><p>Strax över 90° är nämnaren liten och negativ, så tangens är stor och negativ. Själva 90° saknar värde.</p></div></div><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>90°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+</div><p>De lodräta linjerna ligger vid de här x-värdena, där n är ett heltal.</p></div></details>
+</section>
+
+<section class="slide" id="forandra" aria-labelledby="forandra-title">
+  <h1 id="forandra-title" tabindex="-1">Skilj branthet från period</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi></mrow></math>
+</div><p class="task">Vilken av de två funktionerna har period 90°?</p><form class="practice" data-success="Det stämmer. Argumentet behöver öka 180°, så x behöver bara öka 90°." novalidate><div class="practice-fields"><label>Period 90°<select data-answer="2" data-hint="När talet står inuti funktionen ökar argumentet dubbelt så snabbt."><option value="">Välj</option><option value="1">y = 2 tan x</option><option value="2">y = tan 2x</option><option value="3">Båda</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Dubbla y-värden</h2><svg id="amplitud-tan" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Tangens med dubbla y-värden." data-low="-180" data-high="180" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-180°</text><path class="grid" d="M175.50 23 V181"/><text class="tick-x" x="175.50" y="200">-90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">0°</text><path class="grid" d="M410.50 23 V181"/><text class="tick-x" x="410.50" y="200">90°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">180°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M293.00 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="280.00" y="16">y</text>
+<path class="reference-curve" data-reference/><g data-asymptotes></g><g data-tan-curve></g><path class="midline" data-midline/><g data-points></g></svg><p>Brantare kurva. Perioden är fortfarande 180°.</p></div><div><h2>Dubbla vinkeln</h2><svg id="period-tan" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Tangens med dubblerad vinkel." data-low="-180" data-high="180" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-180°</text><path class="grid" d="M175.50 23 V181"/><text class="tick-x" x="175.50" y="200">-90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">0°</text><path class="grid" d="M410.50 23 V181"/><text class="tick-x" x="410.50" y="200">90°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">180°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M293.00 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="280.00" y="16">y</text>
+<path class="reference-curve" data-reference/><g data-asymptotes></g><g data-tan-curve></g><path class="midline" data-midline/><g data-points></g></svg><div class="math-steps">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>180°</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>90°</mn></mrow></math>
+</div></div></div><p>För y = tan kx är P = 180°/k när k > 0.</p></div></details>
+</section>
+
+<section class="slide" id="forskjut" aria-labelledby="forskjut-title">
+  <h1 id="forskjut-title" tabindex="-1">Flytta grafen och asymptoterna</h1>
+<p>För y = tan(k(x + v)) + B flyttar v grafen −v i x-led. B flyttar grafen i y-led. De lodräta asymptoterna har samma x-lägen när bara B ändras.</p><div class="graph-tool"><div class="graph-controls"><label>k <select id="tan-k"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label><label>v i grader <select id="tan-v"><option value="0">0</option><option value="30">30</option><option value="-30">−30</option></select></label><label>B <select id="tan-b"><option value="0">0</option><option value="2">2</option><option value="-2">−2</option></select></label></div><svg id="tangens-verktyg" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Tangensgraf och lodräta asymptoter för de valda parametrarna." data-low="-180" data-high="360" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">-180°</text><path class="grid" d="M136.33 23 V181"/><text class="tick-x" x="136.33" y="200">-90°</text><path class="grid" d="M214.67 23 V181"/><text class="tick-x" x="214.67" y="200">0°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">90°</text><path class="grid" d="M371.33 23 V181"/><text class="tick-x" x="371.33" y="200">180°</text><path class="grid" d="M449.67 23 V181"/><text class="tick-x" x="449.67" y="200">270°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">360°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M214.67 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="201.67" y="16">y</text>
+<path class="reference-curve" data-reference/><g data-asymptotes></g><g data-tan-curve></g><path class="midline" data-midline/><g data-points></g></svg><p id="tan-result" role="status"></p></div><p>Förutsäg vad som händer med asymptoten vid 90° när v blir 30°. Ändra sedan B och förklara vad som ligger kvar.</p>
+</section>
+
+<section class="slide" id="los" aria-labelledby="los-title">
+  <h1 id="los-title" tabindex="-1">Lös för argumentet och sedan för x</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>2</mn><mi>x</mi><mo>=</mo><mo>−</mo><mn>0,8</mn></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>360°</mn></mrow></math>
+</div><p class="task">Vilken period får x när du dividerar hela lösningen för 2x med två?</p><form class="practice" data-success="Det stämmer. Även periodtermen måste divideras med 2." novalidate><div class="practice-fields"><label>Period för x<select data-answer="2" data-hint="Tangens har period 180° i argumentet 2x."><option value="">Välj</option><option value="1">45°</option><option value="2">90°</option><option value="3">180°</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><div class="math-steps">
+<math display="block"><mrow><mn>2</mn><mi>x</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mn>0,8</mn><mo>)</mo><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mn>0,8</mn><mo>)</mo></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mn>90°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mo>−</mo><mn>19,3°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>90°</mn></mrow></math>
+</div><p>Välj n = 1, 2, 3, 4. Svaren är ungefär 70,7°, 160,7°, 250,7° och 340,7°.</p></div><svg id="exempel-tan" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Tangensgraf och linjen y = −0,8, med fyra skärningar." data-low="0" data-high="360" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">0°</text><path class="grid" d="M175.50 23 V181"/><text class="tick-x" x="175.50" y="200">90°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">180°</text><path class="grid" d="M410.50 23 V181"/><text class="tick-x" x="410.50" y="200">270°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">360°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M58.00 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="45.00" y="16">y</text>
+<path class="reference-curve" data-reference/><g data-asymptotes></g><g data-tan-curve></g><path class="midline" data-midline/><g data-points></g></svg></div></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · hitta alla lösningar</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mn>0°</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>180°</mn></mrow></math>
+</div><p class="task">Skriv den allmänna lösningen först. Välj sedan heltal så att alla vinklar i intervallet kommer med. Kontrollera mot grafen.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><div class="math-steps">
+<math display="block"><mrow><mn>3</mn><mi>x</mi><mo>=</mo><mn>45°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>180°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>15°</mn><mo>+</mo><mi>n</mi><mo>·</mo><mn>60°</mn></mrow></math>
+</div><p>n = 0, 1, 2 ger x = 15°, 75° och 135°. Nästa värde 195° ligger utanför intervallet.</p></div><svg id="egen-tan" class="plot shift-plot" viewBox="0 0 554 214" role="img" aria-label="Tangensgraf och linjen y = 1, med tre skärningar." data-low="0" data-high="180" data-limit="4">
+<g><path class="grid" d="M58.00 23 V181"/><text class="tick-x" x="58.00" y="200">0°</text><path class="grid" d="M175.50 23 V181"/><text class="tick-x" x="175.50" y="200">45°</text><path class="grid" d="M293.00 23 V181"/><text class="tick-x" x="293.00" y="200">90°</text><path class="grid" d="M410.50 23 V181"/><text class="tick-x" x="410.50" y="200">135°</text><path class="grid" d="M528.00 23 V181"/><text class="tick-x" x="528.00" y="200">180°</text><path class="grid" d="M58 176.00 H528"/><text class="tick-y" x="50" y="181.00">-4</text><path class="grid" d="M58 157.75 H528"/><text class="tick-y" x="50" y="162.75">-3</text><path class="grid" d="M58 139.50 H528"/><text class="tick-y" x="50" y="144.50">-2</text><path class="grid" d="M58 121.25 H528"/><text class="tick-y" x="50" y="126.25">-1</text><path class="grid" d="M58 84.75 H528"/><text class="tick-y" x="50" y="89.75">1</text><path class="grid" d="M58 66.50 H528"/><text class="tick-y" x="50" y="71.50">2</text><path class="grid" d="M58 48.25 H528"/><text class="tick-y" x="50" y="53.25">3</text><path class="grid" d="M58 30.00 H528"/><text class="tick-y" x="50" y="35.00">4</text></g>
+<path class="plot-axis" d="M58 103 H541 m0 0 l-8 -5 m8 5 l-8 5 M58.00 181 V18 m0 0 l-5 8 m5 -8 l5 8"/>
+<text x="541" y="95">x</text><text x="45.00" y="16">y</text>
+<path class="reference-curve" data-reference/><g data-asymptotes></g><g data-tan-curve></g><path class="midline" data-midline/><g data-points></g></svg></div></div></details>
+</section>
+
+<section class="slide" id="socrative" aria-labelledby="socrative-title">
+  <h1 id="socrative-title" tabindex="-1">Socrative</h1>
+
+  <div class="card socrative-activity">
+    <h2>406. Ma4 ... Kurvor - förskjuta och tanx ...</h2>
+    <p><strong>SOC-38689182</strong></p>
+    <p>Gå till <a href="https://b.socrative.com/login/student/" target="_blank" rel="noopener">Socrative för elever</a>, ange rummet som läraren visar och invänta start.</p>
+  </div>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 54–56 · Tangensfunktioner</p>
+  <p>Titta vid behov på det lösta exemplet 1369. Jämför vilka lösningar algebran ger med vilka skärningspunkter du ser grafiskt.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1370–1378</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1379–1382</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1383–1384</p></article>
+  </div><details class="answer"><summary>Visa formelstödet</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>180°</mn></mrow></mrow><mrow><mrow><mi>k</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Perioden gäller y = tan kx med positivt k. Tangens saknar värde där dess cosinusnämnare blir noll.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+
+  <p class="lead">Visa en graf och en lösning du har arbetat med. Berätta vad som återstår att göra.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Period och asymptot</h2><p>Visa varför funktionen har halvvarvsperiod och saknar värden vid lodräta linjer, till exempel i 1373–1377.</p></article>
+    <article class="card"><h2>Förändra grafen</h2><p>Visa hur k eller en förskjutning ändrar grafen, till exempel i 1370 eller 1382.</p></article>
+    <article class="card"><h2>Lös ekvationen</h2><p>Förklara hur du fick med alla lösningar i intervallet, till exempel i <em>Din tur</em>, 1371 eller 1379.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>
