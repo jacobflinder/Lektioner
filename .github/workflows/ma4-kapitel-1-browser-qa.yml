@@ -41,6 +41,7 @@ jobs:
           node ma4/kapitel-1/qa/enhetscirkeln-symmetrier.cjs
           node ma4/kapitel-1/qa/trigonometriska-ettan.cjs
           node ma4/kapitel-1/qa/additions-och-subtraktionsformler.cjs
+          node ma4/kapitel-1/qa/formler-for-dubbla-vinkeln.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,3 +54,4 @@ jobs:
             /tmp/ma4-symmetri-qa
             /tmp/ma4-ettan-qa
             /tmp/ma4-add-qa
+            /tmp/ma4-dubbel-qa
