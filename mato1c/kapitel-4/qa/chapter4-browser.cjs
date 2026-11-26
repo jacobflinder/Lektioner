@@ -28,7 +28,7 @@ const thoughtPauseTargets={
  'ratvinkliga-trianglar':['rat-definitions','rat-arc-defs'],
  'exakta-trigonometriska-varden':['exact-30-60','rationalize-two'],
  enhetscirkeln:['unit-coordinates','unit-sin-solve','unit-cos-solve','unit-period','unit-series'],
- 'trigonometriska-ekvationer':['trig-sin-full','trig-cos-full','trig-all-symmetries','trig-exact-mirrors'],
+ 'trigonometriska-ekvationer':['trig-sin-full','trig-cos-full','trig-all-symmetries','trig-exact-mirrors','trig-interval'],
  areasatsen:['area-height','area-formula','area-worked','area-inverse','area-two-triangles','area-extra-recall'],
  sinussatsen:['sine-heights','sine-theorem','sine-original'],
  'sinussatsens-tva-fall':['start-answer','height-expression','short','height','two','long','obtuse-short','obtuse-long','worked-example'],
@@ -107,6 +107,12 @@ async function inspectLayout(page,id,width,i){
     for(let j=0;j<await buttons.count();j++){
      const button=buttons.nth(j),id=await button.getAttribute('data-reveal');
      const target=page.locator('#'+id);
+     if(id==='area-inverse'){
+      assert(!(await page.locator('.slide.active').innerText()).includes('36,87°'),'Areasatsen: första värdet är dolt före klick');checks++;
+     }
+     if(id==='trig-interval'){
+      assert(!/(510|750|870)°/.test(await page.locator('.slide.active').innerText()),'Trigekv: inga intervallösningar visas före klick');checks++;
+     }
      assert.equal(await button.getAttribute('aria-expanded'),'false',`${lesson.id} bild ${i+1}: återkopplingsknapp börjar stängd`);checks++;
      if(id==='unit-series')assert.equal(await target.locator('.series-result:visible').count(),0,'Vinkelserier ska inte synas före elevens försök');
      else assert.equal(await target.isVisible(),false,`${lesson.id} bild ${i+1}: matematik i ${id} visas för tidigt`);checks++;
@@ -218,6 +224,17 @@ async function inspectLayout(page,id,width,i){
     }
    }
    if(lesson.id==='ratvinkliga-trianglar'){
+    await page.locator('#jump').selectOption('1');
+    const withinSvg=await page.locator('.slide.active svg').evaluate(svg=>{
+     const right=svg.getBoundingClientRect().right;
+     const label=[...svg.querySelectorAll('text')].find(text=>text.textContent==='a · motstående');
+     return !!label&&label.getBoundingClientRect().right<=right;
+    });
+    assert(withinSvg,'Rätvinkliga: motstående katets etikett får plats');checks++;
+    await page.locator('#jump').selectOption('8');
+    const arc=await page.locator('.slide.active [data-angle-dcb]').getAttribute('d');
+    const [x1,y1,x2,y2]=arc.replace(/ A [\d.]+ [\d.]+ 0 0 1 /,' ').match(/[\d.]+/g).map(Number);
+    assert(Math.abs((y1-60)/(x1-80)-180/390)<0.001&&Math.abs((y2-60)/(x2-80)-180/240)<0.001,'Rätvinkliga: vinkelbågen börjar på CB och slutar på CD');checks++;
     for(const slide of ['2','3','4','5','6','7']){
      await page.locator('#jump').selectOption(slide);
      const fig=page.locator('.slide.active [data-right-triangle] svg');
@@ -226,6 +243,8 @@ async function inspectLayout(page,id,width,i){
     }
    }
    if(lesson.id==='enhetscirkeln'){
+    await page.locator('#jump').selectOption('11');
+    assert.match(await page.locator('.slide.active').innerText(),/4203–4208[\s\S]*4209–4213[\s\S]*4214–4215/,'Enhetscirkeln: nivåer visas före första bokarbetet');checks++;
     for(const slide of ['6','7']){
      await page.locator('#jump').selectOption(slide);
      const figure=page.locator('.slide.active [data-symmetry]');
