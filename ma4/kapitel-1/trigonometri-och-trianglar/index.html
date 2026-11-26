@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Repetera trigonometri i rätvinkliga trianglar och använd sinus, cosinus, tangens och arcus.">
+  <title>Trigonometri och trianglar · Ma4</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="lesson.js" defer></script>
+</head>
+<body>
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Trigonometri och trianglar</h1>
+<div class="split">
+
+  <figure class="diagram">
+    <svg viewBox="0 0 400 250" role="img" aria-label="Rätvinklig triangel med a på basen, b till höger och c på den sneda sidan. Vinkeln v sitter i vänstra hörnet." data-triangle>
+      <path class="triangle" d="M55 210 H241.67 V70.00 Z"/>
+      <path class="right-angle" d="M226.67 210 v-15 h15"/>
+      <path class="angle" d="M90 210 A35 35 0 0 0 83.0 189.0"/>
+
+      <text x="148.33" y="235.00" text-anchor="middle">a</text>
+      <text x="253.67" y="145.00" text-anchor="start">b</text>
+      <text x="141.33" y="125.00" text-anchor="middle">c</text>
+      <text x="110.00" y="200.00" text-anchor="start">v</text>
+    </svg>
+  </figure>
+  <div class="work">
+
+    <p class="task">Peka ut hypotenusan och båda kateterna. Vilken katet ligger mittemot vinkeln <i>v</i>?</p>
+    <details class="answer"><summary>Visa återkoppling</summary><div class="answer-body"><p><i>c</i> är hypotenusan. <i>b</i> är motstående katet till <i>v</i> och <i>a</i> är närliggande katet.</p></div></details>
+    <h2>Efter lektionen ska du kunna</h2>
+    <ol>
+      <li>Välja sinus, cosinus eller tangens utifrån triangelns sidor.</li>
+      <li>Ställa upp en ekvation och beräkna en okänd sida.</li>
+      <li>Beräkna en okänd vinkel med arcus och kontrollera vinkelsumman.</li>
+    </ol>
+  </div>
+</div>
+</section>
+<section class="slide" id="kvoter" aria-labelledby="kvoter-title">
+  <h1 id="kvoter-title" tabindex="-1">Tre kvoter i en rätvinklig triangel</h1>
+<div class="split">
+
+  <figure class="diagram">
+    <svg viewBox="0 0 400 250" role="img" aria-label="I förhållande till vinkeln v är b den motstående kateten, a den närliggande och c hypotenusan." data-triangle>
+      <path class="triangle" d="M55 210 H241.67 V70.00 Z"/>
+      <path class="right-angle" d="M226.67 210 v-15 h15"/>
+      <path class="angle" d="M90 210 A35 35 0 0 0 83.0 189.0"/>
+
+      <text x="148.33" y="235.00" text-anchor="middle">a</text>
+      <text x="253.67" y="145.00" text-anchor="start">b</text>
+      <text x="141.33" y="125.00" text-anchor="middle">c</text>
+      <text x="110.00" y="200.00" text-anchor="start">v</text>
+    </svg>
+  </figure>
+  <div class="work">
+<p>Utgå från vinkeln <i>v</i>. Hypotenusan ligger mittemot den räta vinkeln. Kateternas roller beror på vilken spetsig vinkel du utgår från.</p>
+<dl class="math-givens ratio-list"><div><dt>Motstående katet / hypotenusa</dt><dd><math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mi>b</mi></mrow><mrow><mi>c</mi></mrow></mfrac></mrow></math></dd></div><div><dt>Närliggande katet / hypotenusa</dt><dd><math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mi>a</mi></mrow><mrow><mi>c</mi></mrow></mfrac></mrow></math></dd></div><div><dt>Motstående katet / närliggande katet</dt><dd><math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mi>b</mi></mrow><mrow><mi>a</mi></mrow></mfrac></mrow></math></dd></div></dl>
+  </div>
+</div>
+</section>
+<section class="slide" id="sida" aria-labelledby="sida-title">
+  <h1 id="sida-title" tabindex="-1">Beräkna en katet</h1>
+<div class="split">
+
+  <figure class="diagram">
+    <svg viewBox="0 0 400 250" role="img" aria-label="Vinkeln 35 grader ligger mellan den närliggande kateten x och hypotenusan 11 centimeter." data-triangle>
+      <path class="triangle" d="M55 210 H254.94 V70.00 Z"/>
+      <path class="right-angle" d="M239.94 210 v-15 h15"/>
+      <path class="angle" d="M90 210 A35 35 0 0 0 83.67 189.92"/>
+
+      <text x="154.97" y="235.00" text-anchor="middle">x</text>
+      <text x="147.97" y="125.00" text-anchor="middle">11 cm</text>
+      <text x="110.00" y="200.00" text-anchor="start">35°</text>
+    </svg>
+  </figure>
+  <div class="work">
+<p class="task">Bestäm längden <i>x</i>. Skriv först vilken kvot du behöver och lös ekvationen för hand.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Vi känner hypotenusan och söker den närliggande kateten. Då använder vi cosinus.</p><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>35°</mn><mo>=</mo><mfrac><mrow><mi>x</mi></mrow><mrow><mn>11</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>11</mn><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>35°</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>9,0</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math>
+</div><p>Kateten är kortare än hypotenusan, som väntat.</p></div></details>
+  </div>
+</div>
+</section>
+<section class="slide" id="vinkel" aria-labelledby="vinkel-title">
+  <h1 id="vinkel-title" tabindex="-1">Beräkna en vinkel med arcus</h1>
+<div class="split">
+
+  <figure class="diagram">
+    <svg viewBox="0 0 400 250" role="img" aria-label="Vinkeln v har en motstående katet på 5 centimeter och hypotenusan är 12 centimeter." data-triangle>
+      <path class="triangle" d="M55 210 H317.00 V89.91 Z"/>
+      <path class="right-angle" d="M302.00 210 v-15 h15"/>
+      <path class="angle" d="M90 210 A35 35 0 0 0 86.82 195.42"/>
+
+      <text x="329.00" y="154.96" text-anchor="start">5 cm</text>
+      <text x="179.00" y="134.96" text-anchor="middle">12 cm</text>
+      <text x="110.00" y="200.00" text-anchor="start">v</text>
+    </svg>
+  </figure>
+  <div class="work">
+<p><strong>Arcus</strong> ger vinkeln när du känner kvoten. Använd arcsin, arccos eller arctan. På räknaren kan de stå som sin⁻¹, cos⁻¹ och tan⁻¹. Ställ in <strong>grader (DEG)</strong>.</p><p class="task">Beräkna <i>v</i> och den andra spetsiga vinkeln. Välj kvot innan du använder räknaren.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Vi känner den motstående kateten och hypotenusan.</p><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mn>5</mn></mrow><mrow><mn>12</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mi mathvariant="normal">arcsin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mn>5</mn></mrow><mrow><mn>12</mn></mrow></mfrac><mo>)</mo><mo>≈</mo><mn>24,6°</mn></mrow></math>
+<math display="block"><mrow><mn>90°</mn><mo>−</mo><mn>24,6°</mn><mo>≈</mo><mn>65,4°</mn></mrow></math>
+</div><p>De två spetsiga vinklarna ska tillsammans bli 90°.</p></div></details>
+  </div>
+</div>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · från två kateter till vinkel och hypotenusa</h1>
+<div class="split">
+
+  <figure class="diagram">
+    <svg viewBox="0 0 400 250" role="img" aria-label="Rätvinklig triangel med vinkeln v vid kateten 8 centimeter, motstående katet 6 centimeter och hypotenusan c. Vinkeln u ligger vid den andra spetsen." data-triangle>
+      <path class="triangle" d="M55 210 H241.67 V70.00 Z"/>
+      <path class="right-angle" d="M226.67 210 v-15 h15"/>
+      <path class="angle" d="M90 210 A35 35 0 0 0 83.0 189.0"/>
+      <path class="angle second-angle" d="M241.67 97.00 A27 27 0 0 1 220.07 86.20"/>
+      <text x="148.33" y="235.00" text-anchor="middle">8 cm</text>
+      <text x="253.67" y="145.00" text-anchor="start">6 cm</text>
+      <text x="141.33" y="125.00" text-anchor="middle">c</text>
+      <text x="110.00" y="200.00" text-anchor="start">v</text>
+      <text x="222.67" y="123.00" text-anchor="end">u</text>
+    </svg>
+  </figure>
+  <div class="work">
+<p class="task">Bestäm först <i>v</i> och sedan <i>c</i> med en trigonometrisk kvot. Skriv dina mellanled. Behåll räknarens värde på <i>v</i> tills du har räknat ut <i>c</i>.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Vinkeln</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mn>6</mn></mrow><mrow><mn>8</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mn>6</mn></mrow><mrow><mn>8</mn></mrow></mfrac><mo>)</mo><mo>≈</mo><mn>36,9°</mn></mrow></math>
+</div></div><div><h2>Hypotenusan</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mn>8</mn></mrow><mrow><mi>c</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>c</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mn>8</mn></mrow></math>
+<math display="block"><mrow><mi>c</mi><mo>=</mo><mfrac><mrow><mn>8</mn></mrow><mrow><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi></mrow></mrow></mfrac><mo>=</mo><mn>10</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math>
+</div></div></div><p>Den andra spetsiga vinkeln är ungefär 53,1°. Kontrollera hypotenusan med Pythagoras. <math display="inline"><mrow><msup><mrow><mn>6</mn></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mn>8</mn></mrow><mn>2</mn></msup><mo>=</mo><msup><mrow><mn>10</mn></mrow><mn>2</mn></msup></mrow></math>.</p></div></details>
+  </div>
+</div>
+</section>
+<section class="slide" id="valj-kvot" aria-labelledby="valj-kvot-title">
+  <h1 id="valj-kvot-title" tabindex="-1">Välj kvot när en vinkel söks</h1>
+<div class="split">
+
+  <figure class="diagram">
+    <svg viewBox="0 0 400 250" role="img" aria-label="Vinkeln v ligger mellan kateten 9 centimeter och hypotenusan 15 centimeter." data-triangle>
+      <path class="triangle" d="M55 210 H160.00 V70.00 Z"/>
+      <path class="right-angle" d="M145.00 210 v-15 h15"/>
+      <path class="angle" d="M90 210 A35 35 0 0 0 76.0 182.0"/>
+
+      <text x="107.50" y="235.00" text-anchor="middle">9 cm</text>
+      <text x="100.50" y="125.00" text-anchor="middle">15 cm</text>
+      <text x="110.00" y="200.00" text-anchor="start">v</text>
+    </svg>
+  </figure>
+  <div class="work">
+<p class="task">Bestäm <i>v</i> på papper. Motivera ditt kvotval med de sidor som är givna.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Vi känner den närliggande kateten och hypotenusan.</p><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>v</mi><mo>=</mo><mfrac><mrow><mn>9</mn></mrow><mrow><mn>15</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mi mathvariant="normal">arccos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mn>9</mn></mrow><mrow><mn>15</mn></mrow></mfrac><mo>)</mo><mo>≈</mo><mn>53,1°</mn></mrow></math>
+</div><p>Samma triangel kan användas för att bestämma den andra spetsiga vinkeln med vinkelsumman.</p></div></details>
+  </div>
+</div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+  <p class="lead">Läroboken s. 10–11 · Repetition av trigonometri</p>
+  <p>Läs det lösta exemplet <strong>1101</strong>. Förklara varför tangens används till vinkeln och varför cosinus fungerar till hypotenusan.</p>
+  <p class="task">Gör alla uppgifter och deluppgifter på båda nivåerna på det här uppslaget.</p>
+  <div class="cards">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1102–1105</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1106–1107</p></article>
+  </div>
+  <p>Rita gärna en egen triangel. Markera vinkeln du utgår från och skriv den trigonometriska ekvationen före beräkningen.</p>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+  <p class="lead">Använd dina egna lösningar från s. 11. Visa och förklara hur du tänkte.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Välj kvot</h2><p>Peka ut de två sidorna som avgör kvotvalet i en del av <strong>1102 eller 1107</strong>.</p></article>
+    <article class="card"><h2>Beräkna en sida</h2><p>Visa ekvationen och det steg som frilägger sidan i <strong>1102 eller 1107</strong>.</p></article>
+    <article class="card"><h2>Beräkna en vinkel</h2><p>Visa ditt arcussteg i <strong>1103 eller 1106</strong>. Kontrollera att de spetsiga vinklarna tillsammans blir 90°.</p></article>
+  </div><details class="answer"><summary>Visa vad du kan kontrollera</summary><div class="answer-body"><p>Motivera kvoten med sidornas roller. Skriv först ekvationen med den givna kvoten. Frilägg sedan sidan eller använd rätt arcusfunktion i gradläge.</p></div></details>
+</section>
+</main>
+</body>
+</html>
