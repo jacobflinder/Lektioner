@@ -1,0 +1,40 @@
+.diagram .diagram-after,
+.applicable-case:has(.answer.on) .diagram-before {
+  display: none;
+}
+
+.applicable-case:has(.answer.on) .diagram-after {
+  display: inline;
+}
+
+.diagram svg .path-first { stroke: #087066; }
+.diagram svg .path-second { stroke: #9f5a1c; stroke-dasharray: 7 4; }
+
+.diagram svg line.path-first,
+.diagram svg line.path-second {
+  stroke-width: 3.2px;
+}
+
+.diagram svg text {
+  font-size: 21px;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.diagram svg text.path-first,
+.diagram svg text.path-second {
+  fill: #193649;
+  stroke: #fff;
+  stroke-dasharray: none;
+  font-weight: 700;
+}
+
+.applicable-case details {
+  margin: 16px 0;
+}
+
+.applicable-case .answer .card + .card {
+  margin-top: 12px;
+}
