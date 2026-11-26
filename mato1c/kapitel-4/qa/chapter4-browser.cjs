@@ -13,6 +13,11 @@ const lessons=[
  {id:'areasatsen',levels:['4303–4307','4308–4311','4312–4313'],extras:1},
  {id:'sinussatsen',levels:['4315–4318','4319–4320'],extras:0}
 ];
+const socrativeActivities={
+ enhetscirkeln:[['326','Ma3c Enhetscirkeln','SOC-37277932'],['329','Ma3c Enhetscirkeln 4','SOC-37278098']],
+ areasatsen:[['330','Ma3c Enhetscirkeln 5 och areasats','SOC-37278150']],
+ sinussatsen:[['331','Ma3c Areasats och Sinussatsen1','SOC-37278423']]
+};
 const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
 const screenshotDir=path.resolve(process.env.QA_SCREENSHOT_DIR||'mato1c-qa-screenshots/kapitel-4');
 fs.mkdirSync(screenshotDir,{recursive:true});
@@ -58,11 +63,15 @@ async function inspectLayout(page,id,width,i){
    assert.equal(await page.locator('.slide').first().locator('.grid.three .card > strong').count(),3,`${lesson.id}: 3 goals`);checks++;
    assert.deepEqual(await page.locator('.book-number').allTextContents(),lesson.levels,`${lesson.id}: full book levels`);checks++;
    assert.equal(await page.locator('.goal-list > div').count(),3,`${lesson.id}: goal to work mapping`);checks++;
+   const studentContent=await page.locator('main').textContent();
+   for(const [number,name,code] of socrativeActivities[lesson.id]||[]){
+    assert(studentContent.includes(`Socrative ${number}`)&&studentContent.includes(name)&&studentContent.includes(code),`${lesson.id}: fullständigt Socrative-namn och kod ${number} syns för eleverna`);checks++;
+   }
    for(let i=0;i<count;i++){
     await page.locator('#jump').selectOption(String(i));
     assert.equal(await page.locator('.slide.active').count(),1);checks++;
     const studentText=await page.locator('.slide.active').innerText();
-    assert(!/Originalets|originallektionen|Jacobs?|samma webblektion|SOC-3727|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
+    assert(!/Originalets|originallektionen|Jacobs?|samma webblektion|Ingen information skickas|Sidan skickar|tavla-till-webb/i.test(studentText),`${lesson.id} slide ${i+1}: teknisk/lärarorienterad text i elevvyn`);checks++;
     const buttons=page.locator('.slide.active [data-reveal]');
     for(let j=0;j<await buttons.count();j++){
      const button=buttons.nth(j),id=await button.getAttribute('data-reveal');
@@ -97,9 +106,16 @@ async function inspectLayout(page,id,width,i){
      await page.locator('#jump').selectOption(slide);
      const figure=page.locator('.slide.active [data-symmetry]');
      assert.equal(await figure.locator('svg circle').count(),2);checks++;
+     assert.equal(await figure.locator('svg line[data-role="sine-guide"]').count(),1,`Enhetscirkeln bild ${Number(slide)+1}: sinusprojektion till y-axeln för P`);checks++;
+     assert.equal(await figure.locator('svg line[data-role="sine-segment"]').count(),1);checks++;
+     assert.equal(await figure.locator('svg text[data-role="sine-label"]').count(),1);checks++;
      await figure.locator('[data-symmetry-step="both"]').click();
      assert.equal(await figure.locator('svg circle').count(),3);checks++;
      assert((await figure.locator('svg path').count())>=4);checks++;
+     assert.equal(await figure.locator('svg line[data-role="sine-guide"]').count(),2,`Enhetscirkeln bild ${Number(slide)+1}: båda punkternas sinusprojektioner`);checks++;
+     assert.equal(await figure.locator('svg line[data-role="sine-segment"]').count(),slide==='6'?1:2,`Enhetscirkeln bild ${Number(slide)+1}: en gemensam eller två motsatta sinussträckor`);checks++;
+     assert.equal(await figure.locator('svg text[data-role="sine-label"]').count(),slide==='6'?1:2);checks++;
+     if(width===390)await page.screenshot({path:path.join(screenshotDir,`enhetscirkeln-${width}-spegling-${Number(slide)+1}.png`),fullPage:true});
     }
     for(const slide of ['2','3','5','8']){
      await page.locator('#jump').selectOption(slide);

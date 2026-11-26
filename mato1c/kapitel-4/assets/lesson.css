@@ -32,6 +32,9 @@ math[display=inline]{font:1.09em "Cambria Math","STIX Two Math",serif;vertical-a
 .diagram svg text.diagram-emphasis{font-weight:750;fill:#08766b}
 .diagram svg .case-geometry{opacity:.28;transition:opacity .2s}.diagram svg .case-geometry.is-selected{opacity:1}
 .diagram svg text.big-svg-label{font-size:20px}
+.diagram svg text[data-role="sine-label"]{font:700 21px system-ui,sans-serif;paint-order:stroke;stroke:#fff;stroke-width:2px;stroke-linejoin:round}
+.diagram svg text[data-role="sine-label"][data-sign="positive"]{fill:#087d70}
+.diagram svg text[data-role="sine-label"][data-sign="negative"]{fill:#bf782c}
 .diagram.compact-geometry svg{max-height:240px}
 @media(max-width:790px){.illustrated-solution{grid-template-columns:1fr}.illustrated-solution .math-line{font-size:clamp(1.06rem,4.45vw,1.24rem);padding:8px 10px}}
 @media(max-width:600px){.case-gallery{grid-template-columns:1fr}.case-gallery .diagram svg{max-height:175px}}
