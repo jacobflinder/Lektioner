@@ -36,5 +36,10 @@ math[display=inline]{font:1.09em "Cambria Math","STIX Two Math",serif;vertical-a
 .diagram svg text[data-role="sine-label"][data-sign="positive"]{fill:#087d70}
 .diagram svg text[data-role="sine-label"][data-sign="negative"]{fill:#bf782c}
 .diagram.compact-geometry svg{max-height:240px}
+.eq-chain.answer.on{display:grid}
+.definition-cards.answer.on{display:grid}
+.grid.answer.on{display:grid}
+.deferred-series .series-result{display:none}
+.deferred-series.on .series-result{display:block}
 @media(max-width:790px){.illustrated-solution{grid-template-columns:1fr}.illustrated-solution .math-line{font-size:clamp(1.06rem,4.45vw,1.24rem);padding:8px 10px}}
 @media(max-width:600px){.case-gallery{grid-template-columns:1fr}.case-gallery .diagram svg{max-height:175px}}

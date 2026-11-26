@@ -40,10 +40,13 @@ modeToggle.addEventListener('click',()=>{
 });
 document.querySelectorAll('[data-reveal]').forEach(button=>{
  const target=document.getElementById(button.dataset.reveal);if(!target)throw Error(`Saknar återkoppling ${button.dataset.reveal}`);
- const original=button.textContent;button.setAttribute('aria-expanded','false');
+ const original=button.textContent;button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',target.id);
  button.addEventListener('click',()=>{
   const on=target.classList.toggle('on');button.textContent=on?'Dölj återkoppling':original;
   button.setAttribute('aria-expanded',String(on));
+  button.closest('.slide').querySelectorAll('[data-reveal-label]').forEach(label=>{
+   if(label.dataset.revealLabel===target.id)label.textContent=on?label.dataset.after:label.dataset.before;
+  });
  });
 });
 document.querySelectorAll('[data-table-reveal]').forEach(button=>{
@@ -147,7 +150,7 @@ document.querySelectorAll('[data-symmetry]').forEach(root=>{
    (kind==='vertical'?'Förutsäg var Q hamnar på samma höjd som P.':'Förutsäg var Q hamnar under x-axeln.');
  };
  root.querySelectorAll('[data-symmetry-step]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.symmetryStep==='both')));
- show(false);
+ show(!root.querySelector('[data-symmetry-step]'));
 });
 document.querySelectorAll('[data-equation-circle]').forEach(root=>{
  const svg=root.querySelector('svg'),kind=root.dataset.equationCircle,first=Number(root.dataset.first),second=Number(root.dataset.second);
@@ -166,7 +169,7 @@ document.querySelectorAll('[data-equation-circle]').forEach(root=>{
   if(explanation)explanation.textContent=both?'Två punkter har samma '+(kind==='sin'?'y-koordinat (sinus)':'x-koordinat (cosinus)')+'.': 'En första vinkel kommer från '+(kind==='sin'?'arcsin':'arccos')+'. Var ligger den speglade punkten?';
  };
  root.querySelectorAll('[data-circle-step]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.circleStep==='both')));
- show(true);
+ show(!root.querySelector('[data-circle-step]'));
 });
 document.querySelectorAll('[data-case-choices]').forEach(root=>{
  const choose=id=>{
@@ -175,7 +178,7 @@ document.querySelectorAll('[data-case-choices]').forEach(root=>{
   root.querySelectorAll('[data-case-figure]').forEach(figure=>figure.classList.toggle('is-selected',figure.dataset.caseFigure===id));
  };
  root.querySelectorAll('[data-case-select]').forEach(button=>button.addEventListener('click',()=>choose(button.dataset.caseSelect)));
- choose(root.dataset.defaultCase||root.querySelector('[data-case-select]')?.dataset.caseSelect);
+ choose(root.hasAttribute('data-start-empty')?null:(root.dataset.defaultCase||root.querySelector('[data-case-select]')?.dataset.caseSelect));
 });
 document.querySelectorAll('[data-cycle-demo]').forEach(root=>{
  const svg=root.querySelector('svg'),text=root.querySelector('[data-cycle-result]');
