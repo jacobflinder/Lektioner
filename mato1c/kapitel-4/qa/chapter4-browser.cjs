@@ -24,7 +24,7 @@ const thoughtPauseTargets={
  'exakta-trigonometriska-varden':['exact-30-60','rationalize-two'],
  enhetscirkeln:['unit-coordinates','unit-sin-solve','unit-cos-solve','unit-period','unit-series'],
  'trigonometriska-ekvationer':['trig-sin-full','trig-cos-full','trig-all-symmetries','trig-exact-mirrors'],
- areasatsen:['area-height','area-formula','area-worked','area-inverse','area-two-triangles'],
+ areasatsen:['area-height','area-formula','area-worked','area-inverse','area-two-triangles','area-extra-recall'],
  sinussatsen:['sine-heights','sine-theorem','sine-original']
 };
 const sizes=[[390,844],[768,900],[1280,800],[1920,1080]];
