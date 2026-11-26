@@ -1,0 +1,23 @@
+.dubbel .slide:has(.answer[open]) .practice { display: none; }
+.dubbel .slide > .math-givens { justify-items: start; }
+.dubbel .math-givens { gap: 18px; }
+.dubbel .double-diagram svg { max-height: 283px; }
+.dubbel .circle .doubled { stroke: #854420; }
+.dubbel .circle .point.doubled { fill: #854420; }
+.dubbel .circle .projection.doubled { stroke-dasharray: 2 4; }
+.dubbel .point-label {
+  dominant-baseline: middle;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: #f4f9f6;
+  stroke-width: 4px;
+}
+.dubbel .double-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem; }
+.dubbel .double-controls[hidden] { display: none; }
+.dubbel .double-controls button[aria-pressed="true"] { background: var(--accent); color: white; border-color: var(--accent); }
+.dubbel #double-status { margin: .35rem; text-align: center; }
+.dubbel .socrative-activity { display: grid; gap: .65rem; max-width: 52rem; padding: 1rem; }
+@media (max-width: 580px) {
+  .dubbel .double-diagram svg { max-height: 222px; }
+}
+.dubbel #kvadrant .answer-body { gap: .4rem; }
