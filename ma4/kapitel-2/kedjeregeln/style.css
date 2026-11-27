@@ -1,0 +1,3 @@
+.kedja .slide > .math-givens { justify-items: start; }
+.kedja .slide:has(.answer[open]) .practice { display: none; }
+.kedja .calculation-pair > div { min-width: 0; }

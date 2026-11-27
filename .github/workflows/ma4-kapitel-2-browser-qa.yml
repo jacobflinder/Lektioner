@@ -41,10 +41,11 @@ jobs:
         run: |
           python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/ma4-derivata-http.log 2>&1 &
           curl --fail --retry 12 --retry-connrefused --retry-delay 1 http://127.0.0.1:8123/ma4/kapitel-2/ > /dev/null
-      - name: Verify Deriveringsregler I in Chromium
+      - name: Verify chapter 2 lessons in Chromium
         run: |
           node ma4/kapitel-2/qa/deriveringsregler-repetition.cjs
           node ma4/kapitel-2/qa/derivatan-av-sinus-och-cosinus.cjs
+          node ma4/kapitel-2/qa/kedjeregeln.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,3 +54,4 @@ jobs:
           path: |
             /tmp/ma4-deriveringsregler-qa
             /tmp/ma4-trigderivata-qa
+            /tmp/ma4-kedjeregeln-qa
