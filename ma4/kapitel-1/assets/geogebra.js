@@ -18,8 +18,18 @@ if (demos.length && typeof HTMLDialogElement !== 'undefined') {
   const closeButton = viewer.querySelector('[data-close]');
   const stage = viewer.querySelector('.geogebra-stage');
   const external = viewer.querySelector('a');
+  const appletWidth = 1120;
+  const appletHeight = 860;
   let opener;
 
+  function fitApplet() {
+    if (!viewer.open) return;
+    const scale = Math.min(1, stage.clientWidth / appletWidth, window.innerHeight * .74 / appletHeight);
+    stage.style.height = `${Math.floor(appletHeight * scale)}px`;
+    stage.style.setProperty('--applet-scale', scale);
+  }
+
+  window.addEventListener('resize', fitApplet);
   closeButton.addEventListener('click', () => viewer.close());
   viewer.addEventListener('close', () => {
     stage.replaceChildren();
@@ -37,15 +47,14 @@ if (demos.length && typeof HTMLDialogElement !== 'undefined') {
       title.textContent = demo.textContent.trim();
       external.href = demo.href;
       viewer.showModal();
-      const width = Math.max(260, Math.floor(stage.getBoundingClientRect().width));
-      const height = Math.max(225, Math.min(620, Math.floor(window.innerHeight * .62)));
+      fitApplet();
       const frame = document.createElement('iframe');
       frame.title = title.textContent;
-      frame.width = String(width);
-      frame.height = String(height);
+      frame.width = String(appletWidth);
+      frame.height = String(appletHeight);
       frame.allowFullscreen = true;
       frame.referrerPolicy = 'strict-origin-when-cross-origin';
-      frame.src = `https://www.geogebra.org/material/iframe/id/${id}/width/${width}/height/${height}/border/ffffff/sfsb/true/smb/false/stb/false/stbh/false/ai/false/sri/true/sdz/true`;
+      frame.src = `https://www.geogebra.org/material/iframe/id/${id}/width/${appletWidth}/height/${appletHeight}/border/ffffff/sfsb/true/smb/false/stb/false/stbh/false/ai/false/sri/true/sdz/true`;
       stage.replaceChildren(frame);
       closeButton.focus();
     });

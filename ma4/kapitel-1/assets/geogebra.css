@@ -1,5 +1,5 @@
 .geogebra-viewer {
-  width: min(68rem, calc(100% - 1rem));
+  width: min(86rem, calc(100% - 1rem));
   max-width: none;
   max-height: calc(100% - 1rem);
   margin: auto;
@@ -11,5 +11,11 @@
 }
 .geogebra-viewer::backdrop { background: rgb(14 45 42 / .76); }
 .geogebra-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
-.geogebra-stage { margin-block: .55rem; }
-.geogebra-stage iframe { display: block; width: 100%; border: 0; background: #f4f9f6; }
+.geogebra-stage { position: relative; margin-block: .55rem; }
+.geogebra-stage iframe { position: absolute;
+  inset-block-start: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(var(--applet-scale));
+  transform-origin: center top;
+  border: 0;
+  background: #f4f9f6; }

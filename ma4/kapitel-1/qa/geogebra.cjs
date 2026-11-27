@@ -39,6 +39,9 @@ async function main() {
         assert.equal(await dialog.getByRole('link', { name: 'Öppna i egen flik' }).getAttribute('href'), await link.getAttribute('href'));
         const box = await frame.boundingBox();
         assert.ok(box.x >= 0 && box.x + box.width <= width && box.y + box.height <= height);
+        assert.equal(await frame.getAttribute('width'), '1120');
+        assert.equal(await frame.getAttribute('height'), '860');
+        assert.ok(Math.abs(box.width / box.height - 1120 / 860) < .01, 'Applet scales without changing its aspect ratio');
         const ctx = page.frameLocator('.geogebra-stage iframe');
         if (verifyNetwork) {
           await ctx.locator('canvas').first().waitFor({ state: 'visible', timeout: 30000 });
