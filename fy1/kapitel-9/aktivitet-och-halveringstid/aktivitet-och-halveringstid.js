@@ -30,8 +30,8 @@
       '<p class="small-context">Boken 9.5, s. 350–355 · uppgifter 940–950 på s. 356.</p>',
       [], 'Alla skriver en gissning. Målen prövas på slutbilden. Avsnitt 9.4 har introducerat radioaktiva kärnreaktioner.', 'Originalets startfråga och bokens nya avsnitt'),
 
-    slide('Låt 20 tärningar vara 20 atomkärnor', 'Riktig demonstration · digital reserv', 7,
-      '<div class="demo-card"><h2>Gör Jacobs försök med riktiga tärningar</h2>' +
+    slide('Låt 20 tärningar vara 20 atomkärnor', 'Tärningsförsök · verkligt och digitalt', 7,
+      '<div class="demo-card"><h2>Gör sönderfallsförsöket med riktiga tärningar</h2>' +
       '<ol><li>Ta <b>20 tärningar</b>. Alla är moderkärnor från början.</li>' +
       '<li><b>Kasta alla som är kvar.</b> Plocka bort varje tärning som visar <b>2, 4 eller 6</b> – den kärnan har sönderfallit.</li>' +
       '<li>Räkna kvarvarande. Kasta <b>bara dem</b> igen. Fyll i en tabell efter varje omgång.</li></ol>' +
@@ -52,7 +52,7 @@
       '<li>Välj <b>många kärnor</b> (t.ex. 10 och sedan 30). Jämför mönstret med våra tärningar.</li></ol>' +
       '<p><b>Moderkärna → dotterkärna.</b> Sannolikheten är bestämd, men tidpunkten för en viss kärna är slumpmässig.</p></div>' +
       notice('Förutsäg', 'Om vi startar om med en enda kärna, sönderfaller den då vid precis samma tidpunkt? Varför inte?') +
-      '<p class="small-context">Jacobs gamla Java-demo är ersatt med PhET:s officiella HTML5-version så att visningen fungerar i moderna webbläsare.</p>',
+      '',
       ['<b>Nej.</b> Halveringstid handlar om ett stort antal likadana kärnor, inte om att varje kärna har en inbyggd klocka.'],
       'Starta PhET på projektorn. Originalfilmen visar enskilt och många beta-sönderfall, diskuterar antineutrino och slump. Länken är en demo, inte en förhandsfilm.', 'Faktiskt använd PhET-demo från originalfilmen'),
 
@@ -71,13 +71,13 @@
       e('1 Bq = 1 sönderfall/s') +
       graph('A','A₀') +
       '<p class="caption">Aktiviteten A minskar med samma halveringstid som antalet moderkärnor N.</p>' +
-      '<div class="two-cards"><section><b>Fler moderkärnor → fler sönderfall/s</b><p>För samma isotop gäller <b>A ∝ N</b>.</p></section><section><b>Radioaktivitet är inte ovanligt</b><p>Jacobs exempel: ungefär <b>100 Bq per kg kroppsmassa</b> ⇒ 50 kg ger cirka <b>5 000 Bq</b>.</p></section></div>' +
-      '<p class="small-context">Historisk enhet: <b>1 Ci = 3,7 · 10<sup>10</sup> Bq</b>. Denna exponent rättas jämfört med Jacobs gamla tavla.</p>' +
+      '<div class="two-cards"><section><b>Fler moderkärnor → fler sönderfall/s</b><p>För samma isotop gäller <b>A ∝ N</b>.</p></section><section><b>Radioaktivitet är inte ovanligt</b><p>Exempel: ungefär <b>100 Bq per kg kroppsmassa</b> ⇒ 50 kg ger cirka <b>5 000 Bq</b>.</p></section></div>' +
+      '<p class="small-context">Historisk enhet: <b>1 Ci = 3,7 · 10<sup>10</sup> Bq</b>.</p>' +
       q('Är 5 000 Bq detsamma som en stråldos på 5 000 sievert?'),
       ['Nej. <b>Bq räknar sönderfall per sekund.</b> <b>Sv</b> används för biologiskt viktad stråldos (behandlas senare i kapitlet).'],
       'Behåll A-kurvan, Bq och 100 Bq/kg från originalet. RÄTTELSE: gamla tavlan har Ci=3,7·10^8 Bq; korrekt internationell definition är 3,7·10^10 Bq.', 'Original: aktivitet, kroppsexempel och Curie'),
 
-    slide('Ett samband från halvering till halvering', 'Jacobs väg · exponentialfunktion', 5,
+    slide('Ett samband från halvering till halvering', 'Halveringar · exponentialfunktion', 5,
       '<p>En exponentialfunktion kan skrivas <b>y = C · a<sup>x</sup></b>. Om <b>a = 0,97</b> minskar värdet med <b>3 % per tidssteg</b>. Här är minskningen <b>50 % per halveringstid</b>.</p>' +
       '<div class="formula-card"><b>Antal moderkärnor efter tiden t</b>' +
       e('N = N<sub>0</sub> · (½)<sup>t/T<sub>½</sub></sup>') +
@@ -89,7 +89,7 @@
       'Samma räkneordning som Jacob: y=C·a^x; a=0,97 → 3 % minskning; antal halveringstider som exponent; N-formeln. Inga logaritmer i denna beräkning.', 'Exponentialfunktion i originalfilmen'),
 
     slide('Sönderfallskonstanten och talet e', 'λ · ln 2 · e ≈ 2,718', 5,
-      '<p>Jacob går vidare från halveringar till en kontinuerlig exponentialfunktion. Han inför talet <b>e ≈ 2,718</b> och <b>sönderfallskonstanten λ</b> (lambda).</p>' +
+      '<p>Från halveringar går vi vidare till en kontinuerlig exponentialfunktion. Vi använder talet <b>e ≈ 2,718</b> och <b>sönderfallskonstanten λ</b> (lambda).</p>' +
       '<div class="formula-card"><b>En isotops halveringstid bestämmer λ</b>' +
       e('λ = ' + f('ln 2','T<sub>½</sub>')) +
       '<p><b>ln 2 ≈ 0,693.</b> λ har enheten <b>1/s</b> om T<sub>½</sub> anges i sekunder; om T anges i år får λ enheten <b>1/år</b>.</p></div>' +
@@ -99,9 +99,8 @@
       [e('λ = ' + f('0,693','10 s') + ' = 0,0693 s<sup>−1</sup>') + '<p>En stor halveringstid ger en <b>liten</b> sönderfallskonstant.</p>'],
       'Jacob introducerar e, ln2/T och N=N0e^(−λt) utan att kräva logaritmteori i förväg. Definiera först, räkna sedan.', 'Jacobs övergång från ½-potens till e'),
 
-    slide('Från N till aktivitet: räkna hela vägen', 'A = λN · Jacobs räkneordning', 7,
+    slide('Från N till aktivitet: räkna hela vägen', 'A = λN · räkna steg för steg', 7,
       '<p>Vid samma λ sker fler sönderfall per sekund om fler moderkärnor finns. Därför gäller</p>' +
-      '<p class="small-context">På projektorn: tryck <b>högerpil eller blanksteg</b> för nästa led. Webbsidan skrollar till steget och hela beräkningskedjan stannar på samma bild.</p>' +
       '<div class="formula-card">' + e('A = λN') + e('A = A<sub>0</sub> · e<sup>−λt</sup>') +
       '<p><b>För Bq måste λ anges i s<sup>−1</sup></b>, eftersom Bq betyder sönderfall/s.</p></div>' +
       '<p><b>Övningsdata:</b> N<sub>0</sub> = 10 000 moderkärnor, T<sub>½</sub> = 10 s. Bestäm λ, A<sub>0</sub>, N och A efter 20 s.</p>' +
@@ -116,7 +115,7 @@
        step('6. Stäm av med aktivitetsformeln',e('A = 693 · e<sup>−0,0693 · 20</sup> ≈ 173 Bq',true) + '<p>Två halveringstider innebär också att aktiviteten blir <b>en fjärdedel</b> av startvärdet. Små avrundningsskillnader är normala.</p>')],
       'Behåll ordningen: λ, sedan A=λN och aktivitetens tidsformel. Träna enheter. Alla sex betydelsebärande led finns på denna bild; dela inte över flera slides.', 'Originalets A=λN och A=A0e^(−λt)'),
 
-    slide('När söker vi tiden i stället?', 'Bokens vidare beräkningsbehov · logaritm', 5,
+    slide('När söker vi tiden i stället?', 'Okänd tid · logaritm', 5,
       '<p>I uppgifter kan vi känna till startaktiviteten och aktiviteten efteråt, men <b>inte tiden</b>. Då behöver vi lösa ut t.</p>' +
       '<div class="formula-card"><b>Från aktivitetsformeln till tiden</b>' +
       e('A = A<sub>0</sub> · e<sup>−λt</sup>') +
@@ -150,11 +149,11 @@
       [e('N<sub>K,0</sub> = 50 000 + ' + f('5 450','0,109')) + e('N<sub>K,0</sub> = 50 000 + 50 000 = 100 000') + '<p>Hälften av kalium-40-atomerna återstår: <b>en halveringstid</b> har gått. Åldern blir därför ungefär <b>1,277 miljarder år</b>. Övningens atomantal är påhittade och inte bokens exempel.</p>'],
       'K-Ar-datering och förgreningsandelen kommer från boken, inte 230911-filmen. Behåll samma formelmetod och tydlig startmängd före tidsberäkning.', 'Bok s. 354–355; uppgift 950'),
 
-    slide('Socrative: läs av vad kurvan säger', 'Originalets klassrumsaktivitet', 4,
-      '<div class="demo-card"><h2>Socrative · Fy1 1103 Aktivitet</h2><p><b>Läraren startar den ursprungliga quizen</b> (ID <b>SOC-38350144</b>). Gå in i Socrative med lärarens rumsnamn och välj <b>alla påståenden som stämmer</b>. Den avtagande kurvan gäller moderkärnor.</p>' +
+    slide('Socrative: läs av vad kurvan säger', 'Enskilt → par → klass', 4,
+      '<div class="demo-card"><h2>Socrative · Fy1 1103 Aktivitet</h2><p>När läraren startat aktiviteten (ID <b>SOC-38350144</b>), gå in i Socrative med lärarens rumsnamn och välj <b>alla påståenden som stämmer</b>. Den avtagande kurvan gäller moderkärnor.</p>' +
       '<ol><li><b>Enskilt:</b> granska kurvan och välj dina svar i Socrative.</li><li><b>Par:</b> jämför valen och motivera med N, N<sub>0</sub> och halveringstiden.</li><li><b>Klass:</b> diskutera skillnaden mellan moder- och dotterkärnor innan läraren visar återkopplingen i Socrative.</li></ol>' +
       graph('N','N₀') +
-      '<p class="small-context">Besluten och återkopplingen sker <b>i Socrative</b>, inte i en extra webbenkät. Efter klassdiskussionen arbetar du vidare med boken.</p>',
+      '<p class="small-context">Efter klassdiskussionen arbetar du vidare med bokens uppgifter 940–950.</p>',
       [], 'Original-PDF, s. 2: rätt B,C,D,E och fel A. Visa inte facit före enskilt svar och parsamtal. Den riktiga Socrative-frågan ska användas; ingen lokal ersättningsquiz. Därefter bokuppgifter 940–950.', 'Original PDF 230911 s. 2 · SOC-38350144'),
 
     slide('Bokarbete: alla 940–950', 'S. 356 · öva och fullfölj', 12,

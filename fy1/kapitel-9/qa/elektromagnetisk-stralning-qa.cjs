@@ -13,6 +13,7 @@ vm.runInNewContext(js,{document:{getElementById:()=>lessonTag,addEventListener:(
 const extra=fs.readFileSync(path.join(root,'elektromagnetisk-stralning','innehallskomplettering.js'),'utf8');
 vm.runInNewContext(extra,{document:{getElementById:()=>lessonTag}},{timeout:1200});
 const data=JSON.parse(lessonTag.textContent);
+assert.ok(data.pages.every(p=>!/Originalets upptäcktsväg|ny övning med andra tal|relativitetsteorin/.test([p.title,p.label,p.body].join(' '))),'Student view contains no production markers or unrelated detours');
 assert.equal(data.pages.length,12,'Twelve complete slides, including restored history and 923 method');
 assert.equal(data.goals.length,3,'Three measurable goals');
 assert.equal(data.pages[0].body.match(/<li>/g).length,3,'Three goals appear on the start slide');

@@ -9,6 +9,8 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'aktivitet-och-halveringstid.j
   document:{getElementById:()=>({set textContent(value){lessonJSON=value}})},
 });
 const data=JSON.parse(lessonJSON);
+assert.ok(data.pages.every(p=>!/Jacobs gamla Java-demo|Jacobs gamla tavla|Jacobs räkneordning|Jacobs väg|Originalets klassrumsaktivitet|På projektorn|extra webbenkät/.test([p.title,p.label,p.body].join(' '))),'No obsolete provenance or display instructions in student slides');
+assert.ok(data.pages.some(p=>p.body.includes('Socrative · Fy1 1103 Aktivitet')&&p.body.includes('SOC-38350144')),'Original Socrative name and code preserved');
 assert.equal(data.pages.length,14,'14 classroom slides');
 assert.equal(data.goals.length,3,'three measurable goals');
 assert.equal(data.pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');
