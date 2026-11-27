@@ -1,0 +1,15 @@
+.geogebra-viewer {
+  width: min(68rem, calc(100% - 1rem));
+  max-width: none;
+  max-height: calc(100% - 1rem);
+  margin: auto;
+  padding: clamp(.5rem, 2vw, 1rem);
+  border: 1px solid var(--line);
+  border-radius: .6rem;
+  color: var(--ink);
+  background: #fff;
+}
+.geogebra-viewer::backdrop { background: rgb(14 45 42 / .76); }
+.geogebra-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.geogebra-stage { margin-block: .55rem; }
+.geogebra-stage iframe { display: block; width: 100%; border: 0; background: #f4f9f6; }
