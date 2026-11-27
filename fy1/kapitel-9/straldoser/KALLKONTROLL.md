@@ -50,3 +50,9 @@
 - [x] Senare källverifiering har rensat samtliga inaktuella lärarnotiser om "saknad" s. 369. Driftsverifiering av huvudgrenens GitHub Actions och Pages redovisas vid faktisk publicering, eftersom den sker efter sista commit.
 
 **Status:** Källspärren för s. 369 och visuell/funktionell QA är lösta. Förloppet finns redovisat i PR och Actions. Originalets stora video är fortsatt inte direkt inspekterad, och det redovisas öppet.
+
+## Elevfokus 27 november 2026
+
+- Filmdemonstrationen *The Most Radioactive Places on Earth* är kvar med historiska mätvärden och tydlig skillnad mellan doshastighet och dos.
+- Bild 4 heter nu ”Vad händer med cellerna?”. De biologiska sambanden och återkopplingen är kvar, men eleverna får varken uppdrag att göra mindmap eller se äldre källmetadata i rubriken.
+- Bokens uppgifter 962–973 och Jacobs fullständiga Erik-beräkning påverkas inte.
