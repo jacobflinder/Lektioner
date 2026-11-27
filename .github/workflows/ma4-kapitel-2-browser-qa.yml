@@ -47,6 +47,7 @@ jobs:
           node ma4/kapitel-2/qa/derivatan-av-sinus-och-cosinus.cjs
           node ma4/kapitel-2/qa/kedjeregeln.cjs
           node ma4/kapitel-2/qa/produktregeln.cjs
+          node ma4/kapitel-2/qa/kvotregeln.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,3 +58,4 @@ jobs:
             /tmp/ma4-trigderivata-qa
             /tmp/ma4-kedjeregeln-qa
             /tmp/ma4-produktregeln-qa
+            /tmp/ma4-kvotregeln-qa

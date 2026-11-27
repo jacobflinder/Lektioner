@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kvotregeln · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="../deriveringsregler-repetition/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+</head>
+<body class="kvot">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Kvotregeln</h1>
+<p>Derivera en kvot där täljaren f(x) och nämnaren g(x) är deriverbara. Regeln gäller där g(x) ≠ 0. Både D och primtecknet anger derivering.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mfrac><mrow><mi>f</mi></mrow><mrow><mi>g</mi></mrow></mfrac><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi>f</mi><mo>)</mo></mrow><mo>·</mo><mi>g</mi><mo>−</mo><mi>f</mi><mo>·</mo><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi>g</mi><mo>)</mo></mrow></mrow><mrow><msup><mrow><mi>g</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div><p class="task">Vilken faktor deriverar du i den term som subtraheras?</p>
+<form class="practice" novalidate data-success="Det stämmer. I den termen är täljaren kvar och nämnaren deriverad."><div class="practice-fields"><label>Faktorn som deriveras<select data-answer="2" data-hint="Titta på f(x) · g′(x)."><option value="">Välj</option><option value="1">Täljaren f(x)</option><option value="2">Nämnaren g(x)</option><option value="3">Båda faktorerna</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Märka ut täljare och nämnare och derivera dem var för sig.</li><li>Använda kvotregeln med rätt tecken och villkor.</li><li>Bestämma en tangent med hjälp av kvotregeln.</li></ol>
+</section>
+<section class="slide" id="delar" aria-labelledby="delar-title">
+  <h1 id="delar-title" tabindex="-1">Märk täljaren och nämnaren</h1>
+<p>Vi märker täljaren med t(x) och nämnaren med n(x). Här är nämnaren positiv för alla reella x.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>2</mn><mi>x</mi></mrow><mrow><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn></mrow></mfrac></mrow></math>
+</div><p class="task">Skriv t(x), t′(x), n(x) och n′(x). Vilken är nämnarens derivata?</p>
+<form class="practice" novalidate data-success="Det stämmer. Konstanten försvinner och x² ger 2x."><div class="practice-fields"><label>Nämnarens derivata<select data-answer="1" data-hint="Derivatan av konstanten 9 är noll."><option value="">Välj</option><option value="1">2x</option><option value="2">2x + 9</option><option value="3">x² + 9</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa uppställningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Täljaren</h2><div class="math-steps">
+<math display="block"><mrow><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn></mrow></math>
+</div></div><div><h2>Nämnaren</h2><div class="math-steps">
+<math display="block"><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn></mrow></math>
+<math display="block"><mrow><msup><mi>n</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+</div></div></div></div></details>
+</section>
+<section class="slide" id="tva-termer" aria-labelledby="tva-termer-title">
+  <h1 id="tva-termer-title" tabindex="-1">Sätt in de två termerna</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>2</mn><mi>x</mi></mrow><mrow><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mi>n</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><msup><mrow><mo>(</mo><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div><p class="task">Vilket tecken ska stå framför produkten (2x) · (2x) i täljaren?</p>
+<form class="practice" novalidate data-success="Det stämmer. Den andra produkten ska subtraheras."><div class="practice-fields"><label>Tecken före produkten<select data-answer="2" data-hint="Produkten kommer från täljaren gånger nämnarens derivata."><option value="">Välj</option><option value="1">Plus</option><option value="2">Minus</option><option value="3">Tecknet beror på x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa insättningen och förenklingen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>2</mn><mo>·</mo><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn><mo>)</mo><mo>−</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>·</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo></mrow><mrow><msup><mrow><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>18</mn><mo>−</mo><mn>4</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><msup><mrow><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mn>18</mn><mo>−</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><msup><mrow><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div><p>Förenkla täljaren. Hela nämnaren står kvar i kvadrat.</p>
+</div></details>
+</section>
+<section class="slide" id="produkt" aria-labelledby="produkt-title">
+  <h1 id="produkt-title" tabindex="-1">Skriv kvoten som en produkt</h1>
+<p>Ett bråk kan skrivas som en produkt med inversen av nämnaren, där nämnaren är skild från noll.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>+</mo><mn>2</mn><mo>≠</mo><mn>0</mn></mrow></math>
+</div><p class="task">Vilken är derivatan av faktorn (x + 2)⁻¹?</p>
+<form class="practice" novalidate data-success="Det stämmer. Den inre derivatan av x + 2 är 1."><div class="practice-fields"><label>Derivatan av faktorn<select data-answer="2" data-hint="Potensregeln ger faktorn −1 och minskar exponenten med ett."><option value="">Välj</option><option value="1">(x + 2)⁻²</option><option value="2">−(x + 2)⁻²</option><option value="3">−(x + 2)⁻¹</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Jämför produktregeln med kvotregeln</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Produktregeln</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mo>−</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mo>−</mo><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mo>−</mo><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div></div><div><h2>Kvotregeln</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo><mo>·</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><mn>1</mn></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mo>−</mo><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div></div></div><p>Båda vägarna ger samma derivata där x ≠ −2.</p>
+</div></details>
+</section>
+<section class="slide" id="tangens" aria-labelledby="tangens-title">
+  <h1 id="tangens-title" tabindex="-1">Härled derivatan av tangens</h1>
+<p>Tangens är kvoten mellan sinus och cosinus. Det här är sambandet vi ska motivera. Det gäller för x i radianer där cos x ≠ 0.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">tan</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">tan</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac><mo>=</mo><mn>1</mn><mo>+</mo><msup><mrow><mi mathvariant="normal">tan</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div><p class="task">Nämnarens derivata är −sin x. Hur påverkar det tecknet i täljaren när kvotregeln används?</p>
+<form class="practice" novalidate data-success="Det stämmer. Att subtrahera den negativa produkten ger ett plustecken."><div class="practice-fields"><label>Tecknet efter förenkling<select data-answer="3" data-hint="I kvotregeln subtraherar vi produkten sin x · (−sin x)."><option value="">Välj</option><option value="1">Båda termerna blir negativa</option><option value="2">Det står minus framför sin² x</option><option value="3">Det står plus framför sin² x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa kvotregeln och trigonometriska ettan</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mrow><mi mathvariant="normal">sin</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p>Trigonometriska ettan ger cos² x + sin² x = 1. Den andra formen får du genom att dela upp summan i täljaren.</p>
+<div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi><mo>+</mo><msup><mrow><mi mathvariant="normal">sin</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><msup><mrow><mi mathvariant="normal">sin</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>1</mn><mo>+</mo><msup><mrow><mi mathvariant="normal">tan</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="kedja" aria-labelledby="kedja-title">
+  <h1 id="kedja-title" tabindex="-1">Derivera tangens med en innervinkel</h1>
+<p>Argumentet 3x är i radianer. Derivera både sin 3x och cos 3x med kedjeregeln. Funktionen är definierad där cos 3x ≠ 0.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">tan</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow><mrow><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Vad ska stå i täljaren före förenkling med trigonometriska ettan?</p>
+<form class="practice" novalidate data-success="Det stämmer. Bryt ut trean och använd trigonometriska ettan för vinkeln 3x."><div class="practice-fields"><label>Täljare före förenkling<select data-answer="2" data-hint="Båda derivatorna får inre faktorn 3 och de två minustecknen tar ut varandra."><option value="">Välj</option><option value="1">cos²(3x) + sin²(3x)</option><option value="2">3 cos²(3x) + 3 sin²(3x)</option><option value="3">3 cos²(3x) − 3 sin²(3x)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa kvotregeln och kontrollera med kedjeregeln</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mn>3</mn><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>·</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>·</mo><mo>(</mo><mo>−</mo><mn>3</mn><mi mathvariant="normal">sin</mi><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>)</mo></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mn>3</mn><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>+</mo><mn>3</mn><msup><mrow><mi mathvariant="normal">sin</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mn>3</mn><mo>(</mo><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>+</mo><msup><mrow><mi mathvariant="normal">sin</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi><mo>)</mo></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p>Kontrollera med kedjeregeln. Multiplicera derivatan av tangens vid 3x med den inre derivatan 3.</p>
+<div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac><mo>·</mo><mn>3</mn><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><msup><mrow><mi mathvariant="normal">cos</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>⁡</mo><mspace width="0.12em"/><mn>3</mn><mi>x</mi></mrow></mfrac></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="forenkla" aria-labelledby="forenkla-title">
+  <h1 id="forenkla-title" tabindex="-1">Välj en enklare omskrivning</h1>
+<p>När nämnaren är gemensam kan en summa i täljaren delas upp i flera bråk. Villkoret för den ursprungliga kvoten gäller även efter omskrivningen.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn><mi>x</mi><mo>−</mo><mn>7</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>
+</div><p class="task">Vilken term blir konstant när du dividerar varje term i täljaren med x?</p>
+<form class="practice" novalidate data-success="Det stämmer. 4x/x blir 4 där x ≠ 0."><div class="practice-fields"><label>Konstant term i funktionen<select data-answer="2" data-hint="En term har exakt en faktor x som kan förkortas bort."><option value="">Välj</option><option value="1">3</option><option value="2">4</option><option value="3">−7</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa omskrivningen och derivatan</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><mi>x</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mn>4</mn><mi>x</mi></mrow><mrow><mi>x</mi></mrow></mfrac><mo>−</mo><mfrac><mrow><mn>7</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo>−</mo><mn>7</mn><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>3</mn><mo>+</mo><mn>7</mn><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>=</mo><mn>3</mn><mo>+</mo><mfrac><mrow><mn>7</mn></mrow><mrow><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div><p>Villkoret x ≠ 0 följer med till derivatan.</p>
+</div></details>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · bestäm en tangent</h1>
+<p>I tangeringspunkten ger h värdet på y och h′ lutningen k. Sätt sedan in punkten i tangentens ekvation y = kx + m.</p>
+<div class="split"><figure class="diagram derivata-figur kvotfigur">
+<svg viewBox="0 0 359 245" role="img" aria-labelledby="kvotgraf-title">
+  <title id="kvotgraf-title">Grafen för h med den markerade tangeringspunkten vid x = 0</title>
+  <defs><clipPath id="kvot-graf-yta"><rect x="54" y="36" width="275" height="191"/></clipPath></defs>
+  <path class="rutnat" d="M54 46 H329 M54 71 H329 M54 96 H329 M54 146 H329 M54 171 H329 M54 196 H329 M54 221 H329 M54 36 V227 M104 36 V227 M204 36 V227 M254 36 V227 M304 36 V227"/>
+  <path class="axel" d="M54 121 H334 m-6 -4 l6 4 -6 4 M154 227 V27 m-4 6 l4 -6 4 6"/>
+  <text x="337" y="126">x</text><text x="166" y="29">y</text>
+  <text x="48" y="137">−1</text><text x="140" y="115">0</text><text x="250" y="137">1</text>
+  <text x="160" y="100">1</text><text x="160" y="75">2</text><text x="160" y="175">−2</text><text x="160" y="225">−4</text>
+  <g clip-path="url(#kvot-graf-yta)">
+    <path class="kurva" data-function d="M54.000 221.000 L56.500 216.732 L59.000 212.667 L61.500 208.791 L64.000 205.091 L66.500 201.556 L69.000 198.174 L71.500 194.936 L74.000 191.833 L76.500 188.857 L79.000 186.000 L81.500 183.255 L84.000 180.615 L86.500 178.075 L89.000 175.630 L91.500 173.273 L94.000 171.000 L96.500 168.807 L99.000 166.690 L101.500 164.644 L104.000 162.667 L106.500 160.754 L109.000 158.903 L111.500 157.111 L114.000 155.375 L116.500 153.692 L119.000 152.061 L121.500 150.478 L124.000 148.941 L126.500 147.449 L129.000 146.000 L131.500 144.592 L134.000 143.222 L136.500 141.890 L139.000 140.595 L141.500 139.333 L144.000 138.105 L146.500 136.909 L149.000 135.744 L151.500 134.608 L154.000 133.500 L156.500 132.420 L159.000 131.366 L161.500 130.337 L164.000 129.333 L166.500 128.353 L169.000 127.395 L171.500 126.460 L174.000 125.545 L176.500 124.652 L179.000 123.778 L181.500 122.923 L184.000 122.087 L186.500 121.269 L189.000 120.468 L191.500 119.684 L194.000 118.917 L196.500 118.165 L199.000 117.429 L201.500 116.707 L204.000 116.000 L206.500 115.307 L209.000 114.627 L211.500 113.961 L214.000 113.308 L216.500 112.667 L219.000 112.038 L221.500 111.421 L224.000 110.815 L226.500 110.220 L229.000 109.636 L231.500 109.063 L234.000 108.500 L236.500 107.947 L239.000 107.404 L241.500 106.870 L244.000 106.345 L246.500 105.829 L249.000 105.322 L251.500 104.824 L254.000 104.333 L256.500 103.851 L259.000 103.377 L261.500 102.911 L264.000 102.452 L266.500 102.000 L269.000 101.556 L271.500 101.118 L274.000 100.688 L276.500 100.264 L279.000 99.846 L281.500 99.435 L284.000 99.030 L286.500 98.632 L289.000 98.239 L291.500 97.852 L294.000 97.471 L296.500 97.095 L299.000 96.725 L301.500 96.360 L304.000 96.000 L306.500 95.645 L309.000 95.296 L311.500 94.951 L314.000 94.611 L316.500 94.276 L319.000 93.945 L321.500 93.619 L324.000 93.297 L326.500 92.980 L329.000 92.667"/>
+    <line class="tangent" data-reveal-tangent x1="54" y1="177.25" x2="329" y2="56.9375"/>
+    <circle class="punkt" cx="154" cy="133.5" r="5"/>
+  </g>
+  <text x="166" y="153">P</text>
+</svg>
+<figcaption>Heldragen kurva h.<span data-reveal-tangent> Prickad tangent genom P.</span></figcaption>
+</figure><div class="work"><div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+</div><p class="task">Beräkna h(0) och h′(0) på papper. Skriv sedan tangentens ekvation.</p>
+<details class="answer"><summary>Visa tangenten och beräkningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>h</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mo>−</mo><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>3</mn><mo>·</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo><mo>−</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>·</mo><mn>1</mn></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>6</mn><mo>+</mo><mn>1</mn></mrow><mrow><mn>4</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>7</mn></mrow><mrow><mn>4</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mn>7</mn></mrow><mrow><mn>4</mn></mrow></mfrac><mi>x</mi><mo>−</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+</div><p>Vid x = 0 är linjens y-värde h(0) = −1/2. Det ger m = −1/2.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Slutför dina två nivåer</h1>
+<p class="lead">Läroboken s. 96–99 · Derivatan av en produkt och en kvot</p>
+<p>Gör samtliga uppgifter och deluppgifter på två av nivåerna. Fortsätt på samma två nivåer som du valde under produktpasset.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1 · 2202–2209</h2><p>Börja med kvotuppgifterna 2202c–d, 2204c–d, 2205 och 2207.</p>
+</article><article class="card"><h2>Nivå 2 · 2210–2216</h2><p>Börja med 2211, 2213, 2215c–d och 2216.</p>
+</article><article class="card"><h2>Nivå 3 · 2217–2221</h2><p>Börja med 2218 och 2219.</p>
+</article></div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Välj en egen boklösning och lösningen på Din tur. Visa var metoden syns i det du skrev.</p>
+<div class="cards goals"><article class="card"><h2>Märk delarna</h2><p>Peka ut täljare, nämnare och deras derivator.</p>
+</article><article class="card"><h2>Använd kvotregeln</h2><p>Visa vilken produkt du subtraherade, varför nämnaren kvadreras i formeln och var din funktion är definierad.</p>
+</article><article class="card"><h2>Bestäm tangenten</h2><p>Visa lutningen och kontrollera att din linje går genom tangeringspunkten.</p>
+</article></div>
+</section>
+<section class="slide" id="bevis" aria-labelledby="bevis-title">
+  <h1 id="bevis-title" tabindex="-1">Fördjupning · härled kvotregeln</h1>
+<p>För deriverbara funktioner f och g med g(x) ≠ 0 kan vi skriva kvoten som en produkt. Derivera potensen av g med kedjeregeln.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+</div><p class="task">Peka ut den faktor som kommer från den inre derivatan.</p>
+<details class="answer"><summary>Visa härledningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><mo>=</mo><mo>−</mo><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>−</mo><mfrac><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><msup><mrow><mo>(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div><p>Båda termerna skrivs med den gemensamma nämnaren innan de samlas i ett bråk.</p>
+</div></details>
+</section>
+</main>
+</body>
+</html>
