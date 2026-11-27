@@ -6,7 +6,7 @@ const base = process.env.MA4_QA_SITE || 'http://127.0.0.1:8123';
 const verifyNetwork = process.env.MA4_GEOGEBRA_NETWORK === '1';
 const lessons = [
   ['sinus-och-cosinusfunktioner', 'koppling', 'rqkfm83e'],
-  ['forskjutna-kurvor', 'aktivitet', 'tphudvak'],
+  ['forskjutna-kurvor', 'aktivitet', 'vazwneyw'],
   ['tangensfunktioner', 'period', 'cf6KYJeb']
 ];
 
@@ -29,6 +29,11 @@ async function main() {
         const slide = page.locator(`#${id}`);
         if (id === 'period') await slide.locator('summary').press('Enter');
         const link = slide.locator('a[data-geogebra]');
+        if (slug === 'forskjutna-kurvor') {
+          const instructions = await link.locator('..').textContent();
+          assert.match(instructions, /höjdförskjutningen d i stället för B/);
+          assert.match(instructions, /vinkeltillägget v.*x-led/);
+        }
         const dialog = page.getByRole('dialog');
         assert.equal(await page.locator('.geogebra-stage iframe').count(), 0);
         if (width === 390) await link.tap(); else await link.press('Enter');
