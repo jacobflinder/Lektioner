@@ -11,6 +11,7 @@ vm.runInNewContext(fs.readFileSync(path.join(folder,'straldoser.js'),'utf8'),{
 });
 const lesson=JSON.parse(raw);
 const pages=lesson.pages;
+assert.ok(pages.every(p=>!/Jacobs tavellösning/.test(p.title)),'Student title describes calculation instead of teacher provenance');
 assert.equal(pages.length,10,'ten main slides');
 assert.ok(pages.every(p=>!/ej slutförd|måste fortfarande|Slutgranskning STOPP|ännu under källkontroll/i.test(p.teacher||'')),'no obsolete source blockers in teacher notes');
 assert.equal(pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');

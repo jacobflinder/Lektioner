@@ -87,7 +87,7 @@
       '</section><section><b>Elektroninfångning ε</b><p>En <b>innersta elektron</b> fångas in av kärnan. Proton + elektron blir neutron + neutrino.</p>' +
       eq(mi('p'), op('+'), betaMinus, op('→'), mi('n'), op('+'), neutrino) +
       '<p><b>A oförändrat, Z minskar 1.</b></p></section></div>' +
-      '<p><b>Jacobs exempel:</b> Radium-226 kan först avge en alfapartikel och bilda <b>exciterat radon-222</b>, markerat med en stjärna. När radonkärnan går till grundtillståndet avges en gammafoton.</p>' +
+      '<p><b>Exempel:</b> Radium-226 kan först avge en alfapartikel och bilda <b>exciterat radon-222</b>, markerat med en stjärna. När radonkärnan går till grundtillståndet avges en gammafoton.</p>' +
       eq(nuc('Ra', 226, 88), op('→'), '<msup>' + nuc('Rn', 222, 86) + op('*') + '</msup>', op('+'), alpha) +
       eq('<msup>' + nuc('Rn', 222, 86) + op('*') + '</msup>', op('→'), nuc('Rn', 222, 86), op('+'), mi('γ')) +
       notice('Jämför', 'Beta+ och elektroninfångning ändrar kärnans A och Z på samma sätt. Vad är skillnaden i vilka partiklar som går in eller ut?') +
@@ -139,9 +139,8 @@
       'Jacobs original börjar med proton + neutron och massan som blir mindre. Einstein-formeln görs begriplig utan att kräva relativitetsteori (flyttad till nivå 2).',
       'Bok s. 341 och 346–348; original massdefekt'),
 
-    slide('Räkna hela vägen: deuterium', 'Jacobs metod · u → kg → J → MeV', 9,
-      '<p><b>Vi gör som i Jacobs tavellösning:</b> addera massorna för en fri proton och neutron. Jämför med <b>deuteriumkärnans</b> massa, alltså utan atomens elektron.</p>' +
-      '<p class="small-context">På projektorn: använd <b>högerpil eller blanksteg</b> för att visa nästa led. Sidan följer det nya steget utan att bryta den sammanhängande lösningen.</p>' +
+    slide('Räkna hela vägen: deuterium', 'Massdefekt · u → kg → J → MeV', 9,
+      '<p><b>Beräkningsordning:</b> addera massorna för en fri proton och neutron. Jämför med <b>deuteriumkärnans</b> massa, alltså utan atomens elektron.</p>' +
       '<div class="given-grid"><div><b>Proton</b><span>1,007276 u</span></div><div><b>Neutron</b><span>1,008665 u</span></div><div><b>Neutral deuteriumatom</b><span>2,014102 u</span></div><div><b>Elektron</b><span>0,00054858 u</span></div></div>' +
       '<p class="small-context">' + convert + '. Använd c = 2,998 · 10<sup>8</sup> m/s. Skriv först Δm själv.</p>',
       [
@@ -206,7 +205,7 @@
       'Massdefekt och bindningsenergi här från bokens s. 341, samt skillnad fusion/fission. Ingen separat relativitetsteorigenomgång.',
       'Bok s. 341–342'),
 
-    slide('Från uran-238 till bly-206', 'Jacobs tavellösning · 8 α + 6 β⁻', 4,
+    slide('Från uran-238 till bly-206', 'Sönderfallskedja · masstal först, sedan atomnummer', 4,
       '<p>En sönderfallskedja börjar med <b>uran-238</b> och slutar med stabilt <b>bly-206</b>. Hur många <b>α</b> och <b>β⁻</b> behövs?</p>' +
       eq(nuc('U', 238, 92), op('→'), nuc('Pb', 206, 82)) +
       '<p><b>Börja alltid med masstalet A</b>: endast alfastegen minskar A med fyra. <b>Fortsätt med atomnumret Z</b>: varje alfa minskar Z med två, varje beta− ökar Z med ett.</p>' +

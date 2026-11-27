@@ -9,6 +9,8 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'aktivitet-och-halveringstid.j
   document:{getElementById:()=>({set textContent(value){lessonJSON=value}})},
 });
 const data=JSON.parse(lessonJSON);
+assert.ok(data.pages.every(p=>!/Jacobs gamla Java-demo|Jacobs gamla tavla|Jacobs räkneordning|Jacobs väg|Originalets klassrumsaktivitet|På projektorn|extra webbenkät/.test([p.title,p.label,p.body].join(' '))),'No obsolete provenance or display instructions in student slides');
+assert.ok(data.pages.some(p=>p.body.includes('Socrative · Fy1 1103 Aktivitet')&&p.body.includes('SOC-38350144')),'Original Socrative name and code preserved');
 assert.equal(data.pages.length,14,'14 classroom slides');
 assert.equal(data.goals.length,3,'three measurable goals');
 assert.equal(data.pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');
@@ -102,7 +104,7 @@ console.log('Fy1 9.5 source, goal, original order, physical constants and all as
       await page.selectOption('#jump','11');
       assert.equal(await page.locator('#socrative-options').count(),0,'No competitor to real Socrative');
       assert.equal(await page.locator('#socrative-check').count(),0,'No premature local Socrative facit');
-      assert.match(await page.locator('.slide.active').innerText(),/Läraren startar den ursprungliga quizen/);
+      assert.match(await page.locator('.slide.active').innerText(),/När läraren startat aktiviteten/);
       assert.match(await page.locator('.slide.active').innerText(),/Enskilt:[\s\S]*Par:[\s\S]*Klass:/,'Actual classroom decisions in Socrative');
       await page.screenshot({path:path.join(dir,vp.width+'-socrative-classroom.png'),fullPage:true});
       assert.deepEqual(errors,[],`${vp.width} no console JS errors`);

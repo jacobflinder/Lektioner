@@ -9,6 +9,8 @@ const js = fs.readFileSync(source, 'utf8');
 const tag = {textContent:''};
 vm.runInNewContext(js, {document:{getElementById:()=>tag}}, {timeout:2000});
 const data = JSON.parse(tag.textContent);
+assert.ok(data.pages.every(p=>!/Jacobs metod|Jacobs exempel|Jacobs tavellösning|På projektorn/.test([p.title,p.label,p.body].join(' '))),'Teacher and projector metadata stay out of student slides');
+assert.ok(!/8\s*α\s*\+\s*6\s*β/.test(data.pages[11].label),'Uran-to-lead exercise label must not reveal the answer');
 const bodies = data.pages.map(p => p.body);
 assert.equal(data.pages.length,14,'Ten book pages and full original calculation require 14 teaching screens');
 assert.equal(data.goals.length,3,'Three specific goals');

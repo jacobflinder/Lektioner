@@ -5,6 +5,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const base=path.resolve(__dirname,'..');
 function lesson(slug){const folder=path.join(base,slug);let raw='';const content=fs.readFileSync(path.join(folder,'lektion.js'),'utf8');vm.runInNewContext(content,{document:{getElementById:()=>({set textContent(v){raw=v}})}});return {folder,pages:JSON.parse(raw).pages}}
 const a=lesson('fusion-och-fission'),b=lesson('medicinska-metoder');
+assert.ok(b.pages.every(p=>!/verifierat teoristöd/.test([p.title,p.label,p.body].join(' '))),'Book-task instructions must not expose verification metadata');
 for(const [s,x] of [['9.8',a],['9.9',b]]){
  assert.equal(x.pages.length,s==='9.8'?10:11,s+' required slide count');
  assert.equal(x.pages.reduce((a,p)=>a+Number.parseInt(p.time,10),0),70,s+' 70-minute duration');

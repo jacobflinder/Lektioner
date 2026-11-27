@@ -6,7 +6,7 @@
   const data = JSON.parse(target.textContent);
 
   const notation = data.pages[1];
-  notation.body += '<div class="question"><b>Kontroll från Jacobs genomgång:</b> Kväve-15 har atomnumret 7. Hur många protoner, neutroner och elektroner finns i en <b>neutral</b> kväve-15-atom? Bestäm själv innan steg två visas.</div>';
+  notation.body += '<div class="question"><b>Pröva samma metod:</b> Kväve-15 har atomnumret 7. Hur många protoner, neutroner och elektroner finns i en <b>neutral</b> kväve-15-atom? Bestäm själv innan steg två visas.</div>';
   notation.steps.push(
     '<b>Kväve-15:</b><div class="math-block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>N</mi><mo>=</mo><mi>A</mi><mo>−</mo><mi>Z</mi><mo>=</mo><mn>15</mn><mo>−</mo><mn>7</mn><mo>=</mo><mn>8</mn></mrow></math></div>' +
     '<p>Den neutrala atomen har <b>7 protoner, 8 neutroner och 7 elektroner</b>. Detta är samma sätt att räkna som för kol-14.</p>'

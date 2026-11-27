@@ -10,6 +10,7 @@ vm.runInNewContext(js,{document:{getElementById:()=>tag,addEventListener:()=>{}}
 const extra=fs.readFileSync(path.resolve(__dirname,'..','isotoper-och-nuklider','innehallskomplettering.js'),'utf8');
 vm.runInNewContext(extra,{document:{getElementById:()=>tag}},{timeout:1500});
 const data=JSON.parse(tag.textContent);
+assert.ok(data.pages.every(p=>!/Kontroll från Jacobs/.test([p.title,p.label,p.body].join(' '))),'Student view uses neutral exercise prompts');
 assert.equal(data.pages.length,11,'eleven content slides: separate gamma explanation and interactive application');
 assert.equal(data.goals.length,3,'three goals');
 assert.deepEqual(data.pages.map(p=>parseInt(p.time,10)),[4,6,6,5,5,3,4,8,5,19,5],'70-minute time allocation');

@@ -49,7 +49,7 @@ const malrubriker=['Röntgen, CT och MR','PET och gammakamera','Strålbehandling
 function bokrad(x){return `<div class="bookrow"><b>${x.nr}</b><span><strong>${x.fokus}</strong><small>Teori s. ${x.teori}</small></span></div>`;}
 function maluppgifter(n){return bokuppgifter.filter(x=>x.mal===n).map(x=>`<span class="task-chip">${x.nr} <small>s. ${x.teori}</small></span>`).join('');}
 pages[9].body=`<div class="number-card"><div><small>BOKEN · 9.9 MEDICINSKA METODER</small><strong>988–998</strong><p>Alla uppgifter och deluppgifter. Börja med ett eget försök och jämför sedan i grupp.</p></div><div class="big">381</div></div>
-<p>Varje bokuppgift har ett primärmål och ett verifierat teoristöd. Hänvisningar till tidigare avsnitt gäller sådant ni redan har lärt er.</p>
+<p>Uppgifterna är grupperade efter vilket mål de främst tränar. Teorisidorna hjälper dig hitta rätt samband. Hänvisningar till tidigare avsnitt gäller sådant ni redan har lärt er.</p>
 ${malrubriker.map((rubrik,i)=>`<section class="book-goal"><h3>Mål ${i+1} · ${rubrik}</h3><div class="booklist">${bokuppgifter.filter(x=>x.mal===i+1).map(bokrad).join('')}</div></section>`).join('')}
 <div class="green-card"><b>Läxa:</b> Det som inte hinns med av 988–998 på s. 381. Använd teorin s. 376–380 och lärobokens gröna sammanfattningsrutor.</div>`;
 pages[9].teacher='Verifierat direkt från bokfotot av s.381. Uppgift 992, 996 och 997 kräver nu egen undervisningssekvens om strålbehandling med återkoppling.';
@@ -150,7 +150,10 @@ pages[7].quiz={
 /* Bevara bokens tre schematiska kurvor men gör tolkningen elevstyrd. */
 pages[7].body=pages[7].body.replace(/<svg class="diagram depth-profile"[\s\S]*?<\/svg>/,
  '<iframe class="embedded-demo dose-demo" src="dosmodell.html" title="Välj tumördjup och strålprincip, jämför elektroner, gamma och protoner och visa fysikalisk återkoppling" loading="eager"></iframe>');
+pages[0].time='2 min';
+pages[1].time='2 min';
 pages[8].time='12 min';
+pages[9].time='13 min';
 pages[8].body=pages[8].body.replace(
  'Växla mellan röntgen, CT, MR, PET och gammakamera. För varje metod: välj vilken signal detektorn arbetar med, få återkoppling och klicka fram alla tre stegen. Jämför sedan två metoder med varandra.',
  'Tänk först själv (2 min): välj en metod och skriv vilken signal som registreras. Pröva sedan i par (4 min): gör ert val, läs återkopplingen och klicka fram de tre stegen. Jämför med en annan metod (3 min): vad är skillnaden och används joniserande strålning? Samla upp en slutsats i klassen (3 min). Alla fem modellerna finns kvar för repetition.');
