@@ -1,0 +1,25 @@
+.produkt .slide > .math-givens { justify-items: start; }
+.produkt .slide:has(.answer[open]) .practice { display: none; }
+.produkt .calculation-pair > div { min-width: 0; }
+.produktfigur {
+  padding: .5rem;
+  border: 1px solid var(--line);
+  border-radius: .6rem;
+  background: #f4f9f6;
+  text-align: center;
+}
+.produktfigur svg {
+  display: block;
+  width: 100%;
+  max-height: 250px;
+}
+.produktfigur text { fill: var(--ink); font: 15px system-ui, sans-serif; }
+.produktfigur .bas { fill: #d8eee6; stroke: #255a50; stroke-width: 1.7; }
+.produktfigur .remsa { fill: #cbdbe8; stroke: #405c79; stroke-width: 1.7; }
+.produkttabell { width: min(100%, 36rem); border-collapse: collapse; }
+.produkttabell th, .produkttabell td {
+  text-align: center;
+  padding: .35rem;
+  border: 1px solid var(--line);
+}
+.produkttabell th { background: var(--accent-light); }

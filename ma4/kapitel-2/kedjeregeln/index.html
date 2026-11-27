@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kedjeregeln · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+</head>
+<body class="kedja">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Kedjeregeln</h1>
+<p>En sammansatt funktion består av en inre och en yttre funktion. Sätt u = g(x) för den inre funktionen. Sätt sedan u i den yttre funktionen f.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>→</mo><mi>u</mi><mo>=</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>→</mo><mi>y</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>u</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>u</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p>Derivera den yttre funktionen, behåll den inre funktionen i uttrycket och multiplicera med den inre derivatan.</p>
+<p class="task">Vilken faktor kommer från den inre funktionen? Läs sambandet.</p>
+<form class="practice" novalidate data-success="Det stämmer. Den inre derivatan är g′(x)."><div class="practice-fields"><label>Inre derivata<select data-answer="2" data-hint="Leta efter derivatan av u = g(x)."><option value="">Välj</option><option value="1">f′(g(x))</option><option value="2">g′(x)</option><option value="3">g(x)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<p><a href="https://www.youtube.com/watch?v=wh1tGfj_pBc" target="_blank" rel="noopener">Mysstart · The Calculus Chain Rule Song</a></p>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Peka ut inre och yttre funktion och sätta ihop dem i rätt ordning.</li><li>Derivera en sammansatt funktion och visa alla faktorer.</li><li>Beräkna derivatans värde och använda det som en tangentlutning.</li></ol>
+</section>
+<section class="slide" id="sammansatt" aria-labelledby="sammansatt-title">
+  <h1 id="sammansatt-title" tabindex="-1">Sätt in den inre funktionen först</h1>
+<p>I f(g(x)) räknas g ut först. Om du byter ordning ändras i regel också uttrycket.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>2</mn></mrow></math>
+</div><p class="task">Vilken funktion betyder ”kvadrera och lägg till 2” innan du multiplicerar med 3? Skriv båda sammansättningarna.</p>
+<form class="practice" novalidate data-success="Det stämmer. Funktionen g arbetar först."><div class="practice-fields"><label>Ordning<select data-answer="1" data-hint="Titta på den innersta parentesen först."><option value="">Välj</option><option value="1">f(g(x))</option><option value="2">g(f(x))</option><option value="3">Båda</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa de två uttrycken</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><mn>3</mn><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>6</mn></mrow></math>
+<math display="block"><mrow><mi>g</mi><mo>(</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>2</mn><mo>=</mo><mn>9</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>2</mn></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="potens" aria-labelledby="potens-title">
+  <h1 id="potens-title" tabindex="-1">Behåll parentesen när du deriverar</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn><mo>)</mo></mrow><mrow><mn>5</mn></mrow></msup></mrow></math>
+</div><p class="task">Peka ut den inre funktionen. Vilken är dess derivata? Skriv därefter produkten för y′.</p>
+<form class="practice" novalidate data-success="Det stämmer. Den inre derivatan är 2x."><div class="practice-fields"><label>Inre derivata<select data-answer="2" data-hint="Derivera x² + 4 som en egen funktion."><option value="">Välj</option><option value="1">x² + 4</option><option value="2">2x</option><option value="3">5(x² + 4)⁴</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa faktorerna</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Inre funktion</h2><div class="math-steps">
+<math display="block"><mrow><mi>u</mi><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn></mrow></math>
+<math display="block"><mrow><msup><mi>u</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+</div></div><div><h2>Yttre funktion</h2><div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mi>u</mi></mrow><mrow><mn>5</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>=</mo><mn>5</mn><msup><mrow><mi>u</mi></mrow><mrow><mn>4</mn></mrow></msup></mrow></math>
+</div></div></div><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>5</mn><msup><mrow><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn><mo>)</mo></mrow><mrow><mn>4</mn></mrow></msup><mo>·</mo><mn>2</mn><mi>x</mi><mo>=</mo><mn>10</mn><mi>x</mi><msup><mrow><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn><mo>)</mo></mrow><mrow><mn>4</mn></mrow></msup></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="cosinus" aria-labelledby="cosinus-title">
+  <h1 id="cosinus-title" tabindex="-1">Behåll argumentet i cosinus</h1>
+<p>Regeln D(cos u) = −sin u gäller för radianer. Här är cosinus en funktion av u, och u är i sin tur en funktion av x.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>4</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div><p class="task">Vilket tecken får koefficienten framför sinus i y′? Motivera med faktorerna.</p>
+<form class="practice" novalidate data-success="Det stämmer. Två minustecken i produkten ger plus."><div class="practice-fields"><label>Tecken framför sinus<select data-answer="1" data-hint="Derivatan av cosinus har ett minustecken. Funktionen har också en negativ faktor."><option value="">Välj</option><option value="1">Plus</option><option value="2">Minus</option><option value="3">Tecknet är noll</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa derivatan</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Inre funktion</h2><div class="math-steps">
+<math display="block"><mrow><mi>u</mi><mo>=</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><msup><mi>u</mi><mo>′</mo></msup><mo>=</mo><mn>3</mn></mrow></math>
+</div></div><div><h2>Yttre funktion</h2><div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>4</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>u</mi></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>=</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>u</mi></mrow></math>
+</div></div></div><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mo>−</mo><mn>4</mn><mo>·</mo><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>)</mo><mo>·</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>12</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="exponential" aria-labelledby="exponential-title">
+  <h1 id="exponential-title" tabindex="-1">Derivera exponentialfunktionen</h1>
+<p>Den yttre funktionen e upphöjt till u har samma derivata med avseende på u. Derivatan med avseende på x behöver också den inre faktorn.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>3</mn><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mo>−</mo><mn>5</mn><mi>x</mi></mrow></msup></mrow></math>
+</div><p class="task">Peka ut det uttryck som ska ligga kvar i exponenten. Vad blir den inre derivatan?</p>
+<form class="practice" novalidate data-success="Det stämmer. Faktorn blir −5."><div class="practice-fields"><label>Inre derivata<select data-answer="3" data-hint="Skriv u = 2 − 5x och derivera termen med x."><option value="">Välj</option><option value="1">2 − 5x</option><option value="2">5</option><option value="3">−5</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa derivatan</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Inre funktion</h2><div class="math-steps">
+<math display="block"><mrow><mi>u</mi><mo>=</mo><mn>2</mn><mo>−</mo><mn>5</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>u</mi><mo>′</mo></msup><mo>=</mo><mo>−</mo><mn>5</mn></mrow></math>
+</div></div><div><h2>Yttre funktion</h2><div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>3</mn><msup><mrow><mi>e</mi></mrow><mrow><mi>u</mi></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>=</mo><mn>3</mn><msup><mrow><mi>e</mi></mrow><mrow><mi>u</mi></mrow></msup></mrow></math>
+</div></div></div><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>3</mn><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mo>−</mo><mn>5</mn><mi>x</mi></mrow></msup><mo>·</mo><mo>(</mo><mo>−</mo><mn>5</mn><mo>)</mo><mo>=</mo><mo>−</mo><mn>15</mn><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mo>−</mo><mn>5</mn><mi>x</mi></mrow></msup></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="rot" aria-labelledby="rot-title">
+  <h1 id="rot-title" tabindex="-1">Skriv roten som en potens</h1>
+<div class="math-givens">
+<math display="block"><mrow><msqrt><mi>u</mi></msqrt><mo>=</mo><msup><mrow><mi>u</mi></mrow><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup></mrow></math>
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msqrt><mn>6</mn><mi>x</mi><mo>+</mo><mn>13</mn></msqrt></mrow></math>
+</div><p class="task">Skriv den yttre funktionen som en halvpotens. Vilken faktor tillkommer från funktionen under roten? Beräkna sedan f′(2).</p>
+<form class="practice" novalidate data-success="Det stämmer. Uttrycket under roten har derivatan 6."><div class="practice-fields"><label>Inre faktor<select data-answer="3" data-hint="Den inre funktionen är 6x + 13. Derivera den för sig."><option value="">Välj</option><option value="1">2</option><option value="2">1/2</option><option value="3">6</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa omskrivning och värde</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Derivera för x där 6x + 13 &gt; 0</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>13</mn><mo>)</mo></mrow><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><msup><mrow><mo>(</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>13</mn><mo>)</mo></mrow><mrow><mo>−</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup><mo>·</mo><mn>6</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><msqrt><mn>6</mn><mi>x</mi><mo>+</mo><mn>13</mn></msqrt></mrow></mfrac></mrow></math>
+</div></div><div><h2>Sätt in x = 2</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><msqrt><mn>6</mn><mo>·</mo><mn>2</mn><mo>+</mo><mn>13</mn></msqrt></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><msqrt><mn>25</mn></msqrt></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mn>5</mn></mrow></mfrac></mrow></math>
+</div></div></div></div></details>
+</section>
+<section class="slide" id="tre-led" aria-labelledby="tre-led-title">
+  <h1 id="tre-led-title" tabindex="-1">Följ tre led i samma funktion</h1>
+<p>Den inre funktionen kan själv vara sammansatt. Då använder du kedjeregeln på varje led. Följ x till vinkel, vinkel till sinusvärde och sinusvärde till potens.</p>
+<div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>u</mi></mrow><mrow><mi>d</mi><mi>z</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>z</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>)</mo></mrow><mrow><mn>4</mn></mrow></msup></mrow></math>
+</div><p class="task">Sätt z = 3x och u = sin z. Vilka tre faktorer behövs när du deriverar?</p>
+<form class="practice" novalidate data-success="Det stämmer. Varje led bidrar med en faktor."><div class="practice-fields"><label>Faktorer<select data-answer="2" data-hint="Derivera varje steg i kedjan från x via z och u till y."><option value="">Välj</option><option value="1">4u³ och cos z</option><option value="2">4u³, cos z och 3</option><option value="3">4u³ och 3</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa hela kedjan</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>u</mi></mrow><mrow><mi>d</mi><mi>z</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>z</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>4</mn><msup><mrow><mi>u</mi></mrow><mrow><mn>3</mn></mrow></msup><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>z</mi><mo>·</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>4</mn><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>)</mo></mrow><mrow><mn>3</mn></mrow></msup><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>·</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>12</mn><msup><mrow><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>)</mo></mrow><mrow><mn>3</mn></mrow></msup><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · derivera och bestäm tangenten</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>+</mo><mn>4</mn><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow></math>
+</div><p class="task">Derivera båda termerna. Använd sedan x = 0 för att bestämma tangentens lutning och ekvation. Skriv mellanleden på papper.</p>
+<details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Använd kedjeregeln i båda termerna</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><mo>·</mo><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>)</mo><mo>·</mo><mn>2</mn><mo>+</mo><mn>4</mn><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>·</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>6</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>−</mo><mn>4</mn><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow></math>
+</div></div><div><h2>Tangeringspunkten och linjen</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>3</mn><mo>·</mo><mn>1</mn><mo>+</mo><mn>4</mn><mo>·</mo><mn>1</mn><mo>=</mo><mn>7</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mo>−</mo><mn>6</mn><mo>·</mo><mn>0</mn><mo>−</mo><mn>4</mn><mo>·</mo><mn>1</mn><mo>=</mo><mo>−</mo><mn>4</mn></mrow></math>
+<math display="block"><mrow><mn>7</mn><mo>=</mo><mo>−</mo><mn>4</mn><mo>·</mo><mn>0</mn><mo>+</mo><mi>m</mi></mrow></math>
+<math display="block"><mrow><mi>m</mi><mo>=</mo><mn>7</mn></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>7</mn></mrow></math>
+</div></div></div></div></details>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+<p class="lead">Läroboken s. 90–93 · Kedjeregeln</p>
+<p>Använd de lösta exemplen 2141–2143 för att kontrollera ordningen och den inre faktorn.</p>
+<p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1</h2><p class="book-range">2144–2152</p>
+</article><article class="card"><h2>Nivå 2</h2><p class="book-range">2153–2157</p>
+</article><article class="card"><h2>Nivå 3</h2><p class="book-range">2158–2161</p>
+</article></div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Använd en egen beräkning per mål. Peka ut ditt viktigaste mellanled.</p>
+<div class="cards goals"><article class="card"><h2>Inre och yttre</h2><p>Visa i exempelvis 2144 eller 2147 vilken funktion som verkar först.</p>
+</article><article class="card"><h2>Alla faktorer</h2><p>Peka ut de två eller tre faktorerna, till exempel i 2145, 2146 eller 2157.</p>
+</article><article class="card"><h2>Lutning i en punkt</h2><p>Visa hur du sätter in x-värdet efter deriveringen i Din tur, 2148 eller 2154.</p>
+</article></div><p>Fortsätt till sista bilden om du vill se varför regeln fungerar.</p>
+</section>
+<section class="slide" id="bevis" aria-labelledby="bevis-title">
+  <h1 id="bevis-title" tabindex="-1">Fördjupning · varför faktorerna multipliceras</h1>
+<p>Låt u = g(x) och k vara ändringen i u när x ändras med h. Om k ≠ 0 kan vi dela upp differenskvoten i två faktorer.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+</div><p class="task">Peka ut den faktor som hör till den yttre funktionen. Vilken faktor mäter ändringen i u per ändring i x?</p>
+<details class="answer"><summary>Visa de två gränsvärdena</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>f</mi><mo>(</mo><mi>u</mi><mo>+</mo><mi>k</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>u</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>f</mi><mo>(</mo><mi>u</mi><mo>+</mo><mi>k</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>u</mi><mo>)</mo></mrow><mrow><mi>k</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>k</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mi>u</mi><mo>+</mo><mi>k</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>u</mi><mo>)</mo></mrow><mrow><mi>k</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>k</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+</div><p>När h närmar sig noll går k också mot noll. Första faktorn går mot f′(u) och den andra mot g′(x). När k = 0 sätter vi den första faktorn till f′(u). Den andra faktorn och den ursprungliga kvoten är då båda noll.</p>
+</div></details>
+</section>
+</main>
+</body>
+</html>

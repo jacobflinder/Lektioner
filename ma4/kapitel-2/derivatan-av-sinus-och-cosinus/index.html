@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Derivatan av sinus och cosinus · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/geogebra.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+  <script src="../../kapitel-1/assets/geogebra.js" defer></script>
+  <script src="lutning.js" defer></script>
+</head>
+<body class="trigderivata">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Derivatan av sinus och cosinus</h1>
+<p>Reglerna gäller när vinkeln x mäts i radianer. D betyder derivera. Vi kan också skriva derivatan med primtecken, till exempel f′(x).</p>
+<div class="math-givens">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Vilken regel behöver du för att derivera cosinus? Läs sambandet och peka ut tecknet.</p>
+<form class="practice" novalidate data-success="Det stämmer. Cosinus får derivatan −sin x."><div class="practice-fields"><label>Derivatan av cos x<select data-answer="3" data-hint="I den andra regeln står ett minustecken framför sinus."><option value="">Välj</option><option value="1">cos x</option><option value="2">sin x</option><option value="3">−sin x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Koppla sinuskurvans tangentlutning till värdet av cosinus.</li><li>Derivera sinus- och cosinusuttryck och beräkna derivatans värde.</li><li>Använda derivatan för att hitta punkter där tangenten har en given lutning.</li></ol>
+</section>
+<section class="slide" id="lutning" aria-labelledby="lutning-title">
+  <h1 id="lutning-title" tabindex="-1">Följ tangentens lutning</h1>
+<p>P ligger på sinuskurvan. Q ligger på cosinuskurvan vid samma x. Q:s höjd är lika med tangentens lutning vid P.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Förutsäg vad lutningen blir där sinuskurvan har en topp eller en dal. Välj sedan motsvarande vinkel.</p>
+<div class="lutningsmodell"><label for="derivata-vinkel">x – vinkel i radianer</label><select id="derivata-vinkel"><option value="0">0</option><option value="1">π/4</option><option value="2">π/2</option><option value="4">π</option><option value="6">3π/2</option><option value="8">2π</option></select><svg id="lutningsgraf" viewBox="0 0 565 204" role="img" aria-label="Sinuskurvan med en tangent och cosinuskurvan. Punkterna P och Q har samma x-värde.">
+  <path class="derivata-grid" d="M55 48 H545 M55 144 H545"/>
+  <path class="derivata-axel" d="M55 96 H550 l-7 -4 m7 4 l-7 4 M84 169 V20 l-4 7 m4 -7 l4 7"/>
+  <text x="546" y="86">x</text><text x="91" y="22">y</text><text x="62" y="52">1</text><text x="53" y="148">−1</text>
+  <path class="derivata-grid" d="M83.89 21 V171"/><text class="tick-x" x="83.89" y="191">0</text><path class="derivata-grid" d="M191.95 21 V171"/><text class="tick-x" x="191.95" y="191">π/2</text><path class="derivata-grid" d="M300.00 21 V171"/><text class="tick-x" x="300.00" y="191">π</text><path class="derivata-grid" d="M408.05 21 V171"/><text class="tick-x" x="408.05" y="191">3π/2</text><path class="derivata-grid" d="M516.11 21 V171"/><text class="tick-x" x="516.11" y="191">2π</text>
+  <path class="sinus" d="M83.89 96.00 L86.59 94.12 L89.29 92.23 L92.00 90.36 L94.70 88.49 L97.40 86.64 L100.10 84.79 L102.80 82.97 L105.50 81.17 L108.20 79.39 L110.91 77.63 L113.61 75.90 L116.31 74.21 L119.01 72.55 L121.71 70.92 L124.41 69.33 L127.11 67.79 L129.81 66.28 L132.52 64.83 L135.22 63.42 L137.92 62.06 L140.62 60.75 L143.32 59.50 L146.02 58.30 L148.72 57.17 L151.43 56.09 L154.13 55.07 L156.83 54.12 L159.53 53.23 L162.23 52.41 L164.93 51.65 L167.63 50.97 L170.33 50.35 L173.04 49.80 L175.74 49.33 L178.44 48.92 L181.14 48.59 L183.84 48.33 L186.54 48.15 L189.24 48.04 L191.95 48.00 L194.65 48.04 L197.35 48.15 L200.05 48.33 L202.75 48.59 L205.45 48.92 L208.15 49.33 L210.86 49.80 L213.56 50.35 L216.26 50.97 L218.96 51.65 L221.66 52.41 L224.36 53.23 L227.06 54.12 L229.76 55.07 L232.47 56.09 L235.17 57.17 L237.87 58.30 L240.57 59.50 L243.27 60.75 L245.97 62.06 L248.67 63.42 L251.38 64.83 L254.08 66.28 L256.78 67.79 L259.48 69.33 L262.18 70.92 L264.88 72.55 L267.58 74.21 L270.29 75.90 L272.99 77.63 L275.69 79.39 L278.39 81.17 L281.09 82.97 L283.79 84.79 L286.49 86.64 L289.19 88.49 L291.90 90.36 L294.60 92.23 L297.30 94.12 L300.00 96.00 L302.70 97.88 L305.40 99.77 L308.10 101.64 L310.81 103.51 L313.51 105.36 L316.21 107.21 L318.91 109.03 L321.61 110.83 L324.31 112.61 L327.01 114.37 L329.71 116.10 L332.42 117.79 L335.12 119.45 L337.82 121.08 L340.52 122.67 L343.22 124.21 L345.92 125.72 L348.62 127.17 L351.33 128.58 L354.03 129.94 L356.73 131.25 L359.43 132.50 L362.13 133.70 L364.83 134.83 L367.53 135.91 L370.24 136.93 L372.94 137.88 L375.64 138.77 L378.34 139.59 L381.04 140.35 L383.74 141.03 L386.44 141.65 L389.14 142.20 L391.85 142.67 L394.55 143.08 L397.25 143.41 L399.95 143.67 L402.65 143.85 L405.35 143.96 L408.05 144.00 L410.76 143.96 L413.46 143.85 L416.16 143.67 L418.86 143.41 L421.56 143.08 L424.26 142.67 L426.96 142.20 L429.67 141.65 L432.37 141.03 L435.07 140.35 L437.77 139.59 L440.47 138.77 L443.17 137.88 L445.87 136.93 L448.57 135.91 L451.28 134.83 L453.98 133.70 L456.68 132.50 L459.38 131.25 L462.08 129.94 L464.78 128.58 L467.48 127.17 L470.19 125.72 L472.89 124.21 L475.59 122.67 L478.29 121.08 L480.99 119.45 L483.69 117.79 L486.39 116.10 L489.09 114.37 L491.80 112.61 L494.50 110.83 L497.20 109.03 L499.90 107.21 L502.60 105.36 L505.30 103.51 L508.00 101.64 L510.71 99.77 L513.41 97.88 L516.11 96.00"/>
+  <path class="cosinus" d="M83.89 48.00 L86.59 48.04 L89.29 48.15 L92.00 48.33 L94.70 48.59 L97.40 48.92 L100.10 49.33 L102.80 49.80 L105.50 50.35 L108.20 50.97 L110.91 51.65 L113.61 52.41 L116.31 53.23 L119.01 54.12 L121.71 55.07 L124.41 56.09 L127.11 57.17 L129.81 58.30 L132.52 59.50 L135.22 60.75 L137.92 62.06 L140.62 63.42 L143.32 64.83 L146.02 66.28 L148.72 67.79 L151.43 69.33 L154.13 70.92 L156.83 72.55 L159.53 74.21 L162.23 75.90 L164.93 77.63 L167.63 79.39 L170.33 81.17 L173.04 82.97 L175.74 84.79 L178.44 86.64 L181.14 88.49 L183.84 90.36 L186.54 92.23 L189.24 94.12 L191.95 96.00 L194.65 97.88 L197.35 99.77 L200.05 101.64 L202.75 103.51 L205.45 105.36 L208.15 107.21 L210.86 109.03 L213.56 110.83 L216.26 112.61 L218.96 114.37 L221.66 116.10 L224.36 117.79 L227.06 119.45 L229.76 121.08 L232.47 122.67 L235.17 124.21 L237.87 125.72 L240.57 127.17 L243.27 128.58 L245.97 129.94 L248.67 131.25 L251.38 132.50 L254.08 133.70 L256.78 134.83 L259.48 135.91 L262.18 136.93 L264.88 137.88 L267.58 138.77 L270.29 139.59 L272.99 140.35 L275.69 141.03 L278.39 141.65 L281.09 142.20 L283.79 142.67 L286.49 143.08 L289.19 143.41 L291.90 143.67 L294.60 143.85 L297.30 143.96 L300.00 144.00 L302.70 143.96 L305.40 143.85 L308.10 143.67 L310.81 143.41 L313.51 143.08 L316.21 142.67 L318.91 142.20 L321.61 141.65 L324.31 141.03 L327.01 140.35 L329.71 139.59 L332.42 138.77 L335.12 137.88 L337.82 136.93 L340.52 135.91 L343.22 134.83 L345.92 133.70 L348.62 132.50 L351.33 131.25 L354.03 129.94 L356.73 128.58 L359.43 127.17 L362.13 125.72 L364.83 124.21 L367.53 122.67 L370.24 121.08 L372.94 119.45 L375.64 117.79 L378.34 116.10 L381.04 114.37 L383.74 112.61 L386.44 110.83 L389.14 109.03 L391.85 107.21 L394.55 105.36 L397.25 103.51 L399.95 101.64 L402.65 99.77 L405.35 97.88 L408.05 96.00 L410.76 94.12 L413.46 92.23 L416.16 90.36 L418.86 88.49 L421.56 86.64 L424.26 84.79 L426.96 82.97 L429.67 81.17 L432.37 79.39 L435.07 77.63 L437.77 75.90 L440.47 74.21 L443.17 72.55 L445.87 70.92 L448.57 69.33 L451.28 67.79 L453.98 66.28 L456.68 64.83 L459.38 63.42 L462.08 62.06 L464.78 60.75 L467.48 59.50 L470.19 58.30 L472.89 57.17 L475.59 56.09 L478.29 55.07 L480.99 54.12 L483.69 53.23 L486.39 52.41 L489.09 51.65 L491.80 50.97 L494.50 50.35 L497.20 49.80 L499.90 49.33 L502.60 48.92 L505.30 48.59 L508.00 48.33 L510.71 48.15 L513.41 48.04 L516.11 48.00"/>
+  <line class="vinkelmarkering" data-x-line y1="28" y2="164"/>
+  <line class="visad-tangent" data-tangent/>
+  <circle class="sinuspunkt" data-sin-point r="4.5"/><text class="punktetikett" data-sin-label>P</text>
+  <circle class="cosinuspunkt" data-cos-point r="4.5"/><text class="punktetikett" data-cos-label>Q</text>
+</svg><p>P på heldragen sinuskurva. Q på streckad cosinuskurva. Tangenten är prickad.</p>
+<p id="lutningsstatus" role="status"></p>
+</div><p><a data-geogebra="r4bhxeB6" href="https://www.geogebra.org/m/r4bhxeB6" target="_blank" rel="noopener">Öppna tangentdemonstrationen i GeoGebra</a>. Dra tangeringspunkten A. Slå på punkt D i algebrafältet för att se lutningen som ett y-värde.</p>
+</section>
+<section class="slide" id="cykel" aria-labelledby="cykel-title">
+  <h1 id="cykel-title" tabindex="-1">Derivera flera gånger</h1>
+<p>Varje pil visar en derivering. En konstant faktor följer med när vi deriverar, även ett minustecken.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>→</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>→</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>→</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>→</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Funktionen är cos x. Vilket uttryck får du när du deriverar två gånger?</p>
+<form class="practice" novalidate data-success="Det stämmer. Först får du −sin x, sedan −cos x."><div class="practice-fields"><label>Andraderivatan<select data-answer="2" data-hint="Följ två pilar från cosinus."><option value="">Välj</option><option value="1">−sin x</option><option value="2">−cos x</option><option value="3">cos x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa de två derivatorna</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mo>−</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="skillnadskvot" aria-labelledby="skillnadskvot-title">
+  <h1 id="skillnadskvot-title" tabindex="-1">Utgå från derivatans definition</h1>
+<p>Vi härleder sinusregeln. När h är skilt från noll kan vi skriva om differenskvoten med additionsformeln.</p>
+<div class="math-givens">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow></math>
+</div><p class="task">Skriv täljaren med additionsformeln. Vilken faktor kan brytas ut ur de två termer som innehåller sin x?</p>
+<form class="practice" novalidate data-success="Det stämmer. Det som blir kvar i parentesen är cos h − 1."><div class="practice-fields"><label>Gemensam faktor<select data-answer="1" data-hint="Samla termerna sin x · cos h och −sin x."><option value="">Välj</option><option value="1">sin x</option><option value="2">sin h</option><option value="3">cos x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa omskrivningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Sätt in f(x) = sin x</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+</div></div><div><h2>Dela upp och faktorisera</h2><div class="math-steps">
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow><mrow><mi>h</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>·</mo><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>h</mi></mrow></mfrac><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>·</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+</div><p>Sin x och cos x är konstanta när h går mot noll.</p>
+</div></div></div></details>
+</section>
+<section class="slide" id="gransvarden" aria-labelledby="gransvarden-title">
+  <h1 id="gransvarden-title" tabindex="-1">Läs av de två gränsvärdena</h1>
+<div class="split"><div class="work"><div class="math-givens">
+<math display="block"><mrow><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mn>1</mn></mrow></math>
+</div><p>Tabellen visar närmevärden när h i radianer närmar sig noll från båda håll.</p>
+<table class="granstabell"><thead><tr><th scope="col">h i radianer</th><th scope="col">
+<math display="block"><mrow><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math></th><th scope="col">
+<math display="block"><mrow><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math></th></tr></thead><tbody><tr><td>−0,100</td><td>0,04995835</td><td>0,99833417</td></tr>
+<tr><td>−0,010</td><td>0,00499996</td><td>0,99998333</td></tr>
+<tr><td>0,001</td><td>−0,00050000</td><td>0,99999983</td></tr>
+<tr><td>0,010</td><td>−0,00499996</td><td>0,99998333</td></tr>
+<tr><td>0,100</td><td>−0,04995835</td><td>0,99833417</td></tr></tbody></table></div><div class="work"><p class="task">Vilken av de två kvoterna byter tecken när du ändrar tecknet på h?</p>
+<form class="practice" novalidate data-success="Det stämmer. Cosinus är jämn, så enbart nämnaren byter tecken i den kvoten."><div class="practice-fields"><label>Kvoten som byter tecken<select data-answer="1" data-hint="Cos h har samma värde för h och för −h."><option value="">Välj</option><option value="1">Kvoten med cos h − 1</option><option value="2">Kvoten med sin h</option><option value="3">Båda</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Sätt in gränsvärdena</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>·</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>h</mi></mrow></mfrac><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>·</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>·</mo><mn>0</mn><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>·</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p>Den geometriska förklaringen finns efter målåterkopplingen.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="derivera" aria-labelledby="derivera-title">
+  <h1 id="derivera-title" tabindex="-1">Derivera först och sätt in vinkeln sedan</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>−</mo><mn>3</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Vilket tecken får termen som kommer från −3 cos x? Bestäm sedan f′(π).</p>
+<form class="practice" novalidate data-success="Det stämmer. De två minustecknen ger plus."><div class="practice-fields"><label>Termen efter derivering<select data-answer="2" data-hint="Multiplicera faktorn −3 med derivatan −sin x."><option value="">Välj</option><option value="1">−3sin x</option><option value="2">+3sin x</option><option value="3">−3cos x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa derivering och substitution</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Derivera term för term</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>4</mn><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo>·</mo><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>4</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>+</mo><mn>3</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div></div><div><h2>Beräkna vid x = π</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>π</mi><mo>)</mo><mo>=</mo><mn>4</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>π</mi><mo>+</mo><mn>3</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>π</mi></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>π</mi><mo>)</mo><mo>=</mo><mn>4</mn><mo>·</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mn>3</mn><mo>·</mo><mn>0</mn><mo>=</mo><mo>−</mo><mn>4</mn></mrow></math>
+</div></div></div></div></details>
+<p>Kontrollera vid behov i <a href="https://www.geogebra.org/graphing" target="_blank" rel="noopener">GeoGebras grafritare</a>. Använd radianer.</p>
+</section>
+<section class="slide" id="given-lutning" aria-labelledby="given-lutning-title">
+  <h1 id="given-lutning-title" tabindex="-1">Hitta en vinkel som ger en bestämd lutning</h1>
+<p>När tangentens lutning ska vara k löser vi ekvationen f′(x) = k. Vi skriver alltid den trigonometriska ekvationens period i radianer här.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Vid vilka x har tangenten lutning −1? Välj först grundekvationen och lös sedan på papper.</p>
+<form class="practice" novalidate data-success="Det stämmer. Sinusvärdet är positivt."><div class="practice-fields"><label>Grundekvation<select data-answer="2" data-hint="Derivatan är −2 sin x. Dela båda leden med −2."><option value="">Välj</option><option value="1">sin x = −1/2</option><option value="2">sin x = 1/2</option><option value="3">cos x = 1/2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa båda lösningsfamiljerna</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Utgå från derivatan</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+</div></div><div><h2>Lös sinus i radianer</h2><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+</div><p>n är ett heltal. Båda vinklarna har sinusvärdet 1/2.</p>
+</div></div></div></details>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · från funktion till tangent</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>+</mo><mn>5</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Bestäm f′(x), f″(x) och tangentens ekvation vid x = 0. Skriv mellanleden på papper.</p>
+<details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Derivera två gånger</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>−</mo><mn>5</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>″</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>−</mo><mn>5</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div></div><div><h2>Bestäm tangentens ekvation</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>5</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><mn>5</mn><mo>=</mo><mo>−</mo><mn>2</mn><mo>·</mo><mn>0</mn><mo>+</mo><mi>m</mi></mrow></math>
+<math display="block"><mrow><mi>m</mi><mo>=</mo><mn>5</mn></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow></math>
+</div><p>Tangenten går genom (0, 5) och har lutning −2.</p>
+</div></div></div></details>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+<p class="lead">Läroboken s. 86–89 · Derivatan av sin x och cos x</p>
+<p>Använd exemplen 2119–2120 för att följa hur derivatan används när vinkeln eller lutningen är känd.</p>
+<p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1</h2><p class="book-range">2121–2132</p>
+</article><article class="card"><h2>Nivå 2</h2><p class="book-range">2133–2136</p>
+</article><article class="card"><h2>Nivå 3</h2><p class="book-range">2137–2140</p>
+</article></div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Visa en beräkning eller figur du redan arbetat med och förklara det avgörande steget.</p>
+<div class="cards goals"><article class="card"><h2>Lutning och graf</h2><p>Välj x = π/2 eller x = π i modellen. Förklara hur tangentens lutning och Q:s höjd hör ihop.</p>
+</article><article class="card"><h2>Derivera</h2><p>Visa hur minustecknet behandlas i Din tur eller exempelvis 2122 eller 2125.</p>
+</article><article class="card"><h2>Hitta tangenten</h2><p>Visa hur ett krav på lutning blev en trigonometrisk ekvation, till exempel på bild 7 eller i 2134.</p>
+</article></div><p>Fortsätt till den sista bilden om du vill se varför gränsvärdena blir 0 och 1.</p>
+</section>
+<section class="slide" id="enhetscirkel" aria-labelledby="enhetscirkel-title">
+  <h1 id="enhetscirkel-title" tabindex="-1">Fördjupning · två gränsvärden i enhetscirkeln</h1>
+<div class="split"><figure class="cirkelbevis">
+<svg viewBox="0 0 365 250" role="img" aria-label="Cirkelbågen BC ligger mellan trianglarna ABC och ABE. CD är höjden från cirkelpunkten C och BE är tangenten vid B.">
+  <path class="sektor" d="M55 207 H275 A220 220 0 0 0 250.16 105.41 Z"/>
+  <path class="inre" d="M55 207 H275 L250.16 105.41 Z"/>
+  <path class="yttre" d="M55 207 H275 V92.46 Z"/>
+  <path class="hojd" d="M250.16 105.41 V207"/>
+  <path class="vinkel" d="M100 207 A45 45 0 0 0 94.9 186.2"/>
+  <text x="108" y="203">h</text><text x="40" y="229">A</text><text x="276" y="229">B</text>
+  <text x="220" y="98">C</text><text x="239" y="228">D</text><text x="285" y="92">E</text>
+  <text x="295" y="151">tan h</text><text x="190" y="164">sin h</text>
+</svg><figcaption>Inre triangel ABC, cirkelsektor ABC och yttre triangel ABE. Radien är 1.</figcaption>
+</figure><div class="work"><p>När 0 &lt; h &lt; π/2 ligger cirkelsektorns area mellan de två trianglarnas areor. Trianglarnas höjder är sin h och tan h.</p>
+<div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>&lt;</mo><mfrac><mrow><mi>h</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>&lt;</mo><mfrac><mrow><mi mathvariant="normal">tan</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+</div><p class="task">Förklara varför sin h/h ligger nära 1 när h är liten.</p>
+<details class="answer"><summary>Visa gränsvärdena</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>&lt;</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac><mo>&lt;</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mi>h</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>h</mi></mrow><mrow><mn>1</mn><mo>+</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>h</mi></mrow></mfrac><p>Cos h går mot 1 från båda håll. Kvoten sin h/h är jämn och går därför mot 1 även för negativa h. I sista produkten går den andra faktorn mot 0, så hela produkten går mot 0.</p>
+</mrow></math>
+</div></div></details>
+</div></div><p><a href="https://www.youtube.com/watch?v=-vs0ZWgsVA4" target="_blank" rel="noopener">Se den geometriska animationen av sinusderivatan</a>. Titta på hur den lilla cirkelbågen närmar sig en rät linje.</p>
+</section>
+</main>
+</body>
+</html>

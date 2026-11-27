@@ -1,0 +1,29 @@
+.derivata-figur {
+  gap: .4rem;
+}
+.derivata-figur figcaption {
+  text-align: center;
+}
+.derivata-figur .rutnat,
+.derivata-figur .axel,
+.derivata-figur .kurva,
+.derivata-figur .sekant,
+.derivata-figur .tangent {
+  fill: none;
+}
+.derivata-figur .rutnat { stroke: #d5e6e0; }
+.derivata-figur .axel { stroke: #345a56; stroke-width: 1.5; }
+.derivata-figur .kurva { stroke: #08705c; stroke-width: 3; }
+.derivata-figur .sekant { stroke: #384772; stroke-width: 2; stroke-dasharray: 7 4; }
+.derivata-figur .tangent { stroke: #974313; stroke-width: 2.7; stroke-dasharray: 2 4; }
+.derivata-figur .punkt { fill: #075d4c; stroke: white; stroke-width: 1; }
+.derivata-figur .flyttpunkt { fill: #384772; stroke: white; stroke-width: 1; }
+#sekant-status { font-variant-numeric: tabular-nums; }
+.h-val { display: grid; grid-template-columns: auto minmax(4.4rem, 1fr); align-items: center; gap: .7rem; }
+.regelbord { width: 100%; border-collapse: collapse; font-size: .95em; }
+.regelbord th, .regelbord td { padding: .2rem .34rem; text-align: center; border-bottom: 1px solid var(--line); }
+.regelbord th { background: var(--accent-light); }
+
+@media (min-width: 1024px) {
+  #parallell .split { grid-template-columns: minmax(0, 2fr) minmax(0, 4fr); }
+}
