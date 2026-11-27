@@ -1,0 +1,33 @@
+.derivator-grafer .math-givens,
+.derivator-grafer .math-steps { justify-items: start; }
+.derivator-grafer .slide:has(.answer[open]) .practice { display: none; }
+.derivator-grafer .calculation-pair > div { min-width: 0; }
+.derivator-grafer .card h2 { margin: 0 0 .35rem; }
+.derivator-grafer .lutningsmodell { display: grid; gap: .85rem; }
+.derivator-grafer .lutningsreglage { display: grid; gap: .6rem; align-content: start; }
+.derivator-grafer .lutningsgrafer { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; align-items: start; }
+.derivator-graf svg { width: 100%; max-height: 260px; }
+.derivator-graf .grafskalsteg { font-weight: 500; font-size: 14px; }
+.derivator-grafer .aktuell-tangent {
+  padding: .45rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: #f4f8f5;
+}
+.derivator-grafer .aktuell-tangent math { text-align: left; }
+.derivator-grafer .teckentabell { width: 100%; border-collapse: collapse; text-align: center; font-size: .94em; }
+.derivator-grafer .teckentabell :is(th, td) { padding: .27rem .18rem; border: 1px solid var(--line); }
+.derivator-grafer .teckentabell th { background: #e6f1ec; }
+.derivator-grafer :is(.pos, .neg) { font-weight: 750; }
+.derivator-grafer .pos { color: #065446; }
+.derivator-grafer .neg { color: #843d16; }
+@media (min-width: 1024px) {
+  .derivator-grafer .lutningsmodell { grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr); }
+}
+@media (max-width: 600px) {
+  .derivator-grafer .lutningsgrafer { grid-template-columns: 1fr; }
+  .derivator-grafer .teckentabell { font-size: .82em; }
+}
+@media (min-width: 1024px) {
+  .classroom .derivator-graf svg { max-height: 250px; }
+}

@@ -49,6 +49,7 @@ jobs:
           node ma4/kapitel-2/qa/produktregeln.cjs
           node ma4/kapitel-2/qa/kvotregeln.cjs
           node ma4/kapitel-2/qa/derivatan-av-exponential-och-logaritmfunktioner.cjs
+          node ma4/kapitel-2/qa/derivator-och-grafer.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -61,3 +62,4 @@ jobs:
             /tmp/ma4-produktregeln-qa
             /tmp/ma4-kvotregeln-qa
             /tmp/ma4-derivatan-av-exponential-och-logaritmfunktioner-qa
+            /tmp/ma4-derivator-och-grafer-qa
