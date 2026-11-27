@@ -30,10 +30,14 @@
   </nav>
 <section class="slide" id="start" aria-labelledby="start-title">
   <h1 id="start-title" tabindex="-1">Trigonometriska modeller</h1>
-<p>En periodisk modell beskriver ett mönster som upprepas. Vi ska läsa modellen, räkna ut när något händer och bygga en egen modell från ett hjuls rörelse.</p><div class="math-givens">
-<math display="block"><mrow><mi>T</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
-</div><p>Temperaturen T anges i grader Celsius. Tiden t mäts i timmar från kl. 06.00.</p><p class="task">Vilken punkt i tiden betyder t = 6?</p><form class="practice" data-success="Det stämmer. t räknar timmar från kl. 06.00." novalidate><div class="practice-fields"><label>Klockslag<select data-answer="2" data-hint="Lägg modellens tid till kl. 06.00."><option value="">Välj</option><option value="1">06.00</option><option value="2">12.00</option><option value="3">18.00</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa tolkningen</summary><div class="answer-body"><p>Vid t = 6 är det kl. 12.00. Sätt in 6 i modellen för att beräkna temperaturen.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Tolka modellens variabler, enheter och period.</li><li>Hitta tidpunkter som ger ett visst värde.</li><li>Bygga en modell från extremvärden, varvtid och startläge.</li></ol>
+<p>En periodisk modell beskriver ett mönster som upprepas.</p><div class="math-givens"><math display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>A</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mi>k</mi><mo>(</mo><mi>t</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mi>d</mi></mrow></math></div><p><var>t</var> är tiden och <var>h(t)</var> är modellvärdet. Amplituden är <var>|A|</var> och mittlinjen är <var>h = d</var>. Tidtillägget <var>v</var> flyttar grafen <var>−v</var> i tidsled. Vinkelhastigheten <var>k</var> ger perioden <var>P</var> när <var>k &gt; 0</var> och <var>A ≠ 0</var>.</p><math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mi>k</mi></mfrac></mrow></math><h2>Efter lektionen ska du kunna</h2><ol><li>Tolka modellens variabler, enheter och period.</li><li>Hitta tidpunkter som ger ett visst värde.</li><li>Bygga en modell från extremvärden, varvtid och startläge.</li></ol>
 </section>
+
+<section class="slide" id="temperatur-start" aria-labelledby="temperatur-start-title">
+  <h1 id="temperatur-start-title" tabindex="-1">Tolka en temperaturmodell</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>T</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+</div><p>Temperaturen T anges i grader Celsius. Tiden t mäts i timmar från kl. 06.00.</p><p class="task">Vilken punkt i tiden betyder t = 6?</p><form class="practice" data-success="Det stämmer. t räknar timmar från kl. 06.00." novalidate><div class="practice-fields"><label>Klockslag<select data-answer="2" data-hint="Lägg modellens tid till kl. 06.00."><option value="">Välj</option><option value="1">06.00</option><option value="2">12.00</option><option value="3">18.00</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa tolkningen</summary><div class="answer-body"><p>Vid t = 6 är det kl. 12.00. Sätt in 6 i modellen för att beräkna temperaturen.</p></div></details></section>
 
 <section class="slide" id="temperatur" aria-labelledby="temperatur-title">
   <h1 id="temperatur-title" tabindex="-1">Beräkna temperatur och period</h1>
@@ -115,7 +119,7 @@
 <math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac><mi>v</mi><mo>)</mo><mo>=</mo><mn>1</mn></mrow></math>
 <math display="block"><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac><mi>v</mi><mo>=</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
 <math display="block"><mrow><mi>v</mi><mo>=</mo><mn>5</mn></mrow></math>
-</div><div class="graph-tool"><div class="graph-pair"><svg id="hjul-figur" viewBox="0 0 352 222" role="img" aria-label="Lampa på ett hjul, med höjden markerad från golvet">
+<div class="model-equation"><p>Lampans höjd</p><math id="wheel-equation" display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>1,5</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mfrac><mi>π</mi><mn>10</mn></mfrac><mo>(</mo><mi>t</mi><mo>+</mo><mn>5</mn><mo>)</mo><mo>)</mo><mo>+</mo><mn>2,5</mn></mrow></math></div></div><div class="graph-tool"><div class="graph-pair"><svg id="hjul-figur" viewBox="0 0 352 222" role="img" aria-label="Lampa på ett hjul, med höjden markerad från golvet">
   <path class="plot-axis" d="M22 203 H325 M70 204 V38"/>
   <path class="grid" d="M71 163 H225 M71 103 H225 M71 43 H225"/>
   <text class="tick-y" x="63" y="208">0</text><text class="tick-y" x="63" y="168">1</text>
@@ -133,7 +137,7 @@
     <path class="plot-curve" data-curve/>
     <g class="figure-reveal" data-level><path class="reference-curve"/><g data-marks></g></g>
     <circle class="plot-point model-marker" data-plot-point r="5"/>
-    </svg></div><div class="graph-controls"><label>Tid t <input id="wheel-t" type="range" min="0" max="20" step="1" value="0"></label></div><p id="wheel-result" role="status"></p></div></div></details>
+    </svg></div><div class="graph-controls"><label>Tid t i sekunder <input id="wheel-t" type="range" min="0" max="20" step="1" value="0"></label></div><p id="wheel-result" role="status"></p></div></div></details>
 </section>
 
 <section class="slide" id="din-tur" aria-labelledby="din-tur-title">

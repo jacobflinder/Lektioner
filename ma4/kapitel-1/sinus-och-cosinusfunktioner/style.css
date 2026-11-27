@@ -35,3 +35,13 @@
   .sinusgraph .circle-point { max-height: 152px; }
   .sinusgraph .tick-x { font-size: 17px; }
 }
+
+.sinusgraph .model-equation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .8rem;
+  padding-block-end: .4rem;
+  border-bottom: 1px solid var(--line);
+}
+.sinusgraph .model-equation math { text-align: left; }

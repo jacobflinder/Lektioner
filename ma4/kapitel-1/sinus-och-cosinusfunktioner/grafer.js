@@ -101,8 +101,15 @@ function updateActivity() {
   const plot = graph('aktivitet-graf');
   if (Number(plot.dataset.end) !== end || !plot.querySelector('.grid-x')) redrawXTicks(plot, end);
   draw(plot, mode, a, k, 1);
+  const equation = graph('graf-ekvation');
+  const sign = equation.querySelector('[data-graf-sign]');
+  sign.textContent = a < 0 ? '−' : '';
+  sign.toggleAttribute('hidden', a >= 0);
+  equation.querySelector('[data-graf-a]').textContent = number(Math.abs(a));
+  equation.querySelector('[data-graf-mode]').textContent = mode;
+  equation.querySelector('[data-graf-k]').textContent = number(k);
   graph('graf-status').textContent =
-    `y = ${number(a)} ${mode}(${number(k)}x). Amplitud ${number(Math.abs(a))}. Period ${number(360 / k)}°.`;
+    `Amplitud ${number(Math.abs(a))}. Period ${number(360 / k)}°.`;
 }
 
 function markPoints(plot, angles, fn, a, k) {

@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
 const baseURL = process.env.MA4_QA_SITE || 'http://127.0.0.1:8123';
 const evidence = process.env.MA4_ADD_QA_SCREENSHOTS || '/tmp/ma4-rad-qa';
 const sizes = [[390, 844], [768, 900], [1280, 800], [1920, 1080]];
-const order = ['start', 'baglangd', 'omvandla', 'exakta', 'sinus', 'period', 'sammansatt', 'din-tur', 'bokarbete', 'mal'];
+const order = ['start', 'baglangd', 'omvandla', 'exakta', 'period', 'sinus', 'sammansatt', 'din-tur', 'bokarbete', 'mal'];
 const replies = {
   start: ['1', '2', /fyra lika/, /kvarts varv är 90°/],
   omvandla: ['2', '1', /etthundraåttiondel/, /andra hållet/],
@@ -24,11 +24,16 @@ function near(a, b, tolerance = 1e-9) {
 async function verifyArc(slide) {
   const r = slide.locator('#rad-r');
   const v = slide.locator('#rad-v');
+  const equation = slide.locator('#rad-equation');
+  assert.ok(await equation.evaluate(node => Boolean(node.compareDocumentPosition(document.getElementById('rad-r')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+  assert.equal(await equation.textContent(), 'b=2·1=2');
   for (const [radius, key, angle, expected] of [[1, 'one', 1, '1'], [3, 'one', 1, '3'],
     [2, 'half', Math.PI / 2, 'π'], [3, 'pi', Math.PI, '3π'], [2, 'turn', 2 * Math.PI, '4π']]) {
     await r.selectOption(String(radius));
     await v.selectOption(key);
     assert.ok((await slide.locator('#rad-result').innerText()).endsWith(`Båglängd b = ${expected}.`));
+    assert.ok((await equation.textContent()).endsWith('=' + expected.replace('/', '')));
+    if (key === 'half') assert.equal(await equation.locator('[data-arc-angle] mfrac').count(), 1);
     const geo = await slide.locator('svg').evaluate(svg => ({
       r: Number(svg.querySelector('.circle-rim').getAttribute('r')),
       len: svg.querySelector('[data-arc]').getTotalLength(),

@@ -60,8 +60,15 @@ draw('exempel-tan', { k: 2, h: -.8, roots: [1, 2, 3, 4].map(n => first + n * 90)
 draw('egen-tan', { k: 3, h: 1, roots: [15, 75, 135] });
 
 const controls = ['tan-k', 'tan-v', 'tan-b'].map(id => document.getElementById(id));
+const equation = document.getElementById('tan-equation');
+const equationPart = name => equation.querySelector(`[data-tan-${name}]`);
 function update() {
   const [k, v, b] = controls.map(node => Number(node.value));
+  equationPart('k').textContent = k;
+  equationPart('v-sign').textContent = v < 0 ? '−' : '+';
+  equationPart('v').textContent = `${Math.abs(v)}°`;
+  equationPart('b-sign').textContent = b < 0 ? '−' : '+';
+  equationPart('b').textContent = Math.abs(b);
   const poles = draw('tangens-verktyg', { k, v, b });
   const labels = poles.map(angle => `${String(angle).replace('-', '−')}°`).join(', ');
   document.getElementById('tan-result').textContent = `Period ${180 / k}°. Asymptoter i fönstret: ${labels}.`;

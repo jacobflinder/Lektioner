@@ -23,6 +23,9 @@ function near(a, b, tolerance = 1e-9) {
 async function verifyActivity(slide) {
   const plot = slide.locator('svg');
   const read = () => plot.locator('[data-pole]').evaluateAll(nodes => nodes.map(node => Number(node.getAttribute('data-pole'))));
+  const equation = slide.locator('#tan-equation');
+  assert.ok(await equation.evaluate(node => Boolean(node.compareDocumentPosition(document.getElementById('tan-k')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+  assert.equal(await equation.textContent(), 'y=tan⁡(1(x+0°))+0');
   assert.deepEqual(await read(), [-90, 90, 270]);
   await slide.locator('#tan-v').selectOption('30');
   assert.deepEqual(await read(), [-120, 60, 240]);
@@ -47,6 +50,10 @@ async function verifyActivity(slide) {
     assert.ok(!poles.some(x => x > points[0][0] && x < points.at(-1)[0]));
   }
   assert.match(await slide.locator('#tan-result').innerText(), /Period 90/);
+  assert.equal(await equation.textContent(), 'y=tan⁡(2(x+30°))+2');
+  await slide.locator('#tan-v').selectOption('-30');
+  await slide.locator('#tan-b').selectOption('-2');
+  assert.equal(await equation.textContent(), 'y=tan⁡(2(x−30°))−2');
 }
 
 async function inspectLayout(page, slide, id, width, height) {

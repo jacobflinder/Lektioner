@@ -17,9 +17,37 @@ function place(el, x, y, xName = 'x', yName = 'y') {
   el.setAttribute(yName, y.toFixed(3));
 }
 
+const equation = document.getElementById('rad-equation');
+const mathNs = 'http://www.w3.org/1998/Math/MathML';
+
+function mathNode(tag, value) {
+  const node = document.createElementNS(mathNs, tag);
+  node.textContent = value;
+  return node;
+}
+
+function displayAngle(target, expression) {
+  const [numerator, denominator] = expression.split('/');
+  const parts = numerator.endsWith('π')
+    ? [...(numerator.length > 1 ? [mathNode('mn', numerator.slice(0, -1))] : []), mathNode('mi', 'π')]
+    : [mathNode('mn', numerator)];
+  if (denominator) {
+    const fraction = mathNode('mfrac', '');
+    const top = mathNode('mrow', '');
+    top.append(...parts);
+    fraction.append(top, mathNode('mn', denominator));
+    target.replaceChildren(fraction);
+  } else {
+    target.replaceChildren(...parts);
+  }
+}
+
 function drawArc() {
   const r = Number(radiusControl.value);
   const { angle, label, length } = settings[angleControl.value];
+  equation.querySelector('[data-arc-radius]').textContent = r;
+  displayAngle(equation.querySelector('[data-arc-angle]'), label.replace(' rad', ''));
+  displayAngle(equation.querySelector('[data-arc-length]'), length(r));
   const pixels = r * 34;
   const x = center.x + pixels * Math.cos(angle);
   const y = center.y - pixels * Math.sin(angle);

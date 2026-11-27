@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
 const baseURL = process.env.MA4_QA_SITE || 'http://127.0.0.1:8123';
 const evidence = process.env.MA4_ADD_QA_SCREENSHOTS || '/tmp/ma4-add-qa';
 const sizes = [[390, 844], [768, 900], [1280, 800], [1920, 1080]];
-const order = ['start', 'regler', 'bevis', 'tabell', 'forenkla', 'komplement', 'exakt', 'din-tur', 'socrative', 'bokarbete', 'mal'];
+const order = ['regler', 'start', 'bevis', 'tabell', 'forenkla', 'komplement', 'exakt', 'din-tur', 'socrative', 'bokarbete', 'mal'];
 const replies = {
   start: ['1', '2', /högst 1/, /större än 1/],
   regler: ['1', '2', /plus mellan vinklarna/, /subtraherar vi sinusprodukten/],
@@ -111,7 +111,7 @@ async function main() {
       await page.locator('a[href="additions-och-subtraktionsformler/"]').click();
       const jump = page.locator('#jump');
       await jump.locator('option').nth(order.length - 1).waitFor({ state: 'attached' });
-      assert.equal(await jump.locator('option').count(), order.length);
+      assert.deepEqual(await jump.locator('option').evaluateAll(nodes => nodes.map(node => node.value)), order);
       if (width >= 1280) await page.locator('#mode').click();
       const save = id => page.screenshot({ path: path.join(evidence, `${width}-${id}.png`), fullPage: width < 1280 });
       for (const id of order) {
@@ -132,6 +132,11 @@ async function main() {
           assert.match(await status.innerText(), feedback);
         }
         await inspectLayout(page, slide, id, width, height);
+        if (id === 'regler') {
+          const formulas = slide.locator(':scope > .math-givens math');
+          assert.equal(await formulas.count(), 4);
+          assert.equal(await slide.locator('math mn').count(), 0, 'Första bilden visar sambanden utan numeriska exempel');
+        }
         if (id === 'bevis') await verifyChord(slide, mobile);
         if (id === 'socrative') {
           assert.equal(await slide.getByRole('heading', { level: 2 }).innerText(), '402. Ma4 ... Additionsformler mm ...');
