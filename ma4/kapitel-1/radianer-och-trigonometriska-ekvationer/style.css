@@ -1,0 +1,22 @@
+.radianer .radian-tool svg { max-height: 230px; }
+.radianer .radian-tool svg text { text-anchor: middle; dominant-baseline: middle; font-weight: 650; }
+.radianer .arc-main { fill: none; stroke: #08705c; stroke-width: 4; }
+.radianer .circle svg { max-height: 246px; }
+.radianer .value-table { width: 100%; max-width: 32rem; border-collapse: collapse; }
+.radianer .value-table th, .radianer .value-table td { border: 1px solid var(--line); text-align: center; padding: .25rem; }
+.radianer .value-table math { font-size: 1.1em; }
+.radianer #rad-result { font-weight: 650; }
+@media (max-width: 580px) { .radianer .radian-tool svg, .radianer .circle svg { max-height: 190px; } }
+.radianer .radian-layout, .radianer .radian-intro { display: grid; gap: .7rem; }
+@media (min-width: 880px) {
+  .radianer .radian-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "intro figure" "answer figure";
+    align-items: start;
+    grid-template-rows: auto 1fr;
+  }
+  .radianer .radian-intro { grid-area: intro; }
+  .radianer .radian-tool { grid-area: figure; }
+  .radianer .radian-tool svg { max-height: 270px; }
+  .radianer .radian-layout .answer { grid-area: answer; }
+}
