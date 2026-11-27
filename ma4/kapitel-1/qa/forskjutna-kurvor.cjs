@@ -9,7 +9,7 @@ const evidence = process.env.MA4_ADD_QA_SCREENSHOTS || '/tmp/ma4-shift-qa';
 const sizes = [[390, 844], [768, 900], [1280, 800], [1920, 1080]];
 const order = ['start', 'vertikal', 'horisontell', 'faktorisera', 'aktivitet', 'las-av', 'sin-eller-cos', 'din-tur', 'socrative', 'bokarbete', 'mal'];
 const replies = {
-  start: ['1', '2', /adderas efter/, /ökar med 3/],
+  start: ['1', '2', /adderas efter/, /B anger mittlinjens höjd/],
   vertikal: ['1', '2', /största värdet av cos x/i, /högsta punkten/],
   horisontell: ['2', '1', /gör summan/, /60° åt vänster/],
   faktorisera: ['1', '2', /Dela både 3x/, /20°/],
@@ -38,7 +38,7 @@ async function verifyActivity(slide) {
   const v = slide.locator('#shift-v');
   const b = slide.getByRole('combobox', { name: 'B – höjdförskjutning', exact: true });
   assert.equal(await b.getAttribute('id'), 'shift-b');
-  for (const name of ['A – amplitudfaktor', 'k – styr perioden', 'v – vinkeltillägg (grader)']) {
+  for (const name of ['A – amplitudfaktor', 'k – vinkelfaktor', 'v – vinkeltillägg (grader)']) {
     assert.ok(await slide.getByRole('combobox', { name, exact: true }).isVisible());
   }
   await a.selectOption('-2');
@@ -126,13 +126,24 @@ async function main() {
         }
         await inspectLayout(page, slide, id, width, height);
         if (id === 'start') {
-          const firstEquation = slide.locator('p > math').first();
-          assert.equal((await firstEquation.textContent()).replace(/\s|\u2061/g, ''), 'y=sinx+B');
-          const intro = await firstEquation.evaluate(math => math.parentElement.innerText);
-          assert.match(intro, /talet som läggs till efter att sinusvärdet har beräknats/);
-          const introduction = await firstEquation.boundingBox();
+          const equations = slide.locator('.math-givens math');
+          const relation = await equations.evaluateAll(nodes => nodes.map(el => el.textContent.replace(/\s|\u2061/g, '')));
+          assert.deepEqual(relation, ['y=Asin(k(x+v))+B', 'y=Acos(k(x+v))+B']);
+          const names = slide.locator('.parametrar');
+          assert.deepEqual(await names.locator('dt').allTextContents(), [
+            'A – amplitudfaktor', 'k – vinkelfaktor', 'v – vinkeltillägg', 'B – höjdförskjutning'
+          ]);
+          assert.equal(await slide.locator('math mn').count(), 0, 'Sambandsbilden ska föregå de numeriska exemplen');
+          const finalEquation = await equations.last().boundingBox();
+          const definition = await names.boundingBox();
           const question = await slide.locator('.task').boundingBox();
-          assert.ok(introduction.y + introduction.height <= question.y);
+          assert.ok(finalEquation.y + finalEquation.height <= definition.y);
+          assert.ok(definition.y + definition.height <= question.y);
+        }
+        if (id === 'vertikal') {
+          const example = await slide.locator(':scope > .math-givens math').textContent();
+          assert.equal(example.replace(/\s|\u2061/g, ''), 'y=cosx−2');
+          assert.match(await slide.innerText(), /B = −2/);
         }
         if (id === 'aktivitet') {
           await verifyActivity(slide);
