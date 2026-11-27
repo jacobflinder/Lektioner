@@ -28,6 +28,9 @@ const { chromium } = require('playwright');
           assert.equal(await slide.count(), 1);
           assert.equal(await page.locator('#progress').textContent(), (index + 1) + ' / ' + count);
           assert.equal(await slide.locator('details[open]').count(), 0);
+          if (slug === 'polynom-och-rakneregler' && index === 6) {
+            assert.deepEqual(await slide.locator('.nivaer dd').allTextContents(), ['1145–1151', '1152–1156', '1157–1159']);
+          }
           if (slug === 'introduktion' && index === 6) {
             assert.equal(await slide.locator('svg .skalstreck').count(), 4);
           }
