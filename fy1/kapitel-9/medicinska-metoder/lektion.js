@@ -150,7 +150,10 @@ pages[7].quiz={
 /* Bevara bokens tre schematiska kurvor men gör tolkningen elevstyrd. */
 pages[7].body=pages[7].body.replace(/<svg class="diagram depth-profile"[\s\S]*?<\/svg>/,
  '<iframe class="embedded-demo dose-demo" src="dosmodell.html" title="Välj tumördjup och strålprincip, jämför elektroner, gamma och protoner och visa fysikalisk återkoppling" loading="eager"></iframe>');
+pages[0].time='2 min';
+pages[1].time='2 min';
 pages[8].time='12 min';
+pages[9].time='13 min';
 pages[8].body=pages[8].body.replace(
  'Växla mellan röntgen, CT, MR, PET och gammakamera. För varje metod: välj vilken signal detektorn arbetar med, få återkoppling och klicka fram alla tre stegen. Jämför sedan två metoder med varandra.',
  'Tänk först själv (2 min): välj en metod och skriv vilken signal som registreras. Pröva sedan i par (4 min): gör ert val, läs återkopplingen och klicka fram de tre stegen. Jämför med en annan metod (3 min): vad är skillnaden och används joniserande strålning? Samla upp en slutsats i klassen (3 min). Alla fem modellerna finns kvar för repetition.');

@@ -104,7 +104,7 @@ console.log('Fy1 9.5 source, goal, original order, physical constants and all as
       await page.selectOption('#jump','11');
       assert.equal(await page.locator('#socrative-options').count(),0,'No competitor to real Socrative');
       assert.equal(await page.locator('#socrative-check').count(),0,'No premature local Socrative facit');
-      assert.match(await page.locator('.slide.active').innerText(),/Läraren startar den ursprungliga quizen/);
+      assert.match(await page.locator('.slide.active').innerText(),/När läraren startat aktiviteten/);
       assert.match(await page.locator('.slide.active').innerText(),/Enskilt:[\s\S]*Par:[\s\S]*Klass:/,'Actual classroom decisions in Socrative');
       await page.screenshot({path:path.join(dir,vp.width+'-socrative-classroom.png'),fullPage:true});
       assert.deepEqual(errors,[],`${vp.width} no console JS errors`);

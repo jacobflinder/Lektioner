@@ -24,7 +24,7 @@ assert.ok(data.pages[1].body.includes('penna'),'Original pen demonstration visib
 assert.ok(data.pages[1].body.includes('text x="14" y="138"'),'Wavelength labels separated from wave curves');
 assert.ok(data.pages[1].body.includes('Q80 48 140 86'),'Wavelength sketch varies period without varying wave amplitude');
 assert.ok(data.pages[2].body.includes('Huygens')&&data.pages[2].body.includes('Einstein')&&data.pages[2].quiz,'Historical thread visible with student decision');
-assert.ok(data.pages[2].body.includes('inte</b> en genomgång av relativitetsteorin'),'Light quanta without assumed relativity');
+assert.ok(!data.pages[2].body.includes('relativitetsteorin')&&data.pages[2].body.includes('fotoelektriska effekten'),'Historical contrast stays focused on light and photons');
 assert.equal((data.pages[3].body.match(/data-band=/g)||[]).length,7,'Seven spectrum regions');
 assert.ok(data.pages[4].body.includes('<math')&&data.pages[4].body.includes('<mfrac>'),'c=fλ and f=c/λ shown before calculation');
 assert.ok(data.pages[5].body.includes('Plancks konstant'),'Photon energy and Planck constant before example');

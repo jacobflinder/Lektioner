@@ -17,6 +17,9 @@ Jacob har beslutat att mindmaps och lärarens inspelade föreläsningar inte ska
 | 9.8 Fusion och fission | Inga ytterligare irrelevanta elevkommentarer hittades. | Oförändrad. | Fission/fusion, Veritasium som numrerad begreppsfilm, demonstrationer, energiberäkningar och 974–987. |
 | 9.9 Medicinska metoder | Bild 10 ”verifierat teoristöd”. | Skriv var eleven hittar relevanta samband. | Röntgen, CT, MR, PET, gammakamera, dosmodeller, återkopplingsval och 988–998. |
 
+## Ytterligare testfynd
+Den föregående förstärkningen av 9.9:s bilddemo till 12 minuter gjorde lektionssumman 73 minuter. Starten och målbilden kortas från 3 till 2 minuter vardera och bokarbetet från 14 till 13 minuter. Bilddemonstrationen behåller samtliga 12 minuter och lektionen återgår till 70 minuter. Två äldre testpåståenden har uppdaterats till de nya elevformuleringarna.
+
 ## Säkerhetsgräns för innehåll
 Förändringarna är begränsade till studentvyns rubriker, metaetiketter, produktionskommentarer och en facitläcka. Matematiska/fysikaliska formler, definitioner, metodordning, lösningssteg, elevmål, sidnummer och uppgiftsnummer är oförändrade. Lärarens käll- och metodanteckningar i teacher/source-fälten bevaras.
 
