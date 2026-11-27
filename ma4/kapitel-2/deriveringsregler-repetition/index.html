@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deriveringsregler I – repetition · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+  <script src="figurer.js" defer></script>
+</head>
+<body>
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Deriveringsregler I – repetition</h1>
+<p>Derivatan beskriver hur en funktion förändras. Värdet av derivatan i en punkt är tangentens lutning där.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>2</mn></mrow></math>
+</div><p class="task">Vilket tal anger tangentens lutning vid x = 2?</p>
+<form class="practice" novalidate data-success="Det stämmer. Primtecknet visar att värdet kommer från derivatan."><div class="practice-fields"><label>Tangentens lutning<select data-answer="2" data-hint="Läs värdet med primtecknet."><option value="">Välj</option><option value="1">3</option><option value="2">2</option><option value="3">Den går inte att läsa av här</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa skillnaden</summary><div class="answer-body"><p>Punkten på grafen har koordinaterna (2, 3). Talet 3 är punktens höjd. Talet 2 är lutningen hos tangenten genom punkten.</p>
+</div></details>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Förklara hur en sekant ger ett närmevärde till tangentens lutning.</li><li>Bestämma första- och andraderivatan med deriveringsregler.</li><li>Bestämma en tangents ekvation från lutning och tangeringspunkt.</li></ol>
+</section>
+<section class="slide" id="sekant" aria-labelledby="sekant-title">
+  <h1 id="sekant-title" tabindex="-1">Från sekant till tangent</h1>
+<div class="split"><figure class="diagram derivata-figur">
+<svg viewBox="0 0 440 258" role="img" aria-label="Parabel med en fast punkt P och en flyttbar punkt Q. Den streckade sekanten går genom P och Q.">
+  <path class="rutnat" d="M48 196 H404 M48 162 H404 M48 128 H404 M48 94 H404 M48 60 H404 M48 26 H404 M48 14 V230 M160 14 V230 M272 14 V230 M384 14 V230"/>
+  <path class="axel" d="M48 231 V12 l-4 7 m4 -7 l4 7 M48 231 H409 l-7 -4 m7 4 l-7 4"/>
+  <text x="60" y="23">y</text><text x="400" y="251">x</text><text x="36" y="250">0</text>
+  <text x="155" y="250">1</text><text x="266" y="250">2</text><text x="378" y="250">3</text>
+  <text x="20" y="168">2</text><text x="20" y="134">3</text><text x="20" y="32">6</text>
+  <path class="kurva" d="M48 128 Q216 230 384 26"/>
+  <line class="tangent" x1="104" y1="230" x2="384" y2="60" data-tangent hidden/>
+  <line class="sekant" x1="104" x2="392" data-sekant/>
+  <circle class="punkt" cx="272" cy="128" r="5"/>
+  <text x="254" y="115">P</text>
+  <circle class="flyttpunkt" r="4.5" data-q/>
+  <text data-q-text>Q</text>
+</svg>
+<figcaption><span>Heldragen kurva</span> · <span>Streckad sekant</span><span data-tangent-text hidden> · Prickad tangent</span></figcaption>
+</figure><div class="work"><p>P ligger där x = 2. Punkten Q ligger ett x-steg h från P, vid x = 2 + h. Linjen genom P och Q kallas sekant.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Förutsäg hur sekanten ändras när Q närmar sig P från höger och från vänster. Pröva sedan.</p>
+<label class="h-val">Välj x-steget h <select id="h-val"><option value="-1">−1</option><option value="-0.5">−0,5</option><option value="-0.1">−0,1</option><option value="0.1">0,1</option><option value="0.5">0,5</option><option value="1" selected>1</option></select></label><p id="sekant-status" role="status"></p>
+<details class="answer"><summary>Visa tangenten och jämför</summary><div class="answer-body"><p>När h närmar sig noll närmar sig sekantens lutning 2. Tangenten genom P har lutning 2. Vi behöver två olika punkter för sekanten, så h måste vara skilt från noll.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="definition" aria-labelledby="definition-title">
+  <h1 id="definition-title" tabindex="-1">Räkna med derivatans definition</h1>
+<p>I definitionen låter vi x-steget h närma sig noll. Vi sätter in funktionen i differenskvoten för punkten x = 2.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Skriv täljaren utan parenteser. Vad måste du göra innan du låter h gå mot noll?</p>
+<form class="practice" novalidate data-success="Det stämmer. Kvoten kan förenklas när h ≠ 0."><div class="practice-fields"><label>Nästa steg<select data-answer="2" data-hint="Nämnaren är noll när h är noll. Sök en faktor i hela täljaren."><option value="">Välj</option><option value="1">Sätt in h = 0 direkt</option><option value="2">Förenkla täljaren och förkorta med h</option><option value="3">Förkorta bara en term med h</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa mellanleden</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Förenkla differenskvoten</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><msup><mrow><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>2</mn><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo><mo>+</mo><mn>3</mn><mo>−</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>4</mn><mo>+</mo><mn>4</mn><mi>h</mi><mo>+</mo><msup><mrow><mi>h</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>4</mn><mo>−</mo><mn>2</mn><mi>h</mi><mo>+</mo><mn>3</mn><mo>−</mo><mn>3</mn></mrow></math>
+</div></div><div><h2>Bryt ut h och ta gränsvärdet</h2><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mn>2</mn><mi>h</mi><mo>+</mo><msup><mrow><mi>h</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>h</mi><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mo>+</mo><mi>h</mi></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mo>(</mo><mn>2</mn><mo>+</mo><mi>h</mi><mo>)</mo><mo>=</mo><mn>2</mn></mrow></math>
+</div><p>Förkortningen gäller för h ≠ 0. Det förenklade uttrycket går mot 2.</p>
+</div></div></div></details>
+<p>Digital kontroll: skriv in funktionen i <a href="https://www.geogebra.org/graphing" target="_blank" rel="noopener">GeoGebras grafritare</a> och beräkna sedan f′(2).</p>
+</section>
+<section class="slide" id="regler" aria-labelledby="regler-title">
+  <h1 id="regler-title" tabindex="-1">Derivera varje term</h1>
+<div class="split"><div class="work"><table class="regelbord"><thead><tr><th scope="col">Funktion</th><th scope="col">Derivata</th></tr></thead><tbody><tr><td>
+<math display="block"><mrow><msup><mrow><mi>x</mi></mrow><mrow><mi>a</mi></mrow></msup></mrow></math></td><td>
+<math display="block"><mrow><mi>a</mi><msup><mrow><mi>x</mi></mrow><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></math></td></tr>
+<tr><td>
+<math display="block"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi></mrow></msup></mrow></math></td><td>
+<math display="block"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi></mrow></msup></mrow></math></td></tr>
+<tr><td>
+<math display="block"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mi>k</mi><mi>x</mi></mrow></msup></mrow></math></td><td>
+<math display="block"><mrow><mi>k</mi><msup><mrow><mi>e</mi></mrow><mrow><mi>k</mi><mi>x</mi></mrow></msup></mrow></math></td></tr>
+<tr><td>
+<math display="block"><mrow><msup><mrow><mi>a</mi></mrow><mrow><mi>x</mi></mrow></msup></mrow></math></td><td>
+<math display="block"><mrow><msup><mrow><mi>a</mi></mrow><mrow><mi>x</mi></mrow></msup><mo>·</mo><mi>ln</mi><mi>a</mi></mrow></math></td></tr>
+<tr><td>
+<math display="block"><mrow><mi>k</mi><mo>·</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></td><td>
+<math display="block"><mrow><mi>k</mi><mo>·</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></td></tr>
+<tr><td>
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></td><td>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></td></tr></tbody></table><p>I tabellen är a och k konstanter. För aˣ gäller a > 0. Potensregeln används där potensen är deriverbar.</p>
+</div>
+<div class="work"><div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>4</mn></mrow></msup><mo>−</mo><mn>5</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>8</mn></mrow></math>
+</div><p class="task">Välj derivatan av 3x⁴. Derivera sedan resten på papper.</p>
+<form class="practice" novalidate data-success="Det stämmer. Faktorn 3 följer med och multipliceras med 4."><div class="practice-fields"><label>Derivatan av första termen<select data-answer="2" data-hint="Multiplicera med exponenten och sänk den med ett."><option value="">Välj</option><option value="1">3x³</option><option value="2">12x³</option><option value="3">12x⁴</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa hela derivatan</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><mo>·</mo><mn>4</mn><mo>·</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup><mo>−</mo><mn>5</mn><mo>·</mo><mn>2</mn><mo>·</mo><mi>x</mi><mo>+</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>12</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup><mo>−</mo><mn>10</mn><mi>x</mi></mrow></math>
+</div><p>Konstantens derivata är noll.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="exponential" aria-labelledby="exponential-title">
+  <h1 id="exponential-title" tabindex="-1">Skilj potens från exponentialfunktion</h1>
+<p>I en potens som x³ är basen variabel. I exponentialfunktionerna nedan är baserna fasta och x finns i exponenten.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mn>2</mn><mi>x</mi></mrow></msup><mo>+</mo><msup><mrow><mn>3</mn></mrow><mrow><mi>x</mi></mrow></msup></mrow></math>
+</div><p class="task">Vilken faktor får 3ˣ när du deriverar? Bestäm därefter hela f′(x).</p>
+<form class="practice" novalidate data-success="Det stämmer. Faktorn är den naturliga logaritmen av basen."><div class="practice-fields"><label>Faktor framför 3ˣ<select data-answer="3" data-hint="Använd regeln för aˣ med den fasta basen a = 3."><option value="">Välj</option><option value="1">3</option><option value="2">x</option><option value="3">ln 3</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa båda termerna</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn><mo>·</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mn>2</mn><mi>x</mi></mrow></msup><mo>+</mo><msup><mrow><mn>3</mn></mrow><mrow><mi>x</mi></mrow></msup><mo>·</mo><mi>ln</mi><mn>3</mn></mrow></math>
+</div><p>I första termen kommer −2 från regeln för eᵏˣ. I andra termen kommer ln 3 från regeln för aˣ.</p>
+</div></details>
+</section>
+<section class="slide" id="andraderivata" aria-labelledby="andraderivata-title">
+  <h1 id="andraderivata-title" tabindex="-1">Derivera en gång till</h1>
+<p>Förstaderivatan heter f′(x). Andraderivatan heter f″(x) och fås genom att derivera f′(x). Om y = f(x) skrivs de också y′ och y″, eller dy/dx och d²y/dx².</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msqrt><mi>x</mi></msqrt><mo>+</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p>Här är x > 0. Skriv båda termerna som potenser innan du använder potensregeln.</p>
+<p class="task">Vilken exponent får den andra termen när du skriver om 1/x?</p>
+<form class="practice" novalidate data-success="Det stämmer. Börja med att skriva 1/x som x⁻¹."><div class="practice-fields"><label>Exponent<select data-answer="1" data-hint="En negativ exponent placerar motsvarande positiva potens i nämnaren."><option value="">Välj</option><option value="1">−1</option><option value="2">1</option><option value="3">1/2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa första- och andraderivatan</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Skriv om och derivera</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup><mo>+</mo><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup><mo>−</mo><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mn>2</mn></mrow></msup></mrow></math>
+</div></div><div><h2>Derivera förstaderivatan</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>″</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mo>−</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo><mo>·</mo><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup><mo>+</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>″</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>4</mn></mrow></mfrac><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></msup><mo>+</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow></math>
+</div></div></div></div></details>
+</section>
+<section class="slide" id="parallell" aria-labelledby="parallell-title">
+  <h1 id="parallell-title" tabindex="-1">Bestäm ekvationen för en parallell tangent</h1>
+<div class="split"><figure class="diagram derivata-figur">
+<svg viewBox="0 0 440 250" role="img" aria-label="Exponentialgrafen och den givna räta linjen. Efter lösningen visas tangent och tangeringspunkt P.">
+  <path class="rutnat" d="M48 212 H404 M48 170 H404 M48 128 H404 M48 86 H404 M48 44 H404 M72 14 V224 M192 14 V224 M312 14 V224"/>
+  <path class="axel" d="M192 225 V14 l-4 7 m4 -7 l4 7 M48 212 H408 l-7 -4 m7 4 l-7 4"/>
+  <text x="397" y="233">x</text><text x="173" y="20">y</text><text x="60" y="235">−1</text><text x="188" y="236">0</text><text x="307" y="236">1</text><text x="171" y="112">5</text>
+  <path class="kurva" d="M48.00 9.56 L52.00 14.13 L56.00 18.55 L60.00 22.83 L64.00 26.96 L68.00 30.96 L72.00 34.83 L76.00 38.58 L80.00 42.20 L84.00 45.70 L88.00 49.08 L92.00 52.36 L96.00 55.53 L100.00 58.59 L104.00 61.56 L108.00 64.42 L112.00 67.20 L116.00 69.88 L120.00 72.47 L124.00 74.98 L128.00 77.41 L132.00 79.75 L136.00 82.02 L140.00 84.22 L144.00 86.34 L148.00 88.40 L152.00 90.38 L156.00 92.31 L160.00 94.16 L164.00 95.96 L168.00 97.70 L172.00 99.38 L176.00 101.01 L180.00 102.58 L184.00 104.10 L188.00 105.58 L192.00 107.00 L196.00 108.38 L200.00 109.71 L204.00 111.00 L208.00 112.24 L212.00 113.45 L216.00 114.61 L220.00 115.74 L224.00 116.83 L228.00 117.89 L232.00 118.91 L236.00 119.89 L240.00 120.85 L244.00 121.77 L248.00 122.66 L252.00 123.53 L256.00 124.36 L260.00 125.17 L264.00 125.95 L268.00 126.71 L272.00 127.44 L276.00 128.14 L280.00 128.83 L284.00 129.49 L288.00 130.13 L292.00 130.75 L296.00 131.35 L300.00 131.92 L304.00 132.48 L308.00 133.03 L312.00 133.55 L316.00 134.06 L320.00 134.55 L324.00 135.02 L328.00 135.48 L332.00 135.92 L336.00 136.35 L340.00 136.76 L344.00 137.17 L348.00 137.55 L352.00 137.93 L356.00 138.29 L360.00 138.64 L364.00 138.98 L368.00 139.31 L372.00 139.63 L376.00 139.94 L380.00 140.23 L384.00 140.52 L388.00 140.80 L392.00 141.07 L396.00 141.33 L400.00 141.58 L404.00 141.82"/>
+  <path class="sekant" d="M48 140.6 L283.43 223"/>
+  <g data-tangent hidden><path class="tangent" d="M48 56.6 L399 179.45"/><circle class="punkt" cx="192" cy="107" r="5"/><text x="201" y="99">P</text></g>
+</svg>
+<figcaption>Kurva · Streckad given linje<span data-tangent-text hidden> · Prickad tangent</span></figcaption>
+</figure><div class="work"><div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>+</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>
+</div><p class="task">Grafen till f har en tangent parallell med linjen. Vilket värde ska derivatan ha i tangeringspunkten?</p>
+<form class="practice" novalidate data-success="Det stämmer. Derivatan ska vara lika med linjens lutning."><div class="practice-fields"><label>Derivatans värde<select data-answer="1" data-hint="Parallella linjer har samma riktningskoefficient."><option value="">Välj</option><option value="1">−2</option><option value="2">1</option><option value="3">5</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa tangeringspunkten och linjen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Bestäm var lutningen är −2</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>2</mn><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>=</mo><mo>−</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>
+</div></div><div><h2>Sätt in i y = kx + m</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>2</mn><msup><mrow><mi>e</mi></mrow><mrow><mn>0</mn></mrow></msup><mo>+</mo><mn>3</mn><mo>=</mo><mn>5</mn></mrow></math>
+<math display="block"><mrow><mn>5</mn><mo>=</mo><mo>−</mo><mn>2</mn><mo>·</mo><mn>0</mn><mo>+</mo><mi>m</mi></mrow></math>
+<math display="block"><mrow><mi>m</mi><mo>=</mo><mn>5</mn></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow></math>
+</div></div></div></div></details>
+</div></div>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · derivator och tangent</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup><mo>−</mo><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>
+</div><p class="task">Bestäm f′(x) och f″(x). Sätt sedan x = −1 och bestäm tangentens ekvation. Skriv mellanleden på papper.</p>
+<details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Bestäm derivatorna och lutningen</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>6</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>″</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>12</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>6</mn><msup><mrow><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>1</mn><mo>=</mo><mn>5</mn></mrow></math>
+</div></div><div><h2>Bestäm punkten och ekvationen</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>2</mn><msup><mrow><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mn>3</mn></mrow></msup><mo>−</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow></math>
+<math display="block"><mrow><mn>0</mn><mo>=</mo><mn>5</mn><mo>·</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mi>m</mi></mrow></math>
+<math display="block"><mrow><mi>m</mi><mo>=</mo><mn>5</mn></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>5</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow></math>
+</div></div></div></div></details>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+<p class="lead">Läroboken s. 82–85 · 2.1 Deriveringsregler I</p>
+<p>Använd de lösta exemplen 2101–2102 om du vill jämföra mellanleden.</p>
+<p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1</h2><p class="book-range">2103–2110</p>
+</article><article class="card"><h2>Nivå 2</h2><p class="book-range">2111–2114</p>
+</article><article class="card"><h2>Nivå 3</h2><p class="book-range">2115–2118</p>
+</article></div><details class="answer"><summary>Visa numerisk kontroll</summary><div class="answer-body"><p>Använd samma andragradsfunktion som i sekantfiguren. Beräkna lutningen mellan x = 1,9 och x = 2,1.</p>
+<div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>f</mi><mo>(</mo><mn>2,1</mn><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mn>1,9</mn><mo>)</mo></mrow><mrow><mn>2,1</mn><mo>−</mo><mn>1,9</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>3,21</mn><mo>−</mo><mn>2,81</mn></mrow><mrow><mn>0,2</mn></mrow></mfrac><mo>=</mo><mn>2</mn></mrow></math>
+</div><p>Här ger kvoten exakt 2. För andra funktioner kan den centrala sekanten ge ett närmevärde.</p>
+</div></details>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Välj beräkningar du redan gjort. Peka ut steget som visar varje mål.</p>
+<div class="cards goals"><article class="card"><h2>Sekant och tangent</h2><p>Visa hur ändringen i y delades med ändringen i x. Förklara vad som händer när punkterna närmar sig varandra. Utgå till exempel från 2108.</p>
+</article><article class="card"><h2>Första- och andraderivatan</h2><p>Visa en regel du använde i Din tur eller exempelvis 2103 eller 2106. Förklara hur du gick från första- till andraderivatan.</p>
+</article><article class="card"><h2>Tangentens ekvation</h2><p>Visa hur du fick fram både lutningen och tangeringspunkten i Din tur eller exempelvis 2107 eller 2114.</p>
+</article></div>
+</section>
+</main>
+</body>
+</html>

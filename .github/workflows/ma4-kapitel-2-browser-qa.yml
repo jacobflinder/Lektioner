@@ -1,0 +1,49 @@
+name: Ma4 kapitel 2 browser QA
+
+on:
+  push:
+    paths:
+      - 'ma4/index.html'
+      - 'ma4/kapitel-2/**'
+      - 'ma4/kapitel-1/trigonometri-och-trianglar/lesson.js'
+      - 'ma4/kapitel-1/trigonometri-och-trianglar/style.css'
+      - 'ma4/kapitel-1/assets/practice.*'
+      - '.github/workflows/ma4-kapitel-2-browser-qa.yml'
+  pull_request:
+    paths:
+      - 'ma4/index.html'
+      - 'ma4/kapitel-2/**'
+      - 'ma4/kapitel-1/trigonometri-och-trianglar/lesson.js'
+      - 'ma4/kapitel-1/trigonometri-och-trianglar/style.css'
+      - 'ma4/kapitel-1/assets/practice.*'
+      - '.github/workflows/ma4-kapitel-2-browser-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kapitel-2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Start lesson site
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 > /tmp/ma4-derivata-http.log 2>&1 &
+          curl --fail --retry 12 --retry-connrefused --retry-delay 1 http://127.0.0.1:8123/ma4/kapitel-2/ > /dev/null
+      - name: Verify Deriveringsregler I in Chromium
+        run: node ma4/kapitel-2/qa/deriveringsregler-repetition.cjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ma4-kapitel-2-screenshots
+          path: /tmp/ma4-deriveringsregler-qa
