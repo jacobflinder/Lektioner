@@ -136,6 +136,13 @@ async function main() {
         if (await detail.count()) assert.equal(await slide.locator('.answer-body').isVisible(), false);
         const tangent = slide.locator('[data-tangent]');
         if (await tangent.count()) assert.equal(await tangent.isVisible(), false);
+        if (id === 'start') {
+          const relation = slide.locator('#derivata-lutning');
+          assert.equal((await relation.textContent()).replace(/\s/g, ''), 'f′(a)=k');
+          const model = await relation.boundingBox();
+          const example = await slide.locator('#derivata-lutning + math').boundingBox();
+          assert.ok(model.y + model.height <= example.y, 'Sambandet visas före det första exemplet');
+        }
         if (id === 'sekant') await checkSecant(slide);
         if (choices[id]) {
           const [wrong, right, hint, correct] = choices[id];
