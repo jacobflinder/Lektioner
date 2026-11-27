@@ -117,6 +117,15 @@ async function main() {
           await inspectLayout(page, viewport, id, false);
           if (id === 'sida') {
             await inspectTriangle(page, id, Math.tan(35 * Math.PI / 180));
+            const choice = section.getByRole('combobox');
+            const check = section.getByRole('button', { name: 'Kontrollera' });
+            const feedback = section.locator('.practice-status');
+            await choice.selectOption('1');
+            await check.click();
+            assert.match(await feedback.innerText(), /Peka ut den sökta kateten och hypotenusan/);
+            await choice.selectOption('2');
+            await check.click();
+            assert.match(await feedback.innerText(), /Cosinus kopplar den närliggande kateten till hypotenusan/);
             await page.screenshot({ path: path.join(screenshots, `${width}-sida-fore.png`) });
           }
           if (id === 'vinkel') await inspectTriangle(page, id, 5 / Math.sqrt(144 - 25));
@@ -136,6 +145,8 @@ async function main() {
 
       await page.locator('#jump').selectOption('sida');
       assert.equal(await page.locator('#sida .answer-body').isVisible(), false);
+      assert.equal(await page.locator('#sida select').inputValue(), '');
+      assert.equal(await page.locator('#sida .practice-status').innerText(), '');
       await page.locator('#sida summary').click();
       await page.locator('#mode').click();
       assert.equal(await page.locator('#sida .answer-body').isVisible(), false);

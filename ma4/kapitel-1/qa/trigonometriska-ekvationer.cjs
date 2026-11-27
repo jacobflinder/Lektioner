@@ -28,7 +28,7 @@ const feedback = {
   start: { wrong: ['2'], right: ['1'], hint: /sinusens höjd/ },
   sinus: { wrong: ['1'], right: ['2'], hint: /samma y-koordinat/ },
   cosinus: { wrong: ['2'], right: ['1'], hint: /ovanför och nedanför/ },
-  tangens: { wrong: ['360'], right: ['180°'], hint: /motsatta punkterna/ },
+  tangens: { wrong: ['360'], right: ['180'], hint: /motsatta punkterna/ },
   halva: { wrong: ['360'], right: ['720'], hint: /Multiplicera också/ },
   sammansatt: { wrong: ['2'], right: ['1'], hint: /Frilägg 3x/ },
   intervall: { wrong: ['180', '3'], right: ['90', '4'], hint: /intervallgränserna/ }
@@ -152,13 +152,20 @@ async function main() {
           await save(`${id}-facit`);
         }
       }
-      const book = await page.locator('#bokarbete').textContent();
+      const bookSlide = page.locator('#bokarbete');
+      const book = await bookSlide.textContent();
+      await page.locator('#jump').selectOption('bokarbete');
+      assert.equal(await bookSlide.locator('.answer-body').isVisible(), false);
+      await bookSlide.locator('summary').press('Enter');
+      assert.match(await bookSlide.locator('.answer-body').innerText(), /Sinus och cosinus har perioden 360°. Tangens har perioden 180°/);
+      await checkLayout(page, 'bokarbete', width, height, true);
+      await page.locator('#jump').selectOption('mal');
       for (const value of ['1125–1128', '1129–1138', '1139–1142', '1143–1145']) assert.ok(book.includes(value));
       assert.match(book, /alla uppgifter och deluppgifter på båda dina valda nivåer/);
       assert.ok(await page.locator('#next').isDisabled());
       await save('mal');
       await page.locator('#jump').selectOption('halva');
-      assert.equal(await page.locator('#halva input').inputValue(), '');
+      assert.equal(await page.locator('#halva select').inputValue(), '');
       assert.equal(await page.locator('#halva .figure-reveal').isVisible(), false);
       await page.locator('#halva summary').click();
       await page.locator('#mode').click();

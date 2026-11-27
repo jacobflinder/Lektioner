@@ -6,7 +6,9 @@
   <meta name="description" content="Repetera trigonometri i rätvinkliga trianglar och använd sinus, cosinus, tangens och arcus.">
   <title>Trigonometri och trianglar · Ma4</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
   <script src="lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
 </head>
 <body>
 <header class="lesson-header">
@@ -91,7 +93,11 @@
     </svg>
   </figure>
   <div class="work">
-<p class="task">Bestäm längden <i>x</i>. Skriv först vilken kvot du behöver och lös ekvationen för hand.</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Vi känner hypotenusan och söker den närliggande kateten. Då använder vi cosinus.</p><div class="math-steps">
+<p class="task">Bestäm längden <i>x</i>. Välj kvot med hjälp av figuren och skriv sedan ekvationen på papper.</p>
+<form class="practice" data-success="Det stämmer. Cosinus kopplar den närliggande kateten till hypotenusan." novalidate>
+  <div class="practice-fields"><label>Vilken kvot passar?<select data-answer="2" data-hint="Peka ut den sökta kateten och hypotenusan. Vilken kvot använder just de två sidorna?"><option value="">Välj</option><option value="1">Sinus</option><option value="2">Cosinus</option><option value="3">Tangens</option></select></label></div>
+  <button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><p>Vi känner hypotenusan och söker den närliggande kateten. Då använder vi cosinus.</p><div class="math-steps">
 <math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>35°</mn><mo>=</mo><mfrac><mrow><mi>x</mi></mrow><mrow><mn>11</mn></mrow></mfrac></mrow></math>
 <math display="block"><mrow><mi>x</mi><mo>=</mo><mn>11</mn><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mn>35°</mn></mrow></math>
 <math display="block"><mrow><mi>x</mi><mo>≈</mo><mn>9,0</mn><mspace width="0.18em"/><mtext>cm</mtext></mrow></math>

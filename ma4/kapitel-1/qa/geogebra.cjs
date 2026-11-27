@@ -46,8 +46,8 @@ async function main() {
           await ctx.getByText('GeoGebra-test').waitFor({ state: 'visible' });
         }
         await dialog.getByRole('button', { name: 'Stäng' }).press('Escape');
-        assert.equal(await dialog.isVisible(), false);
-        assert.equal(await page.locator('.geogebra-stage iframe').count(), 0);
+        await dialog.waitFor({ state: 'hidden' });
+        await page.locator('.geogebra-stage iframe').waitFor({ state: 'detached' });
         assert.ok(await link.evaluate(node => document.activeElement === node));
       }
       console.log(`PASS ${width}×${height}: tre GeoGebra-demonstrationer, inbäddning och återgång`);

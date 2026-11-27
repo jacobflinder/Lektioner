@@ -52,6 +52,7 @@ function draw(id, { a = 1, k = 1, v = 0, b = 0, h, roots = [] } = {}) {
 }
 
 draw('tangens-grund');
+draw('tan-nara-asymptot');
 draw('amplitud-tan', { a: 2 });
 draw('period-tan', { k: 2 });
 const first = Math.atan(-.8) / toRad / 2;

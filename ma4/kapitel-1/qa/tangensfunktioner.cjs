@@ -119,6 +119,34 @@ async function main() {
           assert.equal(await solution.isVisible(), false);
           await slide.locator('summary').press('Enter');
           assert.equal(await solution.isVisible(), true);
+          if (id === 'asymptoter') {
+            const plot = slide.locator('#tan-nara-asymptot');
+            assert.ok(await plot.isVisible());
+            const geometry = await plot.evaluate(svg => {
+              const pole = svg.querySelector('[data-pole]');
+              const x = pole.getPointAtLength(0).x;
+              const matrix = svg.getScreenCTM();
+              const bounds = svg.getBoundingClientRect();
+              function point(path, length) {
+                const { x, y } = path.getPointAtLength(length);
+                const pixel = new DOMPoint(x, y).matrixTransform(matrix);
+                return { x, y, visible: pixel.x > bounds.left && pixel.x < bounds.right
+                  && pixel.y > bounds.top && pixel.y < bounds.bottom };
+              }
+              const branches = [...svg.querySelectorAll('[data-tan-curve] path')]
+                .map(path => [point(path, 0), point(path, path.getTotalLength())]);
+              return { x, pole: pole.dataset.pole, branches };
+            });
+            assert.equal(geometry.pole, '90');
+            near(geometry.x, 293);
+            assert.equal(geometry.branches.length, 2);
+            assert.ok(geometry.branches.flat().every(point => point.visible));
+            const [[leftStart, leftEnd], [rightStart, rightEnd]] = geometry.branches;
+            assert.ok(leftStart.x < leftEnd.x && leftEnd.x < geometry.x);
+            assert.ok(rightEnd.x > rightStart.x && rightStart.x > geometry.x);
+            near(leftEnd.y, 30, .002);
+            near(rightStart.y, 176, .002);
+          }
           if (id === 'din-tur' || id === 'los') {
             const roots = await slide.locator('[data-angle]').evaluateAll(nodes => nodes.map(node => Number(node.getAttribute('data-angle'))));
             if (id === 'din-tur') assert.deepEqual(roots, [15, 75, 135]);
