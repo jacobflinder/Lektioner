@@ -5,8 +5,14 @@ const { chromium } = require('playwright');
   const base = process.env.QA_BASE_URL || 'http://127.0.0.1:8123';
   const browser = await chromium.launch();
   try {
-    for (const width of [390, 768, 1280, 1920]) {
-      const page = await browser.newPage({ viewport: { width, height: width === 390 ? 844 : 900 } });
+    const viewports = [
+      { width: 390, height: 844 },
+      { width: 768, height: 900 },
+      { width: 1280, height: 800 },
+      { width: 1920, height: 1080 },
+    ];
+    for (const viewport of viewports) {
+      const page = await browser.newPage({ viewport });
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       const chapter = base + '/mato1c/kapitel-1/';
@@ -22,6 +28,9 @@ const { chromium } = require('playwright');
           assert.equal(await slide.count(), 1);
           assert.equal(await page.locator('#progress').textContent(), (index + 1) + ' / ' + count);
           assert.equal(await slide.locator('details[open]').count(), 0);
+          if (slug === 'introduktion' && index === 6) {
+            assert.equal(await slide.locator('svg .skalstreck').count(), 4);
+          }
           for (const control of await slide.locator('summary').all()) {
             await control.click();
             assert.equal(await slide.locator('details[open] .kedja:visible').count(), 1);
