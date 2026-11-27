@@ -16,6 +16,11 @@ assert.ok(pages.every(p=>!/ej slutförd|måste fortfarande|Slutgranskning STOPP|
 assert.equal(pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');
 assert.match(pages[1].body,/Förklara[\s\S]*Beräkna[\s\S]*Tolka/,'three measurable goals');
 assert.ok(pages[2].body.includes('https://youtu.be/TRL7o2kPqw0'),'correct video');
+assert.equal(pages[2].label,'Film · mätvärden och stråldos','no source meta on video slide');
+assert.ok(pages[1].body.includes('<b>Boken:</b>') && !pages[1].body.includes('Nya boken'),'lesson uses neutral book label');
+assert.ok(!pages[8].body.includes('under källkontroll') && !pages[8].body.includes('ännu under'),'no unresolved source note in student bookwork');
+assert.equal(pages[3].title,'Vad händer med cellerna?','biology title without mindmap meta');
+assert.ok(pages.every(p=>!/mindmap/i.test(p.body||'')),'no separate mindmap in pupil tasks');
 assert.ok(pages[2].body.includes('2,4 mSv/år'),'book page 366 background');
 assert.ok(pages[3].body.includes('Reparation, celldöd eller kvarstående DNA-fel'),'biology before calculation');
 assert.ok(pages[3].body.includes('Bestrålad är inte samma sak som radioaktiv'),'concepts needed in 972/973');

@@ -25,8 +25,10 @@ assert.equal((a.pages[9].body.match(/class="goal-feedback"/g)||[]).length,3,'9.8
 assert.equal((b.pages[10].body.match(/class="goal-feedback"/g)||[]).length,3,'9.9 three delayed goal-specific feedback panels');
 assert.ok(b.pages[7].body.includes('dosmodell.html'),'radiotherapy must use live dose curves');
 assert.ok(a.pages[3].body.includes('Jämför två försök'),'fission model has two-round prediction prompt');
-assert.ok(a.pages[2].body.includes('Mindmap – fission') && a.pages[5].body.includes('Mindmap efter filmen'),'both original nuclear mindmap activities retained');
-assert.ok(b.pages[8].body.includes('Gemensam mindmap'),'original medical mindmap activity retained');
+assert.ok(!a.pages.some(p => /mindmap/i.test(p.body||'')),'9.8 does not instruct pupils to build mindmaps');
+assert.ok(!b.pages.some(p => /mindmap/i.test(p.body||'')),'9.9 does not instruct pupils to build mindmaps');
+assert.ok(!a.pages[2].body.includes('wtpNxiqVAOo'),'older recorded fission lecture is not a student demo');
+assert.ok(b.pages[8].body.includes('Tänk först själv (2 min)') && b.pages[8].body.includes('Samla upp en slutsats i klassen (3 min)'),'9.9 replaces mindmap with 12-minute predict, test, compare, discuss');
 assert.ok(b.pages[7].body.includes('strålbehandling')&&b.pages[7].body.includes('Protonstrålning'),'book 9.9 cancer treatment has own taught slide');
 for(const number of ['2,014102','4,028204','3,016029','1,008665','0,003510','931,5','3,27'])assert.ok(a.pages[7].steps.join('').includes(number),'fusion value '+number);
 assert.ok(a.pages[3].body.includes('karnmodell.html?mode=fission'),'fission embedded');

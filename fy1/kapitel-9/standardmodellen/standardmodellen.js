@@ -37,13 +37,13 @@ const data={
   pages:[
     {
       title:'Vad finns egentligen i en proton?',label:'Start · 5 minuter',time:'5 min',
-      body:`<p class="focus-line">Vi börjar med originalets korta kvarkfilm.</p>
+      body:`<p class="focus-line">Vi börjar med ett kort klipp om kvarkar.</p>
         <div class="youtube-start-wrap">
           <div class="youtube-start-meta"><b>Quarks Explained in Four Minutes</b><span>Physics Girl · cirka 4 minuter</span></div>
           <div class="youtube-start" id="youtube-start" role="group" aria-label="Inbäddad YouTube-film om kvarkar">
             <button type="button" data-youtube-play class="youtube-start-button" aria-label="Spela filmen om kvarkar här i lektionen"><span class="youtube-play-icon" aria-hidden="true">▶</span><span>Spela klippet här</span></button>
           </div>
-          <p class="youtube-start-fallback">Om inbäddningen blockeras: <a href="https://youtu.be/LraNu_78sCw" target="_blank" rel="noopener noreferrer">öppna originalfilmen på YouTube</a>. Filmen laddas först när du trycker på Spela.</p>
+          <p class="youtube-start-fallback">Om inbäddningen blockeras: <a href="https://youtu.be/LraNu_78sCw" target="_blank" rel="noopener noreferrer">öppna filmen på YouTube</a>. Filmen laddas först när du trycker på Spela.</p>
         </div>
         <div class="question">Förutsäg: är protonen en odelbar partikel – eller består den av mindre delar? Vad tänker du efter klippet?</div>
         <div class="goal-card"><b>Efter lektionen ska du kunna</b><ol>
@@ -59,11 +59,10 @@ const data={
       body:`<p>Rutherford och Bohr hjälpte oss att förstå <b>atomen</b>: en kärna med elektroner omkring. En elektron kan exciteras till en högre energinivå och vid återgång sända ut en <b>foton</b>.</p>
         <p>Partikelacceleratorer gav nästa fråga: <b>vad består protoner och neutroner av?</b></p>
         <div class="history"><div><b>1897</b><span>Thomson: elektron</span></div><div><b>1911–1913</b><span>Rutherford, Bohr: atommodeller</span></div><div><b>1960-talet</b><span>Kvarkmodellen utvecklas</span></div><div><b>2012</b><span>Higgsbosonen upptäcks</span></div></div>
-        <p class="small-context">Gemensam minikarta: atom → kärna (protoner, neutroner) → kvarkar. Elektronen tillhör i stället leptonerna.</p>`,
-      side:`<div class="mindmap"><h3>Mindmap – bygg den tillsammans</h3><ul><li>Atom och energinivåer</li><li>Protoner och neutroner → kvarkar</li><li>Elektroner → leptoner</li><li>Kraftförmedlare → växelverkningar</li><li>Higgsfältet → elementarpartiklars massa</li></ul><p class="small-context">Kort sammanfattning av originalets tavelskiss – inte en ny beräkningsmetod.</p></div>
-        <div class="video-refs"><a href="https://youtu.be/8lbJSgnUvsw" target="_blank" rel="noopener noreferrer">Originalets kvarkfilm</a></div>`,
-      teacher:'Använd gärna kvarkfilmen för att illustrera att protonen innehåller tre valenskvarkar men även gluoner och kvark–antikvarkpar. Hoppa över filmens mer avancerade färgladdningsdiskussion i klassens huvudspår. Den gamla stora mindmapen hade även tidigare relativitet/atomfysik; de lämnas som kort återkoppling eftersom denna nya lektion avgränsats till 9.1.',
-      source:'1',tag:'Originalets mindmap, komprimerad'
+        <p class="small-context">Vi går från atommodellen till frågan vad protoner och neutroner består av. Elektronen är däremot en lepton.</p>`,
+      side:'',
+      teacher:'Använd bilden som en kort övergång från atomen till protonernas och neutronernas uppbyggnad. Den tidigare separata kvarklänken och mindmap-övningen används inte i elevlektionen enligt Jacobs senare beslut. Källa och äldre länkar finns dokumenterade i lärarstödet; inga extra filmklipp krävs.',
+      source:'1',tag:'Atommodellen som förkunskap'
     },
     {
       title:'Tre kvarkar ger laddningen',label:'Förklara och räkna · 6 minuter',time:'6 min',

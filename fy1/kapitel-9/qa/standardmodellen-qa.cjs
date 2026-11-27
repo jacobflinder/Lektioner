@@ -21,8 +21,9 @@ assert.deepEqual(Array.from(data.pages, p => Number.parseInt(p.time, 10)), [5, 5
 assert.equal(data.pages[0].body.match(/<li>/g).length, 3, 'Tre synliga elevmål på startbilden');
 assert.ok(data.pages[0].body.includes('LraNu_78sCw'), 'Originalets demonstration');
 assert.ok(data.pages[0].body.includes('data-youtube-play'), 'Publicerad inbäddad spelare bevaras');
-assert.ok(data.pages[1].side.includes('8lbJSgnUvsw'), 'Originalets kvarkfilm');
-assert.ok(data.pages[1].side.includes('Mindmap'), 'Originalets mindmap finns kvar');
+assert.ok(!data.pages[1].body.includes('8lbJSgnUvsw') && !(data.pages[1].side || '').includes('8lbJSgnUvsw'), 'Ingen extra kvarkfilm i elevlektionen');
+assert.ok(!data.pages.some(p => /mindmap|tavelskiss/i.test((p.body || '') + ' ' + (p.side || ''))), 'Ingen mindmap som elevaktivitet eller metakommentar');
+assert.ok(data.pages[1].body.includes('protoner och neutroner'), 'Övergången till atomkärnans byggstenar är kvar');
 assert.ok(data.pages[2].body.includes('uppkvark') && data.pages[2].body.includes('nerkvark'), 'Laddning definieras innan beräkning');
 assert.ok(data.pages[2].steps[0].includes('mfrac') && data.pages[2].steps[1].includes('mfrac'), 'Två fullständiga laddningssummeringar i bråkform');
 assert.ok(data.pages[2].steps[0].includes('Q</mi><mi>p') && data.pages[2].steps[1].includes('Q</mi><mi>n'), 'Både proton och neutron');
