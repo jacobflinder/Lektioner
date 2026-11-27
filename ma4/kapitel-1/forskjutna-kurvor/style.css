@@ -3,3 +3,18 @@
 .shift .answer-body .plot { max-height: 185px; }
 .shift .socrative-activity { display: grid; gap: .65rem; max-width: 52rem; padding: 1rem; }
 .shift #shift-result { font-weight: 650; }
+
+.shift .vald-funktion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .15rem .85rem;
+  padding-block-end: .4rem;
+  border-bottom: 1px solid var(--line);
+}
+.shift .vald-funktion math { text-align: left; }
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .shift #aktivitet { gap: .62rem; }
+  .shift #verktyg-graf { max-height: 215px; }
+}

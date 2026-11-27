@@ -46,10 +46,25 @@ draw('egen-graf', x => 2 * cos(2 * (x - 40)) - 1, null, -1, [40, 85, 130, 175, 2
 
 const model = document.getElementById('aktivitet');
 const controls = ['shift-a', 'shift-k', 'shift-v', 'shift-b'].map(id => document.getElementById(id));
+const equation = document.getElementById('shift-equation');
+
+function updateEquation(a, k, v, b) {
+  const amplitudeSign = equation.querySelector('[data-a-sign]');
+  amplitudeSign.textContent = a < 0 ? '−' : '';
+  amplitudeSign.toggleAttribute('hidden', a >= 0);
+  equation.querySelector('[data-a]').textContent = locale.format(Math.abs(a));
+  equation.querySelector('[data-k]').textContent = locale.format(k);
+  equation.querySelector('[data-v-sign]').textContent = v < 0 ? '−' : '+';
+  equation.querySelector('[data-v]').textContent = locale.format(Math.abs(v));
+  equation.querySelector('[data-b-sign]').textContent = b < 0 ? '−' : '+';
+  equation.querySelector('[data-b]').textContent = locale.format(Math.abs(b));
+}
+
 
 function update() {
   const [a, k, v, b] = controls.map(control => Number(control.value));
   const result = document.getElementById('shift-result');
+  updateEquation(a, k, v, b);
   draw('verktyg-graf', x => a * sin(k * (x + v)) + b, sin, b, [-v]);
   const shift = v === 0 ? 'Ingen förskjutning i sidled' : `${Math.abs(v)}° åt ${v > 0 ? 'vänster' : 'höger'}`;
   const value = x => locale.format(x).replace('-', '−');

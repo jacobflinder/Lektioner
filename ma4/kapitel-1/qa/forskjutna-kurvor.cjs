@@ -21,17 +21,33 @@ function near(a, b, tolerance = 1e-9) {
   assert.ok(Math.abs(a - b) < tolerance, `${a} ≠ ${b}`);
 }
 
+async function assertEquation(slide, expected) {
+  const layout = await slide.locator('#shift-equation').evaluate(equation => ({
+    math: equation.textContent.replace(/\s|\u2061/g, ''),
+    bottom: equation.getBoundingClientRect().bottom,
+    controls: equation.closest('.graph-tool').querySelector('.graph-controls').getBoundingClientRect().top
+  }));
+  assert.equal(layout.math, expected);
+  assert.ok(layout.bottom <= layout.controls, 'Ekvationen ska synas före reglagen');
+}
+
 async function verifyActivity(slide) {
+  await assertEquation(slide, 'y=1·sin(1·(x+0°))+0');
   const a = slide.locator('#shift-a');
   const k = slide.locator('#shift-k');
   const v = slide.locator('#shift-v');
-  const b = slide.locator('#shift-b');
+  const b = slide.getByRole('combobox', { name: 'B – höjdförskjutning', exact: true });
+  assert.equal(await b.getAttribute('id'), 'shift-b');
+  for (const name of ['A – amplitudfaktor', 'k – styr perioden', 'v – vinkeltillägg (grader)']) {
+    assert.ok(await slide.getByRole('combobox', { name, exact: true }).isVisible());
+  }
   await a.selectOption('-2');
   await k.selectOption('1.5');
   await b.selectOption('2');
   const plot = slide.locator('#verktyg-graf');
   for (const offset of [-60, 0, 30, 60]) {
     await v.selectOption(String(offset));
+    await assertEquation(slide, `y=−2·sin(1,5·(x${offset < 0 ? '−' : '+'}${Math.abs(offset)}°))+2`);
     const readout = await slide.locator('#shift-result').innerText();
     assert.match(readout, /Amplitud 2. Period 240°. Mittlinje y = 2/);
     if (offset) assert.ok(readout.includes(`${Math.abs(offset)}° åt ${offset > 0 ? 'vänster' : 'höger'}`));
@@ -49,6 +65,10 @@ async function verifyActivity(slide) {
       near(pairs[i][1], 103 - 73 * expected / 6, .006);
     }
   }
+  await a.selectOption('2');
+  await v.selectOption('-30');
+  await b.selectOption('-1');
+  await assertEquation(slide, 'y=2·sin(1,5·(x−30°))−1');
 }
 
 async function inspectLayout(page, slide, id, width, height) {
@@ -105,6 +125,15 @@ async function main() {
           assert.match(await status.innerText(), feedback);
         }
         await inspectLayout(page, slide, id, width, height);
+        if (id === 'start') {
+          const firstEquation = slide.locator('p > math').first();
+          assert.equal((await firstEquation.textContent()).replace(/\s|\u2061/g, ''), 'y=sinx+B');
+          const intro = await firstEquation.evaluate(math => math.parentElement.innerText);
+          assert.match(intro, /talet som läggs till efter att sinusvärdet har beräknats/);
+          const introduction = await firstEquation.boundingBox();
+          const question = await slide.locator('.task').boundingBox();
+          assert.ok(introduction.y + introduction.height <= question.y);
+        }
         if (id === 'aktivitet') {
           await verifyActivity(slide);
           assert.equal(await slide.getByRole('link').getAttribute('href'), 'https://www.geogebra.org/m/tphudvak');
@@ -143,6 +172,7 @@ async function main() {
       assert.equal(await page.locator('#shift-a').inputValue(), '1');
       assert.equal(await page.locator('#shift-v').inputValue(), '0');
       assert.equal(await page.locator('#shift-b').inputValue(), '0');
+      await assertEquation(page.locator('#aktivitet'), 'y=1·sin(1·(x+0°))+0');
       assert.deepEqual(errors, []);
       console.log(`PASS ${width}×${height}: elva bilder, fasförskjutning, mittlinje, Socrative och bokarbete`);
       await page.close();
