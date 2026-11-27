@@ -50,6 +50,7 @@ jobs:
           node ma4/kapitel-1/qa/tangensfunktioner.cjs
           node ma4/kapitel-1/qa/radianer-och-trigonometriska-ekvationer.cjs
           node ma4/kapitel-1/qa/trigonometriska-modeller.cjs
+          node ma4/kapitel-1/qa/geogebra.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
