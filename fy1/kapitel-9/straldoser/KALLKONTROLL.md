@@ -55,4 +55,5 @@
 
 - Filmdemonstrationen *The Most Radioactive Places on Earth* är kvar med historiska mätvärden och tydlig skillnad mellan doshastighet och dos.
 - Bild 4 heter nu ”Vad händer med cellerna?”. De biologiska sambanden och återkopplingen är kvar, men eleverna får varken uppdrag att göra mindmap eller se äldre källmetadata i rubriken.
+- Den äldre etiketten ”Nya boken” och den inaktuella uppgiften om pågående källkontroll på bokarbetssidan har rensats. Alla uppgifter 962–973 är redan källverifierade och målanknutna på slutbilden.
 - Bokens uppgifter 962–973 och Jacobs fullständiga Erik-beräkning påverkas inte.

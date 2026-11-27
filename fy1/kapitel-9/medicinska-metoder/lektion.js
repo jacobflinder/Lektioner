@@ -31,7 +31,6 @@ pages.splice(7,0,behandlingsbild);
 pages[2].time='6 min';
 pages[8].time='9 min';
 pages[9].time='14 min';
-pages[8].body=pages[8].body.replace('fem grenar:','fem grenar för bilddiagnostik:');
 
 const bokuppgifter=[
  {nr:988,mal:2,fokus:'PET och β⁺-sönderfall',teori:'378'},
