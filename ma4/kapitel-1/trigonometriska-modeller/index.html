@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trigonometriska modeller · Ma4</title>
+  <link rel="stylesheet" href="../trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../enhetscirkeln/style.css">
+  <link rel="stylesheet" href="../assets/practice.css">
+  <link rel="stylesheet" href="../sinus-och-cosinusfunktioner/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../assets/practice.js" defer></script>
+  <script src="modeller.js" defer></script>
+</head>
+<body class="sinusgraph modeller">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 1 · Trigonometri</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Trigonometriska modeller</h1>
+<p>En periodisk modell beskriver ett mönster som upprepas. Vi ska läsa modellen, räkna ut när något händer och bygga en egen modell från ett hjuls rörelse.</p><div class="math-givens">
+<math display="block"><mrow><mi>T</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+</div><p>Temperaturen T anges i grader Celsius. Tiden t mäts i timmar från kl. 06.00.</p><p class="task">Vilken punkt i tiden betyder t = 6?</p><form class="practice" data-success="Det stämmer. t räknar timmar från kl. 06.00." novalidate><div class="practice-fields"><label>Klockslag<select data-answer="2" data-hint="Lägg modellens tid till kl. 06.00."><option value="">Välj</option><option value="1">06.00</option><option value="2">12.00</option><option value="3">18.00</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa tolkningen</summary><div class="answer-body"><p>Vid t = 6 är det kl. 12.00. Sätt in 6 i modellen för att beräkna temperaturen.</p></div></details><h2>Efter lektionen ska du kunna</h2><ol><li>Tolka modellens variabler, enheter och period.</li><li>Hitta tidpunkter som ger ett visst värde.</li><li>Bygga en modell från extremvärden, varvtid och startläge.</li></ol>
+</section>
+
+<section class="slide" id="temperatur" aria-labelledby="temperatur-title">
+  <h1 id="temperatur-title" tabindex="-1">Beräkna temperatur och period</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>T</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+</div><p class="task">Vad ska du använda som vinkelhastighet när du räknar ut perioden?</p><form class="practice" data-success="Det stämmer. Argumentet behöver öka 2π under en period." novalidate><div class="practice-fields"><label>Vinkelhastighet k<select data-answer="2" data-hint="Faktorn framför t inne i sinusargumentet bestämmer perioden."><option value="">Välj</option><option value="1">4</option><option value="2">π/12</option><option value="3">19</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Sätt in en tid</h2><div class="math-steps">
+<math display="block"><mrow><mi>T</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mo>·</mo><mn>0</mn><mo>=</mo><mn>19</mn></mrow></math>
+<math display="block"><mrow><mi>T</mi><mo>(</mo><mn>6</mn><mo>)</mo><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>=</mo><mn>19</mn><mo>+</mo><mn>4</mn><mo>·</mo><mn>1</mn><mo>=</mo><mn>23</mn></mrow></math>
+</div><p>Modellen ger 19 °C kl. 06.00 och 23 °C kl. 12.00.</p></div><div><h2>Räkna ut perioden</h2><div class="math-steps">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mi>π</mi></mrow></mrow><mrow><mrow><mi>k</mi></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mi>π</mi></mrow></mrow><mrow><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac></mrow></mrow></mfrac><mo>=</mo><mn>24</mn></mrow></math>
+</div><p>Ett mönster upprepas efter 24 timmar.</p></div></div></div></details>
+</section>
+
+<section class="slide" id="niva" aria-labelledby="niva-title">
+  <h1 id="niva-title" tabindex="-1">När når temperaturen 21 °C?</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo><mo>=</mo><mn>21</mn></mrow></math>
+</div><svg id="temperatur-graf" class="plot model-plot" viewBox="0 0 559 222" role="img" aria-label="Temperatur i grader Celsius under 24 timmar. En nivå och dess skärningar visas efter elevens försök." data-max="24" data-top="24" data-bottom="14">
+    <g><path class="grid" d="M56.00 20 V184"/><text class="tick-x" x="56.00" y="204">0</text><path class="grid" d="M134.50 20 V184"/><text class="tick-x" x="134.50" y="204">4</text><path class="grid" d="M213.00 20 V184"/><text class="tick-x" x="213.00" y="204">8</text><path class="grid" d="M291.50 20 V184"/><text class="tick-x" x="291.50" y="204">12</text><path class="grid" d="M370.00 20 V184"/><text class="tick-x" x="370.00" y="204">16</text><path class="grid" d="M448.50 20 V184"/><text class="tick-x" x="448.50" y="204">20</text><path class="grid" d="M527.00 20 V184"/><text class="tick-x" x="527.00" y="204">24</text><path class="grid" d="M56 184.00 H527"/><text class="tick-y" x="49" y="189.00">14</text><path class="grid" d="M56 151.20 H527"/><text class="tick-y" x="49" y="156.20">16</text><path class="grid" d="M56 118.40 H527"/><text class="tick-y" x="49" y="123.40">18</text><path class="grid" d="M56 85.60 H527"/><text class="tick-y" x="49" y="90.60">20</text><path class="grid" d="M56 52.80 H527"/><text class="tick-y" x="49" y="57.80">22</text><path class="grid" d="M56 20.00 H527"/><text class="tick-y" x="49" y="25.00">24</text></g>
+    <path class="plot-axis" d="M56 184 V17 m0 0 l-5 7 m5 -7 l5 7 M55 184 H542 m0 0 l-8 -5 m8 5 l-8 5"/>
+    <text x="535" y="217">t (h)</text>
+    <path class="plot-curve" data-curve/>
+    <g class="figure-reveal" data-level><path class="reference-curve"/><g data-marks></g></g>
+    <circle class="plot-point model-marker" data-plot-point r="5"/>
+    </svg><p>Grafens lodräta axel visar temperatur i °C.</p><p class="task">I grafen letar du efter en ny linje där temperaturen är 21 °C. Hur många gånger når temperaturen nivån inom ett dygn?</p><form class="practice" data-success="Det stämmer. Läs av ett t-värde före och ett efter toppen." novalidate><div class="practice-fields"><label>Antal tillfällen<select data-answer="2" data-hint="Temperaturen stiger förbi nivån och sjunker sedan förbi den igen."><option value="">Välj</option><option value="1">En gång</option><option value="2">Två gånger</option><option value="3">Fyra gånger</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa nivån och tidpunkterna</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mn>10</mn></mrow></math>
+</div><p>Lägg tiderna till kl. 06.00. Det blir kl. 08.00 och kl. 16.00.</p></div></details>
+</section>
+
+<section class="slide" id="kontrollera" aria-labelledby="kontrollera-title">
+  <h1 id="kontrollera-title" tabindex="-1">Kontrollera skärningarna med en ekvation</h1>
+<div class="math-givens">
+<math display="block"><mrow><mn>19</mn><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo><mo>=</mo><mn>21</mn></mrow></math>
+</div><p class="task">Vilket sinusvärde söker du efter att ha subtraherat 19 och dividerat med 4?</p><form class="practice" data-success="Det stämmer. En referensvinkel är π/6 och den andra är 5π/6." novalidate><div class="practice-fields"><label>Sinusvärde<select data-answer="1" data-hint="Skillnaden mellan 21 och 19 är 2."><option value="">Välj</option><option value="1">1/2</option><option value="2">2</option><option value="3">1/4</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+</div><div class="calculation-pair"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mn>2</mn><mo>+</mo><mn>24</mn><mi>n</mi></mrow></math>
+</div><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mn>5</mn><mi>π</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mn>10</mn><mo>+</mo><mn>24</mn><mi>n</mi></mrow></math>
+</div></div><p>n är ett heltal. Under första dygnet räcker n = 0 i båda fallen.</p></div></details>
+</section>
+
+<section class="slide" id="mojlig" aria-labelledby="mojlig-title">
+  <h1 id="mojlig-title" tabindex="-1">Vilka mittlinjer gör nivån möjlig?</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>T</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>d</mi><mo>+</mo><mn>4</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+</div><p>Nu får mittlinjen d variera. För vilka d kan modellen ge 21 °C under ett helt dygn?</p><p class="task">Efter omskrivning måste (21 − d)/4 ligga i ett visst intervall. Vilket?</p><form class="practice" data-success="Det stämmer. Båda ändpunkterna ingår eftersom sinus kan anta −1 och 1." novalidate><div class="practice-fields"><label>Intervall<select data-answer="2" data-hint="Uttrycket är nu lika med ett sinusvärde."><option value="">Välj</option><option value="1">0 till 4</option><option value="2">−1 till 1</option><option value="3">−4 till 4</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>12</mn></mrow></mrow></mfrac><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mn>21</mn><mo>−</mo><mi>d</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>1</mn><mo>≤</mo><mfrac><mrow><mrow><mn>21</mn><mo>−</mo><mi>d</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>≤</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>4</mn><mo>≤</mo><mn>21</mn><mo>−</mo><mi>d</mi><mo>≤</mo><mn>4</mn></mrow></math>
+<math display="block"><mrow><mo>−</mo><mn>25</mn><mo>≤</mo><mo>−</mo><mi>d</mi><mo>≤</mo><mo>−</mo><mn>17</mn></mrow></math>
+<math display="block"><mrow><mn>17</mn><mo>≤</mo><mi>d</mi><mo>≤</mo><mn>25</mn></mrow></math>
+</div><p>När vi multiplicerar med −1 byter olikheterna riktning.</p></div></details>
+</section>
+
+<section class="slide" id="hjul" aria-labelledby="hjul-title">
+  <h1 id="hjul-title" tabindex="-1">Bygg en modell från ett hjul</h1>
+<p>En lampa sitter på kanten av ett hjul. Den växlar mellan 1 och 4 meter över golvet. Ett varv tar 20 sekunder och lampan startar högst upp.</p><div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>A</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>k</mi><mo>(</mo><mi>t</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mi>d</mi></mrow></math>
+</div><p class="task">Vilka mätvärden ger mittlinjen d?</p><form class="practice" data-success="Det stämmer. Skillnaden mellan höjderna används till amplituden." novalidate><div class="practice-fields"><label>Mittlinje i meter<select data-answer="2" data-hint="Mittlinjen ligger lika långt från högsta och lägsta höjd."><option value="">Välj</option><option value="1">4</option><option value="2">(4 + 1) / 2</option><option value="3">(4 − 1) / 2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Höjderna</h2><div class="math-steps">
+<math display="block"><mrow><mi>A</mi><mo>=</mo><mfrac><mrow><mrow><mn>4</mn><mo>−</mo><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>1,5</mn></mrow></math>
+<math display="block"><mrow><mi>d</mi><mo>=</mo><mfrac><mrow><mrow><mn>4</mn><mo>+</mo><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac><mo>=</mo><mn>2,5</mn></mrow></math>
+</div></div><div><h2>Varvtiden</h2><div class="math-steps">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mn>20</mn></mrow></math>
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mi>π</mi></mrow></mrow><mrow><mrow><mn>20</mn></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac></mrow></math>
+</div><p>Vinkelhastigheten är π/10 radianer per sekund.</p></div></div></div></details>
+</section>
+
+<section class="slide" id="startlage" aria-labelledby="startlage-title">
+  <h1 id="startlage-title" tabindex="-1">Bestäm fasen och följ lampans höjd</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>1,5</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac><mo>(</mo><mi>t</mi><mo>+</mo><mi>v</mi><mo>)</mo><mo>)</mo><mo>+</mo><mn>2,5</mn></mrow></math>
+</div><p class="task">Lampan är högst upp när t = 0. Vilket värde måste sinusargumentet kunna ha vid start?</p><form class="practice" data-success="Det stämmer. Då behöver k · v vara π/2." novalidate><div class="practice-fields"><label>Argument vid start<select data-answer="2" data-hint="Sinus når sitt största värde när vinkeln är π/2."><option value="">Välj</option><option value="1">0</option><option value="2">π/2</option><option value="3">π</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa modellen och följ rörelsen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>4</mn><mo>=</mo><mn>1,5</mn><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac><mi>v</mi><mo>)</mo><mo>+</mo><mn>2,5</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac><mi>v</mi><mo>)</mo><mo>=</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>10</mn></mrow></mrow></mfrac><mi>v</mi><mo>=</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mn>5</mn></mrow></math>
+</div><div class="graph-tool"><div class="graph-pair"><svg id="hjul-figur" viewBox="0 0 352 222" role="img" aria-label="Lampa på ett hjul, med höjden markerad från golvet">
+  <path class="plot-axis" d="M22 203 H325 M70 204 V38"/>
+  <path class="grid" d="M71 163 H225 M71 103 H225 M71 43 H225"/>
+  <text class="tick-y" x="63" y="208">0</text><text class="tick-y" x="63" y="168">1</text>
+  <text class="tick-y" x="63" y="108">2,5</text><text class="tick-y" x="63" y="48">4</text>
+  <text x="32" y="28">h (m)</text><text x="275" y="197">golv</text>
+  <circle class="circle-rim" cx="165" cy="103" r="60"/>
+  <line class="circle-radius" x1="165" y1="103" data-wheel-radius/>
+  <path class="projection" data-wheel-height/>
+  <circle class="plot-point" r="5" data-wheel-point/>
+  <text x="238" y="108">hjul</text>
+</svg><svg id="hjul-graf" class="plot model-plot" viewBox="0 0 559 222" role="img" aria-label="Grafen över lampans höjd under ett hjulvarv." data-max="20" data-top="5" data-bottom="0">
+    <g><path class="grid" d="M56.00 20 V184"/><text class="tick-x" x="56.00" y="204">0</text><path class="grid" d="M150.20 20 V184"/><text class="tick-x" x="150.20" y="204">4</text><path class="grid" d="M244.40 20 V184"/><text class="tick-x" x="244.40" y="204">8</text><path class="grid" d="M338.60 20 V184"/><text class="tick-x" x="338.60" y="204">12</text><path class="grid" d="M432.80 20 V184"/><text class="tick-x" x="432.80" y="204">16</text><path class="grid" d="M527.00 20 V184"/><text class="tick-x" x="527.00" y="204">20</text><path class="grid" d="M56 184.00 H527"/><text class="tick-y" x="49" y="189.00">0</text><path class="grid" d="M56 151.20 H527"/><text class="tick-y" x="49" y="156.20">1</text><path class="grid" d="M56 118.40 H527"/><text class="tick-y" x="49" y="123.40">2</text><path class="grid" d="M56 85.60 H527"/><text class="tick-y" x="49" y="90.60">3</text><path class="grid" d="M56 52.80 H527"/><text class="tick-y" x="49" y="57.80">4</text><path class="grid" d="M56 20.00 H527"/><text class="tick-y" x="49" y="25.00">5</text></g>
+    <path class="plot-axis" d="M56 184 V17 m0 0 l-5 7 m5 -7 l5 7 M55 184 H542 m0 0 l-8 -5 m8 5 l-8 5"/>
+    <text x="535" y="217">t (s)</text>
+    <path class="plot-curve" data-curve/>
+    <g class="figure-reveal" data-level><path class="reference-curve"/><g data-marks></g></g>
+    <circle class="plot-point model-marker" data-plot-point r="5"/>
+    </svg></div><div class="graph-controls"><label>Tid t <input id="wheel-t" type="range" min="0" max="20" step="1" value="0"></label></div><p id="wheel-result" role="status"></p></div></div></details>
+</section>
+
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · tolka en modell på egen hand</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>H</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>8</mn><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac><mo>)</mo></mrow></math>
+</div><p>Ett instrument på en plattform har höjden H i meter vid tiden t i sekunder.</p><p class="task">Bestäm lägsta höjd och period. När är instrumentet för första gången 9 meter över marken?</p><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Höjd och period</h2><div class="math-steps">
+<math display="block"><mrow><mi>H</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>8</mn><mo>−</mo><mn>2</mn><mo>=</mo><mn>6</mn></mrow></math>
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mi>π</mi></mrow></mrow><mrow><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac></mrow></mrow></mfrac><mo>=</mo><mn>12</mn></mrow></math>
+</div><p>Lägsta höjden är 6 m och perioden är 12 s.</p></div><div><h2>Första tidpunkten</h2><div class="math-steps">
+<math display="block"><mrow><mn>8</mn><mo>−</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac><mo>)</mo><mo>=</mo><mn>9</mn></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mrow><mi>π</mi><mi>t</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mi>π</mi></mrow></mrow><mrow><mrow><mn>3</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mn>4</mn></mrow></math>
+</div><p>Den första positiva vinkeln är 2π/3. Instrumentet når 9 m först efter 4 s.</p></div></div></div></details>
+</section>
+
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+
+  <p class="lead">Läroboken s. 62–65 · Trigonometriska modeller</p>
+  <p>Titta vid behov på de lösta exemplen 1424–1425. Skriv vad variabeln, funktionsvärdet och perioden betyder i uppgiften.</p>
+  <p class="task">Välj två av nivåerna. Gör alla uppgifter och deluppgifter på båda dina valda nivåer.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Nivå 1</h2><p class="book-range">1426–1430</p></article>
+    <article class="card"><h2>Nivå 2</h2><p class="book-range">1431–1439</p></article>
+    <article class="card"><h2>Nivå 3</h2><p class="book-range">1440</p></article>
+  </div><details class="answer"><summary>Visa modellstödet</summary><div class="answer-body"><div class="math-givens">
+<math display="block"><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mi>π</mi></mrow></mrow><mrow><mrow><mi>k</mi></mrow></mrow></mfrac></mrow></math>
+</div><p>Amplituden är halva skillnaden mellan största och minsta värdet. Mittlinjen ligger på deras medelvärde.</p></div></details>
+</section>
+
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med din modell</h1>
+
+  <p class="lead">Välj en uppgift där du kan förklara vad svaret betyder i situationen.</p>
+  <div class="cards goals">
+    <article class="card"><h2>Tolka modellen</h2><p>Visa vad tiden, perioden eller höjden betyder, till exempel i 1426 eller 1435.</p></article>
+    <article class="card"><h2>Hitta tidpunkten</h2><p>Visa hur du hittade rätt tidpunkt och enhet i <em>Din tur</em>, 1427 eller 1438.</p></article>
+    <article class="card"><h2>Bygg en modell</h2><p>Förklara hur extremvärden och varvtid blir konstanter, till exempel i 1428, 1431 eller 1440.</p></article>
+  </div>
+</section>
+</main>
+</body>
+</html>
