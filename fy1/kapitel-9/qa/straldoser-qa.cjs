@@ -15,6 +15,14 @@ assert.equal(pages.length,10,'ten main slides');
 assert.ok(pages.every(p=>!/ej slutförd|måste fortfarande|Slutgranskning STOPP|ännu under källkontroll/i.test(p.teacher||'')),'no obsolete source blockers in teacher notes');
 assert.equal(pages.reduce((n,p)=>n+Number.parseInt(p.time,10),0),70,'70-minute lesson');
 assert.match(pages[1].body,/Förklara[\s\S]*Beräkna[\s\S]*Tolka/,'three measurable goals');
+assert.ok(!pages[1].body.includes('Nya boken') && pages[1].body.includes('<b>Boken:</b>'),'book label should not say new');
+assert.ok(pages[2].body.indexOf('Förstå enheterna innan filmen')>=0 && pages[2].body.indexOf('Förstå enheterna innan filmen')<pages[2].body.indexOf('class="video-preview"'),'dose units defined before film illustration');
+for(const unit of ['Sv står för sievert','enheten för <b>ekvivalent dos</b> och <b>effektiv dos</b>','biologiska verkan','1 mSv = 0,001 Sv','1 µSv = 0,000001 Sv','µSv/h','doshastighet'])assert.ok(pages[2].body.includes(unit),'unit glossary '+unit);
+assert.ok(pages[7].title.includes('energi absorberar Erik'),'learner sees the actual question in title');
+assert.equal(pages[2].label,'Film · mätvärden och stråldos','film slide has student-facing label');
+assert.equal(pages[3].title,'Vad händer med cellerna?','no teacher-source metadata in student title');
+assert.ok(pages[7].label.includes('Uppgift 962 a–b')&&!pages[7].label.includes('Ny bok'),'exercise label, not editorial metadata');
+for(const phrase of ['<b>a) Fråga</b>','<b>b) Fråga</b>','Erik tror','Har han rätt? Motivera.','184 cm','55 kg','7,4 mGy'])assert.ok(pages[7].body.includes(phrase),'original question text '+phrase);
 assert.ok(pages[2].body.includes('https://youtu.be/TRL7o2kPqw0'),'correct video');
 assert.ok(pages[2].body.includes('2,4 mSv/år'),'book page 366 background');
 assert.ok(pages[3].body.includes('Reparation, celldöd eller kvarstående DNA-fel'),'biology before calculation');
@@ -27,7 +35,17 @@ assert.ok(pages[6].body.includes('5 %-per-sievert-regel'),'simplified ICRP model
 assert.equal(pages[7].steps.length,5,'complete original Erik calculation');
 const solution=pages[7].steps.join('');
 for(const step of ['3,5','78','0,273','0,27','7,4'])assert.ok(solution.includes(step),`original solution ${step}`);
-assert.match(pages[8].body,/963–967[\s\S]*968–973[\s\S]*läxa/,'all required textbook work');
+const bookWork=pages[8].body;
+assert.ok(bookWork.includes('class="book-help-grid"'),'bookwork includes theory help');
+assert.equal((bookWork.match(/class="book-help-item"/g)||[]).length,12,'all twelve textbook exercises have independent help rows');
+const helpRows=[...bookWork.matchAll(/<div class="book-help-item"><b>(9\d\d)<\/b><div><strong>(s\. [^<]+)<\/strong><span>([^<]+)<\/span><\/div><\/div>/g)];
+assert.equal(helpRows.length,12,'each theory reference has page and topic');
+for(let n=962;n<=973;n++){
+ const hits=helpRows.filter(m=>Number(m[1])===n);
+ assert.equal(hits.length,1,`exercise ${n} has exactly one relevant theory-page reference`);
+ assert.ok(hits[0][2].startsWith('s. ')&&hits[0][3].length>=20,`exercise ${n} shows theory page and topic`);
+}
+assert.ok(bookWork.includes('Uppgifter 962–973')&&bookWork.includes('läxa'),'all tasks and homework preserved');
 assert.match(pages[9].body,/973 d/,'newly read page 369 mapped to exit goal');
 assert.match(pages[9].body,/Läs särskilt lärobokens gröna rutor så noggrant som möjligt/,'Fy1 class reading convention before next lesson');
 const goals=pages[9].body;
@@ -36,6 +54,8 @@ for(const p of pages.filter(p=>p.quiz)){
   assert.equal(p.quiz.options.length,p.quiz.explanations.length,'every option has differentiated feedback');
   assert.ok(p.quiz.explanations.every(v=>v.length>=25),'feedback is explanatory');
 }
+const studentUI=fs.readFileSync(path.join(folder,'elevvy.js'),'utf8');
+assert.ok(studentUI.includes("getElementById('teacher-toggle')") && studentUI.includes("getElementById('teacher-link')"),'teacher-only UI removed after app init');
 const modelHTML=fs.readFileSync(path.join(folder,'dosmodell.html'),'utf8');
 assert.ok(modelHTML.includes('proton:5'),'model physics matches textbook protons');
 assert.ok(modelHTML.includes("choices.h&&choices.e"),'two predictions gate result');
@@ -57,6 +77,12 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
       page.on('pageerror',e=>errors.push(e.message));
       await page.goto('http://127.0.0.1:8123/fy1/kapitel-9/straldoser/',{waitUntil:'networkidle'});
       assert.equal(await page.locator('.slide').count(),10);
+      assert.equal(await page.locator('#teacher-toggle').count(),0,'no teacher notes button in student view');
+      assert.equal(await page.locator('#teacher-link').count(),0,'no teacher support link in student view');
+      assert.equal(await page.locator('.teacher-note').count(),0,'teacher notes not included in student DOM');
+      assert.equal(await page.locator('.source-note').count(),0,'source metadata not included in student DOM');
+      assert.equal(await page.locator('#classmode').count(),1,'classroom controls intact');
+      assert.equal(await page.locator('#repeatmode').count(),1,'repeat controls intact');
       assert.equal(await page.locator('.teacher-note:visible').count(),0,'teacher notes hidden');
       assert.equal(await page.locator('.source-note:visible').count(),0,'provenance hidden');
       for(let i=0;i<10;i++){
@@ -67,6 +93,7 @@ console.log('9.7 source, 70 minutes, original method, choices and 962–973: PAS
         if([2,3,5,6,7,8,9].includes(i))await page.screenshot({path:path.join(output,`${vp.width}-slide-${i+1}.png`),fullPage:true});
       }
       await page.selectOption('#jump','2');
+      assert.equal(await page.locator('.slide.active .pre-film-units').count(),1,'units visible on film slide');
       const filmNoteColor=await page.locator('.slide.active .video-preview .small-context').evaluate(el=>getComputedStyle(el).color);
       assert.equal(filmNoteColor,'rgb(215, 230, 237)','historical-video disclaimer must be readable on dark background');
       let q=page.locator('.slide.active .quiz');

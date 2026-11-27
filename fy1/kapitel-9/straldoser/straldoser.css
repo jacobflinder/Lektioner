@@ -99,3 +99,15 @@
 @media(max-width:560px){.background-bars>div{grid-template-columns:minmax(100px,1fr) 85px 2.5rem;gap:6px;font-size:.75rem}}
 @media(max-width:850px){.dose-map{grid-template-columns:1fr}.video-preview{grid-template-columns:1fr 100px}.video-preview .radiation-visual{width:100px}.dose-animation{min-height:1150px;height:1160px}}
 @media(max-width:560px){.video-preview{display:block}.video-preview .radiation-visual{display:none}.dose-compare{grid-template-columns:1fr}.number-card .big{font-size:2.25rem}.dose-animation{height:1310px}}
+
+/* 9.7: kompakt läshjälp till varje uppgift, inte extra lärarnotiser. */
+.book-help-section{margin:14px 0 17px}
+.book-help-section h2{font-size:1.12rem;line-height:1.3;margin:4px 0 7px;color:#19566a}
+.book-help-section>p{margin:0 0 10px}
+.book-help-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}
+.book-help-item{display:grid;grid-template-columns:3.3rem minmax(0,1fr);gap:9px;align-items:start;padding:8px 10px;background:#edf7f8;border:1px solid #c8dfe4;border-radius:10px;min-width:0}
+.book-help-item>b{font-size:1.06rem;color:#0b7186;font-variant-numeric:tabular-nums}
+.book-help-item>div{min-width:0}
+.book-help-item strong{display:block;color:#1a6071;font-variant-numeric:tabular-nums;line-height:1.25}
+.book-help-item span{display:block;font-size:.81rem;line-height:1.35;color:#365d6a}
+@media(max-width:670px){.book-help-grid{grid-template-columns:1fr}.book-help-item{grid-template-columns:3.4rem minmax(0,1fr);padding:8px 10px}.book-help-item span{font-size:.88rem}}

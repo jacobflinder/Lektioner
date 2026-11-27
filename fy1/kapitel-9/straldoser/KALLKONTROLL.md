@@ -50,3 +50,40 @@
 - [x] Senare källverifiering har rensat samtliga inaktuella lärarnotiser om "saknad" s. 369. Driftsverifiering av huvudgrenens GitHub Actions och Pages redovisas vid faktisk publicering, eftersom den sker efter sista commit.
 
 **Status:** Källspärren för s. 369 och visuell/funktionell QA är lösta. Förloppet finns redovisat i PR och Actions. Originalets stora video är fortsatt inte direkt inspekterad, och det redovisas öppet.
+
+## Användargranskning 2026-11-24 – tre webbläsarkommentarer
+
+- **Bild 2 – bevarat:** bokreferensen s. 364–369 och obligatoriska uppgifter 962–973; endast etiketten ändrad från ”Nya boken” till ”Boken”.
+- **Bild 3 – didaktiskt förtydligat:** `Sv`, `mSv`, `µSv` och `µSv/h` förklaras före figuren, filmens mätvärden och den första doshastighetsfrågan. Film → originalets cellbegrepp → D, H och effektiv dos → uppgift 962 ligger kvar i samma ordning. Den korta enhetsnyckeln introducerar ingen alternativ beräkningsmetod.
+- **Bild 8 – ursprungets frågor återställda:** a) absorberad energi för Erik; b) pröva om hans lägre stråldos kan förklaras av större kroppsmassa. Ålder 17 år, längd 184 cm, 78 kg / 3,5 mGy och systerns pilotyrke, 55 kg / 7,4 mGy finns i uppgiftens givna data. Fem befintliga lösningsled och D=E/m → E=Dm är oförändrade.
+- **Ny spärr:** automatiska tester kontrollerar att glossary kommer före filmen, att a) och b) finns som synliga frågor och att föregående käll- och metodtester fortfarande passerar. Teknik- och bildgranskning måste godkännas för ny SHA före merge/publicering.
+
+## Elevvy utan lärarnotiser (Jacob, 24 november 2026)
+
+- Eleven ska inte behöva öppna en lärarnotis eller ett separat lärarstöd för att förstå uppgift, metod eller aktivitet. All nödvändig information visas i lektionsbilden vid rätt tillfälle.
+- 9.7 har därför avlägsnat både **Lärarnotiser** och **Lärarstöd** från toppmenyn och tar bort de interna lärar- och källnotisernas HTML-element från elevens sida efter att den gemensamma lektionsmotorn initierats. Projektets källkarta och lärarstöd finns kvar separat för intern granskning, inte som en elevfunktion.
+- Delad `fy1/gemensamt/app.js` ändras inte, för att övriga lektionssidor ska behålla fungerande navigering. Ett lektionsspecifikt `elevvy.js` körs efter motorn. Klassrum/Repetition, Helskärm, stegvisa lösningar och quiz ska fungera precis som tidigare.
+- Webbläsar-QA kontrollerar att knappar, lärarnotiser och källmetadata saknas i elevens DOM på samtliga fyra skärmstorlekar. Slutligt godkännande kräver ett lyckat test av den aktuella committen och visuell granskning innan merge till huvudgrenen.
+
+## Lässtöd per bokuppgift 962–973 – tillagt efter lärargranskning
+
+Bild 9 visar nu tydligt **en konkret teorihänvisning till text eller tabell för var och en av de tolv obligatoriska uppgifterna**, i ett kompakt tvåkolumnsläge på stor skärm och enkolumnsläge på mobil. Uppgifternas frågetexter står alltjämt på s. 368–369. Här är hänvisningarna till *stödmaterialet*, inte till frågans placering:
+
+| Uppgift | Teori-/tabellhänvisning |
+|---|---|
+| 962 | s. 364, absorberad dos och D=E/m; gemensamt löst på bild 8 |
+| 963 | s. 365–366, kvalitetsfaktor, organvikter och förenklad riskmodell |
+| 964 | s. 365, vävnadsviktfaktorer |
+| 965 | s. 364–365, cellskador och strålslag |
+| 966 | s. 365, kvalitets- och vävnadsviktfaktorer |
+| 967 | s. 364–366, dos, effektiv dos och risk |
+| 968 | s. 366, bakgrundsdoser, årsdos och risk |
+| 969 | s. 365, protoners kvalitetsfaktor samt organvikter |
+| 970 | s. 364–365, absorberad dos, Q och effektiv dos |
+| 971 | s. 359 (9.6), s. 364 (9.7), alfapartiklars jonisation och biologiska effekt |
+| 972 | s. 366–367, doshastighet och högdosverkan |
+| 973 | s. 340–343 (9.4), s. 350–353 (9.5) och s. 364–365 (9.7), alfasönderfall, aktivitet och dos |
+
+Ingen teori har kopierats från bokens exempel; referenserna är sökhjälp för självständiga lösningar. Målkopplingarna på bild 10 och Jacobs metod i uppgift 962 är oförändrade.
+
+**Slutkrav:** rätt och tydlig mobil/projektorvisning, inga avklippta formel- eller referensrader, och verifierat fungerande val/återkoppling på aktuell PR-commit. Separat webbläsargranskning krävs före merge/publicering.
