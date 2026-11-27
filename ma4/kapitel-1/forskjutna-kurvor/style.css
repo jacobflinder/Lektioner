@@ -18,3 +18,14 @@
   .shift #aktivitet { gap: .62rem; }
   .shift #verktyg-graf { max-height: 215px; }
 }
+
+.shift .parametrar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .35rem 1rem;
+}
+.shift .parametrar dt { font-weight: 700; }
+.shift .parametrar dd { margin: 0; }
+@media (max-width: 650px) {
+  .shift .parametrar { grid-template-columns: 1fr; gap: .5rem; }
+}
