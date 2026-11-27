@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produktregeln · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+</head>
+<body class="produkt">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Produktregeln</h1>
+<p>En produkt består av två faktorer. Vi skriver den första som f(x) och den andra som g(x). D betyder derivera.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi>f</mi><mo>·</mo><mi>g</mi><mo>)</mo></mrow><mo>=</mo><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi>f</mi><mo>)</mo></mrow><mo>·</mo><mi>g</mi><mo>+</mo><mi>f</mi><mo>·</mo><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi>g</mi><mo>)</mo></mrow></mrow></math>
+</div><p>I den första termen deriverar du f och låter g vara kvar. I den andra behåller du f och deriverar g. Termerna adderas.</p>
+<p class="task">Vilken faktor lämnas kvar i den första termen?</p>
+<form class="practice" novalidate data-success="Det stämmer. Den första termen innehåller g(x) som den är."><div class="practice-fields"><label>Faktorn som är kvar<select data-answer="2" data-hint="Titta på f′(x) · g(x)."><option value="">Välj</option><option value="1">f(x)</option><option value="2">g(x)</option><option value="3">g′(x)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Identifiera de två faktorerna.</li><li>Skriva båda termerna och derivera varje faktor.</li><li>Använda produktregeln för att bestämma en tangentlutning eller läsa in givna värden.</li></ol>
+</section>
+<section class="slide" id="rektangel" aria-labelledby="rektangel-title">
+  <h1 id="rektangel-title" tabindex="-1">Se de två termerna i en rektangel</h1>
+<div class="split"><figure class="produktfigur">
+<svg viewBox="0 0 385 270" role="img" aria-label="Rektangel med sidorna f och g. En överremsa motsvarar ökningen df och en högerremsa motsvarar ökningen dg. Hörnrutan påverkas av båda ökningar.">
+  <defs><pattern id="streck" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 0 L7 7" stroke="#7c4319" stroke-width="1.2"/></pattern></defs>
+  <rect class="bas" x="61" y="86" width="229" height="125"/>
+  <rect class="remsa" x="61" y="40" width="229" height="46"/>
+  <rect class="remsa" x="290" y="86" width="53" height="125"/>
+  <rect x="290" y="40" width="53" height="46" fill="url(#streck)" stroke="#70421d"/>
+  <text x="175" y="156">f · g</text>
+  <text x="165" y="68">df · g</text>
+  <text x="297" y="156">f · dg</text>
+  <text x="28" y="155">f</text><text x="27" y="65">df</text>
+  <text x="175" y="239">g</text><text x="306" y="239">dg</text>
+</svg><figcaption>Det streckade hörnet uppstår när båda sidor ökar.</figcaption></figure><div class="work"><p>Tänk dig att f och g är rektangelns sidor. I skissen ökar båda. Den översta remsan hör till ändringen df. Remsan till höger hör till ändringen dg.</p>
+<p class="task">Vilken del av figuren uppstår för att båda sidor ändras samtidigt?</p>
+<form class="practice" novalidate data-success="Det stämmer. Hörnets area är df · dg."><div class="practice-fields"><label>Arean som beror på båda ändringarna<select data-answer="3" data-hint="Hitta rutan med sidlängderna df och dg."><option value="">Välj</option><option value="1">Den ursprungliga rektangeln</option><option value="2">Remsan upptill</option><option value="3">Det lilla hörnet</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Koppla till produktregeln</summary><div class="answer-body"><p>Vid ett mycket litet x-steg ger remsorna de två termerna i derivatan. Hörnets bidrag per x-steg är (df/h) · dg. När steget h går mot noll går df/h mot f′(x), medan dg går mot noll.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="polynom" aria-labelledby="polynom-title">
+  <h1 id="polynom-title" tabindex="-1">Märk faktorerna och derivera i ordning</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div><p class="task">Vilken term får du när du deriverar den första faktorn och behåller den andra?</p>
+<form class="practice" novalidate data-success="Det stämmer. Det är f som har deriverats i den första termen."><div class="practice-fields"><label>Nästa steg<select data-answer="2" data-hint="I första termen är cos x kvar som den är."><option value="">Välj</option><option value="1">3x² · (−sin x)</option><option value="2">3x² · cos x</option><option value="3">x³ · (−sin x)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa båda termerna</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Första faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+</div></div><div><h2>Andra faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div></div></div><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>+</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup><mo>·</mo><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>3</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mi>x</mi><mo>−</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>3</mn></mrow></msup><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mi>x</mi></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="kedja" aria-labelledby="kedja-title">
+  <h1 id="kedja-title" tabindex="-1">Derivera en sammansatt faktor</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div><p class="task">Vilken derivata får den andra faktorn? Ta med den inre derivatan.</p>
+<form class="practice" novalidate data-success="Det stämmer. Kedjeregeln ger faktorn 2."><div class="practice-fields"><label>Nästa steg<select data-answer="2" data-hint="Derivatan av argumentet är 2. Sinus ger cosinus."><option value="">Välj</option><option value="1">cos(2x + 1)</option><option value="2">2 cos(2x + 1)</option><option value="3">−2 cos(2x + 1)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa båda termerna</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Första faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+</div></div><div><h2>Andra faktorn</h2><div class="math-steps">
+<math display="block"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div></div></div><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>+</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>·</mo><mo>(</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>+</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="exponential" aria-labelledby="exponential-title">
+  <h1 id="exponential-title" tabindex="-1">Bryt ut den gemensamma faktorn</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>·</mo><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div><p class="task">Skriv de två termerna. Vilken faktor kan du bryta ut?</p>
+<form class="practice" novalidate data-success="Det stämmer. Exponentialfaktorn är gemensam."><div class="practice-fields"><label>Gemensam faktor<select data-answer="2" data-hint="Kolla vad som finns i både derivatan av e⁻ˣ och e⁻ˣ själv."><option value="">Välj</option><option value="1">x² + 1</option><option value="2">e⁻ˣ</option><option value="3">2x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa produktregeln och faktoriseringen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mo>−</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>·</mo><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>1</mn><mo>)</mo><mo>+</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>·</mo><mn>2</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo>·</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>−</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="kontroll" aria-labelledby="kontroll-title">
+  <h1 id="kontroll-title" tabindex="-1">Jämför med att multiplicera ut</h1>
+<p>Om båda faktorerna är polynom kan du ibland kontrollera produktregeln genom att först skriva ut produkten.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>·</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo></mrow></math>
+</div><p class="task">Beräkna derivatan på två sätt. Vilken linjär term blir kvar i det utvecklade uttrycket för y?</p>
+<form class="practice" novalidate data-success="Det stämmer. När de samlas återstår x."><div class="practice-fields"><label>Linjär term<select data-answer="1" data-hint="De linjära termerna är 3x och −2x."><option value="">Välj</option><option value="1">x</option><option value="2">−x</option><option value="3">5x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Jämför resultaten</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Produktregeln</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>1</mn><mo>·</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo><mo>+</mo><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>·</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>
+</div></div><div><h2>Multiplicera ut först</h2><div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mi>x</mi><mo>−</mo><mn>3</mn></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>
+</div></div></div></div></details>
+</section>
+<section class="slide" id="varden" aria-labelledby="varden-title">
+  <h1 id="varden-title" tabindex="-1">Läs av värden för de två termerna</h1>
+<p>Låt h(x) vara produkten f(x) · g(x). Du kan använda produktregeln när du känner funktionsvärden och derivator i den punkt du arbetar med.</p>
+<table class="produkttabell"><thead><tr><th scope="col">f(2)</th><th scope="col">g(2)</th><th scope="col">f′(2)</th><th scope="col">g′(2)</th></tr></thead><tbody><tr><td>3</td><td>−2</td><td>1</td><td>4</td></tr></tbody></table><p class="task">Välj vilka värden som bildar den första termen. Bestäm sedan h′(2).</p>
+<form class="practice" novalidate data-success="Det stämmer. Sätt sedan in f(2) och g′(2) i den andra termen."><div class="practice-fields"><label>Första termen<select data-answer="2" data-hint="Den första termen använder f′(2) och g(2)."><option value="">Välj</option><option value="1">3 · 4</option><option value="2">1 · (−2)</option><option value="3">1 · 4</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa insättningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>1</mn><mo>·</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo><mo>+</mo><mn>3</mn><mo>·</mo><mn>4</mn><mo>=</mo><mn>10</mn></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · tangentens lutning</h1>
+<div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo><mo>·</mo><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup></mrow></math>
+</div><p class="task">Skriv de två termerna i f′(x). Bestäm därefter lutningen när x = 0. Kontrollera att du använder både produktregeln och den inre derivatan.</p>
+<details class="answer"><summary>Visa derivatan och lutningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>·</mo><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup><mo>+</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo><mo>·</mo><mn>2</mn><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup><mo>·</mo><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mn>0</mn></mrow></msup><mo>·</mo><mn>5</mn><mo>=</mo><mn>5</mn></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Börja med produktuppgifterna i boken</h1>
+<p class="lead">Läroboken s. 96–99 · Derivatan av en produkt och en kvot</p>
+<p>Välj två av nivåerna för hela momentet. Börja med produktuppgifterna på dina två nivåer. När du har gått igenom kvotregeln gör du alla återstående uppgifter och deluppgifter på samma nivåer.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1 · 2202–2209</h2><p>Börja med 2202a–b, 2203, 2204a–b, 2206 och 2208–2209.</p>
+</article><article class="card"><h2>Nivå 2 · 2210–2216</h2><p>Börja med 2210, 2212, 2214 och 2215a–b.</p>
+</article><article class="card"><h2>Nivå 3 · 2217–2221</h2><p>Börja med 2217, 2220 och 2221.</p>
+</article></div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Visa de två faktorerna och förklara ett avgörande steg i varje lösning du väljer.</p>
+<div class="cards goals"><article class="card"><h2>Identifiera faktorerna</h2><p>Markera f och g i exempelvis 2202a–b eller 2204a–b.</p>
+</article><article class="card"><h2>Skriv båda termerna</h2><p>Visa vilken faktor du deriverade i varje term, exempelvis i 2203, 2206 eller 2217.</p>
+</article><article class="card"><h2>Använd derivatan</h2><p>Visa insättningen i Din tur eller hur du använde givna värden i 2214 eller 2215b.</p>
+</article></div><p>Sista bilden förklarar varför produktregeln fungerar.</p>
+</section>
+<section class="slide" id="bevis" aria-labelledby="bevis-title">
+  <h1 id="bevis-title" tabindex="-1">Fördjupning · härled produktregeln</h1>
+<p>I differenskvoten vill vi få en kvot för f och en för g. Subtrahera och addera f(x)g(x + h) så att termerna går att gruppera.</p>
+<div class="math-givens">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Peka ut den gemensamma faktorn i vardera gruppen.</p>
+<details class="answer"><summary>Visa grupperingen och gränsvärdet</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>+</mo><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mo>+</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mfrac><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+</div><p>När h går mot noll går g(x + h) mot g(x), eftersom g är deriverbar och därmed kontinuerlig. De två differenskvoterna går mot f′(x) och g′(x).</p>
+</div></details>
+</section>
+</main>
+</body>
+</html>
