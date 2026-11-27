@@ -1,8 +1,11 @@
 const assert = require('node:assert/strict');
+const { mkdir } = require('node:fs/promises');
 const { chromium } = require('playwright');
 
 (async () => {
   const base = process.env.QA_BASE_URL || 'http://127.0.0.1:8123';
+  const screenshotDir = 'mato1c-qa-screenshots/kapitel-1';
+  await mkdir(screenshotDir, { recursive: true });
   const browser = await chromium.launch();
   try {
     const viewports = [
@@ -17,8 +20,13 @@ const { chromium } = require('playwright');
       page.on('pageerror', error => errors.push(error.message));
       const chapter = base + '/mato1c/kapitel-1/';
       await page.goto(chapter);
-      assert.equal(await page.locator('main li a').count(), 2);
-      for (const [slug, count] of [['introduktion', 10], ['polynom-och-rakneregler', 8]]) {
+      assert.equal(await page.locator('main li a').count(), 4);
+      for (const [slug, count] of [
+        ['introduktion', 10],
+        ['polynom-och-rakneregler', 8],
+        ['ekvationer', 10],
+        ['ekvationer-och-faktorisering', 10],
+      ]) {
         await page.goto(chapter + slug + '/');
         const jump = page.locator('#jump');
         assert.equal(await jump.locator('option').count(), count);
@@ -34,11 +42,19 @@ const { chromium } = require('playwright');
           if (slug === 'introduktion' && index === 6) {
             assert.equal(await slide.locator('svg .skalstreck').count(), 4);
           }
+          if (slug.startsWith('ekvationer') && index === 7) {
+            assert.deepEqual(await slide.locator('.nivaer dd').allTextContents(), ['1165–1173', '1174–1178', '1179–1182']);
+            assert.match(await slide.textContent(), slug === 'ekvationer' ? /minst två hela nivåer/ : /alla tre nivåerna/);
+          }
           for (const control of await slide.locator('summary').all()) {
             await control.click();
             assert.equal(await slide.locator('details[open] .kedja:visible').count(), 1);
           }
           assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+          const evidenceSlides = { introduktion: 6, 'polynom-och-rakneregler': 6, ekvationer: 4, 'ekvationer-och-faktorisering': 6 };
+          if (index === evidenceSlides[slug] && [390, 1920].includes(viewport.width)) {
+            await page.screenshot({ path: screenshotDir + '/' + slug + '-' + viewport.width + '.png', fullPage: true });
+          }
         }
         await jump.selectOption('0');
         assert.equal(await page.locator('details[open]').count(), 0);
