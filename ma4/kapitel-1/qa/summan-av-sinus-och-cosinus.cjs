@@ -25,10 +25,18 @@ async function verifyActivity(slide) {
   const b = slide.locator('#sum-b');
   const form = slide.locator('#sum-form');
   const path = slide.locator('[data-curve]');
+  const sumEquation = slide.locator('#sum-equation');
+  const phaseEquation = slide.locator('#phase-equation');
+  assert.ok(await phaseEquation.evaluate(node => Boolean(node.compareDocumentPosition(document.getElementById('sum-a')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+  assert.equal(await a.evaluate(node => node.labels[0].firstChild.textContent.trim()), 'a – sinuskoefficient');
+  assert.equal(await b.evaluate(node => node.labels[0].firstChild.textContent.trim()), 'b – cosinuskoefficient');
   for (const [sa, sb, phasePattern] of [['3', '4', /53,1°/], ['3', '-4', /−53,1°/], ['4', '0', /0°/]]) {
     await a.selectOption(sa);
     await b.selectOption(sb);
     await form.selectOption('sum');
+    const sign = Number(sb) < 0 ? '−' : '+';
+    assert.equal(await sumEquation.textContent(), `y=${sa}sin⁡x${sign}${Math.abs(Number(sb))}cos⁡x`);
+    assert.equal(await phaseEquation.textContent(), sb === '0' ? 'y=4sin⁡(x+0°)' : `y≈5sin⁡(x${sign}53,1°)`);
     const sum = await path.getAttribute('d');
     const points = [...sum.matchAll(/[ML]([\d.]+) ([\d.]+)/g)].map(m => m.slice(1).map(Number));
     assert.equal(points.length, 421);

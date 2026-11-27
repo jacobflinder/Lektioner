@@ -40,9 +40,9 @@
 
 <section class="slide" id="baglangd" aria-labelledby="baglangd-title">
   <h1 id="baglangd-title" tabindex="-1">Jämför radien och båglängden</h1>
-<div class="radian-layout"><div class="radian-intro"><p>I radianer är v lika med båglängden b dividerad med radien r. Därför blir båglängden b = r · v.</p><p class="task">Förutsäg vad som händer med bågen när radien dubbleras och vinkeln hålls fast. Prova sedan.</p></div><div class="graph-tool radian-tool"><div class="graph-controls">
+<div class="radian-layout"><div class="radian-intro"><p>I radianer är v lika med båglängden b dividerad med radien r. Därför blir båglängden b = r · v.</p><p class="task">Förutsäg vad som händer med bågen när radien dubbleras och vinkeln hålls fast. Prova sedan.</p></div><div class="graph-tool radian-tool"><div class="model-equation"><p>Båglängden med valda värden</p><math id="rad-equation" display="block"><mrow><mi>b</mi><mo>=</mo><mn data-arc-radius>2</mn><mo>·</mo><mrow data-arc-angle><mn>1</mn></mrow><mo>=</mo><mrow data-arc-length><mn>2</mn></mrow></mrow></math></div><div class="graph-controls">
     <label>Radie r <select id="rad-r"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></label>
-    <label>Vinkel v <select id="rad-v"><option value="one">1 rad</option><option value="half">π/2 rad</option><option value="pi">π rad</option><option value="turn">2π rad</option></select></label>
+    <label>Vinkel v i radianer <select id="rad-v"><option value="one">1 rad</option><option value="half">π/2 rad</option><option value="pi">π rad</option><option value="turn">2π rad</option></select></label>
     </div>
     <svg id="radian-figur" viewBox="0 0 350 256" role="img" aria-label="Cirkel med radier och cirkelbågen för den valda vinkeln">
       <circle class="circle-rim" cx="171" cy="126"/>
@@ -74,6 +74,21 @@
 </div><p class="task">Vilket är det exakta värdet på cos(π/3)?</p><form class="practice" data-success="Det stämmer. Det är samma punkt oavsett vinkelmått." novalidate><div class="practice-fields"><label>Cosinusvärde<select data-answer="1" data-hint="Läs av cosinus för vinkeln 60° på enhetscirkeln."><option value="">Välj</option><option value="1">1/2</option><option value="2">√2/2</option><option value="3">√3/2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa värdetabellen</summary><div class="answer-body"><table class="value-table"><caption>Kända vinklar</caption><thead><tr><th scope="col">v</th><th scope="col"><math display="inline"><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>6</mn></mrow></mrow></mfrac></mrow></math></th><th scope="col"><math display="inline"><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math></th><th scope="col"><math display="inline"><mrow><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>3</mn></mrow></mrow></mfrac></mrow></math></th></tr></thead><tbody><tr><th scope="row">sin v</th><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td></tr><tr><th scope="row">cos v</th><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><mn>2</mn></mrow></mrow></mfrac></mrow></math></td></tr><tr><th scope="row">tan v</th><td><math display="inline"><mrow><mfrac><mrow><mrow><mn>1</mn></mrow></mrow><mrow><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></mrow></mfrac></mrow></math></td><td><math display="inline"><mrow><mn>1</mn></mrow></math></td><td><math display="inline"><mrow><msqrt><mrow><mn>3</mn></mrow></msqrt></mrow></math></td></tr></tbody></table><p>Kontrollera att räknaren står i RAD när argumentet är i radianer.</p></div></details>
 </section>
 
+<section class="slide" id="period" aria-labelledby="period-title">
+  <h1 id="period-title" tabindex="-1">Välj period för sinus, cosinus och tangens</h1>
+<p>För värdet c använder du v = arcsin c, v = arccos c eller v = arctan c. Vinkeln v anges i radianer och n är ett heltal. Sinus och cosinus kräver att −1 ≤ c ≤ 1.</p><div class="cards goals"><article class="card"><h2>Sinus</h2><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>π</mi><mo>−</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+</div></article><article class="card"><h2>Cosinus</h2><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>±</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
+</div></article><article class="card"><h2>Tangens</h2><div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mi>π</mi></mrow></math>
+</div></article></div><p class="task">Vilken period använder du när du löser tan x = −1?</p><form class="practice" data-success="Det stämmer. Perioden är π radianer." novalidate><div class="practice-fields"><label>Period<select data-answer="2" data-hint="Tangens har samma värde efter ett halvvarv."><option value="">Välj</option><option value="1">π/2</option><option value="2">π</option><option value="3">2π</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>v</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mi>π</mi></mrow></math>
+</div></div></details>
+</section>
+
 <section class="slide" id="sinus" aria-labelledby="sinus-title">
   <h1 id="sinus-title" tabindex="-1">Skriv två sinusfamiljer i radianer</h1>
 <div class="split">
@@ -100,21 +115,6 @@
 </div><p>Sinus upprepas efter ett helt varv, 2π. n är ett heltal.</p></div></details>
 </div>
 </div>
-</section>
-
-<section class="slide" id="period" aria-labelledby="period-title">
-  <h1 id="period-title" tabindex="-1">Välj period för sinus, cosinus och tangens</h1>
-<p>För värdet c använder du v = arcsin c, v = arccos c eller v = arctan c. Sinus och cosinus kräver att −1 ≤ c ≤ 1.</p><div class="cards goals"><article class="card"><h2>Sinus</h2><div class="math-givens">
-<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
-<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>π</mi><mo>−</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
-</div></article><article class="card"><h2>Cosinus</h2><div class="math-givens">
-<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>±</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mn>2</mn><mi>π</mi></mrow></math>
-</div></article><article class="card"><h2>Tangens</h2><div class="math-givens">
-<math display="block"><mrow><mi>x</mi><mo>=</mo><mi>v</mi><mo>+</mo><mi>n</mi><mo>·</mo><mi>π</mi></mrow></math>
-</div></article></div><p class="task">Vilken period använder du när du löser tan x = −1?</p><form class="practice" data-success="Det stämmer. Perioden är π radianer." novalidate><div class="practice-fields"><label>Period<select data-answer="2" data-hint="Tangens har samma värde efter ett halvvarv."><option value="">Välj</option><option value="1">π/2</option><option value="2">π</option><option value="3">2π</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p></form><details class="answer"><summary>Visa lösningen</summary><div class="answer-body"><div class="math-steps">
-<math display="block"><mrow><mi>v</mi><mo>=</mo><mi mathvariant="normal">arctan</mi><mo>&#x2061;</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac></mrow></math>
-<math display="block"><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mrow><mi>π</mi></mrow></mrow><mrow><mrow><mn>4</mn></mrow></mrow></mfrac><mo>+</mo><mi>n</mi><mo>·</mo><mi>π</mi></mrow></math>
-</div></div></details>
 </section>
 
 <section class="slide" id="sammansatt" aria-labelledby="sammansatt-title">

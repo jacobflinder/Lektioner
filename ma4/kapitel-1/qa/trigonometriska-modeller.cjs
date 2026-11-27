@@ -7,9 +7,9 @@ const { chromium } = require('playwright');
 const baseURL = process.env.MA4_QA_SITE || 'http://127.0.0.1:8123';
 const evidence = process.env.MA4_ADD_QA_SCREENSHOTS || '/tmp/ma4-modell-qa';
 const sizes = [[390, 844], [768, 900], [1280, 800], [1920, 1080]];
-const order = ['start', 'temperatur', 'niva', 'kontrollera', 'mojlig', 'hjul', 'startlage', 'din-tur', 'bokarbete', 'mal'];
+const order = ['start', 'temperatur-start', 'temperatur', 'niva', 'kontrollera', 'mojlig', 'hjul', 'startlage', 'din-tur', 'bokarbete', 'mal'];
 const replies = {
-  start: ['1', '2', /Lägg modellens tid/, /från kl. 06/],
+  'temperatur-start': ['1', '2', /Lägg modellens tid/, /från kl. 06/],
   temperatur: ['1', '2', /sinusargumentet/, /öka 2π/],
   niva: ['1', '2', /stiger förbi nivån/, /före och ett efter toppen/],
   kontrollera: ['2', '1', /Skillnaden mellan/, /5π\/6/],
@@ -24,6 +24,9 @@ function near(a, b, tolerance = 1e-9) {
 
 async function verifyWheel(slide) {
   const input = slide.locator('#wheel-t');
+  const equation = slide.locator('#wheel-equation');
+  assert.match(await equation.textContent(), /1,5.*π10\(t\+5\).*2,5/);
+  assert.ok(await equation.evaluate(node => Boolean(node.compareDocumentPosition(document.getElementById('wheel-t')) & Node.DOCUMENT_POSITION_FOLLOWING)));
   for (const [t, expected] of [[0, 4], [5, 2.5], [10, 1], [15, 2.5], [20, 4]]) {
     await input.focus();
     await input.press('Home');
@@ -134,7 +137,7 @@ async function main() {
       assert.equal(await page.locator('#wheel-t').inputValue(), '0');
       assert.equal(await page.locator('#startlage .answer-body').isVisible(), false);
       assert.deepEqual(errors, []);
-      console.log(`PASS ${width}×${height}: tio bilder, temperatur, modellvillkor, hjul och bokarbete`);
+      console.log(`PASS ${width}×${height}: elva bilder, temperatur, modellvillkor, hjul och bokarbete`);
       await page.close();
     }
   } finally {

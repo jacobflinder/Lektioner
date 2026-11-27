@@ -7,9 +7,9 @@ const { chromium } = require('playwright');
 const baseURL = process.env.MA4_QA_SITE || 'http://127.0.0.1:8123';
 const evidence = process.env.MA4_ADD_QA_SCREENSHOTS || '/tmp/ma4-dubbel-qa';
 const sizes = [[390, 844], [768, 900], [1280, 800], [1920, 1080]];
-const order = ['start', 'sinus', 'cosinus', 'former', 'satt-in', 'kvadrant', 'rotter', 'din-tur', 'socrative', 'bokarbete', 'mal'];
+const order = ['start', 'jamfor', 'sinus', 'cosinus', 'former', 'satt-in', 'kvadrant', 'rotter', 'din-tur', 'socrative', 'bokarbete', 'mal'];
 const replies = {
-  start: ['1', '2', /sin 60/, /värde mindre än 1/],
+  jamfor: ['1', '2', /sin 60/, /värde mindre än 1/],
   sinus: ['1', '2', /samma faktorer/, /två lika stora produkter/],
   cosinus: ['1', '3', /subtraheras sinusprodukten/, /Cosinusprodukten kommer först/],
   former: ['2', '1', /bara ska innehålla sinus/, /som 1 − sin² v/],
@@ -104,13 +104,19 @@ async function main() {
       await page.locator('a[href="formler-for-dubbla-vinkeln/"]').click();
       const jump = page.locator('#jump');
       await jump.locator('option').nth(order.length - 1).waitFor({ state: 'attached' });
-      assert.equal(await jump.locator('option').count(), order.length);
+      assert.deepEqual(await jump.locator('option').evaluateAll(nodes => nodes.map(node => node.value)), order);
       if (width >= 1280) await page.locator('#mode').click();
       const save = id => page.screenshot({ path: path.join(evidence, `${width}-${id}.png`), fullPage: width < 1280 });
       for (const id of order) {
         const slide = page.locator(`#${id}`);
         assert.equal(await jump.inputValue(), id);
         assert.equal(await page.locator('.slide:visible').count(), 1);
+        if (id === 'start') {
+          const formulas = await slide.locator('.math-givens math').evaluateAll(nodes =>
+            nodes.map(node => node.textContent.replace(/\s|\u2061/g, '')));
+          assert.deepEqual(formulas, ['sin2v=2·sinv·cosv', 'cos2v=cos2v−sin2v']);
+          assert.doesNotMatch(formulas.join(''), /°/);
+        }
         if (replies[id]) {
           const [wrong, right, hint, feedback] = replies[id];
           const select = slide.locator('select');
@@ -178,7 +184,7 @@ async function main() {
       assert.equal(await quadrants.locator('[data-quadrant="2"]').getAttribute('aria-pressed'), 'true');
       assert.doesNotMatch(await page.locator('main').textContent(), /Original-PDF|NaTe22|240326/);
       assert.deepEqual(errors, []);
-      console.log(`PASS ${width}×${height}: elva bilder, vinkeldubblering, elevval, matematik, Socrative och bokarbete`);
+      console.log(`PASS ${width}×${height}: tolv bilder, vinkeldubblering, elevval, matematik, Socrative och bokarbete`);
       await page.close();
     }
   } finally {

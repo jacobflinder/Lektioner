@@ -49,9 +49,19 @@ async function verifyConnection(slide) {
 }
 
 async function verifyGraph(slide) {
+  const equation = slide.locator('#graf-ekvation');
+  const contents = async () => (await equation.textContent()).replace(/\s|\u2061/g, '');
+  assert.equal(await contents(), 'y=1·sin(1x)');
+  const symbol = await equation.boundingBox();
+  const controls = await slide.locator('#kurvverktyg .graph-controls').boundingBox();
+  assert.ok(symbol.y + symbol.height <= controls.y);
+  for (const name of ['Trigonometrisk funktion', 'A – amplitudfaktor', 'k – vinkelfaktor']) {
+    assert.ok(await slide.getByRole('combobox', { name, exact: true }).isVisible());
+  }
   await slide.locator('#graf-funktion').selectOption('cos');
   await slide.locator('#graf-a').selectOption('-2');
   await slide.locator('#graf-k').selectOption('2');
+  assert.equal(await contents(), 'y=−2·cos(2x)');
   const plot = slide.locator('#aktivitet-graf');
   assert.match(await slide.locator('#graf-status').innerText(), /Amplitud 2. Period 180°/);
   const render = async () => {
@@ -67,6 +77,7 @@ async function verifyGraph(slide) {
   }
   await slide.locator('#graf-intervall').selectOption('2160');
   await slide.locator('#graf-k').selectOption('0.2');
+  assert.equal(await contents(), 'y=−2·cos(0,2x)');
   assert.equal(await plot.locator('.tick-x').last().textContent(), '2160°');
   assert.match(await slide.locator('#graf-status').innerText(), /Period 1.?800°/);
   const longNodes = await render();
