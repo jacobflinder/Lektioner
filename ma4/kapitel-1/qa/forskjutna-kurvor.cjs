@@ -147,7 +147,7 @@ async function main() {
         }
         if (id === 'aktivitet') {
           await verifyActivity(slide);
-          assert.equal(await slide.getByRole('link').getAttribute('href'), 'https://www.geogebra.org/m/tphudvak');
+          assert.equal(await slide.getByRole('link').getAttribute('href'), 'https://www.geogebra.org/m/vazwneyw');
         }
         if (id === 'socrative') {
           assert.equal(await slide.getByRole('heading', { level: 2 }).innerText(), '405. Ma4 ... Kurvor - förskjuta ...');
