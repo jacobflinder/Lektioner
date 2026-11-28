@@ -80,7 +80,7 @@ verifyLesson({
   },
   answers: {
     lage: [/s\(2\)=80−20·0=80/],
-    hastighet: [/s′\(6\)=5π·sin\(3π2\)=−5π/, /\|s′\(6\)\|=5π/, /15,7cm\/s/],
+    hastighet: [/s′\(6\)=5π·sin\(3π2\)=−5π/, /\|s′\(6\)\|=5π/, /15,7cm\/s/, /modellensstörstafart/],
     'storsta-volym': [/Q′\(t\)=24t−6t2=6t·\(4−t\)/, /94literefter4minuter/],
     'snabbaste-okning': [/Q′′\(t\)=24−12t/, /Q′\(2\)=48−24=24/, /24liter\/min,eftertvåminuter/],
     period: [/T=2ππ6=12/, /H′\(t\)=π10·cos/],
