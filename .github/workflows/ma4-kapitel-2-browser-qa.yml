@@ -52,6 +52,7 @@ jobs:
           node ma4/kapitel-2/qa/derivator-och-grafer.cjs
           node ma4/kapitel-2/qa/derivator-och-tillampningar.cjs
           node ma4/kapitel-2/qa/tillampningar-med-kedjeregeln.cjs
+          node ma4/kapitel-2/qa/olika-typer-av-grafer-och-dominerande-term.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -67,3 +68,4 @@ jobs:
             /tmp/ma4-derivator-och-grafer-qa
             /tmp/ma4-derivator-och-tillampningar-qa
             /tmp/ma4-tillampningar-med-kedjeregeln-qa
+            /tmp/ma4-olika-typer-av-grafer-och-dominerande-term-qa

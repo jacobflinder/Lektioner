@@ -1,0 +1,57 @@
+.dominerande .math-givens,
+.dominerande .math-steps { justify-items: start; }
+.dominerande .slide:has(.answer[open]) .practice { display: none; }
+.dominerande .split > * { min-width: 0; }
+
+.dominerande .grafgalleri,
+.dominerande .graftyper-svar {
+  display: grid;
+  gap: .55rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.dominerande .grafkort {
+  display: grid;
+  grid-template-rows: minmax(3.15rem, auto) 1fr;
+  align-items: center;
+  padding: .45rem;
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: #f4f8f5;
+}
+.dominerande .grafkort math { margin: 0; }
+.dominerande .grafkort svg { display: block; width: 100%; max-height: 178px; }
+.dominerande .graf svg { max-height: 240px; }
+.dominerande svg text { fill: var(--ink); font-weight: 600; font-size: 17px; }
+.dominerande svg :is(.rutnat, .axel, .kurva, .kubterm, .linjeterm, .stodlinje) { fill: none; }
+.dominerande svg .rutnat { stroke: #c6dbd4; }
+.dominerande svg .axel { stroke: #345a56; stroke-width: 1.6; }
+.dominerande svg .kurva { stroke: #08705c; stroke-width: 3.2; }
+.dominerande svg .kubterm { stroke: #475985; stroke-width: 2.4; stroke-dasharray: 8 4; }
+.dominerande svg .linjeterm { stroke: #92421d; stroke-width: 2.5; stroke-dasharray: 2 4; }
+.dominerande svg .stodlinje { stroke: #506562; stroke-width: 1.75; stroke-dasharray: 4 4; }
+.dominerande svg .fylld,
+.dominerande svg .markerad { fill: #08705c; stroke: white; stroke-width: 1.4; }
+.dominerande svg .oppen { fill: #f4f8f5; stroke: #08705c; stroke-width: 2.5; }
+.dominerande .modellgraf figcaption { display: flex; justify-content: center; flex-wrap: wrap; gap: .3rem .65rem; }
+.dominerande .legend { white-space: nowrap; }
+.dominerande .legend::before { content: ""; display: inline-block; width: 1.2em; border-top: .15em solid #08705c; margin: 0 .28em .23em 0; }
+.dominerande .legend.kub::before { border-top: .15em dashed #475985; }
+.dominerande .legend.linje::before { border-top: .15em dotted #92421d; }
+.dominerande #jamfor-skala { flex-basis: 100%; text-align: center; }
+.dominerande .termvarden { padding: .25rem .6rem; border: 1px solid var(--line); border-radius: .5rem; }
+.dominerande #graftyper .graftyper-svar .card { padding: .35rem .55rem; }
+.dominerande #graftyper .graftyper-svar h2 { margin: 0 0 .25rem; font-size: 1.05em; }
+@media (min-width: 1024px) {
+  .dominerande #jamfor .split { grid-template-columns: minmax(0, .85fr) minmax(0, 1.1fr); }
+}
+@media (max-width: 580px) {
+  .dominerande :is(#polynom, #reciproka) .grafgalleri { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .classroom #jamfor .modellgraf [data-utsnitt] { width: 100%; }
+  .classroom #jamfor .modellgraf svg { max-height: 308px; }
+}
+@media (min-width: 1024px) and (max-height: 900px) {
+  .dominerande #graftyper .grafkort svg { max-height: 146px; }
+  .dominerande #extrempunkter .graf svg { max-height: 214px; }
+}
