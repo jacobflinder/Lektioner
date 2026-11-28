@@ -1,0 +1,24 @@
+.kedjetillamp .math-givens,
+.kedjetillamp .math-steps { justify-items: start; }
+.kedjetillamp .slide:has(.answer[open]) .practice { display: none; }
+.kedjetillamp .split > * { min-width: 0; }
+.kedjetillamp .cirkel-layout,
+.kedjetillamp .cirkel-val,
+.kedjetillamp .cirkel-vy { display: grid; gap: .65rem; align-content: start; min-width: 0; }
+.kedjetillamp .aktuell { border: 1px solid var(--line); border-radius: .55rem; padding: .35rem .65rem; background: #f4f8f5; }
+.kedjeform svg,
+.classroom .kedjeform svg { max-height: 218px; width: 100%; }
+.kedjeform figcaption { text-align: center; }
+.kedjeform .yta { fill: #d6ebe3; stroke: #08705c; stroke-width: 2.5; }
+.kedjeform .vatten { fill: #c7e5e9; stroke: #237583; stroke-width: 2; }
+.kedjeform :is(.kontur,.radie,.matt,.hjallinje,.rorelse) { fill: none; stroke-width: 2.1; }
+.kedjeform :is(.kontur,.radie,.matt) { stroke: #345a56; }
+.kedjeform .hjallinje { stroke: #688074; stroke-dasharray: 4 4; }
+.kedjeform .rorelse { stroke: #8c431e; }
+.kedjeform .markering { fill: #08705c; }
+.kedjeform [data-circle-arrow-label] { font-size: 16px; }
+@media (min-width: 1024px) {
+  .kedjetillamp .cirkel-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr); }
+  .kedjetillamp #din-tur .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1.95fr); }
+}
+.kedjetillamp .cone-model { display: grid; gap: .65rem; align-content: start; }
