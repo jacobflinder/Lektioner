@@ -1,0 +1,13 @@
+.skissa-grafer .regelbord { table-layout: fixed; }
+.skissa-grafer .regelbord caption { font-weight: 700; margin-bottom: .4rem; text-align: left; }
+.skissa-grafer .punktsvar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.skissa-grafer .punktsvar > div { padding: .3rem .55rem; border: 1px solid var(--line); border-radius: .4rem; }
+.skissa-grafer .graf .provpunkt { fill: #f4f8f5; stroke: #405181; stroke-width: 2.5; }
+.skissa-grafer .grafsvaret > div { display: grid; gap: .4rem; }
+.skissa-grafer .skissmodell .graf svg { max-height: 275px; }
+@media (max-width: 720px) {
+  .skissa-grafer .punktsvar { grid-template-columns: 1fr; }
+}
+@media (min-width: 1024px) {
+  .skissa-grafer #din-tur .grafsvaret { grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr); }
+}
