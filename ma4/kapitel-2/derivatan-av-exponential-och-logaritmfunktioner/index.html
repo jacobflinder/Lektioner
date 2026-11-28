@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Derivatan av exponential- och logaritmfunktioner · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="../deriveringsregler-repetition/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+</head>
+<body class="exp-log">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Derivatan av exponential- och logaritmfunktioner</h1>
+<p>Talet e är basen för den naturliga exponentialfunktionen. För en allmän positiv bas a kommer faktorn ln a med i derivatan. I formlerna är x variabeln och u en deriverbar inre funktion av x.</p>
+<div class="calculation-pair"><div><h2>Exponentialfunktioner</h2><div class="math-givens">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi></mrow></msup><mo>)</mo></mrow><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi></mrow></msup></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><msup><mrow><mi>a</mi></mrow><mrow><mi>u</mi></mrow></msup><mo>)</mo></mrow><mo>=</mo><msup><mrow><mi>a</mi></mrow><mrow><mi>u</mi></mrow></msup><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>·</mo><msup><mi>u</mi><mo>′</mo></msup></mrow></math>
+</div></div><div><h2>Naturlig logaritm</h2><div class="math-givens">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>)</mo><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>u</mi></mrow></mfrac><mo>·</mo><msup><mi>u</mi><mo>′</mo></msup></mrow></math>
+</div></div></div><p>Naturliga logaritmen ln u kräver att u &gt; 0. För ln x betyder det x &gt; 0.</p>
+<p class="task">Vilken faktor får du av att derivera den inre funktionen i aᵘ?</p>
+<form class="practice" novalidate data-success="Det stämmer. u′ kommer från kedjeregeln."><div class="practice-fields"><label>Faktorn från den inre funktionen<select data-answer="2" data-hint="Basen är a. Den inre funktionen är exponenten u."><option value="">Välj</option><option value="1">ln a</option><option value="2">u′</option><option value="3">aᵘ</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Derivera exponentialfunktioner och logaritmer.</li><li>Identifiera den inre funktionen och ange när logaritmen är definierad.</li><li>Bestämma tangeringspunkten när du vet en annan punkt på tangenten.</li></ol>
+</section>
+<section class="slide" id="invers" aria-labelledby="invers-title">
+  <h1 id="invers-title" tabindex="-1">Spegla mellan eˣ och ln x</h1>
+<p>Funktionerna är inverser. När du speglar i linjen y = x byter punktens x- och y-koordinater plats.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi></mrow></msup><mo>⇔</mo><mi>x</mi><mo>=</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>y</mi></mrow></math>
+</div><div class="split"><figure class="diagram derivata-figur exp-log-figur">
+<svg viewBox="0 0 283.50 289.50" role="img" aria-labelledby="invers-graf-title">
+  <title id="invers-graf-title">Graferna för e upphöjt till x och den naturliga logaritmen med samma skala. P är markerad på exponentialgrafen.</title>
+  <defs><clipPath id="invers-graf-yta"><rect x="28.50" y="40.50" width="225.00" height="225.00"/></clipPath></defs>
+  <path class="rutnat" d="M141.00 40.50V265.50 M186.00 40.50V265.50 M231.00 40.50V265.50 M28.50 153.00H253.50 M28.50 108.00H253.50 M28.50 63.00H253.50"/>
+  <path class="axel" d="M28.50 198H259.50 m-6 -4 l6 4 -6 4 M96 265.50V34.50 m-4 6 l4 -6 4 6"/>
+  <text x="264.50" y="203">x</text><text x="106" y="36.50">y</text>
+  <text class="grafskalsteg" text-anchor="middle" x="86.00" y="214.00">0</text><text class="grafskalsteg" text-anchor="middle" x="141.00" y="214.00">1</text><text class="grafskalsteg" text-anchor="middle" x="186.00" y="214.00">2</text><text class="grafskalsteg" text-anchor="middle" x="231.00" y="214.00">3</text><text class="grafskalsteg" text-anchor="end" x="88.00" y="158.00">1</text><text class="grafskalsteg" text-anchor="end" x="88.00" y="113.00">2</text><text class="grafskalsteg" text-anchor="end" x="88.00" y="68.00">3</text>
+  <g clip-path="url(#invers-graf-yta)"><path class="spegellinje" d="M28.500 265.500 L29.906 264.094 L31.312 262.688 L32.719 261.281 L34.125 259.875 L35.531 258.469 L36.938 257.062 L38.344 255.656 L39.750 254.250 L41.156 252.844 L42.562 251.438 L43.969 250.031 L45.375 248.625 L46.781 247.219 L48.188 245.812 L49.594 244.406 L51.000 243.000 L52.406 241.594 L53.812 240.188 L55.219 238.781 L56.625 237.375 L58.031 235.969 L59.438 234.562 L60.844 233.156 L62.250 231.750 L63.656 230.344 L65.062 228.938 L66.469 227.531 L67.875 226.125 L69.281 224.719 L70.688 223.312 L72.094 221.906 L73.500 220.500 L74.906 219.094 L76.312 217.688 L77.719 216.281 L79.125 214.875 L80.531 213.469 L81.938 212.062 L83.344 210.656 L84.750 209.250 L86.156 207.844 L87.562 206.438 L88.969 205.031 L90.375 203.625 L91.781 202.219 L93.188 200.812 L94.594 199.406 L96.000 198.000 L97.406 196.594 L98.812 195.188 L100.219 193.781 L101.625 192.375 L103.031 190.969 L104.438 189.562 L105.844 188.156 L107.250 186.750 L108.656 185.344 L110.062 183.938 L111.469 182.531 L112.875 181.125 L114.281 179.719 L115.688 178.312 L117.094 176.906 L118.500 175.500 L119.906 174.094 L121.312 172.688 L122.719 171.281 L124.125 169.875 L125.531 168.469 L126.938 167.062 L128.344 165.656 L129.750 164.250 L131.156 162.844 L132.562 161.438 L133.969 160.031 L135.375 158.625 L136.781 157.219 L138.188 155.812 L139.594 154.406 L141.000 153.000 L142.406 151.594 L143.812 150.188 L145.219 148.781 L146.625 147.375 L148.031 145.969 L149.438 144.562 L150.844 143.156 L152.250 141.750 L153.656 140.344 L155.062 138.938 L156.469 137.531 L157.875 136.125 L159.281 134.719 L160.688 133.312 L162.094 131.906 L163.500 130.500 L164.906 129.094 L166.312 127.688 L167.719 126.281 L169.125 124.875 L170.531 123.469 L171.938 122.062 L173.344 120.656 L174.750 119.250 L176.156 117.844 L177.562 116.438 L178.969 115.031 L180.375 113.625 L181.781 112.219 L183.188 110.812 L184.594 109.406 L186.000 108.000 L187.406 106.594 L188.812 105.188 L190.219 103.781 L191.625 102.375 L193.031 100.969 L194.438 99.562 L195.844 98.156 L197.250 96.750 L198.656 95.344 L200.062 93.938 L201.469 92.531 L202.875 91.125 L204.281 89.719 L205.688 88.312 L207.094 86.906 L208.500 85.500 L209.906 84.094 L211.312 82.688 L212.719 81.281 L214.125 79.875 L215.531 78.469 L216.938 77.062 L218.344 75.656 L219.750 74.250 L221.156 72.844 L222.562 71.438 L223.969 70.031 L225.375 68.625 L226.781 67.219 L228.188 65.812 L229.594 64.406 L231.000 63.000 L232.406 61.594 L233.812 60.188 L235.219 58.781 L236.625 57.375 L238.031 55.969 L239.438 54.562 L240.844 53.156 L242.250 51.750 L243.656 50.344 L245.062 48.938 L246.469 47.531 L247.875 46.125 L249.281 44.719 L250.688 43.312 L252.094 41.906 L253.500 40.500" /><path class="kurva" d="M28.500 187.959 L29.274 187.785 L30.048 187.608 L30.823 187.427 L31.597 187.244 L32.371 187.057 L33.145 186.867 L33.920 186.674 L34.694 186.478 L35.468 186.278 L36.242 186.074 L37.016 185.867 L37.791 185.657 L38.565 185.442 L39.339 185.225 L40.113 185.003 L40.887 184.777 L41.662 184.548 L42.436 184.314 L43.210 184.077 L43.984 183.835 L44.759 183.589 L45.533 183.339 L46.307 183.085 L47.081 182.826 L47.855 182.563 L48.630 182.295 L49.404 182.022 L50.178 181.745 L50.952 181.463 L51.726 181.176 L52.501 180.884 L53.275 180.587 L54.049 180.285 L54.823 179.977 L55.598 179.665 L56.372 179.346 L57.146 179.023 L57.920 178.693 L58.694 178.358 L59.469 178.018 L60.243 177.671 L61.017 177.318 L61.791 176.959 L62.565 176.594 L63.340 176.223 L64.114 175.845 L64.888 175.460 L65.662 175.069 L66.437 174.671 L67.211 174.266 L67.985 173.854 L68.759 173.435 L69.533 173.009 L70.308 172.575 L71.082 172.134 L71.856 171.685 L72.630 171.229 L73.404 170.764 L74.179 170.291 L74.953 169.811 L75.727 169.321 L76.501 168.824 L77.276 168.317 L78.050 167.802 L78.824 167.278 L79.598 166.745 L80.372 166.203 L81.147 165.651 L81.921 165.090 L82.695 164.518 L83.469 163.937 L84.243 163.346 L85.018 162.745 L85.792 162.133 L86.566 161.511 L87.340 160.877 L88.115 160.233 L88.889 159.578 L89.663 158.911 L90.437 158.233 L91.211 157.543 L91.986 156.841 L92.760 156.126 L93.534 155.400 L94.308 154.660 L95.082 153.908 L95.857 153.143 L96.631 152.365 L97.405 151.573 L98.179 150.767 L98.954 149.947 L99.728 149.114 L100.502 148.265 L101.276 147.402 L102.050 146.524 L102.825 145.631 L103.599 144.722 L104.373 143.797 L105.147 142.857 L105.921 141.900 L106.696 140.926 L107.470 139.936 L108.244 138.928 L109.018 137.903 L109.793 136.860 L110.567 135.799 L111.341 134.720 L112.115 133.622 L112.889 132.504 L113.664 131.368 L114.438 130.212 L115.212 129.035 L115.986 127.838 L116.760 126.621 L117.535 125.382 L118.309 124.122 L119.083 122.840 L119.857 121.536 L120.632 120.209 L121.406 118.859 L122.180 117.485 L122.954 116.088 L123.728 114.667 L124.503 113.220 L125.277 111.749 L126.051 110.253 L126.825 108.730 L127.599 107.181 L128.374 105.605 L129.148 104.001 L129.922 102.370 L130.696 100.710 L131.471 99.022 L132.245 97.304 L133.019 95.557 L133.793 93.779 L134.567 91.971 L135.342 90.131 L136.116 88.259 L136.890 86.354 L137.664 84.417 L138.438 82.446 L139.213 80.441 L139.987 78.400 L140.761 76.325 L141.535 74.213 L142.310 72.065 L143.084 69.880 L143.858 67.657 L144.632 65.395 L145.406 63.093 L146.181 60.752 L146.955 58.371 L147.729 55.947 L148.503 53.482 L149.277 50.974 L150.052 48.423 L150.826 45.827 L151.600 43.187 L152.374 40.500" data-exponential/><path class="log-kurva" d="M106.041 265.500 L106.962 261.548 L107.884 257.916 L108.806 254.555 L109.727 251.427 L110.649 248.503 L111.571 245.758 L112.492 243.170 L113.414 240.723 L114.335 238.402 L115.257 236.195 L116.179 234.092 L117.100 232.082 L118.022 230.158 L118.944 228.313 L119.865 226.541 L120.787 224.836 L121.708 223.193 L122.630 221.608 L123.552 220.077 L124.473 218.596 L125.395 217.163 L126.316 215.774 L127.238 214.426 L128.160 213.118 L129.081 211.846 L130.003 210.610 L130.925 209.406 L131.846 208.234 L132.768 207.092 L133.689 205.978 L134.611 204.891 L135.533 203.829 L136.454 202.792 L137.376 201.778 L138.298 200.787 L139.219 199.817 L140.141 198.868 L141.062 197.938 L141.984 197.027 L142.906 196.134 L143.827 195.258 L144.749 194.399 L145.671 193.556 L146.592 192.729 L147.514 191.917 L148.435 191.119 L149.357 190.335 L150.279 189.564 L151.200 188.806 L152.122 188.061 L153.043 187.328 L153.965 186.607 L154.887 185.897 L155.808 185.198 L156.730 184.510 L157.652 183.832 L158.573 183.165 L159.495 182.507 L160.416 181.858 L161.338 181.219 L162.260 180.589 L163.181 179.967 L164.103 179.354 L165.025 178.749 L165.946 178.152 L166.868 177.563 L167.789 176.982 L168.711 176.408 L169.633 175.841 L170.554 175.281 L171.476 174.728 L172.397 174.182 L173.319 173.642 L174.241 173.109 L175.162 172.582 L176.084 172.061 L177.006 171.547 L177.927 171.037 L178.849 170.534 L179.770 170.036 L180.692 169.544 L181.614 169.057 L182.535 168.575 L183.457 168.098 L184.379 167.627 L185.300 167.160 L186.222 166.698 L187.143 166.240 L188.065 165.788 L188.987 165.339 L189.908 164.895 L190.830 164.456 L191.751 164.021 L192.673 163.590 L193.595 163.163 L194.516 162.740 L195.438 162.321 L196.360 161.906 L197.281 161.494 L198.203 161.087 L199.124 160.683 L200.046 160.282 L200.968 159.885 L201.889 159.492 L202.811 159.102 L203.733 158.715 L204.654 158.332 L205.576 157.952 L206.497 157.575 L207.419 157.201 L208.341 156.831 L209.262 156.463 L210.184 156.098 L211.105 155.737 L212.027 155.378 L212.949 155.022 L213.870 154.668 L214.792 154.318 L215.714 153.970 L216.635 153.625 L217.557 153.283 L218.478 152.943 L219.400 152.605 L220.322 152.271 L221.243 151.938 L222.165 151.608 L223.087 151.281 L224.008 150.956 L224.930 150.633 L225.851 150.312 L226.773 149.994 L227.695 149.678 L228.616 149.364 L229.538 149.052 L230.460 148.743 L231.381 148.436 L232.303 148.130 L233.224 147.827 L234.146 147.526 L235.068 147.227 L235.989 146.929 L236.911 146.634 L237.832 146.341 L238.754 146.049 L239.676 145.760 L240.597 145.472 L241.519 145.186 L242.441 144.902 L243.362 144.620 L244.284 144.339 L245.205 144.060 L246.127 143.783 L247.049 143.508 L247.970 143.234 L248.892 142.962 L249.814 142.691 L250.735 142.423 L251.657 142.155 L252.578 141.890 L253.500 141.626" data-logaritm/></g>
+  <line class="spegling" x1="127.192" y1="108" x2="186" y2="166.808" data-show-with-answer/>
+  <circle class="punkt" data-p cx="127.192" cy="108" r="4.5"/><text x="106.192" y="111">P</text>
+  <circle class="punkt log-punkt" data-q data-show-with-answer cx="186" cy="166.808" r="4.5"/>
+  <text data-show-with-answer x="193" y="156.808">Q</text>
+</svg>
+<figcaption><strong>Heldragen</strong> y = eˣ. <strong>Streckad</strong> y = ln x. <strong>Prickad</strong> y = x.</figcaption>
+</figure><div class="work"><p>P ligger på exponentialgrafen och har koordinaterna (ln 2, 2).</p>
+<p class="task">Vilka koordinater får spegelpunkten Q på logaritmgrafen?</p>
+<form class="practice" novalidate data-success="Det stämmer. Koordinaterna byter plats."><div class="practice-fields"><label>Spegelpunkten Q<select data-answer="2" data-hint="Läs koordinaterna i motsatt ordning."><option value="">Välj</option><option value="1">(ln 2, 2)</option><option value="2">(2, ln 2)</option><option value="3">(2, −ln 2)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa punkten på logaritmgrafen</summary><div class="answer-body"><p>Q har koordinaterna (2, ln 2). Logaritmgrafens x-värden är positiva, eftersom exponentialfunktionen bara ger positiva värden.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="harled-ln" aria-labelledby="harled-ln-title">
+  <h1 id="harled-ln-title" tabindex="-1">Varför blir derivatan av ln x lika med 1/x?</h1>
+<p>Börja med inverssambandet för x &gt; 0. Derivera båda leden. I högerledet är ln x exponenten och därmed den inre funktionen.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>x</mi><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></msup></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Vilken faktor kommer från den inre funktionen när du deriverar högerledet?</p>
+<form class="practice" novalidate data-success="Det stämmer. Exponentialfunktionen blir kvar och multipliceras med D(ln x)."><div class="practice-fields"><label>Faktor från exponenten<select data-answer="3" data-hint="Kedjeregeln multiplicerar exponentialfunktionen med derivatan av exponenten."><option value="">Välj</option><option value="1">eˣ</option><option value="2">ln x</option><option value="3">D(ln x)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa härledningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mn>1</mn><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></msup><mo>·</mo><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></math>
+<math display="block"><mrow><mn>1</mn><mo>=</mo><mi>x</mi><mo>·</mo><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div><p>I andra raden används e upphöjt till ln x = x. Eftersom x &gt; 0 kan vi dividera med x.</p>
+</div></details>
+</section>
+<section class="slide" id="exponential" aria-labelledby="exponential-title">
+  <h1 id="exponential-title" tabindex="-1">Derivera en avtagande exponentialfunktion</h1>
+<p>När C &gt; 0 är C · aˣ växande för a &gt; 1 och avtagande för 0 &lt; a &lt; 1. Funktionen har positiva värden för alla reella x. I exemplet har exponenten en inre faktor 2.</p>
+<div class="math-givens">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup><mo>)</mo></mrow><mo>=</mo><mn>2</mn><msup><mrow><mi>e</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup></mrow></math>
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>5</mn><mo>·</mo><msup><mrow><mo>(</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup></mrow></math>
+</div><p class="task">Vilket tecken har derivatan för alla x i exemplet?</p>
+<form class="practice" novalidate data-success="Det stämmer. Ln(1/2) är negativt och övriga faktorer är positiva."><div class="practice-fields"><label>Derivatans tecken<select data-answer="2" data-hint="Undersök tecknet på ln(1/2)."><option value="">Välj</option><option value="1">Positivt</option><option value="2">Negativt</option><option value="3">Det beror på x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa innerfunktionen och basfaktorn</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>u</mi><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>u</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>5</mn><mo>·</mo><msup><mrow><mo>(</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo></mrow><mrow><mi>u</mi></mrow></msup><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo><mo>·</mo><msup><mi>u</mi><mo>′</mo></msup></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>10</mn><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo><mo>·</mo><msup><mrow><mo>(</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo></mrow><mrow><mn>2</mn><mi>x</mi></mrow></msup></mrow></math>
+</div><p>Den negativa derivatan bekräftar att funktionen är avtagande.</p>
+</div></details>
+</section>
+<section class="slide" id="tre-logaritmer" aria-labelledby="tre-logaritmer-title">
+  <h1 id="tre-logaritmer-title" tabindex="-1">Skilj mellan term, faktor och argument</h1>
+<p>En konstantterm får derivatan noll. En konstantfaktor följer med utanför derivatan. Ett tal inne i argumentet påverkar den inre derivatan. Här gäller x &gt; 0 i alla tre fall.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>6</mn><mo>+</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>6</mn><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>6</mn><mi>x</mi><mo>)</mo></mrow></math>
+</div><p class="task">Vilka två funktioner har samma derivata?</p>
+<form class="practice" novalidate data-success="Det stämmer. Sexan i den inre derivatan förkortas bort i C."><div class="practice-fields"><label>Funktioner med samma derivata<select data-answer="2" data-hint="Derivera 6x som inre funktion i C."><option value="">Välj</option><option value="1">A och B</option><option value="2">A och C</option><option value="3">B och C</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa de tre derivatorna</summary><div class="answer-body"><div class="cards goals"><article class="card"><h2>Konstantterm</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>A</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo>+</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div></article><article class="card"><h2>Konstantfaktor</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>B</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>6</mn><mo>·</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>6</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div></article><article class="card"><h2>Konstant i argumentet</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>C</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>6</mn><mi>x</mi></mrow></mfrac><mo>·</mo><mn>6</mn><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div></article></div></div></details>
+</section>
+<section class="slide" id="potens" aria-labelledby="potens-title">
+  <h1 id="potens-title" tabindex="-1">Derivera logaritmen av en potens på två sätt</h1>
+<p>Logaritmlagen säger att ln(xʳ) = r · ln x när x &gt; 0. I exemplet måste x⁵ &gt; 0, så x &gt; 0.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>5</mn></mrow></msup><mo>)</mo></mrow></math>
+</div><p class="task">Vilket uttryck kan du skriva med logaritmlagen före deriveringen?</p>
+<form class="practice" novalidate data-success="Det stämmer. Det gör att konstantfaktorn 5 följer med vid deriveringen."><div class="practice-fields"><label>Samma funktion<select data-answer="3" data-hint="Exponenten flyttas framför logaritmen som faktor."><option value="">Välj</option><option value="1">(ln x)⁵</option><option value="2">ln(5x)</option><option value="3">5 ln x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Jämför samma två metoder</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Logaritmlagen</h2><div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mn>5</mn><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>5</mn><mo>·</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>5</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div></div><div><h2>Kedjeregeln</h2><div class="math-steps">
+<math display="block"><mrow><mi>u</mi><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>5</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>u</mi><mo>′</mo></msup><mo>=</mo><mn>5</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>4</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><msup><mrow><mi>x</mi></mrow><mrow><mn>5</mn></mrow></msup></mrow></mfrac><mo>·</mo><mn>5</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>4</mn></mrow></msup><mo>=</mo><mfrac><mrow><mn>5</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div></div></div><p>Båda metoderna ger samma derivata på funktionens definitionsmängd.</p>
+</div></details>
+</section>
+<section class="slide" id="inre-logaritm" aria-labelledby="inre-logaritm-title">
+  <h1 id="inre-logaritm-title" tabindex="-1">Sätt villkor på den inre logaritmen</h1>
+<p>För y = ln u måste hela argumentet u vara positivt. För den inre formen ln(2x) måste dessutom 2x vara positivt.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>u</mi><mo>=</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>u</mi><mo>&gt;</mo><mn>0</mn></mrow></math>
+</div><p class="task">Vilket villkor säkerställer att båda logaritmerna är definierade?</p>
+<form class="practice" novalidate data-success="Det stämmer. Ln(2x) &gt; 0 betyder 2x &gt; 1."><div class="practice-fields"><label>Villkor för x<select data-answer="3" data-hint="Den inre logaritmen måste vara positiv. Ln(2x) = 0 när 2x = 1."><option value="">Välj</option><option value="1">x > 0</option><option value="2">x ≥ 1/2</option><option value="3">x > 1/2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa villkor och inre derivata</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>&gt;</mo><mn>0</mn><mo>⇔</mo><mn>2</mn><mi>x</mi><mo>&gt;</mo><mn>1</mn><mo>⇔</mo><mi>x</mi><mo>&gt;</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>u</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn><mi>x</mi></mrow></mfrac><mo>·</mo><mn>2</mn><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>u</mi></mrow></mfrac><mo>·</mo><msup><mi>u</mi><mo>′</mo></msup></mrow></math>
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>x</mi><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo></mrow></mfrac></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="kvot" aria-labelledby="kvot-title">
+  <h1 id="kvot-title" tabindex="-1">Använd kvotregeln med ln x</h1>
+<p>Använd kvotregeln. Här är ln x definierad för x &gt; 0. Där är nämnaren x + 1 också skild från noll.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mn>3</mn><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow></math>
+</div><p class="task">Vilken är derivatan av täljaren?</p>
+<form class="practice" novalidate data-success="Det stämmer. Konstantfaktorn följer med i första produkten."><div class="practice-fields"><label>Täljarens derivata<select data-answer="2" data-hint="Behåll konstantfaktorn 3 när du deriverar ln x."><option value="">Välj</option><option value="1">1/x</option><option value="2">3/x</option><option value="3">3 ln x</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa delarna och insättningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Täljaren</h2><div class="math-steps">
+<math display="block"><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>3</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>
+</div></div><div><h2>Nämnaren</h2><div class="math-steps">
+<math display="block"><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><msup><mi>g</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow></math>
+</div></div></div><div class="math-steps">
+<math display="block"><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mfrac><mrow><mfrac><mrow><mn>3</mn></mrow><mrow><mi>x</mi></mrow></mfrac><mo>·</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>−</mo><mn>3</mn><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi><mo>·</mo><mn>1</mn></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mo>=</mo><mfrac><mrow><mfrac><mrow><mn>3</mn><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>x</mi></mrow></mfrac><mo>−</mo><mn>3</mn><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>x</mi></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac></mrow></math>
+</div></div></details>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · hitta tangeringspunkten</h1>
+<p>Lutningen av tangenten är derivatan i tangeringspunkten. Beräkna samma lutning från två punkter på tangenten och sätt resultaten lika.</p>
+<div class="split"><figure class="diagram derivata-figur exp-log-figur">
+<svg viewBox="0 0 330.90 252.00" role="img" aria-labelledby="tangent-graf-title">
+  <title id="tangent-graf-title">Grafen för ln x och punkten A på y-axeln vid y = minus två.</title>
+  <defs><clipPath id="tangent-graf-yta"><rect x="56.00" y="36.00" width="244.90" height="192.00"/></clipPath></defs>
+  <path class="rutnat" d="M135.00 36.00V228.00 M214.00 36.00V228.00 M293.00 36.00V228.00 M56.00 228.00H300.90 M56.00 180.00H300.90 M56.00 132.00H300.90 M56.00 36.00H300.90"/>
+  <path class="axel" d="M56.00 84H306.90 m-6 -4 l6 4 -6 4 M56 228.00V30.00 m-4 6 l4 -6 4 6"/>
+  <text x="311.90" y="89">x</text><text x="66" y="32.00">y</text>
+  <text class="grafskalsteg" text-anchor="middle" x="46.00" y="100.00">0</text><text class="grafskalsteg" text-anchor="middle" x="135.00" y="100.00">0,5</text><text class="grafskalsteg" text-anchor="middle" x="214.00" y="100.00">1</text><text class="grafskalsteg" text-anchor="middle" x="293.00" y="100.00">1,5</text><text class="grafskalsteg" text-anchor="end" x="48.00" y="233.00">−3</text><text class="grafskalsteg" text-anchor="end" x="48.00" y="185.00">−2</text><text class="grafskalsteg" text-anchor="end" x="48.00" y="137.00">−1</text><text class="grafskalsteg" text-anchor="end" x="48.00" y="41.00">1</text>
+  <g clip-path="url(#tangent-graf-yta)"><path class="kurva" d="M63.866 228.000 L65.348 219.718 L66.829 212.656 L68.311 206.502 L69.792 201.048 L71.274 196.150 L72.755 191.707 L74.237 187.640 L75.718 183.891 L77.199 180.414 L78.681 177.171 L80.162 174.134 L81.644 171.278 L83.125 168.582 L84.607 166.030 L86.088 163.606 L87.570 161.299 L89.051 159.098 L90.533 156.993 L92.014 154.977 L93.496 153.042 L94.977 151.182 L96.458 149.391 L97.940 147.665 L99.421 145.999 L100.903 144.388 L102.384 142.830 L103.866 141.321 L105.347 139.858 L106.829 138.438 L108.310 137.059 L109.792 135.719 L111.273 134.415 L112.755 133.145 L114.236 131.908 L115.717 130.703 L117.199 129.526 L118.680 128.378 L120.162 127.257 L121.643 126.161 L123.125 125.090 L124.606 124.042 L126.088 123.017 L127.569 122.013 L129.051 121.029 L130.532 120.066 L132.014 119.121 L133.495 118.194 L134.976 117.285 L136.458 116.393 L137.939 115.518 L139.421 114.657 L140.902 113.813 L142.384 112.982 L143.865 112.166 L145.347 111.363 L146.828 110.574 L148.310 109.797 L149.791 109.033 L151.273 108.281 L152.754 107.540 L154.235 106.811 L155.717 106.092 L157.198 105.385 L158.680 104.687 L160.161 103.999 L161.643 103.322 L163.124 102.653 L164.606 101.994 L166.087 101.344 L167.569 100.702 L169.050 100.069 L170.531 99.444 L172.013 98.827 L173.494 98.218 L174.976 97.616 L176.457 97.022 L177.939 96.436 L179.420 95.856 L180.902 95.283 L182.383 94.717 L183.865 94.158 L185.346 93.605 L186.828 93.058 L188.309 92.518 L189.790 91.983 L191.272 91.455 L192.753 90.932 L194.235 90.415 L195.716 89.903 L197.198 89.397 L198.679 88.896 L200.161 88.400 L201.642 87.909 L203.124 87.423 L204.605 86.943 L206.087 86.466 L207.568 85.995 L209.049 85.528 L210.531 85.066 L212.012 84.608 L213.494 84.154 L214.975 83.705 L216.457 83.259 L217.938 82.818 L219.420 82.381 L220.901 81.948 L222.383 81.519 L223.864 81.093 L225.346 80.671 L226.827 80.253 L228.308 79.839 L229.790 79.428 L231.271 79.020 L232.753 78.616 L234.234 78.216 L235.716 77.818 L237.197 77.424 L238.679 77.034 L240.160 76.646 L241.642 76.261 L243.123 75.880 L244.605 75.501 L246.086 75.126 L247.567 74.753 L249.049 74.383 L250.530 74.016 L252.012 73.652 L253.493 73.291 L254.975 72.932 L256.456 72.576 L257.938 72.223 L259.419 71.872 L260.901 71.523 L262.382 71.178 L263.863 70.834 L265.345 70.493 L266.826 70.155 L268.308 69.819 L269.789 69.485 L271.271 69.154 L272.752 68.824 L274.234 68.497 L275.715 68.173 L277.197 67.850 L278.678 67.530 L280.160 67.211 L281.641 66.895 L283.122 66.581 L284.604 66.269 L286.085 65.959 L287.567 65.651 L289.048 65.345 L290.530 65.041 L292.011 64.738 L293.493 64.438 L294.974 64.140 L296.456 63.843 L297.937 63.548 L299.419 63.255 L300.900 62.964" data-logaritm/><path class="tangent" d="M56.000 180.000 L57.090 179.100 L58.180 178.200 L59.270 177.300 L60.359 176.400 L61.449 175.500 L62.539 174.600 L63.629 173.700 L64.719 172.800 L65.809 171.900 L66.898 171.000 L67.988 170.100 L69.078 169.200 L70.168 168.300 L71.258 167.400 L72.348 166.500 L73.437 165.600 L74.527 164.700 L75.617 163.800 L76.707 162.900 L77.797 162.000 L78.887 161.100 L79.977 160.200 L81.066 159.300 L82.156 158.400 L83.246 157.500 L84.336 156.600 L85.426 155.700 L86.516 154.800 L87.605 153.900 L88.695 153.000 L89.785 152.100 L90.875 151.200 L91.965 150.300 L93.055 149.400 L94.144 148.500 L95.234 147.600 L96.324 146.700 L97.414 145.800 L98.504 144.900 L99.594 144.000 L100.684 143.100 L101.773 142.200 L102.863 141.300 L103.953 140.400 L105.043 139.500 L106.133 138.600 L107.223 137.700 L108.312 136.800 L109.402 135.900 L110.492 135.000 L111.582 134.100 L112.672 133.200 L113.762 132.300 L114.852 131.400 L115.941 130.500 L117.031 129.600 L118.121 128.700 L119.211 127.800 L120.301 126.900 L121.391 126.000 L122.480 125.100 L123.570 124.200 L124.660 123.300 L125.750 122.400 L126.840 121.500 L127.930 120.600 L129.019 119.700 L130.109 118.800 L131.199 117.900 L132.289 117.000 L133.379 116.100 L134.469 115.200 L135.559 114.300 L136.648 113.400 L137.738 112.500 L138.828 111.600 L139.918 110.700 L141.008 109.800 L142.098 108.900 L143.187 108.000 L144.277 107.100 L145.367 106.200 L146.457 105.300 L147.547 104.400 L148.637 103.500 L149.726 102.600 L150.816 101.700 L151.906 100.800 L152.996 99.900 L154.086 99.000 L155.176 98.100 L156.266 97.200 L157.355 96.300 L158.445 95.400 L159.535 94.500 L160.625 93.600 L161.715 92.700 L162.805 91.800 L163.894 90.900 L164.984 90.000 L166.074 89.100 L167.164 88.200 L168.254 87.300 L169.344 86.400 L170.433 85.500 L171.523 84.600 L172.613 83.700 L173.703 82.800 L174.793 81.900 L175.883 81.000 L176.973 80.100 L178.062 79.200 L179.152 78.300 L180.242 77.400 L181.332 76.500 L182.422 75.600 L183.512 74.700 L184.601 73.800 L185.691 72.900 L186.781 72.000 L187.871 71.100 L188.961 70.200 L190.051 69.300 L191.141 68.400 L192.230 67.500 L193.320 66.600 L194.410 65.700 L195.500 64.800 L196.590 63.900 L197.680 63.000 L198.769 62.100 L199.859 61.200 L200.949 60.300 L202.039 59.400 L203.129 58.500 L204.219 57.600 L205.308 56.700 L206.398 55.800 L207.488 54.900 L208.578 54.000 L209.668 53.100 L210.758 52.200 L211.848 51.300 L212.937 50.400 L214.027 49.500 L215.117 48.600 L216.207 47.700 L217.297 46.800 L218.387 45.900 L219.476 45.000 L220.566 44.100 L221.656 43.200 L222.746 42.300 L223.836 41.400 L224.926 40.500 L226.015 39.600 L227.105 38.700 L228.195 37.800 L229.285 36.900 L230.375 36.000" data-tangent-line data-show-with-answer/></g>
+  <circle class="punkt" data-a cx="56" cy="180" r="4.8"/>
+<text x="40" y="200">A</text>
+<circle class="punkt log-punkt" data-tangent-point data-show-with-answer cx="114.125" cy="132" r="4.8"/>
+<text data-show-with-answer x="124.125" y="118">P</text>
+</svg>
+<figcaption>Heldragen kurva y = ln x.<span data-show-with-answer> Prickad tangent genom A och P.</span></figcaption>
+</figure><div class="work"><p>Tangenten till y = ln x går genom A = (0, −2). Låt a vara tangeringspunktens x-värde, så att P = (a, ln a) och a &gt; 0.</p>
+<p class="task">Bestäm a och tangentens lutning. Visa dina båda uttryck för lutningen.</p>
+<details class="answer"><summary>Visa tangeringspunkten och lösningen</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Två uttryck för lutningen</h2><div class="math-steps">
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>−</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mrow><mi>a</mi><mo>−</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>+</mo><mn>2</mn></mrow><mrow><mi>a</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>a</mi></mrow></mfrac></mrow></math>
+</div></div><div><h2>Sätt dem lika</h2><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>+</mo><mn>2</mn></mrow><mrow><mi>a</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>a</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow></math>
+<math display="block"><mrow><mi>a</mi><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mi>k</mi><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><msup><mrow><mi>e</mi></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></mfrac><mo>=</mo><mi>e</mi></mrow></math>
+</div></div></div><p>P = (e⁻¹, −1). Linjen skär y-axeln i A, där y = −2.</p>
+<div class="math-steps">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>e</mi><mo>·</mo><mi>x</mi><mo>−</mo><mn>2</mn></mrow></math>
+</div></div></details>
+</div></div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+<p class="lead">Läroboken s. 100–103 · Derivatan av exponentialfunktioner och logaritmfunktioner</p>
+<p>Gör samtliga uppgifter och deluppgifter på två av nivåerna. Jämför vid behov med bokens lösta exempel 2222–2223.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1 · 2224–2231</h2><p>Träna bas, argument, logaritmlagar och tangent.</p>
+</article><article class="card"><h2>Nivå 2 · 2232–2238</h2><p>Koppla graf och formel. Använd flera deriveringsregler i samma uppgift.</p>
+</article><article class="card"><h2>Nivå 3 · 2239–2241</h2><p>Härled formler och kombinera regler.</p>
+</article></div><p><a href="https://www.youtube.com/playlist?list=PLdFVwau3cPjZPksiZLRAAxxxvJ2fU26U5" target="_blank" rel="noopener">Frivilligt videostöd om exponential- och logaritmfunktioner</a></p>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Visa en exponentialuppgift, en logaritmuppgift och lösningen på Din tur. Förklara det avgörande steget i varje lösning.</p>
+<div class="cards goals"><article class="card"><h2>Exponentialfunktion</h2><p>Förklara var ln a och den inre derivatan kommer ifrån.</p>
+</article><article class="card"><h2>Logaritm</h2><p>Visa argumentet och motivera ditt villkor innan du deriverar.</p>
+</article><article class="card"><h2>Tangent</h2><p>Visa båda uttrycken för lutningen och varför de är lika.</p>
+</article></div>
+</section>
+<section class="slide" id="basbyte" aria-labelledby="basbyte-title">
+  <h1 id="basbyte-title" tabindex="-1">Fördjupning · varför dyker ln a upp?</h1>
+<p>För a &gt; 0 gäller a = e upphöjt till ln a. Skriv om aˣ som en exponentialfunktion med basen e före deriveringen.</p>
+<div class="math-givens">
+<math display="block"><mrow><msup><mrow><mi>a</mi></mrow><mrow><mi>x</mi></mrow></msup><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi></mrow></msup></mrow></math>
+</div><p class="task">Vilken inre derivata får du när x är variabeln och a är konstant?</p>
+<details class="answer"><summary>Visa basbytet och kedjeregeln</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><mi>x</mi><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>)</mo></mrow><mo>=</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi></mrow></math>
+<math display="block"><mrow><mrow><mi mathvariant="normal">D</mi><mo>(</mo><msup><mrow><mi>a</mi></mrow><mrow><mi>x</mi></mrow></msup><mo>)</mo></mrow><mo>=</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>x</mi><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi></mrow></msup><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi><mo>=</mo><msup><mrow><mi>a</mi></mrow><mrow><mi>x</mi></mrow></msup><mo>·</mo><mi mathvariant="normal">ln</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mi>a</mi></mrow></math>
+</div></div></details>
+</section>
+</main>
+</body>
+</html>
