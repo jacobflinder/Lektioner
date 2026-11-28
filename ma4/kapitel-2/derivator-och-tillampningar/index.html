@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Derivator och tillämpningar · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="../deriveringsregler-repetition/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+  <script src="vattenmodell.js" defer></script>
+</head>
+<body class="tillampningar">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Derivator och tillämpningar</h1>
+<p>Låt f(t) vara en storhet vid tiden t. Derivatan f′(t) anger hur snabbt storheten förändras just då. Enheten är storhetens enhet per tidsenhet.</p>
+<div class="cards goals"><article class="card"><h2>Värde</h2><div class="math-givens">
+<math display="block"><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></math>
+</div><p>Vad är nivån, höjden eller volymen vid en viss tid?</p>
+</article><article class="card"><h2>Förändringshastighet</h2><div class="math-givens">
+<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></math>
+</div><p>Positivt värde betyder att storheten ökar. Negativt betyder att den minskar.</p>
+</article><article class="card"><h2>Fart vid rörelse</h2><div class="math-givens">
+<math display="block"><mrow><mo>|</mo><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>|</mo></mrow></math>
+</div><p>Om s är position är farten hastighetens belopp.</p>
+</article></div><p class="task">Vilken storhet undersöker du för att hitta när en vattennivå stiger snabbast?</p>
+<form class="practice" novalidate data-success="Det stämmer. Sök största värdet av derivatan."><div class="practice-fields"><label>Storheten som jämförs<select data-answer="2" data-hint="Leta efter förändring per tidsenhet."><option value="">Välj</option><option value="1">Vattennivån</option><option value="2">Vattennivåns derivata</option><option value="3">Tiden</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Tolka värde, förändringshastighet och enhet.</li><li>Skilja på största värde och snabbaste ökning.</li><li>Bestämma och tolka ett största eller minsta värde i en modell.</li></ol>
+</section>
+<section class="slide" id="lage" aria-labelledby="lage-title">
+  <h1 id="lage-title" tabindex="-1">Läs av höjden vid en given tid</h1>
+<p>Läget s(t) mäts i centimeter från golvet. Tiden t mäts i sekunder efter starten. En liten plattform rör sig periodiskt upp och ner.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>s</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>80</mn><mo>−</mo><mn>20</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi><mi>t</mi></mrow><mrow><mn>4</mn></mrow></mfrac><mo>)</mo></mrow></math>
+</div><div class="split"><figure class="diagram tillampning-figur plattform">
+<svg viewBox="0 0 300 195" role="img" aria-label="En plattform med läge s. Uppåt är positiv riktning och s mäts från golvet.">
+<path class="ref" d="M24 158H271"/><path class="skala-linje" d="M62 155V38 m-6 9 l6 -9 6 9"/>
+<path class="measure" d="M220 103V158 m-6 -8 l6 8 6 -8 m-6 -39 l6 -8 6 8"/>
+<rect x="115" y="85" width="107" height="18" rx="3" class="yta"/>
+<text x="37" y="26">uppåt</text><text x="226" y="142">s</text><text x="33" y="180">golv</text>
+</svg><figcaption>Positiv riktning är uppåt. Höjden mäts från golvet.</figcaption>
+</figure><div class="work"><p class="task">Vilken enhet ska svaret på frågan om s(2) ha? Beräkna sedan höjden.</p>
+<form class="practice" novalidate data-success="Det stämmer. s(2) är en höjd i centimeter."><div class="practice-fields"><label>Enhet för s(2)<select data-answer="2" data-hint="s anger höjd över golvet."><option value="">Välj</option><option value="1">cm/s</option><option value="2">cm</option><option value="3">s</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa höjden</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>s</mi><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>80</mn><mo>−</mo><mn>20</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo></mrow></math>
+<math display="block"><mrow><mi>s</mi><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>80</mn><mo>−</mo><mn>20</mn><mo>·</mo><mn>0</mn><mo>=</mo><mn>80</mn></mrow></math>
+</div><p>Efter två sekunder ligger plattformen 80 cm över golvet.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="hastighet" aria-labelledby="hastighet-title">
+  <h1 id="hastighet-title" tabindex="-1">Skilj på hastighet och fart</h1>
+<p>Derivera läget för att få hastigheten. Den inre derivatan kommer från argumentet πt/4. Välj tecken för riktningen och beloppet för farten.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>s</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>80</mn><mo>−</mo><mn>20</mn><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi><mi>t</mi></mrow><mrow><mn>4</mn></mrow></mfrac><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>5</mn><mi>π</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi><mi>t</mi></mrow><mrow><mn>4</mn></mrow></mfrac><mo>)</mo></mrow></math>
+</div><p class="task">När t = 6 är hastigheten negativ. Hur rör sig plattformen?</p>
+<form class="practice" novalidate data-success="Det stämmer. Minustecknet anger rörelse nedåt."><div class="practice-fields"><label>Rörelsens riktning<select data-answer="2" data-hint="Positiv riktning är uppåt."><option value="">Välj</option><option value="1">Uppåt</option><option value="2">Nedåt</option><option value="3">Den står still</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa deriveringen och tolkningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mo>(</mo><mo>−</mo><mn>20</mn><mo>)</mo><mo>·</mo><mo>(</mo><mo>−</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi><mi>t</mi></mrow><mrow><mn>4</mn></mrow></mfrac><mo>)</mo><mo>)</mo><mo>·</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>4</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>5</mn><mi>π</mi><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi><mi>t</mi></mrow><mrow><mn>4</mn></mrow></mfrac><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mn>6</mn><mo stretchy="false">)</mo><mo>=</mo><mn>5</mn><mi>π</mi><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mn>3</mn><mi>π</mi></mrow><mrow><mn>2</mn></mrow></mfrac><mo>)</mo><mo>=</mo><mo>−</mo><mn>5</mn><mi>π</mi></mrow></math>
+<math display="block"><mrow><mo>|</mo><msup><mi>s</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mn>6</mn><mo stretchy="false">)</mo><mo>|</mo><mo>=</mo><mn>5</mn><mi>π</mi></mrow></math>
+</div><p>Hastigheten är −5π cm/s. Farten är 5π cm/s, ungefär 15,7 cm/s. Plattformen rör sig nedåt.</p>
+</div></details>
+</section>
+<section class="slide" id="storsta-volym" aria-labelledby="storsta-volym-title">
+  <h1 id="storsta-volym-title" tabindex="-1">Hitta modellens största värde</h1>
+<p>En modell ger volymen Q(t) i liter i en tank efter t minuter. På ett slutet intervall jämför du modellens värden vid ändpunkter och inre kandidater.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>30</mn><mo>+</mo><mn>12</mn><msup><mrow><mi>t</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>2</mn><msup><mrow><mi>t</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>5</mn></mrow></math>
+</div><p class="task">Vilken ekvation ger de inre kandidaterna för största volym?</p>
+<form class="practice" novalidate data-success="Det stämmer. Jämför sedan volymerna vid kandidaterna och ändpunkterna."><div class="practice-fields"><label>Ekvation att undersöka<select data-answer="1" data-hint="Sök var volymgrafens tangent är horisontell."><option value="">Välj</option><option value="1">Q′(t) = 0</option><option value="2">Q(t) = 0</option><option value="3">Q″(t) = 0</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa volymerna och grafen</summary><div class="answer-body"><div class="split"><figure class="diagram derivata-figur tillampning-figur">
+<svg viewBox="0 0 359.00 242.75" role="img" aria-labelledby="volymgraf-titel">
+<title id="volymgraf-titel">Tankens volym i liter. Den högsta nivån inträffar vid minut fyra.</title>
+<path class="rutnat" d="M110.00 37V199.75 M162.00 37V199.75 M214.00 37V199.75 M266.00 37V199.75 M318.00 37V199.75 M58 199.75H318.00 M58 161.00H318.00 M58 122.25H318.00 M58 83.50H318.00 M58 44.75H318.00"/>
+<path class="axel" d="M58 199.75H325.00 m-5 -3 l5 3 -5 3 M58 199.75V32 m-3 5 l3 -5 3 5"/>
+<text class="axelnamn" x="58" y="20">Q (liter)</text><text class="axelnamn" x="342.00" y="234.75" text-anchor="end">t (min)</text>
+<text class="skala" x="58.00" y="216.75" text-anchor="middle">0</text><text class="skala" x="110.00" y="216.75" text-anchor="middle">1</text><text class="skala" x="162.00" y="216.75" text-anchor="middle">2</text><text class="skala" x="214.00" y="216.75" text-anchor="middle">3</text><text class="skala" x="266.00" y="216.75" text-anchor="middle">4</text><text class="skala" x="318.00" y="216.75" text-anchor="middle">5</text><text class="skala" x="51" y="203.75" text-anchor="end">0</text><text class="skala" x="51" y="165.00" text-anchor="end">25</text><text class="skala" x="51" y="126.25" text-anchor="end">50</text><text class="skala" x="51" y="87.50" text-anchor="end">75</text><text class="skala" x="51" y="48.75" text-anchor="end">100</text>
+<path class="kurva" data-curve="volymgraf" d="M58.000 153.250 L59.733 153.229 L61.467 153.168 L63.200 153.067 L64.933 152.927 L66.667 152.748 L68.400 152.531 L70.133 152.277 L71.867 151.986 L73.600 151.660 L75.333 151.298 L77.067 150.902 L78.800 150.472 L80.533 150.010 L82.267 149.514 L84.000 148.988 L85.733 148.430 L87.467 147.841 L89.200 147.224 L90.933 146.577 L92.667 145.902 L94.400 145.199 L96.133 144.470 L97.867 143.714 L99.600 142.933 L101.333 142.127 L103.067 141.297 L104.800 140.444 L106.533 139.568 L108.267 138.670 L110.000 137.750 L111.733 136.810 L113.467 135.850 L115.200 134.870 L116.933 133.872 L118.667 132.856 L120.400 131.823 L122.133 130.773 L123.867 129.707 L125.600 128.627 L127.333 127.531 L129.067 126.422 L130.800 125.300 L132.533 124.166 L134.267 123.020 L136.000 121.862 L137.733 120.695 L139.467 119.518 L141.200 118.332 L142.933 117.137 L144.667 115.935 L146.400 114.726 L148.133 113.511 L149.867 112.291 L151.600 111.065 L153.333 109.836 L155.067 108.603 L156.800 107.367 L158.533 106.129 L160.267 104.890 L162.000 103.650 L163.733 102.410 L165.467 101.171 L167.200 99.933 L168.933 98.697 L170.667 97.464 L172.400 96.235 L174.133 95.009 L175.867 93.789 L177.600 92.574 L179.333 91.365 L181.067 90.163 L182.800 88.968 L184.533 87.782 L186.267 86.605 L188.000 85.438 L189.733 84.280 L191.467 83.134 L193.200 82.000 L194.933 80.878 L196.667 79.769 L198.400 78.673 L200.133 77.593 L201.867 76.527 L203.600 75.477 L205.333 74.444 L207.067 73.428 L208.800 72.430 L210.533 71.450 L212.267 70.490 L214.000 69.550 L215.733 68.630 L217.467 67.732 L219.200 66.856 L220.933 66.003 L222.667 65.173 L224.400 64.367 L226.133 63.586 L227.867 62.830 L229.600 62.101 L231.333 61.398 L233.067 60.723 L234.800 60.076 L236.533 59.459 L238.267 58.870 L240.000 58.312 L241.733 57.786 L243.467 57.290 L245.200 56.828 L246.933 56.398 L248.667 56.002 L250.400 55.640 L252.133 55.314 L253.867 55.023 L255.600 54.769 L257.333 54.552 L259.067 54.373 L260.800 54.233 L262.533 54.132 L264.267 54.071 L266.000 54.050 L267.733 54.071 L269.467 54.134 L271.200 54.239 L272.933 54.388 L274.667 54.581 L276.400 54.819 L278.133 55.102 L279.867 55.431 L281.600 55.808 L283.333 56.231 L285.067 56.703 L286.800 57.224 L288.533 57.795 L290.267 58.416 L292.000 59.088 L293.733 59.811 L295.467 60.587 L297.200 61.416 L298.933 62.298 L300.667 63.235 L302.400 64.227 L304.133 65.275 L305.867 66.380 L307.600 67.541 L309.333 68.761 L311.067 70.039 L312.800 71.376 L314.533 72.773 L316.267 74.231 L318.000 75.750"/>
+<line class="modellstreck" data-guide="volym" x1="266.000" y1="54.050" x2="266.000" y2="199.750"/><circle class="punkt" data-point="volym" cx="266.000" cy="54.050" r="4.8"/><text x="273.000" y="46.050" class="punktnamn">Max</text>
+</svg><figcaption>Tanken innehåller som mest vatten vid t = 4.</figcaption>
+</figure><div class="work"><div class="math-steps">
+<math display="block"><mrow><msup><mi>Q</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>24</mn><mi>t</mi><mo>−</mo><mn>6</mn><msup><mrow><mi>t</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>=</mo><mn>6</mn><mi>t</mi><mo>·</mo><mo>(</mo><mn>4</mn><mo>−</mo><mi>t</mi><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>Q</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo>⇔</mo><mi>t</mi><mo>=</mo><mn>0</mn><mtext> eller </mtext><mi>t</mi><mo>=</mo><mn>4</mn></mrow></math>
+</div><table class="kandidater"><thead><tr><th scope="col">t (min)</th><th scope="col">0</th><th scope="col">4</th><th scope="col">5</th></tr></thead><tbody><tr><th scope="row">Q(t) (liter)</th><td>30</td><td>94</td><td>80</td></tr></tbody></table><p>Den största volymen är 94 liter efter 4 minuter.</p>
+</div></div></div></details>
+</section>
+<section class="slide" id="snabbaste-okning" aria-labelledby="snabbaste-okning-title">
+  <h1 id="snabbaste-okning-title" tabindex="-1">Hitta den snabbaste ökningen</h1>
+<p>Sök det största värdet av Q′ för att hitta när volymen ökar snabbast.</p>
+<div class="math-givens">
+<math display="block"><mrow><msup><mi>Q</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>24</mn><mi>t</mi><mo>−</mo><mn>6</mn><msup><mrow><mi>t</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+</div><p class="task">Vilken ekvation kan ge en inre kandidat för största värdet av Q′?</p>
+<form class="practice" novalidate data-success="Det stämmer. Derivatan av Q′ är Q″."><div class="practice-fields"><label>Ekvation för Q′:s kandidater<select data-answer="2" data-hint="Derivera den funktion du ska maximera."><option value="">Välj</option><option value="1">Q′(t) = 0</option><option value="2">Q″(t) = 0</option><option value="3">Q(t) = 0</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Jämför tiden för högsta volym och snabbaste ökning</summary><div class="answer-body"><div class="tva-grafer"><figure class="diagram derivata-figur tillampning-figur">
+<svg viewBox="0 0 359.00 242.75" role="img" aria-labelledby="volymgraf-jamforelse-titel">
+<title id="volymgraf-jamforelse-titel">Tankens volym i liter. Den högsta nivån inträffar vid minut fyra.</title>
+<path class="rutnat" d="M110.00 37V199.75 M162.00 37V199.75 M214.00 37V199.75 M266.00 37V199.75 M318.00 37V199.75 M58 199.75H318.00 M58 161.00H318.00 M58 122.25H318.00 M58 83.50H318.00 M58 44.75H318.00"/>
+<path class="axel" d="M58 199.75H325.00 m-5 -3 l5 3 -5 3 M58 199.75V32 m-3 5 l3 -5 3 5"/>
+<text class="axelnamn" x="58" y="20">Q (liter)</text><text class="axelnamn" x="342.00" y="234.75" text-anchor="end">t (min)</text>
+<text class="skala" x="58.00" y="216.75" text-anchor="middle">0</text><text class="skala" x="110.00" y="216.75" text-anchor="middle">1</text><text class="skala" x="162.00" y="216.75" text-anchor="middle">2</text><text class="skala" x="214.00" y="216.75" text-anchor="middle">3</text><text class="skala" x="266.00" y="216.75" text-anchor="middle">4</text><text class="skala" x="318.00" y="216.75" text-anchor="middle">5</text><text class="skala" x="51" y="203.75" text-anchor="end">0</text><text class="skala" x="51" y="165.00" text-anchor="end">25</text><text class="skala" x="51" y="126.25" text-anchor="end">50</text><text class="skala" x="51" y="87.50" text-anchor="end">75</text><text class="skala" x="51" y="48.75" text-anchor="end">100</text>
+<path class="kurva" data-curve="volymgraf" d="M58.000 153.250 L59.733 153.229 L61.467 153.168 L63.200 153.067 L64.933 152.927 L66.667 152.748 L68.400 152.531 L70.133 152.277 L71.867 151.986 L73.600 151.660 L75.333 151.298 L77.067 150.902 L78.800 150.472 L80.533 150.010 L82.267 149.514 L84.000 148.988 L85.733 148.430 L87.467 147.841 L89.200 147.224 L90.933 146.577 L92.667 145.902 L94.400 145.199 L96.133 144.470 L97.867 143.714 L99.600 142.933 L101.333 142.127 L103.067 141.297 L104.800 140.444 L106.533 139.568 L108.267 138.670 L110.000 137.750 L111.733 136.810 L113.467 135.850 L115.200 134.870 L116.933 133.872 L118.667 132.856 L120.400 131.823 L122.133 130.773 L123.867 129.707 L125.600 128.627 L127.333 127.531 L129.067 126.422 L130.800 125.300 L132.533 124.166 L134.267 123.020 L136.000 121.862 L137.733 120.695 L139.467 119.518 L141.200 118.332 L142.933 117.137 L144.667 115.935 L146.400 114.726 L148.133 113.511 L149.867 112.291 L151.600 111.065 L153.333 109.836 L155.067 108.603 L156.800 107.367 L158.533 106.129 L160.267 104.890 L162.000 103.650 L163.733 102.410 L165.467 101.171 L167.200 99.933 L168.933 98.697 L170.667 97.464 L172.400 96.235 L174.133 95.009 L175.867 93.789 L177.600 92.574 L179.333 91.365 L181.067 90.163 L182.800 88.968 L184.533 87.782 L186.267 86.605 L188.000 85.438 L189.733 84.280 L191.467 83.134 L193.200 82.000 L194.933 80.878 L196.667 79.769 L198.400 78.673 L200.133 77.593 L201.867 76.527 L203.600 75.477 L205.333 74.444 L207.067 73.428 L208.800 72.430 L210.533 71.450 L212.267 70.490 L214.000 69.550 L215.733 68.630 L217.467 67.732 L219.200 66.856 L220.933 66.003 L222.667 65.173 L224.400 64.367 L226.133 63.586 L227.867 62.830 L229.600 62.101 L231.333 61.398 L233.067 60.723 L234.800 60.076 L236.533 59.459 L238.267 58.870 L240.000 58.312 L241.733 57.786 L243.467 57.290 L245.200 56.828 L246.933 56.398 L248.667 56.002 L250.400 55.640 L252.133 55.314 L253.867 55.023 L255.600 54.769 L257.333 54.552 L259.067 54.373 L260.800 54.233 L262.533 54.132 L264.267 54.071 L266.000 54.050 L267.733 54.071 L269.467 54.134 L271.200 54.239 L272.933 54.388 L274.667 54.581 L276.400 54.819 L278.133 55.102 L279.867 55.431 L281.600 55.808 L283.333 56.231 L285.067 56.703 L286.800 57.224 L288.533 57.795 L290.267 58.416 L292.000 59.088 L293.733 59.811 L295.467 60.587 L297.200 61.416 L298.933 62.298 L300.667 63.235 L302.400 64.227 L304.133 65.275 L305.867 66.380 L307.600 67.541 L309.333 68.761 L311.067 70.039 L312.800 71.376 L314.533 72.773 L316.267 74.231 L318.000 75.750"/>
+<line class="modellstreck" data-guide="volym" x1="266.000" y1="54.050" x2="266.000" y2="199.750"/><circle class="punkt" data-point="volym" cx="266.000" cy="54.050" r="4.8"/><text x="273.000" y="46.050" class="punktnamn">Max</text>
+</svg><figcaption>Tanken innehåller som mest vatten vid t = 4.</figcaption>
+</figure><figure class="diagram derivata-figur tillampning-figur">
+<svg viewBox="0 0 359.00 240.80" role="img" aria-labelledby="volymderivata-titel">
+<title id="volymderivata-titel">Volymens förändringshastighet i liter per minut. Den når sitt största värde vid minut två.</title>
+<path class="rutnat" d="M110.00 37V197.80 M162.00 37V197.80 M214.00 37V197.80 M266.00 37V197.80 M318.00 37V197.80 M58 185.80H318.00 M58 149.80H318.00 M58 113.80H318.00 M58 77.80H318.00 M58 41.80H318.00"/>
+<path class="axel" d="M58 113.80H325.00 m-5 -3 l5 3 -5 3 M58 197.80V32 m-3 5 l3 -5 3 5"/>
+<text class="axelnamn" x="58" y="20">Q′ (liter/min)</text><text class="axelnamn" x="342.00" y="232.80" text-anchor="end">t (min)</text>
+<text class="skala" x="58.00" y="214.80" text-anchor="middle">0</text><text class="skala" x="110.00" y="214.80" text-anchor="middle">1</text><text class="skala" x="162.00" y="214.80" text-anchor="middle">2</text><text class="skala" x="214.00" y="214.80" text-anchor="middle">3</text><text class="skala" x="266.00" y="214.80" text-anchor="middle">4</text><text class="skala" x="318.00" y="214.80" text-anchor="middle">5</text><text class="skala" x="51" y="189.80" text-anchor="end">−30</text><text class="skala" x="51" y="153.80" text-anchor="end">−15</text><text class="skala" x="51" y="117.80" text-anchor="end">0</text><text class="skala" x="51" y="81.80" text-anchor="end">15</text><text class="skala" x="51" y="45.80" text-anchor="end">30</text>
+<path class="kurva" data-curve="volymderivata" d="M58.000 113.800 L59.733 111.896 L61.467 110.024 L63.200 108.184 L64.933 106.376 L66.667 104.600 L68.400 102.856 L70.133 101.144 L71.867 99.464 L73.600 97.816 L75.333 96.200 L77.067 94.616 L78.800 93.064 L80.533 91.544 L82.267 90.056 L84.000 88.600 L85.733 87.176 L87.467 85.784 L89.200 84.424 L90.933 83.096 L92.667 81.800 L94.400 80.536 L96.133 79.304 L97.867 78.104 L99.600 76.936 L101.333 75.800 L103.067 74.696 L104.800 73.624 L106.533 72.584 L108.267 71.576 L110.000 70.600 L111.733 69.656 L113.467 68.744 L115.200 67.864 L116.933 67.016 L118.667 66.200 L120.400 65.416 L122.133 64.664 L123.867 63.944 L125.600 63.256 L127.333 62.600 L129.067 61.976 L130.800 61.384 L132.533 60.824 L134.267 60.296 L136.000 59.800 L137.733 59.336 L139.467 58.904 L141.200 58.504 L142.933 58.136 L144.667 57.800 L146.400 57.496 L148.133 57.224 L149.867 56.984 L151.600 56.776 L153.333 56.600 L155.067 56.456 L156.800 56.344 L158.533 56.264 L160.267 56.216 L162.000 56.200 L163.733 56.216 L165.467 56.264 L167.200 56.344 L168.933 56.456 L170.667 56.600 L172.400 56.776 L174.133 56.984 L175.867 57.224 L177.600 57.496 L179.333 57.800 L181.067 58.136 L182.800 58.504 L184.533 58.904 L186.267 59.336 L188.000 59.800 L189.733 60.296 L191.467 60.824 L193.200 61.384 L194.933 61.976 L196.667 62.600 L198.400 63.256 L200.133 63.944 L201.867 64.664 L203.600 65.416 L205.333 66.200 L207.067 67.016 L208.800 67.864 L210.533 68.744 L212.267 69.656 L214.000 70.600 L215.733 71.576 L217.467 72.584 L219.200 73.624 L220.933 74.696 L222.667 75.800 L224.400 76.936 L226.133 78.104 L227.867 79.304 L229.600 80.536 L231.333 81.800 L233.067 83.096 L234.800 84.424 L236.533 85.784 L238.267 87.176 L240.000 88.600 L241.733 90.056 L243.467 91.544 L245.200 93.064 L246.933 94.616 L248.667 96.200 L250.400 97.816 L252.133 99.464 L253.867 101.144 L255.600 102.856 L257.333 104.600 L259.067 106.376 L260.800 108.184 L262.533 110.024 L264.267 111.896 L266.000 113.800 L267.733 115.736 L269.467 117.704 L271.200 119.704 L272.933 121.736 L274.667 123.800 L276.400 125.896 L278.133 128.024 L279.867 130.184 L281.600 132.376 L283.333 134.600 L285.067 136.856 L286.800 139.144 L288.533 141.464 L290.267 143.816 L292.000 146.200 L293.733 148.616 L295.467 151.064 L297.200 153.544 L298.933 156.056 L300.667 158.600 L302.400 161.176 L304.133 163.784 L305.867 166.424 L307.600 169.096 L309.333 171.800 L311.067 174.536 L312.800 177.304 L314.533 180.104 L316.267 182.936 L318.000 185.800"/>
+<line class="modellstreck" data-guide="volymderivata" x1="162.000" y1="56.200" x2="162.000" y2="197.800"/><circle class="punkt" data-point="volymderivata" cx="162.000" cy="56.200" r="4.8"/><text x="169.000" y="48.200" class="punktnamn">Max</text>
+</svg><figcaption>Volymen växer som snabbast vid t = 2.</figcaption>
+</figure></div><div class="calculation-pair"><div><div class="math-steps">
+<math display="block"><mrow><msup><mi>Q</mi><mo>″</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>24</mn><mo>−</mo><mn>12</mn><mi>t</mi></mrow></math>
+<math display="block"><mrow><msup><mi>Q</mi><mo>″</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo>⇔</mo><mi>t</mi><mo>=</mo><mn>2</mn></mrow></math>
+</div></div><div><div class="math-givens">
+<math display="block"><mrow><msup><mi>Q</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>48</mn><mo>−</mo><mn>24</mn><mo>=</mo><mn>24</mn></mrow></math>
+</div></div></div><p>Ändpunkterna ger 0 och −30 liter/min. Största ökningen är 24 liter/min, efter två minuter.</p>
+</div></details>
+</section>
+<section class="slide" id="period" aria-labelledby="period-title">
+  <h1 id="period-title" tabindex="-1">Bestäm perioden och derivera vattennivån</h1>
+<p>En mätmodell beskriver en vattennivå H(t) i meter. Tiden t mäts i timmar. Koefficienten k är vinkelfaktorn i radianer per timme. Vi undersöker tolv timmar från mätningens start.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mrow><mi>k</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mo>+</mo><mn>0,6</mn><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></math>
+<math display="block"><mrow><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>12</mn></mrow></math>
+</div><p class="task">Vilken vinkelfaktor k ska sättas in i periodsambandet?</p>
+<form class="practice" novalidate data-success="Det stämmer. Perioden är 2π dividerat med π/6."><div class="practice-fields"><label>Vinkelfaktor k<select data-answer="2" data-hint="Läs faktorn framför parentesen (t − 2)."><option value="">Välj</option><option value="1">0,6</option><option value="2">π/6</option><option value="3">2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa perioden och den inre derivatan</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mrow><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac></mrow></mfrac><mo>=</mo><mn>12</mn></mrow></math>
+<math display="block"><mrow><msup><mi>H</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0,6</mn><mo>·</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>H</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>10</mn></mrow></mfrac><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></math>
+</div><p>En period är 12 timmar. Derivatan mäts i meter per timme.</p>
+</div></details>
+</section>
+<section class="slide" id="vattenmodell" aria-labelledby="vattenmodell-title">
+  <h1 id="vattenmodell-title" tabindex="-1">När stiger nivån som snabbast?</h1>
+<p>Cosinus når som högst 1. När faktorn framför cosinus är positiv ger det derivatans största värde.</p>
+<div class="vattenmodell"><div class="modelltext"><div class="math-givens">
+<math display="block"><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mo>+</mo><mn>0,6</mn><mo>·</mo><mi mathvariant="normal">sin</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></math>
+<math display="block"><mrow><msup><mi>H</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>10</mn></mrow></mfrac><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></math>
+</div><div class="modelluttryck"><p>Derivatan vid vald tid</p>
+<math display="block"><mrow><msup><mi>H</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mn data-water-value>0</mn><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>10</mn></mrow></mfrac><mo>·</mo><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mn data-water-argument>0</mn><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo><mo data-water-relation>≈</mo><mrow data-water-result><mn>0,157</mn></mrow></mrow></math>
+</div><p class="task">Förutsäg om t = 2 eller t = 5 ger den snabbaste ökningen. Pröva sedan båda.</p>
+<label for="vatten-tid">t – tid i timmar</label><select id="vatten-tid"><option value="0" selected>0</option><option value="2">2</option><option value="5">5</option><option value="8">8</option><option value="11">11</option><option value="12">12</option></select><p id="vatten-resultat" role="status"></p>
+</div><div class="modellvy"><div class="tva-grafer"><figure class="diagram derivata-figur tillampning-figur">
+<svg viewBox="0 0 387.00 227.00" role="img" aria-labelledby="vattenniva-titel">
+<title id="vattenniva-titel">Vattennivån i meter. Punkten visar den valda tiden.</title>
+<path class="rutnat" d="M106.00 37V184.00 M154.00 37V184.00 M202.00 37V184.00 M250.00 37V184.00 M298.00 37V184.00 M346.00 37V184.00 M58 173.50H346.00 M58 131.50H346.00 M58 89.50H346.00 M58 47.50H346.00"/>
+<path class="axel" d="M58 184.00H353.00 m-5 -3 l5 3 -5 3 M58 184.00V32 m-3 5 l3 -5 3 5"/>
+<text class="axelnamn" x="58" y="20">H (m)</text><text class="axelnamn" x="370.00" y="219.00" text-anchor="end">t (h)</text>
+<text class="skala" x="58.00" y="201.00" text-anchor="middle">0</text><text class="skala" x="106.00" y="201.00" text-anchor="middle">2</text><text class="skala" x="154.00" y="201.00" text-anchor="middle">4</text><text class="skala" x="202.00" y="201.00" text-anchor="middle">6</text><text class="skala" x="250.00" y="201.00" text-anchor="middle">8</text><text class="skala" x="298.00" y="201.00" text-anchor="middle">10</text><text class="skala" x="346.00" y="201.00" text-anchor="middle">12</text><text class="skala" x="51" y="177.50" text-anchor="end">1,4</text><text class="skala" x="51" y="135.50" text-anchor="end">1,8</text><text class="skala" x="51" y="93.50" text-anchor="end">2,2</text><text class="skala" x="51" y="51.50" text-anchor="end">2,6</text>
+<path class="kurva" data-curve="vattenniva" d="M58.000 165.060 L59.920 163.693 L61.840 162.232 L63.760 160.681 L65.680 159.042 L67.600 157.318 L69.520 155.512 L71.440 153.626 L73.360 151.665 L75.280 149.632 L77.200 147.530 L79.120 145.364 L81.040 143.136 L82.960 140.850 L84.880 138.512 L86.800 136.124 L88.720 133.692 L90.640 131.219 L92.560 128.709 L94.480 126.167 L96.400 123.598 L98.320 121.006 L100.240 118.396 L102.160 115.772 L104.080 113.138 L106.000 110.500 L107.920 107.862 L109.840 105.228 L111.760 102.604 L113.680 99.994 L115.600 97.402 L117.520 94.833 L119.440 92.291 L121.360 89.781 L123.280 87.308 L125.200 84.876 L127.120 82.488 L129.040 80.150 L130.960 77.864 L132.880 75.636 L134.800 73.470 L136.720 71.368 L138.640 69.335 L140.560 67.374 L142.480 65.488 L144.400 63.682 L146.320 61.958 L148.240 60.319 L150.160 58.768 L152.080 57.307 L154.000 55.940 L155.920 54.669 L157.840 53.496 L159.760 52.423 L161.680 51.451 L163.600 50.583 L165.520 49.821 L167.440 49.165 L169.360 48.616 L171.280 48.176 L173.200 47.845 L175.120 47.624 L177.040 47.514 L178.960 47.514 L180.880 47.624 L182.800 47.845 L184.720 48.176 L186.640 48.616 L188.560 49.165 L190.480 49.821 L192.400 50.583 L194.320 51.451 L196.240 52.423 L198.160 53.496 L200.080 54.669 L202.000 55.940 L203.920 57.307 L205.840 58.768 L207.760 60.319 L209.680 61.958 L211.600 63.682 L213.520 65.488 L215.440 67.374 L217.360 69.335 L219.280 71.368 L221.200 73.470 L223.120 75.636 L225.040 77.864 L226.960 80.150 L228.880 82.488 L230.800 84.876 L232.720 87.308 L234.640 89.781 L236.560 92.291 L238.480 94.833 L240.400 97.402 L242.320 99.994 L244.240 102.604 L246.160 105.228 L248.080 107.862 L250.000 110.500 L251.920 113.138 L253.840 115.772 L255.760 118.396 L257.680 121.006 L259.600 123.598 L261.520 126.167 L263.440 128.709 L265.360 131.219 L267.280 133.692 L269.200 136.124 L271.120 138.512 L273.040 140.850 L274.960 143.136 L276.880 145.364 L278.800 147.530 L280.720 149.632 L282.640 151.665 L284.560 153.626 L286.480 155.512 L288.400 157.318 L290.320 159.042 L292.240 160.681 L294.160 162.232 L296.080 163.693 L298.000 165.060 L299.920 166.331 L301.840 167.504 L303.760 168.577 L305.680 169.549 L307.600 170.417 L309.520 171.179 L311.440 171.835 L313.360 172.384 L315.280 172.824 L317.200 173.155 L319.120 173.376 L321.040 173.486 L322.960 173.486 L324.880 173.376 L326.800 173.155 L328.720 172.824 L330.640 172.384 L332.560 171.835 L334.480 171.179 L336.400 170.417 L338.320 169.549 L340.240 168.577 L342.160 167.504 L344.080 166.331 L346.000 165.060"/>
+<line class="modellstreck" data-guide="level" x1="58.000" y1="165.060" x2="58.000" y2="184.000"/><circle class="punkt" data-point="level" cx="58.000" cy="165.060" r="4.8"/>
+</svg><figcaption>Vattennivå. Skalan börjar vid 1,3 m.</figcaption>
+</figure><figure class="diagram derivata-figur tillampning-figur">
+<svg viewBox="0 0 387.00 227.00" role="img" aria-labelledby="vattenlutning-titel">
+<title id="vattenlutning-titel">Vattennivåns förändring i meter per timme. Punkten visar den valda tiden.</title>
+<path class="rutnat" d="M106.00 37V184.00 M154.00 37V184.00 M202.00 37V184.00 M250.00 37V184.00 M298.00 37V184.00 M346.00 37V184.00 M58 184.00H346.00 M58 147.25H346.00 M58 110.50H346.00 M58 73.75H346.00 M58 37.00H346.00"/>
+<path class="axel" d="M58 110.50H353.00 m-5 -3 l5 3 -5 3 M58 184.00V32 m-3 5 l3 -5 3 5"/>
+<text class="axelnamn" x="58" y="20">H′ (m/h)</text><text class="axelnamn" x="370.00" y="219.00" text-anchor="end">t (h)</text>
+<text class="skala" x="58.00" y="201.00" text-anchor="middle">0</text><text class="skala" x="106.00" y="201.00" text-anchor="middle">2</text><text class="skala" x="154.00" y="201.00" text-anchor="middle">4</text><text class="skala" x="202.00" y="201.00" text-anchor="middle">6</text><text class="skala" x="250.00" y="201.00" text-anchor="middle">8</text><text class="skala" x="298.00" y="201.00" text-anchor="middle">10</text><text class="skala" x="346.00" y="201.00" text-anchor="middle">12</text><text class="skala" x="51" y="188.00" text-anchor="end">−0,4</text><text class="skala" x="51" y="151.25" text-anchor="end">−0,2</text><text class="skala" x="51" y="114.50" text-anchor="end">0</text><text class="skala" x="51" y="77.75" text-anchor="end">0,2</text><text class="skala" x="51" y="41.00" text-anchor="end">0,4</text>
+<path class="kurva" data-curve="vattenlutning" d="M58.000 81.637 L59.920 79.568 L61.840 77.555 L63.760 75.598 L65.680 73.704 L67.600 71.873 L69.520 70.111 L71.440 68.419 L73.360 66.801 L75.280 65.260 L77.200 63.798 L79.120 62.418 L81.040 61.123 L82.960 59.914 L84.880 58.793 L86.800 57.764 L88.720 56.827 L90.640 55.984 L92.560 55.237 L94.480 54.587 L96.400 54.035 L98.320 53.582 L100.240 53.228 L102.160 52.976 L104.080 52.824 L106.000 52.773 L107.920 52.824 L109.840 52.976 L111.760 53.228 L113.680 53.582 L115.600 54.035 L117.520 54.587 L119.440 55.237 L121.360 55.984 L123.280 56.827 L125.200 57.764 L127.120 58.793 L129.040 59.914 L130.960 61.123 L132.880 62.418 L134.800 63.798 L136.720 65.260 L138.640 66.801 L140.560 68.419 L142.480 70.111 L144.400 71.873 L146.320 73.704 L148.240 75.598 L150.160 77.555 L152.080 79.568 L154.000 81.637 L155.920 83.755 L157.840 85.921 L159.760 88.130 L161.680 90.378 L163.600 92.661 L165.520 94.976 L167.440 97.318 L169.360 99.683 L171.280 102.067 L173.200 104.466 L175.120 106.875 L177.040 109.291 L178.960 111.709 L180.880 114.125 L182.800 116.534 L184.720 118.933 L186.640 121.317 L188.560 123.682 L190.480 126.024 L192.400 128.339 L194.320 130.622 L196.240 132.870 L198.160 135.079 L200.080 137.245 L202.000 139.363 L203.920 141.432 L205.840 143.445 L207.760 145.402 L209.680 147.296 L211.600 149.127 L213.520 150.889 L215.440 152.581 L217.360 154.199 L219.280 155.740 L221.200 157.202 L223.120 158.582 L225.040 159.877 L226.960 161.086 L228.880 162.207 L230.800 163.236 L232.720 164.173 L234.640 165.016 L236.560 165.763 L238.480 166.413 L240.400 166.965 L242.320 167.418 L244.240 167.772 L246.160 168.024 L248.080 168.176 L250.000 168.227 L251.920 168.176 L253.840 168.024 L255.760 167.772 L257.680 167.418 L259.600 166.965 L261.520 166.413 L263.440 165.763 L265.360 165.016 L267.280 164.173 L269.200 163.236 L271.120 162.207 L273.040 161.086 L274.960 159.877 L276.880 158.582 L278.800 157.202 L280.720 155.740 L282.640 154.199 L284.560 152.581 L286.480 150.889 L288.400 149.127 L290.320 147.296 L292.240 145.402 L294.160 143.445 L296.080 141.432 L298.000 139.363 L299.920 137.245 L301.840 135.079 L303.760 132.870 L305.680 130.622 L307.600 128.339 L309.520 126.024 L311.440 123.682 L313.360 121.317 L315.280 118.933 L317.200 116.534 L319.120 114.125 L321.040 111.709 L322.960 109.291 L324.880 106.875 L326.800 104.466 L328.720 102.067 L330.640 99.683 L332.560 97.318 L334.480 94.976 L336.400 92.661 L338.320 90.378 L340.240 88.130 L342.160 85.921 L344.080 83.755 L346.000 81.637"/>
+<line class="modellstreck" data-guide="rate" x1="58.000" y1="81.637" x2="58.000" y2="184.000"/><circle class="punkt" data-point="rate" cx="58.000" cy="81.637" r="4.8"/>
+</svg><figcaption>Förändring per timme.</figcaption>
+</figure></div><details class="answer"><summary>Visa tidpunkten och ökningstakten</summary><div class="answer-body"><div class="calculation-pair"><div><h2>Cosinusargumentet u</h2><div class="math-steps">
+<math display="block"><mrow><mi mathvariant="normal">cos</mi><mo>&#x2061;</mo><mspace width="0.12em"/><mo>(</mo><mi>u</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>⇔</mo><mi>u</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>n</mi></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>π</mi></mrow><mrow><mn>6</mn></mrow></mfrac><mo>·</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>2</mn><mi>π</mi><mi>n</mi></mrow></math>
+<math display="block"><mrow><mi>t</mi><mo>=</mo><mn>2</mn><mo>+</mo><mn>12</mn><mi>n</mi></mrow></math>
+</div><p>n är ett heltal. I intervallet 0 ≤ t ≤ 12 får vi t = 2.</p>
+</div><div><h2>Ökningstakten</h2><div class="math-steps">
+<math display="block"><mrow><msup><mi>H</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>π</mi></mrow><mrow><mn>10</mn></mrow></mfrac><mo>≈</mo><mn>0,314</mn></mrow></math>
+</div><p>Cirka 31 cm/h. Vid t = 5 är nivån högst, 2,6 m, och ökningstakten är noll.</p>
+</div></div></div></details>
+</div></div>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · få största möjliga area</h1>
+<p>Rektangelns area är längd gånger bredd. För att använda derivatan behöver du uttrycka arean med en enda variabel.</p>
+<div class="split"><figure class="diagram tillampning-figur plattform">
+<svg viewBox="0 0 322 205" role="img" aria-label="Rektangel längs en vägg. Två stängselsidor är x meter var. Den tredje sidan är b meter.">
+<rect class="yta" x="70" y="59" width="188" height="108"/>
+<path class="ref" d="M37 59H282"/><path class="skala-linje" d="M70 59V167H258V59"/>
+<text x="142" y="44">Vägg</text><text x="41" y="121">x</text><text x="272" y="121">x</text><text x="158" y="193">b</text>
+</svg><figcaption>Stängslet används på de tre fria sidorna.</figcaption>
+</figure><div class="work"><p>Du har 16 m stängsel till tre sidor av ett rektangulärt land längs en vägg. Sidorna vinkelrätt mot väggen är x meter. Den tredje stängselsidan är b meter.</p>
+<p class="task">Skriv b och arean med hjälp av x. Bestäm sedan största arean och vilka mått som ger den.</p>
+<details class="answer"><summary>Visa areamodellen och maximum</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mi>b</mi><mo>=</mo><mn>16</mn><mo>−</mo><mn>2</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>·</mo><mo>(</mo><mn>16</mn><mo>−</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>=</mo><mn>16</mn><mi>x</mi><mo>−</mo><mn>2</mn><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><msup><mi>A</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>16</mn><mo>−</mo><mn>4</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><msup><mi>A</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo>⇔</mo><mi>x</mi><mo>=</mo><mn>4</mn></mrow></math>
+</div><p>En rektangel kräver 0 &lt; x &lt; 8. Modellen ger area noll vid gränserna. Vid x = 4 är b = 8 och arean 32 m².</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+<p class="lead">Läroboken s. 109–112 · Derivator och tillämpningar</p>
+<p>Gör samtliga uppgifter och deluppgifter på två av nivåerna. Knyt svaret till storheten och ange enhet.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1 · 2324–2328</h2><p>Tolka funktionsvärden, förändringshastighet och största värde.</p>
+</article><article class="card"><h2>Nivå 2 · 2329–2332</h2><p>Jämför period, nivå och förändringstakt i samma modell.</p>
+</article><article class="card"><h2>Nivå 3 · 2333–2334</h2><p>Bygg en målfunktion från en figur och bestäm dess extremvärde.</p>
+</article></div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Visa en boklösning och din lösning från Din tur. Motivera ett steg för varje mål.</p>
+<div class="cards goals"><article class="card"><h2>Storhet och enhet</h2><p>Peka ut funktionsvärdet eller derivatan i din lösning. Förklara enheten.</p>
+</article><article class="card"><h2>Störst och snabbast</h2><p>Visa hur du avgjorde vilken funktion som måste maximeras.</p>
+</article><article class="card"><h2>Modellens gränser</h2><p>Beskriv vilka värden variabeln kan ha och vilka kandidater du jämförde.</p>
+</article></div>
+</section>
+</main>
+</body>
+</html>
