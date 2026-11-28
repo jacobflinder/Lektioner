@@ -88,6 +88,11 @@ verifyLesson({
       const graph = slide.locator('[data-graph="extrem"]');
       assert.equal(await graph.isVisible(), false);
       await slide.locator('summary').press('Enter');
+      const equationsFit = await slide.locator(".extremfacit .math-steps").evaluate(steps => {
+        const right = steps.getBoundingClientRect().right;
+        return [...steps.querySelectorAll("math > mrow")].every(row => row.getBoundingClientRect().right <= right + 1);
+      });
+      assert.ok(equationsFit, "Extrempunkternas uträkning måste rymmas i sin kolumn");
       const marks = await graph.locator('circle').evaluateAll(nodes => nodes.map(element =>
         ['cx','cy'].map(name => Number(element.getAttribute(name)))));
       for (const [i, x] of [-2, 2].entries()) {
