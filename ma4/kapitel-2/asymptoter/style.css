@@ -1,0 +1,10 @@
+.dominerande .graf .asymptotlinje { fill: none; stroke: #835027; stroke-width: 2.3; stroke-dasharray: 8 5; }
+.dominerande .dold-linje .asymptotlinje { visibility: hidden; }
+.dominerande .slide:has(.answer[open]) .dold-linje .asymptotlinje { visibility: visible; }
+.dominerande .grafsvaret { align-items: center; }
+.dominerande .graf figcaption { text-align: center; }
+.asymptoter .aktuell { padding: .4rem .55rem; border: 1px solid var(--line); border-radius: .5rem; }
+.asymptoter #avstand .graf svg { max-height: 270px; }
+@media (max-width: 550px) {
+  .asymptoter #avstand .aktuell math { font-size: min(1.05em, 4vw); }
+}
