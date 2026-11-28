@@ -43,7 +43,7 @@ async function confirmChoice(slide, choice, mobile) {
   assert.match(await response.innerText(), correction);
 }
 
-exports.verifyLesson = async ({ slug, route, choices, answers, book, inspect }) => {
+exports.verifyLesson = async ({ slug, route, choices, answers, book, bookInstruction = "två av nivåerna", inspect }) => {
   const evidence = `/tmp/ma4-${slug}-qa`;
   await fs.mkdir(evidence, { recursive: true });
   const browser = await chromium.launch({
@@ -72,7 +72,7 @@ exports.verifyLesson = async ({ slug, route, choices, answers, book, inspect }) 
         if (choices[id]) await confirmChoice(slide, choices[id], mobile);
         if (id === 'bokarbete') {
           const current = await slide.innerText();
-          for (const text of [...book, 'två av nivåerna']) assert.ok(current.includes(text), `Bokarbetet saknar ${text}`);
+          for (const text of [...book, bookInstruction]) assert.ok(current.includes(text), `Bokarbetet saknar ${text}`);
         }
         await page.evaluate(() => window.scrollTo(0, 0));
         await checkLayout(slide, width, height);
