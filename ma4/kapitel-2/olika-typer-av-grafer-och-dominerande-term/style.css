@@ -51,3 +51,7 @@
   .classroom #jamfor .modellgraf [data-utsnitt] { width: 100%; }
   .classroom #jamfor .modellgraf svg { max-height: 308px; }
 }
+@media (min-width: 1024px) and (max-height: 900px) {
+  .dominerande #graftyper .grafkort svg { max-height: 146px; }
+  .dominerande #extrempunkter .graf svg { max-height: 214px; }
+}
