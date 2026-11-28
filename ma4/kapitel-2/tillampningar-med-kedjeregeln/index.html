@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tillämpningar med kedjeregeln · Ma4</title>
+  <link rel="stylesheet" href="../../kapitel-1/trigonometri-och-trianglar/style.css">
+  <link rel="stylesheet" href="../../kapitel-1/assets/practice.css">
+  <link rel="stylesheet" href="../deriveringsregler-repetition/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../kapitel-1/trigonometri-och-trianglar/lesson.js" defer></script>
+  <script src="../../kapitel-1/assets/practice.js" defer></script>
+  <script src="cirkelmodell.js" defer></script>
+</head>
+<body class="kedjetillamp">
+<header class="lesson-header">
+  <div class="wrap">
+    <a href="../">← Kapitel 2 · Derivata</a>
+    <button type="button" id="mode" aria-pressed="false">Klassrumsläge</button>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="navigation" aria-label="Lektionsbilder">
+    <button type="button" id="previous">← Föregående</button>
+    <label for="jump" class="visually-hidden">Välj lektionsbild</label>
+    <select id="jump"></select>
+    <button type="button" id="next">Nästa →</button>
+    <output id="progress" aria-live="polite"></output>
+  </nav>
+<section class="slide" id="start" aria-labelledby="start-title">
+  <h1 id="start-title" tabindex="-1">Tillämpningar med kedjeregeln</h1>
+<p>Tiden t påverkar x, och x påverkar y. Då är x = x(t) den inre funktionen och y = f(x) den yttre. Derivatan dy/dx anger hur y ändras per enhet x. Derivatan dx/dt anger hur x ändras per tidsenhet.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><msup><mi>f</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>·</mo><msup><mi>x</mi><mo>′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></math>
+</div><p class="task">Vilken faktor anger förändring per tidsenhet hos den inre storheten?</p>
+<form class="practice" novalidate data-success="Det stämmer. dx/dt anger hur x ändras med tiden."><div class="practice-fields"><label>Ändring i den inre storheten<select data-answer="2" data-hint="Den inre storheten är x."><option value="">Välj</option><option value="1">dy/dx</option><option value="2">dx/dt</option><option value="3">dy/dt</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<h2>Efter lektionen ska du kunna</h2><ol><li>Koppla ihop två förändringshastigheter med kedjeregeln.</li><li>Lösa ut den hastighet som söks.</li><li>Tolka enhet, tecken och värde i det aktuella ögonblicket.</li></ol><p><a href="https://www.youtube.com/watch?v=0euuGmA5sxk" target="_blank" rel="noopener">Frivillig repetitionsstart · The Chain Rule Song</a></p>
+</section>
+<section class="slide" id="kvadrat" aria-labelledby="kvadrat-title">
+  <h1 id="kvadrat-title" tabindex="-1">Från sidans ändring till areans ändring</h1>
+<p>Sidan x mäts i centimeter. Tiden t mäts i minuter. Arean A beror på sidan, som i sin tur beror på tiden.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>A</mi><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><div class="split"><figure class="diagram kedjeform">
+<svg viewBox="0 0 320 204" role="img" aria-label="En kvadrat med båda sidorna märkta x och arean A inuti.">
+<rect x="95" y="26" width="126" height="126" class="yta"/><text x="68" y="98">x</text><text x="154" y="177">x</text><text x="147" y="97">A</text>
+</svg><figcaption>Sidan x ändras med tiden. Då ändras även arean A.</figcaption>
+</figure><div class="work"><p>Sidan är 9 cm och ökar just då med 1,2 cm/min.</p>
+<p class="task">Vad är derivatan dA/dx innan du sätter in sidans längd?</p>
+<form class="practice" novalidate data-success="Det stämmer. Sätt sedan in x och multiplicera med sidans hastighet."><div class="practice-fields"><label>Areans derivata med avseende på sidan<select data-answer="2" data-hint="Derivera A = x² med avseende på x."><option value="">Välj</option><option value="1">x</option><option value="2">2x</option><option value="3">1,2</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa insättningen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mi>x</mi><mo>·</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mo>·</mo><mn>9</mn><mo>·</mo><mn>1,2</mn><mo>=</mo><mn>21,6</mn><mspace width="0.35em"/><mtext>cm²/min</mtext></mrow></math>
+</div><p>Enheterna cm²/cm och cm/min ger tillsammans cm²/min.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="los-ut" aria-labelledby="los-ut-title">
+  <h1 id="los-ut-title" tabindex="-1">Lös ut sidans förändringshastighet</h1>
+<p>Samma kvadratmodell gäller. När dA/dx är skild från noll kan du dela hela ekvationen med den faktorn.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>A</mi><mo>=</mo><msup><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Sidan är 9 cm och arean ökar med 7,2 cm²/min. Vilken kvot ger dx/dt?</p>
+<form class="practice" novalidate data-success="Det stämmer. Använd samma relation och lös ut den sökta faktorn före insättning."><div class="practice-fields"><label>Lös ut dx/dt<select data-answer="3" data-hint="Dividera areans förändringshastighet med areans derivata med avseende på sidan."><option value="">Välj</option><option value="1">(dA/dx)/(dA/dt)</option><option value="2">(dA/dt) · (dA/dx)</option><option value="3">(dA/dt)/(dA/dx)</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa lösningen och kontrollen</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mo>·</mo><mn>9</mn><mo>=</mo><mn>18</mn></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>7,2</mn></mrow><mrow><mn>18</mn></mrow></mfrac><mo>=</mo><mn>0,4</mn><mspace width="0.35em"/><mtext>cm/min</mtext></mrow></math>
+</div><p>Kontroll. 18 cm²/cm multiplicerat med 0,4 cm/min ger 7,2 cm²/min.</p>
+</div></details>
+</section>
+<section class="slide" id="cirkel" aria-labelledby="cirkel-title">
+  <h1 id="cirkel-title" tabindex="-1">Förändra radien och jämför areaändringen</h1>
+<p>En cirkulär färgfläck breder ut sig. Radien r mäts i meter och ökar hela tiden med 0,20 m/s. Arean A mäts i kvadratmeter.</p>
+<div class="cirkel-layout"><div class="cirkel-val"><div class="math-givens">
+<math display="block"><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>r</mi><mo stretchy="false">)</mo><mo>=</mo><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mo>·</mo><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><div class="aktuell"><p>Areaändring vid vald radie</p>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mi>π</mi><mo>·</mo><mn data-circle-value>1</mn><mo>·</mo><mn>0,20</mn><mo>≈</mo><mn data-circle-estimate>1,257</mn><mspace width="0.35em"/><mtext>m²/s</mtext></mrow></math>
+</div><p class="task">Förutsäg vad som händer med areaändringen när radien dubbleras från 1 m till 2 m. Pröva sedan.</p>
+<label for="cirkelradie">r – radie i meter</label><select id="cirkelradie"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option></select><p id="cirkel-status" role="status"></p>
+</div><div class="cirkel-vy"><figure class="diagram kedjeform cirkelmodell">
+<svg viewBox="0 0 320 204" role="img" aria-label="En cirkel med markerad radie. Pilen vid cirkelns kant visar att radien ökar.">
+  <circle class="yta" data-circle-rim cx="119" cy="100" r="26"/>
+  <path class="radie" data-circle-radius d="M119 100H145"/>
+  <circle class="markering" cx="119" cy="100" r="3"/>
+  <path class="rorelse" data-circle-arrow d="M145 100h28m-8 -6 l8 6 -8 6"/>
+  <text data-circle-arrow-label x="153" y="86">0,20 m/s</text>
+  <text data-circle-label x="118" y="147" text-anchor="middle">r = 1 m</text>
+</svg><figcaption>Pilen visar att radien växer.</figcaption>
+</figure><details class="answer"><summary>Visa varför areaändringen ändras</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><p>Vid samma radialhastighet är areaändringen proportionell mot radien. När r dubbleras blir areaändringen dubbelt så stor. Själva arean blir fyra gånger så stor.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="krympande-klot" aria-labelledby="krympande-klot-title">
+  <h1 id="krympande-klot-title" tabindex="-1">Anpassa enheterna innan du sätter in</h1>
+<p>Klotets radie är 3 dm. Radien minskar just då med 4 mm/h. Vi räknar volymen i dm³ och tiden i timmar.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>r</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>4</mn><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><p class="task">Vilket värde i dm/h ska sättas in som dr/dt?</p>
+<form class="practice" novalidate data-success="Det stämmer. Minus visar en minskning och 4 mm är 0,04 dm."><div class="practice-fields"><label>Radiens förändringshastighet<select data-answer="2" data-hint="En decimeter är 100 millimeter. Tecknet ska visa att radien minskar."><option value="">Välj</option><option value="1">−0,4 dm/h</option><option value="2">−0,04 dm/h</option><option value="3">0,04 dm/h</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa insättning och tolkning</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mn>0,04</mn><mspace width="0.35em"/><mtext>dm/h</mtext></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac><mo>=</mo><mn>4</mn><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>4</mn><mi>π</mi><mo>·</mo><msup><mrow><mn>3</mn></mrow><mrow><mn>2</mn></mrow></msup><mo>·</mo><mo>(</mo><mo>−</mo><mn>0,04</mn><mo>)</mo></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mn>1,44</mn><mi>π</mi><mo>≈</mo><mo>−</mo><mn>4,52</mn><mspace width="0.35em"/><mtext>dm³/h</mtext></mrow></math>
+</div><p>Volymen minskar med cirka 4,52 dm³/h vid det här tillfället.</p>
+</div></details>
+</section>
+<section class="slide" id="radie-fran-volym" aria-labelledby="radie-fran-volym-title">
+  <h1 id="radie-fran-volym-title" tabindex="-1">Lös ut radiehastigheten</h1>
+<p>En sfärisk ballong fylls så att volymen ökar med 20 cm³/s. I ögonblicket vi undersöker är radien 5 cm.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>r</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>4</mn><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><div class="split"><figure class="diagram kedjeform">
+<svg viewBox="0 0 320 204" role="img" aria-label="Klotets radie r är sträckan från centrum till ytan. Den streckade ellipsen visar klotets ekvator.">
+<circle class="yta" cx="155" cy="96" r="70"/><ellipse class="hjallinje" cx="155" cy="96" rx="70" ry="22"/><path class="radie" d="M155 96h70"/><circle class="markering" cx="155" cy="96" r="3"/><text x="185" y="84">r</text>
+</svg><figcaption>Radien mäts från klotets centrum.</figcaption>
+</figure><div class="work"><p class="task">Vilken faktor ska du dividera med för att få den sökta radiehastigheten?</p>
+<form class="practice" novalidate data-success="Det stämmer. Här är dV/dr = 4πr² och den är positiv."><div class="practice-fields"><label>Dividera med<select data-answer="2" data-hint="Vi känner dV/dt och söker dr/dt."><option value="">Välj</option><option value="1">dr/dt</option><option value="2">dV/dr</option><option value="3">dV/dt</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa hur dr/dt löses ut</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac><mo>=</mo><mn>4</mn><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>r</mi></mrow></mfrac></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>r</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>20</mn></mrow><mrow><mn>4</mn><mi>π</mi><msup><mrow><mn>5</mn></mrow><mrow><mn>2</mn></mrow></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>5</mn><mi>π</mi></mrow></mfrac><mo>≈</mo><mn>0,064</mn><mspace width="0.35em"/><mtext>cm/s</mtext></mrow></math>
+</div><p>Radien ökar med cirka 0,064 cm/s i det aktuella ögonblicket.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="cylinder" aria-labelledby="cylinder-title">
+  <h1 id="cylinder-title" tabindex="-1">Identifiera vilken storhet som hålls fast</h1>
+<p>Cylinderns basradie r är fast och lika med 3 cm. Vätskedjupet h varierar med tiden. Volymen ökar med 18 cm³/min.</p>
+<div class="math-givens">
+<math display="block"><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo><mo>=</mo><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>2</mn></mrow></msup><mi>h</mi></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>h</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><div class="split"><figure class="diagram kedjeform">
+<svg viewBox="0 0 320 204" role="img" aria-label="Cylinder med fast radie r och vattennivå på höjden h.">
+<path class="vatten" d="M97 114L97 163A63 16 0 0 0 223 163V114Z"/><ellipse class="vatten" cx="160" cy="114" rx="63" ry="16"/><path class="kontur" d="M97 50V163A63 16 0 0 0 223 163V50"/><ellipse class="kontur" cx="160" cy="50" rx="63" ry="16"/><path class="radie" d="M160 114h63"/><text x="184" y="105">r</text><path class="matt" d="M248 114h11m-5 0v49m-6 0h11"/><text x="263" y="145">h</text>
+</svg><figcaption>Radien r är fast. Vätskedjupet h ändras.</figcaption>
+</figure><div class="work"><p class="task">Vilken faktor får du som dV/dh när r hålls konstant?</p>
+<form class="practice" novalidate data-success="Det stämmer. Derivatan är basytans area."><div class="practice-fields"><label>Derivera volymen med avseende på h<select data-answer="1" data-hint="Betrakta πr² som en konstant faktor."><option value="">Välj</option><option value="1">πr²</option><option value="2">2πrh</option><option value="3">πh²</option></select></label></div><button type="submit">Kontrollera</button><p class="practice-status" role="status"></p>
+</form>
+<details class="answer"><summary>Visa vätskans stighastighet</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac><mo>=</mo><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>=</mo><mn>9</mn><mi>π</mi></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>h</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>18</mn></mrow><mrow><mn>9</mn><mi>π</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn></mrow><mrow><mi>π</mi></mrow></mfrac><mspace width="0.35em"/><mtext>cm/min</mtext></mrow></math>
+</div><p>Vätskan stiger med ungefär 0,64 cm/min.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="din-tur" aria-labelledby="din-tur-title">
+  <h1 id="din-tur-title" tabindex="-1">Din tur · hur snabbt stiger vätskan i konen?</h1>
+<div class="split"><div class="cone-model"><p>Använd likformighet för att koppla ihop vätskedjupet h och vätskeytans radie r.</p><div class="math-givens">
+<math display="block"><mrow><mi>V</mi><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mi>r</mi></mrow><mrow><mn>2</mn></mrow></msup><mi>h</mi></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>h</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+</div><figure class="diagram kedjeform">
+<svg viewBox="0 0 320 204" role="img" aria-label="Konens tvärsnitt. Fullt kärl har höjd 12 centimeter och radie 4 centimeter. Den ljusa vätskan har höjd h och radie r.">
+<path class="vatten" d="M125 101H171L148 170Z"/><path class="kontur" d="M102 32L148 170L194 32Z"/><path class="hjallinje" d="M148 32V170"/><path class="radie" d="M148 32H194M148 101h23"/><text x="168" y="24">4</text><text x="155" y="93">r</text><path class="matt" d="M212 32h12m-6 0v138m-6 0h12M181 101h11m-5 0v69m-6 0h11"/><text x="229" y="103">12</text><text x="191" y="145">h</text>
+</svg><figcaption>Tvärsnittet visar vätskans och kärlets likformiga trianglar.</figcaption>
+</figure></div><div class="work"><p>Kärlet är 12 cm djupt med radien 4 cm vid toppen. Det fylls med 8π cm³/s.</p>
+<p class="task">Bestäm hur snabbt vätskedjupet h ökar när det är 6 cm. Skriv först volymen med hjälp av h.</p>
+<details class="answer"><summary>Visa likformighet, volym och hastighet</summary><div class="answer-body"><div class="math-steps">
+<math display="block"><mrow><mfrac><mrow><mi>r</mi></mrow><mrow><mi>h</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>4</mn></mrow><mrow><mn>12</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>3</mn></mrow></mfrac><mo>⇔</mo><mi>r</mi><mo>=</mo><mfrac><mrow><mi>h</mi></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mo>(</mo><mfrac><mrow><mi>h</mi></mrow><mrow><mn>3</mn></mrow></mfrac><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mi>h</mi></mrow><mrow><mn>3</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mi>h</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow><mrow><mn>27</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>π</mi><msup><mrow><mi>h</mi></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><mn>9</mn></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>h</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><mrow><mfrac><mrow><mi>d</mi><mi>V</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>h</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>8</mn><mi>π</mi></mrow><mrow><mfrac><mrow><mi>π</mi><msup><mrow><mn>6</mn></mrow><mrow><mn>2</mn></mrow></msup></mrow><mrow><mn>9</mn></mrow></mfrac></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>8</mn><mi>π</mi></mrow><mrow><mn>4</mn><mi>π</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mspace width="0.35em"/><mtext>cm/s</mtext></mrow></math>
+</div><p>När vätskan är 6 cm djup stiger den med 2 cm/s.</p>
+</div></details>
+</div></div>
+</section>
+<section class="slide" id="bokarbete" aria-labelledby="bokarbete-title">
+  <h1 id="bokarbete-title" tabindex="-1">Arbeta i boken</h1>
+<p class="lead">Läroboken s. 113–117 · Tillämpningar med kedjeregeln</p>
+<p>Gör samtliga uppgifter och deluppgifter på två av nivåerna. Skriv först vad som är givet, vad som söks och hur storheterna hänger ihop.</p>
+<div class="cards goals"><article class="card"><h2>Nivå 1 · 2338–2342</h2><p>Sätt upp sambandet och räkna med angivna enheter.</p>
+</article><article class="card"><h2>Nivå 2 · 2343–2347</h2><p>Lös ut den sökta derivatan och tolka vad den betyder i ögonblicket.</p>
+</article><article class="card"><h2>Nivå 3 · 2348–2351</h2><p>Bygg sambandet från geometri, volymdata eller en graf.</p>
+</article></div>
+</section>
+<section class="slide" id="mal" aria-labelledby="mal-title">
+  <h1 id="mal-title" tabindex="-1">Stäm av målen med dina lösningar</h1>
+<p class="task">Visa en boklösning och din uppställning från Din tur. Förklara vad varje faktor betyder.</p>
+<div class="cards goals"><article class="card"><h2>Sambandet</h2><p>Peka ut storheten som beror på tiden och storheten som beror på den.</p>
+</article><article class="card"><h2>Lös ut</h2><p>Visa vad du sökte och vilken faktor du dividerade med.</p>
+</article><article class="card"><h2>Tolkning</h2><p>Läs upp svaret med enhet. Förklara tecknet och i vilket ögonblick det gäller.</p>
+</article></div>
+</section>
+<section class="slide" id="ogonblick" aria-labelledby="ogonblick-title">
+  <h1 id="ogonblick-title" tabindex="-1">Fördjupning · ett ögonblick eller en hel minut?</h1>
+<p>Produkten av derivator beskriver ett ögonblick. Om någon faktor ändras under nästa minut ändras också produkten.</p>
+<div class="math-givens">
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow></math>
+<math display="block"><mrow><mfrac><mrow><mi>d</mi><mi>A</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+</div><p class="task">En kvadrats sida minskar med konstant hastighet. Är areans minskningshastighet också konstant? Motivera.</p>
+<details class="answer"><summary>Visa resonemanget</summary><div class="answer-body"><p>Faktorn 2x blir mindre när sidan x minskar. Sidans hastighet är konstant och negativ. Produkten ligger därför närmare noll när kvadraten blir mindre. Arean minskar då långsammare.</p>
+</div></details>
+</section>
+</main>
+</body>
+</html>
