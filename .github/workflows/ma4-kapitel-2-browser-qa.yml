@@ -54,6 +54,7 @@ jobs:
           node ma4/kapitel-2/qa/tillampningar-med-kedjeregeln.cjs
           node ma4/kapitel-2/qa/olika-typer-av-grafer-och-dominerande-term.cjs
           node ma4/kapitel-2/qa/asymptoter.cjs
+          node ma4/kapitel-2/qa/skissa-grafer-med-derivata-och-asymptoter.cjs
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -71,3 +72,4 @@ jobs:
             /tmp/ma4-tillampningar-med-kedjeregeln-qa
             /tmp/ma4-olika-typer-av-grafer-och-dominerande-term-qa
             /tmp/ma4-asymptoter-qa
+            /tmp/ma4-skissa-grafer-med-derivata-och-asymptoter-qa
