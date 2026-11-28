@@ -63,7 +63,7 @@ verifyLesson({
     graftyper: ['2','3', /fyllda punkten/, /övre värdet 2/],
     reciproka: ['1','2', /x² har när x är negativt/, /Kvoten är också positiv/],
     'dominerande-term': ['1','2', /Jämför exponenterna/, /x³ det största bidraget/],
-    extrempunkter: ['3','2', /tangenten vågrät/, /f′\(x\) = 0/]
+    extrempunkter: ['3','2', /tangenten vågrät/, /andraderivatan för att avgöra karaktären/]
   },
   answers: {
     graftyper: [/deriverbarförx>0/, /Värdemängd\{0,2\}/],
@@ -85,6 +85,8 @@ verifyLesson({
       assert.equal(await graph.locator('path.kurva').count(), 2);
     }
     if (id === 'extrempunkter') {
+      assert.match(await slide.locator('h1').innerText(), /extrempunktens karaktär/);
+      assert.match(await slide.locator('h1 + p').innerText(), /Negativ andraderivata ger lokal maxpunkt, positiv ger lokal minpunkt/);
       const graph = slide.locator('[data-graph="extrem"]');
       assert.equal(await graph.isVisible(), false);
       await slide.locator('summary').press('Enter');

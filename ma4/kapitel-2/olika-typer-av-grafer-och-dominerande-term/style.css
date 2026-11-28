@@ -48,5 +48,6 @@
   .dominerande :is(#polynom, #reciproka) .grafgalleri { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1024px) {
+  .classroom #jamfor .modellgraf [data-utsnitt] { width: 100%; }
   .classroom #jamfor .modellgraf svg { max-height: 308px; }
 }
