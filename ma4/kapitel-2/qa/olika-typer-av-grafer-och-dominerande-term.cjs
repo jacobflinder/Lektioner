@@ -69,7 +69,7 @@ verifyLesson({
     graftyper: [/deriverbarförx>0/, /Värdemängd\{0,2\}/],
     reciproka: [/förx≠0/, /värdemängdeny≠0/],
     jamfor: [/är6störreän0,125/, /är125störreän60/],
-    extrempunkter: [/f′\(x\)=3x2−12/, /f′′\(x\)=6x/, /x2=4⇔x=±2/, /f′′\(−2\)=−12<0/, /f′′\(2\)=12>0/, /maxpunkt\(−2;16\).*minpunkt\(2;−16\)/],
+    extrempunkter: [/f′\(x\)=3x2−12/, /f′′\(x\)=6x/, /x2=4⇔x=±2/, /f′′\(−2\)=−12<0/, /f′′\(2\)=12>0/, /maxpunkt\(−2;16\).*minpunkt\(2;−16\)/, /växerförx≤−2ochförx≥2/],
     'din-tur': [/20,25=8/, /3·0,25=0,75/, /24=0,5/, /3·4=12/],
     'lika-belopp': [/\|x3\|=\|−12x\|/, /x2=12/]
   },
